@@ -1,0 +1,21 @@
+{
+    "app-token": "viaggiatrento",
+    "app-id": "trento",
+    "app-version": "0.0.1",
+    "app-name": "ViaggiaTrento",
+    "smartcheck-options": [
+        1,
+        4,
+        5
+    ],
+    "broadcast-notifications-options": [
+        1,
+        4
+    ],
+    "center-map": [
+      46.069672,
+      11.121270
+   ],
+    "zoom-map": 15,
+    "db-version": 25
+}
