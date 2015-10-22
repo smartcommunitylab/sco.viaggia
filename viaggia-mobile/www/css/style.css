@@ -1,1 +1,87 @@
-/* Empty. Add your own CSS if you like */
+/* this is just an example - don't use !important */
+
+.item-header {
+    font-size: 12px !important;
+    font-weight: bold;
+}
+
+.item-footer {
+    font-size: 12px !important;
+    font-weight: bold;
+    /* the workaround below "fixes" the scrolling */
+
+    margin-bottom: 28px !important;
+}
+
+.col-table {
+    text-align: center;
+    /*    padding: 3px 5px 3px 5px !important;*/
+
+    padding: 0px!important;
+    background-color: #e0f2be;
+}
+
+.col-fill {
+    padding-top: 0px;
+    padding-bottom: 2px;
+    background-color: white;
+}
+
+.col-stop {
+    text-align: right;
+    /*    padding: 3px 5px 3px 5px !important;*/
+
+    padding: 0px!important;
+    background-color: beige;
+}
+
+.stop-row {
+    padding: 0!important;
+}
+
+.col-sep {
+    border-left: 1px solid lightgray;
+}
+
+.col-left {
+    /*    padding: 3px 5px 3px 5px !important;*/
+}
+
+.col-head {
+    /*    padding: 3px 5px 3px 5px !important;*/
+
+    padding-top: 0px;
+    padding-bottom: 6px;
+    text-align: center;
+    background-color: crimson;
+}
+
+.min-75 {
+    min-width: 75px;
+}
+
+.min-90 {
+    min-width: 90px;
+}
+
+.min-50 {
+    min-width: 50px;
+}
+
+.min-180 {
+    min-width: 180px;
+}
+
+.min-705 {
+    min-width: 705px;
+}
+
+.row-item {
+    padding: 0px !important;
+    margin-left: 0 !important;
+    font-size: 12px !important;
+}
+
+.row.header td {
+    width: 80px;
+}

@@ -1,0 +1,46 @@
+<ion-view id="table1">
+    <ion-content has-header="true" overflow-scroll="true">
+
+        <div class="row">
+            <div class="col col-20">
+                <div class="row stop-row">
+                    <div class="col col-fill min-90">stops</div>
+                </div>
+                <ion-scroll direction="y" style="{{returnHeightStyle()}}" scrollbar-y="false" delegate-handle="column" zooming="true" on-scroll="scrollMirror('column', 'list')" on-release="releaseTouch()" on-touch="releaseTouch()">
+
+                    <ul class="list">
+                        <li collection-repeat="stop in stops" class="list-item">
+                            <div class="row stop-row">
+                                <div class="col col-stop min-50 row-item">
+                                    {{stop}}
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </ion-scroll>
+            </div>
+            <div class="col">
+                <ion-scroll direction="x" scrollbar-x="false" delegate-handle="head" on-scroll="scrollMirror('head', 'list')" on-release="releaseTouch()" on-touch="releaseTouch()">
+                    <div class="row stop-row">
+                        <div class="col col-head min-90" collection-repeat="course in courses">{{course}}</div>
+                    </div>
+                </ion-scroll>
+                <ion-scroll direction="xy" style="{{returnHeightStyle()}}" class="overlapDiv" on-scroll="scrollMirror('list', 'column','head')" on-release="releaseTouch()" on-touch="releaseTouch()" delegate-handle="list">
+                    <div class="row stop-row">
+                        <div class="col col-table min-90" ng-repeat="course in courses track by $index">
+                            <div class="col col-table col-sep min-90" ng-repeat="stop in stops">{{$index}}:{{$parent.$index}}</div>
+                        </div>
+                </ion-scroll>
+                <ion-infinite-scroll ng-if="!noMoreItemsAvailable" icon="ion-loading-c" on-infinite="loadMore()" distance="1%"></ion-infinite-scroll>
+                </div>
+            </div>
+
+            <!--
+        <ion-scroll direction="x" style=" overflow: scroll; white-space: nowrap;" scrollbar-x="false" delegate-handle="head" on-scroll="scrollMirror('head', 'list')" on-release="releaseTouch()" on-touch="releaseTouch()">
+            <div class="row">
+                <div class="col min-180" ng-repeat="course in courses">{{course}}</div>
+            </div>
+        </ion-scroll>
+-->
+    </ion-content>
+</ion-view>

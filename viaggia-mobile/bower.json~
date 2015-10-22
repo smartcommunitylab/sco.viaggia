@@ -25,7 +25,6 @@
       "angular-translate": "bower_components/angular-translate/angular-translate.min.js",
       "angular-ui-router": "bower_components/angular-ui-router/release/angular-ui-router.min.js",
       "jszip": "bower_components/jszip/dist/jszip.min.js",
-      "ng-cells": "bower_components/ng-cells/dist/latest/ng-cells.min.js",
       "jszip-utils": "bower_components/jszip-utils/dist/jszip-utils.min.js"
     }
   }

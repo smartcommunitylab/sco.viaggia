@@ -7,9 +7,11 @@ angular.module('viaggia', [
     'ionic',
     'ngCordova',
     'ngSanitize',
+    'ngcTableDirective',
     'pascalprecht.translate',
     'viaggia.controllers.common',
     'viaggia.controllers.home',
+    'viaggia.controllers.table',
     'viaggia.services.data',
     'viaggia.services.conf'
 ])
@@ -25,7 +27,7 @@ angular.module('viaggia', [
                 StatusBar.styleDefault();
             }
 
-            DataManager.dbSetup();
+            //DataManager.dbSetup();
         });
     })
     .config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
@@ -37,15 +39,25 @@ angular.module('viaggia', [
         })
 
         .state('app.home', {
-            cache: false,
-            url: "/home",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/home.html",
-                    controller: 'HomeCtrl'
+                cache: false,
+                url: "/home",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/home.html",
+                        controller: 'HomeCtrl'
+                    }
                 }
-            }
-        });
+            })
+            .state('app.table', {
+                cache: false,
+                url: "/table",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/table.html",
+                        controller: 'TableCtrl'
+                    }
+                }
+            });
 
 
         // if none of the above states are matched, use this as the fallback
