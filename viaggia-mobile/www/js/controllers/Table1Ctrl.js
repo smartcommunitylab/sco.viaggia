@@ -1,6 +1,6 @@
-angular.module('viaggia.controllers.home', ['ionic', 'ngcTableDirective'])
+angular.module('viaggia.controllers.table1', ['ionic', 'ngcTableDirective'])
 
-.controller('HomeCtrl', function ($scope, $ionicPosition) {
+.controller('Table1Ctrl', function ($scope, $ionicPosition) {
     $scope.data = [];
     $scope.row_number = Math.floor((window.innerHeight - 40 - 44) / 30);
     console.log("window height" + window.innerHeight);

@@ -17,10 +17,39 @@
         </ion-header-bar>
         <ion-content class="leftmenu">
             <ion-list>
+                <div>
+                    <ion-item class="item-stable" ng-click="toggleGroupRealTime()" ng-class="{active: isGroupRealTimeShown()}">
+                        <i class="icon" ng-class="isGroupRealTimeShown() ? 'ion-minus' : 'ion-plus'"></i> &nbsp; {{'menu_info_real_time' | translate}}
+                    </ion-item>
+                    <ion-item class="item-accordion" ng-repeat="item in itemsRealTime" ng-show="isGroupRealTimeShown()">
+                        {{item}}
+                    </ion-item>
+                </div>
                 <ion-item nav-clear menu-close item-icon-left href="#/app/home">
+                    <i class="icon voice-menu"></i>{{'menu_home' | translate}}
+                </ion-item>
+                <ion-item nav-clear menu-close item-icon-left href="#/app/plan">
+                    <i class="icon voice-menu"></i>{{'menu_plan' | translate}}
+                </ion-item>
+                <ion-item nav-clear menu-close item-icon-left href="#/app/mytrip">
+                    <i class="icon voice-menu"></i>{{'menu_mytrip' | translate}}
+                </ion-item>
+                <ion-item nav-clear menu-close item-icon-left href="#/app/news">
+                    <i class="icon voice-menu"></i>{{'menu_news' | translate}}
+                </ion-item>
+                <ion-item nav-clear menu-close item-icon-left href="#/app/bookmarks">
+                    <i class="icon voice-menu"></i>{{'menu_bookmarks' | translate}}
+                </ion-item>
+                <ion-item nav-clear menu-close item-icon-left href="#/app/info">
+                    <i class="icon voice-menu"></i>{{'menu_info' | translate}}
+                </ion-item>
+                <ion-item nav-clear menu-close item-icon-left href="#/app/notifications">
+                    <i class="icon voice-menu"></i>{{'menu_notifications' | translate}}
+                </ion-item>
+                <ion-item nav-clear menu-close item-icon-left href="#/app/table1">
                     <i class="icon voice-menu"></i>table 1 test
                 </ion-item>
-                <ion-item nav-clear menu-close item-icon-left href="#/app/table">
+                <ion-item nav-clear menu-close item-icon-left href="#/app/table2">
                     <i class="icon voice-menu"></i>table 2 test
                 </ion-item>
             </ion-list>

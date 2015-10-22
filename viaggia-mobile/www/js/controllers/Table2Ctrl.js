@@ -1,6 +1,6 @@
-angular.module('viaggia.controllers.table', ['ionic', 'ngcTableDirective'])
+angular.module('viaggia.controllers.table2', ['ionic', 'ngcTableDirective'])
 
-.controller('TableCtrl', function ($scope, $ionicScrollDelegate, $ionicSideMenuDelegate) {
+.controller('Table2Ctrl', function ($scope, $ionicScrollDelegate, $ionicSideMenuDelegate) {
     $scope.stops = [];
     $scope.courses = [];
     for (var k = 0; k < 50; k++) {
