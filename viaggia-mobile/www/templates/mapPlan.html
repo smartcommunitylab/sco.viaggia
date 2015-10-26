@@ -1,0 +1,13 @@
+<ion-modal-view>
+    <ion-header-bar align-title="center">
+        <h1 class="title">{{'plan_map_title' | translate}</h1>
+        <div class="buttons">
+            <i class="icon voice-menu ion-close-round close-map" ng-click="closeMap()"></i>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div id="map-container" data-tap-disabled="true">
+            <leaflet event-broadcast="events" center="center" markers="myMarkers" style="width: 100%; height: 640px;" ng-init="initMap()"></leaflet>
+        </div>
+    </ion-content>
+</ion-modal-view>

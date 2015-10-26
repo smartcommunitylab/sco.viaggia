@@ -5,9 +5,12 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('viaggia', [
     'ionic',
+     'ionic-material',
     'ngCordova',
     'ngSanitize',
     'ngcTableDirective',
+    'nemLogging',
+    'leaflet-directive',
     'pascalprecht.translate',
     'viaggia.controllers.common',
     'viaggia.controllers.table1',
@@ -16,12 +19,16 @@ angular.module('viaggia', [
     'viaggia.controllers.home',
     'viaggia.controllers.info',
     'viaggia.controllers.mytrips',
+    'viaggia.controllers.monitoring',
     'viaggia.controllers.news',
     'viaggia.controllers.notifications',
     'viaggia.controllers.plan',
     'viaggia.controllers.tripdetails',
     'viaggia.services.data',
-    'viaggia.services.conf'
+    'viaggia.services.conf',
+    'viaggia.services.plan',
+    'viaggia.directives',
+
 ])
 
 .run(function ($ionicPlatform, DataManager, $cordovaFile) {
@@ -47,24 +54,35 @@ angular.module('viaggia', [
         })
 
         .state('app.home', {
-                cache: false,
-                url: "/home",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/home.html",
-                        controller: 'HomeCtrl'
-                    }
+            cache: false,
+            url: "/home",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/home.html",
+                    controller: 'HomeCtrl'
                 }
-            }).state('app.plan', {
-                cache: false,
-                url: "/plan",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/plan.html",
-                        controller: 'PlanCtrl'
-                    }
+            }
+        }).state('app.plan', {
+            cache: false,
+            url: "/plan",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/plan.html",
+                    controller: 'PlanCtrl'
                 }
-            }).state('app.mytrips', {
+            }
+        }).state('app.monitoring', {
+            cache: false,
+            url: "/monitoring",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/monitoring.html",
+                    controller: 'MonitoringCtrl'
+                }
+            }
+        })
+
+        .state('app.mytrips', {
                 cache: false,
                 url: "/mytrips",
                 views: {
@@ -152,7 +170,24 @@ angular.module('viaggia', [
             menu_info: 'Info e tariffe',
             menu_bookmarks: 'Preferiti',
             menu_notifications: 'Notifiche',
-            menu_info_real_time: 'Info in tempo reale'
+            menu_info_real_time: 'Info in tempo reale',
+            menu_monitoring: 'Monitoring',
+            menu_real_time_bus_urban: 'Autobus Urbani',
+            menu_real_time_bus_suburban: 'Autobus Extraurbani',
+            menu_real_time_train: 'Treni',
+            menu_real_time_bus_bike: 'Biciclette condivise',
+            menu_real_time_bus_park: 'Parcheggi',
+            plan_from: 'Da',
+            plan_to: 'A',
+            plan_day: 'Giorno',
+            plan_time: 'Ora',
+            plan_preferences: 'PREFERENZE',
+            plan_preferences_fastest: 'Itinerario piu veloce',
+            plan_preferences_leastChanges: 'Con meno cambi',
+            plan_preferences_leastWalking: 'Minimo tragitto a piedi'
+
+
+
         });
 
 
@@ -165,7 +200,21 @@ angular.module('viaggia', [
             menu_info: 'Info and rates',
             menu_bookmarks: 'Bookmarks',
             menu_notifications: 'Notifications',
-            menu_info_real_time: 'Real Time information'
+            menu_info_real_time: 'Real Time information',
+            menu_monitoring: 'Monitoring',
+            menu_real_time_bus_urban: 'Urban Bus',
+            menu_real_time_bus_suburban: 'Suburban Bus',
+            menu_real_time_train: 'Trains',
+            menu_real_time_bus_bike: 'Shared bikes',
+            menu_real_time_bus_park: 'Parking lots',
+            plan_from: 'From',
+            plan_to: 'To',
+            plan_day: 'Day',
+            plan_time: 'Time',
+            plan_preferences: 'PREFERENCES',
+            plan_preferences_fastest: 'Fastest',
+            plan_preferences_leastChanges: 'Least changes',
+            plan_preferences_leastWalking: 'Least walking'
 
         });
 

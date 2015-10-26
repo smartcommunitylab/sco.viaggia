@@ -7,8 +7,16 @@
     <title></title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <!--    ionic material-->
+    <link href="lib/ionic-material/ionic.material.min.css" rel="stylesheet">
+    <!--    font used by ionic material-->
+    <link href='https://fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic' rel='stylesheet' type='text/css'>
+
+
     <link href="css/style.css" rel="stylesheet">
+    <!--    keep it or not?-->
     <link href="css/ng-cells.css" rel="stylesheet">
+    <link href="fonts/viaggia.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -16,6 +24,9 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+
+    <!--    ionic material-->
+    <script src="lib/ionic-material/ionic.material.min.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -26,12 +37,18 @@
     <script src="lib/jszip-utils/jszip-utils.min.js"></script>
     <script src="lib/jszip/jszip.min.js"></script>
     <script src="lib/ng-cells/ng-cells.min.js"></script>
+    <script src="lib/angular-simple-logger/angular-simple-logger.js"></script>
+    <script src="lib/angular-leaflet-directive/angular-leaflet-directive.min.js"></script>
+    <script src="lib/leaflet/leaflet.js"></script>
+    <link rel="stylesheet" href="lib/leaflet/leaflet.css">
+
     <!-- your app's js -->
     <script src="js/app.js"></script>
     <script src="js/controllers/HomeCtrl.js"></script>
     <script src="js/controllers/BookmarksCtrl.js"></script>
     <script src="js/controllers/InfoCtrl.js"></script>
     <script src="js/controllers/MytripsCtrl.js"></script>
+    <script src="js/controllers/MonitoringCtrl.js"></script>
     <script src="js/controllers/NewsCtrl.js"></script>
     <script src="js/controllers/NotificationsCtrl.js"></script>
     <script src="js/controllers/PlanCtrl.js"></script>
@@ -41,6 +58,8 @@
     <script src="js/controllers/CommonCtrl.js"></script>
     <script src="js/services/DataSrv.js"></script>
     <script src="js/services/ConfigSrv.js"></script>
+    <script src="js/services/PlanSrv.js"></script>
+    <script src="js/directives/Directives.js"></script>
 
 </head>
 

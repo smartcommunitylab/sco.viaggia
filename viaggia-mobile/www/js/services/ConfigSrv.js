@@ -1,6 +1,6 @@
 angular.module('viaggia.services.conf', [])
 
-.factory('Config', function ($q, $http, $window) {
+.factory('Config', function ($q, $http, $window, $filter) {
     var DEVELOPMENT = true;
 
     $http.get('data/config.json').success(function (response) {
@@ -8,9 +8,29 @@ angular.module('viaggia.services.conf', [])
     });
 
     var URL = 'https://' + (DEVELOPMENT ? 'dev' : 'tn') + '.smartcommunitylab.it';
+    var GEOCODER_URL = 'https://os.smartcommunitylab.it/core.geocoder/spring';
     var APP_BUILD = '';
+    var PLAN_PREFERENCES = [
+        {
+            label: $filter('translate')('plan_preferences_fastest'),
+            value: "fastest"
+        }, {
+            label: $filter('translate')('plan_preferences_leastChanges'),
+            value: "leastChanges"
+        }, {
+            label: $filter('translate')('plan_preferences_leastWalking'),
+            value: "leastWalking"
+        }
+
+    ]
 
     return {
+        getGeocoderURL: function () {
+            return GEOCODER_URL;
+        },
+        getPlanPreferences: function () {
+            return PLAN_PREFERENCES;
+        },
         getAppId: function () {
             return mapJsonConfig["app-id"];
         },

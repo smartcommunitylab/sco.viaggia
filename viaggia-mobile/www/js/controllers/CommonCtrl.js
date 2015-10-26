@@ -2,7 +2,6 @@ angular.module('viaggia.controllers.common', [])
 
 .controller('AppCtrl', function ($scope, $rootScope, $location, $timeout, DataManager, $ionicLoading) {
 
-    $scope.itemsRealTime = ['rt1', 'rt2', 'rt3'];
     $scope.toggleGroupRealTime = function () {
         if ($scope.isGroupRealTimeShown()) {
             $scope.shownGroup = false;

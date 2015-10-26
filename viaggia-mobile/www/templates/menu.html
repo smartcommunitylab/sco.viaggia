@@ -1,9 +1,10 @@
 <ion-side-menus enable-menu-with-back-views="false">
-    <ion-side-menu-content drag-content="false">
-        <ion-nav-bar class="bar">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-positive-100" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="left">
+            <ion-nav-back-button class="no-text">
+            </ion-nav-back-button>
             <ion-nav-buttons side="left">
-                <!-- O: button-clear or button-icon -->
-                <button class="button button-clear" menu-toggle="left">
+                <button class="button button-icon button-clear" menu-toggle="left">
                     <i class="icon ion-navicon"></i>
                 </button>
             </ion-nav-buttons>
@@ -21,8 +22,21 @@
                     <ion-item class="item-stable" ng-click="toggleGroupRealTime()" ng-class="{active: isGroupRealTimeShown()}">
                         <i class="icon" ng-class="isGroupRealTimeShown() ? 'ion-minus' : 'ion-plus'"></i> &nbsp; {{'menu_info_real_time' | translate}}
                     </ion-item>
-                    <ion-item class="item-accordion" ng-repeat="item in itemsRealTime" ng-show="isGroupRealTimeShown()">
-                        {{item}}
+
+                    <ion-item class="item-accordion item-stable" ng-show="isGroupRealTimeShown()" nav-clear menu-close item-icon-left href="#/app/table1">
+                        <i class="icon voice-menu"></i>{{'menu_real_time_bus_urban' | translate}}
+                    </ion-item>
+                    <ion-item class="item-accordion item-stable" ng-show="isGroupRealTimeShown()" nav-clear menu-close item-icon-left href="#/app/table1">
+                        <i class="icon voice-menu"></i>{{'menu_real_time_bus_suburban' | translate}}
+                    </ion-item>
+                    <ion-item class="item-accordion item-stable" ng-show="isGroupRealTimeShown()" nav-clear menu-close item-icon-left href="#/app/table1">
+                        <i class="icon voice-menu"></i>{{'menu_real_time_train' | translate}}
+                    </ion-item>
+                    <ion-item class="item-accordion item-stable" ng-show="isGroupRealTimeShown()" nav-clear menu-close item-icon-left href="#/app/table1">
+                        <i class="icon voice-menu"></i>{{'menu_real_time_bus_bike' | translate}}
+                    </ion-item>
+                    <ion-item class="item-accordion item-stable" ng-show="isGroupRealTimeShown()" nav-clear menu-close item-icon-left href="#/app/table1">
+                        <i class="icon voice-menu"></i>{{'menu_real_time_bus_park' | translate}}
                     </ion-item>
                 </div>
                 <ion-item nav-clear menu-close item-icon-left href="#/app/home">
@@ -33,6 +47,9 @@
                 </ion-item>
                 <ion-item nav-clear menu-close item-icon-left href="#/app/mytrip">
                     <i class="icon voice-menu"></i>{{'menu_mytrip' | translate}}
+                </ion-item>
+                <ion-item nav-clear menu-close item-icon-left href="#/app/monitoring">
+                    <i class="icon voice-menu"></i>{{'menu_monitoring' | translate}}
                 </ion-item>
                 <ion-item nav-clear menu-close item-icon-left href="#/app/news">
                     <i class="icon voice-menu"></i>{{'menu_news' | translate}}
@@ -56,3 +73,43 @@
         </ion-content>
     </ion-side-menu>
 </ion-side-menus>
+<!--
+<ion-side-menus enable-menu-with-back-views="true">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-assertive-900" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="left">
+            <ion-nav-back-button class="no-text">
+            </ion-nav-back-button>
+            <ion-nav-buttons side="right">
+                <button class="button button-icon button-clear ion-android-more-vertical" menu-toggle="right">
+                </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="fabContent"></ion-nav-view>
+        <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}" ></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="right">
+        <ion-header-bar class="dark-bg expanded">
+            <span class="avatar" style="background: url('img/crown.jpg'); background-size: cover;"></span>
+            <h2>Thronester</h2>
+        </ion-header-bar>
+        <ion-content class="stable-bg has-expanded-header">
+            <ion-list>
+                <ion-item nav-clear menu-close ui-sref="app.activity">
+                    Activity
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.login">
+                    Login
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.profile">
+                    Profile
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.friends">
+                    Friends
+                </ion-item>
+                <ion-item nav-clear menu-close ui-sref="app.gallery">
+                    Gallery
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>-->

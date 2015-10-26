@@ -1,5 +1,71 @@
 <ion-view id="plan">
+
+
+    <ion-nav-buttons side="right">
+        <button class="button button-balanced button-fab"> <i class="icon ion-search"></i> </button>
+    </ion-nav-buttons>
     <ion-content id="content" has-header="true">
-        Plan
+        <div class="row plan-first-row">
+            <label class="item-input item-floating-label input-plan-fromto ">
+                <span class="input-label">{{'plan_from' | translate}}</span>
+                <input type="text" placeholder="{{'plan_from' | translate}}"> </label>
+
+            <button class="button button-raised button-plan-fromto no-padding margin-8  icon ion-map" ng-click="openMapPlan()">
+
+            </button>
+            <button class="button button-raised button-plan-fromto no-padding margin-8 icon ion-star">
+
+            </button>
+        </div>
+        <div class="row">
+            <label class="item-input item-floating-label input-plan-fromto ">
+                <span class="input-label">{{'plan_to' | translate}}</span>
+                <input type="text" placeholder="{{'plan_to' | translate}}"> </label>
+            <button class="button button-raised square-56 no-padding margin-8  icon ion-map">
+            </button>
+            <button class="button button-raised square-56 no-padding margin-8 icon ion-star">
+            </button>
+        </div>
+        <div class="row plan-first-row">
+            <label class="item item-input plan-item-time">
+                <span class="input-label">{{'plan_day' | translate}}</span>
+                <input type="date" ng-model="plan.time">
+            </label>
+            <label class="item item-input plan-item-time">
+                <span class="input-label">{{'plan_time' | translate}}</span>
+                <input type="time" ng-model="plan.time" formatted-time>
+            </label>
+        </div>
+        <div class="row plan-first-row">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_foot">
+
+            </button>
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_public-transport">
+
+            </button>
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car">
+
+            </button>
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_bike">
+
+            </button>
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car-sharing">
+
+            </button>
+            <button class="button button-raised button-plan-type no-padding margin-8 icon ic_bike-sharing">
+            </button>
+
+        </div>
+
+        <span class="input-label">{{'plan_preferences' | translate}} <i class="icon" ng-click="togglePreferences()" ng-class="isPreferencesShown() ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i> </span>
+        <div class="list">
+            <label class="item item-radio item-accordion " ng-show="isPreferencesShown()" ng-repeat="preference in preferences">
+                <input type="radio" ng-model="selectedPreference" ng-value="preference.value" name="group">
+                <div class="item-content">
+                    {{preference.label}}
+                </div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+        </div>
     </ion-content>
 </ion-view>
