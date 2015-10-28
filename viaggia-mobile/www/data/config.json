@@ -1,21 +1,22 @@
 {
-    "app-token": "viaggiatrento",
-    "app-id": "trento",
-    "app-version": "0.0.1",
-    "app-name": "ViaggiaTrento",
-    "smartcheck-options": [
+    "apptoken": "viaggiatrento",
+    "appid": "trento",
+    "appversion": "0.0.1",
+    "appname": "ViaggiaTrento",
+    "serverURL": "https://dev.smartcommunitylab.it/core.mobility",
+    "smartcheck_options": [
         1,
         4,
         5
     ],
-    "broadcast-notifications-options": [
+    "broadcast_notifications_options": [
         1,
         4
     ],
-    "center-map": [
+    "center_map": [
       46.069672,
       11.121270
    ],
-    "zoom-map": 15,
-    "db-version": 25
+    "zoom_map": 15,
+    "db_version": 25
 }

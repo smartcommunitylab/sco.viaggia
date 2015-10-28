@@ -104,6 +104,10 @@ table.ngc td {
 .cell-content {
     padding: 2px;
     width: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+  text-overflow: ellipsis;
+
 }
 
 .cell.left.header {
@@ -121,9 +125,14 @@ table.ngc td {
     color: whitesmoke;
 }
 
+.cell.left.middle .cell-content {
+    width: 100px;
+}
 .cell.left.middle {
+    width: 100px;
     background-color: beige;
     color: black;
+    text-align: left;
 }
 
 .cell.center.middle {

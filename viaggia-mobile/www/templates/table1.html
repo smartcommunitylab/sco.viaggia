@@ -1,5 +1,5 @@
 <ion-view id="table1">
     <ion-content id="content" has-header="true">
-        <div ngc-table data="data" scroll-delay="0" show-footer="false" left-column-number="1" header-row-number="1" right-column-number="0" show-row-numbers="false" show-column-names="false" center-column-number="column_number" row-number="row_number" custom-data-value-fn="customDataFn"></div>
+        <div ng-if="data && data.length > 0" ngc-table data="data" scroll-delay="0" show-footer="false" left-column-number="1" header-row-number="1" right-column-number="0" show-row-numbers="false" show-column-names="false" center-column-number="column_number" row-number="row_number" custom-data-value-fn="customDataFn"></div>
     </ion-content>
 </ion-view>
