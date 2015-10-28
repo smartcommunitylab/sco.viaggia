@@ -6,6 +6,8 @@
 angular.module('viaggia', [
     'ionic',
      'ionic-material',
+    'ionic-datepicker',
+    'ionic-timepicker',
     'ngCordova',
     'ngSanitize',
     'ngcTableDirective',
@@ -23,6 +25,7 @@ angular.module('viaggia', [
     'viaggia.controllers.news',
     'viaggia.controllers.notifications',
     'viaggia.controllers.plan',
+    'viaggia.controllers.planlist',
     'viaggia.controllers.tripdetails',
     'viaggia.services.data',
     'viaggia.services.conf',
@@ -54,33 +57,45 @@ angular.module('viaggia', [
         })
 
         .state('app.home', {
-            cache: false,
-            url: "/home",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/home.html",
-                    controller: 'HomeCtrl'
+                cache: false,
+                url: "/home",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/home.html",
+                        controller: 'HomeCtrl'
+                    }
                 }
-            }
-        }).state('app.plan', {
-            cache: false,
-            url: "/plan",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/plan.html",
-                    controller: 'PlanCtrl'
+            })
+            .state('app.plan', {
+                cache: false,
+                url: "/plan",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/plan.html",
+                        controller: 'PlanCtrl'
+                    }
                 }
-            }
-        }).state('app.monitoring', {
-            cache: false,
-            url: "/monitoring",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/monitoring.html",
-                    controller: 'MonitoringCtrl'
+            })
+            .state('app.planlist', {
+                cache: false,
+                url: "/planlist",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/planlist.html",
+                        controller: 'PlanlistCtrl'
+                    }
                 }
-            }
-        })
+            })
+            .state('app.monitoring', {
+                cache: false,
+                url: "/monitoring",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/monitoring.html",
+                        controller: 'MonitoringCtrl'
+                    }
+                }
+            })
 
         .state('app.mytrips', {
                 cache: false,
@@ -184,7 +199,18 @@ angular.module('viaggia', [
             plan_preferences: 'PREFERENZE',
             plan_preferences_fastest: 'Itinerario piu veloce',
             plan_preferences_leastChanges: 'Con meno cambi',
-            plan_preferences_leastWalking: 'Minimo tragitto a piedi'
+            plan_preferences_leastWalking: 'Minimo tragitto a piedi',
+            plan_map_title: 'Seleziona l\' indirizzo',
+            pop_up_loading: 'Caricamento...',
+            pop_up_cancel: 'Cancella',
+            pop_up_ok: 'Ok',
+            pop_up_no_connection_title: 'Errore',
+            pop_up__no_connection_template: 'Nessuna Connessione',
+            popup_address: 'Indirizzo',
+            popup_lat: 'Lat: ',
+            popup_long: 'Long: ',
+            popup_no_address: 'Nessun indirizzo'
+
 
 
 
@@ -214,7 +240,18 @@ angular.module('viaggia', [
             plan_preferences: 'PREFERENCES',
             plan_preferences_fastest: 'Fastest',
             plan_preferences_leastChanges: 'Least changes',
-            plan_preferences_leastWalking: 'Least walking'
+            plan_preferences_leastWalking: 'Least walking',
+            plan_map_title: 'Select the address',
+            pop_up_loading: 'Loading...',
+            pop_up_cancel: 'Cancel',
+            pop_up_ok: 'Ok',
+            pop_up_no_connection_title: 'Error',
+            pop_up__no_connection_template: 'No Connection',
+            popup_address: 'Address',
+            popup_lat: 'Lat: ',
+            popup_long: 'Long: ',
+            popup_no_address: 'No address'
+
 
         });
 

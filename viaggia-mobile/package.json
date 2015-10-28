@@ -27,7 +27,7 @@
     "org.apache.cordova.file",
     "org.apache.cordova.network-information",
     "cordova-sqlite-storage",
-    "net.orworks.cordovaplugins.cordovasqlite"
+        "net.orworks.cordovaplugins.cordovasqlite"
   ],
     "cordovaPlatforms": [
     "ios",

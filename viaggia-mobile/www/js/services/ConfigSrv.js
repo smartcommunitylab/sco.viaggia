@@ -9,7 +9,10 @@ angular.module('viaggia.services.conf', [])
 
     var URL = 'https://' + (DEVELOPMENT ? 'dev' : 'tn') + '.smartcommunitylab.it';
     var GEOCODER_URL = 'https://os.smartcommunitylab.it/core.geocoder/spring';
+    var PLAN_URL = 'https://os.smartcommunitylab.it/core.mobility/plansinglejourney';
+
     var APP_BUILD = '';
+    var PLAN_TYPES = ['WALK', 'TRANSIT', 'CAR', 'BICYCLE', 'SHAREDCAR', 'SHAREDBIKE'];
     var PLAN_PREFERENCES = [
         {
             label: $filter('translate')('plan_preferences_fastest'),
@@ -23,10 +26,24 @@ angular.module('viaggia.services.conf', [])
         }
 
     ]
+    var MAP_POSITION = {
+        lat: 46.067332,
+        long: 11.121393,
+        zoom: 12
+    }
 
     return {
+        getMapPosition: function () {
+            return MAP_POSITION;
+        },
         getGeocoderURL: function () {
             return GEOCODER_URL;
+        },
+        getPlanURL: function () {
+            return PLAN_URL;
+        },
+        getPlanTypes: function () {
+            return PLAN_TYPES;
         },
         getPlanPreferences: function () {
             return PLAN_PREFERENCES;

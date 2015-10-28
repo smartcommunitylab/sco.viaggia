@@ -137,3 +137,7 @@
 .plan-item-time {
     border-width: 0px !important;
 }
+
+.button-plan-pressed {
+    background-color: green;
+}

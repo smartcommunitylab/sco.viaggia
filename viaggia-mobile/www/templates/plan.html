@@ -2,15 +2,15 @@
 
 
     <ion-nav-buttons side="right">
-        <button class="button button-balanced button-fab"> <i class="icon ion-search"></i> </button>
+        <button class="button button-balanced button-fab" ng-click="plan()"> <i class="icon ion-search"></i> </button>
     </ion-nav-buttons>
     <ion-content id="content" has-header="true">
         <div class="row plan-first-row">
             <label class="item-input item-floating-label input-plan-fromto ">
                 <span class="input-label">{{'plan_from' | translate}}</span>
-                <input type="text" placeholder="{{'plan_from' | translate}}"> </label>
+                <input type="text" placeholder="{{'plan_from' | translate}}" ng-model="planParams.from.name"> </label>
 
-            <button class="button button-raised button-plan-fromto no-padding margin-8  icon ion-map" ng-click="openMapPlan()">
+            <button class="button button-raised button-plan-fromto no-padding margin-8  icon ion-map" ng-click="openMapPlan('from')">
 
             </button>
             <button class="button button-raised button-plan-fromto no-padding margin-8 icon ion-star">
@@ -20,8 +20,8 @@
         <div class="row">
             <label class="item-input item-floating-label input-plan-fromto ">
                 <span class="input-label">{{'plan_to' | translate}}</span>
-                <input type="text" placeholder="{{'plan_to' | translate}}"> </label>
-            <button class="button button-raised square-56 no-padding margin-8  icon ion-map">
+                <input type="text" placeholder="{{'plan_to' | translate}}" ng-model="planParams.to.name"> </label>
+            <button class="button button-raised square-56 no-padding margin-8  icon ion-map" ng-click="openMapPlan('to')">
             </button>
             <button class="button button-raised square-56 no-padding margin-8 icon ion-star">
             </button>
@@ -29,30 +29,38 @@
         <div class="row plan-first-row">
             <label class="item item-input plan-item-time">
                 <span class="input-label">{{'plan_day' | translate}}</span>
-                <input type="date" ng-model="plan.time">
+                <!--                <input type="text" class="datepicker" ng-model="plan.time">-->
+                <ionic-datepicker input-obj="datepickerObjectPopup">
+                    <button class="button button-block button-positive"> {{datepickerObjectPopup.inputDate | date:'dd - MMMM - yyyy'}}</button>
+                </ionic-datepicker>
             </label>
             <label class="item item-input plan-item-time">
                 <span class="input-label">{{'plan_time' | translate}}</span>
-                <input type="time" ng-model="plan.time" formatted-time>
+                <!--                <input type="text" class="timepicker" ng-model="plan.time">-->
+                <ionic-timepicker input-obj="timePickerObject24Hour">
+                    <button class="button button-block button-positive overflowShow">
+                        <standard-time-no-meridian etime='timePickerObject24Hour.inputEpochTime'></standard-time-no-meridian>
+                    </button>
+                </ionic-timepicker>
             </label>
         </div>
         <div class="row plan-first-row">
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_foot">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_foot" ng-class="{'button-plan-pressed': isSwitched('WALK')}" ng-click="switch('WALK')">
 
             </button>
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_public-transport">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_public-transport" ng-class="{'button-plan-pressed': isSwitched('TRANSIT')}" ng-click="switch('TRANSIT')">
 
             </button>
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car" ng-class="{'button-plan-pressed': isSwitched('CAR')}" ng-click="switch('CAR')">
 
             </button>
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_bike">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_bike" ng-class="{'button-plan-pressed': isSwitched('BICYCLE')}" ng-click="switch('BICYCLE')">
 
             </button>
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car-sharing">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car-sharing" ng-class="{'button-plan-pressed': isSwitched('SHAREDCAR')}" ng-click="switch('SHAREDCAR')">
 
             </button>
-            <button class="button button-raised button-plan-type no-padding margin-8 icon ic_bike-sharing">
+            <button class="button button-raised button-plan-type no-padding margin-8 icon ic_bike-sharing" ng-class="{'button-plan-pressed': isSwitched('SHAREDBIKE')}" ng-click="switch('SHAREDBIKE')">
             </button>
 
         </div>
@@ -60,7 +68,7 @@
         <span class="input-label">{{'plan_preferences' | translate}} <i class="icon" ng-click="togglePreferences()" ng-class="isPreferencesShown() ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i> </span>
         <div class="list">
             <label class="item item-radio item-accordion " ng-show="isPreferencesShown()" ng-repeat="preference in preferences">
-                <input type="radio" ng-model="selectedPreference" ng-value="preference.value" name="group">
+                <input type="radio" ng-model="planParams.routeType" ng-value="preference.value" name="group">
                 <div class="item-content">
                     {{preference.label}}
                 </div>
