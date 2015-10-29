@@ -1,5 +1,22 @@
 <ion-view id="table1">
     <ion-content id="content" has-header="true">
-        <div ng-if="data && data.length > 0" ngc-table data="data" scroll-delay="0" show-footer="false" left-column-number="1" header-row-number="1" right-column-number="0" show-row-numbers="false" show-column-names="false" center-column-number="column_number" row-number="row_number" custom-data-value-fn="customDataFn"></div>
+        <div
+             ng-if="data && data.length > 0"
+             ngc-table data="data"
+             scroll-delay="0"
+             show-footer="false"
+             left-column-number="1" left-column-widths="'100px'"
+             header-row-number="1" header-row-heights="'28px'"
+             right-column-number="0"
+             show-row-numbers="false"
+             show-column-names="false"
+             center-column-widths="[column_width]"
+             center-column-number="column_number"
+             row-number="row_number"
+             row-heights="[row_height]"
+             scroll-left-position="scrollLeftPosition"
+             custom-data-fn="customDataFn">
+        <ngc-range top="1" bottom="tt.stops.length" left="1" right="tt.tripIds.length" style-fn="styleFn"></ngc-range>
+      </div>
     </ion-content>
 </ion-view>

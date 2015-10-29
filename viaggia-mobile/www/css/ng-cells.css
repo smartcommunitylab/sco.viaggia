@@ -111,12 +111,14 @@ table.ngc td {
 
 .cell-content {
 /*    padding: 2px;*/
-    width: 50px;
+/*    width: 50px;*/
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+/*
     min-height: 28px;
     line-height: 28px;
+*/
 }
 
 .cell.left.header .cell-content{
@@ -141,8 +143,10 @@ table.ngc td {
 
 .cell.left.middle .cell-content {
     width: 100px;
+/*
     min-height: 28px;
     line-height: 28px;
+*/
     padding-left: 2px;
 }
 .cell.left.middle {
