@@ -30,6 +30,7 @@ angular.module('viaggia', [
     'viaggia.services.data',
     'viaggia.services.conf',
     'viaggia.services.plan',
+    'viaggia.services.timetable',
     'viaggia.directives',
 
 ])

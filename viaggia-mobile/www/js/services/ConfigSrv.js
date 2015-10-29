@@ -1,16 +1,15 @@
 angular.module('viaggia.services.conf', [])
 
-.factory('Config', function ($q, $http, $window, $filter) {
+.factory('Config', function ($q, $http, $window, $filter, $ionicLoading) {
     var DEVELOPMENT = true;
 
     $http.get('data/config.json').success(function (response) {
         mapJsonConfig = response;
     });
 
-    var URL = 'https://' + (DEVELOPMENT ? 'dev' : 'tn') + '.smartcommunitylab.it';
-    var GEOCODER_URL = 'https://os.smartcommunitylab.it/core.geocoder/spring';
-    var PLAN_URL = 'https://os.smartcommunitylab.it/core.mobility/plansinglejourney';
+    var HTTP_CONFIG = {timeout: 5000};
 
+    var GEOCODER_URL = 'https://os.smartcommunitylab.it/core.geocoder/spring';
     var APP_BUILD = '';
     var PLAN_TYPES = ['WALK', 'TRANSIT', 'CAR', 'BICYCLE', 'SHAREDCAR', 'SHAREDBIKE'];
     var PLAN_PREFERENCES = [
@@ -26,21 +25,23 @@ angular.module('viaggia.services.conf', [])
         }
 
     ]
-    var MAP_POSITION = {
-        lat: 46.067332,
-        long: 11.121393,
-        zoom: 12
-    }
 
     return {
+        getHTTPConfig: function () {
+            return HTTP_CONFIG;
+        },
+        getServerURL: function () {
+            return mapJsonConfig['serverURL'];
+        },
         getMapPosition: function () {
-            return MAP_POSITION;
+            return {
+              lat: mapJsonConfig['center_map'][0],
+              long:mapJsonConfig['center_map'][1],
+              zoom : mapJsonConfig['zoom_map']
+            };
         },
         getGeocoderURL: function () {
             return GEOCODER_URL;
-        },
-        getPlanURL: function () {
-            return PLAN_URL;
         },
         getPlanTypes: function () {
             return PLAN_TYPES;
@@ -49,10 +50,10 @@ angular.module('viaggia.services.conf', [])
             return PLAN_PREFERENCES;
         },
         getAppId: function () {
-            return mapJsonConfig["app-id"];
+            return mapJsonConfig["appid"];
         },
         getVersion: function () {
-            return 'v ' + mapJsonConfig["app-version"] + (APP_BUILD && APP_BUILD != '' ? '<br/>(' + APP_BUILD + ')' : '');
+            return 'v ' + mapJsonConfig["appversion"] + (APP_BUILD && APP_BUILD != '' ? '<br/>(' + APP_BUILD + ')' : '');
         },
         getPlanDefaultOptions: function () {
             return mapJsonConfig["plan-default-options"];
@@ -85,6 +86,12 @@ angular.module('viaggia.services.conf', [])
                 }
             );
 
+        },
+        loading : function() {
+          $ionicLoading.show();
+        },
+        loaded: function() {
+          $ionicLoading.hide();
         }
     }
 })

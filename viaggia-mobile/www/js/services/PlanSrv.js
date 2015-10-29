@@ -236,7 +236,7 @@ angular.module('viaggia.services.plan', [])
         var deferred = $q.defer();
         $http({
             method: 'POST',
-            url: Config.getPlanURL(),
+            url: Config.getServerURL()+'/plansinglejourney ',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
