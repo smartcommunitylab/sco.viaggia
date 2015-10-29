@@ -1,6 +1,4 @@
 <ion-view id="plan">
-
-
     <ion-nav-buttons side="right">
         <button class="button button-balanced button-fab" ng-click="plan()"> <i class="icon ion-search"></i> </button>
     </ion-nav-buttons>
@@ -9,9 +7,7 @@
             <label class="item-input item-floating-label input-plan-fromto ">
                 <span class="input-label">{{'plan_from' | translate}}</span>
                 <input type="text" placeholder="{{'plan_from' | translate}}" ng-model="planParams.from.name"> </label>
-
             <button class="button button-raised button-plan-fromto no-padding margin-8  icon ion-map" ng-click="openMapPlan('from')">
-
             </button>
             <button class="button button-raised button-plan-fromto no-padding margin-8 icon ion-star">
 
@@ -31,7 +27,7 @@
                 <span class="input-label">{{'plan_day' | translate}}</span>
                 <!--                <input type="text" class="datepicker" ng-model="plan.time">-->
                 <ionic-datepicker input-obj="datepickerObjectPopup">
-                    <button class="button button-block button-positive"> {{datepickerObjectPopup.inputDate | date:'dd - MMMM - yyyy'}}</button>
+                    <button class="button button-block button-positive"> {{datepickerObjectPopup.inputDate | date:'dd/MM/yyyy'}}</button>
                 </ionic-datepicker>
             </label>
             <label class="item item-input plan-item-time">
@@ -55,8 +51,9 @@
 
             </button>
             <button class="button button-raised button-plan-type no-padding margin-8  icon ic_bike" ng-class="{'button-plan-pressed': isSwitched('BICYCLE')}" ng-click="switch('BICYCLE')">
-
             </button>
+        </div>
+        <div class="row">
             <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car-sharing" ng-class="{'button-plan-pressed': isSwitched('SHAREDCAR')}" ng-click="switch('SHAREDCAR')">
 
             </button>
@@ -65,7 +62,7 @@
 
         </div>
 
-        <span class="input-label">{{'plan_preferences' | translate}} <i class="icon" ng-click="togglePreferences()" ng-class="isPreferencesShown() ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i> </span>
+        <span class="input-label" style="max-width:100%!important;" ng-click="togglePreferences()">{{'plan_preferences' | translate}} <i class="icon"  ng-class="isPreferencesShown() ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i> </span>
         <div class="list">
             <label class="item item-radio item-accordion " ng-show="isPreferencesShown()" ng-repeat="preference in preferences">
                 <input type="radio" ng-model="planParams.routeType" ng-value="preference.value" name="group">

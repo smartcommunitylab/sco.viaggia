@@ -54,6 +54,12 @@ angular.module('viaggia.services.conf', [])
         getVersion: function () {
             return 'v ' + mapJsonConfig["app-version"] + (APP_BUILD && APP_BUILD != '' ? '<br/>(' + APP_BUILD + ')' : '');
         },
+        getPlanDefaultOptions: function () {
+            return mapJsonConfig["plan-default-options"];
+        },
+        getExtraurbanAgencies: function () {
+            return mapJsonConfig["extraurban-agencies"];
+        },
         getLang: function () {
             var browserLanguage = '';
             // works for earlier version of Android (2.3.x)

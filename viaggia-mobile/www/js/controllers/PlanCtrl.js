@@ -8,73 +8,29 @@ angular.module('viaggia.controllers.plan', [])
     $scope.dateTimestamp = null;
     $scope.hourTimestamp = null;
     $scope.datepickerObject.inputDate = new Date();
-
-    var initMapTypes = function (types) {
-        var map = {};
-        for (var i = 0; i < types.length; i++) {
-            map[types[i]] = false;
-        }
-        return map;
-    }
-
-    $scope.timePickerObject24Hour = {
-        inputEpochTime: ((new Date()).getHours() * 60 * 60 + (new Date()).getMinutes() * 60), //Optional
-        step: 10, //Optional
-        format: 24, //Optional
-        titleLabel: '24-hour Format', //Optional
-        closeLabel: 'Cancel', //Optional
-        setLabel: 'Select', //Optional
-        setButtonType: 'button-balanced', //Optional
-        closeButtonType: 'button-positive', //Optional
-        callback: function (val) { //Mandatory
-            timePicker24Callback(val);
-        }
-    };
-
-    function timePicker24Callback(val) {
-        if (typeof (val) === 'undefined') {
-            console.log('Time not selected');
-        } else {
-            $scope.timePickerObject24Hour.inputEpochTime = val;
-            var selectedTime = new Date(val * 1000);
-            $scope.hourTimestamp = $filter('date')(val * 1000, 'hh:mma');
-            //            console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), ':', selectedTime.getUTCMinutes(), 'in UTC');
-            //            console.log($scope.hourTimestamp);
-        }
-    }
-
-    var datePickerCallbackPopup = function (val) {
-        if (typeof (val) === 'undefined') {
-            console.log('No date selected');
-        } else {
-            $scope.datepickerObjectPopup.inputDate = val;
-            //            console.log('Selected date is : ', val.getTime())
-            $scope.dateTimestamp = $filter('date')(val.getTime(), 'MM/dd/yyyy');
-        }
-    };
-    $scope.datepickerObjectPopup = {
-        titleLabel: 'Ionic-Datepicker', //Optional
-        todayLabel: 'Today', //Optional
-        closeLabel: 'Close', //Optional
-        setLabel: 'Set', //Optional
-        errorMsgLabel: 'Please select time.', //Optional
-        setButtonType: 'button-assertive', //Optional
-        modalHeaderColor: 'bar-positive', //Optional
-        modalFooterColor: 'bar-positive', //Optional
-        templateType: 'popup', //Optional
-        inputDate: $scope.datepickerObject.inputDate, //Optional
-        mondayFirst: true, //Optional
-        //        disabledDates: disabledDates, //Optional
-        //        monthList: monthList, //Optional
-        from: new Date(), //Optional
-        to: new Date(2020, 12, 1), //Optional
-        callback: function (val) { //Optional
-            datePickerCallbackPopup(val);
-        }
-    };
-
-    $scope.mapTypes = initMapTypes($scope.types);
     $scope.place = null;
+    var monthList = [
+        $filter('translate')('popup_datepicker_jan'),
+    $filter('translate')('popup_datepicker_jfeb'),
+    $filter('translate')('popup_datepicker_mar'),
+    $filter('translate')('popup_datepicker_apr'),
+    $filter('translate')('popup_datepicker_may'),
+    $filter('translate')('popup_datepicker_jun'),
+    $filter('translate')('popup_datepicker_jul'),
+    $filter('translate')('popup_datepicker_ago'),
+    $filter('translate')('popup_datepicker_sep'),
+    $filter('translate')('popup_datepicker_oct'),
+    $filter('translate')('popup_datepicker_nov'),
+    $filter('translate')('popup_datepicker_dic')];
+    var weekDaysList = [
+     $filter('translate')('popup_datepicker_sun'),
+    $filter('translate')('popup_datepicker_mon'),
+    $filter('translate')('popup_datepicker_tue'),
+    $filter('translate')('popup_datepicker_wed'),
+    $filter('translate')('popup_datepicker_thu'),
+    $filter('translate')('popup_datepicker_fri'),
+    $filter('translate')('popup_datepicker_sat')
+    ];
     $scope.planParams = {
         //tmp, i need structure with lat-long
         from: {
@@ -92,6 +48,87 @@ angular.module('viaggia.controllers.plan', [])
         departureTime: '',
         date: ''
     };
+
+    var initMapTypes = function (types) {
+        var map = {};
+        for (var i = 0; i < types.length; i++) {
+            map[types[i]] = false;
+        }
+        return map;
+    }
+    var setDefaultOptions = function () {
+        var planOptionConfig = Config.getPlanDefaultOptions();
+        //setDefaultOptions
+        //departureTime
+        $scope.planParams.departureTime = $filter('date')(new Date().getTime(), 'hh:mma');
+        //date
+        $scope.planParams.date = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
+        //set types from Config
+        $scope.planParams.routeType = planOptionConfig.routeType;
+        $scope.planParams.transportTypes = planOptionConfig.transportTypes;
+        for (var i = 0; i < $scope.types.length; i++) {
+            $scope.mapTypes[$scope.planParams.transportTypes[i]] = true;
+        }
+        //set preference trip
+    }
+    $scope.timePickerObject24Hour = {
+        inputEpochTime: ((new Date()).getHours() * 60 * 60 + (new Date()).getMinutes() * 60), //Optional
+        step: 1, //Optional
+        format: 24, //Optional
+        titleLabel: $filter('translate')('popup_timepicker_title'), //Optional
+        closeLabel: $filter('translate')('popup_timepicker_cancel'), //Optional
+        setLabel: $filter('translate')('popup_timepicker_select'), //Optional
+        setButtonType: 'button-popup', //Optional
+        closeButtonType: 'button-popup', //Optional
+        callback: function (val) { //Mandatory
+            timePicker24Callback(val);
+        }
+    };
+
+    function timePicker24Callback(val) {
+        if (typeof (val) === 'undefined') {
+            console.log('Time not selected');
+        } else {
+            $scope.timePickerObject24Hour.inputEpochTime = val;
+            var selectedTime = new Date(val * 1000);
+            $scope.hourTimestamp = $filter('date')(val * 1000, 'hh:mma');
+        }
+    }
+
+    var datePickerCallbackPopup = function (val) {
+        if (typeof (val) === 'undefined') {
+            console.log('No date selected');
+        } else {
+            $scope.datepickerObjectPopup.inputDate = val;
+            //            console.log('Selected date is : ', val.getTime())
+            $scope.dateTimestamp = $filter('date')(val.getTime(), 'MM/dd/yyyy');
+        }
+    };
+    $scope.datepickerObjectPopup = {
+        titleLabel: $filter('translate')('popup_datepicker_title'), //Optional
+        todayLabel: $filter('translate')('popup_datepicker_today'), //Optional
+        closeLabel: $filter('translate')('popup_datepicker_close'), //Optional
+        setLabel: $filter('translate')('popup_datepicker_set'), //Optional
+        errorMsgLabel: $filter('translate')('popup_datepicker_error_label'), //Optional
+        setButtonType: 'button-popup', //Optional
+        todayButtonType: 'button-popup', //Optional
+        closeButtonType: 'button-popup', //Optional
+        modalHeaderColor: 'bar-positive', //Optional
+        modalFooterColor: 'bar-positive', //Optional
+        templateType: 'popup', //Optional
+        showTodayButton: 'true',
+        inputDate: $scope.datepickerObject.inputDate, //Optional
+        mondayFirst: true, //Optional
+        monthList: monthList, //Optional
+        weekDaysList: weekDaysList,
+        from: new Date(), //Optional
+        to: new Date(2020, 12, 1), //Optional
+        callback: function (val) { //Optional
+            datePickerCallbackPopup(val);
+        }
+    };
+
+
     $scope.togglePreferences = function () {
         if ($scope.isPreferencesShown()) {
             $scope.shownPreferences = false;
@@ -104,7 +141,7 @@ angular.module('viaggia.controllers.plan', [])
     };
 
     $ionicModal.fromTemplateUrl('templates/mapPlan.html', {
-        id: '1', // We need to use and ID to identify the modal that is firing the event!
+        id: '1',
         scope: $scope,
         backdropClickToClose: false,
         animation: 'slide-in-up'
@@ -136,10 +173,14 @@ angular.module('viaggia.controllers.plan', [])
                 $scope.planParams.transportTypes.push($scope.types[i]);
             }
         }
-        //departureTime
-        $scope.planParams.departureTime = $scope.hourTimestamp;
-        //date
-        $scope.planParams.date = $scope.dateTimestamp;
+        if ($scope.hourTimestamp) {
+            //departureTime
+            $scope.planParams.departureTime = $scope.hourTimestamp;
+        }
+        if ($scope.dateTimestamp) {
+            //date
+            $scope.planParams.date = $scope.dateTimestamp;
+        }
 
     }
     $scope.plan = function () {
@@ -161,12 +202,10 @@ angular.module('viaggia.controllers.plan', [])
     /*part for the map*/
     var selectPlace = function (placeSelected) {
         if ($scope.place == 'from') {
-            //tmp
             $scope.planParams.from.name = placeSelected;
             $scope.planParams.from.lat = planService.getPosition($scope.place).latitude;
             $scope.planParams.from.long = planService.getPosition($scope.place).longitude;
         } else if ($scope.place == 'to') {
-            //tmp
             $scope.planParams.to.name = placeSelected;
             $scope.planParams.to.lat = planService.getPosition($scope.place).latitude;
             $scope.planParams.to.long = planService.getPosition($scope.place).longitude;
@@ -187,7 +226,7 @@ angular.module('viaggia.controllers.plan', [])
                     var placedata = $q.defer();
                     var places = {};
                     var url = Config.getGeocoderURL() + '/location?latlng=' + position.coords.latitude + ',' + position.coords.longitude;
-                    //                    var url = "https: //os.smartcommunitylab.it/core.geocoder/spring/location?latlng=" + position.coords.latitude + ',' + position.coords.longitude;
+
                     //add timeout
                     $http.get(encodeURI(url), {
                         timeout: 5000
@@ -200,26 +239,13 @@ angular.module('viaggia.controllers.plan', [])
                         // A confirm dialog
                         name = '';
                         if (data.response.docs[0]) {
-                            planService.setName('from', data.response.docs[0]);
-                            //                            if (data.response.docs[0].street)
-                            //                                name = name + data.response.docs[0].street;
-                            //                            if (data.response.docs[0].housenumber) {
-                            //                                if (name)
-                            //                                    name = name + ', ';
-                            //                                name = name + data.response.docs[0].housenumber;
-                            //                            }
-                            //                            if (data.response.docs[0].city) {
-                            //                                if (name)
-                            //                                    name = name + ', ';
-                            //                                name = name + data.response.docs[0].city;
-                            //                            }
-
+                            $scope.place = 'from';
+                            planService.setPosition($scope.place, position.coords.latitude, position.coords.longitude);
+                            planService.setName($scope.place, data.response.docs[0]);
+                            selectPlace(name);
                             $ionicLoading.hide();
-                            //set my position
                         } else {
                             $ionicLoading.hide();
-                            //set my position
-
                         }
                     }).
                     error(function (data, status, headers, config) {
@@ -240,7 +266,12 @@ angular.module('viaggia.controllers.plan', [])
                 maximumAge: 0
             });
     };
+
+    $scope.mapTypes = initMapTypes($scope.types);
     $scope.locateMe();
+    setDefaultOptions();
+
+
 
     $scope.initMap = function () {
         leafletData.getMap().then(function (map) {
@@ -284,7 +315,6 @@ angular.module('viaggia.controllers.plan', [])
             $ionicLoading.show();
             planService.setPosition($scope.place, args.leafletEvent.latlng.lat, args.leafletEvent.latlng.lng);
             var placedata = $q.defer();
-            //var places = {};
             var url = Config.getGeocoderURL() + '/location?latlng=' + args.leafletEvent.latlng.lat + ',' + args.leafletEvent.latlng.lng;
 
             $http.get(encodeURI(url), {
@@ -292,7 +322,6 @@ angular.module('viaggia.controllers.plan', [])
             }).
             success(function (data, status, headers, config) {
                 $ionicLoading.hide();
-                //places = data.response.docs;
                 name = '';
                 if (data.response.docs[0]) {
                     planService.setName($scope.place, data.response.docs[0]);
@@ -307,11 +336,8 @@ angular.module('viaggia.controllers.plan', [])
             }).error(function (data, status, headers, config) {
                 $ionicLoading.hide();
                 $scope.showNoConnection();
-
             });
         });
-
-
 
         $scope.detail = function (view) {
             window.location.assign(view);

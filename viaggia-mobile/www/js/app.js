@@ -209,11 +209,33 @@ angular.module('viaggia', [
             popup_address: 'Indirizzo',
             popup_lat: 'Lat: ',
             popup_long: 'Long: ',
-            popup_no_address: 'Nessun indirizzo'
-
-
-
-
+            popup_no_address: 'Nessun indirizzo',
+            popup_timepicker_title: 'Selezionare l\'ora',
+            popup_timepicker_cancel: 'Annulla',
+            popup_timepicker_select: 'Ok',
+            popup_datepicker_title: 'Selezionare il giorno',
+            popup_datepicker_today: 'Oggi',
+            popup_datepicker_close: 'Annulla',
+            popup_datepicker_set: 'Ok',
+            popup_datepicker_jan: 'Gen',
+            popup_datepicker_jfeb: 'Feb',
+            popup_datepicker_mar: 'Mar',
+            popup_datepicker_apr: 'Apr',
+            popup_datepicker_may: 'Mag',
+            popup_datepicker_jun: 'Giu',
+            popup_datepicker_jul: 'Lug',
+            popup_datepicker_ago: 'Ago',
+            popup_datepicker_sep: 'Set',
+            popup_datepicker_oct: 'Ott',
+            popup_datepicker_nov: 'Nov',
+            popup_datepicker_dic: 'Dic',
+            popup_datepicker_mon: 'L',
+            popup_datepicker_tue: 'M',
+            popup_datepicker_wed: 'M',
+            popup_datepicker_thu: 'G',
+            popup_datepicker_fri: 'V',
+            popup_datepicker_sat: 'S',
+            popup_datepicker_sun: 'D'
         });
 
 
@@ -250,8 +272,33 @@ angular.module('viaggia', [
             popup_address: 'Address',
             popup_lat: 'Lat: ',
             popup_long: 'Long: ',
-            popup_no_address: 'No address'
-
+            popup_no_address: 'No address',
+            popup_timepicker_title: 'Select time',
+            popup_timepicker_cancel: 'Cancel',
+            popup_timepicker_select: 'Ok',
+            popup_datepicker_title: 'Select the day',
+            popup_datepicker_today: 'Today',
+            popup_datepicker_close: 'Cancel',
+            popup_datepicker_set: 'Ok',
+            popup_datepicker_jan: 'Jan',
+            popup_datepicker_jfeb: 'Feb',
+            popup_datepicker_mar: 'Mar',
+            popup_datepicker_apr: 'Apr',
+            popup_datepicker_may: 'May',
+            popup_datepicker_jun: 'Jun',
+            popup_datepicker_jul: 'Jul',
+            popup_datepicker_ago: 'Ago',
+            popup_datepicker_sep: 'Sep',
+            popup_datepicker_oct: 'Oct',
+            popup_datepicker_nov: 'Nov',
+            popup_datepicker_dic: 'Dec',
+            popup_datepicker_mon: 'M',
+            popup_datepicker_tue: 'T',
+            popup_datepicker_wed: 'W',
+            popup_datepicker_thu: 'T',
+            popup_datepicker_fri: 'F',
+            popup_datepicker_sat: 'S',
+            popup_datepicker_sun: 'S'
 
         });
 

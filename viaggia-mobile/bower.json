@@ -1,45 +1,47 @@
 {
-  "name": "viaggia-mobile",
-  "private": "true",
-  "devDependencies": {
-    "ionic": "driftyco/ionic-bower#1.1.0"
-  },
-  "dependencies": {
-    "ionic": "~1.1.0",
-    "ngCordova": "~0.1.20-alpha",
-    "Cordova-sqlite-storage": "https://github.com/litehelpers/Cordova-sqlite-storage.git#~0.7.7",
-    "angular-translate": "~2.8.1",
-    "jszip": "~2.5.0",
-    "jszip-utils": "~0.0.2",
-    "ng-cells": "~0.4.0",
-    "ionic-datepicker": "~0.9.0"
-  },
-  "install": {
-    "path": "www/lib",
-    "sources": {
-      "ionic": "bower_components/ionic/**",
-      "ngCordova": "bower_components/ngCordova/ng-cordova.min.js",
-      "angular": "bower_components/angular/angular.min.js",
-      "angular-animate": "bower_components/angular-animate/angular-animate.min.js",
-      "angular-filter": "bower_components/angular-filter/dist/angular-filter.min.js",
-      "angular-sanitize": "bower_components/angular-sanitize/angular-sanitize.min.js",
-      "angular-translate": "bower_components/angular-translate/angular-translate.min.js",
-      "angular-ui-router": "bower_components/angular-ui-router/release/angular-ui-router.min.js",
-      "jszip": "bower_components/jszip/dist/jszip.min.js",
-      "ng-cells": "bower_components/ng-cells/dist/latest/ng-cells.min.js",
-      "ionic-material": [
+    "name": "viaggia-mobile",
+    "private": "true",
+    "devDependencies": {
+        "ionic": "driftyco/ionic-bower#1.1.0"
+    },
+    "dependencies": {
+        "ionic": "~1.1.0",
+        "ngCordova": "~0.1.20-alpha",
+        "Cordova-sqlite-storage": "https://github.com/litehelpers/Cordova-sqlite-storage.git#~0.7.7",
+        "angular-translate": "~2.8.1",
+        "jszip": "~2.5.0",
+        "jszip-utils": "~0.0.2",
+        "ng-cells": "~0.4.0",
+        "ionic-datepicker": "~0.9.0"
+    },
+    "install": {
+        "path": "www/lib",
+        "sources": {
+            "ionic": "bower_components/ionic/**",
+            "ngCordova": "bower_components/ngCordova/ng-cordova.min.js",
+            "angular": "bower_components/angular/angular.min.js",
+            "angular-animate": "bower_components/angular-animate/angular-animate.min.js",
+            "angular-filter": "bower_components/angular-filter/dist/angular-filter.min.js",
+            "angular-sanitize": "bower_components/angular-sanitize/angular-sanitize.min.js",
+            "angular-translate": "bower_components/angular-translate/angular-translate.min.js",
+            "angular-ui-router": "bower_components/angular-ui-router/release/angular-ui-router.min.js",
+            "jszip": "bower_components/jszip/dist/jszip.min.js",
+            "ng-cells": "bower_components/ng-cells/dist/latest/ng-cells.min.js",
+            "ionic-material": [
         "bower_components/ionic-material/dist/ionic.material.min.js",
         "bower_components/ionic-material/dist/ionic.material.min.css"
       ],
-      "jszip-utils": "bower_components/jszip-utils/dist/jszip-utils.min.js",
-      "angular-leaflet-directive": "bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.min.js",
-      "leaflet": [
+            "jszip-utils": "bower_components/jszip-utils/dist/jszip-utils.min.js",
+            "angular-leaflet-directive": "bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.min.js",
+            "leaflet": [
         "bower_components/leaflet/dist/leaflet.js",
-        "bower_components/leaflet/dist/leaflet.css"
+        "bower_components/leaflet/dist/leaflet.css",
+"bower_components/leaflet/dist/images/*"
       ],
-      "angular-simple-logger": "bower_components/angular-leaflet-directive/dist/angular-simple-logger.min.js",      	"ionic-timepicker": ["bower_components/ionic-timepicker/dist/ionic-timepicker.bundle.min.js",
+            "angular-simple-logger": "bower_components/angular-leaflet-directive/dist/angular-simple-logger.min.js",
+            "ionic-timepicker": ["bower_components/ionic-timepicker/dist/ionic-timepicker.bundle.min.js",
 "bower_components/ionic-timepicker/dist/templates.js"],
-      "ionic-datepicker": "bower_components/ionic-datepicker/dist/ionic-datepicker.bundle.min.js"
+            "ionic-datepicker": "bower_components/ionic-datepicker/dist/ionic-datepicker.bundle.min.js"
+        }
     }
-  }
 }

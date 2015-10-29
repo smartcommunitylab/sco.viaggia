@@ -8,6 +8,14 @@
         4,
         5
     ],
+    "plan-default-options": {
+        "routeType": "fastest",
+        "transportTypes": [
+            "WALK",
+            "TRANSIT"
+        ]
+    },
+    "extraurban-agencies": [17],
     "broadcast-notifications-options": [
         1,
         4
