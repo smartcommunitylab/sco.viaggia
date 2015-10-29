@@ -85,16 +85,24 @@ div.ngc.scroll-wrapper {
 
 table.ngc {
     border: none;
+    margin: 0px;
+    padding: 0px;
+}
+table.ngc .row{
+    border: none;
+    margin: 0px;
+    padding: 0px;
 }
 
 table.ngc td {
-    border: 1px solid transparent;
+/*    border: 1px solid transparent;*/
 }
 
 .ngc.cell {
     font-size: 11px;
     text-align: center;
-    padding: 2px;
+
+/*    padding: 2px;*/
 }
 
 .scroll-wrapper.vertical {
@@ -102,17 +110,23 @@ table.ngc td {
 }
 
 .cell-content {
-    padding: 2px;
+/*    padding: 2px;*/
     width: 50px;
     white-space: nowrap;
     overflow: hidden;
-  text-overflow: ellipsis;
-
+    text-overflow: ellipsis;
+    min-height: 28px;
+    line-height: 28px;
 }
 
+.cell.left.header .cell-content{
+    width: 100px;
+}
 .cell.left.header {
+    width: 100px;
     background-color: #b22222;
     color: whitesmoke;
+
 }
 
 .cell.center.header {
@@ -127,17 +141,31 @@ table.ngc td {
 
 .cell.left.middle .cell-content {
     width: 100px;
+    min-height: 28px;
+    line-height: 28px;
+    padding-left: 2px;
 }
 .cell.left.middle {
     width: 100px;
-    background-color: beige;
+/*    background-color: beige;*/
+    border-right: 1px solid #ddd;
     color: black;
     text-align: left;
 }
 
 .cell.center.middle {
-    background-color: #e0f2be;
     color: black;
+}
+
+.cell.center .odd {
+/*  padding: 4px;*/
+  min-height: 28px;
+  background-color: #fff;
+}
+.cell.center .even {
+/*  padding: 4px;*/
+  min-height: 28px;
+  background-color: #eee;
 }
 
 .cell.right.middle {

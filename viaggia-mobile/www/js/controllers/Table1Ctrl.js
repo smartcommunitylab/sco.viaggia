@@ -2,7 +2,7 @@ angular.module('viaggia.controllers.table1', ['ionic', 'ngcTableDirective'])
 
 .controller('Table1Ctrl', function ($scope, $ionicPosition, ttService, Config) {
     $scope.data = [];
-    $scope.row_number = Math.floor((window.innerHeight - 40 - 44) / 30);
+    $scope.row_number = Math.floor((window.innerHeight - 28 - 44) / 28);
     console.log("window height" + window.innerHeight);
     console.log("content height" + document.getElementById("content").clientHeight);
     console.log("offsetWidth rect " + document.getElementById("content").offsetWidth);
@@ -48,8 +48,11 @@ angular.module('viaggia.controllers.table1', ['ionic', 'ngcTableDirective'])
     $scope.getTT(new Date().getTime());
 
     $scope.customDataFn = function (data, row, col) {
+        if (col == 0 || row == 0) return data[row][col];
+        var cls = col % 2 == 0 ? 'even' : 'odd';
+        var val = '';
         if (data[row] && data[row][col])
-            return data[row][col];
-        else return ""
+          val = data[row][col];
+        return '<div class="'+cls+'">'+val+'</div>';
     }
 });
