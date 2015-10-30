@@ -1,5 +1,13 @@
 <ion-view id="PlanList">
     <ion-content id="content" has-header="true">
+        <div class="row">
+            <div class="col col-50">{{planConfigure.date}}</div>
+            <div class="col col-50 text-right"> {{planConfigure.departureTime}}</div>
+        </div>
+        <div class="row">
+            <div class="col col-50 ">{{nameFrom}}</div>
+            <div class="col col-50 text-right"> {{nameTo}}</div>
+        </div>
 
         <ion-list class="animate-ripple">
             <ion-item ng-repeat="journey in journeys" ng-last-repeat="journeys" ng-click="showPlan(journey)">
@@ -25,40 +33,6 @@
                         </div>
                     </div>
                 </div>
-                <!--
-                   <table class="table table-bordered">
-      <tr ng-repeat="plan in plans">
-        <td ng-class="{'success':plan.promoted}">
-		    <div ng-class="{'itinerary-selected':$index == currentItinerary.index}">
-		      <a href="" ng-click="showPlan(plan)">
-		      <div class="row">
-		        <div class="col-md-2 text-center" style="min-height: 100px;">
-		          <div>{{toTime(plan.startime)}}</div>
-		          <div style="position: absolute; bottom: 0;">{{toTime(plan.endtime)}}</div>
-		        </div>
-		        <div class="col-md-10">
-              <div class="row">
-                <div class="col-md-12 text-right">
-                <small class="text-muted text-center">{{plan.length}}km</small>
-                <small class="text-muted text-center" ng-if="plan.price > 0">/ {{plan.price}} EUR</small>
-                </div>
-              </div>
-		          <div class="row">
-			          <div class="tt thumbnail col-md-2" ng-repeat="mean in plan.means">
-	                <img ng-src="{{mean.img}}" >
-	                <div class="text-center">
-	                  <div ng-repeat="n in mean.note">{{n}}</div>
-	                </div>
-	              </div>
-              </div>
-		        </div>
-		      </div>
-		      </a>
-		    </div>
-		    </td>
-      </tr>
-    </table>
--->
             </ion-item>
         </ion-list>
     </ion-content>

@@ -5,6 +5,8 @@ angular.module('viaggia.services.plan', [])
     var planService = {};
     var position = {};
     var planJourneyResults = {};
+    var planConfigure = {};
+    var selectedjourney = {};
     var getNameFromComplex = function (data) {
         name = '';
         if (data) {
@@ -74,7 +76,7 @@ angular.module('viaggia.services.plan', [])
         if (place == 'from') {
             return position.nameFrom;
         } else {
-            return position.nameFrom;
+            return position.nameTo;
         }
     }
     planService.setPosition = function (place, latitude, longitude) {
@@ -152,6 +154,54 @@ angular.module('viaggia.services.plan', [])
         }
         return means;
     };
+    var getLength = function (it) {
+        if (!it.leg && it.length) {
+            return (it.length / 1000).toFixed(2);
+        }
+        var l = 0;
+        for (var i = 0; i < it.leg.length; i++) {
+            l += it.leg[i].length;
+        }
+        return (l / 1000).toFixed(2);
+    };
+    var getLegCost = function (plan, i) {
+        var fareMap = {};
+        var total = 0;
+        if (plan.leg[i].extra) {
+            var fare = plan.leg[i].extra.fare;
+            var fareIdx = plan.leg[i].extra.fareIndex;
+            if (fare && fareMap[fareIdx] == null) {
+                fareMap[fareIdx] = fare;
+                total += fare.cents / 100;
+            }
+        }
+        return total;
+    };
+    var extractDetails = function (step, leg, idx, from) {
+        step.action = actionMap[leg.transport.type];
+        if (leg.transport.type == 'BICYCLE' && leg.transport.agencyId && leg.transport.agencyId != 'null') {
+            step.fromLabel = "Prendi una bicicletta alla stazione di bike sharing ";
+            if (leg.to.stopId && leg.to.stopId.agencyId && leg.to.stopId.agencyId != 'null') {
+                step.toLabel = "Lascia la bicicletta alla stazione di bike sharing ";
+            } else {
+                step.toLabel = "A ";
+            }
+            //    	} else if (leg.transport.type == 'CAR' && leg.transport.agencyId && leg.transport.agencyId != 'null') {
+        } else {
+            step.fromLabel = "Da ";
+            step.toLabel = "A ";
+        }
+        if (leg.transport.type == 'BUS' || leg.transport.type == 'TRAIN' || leg.transport.type == 'TRANSIT') {
+            step.actionDetails = leg.transport.routeShortName;
+        }
+
+        if (from != null) step.from = from;
+        else {
+            step.from = leg.from.name;
+        }
+        step.to = leg.to.name;
+    };
+
     planService.process = function (plan, from, to, useCoordinates) {
         plan.steps = [];
         var nextFrom = !useCoordinates ? from : nextFrom = plan.leg[0].from.name + ' (' + plan.leg[0].from.lat + ',' + plan.leg[0].from.lon + ')';
@@ -173,7 +223,7 @@ angular.module('viaggia.services.plan', [])
                 console.log('UNDEFINED: ' + plan.leg[i].transport.type);
                 step.mean.img = getImageName('BUS');
             }
-            step.mean.img = 'www/img/' + step.mean.img + '.png';
+            step.mean.img = 'img/' + step.mean.img + '.png';
 
             var parkingStep = null;
             if (t == 'CAR') {
@@ -219,6 +269,7 @@ angular.module('viaggia.services.plan', [])
         }
         return total;
     };
+
     planService.getLegCost = function (plan, i) {
         var fareMap = {};
         var total = 0;
@@ -232,29 +283,39 @@ angular.module('viaggia.services.plan', [])
         }
         return total;
     };
-    planService.planJourney = function (planConfigure) {
+    planService.getPlanConfigure = function () {
+        return planConfigure;
+    }
+    planService.getSelectedJourney = function () {
+        return selectedjourney;
+    }
+    planService.setSelectedJourney = function (journey) {
+        selectedjourney = journey;
+    }
+    planService.planJourney = function (newPlanConfigure) {
+        planConfigure = newPlanConfigure;
         var deferred = $q.defer();
         $http({
             method: 'POST',
-            url: Config.getServerURL()+'/plansinglejourney ',
+            url: Config.getServerURL() + '/plansinglejourney ',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
             data: {
                 "to": {
-                    "lon": planConfigure.to.long,
-                    "lat": planConfigure.to.lat
+                    "lon": newPlanConfigure.to.long,
+                    "lat": newPlanConfigure.to.lat
                 },
-                "routeType": planConfigure.routeType,
+                "routeType": newPlanConfigure.routeType,
                 "resultsNumber": 10,
-                "departureTime": planConfigure.departureTime,
+                "departureTime": newPlanConfigure.departureTime,
                 "from": {
-                    "lon": planConfigure.from.long,
-                    "lat": planConfigure.from.lat
+                    "lon": newPlanConfigure.from.long,
+                    "lat": newPlanConfigure.from.lat
                 },
-                "date": planConfigure.date,
-                "transportTypes": planConfigure.transportTypes
+                "date": newPlanConfigure.date,
+                "transportTypes": newPlanConfigure.transportTypes
             }
         }).
         success(function (data) {

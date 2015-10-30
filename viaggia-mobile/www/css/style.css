@@ -147,3 +147,7 @@
 .button-popup {
     padding: 2px;
 }
+
+.text-right {
+    text-align: right;
+}
