@@ -27,37 +27,37 @@
                 <span class="input-label">{{'plan_day' | translate}}</span>
                 <!--                <input type="text" class="datepicker" ng-model="plan.time">-->
                 <ionic-datepicker input-obj="datepickerObjectPopup">
-                    <button class="button button-block button-positive"> {{datepickerObjectPopup.inputDate | date:'dd/MM/yyyy'}}</button>
+                    <button class="button button-block button-balanced"> {{datepickerObjectPopup.inputDate | date:'dd/MM/yyyy'}}</button>
                 </ionic-datepicker>
             </label>
             <label class="item item-input plan-item-time">
                 <span class="input-label">{{'plan_time' | translate}}</span>
                 <!--                <input type="text" class="timepicker" ng-model="plan.time">-->
                 <ionic-timepicker input-obj="timePickerObject24Hour">
-                    <button class="button button-block button-positive overflowShow">
+                    <button class="button button-block button-balanced overflowShow">
                         <standard-time-no-meridian etime='timePickerObject24Hour.inputEpochTime'></standard-time-no-meridian>
                     </button>
                 </ionic-timepicker>
             </label>
         </div>
         <div class="row plan-first-row">
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_foot" ng-class="{'button-plan-pressed': isSwitched('WALK')}" ng-click="switch('WALK')">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_foot" ng-class="{'button-balanced': isSwitched('WALK')}" ng-click="switch('WALK')">
 
             </button>
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_public-transport" ng-class="{'button-plan-pressed': isSwitched('TRANSIT')}" ng-click="switch('TRANSIT')">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_public-transport" ng-class="{'button-balanced': isSwitched('TRANSIT')}" ng-click="switch('TRANSIT')">
 
             </button>
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car" ng-class="{'button-plan-pressed': isSwitched('CAR')}" ng-click="switch('CAR')">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car" ng-class="{'button-balanced': isSwitched('CAR')}" ng-click="switch('CAR')">
 
             </button>
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_bike" ng-class="{'button-plan-pressed': isSwitched('BICYCLE')}" ng-click="switch('BICYCLE')">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_bike" ng-class="{'button-balanced': isSwitched('BICYCLE')}" ng-click="switch('BICYCLE')">
             </button>
         </div>
         <div class="row">
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car-sharing" ng-class="{'button-plan-pressed': isSwitched('SHAREDCAR')}" ng-click="switch('SHAREDCAR')">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car-sharing" ng-class="{'button-balanced': isSwitched('SHAREDCAR')}" ng-click="switch('SHAREDCAR')">
 
             </button>
-            <button class="button button-raised button-plan-type no-padding margin-8 icon ic_bike-sharing" ng-class="{'button-plan-pressed': isSwitched('SHAREDBIKE')}" ng-click="switch('SHAREDBIKE')">
+            <button class="button button-raised button-plan-type no-padding margin-8 icon ic_bike-sharing" ng-class="{'button-balanced': isSwitched('SHAREDBIKE')}" ng-click="switch('SHAREDBIKE')">
             </button>
 
         </div>

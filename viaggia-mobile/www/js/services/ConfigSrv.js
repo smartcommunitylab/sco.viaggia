@@ -7,8 +7,9 @@ angular.module('viaggia.services.conf', [])
         mapJsonConfig = response;
     });
 
-    var HTTP_CONFIG = {timeout: 5000};
-
+    var HTTP_CONFIG = {
+        timeout: 5000
+    };
     var GEOCODER_URL = 'https://os.smartcommunitylab.it/core.geocoder/spring';
     var APP_BUILD = '';
     var PLAN_TYPES = ['WALK', 'TRANSIT', 'CAR', 'BICYCLE', 'SHAREDCAR', 'SHAREDBIKE'];
@@ -35,9 +36,9 @@ angular.module('viaggia.services.conf', [])
         },
         getMapPosition: function () {
             return {
-              lat: mapJsonConfig['center_map'][0],
-              long:mapJsonConfig['center_map'][1],
-              zoom : mapJsonConfig['zoom_map']
+                lat: mapJsonConfig['center_map'][0],
+                long: mapJsonConfig['center_map'][1],
+                zoom: mapJsonConfig['zoom_map']
             };
         },
         getGeocoderURL: function () {
@@ -87,11 +88,11 @@ angular.module('viaggia.services.conf', [])
             );
 
         },
-        loading : function() {
-          $ionicLoading.show();
+        loading: function () {
+            $ionicLoading.show();
         },
-        loaded: function() {
-          $ionicLoading.hide();
+        loaded: function () {
+            $ionicLoading.hide();
         }
     }
 })

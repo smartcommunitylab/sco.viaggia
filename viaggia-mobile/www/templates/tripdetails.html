@@ -20,7 +20,7 @@
                                 <div>{{requestedFrom}}</div>
                             </div>
                             <!-- ROW -->
-                            <div class="row leg" ng-repeat="step in currentItinerary.steps">
+                            <div class="row leg" ng-repeat="step in currentItinerary.steps" ng-click="openMapTrip()">
                                 <div class="line-background">
                                     <img src="img/ic_point.png">
                                 </div>

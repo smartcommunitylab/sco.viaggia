@@ -1,7 +1,6 @@
 angular.module('viaggia.controllers.plan', [])
 
-.controller('PlanCtrl', function ($scope, Config, $q, $http, $ionicModal, $ionicLoading, $filter, $state, $window, leafletData, planService) {
-
+.controller('PlanCtrl', function ($scope, Config, $q, $http, $ionicModal, $ionicLoading, $filter, $state, $window, leafletData, planService, mapService) {
     $scope.preferences = Config.getPlanPreferences();
     $scope.types = Config.getPlanTypes();
     $scope.datepickerObject = {};
@@ -9,6 +8,23 @@ angular.module('viaggia.controllers.plan', [])
     $scope.hourTimestamp = null;
     $scope.datepickerObject.inputDate = new Date();
     $scope.place = null;
+    $scope.planParams = {
+        //tmp, i need structure with lat-long
+        from: {
+            name: '',
+            lat: '',
+            long: ''
+        },
+        to: {
+            name: '',
+            lat: '',
+            long: ''
+        },
+        routeType: '',
+        transportTypes: [],
+        departureTime: '',
+        date: ''
+    };
     var monthList = [
         $filter('translate')('popup_datepicker_jan'),
     $filter('translate')('popup_datepicker_jfeb'),
@@ -31,23 +47,6 @@ angular.module('viaggia.controllers.plan', [])
     $filter('translate')('popup_datepicker_fri'),
     $filter('translate')('popup_datepicker_sat')
     ];
-    $scope.planParams = {
-        //tmp, i need structure with lat-long
-        from: {
-            name: '',
-            lat: '',
-            long: ''
-        },
-        to: {
-            name: '',
-            lat: '',
-            long: ''
-        },
-        routeType: '',
-        transportTypes: [],
-        departureTime: '',
-        date: ''
-    };
 
     var initMapTypes = function (types) {
         var map = {};
@@ -58,18 +57,13 @@ angular.module('viaggia.controllers.plan', [])
     }
     var setDefaultOptions = function () {
         var planOptionConfig = Config.getPlanDefaultOptions();
-        //setDefaultOptions
-        //departureTime
         $scope.planParams.departureTime = $filter('date')(new Date().getTime(), 'hh:mma');
-        //date
         $scope.planParams.date = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
-        //set types from Config
         $scope.planParams.routeType = planOptionConfig.routeType;
         $scope.planParams.transportTypes = planOptionConfig.transportTypes;
         for (var i = 0; i < $scope.types.length; i++) {
             $scope.mapTypes[$scope.planParams.transportTypes[i]] = true;
         }
-        //set preference trip
     }
     $scope.timePickerObject24Hour = {
         inputEpochTime: ((new Date()).getHours() * 60 * 60 + (new Date()).getMinutes() * 60), //Optional
@@ -140,7 +134,7 @@ angular.module('viaggia.controllers.plan', [])
         return $scope.shownPreferences === true;
     };
 
-    $ionicModal.fromTemplateUrl('templates/mapPlan.html', {
+    $ionicModal.fromTemplateUrl('templates/mapModal.html', {
         id: '1',
         scope: $scope,
         backdropClickToClose: false,
@@ -184,12 +178,8 @@ angular.module('viaggia.controllers.plan', [])
 
     }
     $scope.plan = function () {
-        //prepare plansParams
-        //time test
-        setPlanParams();
-        //check params into setPlanParams
-        /*call plan*/
 
+        setPlanParams();
         planService.planJourney($scope.planParams).then(function (value) {
             //if ok let's go to visualization
             $state.go('app.planlist')
@@ -222,7 +212,6 @@ angular.module('viaggia.controllers.plan', [])
         $window.navigator.geolocation.getCurrentPosition(function (position) {
                 $scope.$apply(function () {
                     $scope.position = position;
-                    //                        alert(position.coords.latitude + ' ' + position.coords.longitude);
                     var placedata = $q.defer();
                     var places = {};
                     var url = Config.getGeocoderURL() + '/location?latlng=' + position.coords.latitude + ',' + position.coords.longitude;
@@ -235,8 +224,6 @@ angular.module('viaggia.controllers.plan', [])
                         //                         planService.setName($scope.place, data.response.docs[0]);
 
                         places = data.response.docs;
-                        //show a pop up where u can choose if address is correct and set up in the bar
-                        // A confirm dialog
                         name = '';
                         if (data.response.docs[0]) {
                             $scope.place = 'from';
@@ -259,7 +246,6 @@ angular.module('viaggia.controllers.plan', [])
             },
             function (error) {
                 $ionicLoading.hide();
-                //showNoPlaceFound();
             }, {
                 enableHighAccuracy: true,
                 timeout: 5000,
@@ -267,88 +253,51 @@ angular.module('viaggia.controllers.plan', [])
             });
     };
 
-    $scope.mapTypes = initMapTypes($scope.types);
-    $scope.locateMe();
-    setDefaultOptions();
-
 
 
     $scope.initMap = function () {
-        leafletData.getMap().then(function (map) {
-            L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
-                type: 'map',
-                ext: 'jpg',
-                attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; ' +
-                    'Map data {attribution.OpenStreetMap}',
-                subdomains: '1234',
-                maxZoom: 18
-            }).addTo(map);
-            map.locate({
-                setView: false,
-                maxZoom: 8,
-                watch: false,
-                enableHighAccuracy: true
+        mapService.initMap().then(function () {
+            $scope.$on("leafletDirectiveMap.click", function (event, args) {
+                $ionicLoading.show();
+                planService.setPosition($scope.place, args.leafletEvent.latlng.lat, args.leafletEvent.latlng.lng);
+                var placedata = $q.defer();
+                var url = Config.getGeocoderURL() + '/location?latlng=' + args.leafletEvent.latlng.lat + ',' + args.leafletEvent.latlng.lng;
+
+                $http.get(encodeURI(url), {
+                    timeout: 5000
+                }).
+                success(function (data, status, headers, config) {
+                    $ionicLoading.hide();
+                    name = '';
+                    if (data.response.docs[0]) {
+                        planService.setName($scope.place, data.response.docs[0]);
+                        $scope.showConfirm(name, $filter('translate')("popup_address"), function () {
+                            return selectPlace(name)
+                        });
+                    } else {
+                        $scope.showConfirm($filter('translate')("popup_lat") + args.leafletEvent.latlng.lat.toString().substring(0, 7) + " " + $filter('translate')("popup_long") + args.leafletEvent.latlng.lng.toString().substring(0, 7), $filter('translate')("popup_no_address"), function () {
+                            return selectPlace(args.leafletEvent.latlng)
+                        });
+                    }
+                }).error(function (data, status, headers, config) {
+                    $ionicLoading.hide();
+                    $scope.showNoConnection();
+                });
             });
-            map.on('locationfound', onLocationFound);
 
-            function onLocationFound(e) {
-                $scope.myloc = e;
-                var radius = e.accuracy / 2;
-
-                L.marker(e.latlng).addTo(map);
-                //                        .bindPopup("You are within " + radius + " meters from this point").openPopup();
-
-                L.circle(e.latlng, radius).addTo(map);
-
-            }
-            L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
-                type: 'map',
-                ext: 'jpg',
-                attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; ' +
-                    'Map data {attribution.OpenStreetMap}',
-                subdomains: '1234',
-                maxZoom: 18
-            }).addTo(map);
         });
-
-        $scope.$on("leafletDirectiveMap.click", function (event, args) {
-            $ionicLoading.show();
-            planService.setPosition($scope.place, args.leafletEvent.latlng.lat, args.leafletEvent.latlng.lng);
-            var placedata = $q.defer();
-            var url = Config.getGeocoderURL() + '/location?latlng=' + args.leafletEvent.latlng.lat + ',' + args.leafletEvent.latlng.lng;
-
-            $http.get(encodeURI(url), {
-                timeout: 5000
-            }).
-            success(function (data, status, headers, config) {
-                $ionicLoading.hide();
-                name = '';
-                if (data.response.docs[0]) {
-                    planService.setName($scope.place, data.response.docs[0]);
-                    $scope.showConfirm(name, $filter('translate')("popup_address"), function () {
-                        return selectPlace(name)
-                    });
-                } else {
-                    $scope.showConfirm($filter('translate')("popup_lat") + args.leafletEvent.latlng.lat.toString().substring(0, 7) + " " + $filter('translate')("popup_long") + args.leafletEvent.latlng.lng.toString().substring(0, 7), $filter('translate')("popup_no_address"), function () {
-                        return selectPlace(args.leafletEvent.latlng)
-                    });
-                }
-            }).error(function (data, status, headers, config) {
-                $ionicLoading.hide();
-                $scope.showNoConnection();
-            });
-        });
-
-        $scope.detail = function (view) {
-            window.location.assign(view);
-        }
-
-        $scope.closeWin = function () {
-            leafletData.getMap().then(function (map) {
-                map.closePopup();
-            });
-        }
     }
+    $scope.detail = function (view) {
+        window.location.assign(view);
+    }
+
+    $scope.closeWin = function () {
+        leafletData.getMap().then(function (map) {
+            map.closePopup();
+        });
+    }
+
+    //    execution
     angular.extend($scope, {
         center: {
             lat: Config.getMapPosition().lat,
@@ -357,6 +306,8 @@ angular.module('viaggia.controllers.plan', [])
         },
         events: {}
     });
-    /*end of part for map*/
 
+    $scope.mapTypes = initMapTypes($scope.types);
+    $scope.locateMe();
+    setDefaultOptions();
 })

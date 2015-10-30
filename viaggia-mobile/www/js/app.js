@@ -29,6 +29,7 @@ angular.module('viaggia', [
     'viaggia.controllers.tripdetails',
     'viaggia.services.data',
     'viaggia.services.conf',
+    'viaggia.services.map',
     'viaggia.services.plan',
     'viaggia.services.timetable',
     'viaggia.directives',
