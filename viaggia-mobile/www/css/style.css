@@ -151,3 +151,7 @@
 .text-right {
     text-align: right;
 }
+
+.line-background {
+    background-image: url("../img/ic_point_line.png")
+}

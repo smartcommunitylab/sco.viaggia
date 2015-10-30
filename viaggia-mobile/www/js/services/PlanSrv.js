@@ -177,6 +177,16 @@ angular.module('viaggia.services.plan', [])
         }
         return total;
     };
+
+    planService.getTimeStr = function (time) {
+        var am = time.getHours() < 12;
+        var hour = am ? time.getHours() : time.getHours() - 12;
+        if (am && hour == 0) hour = 12;
+
+        return (hour < 10 ? '0' : '') + hour + ':' +
+            (time.getMinutes() < 10 ? '0' : '') + time.getMinutes() + (am ? 'AM' : 'PM');
+    };
+
     var extractDetails = function (step, leg, idx, from) {
         step.action = actionMap[leg.transport.type];
         if (leg.transport.type == 'BICYCLE' && leg.transport.agencyId && leg.transport.agencyId != 'null') {

@@ -8,4 +8,8 @@ angular.module('viaggia.controllers.tripdetails', [])
     $scope.currentItinerary = trip;
 
 
+    $scope.toTime = function (millis) {
+        return planService.getTimeStr(new Date(millis));
+    };
+
 })

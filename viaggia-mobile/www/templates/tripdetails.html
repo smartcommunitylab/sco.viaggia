@@ -1,31 +1,31 @@
 <ion-view id="tripdetails">
     <ion-content id="content" has-header="true">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div>
                             <div class="row green-header" ng-if="currentItinerary.promoted">
-                                <div class="col-md-12">
+                                <div class="col">
                                     Itinerario sostenibile
                                     <span class="glyphicon glyphicon-leaf pull-right" aria-hidden="true"></span>
                                 </div>
                             </div>
                             <!-- START -->
                             <div class="row leg">
-                                <div class="col-md-1 start-leg">
+                                <div class=" start-leg">
                                     <img src="img/ic_point_outline.png">
                                 </div>
-                                <div class="col-md-2">{{toTime(currentItinerary.startime)}}</div>
-                                <div class="col-md-9">{{requestedFrom}}</div>
+                                <div>{{toTime(currentItinerary.startime)}}</div>
+                                <div>{{requestedFrom}}</div>
                             </div>
                             <!-- ROW -->
                             <div class="row leg" ng-repeat="step in currentItinerary.steps">
-                                <div class="col-md-1">
+                                <div class="line-background">
                                     <img src="img/ic_point.png">
                                 </div>
-                                <div class="col-md-2">{{toTime(step.startime)}}</div>
-                                <div class="col-md-7 inter-leg">
+                                <div>{{toTime(step.startime)}}</div>
+                                <div class="col inter-leg">
                                     <p ng-if="step.action">{{step.action}}<strong ng-if="step.actionDetails">{{step.actionDetails}}</strong>
                                     </p>
                                     <p ng-if="step.from != null">{{step.fromLabel}}<strong>{{step.from}}</strong>
@@ -39,7 +39,7 @@
                                         <img src="img/ic_look_for_parking.png" />{{step.parking.time}}
                                     </p>
                                 </div>
-                                <div class="col-md-2">
+                                <div>
                                     <div class="tt thumbnail">
                                         <img ng-src="{{step.mean.img}}">
                                         <div class="text-center" ng-if="step.length > 0">
@@ -55,10 +55,10 @@
                             </div>
                             <!-- END -->
                             <div class="row leg">
-                                <div class="col-md-1 end-leg"><img src="img/ic_point_outline.png">
+                                <div class="end-leg"><img src="img/ic_point_outline.png">
                                 </div>
-                                <div class="col-md-2">{{toTime(currentItinerary.endtime)}}</div>
-                                <div class="col-md-9">{{requestedTo}}</div>
+                                <div>{{toTime(currentItinerary.endtime)}}</div>
+                                <div>{{requestedTo}}</div>
                             </div>
                         </div>
                     </div>
