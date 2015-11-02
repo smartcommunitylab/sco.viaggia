@@ -3,13 +3,8 @@ angular.module('viaggia.services.conf', [])
 .factory('Config', function ($q, $http, $window, $filter, $ionicLoading) {
     var DEVELOPMENT = true;
 
-    $http.get('data/config.json').success(function (response) {
-        mapJsonConfig = response;
-    });
-
-    var HTTP_CONFIG = {
-        timeout: 5000
-    };
+    var HTTP_CONFIG = {timeout: 5000};
+    var mapJsonConfig = null;
     var GEOCODER_URL = 'https://os.smartcommunitylab.it/core.geocoder/spring';
     var APP_BUILD = '';
     var PLAN_TYPES = ['WALK', 'TRANSIT', 'CAR', 'BICYCLE', 'SHAREDCAR', 'SHAREDBIKE'];
@@ -28,6 +23,14 @@ angular.module('viaggia.services.conf', [])
     ]
 
     return {
+        init : function() {
+          var deferred = $q.defer();
+          $http.get('data/config.json').success(function (response) {
+            mapJsonConfig = response;
+            deferred.resolve(true);
+          });
+          return deferred.promise;
+        },
         getHTTPConfig: function () {
             return HTTP_CONFIG;
         },
@@ -88,11 +91,11 @@ angular.module('viaggia.services.conf', [])
             );
 
         },
-        loading: function () {
-            $ionicLoading.show();
+        loading : function() {
+          $ionicLoading.show();
         },
-        loaded: function () {
-            $ionicLoading.hide();
+        loaded: function() {
+          $ionicLoading.hide();
         }
     }
 })

@@ -36,7 +36,7 @@ angular.module('viaggia', [
 
 ])
 
-.run(function ($ionicPlatform, DataManager, $cordovaFile) {
+.run(function ($ionicPlatform, DataManager, $cordovaFile, Config) {
 
         $ionicPlatform.ready(function () { // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -46,8 +46,11 @@ angular.module('viaggia', [
             if (window.StatusBar) {
                 StatusBar.styleDefault();
             }
-
-            //DataManager.dbSetup();
+            Config.init().then(function() {
+              if (ionic.Platform.isWebView()) {
+                DataManager.dbSetup();
+              }
+            });
         });
     })
     .config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
