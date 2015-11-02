@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.common', [])
 
-.controller('AppCtrl', function ($scope, $rootScope, $location, $timeout, DataManager, $ionicPopup, $filter, $ionicLoading) {
+.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, DataManager, $ionicPopup, $filter, $ionicLoading, Config) {
 
     /*menu group*/
     $scope.toggleGroupRealTime = function () {
@@ -65,6 +65,16 @@ angular.module('viaggia.controllers.common', [])
                             }
             ]
         });
+    };
+
+    Config.init().then(function() {
+      $scope.infomenu = Config.getInfoMenu();
+    });
+
+    $scope.selectInfomenu = function(m) {
+//      m.data.label = m.label;
+//      Config.setInfoMenuParams(m.data);
+//      $state.go(m.state);
     };
 })
 
