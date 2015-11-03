@@ -45,6 +45,7 @@ div.ngc.scroll-wrapper {
 }
 
 .scrollable .scrollable-bar {
+/*  display: none;*/
     position: absolute;
     box-sizing: border-box;
     -webkit-border-radius: 2px;
@@ -57,15 +58,19 @@ div.ngc.scroll-wrapper {
 }
 
 .scrollable:hover .scrollable-bar {
-    opacity: .6
+/*  display: none;*/
+/*    opacity: 1*/
 }
 
 .scrollable .scrollable-bar:hover,
 .scrollable.active .scrollable-bar {
-    opacity: 1
+/*  display: none;*/
+/*    opacity: 1*/
 }
 
 .scrollable .scrollable-slider {
+/*  display: none;*/
+/*
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
@@ -73,6 +78,7 @@ div.ngc.scroll-wrapper {
     background-image: linear-gradient(to right, #ccc, #ddd);
     border: 1px solid #333;
     border: 1px solid rgba(0, 0, 0, .5)
+*/
 }
 
 .scrollable .scrollable-bar-x .scrollable-slider {
@@ -101,6 +107,7 @@ table.ngc td {
 .ngc.cell {
     font-size: 11px;
     text-align: center;
+    line-height: 28px;
 
 /*    padding: 2px;*/
 }
@@ -126,14 +133,17 @@ table.ngc td {
 }
 .cell.left.header {
     width: 100px;
-    background-color: #b22222;
-    color: whitesmoke;
+/*    background-color: #b22222;*/
+/*    color: whitesmoke;*/
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
 
 }
 
 .cell.center.header {
-    background-color: crimson;
-    color: whitesmoke;
+/*    background-color: crimson;*/
+    border-bottom: 1px solid #ddd;
+/*    color: whitesmoke;*/
 }
 
 .cell.right.header {

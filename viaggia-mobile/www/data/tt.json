@@ -7,15 +7,15 @@
         {
           "agencyId" : "5",
           "routes" : [
-              {"routeId": "BV_R1_G", "routeSymId": "BV_R1_G", "descr": "Bolzano/Bozen - Verona"},
-              {"routeId": "BV_R1_R", "routeSymId": "BV_R1_R", "descr": "Verona - Bolzano/Bozen"}
+              {"routeId": "BV_R1_G", "routeSymId": "BV_R1_G", "descr": "Bolzano/Bozen - Verona", "showTrips":true},
+              {"routeId": "BV_R1_R", "routeSymId": "BV_R1_R", "descr": "Verona - Bolzano/Bozen", "showTrips":true}
           ]
         },
         {
           "agencyId" : "6",
           "routes" : [
-              {"routeId": "TB_R2_G", "routeSymId": "TB_R2_G", "descr": "Trento - Bassano D.G."},
-              {"routeId": "TB_R2_R", "routeSymId": "TB_R2_R", "descr": "Bassano D.G. - Trento"}
+              {"routeId": "TB_R2_G", "routeSymId": "TB_R2_G", "descr": "Trento - Bassano D.G.", "showTrips":true},
+              {"routeId": "TB_R2_R", "routeSymId": "TB_R2_R", "descr": "Bassano D.G. - Trento", "showTrips":true}
           ]
         },
         {

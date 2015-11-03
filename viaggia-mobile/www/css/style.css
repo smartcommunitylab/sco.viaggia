@@ -155,3 +155,16 @@
 .line-background {
     background-image: url("../img/ic_point_line.png")
 }
+
+.tt-day {
+  font-size: 20px;
+  line-height: 40px;
+  text-align: center;
+  padding: 0;
+}
+.tt-day.btn {
+  font-size: 30px;
+}
+.tt-day.btn a:active, .tt-day.btn a:hover, .tt-day.btn a:focus, .tt-day.btn a.activated {
+  opacity: 0.5;
+}

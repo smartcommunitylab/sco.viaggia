@@ -277,7 +277,11 @@ angular.module('viaggia', [
             journey_details_to: 'A ',
             journey_details_from: 'Da ',
             journey_details_from_bike: 'Prendi una bicicletta alla stazione di bike sharing ',
-            journey_details_to_bike: 'Lascia la bicicletta alla stazione di bike sharing '
+            journey_details_to_bike: 'Lascia la bicicletta alla stazione di bike sharing',
+            lbl_delays: 'DELAYS',
+            lbl_trips: 'TYPE',
+            no_data: 'Nessun risultato trovato.'
+
         });
 
 
@@ -340,7 +344,10 @@ angular.module('viaggia', [
             popup_datepicker_thu: 'T',
             popup_datepicker_fri: 'F',
             popup_datepicker_sat: 'S',
-            popup_datepicker_sun: 'S'
+            popup_datepicker_sun: 'S',
+            lbl_delays: 'DELAYS',
+            lbl_trips: 'TYPE',
+            no_data: 'No data found.'
 
         });
 

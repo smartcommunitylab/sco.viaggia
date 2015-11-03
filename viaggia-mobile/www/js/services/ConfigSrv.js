@@ -3,13 +3,14 @@ angular.module('viaggia.services.conf', [])
 .factory('Config', function ($q, $http, $window, $filter, $ionicLoading) {
     var DEVELOPMENT = true;
 
-    $http.get('data/config.json').success(function (response) {
-        mapJsonConfig = response;
-    });
     var DISTANCE_AUTOCOMPLETE = '6';
     var HTTP_CONFIG = {
         timeout: 5000
     };
+
+    var mapJsonConfig = null;
+    var ttJsonConfig = null;
+
     var GEOCODER_URL = 'https://os.smartcommunitylab.it/core.geocoder/spring';
     var APP_BUILD = '';
     var PLAN_TYPES = ['WALK', 'TRANSIT', 'CAR', 'BICYCLE', 'SHAREDCAR', 'SHAREDBIKE'];
@@ -66,6 +67,18 @@ angular.module('viaggia.services.conf', [])
 
         ]
     return {
+        init : function() {
+           var deferred = $q.defer();
+           if (mapJsonConfig != null) deferred.resolve(true);
+           else $http.get('data/config.json').success(function (response) {
+             mapJsonConfig = response;
+             $http.get('data/tt.json').success(function (ttResponse) {
+               ttJsonConfig = ttResponse;
+               deferred.resolve(true);
+             });
+           });
+           return deferred.promise;
+        },
         getHTTPConfig: function () {
             return HTTP_CONFIG;
         },
@@ -137,6 +150,40 @@ angular.module('viaggia.services.conf', [])
         },
         loaded: function () {
             $ionicLoading.hide();
-        }
+        },
+        getInfoMenu: function() {
+          return mapJsonConfig.visualization.infomenu;
+        },
+        getTTData : function(ref, agencyId, groupId, routeId) {
+          var res = ttJsonConfig;
+          if (!!ref) {
+            res = res.elements[ref];
+          }
+          if (!!agencyId) {
+            for (var i = 0; i < res.elements.length; i++) {
+              if (res.elements[i].agencyId == agencyId) {
+                res = res.elements[i];
+                break;
+              }
+            }
+          }
+          if (!!groupId) {
+            for (var i = 0; i < res.groups.length; i++) {
+              if (res.groups[i].label == groupId) {
+                res = res.groups[i];
+                break;
+              }
+            }
+          }
+          if (!!routeId) {
+            for (var i = 0; i < res.routes.length; i++) {
+              if (res.routes[i].routeId == routeId) {
+                res = res.routes[i];
+                break;
+              }
+            }
+          }
+          return res;
+         }
     }
 })

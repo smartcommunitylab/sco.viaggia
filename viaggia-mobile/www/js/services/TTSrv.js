@@ -14,6 +14,33 @@ angular.module('viaggia.services.timetable', [])
     return res;
   }
 
+  var getDelays = function(agency, route, date) {
+    var deferred = $q.defer();
+    var d = new Date(date);
+    d.setHours(0);
+    d.setMinutes(0);
+    d.setSeconds(0);
+    d.setMilliseconds(0);
+    var from = d.getTime();
+    d.setHours(23);
+    d.setMinutes(59);
+    var to = d.getTime();
+    $http.get(Config.getServerURL()+'/gettransitdelays/'+agency+'/'+route+'/'+from+'/'+to,
+              Config.getHTTPConfig())
+      .success(function(data) {
+        if (data && data.delays) deferred.resolve(data.delays[0]);
+      })
+      .error(function(err) {
+        deferred.reject(err);
+      });
+
+
+    return deferred.promise;
+  }
+
+  /**
+   * transform compressed string to matrix of times. string is a sequence of all trip times separated with '|'. Each time (if presented) has 4 chars.
+   */
   var uncompressTime = function(str, rowsCount) {
     if (!str) return [];
     var res = [];
@@ -62,15 +89,10 @@ angular.module('viaggia.services.timetable', [])
           DataManager.doQuery("SELECT times FROM route WHERE agencyID = '"+agency+"' AND linehash = '"+hash+"'",[])
           .then(function(data) {
             result.times = uncompressTime(data,result.stopIds.length);
-            if (readRoutes) {
-              DataManager.doQuery("SELECT routeIds FROM route WHERE agencyID = '"+agency+"' AND linehash = '"+hash+"'",[])
-              .then(function(data) {
-                result.routeIds = toTrimmedList(data);
-                deferred.resolve(result);
-              },errCB);
-            } else {
+            getDelays(agency, route, date).then(function(delays){
+              result.delays = delays;
               deferred.resolve(result);
-            }
+            }, errCB);
           }, errCB);
         }, errCB);
       }, errCB);
@@ -81,7 +103,7 @@ angular.module('viaggia.services.timetable', [])
     /**
      * timetable for specified timestamp: converted to date start/end timestamps
      */
-    getTT : function(agency, route, date, readRoutes) {
+    getTT : function(agency, route, date) {
       var deferred = $q.defer();
       if (ionic.Platform.isWebView()) {
         // use cache of calendar hashes
@@ -92,12 +114,12 @@ angular.module('viaggia.services.timetable', [])
           DataManager.doQuery("SELECT calendar FROM calendar WHERE agencyID = '"+agency+"' AND route = '"+route+"'",[])
           .then(function(data) {
             calendarCache[agency][route] = JSON.parse(data);
-            dataFromHash(agency, route, date, deferred, readRoutes);
+            dataFromHash(agency, route, date, deferred);
           },function(err) {
             deferred.reject(err);
           });
         } else {
-            dataFromHash(agency, route, date, deferred, readRoutes);
+            dataFromHash(agency, route, date, deferred);
         }
       } else {
         // use remote call for timetable
@@ -110,6 +132,7 @@ angular.module('viaggia.services.timetable', [])
         d.setHours(23);
         d.setMinutes(59);
         var to = d.getTime();
+        route = encodeURIComponent(route);
         $http.get(Config.getServerURL()+'/gettransittimes/'+agency+'/'+route+'/'+from+'/'+to,
                   Config.getHTTPConfig())
           .success(function(data) {
