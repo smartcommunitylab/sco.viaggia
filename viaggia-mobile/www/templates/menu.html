@@ -22,21 +22,8 @@
                     <ion-item class="item-stable" ng-click="toggleGroupRealTime()" ng-class="{active: isGroupRealTimeShown()}">
                         <i class="icon" ng-class="isGroupRealTimeShown() ? 'ion-minus' : 'ion-plus'"></i> &nbsp; {{'menu_info_real_time' | translate}}
                     </ion-item>
-
-                    <ion-item class="item-accordion item-stable" ng-show="isGroupRealTimeShown()" nav-clear menu-close item-icon-left href="#/app/table1">
-                        <i class="icon voice-menu"></i>{{'menu_real_time_bus_urban' | translate}}
-                    </ion-item>
-                    <ion-item class="item-accordion item-stable" ng-show="isGroupRealTimeShown()" nav-clear menu-close item-icon-left href="#/app/table1">
-                        <i class="icon voice-menu"></i>{{'menu_real_time_bus_suburban' | translate}}
-                    </ion-item>
-                    <ion-item class="item-accordion item-stable" ng-show="isGroupRealTimeShown()" nav-clear menu-close item-icon-left href="#/app/table1">
-                        <i class="icon voice-menu"></i>{{'menu_real_time_train' | translate}}
-                    </ion-item>
-                    <ion-item class="item-accordion item-stable" ng-show="isGroupRealTimeShown()" nav-clear menu-close item-icon-left href="#/app/table1">
-                        <i class="icon voice-menu"></i>{{'menu_real_time_bus_bike' | translate}}
-                    </ion-item>
-                    <ion-item class="item-accordion item-stable" ng-show="isGroupRealTimeShown()" nav-clear menu-close item-icon-left href="#/app/table1">
-                        <i class="icon voice-menu"></i>{{'menu_real_time_bus_park' | translate}}
+                    <ion-item class="item-accordion item-stable" ng-repeat="m in infomenu" ng-show="isGroupRealTimeShown()" nav-clear menu-close item-icon-left ng-href="#{{m.state}}">
+                        <i class="icon voice-menu"></i>{{m.label | translate}}
                     </ion-item>
                 </div>
                 <ion-item nav-clear menu-close item-icon-left href="#/app/home">

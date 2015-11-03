@@ -47,7 +47,7 @@ angular.module('viaggia.controllers.table1', ['ionic', 'ngcTableDirective'])
     //      $scope.row_number = data.stops.length;
     $scope.data = rows;
     $scope.tt = data;
-    $timeout(function(){;$scope.scrollLeftPosition = 40;},0);
+    $timeout(function(){;$scope.scrollLeftPosition = ttService.locateTablePosition(data,new Date());},0);
   };
 
   $scope.getTT(new Date().getTime());

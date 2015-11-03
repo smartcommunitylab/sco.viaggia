@@ -18,6 +18,7 @@ angular.module('viaggia', [
     'viaggia.controllers.common',
     'viaggia.controllers.table1',
     'viaggia.controllers.table2',
+    'viaggia.controllers.timetable',
     'viaggia.controllers.bookmarks',
     'viaggia.controllers.home',
     'viaggia.controllers.info',
@@ -37,7 +38,7 @@ angular.module('viaggia', [
 
 ])
 
-.run(function ($ionicPlatform, DataManager, $cordovaFile) {
+.run(function ($ionicPlatform, DataManager, $cordovaFile, Config) {
 
         $ionicPlatform.ready(function () { // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -47,8 +48,11 @@ angular.module('viaggia', [
             if (window.StatusBar) {
                 StatusBar.styleDefault();
             }
-
-            //DataManager.dbSetup();
+            Config.init().then(function() {
+              if (ionic.Platform.isWebView()) {
+                DataManager.dbSetup();
+              }
+            });
         });
     })
     .config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
@@ -99,8 +103,7 @@ angular.module('viaggia', [
                     }
                 }
             })
-
-        .state('app.mytrips', {
+            .state('app.mytrips', {
                 cache: false,
                 url: "/mytrips",
                 views: {
@@ -154,7 +157,39 @@ angular.module('viaggia', [
                         controller: 'NotficationsCtrl'
                     }
                 }
-            }).state('app.table1', {
+            })
+            .state('app.ttlist', {
+                cache: false,
+                url: "/ttlist/:ref",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/ttroutelist.html",
+                        controller: 'TTRouteListCtrl'
+                    }
+                }
+            })
+            .state('app.ttgroup', {
+                cache: false,
+                url: "/ttgroup/:ref/:agencyId/:groupId",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/ttroutelist.html",
+                        controller: 'TTRouteListCtrl'
+                    }
+                }
+            })
+            .state('app.tt', {
+                cache: false,
+                url: "/tt/:ref/:agencyId/:groupId/:routeId",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/table1.html",
+                        controller: 'TTCtrl'
+                    }
+                }
+            })
+
+            .state('app.table1', {
                 cache: false,
                 url: "/table1",
                 views: {

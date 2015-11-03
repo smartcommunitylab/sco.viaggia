@@ -1,19 +1,14 @@
 angular.module('viaggia.services.data', [])
 
 .factory('DataManager', function ($http, $q, $cordovaSQLite, $cordovaFile, Config) {
-    var ENDPOINT_URL = 'https://dev.smartcommunitylab.it/core.mobility';
     var LOCAL_DATA_URL = 'data/routesdb.zip';
-    var VERSION_URL = ENDPOINT_URL + '/versions';
     var dataURL = LOCAL_DATA_URL;
     var completeData = null;
     var errorHandler = function (e) {
         console.log(e);
     };
     // limit the data to the necessary one only
-
-    var getDBVersions = function () {
-
-    }
+    var db = null;
 
     var errorDB = function (deferred, error) {
         alert("##openDatabase: " + error);
@@ -21,8 +16,7 @@ angular.module('viaggia.services.data', [])
 
     }
     var openDB = function (successcallback, errorcallback) {
-        cordovaSQLite.openDatabase(cordova.file.dataDirectory + "/routesdb", false,
-            function () {
+      var _do = function () {
                 cordovaSQLite.execQueryArrayResult("select * from version", [],
                     successcallback,
                     //                    function (version) {
@@ -36,10 +30,17 @@ angular.module('viaggia.services.data', [])
                     //
                     //                    }
                 );
-            },
+            };
+
+      if (db == null) {
+        db = cordovaSQLite.openDatabase(cordova.file.dataDirectory + "/routesdb", false,
+            _do,
             errorcallback
-            //                                   errorDB(deferred, error)
         );
+      } else {
+        _do();
+      }
+
     }
     var process = function (url) {
         var deferred = $q.defer();
@@ -75,7 +76,7 @@ angular.module('viaggia.services.data', [])
 
     var getDataURL = function (remote) {
         if (remote) {
-            return ENDPOINT_URL + '/routesDB/' + Config.getAppId();
+            return Config.getServerURL() + '/routesDB/' + Config.getAppId();
 
         } else {
             return LOCAL_DATA_URL;
@@ -139,7 +140,7 @@ angular.module('viaggia.services.data', [])
             deferred.resolve(true);
         }
         getLocalVersion().then(function (localversion) {
-            $http.get(VERSION_URL)
+            $http.get(Config.getServerURL() + '/versions')
                 .success(function (remoteversion) {
                     if (compareversions(localversion, remoteversion) < 0) {
                         installDB(true).then(success, err); //remote
@@ -152,6 +153,30 @@ angular.module('viaggia.services.data', [])
         return deferred.promise;
     }
     return {
+        doQuery: function(query, params) {
+          var deferred = $q.defer();
+          var _do = function () {
+                  cordovaSQLite.execQuerySingleResult(query, params,
+                      function(result) {
+                        deferred.resolve(result);
+                      },
+                      function(err) {
+                        deferred.reject(err);
+                      }
+                  );
+              };
+          if (db == null) {
+            db = cordovaSQLite.openDatabase(cordova.file.dataDirectory + "/routesdb", false,
+                _do,
+                function(err) {
+                  deferred.reject(err);
+                }
+            );
+          } else {
+            _do;
+          }
+          return deferred.promise;
+        },
         dbSetup: function () {
             var deferred = $q.defer();
             var err = function (error) {

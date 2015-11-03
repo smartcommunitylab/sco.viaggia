@@ -26,5 +26,15 @@
       11.121270
    ],
     "zoom_map": 15,
-    "db_version": 25
+    "db_version": 25,
+    "visualization": {
+      "primaryLinks": [],
+      "infomenu" : [
+        {"state":"/app/ttlist/urbano","label":"menu_real_time_bus_urban"},
+        {"state":"/app/ttlist/extraurbano","label":"menu_real_time_bus_suburban"},
+        {"state":"/app/ttlist/trains","label":"menu_real_time_train"},
+        {"state":"/app/bikesharing/trento","label":"menu_real_time_bus_bike"},
+        {"state":"/app/parking/COMUNE_DI_TRENTO","label":"menu_real_time_bus_park"}
+      ]
+    }
 }

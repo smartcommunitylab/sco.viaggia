@@ -1,0 +1,14 @@
+<ion-view title="{{title|translate}}">
+  <ion-content id="content" has-header="true">
+    <ion-list ng-if="view == 'list'">
+      <ion-item ng-repeat="elem in elements" ng-click="selectElement(elem)">
+        <div ng-if="elem.route">
+          <h2>{{elem.route.descr}}</h2>
+        </div>
+        <div ng-if="!elem.route">
+          <h2>{{elem.group.title ? elem.group.title : elem.group.label}}</h2>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
