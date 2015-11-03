@@ -12,7 +12,8 @@
         "jszip": "~2.5.0",
         "jszip-utils": "~0.0.2",
         "ng-cells": "~0.4.0",
-        "ionic-datepicker": "~0.9.0"
+        "ionic-datepicker": "~0.9.0",
+        "ng-material-floating-button": "ng-mfb#~0.6.2"
     },
     "install": {
         "path": "www/lib",
@@ -36,12 +37,17 @@
             "leaflet": [
         "bower_components/leaflet/dist/leaflet.js",
         "bower_components/leaflet/dist/leaflet.css",
-"bower_components/leaflet/dist/images/*"
+        "bower_components/leaflet/dist/images/*"
       ],
             "angular-simple-logger": "bower_components/angular-leaflet-directive/dist/angular-simple-logger.min.js",
-            "ionic-timepicker": ["bower_components/ionic-timepicker/dist/ionic-timepicker.bundle.min.js",
-"bower_components/ionic-timepicker/dist/templates.js"],
-            "ionic-datepicker": "bower_components/ionic-datepicker/dist/ionic-datepicker.bundle.min.js"
+            "ionic-timepicker": [
+        "bower_components/ionic-timepicker/dist/ionic-timepicker.bundle.min.js",
+        "bower_components/ionic-timepicker/dist/templates.js"
+      ],
+            "ionic-datepicker": "bower_components/ionic-datepicker/dist/ionic-datepicker.bundle.min.js",
+            "ng-material-floating-button": [
+        "bower_components/ng-material-floating-button/mfb/dist/mfb.css"
+      ]
         }
     }
 }

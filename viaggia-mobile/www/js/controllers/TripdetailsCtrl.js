@@ -26,8 +26,14 @@ angular.module('viaggia.controllers.tripdetails', [])
     }
 
     $scope.initMap = function () {
-        mapService.initMap().then(function () {})
+        mapService.initMap().then(function () {
+            //add polyline
+
+
+        })
     }
+    $scope.pathLine = mapService.getTripPolyline(trip);
+    $scope.pathMarkers = mapService.getTripPoints(trip);
 
     angular.extend($scope, {
         center: {
@@ -35,6 +41,8 @@ angular.module('viaggia.controllers.tripdetails', [])
             lng: Config.getMapPosition().long,
             zoom: Config.getMapPosition().zoom
         },
-        events: {}
+        markers: $scope.pathMarkers,
+        events: {},
+        pathLine: $scope.pathLine
     });
 })

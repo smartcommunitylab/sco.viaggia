@@ -6,6 +6,7 @@
 angular.module('viaggia', [
     'ionic',
      'ionic-material',
+    'ng-mfb',
     'ionic-datepicker',
     'ionic-timepicker',
     'ngCordova',
@@ -237,7 +238,11 @@ angular.module('viaggia', [
             popup_datepicker_thu: 'G',
             popup_datepicker_fri: 'V',
             popup_datepicker_sat: 'S',
-            popup_datepicker_sun: 'D'
+            popup_datepicker_sun: 'D',
+            journey_details_to: 'A ',
+            journey_details_from: 'Da ',
+            journey_details_from_bike: 'Prendi una bicicletta alla stazione di bike sharing ',
+            journey_details_to_bike: 'Lascia la bicicletta alla stazione di bike sharing '
         });
 
 

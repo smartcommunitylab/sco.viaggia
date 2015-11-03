@@ -6,7 +6,7 @@ angular.module('viaggia.services.conf', [])
     $http.get('data/config.json').success(function (response) {
         mapJsonConfig = response;
     });
-
+    var DISTANCE_AUTOCOMPLETE = '6';
     var HTTP_CONFIG = {
         timeout: 5000
     };
@@ -25,11 +25,52 @@ angular.module('viaggia.services.conf', [])
             value: "leastWalking"
         }
 
-    ]
+    ];
+    var COLORS_TRIP = [
+        {
+            type: 'TRAIN',
+            color: '#e84539',
+            icon: 'img/ic_train.png'
 
+        },
+        {
+            type: 'CAR',
+            color: '#f39619',
+            icon: 'img/ic_car.png'
+
+        },
+        {
+            type: 'BUS',
+            color: '#009587',
+            icon: 'img/ic_urbanBus.png'
+
+        },
+        {
+            type: 'BUSSUBURBAN',
+            color: '#4052a0',
+            icon: 'img/ic_extraurbanBus.png'
+
+        },
+        {
+            type: 'BIKE',
+            color: '#8cc04c',
+            icon: 'img/ic_bike.png'
+
+        },
+        {
+            type: 'WALK',
+            color: '#823d8f',
+            icon: 'img/ic_walk.png'
+
+        }
+
+        ]
     return {
         getHTTPConfig: function () {
             return HTTP_CONFIG;
+        },
+        getDistanceForAutocomplete: function () {
+            return DISTANCE_AUTOCOMPLETE;
         },
         getServerURL: function () {
             return mapJsonConfig['serverURL'];
@@ -46,6 +87,9 @@ angular.module('viaggia.services.conf', [])
         },
         getPlanTypes: function () {
             return PLAN_TYPES;
+        },
+        getColorsTypes: function () {
+            return COLORS_TRIP;
         },
         getPlanPreferences: function () {
             return PLAN_PREFERENCES;

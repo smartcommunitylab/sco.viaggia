@@ -1,12 +1,13 @@
 angular.module('viaggia.services.plan', [])
 
-.factory('planService', function ($q, $http, Config) {
+.factory('planService', function ($q, $http, $filter, Config) {
 
     var planService = {};
     var position = {};
     var planJourneyResults = {};
     var planConfigure = {};
     var selectedjourney = {};
+    var geoCoderPlaces = {};
     var getNameFromComplex = function (data) {
         name = '';
         if (data) {
@@ -190,16 +191,16 @@ angular.module('viaggia.services.plan', [])
     var extractDetails = function (step, leg, idx, from) {
         step.action = actionMap[leg.transport.type];
         if (leg.transport.type == 'BICYCLE' && leg.transport.agencyId && leg.transport.agencyId != 'null') {
-            step.fromLabel = "Prendi una bicicletta alla stazione di bike sharing ";
+            step.fromLabel = $filter('translate')('journey_details_from_bike');
             if (leg.to.stopId && leg.to.stopId.agencyId && leg.to.stopId.agencyId != 'null') {
-                step.toLabel = "Lascia la bicicletta alla stazione di bike sharing ";
+                step.toLabel = $filter('translate')('journey_details_to_bike');
             } else {
-                step.toLabel = "A ";
+                step.toLabel = $filter('translate')('label_to');
             }
             //    	} else if (leg.transport.type == 'CAR' && leg.transport.agencyId && leg.transport.agencyId != 'null') {
         } else {
-            step.fromLabel = "Da ";
-            step.toLabel = "A ";
+            step.fromLabel = $filter('translate')('journey_details_from');
+            step.toLabel = $filter('translate')('journey_details_to');
         }
         if (leg.transport.type == 'BUS' || leg.transport.type == 'TRAIN' || leg.transport.type == 'TRANSIT') {
             step.actionDetails = leg.transport.routeShortName;
@@ -342,5 +343,63 @@ angular.module('viaggia.services.plan', [])
     planService.getplanJourneyResults = function () {
         return planJourneyResults;
     }
+
+    planService.getnames = function (i) {
+        return geoCoderPlaces;
+    }
+    planService.getTypedPlaces = function (i) {
+
+        var placedata = $q.defer();
+        var names = [];
+        i = i.replace(/\ /g, "+");
+        var url = "https://os.smartcommunitylab.it/core.geocoder/spring/address?latlng=" + Config.getMapPosition().lat + ", " + Config.getMapPosition().long + "&distance=" + Config.getDistanceForAutocomplete() + "&address=" + i;
+        $http.get(url, {
+            timeout: 5000
+        }).
+        success(function (data, status, headers, config) {
+            geoCoderPlaces = [];
+            //            places = data.response.docs;
+            //store the data
+            //return the labels
+            k = 0;
+            for (var i = 0; i < data.response.docs.length; i++) {
+                temp = '';
+                if (data.response.docs[i].name)
+                    temp = temp + data.response.docs[i].name;
+                if (data.response.docs[i].street != data.response.docs[i].name)
+                    if (data.response.docs[i].street) {
+                        if (temp)
+                            temp = temp + ', ';
+                        temp = temp + data.response.docs[i].street;
+                    }
+                if (data.response.docs[i].housenumber) {
+                    if (temp)
+                        temp = temp + ', ';
+                    temp = temp + data.response.docs[i].housenumber;
+                }
+                if (data.response.docs[i].city) {
+                    if (temp)
+                        temp = temp + ', ';
+                    temp = temp + data.response.docs[i].city;
+                }
+
+                //check se presente
+                if (!geoCoderPlaces[temp]) {
+                    //se non presente
+                    names[k] = temp;
+                    k++
+                    geoCoderPlaces[temp] = {
+                        latlong: data.response.docs[i].coordinate
+                    }
+                }
+            }
+            placedata.resolve(names);
+        }).
+        error(function (data, status, headers, config) {
+            //            $scope.error = true;
+        });
+        return placedata.promise;
+    }
+
     return planService;
 })

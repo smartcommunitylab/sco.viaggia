@@ -297,7 +297,34 @@ angular.module('viaggia.controllers.plan', [])
         });
     }
 
-    //    execution
+    $scope.typePlace = function (typedthings) {
+        $scope.result = typedthings;
+        $scope.newplaces = planService.getTypedPlaces(typedthings);
+        $scope.newplaces.then(function (data) {
+            $scope.places = data;
+            $scope.placesandcoordinates = planService.getnames();
+        });
+    }
+    $scope.select = function (suggestion) {
+
+        //            if changed set position, name and address
+        //            segnalaService.setPosition($scope.placesandcoordinates[suggestion].latlong.split(',')[0], $scope.placesandcoordinates[suggestion].latlong.split(',')[1]);
+        //            segnalaService.setName(suggestion);
+        //
+        //            $scope.signal.location.address = suggestion;
+        console.log("select");
+    }
+    $scope.changeString = function (suggestion) {
+
+            //            if changed set position, name and address
+            //            segnalaService.setPosition($scope.placesandcoordinates[suggestion].latlong.split(',')[0], $scope.placesandcoordinates[suggestion].latlong.split(',')[1]);
+            //            segnalaService.setName(suggestion);
+            //
+            //            $scope.signal.location.address = suggestion;
+            console.log("changestring");
+
+        }
+        //    execution
     angular.extend($scope, {
         center: {
             lat: Config.getMapPosition().lat,
