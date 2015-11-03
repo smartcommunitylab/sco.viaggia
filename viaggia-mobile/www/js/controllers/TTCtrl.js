@@ -155,7 +155,16 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
   $scope.load = function() {
     $scope.route = Config.getTTData($stateParams.ref, $stateParams.agencyId, $stateParams.groupId, $stateParams.routeId);
-    $scope.getTT(new Date().getTime());
+    $scope.getTT($scope.runningDate.getTime());
+  }
+
+  $scope.nextDate = function() {
+    $scope.runningDate.setDate($scope.runningDate.getDate()+1);
+    $scope.getTT($scope.runningDate.getTime());
+  }
+  $scope.prevDate = function() {
+    $scope.runningDate.setDate($scope.runningDate.getDate()-1);
+    $scope.getTT($scope.runningDate.getTime());
   }
 
   $timeout($scope.load, 500);
