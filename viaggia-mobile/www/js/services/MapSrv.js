@@ -175,7 +175,24 @@ angular.module('viaggia.services.map', [])
         return output;
     }
 
-
+    mapService.resizeElementHeight = function (element) {
+        var height = 0;
+        var body = window.document.body;
+        if (window.innerHeight) {
+            height = window.innerHeight;
+        } else if (body.parentElement.clientHeight) {
+            height = body.parentElement.clientHeight;
+        } else if (body && body.clientHeight) {
+            height = body.clientHeight;
+        }
+        console.log('height' + height);
+        element.style.height = (((height - element.offsetTop) / 2) + "px");
+    }
+    mapService.refresh = function () {
+        leafletData.getMap().then(function (map) {
+            map.invalidateSize();
+        })
+    }
     mapService.decodePolyline = function (str, precision) {
         var index = 0,
             lat = 0,
