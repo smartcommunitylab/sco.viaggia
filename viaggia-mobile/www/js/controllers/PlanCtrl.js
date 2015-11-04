@@ -306,23 +306,18 @@ angular.module('viaggia.controllers.plan', [])
         });
     }
     $scope.select = function (suggestion) {
-
         //            if changed set position, name and address
         //            segnalaService.setPosition($scope.placesandcoordinates[suggestion].latlong.split(',')[0], $scope.placesandcoordinates[suggestion].latlong.split(',')[1]);
         //            segnalaService.setName(suggestion);
-        //
         //            $scope.signal.location.address = suggestion;
         console.log("select");
     }
     $scope.changeString = function (suggestion) {
-
             //            if changed set position, name and address
             //            segnalaService.setPosition($scope.placesandcoordinates[suggestion].latlong.split(',')[0], $scope.placesandcoordinates[suggestion].latlong.split(',')[1]);
             //            segnalaService.setName(suggestion);
-            //
             //            $scope.signal.location.address = suggestion;
             console.log("changestring");
-
         }
         //    execution
     angular.extend($scope, {
