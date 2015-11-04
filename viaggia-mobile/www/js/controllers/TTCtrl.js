@@ -72,7 +72,8 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 .controller('TTCtrl', function ($scope, $stateParams, $ionicPosition, $timeout, $filter, ttService, Config) {
   $scope.data = [];
 
-  var headerHeight = 44 + 50;
+  // header height from the standard style. Augmented in case of iOS non-fullscreen.
+  var headerHeight = 44 + 50 + 1;
   if (ionic.Platform.isIOS() && !ionic.Platform.isFullScreen) {
     headerHeight += 20;
   }
@@ -84,19 +85,21 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
   $scope.scrollLeftPosition = 0;
   $scope.tt = null;
   $scope.runningDate = new Date();
-  $scope.color = '#ddd';
+  $scope.color = '#e84539';
 
+  // load timetable data
   $scope.getTT = function (date) {
     Config.loading();
     ttService.getTT($stateParams.agencyId, $scope.route.routeSymId, date).then(function (data) {
       constructTable(data);
       Config.loaded();
     }, function (err) {
-      $scope.tt = null;
+      $scope.tt = {tripIds:[]};
       Config.loaded();
     });
   };
 
+  // convert delay object to string
   var getDelayValue = function(delay) {
     var res = '';
     if (delay && delay.SERVICE && delay.USER > 0) {
@@ -107,6 +110,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     }
     return res;
   }
+  // custom trip name if trip row is shown
   var getTripText = function(trip) {
     try {
       return TRIP_TYPE_EXTRACTOR($stateParams.agencyId, $scope.route.routeSymId, trip);
@@ -116,6 +120,35 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     }
   }
 
+  var initMeasures = function(data) {
+    var cn = Math.floor((window.innerWidth - firstColWidth) / cellWidthBase);
+    $scope.column_width = (window.innerWidth - firstColWidth) / cn;
+    $scope.column_number = Math.min(cn, data.tripIds.length);
+
+    var rn = Math.floor((window.innerHeight - (firstRowHeight+1)*$scope.header_row_number - headerHeight) / cellHeightBase);
+    $scope.row_height = (window.innerHeight - (firstRowHeight+1)*$scope.header_row_number - headerHeight) / rn;
+    $scope.row_number = Math.min(rn, data.stops.length);
+
+    $timeout(function(){;$scope.scrollLeftPosition = ttService.locateTablePosition(data,new Date());},0);
+  }
+
+  var lastResize = 0;
+  // track size change due to, e.g., orientation change
+  window.onresize = function(event) {
+    lastResize = new Date().getTime();
+
+    $timeout(function(){
+      // on drag may be many events. let's wait a bit
+      if ((new Date().getTime() - 200) >= lastResize) {
+        var tt = $scope.tt;
+        // reset the tt data to trigger ng-if condition
+        $scope.tt = null;
+        $timeout(function(){constructTable(tt);});
+      }
+    }, 200);
+  };
+
+  // construct the table
   var constructTable = function (data) {
     $scope.header_row_number = $scope.route.showTrips ? 2 : 1;
 
@@ -142,26 +175,21 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     $scope.data = rows;
     $scope.tt = data;
 
-    var cn = Math.floor((window.innerWidth - firstColWidth) / cellWidthBase);
-    $scope.column_width = (window.innerWidth - firstColWidth) / cn;
-    $scope.column_number = Math.min(cn, data.tripIds.length);
-
-    var rn = Math.floor((window.innerHeight - (firstRowHeight+1)*$scope.header_row_number - headerHeight) / cellHeightBase);
-    $scope.row_height = (window.innerHeight - (firstRowHeight+1)*$scope.header_row_number - headerHeight) / rn;
-    $scope.row_number = Math.min(rn, data.stops.length);
-
-    $timeout(function(){;$scope.scrollLeftPosition = ttService.locateTablePosition(data,new Date());},0);
+    initMeasures(data);
   };
 
+  // initialize
   $scope.load = function() {
     $scope.route = Config.getTTData($stateParams.ref, $stateParams.agencyId, $stateParams.groupId, $stateParams.routeId);
     $scope.getTT($scope.runningDate.getTime());
   }
 
+  // go to next date
   $scope.nextDate = function() {
     $scope.runningDate.setDate($scope.runningDate.getDate()+1);
     $scope.getTT($scope.runningDate.getTime());
   }
+  // go to prev date
   $scope.prevDate = function() {
     $scope.runningDate.setDate($scope.runningDate.getDate()-1);
     $scope.getTT($scope.runningDate.getTime());
