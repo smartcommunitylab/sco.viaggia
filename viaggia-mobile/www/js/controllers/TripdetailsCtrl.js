@@ -1,6 +1,7 @@
 angular.module('viaggia.controllers.tripdetails', [])
 
-.controller('TripDetailsCtrl', function ($scope, $ionicModal, planService, mapService, Config) {
+.controller('TripDetailsCtrl', function ($scope, $ionicModal, $filter, planService, mapService, Config) {
+    $scope.title = $filter('translate')('map_detail_title');
     $scope.requestedFrom = planService.getName("from");
     $scope.requestedTo = planService.getName("to");
     var trip = planService.getSelectedJourney();
@@ -19,6 +20,13 @@ angular.module('viaggia.controllers.tripdetails', [])
     });
     $scope.openMapTrip = function () {
         $scope.modalMap.show();
+        //        $scope.modalMap.show().then(function () {
+        //            var modalMap = document.getElementById('modal-map-trip-container');
+        //            if (modalMap != null) {
+        //                mapService.resizeElementHeight(modalMap);
+        //                mapService.refresh();
+        //            }
+        //        });
     }
 
     $scope.closeMap = function () {

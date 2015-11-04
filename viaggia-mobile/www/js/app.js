@@ -48,10 +48,10 @@ angular.module('viaggia', [
             if (window.StatusBar) {
                 StatusBar.styleDefault();
             }
-            Config.init().then(function() {
-              if (ionic.Platform.isWebView()) {
-                DataManager.dbSetup();
-              }
+            Config.init().then(function () {
+                if (ionic.Platform.isWebView()) {
+                    DataManager.dbSetup();
+                }
             });
         });
     })
@@ -189,7 +189,7 @@ angular.module('viaggia', [
                 }
             })
 
-            .state('app.table1', {
+        .state('app.table1', {
                 cache: false,
                 url: "/table1",
                 views: {
@@ -280,7 +280,8 @@ angular.module('viaggia', [
             journey_details_to_bike: 'Lascia la bicicletta alla stazione di bike sharing',
             lbl_delays: 'DELAYS',
             lbl_trips: 'TYPE',
-            no_data: 'Nessun risultato trovato.'
+            no_data: 'Nessun risultato trovato.',
+            map_detail_title: 'Dettaglio percorso'
 
         });
 
@@ -347,7 +348,8 @@ angular.module('viaggia', [
             popup_datepicker_sun: 'S',
             lbl_delays: 'DELAYS',
             lbl_trips: 'TYPE',
-            no_data: 'No data found.'
+            no_data: 'No data found.',
+            map_detail_title: 'Dettaglio percorso'
 
         });
 

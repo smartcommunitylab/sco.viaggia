@@ -7,7 +7,9 @@ angular.module('viaggia.controllers.plan', [])
     $scope.dateTimestamp = null;
     $scope.hourTimestamp = null;
     $scope.datepickerObject.inputDate = new Date();
+    $scope.title = $filter('translate')('plan_map_title');
     $scope.place = null;
+
     $scope.planParams = {
         //tmp, i need structure with lat-long
         from: {
@@ -146,6 +148,13 @@ angular.module('viaggia.controllers.plan', [])
     $scope.openMapPlan = function (place) {
         $scope.place = place;
         $scope.modalMap.show();
+        //        $scope.modalMap.show().then(function () {
+        //            var modalMap = document.getElementById('modal-map-container');
+        //            if (modalMap != null) {
+        //                mapService.resizeElementHeight(modalMap);
+        //                mapService.refresh();
+        //            }
+        //        });
     }
 
     $scope.closeMap = function () {
@@ -192,10 +201,12 @@ angular.module('viaggia.controllers.plan', [])
     /*part for the map*/
     var selectPlace = function (placeSelected) {
         if ($scope.place == 'from') {
+            $scope.fromName = name;
             $scope.planParams.from.name = placeSelected;
             $scope.planParams.from.lat = planService.getPosition($scope.place).latitude;
             $scope.planParams.from.long = planService.getPosition($scope.place).longitude;
         } else if ($scope.place == 'to') {
+            $scope.toName = name;
             $scope.planParams.to.name = placeSelected;
             $scope.planParams.to.lat = planService.getPosition($scope.place).latitude;
             $scope.planParams.to.long = planService.getPosition($scope.place).longitude;
@@ -210,39 +221,37 @@ angular.module('viaggia.controllers.plan', [])
     $scope.locateMe = function () {
         $ionicLoading.show();
         $window.navigator.geolocation.getCurrentPosition(function (position) {
-                $scope.$apply(function () {
-                    $scope.position = position;
-                    var placedata = $q.defer();
-                    var places = {};
-                    var url = Config.getGeocoderURL() + '/location?latlng=' + position.coords.latitude + ',' + position.coords.longitude;
+                //                $scope.$apply(function () {
+                $scope.position = position;
+                var placedata = $q.defer();
+                var places = {};
+                var url = Config.getGeocoderURL() + '/location?latlng=' + position.coords.latitude + ',' + position.coords.longitude;
 
-                    //add timeout
-                    $http.get(encodeURI(url), {
-                        timeout: 5000
-                    }).
-                    success(function (data, status, headers, config) {
-                        //                         planService.setName($scope.place, data.response.docs[0]);
+                //add timeout
+                $http.get(encodeURI(url), {
+                    timeout: 5000
+                }).
+                success(function (data, status, headers, config) {
+                    //                         planService.setName($scope.place, data.response.docs[0]);
 
-                        places = data.response.docs;
-                        name = '';
-                        if (data.response.docs[0]) {
-                            $scope.place = 'from';
-                            planService.setPosition($scope.place, position.coords.latitude, position.coords.longitude);
-                            planService.setName($scope.place, data.response.docs[0]);
-                            selectPlace(name);
-                            $ionicLoading.hide();
-                        } else {
-                            $ionicLoading.hide();
-                        }
-                    }).
-                    error(function (data, status, headers, config) {
-                        //temporary
-                        $ionicLoading.hide();
-                        $scope.showNoConnection();
-                    });
-
-
+                    places = data.response.docs;
+                    name = '';
+                    if (data.response.docs[0]) {
+                        $scope.place = 'from';
+                        planService.setPosition($scope.place, position.coords.latitude, position.coords.longitude);
+                        planService.setName($scope.place, data.response.docs[0]);
+                        selectPlace(name);
+                    }
+                    $ionicLoading.hide();
+                }).
+                error(function (data, status, headers, config) {
+                    //temporary
+                    $ionicLoading.hide();
+                    $scope.showNoConnection();
                 });
+
+
+                //                });
             },
             function (error) {
                 $ionicLoading.hide();
@@ -257,6 +266,7 @@ angular.module('viaggia.controllers.plan', [])
 
     $scope.initMap = function () {
         mapService.initMap().then(function () {
+
             $scope.$on("leafletDirectiveMap.click", function (event, args) {
                 $ionicLoading.show();
                 planService.setPosition($scope.place, args.leafletEvent.latlng.lat, args.leafletEvent.latlng.lng);
@@ -272,10 +282,12 @@ angular.module('viaggia.controllers.plan', [])
                     if (data.response.docs[0]) {
                         planService.setName($scope.place, data.response.docs[0]);
                         $scope.showConfirm(name, $filter('translate')("popup_address"), function () {
+                            //$scope.result = name;
                             return selectPlace(name)
                         });
                     } else {
                         $scope.showConfirm($filter('translate')("popup_lat") + args.leafletEvent.latlng.lat.toString().substring(0, 7) + " " + $filter('translate')("popup_long") + args.leafletEvent.latlng.lng.toString().substring(0, 7), $filter('translate')("popup_no_address"), function () {
+                            //$scope.result = args.leafletEvent.latlng;
                             return selectPlace(args.leafletEvent.latlng)
                         });
                     }

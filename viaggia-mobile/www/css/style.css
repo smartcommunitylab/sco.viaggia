@@ -177,3 +177,7 @@
 .leaflet-container {
     height: 100% !important;
 }
+
+#modal-map-container {
+    height: 100%!important;
+}

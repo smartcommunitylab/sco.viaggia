@@ -187,6 +187,9 @@ angular.module('viaggia.services.map', [])
         }
         console.log('height' + height);
         element.style.height = (((height - element.offsetTop) / 2) + "px");
+        leafletData.getMap().then(function (map) {
+            map.invalidateSize();
+        })
     }
     mapService.refresh = function () {
         leafletData.getMap().then(function (map) {
