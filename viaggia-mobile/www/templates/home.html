@@ -20,7 +20,7 @@
         </div>
         <ion-list class="animate-ripple">
         <ion-item ng-repeat="m in primaryLinks" ng-last-repeat="primaryLinks">
-          <button class="button button-block icon-left" ng-class="m.icon">{{m.label | translate}}</button>
+          <button class="button button-block icon-left" ng-class="m.icon" ng-click="go(m.state)">{{m.label | translate}}</button>
         </ion-item>
 
 <!--

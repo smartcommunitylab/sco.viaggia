@@ -34,6 +34,7 @@ angular.module('viaggia', [
     'viaggia.services.map',
     'viaggia.services.plan',
     'viaggia.services.timetable',
+    'viaggia.services.info',
     'viaggia.directives',
 
 ])
@@ -189,7 +190,18 @@ angular.module('viaggia', [
                 }
             })
 
-        .state('app.table1', {
+            .state('app.parking', {
+                cache: false,
+                url: "/parking/:agencyId",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/parking.html",
+                        controller: 'ParkingCtrl'
+                    }
+                }
+            })
+
+            .state('app.table1', {
                 cache: false,
                 url: "/table1",
                 views: {
@@ -228,8 +240,8 @@ angular.module('viaggia', [
             menu_real_time_bus_urban: 'Autobus Urbani',
             menu_real_time_bus_suburban: 'Autobus Extraurbani',
             menu_real_time_train: 'Treni',
-            menu_real_time_bus_bike: 'Biciclette condivise',
-            menu_real_time_bus_park: 'Parcheggi',
+            menu_real_time_bike: 'Biciclette condivise',
+            menu_real_time_park: 'Parcheggi',
             menu_credits: "Credits",
             menu_login: "Login",
             menu_logout: "Logout",
@@ -303,8 +315,8 @@ angular.module('viaggia', [
             menu_real_time_bus_urban: 'Urban Bus',
             menu_real_time_bus_suburban: 'Suburban Bus',
             menu_real_time_train: 'Trains',
-            menu_real_time_bus_bike: 'Shared bikes',
-            menu_real_time_bus_park: 'Parking lots',
+            menu_real_time_bike: 'Shared bikes',
+            menu_real_time_park: 'Parking lots',
             menu_credits: "Credits",
             menu_login: "Login",
             menu_logout: "Logout",

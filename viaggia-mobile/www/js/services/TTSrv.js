@@ -25,6 +25,7 @@ angular.module('viaggia.services.timetable', [])
     d.setHours(23);
     d.setMinutes(59);
     var to = d.getTime();
+    route = encodeURIComponent(route);
     $http.get(Config.getServerURL()+'/gettransitdelays/'+agency+'/'+route+'/'+from+'/'+to,
               Config.getHTTPConfig())
       .success(function(data) {
@@ -71,8 +72,8 @@ angular.module('viaggia.services.timetable', [])
    */
   var dataFromHash = function(agency, route, date, deferred, readRoutes) {
     var cal = calendarCache[agency][route];
-    date = $filter('date')(date,'yyyyMMdd');
-    var hash = route+'_'+cal.mapping[cal.entries[date]];
+    dateStr = $filter('date')(date,'yyyyMMdd');
+    var hash = route+'_'+cal.mapping[cal.entries[dateStr]];
     var errCB = function(err){
       deferred.reject(err);
     };

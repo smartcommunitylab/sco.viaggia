@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.home', [])
 
-.controller('HomeCtrl', function ($scope, $timeout, Config, mapService, ionicMaterialMotion, ionicMaterialInk) {
+.controller('HomeCtrl', function ($scope, $timeout, $location, Config, mapService, ionicMaterialMotion, ionicMaterialInk) {
 
     $scope.buttons = [{
         label: 'News',
@@ -59,5 +59,8 @@ angular.module('viaggia.controllers.home', [])
         events: {}
     });
 
+  $scope.go = function(state) {
+    $location.path(state);
+  }
 
 })
