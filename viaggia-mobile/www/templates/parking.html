@@ -1,4 +1,14 @@
 <ion-view title="{{'menu_real_time_park'|translate}}">
   <ion-content has-header="true">
+    <ion-list>
+      <div class="list card" ng-repeat="p in parkings | orderBy:'distance'">
+        <div class="item  item-icon-right">
+          <h2>{{p.name}}</h2>
+          <i class="icon ic_bookmark"></i>
+          <p>{{p.description}}</p>
+          <p>{{p.distance| number:3}}km</p>
+        </div>
+      </div>
+    </ion-list>
   </ion-content>
 </ion-view>

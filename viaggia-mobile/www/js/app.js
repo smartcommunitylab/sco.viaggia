@@ -36,10 +36,36 @@ angular.module('viaggia', [
     'viaggia.services.timetable',
     'viaggia.services.info',
     'viaggia.directives',
+    'viaggia.services.geo'
 
 ])
 
-.run(function ($ionicPlatform, DataManager, $cordovaFile, Config) {
+.run(function ($ionicPlatform, $cordovaFile, $rootScope, DataManager, Config, GeoLocate) {
+
+        $rootScope.locationWatchID = undefined;
+
+        document.addEventListener("pause", function () {
+            console.log('app paused');
+            if (typeof $rootScope.locationWatchID != 'undefined') {
+                navigator.geolocation.clearWatch($rootScope.locationWatchID);
+                $rootScope.locationWatchID = undefined;
+                GeoLocate.reset();
+                console.log('geolocation reset');
+            }
+        }, false);
+
+        document.addEventListener("resume", function () {
+            console.log('app resumed');
+            GeoLocate.locate();
+        }, false);
+
+        GeoLocate.locate().then(function (position) {
+            $rootScope.myPosition = position;
+            //console.log('first geolocation: ' + position);
+        }, function () {
+            console.log('CANNOT LOCATE!');
+        });
+
 
         $ionicPlatform.ready(function () { // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
