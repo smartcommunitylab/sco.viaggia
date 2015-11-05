@@ -154,6 +154,9 @@ angular.module('viaggia.services.conf', [])
         getInfoMenu: function() {
           return mapJsonConfig.visualization.infomenu;
         },
+        getPrimaryLinks: function() {
+          return mapJsonConfig.visualization.primaryLinks;
+        },
         getTTData : function(ref, agencyId, groupId, routeId) {
           var res = ttJsonConfig;
           if (!!ref) {

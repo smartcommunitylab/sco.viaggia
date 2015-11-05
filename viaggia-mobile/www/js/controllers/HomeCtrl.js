@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.home', [])
 
-.controller('HomeCtrl', function ($scope, Config, mapService, ionicMaterialMotion, ionicMaterialInk) {
+.controller('HomeCtrl', function ($scope, $timeout, Config, mapService, ionicMaterialMotion, ionicMaterialInk) {
 
     $scope.buttons = [{
         label: 'News',
@@ -12,9 +12,6 @@ angular.module('viaggia.controllers.home', [])
     var mymap = document.getElementById('map-container');
 
     Config.init().then(function () {
-        ionicMaterialMotion.ripple();
-        ionicMaterialInk.displayEffect();
-
         angular.extend($scope, {
             center: {
                 lat: Config.getMapPosition().lat,
@@ -23,7 +20,16 @@ angular.module('viaggia.controllers.home', [])
             },
             events: {}
         });
+        $scope.primaryLinks = Config.getPrimaryLinks();
     });
+
+    $scope.$on('ngLastRepeat.primaryLinks', function (e) {
+        $timeout(function () {
+            ionicMaterialMotion.ripple();
+            ionicMaterialInk.displayEffect()
+        }); // No timeout delay necessary.
+    });
+
 
     $scope.initMap = function () {
         mapService.initMap().then(function () {

@@ -13,49 +13,58 @@
     </ion-side-menu-content>
 
     <ion-side-menu side="left">
-        <ion-header-bar class="bar">
-            <h1 class="title">Menu</h1>
-        </ion-header-bar>
         <ion-content class="leftmenu">
             <ion-list>
                 <div>
-                    <ion-item class="item-stable" ng-click="toggleGroupRealTime()" ng-class="{active: isGroupRealTimeShown()}">
-                        <i class="icon" ng-class="isGroupRealTimeShown() ? 'ion-minus' : 'ion-plus'"></i> &nbsp; {{'menu_info_real_time' | translate}}
+                    <ion-item class="item item-icon-left item-icon-right menu-rt" ng-click="toggleGroupRealTime()" ng-class="{active: isGroupRealTimeShown()}">
+                      <i class="icon ic_real-time-info"></i>
+                      {{'menu_info_real_time' | translate}}
+                      <i class="icon" ng-class="isGroupRealTimeShown() ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i>
                     </ion-item>
-                    <ion-item class="item-accordion item-stable" ng-repeat="m in infomenu" ng-show="isGroupRealTimeShown()" nav-clear menu-close item-icon-left ng-href="#{{m.state}}">
-                        <i class="icon voice-menu"></i>{{m.label | translate}}
+                    <div>
+                    <ion-item class="item-icon-left item-accordion  menu-rt" ng-repeat="m in infomenu" ng-show="isGroupRealTimeShown()" nav-clear menu-close item-icon-left ng-href="#{{m.state}}">
+                        <i class="icon" ng-class="m.icon"></i>{{m.label | translate}}
                     </ion-item>
+                  </div>
                 </div>
-                <ion-item nav-clear menu-close item-icon-left href="#/app/home">
-                    <i class="icon voice-menu"></i>{{'menu_home' | translate}}
+                <ion-item nav-clear menu-close href="#/app/home" class="menu-main item-icon-left">
+                    <i class="icon ic_home"></i>{{'menu_home' | translate}}
                 </ion-item>
-                <ion-item nav-clear menu-close item-icon-left href="#/app/plan">
-                    <i class="icon voice-menu"></i>{{'menu_plan' | translate}}
+                <ion-item nav-clear menu-close href="#/app/plan"  class="menu-main item-icon-left">
+                    <i class="icon ic_search"></i>{{'menu_plan' | translate}}
                 </ion-item>
-                <ion-item nav-clear menu-close item-icon-left href="#/app/mytrip">
-                    <i class="icon voice-menu"></i>{{'menu_mytrip' | translate}}
+                <ion-item nav-clear menu-close href="#/app/mytrip" class="menu-main item-icon-left">
+                    <i class="icon ic_folder"></i>{{'menu_mytrip' | translate}}
                 </ion-item>
-                <ion-item nav-clear menu-close item-icon-left href="#/app/monitoring">
-                    <i class="icon voice-menu"></i>{{'menu_monitoring' | translate}}
+                <ion-item nav-clear menu-close href="#/app/monitoring" class="menu-main item-icon-left">
+                    <i class="icon ic_monitoring"></i>{{'menu_monitoring' | translate}}
                 </ion-item>
-                <ion-item nav-clear menu-close item-icon-left href="#/app/news">
-                    <i class="icon voice-menu"></i>{{'menu_news' | translate}}
+                <ion-item nav-clear menu-close href="#/app/news"  class="menu-main item-icon-left">
+                    <i class="icon ic_news"></i>{{'menu_news' | translate}}
                 </ion-item>
-                <ion-item nav-clear menu-close item-icon-left href="#/app/bookmarks">
-                    <i class="icon voice-menu"></i>{{'menu_bookmarks' | translate}}
+                <ion-item nav-clear menu-close href="#/app/info"  class="menu-main item-icon-left">
+                    <i class="icon ic_euro"></i>{{'menu_info' | translate}}
                 </ion-item>
-                <ion-item nav-clear menu-close item-icon-left href="#/app/info">
-                    <i class="icon voice-menu"></i>{{'menu_info' | translate}}
+                <ion-item nav-clear menu-close href="#/app/bookmarks"  class="menu-main item-icon-left">
+                    <i class="icon ic_bookmark"></i>{{'menu_bookmarks' | translate}}
                 </ion-item>
-                <ion-item nav-clear menu-close item-icon-left href="#/app/notifications">
-                    <i class="icon voice-menu"></i>{{'menu_notifications' | translate}}
+                <ion-item nav-clear menu-close href="#/app/notifications" class="menu-main item-icon-left">
+                    <i class="icon ic_notification"></i>{{'menu_notifications' | translate}}
                 </ion-item>
-                <ion-item nav-clear menu-close item-icon-left href="#/app/table1">
+                <ion-item nav-clear menu-close href="#/app/login" class="menu-last item-icon-left">
+                    <i class="icon ic_user"></i>{{'menu_login' | translate}}
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/credits" class="menu-last item-icon-left">
+                    <i class="icon ic_info"></i>{{'menu_credits' | translate}}
+                </ion-item>
+<!--
+                <ion-item nav-clear menu-close href="#/app/table1">
                     <i class="icon voice-menu"></i>table 1 test
                 </ion-item>
-                <ion-item nav-clear menu-close item-icon-left href="#/app/table2">
+                <ion-item nav-clear menu-close href="#/app/table2">
                     <i class="icon voice-menu"></i>table 2 test
                 </ion-item>
+-->
             </ion-list>
         </ion-content>
     </ion-side-menu>

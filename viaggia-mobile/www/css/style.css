@@ -220,3 +220,46 @@
 .ic-text {
   font-family: 'viaggia';
 }
+
+.menu-rt:not(.item-accordion) {
+  text-transform: uppercase;
+}
+.menu-rt, .menu-main, .menu-last {
+  color: #fff !important;
+}
+.menu-rt {
+  background-color: #2975a7 !important;
+}
+.menu-main {
+  background-color: #2989a7 !important;
+}
+.menu-last {
+  background-color: #3bbacf !important;
+}
+
+.menu-rt.item-icon-left .icon,
+.menu-rt.item-icon-right .icon,
+.menu-main.item-icon-left .icon,
+.menu-last.item-icon-left .icon {
+  font-size: 22px;
+}
+
+.menu-rt .item-content,
+.menu-main .item-content,
+.menu-last .item-content {
+  padding-left: 59px !important;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.menu-rt.item-accordion:first-child {
+  border-top: 1px solid #000;
+}
+
+.menu-left {
+  background-color: #3bbacf;
+}
+
+.bar-positive-100 {
+  background-color: #2975a7 !important;
+}
