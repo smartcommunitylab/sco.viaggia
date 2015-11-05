@@ -324,12 +324,22 @@ angular.module('viaggia.controllers.plan', [])
         //            $scope.signal.location.address = suggestion;
         console.log("select");
     }
-    $scope.changeString = function (suggestion) {
-            //            if changed set position, name and address
-            //            segnalaService.setPosition($scope.placesandcoordinates[suggestion].latlong.split(',')[0], $scope.placesandcoordinates[suggestion].latlong.split(',')[1]);
-            //            segnalaService.setName(suggestion);
-            //            $scope.signal.location.address = suggestion;
-            console.log("changestring");
+    $scope.setPlaceById = function (id) {
+        console.log(id);
+    }
+    $scope.changeStringFrom = function (suggestion) {
+        console.log("changestringfrom");
+        $scope.place = 'from';
+        planService.setPosition($scope.place, $scope.placesandcoordinates[suggestion].latlong.split(',')[0], $scope.placesandcoordinates[suggestion].latlong.split(',')[1]);
+        planService.setName($scope.place, data.response.docs[0]);
+        selectPlace(name);
+    }
+    $scope.changeStringTo = function (suggestion) {
+            console.log("changestringto");
+            $scope.place = 'to';
+            planService.setPosition($scope.place, $scope.placesandcoordinates[suggestion].latlong.split(',')[0], $scope.placesandcoordinates[suggestion].latlong.split(',')[1]);
+            planService.setName($scope.place, suggestion);
+            selectPlace(name);
         }
         //    execution
     angular.extend($scope, {

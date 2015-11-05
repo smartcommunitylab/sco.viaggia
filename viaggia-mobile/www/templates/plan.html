@@ -4,11 +4,13 @@
     </ion-nav-buttons>
     <ion-content id="content" has-header="true">
         <div class="row plan-first-row">
-            <label class="item-input item-floating-label input-plan-fromto ">
+            <!--            <label class="item-input item-floating-label input-plan-fromto ">-->
+            <div class="input-plan-fromto">
                 <span class="input-label">{{'plan_from' | translate}}</span>
                 <!--                <input type="text" placeholder="{{'plan_from' | translate}}" ng-model="planParams.from.name">-->
-                <placeautocomplete ng-model="fromName" attr-placeholder="{{'plan_from' | translate}}" click-activation="true" data="places" on-type="typePlace" placeholder="{{'plan_from' | translate}}" on-select="changeString" ng-blur="setNameParam"></placeautocomplete>
-            </label>
+                <placeautocomplete ng-model="fromName" attr-placeholder="{{'plan_from' | translate}}" click-activation="true" data="places" on-type="typePlace" placeholder="{{'plan_from' | translate}}" on-select="changeStringFrom" ng-blur="setNameParam"></placeautocomplete>
+            </div>
+            <!--            </label>-->
             <button class="button button-raised button-plan-fromto no-padding margin-8  icon ion-map" ng-click="openMapPlan('from')">
             </button>
             <button class="button button-raised button-plan-fromto no-padding margin-8 icon ion-star">
@@ -16,11 +18,17 @@
             </button>
         </div>
         <div class="row">
-            <label class="item-input item-floating-label input-plan-fromto ">
+            <!--            <placeautocomplete ng-model="toName" attr-placeholder="{{'plan_to' | translate}}" click-activation="true" data="places" on-type="typePlace" placeholder="{{'plan_from' | translate}}" on-select="changeString" ng-blur="setNameParam"></placeautocomplete>-->
+
+
+            <!--            <label class="item-input item-floating-label input-plan-fromto ">-->
+            <div class="input-plan-fromto">
+
                 <span class="input-label">{{'plan_to' | translate}}</span>
-                <!--                <input type="text" placeholder="{{'plan_to' | translate}}" ng-model="planParams.to.name"> -->
-                <placeautocomplete ng-model="toName" attr-placeholder="{{'plan_to' | translate}}" click-activation="true" data="places" on-type="typePlace" placeholder="{{'plan_from' | translate}}" on-select="changeString" ng-blur="setNameParam"></placeautocomplete>
-            </label>
+                <placeautocomplete ng-model="toName" attr-placeholder="{{'plan_to' | translate}}" click-activation="true" data="places" on-type="typePlace" placeholder="{{'plan_from' | translate}}" on-select="changeStringTo" ng-blur="setNameParam"></placeautocomplete>
+            </div>
+            <!--            </label>-->
+
             <button class="button button-raised square-56 no-padding margin-8  icon ion-map" ng-click="openMapPlan('to')">
             </button>
             <button class="button button-raised square-56 no-padding margin-8 icon ion-star">

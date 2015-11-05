@@ -182,84 +182,97 @@
     height: 100%!important;
 }
 
-.route-list .list{
-  padding-top: 20px;
+.route-list .list {
+    padding-top: 20px;
 }
 
 .route-list .list ion-item {
-  padding-top: 0px;
-  padding-bottom: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
+
 .route-list .list ion-item .button {
-  text-align: left;
+    text-align: left;
 }
 
 .route-grid-row {
-  margin-top: 8px !important;
-  margin-bottom: 8px !important;
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
 }
 
 .route-grid-element {
-  width: 60px;
-  height: 60px;
-  margin: auto;
-  border: 2px solid transparent;
-  border-radius: 50%;
-  text-align: center;
-  color: #fff;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    width: 60px;
+    height: 60px;
+    margin: auto;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    text-align: center;
+    color: #fff;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 .route-grid-element span {
-  text-align: center;
-  font-size: 24px;
-  line-height: 56px;
-  font-weight: bold;
-
+    text-align: center;
+    font-size: 24px;
+    line-height: 56px;
+    font-weight: bold;
 }
+
 .ic-text {
-  font-family: 'viaggia';
+    font-family: 'viaggia';
 }
 
 .menu-rt:not(.item-accordion) {
-  text-transform: uppercase;
+    text-transform: uppercase;
 }
-.menu-rt, .menu-main, .menu-last {
-  color: #fff !important;
-}
-.menu-rt {
-  background-color: #2975a7 !important;
-}
-.menu-main {
-  background-color: #2989a7 !important;
-}
+
+.menu-rt,
+.menu-main,
 .menu-last {
-  background-color: #3bbacf !important;
+    color: #fff !important;
+}
+
+.menu-rt {
+    background-color: #2975a7 !important;
+}
+
+.menu-main {
+    background-color: #2989a7 !important;
+}
+
+.menu-last {
+    background-color: #3bbacf !important;
 }
 
 .menu-rt.item-icon-left .icon,
 .menu-rt.item-icon-right .icon,
 .menu-main.item-icon-left .icon,
 .menu-last.item-icon-left .icon {
-  font-size: 22px;
+    font-size: 22px;
 }
 
 .menu-rt .item-content,
 .menu-main .item-content,
 .menu-last .item-content {
-  padding-left: 59px !important;
-  padding-top: 8px;
-  padding-bottom: 8px;
+    padding-left: 59px !important;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .menu-rt.item-accordion:first-child {
-  border-top: 1px solid #000;
+    border-top: 1px solid #000;
 }
 
 .menu-left {
-  background-color: #3bbacf;
+    background-color: #3bbacf;
 }
 
 .bar-positive-100 {
-  background-color: #2975a7 !important;
+    background-color: #2975a7 !important;
+}
+
+.placeautocomplete ul {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 99;
 }
