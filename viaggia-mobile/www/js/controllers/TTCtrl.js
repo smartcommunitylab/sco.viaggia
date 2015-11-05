@@ -198,24 +198,29 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     $scope.header_row_number = $scope.route.showTrips ? 2 : 1;
 
     var rows = [];
-    for (var row = 0; row < data.stops.length + $scope.header_row_number; row++) {
-      var rowContent = [];
-      for (var col = 0; col <= data.tripIds.length; col++) {
-        if (col == 0 && row == 0) {
-          rowContent.push($filter('translate')('lbl_delays'));
-        } else if ($scope.header_row_number == 2 && row == 1 && col == 0) {
-          rowContent.push($filter('translate')('lbl_trips'));
-        } else if (col == 0) {
-          rowContent.push(data.stops[row-$scope.header_row_number]);
-        } else if (row == 0) {
-          rowContent.push(getDelayValue(data.delays[col - 1]));
-        } else if ($scope.header_row_number == 2 && row == 1) {
-          rowContent.push(getTripText(data.tripIds[col - 1]));
-        } else {
-          rowContent.push(data.times[col - 1][row - $scope.header_row_number]);
+    if (data.stops) {
+      for (var row = 0; row < data.stops.length + $scope.header_row_number; row++) {
+        var rowContent = [];
+        for (var col = 0; col <= data.tripIds.length; col++) {
+          if (col == 0 && row == 0) {
+            rowContent.push($filter('translate')('lbl_delays'));
+          } else if ($scope.header_row_number == 2 && row == 1 && col == 0) {
+            rowContent.push($filter('translate')('lbl_trips'));
+          } else if (col == 0) {
+            rowContent.push(data.stops[row-$scope.header_row_number]);
+          } else if (row == 0) {
+            rowContent.push(getDelayValue(data.delays[col - 1]));
+          } else if ($scope.header_row_number == 2 && row == 1) {
+            rowContent.push(getTripText(data.tripIds[col - 1]));
+          } else {
+            rowContent.push(data.times[col - 1][row - $scope.header_row_number]);
+          }
         }
+        rows.push(rowContent);
       }
-      rows.push(rowContent);
+    } else {
+      data.stops = [];
+      data.stopIds = [];
     }
     $scope.data = rows;
     $scope.tt = data;

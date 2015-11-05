@@ -31,14 +31,14 @@
       "primaryLinks": [
         {"state":"/app/ttlist/urbano","label":"menu_real_time_bus_urban", "icon": "ic_urban-bus"},
         {"state":"/app/ttlist/trains","label":"menu_real_time_train", "icon": "ic_train"},
-        {"state":"/app/parking/COMUNE_DI_TRENTO","label":"menu_real_time_bus_park", "icon": "ic_parking-lot"}
+        {"state":"/app/parking/COMUNE_DI_TRENTO","label":"menu_real_time_park", "icon": "ic_parking-lot"}
       ],
       "infomenu" : [
         {"state":"/app/ttlist/urbano","label":"menu_real_time_bus_urban", "icon": "ic_urban-bus"},
         {"state":"/app/ttlist/extraurbano","label":"menu_real_time_bus_suburban", "icon": "ic_extraurban-bus"},
         {"state":"/app/ttlist/trains","label":"menu_real_time_train", "icon": "ic_train"},
-        {"state":"/app/bikesharing/trento","label":"menu_real_time_bus_bike", "icon": "ic_bike"},
-        {"state":"/app/parking/COMUNE_DI_TRENTO","label":"menu_real_time_bus_park", "icon": "ic_parking-lot"}
+        {"state":"/app/bikesharing/trento","label":"menu_real_time_bike", "icon": "ic_bike"},
+        {"state":"/app/parking/COMUNE_DI_TRENTO","label":"menu_real_time_park", "icon": "ic_parking-lot"}
       ]
     }
 }
