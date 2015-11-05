@@ -181,3 +181,42 @@
 #modal-map-container {
     height: 100%!important;
 }
+
+.route-list .list{
+  padding-top: 20px;
+}
+
+.route-list .list ion-item {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.route-list .list ion-item .button {
+  text-align: left;
+}
+
+.route-grid-row {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+
+.route-grid-element {
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  text-align: center;
+  color: #fff;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.route-grid-element span {
+  text-align: center;
+  font-size: 24px;
+  line-height: 56px;
+  font-weight: bold;
+
+}
+.ic-text {
+  font-family: 'viaggia';
+}

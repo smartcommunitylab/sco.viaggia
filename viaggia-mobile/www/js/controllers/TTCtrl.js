@@ -1,6 +1,8 @@
 angular.module('viaggia.controllers.timetable', ['ionic'])
 
-.controller('TTRouteListCtrl', function ($scope, $state, $stateParams, Config) {
+.controller('TTRouteListCtrl', function ($scope, $state, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Config) {
+  var min_grid_cell_width = 90;
+
   var ref = $stateParams.ref;
   var agencyId = $stateParams.agencyId;
   var groupId = $stateParams.groupId;
@@ -13,12 +15,17 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     if (e.agencyId != null) localAgency = e.agencyId;
     if (e.groups != null) {
       for (var j = 0; j < e.groups.length; j++) {
-        res.push({ref:ref, agencyId: localAgency, group: e.groups[j]});
+        res.push({ref:ref, agencyId: localAgency, group: e.groups[j],
+                  color: e.groups[j].color, label: e.groups[j].label, title: e.groups[j].title ? e.groups[j].title : e.groups[j].label,
+                  gridCode: e.groups[j].gridCode});
       }
     }
     if (e.routes != null) {
       for (var j = 0; j < e.routes.length; j++) {
-        res.push({ref:ref, agencyId: localAgency, route: e.routes[j]});
+        res.push({ref:ref, agencyId: localAgency, route: e.routes[j],
+                  color: e.routes[j].color ? e.routes[j].color : e.color,
+                  label: e.routes[j].label ? e.routes[j].label : e.label,
+                  title: e.routes[j].title ? e.routes[j].title : e.title});
       }
     }
   }
@@ -38,9 +45,29 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
   $scope.selectElement = function(e) {
     if (e.route != null) {
       $state.go('app.tt',{ref: e.ref, agencyId: e.agencyId, groupId: groupId, routeId: e.route.routeId});
+    } else if (e.group.routes != null && e.group.routes.length == 1) {
+      $state.go('app.tt',{ref: e.ref, agencyId: e.agencyId, groupId: e.group.label, routeId: e.group.routes[0].routeId});
     } else {
       $state.go('app.ttgroup',{ref: e.ref, agencyId: e.agencyId, groupId: e.group.label});
     }
+  }
+
+  var prepareGrid = function() {
+    var cols = Math.floor(window.innerWidth / min_grid_cell_width);
+    var gridRows = [];
+    var row = [];
+    gridRows.push(row);
+    for(var i = 0; i < $scope.elements.length; i++) {
+      row.push($scope.elements[i]);
+      if ((i+1) % cols == 0) {
+        row = [];
+        gridRows.push(row);
+      }
+    }
+    for (var i = row.length; i < cols; i++) {
+      row.push({});
+    }
+    $scope.gridRows = gridRows;
   }
 
   var init = function(){
@@ -58,14 +85,32 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
       }
     }
     if (data) {
-  //    if (data.view != null) $scope.view = data.view;
       $scope.title = data.title ? data.title : data.label;
       $scope.elements = flattenData(data);
+      $scope.view = data.view ? data.view : 'list';
+      if ($scope.view == 'grid') {
+        prepareGrid();
+      }
     }
   }
 
-  init();
+  window.onresize = function(event) {
+    if ($scope.view == 'grid') {
+      $scope.view = null;
+      $timeout(function(){$scope.view = 'grid'; prepareGrid();});
 
+    }
+  }
+
+
+  $timeout(init, 500);
+
+    $scope.$on('ngLastRepeat.elements', function (e) {
+        $timeout(function () {
+            ionicMaterialMotion.ripple();
+            ionicMaterialInk.displayEffect()
+        }, 0); // No timeout delay necessary.
+    });
 
 })
 
@@ -85,7 +130,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
   $scope.scrollLeftPosition = 0;
   $scope.tt = null;
   $scope.runningDate = new Date();
-  $scope.color = '#e84539';
+  $scope.color = '#ddd';
 
   // load timetable data
   $scope.getTT = function (date) {
@@ -181,6 +226,12 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
   // initialize
   $scope.load = function() {
     $scope.route = Config.getTTData($stateParams.ref, $stateParams.agencyId, $stateParams.groupId, $stateParams.routeId);
+    if (!$scope.route.color) {
+      var group = Config.getTTData($stateParams.ref, $stateParams.agencyId, $stateParams.groupId);
+      if (group && group.color) $scope.color = group.color;
+    } else {
+      $scope.color = $scope.route.color;
+    }
     $scope.getTT($scope.runningDate.getTime());
   }
 

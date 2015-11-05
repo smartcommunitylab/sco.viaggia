@@ -2,187 +2,211 @@
   "elements": {
     "trains" : {
       "view" : "list",
-      "title": "menu_real_time_train",
+      "label": "menu_real_time_train",
       "elements": [
         {
           "agencyId" : "5",
+          "color" : "#e84539",
           "routes" : [
-              {"routeId": "BV_R1_G", "routeSymId": "BV_R1_G", "descr": "Bolzano - Verona", "showTrips":true},
-              {"routeId": "BV_R1_R", "routeSymId": "BV_R1_R", "descr": "Verona - Bolzano", "showTrips":true}
+              {"routeId": "BV_R1_G", "routeSymId": "BV_R1_G", "title": "Bolzano - Verona", "showTrips":true},
+              {"routeId": "BV_R1_R", "routeSymId": "BV_R1_R", "title": "Verona - Bolzano", "showTrips":true}
           ]
         },
         {
           "agencyId" : "6",
+          "color" : "#e84539",
           "routes" : [
-              {"routeId": "TB_R2_G", "routeSymId": "TB_R2_G", "descr": "Trento - Bassano D.G.", "showTrips":true},
-              {"routeId": "TB_R2_R", "routeSymId": "TB_R2_R", "descr": "Bassano D.G. - Trento", "showTrips":true}
+              {"routeId": "TB_R2_G", "routeSymId": "TB_R2_G", "title": "Trento - Bassano D.G.", "showTrips":true},
+              {"routeId": "TB_R2_R", "routeSymId": "TB_R2_R", "title": "Bassano D.G. - Trento", "showTrips":true}
           ]
         },
         {
           "agencyId" : "10",
+          "color" : "#e84539",
           "routes" : [
-              {"routeId": "555", "routeSymId": "555", "descr": "Trento - Malé"},
-              {"routeId": "556", "routeSymId": "556", "descr": "Malé - Trento"}
+              {"routeId": "555", "routeSymId": "555", "title": "Trento - Malé"},
+              {"routeId": "556", "routeSymId": "556", "title": "Malé - Trento"}
           ]
         }
       ]
     },
     "urbano" : {
       "view" : "grid",
-      "title": "menu_real_time_bus_urban",
+      "label": "menu_real_time_bus_urban",
       "elements": [
         {
           "agencyId" : "12",
           "groups" : [
             {
               "label" : "A",
+              "color" : "#b8b8b4",
               "routes" : [
-                {"routeId": "_A", "routeSymId": "%20AC", "descr": "P. Dante - Osp. S. Chiara - Clarina - P. Dante", "title":"A"}
+                {"routeId": "_A", "routeSymId": "%20AC", "title": "P. Dante - Osp. S. Chiara - Clarina - P. Dante", "label":"A"}
               ]
             },
             {
               "label" : "B",
+              "color" : "#717780",
               "routes" : [
-                {"routeId": "_B", "routeSymId": "%20BC", "descr": "Piazza Dante - Laste - Piazza Dante", "title":"B"}
+                {"routeId": "_B", "routeSymId": "%20BC", "title": "Piazza Dante - Laste - Piazza Dante", "label":"B"}
               ]
             },
             {
               "label" : "C",
+              "color" : "#000000",
               "routes" : [
-                {"routeId": "Ca", "routeSymId": "Ca", "descr": "RSA S. Bartolomeo - RSA Angeli Custodi", "title":"C"},
-                {"routeId": "Cr", "routeSymId": "Cr", "descr": "RSA Angeli Custodi - RSA S. Bartolomeo", "title":"C"}
+                {"routeId": "Ca", "routeSymId": "Ca", "title": "RSA S. Bartolomeo - RSA Angeli Custodi", "label":"C"},
+                {"routeId": "Cr", "routeSymId": "Cr", "title": "RSA Angeli Custodi - RSA S. Bartolomeo", "label":"C"}
               ]
             },
             {
               "label" : "NP",
+              "color" : "#7f8080",
               "routes" : [
-                {"routeId": "NPA", "routeSymId": "NPC", "descr": "Navetta parcheggi: Ex Zuffo - Monte Baldo - Ex Zuffo", "title":"NP"}
+                {"routeId": "NPA", "routeSymId": "NPC", "title": "Navetta parcheggi: Ex Zuffo - Monte Baldo - Ex Zuffo", "label":"NP"}
               ]
             },
             {
               "label" : "1",
+              "color" : "#1a3f6f",
               "routes" : [
-                {"routeId": "01A", "routeSymId": "01A", "descr": "Ospedale - P. Dante - Sopramonte", "title":"1"},
-                {"routeId": "01R", "routeSymId": "01R", "descr": "Sopramonte - P.Dante - Ospedale", "title":"1"}
+                {"routeId": "01A", "routeSymId": "01A", "title": "Ospedale - P. Dante - Sopramonte", "label":"1"},
+                {"routeId": "01R", "routeSymId": "01R", "title": "Sopramonte - P.Dante - Ospedale", "label":"1"}
               ]
             },
             {
               "label" : "2",
+              "color" : "#d4592c",
               "routes" : [
-                {"routeId": "02", "routeSymId": "02C", "descr": "Piedicastello - Stazione - Osp. S. Chiara - Regione - Piedicastello", "title":"2"}
+                {"routeId": "02", "routeSymId": "02C", "title": "Piedicastello - Stazione - Osp. S. Chiara - Regione - Piedicastello", "label":"2"}
               ]
             },
             {
               "label" : "3",
+              "color" : "#bf2c26",
               "routes" : [
-                {"routeId": "03A", "routeSymId": "03A", "descr": "Cortesano - Gardolo - P. Dante - Villazzano 3", "title":"3"},
-                {"routeId": "03R", "routeSymId": "03R", "descr": "Villazzano 3 - P. Dante - Gardolo - Cortesano", "title":"3"}
+                {"routeId": "03A", "routeSymId": "03A", "title": "Cortesano - Gardolo - P. Dante - Villazzano 3", "label":"3"},
+                {"routeId": "03R", "routeSymId": "03R", "title": "Villazzano 3 - P. Dante - Gardolo - Cortesano", "label":"3"}
               ]
             },
             {
               "label" : "4",
+              "color" : "#0977b7",
               "routes" : [
-                {"routeId": "04A", "routeSymId": "04A", "descr": "Gardolo - Roncafort - Stazione - Via Degasperi - Madonna Bianca", "title":"4"},
-                {"routeId": "04R", "routeSymId": "04R", "descr": "Madonna Bianca - Via Degasperi - Regione - Roncafort - Gardolo", "title":"4"}
+                {"routeId": "04A", "routeSymId": "04A", "title": "Gardolo - Roncafort - Stazione - Via Degasperi - Madonna Bianca", "label":"4"},
+                {"routeId": "04R", "routeSymId": "04R", "title": "Madonna Bianca - Via Degasperi - Regione - Roncafort - Gardolo", "label":"4"}
               ]
             },
             {
               "label" : "5",
+              "color" : "#f8ad1e",
               "routes" : [
-                {"routeId": "05A", "routeSymId": "05A", "descr": "Piazza Dante - P.Fiera - Povo - Oltrecastello", "title":"5"},
-                {"routeId": "05R", "routeSymId": "05R", "descr": "Oltrecastello - Povo - P.Aquila - P. Dante", "title":"5"}
+                {"routeId": "05A", "routeSymId": "05A", "title": "Piazza Dante - P.Fiera - Povo - Oltrecastello", "label":"5"},
+                {"routeId": "05R", "routeSymId": "05R", "title": "Oltrecastello - Povo - P.Aquila - P. Dante", "label":"5"}
               ]
             },
             {
               "label" : "6",
+              "color" : "#6eae46",
               "routes" : [
-                {"routeId": "06A", "routeSymId": "06A", "descr": "Vela - P. Dante - Villazzano - Grotta", "title":"6"},
-                {"routeId": "06R", "routeSymId": "06R", "descr": "Grotta - Villazzano - P. Dante - Vela", "title":"6"}
+                {"routeId": "06A", "routeSymId": "06A", "title": "Vela - P. Dante - Villazzano - Grotta", "label":"6"},
+                {"routeId": "06R", "routeSymId": "06R", "title": "Grotta - Villazzano - P. Dante - Vela", "label":"6"}
               ]
             },
             {
               "label" : "7",
+              "color" : "#179585",
               "routes" : [
-                {"routeId": "07A", "routeSymId": "07A", "descr": "Canova - Melta - Piazza Dante - Gocciadoro", "title":"7"},
-                {"routeId": "07R", "routeSymId": "07R", "descr": "Gocciadoro - Piazza Dante - Melta - Canova", "title":"7"}
+                {"routeId": "07A", "routeSymId": "07A", "title": "Canova - Melta - Piazza Dante - Gocciadoro", "label":"7"},
+                {"routeId": "07R", "routeSymId": "07R", "title": "Gocciadoro - Piazza Dante - Melta - Canova", "label":"7"}
               ]
             },
             {
               "label" : "8",
+              "color" : "#543428",
               "routes" : [
-                {"routeId": "08A", "routeSymId": "08A", "descr": "Centochiavi - Piazza Dante - Mattarello", "title":"8"},
-                {"routeId": "08R", "routeSymId": "08R", "descr": "Mattarello -  Piazza Dante -  Centochiavi", "title":"8"}
+                {"routeId": "08A", "routeSymId": "08A", "title": "Centochiavi - Piazza Dante - Mattarello", "label":"8"},
+                {"routeId": "08R", "routeSymId": "08R", "title": "Mattarello -  Piazza Dante -  Centochiavi", "label":"8"}
               ]
             },
             {
               "label" : "9",
+              "color" : "#894d2d",
               "routes" : [
-                {"routeId": "09A", "routeSymId": "09A", "descr": "P. Dante - S. Donà - Cognola - Villamontagna", "title":"9"},
-                {"routeId": "09R", "routeSymId": "09R", "descr": "Villamontagna - Cognola - S. Donà - P. Dante", "title":"9"}
+                {"routeId": "09A", "routeSymId": "09A", "title": "P. Dante - S. Donà - Cognola - Villamontagna", "label":"9"},
+                {"routeId": "09R", "routeSymId": "09R", "title": "Villamontagna - Cognola - S. Donà - P. Dante", "label":"9"}
               ]
             },
             {
               "label" : "10",
+              "color" : "#125547",
               "routes" : [
-                {"routeId": "10A", "routeSymId": "10A", "descr": "P. Dante - Martignano - Cognola / Montevaccino", "title":"10"},
-                {"routeId": "10R", "routeSymId": "10R", "descr": "Cognola / Montevaccino - Martignano - P. Dante", "title":"10"}
+                {"routeId": "10A", "routeSymId": "10A", "title": "P. Dante - Martignano - Cognola / Montevaccino", "label":"10"},
+                {"routeId": "10R", "routeSymId": "10R", "title": "Cognola / Montevaccino - Martignano - P. Dante", "label":"10"}
               ]
             },
             {
               "label" : "11",
+              "color" : "#572f75",
               "routes" : [
-                {"routeId": "11A", "routeSymId": "11A", "descr": "Piazza Dante - Via Brennero - Gardolo - Spini", "title":"11"},
-                {"routeId": "11R", "routeSymId": "11R", "descr": "Spini di Gardolo - Via Brennero - Piazza Dante", "title":"11"}
+                {"routeId": "11A", "routeSymId": "11A", "title": "Piazza Dante - Via Brennero - Gardolo - Spini", "label":"11"},
+                {"routeId": "11R", "routeSymId": "11R", "title": "Spini di Gardolo - Via Brennero - Piazza Dante", "label":"11"}
               ]
             },
             {
               "label" : "12",
+              "color" : "#922840",
               "routes" : [
-                {"routeId": "12A", "routeSymId": "12A", "descr": "P. Dante - Via Ghiaie - Ravina - Romagnano", "title":"12"},
-                {"routeId": "12R", "routeSymId": "12R", "descr": "Romagnano - Ravina - Via Ghiaie - P. Dante", "title":"12"}
+                {"routeId": "12A", "routeSymId": "12A", "title": "P. Dante - Via Ghiaie - Ravina - Romagnano", "label":"12"},
+                {"routeId": "12R", "routeSymId": "12R", "title": "Romagnano - Ravina - Via Ghiaie - P. Dante", "label":"12"}
               ]
             },
             {
               "label" : "13",
+              "color" : "#b55f8e",
               "routes" : [
-                {"routeId": "13A", "routeSymId": "13A", "descr": "P. Dante - Rosmini - S. Rocco - Povo polo soc.", "title":"13"},
-                {"routeId": "13R", "routeSymId": "13R", "descr": "Povo - S. Rocco - Rosmini - Piazza Dante", "title":"13"}
+                {"routeId": "13A", "routeSymId": "13A", "title": "P. Dante - Rosmini - S. Rocco - Povo polo soc.", "label":"13"},
+                {"routeId": "13R", "routeSymId": "13R", "title": "Povo - S. Rocco - Rosmini - Piazza Dante", "label":"13"}
               ]
             },
             {
               "label" : "14",
+              "color" : "#db8fac",
               "routes" : [
-                {"routeId": "14A", "routeSymId": "14A", "descr": "P. Dante - Via Sanseverino - Belvedere Ravina", "title":"14"},
-                {"routeId": "14R", "routeSymId": "14R", "descr": "Belvedere Ravina - Via Sanseverino - P. Dante", "title":"14"}
+                {"routeId": "14A", "routeSymId": "14A", "title": "P. Dante - Via Sanseverino - Belvedere Ravina", "label":"14"},
+                {"routeId": "14R", "routeSymId": "14R", "title": "Belvedere Ravina - Via Sanseverino - P. Dante", "label":"14"}
               ]
             },
             {
               "label" : "15",
+              "color" : "#81bb46",
               "routes" : [
-                {"routeId": "15A", "routeSymId": "15A", "descr": "Piazza Dante - Interporto - Spini di Gardolo", "title":"15"},
-                {"routeId": "15R", "routeSymId": "15R", "descr": "Spini di Gardolo - Interporto - Piazza Dante", "title":"15"}
+                {"routeId": "15A", "routeSymId": "15A", "title": "Piazza Dante - Interporto - Spini di Gardolo", "label":"15"},
+                {"routeId": "15R", "routeSymId": "15R", "title": "Spini di Gardolo - Interporto - Piazza Dante", "label":"15"}
               ]
             },
             {
               "label" : "16",
+              "color" : "#262e5f",
               "routes" : [
-                {"routeId": "16A", "routeSymId": "16A", "descr": "Centochiavi - Martignano - Cognola - Povo", "title":"16"},
-                {"routeId": "16R", "routeSymId": "16R", "descr": "Povo - Cognola - Martignano - Centochiavi", "title":"16"}
+                {"routeId": "16A", "routeSymId": "16A", "title": "Centochiavi - Martignano - Cognola - Povo", "label":"16"},
+                {"routeId": "16R", "routeSymId": "16R", "title": "Povo - Cognola - Martignano - Centochiavi", "label":"16"}
               ]
             },
             {
               "label" : "17",
+              "color" : "#2993c4",
               "routes" : [
-                {"routeId": "17A", "routeSymId": "17A", "descr": "Piazza Dante - Via Bolzano - Lamar - Lavis", "title":"17"},
-                {"routeId": "17R", "routeSymId": "17R", "descr": "Lavis - S.Lazzaro - Via Bolzano - P.Dante", "title":"17"}
+                {"routeId": "17A", "routeSymId": "17A", "title": "Piazza Dante - Via Bolzano - Lamar - Lavis", "label":"17"},
+                {"routeId": "17R", "routeSymId": "17R", "title": "Lavis - S.Lazzaro - Via Bolzano - P.Dante", "label":"17"}
               ]
             },
             {
-              "label" : "FUTS",
-              "icon" : "funivia",
+              "label" : "Funivia",
+              "gridCode": "ic_funivia",
               "routes" : [
-                {"routeId": "FUTSA", "routeSymId": "FunA", "descr": "Funivia Trento Sardagna", "title":"Trento - Sardagna"},
-                {"routeId": "FUTSR", "routeSymId": "FunR", "descr": "Funivia Sardagna Trento", "title":"Sardagna - Trento"}
+                {"routeId": "FUTSA", "routeSymId": "FunA", "title": "Funivia Trento Sardagna", "label":"Trento - Sardagna"},
+                {"routeId": "FUTSR", "routeSymId": "FunR", "title": "Funivia Sardagna Trento", "label":"Sardagna - Trento"}
               ]
             }
           ]

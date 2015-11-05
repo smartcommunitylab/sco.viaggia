@@ -23,6 +23,54 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.ic_one:before {
+	content: "\e926";
+}
+.ic_two:before {
+	content: "\e927";
+}
+.ic_three:before {
+	content: "\e928";
+}
+.ic_four:before {
+	content: "\e929";
+}
+.ic_five:before {
+	content: "\e92a";
+}
+.ic_six:before {
+	content: "\e92b";
+}
+.ic_seven:before {
+	content: "\e92c";
+}
+.ic_eight:before {
+	content: "\e92d";
+}
+.ic_nine:before {
+	content: "\e92e";
+}
+.ic_zero:before {
+	content: "\e92f";
+}
+.ic_A:before {
+	content: "\e930";
+}
+.ic_B:before {
+	content: "\e931";
+}
+.ic_C:before {
+	content: "\e932";
+}
+.ic_N:before {
+	content: "\e933";
+}
+.ic_P:before {
+	content: "\e934";
+}
+.ic_funivia:before {
+	content: "\e935";
+}
 .ic_car:before {
 	content: "\e925";
 }
