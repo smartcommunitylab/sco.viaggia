@@ -120,6 +120,9 @@
     background-color: #3bbacf;
     color: white;
 }
+.button-viaggia-header.activated {
+    background-color: #3bbacf !important;
+}
 
 .button-viaggia-header:hover {
     background-color: #3bbacf;
@@ -324,6 +327,9 @@
 .parking-card .row, .parking-card .col{
   padding: 0px;
 }
+.parking-card.selected {
+  background-color: rgba(59, 186, 207, 0.5);
+}
 .parking-card .col-80 p {
   white-space: normal;
 }
@@ -366,4 +372,20 @@
 .avail-yellow {
   font-weight: bold;
   color: #f39619;
+}
+
+.parking-popup .popup-title {
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.parking-popup .popup-buttons button{
+  white-space: normal;
+  padding: 0px;
+  background-color: #3bbacf !important;
+  color: #fff !important;
+}
+
+ion-header-bar .title {
+  color: #fff !important;
 }

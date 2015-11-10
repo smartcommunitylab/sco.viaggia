@@ -1,0 +1,17 @@
+<div>
+  <div class="row">
+    <div class="col">
+      <h4>{{popupParking.name}}</h4>
+      <p>{{popupParking.description}}</p>
+    </div>
+  </div>
+  <div class="row parking-card-footer">
+    <div class="col"><span>{{popupParking.distance| number:3}}km</span></div>
+    <div ng-if="!popupParking.monitored || popupParking.slotsAvailable == -2" class="col col-right"><span>{{popupParking.slotsTotal}} {{'lbl_places' | translate}}</span></div>
+    <div ng-if="popupParking.monitored && popupParking.slotsAvailable > -2" class="col col-right">
+      <div>
+        <div class="text-center"><span ng-class="popupParking.availLevel">{{popupParking.slotsAvailable > 0? popupParking.slotsAvailable : 0}} / {{popupParking.slotsTotal}}</span></div>
+      </div>
+    </div>
+  </div>
+</div>

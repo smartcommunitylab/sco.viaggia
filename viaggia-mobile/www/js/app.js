@@ -327,7 +327,10 @@ angular.module('viaggia', [
             lbl_trips: 'TYPE',
             no_data: 'Nessun risultato trovato.',
             map_detail_title: 'Dettaglio percorso',
-            lbl_places: 'posti totali'
+            lbl_places: 'posti totali',
+            lbl_parking: 'Parcheggio',
+            btn_close : 'Chiudi',
+            btn_nav_to: 'Indicazioni stradali'
 
         });
 
@@ -407,7 +410,10 @@ angular.module('viaggia', [
             lbl_trips: 'TYPE',
             no_data: 'No data found.',
             map_detail_title: 'Dettaglio percorso',
-            lbl_places: 'total places'
+            lbl_places: 'total places',
+            lbl_parking: 'Parking',
+            btn_close : 'Close',
+            btn_nav_to: 'Directions'
 
         });
 
