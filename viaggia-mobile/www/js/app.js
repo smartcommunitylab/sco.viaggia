@@ -226,6 +226,16 @@ angular.module('viaggia', [
                 }
             }
         })
+        .state('app.bikesharing', {
+            cache: false,
+            url: "/bikesharing/:agencyId",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/bikesharing.html",
+                    controller: 'BikeSharingCtrl'
+                }
+            }
+        })
 
         .state('app.table1', {
                 cache: false,
@@ -329,6 +339,7 @@ angular.module('viaggia', [
             map_detail_title: 'Dettaglio percorso',
             lbl_places: 'posti totali',
             lbl_parking: 'Parcheggio',
+            lbl_bike_station: 'Stazione bici',
             btn_close : 'Chiudi',
             btn_nav_to: 'Indicazioni stradali'
 
@@ -412,6 +423,7 @@ angular.module('viaggia', [
             map_detail_title: 'Dettaglio percorso',
             lbl_places: 'total places',
             lbl_parking: 'Parking',
+            lbl_bike_station: 'Bike station',
             btn_close : 'Close',
             btn_nav_to: 'Directions'
 

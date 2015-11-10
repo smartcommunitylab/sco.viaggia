@@ -1,0 +1,17 @@
+<div>
+  <div class="row">
+    <div class="col">
+      <h4>{{popupParking.name}}</h4>
+      <p>{{popupParking.address}}</p>
+      <p>{{popupParking.distance| number:3}}km</p>
+    </div>
+  </div>
+  <div class="row  text-center" style="font-size:30px;">
+    <div class="col"><i class="icon ic_bike avail-green"></i></div>
+    <div class="col"><i class="icon ic_bike avail-red"></i></div>
+  </div>
+  <div class="row text-center" >
+    <div class="col">{{popupParking.bikes}}</div>
+    <div class="col">{{popupParking.slots}}</div>
+  </div>
+</div>
