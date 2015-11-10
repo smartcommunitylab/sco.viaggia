@@ -23,7 +23,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     if (e.routes != null) {
       for (var j = 0; j < e.routes.length; j++) {
         res.push({ref:ref, agencyId: localAgency, route: e.routes[j],
-                  color: e.routes[j].color ? e.routes[j].color : e.color,
+                  color: e.color,
                   label: e.routes[j].label ? e.routes[j].label : e.label,
                   title: e.routes[j].title ? e.routes[j].title : e.title});
       }
@@ -147,7 +147,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
   // convert delay object to string
   var getDelayValue = function(delay) {
     var res = '';
-    if (delay && delay.SERVICE && delay.USER > 0) {
+    if (delay && delay.SERVICE && delay.SERVICE > 0) {
       res += '<span>'+delay.SERVICE+'\'</span>';
     }
     if (delay && delay.USER && delay.USER > 0) {
