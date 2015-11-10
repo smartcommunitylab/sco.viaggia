@@ -322,7 +322,8 @@ angular.module('viaggia', [
             lbl_delays: 'DELAYS',
             lbl_trips: 'TYPE',
             no_data: 'Nessun risultato trovato.',
-            map_detail_title: 'Dettaglio percorso'
+            map_detail_title: 'Dettaglio percorso',
+            lbl_places: 'posti totali'
 
         });
 
@@ -397,7 +398,8 @@ angular.module('viaggia', [
             lbl_delays: 'DELAYS',
             lbl_trips: 'TYPE',
             no_data: 'No data found.',
-            map_detail_title: 'Dettaglio percorso'
+            map_detail_title: 'Dettaglio percorso',
+            lbl_places: 'total places'
 
         });
 

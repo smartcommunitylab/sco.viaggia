@@ -11,6 +11,11 @@ angular.module('viaggia.controllers.info', [])
     Config.loading();
     parkingService.getParkings($scope.agencyId).then(function(data){
       $scope.parkings = data;
+      $scope.parkings.forEach(function(e) {
+        if (e.monitored && e.slotsAvailable > -2) {
+          e.availLevel = e.slotsAvailable <= 5 ? 'avail-red' : e.slotsAvailable > 20 ? 'avail-green' : 'avail-yellow';
+        }
+      });
       Config.loaded();
     }, function (err) {
       $scope.parkings = null;

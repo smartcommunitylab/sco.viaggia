@@ -2,11 +2,23 @@
   <ion-content has-header="true">
     <ion-list>
       <div class="list card" ng-repeat="p in parkings | orderBy:'distance'">
-        <div class="item  item-icon-right">
-          <h2>{{p.name}}</h2>
-          <i class="icon ic_bookmark"></i>
-          <p>{{p.description}}</p>
-          <p>{{p.distance| number:3}}km</p>
+        <div class="item parking-card">
+          <div class="row">
+            <div class="col col-80">
+              <h2>{{p.name}}</h2>
+              <p>{{p.description}}</p>
+            </div>
+            <div class="col col-20 text-right"><i class="icon ic_bookmark-outline"></i></div>
+          </div>
+          <div class="row parking-card-footer">
+            <div class="col"><span>{{p.distance| number:3}}km</span></div>
+            <div ng-if="!p.monitored || p.slotsAvailable == -2" class="col col-right"><span>{{p.slotsTotal}} {{'lbl_places' | translate}}</span></div>
+            <div ng-if="p.monitored && p.slotsAvailable > -2" class="col col-right">
+              <div>
+                <div class="text-center"><span ng-class="p.availLevel">{{p.slotsAvailable > 0? p.slotsAvailable : 0}} / {{p.slotsTotal}}</span></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </ion-list>

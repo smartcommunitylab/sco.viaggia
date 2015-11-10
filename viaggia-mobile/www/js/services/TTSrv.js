@@ -93,7 +93,9 @@ angular.module('viaggia.services.timetable', [])
             getDelays(agency, route, date).then(function(delays){
               result.delays = delays;
               deferred.resolve(result);
-            }, errCB);
+            }, function() {
+              deferred.resolve(result);
+            });
           }, errCB);
         }, errCB);
       }, errCB);
