@@ -216,18 +216,18 @@ angular.module('viaggia', [
                 }
             })
 
-            .state('app.parking', {
-                cache: false,
-                url: "/parking/:agencyId",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/parking.html",
-                        controller: 'ParkingCtrl'
-                    }
+        .state('app.parking', {
+            cache: false,
+            url: "/parking/:agencyId",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/parking.html",
+                    controller: 'ParkingCtrl'
                 }
-            })
+            }
+        })
 
-            .state('app.table1', {
+        .state('app.table1', {
                 cache: false,
                 url: "/table1",
                 views: {
@@ -280,6 +280,10 @@ angular.module('viaggia', [
             plan_preferences_leastChanges: 'Con meno cambi',
             plan_preferences_leastWalking: 'Minimo tragitto a piedi',
             plan_map_title: 'Seleziona l\' indirizzo',
+            plan_insert_to_address: 'Inserisci l\'indirizzo di partenza',
+            plan_insert_from_address: 'Inserisci l\'indirizzo di destinazione',
+            add_favorites_template: 'Vuoi aggiungere l\'indirizzo ai tuoi preferiti?',
+            add_favorites_title: 'Aggiungi a preferiti',
             pop_up_loading: 'Caricamento...',
             pop_up_cancel: 'Cancella',
             pop_up_ok: 'Ok',
@@ -356,6 +360,10 @@ angular.module('viaggia', [
             plan_preferences_leastChanges: 'Least changes',
             plan_preferences_leastWalking: 'Least walking',
             plan_map_title: 'Select the address',
+            plan_insert_to_address: 'Insert starting address',
+            plan_insert_from_address: 'Insert destination address',
+            add_favorites_template: 'Do you wann add this address in your favorites?',
+            add_favorites_title: 'Add to favorites',
             pop_up_loading: 'Loading...',
             pop_up_cancel: 'Cancel',
             pop_up_ok: 'Ok',

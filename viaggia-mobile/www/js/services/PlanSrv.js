@@ -8,6 +8,7 @@ angular.module('viaggia.services.plan', [])
     var planConfigure = {};
     var selectedjourney = {};
     var geoCoderPlaces = {};
+    var fromOrTo = "";
     var getNameFromComplex = function (data) {
         name = '';
         if (data) {
@@ -56,6 +57,12 @@ angular.module('viaggia.services.plan', [])
             return ttMap['EXTRA'];
         }
         return ttMap[tt];
+    }
+    planService.setFromOrTo = function (value) {
+        fromOrTo = value;
+    }
+    planService.getFromOrTo = function () {
+        return fromOrTo;
     }
     planService.setName = function (place, complexName) {
         if (place == 'from') {

@@ -1,0 +1,15 @@
+<ion-modal-view>
+    <ion-header-bar align-title="center">
+        <h1 class="title">{{title}}</h1>
+        <div class="buttons">
+            <i class="icon voice-menu ion-close-round close-map" ng-click="closeFavorites()"></i>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <ion-list>
+            <ion-item ng-repeat="favorite in favoritePlaces track by $index" ng-click="favoriteSelect(favorite)">
+                {{favorite.name}}
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-modal-view>
