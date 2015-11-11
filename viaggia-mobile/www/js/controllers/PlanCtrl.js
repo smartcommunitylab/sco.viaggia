@@ -104,7 +104,7 @@ angular.module('viaggia.controllers.plan', [])
         }
     };
 
-    //super CPU draining
+    //super CPU draining. I would need another way to check it
     $scope.isFavorite = function (fromOrTo, name) {
         // return true;
         //var found = false;
@@ -171,6 +171,8 @@ angular.module('viaggia.controllers.plan', [])
         $scope.modalFavorites = modal;
     });
     $scope.bookmarks = function (fromOrTo, name) {
+        //else pop up with list of favorites
+        $scope.place = fromOrTo;
         if (!!name && name != '') {
             //if name is not contained in favorite, then popup (do u wanna add it?)
             if (!$scope.isFavorite(fromOrTo, name)) {
@@ -186,14 +188,12 @@ angular.module('viaggia.controllers.plan', [])
                     localStorage.setItem("favoritePlaces", JSON.stringify($scope.favoritePlaces));
                 });
             } else {
-                //        else pop up with list of favorites
-                $scope.place = fromOrTo;
                 //planService.setFromOrTo(fromOrTo);
                 $scope.openFavorites();
             }
         } else {
 
-            //error input
+            $scope.openFavorites();
         }
 
     }
@@ -376,13 +376,25 @@ angular.module('viaggia.controllers.plan', [])
         });
     }
 
+    var addFavoritePlaces = function (typedthings) {
+        var newplaces = $scope.places;
+        for (var i = 0; i < $scope.favoritePlaces.length; i++) {
+            if (($scope.favoritePlaces[i].name.toUpperCase().indexOf(typedthings.toUpperCase()) > -1) && (newplaces.indexOf($scope.favoritePlaces[i].name) == -1)) { //se favorites places contiene la stringa e non fa ancora parte di places
+                //if is not already present in the array
+                newplaces.unshift($scope.favoritePlaces[i].name);
+            }
+        }
+        return newplaces;
+    }
     $scope.typePlace = function (typedthings) {
         $scope.result = typedthings;
         $scope.newplaces = planService.getTypedPlaces(typedthings);
         $scope.newplaces.then(function (data) {
-            $scope.places = data;
-            $scope.placesandcoordinates = planService.getnames();
             //merge with favorites and check no double values
+            $scope.places = data;
+            $scope.places = addFavoritePlaces(typedthings);
+            $scope.placesandcoordinates = planService.getnames();
+            $scope.placesandcoordinates = planService.addnames($scope.favoritePlaces);
 
         });
     }

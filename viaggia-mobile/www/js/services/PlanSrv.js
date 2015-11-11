@@ -351,6 +351,15 @@ angular.module('viaggia.services.plan', [])
         return planJourneyResults;
     }
 
+
+    planService.addnames = function (newnames) {
+        for (var i = 0; i < newnames.length; i++) {
+            geoCoderPlaces[newnames[i].name] = {
+                latlong: newnames[i].lat + "," + newnames[i].long
+            }
+        }
+        return geoCoderPlaces;
+    }
     planService.getnames = function (i) {
         return geoCoderPlaces;
     }
