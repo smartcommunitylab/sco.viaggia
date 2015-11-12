@@ -120,6 +120,7 @@
     background-color: #3bbacf;
     color: white;
 }
+
 .button-viaggia-header.activated {
     background-color: #3bbacf !important;
 }
@@ -319,73 +320,85 @@
 }
 
 .card-tt {
-  padding: 16px 8px;
-  white-space: normal;
-  text-transform: uppercase;
+    padding: 16px 8px;
+    white-space: normal;
+    text-transform: uppercase;
 }
 
-.parking-card .row, .parking-card .col{
-  padding: 0px;
+.parking-card .row,
+.parking-card .col {
+    padding: 0px;
 }
+
 .parking-card.selected {
-  background-color: rgba(59, 186, 207, 0.5);
-}
-.parking-card .col-80 p {
-  white-space: normal;
-}
-.parking-card-footer {
-  min-height: 40px;
+    background-color: rgba(59, 186, 207, 0.5);
 }
 
-.parking-card-footer .col{
-  position: relative;
+.parking-card .col-80 p {
+    white-space: normal;
+}
+
+.parking-card-footer {
+    min-height: 40px;
+}
+
+.parking-card-footer .col {
+    position: relative;
 }
 
 .parking-card-footer .col span {
-  position: absolute;
-  bottom: 0;
+    position: absolute;
+    bottom: 0;
 }
 
 .parking-card-footer .col-right span {
-  right: 0px;
+    right: 0px;
 }
 
-.col-right > div{
-  float: right;
+.col-right > div {
+    float: right;
 }
 
 .parking-meter img {
-  box-shadow: none;
-  margin: auto;
-  width: 70px;
-  height: 30px;
+    box-shadow: none;
+    margin: auto;
+    width: 70px;
+    height: 30px;
 }
 
 .avail-green {
-  font-weight: bold;
-  color: #8cc04c;
+    font-weight: bold;
+    color: #8cc04c;
 }
+
 .avail-red {
-  font-weight: bold;
-  color: #e84539;
+    font-weight: bold;
+    color: #e84539;
 }
+
 .avail-yellow {
-  font-weight: bold;
-  color: #f39619;
+    font-weight: bold;
+    color: #f39619;
 }
 
 .parking-popup .popup-title {
-  text-align: left;
-  text-transform: uppercase;
+    text-align: left;
+    text-transform: uppercase;
 }
 
-.parking-popup .popup-buttons button{
-  white-space: normal;
-  padding: 0px;
-  background-color: #3bbacf !important;
-  color: #fff !important;
+.parking-popup .popup-buttons button {
+    white-space: normal;
+    padding: 0px;
+    background-color: #3bbacf !important;
+    color: #fff !important;
 }
 
 ion-header-bar .title {
-  color: #fff !important;
+    color: #fff !important;
+}
+
+.close-modal {
+    font-size: 35px;
+    padding-left: 4px;
+    padding-top: 4px;
 }

@@ -9,6 +9,7 @@ angular.module('viaggia.controllers.plan', [])
     $scope.datepickerObject.inputDate = new Date();
     $scope.title = $filter('translate')('plan_map_title');
     $scope.place = null;
+    $scope.placesandcoordinates = null;
     $scope.favoritePlaces = JSON.parse(localStorage.getItem("favoritePlaces"));
     if (!$scope.favoritePlaces) {
         $scope.favoritePlaces = [];
@@ -221,6 +222,16 @@ angular.module('viaggia.controllers.plan', [])
     }
     $scope.switch = function (type) {
         $scope.mapTypes[type] = !$scope.mapTypes[type];
+    }
+
+    $scope.deleteFavorite = function (favorite) {
+        $scope.showConfirm($filter('translate')("popup_lat"), $filter('translate')("popup_no_address"), function () {
+            $scope.favoritePlaces.splice($scope.favoritePlaces.indexOf(favorite), 1);
+            localStorage.setItem("favoritePlaces", JSON.stringify($scope.favoritePlaces));
+            $scope.closeFavorites();
+        });
+
+        //delete $scope.placesandcoordinates[favorite.name];
     }
 
     var setPlanParams = function () {
