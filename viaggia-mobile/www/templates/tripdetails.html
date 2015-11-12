@@ -1,4 +1,7 @@
 <ion-view id="tripdetails">
+    <ion-nav-buttons side="right">
+        <button class="button button-viaggia-header button-fab" ng-click="openMapTrip()"> <i class="icon ion-map"></i> </button>
+    </ion-nav-buttons>
     <ion-content id="content" has-header="true">
         <div class="row">
             <div class="col">
@@ -20,7 +23,7 @@
                                 <div>{{requestedFrom}}</div>
                             </div>
                             <!-- ROW -->
-                            <div class="row leg" ng-repeat="step in currentItinerary.steps" ng-click="openMapTrip()">
+                            <div class="row leg" ng-repeat="step in currentItinerary.steps">
                                 <div class="line-background">
                                     <img src="img/ic_point.png">
                                 </div>
@@ -60,6 +63,7 @@
                                 <div>{{toTime(currentItinerary.endtime)}}</div>
                                 <div>{{requestedTo}}</div>
                             </div>
+                            <button class="button button-viaggia-header button-block" ng-click=""> salva </button>
                         </div>
                     </div>
                 </div>
