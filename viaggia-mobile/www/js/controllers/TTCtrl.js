@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.timetable', ['ionic'])
 
-.controller('TTRouteListCtrl', function ($scope, $state, $stateParams, $timeout, $ionicModal, $filter, ionicMaterialMotion, ionicMaterialInk, mapService, Config, DataManager) {
+.controller('TTRouteListCtrl', function ($scope, $state, $stateParams, $timeout, $ionicModal, $filter, ionicMaterialMotion, ionicMaterialInk, mapService, Config, DataManager, GeoLocate, Toast) {
   var min_grid_cell_width = 90;
 
   var ref = $stateParams.ref;
@@ -11,6 +11,8 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
   $scope.view = 'list';
 
   $scope.hasMap = false;
+  $scope.allMarkers = null;
+
 
   var flattenElement = function(e, res) {
     var localAgency = agencyId;
@@ -126,65 +128,94 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     return res;
   };
 
+
   var prepareMap = function(){
+    var MAX_MARKERS = 20;
+//    $scope.$on('leafletDirectiveMap.modalMap.zoomend', function(event){
+//      console.log('Zoom finished');
+//      $scope.filterMarkers();
+//    });
+    $scope.$on('leafletDirectiveMap.modalMap.moveend', function(event){
+      $scope.filterMarkers();
+    });
+
+
     $scope.showMap = function () {
-          $scope.modalMap.show().then(function () {
-              var markers = [];
-
-              var agencyIds = getAgencies();
-
-              var list = DataManager.getStopData(agencyIds);
-              var boundsArray = [];
-              for (var i = 0; i < list.length; i++) {
-                  markers.push({
-                      stop: list[i],
-                      lat: parseFloat(list[i].coordinates[0]),
-                      lng: parseFloat(list[i].coordinates[1]),
-                      icon: {
-                          iconUrl: 'img/'+$scope.markerIcon+'.png',
-                          iconSize: [36, 50],
-                          iconAnchor: [18, 50],
-                          popupAnchor: [-0, -50]
-                      },
-                      //                        focus: true
-                  });
-                  boundsArray.push(list[i].coordinates);
-              }
-//              if (boundsArray.length > 0) {
-//                  var bounds = L.latLngBounds(boundsArray);
-//                  mapService.getMap('modalMap').then(function (map) {
-//                      map.fitBounds(bounds);
-//                  });
-//              }
-
-             // $scope.markers = markers;
+      $scope.modalMap.show().then(function () {
+        GeoLocate.locate().then(function(pos) {
+          $scope.center = {
+            lat: pos[0],
+            lng: pos[1],
+            zoom: 16
+          };
+        }, function() {
+          $scope.filterMarkers();
+        });
+      });
+    };
+    $scope.filterMarkers = function() {
+      mapService.getMap('modalMap').then(function (map) {
+        var currBounds = map.getBounds();
+        if ($scope.allMarkers == null) {
+          var agencyIds = getAgencies();
+          var list = DataManager.getStopData(agencyIds);
+          var markers = [];
+          for (var i = 0; i < list.length; i++) {
+            markers.push({
+                stop: list[i],
+                lat: parseFloat(list[i].coordinates[0]),
+                lng: parseFloat(list[i].coordinates[1]),
+                icon: {
+                    iconUrl: 'img/'+$scope.markerIcon+'.png',
+                    iconSize: [36, 50],
+                    iconAnchor: [18, 50],
+                    popupAnchor: [-0, -50]
+                },
+            });
+          }
+          $scope.allMarkers = markers;
+        }
+        var filteredMarkers = [];
+        if ($scope.allMarkers.length > MAX_MARKERS) {
+          $scope.allMarkers.forEach(function(m){
+            if (currBounds.contains(L.latLng(m.lat, m.lng))) {
+              filteredMarkers.push(m);
+            }
           });
-      };
-
-      $ionicModal.fromTemplateUrl('templates/mapModal.html', {
-          id: '1',
-          scope: $scope,
-          backdropClickToClose: false,
-          animation: 'slide-in-up'
-      }).then(function (modal) {
-          $scope.modalMap = modal;
+          if (filteredMarkers.length > MAX_MARKERS) {
+            console.log('too many markers');
+            Toast.show($filter('translate')('err_too_many_markers'));
+            return;
+          }
+        }
+        $scope.markers = filteredMarkers;
       });
-      $scope.closeMap = function () {
-          $scope.modalMap.hide();
-      };
-      $scope.initMap = function () {
-          mapService.initMap('modalMap').then(function () {});
-      };
+    };
 
-      angular.extend($scope, {
-          center: {
-            lat: Config.getMapPosition().lat,
-            lng: Config.getMapPosition().long,
-            zoom: Config.getMapPosition().zoom
-          },
-          markers: [],
-          events: {}
-      });
+    $ionicModal.fromTemplateUrl('templates/mapModal.html', {
+        id: '1',
+        scope: $scope,
+        backdropClickToClose: false,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.modalMap = modal;
+    });
+    $scope.closeMap = function () {
+        $scope.modalMap.hide();
+    };
+    $scope.initMap = function () {
+        mapService.initMap('modalMap').then(function () {});
+    };
+
+    angular.extend($scope, {
+        center: {
+          lat: Config.getMapPosition().lat,
+          lng: Config.getMapPosition().long,
+          zoom: Config.getMapPosition().zoom
+        },
+        markers: [],
+        events: {}
+    });
   };
 })
 

@@ -343,8 +343,8 @@ angular.module('viaggia', [
             lbl_parking: 'Parcheggio',
             lbl_bike_station: 'Stazione bici',
             btn_close : 'Chiudi',
-            btn_nav_to: 'Indicazioni stradali'
-
+            btn_nav_to: 'Indicazioni stradali',
+            err_too_many_markers: 'Too many objects on the map. Please zoom in.'
         });
 
 
@@ -427,7 +427,8 @@ angular.module('viaggia', [
             lbl_parking: 'Parking',
             lbl_bike_station: 'Bike station',
             btn_close : 'Close',
-            btn_nav_to: 'Directions'
+            btn_nav_to: 'Directions',
+            err_too_many_markers: 'Too many objects on the map. Please zoom in.'
 
         });
 
