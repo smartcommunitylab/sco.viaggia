@@ -164,21 +164,6 @@ angular.module('viaggia.services.data', [])
             });
     };
 
-    var getStopsData = function(agencies) {
-      var res = [];
-      agencies.forEach(function(a) {
-        var local = localStorage[Config.getAppId()+"_stops_"+a];
-        if (local) {
-          local = JSON.parse(local);
-          local.forEach(function(s) {
-            s.agencyId = a;
-            res.push(s);
-          });
-        }
-      });return res;
-
-    };
-
     var readLocalStopVersions = function() {
       var localStopVersionsKey = Config.getAppId()+"_localStopVersions";
       var localVersions = localStorage[localStopVersionsKey];
@@ -244,7 +229,6 @@ angular.module('viaggia.services.data', [])
           return deferred.promise;
         },
         syncStopData : syncStops,
-        getStopData : getStopsData,
         dbSetup: function () {
             var deferred = $q.defer();
             var err = function (error) {

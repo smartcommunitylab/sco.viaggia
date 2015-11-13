@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.timetable', ['ionic'])
 
-.controller('TTRouteListCtrl', function ($scope, $state, $stateParams, $timeout, $ionicModal, $filter, ionicMaterialMotion, ionicMaterialInk, mapService, Config, DataManager, GeoLocate, Toast) {
+.controller('TTRouteListCtrl', function ($scope, $state, $stateParams, $timeout, $ionicModal, $ionicPopup, $filter, ionicMaterialMotion, ionicMaterialInk, mapService, Config, ttService, GeoLocate, Toast) {
   var min_grid_cell_width = 90;
 
   var ref = $stateParams.ref;
@@ -146,7 +146,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
           $scope.center = {
             lat: pos[0],
             lng: pos[1],
-            zoom: 16
+            zoom: 18
           };
         }, function() {
           $scope.filterMarkers();
@@ -154,11 +154,12 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
       });
     };
     $scope.filterMarkers = function() {
+      Config.loading();
       mapService.getMap('modalMap').then(function (map) {
         var currBounds = map.getBounds();
         if ($scope.allMarkers == null) {
           var agencyIds = getAgencies();
-          var list = DataManager.getStopData(agencyIds);
+          var list = ttService.getStopData(agencyIds);
           var markers = [];
           for (var i = 0; i < list.length; i++) {
             markers.push({
@@ -176,17 +177,28 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
           $scope.allMarkers = markers;
         }
         var filteredMarkers = [];
+
         if ($scope.allMarkers.length > MAX_MARKERS) {
           $scope.allMarkers.forEach(function(m){
             if (currBounds.contains(L.latLng(m.lat, m.lng))) {
               filteredMarkers.push(m);
             }
           });
+
+          Config.loaded();
           if (filteredMarkers.length > MAX_MARKERS) {
             console.log('too many markers');
-            Toast.show($filter('translate')('err_too_many_markers'));
+            if ($scope.markers.length > 0 && !$scope.tooManyMarkers) {
+              Toast.show($filter('translate')('err_too_many_markers'));
+              $scope.tooManyMarkers = true;
+            }
             return;
+          } else if (filteredMarkers.length < MAX_MARKERS) {
+            $scope.tooManyMarkers = false;
           }
+        } else {
+          Config.loaded();
+          $scope.tooManyMarkers = false;
         }
         $scope.markers = filteredMarkers;
       });
@@ -206,6 +218,43 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     $scope.initMap = function () {
         mapService.initMap('modalMap').then(function () {});
     };
+
+    $scope.$on('leafletDirectiveMarker.modalMap.click', function (e, args) {
+      var showPopup = function() {
+        $ionicPopup.show({
+            templateUrl: 'templates/stopPopup.html',
+            title: $filter('translate')('lbl_stop'),
+            cssClass: 'parking-popup',
+            scope: $scope,
+            buttons: [
+                {
+                    text: $filter('translate')('btn_close')
+                },
+                {
+                    text: $filter('translate')('btn_next_trips'),
+                    onTap: function (e) {
+                        // TODO
+                    }
+                }
+            ]
+        });
+      };
+
+      var p = $scope.markers[args.modelName].stop;
+        $scope.popupStop = p;
+        Config.loading();
+        ttService.getNextTrips($scope.popupStop.agencyId, $scope.popupStop.id, 5).then(function(data) {
+          Config.loaded();
+          $scope.popupStop.routes = data;
+          $scope.popupStop.visualization = Config.getStopVisualization($scope.popupStop.agencyId);
+          showPopup();
+        }, function(err) {
+          Config.loaded();
+          showPopup();
+          console.log('No data');
+        });
+    });
+
 
     angular.extend($scope, {
         center: {

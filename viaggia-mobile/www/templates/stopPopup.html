@@ -1,0 +1,23 @@
+<div>
+  <div class="row">
+    <div class="col">
+      <h4>{{popupStop.name}}</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h4>{{'lbl_lines' | translate}}</h4>
+    </div>
+  </div>
+
+  <div class="list stop-line-list" ng-if="popupStop.visualization.view != 'grid'">
+    <div class="item" ng-repeat="(routeId, route) in popupStop.routes">
+      {{route.name}}
+    </div>
+  </div>
+  <div class="stop-line-grid" ng-if="popupStop.visualization.view == 'grid'">
+    <div class="grid-item" ng-repeat="(routeId, route) in popupStop.routes">
+      {{route.name}}
+    </div>
+  </div>
+</div>

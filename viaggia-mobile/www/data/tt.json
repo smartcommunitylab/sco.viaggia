@@ -1,4 +1,11 @@
 {
+  "stopVisualization" : {
+    "12" : {"view": "grid"},
+    "5" : {"view": "list"},
+    "6" : {"view": "list"},
+    "10" : {"view": "list"},
+    "17" : {"view": "list"}
+  },
   "elements": {
     "trains" : {
       "view" : "list",

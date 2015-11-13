@@ -190,6 +190,10 @@ angular.module('viaggia.services.conf', [])
             }
           }
           return res;
-         }
+         },
+      getStopVisualization: function(agencyId) {
+        if (!ttJsonConfig || !ttJsonConfig.stopVisualization || !ttJsonConfig.stopVisualization[agencyId]) return {};
+        return ttJsonConfig.stopVisualization[agencyId];
+      }
     }
 })

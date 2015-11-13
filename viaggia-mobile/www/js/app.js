@@ -344,7 +344,10 @@ angular.module('viaggia', [
             lbl_bike_station: 'Stazione bici',
             btn_close : 'Chiudi',
             btn_nav_to: 'Indicazioni stradali',
-            err_too_many_markers: 'Too many objects on the map. Please zoom in.'
+            btn_next_trips: 'Vedi prossimi orari',
+            lbl_stop: 'Fermata',
+            err_too_many_markers: 'Too many objects on the map. Please zoom in.',
+            lbl_lines: 'Corse:'
         });
 
 
@@ -428,8 +431,10 @@ angular.module('viaggia', [
             lbl_bike_station: 'Bike station',
             btn_close : 'Close',
             btn_nav_to: 'Directions',
-            err_too_many_markers: 'Too many objects on the map. Please zoom in.'
-
+            btn_next_trips: 'See next trips',
+            lbl_stop: 'Stop',
+            err_too_many_markers: 'Too many objects on the map. Please zoom in.',
+            lbl_lines: 'Lines:'
         });
 
 

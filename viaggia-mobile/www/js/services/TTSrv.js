@@ -6,6 +6,21 @@ angular.module('viaggia.services.timetable', [])
 .factory('ttService', function ($http, $q, $filter, Config, DataManager) {
   var calendarCache = {};
 
+  var getStopsData = function(agencies) {
+    var res = [];
+    agencies.forEach(function(a) {
+      var local = localStorage[Config.getAppId()+"_stops_"+a];
+      if (local) {
+        local = JSON.parse(local);
+        local.forEach(function(s) {
+          s.agencyId = a;
+          res.push(s);
+        });
+      }
+    });
+    return res;
+  };
+
   var toTrimmedList = function(str) {
     if (!str) return [];
     var arr = str.split(',');
@@ -102,6 +117,21 @@ angular.module('viaggia.services.timetable', [])
     }, errCB);
   };
 
+  var getNextTrips = function(agencyId, stopId, numberOfResults) {
+    var deferred = $q.defer();
+    numberOfResults = numberOfResults || 3;
+    $http.get(Config.getServerURL()+'/getlimitedtimetable/'+agencyId+'/'+stopId+'/'+numberOfResults,
+          Config.getHTTPConfig())
+    .success(function(data) {
+      deferred.resolve(data);
+    })
+    .error(function(err) {
+      deferred.reject(err);
+    });
+
+    return deferred.promise;
+  };
+
   return {
     /**
      * timetable for specified timestamp: converted to date start/end timestamps
@@ -170,6 +200,14 @@ angular.module('viaggia.services.timetable', [])
         }
       }
       return data.tripIds.length - 1;
-    }
+    },
+    /**
+     * Read stops for agencies
+     */
+    getStopData : getStopsData,
+    /**
+     * Next N trips of different routes passing at the specified agency stop
+     */
+    getNextTrips : getNextTrips
   }
 })
