@@ -147,11 +147,77 @@ angular.module('viaggia.services.data', [])
                     } else {
                         success();
                     }
+                    syncStops(remoteversion);
                 })
                 .error(err);
         }, err);
         return deferred.promise;
     }
+
+    var syncStops = function() {
+            $http.get(Config.getServerURL() + '/versions')
+            .success(function (remoteversion) {
+                syncStopsForVersions(remoteversion);
+            })
+            .error(function (error) {
+              console.error('ERROR SYNC STOP DATA: '+error);
+            });
+    };
+
+    var getStopsData = function(agencies) {
+      var res = [];
+      agencies.forEach(function(a) {
+        var local = localStorage[Config.getAppId()+"_stops_"+a];
+        if (local) {
+          local = JSON.parse(local);
+          local.forEach(function(s) {
+            s.agencyId = a;
+            res.push(s);
+          });
+        }
+      });return res;
+
+    };
+
+    var readLocalStopVersions = function() {
+      var localStopVersionsKey = Config.getAppId()+"_localStopVersions";
+      var localVersions = localStorage[localStopVersionsKey];
+      if (localVersions) localVersions = JSON.parse(localVersions);
+      else localVersions = {};
+      return localVersions;
+    };
+    var writeLocalStopVersion = function(agency,version) {
+      var localStopVersionsKey = Config.getAppId()+"_localStopVersions";
+      var lv = readLocalStopVersions();
+      lv[agency] = version;
+      localStorage[localStopVersionsKey] = JSON.stringify(lv);
+    };
+
+    var syncStopsForVersions = function(remoteversion) {
+      var agencies = Config.getAppAgencies();
+      var versions = {};
+      var localStopVersionsKey = Config.getAppId()+"_localStopVersions";
+      var localversion = readLocalStopVersions();
+
+      agencies.forEach(function(a){
+        var key = Config.getAppId()+"_stops_"+a
+        var localStops = localStorage[key];
+        var localVersion = localversion[a] ? localversion[a] : -1;
+        var remoteVersion = remoteversion[a] ? remoteversion[a] : -1;
+
+        if (!localStops || localVersion < remoteVersion) {
+            $http.get(Config.getServerURL() + '/geostops/'+a+'?lat='+Config.getMapPosition().lat+'&lng='+Config.getMapPosition().long+'&radius=1000')
+            .success(function (stops) {
+              localStorage[key] = JSON.stringify(stops);
+              writeLocalStopVersion(a, remoteVersion);
+            })
+            .error(function (error) {
+              console.error('ERROR SYNC STOP DATA: '+error);
+            });
+        }
+      });
+    }
+
     return {
         doQuery: function(query, params) {
           var deferred = $q.defer();
@@ -177,6 +243,8 @@ angular.module('viaggia.services.data', [])
           }
           return deferred.promise;
         },
+        syncStopData : syncStops,
+        getStopData : getStopsData,
         dbSetup: function () {
             var deferred = $q.defer();
             var err = function (error) {

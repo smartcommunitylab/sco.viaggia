@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.timetable', ['ionic'])
 
-.controller('TTRouteListCtrl', function ($scope, $state, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk, Config) {
+.controller('TTRouteListCtrl', function ($scope, $state, $stateParams, $timeout, $ionicModal, $filter, ionicMaterialMotion, ionicMaterialInk, mapService, Config, DataManager) {
   var min_grid_cell_width = 90;
 
   var ref = $stateParams.ref;
@@ -9,6 +9,8 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
   $scope.title = null;
   $scope.view = 'list';
+
+  $scope.hasMap = false;
 
   var flattenElement = function(e, res) {
     var localAgency = agencyId;
@@ -85,7 +87,11 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
       }
     }
     if (data) {
-      $scope.title = data.title ? data.title : data.label;
+      $scope.hasMap = data.hasMap;
+      $scope.markerIcon = data.markerIcon;
+      if ($scope.hasMap) prepareMap();
+
+      $scope.title = $filter('translate')(data.title ? data.title : data.label);
       $scope.elements = flattenData(data);
       $scope.view = data.view ? data.view : 'list';
       if ($scope.view == 'grid') {
@@ -105,13 +111,81 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
   $timeout(init, 500);
 
-    $scope.$on('ngLastRepeat.elements', function (e) {
-        $timeout(function () {
-            ionicMaterialMotion.ripple();
-            ionicMaterialInk.displayEffect()
-        }, 0); // No timeout delay necessary.
-    });
+  $scope.$on('ngLastRepeat.elements', function (e) {
+      $timeout(function () {
+          ionicMaterialMotion.ripple();
+          ionicMaterialInk.displayEffect()
+      }, 0); // No timeout delay necessary.
+  });
 
+  var getAgencies = function() {
+    var res = [];
+    $scope.elements.forEach(function(e) {
+      if (e.agencyId && res.indexOf(e.agencyId) < 0) res.push(e.agencyId);
+    });
+    return res;
+  };
+
+  var prepareMap = function(){
+    $scope.showMap = function () {
+          $scope.modalMap.show().then(function () {
+              var markers = [];
+
+              var agencyIds = getAgencies();
+
+              var list = DataManager.getStopData(agencyIds);
+              var boundsArray = [];
+              for (var i = 0; i < list.length; i++) {
+                  markers.push({
+                      stop: list[i],
+                      lat: parseFloat(list[i].coordinates[0]),
+                      lng: parseFloat(list[i].coordinates[1]),
+                      icon: {
+                          iconUrl: 'img/'+$scope.markerIcon+'.png',
+                          iconSize: [36, 50],
+                          iconAnchor: [18, 50],
+                          popupAnchor: [-0, -50]
+                      },
+                      //                        focus: true
+                  });
+                  boundsArray.push(list[i].coordinates);
+              }
+//              if (boundsArray.length > 0) {
+//                  var bounds = L.latLngBounds(boundsArray);
+//                  mapService.getMap('modalMap').then(function (map) {
+//                      map.fitBounds(bounds);
+//                  });
+//              }
+
+             // $scope.markers = markers;
+          });
+      };
+
+      $ionicModal.fromTemplateUrl('templates/mapModal.html', {
+          id: '1',
+          scope: $scope,
+          backdropClickToClose: false,
+          animation: 'slide-in-up'
+      }).then(function (modal) {
+          $scope.modalMap = modal;
+      });
+      $scope.closeMap = function () {
+          $scope.modalMap.hide();
+      };
+      $scope.initMap = function () {
+          mapService.initMap('modalMap').then(function () {});
+      };
+
+      angular.extend($scope, {
+          center: {
+            lat: Config.getMapPosition().lat,
+            lng: Config.getMapPosition().long,
+            zoom: Config.getMapPosition().zoom
+          },
+          markers: [],
+          events: {}
+      });
+  };
 })
 
 .controller('TTCtrl', function ($scope, $stateParams, $ionicPosition, $timeout, $filter, ttService, Config) {

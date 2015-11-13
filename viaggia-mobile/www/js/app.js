@@ -78,6 +78,8 @@ angular.module('viaggia', [
             Config.init().then(function () {
                 if (ionic.Platform.isWebView()) {
                     DataManager.dbSetup();
+                } else {
+                  DataManager.syncStopData();
                 }
             });
         });

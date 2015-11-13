@@ -3,6 +3,8 @@
     "trains" : {
       "view" : "list",
       "label": "menu_real_time_train",
+      "hasMap": true,
+      "markerIcon": "ic_train",
       "elements": [
         {
           "agencyId" : "5",
@@ -31,9 +33,12 @@
     "urbano" : {
       "view" : "grid",
       "label": "menu_real_time_bus_urban",
+      "hasMap": true,
+      "markerIcon": "ic_urbanBus",
       "elements": [
         {
           "agencyId" : "12",
+          "hasMap": true,
           "groups" : [
             {
               "label" : "A",
