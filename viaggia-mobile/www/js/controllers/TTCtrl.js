@@ -245,7 +245,28 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         Config.loading();
         ttService.getNextTrips($scope.popupStop.agencyId, $scope.popupStop.id, 5).then(function(data) {
           Config.loaded();
-          $scope.popupStop.routes = data;
+          var routes = [];
+          $scope.elements.forEach(function(e) {
+            var list = [];
+            if (e.group) {
+              if (e.group.routes) list = list.concat(e.group.routes);
+              else if (e.group.route)  list.push(e.group.route);
+            } else {
+              if (e.routes) list = list.concat(e.routes);
+              else if (e.route)  list.push(e.route);
+            }
+            list.forEach(function(r) {
+              if (data[r.routeId] != null) {
+                data[r.routeId].routeElement = e;
+                routes.push(data[r.routeId]);
+              }
+              else if (data[r.routeSymId] != null) {
+                data[r.routeSymId].routeElement = e;
+                routes.push(data[r.routeSymId]);
+              }
+            });
+          });
+          $scope.popupStop.routes = routes;
           $scope.popupStop.visualization = Config.getStopVisualization($scope.popupStop.agencyId);
           showPopup();
         }, function(err) {

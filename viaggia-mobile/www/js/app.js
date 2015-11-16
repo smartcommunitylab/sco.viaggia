@@ -82,6 +82,7 @@ angular.module('viaggia', [
                   DataManager.syncStopData();
                 }
             });
+            $rootScope.platform = ionic.Platform;
         });
     })
     .config(function ($stateProvider, $urlRouterProvider, $translateProvider) {

@@ -80,8 +80,8 @@
               "label" : "1",
               "color" : "#1a3f6f",
               "routes" : [
-                {"routeId": "01A", "routeSymId": "01A", "title": "Ospedale - P. Dante - Sopramonte", "label":"1"},
-                {"routeId": "01R", "routeSymId": "01R", "title": "Sopramonte - P.Dante - Ospedale", "label":"1"}
+                {"routeId": "1A", "routeSymId": "01A", "title": "Ospedale - P. Dante - Sopramonte", "label":"1"},
+                {"routeId": "1R", "routeSymId": "01R", "title": "Sopramonte - P.Dante - Ospedale", "label":"1"}
               ]
             },
             {
