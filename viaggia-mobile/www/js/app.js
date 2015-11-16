@@ -66,6 +66,9 @@ angular.module('viaggia', [
             console.log('CANNOT LOCATE!');
         });
 
+//        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+//          console.log(toState);
+//        });
 
         $ionicPlatform.ready(function () { // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -189,7 +192,7 @@ angular.module('viaggia', [
                 }
             })
             .state('app.ttlist', {
-                cache: false,
+//                cache: false,
                 url: "/ttlist/:ref",
                 views: {
                     'menuContent': {
@@ -198,8 +201,18 @@ angular.module('viaggia', [
                     }
                 }
             })
-            .state('app.ttgroup', {
+            .state('app.ttmap', {
                 cache: false,
+                url: "/map",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/ttmap.html",
+                        controller: 'TTMapCtrl'
+                    }
+                }
+            })
+            .state('app.ttgroup', {
+//                cache: false,
                 url: "/ttgroup/:ref/:agencyId/:groupId",
                 views: {
                     'menuContent': {

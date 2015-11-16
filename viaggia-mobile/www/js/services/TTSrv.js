@@ -6,6 +6,8 @@ angular.module('viaggia.services.timetable', [])
 .factory('ttService', function ($http, $q, $filter, Config, DataManager) {
   var calendarCache = {};
 
+  var ttMapData = {};
+
   var getStopsData = function(agencies) {
     var res = [];
     agencies.forEach(function(a) {
@@ -208,6 +210,15 @@ angular.module('viaggia.services.timetable', [])
     /**
      * Next N trips of different routes passing at the specified agency stop
      */
-    getNextTrips : getNextTrips
+    getNextTrips : getNextTrips,
+    /**
+     * Cache the elements for the TT map set up
+     */
+    getTTMapData: function() {
+      return ttMapData;
+    },
+    setTTMapData: function(mapData){
+      ttMapData = mapData;
+    }
   }
 })

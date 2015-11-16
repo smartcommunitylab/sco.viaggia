@@ -91,7 +91,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     if (data) {
       $scope.hasMap = data.hasMap;
       $scope.markerIcon = data.markerIcon;
-      if ($scope.hasMap) prepareMap();
+//      if ($scope.hasMap) prepareMap();
 
       $scope.title = $filter('translate')(data.title ? data.title : data.label);
       $scope.elements = flattenData(data);
@@ -110,7 +110,6 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     }
   }
 
-
   $timeout(init, 500);
 
   $scope.$on('ngLastRepeat.elements', function (e) {
@@ -120,173 +119,13 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
       }, 0); // No timeout delay necessary.
   });
 
-  var getAgencies = function() {
-    var res = [];
-    $scope.elements.forEach(function(e) {
-      if (e.agencyId && res.indexOf(e.agencyId) < 0) res.push(e.agencyId);
-    });
-    return res;
+  $scope.showMap = function () {
+    var vis = {title: $scope.title, markerIcon: $scope.markerIcon, elements: $scope.elements};
+
+    ttService.setTTMapData(vis);
+    $state.go('app.ttmap');
   };
 
-
-  var prepareMap = function(){
-    var MAX_MARKERS = 20;
-//    $scope.$on('leafletDirectiveMap.modalMap.zoomend', function(event){
-//      console.log('Zoom finished');
-//      $scope.filterMarkers();
-//    });
-    $scope.$on('leafletDirectiveMap.modalMap.moveend', function(event){
-      $scope.filterMarkers();
-    });
-
-
-    $scope.showMap = function () {
-      $scope.modalMap.show().then(function () {
-        GeoLocate.locate().then(function(pos) {
-          $scope.center = {
-            lat: pos[0],
-            lng: pos[1],
-            zoom: 18
-          };
-        }, function() {
-          $scope.filterMarkers();
-        });
-      });
-    };
-    $scope.filterMarkers = function() {
-      Config.loading();
-      mapService.getMap('modalMap').then(function (map) {
-        var currBounds = map.getBounds();
-        if ($scope.allMarkers == null) {
-          var agencyIds = getAgencies();
-          var list = ttService.getStopData(agencyIds);
-          var markers = [];
-          for (var i = 0; i < list.length; i++) {
-            markers.push({
-                stop: list[i],
-                lat: parseFloat(list[i].coordinates[0]),
-                lng: parseFloat(list[i].coordinates[1]),
-                icon: {
-                    iconUrl: 'img/'+$scope.markerIcon+'.png',
-                    iconSize: [36, 50],
-                    iconAnchor: [18, 50],
-                    popupAnchor: [-0, -50]
-                },
-            });
-          }
-          $scope.allMarkers = markers;
-        }
-        var filteredMarkers = [];
-
-        if ($scope.allMarkers.length > MAX_MARKERS) {
-          $scope.allMarkers.forEach(function(m){
-            if (currBounds.contains(L.latLng(m.lat, m.lng))) {
-              filteredMarkers.push(m);
-            }
-          });
-
-          Config.loaded();
-          if (filteredMarkers.length > MAX_MARKERS) {
-            console.log('too many markers');
-            if ($scope.markers.length > 0 && !$scope.tooManyMarkers) {
-              Toast.show($filter('translate')('err_too_many_markers'));
-              $scope.tooManyMarkers = true;
-            }
-            return;
-          } else if (filteredMarkers.length < MAX_MARKERS) {
-            $scope.tooManyMarkers = false;
-          }
-        } else {
-          Config.loaded();
-          $scope.tooManyMarkers = false;
-        }
-        $scope.markers = filteredMarkers;
-      });
-    };
-
-    $ionicModal.fromTemplateUrl('templates/mapModal.html', {
-        id: '1',
-        scope: $scope,
-        backdropClickToClose: false,
-        animation: 'slide-in-up'
-    }).then(function (modal) {
-        $scope.modalMap = modal;
-    });
-    $scope.closeMap = function () {
-        $scope.modalMap.hide();
-    };
-    $scope.initMap = function () {
-        mapService.initMap('modalMap').then(function () {});
-    };
-
-    $scope.$on('leafletDirectiveMarker.modalMap.click', function (e, args) {
-      var showPopup = function() {
-        $ionicPopup.show({
-            templateUrl: 'templates/stopPopup.html',
-            title: $filter('translate')('lbl_stop'),
-            cssClass: 'parking-popup',
-            scope: $scope,
-            buttons: [
-                {
-                    text: $filter('translate')('btn_close')
-                },
-                {
-                    text: $filter('translate')('btn_next_trips'),
-                    onTap: function (e) {
-                        // TODO
-                    }
-                }
-            ]
-        });
-      };
-
-      var p = $scope.markers[args.modelName].stop;
-        $scope.popupStop = p;
-        Config.loading();
-        ttService.getNextTrips($scope.popupStop.agencyId, $scope.popupStop.id, 5).then(function(data) {
-          Config.loaded();
-          var routes = [];
-          $scope.elements.forEach(function(e) {
-            var list = [];
-            if (e.group) {
-              if (e.group.routes) list = list.concat(e.group.routes);
-              else if (e.group.route)  list.push(e.group.route);
-            } else {
-              if (e.routes) list = list.concat(e.routes);
-              else if (e.route)  list.push(e.route);
-            }
-            list.forEach(function(r) {
-              if (data[r.routeId] != null) {
-                data[r.routeId].routeElement = e;
-                routes.push(data[r.routeId]);
-              }
-              else if (data[r.routeSymId] != null) {
-                data[r.routeSymId].routeElement = e;
-                routes.push(data[r.routeSymId]);
-              }
-            });
-          });
-          $scope.popupStop.routes = routes;
-          $scope.popupStop.visualization = Config.getStopVisualization($scope.popupStop.agencyId);
-          showPopup();
-        }, function(err) {
-          Config.loaded();
-          showPopup();
-          console.log('No data');
-        });
-    });
-
-
-    angular.extend($scope, {
-        center: {
-          lat: Config.getMapPosition().lat,
-          lng: Config.getMapPosition().long,
-          zoom: Config.getMapPosition().zoom
-        },
-        markers: [],
-        events: {}
-    });
-  };
 })
 
 .controller('TTCtrl', function ($scope, $stateParams, $ionicPosition, $timeout, $filter, ttService, Config) {
@@ -436,3 +275,161 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     return res + 'background-color: #eee';
   }
 })
+
+.controller('TTMapCtrl', function ($scope, $state, $stateParams, $timeout, $ionicModal, $ionicPopup, $filter, ionicMaterialMotion, ionicMaterialInk, mapService, Config, ttService, GeoLocate, Toast) {
+    $scope.allMarkers = null;
+
+    var mapData = ttService.getTTMapData();
+    $scope.elements = mapData.elements;
+    $scope.markerIcon = mapData.markerIcon;
+    $scope.title = mapData.title;
+
+    var MAX_MARKERS = 20;
+    $scope.$on('leafletDirectiveMap.ttMap.moveend', function(event){
+      $scope.filterMarkers();
+    });
+
+    var getAgencies = function() {
+      var res = [];
+      $scope.elements.forEach(function(e) {
+        if (e.agencyId && res.indexOf(e.agencyId) < 0) res.push(e.agencyId);
+      });
+      return res;
+    };
+
+    $scope.filterMarkers = function() {
+      Config.loading();
+      mapService.getMap('ttMap').then(function (map) {
+        var currBounds = map.getBounds();
+        if ($scope.allMarkers == null) {
+          var agencyIds = getAgencies();
+          var list = ttService.getStopData(agencyIds);
+          var markers = [];
+          for (var i = 0; i < list.length; i++) {
+            markers.push({
+                stop: list[i],
+                lat: parseFloat(list[i].coordinates[0]),
+                lng: parseFloat(list[i].coordinates[1]),
+                icon: {
+                    iconUrl: 'img/'+$scope.markerIcon+'.png',
+                    iconSize: [36, 50],
+                    iconAnchor: [18, 50],
+                    popupAnchor: [-0, -50]
+                },
+            });
+          }
+          $scope.allMarkers = markers;
+        }
+        var filteredMarkers = [];
+
+        if ($scope.allMarkers.length > MAX_MARKERS) {
+          $scope.allMarkers.forEach(function(m){
+            if (currBounds.contains(L.latLng(m.lat, m.lng))) {
+              filteredMarkers.push(m);
+            }
+          });
+
+          Config.loaded();
+          if (filteredMarkers.length > MAX_MARKERS) {
+            console.log('too many markers');
+            if ($scope.markers.length > 0 && !$scope.tooManyMarkers) {
+              Toast.show($filter('translate')('err_too_many_markers'));
+              $scope.tooManyMarkers = true;
+            }
+            return;
+          } else if (filteredMarkers.length < MAX_MARKERS) {
+            $scope.tooManyMarkers = false;
+          }
+        } else {
+          Config.loaded();
+          $scope.tooManyMarkers = false;
+        }
+        $scope.markers = filteredMarkers;
+      });
+    };
+
+    $scope.initMap = function () {
+        mapService.initMap('ttMap').then(function () {
+          GeoLocate.locate().then(function(pos) {
+            $scope.center = {
+              lat: pos[0],
+              lng: pos[1],
+              zoom: 18
+            };
+          }, function() {
+            $scope.filterMarkers();
+          });
+
+        });
+    };
+
+    $scope.$on('leafletDirectiveMarker.ttMap.click', function (e, args) {
+      var showPopup = function() {
+        $ionicPopup.show({
+            templateUrl: 'templates/stopPopup.html',
+            title: $filter('translate')('lbl_stop'),
+            cssClass: 'parking-popup',
+            scope: $scope,
+            buttons: [
+                {
+                    text: $filter('translate')('btn_close')
+                },
+                {
+                    text: $filter('translate')('btn_next_trips'),
+                    onTap: function (e) {
+                        // TODO
+                    }
+                }
+            ]
+        });
+      };
+
+      var p = $scope.markers[args.modelName].stop;
+        $scope.popupStop = p;
+        Config.loading();
+        ttService.getNextTrips($scope.popupStop.agencyId, $scope.popupStop.id, 5).then(function(data) {
+          Config.loaded();
+          var routes = [];
+          $scope.elements.forEach(function(e) {
+            var list = [];
+            if (e.group) {
+              if (e.group.routes) list = list.concat(e.group.routes);
+              else if (e.group.route)  list.push(e.group.route);
+            } else {
+              if (e.routes) list = list.concat(e.routes);
+              else if (e.route)  list.push(e.route);
+            }
+            list.forEach(function(r) {
+              if (data[r.routeId] != null) {
+                data[r.routeId].routeElement = e;
+                routes.push(data[r.routeId]);
+              }
+              else if (data[r.routeSymId] != null) {
+                data[r.routeSymId].routeElement = e;
+                routes.push(data[r.routeSymId]);
+              }
+            });
+          });
+          $scope.popupStop.routes = routes;
+          $scope.popupStop.visualization = Config.getStopVisualization($scope.popupStop.agencyId);
+          showPopup();
+        }, function(err) {
+          Config.loaded();
+          showPopup();
+          console.log('No data');
+        });
+    });
+
+
+    angular.extend($scope, {
+        center: {
+          lat: Config.getMapPosition().lat,
+          lng: Config.getMapPosition().long,
+          zoom: Config.getMapPosition().zoom
+        },
+        markers: [],
+        events: {}
+    });
+})
+
+;
