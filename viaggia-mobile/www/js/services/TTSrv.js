@@ -7,6 +7,7 @@ angular.module('viaggia.services.timetable', [])
   var calendarCache = {};
 
   var ttMapData = {};
+  var ttStopData = {};
 
   var getStopsData = function(agencies) {
     var res = [];
@@ -212,13 +213,23 @@ angular.module('viaggia.services.timetable', [])
      */
     getNextTrips : getNextTrips,
     /**
-     * Cache the elements for the TT map set up
+     * Cache the data for the TT map set up
      */
     getTTMapData: function() {
       return ttMapData;
     },
     setTTMapData: function(mapData){
       ttMapData = mapData;
+    },
+    /**
+     * Cache the data for the TT stop set up
+     */
+    getTTStopData: function() {
+      return ttStopData;
+    },
+    setTTStopData: function(stopData){
+      ttStopData = stopData;
     }
+
   }
 })

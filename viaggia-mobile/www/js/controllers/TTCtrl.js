@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.timetable', ['ionic'])
 
-.controller('TTRouteListCtrl', function ($scope, $state, $stateParams, $timeout, $ionicModal, $ionicPopup, $filter, ionicMaterialMotion, ionicMaterialInk, mapService, Config, ttService, GeoLocate, Toast) {
+.controller('TTRouteListCtrl', function ($scope, $state, $stateParams, $timeout, $ionicPopup, $filter, ionicMaterialMotion, ionicMaterialInk, Config, ttService) {
   var min_grid_cell_width = 90;
 
   var ref = $stateParams.ref;
@@ -363,6 +363,11 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         });
     };
 
+    $scope.showStopData = function() {
+      ttService.setTTStopData($scope.popupStop);
+      $state.go('app.ttstop');
+    }
+
     $scope.$on('leafletDirectiveMarker.ttMap.click', function (e, args) {
       var showPopup = function() {
         $ionicPopup.show({
@@ -371,14 +376,10 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
             cssClass: 'parking-popup',
             scope: $scope,
             buttons: [
-                {
-                    text: $filter('translate')('btn_close')
-                },
+                {text: $filter('translate')('btn_close')},
                 {
                     text: $filter('translate')('btn_next_trips'),
-                    onTap: function (e) {
-                        // TODO
-                    }
+                    onTap: $scope.showStopData
                 }
             ]
         });
@@ -430,6 +431,16 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         markers: [],
         events: {}
     });
+})
+
+.controller('TTStopCtrl', function ($scope, $state, $stateParams, $timeout, $ionicPopup, $filter, ionicMaterialMotion, ionicMaterialInk, Config, ttService) {
+  var stopData = ttService.getTTStopData();
+  if (stopData.routes) {
+    stopData.routes.forEach(function(r) {
+      if (!r.color) r.color = r.routeElement.color ? r.routeElement.color: r.routeElement.route.color;
+    });
+  }
+  $scope.stopData = stopData;
 })
 
 ;

@@ -202,12 +202,20 @@ angular.module('viaggia', [
                 }
             })
             .state('app.ttmap', {
-                cache: false,
-                url: "/map",
+                url: "/ttmap",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/ttmap.html",
                         controller: 'TTMapCtrl'
+                    }
+                }
+            })
+            .state('app.ttstop', {
+                url: "/ttstop",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/ttstop.html",
+                        controller: 'TTStopCtrl'
                     }
                 }
             })
