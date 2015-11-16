@@ -32,18 +32,18 @@ angular.module('viaggia.controllers.home', [])
 
 
     $scope.initMap = function () {
-        mapService.initMap().then(function () {
+        mapService.initMap('homeMap').then(function () {
 
             if (mymap != null) {
-                mapService.resizeElementHeight(mymap);
-                mapService.refresh();
+                mapService.resizeElementHeight(mymap, 'homeMap');
+                mapService.refresh('homeMap');
             }
         });
     }
     window.onresize = function () {
         if (mymap != null) {
-            mapService.resizeElementHeight(mymap);
-            mapService.refresh();
+            mapService.resizeElementHeight(mymap, 'homeMap');
+            mapService.refresh('homeMap');
 
         }
     }

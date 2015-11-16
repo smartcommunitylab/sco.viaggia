@@ -1,0 +1,13 @@
+<ion-view title="{{stopData.name}}">
+      <ion-content>
+        <div>
+          <div class="stop-line" ng-repeat="route in stopData.routes">
+            <div class="stop-line-title" style="background-color: {{route.color}}"><span ng-if="route.routeElement.label">{{route.routeElement.label}} - </span>{{route.name}}</div>
+            <div class="row">
+              <div class="col text-center" ng-repeat="t in route.times">{{t.time | date:'HH:mm'}}</div>
+            </div>
+          </div>
+        </div>
+    </ion-content>
+
+</ion-view>

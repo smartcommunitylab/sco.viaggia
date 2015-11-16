@@ -3,6 +3,8 @@ angular.module('viaggia.services.map', [])
 .factory('mapService', function ($q, $http, Config, planService, leafletData) {
     var colorsAndTypes = Config.getColorsTypes();
 
+    var cachedMap = {};
+
     var getMapOfColors = function () {
         var mapOfColors = [];
         for (var k = 0; k < colorsAndTypes.length; k++) {
@@ -65,6 +67,20 @@ angular.module('viaggia.services.map', [])
     var mapOfIcons = getMapOfIcons();
 
 
+    mapService.getMap = function(mapId) {
+      var deferred = $q.defer();
+
+      if (cachedMap[mapId] == null) {
+        mapService.initMap(mapId).then(function() {
+          deferred.resolve(cachedMap[mapId]);
+        });
+      } else {
+        deferred.resolve(cachedMap[mapId]);
+      }
+
+      return deferred.promise;
+    }
+
     mapService.setMyLocation = function (myNewLocation) {
         myLocation = myNewLocation
     };
@@ -73,9 +89,11 @@ angular.module('viaggia.services.map', [])
     };
 
     //init map with tile server provider and show my position
-    mapService.initMap = function () {
+    mapService.initMap = function (mapId) {
         var deferred = $q.defer();
-        leafletData.getMap().then(function (map) {
+
+        leafletData.getMap(mapId).then(function (map) {
+            cachedMap[mapId] = map;
             L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
                 type: 'map',
                 ext: 'jpg',
@@ -175,7 +193,7 @@ angular.module('viaggia.services.map', [])
         return output;
     }
 
-    mapService.resizeElementHeight = function (element) {
+    mapService.resizeElementHeight = function (element, mapId) {
         var height = 0;
         var body = window.document.body;
         if (window.innerHeight) {
@@ -187,12 +205,12 @@ angular.module('viaggia.services.map', [])
         }
         console.log('height' + height);
         element.style.height = (((height - element.offsetTop) / 2) + "px");
-        leafletData.getMap().then(function (map) {
+        this.getMap(mapId).then(function (map) {
             map.invalidateSize();
         })
     }
-    mapService.refresh = function () {
-        leafletData.getMap().then(function (map) {
+    mapService.refresh = function (mapId) {
+        this.getMap(mapId).then(function (map) {
             map.invalidateSize();
         })
     }

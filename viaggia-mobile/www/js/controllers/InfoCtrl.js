@@ -62,7 +62,7 @@ angular.module('viaggia.controllers.info', [])
             }
             if (boundsArray.length > 0) {
                 var bounds = L.latLngBounds(boundsArray);
-                leafletData.getMap().then(function (map) {
+                mapService.getMap('modalMap').then(function (map) {
                     map.fitBounds(bounds);
                 });
             }
@@ -80,7 +80,11 @@ angular.module('viaggia.controllers.info', [])
     });
 
     angular.extend($scope, {
-        center: {},
+          center: {
+            lat: Config.getMapPosition().lat,
+            lng: Config.getMapPosition().long,
+            zoom: Config.getMapPosition().zoom
+          },
         markers: [],
         events: {}
     });
@@ -89,10 +93,12 @@ angular.module('viaggia.controllers.info', [])
         $scope.modalMap.hide();
     };
     $scope.initMap = function () {
-        mapService.initMap().then(function () {});
+        mapService.initMap('modalMap').then(function () {
+          console.log('map initialized');
+        });
     };
 
-    $scope.$on('leafletDirectiveMarker.mapModal.click', function (e, args) {
+    $scope.$on('leafletDirectiveMarker.modalMap.click', function (e, args) {
         var p = $scope.markers[args.modelName].parking;
         $scope.popupParking = p;
         $ionicPopup.show({
@@ -173,7 +179,7 @@ angular.module('viaggia.controllers.info', [])
             }
             if (boundsArray.length > 0) {
                 var bounds = L.latLngBounds(boundsArray);
-                leafletData.getMap().then(function (map) {
+                mapService.getMap('modalMap').then(function (map) {
                     map.fitBounds(bounds);
                 });
             }
@@ -191,7 +197,11 @@ angular.module('viaggia.controllers.info', [])
     });
 
     angular.extend($scope, {
-        center: {},
+        center: {
+          lat: Config.getMapPosition().lat,
+          lng: Config.getMapPosition().long,
+          zoom: Config.getMapPosition().zoom
+        },
         markers: [],
         events: {}
     });
@@ -200,10 +210,10 @@ angular.module('viaggia.controllers.info', [])
         $scope.modalMap.hide();
     };
     $scope.initMap = function () {
-        mapService.initMap().then(function () {});
+        mapService.initMap('modalMap').then(function () {});
     };
 
-    $scope.$on('leafletDirectiveMarker.mapModal.click', function (e, args) {
+    $scope.$on('leafletDirectiveMarker.modalMap.click', function (e, args) {
         var p = $scope.markers[args.modelName].parking;
         $scope.popupParking = p;
         $ionicPopup.show({

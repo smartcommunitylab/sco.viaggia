@@ -110,14 +110,17 @@ angular.module('viaggia.services.conf', [])
         getAppId: function () {
             return mapJsonConfig["appid"];
         },
+        getAppAgencies: function () {
+            return mapJsonConfig["agencies"];
+        },
         getVersion: function () {
             return 'v ' + mapJsonConfig["appversion"] + (APP_BUILD && APP_BUILD != '' ? '<br/>(' + APP_BUILD + ')' : '');
         },
         getPlanDefaultOptions: function () {
-            return mapJsonConfig["plan-default-options"];
+            return mapJsonConfig["plan_default_options"];
         },
         getExtraurbanAgencies: function () {
-            return mapJsonConfig["extraurban-agencies"];
+            return mapJsonConfig["extraurban_agencies"];
         },
         getLang: function () {
             var browserLanguage = '';
@@ -187,6 +190,10 @@ angular.module('viaggia.services.conf', [])
             }
           }
           return res;
-         }
+         },
+      getStopVisualization: function(agencyId) {
+        if (!ttJsonConfig || !ttJsonConfig.stopVisualization || !ttJsonConfig.stopVisualization[agencyId]) return {};
+        return ttJsonConfig.stopVisualization[agencyId];
+      }
     }
 })

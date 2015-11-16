@@ -66,6 +66,9 @@ angular.module('viaggia', [
             console.log('CANNOT LOCATE!');
         });
 
+        //        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+        //          console.log(toState);
+        //        });
 
         $ionicPlatform.ready(function () { // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -78,8 +81,11 @@ angular.module('viaggia', [
             Config.init().then(function () {
                 if (ionic.Platform.isWebView()) {
                     DataManager.dbSetup();
+                } else {
+                    DataManager.syncStopData();
                 }
             });
+            $rootScope.platform = ionic.Platform;
         });
     })
     .config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
@@ -186,7 +192,7 @@ angular.module('viaggia', [
                 }
             })
             .state('app.ttlist', {
-                cache: false,
+                //                cache: false,
                 url: "/ttlist/:ref",
                 views: {
                     'menuContent': {
@@ -195,8 +201,26 @@ angular.module('viaggia', [
                     }
                 }
             })
+            .state('app.ttmap', {
+                url: "/ttmap",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/ttmap.html",
+                        controller: 'TTMapCtrl'
+                    }
+                }
+            })
+            .state('app.ttstop', {
+                url: "/ttstop",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/ttstop.html",
+                        controller: 'TTStopCtrl'
+                    }
+                }
+            })
             .state('app.ttgroup', {
-                cache: false,
+                //                cache: false,
                 url: "/ttgroup/:ref/:agencyId/:groupId",
                 views: {
                     'menuContent': {
@@ -343,13 +367,16 @@ angular.module('viaggia', [
             lbl_places: 'posti totali',
             lbl_parking: 'Parcheggio',
             lbl_bike_station: 'Stazione bici',
-            btn_close: 'Chiudi',
-            btn_nav_to: 'Indicazioni stradali',
             popup_delete_favorite: 'Sicuro di cancellare il preferito?',
             save_trip_title: 'Salva viaggio',
             save_trip_text: 'Dai un nome al tuo viaggio',
-            tripsaved_message_feedback: 'Viaggio salvato correttamente'
-
+            tripsaved_message_feedback: 'Viaggio salvato correttamente',
+            btn_close: 'Chiudi',
+            btn_nav_to: 'Indicazioni stradali',
+            btn_next_trips: 'Vedi prossimi orari',
+            lbl_stop: 'Fermata',
+            err_too_many_markers: 'Too many objects on the map. Please zoom in.',
+            lbl_lines: 'Corse:'
         });
 
 
@@ -434,13 +461,16 @@ angular.module('viaggia', [
             lbl_places: 'total places',
             lbl_parking: 'Parking',
             lbl_bike_station: 'Bike station',
-            btn_close: 'Close',
-            btn_nav_to: 'Directions',
             popup_delete_favorite: 'Are you sure to delete the favorite?',
             save_trip_title: 'Save journey',
             save_trip_text: 'Give a name to your journey',
-            tripsaved_message_feedback: 'Journey correctly saved'
-
+            tripsaved_message_feedback: 'Journey correctly saved',
+            btn_close: 'Close',
+            btn_nav_to: 'Directions',
+            btn_next_trips: 'See next trips',
+            lbl_stop: 'Stop',
+            err_too_many_markers: 'Too many objects on the map. Please zoom in.',
+            lbl_lines: 'Lines:'
         });
 
 

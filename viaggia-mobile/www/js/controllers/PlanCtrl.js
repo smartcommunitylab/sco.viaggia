@@ -343,7 +343,7 @@ angular.module('viaggia.controllers.plan', [])
 
 
     $scope.initMap = function () {
-        mapService.initMap().then(function () {
+        mapService.initMap('modalMap').then(function () {
 
             $scope.$on("leafletDirectiveMap.click", function (event, args) {
                 $ionicLoading.show();
@@ -382,7 +382,7 @@ angular.module('viaggia.controllers.plan', [])
     }
 
     $scope.closeWin = function () {
-        leafletData.getMap().then(function (map) {
+        mapService.getMap('modalMap').then(function (map) {
             map.closePopup();
         });
     }

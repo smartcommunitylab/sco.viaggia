@@ -381,6 +381,11 @@
     color: #f39619;
 }
 
+.parking-popup .popup {
+  width: 80%;
+  max-width: 400px;
+}
+
 .parking-popup .popup-title {
     text-align: left;
     text-transform: uppercase;
@@ -398,9 +403,41 @@ ion-header-bar .title {
 }
 
 .close-modal {
-    font-size: 35px;
-    padding-left: 4px;
+    font-size: 24px;
+    padding-left: 16px;
     padding-top: 4px;
+    line-height: 40px;
+}
+
+.stop-line-list .item {
+  padding: 8px 16px;
+  min-height: 0;
+  white-space: normal;
+
+}
+
+.stop-line-grid .route-grid-element {
+  margin: 4px 8px 4px 0;
+  display: inline-block;
+}
+
+.stop-line-title {
+  padding: 8px 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stop-line .row {
+  padding: 0;
+}
+.stop-line .row .col {
+  border-bottom: 1px solid #d2d2d2;
+  padding: 16px 0px;
+  border-right: 1px solid #d2d2d2;
+}
+.stop-line .row .col:last-child {
+  border-right: 0;
 }
 
 .many-options {

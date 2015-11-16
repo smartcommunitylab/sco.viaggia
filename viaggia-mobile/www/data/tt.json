@@ -1,8 +1,17 @@
 {
+  "stopVisualization" : {
+    "12" : {"view": "grid"},
+    "5" : {"view": "list"},
+    "6" : {"view": "list"},
+    "10" : {"view": "list"},
+    "17" : {"view": "list"}
+  },
   "elements": {
     "trains" : {
       "view" : "list",
       "label": "menu_real_time_train",
+      "hasMap": true,
+      "markerIcon": "ic_train",
       "elements": [
         {
           "agencyId" : "5",
@@ -31,9 +40,12 @@
     "urbano" : {
       "view" : "grid",
       "label": "menu_real_time_bus_urban",
+      "hasMap": true,
+      "markerIcon": "ic_urbanBus",
       "elements": [
         {
           "agencyId" : "12",
+          "hasMap": true,
           "groups" : [
             {
               "label" : "A",
@@ -68,8 +80,8 @@
               "label" : "1",
               "color" : "#1a3f6f",
               "routes" : [
-                {"routeId": "01A", "routeSymId": "01A", "title": "Ospedale - P. Dante - Sopramonte", "label":"1"},
-                {"routeId": "01R", "routeSymId": "01R", "title": "Sopramonte - P.Dante - Ospedale", "label":"1"}
+                {"routeId": "1A", "routeSymId": "01A", "title": "Ospedale - P. Dante - Sopramonte", "label":"1"},
+                {"routeId": "1R", "routeSymId": "01R", "title": "Sopramonte - P.Dante - Ospedale", "label":"1"}
               ]
             },
             {

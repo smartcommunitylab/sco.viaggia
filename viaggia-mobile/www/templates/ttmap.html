@@ -1,0 +1,8 @@
+<ion-view title="{{title}}">
+      <ion-content scroll="false">
+        <div id="modal-map-container" data-tap-disabled="true">
+            <leaflet event-broadcast="events" center="center" markers="markers" paths="pathLine" style="width: 100%; height: 700px;" ng-init="initMap()"  id="ttMap"></leaflet>
+        </div>
+    </ion-content>
+
+</ion-view>
