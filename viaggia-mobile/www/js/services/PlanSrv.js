@@ -9,6 +9,7 @@ angular.module('viaggia.services.plan', [])
     var selectedjourney = {};
     var geoCoderPlaces = {};
     var fromOrTo = "";
+    var tripId = null;
     var getNameFromComplex = function (data) {
         name = '';
         if (data) {
@@ -64,20 +65,32 @@ angular.module('viaggia.services.plan', [])
     planService.getFromOrTo = function () {
         return fromOrTo;
     }
+    planService.setTripId = function (id) {
+        tripId = id;
+    }
+    planService.getTripId = function () {
+        return tripId;
+    }
     planService.setName = function (place, complexName) {
         if (place == 'from') {
             if (!position.nameFrom) {
                 position.nameFrom = '';
             }
-            //get name from complexName
-            position.nameFrom = getNameFromComplex(complexName);
+            if (typeof complexName === 'string' || complexName instanceof String) {
+                position.nameFrom = complexName;
+            } else { //get name from complexName
+                position.nameFrom = getNameFromComplex(complexName);
+            }
         } else {
             if (!position.nameTo) {
                 position.nameTo = '';
             }
-            //get name from complexName
-            position.nameTo = getNameFromComplex(complexName);
-
+            if (typeof complexName === 'string' || complexName instanceof String) {
+                position.nameTo = complexName;
+            } else {
+                //get name from complexName
+                position.nameTo = getNameFromComplex(complexName);
+            }
         }
     }
     planService.getName = function (place) {
@@ -416,6 +429,72 @@ angular.module('viaggia.services.plan', [])
         });
         return placedata.promise;
     }
+    planService.saveTrip = function (tripId, trip, name, requestedFrom, requestedTo) {
+        var deferred = $q.defer();
+        if (!tripId) {
+            tripId = new Date().getTime();
+        }
+        var tripToSave = {
+            "tripId": tripId,
+            "data": {
+                "originalFrom": {
+                    "name": requestedFrom,
+                    "lat": trip.from.lat,
+                    "lon": trip.from.lon
+                },
+                "originalTo": {
+                    "name": requestedTo,
+                    "lat": trip.to.lat,
+                    "lon": trip.to.lon
+                },
+                "monitor": true,
+                "name": name,
+                "data": trip
+            }
+        };
+        var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
+        if (!savedTrips) {
+            savedTrips = {};
+        }
+        savedTrips[tripId] = tripToSave;
+        localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
+        deferred.resolve(tripToSave);
 
+
+        //     later for the server
+        //$http({
+        //            method: 'POST',
+        //            url: Config.getServerURL(),
+        //            headers: {
+        //                'Accept': 'application/json',
+        //                'Content-Type': 'application/json'
+        //            },
+        //            data: {
+        //                "originalFrom": {
+        //                    "name": requestedFrom,
+        //                    "lat": trip.from.lat,
+        //                    "lon": trip.from.lon
+        //                },
+        //                "originalTo": {
+        //                    "name": requestedTo,
+        //                    "lat": trip.to.lat,
+        //                    "lon": trip.to.lon
+        //                },
+        //                "monitor": true,
+        //                "name": name,
+        //                "data": trip
+        //
+        //            }
+        //        }).
+        //        success(function (data) {
+        //            deferred.resolve(data);
+        //        }).
+        //        error(function (data, status, headers, config) {
+        //            console.log(data + status + headers + config);
+        //            deferred.reject(data);
+        //        });
+
+        return deferred.promise;
+    }
     return planService;
 })

@@ -217,25 +217,25 @@ angular.module('viaggia', [
             })
 
         .state('app.parking', {
-            cache: false,
-            url: "/parking/:agencyId",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/parking.html",
-                    controller: 'ParkingCtrl'
+                cache: false,
+                url: "/parking/:agencyId",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/parking.html",
+                        controller: 'ParkingCtrl'
+                    }
                 }
-            }
-        })
-        .state('app.bikesharing', {
-            cache: false,
-            url: "/bikesharing/:agencyId",
-            views: {
-                'menuContent': {
-                    templateUrl: "templates/bikesharing.html",
-                    controller: 'BikeSharingCtrl'
+            })
+            .state('app.bikesharing', {
+                cache: false,
+                url: "/bikesharing/:agencyId",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/bikesharing.html",
+                        controller: 'BikeSharingCtrl'
+                    }
                 }
-            }
-        })
+            })
 
         .state('app.table1', {
                 cache: false,
@@ -329,6 +329,9 @@ angular.module('viaggia', [
             popup_datepicker_fri: 'V',
             popup_datepicker_sat: 'S',
             popup_datepicker_sun: 'D',
+            journey_details_sustainable: 'Itinerario sostenibile ',
+            journey_details_modify: 'Modifica',
+            journey_details_delete: 'Cancella',
             journey_details_to: 'A ',
             journey_details_from: 'Da ',
             journey_details_from_bike: 'Prendi una bicicletta alla stazione di bike sharing ',
@@ -340,8 +343,12 @@ angular.module('viaggia', [
             lbl_places: 'posti totali',
             lbl_parking: 'Parcheggio',
             lbl_bike_station: 'Stazione bici',
-            btn_close : 'Chiudi',
-            btn_nav_to: 'Indicazioni stradali'
+            btn_close: 'Chiudi',
+            btn_nav_to: 'Indicazioni stradali',
+            popup_delete_favorite: 'Sicuro di cancellare il preferito?',
+            save_trip_title: 'Salva viaggio',
+            save_trip_text: 'Dai un nome al tuo viaggio',
+            tripsaved_message_feedback: 'Viaggio salvato correttamente'
 
         });
 
@@ -413,6 +420,9 @@ angular.module('viaggia', [
             popup_datepicker_fri: 'F',
             popup_datepicker_sat: 'S',
             popup_datepicker_sun: 'S',
+            journey_details_sustainable: 'Sustainable journey ',
+            journey_details_modify: 'Modify',
+            journey_details_delete: 'Delete',
             journey_details_to: 'From ',
             journey_details_from: 'To ',
             journey_details_from_bike: 'Take a bike at the bike sharing station ',
@@ -424,8 +434,12 @@ angular.module('viaggia', [
             lbl_places: 'total places',
             lbl_parking: 'Parking',
             lbl_bike_station: 'Bike station',
-            btn_close : 'Close',
-            btn_nav_to: 'Directions'
+            btn_close: 'Close',
+            btn_nav_to: 'Directions',
+            popup_delete_favorite: 'Are you sure to delete the favorite?',
+            save_trip_title: 'Save journey',
+            save_trip_text: 'Give a name to your journey',
+            tripsaved_message_feedback: 'Journey correctly saved'
 
         });
 

@@ -1,11 +1,14 @@
 angular.module('viaggia.controllers.tripdetails', [])
 
-.controller('TripDetailsCtrl', function ($scope, $ionicModal, $filter, planService, mapService, Config) {
+.controller('TripDetailsCtrl', function ($scope, $ionicModal, $filter, $ionicPopup, planService, mapService, Config, Toast, $filter) {
     $scope.title = $filter('translate')('map_detail_title');
+    var trip = planService.getSelectedJourney();
     $scope.requestedFrom = planService.getName("from");
     $scope.requestedTo = planService.getName("to");
-    var trip = planService.getSelectedJourney();
-    planService.process(trip, $scope.requestFrom, trip.to);
+    $scope.tripId = planService.getTripId();
+    $scope.labelModify = $filter('translate')('journey_details_modify');
+    $scope.labelDelete = $filter('translate')('journey_details_delete');
+    planService.process(trip, $scope.requestFrom, $scope.requestTo);
     $scope.currentItinerary = trip;
     $scope.toTime = function (millis) {
         return planService.getTimeStr(new Date(millis));
@@ -20,19 +23,30 @@ angular.module('viaggia.controllers.tripdetails', [])
     });
     $scope.openMapTrip = function () {
         $scope.modalMap.show();
-        //        $scope.modalMap.show().then(function () {
-        //            var modalMap = document.getElementById('modal-map-trip-container');
-        //            if (modalMap != null) {
-        //                mapService.resizeElementHeight(modalMap);
-        //                mapService.refresh();
-        //            }
-        //        });
     }
 
     $scope.closeMap = function () {
         $scope.modalMap.hide();
     }
+    $scope.saveTrip = function () {
+        // Prompt popup code
+        $ionicPopup.prompt({
+            title: $filter('translate')('save_trip_title'),
+            template: $filter('translate')('save_trip_text'),
 
+        }).then(function (res) {
+            planService.saveTrip($scope.tripId, trip, res, $scope.requestedFrom, $scope.requestedTo).then(function (res) {
+
+                //return tripToSave that contains new tripId and in data the trip
+
+                $scope.tripId = res.tripId;
+                //toast saved
+                Toast.show($filter('translate')("tripsaved_message_feedback"), "short", "bottom");
+            });
+        });
+
+
+    }
     $scope.initMap = function () {
         mapService.initMap().then(function () {
             //add polyline

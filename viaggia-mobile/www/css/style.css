@@ -402,3 +402,13 @@ ion-header-bar .title {
     padding-left: 4px;
     padding-top: 4px;
 }
+
+.many-options {
+    margin-top: 25px;
+    margin-right: 100px;
+}
+
+.single-options {
+    margin-top: 25px;
+    margin-right: 25px;
+}

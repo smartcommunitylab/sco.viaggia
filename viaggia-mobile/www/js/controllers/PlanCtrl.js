@@ -10,7 +10,7 @@ angular.module('viaggia.controllers.plan', [])
     $scope.title = $filter('translate')('plan_map_title');
     $scope.place = null;
     $scope.placesandcoordinates = null;
-    $scope.favoritePlaces = JSON.parse(localStorage.getItem("favoritePlaces"));
+    $scope.favoritePlaces = JSON.parse(localStorage.getItem(Config.getAppId() + "_favoritePlaces"));
     if (!$scope.favoritePlaces) {
         $scope.favoritePlaces = [];
     }
@@ -186,7 +186,7 @@ angular.module('viaggia.controllers.plan', [])
                         long: planService.getPosition($scope.place).longitude
                     });
                     //write into local storage
-                    localStorage.setItem("favoritePlaces", JSON.stringify($scope.favoritePlaces));
+                    localStorage.setItem(Config.getAppId() + "_favoritePlaces", JSON.stringify($scope.favoritePlaces));
                 });
             } else {
                 //planService.setFromOrTo(fromOrTo);
@@ -225,9 +225,9 @@ angular.module('viaggia.controllers.plan', [])
     }
 
     $scope.deleteFavorite = function (favorite) {
-        $scope.showConfirm($filter('translate')("popup_lat"), $filter('translate')("popup_no_address"), function () {
+        $scope.showConfirm(favorite.name, $filter('translate')("popup_delete_favorite"), function () {
             $scope.favoritePlaces.splice($scope.favoritePlaces.indexOf(favorite), 1);
-            localStorage.setItem("favoritePlaces", JSON.stringify($scope.favoritePlaces));
+            localStorage.setItem(Config.getAppId() + "_favoritePlaces", JSON.stringify($scope.favoritePlaces));
             $scope.closeFavorites();
         });
 
@@ -410,10 +410,6 @@ angular.module('viaggia.controllers.plan', [])
         });
     }
     $scope.select = function (suggestion) {
-        //            if changed set position, name and address
-        //            segnalaService.setPosition($scope.placesandcoordinates[suggestion].latlong.split(',')[0], $scope.placesandcoordinates[suggestion].latlong.split(',')[1]);
-        //            segnalaService.setName(suggestion);
-        //            $scope.signal.location.address = suggestion;
         console.log("select");
     }
     $scope.setPlaceById = function (id) {

@@ -17,35 +17,34 @@
             <ion-list>
                 <div>
                     <ion-item class="item item-icon-left item-icon-right menu-rt" ng-click="toggleGroupRealTime()" ng-class="{active: isGroupRealTimeShown()}">
-                      <i class="icon ic_real-time-info"></i>
-                      {{'menu_info_real_time' | translate}}
-                      <i class="icon" ng-class="isGroupRealTimeShown() ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i>
+                        <i class="icon ic_real-time-info"></i> {{'menu_info_real_time' | translate}}
+                        <i class="icon" ng-class="isGroupRealTimeShown() ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i>
                     </ion-item>
                     <div>
-                    <ion-item class="item-icon-left item-accordion  menu-rt" ng-repeat="m in infomenu" ng-show="isGroupRealTimeShown()" nav-clear menu-close item-icon-left ng-href="#{{m.state}}">
-                        <i class="icon" ng-class="m.icon"></i>{{m.label | translate}}
-                    </ion-item>
-                  </div>
+                        <ion-item class="item-icon-left item-accordion  menu-rt" ng-repeat="m in infomenu" ng-show="isGroupRealTimeShown()" nav-clear menu-close item-icon-left ng-href="#{{m.state}}">
+                            <i class="icon" ng-class="m.icon"></i>{{m.label | translate}}
+                        </ion-item>
+                    </div>
                 </div>
                 <ion-item nav-clear menu-close href="#/app/home" class="menu-main item-icon-left">
                     <i class="icon ic_home"></i>{{'menu_home' | translate}}
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/app/plan"  class="menu-main item-icon-left">
+                <ion-item nav-clear menu-close href="#/app/plan" class="menu-main item-icon-left">
                     <i class="icon ic_search"></i>{{'menu_plan' | translate}}
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/app/mytrip" class="menu-main item-icon-left">
+                <ion-item nav-clear menu-close href="#/app/mytrips" class="menu-main item-icon-left">
                     <i class="icon ic_folder"></i>{{'menu_mytrip' | translate}}
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/monitoring" class="menu-main item-icon-left">
                     <i class="icon ic_monitoring"></i>{{'menu_monitoring' | translate}}
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/app/news"  class="menu-main item-icon-left">
+                <ion-item nav-clear menu-close href="#/app/news" class="menu-main item-icon-left">
                     <i class="icon ic_news"></i>{{'menu_news' | translate}}
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/app/info"  class="menu-main item-icon-left">
+                <ion-item nav-clear menu-close href="#/app/info" class="menu-main item-icon-left">
                     <i class="icon ic_euro"></i>{{'menu_info' | translate}}
                 </ion-item>
-                <ion-item nav-clear menu-close href="#/app/bookmarks"  class="menu-main item-icon-left">
+                <ion-item nav-clear menu-close href="#/app/bookmarks" class="menu-main item-icon-left">
                     <i class="icon ic_bookmark"></i>{{'menu_bookmarks' | translate}}
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/notifications" class="menu-main item-icon-left">
@@ -57,7 +56,7 @@
                 <ion-item nav-clear menu-close href="#/app/credits" class="menu-last item-icon-left">
                     <i class="icon ic_info"></i>{{'menu_credits' | translate}}
                 </ion-item>
-<!--
+                <!--
                 <ion-item nav-clear menu-close href="#/app/table1">
                     <i class="icon voice-menu"></i>table 1 test
                 </ion-item>
