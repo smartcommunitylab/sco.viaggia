@@ -110,7 +110,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     }
   }
 
-  $timeout(init, 500);
+  init();
 
   $scope.$on('ngLastRepeat.elements', function (e) {
       $timeout(function () {
@@ -265,7 +265,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     $scope.getTT($scope.runningDate.getTime());
   }
 
-  $timeout($scope.load, 500);
+ $scope.load();
 
   $scope.styleFn = function (value, row, col) {
     //        var cls = col % 2 == 0 ? 'even' : 'odd';

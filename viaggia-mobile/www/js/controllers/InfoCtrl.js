@@ -2,13 +2,20 @@ angular.module('viaggia.controllers.info', [])
 
 .controller('InfoCtrl', function ($scope) {})
 
-.controller('ParkingCtrl', function ($scope, $stateParams, $timeout, $filter, $ionicModal, $ionicPopup, leafletData, mapService, parkingService, Config) {
+.controller('ParkingCtrl', function ($scope, $stateParams, $timeout, $filter, $ionicModal, $ionicPopup, ionicMaterialMotion, ionicMaterialInk, leafletData, mapService, parkingService, Config) {
     $scope.agencyId = $stateParams.agencyId;
     $scope.parkings = null;
 
     $scope.markers = [];
 
     $scope.title = $filter('translate')('menu_real_time_park');
+
+    $scope.$on('ngLastRepeat.parkings', function (e) {
+        $timeout(function () {
+            ionicMaterialMotion.ripple();
+            ionicMaterialInk.displayEffect()
+        }); // No timeout delay necessary.
+    });
 
     $scope.load = function () {
         parkingService.getParkings($scope.agencyId).then(function (data) {
@@ -124,13 +131,22 @@ angular.module('viaggia.controllers.info', [])
 })
 
 
-.controller('BikeSharingCtrl', function ($scope, $stateParams, $timeout, $filter, $ionicModal, $ionicPopup, leafletData, mapService, bikeSharingService, Config) {
+.controller('BikeSharingCtrl', function ($scope, $stateParams, $timeout, $filter, $ionicModal, $ionicPopup, ionicMaterialMotion, ionicMaterialInk, leafletData, mapService, bikeSharingService, Config) {
     $scope.agencyId = $stateParams.agencyId;
     $scope.parkings = null;
 
     $scope.markers = [];
 
     $scope.title = $filter('translate')('menu_real_time_bike');
+
+    $scope.$on('ngLastRepeat.parkings', function (e) {
+        $timeout(function () {
+            ionicMaterialMotion.ripple();
+            ionicMaterialInk.displayEffect()
+        }); // No timeout delay necessary.
+    });
+
+
 
     $scope.load = function () {
         bikeSharingService.getStations($scope.agencyId).then(function (data) {
@@ -235,5 +251,5 @@ angular.module('viaggia.controllers.info', [])
         });
     });
 
-    $timeout(init, 200);
+    init();
 })

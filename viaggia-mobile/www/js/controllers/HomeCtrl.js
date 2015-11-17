@@ -1,17 +1,18 @@
 angular.module('viaggia.controllers.home', [])
 
-.controller('HomeCtrl', function ($scope, $timeout, $location, Config, mapService, ionicMaterialMotion, ionicMaterialInk) {
+.controller('HomeCtrl', function ($scope, $timeout, $filter, $location, Config, mapService, ionicMaterialMotion, ionicMaterialInk) {
 
     $scope.buttons = [{
-        label: 'News',
-        icon: 'ion-ios-paper'
+        label: $filter('translate')('menu_news'),
+        icon: 'ic_news'
 }, {
-        label: 'Notifications',
-        icon: 'ion-ios-bell'
+        label: $filter('translate')('menu_notifications'),
+        icon: 'ic_notification'
 }];
     var mymap = document.getElementById('map-container');
 
     Config.init().then(function () {
+        $scope.title = Config.getAppName();
         angular.extend($scope, {
             center: {
                 lat: Config.getMapPosition().lat,

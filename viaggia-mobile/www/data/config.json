@@ -30,9 +30,9 @@
     "db_version": 25,
     "visualization": {
       "primaryLinks": [
-        {"state":"/app/ttlist/urbano","label":"menu_real_time_bus_urban", "icon": "ic_urban-bus"},
-        {"state":"/app/ttlist/trains","label":"menu_real_time_train", "icon": "ic_train"},
-        {"state":"/app/parking/COMUNE_DI_TRENTO","label":"menu_real_time_park", "icon": "ic_parking-lot"}
+        {"state":"/app/ttlist/urbano","label":"menu_real_time_bus_urban", "icon": "ic_urban-bus", "color": "#009587"},
+        {"state":"/app/ttlist/trains","label":"menu_real_time_train", "icon": "ic_train", "color": "#e84539"},
+        {"state":"/app/parking/COMUNE_DI_TRENTO","label":"menu_real_time_park", "icon": "ic_parking-lot", "color": "#36a3dc"}
       ],
       "infomenu" : [
         {"state":"/app/ttlist/urbano","label":"menu_real_time_bus_urban", "icon": "ic_urban-bus"},
