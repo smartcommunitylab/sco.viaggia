@@ -10,50 +10,113 @@ angular.module('viaggia.services.data', [])
     // limit the data to the necessary one only
     var db = null;
 
+    var getDBFileShortName = function() {
+      return Config.getAppId() + "routesdb";
+    };
+    var getDBPath = function() {
+      if (ionic.Platform.isIOS()) {
+        return cordova.file.documentsDirectory;
+      } else if (ionic.Platform.isAndroid()) {
+        var filesdir = cordova.file.dataDirectory;
+        if (filesdir.charAt(filesdir.length-1) == '/') {
+          filesdir = filesdir.substr(0, filesdir.length - 1);
+        }
+        filesdir = filesdir.substr(0, filesdir.lastIndexOf('/'))+'/databases/';
+        return filesdir;
+      } else {
+        return cordova.file.dataDirectory;
+      }
+    }
+    var getDBFileName = function() {
+      return getDBPath() + getDBFileShortName();
+    };
+
     var errorDB = function (deferred, error) {
         alert("##openDatabase: " + error);
         deferred.resolve(false);
 
     }
+
+    var doWithDB = function(successcallback, errorcallback) {
+      if (db == null) {
+        window.sqlitePlugin.openDatabase({
+            name: getDBFileShortName(),
+            bgType: 1,
+            skipBackup: true
+        }, function(dbres){
+          db = dbres;
+          successcallback();
+        },function(){
+          console.log('DBOPEN ERROR');
+          errorcallback();
+        });
+//        db = cordovaSQLite.openDatabase(getDBFileName(), false,
+//            _do,
+//            errorcallback
+//        );
+      } else {
+        successcallback();
+      }
+    };
+
+    var size = function(obj) {
+        var size = 0, key;
+        for (key in obj) {
+            if (obj.hasOwnProperty(key)) size++;
+        }
+        return size;
+    };
+
+    var convertData = function(res) {
+      var data = [];
+      var rowsize = 0;
+      if (res.rows.length > 0) {
+        rowsize = size(res.rows.item(0));
+        for (var i = 0; i < res.rows.length; i++) {
+//          var rowArray = [];
+//          var row = res.rows.item(i);
+//          for (var key in row) {
+//            rowArray.p
+//          }
+          var row = res.rows.item(i);
+          if (rowsize == 1) {
+            for (var k in row) data.push(row[k]);
+          }
+          else data.push(row);
+        }
+      }
+      if (data.length == 1 && rowsize == 1) return data[0];
+      return data;
+    };
+
     var openDB = function (successcallback, errorcallback) {
       var _do = function () {
-                cordovaSQLite.execQueryArrayResult("select * from version", [],
-                    successcallback,
-                    //                    function (version) {
-                    //                        console.log("get version: " + version);
-                    //                        deferred.resolve(true);
-                    //                    },
-                    errorcallback
-                    //                    function (error) {
-                    //                        alert("##execQueryArrayResult: " + error);
-                    //                        deferred.resolve(false);
-                    //
-                    //                    }
-                );
-            };
-
-      if (db == null) {
-        db = cordovaSQLite.openDatabase(cordova.file.dataDirectory + "/routesdb", false,
-            _do,
-            errorcallback
-        );
-      } else {
-        _do();
-      }
+        db.executeSql("select * from version", [], function(res) {
+          var data = convertData(res);
+          successcallback(data);
+        }, errorcallback);
+//                cordovaSQLite.execQueryArrayResult("select * from version", [],
+//                    successcallback,
+//                    errorcallback
+//                );
+      };
+      doWithDB(_do,errorcallback);
 
     }
     var process = function (url) {
         var deferred = $q.defer();
         JSZipUtils.getBinaryContent(url, function (err, data) {
             if (err) {
+              console.log("Error reading ZIP file: "+err);
                 deferred.reject(err);
                 return;
             }
+            console.log("Reading ZIP file");
             var jszipobj = new JSZip(data);
             Object.keys(jszipobj.files).forEach(function (key) {
-                $cordovaFile.createFile(cordova.file.dataDirectory, "routesdb", true)
+                $cordovaFile.createFile(getDBPath(), getDBFileShortName(), true)
                     .then(function (success) {
-                        $cordovaFile.writeExistingFile(cordova.file.dataDirectory, "routesdb", jszipobj.file(key).asArrayBuffer())
+                        $cordovaFile.writeExistingFile(getDBPath(), getDBFileShortName(), jszipobj.file(key).asArrayBuffer())
                             .then(function (success) {
                                 console.log('success copy');
                                 deferred.resolve(true);
@@ -91,9 +154,10 @@ angular.module('viaggia.services.data', [])
     var localDBisPresent = function () {
         var deferred = $q.defer();
         //return true if a localdb is present
-        openDB(function () {
-            deferred.resolve(true);
+        openDB(function (res) {
+            deferred.resolve(res.length > 0);
         }, function () {
+            console.log("DB file does not exist!");
             deferred.resolve(false);
         });
         return deferred.promise;
@@ -101,8 +165,11 @@ angular.module('viaggia.services.data', [])
 
     var mapVersions = function (arrayOfVersions) {
         var returnVersions = {};
-        for (var i = 0; i < arrayOfVersions.length; ++i)
-            returnVersions[arrayOfVersions[i][0]] = parseInt(arrayOfVersions[i][1]);
+         for (var i = 0; i < arrayOfVersions.length; ++i) {
+           returnVersions[''+arrayOfVersions[i].agencyID] = arrayOfVersions[i].version;
+         }
+//        for (var i = 0; i < arrayOfVersions.length; ++i)
+//            returnVersions[arrayOfVersions[i][0]] = parseInt(arrayOfVersions[i][1]);
         return returnVersions;
     }
 
@@ -133,8 +200,9 @@ angular.module('viaggia.services.data', [])
 
     var synchDB = function () {
         var deferred = $q.defer();
-        var err = function (error) {
-            deferred.reject(error);
+        var err = function (e) {
+            console.log("DB SYNC ERROR: "+e);
+            deferred.reject(e);
         }
         var success = function () {
             deferred.resolve(true);
@@ -207,25 +275,25 @@ angular.module('viaggia.services.data', [])
         doQuery: function(query, params) {
           var deferred = $q.defer();
           var _do = function () {
-                  cordovaSQLite.execQuerySingleResult(query, params,
-                      function(result) {
-                        deferred.resolve(result);
-                      },
-                      function(err) {
-                        deferred.reject(err);
-                      }
-                  );
+            db.executeSql(query, params, function(res) {
+              var data = convertData(res);
+              deferred.resolve(data);
+            }, function(err) {
+              deferred.reject(err);
+            });
+//                  cordovaSQLite.execQuerySingleResult(query, params,
+//                      function(result) {
+//                        deferred.resolve(result);
+//                      },
+//                      function(err) {
+//                        deferred.reject(err);
+//                      }
+//                  );
               };
-          if (db == null) {
-            db = cordovaSQLite.openDatabase(cordova.file.dataDirectory + "/routesdb", false,
-                _do,
-                function(err) {
-                  deferred.reject(err);
-                }
-            );
-          } else {
-            _do;
-          }
+          doWithDB(_do,function(e) {
+                  console.error("!DB ERROR: "+e);
+                  deferred.reject(e);
+                });
           return deferred.promise;
         },
         syncStopData : syncStops,
@@ -233,7 +301,7 @@ angular.module('viaggia.services.data', [])
             var deferred = $q.defer();
             var err = function (error) {
                 deferred.reject(error);
-                console.log("NOT synch");
+                console.log("NOT synch: "+error);
 
             }
             var success = function () {
@@ -241,11 +309,6 @@ angular.module('viaggia.services.data', [])
                     console.log("synch done");
 
                 }
-                //check if db is present
-                //if no, use local db.zip and create (copy file) db with that
-                //
-                //after all check local version vs remote version of db using an end point
-                //if remote > local download zip and change db file
 
             //try to open db (check if db is present)
             localDBisPresent().then(function (result) {

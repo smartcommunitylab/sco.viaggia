@@ -30,7 +30,7 @@ angular.module('viaggia.services.geo', [])
           }, {
             //frequency: (20 * 60 * 1000), //20 mins
             maximumAge: (10 * 60 * 1000), //10 mins
-            timeout: 60 * 1000, //1 minute
+            timeout: 10 * 1000, //1 minute
             enableHighAccuracy: (device.version.indexOf('2.') == 0) // true for Android 2.x
           });
         }, false);
@@ -46,7 +46,7 @@ angular.module('viaggia.services.geo', [])
           localization.reject('cannot geolocate (web)');
         }, {
           maximumAge: (10 * 60 * 1000), //5 mins
-          timeout: 60 * 1000, //1 minute
+          timeout: 10 * 1000, //1 minute
           enableHighAccuracy: false
         });
       }

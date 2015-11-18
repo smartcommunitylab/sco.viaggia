@@ -1,14 +1,14 @@
-<ion-view title="{{'menu_real_time_park'|translate}}">
+<ion-view title="{{'menu_real_time_bike'|translate}}">
     <ion-nav-buttons side="right">
         <button class="button button-icon" ng-click="showMap()"
-                ng-class="{'button-fab button-viaggia-header ion-map':selected==null, 'button-clear ion-navigate': selected != null}"></button>
+                ng-class="{'button-fab button-viaggia-header ion-map':selected==null, 'button-clear ion-map': selected != null}"></button>
     </ion-nav-buttons>
-  <ion-content has-header="true">
+  <ion-content has-header="true" padding="true">
     <ion-refresher
     on-refresh="load()">
     </ion-refresher>
-    <ion-list>
-      <div class="list card" ng-repeat="p in parkings | orderBy:'distance'" ng-click="select(p)">
+    <ion-list class="list animate-ripple">
+      <div class="item card" ng-repeat="p in parkings | orderBy:'distance'" ng-last-repeat="parkings"  ng-click="select(p)">
         <div class="item parking-card" ng-class="{'selected': selected == p}">
           <div class="row">
             <div class="col col-80">

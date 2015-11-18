@@ -1,5 +1,24 @@
 /* this is just an example - don't use !important */
 
+.mfb-component__button--main i,
+.mfb-component__button--child i {
+    font-size: 24px;
+}
+
+.mfb-component__button--main [class^="ic_"],
+.mfb-component__button--main [class*=" ic_"],
+.mfb-component__button--child [class^="ic_"],
+.mfb-component__button--child [class*=" ic_"] {
+    line-height: 56px !important;
+}
+
+.platform-ios.platform-cordova:not(.fullscreen) .fs-header {
+    display: block;
+    height: 20px;
+    background-color: #2975a7 !important;
+    margin-top: -1px;
+}
+
 .item-header {
     font-size: 12px !important;
     font-weight: bold;
@@ -451,7 +470,7 @@ ion-header-bar .title {
     margin-right: 25px;
 }
 
-.empty-list-card {
+<<<<<<< HEAD .empty-list-card {
     min-height: 50px;
     text-align: center;
 }
@@ -525,4 +544,30 @@ ion-header-bar .title {
     margin: 8px;
     padding: 0;
     position: relative;
+}
+
+.home-list .list {
+    padding: 16px 8px;
+}
+
+.home-list ion-item {
+    padding: 0px;
+}
+
+.home-list .button {
+    text-align: left;
+    font-size: 16px;
+    background-color: #fff;
+    border: 1px solid #d2d2d2;
+    min-height: 48px;
+    margin: 5px 0px;
+    padding: 0px 16px;
+}
+
+.home-list .button i {
+    margin-right: 16px;
+}
+
+.home-list .button i::before {
+    font-size: 28px;
 }

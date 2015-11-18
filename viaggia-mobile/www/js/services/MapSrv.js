@@ -1,6 +1,6 @@
 angular.module('viaggia.services.map', [])
 
-.factory('mapService', function ($q, $http, Config, planService, leafletData) {
+.factory('mapService', function ($q, $http, $ionicPlatform, Config, planService, leafletData) {
     var colorsAndTypes = Config.getColorsTypes();
 
     var cachedMap = {};
@@ -97,18 +97,19 @@ angular.module('viaggia.services.map', [])
             L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
                 type: 'map',
                 ext: 'jpg',
-                attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; ' +
-                    'Map data {attribution.OpenStreetMap}',
+                attribution: '',
                 subdomains: '1234',
                 maxZoom: 18
             }).addTo(map);
-            map.locate({
-                setView: false,
-                maxZoom: 8,
-                watch: false,
-                enableHighAccuracy: true
+            $ionicPlatform.ready(function () {
+              map.locate({
+                  setView: false,
+                  maxZoom: 8,
+                  watch: false,
+                  enableHighAccuracy: true
+              });
+              map.on('locationfound', onLocationFound);
             });
-            map.on('locationfound', onLocationFound);
 
             function onLocationFound(e) {
                 mapService.setMyLocation(e);
@@ -119,8 +120,7 @@ angular.module('viaggia.services.map', [])
             L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
                 type: 'map',
                 ext: 'jpg',
-                attribution: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; ' +
-                    'Map data {attribution.OpenStreetMap}',
+                attribution: '',
                 subdomains: '1234',
                 maxZoom: 18
             }).addTo(map);

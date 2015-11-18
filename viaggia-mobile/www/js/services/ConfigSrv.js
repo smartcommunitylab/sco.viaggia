@@ -110,6 +110,9 @@ angular.module('viaggia.services.conf', [])
         getAppId: function () {
             return mapJsonConfig["appid"];
         },
+        getAppName: function () {
+            return mapJsonConfig["appname"];
+        },
         getAppAgencies: function () {
             return mapJsonConfig["agencies"];
         },

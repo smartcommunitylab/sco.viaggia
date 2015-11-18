@@ -110,7 +110,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     }
   }
 
-  $timeout(init, 500);
+  init();
 
   $scope.$on('ngLastRepeat.elements', function (e) {
       $timeout(function () {
@@ -265,7 +265,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     $scope.getTT($scope.runningDate.getTime());
   }
 
-  $timeout($scope.load, 500);
+ $scope.load();
 
   $scope.styleFn = function (value, row, col) {
     //        var cls = col % 2 == 0 ? 'even' : 'odd';
@@ -333,7 +333,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
           if (filteredMarkers.length > MAX_MARKERS) {
             console.log('too many markers');
             if ($scope.markers.length > 0 && !$scope.tooManyMarkers) {
-              Toast.show($filter('translate')('err_too_many_markers'));
+              Toast.show($filter('translate')('err_too_many_markers'), "short", "bottom");
               $scope.tooManyMarkers = true;
             }
             return;
