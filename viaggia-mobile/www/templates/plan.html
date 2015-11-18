@@ -4,15 +4,12 @@
     </ion-nav-buttons>
     <ion-content id="content" has-header="true">
         <div class="row plan-first-row">
-            <!--            <label class="item-input item-floating-label input-plan-fromto ">-->
             <div class="input-plan-fromto">
                 <span class="input-label"><b>{{'plan_from' | translate}}</b></span>
-                <!--                <input type="text" placeholder="{{'plan_from' | translate}}" ng-model="planParams.from.name">-->
                 <placeautocomplete ng-if="refresh" ng-model="fromName" attr-placeholder="{{'plan_insert_from_address' | translate}}" click-activation="false" data="places" on-type="typePlace" placeholder="{{'plan_from' | translate}}" on-select="changeStringFrom" ng-blur="setNameParam"></placeautocomplete>
-                <!--                                    <placeautocomplete ng-model="result" attr-placeholder="{{'segnala_input_place_suggestion' | translate}}" click-activation="true" data="places" on-type="typePlace" placeholder="{{'segnala_input_description' | translate}}" style="width: 100%" on-select="changeString" ng-blur="setNameParam"></placeautocomplete>-->
+
 
             </div>
-            <!--            </label>-->
             <button class="button button-raised button-plan-fromto button-viaggia no-padding margin-8  icon ion-map" ng-click="openMapPlan('from')">
             </button>
             <button class="button button-raised button-plan-fromto button-viaggia no-padding margin-8 icon " ng-class="isFavorite('from',fromName)?'ion-android-star':'ion-android-star-outline'" ng-click="bookmarks('from',fromName)">
@@ -20,16 +17,12 @@
             </button>
         </div>
         <div class="row">
-            <!--            <placeautocomplete ng-model="toName" attr-placeholder="{{'plan_to' | translate}}" click-activation="true" data="places" on-type="typePlace" placeholder="{{'plan_from' | translate}}" on-select="changeString" ng-blur="setNameParam"></placeautocomplete>-->
 
-
-            <!--            <label class="item-input item-floating-label input-plan-fromto ">-->
             <div class="input-plan-fromto">
 
                 <span class="input-label"><b>{{'plan_to' | translate}}</b></span>
                 <placeautocomplete ng-if="refresh" ng-model="toName" attr-placeholder="{{'plan_insert_to_address' | translate}}" click-activation="false" data="places" on-type="typePlace" placeholder="{{'plan_from' | translate}}" on-select="changeStringTo" ng-blur="setNameParam"></placeautocomplete>
             </div>
-            <!--            </label>-->
 
             <button class="button button-raised button-plan-fromto button-viaggia square-56 no-padding margin-8  icon ion-map" ng-click="openMapPlan('to')">
             </button>
@@ -39,7 +32,6 @@
         <div class="row plan-first-row">
             <label class="item item-input plan-item-time">
                 <span class="input-label"><b>{{'plan_day' | translate}}</b></span>
-                <!--                <input type="text" class="datepicker" ng-model="plan.time">-->
                 <ionic-datepicker input-obj="datepickerObjectPopup">
                     <span class="input-label">{{datepickerObjectPopup.inputDate | date:'dd/MM/yyyy'}}</span>
                     <button ng-hide="true">
@@ -48,7 +40,6 @@
             </label>
             <label class="item item-input plan-item-time">
                 <span class="input-label"><b>{{'plan_time' | translate}}</b></span>
-                <!--                <input type="text" class="timepicker" ng-model="plan.time">-->
                 <ionic-timepicker input-obj="timePickerObject24Hour">
 
                     <button ng-hide="true">

@@ -1,0 +1,64 @@
+<ion-modal-view>
+    <ion-header-bar align-title="center">
+        <h1 class="title">Credits</h1>
+        <div class="buttons">
+            <i class="icon voice-menu ion-close-round close-credits" ng-click="closeCredits()"></i>
+        </div>
+    </ion-header-bar>
+    <ion-content>
+        <div class="row">
+            <div class="col">
+                <div class="credits_title">{{appName}}</div>
+            </div>
+        </div>
+        <div class="row credits_row version">
+            <div class="col credits_version" ng-bind-html="version"></div>
+        </div>
+        <div class="row credits_row credits_subtitle">
+            <div class="col"><span>{{'credits_project' | translate}}</span>
+            </div>
+        </div>
+        <div class="row credits_row">
+            <div class="col col-50">
+                <a href="#" onclick="window.open('http://www.fbk.eu', '_system', 'location=yes'); return false;"><img class="image center" src="img/credits/fbk.png" width="50%" />
+                </a>
+            </div>
+            <div class="col col-50">
+                <a href="#" onclick="window.open('http://www.smartcommunitylab.it/', '_system', 'location=yes'); return false;"><img class="image center" src="img/credits/logo-SCO.png" width="100%" />
+                </a>
+            </div>
+        </div>
+        <div class="row credits_row credits_subtitle">
+            <div class="col"><span>{{'credits_sponsored' | translate}}</span>
+            </div>
+        </div>
+        <div class="row credits_row">
+            <div class="col col-center">
+                <a href="#" onclick="window.open('http://www.comune.trento.it', '_system', 'location=yes'); return false;"><img class="image center" src="img/credits/comune_tn.png" width="40%" />
+                </a>
+            </div>
+
+        </div>
+        <div class="row credits_row">
+            <div class="col col-center">
+                <a href="#" onclick="window.open('http://www.comunitrentini.it', '_system', 'location=yes'); return false;"><img class="image center" src="img/credits/consorzio_comuni_trentini.png" width="40%" />
+                </a>
+            </div>
+
+        </div>
+
+        <div class="row credits_row credits_subtitle">
+            <div class="col"><span class="credits-title">{{'credits_info' | translate}}</span>
+                <br/><a class="credits_mail" href="mailto:viaggiatrento@smartcommunitylab.it">viaggiatrento@smartcommunitylab.it</a>
+            </div>
+        </div>
+
+        <div class="row credits_row">
+            <div class="col">
+                <button class="button button-percorsi button-block" onclick="window.open('http://www.smartcommunitylab.it/licenze/', '_system', 'location=yes'); return false;">
+                    {{'credits_licenses_button' | translate}}
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

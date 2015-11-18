@@ -175,7 +175,7 @@
 }
 
 .plan-first-row {
-    padding-top: 32px!important;
+    padding-top: 40px!important;
 }
 
 .plan-item-time {
@@ -382,8 +382,8 @@
 }
 
 .parking-popup .popup {
-  width: 80%;
-  max-width: 400px;
+    width: 80%;
+    max-width: 400px;
 }
 
 .parking-popup .popup-title {
@@ -410,34 +410,35 @@ ion-header-bar .title {
 }
 
 .stop-line-list .item {
-  padding: 8px 16px;
-  min-height: 0;
-  white-space: normal;
-
+    padding: 8px 16px;
+    min-height: 0;
+    white-space: normal;
 }
 
 .stop-line-grid .route-grid-element {
-  margin: 4px 8px 4px 0;
-  display: inline-block;
+    margin: 4px 8px 4px 0;
+    display: inline-block;
 }
 
 .stop-line-title {
-  padding: 8px 16px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    padding: 8px 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .stop-line .row {
-  padding: 0;
+    padding: 0;
 }
+
 .stop-line .row .col {
-  border-bottom: 1px solid #d2d2d2;
-  padding: 16px 0px;
-  border-right: 1px solid #d2d2d2;
+    border-bottom: 1px solid #d2d2d2;
+    padding: 16px 0px;
+    border-right: 1px solid #d2d2d2;
 }
+
 .stop-line .row .col:last-child {
-  border-right: 0;
+    border-right: 0;
 }
 
 .many-options {
@@ -448,4 +449,80 @@ ion-header-bar .title {
 .single-options {
     margin-top: 25px;
     margin-right: 25px;
+}
+
+.empty-list-card {
+    min-height: 50px;
+    text-align: center;
+}
+
+.credits_title {
+    text-align: center;
+    color: #2975a7;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.credits_subtitle {
+    text-align: center;
+    color: #2975a7;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.credits_row {
+    padding: 0;
+    margin-bottom: 10px;
+}
+
+.credits_row.last {
+    margin-bottom: 20px;
+}
+
+.credits_row.version {
+    color: #aaa;
+}
+
+.credits_row.version .col {
+    font-size: 12px;
+    line-height: 12px;
+}
+
+.credits_mail {
+    color: black;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.credits_version {
+    text-align: center;
+}
+
+.close-credits {
+    padding: 8px;
+}
+
+.image.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.popup {
+    width: 400px!important;
+}
+
+.popup-buttons .button {
+    background-color: #3bbacf;
+    color: #fff;
+}
+
+.list-journey {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+    display: block;
+    margin: 8px;
+    padding: 0;
+    position: relative;
 }

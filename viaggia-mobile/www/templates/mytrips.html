@@ -1,11 +1,13 @@
 <ion-view id="mytrips">
     <ion-content id="content" has-header="true">
-        <ion-list class="animate-ripple">
+        <div class="card empty-list-card" ng-hide="savedTrips.length>0">
+            {{'my_trip_empty_list'|translate}}
+        </div>
+        <ion-list class="animate-ripple" ng-hide="savedTrips.length==0">
             <ion-item class="card" ng-repeat="journey in savedTrips" ng-last-repeat="savedTrips" ng-click="showPlan(journey)">
                 <div class="row">
                     <div class="col-md-2 text-center">
                         <div>{{journey.data.name }}</div>
-                        <!--                        <div style="position: absolute; bottom: 0;">{{journey.endtime | date:'hh:mm'}}</div>-->
                     </div>
                 </div>
                 <!--<div class="col-md-10">-->

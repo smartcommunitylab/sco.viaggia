@@ -10,9 +10,9 @@
         </div>
 
         <ion-list class="animate-ripple">
-            <ion-item ng-repeat="journey in journeys" ng-last-repeat="journeys" ng-click="showPlan(journey)">
+            <ion-item class="list-journey" ng-repeat="journey in journeys" ng-last-repeat="journeys" ng-click="showPlan(journey)">
                 <div class="row">
-                    <div class="col-md-2 text-center" style="min-height: 100px;">
+                    <div class="col-md-2 text-center line-background" style="min-height: 100px;">
                         <div>{{journey.startime | date:'hh:mm'}}</div>
                         <div style="position: absolute; bottom: 0;">{{journey.endtime | date:'hh:mm'}}</div>
                     </div>

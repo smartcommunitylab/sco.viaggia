@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.common', [])
 
-.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, DataManager, $ionicPopup, $filter, $ionicLoading, Config) {
+.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, DataManager, $ionicPopup, $ionicModal, $filter, $ionicLoading, Config, planService) {
 
     /*menu group*/
     $scope.toggleGroupRealTime = function () {
@@ -14,7 +14,25 @@ angular.module('viaggia.controllers.common', [])
         return $scope.shownGroup === true;
     };
 
-    /*pop up managers*/
+    $ionicModal.fromTemplateUrl('templates/credits.html', {
+        id: '3',
+        scope: $scope,
+        backdropClickToClose: false,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.creditsModal = modal;
+    });
+    $scope.closeCredits = function () {
+        $scope.creditsModal.hide();
+    };
+    $scope.openCredits = function () {
+            $scope.creditsModal.show();
+        }
+        /*pop up managers*/
+    $scope.newPlan = function () {
+        planService.setTripId(null); //reset data for pianification
+        $state.go('app.plan');
+    };
     $scope.popupLoadingShow = function () {
         $ionicLoading.show({
             template: $filter('translate')("pop_up_loading")
@@ -67,14 +85,14 @@ angular.module('viaggia.controllers.common', [])
         });
     };
 
-    Config.init().then(function() {
-      $scope.infomenu = Config.getInfoMenu();
+    Config.init().then(function () {
+        $scope.infomenu = Config.getInfoMenu();
     });
 
-    $scope.selectInfomenu = function(m) {
-//      m.data.label = m.label;
-//      Config.setInfoMenuParams(m.data);
-//      $state.go(m.state);
+    $scope.selectInfomenu = function (m) {
+        //      m.data.label = m.label;
+        //      Config.setInfoMenuParams(m.data);
+        //      $state.go(m.state);
     };
 })
 

@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.plan', [])
 
-.controller('PlanCtrl', function ($scope, Config, $q, $http, $ionicModal, $ionicLoading, $filter, $state, $window, leafletData, planService, GeoLocate, mapService) {
+.controller('PlanCtrl', function ($scope, Config, $q, $http, $ionicModal, $ionicLoading, $filter, $state, $window, Toast, leafletData, planService, GeoLocate, mapService) {
     $scope.preferences = Config.getPlanPreferences();
     $scope.types = Config.getPlanTypes();
     $scope.datepickerObject = {};
@@ -11,6 +11,8 @@ angular.module('viaggia.controllers.plan', [])
     $scope.place = null;
     $scope.placesandcoordinates = null;
     $scope.favoritePlaces = JSON.parse(localStorage.getItem(Config.getAppId() + "_favoritePlaces"));
+
+
     if (!$scope.favoritePlaces) {
         $scope.favoritePlaces = [];
     }
@@ -67,6 +69,16 @@ angular.module('viaggia.controllers.plan', [])
         $scope.planParams.date = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
         $scope.planParams.routeType = planOptionConfig.routeType;
         $scope.planParams.transportTypes = planOptionConfig.transportTypes;
+        for (var i = 0; i < $scope.types.length; i++) {
+            $scope.mapTypes[$scope.planParams.transportTypes[i]] = true;
+        }
+    }
+
+    var setSavedOptions = function (Configure) {
+        $scope.planParams.departureTime = $filter('date')(new Date().getTime(), 'hh:mma');
+        $scope.planParams.date = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
+        $scope.planParams.routeType = Configure.routeType;
+        $scope.planParams.transportTypes = Configure.transportTypes;
         for (var i = 0; i < $scope.types.length; i++) {
             $scope.mapTypes[$scope.planParams.transportTypes[i]] = true;
         }
@@ -201,12 +213,16 @@ angular.module('viaggia.controllers.plan', [])
     $scope.openMapPlan = function (place) {
         $scope.place = place;
         $scope.refresh = false;
-        $scope.modalMap.show();
+        if ($scope.modalMap) {
+            $scope.modalMap.show();
+        }
     }
 
     $scope.closeMap = function () {
         $scope.refresh = true;
-        $scope.modalMap.hide();
+        if ($scope.modalMap) {
+            $scope.modalMap.hide();
+        }
     }
     $scope.openFavorites = function () {
         $scope.refresh = false;
@@ -234,8 +250,22 @@ angular.module('viaggia.controllers.plan', [])
         //delete $scope.placesandcoordinates[favorite.name];
     }
 
-    var setPlanParams = function () {
+    var setAndCheckPlanParams = function () {
         //routeType
+        if (($scope.planParams.from.name == '') || ($scope.fromName == '')) {
+            Toast.show($filter('translate')("error_from_message_feedback"), "short", "bottom");
+            return false
+        }
+        if (($scope.planParams.to.name == '') || ($scope.toName == '')) {
+            Toast.show($filter('translate')("error_to_message_feedback"), "short", "bottom");
+            return false
+        }
+        var selectedDate = new Date($scope.datepickerObjectPopup.inputDate);
+        selectedDate.setHours(0, 0, 0, 0);
+        if (((selectedDate.getTime() + $scope.timePickerObject24Hour.inputEpochTime * 1000)) < (new Date()).getTime() - (5 * 60000)) {
+            Toast.show($filter('translate')("error_time_message_feedback"), "short", "bottom");
+            return false
+        }
         //transportTypes
         for (var i = 0; i < $scope.types.length; i++) {
             if ($scope.mapTypes[$scope.types[i]]) {
@@ -250,18 +280,22 @@ angular.module('viaggia.controllers.plan', [])
             //date
             $scope.planParams.date = $scope.dateTimestamp;
         }
-
+        return true;
     }
     $scope.plan = function () {
 
-        setPlanParams();
-        planService.planJourney($scope.planParams).then(function (value) {
-            //if ok let's go to visualization
-            $state.go('app.planlist')
-        }, function (error) {
-            //error then pop up some problem
-            $scope.showErrorServer()
-        });
+
+        if (setAndCheckPlanParams()) {
+            planService.planJourney($scope.planParams).then(function (value) {
+                //if ok let's go to visualization
+                $state.go('app.planlist')
+            }, function (error) {
+                //error then pop up some problem
+                $scope.showErrorServer()
+            });
+        } else {
+            //message something is missing
+        }
     }
     var selectPlace = function (placeSelected) {
         if ($scope.place == 'from') {
@@ -328,14 +362,7 @@ angular.module('viaggia.controllers.plan', [])
 
                 //                });
             }
-            //                                ,
-            //            function (error) {
-            //                $ionicLoading.hide();
-            //            }, {
-            //                enableHighAccuracy: true,
-            //                timeout: 10000,
-            //                maximumAge: 0
-            //            }
+
         );
         // }
     };
@@ -345,7 +372,7 @@ angular.module('viaggia.controllers.plan', [])
     $scope.initMap = function () {
         mapService.initMap('modalMap').then(function () {
 
-            $scope.$on("leafletDirectiveMap.click", function (event, args) {
+            $scope.$on("leafletDirectiveMap.modalMap.click", function (event, args) {
                 $ionicLoading.show();
                 planService.setPosition($scope.place, args.leafletEvent.latlng.lat, args.leafletEvent.latlng.lng);
                 var placedata = $q.defer();
@@ -441,6 +468,23 @@ angular.module('viaggia.controllers.plan', [])
     });
 
     $scope.mapTypes = initMapTypes($scope.types);
-    $scope.locateMe();
-    setDefaultOptions();
+    if (planService.getTripId() == null) {
+        $scope.locateMe();
+        setDefaultOptions();
+    } else {
+        /*if param, then load from service*/
+        var trip = planService.getSelectedJourney();
+        $scope.planParams = planService.getPlanConfigure();
+
+        $scope.fromName = $scope.planParams.from.name;
+        $scope.place = 'from';
+        planService.setPosition($scope.place, $scope.planParams.from.lat, $scope.planParams.from.long);
+        selectPlace($scope.planParams.from.name);
+        $scope.toName = $scope.planParams.to.name;
+        $scope.place = 'to';
+        planService.setPosition($scope.place, $scope.planParams.to.lat, $scope.planParams.to.long);
+        selectPlace($scope.planParams.to.name);
+        setSavedOptions($scope.planParams);
+
+    }
 })

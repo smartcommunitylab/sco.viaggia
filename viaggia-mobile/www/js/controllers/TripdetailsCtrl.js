@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.tripdetails', [])
 
-.controller('TripDetailsCtrl', function ($scope, $ionicModal, $filter, $ionicPopup, planService, mapService, Config, Toast, $filter) {
+.controller('TripDetailsCtrl', function ($scope, $ionicModal, $filter, $ionicPopup, planService, mapService, Config, Toast, $filter, $ionicHistory, $state) {
     $scope.title = $filter('translate')('map_detail_title');
     var trip = planService.getSelectedJourney();
     $scope.requestedFrom = planService.getName("from");
@@ -47,11 +47,25 @@ angular.module('viaggia.controllers.tripdetails', [])
 
 
     }
+    $scope.modifyTrip = function () {
+        $state.go('app.plan');
+
+    }
+    $scope.deleteTrip = function () {
+        $scope.showConfirm($filter('translate')("popup_delete_trip_message"), $filter('translate')("popup_delete_trip_title"), function () {
+            planService.deleteTrip($scope.tripId).then(function (res) {
+                //delete actual from localStorage and memory
+                //go back in the stack
+
+                $ionicHistory.goBack();
+            });
+        });
+
+        //delete $scope.placesandcoordinates[favorite.name];
+    }
     $scope.initMap = function () {
         mapService.initMap().then(function () {
             //add polyline
-
-
         })
     }
     $scope.pathLine = mapService.getTripPolyline(trip);

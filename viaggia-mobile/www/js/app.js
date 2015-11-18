@@ -376,7 +376,24 @@ angular.module('viaggia', [
             btn_next_trips: 'Vedi prossimi orari',
             lbl_stop: 'Fermata',
             err_too_many_markers: 'Too many objects on the map. Please zoom in.',
-            lbl_lines: 'Corse:'
+            lbl_lines: 'Corse:',
+            popup_delete_trip_message: 'Sicuro di voler cancellare il viaggio salvato?',
+            popup_delete_trip_text: 'Cancella',
+            tripdeleted_message_feedback: 'Il viaggio selezionato è stato cancellato',
+            my_trip_empty_list: 'Non ci sono viaggi salvati',
+            favorites_empty_list: 'Non ci sono favoriti memorizzati',
+            pop_up_error_server_title: 'Errore',
+            pop_up_error_server_template: 'Errore di comunicazione con il server',
+            error_from_message_feedback: 'Luogo di partenza non valido',
+            error_to_message_feedback: 'Luogo di destinazione non valido',
+            error_time_message_feedback: 'Selezionare un\'ora recente',
+            credits_project: 'Un progetto di:',
+            credits_sponsored: 'Con la collaborazione di:',
+            credits_info: 'Per informazioni:',
+            credits_licenses_button: 'VEDI LICENZE',
+            favorites_title_list: 'Indirizzi preferiti'
+
+
         });
 
 
@@ -470,7 +487,23 @@ angular.module('viaggia', [
             btn_next_trips: 'See next trips',
             lbl_stop: 'Stop',
             err_too_many_markers: 'Too many objects on the map. Please zoom in.',
-            lbl_lines: 'Lines:'
+            lbl_lines: 'Lines:',
+            popup_delete_trip_message: 'Are you sure to delete the saved journey?',
+            popup_delete_trip_text: 'Delete',
+            tripdeleted_message_feedback: 'The selected journey has been deleted',
+            my_trip_empty_list: 'No saved journeys',
+            favorites_empty_list: 'No saved favorites',
+            pop_up_error_server_title: 'Error',
+            pop_up_error_server_template: 'We had some communication problems',
+            error_from_message_feedback: 'Starting point is not valid',
+            error_to_message_feedback: 'Destination point is not valid',
+            error_time_message_feedback: 'Choose a recent hour',
+            credits_project: 'A project by:',
+            credits_sponsored: 'In collaboration with:',
+            credits_info: 'Further information:',
+            credits_licenses_button: 'READ LICENSES',
+            favorites_title_list: 'Favorite places'
+
         });
 
 

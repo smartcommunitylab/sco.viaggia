@@ -17,6 +17,7 @@ angular.module('viaggia.controllers.mytrips', [])
 
     $scope.showPlan = function (journey) {
         planService.setSelectedJourney(journey.data.data);
+        planService.setPlanConfigure(journey.data.originalRequest);
         planService.setName("from", journey.data.originalFrom.name);
         planService.setName("to", journey.data.originalTo.name);
         planService.setTripId(journey.tripId);

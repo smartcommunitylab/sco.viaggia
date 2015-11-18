@@ -317,6 +317,9 @@ angular.module('viaggia.services.plan', [])
     planService.getPlanConfigure = function () {
         return planConfigure;
     }
+    planService.setPlanConfigure = function (configure) {
+        planConfigure = configure;
+    }
     planService.getSelectedJourney = function () {
         return selectedjourney;
     }
@@ -347,7 +350,8 @@ angular.module('viaggia.services.plan', [])
                 },
                 "date": newPlanConfigure.date,
                 "transportTypes": newPlanConfigure.transportTypes
-            }
+            },
+            timeout: 10000
         }).
         success(function (data) {
             deferred.resolve(data);
@@ -447,6 +451,7 @@ angular.module('viaggia.services.plan', [])
                     "lat": trip.to.lat,
                     "lon": trip.to.lon
                 },
+                "originalRequest": planService.getPlanConfigure(),
                 "monitor": true,
                 "name": name,
                 "data": trip
@@ -493,6 +498,25 @@ angular.module('viaggia.services.plan', [])
         //            console.log(data + status + headers + config);
         //            deferred.reject(data);
         //        });
+
+        return deferred.promise;
+    }
+
+
+    planService.deleteTrip = function (tripId) {
+        var deferred = $q.defer();
+        if (!tripId) {
+            deferred.reject();
+        }
+
+        var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
+        if (!savedTrips) {
+            deferred.reject();
+        }
+        delete savedTrips[tripId]
+        localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
+        deferred.resolve(true);
+
 
         return deferred.promise;
     }
