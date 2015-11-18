@@ -470,7 +470,7 @@ ion-header-bar .title {
     margin-right: 25px;
 }
 
-<<<<<<< HEAD .empty-list-card {
+.empty-list-card {
     min-height: 50px;
     text-align: center;
 }
@@ -530,7 +530,8 @@ ion-header-bar .title {
 }
 
 .popup {
-    width: 400px!important;
+    max-width: 400px!important;
+    width: 90%!important;
 }
 
 .popup-buttons .button {

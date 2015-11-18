@@ -3,7 +3,10 @@ angular.module('viaggia.controllers.mytrips', [])
 .controller('MyTripsCtrl', function ($scope, Config, $timeout, ionicMaterialMotion, ionicMaterialInk, planService, $state) {
 
     $scope.savedTripsOnMemory = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
-    $scope.savedTripsKeys = Object.keys($scope.savedTripsOnMemory);
+    $scope.savedTripsKeys = [];
+    if ($scope.savedTripsOnMemory) {
+        $scope.savedTripsKeys = Object.keys($scope.savedTripsOnMemory);
+    }
     $scope.savedTrips = [];
     for (var k = 0; k < $scope.savedTripsKeys.length; k++) {
         $scope.savedTrips.push($scope.savedTripsOnMemory[$scope.savedTripsKeys[k]]);
