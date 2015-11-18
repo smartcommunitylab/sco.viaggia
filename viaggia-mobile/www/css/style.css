@@ -8,6 +8,13 @@
   line-height: 56px !important;
 }
 
+.platform-ios.platform-cordova:not(.fullscreen) .fs-header {
+  display: block;
+  height: 20px;
+  background-color: #2975a7 !important;
+  margin-top: -1px;
+}
+
 .item-header {
     font-size: 12px !important;
     font-weight: bold;

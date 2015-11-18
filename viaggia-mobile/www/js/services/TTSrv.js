@@ -26,10 +26,15 @@ angular.module('viaggia.services.timetable', [])
 
   var toTrimmedList = function(str) {
     if (!str) return [];
-    var arr = str.split(',');
-    var res = [];
-    arr.forEach(function(e) {res.push(e.trim());});
-    return res;
+    try {
+      var arr = str.split(',');
+      var res = [];
+      arr.forEach(function(e) {res.push(e.trim());});
+      return res;
+    } catch(e) {
+      console.error('ERROR PARSING ARRAY: '+e);
+      return [];
+    }
   }
 
   var getDelays = function(agency, route, date) {
