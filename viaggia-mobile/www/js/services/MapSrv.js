@@ -54,10 +54,10 @@ angular.module('viaggia.services.map', [])
             divreturn = divreturn + '<p>' + leg.toLabel + '<strong>' + leg.to + '</strong></p>'
         }
         if (leg.parking && leg.parking.cost) {
-            divreturn = divreturn + '<p>' + step.parking.cost + '</strong></p>'
+            divreturn = divreturn + '<p>' + leg.parking.cost + '</strong></p>'
         }
         if (leg.parking && leg.parking.time) {
-            divreturn = divreturn + '<p>' + step.parking.time + '</p>'
+            divreturn = divreturn + '<p>' + leg.parking.time + '</p>'
         }
         return divreturn;
     }
@@ -67,18 +67,18 @@ angular.module('viaggia.services.map', [])
     var mapOfIcons = getMapOfIcons();
 
 
-    mapService.getMap = function(mapId) {
-      var deferred = $q.defer();
+    mapService.getMap = function (mapId) {
+        var deferred = $q.defer();
 
-      if (cachedMap[mapId] == null) {
-        mapService.initMap(mapId).then(function() {
-          deferred.resolve(cachedMap[mapId]);
-        });
-      } else {
-        deferred.resolve(cachedMap[mapId]);
-      }
+        if (cachedMap[mapId] == null) {
+            mapService.initMap(mapId).then(function () {
+                deferred.resolve(cachedMap[mapId]);
+            });
+        } else {
+            deferred.resolve(cachedMap[mapId]);
+        }
 
-      return deferred.promise;
+        return deferred.promise;
     }
 
     mapService.setMyLocation = function (myNewLocation) {
@@ -102,13 +102,13 @@ angular.module('viaggia.services.map', [])
                 maxZoom: 18
             }).addTo(map);
             $ionicPlatform.ready(function () {
-              map.locate({
-                  setView: false,
-                  maxZoom: 8,
-                  watch: false,
-                  enableHighAccuracy: true
-              });
-              map.on('locationfound', onLocationFound);
+                map.locate({
+                    setView: false,
+                    maxZoom: 8,
+                    watch: false,
+                    enableHighAccuracy: true
+                });
+                map.on('locationfound', onLocationFound);
             });
 
             function onLocationFound(e) {

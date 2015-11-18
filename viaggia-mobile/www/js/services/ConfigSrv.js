@@ -53,7 +53,7 @@ angular.module('viaggia.services.conf', [])
 
         },
         {
-            type: 'BIKE',
+            type: 'BICYCLE',
             color: '#8cc04c',
             icon: 'img/ic_bike.png'
 
@@ -67,17 +67,17 @@ angular.module('viaggia.services.conf', [])
 
         ]
     return {
-        init : function() {
-           var deferred = $q.defer();
-           if (mapJsonConfig != null) deferred.resolve(true);
-           else $http.get('data/config.json').success(function (response) {
-             mapJsonConfig = response;
-             $http.get('data/tt.json').success(function (ttResponse) {
-               ttJsonConfig = ttResponse;
-               deferred.resolve(true);
-             });
-           });
-           return deferred.promise;
+        init: function () {
+            var deferred = $q.defer();
+            if (mapJsonConfig != null) deferred.resolve(true);
+            else $http.get('data/config.json').success(function (response) {
+                mapJsonConfig = response;
+                $http.get('data/tt.json').success(function (ttResponse) {
+                    ttJsonConfig = ttResponse;
+                    deferred.resolve(true);
+                });
+            });
+            return deferred.promise;
         },
         getHTTPConfig: function () {
             return HTTP_CONFIG;
@@ -157,46 +157,46 @@ angular.module('viaggia.services.conf', [])
         loaded: function () {
             $ionicLoading.hide();
         },
-        getInfoMenu: function() {
-          return mapJsonConfig.visualization.infomenu;
+        getInfoMenu: function () {
+            return mapJsonConfig.visualization.infomenu;
         },
-        getPrimaryLinks: function() {
-          return mapJsonConfig.visualization.primaryLinks;
+        getPrimaryLinks: function () {
+            return mapJsonConfig.visualization.primaryLinks;
         },
-        getTTData : function(ref, agencyId, groupId, routeId) {
-          var res = ttJsonConfig;
-          if (!!ref) {
-            res = res.elements[ref];
-          }
-          if (!!agencyId) {
-            for (var i = 0; i < res.elements.length; i++) {
-              if (res.elements[i].agencyId == agencyId) {
-                res = res.elements[i];
-                break;
-              }
+        getTTData: function (ref, agencyId, groupId, routeId) {
+            var res = ttJsonConfig;
+            if (!!ref) {
+                res = res.elements[ref];
             }
-          }
-          if (!!groupId) {
-            for (var i = 0; i < res.groups.length; i++) {
-              if (res.groups[i].label == groupId) {
-                res = res.groups[i];
-                break;
-              }
+            if (!!agencyId) {
+                for (var i = 0; i < res.elements.length; i++) {
+                    if (res.elements[i].agencyId == agencyId) {
+                        res = res.elements[i];
+                        break;
+                    }
+                }
             }
-          }
-          if (!!routeId) {
-            for (var i = 0; i < res.routes.length; i++) {
-              if (res.routes[i].routeId == routeId) {
-                res = res.routes[i];
-                break;
-              }
+            if (!!groupId) {
+                for (var i = 0; i < res.groups.length; i++) {
+                    if (res.groups[i].label == groupId) {
+                        res = res.groups[i];
+                        break;
+                    }
+                }
             }
-          }
-          return res;
-         },
-      getStopVisualization: function(agencyId) {
-        if (!ttJsonConfig || !ttJsonConfig.stopVisualization || !ttJsonConfig.stopVisualization[agencyId]) return {};
-        return ttJsonConfig.stopVisualization[agencyId];
-      }
+            if (!!routeId) {
+                for (var i = 0; i < res.routes.length; i++) {
+                    if (res.routes[i].routeId == routeId) {
+                        res = res.routes[i];
+                        break;
+                    }
+                }
+            }
+            return res;
+        },
+        getStopVisualization: function (agencyId) {
+            if (!ttJsonConfig || !ttJsonConfig.stopVisualization || !ttJsonConfig.stopVisualization[agencyId]) return {};
+            return ttJsonConfig.stopVisualization[agencyId];
+        }
     }
 })

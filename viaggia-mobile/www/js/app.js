@@ -1,40 +1,40 @@
-angular.module('ngIOS9UIWebViewPatch', ['ng']).config(['$provide', function($provide) {
-  'use strict';
+angular.module('ngIOS9UIWebViewPatch', ['ng']).config(['$provide', function ($provide) {
+    'use strict';
 
-  $provide.decorator('$browser', ['$delegate', '$window', function($delegate, $window) {
+    $provide.decorator('$browser', ['$delegate', '$window', function ($delegate, $window) {
 
-    if (isIOS9UIWebView($window.navigator.userAgent)) {
-      return applyIOS9Shim($delegate);
-    }
-
-    return $delegate;
-
-    function isIOS9UIWebView(userAgent) {
-      return /(iPhone|iPad|iPod).* OS 9_\d/.test(userAgent) && !/Version\/9\./.test(userAgent);
-    }
-
-    function applyIOS9Shim(browser) {
-      var pendingLocationUrl = null;
-      var originalUrlFn= browser.url;
-
-      browser.url = function() {
-        if (arguments.length) {
-          pendingLocationUrl = arguments[0];
-          return originalUrlFn.apply(browser, arguments);
+        if (isIOS9UIWebView($window.navigator.userAgent)) {
+            return applyIOS9Shim($delegate);
         }
 
-        return pendingLocationUrl || originalUrlFn.apply(browser, arguments);
-      };
+        return $delegate;
 
-      window.addEventListener('popstate', clearPendingLocationUrl, false);
-      window.addEventListener('hashchange', clearPendingLocationUrl, false);
+        function isIOS9UIWebView(userAgent) {
+            return /(iPhone|iPad|iPod).* OS 9_\d/.test(userAgent) && !/Version\/9\./.test(userAgent);
+        }
 
-      function clearPendingLocationUrl() {
-        pendingLocationUrl = null;
-      }
+        function applyIOS9Shim(browser) {
+            var pendingLocationUrl = null;
+            var originalUrlFn = browser.url;
 
-      return browser;
-    }
+            browser.url = function () {
+                if (arguments.length) {
+                    pendingLocationUrl = arguments[0];
+                    return originalUrlFn.apply(browser, arguments);
+                }
+
+                return pendingLocationUrl || originalUrlFn.apply(browser, arguments);
+            };
+
+            window.addEventListener('popstate', clearPendingLocationUrl, false);
+            window.addEventListener('hashchange', clearPendingLocationUrl, false);
+
+            function clearPendingLocationUrl() {
+                pendingLocationUrl = null;
+            }
+
+            return browser;
+        }
   }]);
 }]);
 
@@ -430,7 +430,8 @@ angular.module('viaggia', [
             credits_sponsored: 'Con la collaborazione di:',
             credits_info: 'Per informazioni:',
             credits_licenses_button: 'VEDI LICENZE',
-            favorites_title_list: 'Indirizzi preferiti'
+            favorites_title_list: 'Indirizzi preferiti',
+            plan_title: 'Pianifica viaggio'
 
 
         });
@@ -541,7 +542,8 @@ angular.module('viaggia', [
             credits_sponsored: 'In collaboration with:',
             credits_info: 'Further information:',
             credits_licenses_button: 'READ LICENSES',
-            favorites_title_list: 'Favorite places'
+            favorites_title_list: 'Favorite places',
+            plan_title: 'Plan journey'
 
         });
 

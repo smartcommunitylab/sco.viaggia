@@ -133,6 +133,55 @@ angular.module('viaggia.services.plan', [])
         }
         return (l / 1000).toFixed(2);
     };
+    var extractParking = function (leg, extended) {
+        var res = {
+            type: null,
+            cost: null,
+            time: null,
+            note: [],
+            img: null
+        };
+        if (leg.extra != null) {
+            if (leg.extra.costData && leg.extra.costData.fixedCost) {
+                var cost = (leg.extra.costData.fixedCost).replace(',', '.').replace(' ', '');
+                if (extended == true) {
+                    cost = parseFloat(cost) > 0 ? leg.extra.costData.costDefinition : 'gratis';
+                } else {
+                    cost = parseFloat(cost) > 0 ? (cost + '\u20AC') : 'gratis';
+                }
+                res.cost = cost;
+                res.note.push(cost);
+            }
+            if (leg.extra.searchTime && leg.extra.searchTime.max > 0) {
+                res.time = leg.extra.searchTime.min + '-' + leg.extra.searchTime.max + 'min';
+                res.note.push(res.time);
+            }
+            res.type = 'STREET';
+        }
+        if (leg.to.stopId) {
+            var cost = 'gratis';
+            if (leg.to.stopId.extra && leg.to.stopId.extra.costData && leg.to.stopId.extra.costData.fixedCost) {
+                cost = (leg.to.stopId.extra.costData.fixedCost).replace(',', '.').replace(' ', '');
+                if (extended == true) {
+                    cost = parseFloat(cost) > 0 ? leg.to.stopId.extra.costData.costDefinition : 'gratis';
+                } else {
+                    cost = parseFloat(cost) > 0 ? (cost + '\u20AC') : 'gratis';
+                }
+            }
+            res.cost = cost;
+            res.note.push(cost);
+            res.type = 'PARK';
+        }
+        if (leg.to.stopId && leg.to.stopId.id) {
+            //            var parkingPlace = parking.getParking(leg.to.stopId.agencyId, leg.to.stopId.id);
+            var parkingPlace = null;
+            res.place = parkingPlace != null ? parkingPlace.description : leg.to.stopId.id;
+        }
+        if (res.type) {
+            res.img = 'img/' + getImageName(res.type) + '.png';
+            return res;
+        }
+    };
     planService.extractItineraryMeans = function (it) {
         var means = [];
         var meanTypes = [];

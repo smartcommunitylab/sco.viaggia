@@ -1,6 +1,7 @@
 angular.module('viaggia.controllers.planlist', [])
 
-.controller('PlanlistCtrl', function ($scope, planService, ionicMaterialMotion, ionicMaterialInk, $timeout, $state) {
+.controller('PlanlistCtrl', function ($scope, planService, ionicMaterialMotion, ionicMaterialInk, $timeout, $state, $filter) {
+    $scope.plantitle = $filter('translate')('plan_title');
     $scope.journeys = planService.getplanJourneyResults();
     $scope.planConfigure = planService.getPlanConfigure();
     $scope.nameFrom = planService.getName('from');

@@ -1,6 +1,7 @@
 angular.module('viaggia.controllers.plan', [])
 
 .controller('PlanCtrl', function ($scope, Config, $q, $http, $ionicModal, $ionicLoading, $filter, $state, $window, Toast, leafletData, planService, GeoLocate, mapService) {
+    $scope.plantitle = $filter('translate')('plan_title');
     $scope.preferences = Config.getPlanPreferences();
     $scope.types = Config.getPlanTypes();
     $scope.datepickerObject = {};
@@ -475,7 +476,6 @@ angular.module('viaggia.controllers.plan', [])
         /*if param, then load from service*/
         var trip = planService.getSelectedJourney();
         $scope.planParams = planService.getPlanConfigure();
-
         $scope.fromName = $scope.planParams.from.name;
         $scope.place = 'from';
         planService.setPosition($scope.place, $scope.planParams.from.lat, $scope.planParams.from.long);

@@ -572,3 +572,9 @@ ion-header-bar .title {
 .home-list .button i::before {
     font-size: 28px;
 }
+
+.line-background-for-list {
+    background-image: url("../img/ic_point_line_list.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+}
