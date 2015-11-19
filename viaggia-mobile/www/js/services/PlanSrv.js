@@ -550,7 +550,23 @@ angular.module('viaggia.services.plan', [])
 
         return deferred.promise;
     }
+    planService.getTripFromMemory = function (tripId) {
+        var deferred = $q.defer();
+        if (!tripId) {
+            deferred.reject();
+        }
 
+        var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
+        if (!savedTrips) {
+            deferred.reject();
+        } else {
+            deferred.resolve(savedTrips[tripId])
+        };
+
+
+
+        return deferred.promise;
+    }
 
     planService.deleteTrip = function (tripId) {
         var deferred = $q.defer();

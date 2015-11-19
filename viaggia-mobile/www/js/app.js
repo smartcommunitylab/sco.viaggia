@@ -431,7 +431,8 @@ angular.module('viaggia', [
             credits_info: 'Per informazioni:',
             credits_licenses_button: 'VEDI LICENZE',
             favorites_title_list: 'Indirizzi preferiti',
-            plan_title: 'Pianifica viaggio'
+            plan_title: 'Pianifica viaggio',
+            planlist_sustanainable: 'Itinerari sostenibili'
 
 
         });
@@ -543,7 +544,8 @@ angular.module('viaggia', [
             credits_info: 'Further information:',
             credits_licenses_button: 'READ LICENSES',
             favorites_title_list: 'Favorite places',
-            plan_title: 'Plan journey'
+            plan_title: 'Plan journey',
+            planlist_sustanainable: 'Sustainable Itineraries'
 
         });
 

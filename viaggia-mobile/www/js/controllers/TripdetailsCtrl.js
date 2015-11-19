@@ -48,7 +48,15 @@ angular.module('viaggia.controllers.tripdetails', [])
 
     }
     $scope.modifyTrip = function () {
-        $state.go('app.plan');
+        //get configuration with tripid
+        planService.getTripFromMemory($scope.tripId).then(function (trip) {
+            planService.setPlanConfigure(trip.data.originalRequest);
+            $state.go('app.plan');
+        });
+        //        planService.setName("from", $scope.requestedFrom);
+        //        planService.setName("to", $scope.requestedTo);
+        //        planService.setTripId($scope.tripId);
+        //        $state.go('app.plan');
 
     }
     $scope.deleteTrip = function () {

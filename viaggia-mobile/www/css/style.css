@@ -578,3 +578,11 @@ ion-header-bar .title {
     background-repeat: no-repeat;
     background-position: center center;
 }
+
+.green-list {
+    width: 100%;
+    background-color: #179585;
+    color: white;
+    height: 24px;
+    text-align: center;
+}

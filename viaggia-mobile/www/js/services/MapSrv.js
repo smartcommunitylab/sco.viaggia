@@ -1,6 +1,6 @@
 angular.module('viaggia.services.map', [])
 
-.factory('mapService', function ($q, $http, $ionicPlatform, Config, planService, leafletData) {
+.factory('mapService', function ($q, $http, $ionicPlatform, Config, planService, leafletData, GeoLocate) {
     var colorsAndTypes = Config.getColorsTypes();
 
     var cachedMap = {};
@@ -93,42 +93,50 @@ angular.module('viaggia.services.map', [])
         var deferred = $q.defer();
 
         leafletData.getMap(mapId).then(function (map) {
-            cachedMap[mapId] = map;
-            L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
-                type: 'map',
-                ext: 'jpg',
-                attribution: '',
-                subdomains: '1234',
-                maxZoom: 18
-            }).addTo(map);
-            $ionicPlatform.ready(function () {
-                map.locate({
-                    setView: false,
-                    maxZoom: 8,
-                    watch: false,
-                    enableHighAccuracy: true
+                cachedMap[mapId] = map;
+                L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
+                    type: 'map',
+                    ext: 'jpg',
+                    attribution: '',
+                    subdomains: '1234',
+                    maxZoom: 18
+                }).addTo(map);
+                $ionicPlatform.ready(function () {
+                    GeoLocate.locate().then(function (e) {
+                        L.marker(L.latLng(e[0], e[1])).addTo(map);
+                        //mapService.setMyLocation(e);
+                        //var radius = e.accuracy / 2;
+                        //L.marker(e.latlng).addTo(map);
+                        // L.circle(e.latlng, radius).addTo(map);
+                    });
+                    //                map.locate({
+                    //                    setView: false,
+                    //                    maxZoom: 8,
+                    //                    watch: false,
+                    //                    enableHighAccuracy: true
+                    //                });
+                    //                map.on('locationfound', onLocationFound);
                 });
-                map.on('locationfound', onLocationFound);
-            });
 
-            function onLocationFound(e) {
-                mapService.setMyLocation(e);
-                var radius = e.accuracy / 2;
-                L.marker(e.latlng).addTo(map);
-                L.circle(e.latlng, radius).addTo(map);
-            }
-            L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
-                type: 'map',
-                ext: 'jpg',
-                attribution: '',
-                subdomains: '1234',
-                maxZoom: 18
-            }).addTo(map);
-            deferred.resolve(true);
-        }, function (error) {
-            console.log('error creation');
-            deferred.reject(error);
-        });
+                //            function onLocationFound(e) {
+                //                    mapService.setMyLocation(e);
+                //                    var radius = e.accuracy / 2;
+                //                    L.marker(e.latlng).addTo(map);
+                //                    L.circle(e.latlng, radius).addTo(map);
+                //                }
+                //            L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
+                //                type: 'map',
+                //                ext: 'jpg',
+                //                attribution: '',
+                //                subdomains: '1234',
+                //                maxZoom: 18
+                //            }).addTo(map);
+                deferred.resolve(true);
+            },
+            function (error) {
+                console.log('error creation');
+                deferred.reject(error);
+            });
         return deferred.promise;
     }
 

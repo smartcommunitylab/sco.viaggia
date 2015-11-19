@@ -10,7 +10,36 @@
         </div>
 
         <ion-list class="animate-ripple">
-            <ion-item class="list-journey" ng-repeat="journey in journeys" ng-last-repeat="journeys" ng-click="showPlan(journey)">
+            <div ng-if="containsGreen">
+                <div class="green-list">{{'planlist_sustanainable' | translate}}</div>
+                <ion-item class="list-journey" ng-repeat="journey in journeys" ng-if="journey.promoted" ng-last-repeat="journeys" ng-click="showPlan(journey)">
+                    <div class="row">
+                        <div class="col-md-2 text-center line-background-for-list" style="min-height: 100px;">
+                            <div class="row">{{journey.startime | date:'hh:mm'}}</div>
+                            <div class="row" style="position: absolute; bottom: 0;">{{journey.endtime | date:'hh:mm'}}</div>
+                        </div>
+                        <div class="col-md-10">
+
+                            <div class="row">
+                                <div class="tt thumbnail col-md-2" ng-repeat="mean in journey.means">
+                                    <img ng-src="{{mean.img}}">
+                                    <div class="text-center">
+                                        <div ng-repeat="n in mean.note">{{n}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-right">
+                                <small class="text-muted text-center">{{journey.length}}km</small>
+                                <small class="text-muted text-center" ng-if="journey.price > 0">/ {{journey.price}} EUR</small>
+                            </div>
+                        </div>
+                    </div>
+                </ion-item>
+                <div class="green-list"></div>
+            </div>
+            <ion-item class="list-journey" ng-repeat="journey in journeys" ng-if="!journey.promoted" ng-last-repeat="journeys" ng-click="showPlan(journey)">
                 <div class="row">
                     <div class="col-md-2 text-center line-background-for-list" style="min-height: 100px;">
                         <div class="row">{{journey.startime | date:'hh:mm'}}</div>

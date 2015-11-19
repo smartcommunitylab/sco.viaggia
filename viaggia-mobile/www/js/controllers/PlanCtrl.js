@@ -17,22 +17,23 @@ angular.module('viaggia.controllers.plan', [])
     if (!$scope.favoritePlaces) {
         $scope.favoritePlaces = [];
     }
-
-    $scope.planParams = {
-        from: {
-            name: '',
-            lat: '',
-            long: ''
-        },
-        to: {
-            name: '',
-            lat: '',
-            long: ''
-        },
-        routeType: '',
-        transportTypes: [],
-        departureTime: '',
-        date: ''
+    $scope.initParams = function () {
+        $scope.planParams = {
+            from: {
+                name: '',
+                lat: '',
+                long: ''
+            },
+            to: {
+                name: '',
+                lat: '',
+                long: ''
+            },
+            routeType: '',
+            transportTypes: [],
+            departureTime: '',
+            date: ''
+        }
     };
     var monthList = [
         $filter('translate')('popup_datepicker_jan'),
@@ -65,7 +66,7 @@ angular.module('viaggia.controllers.plan', [])
         return map;
     }
     var setDefaultOptions = function () {
-        var planOptionConfig = Config.getPlanDefaultOptions();
+        //var planOptionConfig = Config.getPlanDefaultOptions();
         $scope.planParams.departureTime = $filter('date')(new Date().getTime(), 'hh:mma');
         $scope.planParams.date = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
         $scope.planParams.routeType = planOptionConfig.routeType;
@@ -184,6 +185,7 @@ angular.module('viaggia.controllers.plan', [])
     }).then(function (modal) {
         $scope.modalFavorites = modal;
     });
+
     $scope.bookmarks = function (fromOrTo, name) {
         //else pop up with list of favorites
         $scope.place = fromOrTo;
@@ -467,24 +469,62 @@ angular.module('viaggia.controllers.plan', [])
         },
         events: {}
     });
+    var manageOptions = function () {
+        if ($scope.planParams.from && $scope.planParams.from.name) {
+            $scope.fromName = $scope.planParams.from.name;
+            $scope.place = 'from';
+            planService.setPosition($scope.place, $scope.planParams.from.lat, $scope.planParams.from.long);
+            selectPlace($scope.planParams.from.name);
+        } else {
+            $scope.planParams['from'] = {
+                name: '',
+                lat: '',
+                long: ''
+            };
+            $scope.locateMe();
+        };
+        if ($scope.planParams.to && $scope.planParams.to.name) {
+            $scope.toName = $scope.planParams.to.name;
+            $scope.place = 'to';
+            planService.setPosition($scope.place, $scope.planParams.to.lat, $scope.planParams.to.long);
+            selectPlace($scope.planParams.to.name);
+        } else {
+            $scope.planParams['to'] = {
+                name: '',
+                lat: '',
+                long: ''
+            };
+        }
+        if (!$scope.planParams.routeType) {
+            $scope.planParams['routeType'] = planOptionConfig.routeType;
+        }
+        if (!$scope.planParams.transportTypes) {
+            $scope.planParams['transportTypes'] = planOptionConfig.transportTypes;
 
+        }
+        for (var i = 0; i < $scope.types.length; i++) {
+            $scope.mapTypes[$scope.planParams.transportTypes[i]] = true;
+        }
+        if (!$scope.planParams.departureTime) {
+            $scope.planParams['departureTime'] = $filter('date')(new Date().getTime(), 'hh:mma');
+        }
+        if (!$scope.planParams.date) {
+            $scope.planParams['date'] = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
+        }
+    }
     $scope.mapTypes = initMapTypes($scope.types);
-    if (planService.getTripId() == null) {
+    $scope.planParams = planService.getPlanConfigure();
+    var planOptionConfig = Config.getPlanDefaultOptions();
+
+    //check option by option
+    if ($scope.planParams) {
+        manageOptions();
+
+    } else {
+        $scope.initParams();
         $scope.locateMe();
         setDefaultOptions();
-    } else {
-        /*if param, then load from service*/
-        var trip = planService.getSelectedJourney();
-        $scope.planParams = planService.getPlanConfigure();
-        $scope.fromName = $scope.planParams.from.name;
-        $scope.place = 'from';
-        planService.setPosition($scope.place, $scope.planParams.from.lat, $scope.planParams.from.long);
-        selectPlace($scope.planParams.from.name);
-        $scope.toName = $scope.planParams.to.name;
-        $scope.place = 'to';
-        planService.setPosition($scope.place, $scope.planParams.to.lat, $scope.planParams.to.long);
-        selectPlace($scope.planParams.to.name);
-        setSavedOptions($scope.planParams);
-
     }
+    planService.setPlanConfigure(null);
+
 })
