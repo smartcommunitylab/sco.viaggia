@@ -11,7 +11,14 @@
 
         <ion-list class="animate-ripple">
             <div ng-if="containsGreen">
-                <div class="green-list">{{'planlist_sustanainable' | translate}}</div>
+
+                <div class="green-head">
+                    <div class="green-thumb"><img src="img/ic_leaf.png" />
+                    </div>
+                    <div class="green-content">
+                        <p class="green-title">{{'planlist_sustanainable' | translate}}</p>
+                    </div>
+                </div>
                 <ion-item class="list-journey" ng-repeat="journey in journeys" ng-if="journey.promoted" ng-last-repeat="journeys" ng-click="showPlan(journey)">
                     <div class="row">
                         <div class="col-md-2 text-center line-background-for-list" style="min-height: 100px;">
@@ -37,7 +44,7 @@
                         </div>
                     </div>
                 </ion-item>
-                <div class="green-list"></div>
+                <div class="green-bottom"></div>
             </div>
             <ion-item class="list-journey" ng-repeat="journey in journeys" ng-if="!journey.promoted" ng-last-repeat="journeys" ng-click="showPlan(journey)">
                 <div class="row">

@@ -130,6 +130,14 @@
     margin: 8px;
 }
 
+.margin-left-16 {
+    margin-left: 16px;
+}
+
+.margin-right-16 {
+    margin-right: 16px;
+}
+
 .input-plan-fromto {
     width: 100%;
     padding: 8px;
@@ -579,10 +587,41 @@ ion-header-bar .title {
     background-position: center center;
 }
 
-.green-list {
+.green-bottom {
     width: 100%;
     background-color: #179585;
     color: white;
     height: 24px;
     text-align: center;
+}
+
+.green-head {
+    background-color: #179585;
+    padding-top: 4px;
+    height: 40px;
+    overflow: auto
+}
+
+.green-thumb {
+    float: right
+}
+
+.green-thumb img {
+    display: block;
+    height: auto;
+    width: auto;
+    max-width: 30px;
+    max-height: 30px;
+}
+
+.green-content {
+    margin-left: 24px
+}
+
+.green-title {
+    color: white;
+}
+
+.trip-detail-panel {
+    padding-top: 24px;
 }

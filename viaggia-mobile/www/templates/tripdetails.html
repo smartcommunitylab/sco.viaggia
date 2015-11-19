@@ -10,13 +10,15 @@
     <ion-content id="content" has-header="true">
         <div class="row">
             <div class="col">
-                <div class="panel panel-default">
+                <div class="panel panel-default trip-detail-panel">
                     <div class="panel-body">
                         <div>
-                            <div class="row green-header" ng-if="currentItinerary.promoted">
-                                <div class="col">
-                                    {{journey_details_sustainable | translate}}
-                                    <span class="glyphicon glyphicon-leaf pull-right" aria-hidden="true"></span>
+
+                            <div class="green-head" ng-if="currentItinerary.promoted">
+                                <div class="green-thumb"><img src="img/ic_leaf.png" />
+                                </div>
+                                <div class="green-content">
+                                    <p class="green-title">{{'planlist_sustanainable' | translate}}</p>
                                 </div>
                             </div>
                             <!-- START -->
@@ -24,7 +26,7 @@
                                 <div class=" start-leg">
                                     <img src="img/ic_point_outline.png">
                                 </div>
-                                <div>{{toTime(currentItinerary.startime)}}</div>
+                                <div class="margin-right-16">{{toTime(currentItinerary.startime)}} </div>
                                 <div>{{requestedFrom}}</div>
                             </div>
                             <!-- ROW -->
@@ -32,7 +34,7 @@
                                 <div class="line-background">
                                     <img src="img/ic_point.png">
                                 </div>
-                                <div>{{toTime(step.startime)}}</div>
+                                <div class="margin-right-16">{{toTime(step.startime)}} </div>
                                 <div class="col inter-leg">
                                     <p ng-if="step.action">{{step.action}}<strong ng-if="step.actionDetails">{{step.actionDetails}}</strong>
                                     </p>
@@ -65,7 +67,7 @@
                             <div class="row leg">
                                 <div class="end-leg"><img src="img/ic_point_outline.png">
                                 </div>
-                                <div>{{toTime(currentItinerary.endtime)}}</div>
+                                <div class="margin-right-16">{{toTime(currentItinerary.endtime)}} </div>
                                 <div>{{requestedTo}}</div>
                             </div>
                             <button ng-if="tripId==null" class="button button-viaggia-header button-block" ng-click="saveTrip()"> salva </button>
