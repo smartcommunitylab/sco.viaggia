@@ -8,6 +8,9 @@
             </div>
           </div>
         </div>
+        <div ng-if="!stopData.routes || stopData.routes.length == 0" class="text-center">
+          <h4>{{'no_data' | translate}}</h4>
+        </div>
     </ion-content>
 
 </ion-view>

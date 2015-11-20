@@ -2,7 +2,7 @@ angular.module('viaggia.controllers.info', [])
 
 .controller('InfoCtrl', function ($scope) {})
 
-.controller('ParkingCtrl', function ($scope, $stateParams, $timeout, $filter, $ionicModal, $ionicPopup, ionicMaterialMotion, ionicMaterialInk, leafletData, mapService, parkingService, Config) {
+.controller('ParkingCtrl', function ($scope, $state, $stateParams, $timeout, $filter, $ionicModal, $ionicPopup, ionicMaterialMotion, ionicMaterialInk, leafletData, mapService, parkingService, Config, planService) {
     $scope.agencyId = $stateParams.agencyId;
     $scope.parkings = null;
 
@@ -120,7 +120,11 @@ angular.module('viaggia.controllers.info', [])
                 {
                     text: $filter('translate')('btn_nav_to'),
                     onTap: function (e) {
-                        // TODO
+                      planService.setPlanConfigure({
+                        to: {name: $scope.popupParking.description, lat: $scope.popupParking.position[0], long: $scope.popupParking.position[1]},
+                      });
+                      $scope.closeMap();
+                      $state.go('app.plan');
                     }
         }
       ]
@@ -131,7 +135,7 @@ angular.module('viaggia.controllers.info', [])
 })
 
 
-.controller('BikeSharingCtrl', function ($scope, $stateParams, $timeout, $filter, $ionicModal, $ionicPopup, ionicMaterialMotion, ionicMaterialInk, leafletData, mapService, bikeSharingService, Config) {
+.controller('BikeSharingCtrl', function ($scope, $state, $stateParams, $timeout, $filter, $ionicModal, $ionicPopup, ionicMaterialMotion, ionicMaterialInk, leafletData, mapService, bikeSharingService, Config, planService) {
     $scope.agencyId = $stateParams.agencyId;
     $scope.parkings = null;
 
@@ -244,7 +248,11 @@ angular.module('viaggia.controllers.info', [])
                 {
                     text: $filter('translate')('btn_nav_to'),
                     onTap: function (e) {
-                        // TODO
+                      planService.setPlanConfigure({
+                        to: {name: $scope.popupParking.address, lat: $scope.popupParking.position[0], long: $scope.popupParking.position[1]},
+                      });
+                      $scope.closeMap();
+                      $state.go('app.plan');
                     }
         }
       ]
