@@ -22,8 +22,8 @@
                 <ion-item class="list-journey" ng-repeat="journey in journeys" ng-if="journey.promoted" ng-last-repeat="journeys" ng-click="showPlan(journey)">
                     <div class="row">
                         <div class="col-md-2 text-center line-background-for-list" style="min-height: 100px;">
-                            <div class="row">{{journey.startime | date:'hh:mm'}}</div>
-                            <div class="row" style="position: absolute; bottom: 0;">{{journey.endtime | date:'hh:mm'}}</div>
+                            <div class="row">{{journey.startime | date:'HH:mm'}}</div>
+                            <div class="row" style="position: absolute; bottom: 0;">{{journey.endtime | date:'HH:mm'}}</div>
                         </div>
                         <div class="col-md-10">
 
@@ -49,8 +49,8 @@
             <ion-item class="list-journey" ng-repeat="journey in journeys" ng-if="!journey.promoted" ng-last-repeat="journeys" ng-click="showPlan(journey)">
                 <div class="row">
                     <div class="col-md-2 text-center line-background-for-list" style="min-height: 100px;">
-                        <div class="row">{{journey.startime | date:'hh:mm'}}</div>
-                        <div class="row" style="position: absolute; bottom: 0;">{{journey.endtime | date:'hh:mm'}}</div>
+                        <div class="row">{{journey.startime | date:'HH:mm'}}</div>
+                        <div class="row" style="position: absolute; bottom: 0;">{{journey.endtime | date:'HH:mm'}}</div>
                     </div>
                     <div class="col-md-10">
 

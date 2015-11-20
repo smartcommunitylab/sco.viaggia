@@ -29,10 +29,10 @@ angular.module('viaggia.controllers.common', [])
             $scope.creditsModal.show();
         }
         /*pop up managers*/
-//    $scope.newPlan = function () {
-//        planService.setTripId(null); //reset data for pianification
-//        $state.go('app.plan');
-//    };
+        //    $scope.newPlan = function () {
+        //        planService.setTripId(null); //reset data for pianification
+        //        $state.go('app.plan');
+        //    };
     $scope.popupLoadingShow = function () {
         $ionicLoading.show({
             template: $filter('translate')("pop_up_loading")
@@ -87,6 +87,7 @@ angular.module('viaggia.controllers.common', [])
 
     Config.init().then(function () {
         $scope.infomenu = Config.getInfoMenu();
+        $scope.version = Config.getVersion();
     });
 
     $scope.selectInfomenu = function (m) {
