@@ -44,33 +44,33 @@ angular.module('viaggia.services.map', [])
             var toIndex = trip.leg[i].toStep;
             var steps = toIndex - fromIndex;
             var internalIndex = fromIndex;
-            for (var k = 0; k < steps; k++) {
-//                if (steps > 1) {
-     //                    divreturn = divreturn + '<div>' + $filter('translate')('popup_step_number') + k + '</div>';
-     //                }
-                if (trip.steps[internalIndex].startime) {
-                    divreturn = divreturn + '<div>' + planService.getTimeStr(new Date(trip.steps[internalIndex].startime)) + '</div><div class="col inter-leg">'
-                }
-                if (trip.steps[internalIndex].action) {
-                    divreturn = divreturn + '<p>' + trip.steps[internalIndex].action
-                }
-                if (trip.steps[internalIndex].actionDetails) {
-                    divreturn = divreturn + '<strong>' + trip.steps[internalIndex].actionDetails + '</strong></p>'
-                }
-                if (trip.steps[internalIndex].from) {
-                    divreturn = divreturn + '<p>' + trip.steps[internalIndex].fromLabel + '<strong>' + trip.steps[internalIndex].from + '</strong></p>'
-                }
-                if (trip.steps[internalIndex].to) {
-                    divreturn = divreturn + '<p>' + trip.steps[internalIndex].toLabel + '<strong>' + trip.steps[internalIndex].to + '</strong></p>'
-                }
-                if (trip.steps[internalIndex].parking && trip.steps[internalIndex].parking.cost) {
-                    divreturn = divreturn + '<p>' + trip.steps[internalIndex].parking.cost + '</strong></p>'
-                }
-                if (trip.steps[internalIndex].parking && trip.steps[internalIndex].parking.time) {
-                    divreturn = divreturn + '<p>' + trip.steps[steps].parking.time + '</p></div>'
-                }
-                internalIndex++;
+            //for (var k = 0; k < steps; k++) {
+            //                if (steps > 1) {
+            //                    divreturn = divreturn + '<div>' + $filter('translate')('popup_step_number') + k + '</div>';
+            //                }
+            if (trip.steps[internalIndex].startime) {
+                divreturn = divreturn + '<div><strong>' + planService.getTimeStr(new Date(trip.steps[internalIndex].startime)) + '</strong></div><div class="col inter-leg">'
             }
+            if (trip.steps[internalIndex].action) {
+                divreturn = divreturn + '<p>' + trip.steps[internalIndex].action
+            }
+            if (trip.steps[internalIndex].actionDetails) {
+                divreturn = divreturn + '<strong>' + trip.steps[internalIndex].actionDetails + '</strong></p>'
+            }
+            if (trip.steps[internalIndex].from) {
+                divreturn = divreturn + '<p>' + trip.steps[internalIndex].fromLabel + '<strong>' + trip.steps[internalIndex].from + '</strong></p>'
+            }
+            if (trip.steps[internalIndex].to) {
+                divreturn = divreturn + '<p>' + trip.steps[internalIndex].toLabel + '<strong>' + trip.steps[internalIndex].to + '</strong></p>'
+            }
+            if (trip.steps[internalIndex].parking && trip.steps[internalIndex].parking.cost) {
+                divreturn = divreturn + '<p>' + trip.steps[internalIndex].parking.cost + '</strong></p>'
+            }
+            if (trip.steps[internalIndex].parking && trip.steps[internalIndex].parking.time) {
+                divreturn = divreturn + '<p>' + trip.steps[steps].parking.time + '</p></div>'
+            }
+            internalIndex++;
+            //}
         }
         return divreturn;
     }
@@ -172,6 +172,7 @@ angular.module('viaggia.services.map', [])
                 //        else {
                 //                markers.push(getMarkerParkAndWalk(trip.leg[i]));
                 //            }
+            var bound = [trip.leg[i].from.lat, trip.leg[i].from.lon];
 
         }
         //add the arrival place
@@ -188,6 +189,9 @@ angular.module('viaggia.services.map', [])
             },
             //                        focus: true
         });
+
+
+
         return markers;
     }
     mapService.encodePolyline = function (coordinate, factor) {

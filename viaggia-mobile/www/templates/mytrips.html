@@ -11,17 +11,22 @@
                     </div>
                 </div>
                 <!--<div class="col-md-10">-->
-                <div class="row">
-                    <div class="col-md-12 text-right">
-                        <small class="text-muted text-center">da: {{journey.data.originalFrom.name}}</small>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 text-right">
-                        <small class="text-muted text-center">a: {{journey.data.originalTo.name}}</small>
-                    </div>
-                </div>
 
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <small class="text-muted text-center"><strong>{{'my_trip_from'|translate}}</strong>: {{journey.data.originalFrom.name}}</small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <small class="text-muted text-center"><strong>{{'my_trip_to'|translate}}</strong>: {{journey.data.originalTo.name}}</small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <small class="text-muted text-center"><strong>{{'my_trip_time'|translate}}</strong>: {{journey.data.data.startime| date:'hh:mm'}}</small>
+                    </div>
+                </div>
                 <!--</div>-->
             </ion-item>
         </ion-list>

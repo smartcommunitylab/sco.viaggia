@@ -420,6 +420,9 @@ angular.module('viaggia', [
             popup_delete_trip_title: 'Cancella',
             tripdeleted_message_feedback: 'Il viaggio selezionato è stato cancellato',
             my_trip_empty_list: 'Non ci sono viaggi salvati',
+            my_trip_from: 'Da',
+            my_trip_to: 'A',
+            my_trip_time: 'Ora',
             favorites_empty_list: 'Non ci sono favoriti memorizzati',
             pop_up_error_server_title: 'Errore',
             pop_up_error_server_template: 'Errore di comunicazione con il server',
@@ -434,7 +437,8 @@ angular.module('viaggia', [
             plan_title: 'Pianifica viaggio',
             planlist_sustanainable: 'Itinerari sostenibili',
             popup_step_number: 'Passo ',
-            pop_up_arrival: 'Arrivo'
+            pop_up_arrival: 'Arrivo',
+
 
 
         });
@@ -535,6 +539,9 @@ angular.module('viaggia', [
             popup_delete_trip_title: 'Delete',
             tripdeleted_message_feedback: 'The selected journey has been deleted',
             my_trip_empty_list: 'No saved journeys',
+            my_trip_from: 'From',
+            my_trip_to: 'To',
+            my_trip_time: 'Time',
             favorites_empty_list: 'No saved favorites',
             pop_up_error_server_title: 'Error',
             pop_up_error_server_template: 'We had some communication problems',

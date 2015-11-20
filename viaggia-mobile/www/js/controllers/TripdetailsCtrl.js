@@ -22,7 +22,20 @@ angular.module('viaggia.controllers.tripdetails', [])
         $scope.modalMap = modal;
     });
     $scope.openMapTrip = function () {
-        $scope.modalMap.show();
+        $scope.modalMap.show().then(function () {
+            var boundsArray = [];
+            for (var i = 0; i < $scope.pathMarkers.length; i++) {
+                var bound = [$scope.pathMarkers[i].lat, $scope.pathMarkers[i].lng];
+                boundsArray.push(bound);
+            }
+            if (boundsArray.length > 0) {
+                var bounds = L.latLngBounds(boundsArray);
+                mapService.getMap('modalMap').then(function (map) {
+                    map.fitBounds(bounds);
+                });
+            }
+        });
+
     }
 
     $scope.closeMap = function () {
@@ -42,6 +55,7 @@ angular.module('viaggia.controllers.tripdetails', [])
                 $scope.tripId = res.tripId;
                 //toast saved
                 Toast.show($filter('translate')("tripsaved_message_feedback"), "short", "bottom");
+                $ionicHistory.goBack();
             });
         });
 
@@ -78,7 +92,6 @@ angular.module('viaggia.controllers.tripdetails', [])
     }
     $scope.pathLine = mapService.getTripPolyline(trip);
     $scope.pathMarkers = mapService.getTripPoints(trip);
-
     angular.extend($scope, {
         center: {
             lat: Config.getMapPosition().lat,
@@ -89,4 +102,9 @@ angular.module('viaggia.controllers.tripdetails', [])
         events: {},
         pathLine: $scope.pathLine
     });
+
+
+
+
+
 })
