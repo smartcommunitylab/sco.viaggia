@@ -63,6 +63,12 @@ angular.module('viaggia.services.conf', [])
             color: '#823d8f',
             icon: 'img/ic_walk.png'
 
+        },
+        {
+            type: 'PARKWALK',
+            color: '#823d8f',
+            icon: 'img/ic_park_walk.png'
+
         }
 
         ]

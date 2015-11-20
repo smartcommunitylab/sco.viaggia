@@ -1,6 +1,6 @@
 angular.module('viaggia.services.map', [])
 
-.factory('mapService', function ($q, $http, $ionicPlatform, Config, planService, leafletData, GeoLocate) {
+.factory('mapService', function ($q, $http, $ionicPlatform, $filter, Config, planService, leafletData, GeoLocate) {
     var colorsAndTypes = Config.getColorsTypes();
 
     var cachedMap = {};
@@ -36,28 +36,41 @@ angular.module('viaggia.services.map', [])
         }
         return mapOfIcons[transport.type];
     }
-    var getPopUpMessage = function (leg) {
+    var getPopUpMessage = function (trip, leg, i) {
+        //from step to step
         var divreturn = "";
-        if (leg.starttime) {
-            divreturn = divreturn + '<div>' + planService.getTimeStr(new Date(millis)) + '</div><div class="col inter-leg">'
-        }
-        if (leg.action) {
-            divreturn = divreturn + '<p>' + leg.action
-        }
-        if (leg.actionDetails) {
-            divreturn = divreturn + '<strong>' + leg.actionDetails + '</strong></p>'
-        }
-        if (leg.from) {
-            divreturn = divreturn + '<p>' + leg.fromLabel + '<strong>' + leg.from + '</strong></p>'
-        }
-        if (leg.to) {
-            divreturn = divreturn + '<p>' + leg.toLabel + '<strong>' + leg.to + '</strong></p>'
-        }
-        if (leg.parking && leg.parking.cost) {
-            divreturn = divreturn + '<p>' + leg.parking.cost + '</strong></p>'
-        }
-        if (leg.parking && leg.parking.time) {
-            divreturn = divreturn + '<p>' + leg.parking.time + '</p>'
+        if (trip.leg[i]) {
+            var fromIndex = trip.leg[i].fromStep;
+            var toIndex = trip.leg[i].toStep;
+            var steps = toIndex - fromIndex;
+            var internalIndex = fromIndex;
+            for (var k = 0; k < steps; k++) {
+//                if (steps > 1) {
+     //                    divreturn = divreturn + '<div>' + $filter('translate')('popup_step_number') + k + '</div>';
+     //                }
+                if (trip.steps[internalIndex].startime) {
+                    divreturn = divreturn + '<div>' + planService.getTimeStr(new Date(trip.steps[internalIndex].startime)) + '</div><div class="col inter-leg">'
+                }
+                if (trip.steps[internalIndex].action) {
+                    divreturn = divreturn + '<p>' + trip.steps[internalIndex].action
+                }
+                if (trip.steps[internalIndex].actionDetails) {
+                    divreturn = divreturn + '<strong>' + trip.steps[internalIndex].actionDetails + '</strong></p>'
+                }
+                if (trip.steps[internalIndex].from) {
+                    divreturn = divreturn + '<p>' + trip.steps[internalIndex].fromLabel + '<strong>' + trip.steps[internalIndex].from + '</strong></p>'
+                }
+                if (trip.steps[internalIndex].to) {
+                    divreturn = divreturn + '<p>' + trip.steps[internalIndex].toLabel + '<strong>' + trip.steps[internalIndex].to + '</strong></p>'
+                }
+                if (trip.steps[internalIndex].parking && trip.steps[internalIndex].parking.cost) {
+                    divreturn = divreturn + '<p>' + trip.steps[internalIndex].parking.cost + '</strong></p>'
+                }
+                if (trip.steps[internalIndex].parking && trip.steps[internalIndex].parking.time) {
+                    divreturn = divreturn + '<p>' + trip.steps[steps].parking.time + '</p></div>'
+                }
+                internalIndex++;
+            }
         }
         return divreturn;
     }
@@ -104,33 +117,9 @@ angular.module('viaggia.services.map', [])
                 $ionicPlatform.ready(function () {
                     GeoLocate.locate().then(function (e) {
                         L.marker(L.latLng(e[0], e[1])).addTo(map);
-                        //mapService.setMyLocation(e);
-                        //var radius = e.accuracy / 2;
-                        //L.marker(e.latlng).addTo(map);
-                        // L.circle(e.latlng, radius).addTo(map);
                     });
-                    //                map.locate({
-                    //                    setView: false,
-                    //                    maxZoom: 8,
-                    //                    watch: false,
-                    //                    enableHighAccuracy: true
-                    //                });
-                    //                map.on('locationfound', onLocationFound);
                 });
 
-                //            function onLocationFound(e) {
-                //                    mapService.setMyLocation(e);
-                //                    var radius = e.accuracy / 2;
-                //                    L.marker(e.latlng).addTo(map);
-                //                    L.circle(e.latlng, radius).addTo(map);
-                //                }
-                //            L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
-                //                type: 'map',
-                //                ext: 'jpg',
-                //                attribution: '',
-                //                subdomains: '1234',
-                //                maxZoom: 18
-                //            }).addTo(map);
                 deferred.resolve(true);
             },
             function (error) {
@@ -141,33 +130,48 @@ angular.module('viaggia.services.map', [])
     }
 
     mapService.getTripPolyline = function (trip) {
-        var listOfPoints = {};
-        for (var k = 0; k < trip.leg.length; k++) {
-            listOfPoints["p" + k] = {
-                color: getColorByType(trip.leg[k].transport),
-                weight: 5,
-                latlngs: mapService.decodePolyline(trip.leg[k].legGeometery.points),
-                message: getPopUpMessage(trip.steps[k]),
+            var listOfPoints = {};
+            for (var k = 0; k < trip.leg.length; k++) {
+                listOfPoints["p" + k] = {
+                    color: getColorByType(trip.leg[k].transport),
+                    weight: 5,
+                    latlngs: mapService.decodePolyline(trip.leg[k].legGeometery.points),
+                    message: getPopUpMessage(trip, trip.leg[k], k),
+                }
             }
+            return listOfPoints;
         }
-        return listOfPoints;
-    }
+        //    var parkAndWalk = function (trip, index) {
+        //        if (index > (trip.leg.length - 2)) {
+        //            return false;
+        //        } //end of the journey
+        //        //check if trip.leg[index] trip.leg[index1]
+        //        if (trip.leg[index].type = "")
+        //            return false;
+        //    }
+        //    var getMarkerParkAndWalk = function (leg) {}
     mapService.getTripPoints = function (trip) {
+        //manage park&walk
         var markers = [];
         for (i = 0; i < trip.leg.length; i++) {
+            //if (!parkAndWalk(trip, i)) {
             markers.push({
-                lat: parseFloat(trip.leg[i].from.lat),
-                lng: parseFloat(trip.leg[i].from.lon),
+                    lat: parseFloat(trip.leg[i].from.lat),
+                    lng: parseFloat(trip.leg[i].from.lon),
 
-                message: getPopUpMessage(trip.steps[i]),
-                icon: {
-                    iconUrl: getIconByType(trip.leg[i].transport),
-                    iconSize: [36, 50],
-                    iconAnchor: [18, 50],
-                    popupAnchor: [-0, -50]
-                },
-                //                        focus: true
-            });
+                    message: getPopUpMessage(trip, trip.leg[i], i),
+                    icon: {
+                        iconUrl: getIconByType(trip.leg[i].transport),
+                        iconSize: [36, 50],
+                        iconAnchor: [18, 50],
+                        popupAnchor: [-0, -50]
+                    },
+                    //                        focus: true
+                })
+                //            }
+                //        else {
+                //                markers.push(getMarkerParkAndWalk(trip.leg[i]));
+                //            }
 
         }
         //add the arrival place
@@ -175,7 +179,7 @@ angular.module('viaggia.services.map', [])
             lat: parseFloat(trip.leg[trip.leg.length - 1].to.lat),
             lng: parseFloat(trip.leg[trip.leg.length - 1].to.lon),
 
-            message: getPopUpMessage(trip.steps[trip.leg.length - 1]),
+            message: $filter('translate')('pop_up_arrival'),
             icon: {
                 iconUrl: "img/ic_arrival.png",
                 iconSize: [36, 50],

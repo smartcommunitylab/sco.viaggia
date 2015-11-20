@@ -280,6 +280,13 @@ angular.module('viaggia.services.plan', [])
             step.from = leg.from.name;
         }
         step.to = leg.to.name;
+        //check if 'service road' otherwise put plan String
+        if (step.from == 'service road' && planConfigure.from) {
+            step.from = planConfigure.from.name;
+        }
+        if (step.to == 'service road' && planConfigure.to) {
+            step.to = planConfigure.to.name;
+        }
     };
 
     planService.process = function (plan, from, to, useCoordinates) {
@@ -287,6 +294,7 @@ angular.module('viaggia.services.plan', [])
         var nextFrom = !useCoordinates ? from : nextFrom = plan.leg[0].from.name + ' (' + plan.leg[0].from.lat + ',' + plan.leg[0].from.lon + ')';
 
         for (var i = 0; i < plan.leg.length; i++) {
+            plan.leg[i]['fromStep'] = plan.steps.length; //connection between step and leg
             var step = {};
             step.startime = i == 0 ? plan.startime : plan.leg[i].startime;
             step.endtime = plan.leg[i].endtime;
@@ -322,6 +330,10 @@ angular.module('viaggia.services.plan', [])
                                 img: parking.img
                             }
                         };
+                        //change the type of leg for having the information for parking and walking
+                        if (plan.leg[i + 1].transport['type'] == 'WALK') {
+                            plan.leg[i + 1].transport['type'] = 'PARKWALK';
+                        }
                     } else {
                         step.parking = parking;
                     }
@@ -332,6 +344,8 @@ angular.module('viaggia.services.plan', [])
             if (parkingStep != null) {
                 plan.steps.push(parkingStep);
             }
+            plan.leg[i]['toStep'] = plan.steps.length; //connection between step and leg
+
         }
     };
     planService.getItineraryCost = function (plan) {

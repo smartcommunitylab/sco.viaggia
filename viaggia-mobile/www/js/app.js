@@ -417,7 +417,7 @@ angular.module('viaggia', [
             err_too_many_markers: 'Too many objects on the map. Please zoom in.',
             lbl_lines: 'Corse:',
             popup_delete_trip_message: 'Sicuro di voler cancellare il viaggio salvato?',
-            popup_delete_trip_text: 'Cancella',
+            popup_delete_trip_title: 'Cancella',
             tripdeleted_message_feedback: 'Il viaggio selezionato è stato cancellato',
             my_trip_empty_list: 'Non ci sono viaggi salvati',
             favorites_empty_list: 'Non ci sono favoriti memorizzati',
@@ -432,7 +432,9 @@ angular.module('viaggia', [
             credits_licenses_button: 'VEDI LICENZE',
             favorites_title_list: 'Indirizzi preferiti',
             plan_title: 'Pianifica viaggio',
-            planlist_sustanainable: 'Itinerari sostenibili'
+            planlist_sustanainable: 'Itinerari sostenibili',
+            popup_step_number: 'Passo ',
+            pop_up_arrival: 'Arrivo'
 
 
         });
@@ -530,7 +532,7 @@ angular.module('viaggia', [
             err_too_many_markers: 'Too many objects on the map. Please zoom in.',
             lbl_lines: 'Lines:',
             popup_delete_trip_message: 'Are you sure to delete the saved journey?',
-            popup_delete_trip_text: 'Delete',
+            popup_delete_trip_title: 'Delete',
             tripdeleted_message_feedback: 'The selected journey has been deleted',
             my_trip_empty_list: 'No saved journeys',
             favorites_empty_list: 'No saved favorites',
@@ -545,7 +547,9 @@ angular.module('viaggia', [
             credits_licenses_button: 'READ LICENSES',
             favorites_title_list: 'Favorite places',
             plan_title: 'Plan journey',
-            planlist_sustanainable: 'Sustainable Itineraries'
+            planlist_sustanainable: 'Sustainable Itineraries',
+            popup_step_number: 'Step ',
+            pop_up_arrival: 'Arrive'
 
         });
 

@@ -26,7 +26,7 @@
                                 <div class=" start-leg">
                                     <img src="img/ic_point_outline.png">
                                 </div>
-                                <div class="margin-right-16">{{toTime(currentItinerary.startime)}} </div>
+                                <div class="margin-right-16 margin-left-16">{{toTime(currentItinerary.startime)}} </div>
                                 <div>{{requestedFrom}}</div>
                             </div>
                             <!-- ROW -->
@@ -34,7 +34,7 @@
                                 <div class="line-background">
                                     <img src="img/ic_point.png">
                                 </div>
-                                <div class="margin-right-16">{{toTime(step.startime)}} </div>
+                                <div class="margin-right-16 margin-left-16">{{toTime(step.startime)}} </div>
                                 <div class="col inter-leg">
                                     <p ng-if="step.action">{{step.action}}<strong ng-if="step.actionDetails">{{step.actionDetails}}</strong>
                                     </p>
@@ -67,7 +67,7 @@
                             <div class="row leg">
                                 <div class="end-leg"><img src="img/ic_point_outline.png">
                                 </div>
-                                <div class="margin-right-16">{{toTime(currentItinerary.endtime)}} </div>
+                                <div class="margin-right-16 margin-left-16">{{toTime(currentItinerary.endtime)}} </div>
                                 <div>{{requestedTo}}</div>
                             </div>
                             <button ng-if="tripId==null" class="button button-viaggia-header button-block" ng-click="saveTrip()"> salva </button>

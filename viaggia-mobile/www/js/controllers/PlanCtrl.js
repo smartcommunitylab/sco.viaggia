@@ -333,40 +333,42 @@ angular.module('viaggia.controllers.plan', [])
         // if ($window.navigator.geolocation) {
         // $window.navigator.geolocation.getCurrentPosition(function (position) {
         GeoLocate.locate().then(function (position) {
-                //                $scope.$apply(function () {
-                $scope.position = position;
-                var placedata = $q.defer();
-                var places = {};
-                var url = Config.getGeocoderURL() + '/location?latlng=' + position[0] + ',' + position[1];
+            //                $scope.$apply(function () {
+            $scope.position = position;
+            var placedata = $q.defer();
+            var places = {};
+            var url = Config.getGeocoderURL() + '/location?latlng=' + position[0] + ',' + position[1];
 
-                //add timeout
-                $http.get(encodeURI(url), {
-                    timeout: 5000
-                }).
-                success(function (data, status, headers, config) {
-                    //                         planService.setName($scope.place, data.response.docs[0]);
+            //add timeout
+            $http.get(encodeURI(url), {
+                timeout: 5000
+            }).
+            success(function (data, status, headers, config) {
+                //                         planService.setName($scope.place, data.response.docs[0]);
 
-                    places = data.response.docs;
-                    name = '';
-                    if (data.response.docs[0]) {
-                        $scope.place = 'from';
-                        planService.setPosition($scope.place, position[0], position[1]);
-                        planService.setName($scope.place, data.response.docs[0]);
-                        selectPlace(name);
-                    }
-                    $ionicLoading.hide();
-                }).
-                error(function (data, status, headers, config) {
-                    //temporary
-                    $ionicLoading.hide();
-                    $scope.showNoConnection();
-                });
+                places = data.response.docs;
+                name = '';
+                if (data.response.docs[0]) {
+                    $scope.place = 'from';
+                    planService.setPosition($scope.place, position[0], position[1]);
+                    planService.setName($scope.place, data.response.docs[0]);
+                    selectPlace(name);
+                }
+                $ionicLoading.hide();
+            }).
+            error(function (data, status, headers, config) {
+                //temporary
+                $ionicLoading.hide();
+                $scope.showNoConnection();
+            });
 
 
-                //                });
-            }
-
-        );
+            //                });
+        }, function () {
+            $ionicLoading.hide();
+            $scope.showNoConnection();
+            console.log('CANNOT LOCATE!');
+        });
         // }
     };
 
