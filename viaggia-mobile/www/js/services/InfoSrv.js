@@ -12,13 +12,17 @@ angular.module('viaggia.services.info', [])
         .success(function(data) {
           if (data) {
             var all = [];
-            data.forEach(function(p) {
-              all.push(GeoLocate.distanceTo(p.position));
-            });
-            $q.all(all).then(function(positions){
-              data.forEach(function(d, idx) {
-                d.distance = positions[idx];
+            GeoLocate.locate().then(function(pos) {
+              data.forEach(function(p) {
+                all.push(GeoLocate.distanceTo(p.position));
               });
+              $q.all(all).then(function(positions){
+                data.forEach(function(d, idx) {
+                  d.distance = positions[idx];
+                });
+                deferred.resolve(data);
+              });
+            }, function(err) {
               deferred.resolve(data);
             });
           } else {
@@ -44,13 +48,17 @@ angular.module('viaggia.services.info', [])
         .success(function(data) {
           if (data) {
             var all = [];
-            data.forEach(function(p) {
-              all.push(GeoLocate.distanceTo(p.position));
-            });
-            $q.all(all).then(function(positions){
-              data.forEach(function(d, idx) {
-                d.distance = positions[idx];
+            GeoLocate.locate().then(function(pos) {
+              data.forEach(function(p) {
+                all.push(GeoLocate.distanceTo(p.position));
               });
+              $q.all(all).then(function(positions){
+                data.forEach(function(d, idx) {
+                  d.distance = positions[idx];
+                });
+                deferred.resolve(data);
+              });
+            }, function(err) {
               deferred.resolve(data);
             });
           } else {

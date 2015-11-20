@@ -18,7 +18,7 @@
             <div class="col col-20 text-right"><i class="icon ic_bookmark-outline"></i></div>
           </div>
           <div class="row parking-card-footer">
-            <div class="col"><span>{{p.distance| number:3}}km</span></div>
+            <div class="col"><span ng-if="p.distance">{{p.distance| number:3}}km</span></div>
             <div class="col col-right">
               <div class="row  text-center" style="font-size:30px;">
                 <div class="col"><i class="icon ic_bike avail-green"></i></div>
@@ -33,5 +33,8 @@
         </div>
       </div>
     </ion-list>
+    <div ng-if="!parkings || parkings.length == 0" class="text-center">
+      <h4>{{'no_data' | translate}}</h4>
+    </div>
   </ion-content>
 </ion-view>

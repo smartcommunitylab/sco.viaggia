@@ -1,5 +1,5 @@
 <ion-view title="{{route.label ? route.label : route.title}}">
-    <ion-content id="content" has-header="true">
+    <ion-content id="content" has-header="true" has-bouncing="false">
       <div class="row" style="background-color: {{color}};">
         <div class="col col-25 tt-day btn" ng-click="prevDate()"><a><i class="icon ion-arrow-left-b"></i></a></div>
         <div class="col col-50 tt-day">{{runningDate | date : 'dd/MM/yyyy'}}</div>
