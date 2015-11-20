@@ -57,6 +57,10 @@ angular.module('viaggia.services.plan', [])
         if (tt == 'BUS' && Config.getExtraurbanAgencies().indexOf(agency) >= 0) {
             return ttMap['EXTRA'];
         }
+        if (tt == 'PARKWALK') {
+            return ttMap['WALK'];
+        }
+
         return ttMap[tt];
     }
     planService.setFromOrTo = function (value) {

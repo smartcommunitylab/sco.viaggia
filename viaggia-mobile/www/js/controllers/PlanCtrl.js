@@ -270,6 +270,7 @@ angular.module('viaggia.controllers.plan', [])
             return false
         }
         //transportTypes
+        $scope.planParams.transportTypes = [];
         for (var i = 0; i < $scope.types.length; i++) {
             if ($scope.mapTypes[$scope.types[i]]) {
                 $scope.planParams.transportTypes.push($scope.types[i]);
