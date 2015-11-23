@@ -435,10 +435,11 @@ angular.module('viaggia', [
             credits_licenses_button: 'VEDI LICENZE',
             favorites_title_list: 'Indirizzi preferiti',
             plan_title: 'Pianifica viaggio',
+            journey_detail: 'Dettagli viaggio',
             planlist_sustanainable: 'Itinerari sostenibili',
             popup_step_number: 'Passo ',
             pop_up_arrival: 'Arrivo',
-
+            my_trip_title: 'I miei viaggi'
 
 
         });
@@ -554,9 +555,11 @@ angular.module('viaggia', [
             credits_licenses_button: 'READ LICENSES',
             favorites_title_list: 'Favorite places',
             plan_title: 'Plan journey',
+            journey_detail: 'Journey detail',
             planlist_sustanainable: 'Sustainable Itineraries',
             popup_step_number: 'Step ',
-            pop_up_arrival: 'Arrive'
+            pop_up_arrival: 'Arrive',
+            my_trip_title: 'My journeys'
 
         });
 
