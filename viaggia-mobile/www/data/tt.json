@@ -15,26 +15,26 @@
       "elements": [
         {
           "agencyId" : "5",
-          "color" : "#e84539",
+          "color" : "#cd251c",
           "routes" : [
-              {"routeId": "BV_R1_G", "routeSymId": "BV_R1_G", "title": "Bolzano - Verona", "color" : "#e84539", "showTrips":true},
-              {"routeId": "BV_R1_R", "routeSymId": "BV_R1_R", "title": "Verona - Bolzano", "color" : "#e84539", "showTrips":true}
+              {"routeId": "BV_R1_G", "routeSymId": "BV_R1_G", "title": "Bolzano - Verona", "color" : "#cd251c", "showTrips":true},
+              {"routeId": "BV_R1_R", "routeSymId": "BV_R1_R", "title": "Verona - Bolzano", "color" : "#cd251c", "showTrips":true}
           ]
         },
         {
           "agencyId" : "6",
-          "color" : "#e84539",
+          "color" : "#cd251c",
           "routes" : [
-              {"routeId": "TB_R2_G", "routeSymId": "TB_R2_G", "title": "Trento - Bassano D.G.", "color" : "#e84539",  "showTrips":true},
-              {"routeId": "TB_R2_R", "routeSymId": "TB_R2_R", "title": "Bassano D.G. - Trento", "color" : "#e84539",  "showTrips":true}
+              {"routeId": "TB_R2_G", "routeSymId": "TB_R2_G", "title": "Trento - Bassano D.G.", "color" : "#cd251c",  "showTrips":true},
+              {"routeId": "TB_R2_R", "routeSymId": "TB_R2_R", "title": "Bassano D.G. - Trento", "color" : "#cd251c",  "showTrips":true}
           ]
         },
         {
           "agencyId" : "10",
-          "color" : "#e84539",
+          "color" : "#cd251c",
           "routes" : [
-              {"routeId": "555", "routeSymId": "555", "color" : "#e84539",  "title": "Trento - Malé"},
-              {"routeId": "556", "routeSymId": "556", "color" : "#e84539",  "title": "Malé - Trento"}
+              {"routeId": "555", "routeSymId": "555", "color" : "#cd251c",  "title": "Trento - Malé"},
+              {"routeId": "556", "routeSymId": "556", "color" : "#cd251c",  "title": "Malé - Trento"}
           ]
         }
       ]
