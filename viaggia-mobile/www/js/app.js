@@ -136,7 +136,7 @@ angular.module('viaggia', [
         })
 
         .state('app.home', {
-//                cache: false,
+                //                cache: false,
                 url: "/home",
                 views: {
                     'menuContent': {
@@ -399,8 +399,8 @@ angular.module('viaggia', [
             journey_details_from: 'Da ',
             journey_details_from_bike: 'Prendi una bicicletta alla stazione di bike sharing ',
             journey_details_to_bike: 'Lascia la bicicletta alla stazione di bike sharing',
-            lbl_delays: 'DELAYS',
-            lbl_trips: 'TYPE',
+            lbl_delays: 'RITARDI',
+            lbl_trips: 'TIPO',
             no_data: 'Nessun risultato trovato.',
             map_detail_title: 'Dettaglio percorso',
             lbl_places: 'posti totali',
