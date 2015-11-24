@@ -96,7 +96,9 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
       $scope.markerIcon = data.markerIcon;
 //      if ($scope.hasMap) prepareMap();
 
-      $scope.title = $filter('translate')(data.title ? data.title : data.label);
+      var title = $filter('translate')(data.title ? data.title : data.label);
+      if (title.length < 5) title =  $filter('translate')('lbl_line') + ' '+title;
+      $scope.title = title;
       $scope.elements = flattenData(data);
       $scope.view = data.view ? data.view : 'list';
       if ($scope.view == 'grid') {
