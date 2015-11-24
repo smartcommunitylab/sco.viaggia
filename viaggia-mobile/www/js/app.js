@@ -125,6 +125,8 @@ angular.module('viaggia', [
                 }
             });
             $rootScope.platform = ionic.Platform;
+
+            setTimeout(function(){ navigator.splashscreen.hide(); },1500);
         });
     })
     .config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
