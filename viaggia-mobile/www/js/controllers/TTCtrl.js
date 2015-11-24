@@ -96,7 +96,9 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
       $scope.markerIcon = data.markerIcon;
 //      if ($scope.hasMap) prepareMap();
 
-      $scope.title = $filter('translate')(data.title ? data.title : data.label);
+      var title = $filter('translate')(data.title ? data.title : data.label);
+      if (title.length < 5) title =  $filter('translate')('lbl_line') + ' '+title;
+      $scope.title = title;
       $scope.elements = flattenData(data);
       $scope.view = data.view ? data.view : 'list';
       if ($scope.view == 'grid') {
@@ -147,7 +149,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
   $scope.scrollLeftPosition = 0;
   $scope.tt = null;
   $scope.runningDate = new Date();
-  $scope.color = '#ddd';
+  $scope.color = '#dddddd';
 
   // load timetable data
   $scope.getTT = function (date) {
@@ -280,7 +282,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
   }
 })
 
-.controller('TTMapCtrl', function ($scope, $state, $stateParams, $timeout, $ionicModal, $ionicPopup, $filter, ionicMaterialMotion, ionicMaterialInk, mapService, Config, ttService, GeoLocate, Toast) {
+.controller('TTMapCtrl', function ($scope, $state, $stateParams, $timeout, $ionicModal, $ionicPopup, $filter, ionicMaterialMotion, ionicMaterialInk, mapService, Config, ttService, planService, GeoLocate, Toast) {
     $scope.allMarkers = null;
 
     var mapData = ttService.getTTMapData();
@@ -372,6 +374,13 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
       $state.go('app.ttstop');
     }
 
+    $scope.navigate = function() {
+      planService.setPlanConfigure({
+        to: {name: $scope.popupStop.name, lat: $scope.popupStop.coordinates[0], long: $scope.popupStop.coordinates[1]},
+      });
+      $state.go('app.plan');
+    };
+
     $scope.$on('leafletDirectiveMarker.ttMap.click', function (e, args) {
       var showPopup = function() {
         $ionicPopup.show({
@@ -382,7 +391,11 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
             buttons: [
                 {text: $filter('translate')('btn_close')},
                 {
-                    text: $filter('translate')('btn_next_trips'),
+                    text: '<i class="icon ion-navigate"></id>',
+                    onTap: $scope.navigate
+                },
+                {
+                    text: '<i class="icon ion-android-time"></id>',
                     onTap: $scope.showStopData
                 }
             ]
@@ -440,8 +453,17 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 .controller('TTStopCtrl', function ($scope, $state, $stateParams, $timeout, $ionicPopup, $filter, ionicMaterialMotion, ionicMaterialInk, Config, ttService) {
   var stopData = ttService.getTTStopData();
   if (stopData.routes) {
+    var d = new Date();
+    d.setHours(0);
+    d.setMinutes(0);
+    d.setSeconds(0);
+    d.setMilliseconds(0);
+    d.setDate(d.getDate()+1);
     stopData.routes.forEach(function(r) {
       if (!r.color) r.color = r.routeElement.color ? r.routeElement.color: r.routeElement.route.color;
+      r.times.forEach(function(t){
+        if (t.time > d.getTime()) t.nextDay = true;
+      });
     });
   }
   $scope.stopData = stopData;

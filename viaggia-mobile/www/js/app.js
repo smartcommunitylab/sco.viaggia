@@ -420,6 +420,7 @@ angular.module('viaggia', [
             lbl_stop: 'Fermata',
             err_too_many_markers: 'Too many objects on the map. Please zoom in.',
             lbl_lines: 'Corse:',
+            lbl_line: 'Linea',
             popup_delete_trip_message: 'Sicuro di voler cancellare il viaggio salvato?',
             popup_delete_trip_title: 'Cancella',
             tripdeleted_message_feedback: 'Il viaggio selezionato è stato cancellato',
@@ -444,8 +445,6 @@ angular.module('viaggia', [
             popup_step_number: 'Passo ',
             pop_up_arrival: 'Arrivo',
             my_trip_title: 'I miei viaggi'
-
-
         });
 
 
@@ -540,6 +539,7 @@ angular.module('viaggia', [
             lbl_stop: 'Stop',
             err_too_many_markers: 'Too many objects on the map. Please zoom in.',
             lbl_lines: 'Lines:',
+            lbl_line: 'Line',
             popup_delete_trip_message: 'Are you sure to delete the saved journey?',
             popup_delete_trip_title: 'Delete',
             tripdeleted_message_feedback: 'The selected journey has been deleted',

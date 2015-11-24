@@ -16,15 +16,15 @@
             "TRANSIT"
         ]
     },
-    "agencies": [5,6,10,12,16,17],
+    "agencies": [5,6,10,16,17],
     "extraurban_agencies": [17],
     "broadcast_notifications_options": [
         1,
         4
     ],
     "center_map": [
-      46.069672,
-      11.121270
+      45.890919,
+      11.040184
    ],
     "zoom_map": 15,
     "db_version": 25,
