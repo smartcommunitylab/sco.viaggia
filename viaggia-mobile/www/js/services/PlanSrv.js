@@ -253,13 +253,7 @@ angular.module('viaggia.services.plan', [])
     };
 
     planService.getTimeStr = function (time) {
-        return time.getHours() + ':' + time.getMinutes();
-        //        var am = time.getHours() < 12;
-        //        var hour = am ? time.getHours() : time.getHours() - 12;
-        //        if (am && hour == 0) hour = 12;
-        //
-        //        return (hour < 10 ? '0' : '') + hour + ':' +
-        //            (time.getMinutes() < 10 ? '0' : '') + time.getMinutes() + (am ? 'AM' : 'PM');
+        return (time.getHours() < 10 ? '0' : '') + time.getHours() + ':' + (time.getMinutes() < 10 ? '0' : '') + time.getMinutes();
     };
 
     var extractDetails = function (step, leg, idx, from) {
