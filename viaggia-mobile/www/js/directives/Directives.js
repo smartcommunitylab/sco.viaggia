@@ -23,7 +23,7 @@ angular.module('viaggia.directives', [])
             scope: {
                 etime: '=etime'
             },
-            template: "<strong>{{stime}}</strong>",
+            template: "<span>{{stime}}</span>",
             link: function (scope, elem, attrs) {
 
                 scope.stime = epochParser(scope.etime, 'time');
@@ -55,18 +55,18 @@ angular.module('viaggia.directives', [])
             }
         };
     })
-//    .directive('ngLastRepeat', function ($timeout) {
-//        return {
-//            restrict: 'A',
-//            link: function (scope, element, attr) {
-//                if (scope.$last === true) {
-//                    $timeout(function () {
-//                        scope.$emit('ngLastRepeat' + (attr.ngLastRepeat ? '.' + attr.ngLastRepeat : ''));
-//                    });
-//                }
-//            }
-//        };
-//    })
+    //    .directive('ngLastRepeat', function ($timeout) {
+    //        return {
+    //            restrict: 'A',
+    //            link: function (scope, element, attr) {
+    //                if (scope.$last === true) {
+    //                    $timeout(function () {
+    //                        scope.$emit('ngLastRepeat' + (attr.ngLastRepeat ? '.' + attr.ngLastRepeat : ''));
+    //                    });
+    //                }
+    //            }
+    //        };
+    //    })
     .directive('placeautocomplete', function () {
         var index = -1;
 

@@ -10,11 +10,11 @@
 
 
             </div>
-            <button class="button button-raised button-plan-fromto button-viaggia no-padding margin-8  icon ion-map" ng-click="openMapPlan('from')">
-            </button>
-            <button class="button button-raised button-plan-fromto button-viaggia no-padding margin-8 icon " ng-class="isFavorite('from',fromName)?'ion-android-star':'ion-android-star-outline'" ng-click="bookmarks('from',fromName)">
+            <a class="button button-icon plan-viaggia-fromto margin-8  icon ion-map" ng-click="openMapPlan('from')">
+            </a>
+            <a class="button button-icon plan-viaggia-fromto margin-8 icon " ng-class="isFavorite('from',fromName)?'ion-android-star':'ion-android-star-outline'" ng-click="bookmarks('from',fromName)">
 
-            </button>
+            </a>
         </div>
         <div class="row">
 
@@ -24,10 +24,10 @@
                 <placeautocomplete ng-if="refresh" ng-model="toName" attr-placeholder="{{'plan_insert_to_address' | translate}}" click-activation="false" data="places" on-type="typePlace" placeholder="{{'plan_from' | translate}}" on-select="changeStringTo" ng-blur="setNameParam"></placeautocomplete>
             </div>
 
-            <button class="button button-raised button-plan-fromto button-viaggia square-56 no-padding margin-8  icon ion-map" ng-click="openMapPlan('to')">
-            </button>
-            <button class="button button-raised button-plan-fromto button-viaggia square-56 no-padding margin-8 icon" ng-class="isFavorite('to',toName)?'ion-android-star':'ion-android-star-outline'" ng-click="bookmarks('to',toName)">
-            </button>
+            <a class="button button-icon plan-viaggia-fromto margin-8  icon ion-map" ng-click="openMapPlan('to')">
+            </a>
+            <a class="button button-icon plan-viaggia-fromto margin-8 icon" ng-class="isFavorite('to',toName)?'ion-android-star':'ion-android-star-outline'" ng-click="bookmarks('to',toName)">
+            </a>
         </div>
         <div class="row plan-first-row">
             <label class="item item-input plan-item-time">

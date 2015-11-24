@@ -4,22 +4,22 @@ angular.module('viaggia.services.conf', [])
     var DEVELOPMENT = true;
 
 
-    var isDarkColor = function(color) {
-      var c = color.substring(1);      // strip #
-      var rgb = parseInt(c, 16);   // convert rrggbb to decimal
-      var r = (rgb >> 16) & 0xff;  // extract red
-      var g = (rgb >>  8) & 0xff;  // extract green
-      var b = (rgb >>  0) & 0xff;  // extract blue
+    var isDarkColor = function (color) {
+        var c = color.substring(1); // strip #
+        var rgb = parseInt(c, 16); // convert rrggbb to decimal
+        var r = (rgb >> 16) & 0xff; // extract red
+        var g = (rgb >> 8) & 0xff; // extract green
+        var b = (rgb >> 0) & 0xff; // extract blue
 
-      var luma = (r + g + b)/3;//0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+        var luma = (r + g + b) / 3; //0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
 
-      return luma < 128;
+        return luma < 128;
     };
 
 
-    $rootScope.textColor = function(color) {
-      if (isDarkColor(color)) return '#fff';
-      return '#000';
+    $rootScope.textColor = function (color) {
+        if (isDarkColor(color)) return '#fff';
+        return '#000';
     };
 
 
@@ -51,43 +51,43 @@ angular.module('viaggia.services.conf', [])
     var COLORS_TRIP = [
         {
             type: 'TRAIN',
-            color: '#e84539',
+            color: '#cd251c',
             icon: 'img/ic_train.png'
 
         },
         {
             type: 'CAR',
-            color: '#f39619',
+            color: '#757575',
             icon: 'img/ic_car.png'
 
         },
         {
             type: 'BUS',
-            color: '#009587',
+            color: '#eb8919',
             icon: 'img/ic_urbanBus.png'
 
         },
         {
             type: 'BUSSUBURBAN',
-            color: '#4052a0',
+            color: '#00588e',
             icon: 'img/ic_extraurbanBus.png'
 
         },
         {
             type: 'BICYCLE',
-            color: '#8cc04c',
+            color: '#922d66',
             icon: 'img/ic_bike.png'
 
         },
         {
             type: 'WALK',
-            color: '#823d8f',
+            color: '#8cc04c',
             icon: 'img/ic_walk.png'
 
         },
         {
             type: 'PARKWALK',
-            color: '#823d8f',
+            color: '#8cc04c',
             icon: 'img/ic_park_walk.png'
 
         }
@@ -204,11 +204,11 @@ angular.module('viaggia.services.conf', [])
                 }
             }
 
-            var searchRec = function(res, groupIds, idx) {
+            var searchRec = function (res, groupIds, idx) {
                 if (idx >= groupIds.length) return res;
                 for (var i = 0; i < res.groups.length; i++) {
                     if (res.groups[i].label == groupIds[idx]) {
-                        res = searchRec(res.groups[i], groupIds, idx+1);
+                        res = searchRec(res.groups[i], groupIds, idx + 1);
                         break;
                     }
                 }

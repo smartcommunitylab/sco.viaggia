@@ -587,14 +587,14 @@ ion-header-bar .title {
 
 .green-bottom {
     width: 100%;
-    background-color: #179585;
+    background-color: #4caf4f;
     color: white;
     height: 24px;
     text-align: center;
 }
 
 .green-head {
-    background-color: #179585;
+    background-color: #4caf4f;
     padding-top: 4px;
     height: 40px;
     overflow: auto
@@ -622,4 +622,27 @@ ion-header-bar .title {
 
 .trip-detail-panel {
     padding-top: 24px;
+}
+
+.plan-viaggia-fromto {
+    color: #3bbacf;
+    box-shadow: none;
+}
+
+.plan-viaggia-fromto:hover {
+    color: rgba(60, 186, 207, 0.5);
+    box-shadow: none;
+}
+/*redefine style for checkbox*/
+
+.ion-checkmark:before {
+    color: white;
+}
+
+.item-radio input:checked ~ .item-content {
+    background: #3bbacf;
+}
+
+.list-of-icons {
+    min-width: 50px;
 }
