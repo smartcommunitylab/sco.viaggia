@@ -65,12 +65,11 @@ div.ngc.scroll-wrapper {
 .scrollable .scrollable-bar:hover,
 .scrollable.active .scrollable-bar {
 /*  display: none;*/
-/*    opacity: 1*/
+    opacity: 1
 }
 
 .scrollable .scrollable-slider {
 /*  display: none;*/
-/*
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
@@ -78,7 +77,6 @@ div.ngc.scroll-wrapper {
     background-image: linear-gradient(to right, #ccc, #ddd);
     border: 1px solid #333;
     border: 1px solid rgba(0, 0, 0, .5)
-*/
 }
 
 .scrollable .scrollable-bar-x .scrollable-slider {
