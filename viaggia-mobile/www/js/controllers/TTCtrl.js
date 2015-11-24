@@ -147,7 +147,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
   $scope.scrollLeftPosition = 0;
   $scope.tt = null;
   $scope.runningDate = new Date();
-  $scope.color = '#ddd';
+  $scope.color = '#dddddd';
 
   // load timetable data
   $scope.getTT = function (date) {
