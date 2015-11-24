@@ -136,7 +136,7 @@ angular.module('viaggia', [
         })
 
         .state('app.home', {
-                cache: false,
+//                cache: false,
                 url: "/home",
                 views: {
                     'menuContent': {

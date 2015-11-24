@@ -182,13 +182,21 @@ angular.module('viaggia.services.conf', [])
                     }
                 }
             }
-            if (!!groupId) {
+
+            var searchRec = function(res, groupIds, idx) {
+                if (idx >= groupIds.length) return res;
                 for (var i = 0; i < res.groups.length; i++) {
-                    if (res.groups[i].label == groupId) {
-                        res = res.groups[i];
+                    if (res.groups[i].label == groupIds[idx]) {
+                        res = searchRec(res.groups[i], groupIds, idx+1);
                         break;
                     }
                 }
+                return res;
+            };
+
+            if (!!groupId) {
+                var groupIds = groupId.split(',');
+                res = searchRec(res, groupIds, 0);
             }
             if (!!routeId) {
                 for (var i = 0; i < res.routes.length; i++) {

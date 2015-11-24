@@ -131,7 +131,7 @@ angular.module('viaggia.controllers.info', [])
         });
     });
 
-    $timeout(init, 200);
+    init();
 })
 
 

@@ -101,27 +101,35 @@ angular.module('viaggia.services.timetable', [])
       deferred.reject(err);
     };
     var result = {stops:[],tripIds:[],times:[],stopIds:[], routeIds: []};
-    DataManager.doQuery("SELECT stopsIDs FROM route WHERE agencyID = '"+agency+"' AND linehash = '"+hash+"'",[])
+    DataManager.doQuery("SELECT * FROM route WHERE agencyID = '"+agency+"' AND linehash = '"+hash+"'",[])
     .then(function(data) {
-      result.stopIds = toTrimmedList(data);
-      DataManager.doQuery("SELECT stopsNames FROM route WHERE agencyID = '"+agency+"' AND linehash = '"+hash+"'",[])
-      .then(function(data) {
-        result.stops = toTrimmedList(data);
-        DataManager.doQuery("SELECT tripIds FROM route WHERE agencyID = '"+agency+"' AND linehash = '"+hash+"'",[])
-        .then(function(data) {
-          result.tripIds = toTrimmedList(data);
-          DataManager.doQuery("SELECT times FROM route WHERE agencyID = '"+agency+"' AND linehash = '"+hash+"'",[])
-          .then(function(data) {
-            result.times = uncompressTime(data,result.stopIds.length);
-            getDelays(agency, route, date).then(function(delays){
-              result.delays = delays;
-              deferred.resolve(result);
-            }, function() {
-              deferred.resolve(result);
-            });
-          }, errCB);
-        }, errCB);
-      }, errCB);
+      result.stops = toTrimmedList(data[0].stopsNames);
+      result.tripIds = toTrimmedList(data[0].tripIds);
+      result.times = uncompressTime(data[0].times,result.stops.length);
+      getDelays(agency, route, date).then(function(delays){
+        result.delays = delays;
+        deferred.resolve(result);
+      }, function() {
+        deferred.resolve(result);
+      });
+//      DataManager.doQuery("SELECT stopsNames FROM route WHERE agencyID = '"+agency+"' AND linehash = '"+hash+"'",[])
+//      .then(function(data) {
+//        result.stops = toTrimmedList(data);
+//        DataManager.doQuery("SELECT tripIds FROM route WHERE agencyID = '"+agency+"' AND linehash = '"+hash+"'",[])
+//        .then(function(data) {
+//          result.tripIds = toTrimmedList(data);
+//          DataManager.doQuery("SELECT times FROM route WHERE agencyID = '"+agency+"' AND linehash = '"+hash+"'",[])
+//          .then(function(data) {
+//            result.times = uncompressTime(data,result.stopIds.length);
+//            getDelays(agency, route, date).then(function(delays){
+//              result.delays = delays;
+//              deferred.resolve(result);
+//            }, function() {
+//              deferred.resolve(result);
+//            });
+//          }, errCB);
+//        }, errCB);
+//      }, errCB);
     }, errCB);
   };
 
@@ -235,6 +243,21 @@ angular.module('viaggia.services.timetable', [])
     setTTStopData: function(stopData){
       ttStopData = stopData;
     }
+//    ,
+//    getDelays: function(data, agency, route, date) {
+//      var deferred = $q.defer();
+//      if (ionic.Platform.isWebView()) {
+//        getDelays(agency, route, date).then(function(delays) {
+//          result.delays = delays;
+//          deferred.resolve(result);
+//        }, function() {
+//          deferred.resolve(result);
+//        });
+//      } else {
+//        deferred.resolve(data.delays);
+//      }
+//      return deferred.promise;
+//    }
 
   }
 })

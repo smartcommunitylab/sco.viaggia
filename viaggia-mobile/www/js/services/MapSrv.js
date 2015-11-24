@@ -1,6 +1,6 @@
 angular.module('viaggia.services.map', [])
 
-.factory('mapService', function ($q, $http, $ionicPlatform, $filter, Config, planService, leafletData, GeoLocate) {
+.factory('mapService', function ($q, $http, $ionicPlatform, $filter, $timeout, Config, planService, leafletData, GeoLocate) {
     var colorsAndTypes = Config.getColorsTypes();
 
     var cachedMap = {};
@@ -120,7 +120,7 @@ angular.module('viaggia.services.map', [])
                     });
                 });
 
-                deferred.resolve(true);
+                deferred.resolve(map);
             },
             function (error) {
                 console.log('error creation');
@@ -128,6 +128,14 @@ angular.module('viaggia.services.map', [])
             });
         return deferred.promise;
     }
+    mapService.centerOnMe = function(mapId, zoom) {
+      leafletData.getMap(mapId).then(function(map) {
+        GeoLocate.locate().then(function (e) {
+              $timeout(function(){map.setView(L.latLng(e[0], e[1]), zoom);});
+        });
+      });
+
+    };
 
     mapService.getTripPolyline = function (trip) {
             var listOfPoints = {};

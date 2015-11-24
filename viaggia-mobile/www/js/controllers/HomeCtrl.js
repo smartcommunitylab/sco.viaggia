@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.home', [])
 
-.controller('HomeCtrl', function ($scope, $timeout, $filter, $location, Config, mapService, ionicMaterialMotion, ionicMaterialInk) {
+.controller('HomeCtrl', function ($scope, $timeout, $filter, $location, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk) {
 
     $scope.buttons = [{
         label: $filter('translate')('menu_news'),
@@ -33,19 +33,21 @@ angular.module('viaggia.controllers.home', [])
 
 
     $scope.initMap = function () {
-        mapService.initMap('homeMap').then(function () {
+        mapService.initMap('homeMap').then(function (map) {
 
             if (mymap != null) {
                 mapService.resizeElementHeight(mymap, 'homeMap');
                 mapService.refresh('homeMap');
             }
+            Config.init().then(function () {
+              mapService.centerOnMe('homeMap', Config.getMapPosition().zoom);
+            });
         });
     }
     window.onresize = function () {
         if (mymap != null) {
             mapService.resizeElementHeight(mymap, 'homeMap');
             mapService.refresh('homeMap');
-
         }
     }
 

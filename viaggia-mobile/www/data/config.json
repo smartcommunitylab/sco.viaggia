@@ -36,6 +36,7 @@
       ],
       "infomenu" : [
         {"state":"/app/ttlist/urbano","label":"menu_real_time_bus_urban", "icon": "ic_urban-bus"},
+        {"state":"/app/ttlist/rovereto","label":"menu_real_time_bus_urban", "icon": "ic_urban-bus"},
         {"state":"/app/ttlist/extraurbano","label":"menu_real_time_bus_suburban", "icon": "ic_extraurban-bus"},
         {"state":"/app/ttlist/trains","label":"menu_real_time_train", "icon": "ic_train"},
         {"state":"/app/bikesharing/trento","label":"menu_real_time_bike", "icon": "ic_bike"},

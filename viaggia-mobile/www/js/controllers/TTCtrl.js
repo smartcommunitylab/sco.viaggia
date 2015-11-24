@@ -47,12 +47,15 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
   }
 
   $scope.selectElement = function(e) {
+    // route element: go to table
     if (e.route != null) {
       $state.go('app.tt',{ref: e.ref, agencyId: e.agencyId, groupId: groupId, routeId: e.route.routeId});
+    // group with single route: go to table
     } else if (e.group.routes != null && e.group.routes.length == 1) {
       $state.go('app.tt',{ref: e.ref, agencyId: e.agencyId, groupId: e.group.label, routeId: e.group.routes[0].routeId});
+    // group with multiple elements: go to group
     } else {
-      $state.go('app.ttgroup',{ref: e.ref, agencyId: e.agencyId, groupId: e.group.label});
+      $state.go('app.ttgroup',{ref: e.ref, agencyId: e.agencyId, groupId: groupId ? (groupId + ','+e.group.label) :  e.group.label});
     }
   }
 
@@ -223,7 +226,8 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
           } else if (col == 0) {
             rowContent.push(data.stops[row-$scope.header_row_number]);
           } else if (row == 0) {
-            rowContent.push(getDelayValue(data.delays[col - 1]));
+            if (data.delays) rowContent.push(getDelayValue(data.delays[col - 1]));
+            else rowContent.push('');
           } else if ($scope.header_row_number == 2 && row == 1) {
             rowContent.push(getTripText(data.tripIds[col - 1]));
           } else {
