@@ -566,7 +566,7 @@ ion-header-bar .title {
     font-size: 16px;
     background-color: #fff;
     border: 1px solid #d2d2d2;
-    min-height: 48px;
+    min-height: 70px;
     margin: 5px 0px;
     padding: 0px 16px;
 }
@@ -576,7 +576,7 @@ ion-header-bar .title {
 }
 
 .home-list .button i::before {
-    font-size: 28px;
+    font-size: 44px;
 }
 
 .line-background-for-list {
