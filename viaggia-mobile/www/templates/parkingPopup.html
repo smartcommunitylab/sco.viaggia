@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="row parking-card-footer">
-    <div class="col"><span ng-if="popupParking.distance">{{popupParking.distance| number:3}}km</span></div>
+    <div class="col"><span ng-if="popupParking.distance">{{popupParking.distance| number:1}}km</span></div>
     <div ng-if="!popupParking.monitored || popupParking.slotsAvailable == -2" class="col col-right"><span>{{popupParking.slotsTotal}} {{'lbl_places' | translate}}</span></div>
     <div ng-if="popupParking.monitored && popupParking.slotsAvailable > -2" class="col col-right">
       <div>

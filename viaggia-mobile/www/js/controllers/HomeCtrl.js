@@ -31,7 +31,7 @@ angular.module('viaggia.controllers.home', [])
         }); // No timeout delay necessary.
     });
 
-
+/* DISABLED MAP
     $scope.initMap = function () {
         mapService.initMap('homeMap').then(function (map) {
 
@@ -52,6 +52,11 @@ angular.module('viaggia.controllers.home', [])
     }
 
 
+    $scope.$on('$ionicView.beforeEnter', function(){
+      mapService.resizeElementHeight(mymap, 'homeMap');
+      mapService.refresh('homeMap');
+    });
+
     //just for init
     angular.extend($scope, {
         center: {
@@ -61,7 +66,7 @@ angular.module('viaggia.controllers.home', [])
         },
         events: {}
     });
-
+*/
   $scope.go = function(state) {
     $location.path(state);
   }

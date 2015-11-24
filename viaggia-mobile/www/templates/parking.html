@@ -1,5 +1,6 @@
 <ion-view title="{{'menu_real_time_park'|translate}}">
     <ion-nav-buttons side="right">
+        <button ng-if="selected != null" class="button button-icon button-clear ion-navigate" ng-click="navigate()"></button>
         <button class="button button-icon" ng-click="showMap()" ng-class="{'button-fab button-viaggia-header ion-map':selected==null, 'button-clear ion-map': selected != null}"></button>
     </ion-nav-buttons>
     <ion-content has-header="true" padding="true">
@@ -16,7 +17,7 @@
                         <!--            <div class="col col-20 text-right"><i class="icon ic_bookmark-outline"></i></div>-->
                     </div>
                     <div class="row parking-card-footer">
-                        <div class="col"><span ng-if="p.distance">{{p.distance| number:3}}km</span>
+                        <div class="col"><span ng-if="p.distance">{{p.distance| number:1}}km</span>
                         </div>
                         <div ng-if="!p.monitored || p.slotsAvailable == -2" class="col col-right"><span>{{p.slotsTotal}} {{'lbl_places' | translate}}</span>
                         </div>

@@ -12,7 +12,8 @@
     line-height: 56px !important;
 }
 
-.platform-ios.platform-cordova:not(.fullscreen) .fs-header {
+/*.platform-ios.platform-cordova:not(.fullscreen) */
+.fs-header {
     display: block;
     height: 20px;
     background-color: #2975a7 !important;
@@ -302,15 +303,15 @@
 }
 
 .menu-rt {
-    background-color: #2975a7 !important;
+    background-color: #3bbacf !important;
 }
 
 .menu-main {
-    background-color: #2989a7 !important;
+    background-color: #2975a7 !important;
 }
 
 .menu-last {
-    background-color: #3bbacf !important;
+    background-color: #2975a7 !important;
 }
 
 .menu-rt.item-icon-left .icon,
@@ -328,12 +329,8 @@
     padding-bottom: 8px;
 }
 
-.menu-rt.item-accordion:first-child {
-    border-top: 1px solid #000;
-}
-
 .menu-left {
-    background-color: #3bbacf;
+    background-color: #2975a7;
 }
 
 .bar-positive-100 {

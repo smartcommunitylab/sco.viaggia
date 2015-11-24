@@ -15,9 +15,18 @@
     <ion-side-menu side="left">
         <ion-content class="leftmenu">
             <ion-list>
-                <div>
-                    <div class="fs-header"></div>
-                    <ion-item class="item item-icon-left item-icon-right menu-rt" ng-click="toggleGroupRealTime()" ng-class="{active: isGroupRealTimeShown()}">
+              <div class="fs-header"></div>
+              <ion-item nav-clear menu-close href="#/app/home" class="menu-main item-icon-left">
+                  <i class="icon ic_home"></i>{{'menu_home' | translate}}
+              </ion-item>
+              <ion-item nav-clear menu-close href="#/app/plan" class="menu-main item-icon-left">
+                  <i class="icon ic_search"></i>{{'menu_plan' | translate}}
+              </ion-item>
+              <ion-item nav-clear menu-close href="#/app/mytrips" class="menu-main item-icon-left">
+                  <i class="icon ic_folder"></i>{{'menu_mytrip' | translate}}
+              </ion-item>
+              <div>
+                    <ion-item class="item item-icon-left item-icon-right menu-main" ng-click="toggleGroupRealTime()" ng-class="{active: isGroupRealTimeShown()}">
                         <i class="icon ic_real-time-info"></i> {{'menu_info_real_time' | translate}}
                         <i class="icon" ng-class="isGroupRealTimeShown() ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i>
                     </ion-item>
@@ -27,15 +36,6 @@
                         </ion-item>
                     </div>
                 </div>
-                <ion-item nav-clear menu-close href="#/app/home" class="menu-main item-icon-left">
-                    <i class="icon ic_home"></i>{{'menu_home' | translate}}
-                </ion-item>
-                <ion-item nav-clear menu-close href="#/app/plan" class="menu-main item-icon-left">
-                    <i class="icon ic_search"></i>{{'menu_plan' | translate}}
-                </ion-item>
-                <ion-item nav-clear menu-close href="#/app/mytrips" class="menu-main item-icon-left">
-                    <i class="icon ic_folder"></i>{{'menu_mytrip' | translate}}
-                </ion-item>
                 <!--
                 <ion-item nav-clear menu-close href="#/app/monitoring" class="menu-main item-icon-left">
                     <i class="icon ic_monitoring"></i>{{'menu_monitoring' | translate}}

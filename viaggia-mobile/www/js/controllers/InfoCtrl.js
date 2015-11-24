@@ -131,6 +131,14 @@ angular.module('viaggia.controllers.info', [])
         });
     });
 
+    $scope.navigate = function() {
+      planService.setPlanConfigure({
+        to: {name: $scope.selected.description, lat: $scope.selected.position[0], long: $scope.selected.position[1]},
+      });
+      $scope.closeMap();
+      $state.go('app.plan');
+    };
+
     init();
 })
 
@@ -258,6 +266,14 @@ angular.module('viaggia.controllers.info', [])
       ]
         });
     });
+
+    $scope.navigate = function() {
+      planService.setPlanConfigure({
+        to: {name: $scope.selected.description, lat: $scope.selected.position[0], long: $scope.selected.position[1]},
+      });
+      $scope.closeMap();
+      $state.go('app.plan');
+    };
 
     init();
 })

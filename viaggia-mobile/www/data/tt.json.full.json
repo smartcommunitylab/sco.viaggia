@@ -1,0 +1,147 @@
+{
+  "stopVisualization" : {
+    "12" : {"view": "grid"},
+    "5" : {"view": "list"},
+    "6" : {"view": "list"},
+    "10" : {"view": "list"},
+    "17" : {"view": "list"}
+  },
+  "elements": {
+    "trains" : {
+      "view" : "list",
+      "label": "menu_real_time_train",
+      "hasMap": true,
+      "markerIcon": "ic_train",
+      "elements": [
+        {
+          "agencyId" : "5",
+
+          "routes" : [
+              {"routeId": "BV_R1_G", "routeSymId": "BV_R1_G", "title": "Bolzano - Verona", "color" : "#e84539", "showTrips":true},
+              {"routeId": "BV_R1_R", "routeSymId": "BV_R1_R", "title": "Verona - Bolzano", "color" : "#e84539", "showTrips":true}
+          ]
+        },
+        {
+          "agencyId" : "6",
+          "routes" : [
+              {"routeId": "TB_R2_G", "routeSymId": "TB_R2_G", "title": "Trento - Bassano D.G.", "color" : "#e84539",  "showTrips":true},
+              {"routeId": "TB_R2_R", "routeSymId": "TB_R2_R", "title": "Bassano D.G. - Trento", "color" : "#e84539",  "showTrips":true}
+          ]
+        },
+        {
+          "agencyId" : "10",
+          "routes" : [
+              {"routeId": "555", "routeSymId": "555", "color" : "#e84539",  "title": "Trento - Malé"},
+              {"routeId": "556", "routeSymId": "556", "color" : "#e84539",  "title": "Malé - Trento"}
+          ]
+        }
+      ]
+    },
+    "extraurbano" : {
+      "view" : "list",
+      "label": "menu_real_time_bus_suburban",
+      "hasMap": true,
+      "markerIcon": "ic_extraurbanBus",
+      "elements": [
+        {
+          "agencyId" : "17",
+          "hasMap": true,
+          "groups" : [
+            {
+              "label" : "ZONA 3",
+              "color" : "#fcbf0e",
+              "description": "Rovereto-Riva del Garda, Avio-Folgaria, Lavarone-Luserna, Vallarsa-Terragnolo, Destra Adige-Brentonico, Garniga Terme, Ronzo-Chienis",
+              "groups": [
+                {
+                  "label": "301",
+                  "title": "301 - TRENTO-BESENELLO-CALLIANO-ROVERETO",
+                  "routes" :[
+                    {"routeId": "301A", "routeSymId": "301A", "title": "TRENTO-BESENELLO-CALLIANO-ROVERETO", "label":"301"},
+                    {"routeId": "301R", "routeSymId": "301R", "title": "ROVERETO-CALLIANO-BESENELLO-TRENTO", "label":"301"}
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "urbano" : {
+      "view" : "grid",
+      "label": "menu_real_time_bus_urban",
+      "hasMap": true,
+      "markerIcon": "ic_urbanBus",
+      "elements": [
+        {
+          "agencyId" : "16",
+          "hasMap": true,
+          "groups" : [
+            {
+              "label" : "1",
+              "color" : "#174072",
+              "routes" : [
+                {"routeId": "01A_Rov", "routeSymId": "01A", "title": "Corso Bettini Ospedale Lizzana Marco", "label":"1"},
+                {"routeId": "01R_Rov", "routeSymId": "01R", "title": "Marco Lizzana Corso Bettini Pomarolo", "label":"1"}
+              ]
+            },
+            {
+              "label" : "2",
+              "color" : "#D65A2E",
+              "routes" : [
+                {"routeId": "02A_Rov", "routeSymId": "02A", "title": "Costa Corso Rosmini S.Giorgio", "label":"2"},
+                {"routeId": "02R_Rov", "routeSymId": "02R", "title": "S.Giorgio Corso Rosmini Costa", "label":"2"}
+              ]
+            },
+            {
+              "label" : "3",
+              "color" : "#C02927",
+              "routes" : [
+                {"routeId": "03A_Rov", "routeSymId": "03A", "title": "Pedersano Nogaredo Rosmini Lenzima", "label":"3"},
+                {"routeId": "03R_Rov", "routeSymId": "03R", "title": "Lenzima Rosmini Nogaredo Pedersano", "label":"3"}
+              ]
+            },
+            {
+              "label" : "4",
+              "color" : "#0976B7",
+              "routes" : [
+                {"routeId": "04A_Rov", "routeSymId": "04A", "title": "Noarna S.Ilario Isera Villa Lagarina", "label":"4"},
+                {"routeId": "04R_Rov", "routeSymId": "04R", "title": "Villa Lagarina Isera S.Ilario Noarna", "label":"4"}
+              ]
+            },
+            {
+              "label" : "5",
+              "color" : "#E8C01C",
+              "routes" : [
+                {"routeId": "05A_Rov", "routeSymId": "05R", "title": "Mori Villa Lagarina Pomarolo Nomi", "label":"5"}
+              ]
+            },
+            {
+              "label" : "6",
+              "color" : "#6EB046",
+              "routes" : [
+                {"routeId": "06A_Rov", "routeSymId": "06A", "title": "Nomi Pomarolo/Volano Rosmini Mori", "label":"6"},
+                {"routeId": "06R_Rov", "routeSymId": "06R", "title": "Mori Rosmini Calliano Nomi", "label":"6"}
+              ]
+            },
+            {
+              "label" : "7",
+              "color" : "#1B9887",
+              "routes" : [
+                {"routeId": "07A_Rov", "routeSymId": "07A", "title": "Noriglio Rosmini Campana Dei Caduti", "label":"7"},
+                {"routeId": "07R_Rov", "routeSymId": "07R", "title": "Campana Dei Caduti Rosmini Noriglio", "label":"7"}
+              ]
+            },
+            {
+              "label" : "A",
+              "color" : "#B9BAB5",
+              "routes" : [
+                {"routeId": "AA_Rov", "routeSymId": "AA", "title": "Brione S.Giorgio Lizzana Ossario", "label":"A"},
+                {"routeId": "AR_Rov", "routeSymId": "AR", "title": "Ossario Ospedale Rosmini Brione", "label":"A"}
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

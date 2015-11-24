@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="it.smartcommunitylab.sco.viaggia" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>viaggia-mobile</name>
-  <description>
-        An Ionic Framework and Cordova project.
-    </description>
-  <author email="info@smartcommunitylab.it" href="http://www.smartcommunitylab.it/">
-      Smart Community Lab
-    </author>
+<widget id="eu.trentorise.smartcampus.viaggiarovereto" version="0.0.1" android-versionCode="1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>Viaggia Rovereto</name>
+  <description>Viaggia Rovereto</description>
+  <author email="info@smartcommunitylab.it" href="http://www.smartcommunitylab.it/">Smart Community Lab</author>
   <content src="index.html"/>
   <access origin="*"/>
+  <access origin="sms:*" launch-external="yes"/>
+  <access origin="tel:*" launch-external="yes"/>
+  <access origin="mailto:*" launch-external="yes"/>
+  <access origin="geo:*" launch-external="yes"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
-  <preference name="android-minSdkVersion" value="16"/>
+  <preference name="AutoHideSplashScreen" value="false"/>
+  <preference name="auto-hide-splash-screen" value="false"/>
   <preference name="BackupWebStorage" value="none"/>
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
+  <preference name="android-minSdkVersion" value="16"/>
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>

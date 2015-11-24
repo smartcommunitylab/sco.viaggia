@@ -1,6 +1,7 @@
 angular.module('viaggia.controllers.common', [])
 
 .controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, DataManager, $ionicPopup, $ionicModal, $filter, $ionicLoading, Config, planService) {
+    $scope.shownGroup = true;
 
     /*menu group*/
     $scope.toggleGroupRealTime = function () {
