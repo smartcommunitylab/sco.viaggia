@@ -11,8 +11,8 @@
 .mfb-component__button--child [class*=" ic_"] {
     line-height: 56px !important;
 }
-
 /*.platform-ios.platform-cordova:not(.fullscreen) */
+
 .fs-header {
     display: block;
     height: 20px;
@@ -171,6 +171,7 @@
 .button-viaggia-selected {
     background-color: #3bbacf;
     color: white;
+    box-shadow: none;
 }
 
 .button-viaggia-selected:hover {

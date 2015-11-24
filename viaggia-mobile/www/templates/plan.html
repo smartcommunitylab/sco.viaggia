@@ -52,31 +52,31 @@
             </label>
         </div>
         <div class="row plan-first-row">
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_foot" ng-class="{'button-viaggia-selected': isSwitched('WALK'),'button-viaggia-notselected': !isSwitched('WALK')}" ng-click="switch('WALK')">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_foot" ng-class="{'button-viaggia-selected ': isSwitched('WALK'),'button-viaggia-notselected': !isSwitched('WALK')}" ng-click="switch('WALK')">
 
             </button>
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_public-transport" ng-class="{'button-viaggia': isSwitched('TRANSIT'),'button-viaggia-notselected': !isSwitched('TRANSIT')}" ng-click="switch('TRANSIT')">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_public-transport" ng-class="{'button-viaggia-selected ': isSwitched('TRANSIT'),'button-viaggia-notselected': !isSwitched('TRANSIT')}" ng-click="switch('TRANSIT')">
 
             </button>
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car" ng-class="{'button-viaggia': isSwitched('CAR'),'button-viaggia-notselected': !isSwitched('CAR')}" ng-click="switch('CAR')">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car" ng-class="{'button-viaggia-selected ': isSwitched('CAR'),'button-viaggia-notselected': !isSwitched('CAR')}" ng-click="switch('CAR')">
 
             </button>
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_bike" ng-class="{'button-viaggia': isSwitched('BICYCLE'),'button-viaggia-notselected': !isSwitched('BICYCLE')}" ng-click="switch('BICYCLE')">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_bike" ng-class="{'button-viaggia-selected ': isSwitched('BICYCLE'),'button-viaggia-notselected': !isSwitched('BICYCLE')}" ng-click="switch('BICYCLE')">
             </button>
         </div>
         <div class="row">
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car-sharing" ng-class="{'button-viaggia': isSwitched('SHAREDCAR'),'button-viaggia-notselected': !isSwitched('SHAREDCAR')}" ng-click="switch('SHAREDCAR')">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDCAR'),'button-viaggia-notselected': !isSwitched('SHAREDCAR')}" ng-click="switch('SHAREDCAR')">
 
             </button>
-            <button class="button button-raised button-plan-type no-padding margin-8 icon ic_bike-sharing" ng-class="{'button-viaggia': isSwitched('SHAREDBIKE'),'button-viaggia-notselected': !isSwitched('SHAREDBIKE')}" ng-click="switch('SHAREDBIKE')">
+            <button class="button button-raised button-plan-type no-padding margin-8 icon ic_bike-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDBIKE'),'button-viaggia-notselected': !isSwitched('SHAREDBIKE')}" ng-click="switch('SHAREDBIKE')">
             </button>
             <span class="button-plan-type no-padding margin-8"></span>
             <span class="button-plan-type no-padding margin-8"></span>
         </div>
 
-        <span class="input-label" style="max-width:100%!important;" ng-click="togglePreferences()">{{'plan_preferences' | translate}} <i class="icon"  ng-class="isPreferencesShown() ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i> </span>
+        <span class="input-label" style="max-width:100%!important;" ng-click="togglePreferences()"><b>{{'plan_preferences' | translate}}</b></span>
         <div class="list">
-            <label class="item item-radio item-accordion " ng-show="isPreferencesShown()" ng-repeat="preference in preferences">
+            <label class="item item-radio item-accordion " ng-repeat="preference in preferences">
                 <input type="radio" ng-model="planParams.routeType" ng-value="preference.value" name="group">
                 <div class="item-content">
                     {{preference.label}}

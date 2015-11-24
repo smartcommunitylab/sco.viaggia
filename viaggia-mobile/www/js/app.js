@@ -126,7 +126,9 @@ angular.module('viaggia', [
             });
             $rootScope.platform = ionic.Platform;
 
-            setTimeout(function(){ navigator.splashscreen.hide(); },1500);
+            setTimeout(function () {
+                navigator.splashscreen.hide();
+            }, 1500);
         });
     })
     .config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
@@ -350,7 +352,7 @@ angular.module('viaggia', [
             plan_to: 'A',
             plan_day: 'Giorno',
             plan_time: 'Ora',
-            plan_preferences: 'PREFERENZE',
+            plan_preferences: 'Preferenze',
             plan_preferences_fastest: 'Itinerario piu veloce',
             plan_preferences_leastChanges: 'Con meno cambi',
             plan_preferences_leastWalking: 'Minimo tragitto a piedi',
@@ -470,7 +472,7 @@ angular.module('viaggia', [
             plan_to: 'To',
             plan_day: 'Day',
             plan_time: 'Time',
-            plan_preferences: 'PREFERENCES',
+            plan_preferences: 'Preferences',
             plan_preferences_fastest: 'Fastest',
             plan_preferences_leastChanges: 'Least changes',
             plan_preferences_leastWalking: 'Least walking',
