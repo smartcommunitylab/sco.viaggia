@@ -54,7 +54,7 @@ angular.module('viaggia.services.plan', [])
     };
 
     var getImageName = function (tt, agency) {
-        if (tt == 'BUS' && Config.getExtraurbanAgencies().indexOf(agency) >= 0) {
+        if (tt == 'BUS' && Config.getExtraurbanAgencies().indexOf(parseInt(agency)) >= 0) {
             return ttMap['EXTRA'];
         }
         if (tt == 'PARKWALK') {
@@ -256,7 +256,7 @@ angular.module('viaggia.services.plan', [])
         return (time.getHours() < 10 ? '0' : '') + time.getHours() + ':' + (time.getMinutes() < 10 ? '0' : '') + time.getMinutes();
     };
 
-    var extractDetails = function (step, leg, idx, from) {
+    var extractDetails = function (step, leg, legs, idx, from) {
         step.action = actionMap[leg.transport.type];
         if (leg.transport.type == 'BICYCLE' && leg.transport.agencyId && leg.transport.agencyId != 'null') {
             step.fromLabel = $filter('translate')('journey_details_from_bike');
@@ -274,19 +274,47 @@ angular.module('viaggia.services.plan', [])
             step.actionDetails = leg.transport.routeShortName;
         }
 
-        if (from != null) step.from = from;
-        else {
-            step.from = leg.from.name;
-        }
-        step.to = leg.to.name;
-        //check if 'service road' otherwise put plan String
-        if (step.from == 'service road' && planConfigure.from) {
-            step.from = planConfigure.from.name;
-        }
-        if (step.to == 'service road' && planConfigure.to) {
-            step.to = planConfigure.to.name;
-        }
+        step.from = buildDescriptionFrom(planConfigure.from.name, legs, idx);
+        step.to = buildDescriptionTo(planConfigure.to.name, legs, idx);
+
     };
+
+    var isBadString = function (s) {
+        if (s.indexOf("road") > -1 || s.indexOf("sidewalk") > -1 || s.indexOf("path") > -1 || s.indexOf("steps") > -1 || s.indexOf("track") > -1 || s.indexOf("node ") > -1 || s.indexOf("way ") > -1) {
+            return true;
+        }
+        return false;
+    }
+
+    var buildDescriptionFrom = function (fromPosition, legs, idx) {
+        var from = "";
+        if (idx == 0) {
+            from = " " + (fromPosition);
+        } else if (legs[idx - 1] == null || isBadString(legs[idx - 1].to.name)) {
+            from = "?"; //this.mCtx.getString(R.string.step_move);
+        } else {
+            from = " " + placeName(legs[idx - 1].to.name);
+        }
+        return from;
+    }
+
+    var placeName = function (p) {
+        return p;
+    }
+
+    var buildDescriptionTo = function (toPosition, legs, idx) {
+        var to = "";
+        if ((idx + 1 == legs.length)) {
+            to = " " + (toPosition);
+        } else if (legs[idx + 1] == null || isBadString(legs[idx + 1].to.name)) {
+            to = "";
+        } else {
+            to = " " + placeName(legs[idx + 1].from.name);
+        }
+        return to;
+    }
+
+
 
     planService.process = function (plan, from, to, useCoordinates) {
         plan.steps = [];
@@ -299,7 +327,7 @@ angular.module('viaggia.services.plan', [])
             step.endtime = plan.leg[i].endtime;
             step.mean = {};
 
-            extractDetails(step, plan.leg[i], i, nextFrom);
+            extractDetails(step, plan.leg[i], plan.leg, i, nextFrom);
             nextFrom = null;
             step.length = getLength(plan.leg[i]);
             step.cost = getLegCost(plan, i);

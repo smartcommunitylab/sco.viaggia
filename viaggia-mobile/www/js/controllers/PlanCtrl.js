@@ -288,17 +288,18 @@ angular.module('viaggia.controllers.plan', [])
     }
     $scope.plan = function () {
 
-
         if (setAndCheckPlanParams()) {
+            $scope.popupLoadingShow();
             planService.planJourney($scope.planParams).then(function (value) {
                 //if ok let's go to visualization
+                $scope.popupLoadingHide();
                 $state.go('app.planlist')
             }, function (error) {
                 //error then pop up some problem
                 $scope.showErrorServer()
+                $scope.popupLoadingHide();
+
             });
-        } else {
-            //message something is missing
         }
     }
     var selectPlace = function (placeSelected) {
