@@ -3,7 +3,7 @@
         <button class="button button-viaggia-header button-fab" ng-click="plan()"> <i class="icon ion-search"></i> </button>
     </ion-nav-buttons>
     <ion-content id="content" has-header="true">
-        <div class="row plan-first-row">
+        <div class="row space-from-top">
             <div class="input-plan-fromto">
                 <span class="input-label"><b>{{'plan_from' | translate}}</b></span>
                 <placeautocomplete ng-if="refresh" ng-model="fromName" attr-placeholder="{{'plan_insert_from_address' | translate}}" click-activation="false" data="places" on-type="typePlace" placeholder="{{'plan_from' | translate}}" on-select="changeStringFrom" ng-blur="setNameParam"></placeautocomplete>
@@ -29,7 +29,7 @@
             <a class="button button-icon plan-viaggia-fromto margin-8 icon" ng-class="isFavorite('to',toName)?'ion-android-star':'ion-android-star-outline'" ng-click="bookmarks('to',toName)">
             </a>
         </div>
-        <div class="row plan-first-row">
+        <div class="row space-from-top">
             <label class="item item-input plan-item-time">
                 <span class="input-label"><b>{{'plan_day' | translate}}</b></span>
                 <ionic-datepicker input-obj="datepickerObjectPopup">
@@ -51,7 +51,7 @@
                 </ionic-timepicker>
             </label>
         </div>
-        <div class="row plan-first-row">
+        <div class="row space-from-top">
             <button class="button button-raised button-plan-type no-padding margin-8  icon ic_foot" ng-class="{'button-viaggia-selected ': isSwitched('WALK'),'button-viaggia-notselected': !isSwitched('WALK')}" ng-click="switch('WALK')">
 
             </button>
