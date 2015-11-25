@@ -232,6 +232,7 @@
     line-height: 40px;
     text-align: center;
     padding: 0;
+    text-transform: uppercase;
 }
 
 .tt-day.btn {
@@ -645,4 +646,46 @@ ion-header-bar .title {
 
 .list-of-icons {
     min-width: 50px;
+}
+
+#table-header {
+  white-space: nowrap;
+  font-family: monospace;
+  position: absolute;
+  background-color: #fff;
+  border-bottom: 1px solid #bbb;
+  left: 100px;
+}
+
+#table-table {
+  white-space: nowrap;
+  font-family: monospace;
+  padding-top: 20px;
+  padding-left: 100px;
+}
+
+#table-col {
+  line-height: 20px;
+  padding-top: 20px;
+  white-space: nowrap;
+  font-family: monospace;
+/*  font-size: 14px;*/
+  position: absolute;
+  background-color: #fff;
+  width: 100px;
+  border-right: 1px solid #bbb;
+}
+
+#table-corner {
+  font-family: monospace;
+  border-right: 1px solid #bbb;
+  border-bottom: 1px solid #bbb;
+  position: absolute;
+  width: 100px;
+  height: 21px;
+  background-color: #fff;
+  z-index: 100;
+  text-align: center;
+  top: 44px;
+  left: 5px;
 }
