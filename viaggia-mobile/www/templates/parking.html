@@ -31,7 +31,7 @@
                 </div>
             </div>
         </ion-list>
-        <div ng-if="!parkings || parkings.length == 0" class="text-center">
+        <div ng-if="(!parkings || parkings.length == 0) && !loading" class="text-center">
             <h4>{{'no_data' | translate}}</h4>
         </div>
     </ion-content>
