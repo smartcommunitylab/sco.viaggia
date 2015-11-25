@@ -444,7 +444,10 @@ angular.module('viaggia', [
             planlist_sustanainable: 'Itinerari sostenibili',
             popup_step_number: 'Passo ',
             pop_up_arrival: 'Arrivo',
-            my_trip_title: 'I miei viaggi'
+            my_trip_title: 'I miei viaggi',
+            parking_on: 'posti liberi su ',
+            bikesharings_bikes: 'biciclette',
+            bikesharings_free_slots: 'posti liberi'
         });
 
 
@@ -563,7 +566,10 @@ angular.module('viaggia', [
             planlist_sustanainable: 'Sustainable Itineraries',
             popup_step_number: 'Step ',
             pop_up_arrival: 'Arrive',
-            my_trip_title: 'My journeys'
+            my_trip_title: 'My journeys',
+            parking_on: 'free parks out of',
+            bikesharings_bikes: 'bikes',
+            bikesharings_free_slots: 'free slots'
 
         });
 
