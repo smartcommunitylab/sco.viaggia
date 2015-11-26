@@ -175,6 +175,7 @@
 .input-plan-fromto {
     width: 100%;
     padding: 8px;
+    margin: 8px;
 }
 
 .button-viaggia-header {
@@ -230,10 +231,16 @@
 .button-plan-type {
     width: 80px;
     height: 80px;
+    margin: 8px;
+    padding: 0px;
 }
 
 .button-plan-type:before {
     font-size: 50px !important;
+}
+
+.plan-preference-toggler {
+    border: 0;
 }
 
 .space-from-top {
