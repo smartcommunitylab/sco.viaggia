@@ -1,75 +1,57 @@
 <ion-view id="plan" title="{{plantitle}}">
     <ion-nav-buttons side="right">
-        <button class="button button-viaggia-header button-fab" ng-click="plan()"> <i class="icon ion-search"></i> </button>
+        <button class="button button-viaggia-header button-fab" ng-click="plan()">
+            <i class="icon ion-search"></i>
+        </button>
     </ion-nav-buttons>
+
     <ion-content id="content" has-header="true">
         <div class="row space-from-top">
             <div class="input-plan-fromto">
                 <span class="input-label"><b>{{'plan_from' | translate}}</b></span>
                 <placeautocomplete ng-if="refresh" ng-model="fromName" attr-placeholder="{{'plan_insert_from_address' | translate}}" click-activation="false" data="places" on-type="typePlace" placeholder="{{'plan_from' | translate}}" on-select="changeStringFrom" ng-blur="setNameParam"></placeautocomplete>
-
-
             </div>
-            <a class="button button-icon plan-viaggia-fromto margin-8  icon ion-map" ng-click="openMapPlan('from')">
-            </a>
-            <a class="button button-icon plan-viaggia-fromto margin-8 icon " ng-class="isFavorite('from',fromName)?'ion-android-star':'ion-android-star-outline'" ng-click="bookmarks('from',fromName)">
-
-            </a>
+            <a class="button-icon plan-viaggia-fromto margin-8 icon ion-map" ng-click="openMapPlan('from')"></a>
+            <a class="button-icon plan-viaggia-fromto margin-8 icon" ng-class="isFavorite('from', fromName) ? 'ion-android-star' : 'ion-android-star-outline'" ng-click="bookmarks('from', fromName)"></a>
         </div>
+
         <div class="row">
-
             <div class="input-plan-fromto">
-
                 <span class="input-label"><b>{{'plan_to' | translate}}</b></span>
                 <placeautocomplete ng-if="refresh" ng-model="toName" attr-placeholder="{{'plan_insert_to_address' | translate}}" click-activation="false" data="places" on-type="typePlace" placeholder="{{'plan_from' | translate}}" on-select="changeStringTo" ng-blur="setNameParam"></placeautocomplete>
             </div>
-
-            <a class="button button-icon plan-viaggia-fromto margin-8  icon ion-map" ng-click="openMapPlan('to')">
-            </a>
-            <a class="button button-icon plan-viaggia-fromto margin-8 icon" ng-class="isFavorite('to',toName)?'ion-android-star':'ion-android-star-outline'" ng-click="bookmarks('to',toName)">
-            </a>
+            <a class="button-icon plan-viaggia-fromto margin-8  icon ion-map" ng-click="openMapPlan('to')"></a>
+            <a class="button-icon plan-viaggia-fromto margin-8 icon" ng-class="isFavorite('to', toName) ? 'ion-android-star' : 'ion-android-star-outline'" ng-click="bookmarks('to', toName)"></a>
         </div>
+
         <div class="row space-from-top">
             <label class="item item-input plan-item-time">
                 <span class="input-label"><b>{{'plan_day' | translate}}</b></span>
                 <ionic-datepicker input-obj="datepickerObjectPopup">
                     <span class="input-label">{{datepickerObjectPopup.inputDate | date:'dd/MM/yyyy'}}</span>
-                    <button ng-hide="true">
-                    </button>
+                    <button ng-hide="true"></button>
                 </ionic-datepicker>
             </label>
             <label class="item item-input plan-item-time">
                 <span class="input-label"><b>{{'plan_time' | translate}}</b></span>
                 <ionic-timepicker input-obj="timePickerObject24Hour">
-
-                    <button ng-hide="true">
-                    </button>
-
+                    <button ng-hide="true"></button>
                     <span class="input-label">
                         <standard-time-no-meridian etime='timePickerObject24Hour.inputEpochTime'></standard-time-no-meridian>
                     </span>
                 </ionic-timepicker>
             </label>
         </div>
+
         <div class="row space-from-top">
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_foot" ng-class="{'button-viaggia-selected ': isSwitched('WALK'),'button-viaggia-notselected': !isSwitched('WALK')}" ng-click="switch('WALK')">
-
-            </button>
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_public-transport" ng-class="{'button-viaggia-selected ': isSwitched('TRANSIT'),'button-viaggia-notselected': !isSwitched('TRANSIT')}" ng-click="switch('TRANSIT')">
-
-            </button>
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car" ng-class="{'button-viaggia-selected ': isSwitched('CAR'),'button-viaggia-notselected': !isSwitched('CAR')}" ng-click="switch('CAR')">
-
-            </button>
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_bike" ng-class="{'button-viaggia-selected ': isSwitched('BICYCLE'),'button-viaggia-notselected': !isSwitched('BICYCLE')}" ng-click="switch('BICYCLE')">
-            </button>
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_foot" ng-class="{'button-viaggia-selected ': isSwitched('WALK'),'button-viaggia-notselected': !isSwitched('WALK')}" ng-click="switch('WALK')"></button>
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_public-transport" ng-class="{'button-viaggia-selected ': isSwitched('TRANSIT'),'button-viaggia-notselected': !isSwitched('TRANSIT')}" ng-click="switch('TRANSIT')"></button>
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car" ng-class="{'button-viaggia-selected ': isSwitched('CAR'),'button-viaggia-notselected': !isSwitched('CAR')}" ng-click="switch('CAR')"></button>
         </div>
-        <div class="row">
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDCAR'),'button-viaggia-notselected': !isSwitched('SHAREDCAR')}" ng-click="switch('SHAREDCAR')">
 
-            </button>
-            <button class="button button-raised button-plan-type no-padding margin-8 icon ic_bike-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDBIKE'),'button-viaggia-notselected': !isSwitched('SHAREDBIKE')}" ng-click="switch('SHAREDBIKE')">
-            </button>
+        <div class="row">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDCAR'),'button-viaggia-notselected': !isSwitched('SHAREDCAR')}" ng-click="switch('SHAREDCAR')"></button>
+            <button class="button button-raised button-plan-type no-padding margin-8 icon ic_bike-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDBIKE'),'button-viaggia-notselected': !isSwitched('SHAREDBIKE')}" ng-click="switch('SHAREDBIKE')"></button>
             <span class="button-plan-type no-padding margin-8"></span>
             <span class="button-plan-type no-padding margin-8"></span>
         </div>

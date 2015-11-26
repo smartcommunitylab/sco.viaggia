@@ -1,6 +1,7 @@
 angular.module('viaggia.controllers.plan', [])
 
 .controller('PlanCtrl', function ($scope, $rootScope, Config, $q, $http, $ionicModal, $ionicLoading, $filter, $state, $window, Toast, leafletData, planService, GeoLocate, mapService) {
+    $scope.refresh = true;
     $scope.plantitle = $filter('translate')('plan_title');
     $scope.preferences = Config.getPlanPreferences();
     $scope.types = Config.getPlanTypes();
@@ -37,7 +38,7 @@ angular.module('viaggia.controllers.plan', [])
     };
     var monthList = [
         $filter('translate')('popup_datepicker_jan'),
-    $filter('translate')('popup_datepicker_jfeb'),
+    $filter('translate')('popup_datepicker_feb'),
     $filter('translate')('popup_datepicker_mar'),
     $filter('translate')('popup_datepicker_apr'),
     $filter('translate')('popup_datepicker_may'),
