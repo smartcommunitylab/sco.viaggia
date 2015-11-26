@@ -44,39 +44,28 @@
         </div>
 
         <div class="row space-from-top">
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_foot" ng-class="{'button-viaggia-selected ': isSwitched('WALK'),'button-viaggia-notselected': !isSwitched('WALK')}" ng-click="switch('WALK')">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_foot" ng-class="{'button-viaggia-selected ': isSwitched('WALK'),'button-viaggia-notselected': !isSwitched('WALK')}" ng-click="switch('WALK')"></button>
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_public-transport" ng-class="{'button-viaggia-selected ': isSwitched('TRANSIT'),'button-viaggia-notselected': !isSwitched('TRANSIT')}" ng-click="switch('TRANSIT')"></button>
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car" ng-class="{'button-viaggia-selected ': isSwitched('CAR'),'button-viaggia-notselected': !isSwitched('CAR')}" ng-click="switch('CAR')"></button>
+        </div>
 
-            </button>
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_public-transport" ng-class="{'button-viaggia-selected ': isSwitched('TRANSIT'),'button-viaggia-notselected': !isSwitched('TRANSIT')}" ng-click="switch('TRANSIT')">
+        <div class="row">
+            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDCAR'),'button-viaggia-notselected': !isSwitched('SHAREDCAR')}" ng-click="switch('SHAREDCAR')"></button>
+            <button class="button button-raised button-plan-type no-padding margin-8 icon ic_bike-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDBIKE'),'button-viaggia-notselected': !isSwitched('SHAREDBIKE')}" ng-click="switch('SHAREDBIKE')"></button>
+            <span class="button-plan-type no-padding margin-8"></span>
+            <span class="button-plan-type no-padding margin-8"></span>
+        </div>
 
-            </button>
-            <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car" ng-class="{'button-viaggia-selected ': isSwitched('CAR'),'button-viaggia-notselected': !isSwitched('CAR')}" ng-click="switch('CAR')">
-                >>>>>>> origin/master
+        <span class="input-label" style="max-width:100%!important;" ng-click="togglePreferences()"><b>{{'plan_preferences' | translate}}</b></span>\
 
-                <div class="row plan-first-row">
-                    <button class="button button-raised button-plan-type no-padding margin-8  icon ic_foot" ng-class="{'button-viaggia-selected ': isSwitched('WALK'),'button-viaggia-notselected': !isSwitched('WALK')}" ng-click="switch('WALK')"></button>
-                    <button class="button button-raised button-plan-type no-padding margin-8  icon ic_public-transport" ng-class="{'button-viaggia-selected ': isSwitched('TRANSIT'),'button-viaggia-notselected': !isSwitched('TRANSIT')}" ng-click="switch('TRANSIT')"></button>
-                    <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car" ng-class="{'button-viaggia-selected ': isSwitched('CAR'),'button-viaggia-notselected': !isSwitched('CAR')}" ng-click="switch('CAR')"></button>
-                    <button class="button button-raised button-plan-type no-padding margin-8  icon ic_bike" ng-class="{'button-viaggia-selected ': isSwitched('BICYCLE'),'button-viaggia-notselected': !isSwitched('BICYCLE')}" ng-click="switch('BICYCLE')"></button>
+        <div class="list">
+            <label class="item item-radio item-accordion " ng-repeat="preference in preferences">
+                <input type="radio" ng-model="planParams.routeType" ng-value="preference.value" name="group">
+                <div class="item-content">
+                    {{preference.label}}
                 </div>
-
-                <div class="row">
-                    <button class="button button-raised button-plan-type no-padding margin-8  icon ic_car-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDCAR'),'button-viaggia-notselected': !isSwitched('SHAREDCAR')}" ng-click="switch('SHAREDCAR')"></button>
-                    <button class="button button-raised button-plan-type no-padding margin-8 icon ic_bike-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDBIKE'),'button-viaggia-notselected': !isSwitched('SHAREDBIKE')}" ng-click="switch('SHAREDBIKE')"></button>
-                    <span class="button-plan-type no-padding margin-8"></span>
-                    <span class="button-plan-type no-padding margin-8"></span>
-                </div>
-
-                <span class="input-label" style="max-width:100%!important;" ng-click="togglePreferences()"><b>{{'plan_preferences' | translate}}</b></span>\
-
-                <div class="list">
-                    <label class="item item-radio item-accordion " ng-repeat="preference in preferences">
-                        <input type="radio" ng-model="planParams.routeType" ng-value="preference.value" name="group">
-                        <div class="item-content">
-                            {{preference.label}}
-                        </div>
-                        <i class="radio-icon ion-checkmark"></i>
-                    </label>
-                </div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+        </div>
     </ion-content>
 </ion-view>
