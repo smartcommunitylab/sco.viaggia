@@ -1,4 +1,33 @@
 /* this is just an example - don't use !important */
+@font-face {
+  font-family: RobotoMono;
+  src: url(../fonts/Roboto_Mono/RobotoMono-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'RobotoDraft';
+  font-style: normal;
+  font-weight: 400;
+  src: local('RobotoDraft'), local('RobotoDraft-Regular'), url(../fonts/RobotoDraft.woff) format('woff');
+}
+@font-face {
+  font-family: 'RobotoDraft';
+  font-style: normal;
+  font-weight: 500;
+  src: local('RobotoDraft Medium'), local('RobotoDraft-Medium'), url(../fonts/RobotoDraft-Medium.woff) format('woff');
+}
+@font-face {
+  font-family: 'RobotoDraft';
+  font-style: normal;
+  font-weight: 700;
+  src: local('RobotoDraft Bold'), local('RobotoDraft-Bold'), url(../fonts/RobotoDraft-Bold.woff) format('woff');
+}
+@font-face {
+  font-family: 'RobotoDraft';
+  font-style: italic;
+  font-weight: 400;
+  src: local('RobotoDraft Italic'), local('RobotoDraft-Italic'), url(../fonts/RobotoDraft-Italic.woff) format('woff');
+}
 
 .mfb-component__button--main i,
 .mfb-component__button--child i {
@@ -240,6 +269,7 @@
     text-align: center;
     padding: 0;
     text-transform: uppercase;
+    white-space: nowrap;
 }
 
 .tt-day.btn {
@@ -657,46 +687,64 @@ ion-header-bar .title {
 }
 
 #table-header {
-    white-space: nowrap;
-    font-family: monospace;
-    position: absolute;
-    background-color: #fff;
-    border-bottom: 1px solid #bbb;
-    left: 100px;
+  white-space: nowrap;
+  font-family: RobotoMono;
+  position: absolute;
+  background-color: #fff;
+  font-size: 12px;
+  left: 100px;
+  z-index: 10;
+}
+#table-header div {
+  border-bottom: 1px solid #bbb;
+}
+#table-header div:first-child {
+  color: #cd251c;
 }
 
 #table-table {
-    white-space: nowrap;
-    font-family: monospace;
-    padding-top: 20px;
-    padding-left: 100px;
+  white-space: nowrap;
+  font-family: RobotoMono;
+  left: 100px;
+  font-size: 12px;
+  position: absolute;
 }
 
 #table-col {
-    line-height: 20px;
-    padding-top: 20px;
-    white-space: nowrap;
-    font-family: monospace;
-    /*  font-size: 14px;*/
-
-    position: absolute;
-    background-color: #fff;
-    width: 100px;
-    border-right: 1px solid #bbb;
+  line-height: 20px;
+  white-space: nowrap;
+  font-size: 12px;
+  position: absolute;
+  background-color: #fff;
+  width: 100px;
+  border-right: 1px solid #bbb;
+  z-index: 10;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
 #table-corner {
-    font-family: monospace;
-    border-right: 1px solid #bbb;
-    border-bottom: 1px solid #bbb;
-    position: absolute;
-    width: 100px;
-    height: 21px;
-    background-color: #fff;
-    z-index: 100;
-    text-align: center;
-    top: 44px;
-    left: 5px;
+  font-size: 12px;
+  border-right: 1px solid #bbb;
+  position: absolute;
+  width: 100px;
+  background-color: #fff;
+  z-index: 100;
+  text-align: center;
+  top: 50px;
+}
+#table-corner div {
+  border-bottom: 1px solid #bbb;
+}
+
+.table-container {
+  padding: 0px;
+}
+
+.table-container ion-scroll {
+  margin-top: 0;
 }
 
 .markets-home img {
