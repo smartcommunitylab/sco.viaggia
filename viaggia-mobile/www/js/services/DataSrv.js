@@ -259,7 +259,7 @@ angular.module('viaggia.services.data', [])
         var remoteVersion = remoteversion[a] ? remoteversion[a] : -1;
 
         if (!localStops || localVersion < remoteVersion) {
-            $http.get(Config.getServerURL() + '/geostops/'+a+'?lat='+Config.getMapPosition().lat+'&lng='+Config.getMapPosition().long+'&radius=1000')
+            $http.get(Config.getServerURL() + '/geostops/'+a+'?lat='+Config.getMapPosition().lat+'&lng='+Config.getMapPosition().long+'&radius=5')
             .success(function (stops) {
               localStorage[key] = JSON.stringify(stops);
               writeLocalStopVersion(a, remoteVersion);
