@@ -3,9 +3,9 @@ angular.module('viaggia.services.markets', [])
 .factory('marketService', function ($q, Config) {
     var marketService = {};
     var mercatino = {
-        name: "Piazza Rosmini",
-        lat: 45.89088,
-        long: 11.04354
+        name: "Mercatini - Via Roma",
+        lat: 45.889568,
+        long: 11.043297
     };
     var park = {
         name: "Stadio Quercia",
@@ -21,7 +21,11 @@ angular.module('viaggia.services.markets', [])
             name: "Stadio Quercia",
             lat: 45.90031,
             long: 11.03626
-    }];
+    }, {
+            name: "Mercatini - Via Roma",
+            lat: 45.889568,
+            long: 11.043297
+        }];
 
     var mercatinoFavorites = function () {
         return favorites;
