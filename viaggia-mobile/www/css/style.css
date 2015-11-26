@@ -625,6 +625,7 @@ ion-header-bar .title {
 }
 
 .plan-viaggia-fromto {
+    margin: auto;
     color: #3bbacf;
     box-shadow: none;
 }
