@@ -656,6 +656,7 @@ ion-header-bar .title {
 }
 
 .plan-viaggia-fromto {
+    margin: auto;
     color: #3bbacf;
     box-shadow: none;
 }
@@ -737,4 +738,27 @@ ion-header-bar .title {
 
 .table-container ion-scroll {
   margin-top: 0;
+}
+
+.markets-home img {
+    height: 50px;
+    width: 50px;
+    margin-right: 12px;
+    vertical-align: bottom;
+}
+
+.market-subtitle {
+    text-align: center;
+    font-weight: bold;
+    color: #2975a7;
+}
+
+.market-text1 {
+    text-align: center;
+    font-weight: bold;
+}
+
+.market-text2 {
+    text-align: justify;
+    font-weight: bold;
 }
