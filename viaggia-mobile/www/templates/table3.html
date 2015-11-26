@@ -1,0 +1,19 @@
+<ion-view title="table3">
+    <ion-content id="content" has-header="true" has-bouncing="false"  overflow-scroll="true" scrollbar-y="false">
+      <div id="table-corner">RITARDI</div>
+      <div class="row">
+        <div class="col col-25 tt-day btn" ng-click="prevDate()"><a><i class="icon ion-arrow-left-b"></i></a></div>
+        <div class="col col-50 tt-day">dd/MM/yyyy</div>
+        <div class="col col-25 tt-day btn" ng-click="nextDate()"><a><i class="icon ion-arrow-right-b"></i></a></div>
+      </div>
+      <div class="row table-container">
+        <ion-scroll direction="xy" style="height:{{scrollHeight}}px; width: {{scrollWidth}}px" class="overlapDiv" on-scroll="doScroll()" delegate-handle="list">
+          <div id="table-col" ng-bind-html="colStr"></div>
+          <div id="table-header" ng-bind-html="headStr"
+               style="background: repeating-linear-gradient(to right, #fff, #fff {{colwidth}}px, #eee {{colwidth}}px, #eee {{colwidth*2}}px);"></div>
+          <div id="table-table" ng-bind-html="dataStr"
+               style="height:{{tableHeight}}px; background: repeating-linear-gradient(to right, #fff, #fff {{colwidth}}px, #eee {{colwidth}}px, #eee {{colwidth*2}}px);"></div>
+        </ion-scroll>
+      </div>
+    </ion-content>
+</ion-view>
