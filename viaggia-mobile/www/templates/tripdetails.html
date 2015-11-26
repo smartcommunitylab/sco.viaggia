@@ -1,11 +1,13 @@
 <ion-view id="tripdetails" title="{{'journey_detail' | translate}}">
     <ion-nav-buttons side="right">
-        <a mfb-button ng-class="{'many-options':tripId!=null,'single-options':tripId==null}" icon="ion-map" ng-click="openMapTrip()"></a>
-
+        <button class="button button-viaggia-header button-fab" ng-class="{'many-options':tripId!=null,'single-options':tripId==null}" ng-click="openMapTrip()">
+            <i class="icon ion-map"></i>
+        </button>
         <nav ng-if="tripId!=null" mfb-menu position="tr" effect="zoomin" active-icon="ion-ios-close-empty" resting-icon="ion-ios-plus-empty" toggling-method="click">
             <a mfb-button label="{{labelModify}}" icon="ion-edit" ng-click="modifyTrip()"></a>
             <a mfb-button label="{{labelDelete}}" icon="ion-trash-b" ng-click="deleteTrip()"></a>
         </nav>
+
     </ion-nav-buttons>
     <ion-content id="content" has-header="true">
         <div class="row">

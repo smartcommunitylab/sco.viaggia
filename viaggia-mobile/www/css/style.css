@@ -509,13 +509,17 @@ ion-header-bar .title {
 }
 
 .many-options {
-    margin-top: 25px;
+    margin-top: 0px;
     margin-right: 100px;
 }
 
 .single-options {
-    margin-top: 25px;
-    margin-right: 25px;
+    margin-top: 0px;
+    margin-right: 0px;
+}
+
+.mfb-component__wrap {
+    padding-top: 16px!important;
 }
 
 .empty-list-card {

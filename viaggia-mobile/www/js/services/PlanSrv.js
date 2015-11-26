@@ -274,8 +274,18 @@ angular.module('viaggia.services.plan', [])
             step.actionDetails = leg.transport.routeShortName;
         }
 
-        step.from = buildDescriptionFrom(planConfigure.from.name, legs, idx);
-        step.to = buildDescriptionTo(planConfigure.to.name, legs, idx);
+        if (planConfigure) {
+            step.from = buildDescriptionFrom(planConfigure.from.name, legs, idx);
+        } else {
+            step.from = buildDescriptionFrom(position.fromName, legs, idx);
+        }
+        if (planConfigure) {
+            step.to = buildDescriptionTo(planConfigure.to.name, legs, idx);
+        } else {
+            step.to = buildDescriptionTo(position.toName, legs, idx);
+        }
+
+
 
     };
 
