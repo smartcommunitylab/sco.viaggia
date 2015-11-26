@@ -368,7 +368,7 @@ angular.module('viaggia.controllers.plan', [])
             //                });
         }, function () {
             $ionicLoading.hide();
-            $scope.showNoConnection();
+            //$scope.showNoConnection();
             console.log('CANNOT LOCATE!');
         });
         // }
