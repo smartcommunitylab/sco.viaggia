@@ -5,7 +5,7 @@ angular.module('viaggia.controllers.info', [])
 .controller('ParkingCtrl', function ($scope, $state, $stateParams, $timeout, $filter, $ionicModal, $ionicPopup, ionicMaterialMotion, ionicMaterialInk, leafletData, mapService, parkingService, Config, planService) {
     $scope.agencyId = $stateParams.agencyId;
     $scope.parkings = null;
-
+    $scope.loading = true;
     $scope.markers = [];
 
     $scope.title = $filter('translate')('menu_real_time_park');
@@ -25,16 +25,19 @@ angular.module('viaggia.controllers.info', [])
                     e.availLevel = e.slotsAvailable <= 5 ? 'avail-red' : e.slotsAvailable > 20 ? 'avail-green' : 'avail-yellow';
                 }
             });
+            $scope.loading = false;
             Config.loaded();
             $scope.$broadcast('scroll.refreshComplete');
         }, function (err) {
             $scope.parkings = null;
             $scope.$broadcast('scroll.refreshComplete');
+            $scope.loading = false;
             Config.loaded();
         });
     }
 
     var init = function () {
+        $scope.loading = true;
         Config.loading();
         $scope.load();
     };
@@ -87,11 +90,11 @@ angular.module('viaggia.controllers.info', [])
     });
 
     angular.extend($scope, {
-          center: {
+        center: {
             lat: Config.getMapPosition().lat,
             lng: Config.getMapPosition().long,
             zoom: Config.getMapPosition().zoom
-          },
+        },
         markers: [],
         events: {}
     });
@@ -101,7 +104,7 @@ angular.module('viaggia.controllers.info', [])
     };
     $scope.initMap = function () {
         mapService.initMap('modalMap').then(function () {
-          console.log('map initialized');
+            console.log('map initialized');
         });
     };
 
@@ -120,23 +123,31 @@ angular.module('viaggia.controllers.info', [])
                 {
                     text: $filter('translate')('btn_nav_to'),
                     onTap: function (e) {
-                      planService.setPlanConfigure({
-                        to: {name: $scope.popupParking.description, lat: $scope.popupParking.position[0], long: $scope.popupParking.position[1]},
-                      });
-                      $scope.closeMap();
-                      $state.go('app.plan');
+                        planService.setPlanConfigure({
+                            to: {
+                                name: $scope.popupParking.description,
+                                lat: $scope.popupParking.position[0],
+                                long: $scope.popupParking.position[1]
+                            },
+                        });
+                        $scope.closeMap();
+                        $state.go('app.plan');
                     }
         }
       ]
         });
     });
 
-    $scope.navigate = function() {
-      planService.setPlanConfigure({
-        to: {name: $scope.selected.description, lat: $scope.selected.position[0], long: $scope.selected.position[1]},
-      });
-      $scope.closeMap();
-      $state.go('app.plan');
+    $scope.navigate = function () {
+        planService.setPlanConfigure({
+            to: {
+                name: $scope.selected.description,
+                lat: $scope.selected.position[0],
+                long: $scope.selected.position[1]
+            },
+        });
+        $scope.closeMap();
+        $state.go('app.plan');
     };
 
     init();
@@ -163,16 +174,19 @@ angular.module('viaggia.controllers.info', [])
     $scope.load = function () {
         bikeSharingService.getStations($scope.agencyId).then(function (data) {
             $scope.parkings = data;
+            $scope.loading = false;
             Config.loaded();
             $scope.$broadcast('scroll.refreshComplete');
         }, function (err) {
             $scope.parkings = null;
             $scope.$broadcast('scroll.refreshComplete');
+            $scope.loading = false;
             Config.loaded();
         });
     }
 
     var init = function () {
+        $scope.loading = true;
         Config.loading();
         $scope.load();
     };
@@ -226,9 +240,9 @@ angular.module('viaggia.controllers.info', [])
 
     angular.extend($scope, {
         center: {
-          lat: Config.getMapPosition().lat,
-          lng: Config.getMapPosition().long,
-          zoom: Config.getMapPosition().zoom
+            lat: Config.getMapPosition().lat,
+            lng: Config.getMapPosition().long,
+            zoom: Config.getMapPosition().zoom
         },
         markers: [],
         events: {}
@@ -256,23 +270,31 @@ angular.module('viaggia.controllers.info', [])
                 {
                     text: $filter('translate')('btn_nav_to'),
                     onTap: function (e) {
-                      planService.setPlanConfigure({
-                        to: {name: $scope.popupParking.address, lat: $scope.popupParking.position[0], long: $scope.popupParking.position[1]},
-                      });
-                      $scope.closeMap();
-                      $state.go('app.plan');
+                        planService.setPlanConfigure({
+                            to: {
+                                name: $scope.popupParking.address,
+                                lat: $scope.popupParking.position[0],
+                                long: $scope.popupParking.position[1]
+                            },
+                        });
+                        $scope.closeMap();
+                        $state.go('app.plan');
                     }
         }
       ]
         });
     });
 
-    $scope.navigate = function() {
-      planService.setPlanConfigure({
-        to: {name: $scope.selected.description, lat: $scope.selected.position[0], long: $scope.selected.position[1]},
-      });
-      $scope.closeMap();
-      $state.go('app.plan');
+    $scope.navigate = function () {
+        planService.setPlanConfigure({
+            to: {
+                name: $scope.selected.description,
+                lat: $scope.selected.position[0],
+                long: $scope.selected.position[1]
+            },
+        });
+        $scope.closeMap();
+        $state.go('app.plan');
     };
 
     init();

@@ -1,8 +1,7 @@
 <ion-view title="{{'menu_real_time_bike'|translate}}">
     <ion-nav-buttons side="right">
         <button ng-if="selected != null" class="button button-icon button-clear ion-navigate" ng-click="navigate()"></button>
-        <button class="button button-icon" ng-click="showMap()"
-                ng-class="{'button-fab button-viaggia-header ion-map':selected==null, 'button-clear ion-map': selected != null}"></button>
+        <button class="button button-icon" ng-click="showMap()" ng-class="{'button-fab button-viaggia-header ion-map':selected==null, 'button-clear ion-map': selected != null}"></button>
     </ion-nav-buttons>
     <ion-content has-header="true" padding="true">
         <ion-refresher on-refresh="load()">
@@ -21,22 +20,21 @@
                         <div class="col"><span ng-if="p.distance">{{p.distance| number:1}}km</span>
                         </div>
                         <div class="col col-right">
-                            <div class="row  text-center" style="font-size:30px;">
-                                <div class="col"><i class="icon ic_bike avail-green"></i>
+                            <div class="row  text-center">
+                                <div class="col text-right"><b>{{p.bikes}} {{'bikesharings_bikes' | translate}}</b>
                                 </div>
-                                <div class="col"><i class="icon ic_bike avail-red"></i>
-                                </div>
+
                             </div>
-                            <div class="row text-center" style="margin-top:0px;">
-                                <div class="col">{{p.bikes}}</div>
-                                <div class="col">{{p.slots}}</div>
+                            <div class="row text-center">
+                                <div class="col text-right"><b>{{p.slots}} {{'bikesharings_free_slots' | translate}}</b>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </ion-list>
-        <div ng-if="!parkings || parkings.length == 0" class="text-center">
+        <div ng-if="(!parkings || parkings.length == 0)&& !loading" class="text-center">
             <h4>{{'no_data' | translate}}</h4>
         </div>
     </ion-content>

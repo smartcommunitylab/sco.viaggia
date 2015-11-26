@@ -469,4 +469,64 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
   $scope.stopData = stopData;
 })
 
+
+.controller('TTTable3Ctrl', function ($scope, $state, $stateParams, $timeout, $ionicPopup, $filter, ionicMaterialMotion, $ionicScrollDelegate, ionicMaterialInk, Config, ttService) {
+  var W = 100, H = 100;
+  var data = [];
+  var dataStr = '';
+  for (var i = 0; i < H; i++) {
+    data.push([]);
+    for (var j = 0; j < W; j++) {
+      var d = (i < 10 ? '0'+i : i)+':'+(j < 10 ? '0'+j : j);
+      data[i].push(d);
+//      dataStr += '<span>'+d +'</span>'
+      dataStr += '&nbsp;&nbsp;'+d+'&nbsp;&nbsp;';
+    }
+    if (i < H - 1) dataStr += '<br/>';
+  }
+  var headStr = '';
+  for (var j = 0; j < W; j++) {
+    var v = j;
+//    headStr += '<span>'+v +'</span>'
+    if (j < 10) v = '0'+j;
+    headStr += '&nbsp;&nbsp;&nbsp;&nbsp;'+v+'&nbsp;&nbsp;&nbsp;';
+  }
+  $scope.headStr = headStr;
+
+
+  var colStr = '';
+  for (var j = 0; j < H; j++) {
+    colStr += 'Fermata '+j+"<br/>";
+  }
+  $scope.colStr = colStr;
+
+  $scope.data = data;
+  $scope.dataStr = dataStr;
+
+  $scope.header = null;
+  $scope.col = null;
+
+  $scope.doScroll = function() {
+    if ($scope.header == null) {
+      $scope.header = document.getElementById('table-header');
+    }
+    if ($scope.col == null) {
+      $scope.col = document.getElementById('table-col');
+    }
+    var pos = $ionicScrollDelegate.$getByHandle('list').getScrollPosition();
+    $scope.header.style.top = pos.top+'px';
+    $scope.col.style.left = pos.left+'px';
+  }
+
+  $timeout(function() {
+  if ($scope.header == null) {
+    $scope.header = document.getElementById('table-header');
+    $scope.colwidth = Math.floor(($scope.header.getBoundingClientRect().width) / W);
+    console.log('width = '+ $scope.colwidth);
+  }
+
+  });
+
+
+})
 ;

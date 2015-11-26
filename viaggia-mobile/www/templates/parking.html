@@ -23,7 +23,7 @@
                         </div>
                         <div ng-if="p.monitored && p.slotsAvailable > -2" class="col col-right">
                             <div>
-                                <div class="text-center"><span ng-class="p.availLevel">{{p.slotsAvailable > 0? p.slotsAvailable : 0}} / {{p.slotsTotal}}</span>
+                                <div class="text-center"><span ng-class="p.availLevel"> {{p.slotsAvailable > 0? p.slotsAvailable : 0}} {{'parking_on' | translate}} {{p.slotsTotal}}</span>
                                 </div>
                             </div>
                         </div>
@@ -31,7 +31,7 @@
                 </div>
             </div>
         </ion-list>
-        <div ng-if="!parkings || parkings.length == 0" class="text-center">
+        <div ng-if="(!parkings || parkings.length == 0) && !loading" class="text-center">
             <h4>{{'no_data' | translate}}</h4>
         </div>
     </ion-content>

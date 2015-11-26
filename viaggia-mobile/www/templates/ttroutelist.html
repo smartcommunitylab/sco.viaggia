@@ -2,21 +2,21 @@
     <ion-nav-buttons side="right">
         <button class="button button-icon button-fab button-viaggia-header ion-map" ng-click="showMap()" ng-if="hasMap"></button>
     </ion-nav-buttons>
-  <ion-content has-header="true">
-    <ion-list class="animate-ripple route-list" ng-if="view == 'list'">
-      <ion-item ng-repeat="elem in elements" ng-last-repeat="elements" ng-click="selectElement(elem)" >
-          <div class="card card-tt" style="{{elem.color ? ('color:'+textColor(elem.color)+';background-color: '+elem.color) : ''}}">{{elem.title}}</div>
-      </ion-item>
-    </ion-list>
-    <div ng-if="view == 'grid'">
-      <div class="row route-grid-row" ng-repeat="row in gridRows">
-        <div class="col text-center" ng-repeat="elem in row" ng-click="selectElement(elem)">
-          <div class="route-grid-element" ng-if="elem.label" style="{{elem.color ? ('background-color: '+elem.color) : 'color:#000;border: 4px solid #000; text-shadow: none;'}}">
-              <span ng-if="!elem.gridCode">{{elem.label}}</span>
-            <span ng-if="elem.gridCode"><i class="icon" ng-class="elem.gridCode"></i></span>
-          </div>
+    <ion-content has-header="true">
+        <ion-list class="animate-ripple route-list space-from-top" ng-if="view == 'list'">
+            <ion-item ng-repeat="elem in elements" ng-last-repeat="elements" ng-click="selectElement(elem)">
+                <div class="card card-tt" style="{{elem.color ? ('color:'+textColor(elem.color)+';background-color: '+elem.color) : ''}}">{{elem.title}}</div>
+            </ion-item>
+        </ion-list>
+        <div class="space-from-top" ng-if="view == 'grid'">
+            <div class="row route-grid-row" ng-repeat="row in gridRows">
+                <div class="col text-center" ng-repeat="elem in row" ng-click="selectElement(elem)">
+                    <div class="route-grid-element" ng-if="elem.label" style="{{elem.color ? ('background-color: '+elem.color) : 'color:#000;border: 4px solid #000; text-shadow: none;'}}">
+                        <span ng-if="!elem.gridCode">{{elem.label}}</span>
+                        <span ng-if="elem.gridCode"><i class="icon" ng-class="elem.gridCode"></i></span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </ion-content>
+    </ion-content>
 </ion-view>

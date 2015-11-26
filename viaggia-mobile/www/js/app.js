@@ -58,6 +58,7 @@ angular.module('viaggia', [
     'viaggia.controllers.table1',
     'viaggia.controllers.table2',
     'viaggia.controllers.timetable',
+    'viaggia.controllers.markets',
     'viaggia.controllers.bookmarks',
     'viaggia.controllers.home',
     'viaggia.controllers.info',
@@ -73,10 +74,11 @@ angular.module('viaggia', [
     'viaggia.services.map',
     'viaggia.services.plan',
     'viaggia.services.timetable',
+    'viaggia.services.markets',
     'viaggia.services.info',
     'viaggia.directives',
-    'viaggia.services.geo'
-
+    'viaggia.services.geo',
+    'viaggia.filters'
 ])
 
 .run(function ($ionicPlatform, $cordovaFile, $rootScope, DataManager, Config, GeoLocate) {
@@ -125,7 +127,6 @@ angular.module('viaggia', [
                 }
             });
             $rootScope.platform = ionic.Platform;
-
             setTimeout(function () {
                 navigator.splashscreen.hide();
             }, 1500);
@@ -302,6 +303,15 @@ angular.module('viaggia', [
                         controller: 'BikeSharingCtrl'
                     }
                 }
+            }).state('app.markets', {
+                cache: false,
+                url: "/markets",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/markets.html",
+                        controller: 'MarketsCtrl'
+                    }
+                }
             })
 
         .state('app.table1', {
@@ -321,6 +331,16 @@ angular.module('viaggia', [
                     'menuContent': {
                         templateUrl: "templates/table2.html",
                         controller: 'Table2Ctrl'
+                    }
+                }
+            })
+            .state('app.table3', {
+                cache: false,
+                url: "/table3",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/table3.html",
+                        controller: 'TTTable3Ctrl'
                     }
                 }
             });
@@ -444,7 +464,26 @@ angular.module('viaggia', [
             planlist_sustanainable: 'Itinerari sostenibili',
             popup_step_number: 'Passo ',
             pop_up_arrival: 'Arrivo',
-            my_trip_title: 'I miei viaggi'
+            my_trip_title: 'I miei viaggi',
+            parking_on: 'posti liberi su ',
+            bikesharings_bikes: 'biciclette',
+            bikesharings_free_slots: 'posti liberi',
+            dow_1_s: 'Lun',
+            dow_2_s: 'Mar',
+            dow_3_s: 'Mer',
+            dow_4_s: 'Gio',
+            dow_5_s: 'Ven',
+            dow_6_s: 'Sab',
+            dow_7_s: 'Dom',
+            home_markets: 'MERCATINO DI ROVERETO',
+            markets_title: 'Mercatini di Natale',
+            markets_subtitle: 'Parcheggia fuori, entra nel Natale!',
+            markets_text1: 'test 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
+            markets_text2: 'test 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
+            markets_button_to_market: 'PORTAMI AI MERCATINI',
+            markets_button_to_park: 'RIPORTAMI AL PARCHEGGIO STADIO QUERCIA',
+            journey_details_save: 'SALVA ITINERARIO'
+
         });
 
 
@@ -563,7 +602,25 @@ angular.module('viaggia', [
             planlist_sustanainable: 'Sustainable Itineraries',
             popup_step_number: 'Step ',
             pop_up_arrival: 'Arrive',
-            my_trip_title: 'My journeys'
+            my_trip_title: 'My journeys',
+            parking_on: 'free parks out of',
+            bikesharings_bikes: 'bikes',
+            bikesharings_free_slots: 'free slots',
+            dow_1_s: 'Mon',
+            dow_2_s: 'Tue',
+            dow_3_s: 'Wed',
+            dow_4_s: 'Thu',
+            dow_5_s: 'Fri',
+            dow_6_s: 'Sat',
+            dow_7_s: 'Sun',
+            home_markets: 'ROVERETO\'S MARKET',
+            markets_title: 'Christmas Market',
+            markets_subtitle: 'Mercatini di Natale',
+            markets_text1: 'test 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
+            markets_text2: 'test 2 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
+            markets_button_to_market: 'BRING ME TO MARKETS',
+            markets_button_to_park: 'BRING ME BACK TO QUERCIA STADIUM',
+            journey_details_save: 'SAVE JOURNEY'
 
         });
 
