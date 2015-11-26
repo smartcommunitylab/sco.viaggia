@@ -3,7 +3,7 @@
         <div class="row" style="background-color: {{color}}; color: {{textColor(color)}} !important;">
             <div class="col col-25 tt-day btn" ng-click="prevDate()"><a><i class="icon ion-arrow-left-b"></i></a>
             </div>
-            <div class="col col-50 tt-day">{{runningDate | date : 'dd/MM/yyyy'}}</div>
+            <div class="col col-50 tt-day">{{runningDate | dowDate}} {{runningDate | date : 'dd/MM/yyyy'}}</div>
             <div class="col col-25 tt-day btn" ng-click="nextDate()"><a><i class="icon ion-arrow-right-b"></i></a>
             </div>
         </div>

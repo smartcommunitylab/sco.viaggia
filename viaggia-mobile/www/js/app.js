@@ -75,8 +75,8 @@ angular.module('viaggia', [
     'viaggia.services.timetable',
     'viaggia.services.info',
     'viaggia.directives',
-    'viaggia.services.geo'
-
+    'viaggia.services.geo',
+    'viaggia.filters'
 ])
 
 .run(function ($ionicPlatform, $cordovaFile, $rootScope, DataManager, Config, GeoLocate) {
@@ -323,6 +323,16 @@ angular.module('viaggia', [
                         controller: 'Table2Ctrl'
                     }
                 }
+            })
+            .state('app.table3', {
+                cache: false,
+                url: "/table3",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/table3.html",
+                        controller: 'TTTable3Ctrl'
+                    }
+                }
             });
 
 
@@ -447,7 +457,14 @@ angular.module('viaggia', [
             my_trip_title: 'I miei viaggi',
             parking_on: 'posti liberi su ',
             bikesharings_bikes: 'biciclette',
-            bikesharings_free_slots: 'posti liberi'
+            bikesharings_free_slots: 'posti liberi',
+	    dow_1_s: 'Lun',
+            dow_2_s: 'Mar',
+            dow_3_s: 'Mer',
+            dow_4_s: 'Gio',
+            dow_5_s: 'Ven',
+            dow_6_s: 'Sab',
+            dow_7_s: 'Dom'
         });
 
 
@@ -569,7 +586,14 @@ angular.module('viaggia', [
             my_trip_title: 'My journeys',
             parking_on: 'free parks out of',
             bikesharings_bikes: 'bikes',
-            bikesharings_free_slots: 'free slots'
+            bikesharings_free_slots: 'free slots',
+	    dow_1_s: 'Mon',
+            dow_2_s: 'Tue',
+            dow_3_s: 'Wed',
+            dow_4_s: 'Thu',
+            dow_5_s: 'Fri',
+            dow_6_s: 'Sat',
+            dow_7_s: 'Sun'
 
         });
 
