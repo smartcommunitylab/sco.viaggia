@@ -11,10 +11,10 @@
             {{'favorites_empty_list'|translate}}
         </div>
         <ion-list ng-hide="favoritePlaces.length==0">
-            <ion-item class="item-icon-right" ng-repeat="favorite in favoritePlaces track by $index">
-                <span ng-click="favoriteSelect(favorite)">{{favorite.name}}</span>
+            <a class="item  item-icon-right" ng-repeat="favorite in favoritePlaces track by $index">
+                <p ng-click="favoriteSelect(favorite)">{{favorite.name}}</p>
                 <i class="icon ion-close-round close-map" ng-click="deleteFavorite(favorite)"></i>
-            </ion-item>
+            </a>
         </ion-list>
     </ion-content>
 </ion-modal-view>
