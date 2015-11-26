@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.home', [])
 
-.controller('HomeCtrl', function ($scope, $timeout, $filter, $location, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk) {
+.controller('HomeCtrl', function ($scope, $timeout, $filter, $location, marketService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk) {
 
     $scope.buttons = [{
         label: $filter('translate')('menu_news'),
@@ -22,6 +22,8 @@ angular.module('viaggia.controllers.home', [])
             events: {}
         });
         $scope.primaryLinks = Config.getPrimaryLinks();
+        marketService.initMarketFavorites();
+
     });
 
     $scope.$on('ngLastRepeat.primaryLinks', function (e) {
@@ -31,44 +33,44 @@ angular.module('viaggia.controllers.home', [])
         }); // No timeout delay necessary.
     });
 
-/* DISABLED MAP
-    $scope.initMap = function () {
-        mapService.initMap('homeMap').then(function (map) {
+    /* DISABLED MAP
+        $scope.initMap = function () {
+            mapService.initMap('homeMap').then(function (map) {
 
+                if (mymap != null) {
+                    mapService.resizeElementHeight(mymap, 'homeMap');
+                    mapService.refresh('homeMap');
+                }
+                Config.init().then(function () {
+                  mapService.centerOnMe('homeMap', Config.getMapPosition().zoom);
+                });
+            });
+        }
+        window.onresize = function () {
             if (mymap != null) {
                 mapService.resizeElementHeight(mymap, 'homeMap');
                 mapService.refresh('homeMap');
             }
-            Config.init().then(function () {
-              mapService.centerOnMe('homeMap', Config.getMapPosition().zoom);
-            });
-        });
-    }
-    window.onresize = function () {
-        if (mymap != null) {
-            mapService.resizeElementHeight(mymap, 'homeMap');
-            mapService.refresh('homeMap');
         }
+
+
+        $scope.$on('$ionicView.beforeEnter', function(){
+          mapService.resizeElementHeight(mymap, 'homeMap');
+          mapService.refresh('homeMap');
+        });
+
+        //just for init
+        angular.extend($scope, {
+            center: {
+                lat: 0,
+                lng: 0,
+                zoom: 8
+            },
+            events: {}
+        });
+    */
+    $scope.go = function (state) {
+        $location.path(state);
     }
-
-
-    $scope.$on('$ionicView.beforeEnter', function(){
-      mapService.resizeElementHeight(mymap, 'homeMap');
-      mapService.refresh('homeMap');
-    });
-
-    //just for init
-    angular.extend($scope, {
-        center: {
-            lat: 0,
-            lng: 0,
-            zoom: 8
-        },
-        events: {}
-    });
-*/
-  $scope.go = function(state) {
-    $location.path(state);
-  }
 
 })
