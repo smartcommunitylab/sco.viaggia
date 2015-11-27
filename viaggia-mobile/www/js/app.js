@@ -81,7 +81,7 @@ angular.module('viaggia', [
     'viaggia.filters'
 ])
 
-.run(function ($ionicPlatform, $cordovaFile, $rootScope, DataManager, Config, GeoLocate) {
+.run(function ($ionicPlatform, $cordovaFile, $rootScope, $translate, DataManager, Config, GeoLocate) {
 
         $rootScope.locationWatchID = undefined;
 
@@ -126,6 +126,16 @@ angular.module('viaggia', [
                     DataManager.syncStopData();
                 }
             });
+
+            if (typeof navigator.globalization !== "undefined") {
+                navigator.globalization.getPreferredLanguage(function (language) {
+                    $translate.use((language.value).split("-")[0]).then(function (data) {
+                        console.log("SUCCESS -> " + data);
+                    }, function (error) {
+                        console.log("ERROR -> " + error);
+                    });
+                }, null);
+            }
             $rootScope.platform = ionic.Platform;
             setTimeout(function () {
                 if (!!navigator.splashscreen) {
@@ -287,7 +297,7 @@ angular.module('viaggia', [
             })
 
         .state('app.parking', {
-//                cache: false,
+                //                cache: false,
                 url: "/parking/:agencyId",
                 views: {
                     'menuContent': {
@@ -297,7 +307,7 @@ angular.module('viaggia', [
                 }
             })
             .state('app.bikesharing', {
-//                cache: false,
+                //                cache: false,
                 url: "/bikesharing/:agencyId",
                 views: {
                     'menuContent': {
