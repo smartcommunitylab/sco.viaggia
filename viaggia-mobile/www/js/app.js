@@ -477,7 +477,7 @@ angular.module('viaggia', [
             dow_5_s: 'Ven',
             dow_6_s: 'Sab',
             dow_7_s: 'Dom',
-            home_markets: 'MERCATINO DI ROVERETO',
+            home_markets: 'MERCATINI DI ROVERETO',
             markets_title: 'Mercatini di Natale',
             markets_subtitle: 'Parcheggia fuori, entra nel Natale!',
             markets_text1: 'test 1 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',

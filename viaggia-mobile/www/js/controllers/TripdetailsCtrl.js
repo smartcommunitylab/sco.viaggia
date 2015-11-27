@@ -4,7 +4,7 @@ angular.module('viaggia.controllers.tripdetails', [])
     $scope.title = $filter('translate')('map_detail_title');
     var trip = planService.getSelectedJourney();
     $scope.requestedFrom = planService.getName("from");
-    if (!$scope.requestFrom) {
+    if (!$scope.requestedFrom) {
         $scope.requestedFrom = trip.from.name;
     }
     if (!$scope.requestTo) {
