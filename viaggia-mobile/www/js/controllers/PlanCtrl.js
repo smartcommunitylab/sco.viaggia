@@ -379,7 +379,7 @@ angular.module('viaggia.controllers.plan', [])
 
     $scope.initMap = function () {
         mapService.initMap('modalMap').then(function () {
-
+            mapService.refresh('modalMap');
             $scope.$on("leafletDirectiveMap.modalMap.click", function (event, args) {
                 $ionicLoading.show();
                 planService.setPosition($scope.place, args.leafletEvent.latlng.lat, args.leafletEvent.latlng.lng);

@@ -287,7 +287,7 @@ angular.module('viaggia', [
             })
 
         .state('app.parking', {
-                cache: false,
+//                cache: false,
                 url: "/parking/:agencyId",
                 views: {
                     'menuContent': {
@@ -297,7 +297,7 @@ angular.module('viaggia', [
                 }
             })
             .state('app.bikesharing', {
-                cache: false,
+//                cache: false,
                 url: "/bikesharing/:agencyId",
                 views: {
                     'menuContent': {
