@@ -586,7 +586,7 @@ angular.module('viaggia', [
             lbl_delays: 'DELAYS',
             lbl_trips: 'TYPE',
             no_data: 'No data found.',
-            map_detail_title: 'Dettaglio percorso',
+            map_detail_title: 'Journey details',
             lbl_places: 'total places',
             lbl_parking: 'Parking',
             lbl_bike_station: 'Bike station',
