@@ -11,6 +11,8 @@ angular.module('viaggia.controllers.plan', [])
     $scope.datepickerObject.inputDate = new Date();
     $scope.title = $filter('translate')('plan_map_title');
     $scope.place = null;
+    $scope.favoriteFrom = false;
+    $scope.favoriteTo = false;
     $scope.placesandcoordinates = null;
     $scope.favoritePlaces = JSON.parse(localStorage.getItem(Config.getAppId() + "_favoritePlaces"));
 
@@ -126,18 +128,22 @@ angular.module('viaggia.controllers.plan', [])
 
     //super CPU draining. I would need another way to check it
     $scope.isFavorite = function (fromOrTo, name) {
+        if (fromOrTo == 'from')
+            return $scope.favoriteFrom;
+        else $scope.favoriteTo;
+        //        return $scopeisFavorite
         // return true;
         //var found = false;
         //        if ($scope.planParams[fromOrTo].name == '') {
         //            return false;
         //        }
-        for (var i = 0; i < $scope.favoritePlaces.length; i++) {
-            if ($scope.favoritePlaces[i].name == name) {
-                return true;
-                // break;
-            }
-        }
-        return false;
+        //        for (var i = 0; i < $scope.favoritePlaces.length; i++) {
+        //            if ($scope.favoritePlaces[i].name == name) {
+        //                return true;
+        // break;
+        //            }
+        //        }
+        //        return false;
     }
 
     $scope.datepickerObjectPopup = {
@@ -209,6 +215,9 @@ angular.module('viaggia.controllers.plan', [])
                         lat: planService.getPosition($scope.place).latitude,
                         long: planService.getPosition($scope.place).longitude
                     });
+                    if (fromOrTo == 'from')
+                        $scope.favoriteFrom = true;
+                    else $scope.favoriteTo = true;
                     //write into local storage
                     localStorage.setItem(Config.getAppId() + "_favoritePlaces", JSON.stringify($scope.favoritePlaces));
                 });
@@ -345,6 +354,9 @@ angular.module('viaggia.controllers.plan', [])
         planService.setPosition($scope.place, newplace.lat, newplace.long);
         planService.setName($scope.place, newplace.name);
         selectPlace(newplace.name);
+        if ($scope.place == 'from')
+            $scope.favoriteFrom = true;
+        else $scope.favoriteTo = true;
     };
 
     /* part for the map */
@@ -372,6 +384,12 @@ angular.module('viaggia.controllers.plan', [])
                     $scope.place = 'from';
                     planService.setPosition($scope.place, position[0], position[1]);
                     planService.setName($scope.place, data.response.docs[0]);
+                    for (var i = 0; i < $scope.favoritePlaces.length; i++) {
+                        if ($scope.favoritePlaces[i].name == name) {
+                            $scope.favoriteFrom = true;
+                            break;
+                        }
+                    }
                     selectPlace(name);
                     if (!$scope.placesandcoordinates) {
                         $scope.placesandcoordinates = [];
@@ -465,7 +483,9 @@ angular.module('viaggia.controllers.plan', [])
                 lat: '',
                 long: ''
             }
-
+            if (fromOrTo == 'from')
+                $scope.favoriteFrom = false;
+            $scope.favoriteTo = false;
         };
         //        if (fromOrTo = 'from') {
         //            $scope.fromName = '';
@@ -504,6 +524,9 @@ angular.module('viaggia.controllers.plan', [])
             lat: '',
             long: ''
         }
+        if (fromOrTo == 'from')
+            $scope.favoriteFrom = false;
+        else $scope.favoriteTo = false;
 
     }
     $scope.select = function (suggestion) {
@@ -520,6 +543,13 @@ angular.module('viaggia.controllers.plan', [])
         $scope.place = 'from';
         planService.setPosition($scope.place, $scope.placesandcoordinates[suggestion].latlong.split(',')[0], $scope.placesandcoordinates[suggestion].latlong.split(',')[1]);
         planService.setName($scope.place, suggestion);
+        for (var i = 0; i < $scope.favoritePlaces.length; i++) {
+            if ($scope.favoritePlaces[i].name == suggestion) {
+                $scope.favoriteFrom = true;
+                break;
+            }
+        }
+
         selectPlace(suggestion);
     };
 
@@ -528,6 +558,12 @@ angular.module('viaggia.controllers.plan', [])
         $scope.place = 'to';
         planService.setPosition($scope.place, $scope.placesandcoordinates[suggestion].latlong.split(',')[0], $scope.placesandcoordinates[suggestion].latlong.split(',')[1]);
         planService.setName($scope.place, suggestion);
+        for (var i = 0; i < $scope.favoritePlaces.length; i++) {
+            if ($scope.favoritePlaces[i].name == suggestion) {
+                $scope.favoriteTo = true;
+                break;
+            }
+        }
         selectPlace(suggestion);
     };
 

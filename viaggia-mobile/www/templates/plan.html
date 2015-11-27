@@ -12,7 +12,7 @@
                 <placeautocomplete ng-if="refresh" ng-model="fromName" attr-placeholder="{{'plan_insert_from_address' | translate}}" click-activation="false" data="places" on-type="typePlaceFrom" placeholder="{{'plan_from' | translate}}" on-select="changeStringFrom" ng-blur="setNameParam"></placeautocomplete>
             </div>
             <a class="button-icon plan-viaggia-fromto  icon ion-map" ng-click="openMapPlan('from')"></a>
-            <a class="button-icon plan-viaggia-fromto  icon" ng-class="isFavorite('from', fromName) ? 'ion-android-star' : 'ion-android-star-outline'" ng-click="bookmarks('from', fromName)"></a>
+            <a class="button-icon plan-viaggia-fromto  icon" ng-class=" favoriteFrom ? 'ion-android-star' : 'ion-android-star-outline'" ng-click="bookmarks('from', fromName)"></a>
         </div>
 
         <div class="row">
@@ -21,7 +21,7 @@
                 <placeautocomplete ng-if="refresh" ng-model="toName" attr-placeholder="{{'plan_insert_to_address' | translate}}" click-activation="false" data="places" on-type="typePlaceTo" placeholder="{{'plan_to' | translate}}" on-select="changeStringTo" ng-blur="setNameParam"></placeautocomplete>
             </div>
             <a class="button-icon plan-viaggia-fromto icon ion-map" ng-click="openMapPlan('to')"></a>
-            <a class="button-icon plan-viaggia-fromto icon" ng-class="isFavorite('to', toName) ? 'ion-android-star' : 'ion-android-star-outline'" ng-click="bookmarks('to', toName)"></a>
+            <a class="button-icon plan-viaggia-fromto icon" ng-class="favoriteTo ? 'ion-android-star' : 'ion-android-star-outline'" ng-click="bookmarks('to', toName)"></a>
         </div>
 
         <div class="row space-from-top">
