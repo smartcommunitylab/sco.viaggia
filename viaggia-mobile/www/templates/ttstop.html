@@ -2,7 +2,7 @@
       <ion-content>
         <div>
           <div class="stop-line" ng-repeat="route in stopData.routes">
-            <div class="stop-line-title" style="background-color: {{route.color}}; color: {{textColor(route.color)}}"><span ng-if="route.routeElement.label">{{route.routeElement.label}} - </span>{{route.name}}</div>
+            <div class="stop-line-title" style="background-color: {{route.color}}; color: {{textColor(route.color)}}"><span ng-if="route.routeObject.label">{{route.routeObject.label}}: </span>{{route.routeObject.title}}</div>
             <div class="row">
               <div class="col text-center" ng-repeat="t in route.times">{{t.time | date:'HH:mm'}}{{t.nextDay ? ' *' : ''}}</div>
             </div>

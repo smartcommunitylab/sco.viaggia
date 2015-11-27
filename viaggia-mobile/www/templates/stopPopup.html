@@ -12,7 +12,7 @@
 
   <div class="list stop-line-list" ng-if="popupStop.visualization.view != 'grid'">
     <div class="item" ng-repeat="route in popupStop.routes">
-      {{route.name}}
+      <span ng-if="route.routeObject.label">{{route.routeObject.label}}: </span>{{route.routeObject.title}}
     </div>
   </div>
   <div class="stop-line-grid" ng-if="popupStop.visualization.view == 'grid'">
