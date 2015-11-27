@@ -18,7 +18,7 @@
         <div class="row">
             <div class="input-plan-fromto">
                 <span class="input-label"><b>{{'plan_to' | translate}}</b></span>
-                <placeautocomplete ng-if="refresh" ng-model="toName" attr-placeholder="{{'plan_insert_to_address' | translate}}" click-activation="false" data="places" on-type="typePlace" placeholder="{{'plan_from' | translate}}" on-select="changeStringTo" ng-blur="setNameParam"></placeautocomplete>
+                <placeautocomplete ng-if="refresh" ng-model="toName" attr-placeholder="{{'plan_insert_to_address' | translate}}" click-activation="false" data="places" on-type="typePlace" placeholder="{{'plan_to' | translate}}" on-select="changeStringTo" ng-blur="setNameParam"></placeautocomplete>
             </div>
             <a class="button-icon plan-viaggia-fromto icon ion-map" ng-click="openMapPlan('to')"></a>
             <a class="button-icon plan-viaggia-fromto icon" ng-class="isFavorite('to', toName) ? 'ion-android-star' : 'ion-android-star-outline'" ng-click="bookmarks('to', toName)"></a>
