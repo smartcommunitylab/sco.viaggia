@@ -716,6 +716,13 @@ ion-header-bar .title {
 .item-radio input:checked ~ .item-content {
     background: #3bbacf;
 }
+.item-radio input:checked + .item-content {
+  background: #3bbacf;
+}
+
+.item-radio input:checked + .radio-icon {
+  visibility: visible;
+}
 
 .list-of-icons {
     min-width: 50px;
@@ -809,3 +816,4 @@ ion-header-bar .title {
 .market-text2 {
     text-align: justify;
 }
+
