@@ -497,7 +497,14 @@ angular.module('viaggia', [
             markets_button_to_market: 'PORTAMI AI MERCATINI',
             markets_button_to_park1: 'RIPORTAMI AL PARCHEGGIO',
             markets_button_to_park2: 'STADIO QUERCIA',
-            journey_details_save: 'SALVA ITINERARIO'
+            journey_details_save: 'SALVA ITINERARIO',
+            action_walk: 'Cammina ',
+            action_bicycle: 'Pedala ',
+            action_car: 'Guida ',
+            action_bus: 'Prendi l\'autobus ',
+            action_train: 'Prendi il treno ',
+            action_park: 'Lascia la macchina a '
+
 
         });
 
@@ -638,7 +645,13 @@ angular.module('viaggia', [
             markets_button_to_market: 'TAKE ME TO THE MARKETS',
             markets_button_to_park1: 'TAKE ME BACK TO THE PARKING',
             markets_button_to_park2: 'QUERCIA STADIUM',
-            journey_details_save: 'SAVE JOURNEY'
+            journey_details_save: 'SAVE JOURNEY',
+            action_walk: 'Walk ',
+            action_bicycle: 'Ride ',
+            action_car: 'Drive ',
+            action_bus: 'Take the bus ',
+            action_train: 'Take the train ',
+            action_park: 'Leave the car to '
 
         });
 

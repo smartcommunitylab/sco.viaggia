@@ -45,14 +45,24 @@ angular.module('viaggia.services.plan', [])
         'TRANSIT': 'ic_mt_funivia',
         'STREET': 'ic_price_parking'
     };
-    var actionMap = {
-        'WALK': 'Cammina',
-        'BICYCLE': 'Pedala',
-        'CAR': 'Guida',
-        'BUS': 'Prendi l\'autobus ',
-        'TRAIN': 'Prendi il treno '
-    };
 
+    //    };
+    var actionMap = function (action) {
+        switch (action) {
+        case 'WALK':
+            return $filter('translate')('action_walk');
+        case 'BICYCLE':
+            return $filter('translate')('action_bicycle');
+        case 'CAR':
+            return $filter('translate')('action_car');
+        case 'BUS':
+            return $filter('translate')('action_bus');
+        case 'TRAIN':
+            return $filter('translate')('action_train');
+        default:
+            return $filter('translate')('action_walk');
+        }
+    }
     var getImageName = function (tt, agency) {
         if (tt == 'BUS' && Config.getExtraurbanAgencies().indexOf(parseInt(agency)) >= 0) {
             return ttMap['EXTRA'];
@@ -257,7 +267,7 @@ angular.module('viaggia.services.plan', [])
     };
 
     var extractDetails = function (step, leg, legs, idx, from) {
-        step.action = actionMap[leg.transport.type];
+        step.action = actionMap(leg.transport.type);
         if (leg.transport.type == 'BICYCLE' && leg.transport.agencyId && leg.transport.agencyId != 'null') {
             step.fromLabel = $filter('translate')('journey_details_from_bike');
             if (leg.to.stopId && leg.to.stopId.agencyId && leg.to.stopId.agencyId != 'null') {
@@ -360,7 +370,7 @@ angular.module('viaggia.services.plan', [])
                         parkingStep = {
                             startime: plan.leg[i].endtime,
                             endtime: plan.leg[i].endtime,
-                            action: 'Lascia la macchina a ',
+                            action: $filter('translate')('park_to'),
                             actionDetails: step.to,
                             parking: parking,
                             mean: {

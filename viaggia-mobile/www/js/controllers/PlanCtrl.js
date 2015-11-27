@@ -128,6 +128,9 @@ angular.module('viaggia.controllers.plan', [])
     $scope.isFavorite = function (fromOrTo, name) {
         // return true;
         //var found = false;
+        //        if ($scope.planParams[fromOrTo].name == '') {
+        //            return false;
+        //        }
         for (var i = 0; i < $scope.favoritePlaces.length; i++) {
             if ($scope.favoritePlaces[i].name == name) {
                 return true;
@@ -194,7 +197,8 @@ angular.module('viaggia.controllers.plan', [])
     $scope.bookmarks = function (fromOrTo, name) {
         //else pop up with list of favorites
         $scope.place = fromOrTo;
-        if (!!name && name != '') {
+
+        if (!!name && name != '' && (!$scope.planParams[fromOrTo].name == '')) {
             //if name is not contained in favorite, then popup (do u wanna add it?)
             if (!$scope.isFavorite(fromOrTo, name)) {
                 //             popup (do u wanna add it?)
@@ -215,6 +219,7 @@ angular.module('viaggia.controllers.plan', [])
         } else {
             $scope.openFavorites();
         }
+
     };
 
     $ionicPlatform.onHardwareBackButton(function () {
@@ -368,6 +373,12 @@ angular.module('viaggia.controllers.plan', [])
                     planService.setPosition($scope.place, position[0], position[1]);
                     planService.setName($scope.place, data.response.docs[0]);
                     selectPlace(name);
+                    if (!$scope.placesandcoordinates) {
+                        $scope.placesandcoordinates = [];
+                    }
+                    $scope.placesandcoordinates[$scope.place] = {
+                        latlong: position[0] + "," + position[1]
+                    }
                 }
                 $ionicLoading.hide();
             })
@@ -446,8 +457,22 @@ angular.module('viaggia.controllers.plan', [])
         return newplaces;
     };
 
-    $scope.typePlace = function (typedthings) {
 
+    var typePlace = function (typedthings, fromOrTo) {
+        if ($scope.placesandcoordinates && $scope.placesandcoordinates[typedthings] == null) {
+            $scope.planParams[fromOrTo] = {
+                name: '',
+                lat: '',
+                long: ''
+            }
+
+        };
+        //        if (fromOrTo = 'from') {
+        //            $scope.fromName = '';
+        //        }
+        //        if (fromOrTo = 'to') {
+        //            $scope.toName = '';
+        //        }
         $scope.result = typedthings;
         $scope.newplaces = planService.getTypedPlaces(typedthings);
         $scope.newplaces.then(function (data) {
@@ -462,7 +487,13 @@ angular.module('viaggia.controllers.plan', [])
                 $scope.placesandcoordinates = null;
             }
         });
+    }
 
+    $scope.typePlaceFrom = function (typedthings) {
+        typePlace(typedthings, 'from');
+    };
+    $scope.typePlaceTo = function (typedthings) {
+        typePlace(typedthings, 'to');
     };
 
     $scope.resetParams = function (fromOrTo) {
