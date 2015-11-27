@@ -130,6 +130,7 @@ angular.module('viaggia.controllers.info', [])
                                 long: $scope.popupParking.position[1]
                             },
                         });
+                        planService.setName('to', $scope.popupParking.description);
                         $scope.closeMap();
                         $state.go('app.plan');
                     }
@@ -146,6 +147,7 @@ angular.module('viaggia.controllers.info', [])
                 long: $scope.selected.position[1]
             },
         });
+        planService.setName('to', $scope.selected.description);
         $scope.closeMap();
         $state.go('app.plan');
     };
@@ -277,6 +279,7 @@ angular.module('viaggia.controllers.info', [])
                                 long: $scope.popupParking.position[1]
                             },
                         });
+                        planService.setName('to', $scope.popupParking.address);
                         $scope.closeMap();
                         $state.go('app.plan');
                     }
@@ -288,11 +291,12 @@ angular.module('viaggia.controllers.info', [])
     $scope.navigate = function () {
         planService.setPlanConfigure({
             to: {
-                name: $scope.selected.description,
+                name: $scope.selected.address,
                 lat: $scope.selected.position[0],
                 long: $scope.selected.position[1]
             },
         });
+        planService.setName('to', $scope.selected.address);
         $scope.closeMap();
         $state.go('app.plan');
     };
