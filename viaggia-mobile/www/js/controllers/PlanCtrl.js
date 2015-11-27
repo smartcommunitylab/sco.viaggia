@@ -217,6 +217,11 @@ angular.module('viaggia.controllers.plan', [])
     };
 
     $ionicPlatform.onHardwareBackButton(function () {
+        if ($scope.modalMap.isShown()) {
+            $scope.modalMap.hide();
+        } else if ($scope.modalFavorites.isShown()) {
+            $scope.modalFavorites.hide();
+        }
         $scope.refresh = true;
     });
 
