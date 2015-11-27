@@ -459,7 +459,7 @@ angular.module('viaggia.controllers.plan', [])
 
 
     var typePlace = function (typedthings, fromOrTo) {
-        if ($scope.placesandcoordinates && $scope.placesandcoordinates[typedthings] == null) {
+        if (($scope.placesandcoordinates && $scope.placesandcoordinates[typedthings] == null) || typedthings == '') {
             $scope.planParams[fromOrTo] = {
                 name: '',
                 lat: '',
