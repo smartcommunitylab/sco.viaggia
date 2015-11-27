@@ -670,10 +670,21 @@ ion-header-bar .title {
     padding-top: 24px;
 }
 
+.placeautocomplete-input {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.placeautocomplete-input:focus {
+    text-overflow: clip`;
+}
+
 .plan-viaggia-fromto {
     margin: auto;
     color: #3bbacf;
     box-shadow: none;
+    padding: 0 12px;
 }
 
 .plan-viaggia-fromto:hover {

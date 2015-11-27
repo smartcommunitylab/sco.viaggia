@@ -321,7 +321,7 @@ angular.module('viaggia.directives', [])
             type="text"\
             ng-model="searchParam"\
             placeholder="{{ attrs.placeholder }}"\
-            class="{{ attrs.inputclass }}"\
+            class="placeautocomplete-input {{ attrs.inputclass }}"\
             id="{{ attrs.inputid }}"\
             style="width:100%;"\
             ng-required="{{ placeautocompleteRequired }}" />\
