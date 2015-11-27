@@ -173,7 +173,7 @@ angular.module('viaggia.controllers.plan', [])
         return $scope.shownPreferences === true;
     };
 
-    $ionicModal.fromTemplateUrl('templates/mapModal.html', {
+    $ionicModal.fromTemplateUrl('templates/planMapModal.html', {
         id: '1',
         scope: $scope,
         backdropClickToClose: false,
@@ -381,15 +381,16 @@ angular.module('viaggia.controllers.plan', [])
         }, function () {
             $ionicLoading.hide();
             //$scope.showNoConnection();
+            $scope.refresh = true;
             console.log('CANNOT LOCATE!');
         });
         // }
     };
 
     $scope.initMap = function () {
-        mapService.initMap('modalMap').then(function () {
+        mapService.initMap('planMapModal').then(function () {
 
-            $scope.$on("leafletDirectiveMap.modalMap.click", function (event, args) {
+            $scope.$on("leafletDirectiveMap.planMapModal.click", function (event, args) {
                 $ionicLoading.show();
                 planService.setPosition($scope.place, args.leafletEvent.latlng.lat, args.leafletEvent.latlng.lng);
                 var placedata = $q.defer();
@@ -429,7 +430,7 @@ angular.module('viaggia.controllers.plan', [])
     };
 
     $scope.closeWin = function () {
-        mapService.getMap('modalMap').then(function (map) {
+        mapService.getMap('planMapModal').then(function (map) {
             map.closePopup();
         });
     };
