@@ -791,6 +791,9 @@ ion-header-bar .title {
     margin-right: 12px;
     vertical-align: bottom;
 }
+.markets-home span {
+  line-height: 50px;
+}
 
 .market-subtitle {
     text-align: center;
