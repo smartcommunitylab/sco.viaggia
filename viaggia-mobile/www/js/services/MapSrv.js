@@ -67,7 +67,7 @@ angular.module('viaggia.services.map', [])
                 divreturn = divreturn + '<p>' + trip.steps[internalIndex].parking.cost + '</strong></p>'
             }
             if (trip.steps[internalIndex].parking && trip.steps[internalIndex].parking.time) {
-                divreturn = divreturn + '<p>' + trip.steps[steps].parking.time + '</p></div>'
+                divreturn = divreturn + '<p>' + trip.steps[internalIndex].parking.time + '</p></div>'
             }
             internalIndex++;
             //}
@@ -128,12 +128,14 @@ angular.module('viaggia.services.map', [])
             });
         return deferred.promise;
     }
-    mapService.centerOnMe = function(mapId, zoom) {
-      leafletData.getMap(mapId).then(function(map) {
-        GeoLocate.locate().then(function (e) {
-              $timeout(function(){map.setView(L.latLng(e[0], e[1]), zoom);});
+    mapService.centerOnMe = function (mapId, zoom) {
+        leafletData.getMap(mapId).then(function (map) {
+            GeoLocate.locate().then(function (e) {
+                $timeout(function () {
+                    map.setView(L.latLng(e[0], e[1]), zoom);
+                });
+            });
         });
-      });
 
     };
 
