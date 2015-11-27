@@ -484,53 +484,57 @@ angular.module('viaggia.services.plan', [])
 
         var placedata = $q.defer();
         var names = [];
-        i = i.replace(/\ /g, "+");
-        var url = "https://os.smartcommunitylab.it/core.geocoder/spring/address?latlng=" + Config.getMapPosition().lat + ", " + Config.getMapPosition().long + "&distance=" + Config.getDistanceForAutocomplete() + "&address=" + i;
-        $http.get(url, {
-            timeout: 5000
-        }).
-        success(function (data, status, headers, config) {
-            geoCoderPlaces = [];
-            //            places = data.response.docs;
-            //store the data
-            //return the labels
-            k = 0;
-            for (var i = 0; i < data.response.docs.length; i++) {
-                temp = '';
-                if (data.response.docs[i].name)
-                    temp = temp + data.response.docs[i].name;
-                if (data.response.docs[i].street != data.response.docs[i].name)
-                    if (data.response.docs[i].street) {
+        if (i.length == 0) {
+            placedata.resolve(names);
+        } else {
+            i = i.replace(/\ /g, "+");
+            var url = "https://os.smartcommunitylab.it/core.geocoder/spring/address?latlng=" + Config.getMapPosition().lat + ", " + Config.getMapPosition().long + "&distance=" + Config.getDistanceForAutocomplete() + "&address=" + i;
+            $http.get(url, {
+                timeout: 5000
+            }).
+            success(function (data, status, headers, config) {
+                geoCoderPlaces = [];
+                //            places = data.response.docs;
+                //store the data
+                //return the labels
+                k = 0;
+                for (var i = 0; i < data.response.docs.length; i++) {
+                    temp = '';
+                    if (data.response.docs[i].name)
+                        temp = temp + data.response.docs[i].name;
+                    if (data.response.docs[i].street != data.response.docs[i].name)
+                        if (data.response.docs[i].street) {
+                            if (temp)
+                                temp = temp + ', ';
+                            temp = temp + data.response.docs[i].street;
+                        }
+                    if (data.response.docs[i].housenumber) {
                         if (temp)
                             temp = temp + ', ';
-                        temp = temp + data.response.docs[i].street;
+                        temp = temp + data.response.docs[i].housenumber;
                     }
-                if (data.response.docs[i].housenumber) {
-                    if (temp)
-                        temp = temp + ', ';
-                    temp = temp + data.response.docs[i].housenumber;
-                }
-                if (data.response.docs[i].city) {
-                    if (temp)
-                        temp = temp + ', ';
-                    temp = temp + data.response.docs[i].city;
-                }
+                    if (data.response.docs[i].city) {
+                        if (temp)
+                            temp = temp + ', ';
+                        temp = temp + data.response.docs[i].city;
+                    }
 
-                //check se presente
-                if (!geoCoderPlaces[temp]) {
-                    //se non presente
-                    names[k] = temp;
-                    k++
-                    geoCoderPlaces[temp] = {
-                        latlong: data.response.docs[i].coordinate
+                    //check se presente
+                    if (!geoCoderPlaces[temp]) {
+                        //se non presente
+                        names[k] = temp;
+                        k++
+                        geoCoderPlaces[temp] = {
+                            latlong: data.response.docs[i].coordinate
+                        }
                     }
                 }
-            }
-            placedata.resolve(names);
-        }).
-        error(function (data, status, headers, config) {
-            //            $scope.error = true;
-        });
+                placedata.resolve(names);
+            }).
+            error(function (data, status, headers, config) {
+                //            $scope.error = true;
+            });
+        }
         return placedata.promise;
     }
     planService.saveTrip = function (tripId, trip, name, requestedFrom, requestedTo) {

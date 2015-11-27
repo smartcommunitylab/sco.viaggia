@@ -1,7 +1,7 @@
 angular.module('viaggia.controllers.plan', [])
 
 .controller('PlanCtrl', function ($scope, $rootScope, Config, $q, $http, $ionicPlatform, $ionicModal, $ionicLoading, $filter, $state, $window, Toast, leafletData, planService, GeoLocate, mapService) {
-    $scope.refresh = true;
+    //$scope.refresh = true;
     $scope.plantitle = $filter('translate')('plan_title');
     $scope.preferences = Config.getPlanPreferences();
     $scope.types = Config.getPlanTypes();
@@ -19,6 +19,7 @@ angular.module('viaggia.controllers.plan', [])
     }
 
     $scope.initParams = function () {
+        $scope.refresh = true;
         $scope.planParams = {
             from: {
                 name: '',
@@ -335,10 +336,10 @@ angular.module('viaggia.controllers.plan', [])
     };
 
     $scope.favoriteSelect = function (newplace) {
-            $scope.closeFavorites();
-            planService.setPosition($scope.place, newplace.lat, newplace.long);
-            planService.setName($scope.place, newplace.name);
-            selectPlace(newplace.name);
+        $scope.closeFavorites();
+        planService.setPosition($scope.place, newplace.lat, newplace.long);
+        planService.setName($scope.place, newplace.name);
+        selectPlace(newplace.name);
     };
 
     /* part for the map */
@@ -445,19 +446,37 @@ angular.module('viaggia.controllers.plan', [])
     };
 
     $scope.typePlace = function (typedthings) {
+
         $scope.result = typedthings;
         $scope.newplaces = planService.getTypedPlaces(typedthings);
         $scope.newplaces.then(function (data) {
             //merge with favorites and check no double values
             $scope.places = data;
-            $scope.places = addFavoritePlaces(typedthings);
-            $scope.placesandcoordinates = planService.getnames();
-            $scope.placesandcoordinates = planService.addnames($scope.favoritePlaces);
+            if (data.length > 0) {
+                $scope.places = addFavoritePlaces(typedthings);
+                $scope.placesandcoordinates = planService.getnames();
+                $scope.placesandcoordinates = planService.addnames($scope.favoritePlaces);
+            } else {
+                $scope.places = null;
+                $scope.placesandcoordinates = null;
+            }
         });
+
     };
 
+    $scope.resetParams = function (fromOrTo) {
+        $scope.places = null;
+        $scope.placesandcoordinates = null;
+        $scope.planParams[fromOrTo] = {
+            name: '',
+            lat: '',
+            long: ''
+        }
+
+    }
     $scope.select = function (suggestion) {
         console.log("select");
+
     };
 
     $scope.setPlaceById = function (id) {
@@ -473,11 +492,11 @@ angular.module('viaggia.controllers.plan', [])
     };
 
     $scope.changeStringTo = function (suggestion) {
-            console.log("changestringto");
-            $scope.place = 'to';
-            planService.setPosition($scope.place, $scope.placesandcoordinates[suggestion].latlong.split(',')[0], $scope.placesandcoordinates[suggestion].latlong.split(',')[1]);
-            planService.setName($scope.place, suggestion);
-            selectPlace(suggestion);
+        console.log("changestringto");
+        $scope.place = 'to';
+        planService.setPosition($scope.place, $scope.placesandcoordinates[suggestion].latlong.split(',')[0], $scope.placesandcoordinates[suggestion].latlong.split(',')[1]);
+        planService.setName($scope.place, suggestion);
+        selectPlace(suggestion);
     };
 
     // execution
