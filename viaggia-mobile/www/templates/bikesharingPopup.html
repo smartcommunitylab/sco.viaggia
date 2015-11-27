@@ -1,17 +1,34 @@
 <div>
-  <div class="row">
-    <div class="col">
-      <h4>{{popupParking.name}}</h4>
-      <p>{{popupParking.address}}</p>
-      <p ng-if="popupParking.distance">{{popupParking.distance| number:1}}km</p>
+    <div class="row">
+        <div class="col">
+            <h4>{{popupParking.name}}</h4>
+            <p>{{popupParking.address}}</p>
+            <p ng-if="popupParking.distance">{{popupParking.distance| number:1}}km</p>
+        </div>
     </div>
-  </div>
-  <div class="row  text-center" style="font-size:30px;">
-    <div class="col"><i class="icon ic_bike avail-green"></i></div>
-    <div class="col"><i class="icon ic_bike avail-red"></i></div>
-  </div>
+    <!--
+    <div class="row  text-center" style="font-size:30px;">
+        <div class="col"><i class="icon ic_bike avail-green"></i>
+        </div>
+        <div class="col"><i class="icon ic_bike avail-red"></i>
+        </div>
+    </div>
+-->
+    <!--
   <div class="row text-center" >
     <div class="col">{{popupParking.bikes}}</div>
     <div class="col">{{popupParking.slots}}</div>
   </div>
+-->
+    <div class="col col-right">
+        <div class="row  text-center">
+            <div class="col text-left"><b>{{popupParking.bikes}} {{'bikesharings_bikes' | translate}}</b>
+            </div>
+
+        </div>
+        <div class="row text-center">
+            <div class="col text-left"><b>{{popupParking.slots}} {{'bikesharings_free_slots' | translate}}</b>
+            </div>
+        </div>
+    </div>
 </div>
