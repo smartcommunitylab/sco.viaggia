@@ -161,7 +161,7 @@ angular.module('viaggia.services.plan', [])
                 if (extended == true) {
                     cost = parseFloat(cost) > 0 ? leg.extra.costData.costDefinition : 'gratis';
                 } else {
-                    cost = parseFloat(cost) > 0 ? (cost + '\u20AC') : 'gratis';
+                    cost = parseFloat(cost) > 0 ? ($filter('number')(cost, 2) + '\u20AC') : 'gratis';
                 }
                 res.cost = cost;
                 res.note.push(cost);
@@ -179,7 +179,7 @@ angular.module('viaggia.services.plan', [])
                 if (extended == true) {
                     cost = parseFloat(cost) > 0 ? leg.to.stopId.extra.costData.costDefinition : 'gratis';
                 } else {
-                    cost = parseFloat(cost) > 0 ? (cost + '\u20AC') : 'gratis';
+                    cost = parseFloat(cost) > 0 ? ($filter('number')(cost, 2) + '\u20AC') : 'gratis';
                 }
             }
             res.cost = cost;

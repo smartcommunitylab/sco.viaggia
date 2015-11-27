@@ -597,6 +597,7 @@ ion-header-bar .title {
     margin: 8px;
     padding: 0;
     position: relative;
+    width: auto !important;
 }
 
 .home-list .list {
@@ -817,3 +818,8 @@ ion-header-bar .title {
     text-align: justify;
 }
 
+.length-price {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
