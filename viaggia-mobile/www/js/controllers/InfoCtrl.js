@@ -80,6 +80,10 @@ angular.module('viaggia.controllers.info', [])
         });
     };
 
+    $scope.$on('$ionicView.beforeEnter', function(){
+      mapService.refresh('ttMap');
+    });
+
     $ionicModal.fromTemplateUrl('templates/mapModal.html', {
         id: '1',
         scope: $scope,
@@ -288,7 +292,11 @@ angular.module('viaggia.controllers.info', [])
         });
     });
 
-    $scope.navigate = function () {
+    $scope.$on('$ionicView.beforeEnter', function(){
+      mapService.refresh('ttMap');
+    });
+
+  $scope.navigate = function () {
         planService.setPlanConfigure({
             to: {
                 name: $scope.selected.address,

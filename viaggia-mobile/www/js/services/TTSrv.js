@@ -103,6 +103,10 @@ angular.module('viaggia.services.timetable', [])
     var result = {stops:[],tripIds:[],times:[],stopIds:[], routeIds: []};
     DataManager.doQuery("SELECT * FROM route WHERE agencyID = '"+agency+"' AND linehash = '"+hash+"'",[])
     .then(function(data) {
+      if (!data || !data[0] || !data[0].stopsNames) {
+        deferred.resolve(result);
+        return;
+      }
       result.stops = toTrimmedList(data[0].stopsNames);
       result.tripIds = toTrimmedList(data[0].tripIds);
       result.times = uncompressTime(data[0].times,result.stops.length);
