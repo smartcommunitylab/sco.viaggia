@@ -19,7 +19,7 @@ angular.module('viaggia.controllers.tripdetails', [])
     $scope.toTime = function (millis) {
         return planService.getTimeStr(new Date(millis));
     };
-    $ionicModal.fromTemplateUrl('templates/mapModal.html', {
+    $ionicModal.fromTemplateUrl('templates/planMapModal.html', {
         id: '1',
         scope: $scope,
         backdropClickToClose: false,
@@ -36,7 +36,7 @@ angular.module('viaggia.controllers.tripdetails', [])
             }
             if (boundsArray.length > 0) {
                 var bounds = L.latLngBounds(boundsArray);
-                mapService.getMap('modalMap').then(function (map) {
+                mapService.getMap('planMapModal').then(function (map) {
                     map.fitBounds(bounds);
                 });
             }
@@ -92,7 +92,7 @@ angular.module('viaggia.controllers.tripdetails', [])
         //delete $scope.placesandcoordinates[favorite.name];
     }
     $scope.initMap = function () {
-        mapService.initMap('modalMap').then(function () {
+        mapService.initMap('planMapModal').then(function () {
             //add polyline
         })
     }
