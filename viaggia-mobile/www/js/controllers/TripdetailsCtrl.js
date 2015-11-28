@@ -1,7 +1,7 @@
 angular.module('viaggia.controllers.tripdetails', [])
 
 .controller('TripDetailsCtrl', function ($scope, $ionicModal, $filter, $ionicPopup, planService, mapService, Config, Toast, $filter, $ionicHistory, $state) {
-    $scope.title = $filter('translate')('map_detail_title');
+    $scope.title = $filter('translate')('journey_detail');
     var trip = planService.getSelectedJourney();
     $scope.requestedFrom = planService.getName("from");
     if (!$scope.requestedFrom) {

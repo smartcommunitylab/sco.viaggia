@@ -846,3 +846,8 @@ ion-header-bar .title {
   padding-left: 0px;
   padding-right: 0px;
 }
+
+.close-modal {
+  font-size: 32px;
+  padding-top: 2px !important;
+}
