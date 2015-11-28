@@ -275,7 +275,7 @@ angular.module('viaggia.services.plan', [])
             if (leg.to.stopId && leg.to.stopId.agencyId && leg.to.stopId.agencyId != 'null') {
                 step.toLabel = $filter('translate')('journey_details_to_bike');
             } else {
-                step.toLabel = $filter('translate')('label_to');
+                step.toLabel = $filter('translate')('plan_to');
             }
             //    	} else if (leg.transport.type == 'CAR' && leg.transport.agencyId && leg.transport.agencyId != 'null') {
         } else {
@@ -454,14 +454,14 @@ angular.module('viaggia.services.plan', [])
                     "lat": newPlanConfigure.to.lat
                 },
                 "routeType": newPlanConfigure.routeType,
-                "resultsNumber": 10,
+                "resultsNumber": 5,
                 "departureTime": newPlanConfigure.departureTime,
                 "from": {
                     "lon": newPlanConfigure.from.long,
                     "lat": newPlanConfigure.from.lat
                 },
                 "date": newPlanConfigure.date,
-                "transportTypes": newPlanConfigure.transportTypes
+                "transportTypes": Config.convertPlanTypes(newPlanConfigure.transportTypes)
             },
             timeout: 10000
         }).

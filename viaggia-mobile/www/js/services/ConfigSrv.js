@@ -35,6 +35,31 @@ angular.module('viaggia.services.conf', [])
     var GEOCODER_URL = 'https://os.smartcommunitylab.it/core.geocoder/spring';
     var APP_BUILD = '';
     var PLAN_TYPES = ['WALK', 'TRANSIT', 'CAR', 'BICYCLE', 'SHAREDCAR', 'SHAREDBIKE'];
+    var convertMeans = function(means) {
+    	res = [];
+    	if (means.indexOf('TRANSIT') >= 0) {
+          res.push('TRANSIT');
+        }
+    	if (means.indexOf('CAR') >= 0) {
+          res.push('CAR');
+          res.push('CARWITHPARKING');
+        }
+    	if (means.indexOf('SHAREDCAR') >= 0) {
+          res.push('SHAREDCAR_WITHOUT_STATION');
+        }
+    	if (means.indexOf('WALK') >= 0) {
+          res.push('WALK');
+        }
+    	if (means.indexOf('BICYCLE') >= 0) {
+          res.push('BICYCLE');
+        }
+    	if (means.indexOf('SHAREDBIKE') >= 0) {
+          res.push('SHAREDBIKE');
+          res.push('SHAREDBIKE_WITHOUT_STATION');
+        }
+    	return res;
+    };
+
     var PLAN_PREFERENCES = [
         {
             label: $filter('translate')('plan_preferences_fastest'),
@@ -128,6 +153,7 @@ angular.module('viaggia.services.conf', [])
         getPlanTypes: function () {
             return PLAN_TYPES;
         },
+        convertPlanTypes: convertMeans,
         getColorsTypes: function () {
             return COLORS_TRIP;
         },
