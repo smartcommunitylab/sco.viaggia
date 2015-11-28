@@ -14,6 +14,7 @@ angular.module('viaggia.controllers.plan', [])
     $scope.favoriteFrom = false;
     $scope.favoriteTo = false;
     $scope.placesandcoordinates = null;
+    //$scope.located = false;
     $scope.favoritePlaces = JSON.parse(localStorage.getItem(Config.getAppId() + "_favoritePlaces"));
 
     if (!$scope.favoritePlaces) {
@@ -203,8 +204,12 @@ angular.module('viaggia.controllers.plan', [])
     $scope.bookmarks = function (fromOrTo, name) {
         //else pop up with list of favorites
         $scope.place = fromOrTo;
+        var isfavorite = false;
+        if (fromOrTo == 'from')
+            isfavorite = $scope.favoriteFrom;
+        else isfavorite = $scope.favoriteTo;
 
-        if (!!name && name != '' && (!$scope.planParams[fromOrTo].name == '')) {
+        if (!!name && name != '' && (!$scope.planParams[fromOrTo].name == '') && !isfavorite) {
             //if name is not contained in favorite, then popup (do u wanna add it?)
             if (!$scope.isFavorite(fromOrTo, name)) {
                 //             popup (do u wanna add it?)
@@ -390,11 +395,12 @@ angular.module('viaggia.controllers.plan', [])
                             break;
                         }
                     }
+                    //$scope.located = true;
                     selectPlace(name);
                     if (!$scope.placesandcoordinates) {
                         $scope.placesandcoordinates = [];
                     }
-                    $scope.placesandcoordinates[$scope.place] = {
+                    $scope.placesandcoordinates[name] = {
                         latlong: position[0] + "," + position[1]
                     }
                 }
@@ -478,7 +484,10 @@ angular.module('viaggia.controllers.plan', [])
 
 
     var typePlace = function (typedthings, fromOrTo) {
-        if (($scope.placesandcoordinates && $scope.placesandcoordinates[typedthings] == null) || typedthings == '') {
+        //        if ($scope.located) {
+        //            $scope.located = false
+        //        } else
+        if (($scope.placesandcoordinates && $scope.placesandcoordinates[typedthings] == null) || typedthings == '' || $scope.placesandcoordinates == null) {
             $scope.planParams[fromOrTo] = {
                 name: '',
                 lat: '',
@@ -584,6 +593,18 @@ angular.module('viaggia.controllers.plan', [])
             $scope.place = 'from';
             planService.setPosition($scope.place, $scope.planParams.from.lat, $scope.planParams.from.long);
             selectPlace($scope.planParams.from.name);
+            if (!$scope.placesandcoordinates) {
+                $scope.placesandcoordinates = [];
+            }
+            $scope.placesandcoordinates[$scope.planParams.from.name] = {
+                    latlong: $scope.planParams.from.lat + "," + $scope.planParams.from.long
+                }
+                            for (var i = 0; i < $scope.favoritePlaces.length; i++) {
+                                if ($scope.favoritePlaces[i].name == name) {
+                                    $scope.favoriteFrom = true;
+                                    break;
+                                }
+                            }
         } else {
             $scope.planParams['from'] = {
                 name: '',
@@ -597,6 +618,18 @@ angular.module('viaggia.controllers.plan', [])
             $scope.place = 'to';
             planService.setPosition($scope.place, $scope.planParams.to.lat, $scope.planParams.to.long);
             selectPlace($scope.planParams.to.name);
+            if (!$scope.placesandcoordinates) {
+                $scope.placesandcoordinates = [];
+            }
+            $scope.placesandcoordinates[$scope.planParams.to.name] = {
+                    latlong: $scope.planParams.to.lat + "," + $scope.planParams.to.long
+                }
+                            for (var i = 0; i < $scope.favoritePlaces.length; i++) {
+                                if ($scope.favoritePlaces[i].name == name) {
+                                    $scope.favoriteTo = true;
+                                    break;
+                                }
+                            }
         } else {
             $scope.planParams['to'] = {
                 name: '',
@@ -619,6 +652,7 @@ angular.module('viaggia.controllers.plan', [])
         if (!$scope.planParams.date) {
             $scope.planParams['date'] = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
         }
+
     }
 
     $scope.mapTypes = initMapTypes($scope.types);
