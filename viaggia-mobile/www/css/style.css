@@ -830,3 +830,19 @@ ion-header-bar .title {
   overflow: hidden;
   padding: 5px;
 }
+
+.ionic-datepicker .right_arrow,
+.ionic-datepicker .left_arrow {
+  margin: auto;
+}
+
+.timePickerColon {
+  padding-top: 0px !important;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+.timePickerArrows {
+  padding-left: 0px;
+  padding-right: 0px;
+}
