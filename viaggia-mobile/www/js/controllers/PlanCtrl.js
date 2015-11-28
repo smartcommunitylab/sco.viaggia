@@ -404,6 +404,7 @@ angular.module('viaggia.controllers.plan', [])
             .error(function (data, status, headers, config) {
                 //temporary
                 $ionicLoading.hide();
+                $scope.refresh = true;
                 $scope.showNoConnection();
             });
             //                });
