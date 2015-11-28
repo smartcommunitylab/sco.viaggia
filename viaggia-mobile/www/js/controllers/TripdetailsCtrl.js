@@ -54,6 +54,7 @@ angular.module('viaggia.controllers.tripdetails', [])
             template: $filter('translate')('save_trip_text'),
 
         }).then(function (res) {
+            if (!res) return;
             planService.saveTrip($scope.tripId, trip, res, $scope.requestedFrom, $scope.requestedTo).then(function (res) {
 
                 //return tripToSave that contains new tripId and in data the trip
