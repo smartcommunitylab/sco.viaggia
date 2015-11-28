@@ -12,7 +12,7 @@
         </div>
         <div ng-if="popupParking.monitored && popupParking.slotsAvailable > -2" class="col col-right">
             <div>
-                <div class="text-center"><span ng-class="popupParking.availLevel">{{p.slotsAvailable > 0? p.slotsAvailable : 0}} {{'parking_on' | translate}} {{p.slotsTotal}}</span>
+                <div class="text-center"><span ng-class="popupParking.availLevel">{{popupParking.slotsAvailable > 0? popupParking.slotsAvailable : 0}} {{'parking_on' | translate}} {{popupParking.slotsTotal}}</span>
                 </div>
             </div>
         </div>
