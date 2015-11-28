@@ -823,3 +823,10 @@ ion-header-bar .title {
   right: 5px;
   bottom: 5px;
 }
+
+.card .trip-title {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding: 5px;
+}

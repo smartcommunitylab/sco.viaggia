@@ -1,35 +1,39 @@
 <ion-view id="mytrips" title="{{'my_trip_title'|translate}}">
     <ion-content id="content" has-header="true">
+        <div ng-hide="savedTrips.length>0" class="text-center">
+            <h4>{{'my_trip_empty_list'|translate}}</h4>
+        </div>
+
+<!--
         <div class="card empty-list-card" ng-hide="savedTrips.length>0">
             {{'my_trip_empty_list'|translate}}
         </div>
+-->
         <ion-list class="animate-ripple" ng-hide="savedTrips.length==0">
-            <ion-item class="card" ng-repeat="journey in savedTrips" ng-last-repeat="savedTrips" ng-click="showPlan(journey)">
-                <div class="row">
-                    <div class="col-md-2 text-center">
-                        <div>{{journey.data.name }}</div>
+            <div class="card" ng-repeat="journey in savedTrips" ng-last-repeat="savedTrips" ng-click="showPlan(journey)">
+                    <div class="trip-title text-center">
+                        {{journey.data.name }}
                     </div>
-                </div>
                 <!--<div class="col-md-10">-->
 
                 <div class="row">
-                    <div class="col-md-12 text-right">
+                    <div class="text-right">
                         <small class="text-muted text-center"><strong>{{'my_trip_from'|translate}}</strong>: {{journey.data.originalFrom.name}}</small>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 text-right">
+                    <div class="text-right">
                         <small class="text-muted text-center"><strong>{{'my_trip_to'|translate}}</strong>: {{journey.data.originalTo.name}}</small>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 text-right">
+                    <div class="text-right">
                         <small class="text-muted text-center"><strong>{{'my_trip_time'|translate}}</strong>: {{journey.data.data.startime| date:'d-MM-yyyy HH:mm'}}</small>
                     </div>
                 </div>
 
                 <!--</div>-->
-            </ion-item>
+            </div>
         </ion-list>
     </ion-content>
 </ion-view>
