@@ -60,7 +60,7 @@ angular.module('viaggia.services.plan', [])
         case 'TRAIN':
             return $filter('translate')('action_train');
         case 'PARKWALK':
-            return $filter('translate')('action_park');
+            return $filter('translate')('action_walk');
         default:
             return $filter('translate')('action_walk');
         }
