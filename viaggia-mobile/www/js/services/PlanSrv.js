@@ -59,6 +59,8 @@ angular.module('viaggia.services.plan', [])
             return $filter('translate')('action_bus');
         case 'TRAIN':
             return $filter('translate')('action_train');
+        case 'PARKWALK':
+            return $filter('translate')('action_park');
         default:
             return $filter('translate')('action_walk');
         }
@@ -311,7 +313,7 @@ angular.module('viaggia.services.plan', [])
         if (idx == 0) {
             from = " " + (fromPosition);
         } else if (legs[idx - 1] == null || isBadString(legs[idx - 1].to.name)) {
-            from = "?"; //this.mCtx.getString(R.string.step_move);
+            from = $filter('translate')('action_move');
         } else {
             from = " " + placeName(legs[idx - 1].to.name);
         }
@@ -326,8 +328,8 @@ angular.module('viaggia.services.plan', [])
         var to = "";
         if ((idx + 1 == legs.length)) {
             to = " " + (toPosition);
-        } else if (legs[idx + 1] == null || isBadString(legs[idx + 1].to.name)) {
-            to = "";
+        } else if (legs[idx + 1] == null || isBadString(legs[idx + 1].from.name)) {
+            to = $filter('translate')('action_move');
         } else {
             to = " " + placeName(legs[idx + 1].from.name);
         }
@@ -370,7 +372,7 @@ angular.module('viaggia.services.plan', [])
                         parkingStep = {
                             startime: plan.leg[i].endtime,
                             endtime: plan.leg[i].endtime,
-                            action: $filter('translate')('park_to'),
+                            action: $filter('translate')('action_park'),
                             actionDetails: step.to,
                             parking: parking,
                             mean: {

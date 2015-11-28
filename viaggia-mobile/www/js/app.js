@@ -503,7 +503,8 @@ angular.module('viaggia', [
             action_car: 'Guida ',
             action_bus: 'Prendi l\'autobus ',
             action_train: 'Prendi il treno ',
-            action_park: 'Lascia la macchina a '
+            action_park: 'Lascia la macchina a ',
+            action_move: 'Prosegui'
 
 
         });
@@ -651,7 +652,8 @@ angular.module('viaggia', [
             action_car: 'Drive ',
             action_bus: 'Take the bus ',
             action_train: 'Take the train ',
-            action_park: 'Leave the car to '
+            action_park: 'Leave the car to ',
+            action_move: 'Move '
 
         });
 
