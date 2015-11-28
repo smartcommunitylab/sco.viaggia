@@ -504,8 +504,8 @@ angular.module('viaggia', [
             action_bus: 'Prendi l\'autobus ',
             action_train: 'Prendi il treno ',
             action_park: 'Lascia la macchina a ',
-            action_move: 'Prosegui'
-
+            action_move: 'Prosegui',
+            parking_search_time: 'Trova parcheggio: '
 
         });
 
@@ -653,7 +653,8 @@ angular.module('viaggia', [
             action_bus: 'Take the bus ',
             action_train: 'Take the train ',
             action_park: 'Leave the car to ',
-            action_move: 'Move '
+            action_move: 'Move ',
+            parking_search_time: 'Time to park: '
 
         });
 

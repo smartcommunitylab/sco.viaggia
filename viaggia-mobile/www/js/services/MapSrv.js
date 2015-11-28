@@ -67,7 +67,7 @@ angular.module('viaggia.services.map', [])
                 divreturn = divreturn + '<p>' + trip.steps[internalIndex].parking.cost + '</strong></p>'
             }
             if (trip.steps[internalIndex].parking && trip.steps[internalIndex].parking.time) {
-                divreturn = divreturn + '<p>' + trip.steps[internalIndex].parking.time + '</p></div>'
+                divreturn = divreturn + '<p><img src="img/ic_look_for_parking.png" />'+$filter('translate')("parking_search_time")+' ' + trip.steps[internalIndex].parking.time + '</p></div>'
             }
             internalIndex++;
             //}
