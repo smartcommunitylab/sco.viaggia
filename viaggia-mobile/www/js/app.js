@@ -144,7 +144,8 @@ angular.module('viaggia', [
             }, 1500);
         });
     })
-    .config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider) {
+        $ionicConfigProvider.views.swipeBackEnabled(false);
         $stateProvider.state('app', {
             url: "/app",
             abstract: true,
