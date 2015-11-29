@@ -4,18 +4,23 @@ angular.module('viaggia.controllers.planlist', [])
     $scope.plantitle = $filter('translate')('plan_title');
     $scope.containsGreen = false;
     $scope.journeys = planService.getplanJourneyResults();
+    $scope.empty = false;
     $scope.planConfigure = planService.getPlanConfigure();
     $scope.nameFrom = planService.getName('from');
     $scope.nameTo = planService.getName('to');
-    $scope.journeys.forEach(function (it, idx) {
-        if (it.promoted) {
-            $scope.containsGreen = true;
-        }
-        it.length = planService.getLength(it);
-        it.means = planService.extractItineraryMeans(it);
-        it.price = planService.getItineraryCost(it);
-        it.index = idx;
-    });
+    if ($scope.journeys && $scope.journeys.length > 0) {
+        $scope.journeys.forEach(function (it, idx) {
+            if (it.promoted) {
+                $scope.containsGreen = true;
+            }
+            it.length = planService.getLength(it);
+            it.means = planService.extractItineraryMeans(it);
+            it.price = planService.getItineraryCost(it);
+            it.index = idx;
+        });
+    } else {
+        $scope.empty = true;
+    }
     $scope.$on('ngLastRepeat.journeys', function (e) {
         $timeout(function () {
             ionicMaterialMotion.ripple();

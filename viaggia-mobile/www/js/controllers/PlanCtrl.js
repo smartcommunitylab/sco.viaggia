@@ -310,6 +310,11 @@ angular.module('viaggia.controllers.plan', [])
                 $scope.planParams.transportTypes.push($scope.types[i]);
             }
         }
+        if ($scope.planParams.transportTypes.length==0)
+        {
+            Toast.show($filter('translate')("error_select_type_feedback"), "short", "bottom");
+            return false
+        }
         if ($scope.hourTimestamp) {
             //departureTime
             $scope.planParams.departureTime = $scope.hourTimestamp;

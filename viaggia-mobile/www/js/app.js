@@ -505,7 +505,9 @@ angular.module('viaggia', [
             action_train: 'Prendi il treno ',
             action_park: 'Lascia la macchina a ',
             action_move: 'Prosegui',
-            parking_search_time: 'Trova parcheggio: '
+            parking_search_time: 'Trova parcheggio: ',
+            error_select_type_feedback: 'Selezionare almeno un mezzo di trasporto',
+            planlist_empty_list: 'La ricerca non ha prodotto risultati validi'
 
         });
 
@@ -654,7 +656,9 @@ angular.module('viaggia', [
             action_train: 'Take the train ',
             action_park: 'Leave the car to ',
             action_move: 'Move ',
-            parking_search_time: 'Time to park: '
+            parking_search_time: 'Time to park: ',
+            error_select_type_feedback: 'Select at least one mean of transport ',
+            planlist_empty_list: 'Your search did not match any journey'
 
         });
 

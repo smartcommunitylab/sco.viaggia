@@ -8,8 +8,10 @@
             <div class="col col-50 ">{{nameFrom}}</div>
             <div class="col col-50 text-right"> {{nameTo}}</div>
         </div>
-
-        <ion-list class="animate-ripple">
+        <div ng-if="empty" class="text-center">
+            <h4>{{'planlist_empty_list'|translate}}</h4>
+        </div>
+        <ion-list class="animate-ripple" ng-if="!empty">
             <div ng-if="containsGreen">
 
                 <div class="green-head">
@@ -38,8 +40,8 @@
                         </div>
                     </div>
                     <div class="length-price">
-                      <span class="text-muted text-center">{{journey.length}}km</span>
-                      <span class="text-muted text-center" ng-if="journey.price > 0">/ {{journey.price| number:2}}  &#8364;</span>
+                        <span class="text-muted text-center">{{journey.length}}km</span>
+                        <span class="text-muted text-center" ng-if="journey.price > 0">/ {{journey.price| number:2}}  &#8364;</span>
                     </div>
                 </ion-item>
                 <div class="green-bottom"></div>
@@ -63,8 +65,8 @@
                     </div>
                 </div>
                 <div class="length-price">
-                  <span class="text-muted text-center">{{journey.length}}km</span>
-                  <span class="text-muted text-center" ng-if="journey.price > 0">/ {{journey.price| number:2}}  &#8364;</span>
+                    <span class="text-muted text-center">{{journey.length}}km</span>
+                    <span class="text-muted text-center" ng-if="journey.price > 0">/ {{journey.price| number:2}}  &#8364;</span>
                 </div>
             </ion-item>
         </ion-list>
