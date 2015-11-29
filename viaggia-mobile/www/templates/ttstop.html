@@ -1,14 +1,19 @@
 <ion-view title="{{stopData.name}}">
       <ion-content>
         <div>
-          <div class="stop-line" ng-repeat="route in stopData.routes">
-            <div class="stop-line-title" style="background-color: {{route.color}}; color: {{textColor(route.color)}}"><span ng-if="route.routeObject.label">{{route.routeObject.label}}: </span>{{route.routeObject.title}}</div>
+          <div class="stop-line" ng-repeat="(routeId, route) in stopData.data">
+            <div ng-if="route.routeObject" class="stop-line-title" style="background-color: {{route.color}}; color: {{textColor(route.color)}}">
+              <span ng-if="route.routeObject.label">{{route.routeObject.label}}: </span>{{route.routeObject.title}}
+            </div>
+            <div ng-if="!route.routeObject" class="stop-line-title"  style="background-color: #eee">
+              <span ng-if="route.route">{{route.route}}: </span>{{route.name}}
+            </div>
             <div class="row">
               <div class="col text-center" ng-repeat="t in route.times">{{t.time | date:'HH:mm'}}{{t.nextDay ? ' *' : ''}}</div>
             </div>
           </div>
         </div>
-        <div ng-if="!stopData.routes || stopData.routes.length == 0" class="text-center">
+        <div ng-if="isEmpty()" class="text-center">
           <h4>{{'no_data' | translate}}</h4>
         </div>
     </ion-content>
