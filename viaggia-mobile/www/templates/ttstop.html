@@ -9,7 +9,7 @@
               <span ng-if="route.route">{{route.route}}: </span>{{route.name}}
             </div>
             <div class="row">
-              <div class="col text-center" ng-repeat="t in route.times">{{t.time | date:'HH:mm'}}{{t.nextDay ? ' *' : ''}}</div>
+              <div class="col text-center" ng-repeat="t in route.times">{{t.time | date:'HH:mm'}}</div>
             </div>
           </div>
         </div>
