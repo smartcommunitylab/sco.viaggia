@@ -443,7 +443,7 @@ angular.module('viaggia.services.plan', [])
         var deferred = $q.defer();
         $http({
             method: 'POST',
-            url: Config.getServerURL() + '/plansinglejourney ',
+            url: Config.getServerURL() + '/plansinglejourney?policyId='+Config.getPlanPolicy(),
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'

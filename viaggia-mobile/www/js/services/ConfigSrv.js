@@ -1,8 +1,6 @@
 angular.module('viaggia.services.conf', [])
 
 .factory('Config', function ($q, $http, $window, $filter, $rootScope, $ionicLoading) {
-    var DEVELOPMENT = true;
-
 
     var isDarkColor = function (color) {
         var c = color.substring(1); // strip #
@@ -146,6 +144,9 @@ angular.module('viaggia.services.conf', [])
                 long: mapJsonConfig['center_map'][1],
                 zoom: mapJsonConfig['zoom_map']
             };
+        },
+        getPlanPolicy: function() {
+          return mapJsonConfig['plan_policy'];
         },
         getGeocoderURL: function () {
             return GEOCODER_URL;
