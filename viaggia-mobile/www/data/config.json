@@ -3,7 +3,7 @@
     "appid": "rovereto",
     "appversion": "0.0.1",
     "appname": "Viaggia Rovereto",
-    "serverURL": "https://dev.smartcommunitylab.it/core.mobility",
+    "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
     "smartcheck_options": [
         1,
         4,
