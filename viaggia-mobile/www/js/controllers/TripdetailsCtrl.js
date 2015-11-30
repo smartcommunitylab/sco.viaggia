@@ -48,22 +48,40 @@ angular.module('viaggia.controllers.tripdetails', [])
         $scope.modalMap.hide();
     }
     $scope.saveTrip = function () {
+        $scope.data = {};
+        $scope.showError = false;
         // Prompt popup code
         $ionicPopup.prompt({
             title: $filter('translate')('save_trip_title'),
-            template: $filter('translate')('save_trip_text'),
+            templateUrl: 'templates/popup-savetrip.html',
+            subTitle: $filter('translate')('save_trip_text'),
+            scope: $scope,
+            buttons: [
+                {
+                    text: $filter('translate')('save_trip_close_button')
+                },
+                {
+                    text: '<b>' + $filter('translate')('save_trip_save_button') + '</b>',
+                    onTap: function (e) {
+                        if (!$scope.data.nametrip) {
+                            //Toast.show($filter('translate')("save_trip_error_message"), "short", "bottom");
+                            $scope.showError = true;
 
+                            e.preventDefault();
+                        } else {
+                            return $scope.data.nametrip;
+                        }
+                    }
+                                }]
         }).then(function (res) {
-            if (!res) return;
-            planService.saveTrip($scope.tripId, trip, res, $scope.requestedFrom, $scope.requestedTo).then(function (res) {
-
-                //return tripToSave that contains new tripId and in data the trip
-
-                $scope.tripId = res.tripId;
-                //toast saved
-                Toast.show($filter('translate')("tripsaved_message_feedback"), "short", "bottom");
-                $ionicHistory.goBack();
-            });
+            if (res) {
+                planService.saveTrip($scope.tripId, trip, res, $scope.requestedFrom, $scope.requestedTo).then(function (res) {
+                    $scope.tripId = res.tripId;
+                    //toast saved
+                    Toast.show($filter('translate')("tripsaved_message_feedback"), "short", "bottom");
+                    $ionicHistory.goBack();
+                });
+            }
         });
 
 

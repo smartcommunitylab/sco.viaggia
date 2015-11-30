@@ -717,12 +717,13 @@ ion-header-bar .title {
 .item-radio input:checked ~ .item-content {
     background: #3bbacf;
 }
+
 .item-radio input:checked + .item-content {
-  background: #3bbacf;
+    background: #3bbacf;
 }
 
 .item-radio input:checked + .radio-icon {
-  visibility: visible;
+    visibility: visible;
 }
 
 .list-of-icons {
@@ -799,8 +800,9 @@ ion-header-bar .title {
     margin-right: 12px;
     vertical-align: bottom;
 }
+
 .markets-home span {
-  line-height: 50px;
+    line-height: 50px;
 }
 
 .market-subtitle {
@@ -819,39 +821,44 @@ ion-header-bar .title {
 }
 
 .length-price {
-  position: absolute;
-  right: 5px;
-  bottom: 5px;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
 }
 
 .card .trip-title {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  padding: 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 5px;
 }
 
 .ionic-datepicker .right_arrow,
 .ionic-datepicker .left_arrow {
-  margin: auto;
+    margin: auto;
 }
 
 .timePickerColon {
-  padding-top: 0px !important;
-  margin-bottom: auto;
-  margin-top: auto;
+    padding-top: 0px !important;
+    margin-bottom: auto;
+    margin-top: auto;
 }
 
 .timePickerArrows {
-  padding-left: 0px;
-  padding-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 
 .close-modal {
-  font-size: 32px;
-  padding-top: 2px !important;
+    font-size: 32px;
+    padding-top: 2px !important;
 }
 
 .platform-ios.platform-cordova:not(.fullscreen) .mfb-component--tr {
-  margin-top: 45px;
+    margin-top: 45px;
+}
+
+.error {
+    color: red;
+    text-align: center;
 }
