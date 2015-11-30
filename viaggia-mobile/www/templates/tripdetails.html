@@ -45,7 +45,7 @@
                                     <p ng-if="step.to != null">{{step.toLabel}}<strong>{{step.to}}</strong>
                                     </p>
                                     <p ng-if="step.parking && step.parking.cost">
-                                        <img src="img/ic_price_parking.png" />{{step.parking.cost}}
+                                        <img src="img/ic_price_parking.png" />{{step.parking.cost| number:2}}
                                     </p>
                                     <p ng-if="step.parking && step.parking.time">
                                         <img src="img/ic_look_for_parking.png" />{{'parking_search_time' | translate}} {{step.parking.time}}
@@ -59,7 +59,7 @@
                                             </div>
                                         </div>
                                         <div class="text-center" ng-if="step.cost > 0">
-                                            <div><small>{{step.cost}} &#8364;</small>
+                                            <div><small>{{step.cost| number:2}} &#8364;</small>
                                             </div>
                                         </div>
                                     </div>

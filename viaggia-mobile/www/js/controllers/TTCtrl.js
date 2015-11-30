@@ -392,7 +392,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
  $scope.showStop = function($event) {
    var pos = $ionicScrollDelegate.$getByHandle('list').getScrollPosition().top + $event.clientY - $scope.tableHeaderHeight - headerHeight;
-   var idx = Math.floor(pos / rowHeight);
+   var idx = Math.floor(pos / $scope.stopsColLineHeight);
    if (idx < 0 || idx >= $scope.tt.stops.length) return;
    var stop = $scope.tt.stops[idx];
     Toast.show(stop, "short", "bottom");
@@ -528,7 +528,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         Config.loading();
         ttService.getNextTrips($scope.popupStop.agencyId, $scope.popupStop.id, 5).then(function(data) {
           Config.loaded();
-          var routes = [];
+//          var routes = [];
           $scope.elements.forEach(function(e) {
             var list = [];
             if (e.group) {
@@ -542,16 +542,17 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
               if (data[r.routeId] != null) {
                 data[r.routeId].routeElement = e;
                 data[r.routeId].routeObject = r;
-                routes.push(data[r.routeId]);
+//                routes.push(data[r.routeId]);
               }
               else if (data[r.routeSymId] != null) {
                 data[r.routeSymId].routeElement = e;
                 data[r.routeSymId].routeObject = r;
-                routes.push(data[r.routeSymId]);
+//                routes.push(data[r.routeSymId]);
               }
             });
           });
-          $scope.popupStop.routes = routes;
+          $scope.popupStop.data = data;
+//          $scope.popupStop.routes = routes;
           $scope.popupStop.visualization = Config.getStopVisualization($scope.popupStop.agencyId);
           showPopup();
         }, function(err) {
@@ -560,6 +561,10 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
           console.log('No data');
         });
     });
+
+    $scope.isEmpty = function(data) {
+      return angular.equals(data, {});
+    };
 
 
     angular.extend($scope, {
@@ -575,21 +580,27 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
 .controller('TTStopCtrl', function ($scope, $state, $stateParams, $timeout, $ionicPopup, $filter, ionicMaterialMotion, ionicMaterialInk, Config, ttService) {
   var stopData = ttService.getTTStopData();
-  if (stopData.routes) {
+  if (stopData.data) {
     var d = new Date();
     d.setHours(0);
     d.setMinutes(0);
     d.setSeconds(0);
     d.setMilliseconds(0);
     d.setDate(d.getDate()+1);
-    stopData.routes.forEach(function(r) {
-      if (!r.color) r.color = r.routeElement.color ? r.routeElement.color: r.routeElement.route.color;
+    for (var key in stopData.data) {
+      var r = stopData.data[key];
+      if (r.routeElement) {
+        if (!r.color) r.color = r.routeElement.color ? r.routeElement.color: r.routeElement.route.color;
+      }
       r.times.forEach(function(t){
         if (t.time > d.getTime()) t.nextDay = true;
       });
-    });
+    }
   }
   $scope.stopData = stopData;
+  $scope.isEmpty = function() {
+    return angular.equals($scope.stopData.data, {});
+  };
 })
 
 ;

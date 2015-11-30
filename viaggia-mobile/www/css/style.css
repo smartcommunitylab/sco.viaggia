@@ -851,3 +851,7 @@ ion-header-bar .title {
   font-size: 32px;
   padding-top: 2px !important;
 }
+
+.platform-ios.platform-cordova:not(.fullscreen) .mfb-component--tr {
+  margin-top: 45px;
+}
