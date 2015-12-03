@@ -511,7 +511,8 @@ angular.module('viaggia', [
             action_move: 'Prosegui',
             parking_search_time: 'Trova parcheggio: ',
             error_select_type_feedback: 'Selezionare almeno un mezzo di trasporto',
-            planlist_empty_list: 'La ricerca non ha prodotto risultati validi'
+            planlist_empty_list: 'La ricerca non ha prodotto risultati validi',
+            no_tt: 'In questa giornata non ci sono corse disponibili per questa linea.'
 
         });
 
@@ -665,7 +666,8 @@ angular.module('viaggia', [
             action_move: 'Move ',
             parking_search_time: 'Time to park: ',
             error_select_type_feedback: 'Select at least one mean of transport ',
-            planlist_empty_list: 'Your search did not match any journey'
+            planlist_empty_list: 'Your search did not match any journey',
+            no_tt: 'No trips available for this line on this date.'
 
         });
 
