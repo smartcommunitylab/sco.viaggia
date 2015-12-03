@@ -173,9 +173,18 @@
 }
 
 .input-plan-fromto {
-    width: 100%;
     padding: 8px;
     margin: 8px;
+}
+
+.plan-buttons-right {
+    line-height: 68px;
+}
+
+.plan-buttons-right a {
+    min-width: 65px;
+    margin: auto;
+    vertical-align: middle;
 }
 
 .button-viaggia-header {

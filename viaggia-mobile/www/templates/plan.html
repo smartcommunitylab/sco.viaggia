@@ -7,21 +7,27 @@
 
     <ion-content id="content" has-header="true">
         <div class="row space-from-top">
-            <div class="input-plan-fromto">
+            <div class="input-plan-fromto col">
                 <span class="input-label"><b>{{'plan_from' | translate}}</b></span>
                 <placeautocomplete ng-if="refresh" ng-model="fromName" attr-placeholder="{{'plan_insert_from_address' | translate}}" click-activation="false" data="places" on-type="typePlaceFrom" placeholder="{{'plan_from' | translate}}" on-select="changeStringFrom" ng-blur="setNameParam"></placeautocomplete>
             </div>
-            <a class="button-icon plan-viaggia-fromto  icon ion-map" ng-click="openMapPlan('from')"></a>
-            <a class="button-icon plan-viaggia-fromto  icon" ng-class=" favoriteFrom ? 'ion-android-star' : 'ion-android-star-outline'" ng-click="bookmarks('from', fromName)"></a>
+            <div class="plan-buttons-right">
+                <a class="button-icon plan-viaggia-fromto  icon ion-map" ng-click="openMapPlan('from')"></a>
+                <a class="button-icon plan-viaggia-fromto  icon" ng-class=" favoriteFrom ? 'ion-android-star' : 'ion-android-star-outline'" ng-click="bookmarks('from', fromName)"></a>
+            </div>
+
         </div>
 
         <div class="row">
-            <div class="input-plan-fromto">
+            <div class="input-plan-fromto col">
                 <span class="input-label"><b>{{'plan_to' | translate}}</b></span>
                 <placeautocomplete ng-if="refresh" ng-model="toName" attr-placeholder="{{'plan_insert_to_address' | translate}}" click-activation="false" data="places" on-type="typePlaceTo" placeholder="{{'plan_to' | translate}}" on-select="changeStringTo" ng-blur="setNameParam"></placeautocomplete>
             </div>
-            <a class="button-icon plan-viaggia-fromto icon ion-map" ng-click="openMapPlan('to')"></a>
-            <a class="button-icon plan-viaggia-fromto icon" ng-class="favoriteTo ? 'ion-android-star' : 'ion-android-star-outline'" ng-click="bookmarks('to', toName)"></a>
+            <div class="plan-buttons-right">
+
+                <a class="button-icon plan-viaggia-fromto icon ion-map" ng-click="openMapPlan('to')"></a>
+                <a class="button-icon plan-viaggia-fromto icon" ng-class="favoriteTo ? 'ion-android-star' : 'ion-android-star-outline'" ng-click="bookmarks('to', toName)"></a>
+            </div>
         </div>
 
         <div class="row space-from-top">
@@ -53,7 +59,7 @@
             <button class="button button-raised button-plan-type icon ic_bike" ng-class="{'button-viaggia-selected ': isSwitched('BICYCLE'),'button-viaggia-notselected': !isSwitched('BICYCLE')}" ng-click="switch('BICYCLE')"></button>
             <button class="button button-raised button-plan-type icon ic_car-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDCAR'),'button-viaggia-notselected': !isSwitched('SHAREDCAR')}" ng-click="switch('SHAREDCAR')"></button>
             <button class="button button-raised button-plan-type icon ic_bike-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDBIKE'),'button-viaggia-notselected': !isSwitched('SHAREDBIKE')}" ng-click="switch('SHAREDBIKE')"></button>
-<!--            <span class="button-plan-type"></span>-->
+            <!--            <span class="button-plan-type"></span>-->
         </div>
 
         <label class="item item-input plan-preference-toggler">
