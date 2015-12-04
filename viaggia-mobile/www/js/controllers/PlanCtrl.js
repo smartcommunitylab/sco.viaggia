@@ -424,7 +424,8 @@ angular.module('viaggia.controllers.plan', [])
             $scope.refresh = true;
             console.log('CANNOT LOCATE!');
         });
-        // }    };
+        // }
+    };
 
     $scope.initMap = function () {
         mapService.initMap('planMapModal').then(function () {
@@ -435,54 +436,54 @@ angular.module('viaggia.controllers.plan', [])
                 var placedata = $q.defer();
                 var url = Config.getGeocoderURL() + '/location?latlng=' + args.leafletEvent.latlng.lat + ',' + args.leafletEvent.latlng.lng;
                 $http.get(encodeURI(url), {
-                    timeout: 5000
-                })
-                .success(function (data, status, headers, config) {
-                    $ionicLoading.hide();
-                    $scope.name = '';
-                    if (data.response.docs[0]) {
-                        planService.setName($scope.place, data.response.docs[0]);
-                        $scope.name = planService.getName($scope.place);
-                        $ionicPopup.show({
-                            templateUrl: 'templates/planMapPopup.html',
-                            cssClass: 'parking-popup',
-                            scope: $scope,
-                            buttons: [
-                                {
-                                    text: $filter('translate')('btn_close'),
-                                    type: 'button-close'
-                    },
-                                {
-                                    text: $filter('translate')('btn_conferma'),
-                                    onTap: function (e) {
-                                        selectPlace($scope.name);
-                                    }
-                }
+                        timeout: 5000
+                    })
+                    .success(function (data, status, headers, config) {
+                        $ionicLoading.hide();
+                        $scope.name = '';
+                        if (data.response.docs[0]) {
+                            planService.setName($scope.place, data.response.docs[0]);
+                            $scope.name = planService.getName($scope.place);
+                            $ionicPopup.show({
+                                templateUrl: 'templates/planMapPopup.html',
+                                cssClass: 'parking-popup',
+                                scope: $scope,
+                                buttons: [
+                                    {
+                                        text: $filter('translate')('btn_close'),
+                                        type: 'button-close'
+                                },
+                                    {
+                                        text: $filter('translate')('btn_conferma'),
+                                        onTap: function (e) {
+                                            selectPlace($scope.name);
+                                        }
+                            }
 
-            ]
-                        });
-                    } else {
-                        /*confirmpopup*/
-                        $scope.name = $filter('translate')("popup_lat") + args.leafletEvent.latlng.lat.toString().substring(0, 7) + " " + $filter('translate')("popup_long") + args.leafletEvent.latlng.lng.toString().substring(0, 7);
-                        $ionicPopup.show({
-                            templateUrl: 'templates/planMapPopup.html',
-                            cssClass: 'parking-popup',
-                            scope: $scope,
-                            buttons: [
-                                {
-                                    text: $filter('translate')('btn_close'),
-                                    type: 'button-close'
-                    },
-                                {
-                                    text: '<i class="icon ion-navigate"></i>',
-                                    onTap: function (e) {
-                                        selectPlace(args.leafletEvent.latlng);
+                        ]
+                            });
+                        } else {
+                            /*confirmpopup*/
+                            $scope.name = $filter('translate')("popup_lat") + args.leafletEvent.latlng.lat.toString().substring(0, 7) + " " + $filter('translate')("popup_long") + args.leafletEvent.latlng.lng.toString().substring(0, 7);
+                            $ionicPopup.show({
+                                templateUrl: 'templates/planMapPopup.html',
+                                cssClass: 'parking-popup',
+                                scope: $scope,
+                                buttons: [
+                                    {
+                                        text: $filter('translate')('btn_close'),
+                                        type: 'button-close'
+                                                },
+                                    {
+                                        text: '<i class="icon ion-navigate"></i>',
+                                        onTap: function (e) {
+                                            selectPlace(args.leafletEvent.latlng);
+                                        }
                                     }
-                }
-            ]
-                        });
-                    }
-                })
+                                            ]
+                            });
+                        }
+                    })
 
                 .error(function (data, status, headers, config) {
                     $ionicLoading.hide();

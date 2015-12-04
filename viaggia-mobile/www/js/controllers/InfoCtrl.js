@@ -30,8 +30,9 @@ angular.module('viaggia.controllers.info', [])
             $scope.$broadcast('scroll.refreshComplete');
         }, function (err) {
             $scope.parkings = null;
+            $scope.showNoConnection();
+            $scope.loading = true;
             $scope.$broadcast('scroll.refreshComplete');
-            $scope.loading = false;
             Config.loaded();
         });
     }
@@ -186,7 +187,8 @@ angular.module('viaggia.controllers.info', [])
         }, function (err) {
             $scope.parkings = null;
             $scope.$broadcast('scroll.refreshComplete');
-            $scope.loading = false;
+            $scope.showNoConnection();
+            $scope.loading = true;
             Config.loaded();
         });
     }

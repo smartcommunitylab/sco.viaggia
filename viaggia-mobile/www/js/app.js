@@ -398,7 +398,7 @@ angular.module('viaggia', [
             pop_up_cancel: 'Cancella',
             pop_up_ok: 'Ok',
             pop_up_no_connection_title: 'Errore',
-            pop_up__no_connection_template: 'Nessuna Connessione',
+            pop_up__no_connection_template: 'Nessuna connessione',
             popup_address: 'Indirizzo',
             popup_lat: 'Lat: ',
             popup_long: 'Long: ',
@@ -550,13 +550,13 @@ angular.module('viaggia', [
             plan_map_title: 'Select the address',
             plan_insert_to_address: 'Insert destination address',
             plan_insert_from_address: 'Insert starting address',
-            add_favorites_template: 'Would you like to add this address in your favorites?',
+            add_favorites_template: 'Add this address to favorites?',
             add_favorites_title: 'Add to favorites',
             pop_up_loading: 'Loading...',
             pop_up_cancel: 'Cancel',
             pop_up_ok: 'Ok',
             pop_up_no_connection_title: 'Error',
-            pop_up__no_connection_template: 'No Connection',
+            pop_up__no_connection_template: 'No connection',
             popup_address: 'Address',
             popup_lat: 'Lat: ',
             popup_long: 'Long: ',
@@ -677,6 +677,6 @@ angular.module('viaggia', [
         });
 
 
-        $translateProvider.preferredLanguage("it");
-        $translateProvider.fallbackLanguage("it");
+        $translateProvider.preferredLanguage(DEFAULT_LANG);
+        $translateProvider.fallbackLanguage(DEFAULT_LANG);
     });
