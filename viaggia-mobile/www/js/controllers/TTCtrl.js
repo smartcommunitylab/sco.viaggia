@@ -1,402 +1,438 @@
 angular.module('viaggia.controllers.timetable', ['ionic'])
 
 .controller('TTRouteListCtrl', function ($scope, $state, $stateParams, $timeout, $ionicPopup, $filter, ionicMaterialMotion, ionicMaterialInk, Config, ttService) {
-  var min_grid_cell_width = 90;
+    var min_grid_cell_width = 90;
 
-  var ref = $stateParams.ref;
-  var agencyId = $stateParams.agencyId;
-  var groupId = $stateParams.groupId;
+    var ref = $stateParams.ref;
+    var agencyId = $stateParams.agencyId;
+    var groupId = $stateParams.groupId;
 
-  $scope.title = null;
-  $scope.view = 'list';
+    $scope.title = null;
+    $scope.view = 'list';
 
-  $scope.hasMap = false;
-  $scope.allMarkers = null;
+    $scope.hasMap = false;
+    $scope.allMarkers = null;
 
 
-  var flattenElement = function(e, res) {
-    var localAgency = agencyId;
-    if (e.agencyId != null) localAgency = e.agencyId;
-    if (e.groups != null) {
-      for (var j = 0; j < e.groups.length; j++) {
-        res.push({ref:ref, agencyId: localAgency, group: e.groups[j],
-                  color: e.groups[j].color, label: e.groups[j].label, title: e.groups[j].title ? e.groups[j].title : e.groups[j].label,
-                  gridCode: e.groups[j].gridCode});
-      }
+    var flattenElement = function (e, res) {
+        var localAgency = agencyId;
+        if (e.agencyId != null) localAgency = e.agencyId;
+        if (e.groups != null) {
+            for (var j = 0; j < e.groups.length; j++) {
+                res.push({
+                    ref: ref,
+                    agencyId: localAgency,
+                    group: e.groups[j],
+                    color: e.groups[j].color,
+                    label: e.groups[j].label,
+                    title: e.groups[j].title ? e.groups[j].title : e.groups[j].label,
+                    gridCode: e.groups[j].gridCode
+                });
+            }
+        }
+        if (e.routes != null) {
+            for (var j = 0; j < e.routes.length; j++) {
+                res.push({
+                    ref: ref,
+                    agencyId: localAgency,
+                    route: e.routes[j],
+                    color: e.color,
+                    label: e.routes[j].label ? e.routes[j].label : e.label,
+                    title: e.routes[j].title ? e.routes[j].title : e.title
+                });
+            }
+        }
     }
-    if (e.routes != null) {
-      for (var j = 0; j < e.routes.length; j++) {
-        res.push({ref:ref, agencyId: localAgency, route: e.routes[j],
-                  color: e.color,
-                  label: e.routes[j].label ? e.routes[j].label : e.label,
-                  title: e.routes[j].title ? e.routes[j].title : e.title});
-      }
+    var flattenData = function (data) {
+        var res = [];
+        if (data.elements) {
+            for (var i = 0; i < data.elements.length; i++) {
+                var e = data.elements[i];
+                flattenElement(e, res);
+            }
+        } else {
+            flattenElement(data, res);
+        }
+        return res;
     }
-  }
-  var flattenData = function(data) {
-    var res = [];
-    if (data.elements) {
-      for (var i = 0; i < data.elements.length; i++) {
-        var e = data.elements[i];
-        flattenElement(e, res);
-      }
-    } else {
-        flattenElement(data, res);
-    }
-    return res;
-  }
 
-  $scope.selectElement = function(e) {
-    // route element: go to table
-    if (e.route != null) {
-      $state.go('app.tt',{ref: e.ref, agencyId: e.agencyId, groupId: groupId, routeId: e.route.routeId});
-    // group with single route: go to table
-    } else if (e.group.routes != null && e.group.routes.length == 1) {
-      $state.go('app.tt',{ref: e.ref, agencyId: e.agencyId, groupId: e.group.label, routeId: e.group.routes[0].routeId});
-    // group with multiple elements: go to group
-    } else {
-      $state.go('app.ttgroup',{ref: e.ref, agencyId: e.agencyId, groupId: groupId ? (groupId + ','+e.group.label) :  e.group.label});
+    $scope.selectElement = function (e) {
+        // route element: go to table
+        if (e.route != null) {
+            $state.go('app.tt', {
+                ref: e.ref,
+                agencyId: e.agencyId,
+                groupId: groupId,
+                routeId: e.route.routeId
+            });
+            // group with single route: go to table
+        } else if (e.group.routes != null && e.group.routes.length == 1) {
+            $state.go('app.tt', {
+                ref: e.ref,
+                agencyId: e.agencyId,
+                groupId: e.group.label,
+                routeId: e.group.routes[0].routeId
+            });
+            // group with multiple elements: go to group
+        } else {
+            $state.go('app.ttgroup', {
+                ref: e.ref,
+                agencyId: e.agencyId,
+                groupId: groupId ? (groupId + ',' + e.group.label) : e.group.label
+            });
+        }
     }
-  }
 
-  var prepareGrid = function() {
-    var cols = Math.floor(window.innerWidth / min_grid_cell_width);
-    var gridRows = [];
-    var row = [];
-    gridRows.push(row);
-    for(var i = 0; i < $scope.elements.length; i++) {
-      row.push($scope.elements[i]);
-      if ((i+1) % cols == 0) {
-        row = [];
+    var prepareGrid = function () {
+        var cols = Math.floor(window.innerWidth / min_grid_cell_width);
+        var gridRows = [];
+        var row = [];
         gridRows.push(row);
-      }
+        for (var i = 0; i < $scope.elements.length; i++) {
+            row.push($scope.elements[i]);
+            if ((i + 1) % cols == 0) {
+                row = [];
+                gridRows.push(row);
+            }
+        }
+        for (var i = row.length; i < cols; i++) {
+            row.push({});
+        }
+        $scope.gridRows = gridRows;
     }
-    for (var i = row.length; i < cols; i++) {
-      row.push({});
+
+    var init = function () {
+        if (agencyId == null && groupId == null) {
+            // main data
+            var data = Config.getTTData(ref);
+        } else if (agencyId != null) {
+            // specific data
+            if (groupId != null) {
+                // specific group
+                var data = Config.getTTData(ref, agencyId, groupId);
+            } else {
+                // agency
+                var data = Config.getTTData(ref, agencyId);
+            }
+        }
+        if (data) {
+            $scope.hasMap = data.hasMap;
+            $scope.markerIcon = data.markerIcon;
+            $scope.icon = data.icon;
+            //      if ($scope.hasMap) prepareMap();
+
+            var title = $filter('translate')(data.title ? data.title : data.label);
+            if (title.length < 5) title = $filter('translate')('lbl_line') + ' ' + title;
+            $scope.title = title;
+            $scope.elements = flattenData(data);
+            $scope.view = data.view ? data.view : 'list';
+            if ($scope.view == 'grid') {
+                prepareGrid();
+            }
+        }
     }
-    $scope.gridRows = gridRows;
-  }
 
-  var init = function(){
-    if (agencyId == null && groupId == null) {
-      // main data
-      var data = Config.getTTData(ref);
-    } else if (agencyId != null) {
-      // specific data
-      if (groupId != null) {
-        // specific group
-        var data = Config.getTTData(ref, agencyId, groupId);
-      } else {
-        // agency
-        var data = Config.getTTData(ref, agencyId);
-      }
+    window.onresize = function (event) {
+        if ($scope.view == 'grid') {
+            $scope.view = null;
+            $timeout(function () {
+                $scope.view = 'grid';
+                prepareGrid();
+            });
+
+        }
     }
-    if (data) {
-      $scope.hasMap = data.hasMap;
-      $scope.markerIcon = data.markerIcon;
-//      if ($scope.hasMap) prepareMap();
 
-      var title = $filter('translate')(data.title ? data.title : data.label);
-      if (title.length < 5) title =  $filter('translate')('lbl_line') + ' '+title;
-      $scope.title = title;
-      $scope.elements = flattenData(data);
-      $scope.view = data.view ? data.view : 'list';
-      if ($scope.view == 'grid') {
-        prepareGrid();
-      }
-    }
-  }
+    init();
 
-  window.onresize = function(event) {
-    if ($scope.view == 'grid') {
-      $scope.view = null;
-      $timeout(function(){$scope.view = 'grid'; prepareGrid();});
+    $scope.$on('ngLastRepeat.elements', function (e) {
+        $timeout(function () {
+            ionicMaterialMotion.ripple();
+            ionicMaterialInk.displayEffect()
+        }, 0); // No timeout delay necessary.
+    });
 
-    }
-  }
+    $scope.showMap = function () {
+        var vis = {
+            title: $scope.title,
+            markerIcon: $scope.markerIcon,
+            icon: $scope.icon,
+            elements: $scope.elements
+        };
 
-  init();
-
-  $scope.$on('ngLastRepeat.elements', function (e) {
-      $timeout(function () {
-          ionicMaterialMotion.ripple();
-          ionicMaterialInk.displayEffect()
-      }, 0); // No timeout delay necessary.
-  });
-
-  $scope.showMap = function () {
-    var vis = {title: $scope.title, markerIcon: $scope.markerIcon, elements: $scope.elements};
-
-    ttService.setTTMapData(vis);
-    $state.go('app.ttmap');
-  };
+        ttService.setTTMapData(vis);
+        $state.go('app.ttmap');
+    };
 
 })
 
 .controller('TTCtrl', function ($scope, $stateParams, $ionicPosition, $ionicScrollDelegate, $timeout, $filter, ttService, Config, Toast) {
-  $scope.data = [];
+    $scope.data = [];
 
-  var rowHeight = 20;
-  var headerRowHeight = 21; // has a border
-  var stopsColWidth = 101; // has border
+    var rowHeight = 20;
+    var headerRowHeight = 21; // has a border
+    var stopsColWidth = 101; // has border
 
-  $scope.stopsColLineHeight = 20;
-  if (ionic.Platform.isIOS() && ionic.Platform.version() < 9) {
-    $scope.stopsColLineHeight = 21;
-  }
+    $scope.stopsColLineHeight = 20;
+    if (ionic.Platform.isIOS() && ionic.Platform.version() < 9) {
+        $scope.stopsColLineHeight = 21;
+    }
 
-  // header height from the standard style. Augmented in case of iOS non-fullscreen.
-  var headerHeight = 44 + 50 + 1;
-  if (ionic.Platform.isIOS() && !ionic.Platform.isFullScreen) {
-    headerHeight += 20;
-  }
-  var cellWidthBase = 50;
-  var firstColWidth = 100;
-  var cellHeightBase = 28;
-  var firstRowHeight = 28;
+    // header height from the standard style. Augmented in case of iOS non-fullscreen.
+    var headerHeight = 44 + 50 + 1;
+    if (ionic.Platform.isIOS() && !ionic.Platform.isFullScreen) {
+        headerHeight += 20;
+    }
+    var cellWidthBase = 50;
+    var firstColWidth = 100;
+    var cellHeightBase = 28;
+    var firstRowHeight = 28;
 
-  $scope.scrollLeftPosition = 0;
-  $scope.tt = null;
-  $scope.runningDate = new Date();
-  $scope.color = '#dddddd';
+    $scope.scrollLeftPosition = 0;
+    $scope.tt = null;
+    $scope.runningDate = new Date();
+    $scope.color = '#dddddd';
 
-  var getTextWidth = function(text, font) {
-//    var canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
-//    var context = canvas.getContext("2d");
-//    context.font = font;
-//    var metrics = context.measureText(text);
-//    return metrics.width;
-    var measurer = document.getElementById('measurer');
-    return (measurer.getBoundingClientRect().width);
-  };
+    var getTextWidth = function (text, font) {
+        //    var canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
+        //    var context = canvas.getContext("2d");
+        //    context.font = font;
+        //    var metrics = context.measureText(text);
+        //    return metrics.width;
+        var measurer = document.getElementById('measurer');
+        return (measurer.getBoundingClientRect().width);
+    };
 
-  $scope.$on('$ionicView.enter', function() {
-    $scope.colwidth = getTextWidth("000000000", "12px RobotoMono");
-    $scope.load();
- });
-  // load timetable data
-  $scope.getTT = function (date) {
-    Config.loading();
-    ttService.getTT($stateParams.agencyId, $scope.route.routeSymId, date).then(function (data) {
-      constructTable(data);
-      Config.loaded();
-    }, function (err) {
-      $scope.tt = {tripIds:[]};
-      Config.loaded();
+    $scope.$on('$ionicView.enter', function () {
+        $scope.colwidth = getTextWidth("000000000", "12px RobotoMono");
+        $scope.load();
     });
-  };
+    // load timetable data
+    $scope.getTT = function (date) {
+        Config.loading();
+        ttService.getTT($stateParams.agencyId, $scope.route.routeSymId, date).then(function (data) {
+            constructTable(data);
+            Config.loaded();
+        }, function (err) {
+            $scope.tt = {
+                tripIds: []
+            };
+            Config.loaded();
+        });
+    };
 
-  // convert delay object to string
-  var getDelayValue = function(delay) {
-    var res = '';
-//    if (delay && delay.SERVICE && delay.SERVICE > 0) {
-//      res += '<span>'+delay.SERVICE+'\'</span>';
-//    }
-//    if (delay && delay.USER && delay.USER > 0) {
-//      res += '<span>'+delay.USER+'\'</span>';
-//    }
-    if (delay && delay.SERVICE && delay.SERVICE > 0) {
-      res += delay.SERVICE+'\'';
-    }
-    if (delay && delay.USER && delay.USER > 0) {
-      if (res.length > 0) res += ' / ';
-      res += delay.USER+'\'';
-    }
-    return res;
-  }
-  // custom trip name if trip row is shown
-  var getTripText = function(trip) {
-    try {
-      return TRIP_TYPE_EXTRACTOR($stateParams.agencyId, $scope.route.routeSymId, trip);
-    }
-    catch(e) {
-      return trip;
-    }
-  }
-
-  var initMeasures = function(data) {
-    // header rows
-    $scope.header = null;
-    // first col with stops
-    $scope.col = null;
-
-    if (!$scope.tt.tripIds || $scope.tt.tripIds.length == 0) return;
-
-//    var cn = Math.floor((window.innerWidth - firstColWidth) / cellWidthBase);
-//    $scope.column_width = (window.innerWidth - firstColWidth) / cn;
-//    $scope.column_number = Math.min(cn, data.tripIds.length);
-//
-//    var rn = Math.floor((window.innerHeight - (firstRowHeight+1)*$scope.header_row_number - headerHeight) / cellHeightBase);
-//    $scope.row_height = (window.innerHeight - (firstRowHeight+1)*$scope.header_row_number - headerHeight) / rn;
-//    $scope.row_number = Math.min(rn, data.stops.length);
-//
-//    $timeout(function(){;$scope.scrollLeftPosition = ttService.locateTablePosition(data,new Date());},0);
-
-    $scope.tableHeight = data.stops.length * rowHeight;
-    $scope.scrollWidth = stopsColWidth + data.tripIds.length * $scope.colwidth;
-    $scope.scrollHeight = window.innerHeight - headerHeight;
-    $scope.tableHeaderHeight = $scope.header_row_number * headerRowHeight;
-
-    $timeout(function() {
-//      if ($scope.header == null) {
-//        $scope.header = document.getElementById('table-header');
-//        $scope.colwidth = ($scope.header.getBoundingClientRect().width) / data.tripIds.length;
-//      }
-
-      var columnScrollTo = ttService.locateTablePosition(data,new Date());
-      var pos = $scope.colwidth * columnScrollTo;
-      $ionicScrollDelegate.$getByHandle('list').scrollTo(pos, 0, true);
-    }, 300);
-
-  }
-
-  var lastResize = 0;
-  // track size change due to, e.g., orientation change
-  window.onresize = function(event) {
-    lastResize = new Date().getTime();
-
-    $timeout(function(){
-      // on drag may be many events. let's wait a bit
-      if ((new Date().getTime() - 200) >= lastResize) {
-        var tt = $scope.tt;
-        // reset the tt data to trigger ng-if condition
-        $scope.tt = null;
-        $timeout(function(){constructTable(tt);});
-      }
-    }, 200);
-  };
-
-  var expandStr = function(str) {
-    if (str.length < 9) {
-      var m =  9 - str.length;
-      var l = Math.round(m / 2);
-      for (var i = 0; i < l; i++) {
-        str = '&nbsp;'+str;
-      }
-      for (var i = 0; i < m-l; i++) {
-        str += '&nbsp';
-      }
-    }
-    return str;
-  };
-
-  $scope.doScroll = function() {
-    if ($scope.header == null) {
-      $scope.header = document.getElementById('table-header');
-    }
-    if ($scope.col == null) {
-      $scope.col = document.getElementById('table-col');
-    }
-    var pos = $ionicScrollDelegate.$getByHandle('list').getScrollPosition();
-    $scope.header.style.top = pos.top+'px';
-    $scope.col.style.left = pos.left+'px';
-  }
-
-  // construct the table
-  var constructTable = function (data) {
-    $scope.header_row_number = $scope.route.showTrips ? 2 : 1;
-
-    var dataStr = '';
-    var headStr = $scope.header_row_number == 2? ['',''] : [''];
-    var colStr  = '';
-    var tableCornerStr = ['',''];
-
-    var rows = [];
-    if (data.stops) {
-      for (var row = 0; row < data.stops.length + $scope.header_row_number; row++) {
-        var rowContent = [];
-        for (var col = 0; col <= data.tripIds.length; col++) {
-          // corner 0
-          if (col == 0 && row == 0) {
-            var str = $filter('translate')('lbl_delays');
-            rowContent.push(str);
-            tableCornerStr[0] = str;
-          // corner 1
-          } else if ($scope.header_row_number == 2 && row == 1 && col == 0) {
-            var str = $filter('translate')('lbl_trips');
-            rowContent.push(str);
-            tableCornerStr[1] = str;
-          // stops column
-          } else if (col == 0) {
-            rowContent.push(data.stops[row-$scope.header_row_number]);
-            colStr += data.stops[row-$scope.header_row_number] +'<br/>';
-          // delays header row
-          } else if (row == 0) {
-            var str = '';
-            if (data.delays) str = getDelayValue(data.delays[col - 1]);
-            rowContent.push(str);
-            str = expandStr(str);
-            headStr[0] += str;
-          // train lines header row
-          } else if ($scope.header_row_number == 2 && row == 1) {
-            var str = getTripText(data.tripIds[col - 1]);
-            rowContent.push(str);
-            str = expandStr(str, true);
-            headStr[1] += str;
-          // table data
-          } else {
-            var str = data.times[col - 1][row - $scope.header_row_number];
-            rowContent.push(str);
-            if (!str) str = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-            dataStr += '&nbsp;&nbsp;'+str+'&nbsp;&nbsp;';
-            if (col == data.tripIds.length) dataStr += '<br/>';
-          }
+    // convert delay object to string
+    var getDelayValue = function (delay) {
+            var res = '';
+            //    if (delay && delay.SERVICE && delay.SERVICE > 0) {
+            //      res += '<span>'+delay.SERVICE+'\'</span>';
+            //    }
+            //    if (delay && delay.USER && delay.USER > 0) {
+            //      res += '<span>'+delay.USER+'\'</span>';
+            //    }
+            if (delay && delay.SERVICE && delay.SERVICE > 0) {
+                res += delay.SERVICE + '\'';
+            }
+            if (delay && delay.USER && delay.USER > 0) {
+                if (res.length > 0) res += ' / ';
+                res += delay.USER + '\'';
+            }
+            return res;
         }
-        rows.push(rowContent);
-      }
-    } else {
-      data.stops = [];
-      data.stopIds = [];
+        // custom trip name if trip row is shown
+    var getTripText = function (trip) {
+        try {
+            return TRIP_TYPE_EXTRACTOR($stateParams.agencyId, $scope.route.routeSymId, trip);
+        } catch (e) {
+            return trip;
+        }
     }
-    $scope.data = rows;
-    $scope.headStr = headStr;
-    $scope.dataStr = dataStr;
-    $scope.tableCornerStr = tableCornerStr;
-    $scope.colStr = colStr;
 
-    $scope.tt = data;
+    var initMeasures = function (data) {
+        // header rows
+        $scope.header = null;
+        // first col with stops
+        $scope.col = null;
 
-    initMeasures(data);
-  };
+        if (!$scope.tt.tripIds || $scope.tt.tripIds.length == 0) return;
 
-  // initialize
-  $scope.load = function() {
-    $scope.route = Config.getTTData($stateParams.ref, $stateParams.agencyId, $stateParams.groupId, $stateParams.routeId);
-    if (!$scope.route.color) {
-      var group = Config.getTTData($stateParams.ref, $stateParams.agencyId, $stateParams.groupId);
-      if (group && group.color) $scope.color = group.color;
-    } else {
-      $scope.color = $scope.route.color;
+        //    var cn = Math.floor((window.innerWidth - firstColWidth) / cellWidthBase);
+        //    $scope.column_width = (window.innerWidth - firstColWidth) / cn;
+        //    $scope.column_number = Math.min(cn, data.tripIds.length);
+        //
+        //    var rn = Math.floor((window.innerHeight - (firstRowHeight+1)*$scope.header_row_number - headerHeight) / cellHeightBase);
+        //    $scope.row_height = (window.innerHeight - (firstRowHeight+1)*$scope.header_row_number - headerHeight) / rn;
+        //    $scope.row_number = Math.min(rn, data.stops.length);
+        //
+        //    $timeout(function(){;$scope.scrollLeftPosition = ttService.locateTablePosition(data,new Date());},0);
+
+        $scope.tableHeight = data.stops.length * rowHeight;
+        $scope.scrollWidth = stopsColWidth + data.tripIds.length * $scope.colwidth;
+        $scope.scrollHeight = window.innerHeight - headerHeight;
+        $scope.tableHeaderHeight = $scope.header_row_number * headerRowHeight;
+
+        $timeout(function () {
+            //      if ($scope.header == null) {
+            //        $scope.header = document.getElementById('table-header');
+            //        $scope.colwidth = ($scope.header.getBoundingClientRect().width) / data.tripIds.length;
+            //      }
+
+            var columnScrollTo = ttService.locateTablePosition(data, new Date());
+            var pos = $scope.colwidth * columnScrollTo;
+            $ionicScrollDelegate.$getByHandle('list').scrollTo(pos, 0, true);
+        }, 300);
+
     }
-    $scope.getTT($scope.runningDate.getTime());
-  }
 
-  // go to next date
-  $scope.nextDate = function() {
-    $scope.runningDate.setDate($scope.runningDate.getDate()+1);
-    $scope.getTT($scope.runningDate.getTime());
-  }
-  // go to prev date
-  $scope.prevDate = function() {
-    $scope.runningDate.setDate($scope.runningDate.getDate()-1);
-    $scope.getTT($scope.runningDate.getTime());
-  }
+    var lastResize = 0;
+    // track size change due to, e.g., orientation change
+    window.onresize = function (event) {
+        lastResize = new Date().getTime();
 
-// $scope.styleFn = function (value, row, col) {
-//   //        var cls = col % 2 == 0 ? 'even' : 'odd';
-//   var res = '';
-//   if (row == 0) res += 'color: red;';
-//   if (col % 2 == 0) return res;
-//   return res + 'background-color: #eee';
-// }
+        $timeout(function () {
+            // on drag may be many events. let's wait a bit
+            if ((new Date().getTime() - 200) >= lastResize) {
+                var tt = $scope.tt;
+                // reset the tt data to trigger ng-if condition
+                $scope.tt = null;
+                $timeout(function () {
+                    constructTable(tt);
+                });
+            }
+        }, 200);
+    };
 
- $scope.showStop = function($event) {
-   var pos = $ionicScrollDelegate.$getByHandle('list').getScrollPosition().top + $event.clientY - $scope.tableHeaderHeight - headerHeight;
-   var idx = Math.floor(pos / $scope.stopsColLineHeight);
-   if (idx < 0 || idx >= $scope.tt.stops.length) return;
-   var stop = $scope.tt.stops[idx];
-    Toast.show(stop, "short", "bottom");
- }
+    var expandStr = function (str) {
+        if (str.length < 9) {
+            var m = 9 - str.length;
+            var l = Math.round(m / 2);
+            for (var i = 0; i < l; i++) {
+                str = '&nbsp;' + str;
+            }
+            for (var i = 0; i < m - l; i++) {
+                str += '&nbsp';
+            }
+        }
+        return str;
+    };
+
+    $scope.doScroll = function () {
+        if ($scope.header == null) {
+            $scope.header = document.getElementById('table-header');
+        }
+        if ($scope.col == null) {
+            $scope.col = document.getElementById('table-col');
+        }
+        var pos = $ionicScrollDelegate.$getByHandle('list').getScrollPosition();
+        $scope.header.style.top = pos.top + 'px';
+        $scope.col.style.left = pos.left + 'px';
+    }
+
+    // construct the table
+    var constructTable = function (data) {
+        $scope.header_row_number = $scope.route.showTrips ? 2 : 1;
+
+        var dataStr = '';
+        var headStr = $scope.header_row_number == 2 ? ['', ''] : [''];
+        var colStr = '';
+        var tableCornerStr = ['', ''];
+
+        var rows = [];
+        if (data.stops) {
+            for (var row = 0; row < data.stops.length + $scope.header_row_number; row++) {
+                var rowContent = [];
+                for (var col = 0; col <= data.tripIds.length; col++) {
+                    // corner 0
+                    if (col == 0 && row == 0) {
+                        var str = $filter('translate')('lbl_delays');
+                        rowContent.push(str);
+                        tableCornerStr[0] = str;
+                        // corner 1
+                    } else if ($scope.header_row_number == 2 && row == 1 && col == 0) {
+                        var str = $filter('translate')('lbl_trips');
+                        rowContent.push(str);
+                        tableCornerStr[1] = str;
+                        // stops column
+                    } else if (col == 0) {
+                        rowContent.push(data.stops[row - $scope.header_row_number]);
+                        colStr += data.stops[row - $scope.header_row_number] + '<br/>';
+                        // delays header row
+                    } else if (row == 0) {
+                        var str = '';
+                        if (data.delays) str = getDelayValue(data.delays[col - 1]);
+                        rowContent.push(str);
+                        str = expandStr(str);
+                        headStr[0] += str;
+                        // train lines header row
+                    } else if ($scope.header_row_number == 2 && row == 1) {
+                        var str = getTripText(data.tripIds[col - 1]);
+                        rowContent.push(str);
+                        str = expandStr(str, true);
+                        headStr[1] += str;
+                        // table data
+                    } else {
+                        var str = data.times[col - 1][row - $scope.header_row_number];
+                        rowContent.push(str);
+                        if (!str) str = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+                        dataStr += '&nbsp;&nbsp;' + str + '&nbsp;&nbsp;';
+                        if (col == data.tripIds.length) dataStr += '<br/>';
+                    }
+                }
+                rows.push(rowContent);
+            }
+        } else {
+            data.stops = [];
+            data.stopIds = [];
+        }
+        $scope.data = rows;
+        $scope.headStr = headStr;
+        $scope.dataStr = dataStr;
+        $scope.tableCornerStr = tableCornerStr;
+        $scope.colStr = colStr;
+
+        $scope.tt = data;
+
+        initMeasures(data);
+    };
+
+    // initialize
+    $scope.load = function () {
+        $scope.route = Config.getTTData($stateParams.ref, $stateParams.agencyId, $stateParams.groupId, $stateParams.routeId);
+        if (!$scope.route.color) {
+            var group = Config.getTTData($stateParams.ref, $stateParams.agencyId, $stateParams.groupId);
+            if (group && group.color) $scope.color = group.color;
+        } else {
+            $scope.color = $scope.route.color;
+        }
+        $scope.getTT($scope.runningDate.getTime());
+    }
+
+    // go to next date
+    $scope.nextDate = function () {
+            $scope.runningDate.setDate($scope.runningDate.getDate() + 1);
+            $scope.getTT($scope.runningDate.getTime());
+        }
+        // go to prev date
+    $scope.prevDate = function () {
+        $scope.runningDate.setDate($scope.runningDate.getDate() - 1);
+        $scope.getTT($scope.runningDate.getTime());
+    }
+
+    // $scope.styleFn = function (value, row, col) {
+    //   //        var cls = col % 2 == 0 ? 'even' : 'odd';
+    //   var res = '';
+    //   if (row == 0) res += 'color: red;';
+    //   if (col % 2 == 0) return res;
+    //   return res + 'background-color: #eee';
+    // }
+
+    $scope.showStop = function ($event) {
+        var pos = $ionicScrollDelegate.$getByHandle('list').getScrollPosition().top + $event.clientY - $scope.tableHeaderHeight - headerHeight;
+        var idx = Math.floor(pos / $scope.stopsColLineHeight);
+        if (idx < 0 || idx >= $scope.tt.stops.length) return;
+        var stop = $scope.tt.stops[idx];
+        Toast.show(stop, "short", "bottom");
+    }
 
 })
 
@@ -406,172 +442,180 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     var mapData = ttService.getTTMapData();
     $scope.elements = mapData.elements;
     $scope.markerIcon = mapData.markerIcon;
+    $scope.icon = mapData.icon;
     $scope.title = mapData.title;
 
     var MAX_MARKERS = 20;
-    $scope.$on('leafletDirectiveMap.ttMap.moveend', function(event){
-      $scope.filterMarkers();
+    $scope.$on('leafletDirectiveMap.ttMap.moveend', function (event) {
+        $scope.filterMarkers();
     });
 
-    var getAgencies = function() {
-      var res = [];
-      $scope.elements.forEach(function(e) {
-        if (e.agencyId && res.indexOf(e.agencyId) < 0) res.push(e.agencyId);
-      });
-      return res;
+    var getAgencies = function () {
+        var res = [];
+        $scope.elements.forEach(function (e) {
+            if (e.agencyId && res.indexOf(e.agencyId) < 0) res.push(e.agencyId);
+        });
+        return res;
     };
 
-    $scope.filterMarkers = function() {
-      Config.loading();
-      mapService.getMap('ttMap').then(function (map) {
-        var currBounds = map.getBounds();
-        if ($scope.allMarkers == null) {
-          var agencyIds = getAgencies();
-          var list = ttService.getStopData(agencyIds);
-          var markers = [];
-          for (var i = 0; i < list.length; i++) {
-            markers.push({
-                stop: list[i],
-                lat: parseFloat(list[i].coordinates[0]),
-                lng: parseFloat(list[i].coordinates[1]),
-                icon: {
-                    iconUrl: 'img/'+$scope.markerIcon+'.png',
-                    iconSize: [36, 50],
-                    iconAnchor: [18, 50],
-                    popupAnchor: [-0, -50]
-                },
-            });
-          }
-          $scope.allMarkers = markers;
-        }
-        var filteredMarkers = [];
-
-        if ($scope.allMarkers.length > MAX_MARKERS) {
-          $scope.allMarkers.forEach(function(m){
-            if (currBounds.contains(L.latLng(m.lat, m.lng))) {
-              filteredMarkers.push(m);
+    $scope.filterMarkers = function () {
+        Config.loading();
+        mapService.getMap('ttMap').then(function (map) {
+            var currBounds = map.getBounds();
+            if ($scope.allMarkers == null) {
+                var agencyIds = getAgencies();
+                var list = ttService.getStopData(agencyIds);
+                var markers = [];
+                for (var i = 0; i < list.length; i++) {
+                    markers.push({
+                        stop: list[i],
+                        lat: parseFloat(list[i].coordinates[0]),
+                        lng: parseFloat(list[i].coordinates[1]),
+                        icon: {
+                            iconUrl: 'img/' + $scope.markerIcon + '.png',
+                            iconSize: [36, 50],
+                            iconAnchor: [18, 50],
+                            popupAnchor: [-0, -50]
+                        },
+                    });
+                }
+                $scope.allMarkers = markers;
             }
-          });
+            var filteredMarkers = [];
 
-          Config.loaded();
-          if (filteredMarkers.length > MAX_MARKERS) {
-            console.log('too many markers');
-            if (!$scope.tooManyMarkers) {
-              Toast.show($filter('translate')('err_too_many_markers'), "short", "bottom");
-              $scope.tooManyMarkers = true;
+            if ($scope.allMarkers.length > MAX_MARKERS) {
+                $scope.allMarkers.forEach(function (m) {
+                    if (currBounds.contains(L.latLng(m.lat, m.lng))) {
+                        filteredMarkers.push(m);
+                    }
+                });
+
+                Config.loaded();
+                if (filteredMarkers.length > MAX_MARKERS) {
+                    console.log('too many markers');
+                    if (!$scope.tooManyMarkers) {
+                        Toast.show($filter('translate')('err_too_many_markers'), "short", "bottom");
+                        $scope.tooManyMarkers = true;
+                    }
+                    return;
+                } else if (filteredMarkers.length < MAX_MARKERS) {
+                    $scope.tooManyMarkers = false;
+                }
+            } else {
+                Config.loaded();
+                $scope.tooManyMarkers = false;
             }
-            return;
-          } else if (filteredMarkers.length < MAX_MARKERS) {
-            $scope.tooManyMarkers = false;
-          }
-        } else {
-          Config.loaded();
-          $scope.tooManyMarkers = false;
-        }
-        $scope.markers = filteredMarkers;
-      });
+            $scope.markers = filteredMarkers;
+        });
     };
 
     $scope.initMap = function () {
         mapService.initMap('ttMap').then(function () {
-          GeoLocate.locate().then(function(pos) {
-            $scope.center = {
-              lat: pos[0],
-              lng: pos[1],
-              zoom: 18
-            };
-          }, function() {
-            $scope.filterMarkers();
-          });
+            GeoLocate.locate().then(function (pos) {
+                $scope.center = {
+                    lat: pos[0],
+                    lng: pos[1],
+                    zoom: 18
+                };
+            }, function () {
+                $scope.filterMarkers();
+            });
 
         });
     };
-    $scope.$on('$ionicView.beforeEnter', function(){
-      mapService.refresh('ttMap');
+    $scope.$on('$ionicView.beforeEnter', function () {
+        mapService.refresh('ttMap');
     });
 
-    $scope.showStopData = function() {
-      ttService.setTTStopData($scope.popupStop);
-      $state.go('app.ttstop');
+    $scope.showStopData = function () {
+        ttService.setTTStopData($scope.popupStop);
+        $state.go('app.ttstop');
     }
 
-    $scope.navigate = function() {
-      planService.setPlanConfigure({
-        to: {name: $scope.popupStop.name, lat: $scope.popupStop.coordinates[0], long: $scope.popupStop.coordinates[1]},
-      });
-      $state.go('app.plan');
+    $scope.navigate = function () {
+        planService.setPlanConfigure({
+            to: {
+                name: $scope.popupStop.name,
+                lat: $scope.popupStop.coordinates[0],
+                long: $scope.popupStop.coordinates[1]
+            },
+        });
+        $state.go('app.plan');
     };
 
     $scope.$on('leafletDirectiveMarker.ttMap.click', function (e, args) {
-      var showPopup = function() {
-        $ionicPopup.show({
-            templateUrl: 'templates/stopPopup.html',
-            title: $filter('translate')('lbl_stop'),
-            cssClass: 'parking-popup',
-            scope: $scope,
-            buttons: [
-                {text: $filter('translate')('btn_close')},
-                {
-                    text: '<i class="icon ion-navigate"></id>',
-                    onTap: $scope.navigate
+        var showPopup = function () {
+            $ionicPopup.show({
+                templateUrl: 'templates/stopPopup.html',
+                title: $filter('translate')('lbl_stop'),
+                cssClass: 'parking-popup',
+                scope: $scope,
+                buttons: [
+                    {
+                        text: $filter('translate')('btn_close'),
+                        type: 'button-close'
+                    },
+                    {
+                        text: '<i class="icon ion-navigate"></i>',
+                        onTap: $scope.navigate,
                 },
-                {
-                    text: '<i class="icon ion-android-time"></id>',
-                    onTap: $scope.showStopData
+                    {
+                        text: '<i class="icon ion-android-time"></i>',
+                        onTap: $scope.showStopData
                 }
             ]
-        });
-      };
+            });
+        };
 
-      var p = $scope.markers[args.modelName].stop;
+        var p = $scope.markers[args.modelName].stop;
         $scope.popupStop = p;
         Config.loading();
-        ttService.getNextTrips($scope.popupStop.agencyId, $scope.popupStop.id, 5).then(function(data) {
-          Config.loaded();
-//          var routes = [];
-          $scope.elements.forEach(function(e) {
-            var list = [];
-            if (e.group) {
-              if (e.group.routes) list = list.concat(e.group.routes);
-              else if (e.group.route)  list.push(e.group.route);
-            } else {
-              if (e.routes) list = list.concat(e.routes);
-              else if (e.route)  list.push(e.route);
-            }
-            list.forEach(function(r) {
-              if (data[r.routeId] != null) {
-                data[r.routeId].routeElement = e;
-                data[r.routeId].routeObject = r;
-//                routes.push(data[r.routeId]);
-              }
-              else if (data[r.routeSymId] != null) {
-                data[r.routeSymId].routeElement = e;
-                data[r.routeSymId].routeObject = r;
-//                routes.push(data[r.routeSymId]);
-              }
+        ttService.getNextTrips($scope.popupStop.agencyId, $scope.popupStop.id, 5).then(function (data) {
+            Config.loaded();
+            //          var routes = [];
+            $scope.elements.forEach(function (e) {
+                var list = [];
+                if (e.group) {
+                    if (e.group.routes) list = list.concat(e.group.routes);
+                    else if (e.group.route) list.push(e.group.route);
+                } else {
+                    if (e.routes) list = list.concat(e.routes);
+                    else if (e.route) list.push(e.route);
+                }
+                list.forEach(function (r) {
+                    if (data[r.routeId] != null) {
+                        data[r.routeId].routeElement = e;
+                        data[r.routeId].routeObject = r;
+                        //                routes.push(data[r.routeId]);
+                    } else if (data[r.routeSymId] != null) {
+                        data[r.routeSymId].routeElement = e;
+                        data[r.routeSymId].routeObject = r;
+                        //                routes.push(data[r.routeSymId]);
+                    }
+                });
             });
-          });
-          $scope.popupStop.data = data;
-//          $scope.popupStop.routes = routes;
-          $scope.popupStop.visualization = Config.getStopVisualization($scope.popupStop.agencyId);
-          showPopup();
-        }, function(err) {
-          Config.loaded();
-          showPopup();
-          console.log('No data');
+            $scope.popupStop.data = data;
+            $scope.popupStop.icon = $scope.icon;
+            //          $scope.popupStop.routes = routes;
+            $scope.popupStop.visualization = Config.getStopVisualization($scope.popupStop.agencyId);
+            showPopup();
+        }, function (err) {
+            Config.loaded();
+            showPopup();
+            console.log('No data');
         });
     });
 
-    $scope.isEmpty = function(data) {
-      return angular.equals(data, {});
+    $scope.isEmpty = function (data) {
+        return angular.equals(data, {});
     };
 
 
     angular.extend($scope, {
         center: {
-          lat: Config.getMapPosition().lat,
-          lng: Config.getMapPosition().long,
-          zoom: 18
+            lat: Config.getMapPosition().lat,
+            lng: Config.getMapPosition().long,
+            zoom: 18
         },
         markers: [],
         events: {}
@@ -579,28 +623,28 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 })
 
 .controller('TTStopCtrl', function ($scope, $state, $stateParams, $timeout, $ionicPopup, $filter, ionicMaterialMotion, ionicMaterialInk, Config, ttService) {
-  var stopData = ttService.getTTStopData();
-  if (stopData.data) {
-    var d = new Date();
-    d.setHours(0);
-    d.setMinutes(0);
-    d.setSeconds(0);
-    d.setMilliseconds(0);
-    d.setDate(d.getDate()+1);
-    for (var key in stopData.data) {
-      var r = stopData.data[key];
-      if (r.routeElement) {
-        if (!r.color) r.color = r.routeElement.color ? r.routeElement.color: r.routeElement.route.color;
-      }
-      r.times.forEach(function(t){
-        if (t.time > d.getTime()) t.nextDay = true;
-      });
+    var stopData = ttService.getTTStopData();
+    if (stopData.data) {
+        var d = new Date();
+        d.setHours(0);
+        d.setMinutes(0);
+        d.setSeconds(0);
+        d.setMilliseconds(0);
+        d.setDate(d.getDate() + 1);
+        for (var key in stopData.data) {
+            var r = stopData.data[key];
+            if (r.routeElement) {
+                if (!r.color) r.color = r.routeElement.color ? r.routeElement.color : r.routeElement.route.color;
+            }
+            r.times.forEach(function (t) {
+                if (t.time > d.getTime()) t.nextDay = true;
+            });
+        }
     }
-  }
-  $scope.stopData = stopData;
-  $scope.isEmpty = function() {
-    return angular.equals($scope.stopData.data, {});
-  };
+    $scope.stopData = stopData;
+    $scope.isEmpty = function () {
+        return angular.equals($scope.stopData.data, {});
+    };
 })
 
 ;

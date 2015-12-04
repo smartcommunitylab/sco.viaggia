@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.plan', [])
 
-.controller('PlanCtrl', function ($scope, $rootScope, Config, $q, $http, $ionicPlatform, $ionicModal, $ionicLoading, $filter, $state, $window, Toast, leafletData, planService, GeoLocate, mapService) {
+.controller('PlanCtrl', function ($scope, $rootScope, Config, $q, $http, $ionicPlatform, $ionicPopup, $ionicModal, $ionicLoading, $filter, $state, $window, Toast, leafletData, planService, GeoLocate, mapService) {
     //$scope.refresh = true;
     $scope.plantitle = $filter('translate')('plan_title');
     $scope.preferences = Config.getPlanPreferences();
@@ -310,8 +310,7 @@ angular.module('viaggia.controllers.plan', [])
                 $scope.planParams.transportTypes.push($scope.types[i]);
             }
         }
-        if ($scope.planParams.transportTypes.length==0)
-        {
+        if ($scope.planParams.transportTypes.length == 0) {
             Toast.show($filter('translate')("error_select_type_feedback"), "short", "bottom");
             return false
         }
@@ -425,8 +424,7 @@ angular.module('viaggia.controllers.plan', [])
             $scope.refresh = true;
             console.log('CANNOT LOCATE!');
         });
-        // }
-    };
+        // }    };
 
     $scope.initMap = function () {
         mapService.initMap('planMapModal').then(function () {
@@ -436,24 +434,52 @@ angular.module('viaggia.controllers.plan', [])
                 planService.setPosition($scope.place, args.leafletEvent.latlng.lat, args.leafletEvent.latlng.lng);
                 var placedata = $q.defer();
                 var url = Config.getGeocoderURL() + '/location?latlng=' + args.leafletEvent.latlng.lat + ',' + args.leafletEvent.latlng.lng;
-
                 $http.get(encodeURI(url), {
                     timeout: 5000
                 })
-
                 .success(function (data, status, headers, config) {
                     $ionicLoading.hide();
-                    name = '';
+                    $scope.name = '';
                     if (data.response.docs[0]) {
                         planService.setName($scope.place, data.response.docs[0]);
-                        $scope.showConfirm(name, $filter('translate')("popup_address"), function () {
-                            //$scope.result = name;
-                            return selectPlace(name)
+                        $scope.name = planService.getName($scope.place);
+                        $ionicPopup.show({
+                            templateUrl: 'templates/planMapPopup.html',
+                            cssClass: 'parking-popup',
+                            scope: $scope,
+                            buttons: [
+                                {
+                                    text: $filter('translate')('btn_close'),
+                                    type: 'button-close'
+                    },
+                                {
+                                    text: $filter('translate')('btn_conferma'),
+                                    onTap: function (e) {
+                                        selectPlace($scope.name);
+                                    }
+                }
+
+            ]
                         });
                     } else {
-                        $scope.showConfirm($filter('translate')("popup_lat") + args.leafletEvent.latlng.lat.toString().substring(0, 7) + " " + $filter('translate')("popup_long") + args.leafletEvent.latlng.lng.toString().substring(0, 7), $filter('translate')("popup_no_address"), function () {
-                            //$scope.result = args.leafletEvent.latlng;
-                            return selectPlace(args.leafletEvent.latlng)
+                        /*confirmpopup*/
+                        $scope.name = $filter('translate')("popup_lat") + args.leafletEvent.latlng.lat.toString().substring(0, 7) + " " + $filter('translate')("popup_long") + args.leafletEvent.latlng.lng.toString().substring(0, 7);
+                        $ionicPopup.show({
+                            templateUrl: 'templates/planMapPopup.html',
+                            cssClass: 'parking-popup',
+                            scope: $scope,
+                            buttons: [
+                                {
+                                    text: $filter('translate')('btn_close'),
+                                    type: 'button-close'
+                    },
+                                {
+                                    text: '<i class="icon ion-navigate"></i>',
+                                    onTap: function (e) {
+                                        selectPlace(args.leafletEvent.latlng);
+                                    }
+                }
+            ]
                         });
                     }
                 })
@@ -602,14 +628,14 @@ angular.module('viaggia.controllers.plan', [])
                 $scope.placesandcoordinates = [];
             }
             $scope.placesandcoordinates[$scope.planParams.from.name] = {
-                    latlong: $scope.planParams.from.lat + "," + $scope.planParams.from.long
+                latlong: $scope.planParams.from.lat + "," + $scope.planParams.from.long
+            }
+            for (var i = 0; i < $scope.favoritePlaces.length; i++) {
+                if ($scope.favoritePlaces[i].name == name) {
+                    $scope.favoriteFrom = true;
+                    break;
                 }
-                            for (var i = 0; i < $scope.favoritePlaces.length; i++) {
-                                if ($scope.favoritePlaces[i].name == name) {
-                                    $scope.favoriteFrom = true;
-                                    break;
-                                }
-                            }
+            }
         } else {
             $scope.planParams['from'] = {
                 name: '',
@@ -627,14 +653,14 @@ angular.module('viaggia.controllers.plan', [])
                 $scope.placesandcoordinates = [];
             }
             $scope.placesandcoordinates[$scope.planParams.to.name] = {
-                    latlong: $scope.planParams.to.lat + "," + $scope.planParams.to.long
+                latlong: $scope.planParams.to.lat + "," + $scope.planParams.to.long
+            }
+            for (var i = 0; i < $scope.favoritePlaces.length; i++) {
+                if ($scope.favoritePlaces[i].name == name) {
+                    $scope.favoriteTo = true;
+                    break;
                 }
-                            for (var i = 0; i < $scope.favoritePlaces.length; i++) {
-                                if ($scope.favoritePlaces[i].name == name) {
-                                    $scope.favoriteTo = true;
-                                    break;
-                                }
-                            }
+            }
         } else {
             $scope.planParams['to'] = {
                 name: '',

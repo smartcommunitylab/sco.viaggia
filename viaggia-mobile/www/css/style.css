@@ -178,7 +178,7 @@
 }
 
 .plan-buttons-right {
-    line-height: 68px;
+    line-height: 104px;
 }
 
 .plan-buttons-right a {
@@ -467,11 +467,52 @@
     text-transform: uppercase;
 }
 
+.parking-popup .popup-head {
+    display: none;
+}
+
+.parking-popup .button-close {
+    background-color: gray!important;
+}
+
+.parking-popup .popup-buttons button:not(.button-close) {
+    background-color: #3bbacf !important;
+}
+
 .parking-popup .popup-buttons button {
     white-space: normal;
     padding: 0px;
-    background-color: #3bbacf !important;
     color: #fff !important;
+    margin-right: 4px;
+}
+
+.parking-popup .map-stop-title {
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #2975a7;
+}
+
+.parking-popup .popup-icon {
+    font-size: 30px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+.parking-popup .map-stop-name {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.parking-popup .map-stop-hline {
+    width: 100%;
+    height: 1px;
+    border-bottom: 3px solid #2975a7;
+}
+
+.parking-popup .map-stop-nocourses {
+    text-align: center;
 }
 
 ion-header-bar .title {

@@ -22,6 +22,7 @@
             "label": "menu_real_time_train",
             "hasMap": true,
             "markerIcon": "ic_train",
+            "icon": "ic_train",
             "elements": [
                 {
                     "agencyId": "5",
@@ -88,6 +89,7 @@
             "label": "menu_real_time_bus_suburban",
             "hasMap": true,
             "markerIcon": "ic_extraurbanBus",
+            "icon": "ic_extraurban-bus",
             "elements": [
                 {
                     "agencyId": "17",
@@ -469,6 +471,7 @@
             "label": "menu_real_time_bus_urban",
             "hasMap": true,
             "markerIcon": "ic_urbanBus",
+            "icon": "ic_urban-bus",
             "elements": [
                 {
                     "agencyId": "16",

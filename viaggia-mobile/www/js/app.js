@@ -451,6 +451,7 @@ angular.module('viaggia', [
             save_trip_error_message: 'Inserire un nome valido',
             tripsaved_message_feedback: 'Viaggio salvato correttamente',
             btn_close: 'Chiudi',
+            btn_conferma: 'Conferma',
             btn_nav_to: 'Indicazioni stradali',
             btn_next_trips: 'Vedi prossimi orari',
             lbl_stop: 'Fermata',
@@ -512,7 +513,9 @@ angular.module('viaggia', [
             parking_search_time: 'Trova parcheggio: ',
             error_select_type_feedback: 'Selezionare almeno un mezzo di trasporto',
             planlist_empty_list: 'La ricerca non ha prodotto risultati validi',
-            no_tt: 'In questa giornata non ci sono corse disponibili per questa linea.'
+            no_tt: 'In questa giornata non ci sono corse disponibili per questa linea.',
+            lbl_no_trips: 'Non sono previste corse nelle prossime 24 ore.'
+
 
         });
 
@@ -547,7 +550,7 @@ angular.module('viaggia', [
             plan_map_title: 'Select the address',
             plan_insert_to_address: 'Insert destination address',
             plan_insert_from_address: 'Insert starting address',
-            add_favorites_template: 'Do you wann add this address in your favorites?',
+            add_favorites_template: 'Would you like to add this address in your favorites?',
             add_favorites_title: 'Add to favorites',
             pop_up_loading: 'Loading...',
             pop_up_cancel: 'Cancel',
@@ -606,6 +609,7 @@ angular.module('viaggia', [
             save_trip_error_message: 'Inserire un nome valido',
             tripsaved_message_feedback: 'Journey correctly saved',
             btn_close: 'Close',
+            btn_conferma: 'Confirm',
             btn_nav_to: 'Directions',
             btn_next_trips: 'See next trips',
             lbl_stop: 'Stop',
@@ -667,7 +671,8 @@ angular.module('viaggia', [
             parking_search_time: 'Time to park: ',
             error_select_type_feedback: 'Select at least one mean of transport ',
             planlist_empty_list: 'Your search did not match any journey',
-            no_tt: 'No trips available for this line on this date.'
+            no_tt: 'No trips available for this line on this date.',
+            lbl_no_trips: 'No lines due in the next 24 hours.'
 
         });
 
