@@ -547,7 +547,7 @@ angular.module('viaggia', [
             plan_map_title: 'Select the address',
             plan_insert_to_address: 'Insert destination address',
             plan_insert_from_address: 'Insert starting address',
-            add_favorites_template: 'Do you wann add this address in your favorites?',
+            add_favorites_template: 'Add this address to favorites?',
             add_favorites_title: 'Add to favorites',
             pop_up_loading: 'Loading...',
             pop_up_cancel: 'Cancel',
@@ -672,6 +672,6 @@ angular.module('viaggia', [
         });
 
 
-        $translateProvider.preferredLanguage("it");
-        $translateProvider.fallbackLanguage("it");
+        $translateProvider.preferredLanguage(DEFAULT_LANG);
+        $translateProvider.fallbackLanguage(DEFAULT_LANG);
     });
