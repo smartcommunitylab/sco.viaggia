@@ -116,7 +116,8 @@ angular.module('viaggia.services.data', [])
             Object.keys(jszipobj.files).forEach(function (key) {
                 $cordovaFile.createFile(getDBPath(), getDBFileShortName(), true)
                     .then(function (success) {
-                        $cordovaFile.writeExistingFile(getDBPath(), getDBFileShortName(), jszipobj.file(key).asArrayBuffer())
+                        var f = jszipobj.file(key);
+                        $cordovaFile.writeFile(getDBPath(), getDBFileShortName(), jszipobj.file(key).asArrayBuffer(), true)
                             .then(function (success) {
                                 console.log('success copy');
                                 deferred.resolve(true);
