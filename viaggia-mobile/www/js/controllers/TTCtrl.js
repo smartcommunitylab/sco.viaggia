@@ -174,7 +174,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     var stopsColWidth = 101; // has border
 
     $scope.stopsColLineHeight = 20;
-    if (ionic.Platform.isIOS() && ionic.Platform.version() < 9) {
+    if (ionic.Platform.isWebView() && ionic.Platform.isIOS() && ionic.Platform.version() < 9) {
         $scope.stopsColLineHeight = 21;
     }
 
