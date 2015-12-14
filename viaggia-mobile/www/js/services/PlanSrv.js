@@ -244,11 +244,12 @@ angular.module('viaggia.services.plan', [])
         if (!it.leg && it.length) {
             return (it.length / 1000).toFixed(2);
         }
-        var l = 0;
-        for (var i = 0; i < it.leg.length; i++) {
-            l += it.leg[i].length;
-        }
-        return (l / 1000).toFixed(2);
+        return 0;
+//        var l = 0;
+//        for (var i = 0; i < it.leg.length; i++) {
+//            l += it.leg[i].length;
+//        }
+//        return (l / 1000).toFixed(2);
     };
     var getLegCost = function (plan, i) {
         var fareMap = {};
