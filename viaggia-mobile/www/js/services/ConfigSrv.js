@@ -91,6 +91,12 @@ angular.module('viaggia.services.conf', [])
 
         },
         {
+            type: 'TRANSIT',
+            color: '#016a6a',
+            icon: 'img/ic_funivia.png'
+
+        },
+        {
             type: 'BUSSUBURBAN',
             color: '#00588e',
             icon: 'img/ic_extraurbanBus.png'

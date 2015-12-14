@@ -3,7 +3,7 @@
     "appid": "trento",
     "appversion": "0.0.1",
     "appname": "ViaggiaTrento",
-    "serverURL": "https://dev.smartcommunitylab.it/core.mobility",
+    "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
     "smartcheck_options": [
         1,
         4,
@@ -16,8 +16,9 @@
             "TRANSIT"
         ]
     },
-    "agencies": [5,6,10,12,17],
-    "extraurban_agencies": [17],
+    "plan_policy": "Trento",
+    "agencies": [5,6,10,12],
+        "extraurban_agencies": [],
     "broadcast_notifications_options": [
         1,
         4

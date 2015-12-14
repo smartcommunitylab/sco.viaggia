@@ -66,7 +66,7 @@ angular.module('viaggia.services.plan', [])
         }
     }
     var getImageName = function (tt, agency) {
-        if (tt == 'BUS' && Config.getExtraurbanAgencies().indexOf(parseInt(agency)) >= 0) {
+        if (tt == 'BUS' && Config.getExtraurbanAgencies() && Config.getExtraurbanAgencies().indexOf(parseInt(agency)) >= 0) {
             return ttMap['EXTRA'];
         }
         if (tt == 'PARKWALK') {

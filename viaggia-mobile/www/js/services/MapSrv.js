@@ -16,7 +16,7 @@ angular.module('viaggia.services.map', [])
     var getColorByType = function (transport) {
         var colors = [];
         if (transport.type == 'BUS') {
-            if (Config.getExtraurbanAgencies().indexOf(parseInt(transport.agencyId)) != -1)
+            if (Config.getExtraurbanAgencies() && Config.getExtraurbanAgencies().indexOf(parseInt(transport.agencyId)) != -1)
                 return mapOfColors['BUSSUBURBAN'];
         }
         return mapOfColors[transport.type];
@@ -31,7 +31,11 @@ angular.module('viaggia.services.map', [])
     var getIconByType = function (transport) {
         var icons = [];
         if (transport.type == 'BUS') {
-            if (Config.getExtraurbanAgencies().indexOf(parseInt(transport.agencyId)) != -1)
+            if (Config.getExtraurbanAgencies() && Config.getExtraurbanAgencies().indexOf(parseInt(transport.agencyId)) != -1)
+                return mapOfIcons['BUSSUBURBAN'];
+        }
+                if (transport.type == 'BUS') {
+            if (Config.getExtraurbanAgencies() && Config.getExtraurbanAgencies().indexOf(parseInt(transport.agencyId)) != -1)
                 return mapOfIcons['BUSSUBURBAN'];
         }
         return mapOfIcons[transport.type];
