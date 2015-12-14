@@ -1,0 +1,38 @@
+<ion-view title="{{title}}">
+    <ion-nav-buttons side="right">
+
+        <!--
+        <nav mfb-menu position="tr" effect="zoomin" active-icon="ion-ios-close-empty" resting-icon="ion-ios-plus-empty" toggling-method="click">
+            <a mfb-button label="{{button.label}}" icon="{{button.icon}}" ng-repeat="button in buttons"></a>
+        </nav>
+-->
+    </ion-nav-buttons>
+    <!--
+    <ion-nav-buttons side="right">
+        <button class="button button-balanced button-fab" ng-click="plan()"> <i class="icon ion-search"></i> </button>
+    </ion-nav-buttons>
+-->
+    <ion-content>
+        <!--
+        <div id="map-container" data-tap-disabled="true">
+            <leaflet event-broadcast="events" center="center" markers="markers" paths="pathLine" style="width: 100%; height: 320px;" ng-init="initMap()"  id="homeMap"></leaflet>
+        </div>
+-->
+
+        <ion-list class="animate-ripple home-list">
+            <ion-item ng-click="go('/app/markets')">
+                <button class="button button-block markets-home">
+                    <img src="img/markets/ic_nataleDeiPopoli.png">
+                    <span>{{'home_markets'|translate}}</span>
+                </button>
+            </ion-item>
+            <ion-item ng-repeat="m in primaryLinks" ng-last-repeat="primaryLinks" ng-click="go(m.state)">
+                <button class="button button-block">
+                    <i class="icon" ng-class="m.icon" style="{{'color: '+m.color}}"></i>
+                    <span>{{m.label | translate}}</span>
+                </button>
+            </ion-item>
+
+        </ion-list>
+    </ion-content>
+</ion-view>

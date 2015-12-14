@@ -1,98 +1,49 @@
 {
-    "stopVisualization": {
-        "12": {
-            "view": "grid"
-        },
-        "5": {
-            "view": "list"
-        },
-        "6": {
-            "view": "list"
-        },
-        "10": {
-            "view": "list"
-        }
-    },
-    "elements": {
-        "trains": {
-            "view": "list",
-            "label": "menu_real_time_train",
-            "hasMap": true,
-            "markerIcon": "ic_train",
-            "icon": "ic_train",
-            "elements": [
-                {
-                    "agencyId": "5",
-                    "color": "#cd251c",
-                    "routes": [
-                        {
-                            "routeId": "BV_R1_G",
-                            "routeSymId": "BV_R1_G",
-                            "title": "Bolzano - Verona",
-                            "color": "#cd251c",
-                            "showTrips": true
-                        },
-                        {
-                            "routeId": "BV_R1_R",
-                            "routeSymId": "BV_R1_R",
-                            "title": "Verona - Bolzano",
-                            "color": "#cd251c",
-                            "showTrips": true
-                        }
+  "stopVisualization" : {
+    "12" : {"view": "grid"},
+    "5" : {"view": "list"},
+    "6" : {"view": "list"},
+    "10" : {"view": "list"},
+    "17" : {"view": "list"}
+  },
+  "elements": {
+    "trains" : {
+      "view" : "list",
+      "label": "menu_real_time_train",
+      "hasMap": true,
+      "markerIcon": "ic_train",
+      "elements": [
+        {
+          "agencyId" : "5",
+
+          "routes" : [
+              {"routeId": "BV_R1_G", "routeSymId": "BV_R1_G", "title": "Bolzano - Verona", "color" : "#e84539", "showTrips":true},
+              {"routeId": "BV_R1_R", "routeSymId": "BV_R1_R", "title": "Verona - Bolzano", "color" : "#e84539", "showTrips":true}
           ]
         },
-                {
-                    "agencyId": "6",
-                    "color": "#cd251c",
-                    "routes": [
-                        {
-                            "routeId": "TB_R2_G",
-                            "routeSymId": "TB_R2_G",
-                            "title": "Trento - Bassano D.G.",
-                            "color": "#cd251c",
-                            "showTrips": true
-                        },
-                        {
-                            "routeId": "TB_R2_R",
-                            "routeSymId": "TB_R2_R",
-                            "title": "Bassano D.G. - Trento",
-                            "color": "#cd251c",
-                            "showTrips": true
-                        }
+        {
+          "agencyId" : "6",
+          "routes" : [
+              {"routeId": "TB_R2_G", "routeSymId": "TB_R2_G", "title": "Trento - Bassano D.G.", "color" : "#e84539",  "showTrips":true},
+              {"routeId": "TB_R2_R", "routeSymId": "TB_R2_R", "title": "Bassano D.G. - Trento", "color" : "#e84539",  "showTrips":true}
           ]
         },
-                {
-                    "agencyId": "10",
-                    "color": "#cd251c",
-                    "routes": [
-                        {
-                            "routeId": "555",
-                            "routeSymId": "555",
-                            "color": "#cd251c",
-                            "title": "Trento - Malé"
-                        },
-                        {
-                            "routeId": "556",
-                            "routeSymId": "556",
-                            "color": "#cd251c",
-                            "title": "Malé - Trento"
-                        }
+        {
+          "agencyId" : "10",
+          "routes" : [
+              {"routeId": "555", "routeSymId": "555", "color" : "#e84539",  "title": "Trento - Malé"},
+              {"routeId": "556", "routeSymId": "556", "color" : "#e84539",  "title": "Malé - Trento"}
           ]
         }
       ]
-        },
-        "urbano": {
-            "view": "grid",
-            "label": "menu_real_time_bus_urban",
-            "hasMap": true,
-            "markerIcon": "ic_urbanBus",
-            "icon": "ic_urban-bus",
-            "elements": [
-                {
-                    "agencyId": "12",
-                    "hasMap": true,
-                    "groups": [
-                        {
+    },
+    "urbano" : {
+      "view" : "grid",
+      "label": "menu_real_time_bus_urban",
+      "hasMap": true,
+      "markerIcon": "ic_urbanBus",
+      "elements": [
+        {
                             "label": "A",
                             "color": "#b8b8b4",
                             "routes": [
@@ -462,11 +413,9 @@
                                     "title": "Funivia Sardagna Trento",
                                     "label": "Sardagna - Trento"
                                 }
-              ]
-            }
           ]
         }
       ]
-        }
     }
+  }
 }
