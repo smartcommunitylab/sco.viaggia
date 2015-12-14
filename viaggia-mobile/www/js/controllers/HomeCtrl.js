@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.home', [])
 
-.controller('HomeCtrl', function ($scope, $timeout, $filter, $location, marketService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk) {
+.controller('HomeCtrl', function ($scope, $rootScope, $timeout, $filter, $location, marketService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk) {
 
     $scope.buttons = [{
         label: $filter('translate')('menu_news'),
@@ -12,7 +12,7 @@ angular.module('viaggia.controllers.home', [])
     var mymap = document.getElementById('map-container');
 
     Config.init().then(function () {
-        $scope.title = Config.getAppName();
+        $rootScope.title = Config.getAppName();
         angular.extend($scope, {
             center: {
                 lat: Config.getMapPosition().lat,

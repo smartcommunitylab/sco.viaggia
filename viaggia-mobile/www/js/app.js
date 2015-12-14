@@ -363,7 +363,6 @@ angular.module('viaggia', [
         $urlRouterProvider.otherwise('/app/home');
 
         $translateProvider.translations('it', {
-            appName: 'Viaggia Trento',
             menu_home: 'Home',
             menu_plan: 'Pianifica viaggio',
             menu_mytrip: 'I miei viaggi',
@@ -521,7 +520,6 @@ angular.module('viaggia', [
 
 
         $translateProvider.translations('en', {
-            appName: 'Viaggia Trento',
             menu_home: 'Home',
             menu_plan: 'Plan journey',
             menu_mytrip: 'My journeys',
