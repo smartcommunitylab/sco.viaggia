@@ -22,12 +22,12 @@
     "org.apache.cordova.inappbrowser",
     "org.apache.cordova.geolocation",
     "org.apache.cordova.globalization",
-    "com.ionic.keyboard",
+    "ionic-plugin-keyboard",
     "nl.x-services.plugins.toast",
     "org.apache.cordova.file",
     "org.apache.cordova.network-information",
     "cordova-sqlite-storage",
-    "net.orworks.cordovaplugins.cordovasqlite",
+    "https://github.com/samikrc/CordovaSQLite.git",
     "cordova-plugin-whitelist"
   ],
   "cordovaPlatforms": [
