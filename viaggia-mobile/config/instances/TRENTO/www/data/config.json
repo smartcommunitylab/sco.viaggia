@@ -17,8 +17,8 @@
         ]
     },
     "plan_policy": "Trento",
-    "agencies": [5,6,10,12],
-        "extraurban_agencies": [],
+    "agencies": [5,6,10,12, 17],
+        "extraurban_agencies": [17],
     "broadcast_notifications_options": [
         1,
         4
