@@ -394,7 +394,7 @@ angular.module('viaggia', [
             add_favorites_template: 'Vuoi aggiungere l\'indirizzo ai tuoi preferiti?',
             add_favorites_title: 'Aggiungi a preferiti',
             pop_up_loading: 'Caricamento...',
-            pop_up_cancel: 'Cancella',
+            pop_up_cancel: 'Annulla',
             pop_up_ok: 'Ok',
             pop_up_no_connection_title: 'Errore',
             pop_up__no_connection_template: 'Nessuna connessione',
