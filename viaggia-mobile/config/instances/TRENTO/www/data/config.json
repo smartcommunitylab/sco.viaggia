@@ -1,7 +1,7 @@
 {
     "apptoken": "viaggiatrento",
     "appid": "trento",
-    "appversion": "0.0.1",
+    "appversion": "1.0.0",
     "appname": "ViaggiaTrento",
     "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
     "smartcheck_options": [
