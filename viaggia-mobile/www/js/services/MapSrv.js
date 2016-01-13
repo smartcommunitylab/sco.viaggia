@@ -1,44 +1,13 @@
 angular.module('viaggia.services.map', [])
 
 .factory('mapService', function ($q, $http, $ionicPlatform, $filter, $timeout, Config, planService, leafletData, GeoLocate) {
-    var colorsAndTypes = Config.getColorsTypes();
-
     var cachedMap = {};
 
-    var getMapOfColors = function () {
-        var mapOfColors = [];
-        for (var k = 0; k < colorsAndTypes.length; k++) {
-            mapOfColors[colorsAndTypes[k].type] = colorsAndTypes[k].color;
-        }
-        return mapOfColors;
-    }
-
     var getColorByType = function (transport) {
-        var colors = [];
-        if (transport.type == 'BUS') {
-            if (Config.getExtraurbanAgencies() && Config.getExtraurbanAgencies().indexOf(parseInt(transport.agencyId)) != -1)
-                return mapOfColors['BUSSUBURBAN'];
-        }
-        return mapOfColors[transport.type];
-    }
-    var getMapOfIcons = function () {
-        var mapOfIcons = [];
-        for (var k = 0; k < colorsAndTypes.length; k++) {
-            mapOfIcons[colorsAndTypes[k].type] = colorsAndTypes[k].icon;
-        }
-        return mapOfIcons;
+      return Config.getColorType(transport.type, transport.agencyId).color;
     }
     var getIconByType = function (transport) {
-        var icons = [];
-        if (transport.type == 'BUS') {
-            if (Config.getExtraurbanAgencies() && Config.getExtraurbanAgencies().indexOf(parseInt(transport.agencyId)) != -1)
-                return mapOfIcons['BUSSUBURBAN'];
-        }
-                if (transport.type == 'BUS') {
-            if (Config.getExtraurbanAgencies() && Config.getExtraurbanAgencies().indexOf(parseInt(transport.agencyId)) != -1)
-                return mapOfIcons['BUSSUBURBAN'];
-        }
-        return mapOfIcons[transport.type];
+      return Config.getColorType(transport.type, transport.agencyId).icon;
     }
     var getPopUpMessage = function (trip, leg, i) {
         //from step to step
@@ -80,8 +49,6 @@ angular.module('viaggia.services.map', [])
     }
     var mapService = {};
     var myLocation = {};
-    var mapOfColors = getMapOfColors();
-    var mapOfIcons = getMapOfIcons();
 
 
     mapService.getMap = function (mapId) {

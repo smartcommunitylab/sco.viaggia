@@ -13,49 +13,6 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     $scope.hasMap = false;
     $scope.allMarkers = null;
 
-
-    var flattenElement = function (e, res) {
-        var localAgency = agencyId;
-        if (e.agencyId != null) localAgency = e.agencyId;
-        if (e.groups != null) {
-            for (var j = 0; j < e.groups.length; j++) {
-                res.push({
-                    ref: ref,
-                    agencyId: localAgency,
-                    group: e.groups[j],
-                    color: e.groups[j].color,
-                    label: e.groups[j].label,
-                    title: e.groups[j].title ? e.groups[j].title : e.groups[j].label,
-                    gridCode: e.groups[j].gridCode
-                });
-            }
-        }
-        if (e.routes != null) {
-            for (var j = 0; j < e.routes.length; j++) {
-                res.push({
-                    ref: ref,
-                    agencyId: localAgency,
-                    route: e.routes[j],
-                    color: e.color,
-                    label: e.routes[j].label ? e.routes[j].label : e.label,
-                    title: e.routes[j].title ? e.routes[j].title : e.title
-                });
-            }
-        }
-    }
-    var flattenData = function (data) {
-        var res = [];
-        if (data.elements) {
-            for (var i = 0; i < data.elements.length; i++) {
-                var e = data.elements[i];
-                flattenElement(e, res);
-            }
-        } else {
-            flattenElement(data, res);
-        }
-        return res;
-    }
-
     $scope.selectElement = function (e) {
         // route element: go to table
         if (e.route != null) {
@@ -124,7 +81,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
             var title = $filter('translate')(data.title ? data.title : data.label);
             if (title.length < 5) title = $filter('translate')('lbl_line') + ' ' + title;
             $scope.title = title;
-            $scope.elements = flattenData(data);
+            $scope.elements = Config.flattenData(data, ref, agencyId);
             $scope.view = data.view ? data.view : 'list';
             if ($scope.view == 'grid') {
                 prepareGrid();
@@ -157,7 +114,8 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
             title: $scope.title,
             markerIcon: $scope.markerIcon,
             icon: $scope.icon,
-            elements: $scope.elements
+            elements: $scope.elements,
+            ref: ref
         };
 
         ttService.setTTMapData(vis);
@@ -166,7 +124,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
 })
 
-.controller('TTCtrl', function ($scope, $stateParams, $ionicPosition, $ionicScrollDelegate, $timeout, $filter, ttService, Config, Toast) {
+.controller('TTCtrl', function ($scope, $state, $location, $stateParams, $ionicPosition, $ionicScrollDelegate, $timeout, $filter, ttService, Config, Toast, bookmarkService) {
     $scope.data = [];
 
     var rowHeight = 20;
@@ -398,6 +356,10 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     // initialize
     $scope.load = function () {
         $scope.route = Config.getTTData($stateParams.ref, $stateParams.agencyId, $stateParams.groupId, $stateParams.routeId);
+        $scope.title = ($scope.route.label ? ($scope.route.label + ': ') : '') + $scope.route.title;
+        $scope.bookmarkStyle = bookmarkService.getBookmarkStyle($location.path());
+
+
         if (!$scope.route.color) {
             var group = Config.getTTData($stateParams.ref, $stateParams.agencyId, $stateParams.groupId);
             if (group && group.color) $scope.color = group.color;
@@ -434,6 +396,12 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         Toast.show(stop, "short", "bottom");
     }
 
+    $scope.bookmark = function() {
+      var ref = Config.getTTData($stateParams.ref);
+      bookmarkService.toggleBookmark($location.path(),$scope.title, ref.transportType).then(function(style) {
+        $scope.bookmarkStyle = style;
+      });
+    };
 })
 
 .controller('TTMapCtrl', function ($scope, $state, $stateParams, $timeout, $ionicModal, $ionicPopup, $filter, ionicMaterialMotion, ionicMaterialInk, mapService, Config, ttService, planService, GeoLocate, Toast) {
@@ -529,7 +497,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
     $scope.showStopData = function () {
         ttService.setTTStopData($scope.popupStop);
-        $state.go('app.ttstop');
+        $state.go('app.ttstop',{stopId:$scope.popupStop.id, agencyId: $scope.popupStop.agencyId, ref:mapData.ref});
     }
 
     $scope.navigate = function () {
@@ -622,29 +590,54 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     });
 })
 
-.controller('TTStopCtrl', function ($scope, $state, $stateParams, $timeout, $ionicPopup, $filter, ionicMaterialMotion, ionicMaterialInk, Config, ttService) {
-    var stopData = ttService.getTTStopData();
-    if (stopData.data) {
-        var d = new Date();
-        d.setHours(0);
-        d.setMinutes(0);
-        d.setSeconds(0);
-        d.setMilliseconds(0);
-        d.setDate(d.getDate() + 1);
-        for (var key in stopData.data) {
-            var r = stopData.data[key];
-            if (r.routeElement) {
-                if (!r.color) r.color = r.routeElement.color ? r.routeElement.color : r.routeElement.route.color;
-            }
-            r.times.forEach(function (t) {
-                if (t.time > d.getTime()) t.nextDay = true;
-            });
-        }
+.controller('TTStopCtrl', function ($scope, $state, $stateParams, $timeout, $location, $ionicPopup, $filter, ionicMaterialMotion, ionicMaterialInk, Config, ttService, bookmarkService) {
+    var init = function(stopData){
+      if (stopData.data) {
+          var d = new Date();
+          d.setHours(0);
+          d.setMinutes(0);
+          d.setSeconds(0);
+          d.setMilliseconds(0);
+          d.setDate(d.getDate() + 1);
+          for (var key in stopData.data) {
+              var r = stopData.data[key];
+              if (r.routeElement) {
+                  if (!r.color) r.color = r.routeElement.color ? r.routeElement.color : r.routeElement.route.color;
+              }
+              r.times.forEach(function (t) {
+                  if (t.time > d.getTime()) t.nextDay = true;
+              });
+          }
+      }
     }
-    $scope.stopData = stopData;
+
+    $scope.stopData = ttService.getTTStopData();
+    if ($scope.stopData) {
+      Config.loading();
+      ttService.getTTStopDataAsync($stateParams.ref,$stateParams.agencyId,$stateParams.stopId).then(function(stop) {
+        $scope.stopData = stop;
+        init($scope.stopData);
+        Config.loaded();
+      }, function(err){
+        Config.loaded();
+      });
+    } else {
+      init($scope.stopData);
+
+    }
+    $scope.bookmarkStyle = bookmarkService.getBookmarkStyle($location.path());
+
     $scope.isEmpty = function () {
         return angular.equals($scope.stopData.data, {});
     };
+
+    $scope.bookmark = function() {
+      var ref = Config.getTTData($stateParams.ref);
+      bookmarkService.toggleBookmark($location.path(),$scope.stopData.name, ref.transportType+'STOP').then(function(style) {
+        $scope.bookmarkStyle = style;
+      });
+    };
+
 })
 
 ;

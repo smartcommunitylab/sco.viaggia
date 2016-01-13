@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.home', [])
 
-.controller('HomeCtrl', function ($scope, $rootScope, $timeout, $filter, $location, marketService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk) {
+.controller('HomeCtrl', function ($scope, $rootScope, $timeout, $filter, $location, marketService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService) {
 
     $scope.buttons = [{
         label: $filter('translate')('menu_news'),
@@ -21,7 +21,11 @@ angular.module('viaggia.controllers.home', [])
             },
             events: {}
         });
-        $scope.primaryLinks = Config.getPrimaryLinks();
+        bookmarkService.getBookmarks().then(function(list) {
+          var homeList = [];
+          list.forEach(function(e) {if (e.home) homeList.push(e);});
+          $scope.primaryLinks = homeList;//Config.getPrimaryLinks();
+        });
         marketService.initMarketFavorites();
 
     });

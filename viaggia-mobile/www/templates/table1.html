@@ -1,4 +1,7 @@
-<ion-view title="{{route.label ? (route.label + ': ') : ''}}{{route.title}}">
+<ion-view title="{{title}}">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear" ng-class="bookmarkStyle" ng-click="bookmark()"></button>
+    </ion-nav-buttons>
     <ion-content id="content" has-header="true" has-bouncing="false">
         <div class="row" style="background-color: {{color}}; color: {{textColor(color)}} !important;">
             <div class="col col-25 tt-day btn" ng-click="prevDate()"><a><i class="icon ion-arrow-left-b"></i></a>

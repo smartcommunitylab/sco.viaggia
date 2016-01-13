@@ -1,5 +1,35 @@
-<ion-view id="bookmarks">
-    <ion-content id="content" has-header="true">
-        Bookmarks
-    </ion-content>
+<ion-view title="{{'menu_bookmarks'|translate}}">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-drag" ng-click="toggleReorder()"></button>
+    </ion-nav-buttons>
+  <ion-content id="content" has-header="true">
+    <ion-list class="animate-ripple bookmark-list" can-swipe="true" show-reorder="showReorder">
+      <ion-item class="card item-icon-left" ng-repeat="m in bookmarks track by $index" ng-last-repeat="bookmarks" ng-click="go(m.state)" >
+        <h2>
+          <i class="icon img" ng-class="m.icon" style="{{'color: '+m.color}}"></i>
+          <span>{{m.label | translate}}</span>
+        </h2>
+        <ion-option-button ng-if="m.removable" class="button button-clear"  ng-click="delete($index)"><i class="icon ic_delete"></i></ion-option-button>
+        <ion-option-button class="button button-clear" ng-click="toggleHome($index)"><i class="icon" ng-class="{'ion-ios-home': m.home, 'ion-ios-home-outline': !m.home}"></i></ion-option-button>
+        <ion-reorder-button class="button button-clear ion-drag" on-reorder="reorder($fromIndex, $toIndex)"></ion-reorder-button>
+      </ion-item>
+
+<!--
+      <ion-item class="card" ng-repeat="m in bookmarks" ng-last-repeat="bookmarks">
+        <div class="bookmark">
+          <div class="row">
+            <i class="icon img" ng-class="m.icon" style="{{'color: '+m.color}}"  ng-click="go(m.state)"></i>
+            <span class="col col-center" ng-click="go(m.state)">{{m.label | translate}}</span>
+            <i class="icon col-center ion-close ctrl" ng-click="delete($index)"></i>
+          </div>
+        </div>
+      </ion-item>
+-->
+
+    </ion-list>
+    <div ng-if="(!bookmarks || bookmarks.length == 0)" class="text-center">
+        <h4>{{'no_data' | translate}}</h4>
+    </div>
+
+  </ion-content>
 </ion-view>

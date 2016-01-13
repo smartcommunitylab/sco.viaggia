@@ -3,6 +3,7 @@ angular.module('viaggia.services.conf', [])
 .factory('Config', function ($q, $http, $window, $filter, $rootScope, $ionicLoading) {
 
     var isDarkColor = function (color) {
+      if (!color) return true;
         var c = color.substring(1); // strip #
         var rgb = parseInt(c, 16); // convert rrggbb to decimal
         var r = (rgb >> 16) & 0xff; // extract red
@@ -71,57 +72,100 @@ angular.module('viaggia.services.conf', [])
         }
 
     ];
-    var COLORS_TRIP = [
-        {
-            type: 'TRAIN',
+    var COLORS_TRIP = {
+        TRAIN: {
             color: '#cd251c',
+            listIcon: 'img/ic_mt_train.png',
             icon: 'img/ic_train.png'
 
         },
-        {
-            type: 'CAR',
+        CAR: {
             color: '#757575',
+            listIcon: 'img/ic_mt_car.png',
             icon: 'img/ic_car.png'
 
         },
-        {
-            type: 'BUS',
+        BUS: {
             color: '#eb8919',
+            listIcon: 'img/ic_mt_bus.png',
             icon: 'img/ic_urbanBus.png'
 
         },
-        {
-            type: 'TRANSIT',
+        TRANSIT: {
             color: '#016a6a',
+            listIcon: 'img/ic_mt_funivia.png',
             icon: 'img/ic_funivia.png'
 
         },
-        {
-            type: 'BUSSUBURBAN',
+        BUSSUBURBAN: {
             color: '#00588e',
+            listIcon: 'img/ic_mt_extraurbano.png',
             icon: 'img/ic_extraurbanBus.png'
 
         },
-        {
-            type: 'BICYCLE',
+        BICYCLE: {
             color: '#922d66',
+            listIcon: 'img/ic_mt_bicycle.png',
             icon: 'img/ic_bike.png'
 
         },
-        {
-            type: 'WALK',
+        WALK: {
             color: '#8cc04c',
+            listIcon: 'img/ic_mt_foot.png',
             icon: 'img/ic_walk.png'
 
         },
-        {
-            type: 'PARKWALK',
+        PARKWALK: {
             color: '#8cc04c',
+            listIcon: 'img/ic_mt_walk.png',
             icon: 'img/ic_park_walk.png'
 
         }
+    };
 
-        ]
+
+    var flattenElement = function (e, res, ref, agencyId) {
+        var localAgency = agencyId;
+        if (e.agencyId != null) localAgency = e.agencyId;
+        if (e.groups != null) {
+            for (var j = 0; j < e.groups.length; j++) {
+                res.push({
+                    ref: ref,
+                    agencyId: localAgency,
+                    group: e.groups[j],
+                    color: e.groups[j].color,
+                    label: e.groups[j].label,
+                    title: e.groups[j].title ? e.groups[j].title : e.groups[j].label,
+                    gridCode: e.groups[j].gridCode
+                });
+            }
+        }
+        if (e.routes != null) {
+            for (var j = 0; j < e.routes.length; j++) {
+                res.push({
+                    ref: ref,
+                    agencyId: localAgency,
+                    route: e.routes[j],
+                    color: e.color,
+                    label: e.routes[j].label ? e.routes[j].label : e.label,
+                    title: e.routes[j].title ? e.routes[j].title : e.title
+                });
+            }
+        }
+    }
+    var flattenData = function (data, ref, agencyId) {
+        var res = [];
+        if (data.elements) {
+            for (var i = 0; i < data.elements.length; i++) {
+                var e = data.elements[i];
+                flattenElement(e, res, ref, agencyId);
+            }
+        } else {
+            flattenElement(data, res, ref, agencyId);
+        }
+        return res;
+    }
+
     return {
         init: function () {
             var deferred = $q.defer();
@@ -163,6 +207,13 @@ angular.module('viaggia.services.conf', [])
         convertPlanTypes: convertMeans,
         getColorsTypes: function () {
             return COLORS_TRIP;
+        },
+        getColorType: function(transportType, agencyId) {
+          if (transportType == 'BUS') {
+              if (this.getExtraurbanAgencies() && this.getExtraurbanAgencies().indexOf(parseInt(agencyId)) != -1)
+                  return COLORS_TRIP['BUSSUBURBAN'];
+          }
+          return COLORS_TRIP[transportType];
         },
         getPlanPreferences: function () {
             return PLAN_PREFERENCES;
@@ -262,6 +313,7 @@ angular.module('viaggia.services.conf', [])
             }
             return res;
         },
+        flattenData: flattenData,
         getStopVisualization: function (agencyId) {
             if (!ttJsonConfig || !ttJsonConfig.stopVisualization || !ttJsonConfig.stopVisualization[agencyId]) return {};
             return ttJsonConfig.stopVisualization[agencyId];

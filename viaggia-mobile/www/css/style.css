@@ -666,6 +666,7 @@ ion-header-bar .title {
     min-height: 70px;
     margin: 5px 0px;
     padding: 0px 16px;
+    text-transform: none;
 }
 
 .home-list .button i {
@@ -673,7 +674,7 @@ ion-header-bar .title {
 }
 
 .home-list .button i::before {
-    font-size: 44px;
+    font-size: 36px;
 }
 
 .line-background-for-list {
@@ -911,4 +912,49 @@ ion-header-bar .title {
 .error {
     color: red;
     text-align: center;
+}
+
+.bookmark-list .list {
+    padding: 16px 8px;
+}
+
+.bookmark-list ion-item {
+    padding: 0px;
+    width: inherit !important;
+}
+
+.bookmark-list .bookmark {
+    text-align: left;
+    font-size: 16px;
+    background-color: #fff;
+    padding: 8px 8px;
+}
+
+.bookmark-list .ctrl {
+  float: right;
+}
+
+.bookmark-list .bookmark .img {
+  font-size: 36px;
+}
+
+.bookmark-list .bookmark span {
+  padding: 0 0 0 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+/*  text-transform: uppercase;*/
+  font-weight: 500;
+}
+
+.bookmark-list ion-item.activated {
+  background-color: #d2d2d2;
+}
+.bookmark-list ion-item.activated .item-content {
+  background-color: #d2d2d2;
+}
+.bookmark-list ion-item .item-content {
+  background-color: #fff;
+}
+.bookmark-list ion-option-button,.bookmark-list ion-reorder-button {
+  padding: 0 8px;
 }

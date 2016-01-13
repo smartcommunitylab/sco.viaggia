@@ -152,6 +152,58 @@ angular.module('viaggia.services.timetable', [])
     return deferred.promise;
   };
 
+  var getStopData = function(ref, agencyId, stopId) {
+    var deferred = $q.defer();
+    var stop = null;
+    var stops = getStopsData([agencyId]);
+    if (stops) {
+      for (var i = 0; i < stops.length; i++) {
+        if (stops[i].id == stopId) {
+          stop = stops[i];
+          break;
+        }
+      }
+      if (stop) {
+        getNextTrips(stop.agencyId, stop.id, 5).then(function (data) {
+          var ttData = Config.getTTData(ref);
+          var flatTTData = Config.flattenData(ttData, ref);
+
+          flatTTData.forEach(function (e) {
+              var list = [];
+              if (e.group) {
+                  if (e.group.routes) list = list.concat(e.group.routes);
+                  else if (e.group.route) list.push(e.group.route);
+              } else {
+                  if (e.routes) list = list.concat(e.routes);
+                  else if (e.route) list.push(e.route);
+              }
+              list.forEach(function (r) {
+                  if (data[r.routeId] != null) {
+                      data[r.routeId].routeElement = e;
+                      data[r.routeId].routeObject = r;
+                      //                routes.push(data[r.routeId]);
+                  } else if (data[r.routeSymId] != null) {
+                      data[r.routeSymId].routeElement = e;
+                      data[r.routeSymId].routeObject = r;
+                      //                routes.push(data[r.routeSymId]);
+                  }
+              });
+          });
+          stop.data = data;
+          deferred.resolve(stop);
+        }, function (err) {
+          deferred.reject(err);
+        });
+      } else {
+        deferred.resolve(null);
+      }
+    } else {
+      deferred.resolve(null);
+    }
+    return deferred.promise;
+  }
+
+
   return {
     /**
      * timetable for specified timestamp: converted to date start/end timestamps
@@ -243,6 +295,9 @@ angular.module('viaggia.services.timetable', [])
      */
     getTTStopData: function() {
       return ttStopData;
+    },
+    getTTStopDataAsync: function(ref, agencyId, stopId) {
+      return getStopData(ref, agencyId, stopId);
     },
     setTTStopData: function(stopData){
       ttStopData = stopData;

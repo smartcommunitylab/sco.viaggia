@@ -78,6 +78,7 @@ angular.module('viaggia', [
     'viaggia.services.info',
     'viaggia.directives',
     'viaggia.services.geo',
+    'viaggia.services.bookmarks',
     'viaggia.filters'
 ])
 
@@ -154,7 +155,7 @@ angular.module('viaggia', [
         })
 
         .state('app.home', {
-                //                cache: false,
+                cache: false,
                 url: "/home",
                 views: {
                     'menuContent': {
@@ -268,7 +269,7 @@ angular.module('viaggia', [
                 }
             })
             .state('app.ttstop', {
-                url: "/ttstop",
+                url: "/ttstop/:ref/:agencyId/:stopId",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/ttstop.html",

@@ -1,4 +1,7 @@
 <ion-view title="{{stopData.name}}">
+      <ion-nav-buttons side="right">
+          <button class="button button-icon button-clear" ng-class="bookmarkStyle" ng-click="bookmark()"></button>
+      </ion-nav-buttons>
       <ion-content>
         <div>
           <div class="stop-line" ng-repeat="(routeId, route) in stopData.data">
