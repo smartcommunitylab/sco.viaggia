@@ -426,7 +426,7 @@
 
 .parking-card-footer .col span {
     position: absolute;
-    bottom: 0;
+    top: 50%;
 }
 
 .parking-card-footer .col-right span {
