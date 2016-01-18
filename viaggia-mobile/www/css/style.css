@@ -44,6 +44,8 @@
 .mfb-component__button--child [class*=" ic_"] {
     line-height: 56px !important;
 }
+
+
 /*.platform-ios.platform-cordova:not(.fullscreen) */
 
 .fs-header {
@@ -62,14 +64,12 @@
     font-size: 12px !important;
     font-weight: bold;
     /* the workaround below "fixes" the scrolling */
-
     margin-bottom: 28px !important;
 }
 
 .col-table {
     text-align: center;
     /*    padding: 3px 5px 3px 5px !important;*/
-
     padding: 0px!important;
     background-color: #e0f2be;
 }
@@ -130,6 +130,8 @@
 .row.header td {
     width: 80px;
 }
+
+
 /*menu group*/
 
 .list .item.item-accordion {
@@ -759,6 +761,8 @@ ion-header-bar .title {
     color: rgba(60, 186, 207, 0.5);
     box-shadow: none;
 }
+
+
 /*redefine style for checkbox*/
 
 .ion-checkmark:before {
@@ -931,30 +935,38 @@ ion-header-bar .title {
 }
 
 .bookmark-list .ctrl {
-  float: right;
+    float: right;
 }
 
 .bookmark-list .bookmark .img {
-  font-size: 36px;
+    font-size: 36px;
 }
 
 .bookmark-list .bookmark span {
-  padding: 0 0 0 8px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-/*  text-transform: uppercase;*/
-  font-weight: 500;
+    padding: 0 0 0 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*  text-transform: uppercase;*/
+    font-weight: 500;
 }
 
 .bookmark-list ion-item.activated {
-  background-color: #d2d2d2;
+    background-color: #d2d2d2;
 }
+
 .bookmark-list ion-item.activated .item-content {
-  background-color: #d2d2d2;
+    background-color: #d2d2d2;
 }
+
 .bookmark-list ion-item .item-content {
-  background-color: #fff;
+    background-color: #fff;
 }
-.bookmark-list ion-option-button,.bookmark-list ion-reorder-button {
-  padding: 0 8px;
+
+.bookmark-list ion-option-button,
+.bookmark-list ion-reorder-button {
+    padding: 0 8px;
+}
+
+.date-label {
+    white-space: nowrap;
 }
