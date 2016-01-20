@@ -19,11 +19,14 @@
 
             <ion-scroll direction="xy" has-bouncing="false" id="tablescroll" style="height:{{scrollHeight}}px; width: {{scrollWidth}}px" class="overlapDiv" on-scroll="doScroll()" delegate-handle="list">
                 <div id="table-col" ng-bind-html="colStr" style="line-height: {{stopsColLineHeight}}px; top: {{tableHeaderHeight}}px" ng-click="showStop($event)"></div>
-                <div id="table-header" style="background: repeating-linear-gradient(to right, #fff, #fff {{colwidth}}px, #eee {{colwidth}}px, #eee {{colwidth*2}}px);">
+                <div id="table-header" style="background: -webkit-repeating-linear-gradient(0deg,#fff, #fff {{colwidth}}px, #eee {{colwidth}}px, #eee {{colwidth*2}}px);
+background: repeating-linear-gradient(90deg,#fff, #fff {{colwidth}}px, #eee {{colwidth}}px, #eee {{colwidth*2}}px);">
                     <div ng-bind-html="headStr[0]"></div>
                     <div ng-if="header_row_number == 2" ng-bind-html="headStr[1]"></div>
                 </div>
-                <div id="table-table" ng-bind-html="dataStr" style="top: {{tableHeaderHeight}}px; background: repeating-linear-gradient(to right, #fff, #fff {{colwidth}}px, #eee {{colwidth}}px, #eee {{colwidth*2}}px);"></div>
+
+                <div id="table-table" ng-bind-html="dataStr" style="top: {{tableHeaderHeight}}px; background: -webkit-repeating-linear-gradient(0deg,#fff, #fff {{colwidth}}px, #eee {{colwidth}}px, #eee {{colwidth*2}}px);
+background: repeating-linear-gradient(90deg,#fff, #fff {{colwidth}}px, #eee {{colwidth}}px, #eee {{colwidth*2}}px);"></div>
             </ion-scroll>
         </div>
 
