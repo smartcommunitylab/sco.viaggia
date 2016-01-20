@@ -23,6 +23,24 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.ic_m_extraurban_bus:before {
+    content: "\e936";
+}
+.ic_m_urban_bus:before {
+    content: "\e937";
+}
+.ic_m_train:before {
+    content: "\e938";
+}
+.ic_m_parking-lot:before {
+    content: "\e939";
+}
+.ic_m_bike:before {
+    content: "\e93a";
+}
+.ic_m_funivia:before {
+    content: "\e93b";
+}
 .ic_one:before {
 	content: "\e926";
 }

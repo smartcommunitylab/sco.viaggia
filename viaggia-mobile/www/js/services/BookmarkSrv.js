@@ -167,21 +167,35 @@ angular.module('viaggia.services.bookmarks', [])
             var ct = Config.getColorsTypes()['TRAIN'];
             color = ct.color;
             // TODO replace
-            icon = 'ic_train';
+            icon = 'ic_m_train';
             break;
           }
           case 'BUSSTOP': {
             var ct = Config.getColorsTypes()['BUS'];
             color = ct.color;
             // TODO replace
-            icon = 'ic_urban-bus';
+            icon = 'ic_m_urban_bus';
             break;
           }
           case 'BUSSUBURBANSTOP': {
             var ct = Config.getColorsTypes()['BUSSUBURNAN'];
             color = ct.color;
             // TODO replace
-            icon = 'ic_extraurban-bus';
+            icon = 'ic_m_extraurban_bus';
+            break;
+          }
+          case 'PARKING': {
+            var ct = Config.getColorsTypes()['PARKING'];
+            color = ct.color;
+            // TODO replace
+            icon = 'ic_m_parking-lot';
+            break;
+          }
+          case 'BIKESHARING': {
+            var ct = Config.getColorsTypes()['BIKESHARING'];
+            color = ct.color;
+            // TODO replace
+            icon = 'ic_m_bike';
             break;
           }
         }

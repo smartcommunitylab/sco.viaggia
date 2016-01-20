@@ -19,8 +19,10 @@ angular.module('viaggia.controllers.bookmarks', [])
       }); // No timeout delay necessary.
   });
 
-  $scope.delete = function(idx) {
+  $scope.delete = function(idx, $event) {
+    $scope.deleting = true;
     Config.loading();
+    $event.preventDefault();
     bookmarkService.removeBookmark(idx).then(function(list){
       $scope.bookmarks = list;
       $ionicHistory.clearCache();
@@ -50,7 +52,11 @@ angular.module('viaggia.controllers.bookmarks', [])
   }
 
   $scope.go = function (state) {
+    if ($scope.deleting) {
+      $scope.deleting = false;
+    } else {
       $location.path(state);
+    }
   }
 
 

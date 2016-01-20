@@ -120,6 +120,12 @@ angular.module('viaggia.services.conf', [])
             listIcon: 'img/ic_mt_walk.png',
             icon: 'img/ic_park_walk.png'
 
+        },
+        PARKING: {
+            color: '#36a3dc'
+        },
+        BIKESHARING: {
+            color: '#8cc04c'
         }
     };
 

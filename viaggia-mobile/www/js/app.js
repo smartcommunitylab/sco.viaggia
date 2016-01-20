@@ -297,10 +297,19 @@ angular.module('viaggia', [
                     }
                 }
             })
-
-        .state('app.parking', {
+            .state('app.parking', {
                 //                cache: false,
                 url: "/parking/:agencyId",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/parking.html",
+                        controller: 'ParkingCtrl'
+                    }
+                }
+            })
+            .state('app.parkingstation', {
+                //                cache: false,
+                url: "/parking/:agencyId/:id",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/parking.html",
@@ -317,7 +326,18 @@ angular.module('viaggia', [
                         controller: 'BikeSharingCtrl'
                     }
                 }
-            }).state('app.markets', {
+            })
+            .state('app.bikestation', {
+                //                cache: false,
+                url: "/bikesharing/:agencyId/:id",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/bikesharing.html",
+                        controller: 'BikeSharingCtrl'
+                    }
+                }
+            })
+          .state('app.markets', {
                 cache: false,
                 url: "/markets",
                 views: {
@@ -327,8 +347,7 @@ angular.module('viaggia', [
                     }
                 }
             })
-
-        .state('app.table1', {
+            .state('app.table1', {
                 cache: false,
                 url: "/table1",
                 views: {

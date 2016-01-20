@@ -4,6 +4,9 @@ angular.module('viaggia.services.info', [])
  * A SERVICE TO WORK WITH PARKING DATA FROM SERVER
  */
 .factory('parkingService', function ($http, $q, $filter, Config, DataManager, GeoLocate) {
+  var generateId = function(name) {
+    return name ? name.replace('/','_') : '_';
+  };
   return {
     getParkings : function(agencyId) {
       var deferred = $q.defer();
@@ -11,6 +14,9 @@ angular.module('viaggia.services.info', [])
                 Config.getHTTPConfig())
         .success(function(data) {
           if (data) {
+            data.forEach(function(d, idx) {
+                  d.id = generateId(d.name);
+            });
             var all = [];
             GeoLocate.locate().then(function(pos) {
               data.forEach(function(p) {
