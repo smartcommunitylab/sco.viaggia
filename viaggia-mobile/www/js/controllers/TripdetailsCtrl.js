@@ -1,21 +1,74 @@
 angular.module('viaggia.controllers.tripdetails', [])
 
-.controller('TripDetailsCtrl', function ($scope, $ionicModal, $filter, $ionicPopup, planService, mapService, Config, Toast, $filter, $ionicHistory, $state) {
+.controller('TripDetailsCtrl', function ($scope, $stateParams, $ionicModal, $filter, $ionicPopup, planService, mapService, Config, Toast, $filter, $ionicHistory, $state, $location, bookmarkService) {
     $scope.title = $filter('translate')('journey_detail');
-    var trip = planService.getSelectedJourney();
-    $scope.requestedFrom = planService.getName("from");
-    if (!$scope.requestedFrom) {
-        $scope.requestedFrom = trip.from.name;
+
+    var initMyTrip = function() {
+      planService.setEditInstance(null);
+      $scope.editMode = false;
+      planService.getTrip($stateParams.tripId).then(function(trip){
+        $scope.tripId = $stateParams.tripId;
+        $scope.tripName = trip.data.name;
+        $scope.bookmarkStyle = bookmarkService.getBookmarkStyle($location.path());
+        $scope.requestedFrom = trip.data.originalFrom.name;
+        $scope.requestedTo = trip.data.originalTo.name;
+
+        planService.setPlanConfigure(trip.data.originalRequest);
+        planService.process(trip.data.data, $scope.requestedFrom, $scope.requestedTo);
+        $scope.currentItinerary = trip.data.data;
+        $scope.pathLine = mapService.getTripPolyline(trip.data.data);
+        $scope.pathMarkers = mapService.getTripPoints(trip.data.data);
+
+        angular.extend($scope, {
+            center: {
+                lat: Config.getMapPosition().lat,
+                lng: Config.getMapPosition().long,
+                zoom: Config.getMapPosition().zoom
+            },
+            markers: $scope.pathMarkers,
+            events: {},
+            pathLine: $scope.pathLine
+        });
+      });
     }
-    if (!$scope.requestTo) {
-        $scope.requestTo = trip.to.name;
+
+    var initNewTrip = function() {
+      var trip = planService.getSelectedJourney();
+      $scope.trip = trip;
+      $scope.editMode = true;
+
+      $scope.requestedFrom = planService.getName("from");
+      if (!$scope.requestedFrom) {
+          $scope.requestedFrom = trip.from.name;
+      }
+      $scope.requestedTo = planService.getName("to");
+      if (!$scope.requestedTo) {
+          $scope.requestedTo = trip.to.name;
+      }
+      var editInstance = planService.getEditInstance();
+      $scope.tripId = editInstance ? editInstance.tripId : null;
+      planService.process(trip, $scope.requestedFrom, $scope.requestedTo);
+      $scope.currentItinerary = trip;
+      $scope.pathLine = mapService.getTripPolyline(trip);
+      $scope.pathMarkers = mapService.getTripPoints(trip);
+      angular.extend($scope, {
+          center: {
+              lat: Config.getMapPosition().lat,
+              lng: Config.getMapPosition().long,
+              zoom: Config.getMapPosition().zoom
+          },
+          markers: $scope.pathMarkers,
+          events: {},
+          pathLine: $scope.pathLine
+      });
     }
-    $scope.requestedTo = planService.getName("to");
-    $scope.tripId = planService.getTripId();
-    $scope.labelModify = $filter('translate')('journey_details_modify');
-    $scope.labelDelete = $filter('translate')('journey_details_delete');
-    planService.process(trip, $scope.requestFrom, $scope.requestTo);
-    $scope.currentItinerary = trip;
+
+    if ($stateParams.tripId) {
+      initMyTrip();
+    } else {
+      initNewTrip();
+    }
+
     $scope.toTime = function (millis) {
         return planService.getTimeStr(new Date(millis));
     };
@@ -48,6 +101,22 @@ angular.module('viaggia.controllers.tripdetails', [])
         $scope.modalMap.hide();
     }
     $scope.saveTrip = function () {
+        var editInstance = planService.getEditInstance();
+        if ($scope.tripId && editInstance) {
+          planService.saveTrip($scope.tripId, $scope.trip, editInstance.data.name, $scope.requestedFrom, $scope.requestedTo).then(function (res) {
+              planService.setEditInstance(null);
+              $scope.editMode = false;
+              $scope.tripId = res.tripId;
+              //toast saved
+              Toast.show($filter('translate')("tripsaved_message_feedback"), "short", "bottom");
+              $ionicHistory.nextViewOptions({
+                  historyRoot: true,
+                  disableBack: true
+              });
+              $state.go('app.mytrips');
+          });
+          return;
+        }
         $scope.data = {};
         $scope.showError = false;
         // Prompt popup code
@@ -58,7 +127,8 @@ angular.module('viaggia.controllers.tripdetails', [])
             scope: $scope,
             buttons: [
                 {
-                    text: $filter('translate')('save_trip_close_button')
+                    text: $filter('translate')('save_trip_close_button'),
+                    type: 'button-cancel'
                 },
                 {
                     text: '<b>' + $filter('translate')('save_trip_save_button') + '</b>',
@@ -75,7 +145,9 @@ angular.module('viaggia.controllers.tripdetails', [])
                                 }]
         }).then(function (res) {
             if (res) {
-                planService.saveTrip($scope.tripId, trip, res, $scope.requestedFrom, $scope.requestedTo).then(function (res) {
+                planService.saveTrip($scope.tripId, $scope.trip, res, $scope.requestedFrom, $scope.requestedTo).then(function (res) {
+                    planService.setEditInstance(null);
+                    $scope.editMode = false;
                     $scope.tripId = res.tripId;
                     //toast saved
                     Toast.show($filter('translate')("tripsaved_message_feedback"), "short", "bottom");
@@ -88,9 +160,14 @@ angular.module('viaggia.controllers.tripdetails', [])
     }
     $scope.modifyTrip = function () {
         //get configuration with tripid
-        planService.getTripFromMemory($scope.tripId).then(function (trip) {
+        planService.getTrip($scope.tripId).then(function (trip) {
+            planService.setName("from", $scope.requestedFrom);
+            planService.setName("to", $scope.requestedTo);
             planService.setPlanConfigure(trip.data.originalRequest);
-            $state.go('app.plan');
+            planService.setEditInstance(trip);
+//            planService.setTripId($scope.tripId);
+//            planService.setTripName(trip.data.name);
+            $state.go('app.plan',{replan:true});
         });
         //        planService.setName("from", $scope.requestedFrom);
         //        planService.setName("to", $scope.requestedTo);
@@ -115,20 +192,12 @@ angular.module('viaggia.controllers.tripdetails', [])
             //add polyline
         })
     }
-    $scope.pathLine = mapService.getTripPolyline(trip);
-    $scope.pathMarkers = mapService.getTripPoints(trip);
-    angular.extend($scope, {
-        center: {
-            lat: Config.getMapPosition().lat,
-            lng: Config.getMapPosition().long,
-            zoom: Config.getMapPosition().zoom
-        },
-        markers: $scope.pathMarkers,
-        events: {},
-        pathLine: $scope.pathLine
-    });
 
-
+    $scope.bookmark = function() {
+      bookmarkService.toggleBookmark($location.path(), $scope.tripName, 'TRIP').then(function(style) {
+        $scope.bookmarkStyle = style;
+      });
+    };
 
 
 

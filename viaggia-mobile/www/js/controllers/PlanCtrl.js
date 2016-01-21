@@ -1,6 +1,10 @@
 angular.module('viaggia.controllers.plan', [])
 
-.controller('PlanCtrl', function ($scope, $rootScope, Config, $q, $http, $ionicPlatform, $ionicPopup, $ionicModal, $ionicLoading, $filter, $state, $window, Toast, leafletData, planService, GeoLocate, mapService) {
+.controller('PlanCtrl', function ($scope, $rootScope, Config, $q, $http, $ionicPlatform, $ionicPopup, $ionicModal, $ionicLoading, $filter, $state, $stateParams, $window, Toast, leafletData, planService, GeoLocate, mapService) {
+    if (!$stateParams.replan) {
+      planService.setEditInstance(null);
+    }
+
     //$scope.refresh = true;
     $scope.plantitle = $filter('translate')('plan_title');
     $scope.preferences = Config.getPlanPreferences();
@@ -700,19 +704,14 @@ angular.module('viaggia.controllers.plan', [])
         setDefaultOptions();
     }
 
-    var oldConfig = null;
-    if (planService.getPlanConfigure() != null) {
-        oldConfig = planService.getPlanConfigure();
-    }
-
-    planService.setPlanConfigure(null);
-
-    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-        if ((toState.name == 'app.plan') && (fromState.name == 'app.tripdetails') && (oldConfig != null)) {
-            planService.setPlanConfigure(oldConfig);
-            $scope.planParams = planService.getPlanConfigure();
-            var planOptionConfig = Config.getPlanDefaultOptions();
-            manageOptions();
-        }
-    });
+//    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+//        var oldConfig = planService.getPlanConfigure();
+//
+//        if ((toState.name == 'app.plan') && (fromState.name == 'app.tripdetails') && (oldConfig != null)) {
+//            planService.setPlanConfigure(oldConfig);
+//            $scope.planParams = planService.getPlanConfigure();
+//            var planOptionConfig = Config.getPlanDefaultOptions();
+//            manageOptions();
+//        }
+//    });
 })

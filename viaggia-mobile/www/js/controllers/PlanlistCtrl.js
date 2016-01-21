@@ -29,7 +29,6 @@ angular.module('viaggia.controllers.planlist', [])
     });
     $scope.showPlan = function (journey) {
         planService.setSelectedJourney(journey);
-        planService.setTripId(null);
-        $state.go('app.tripdetails');
+        $state.go('app.newtripdetails');
     }
 })

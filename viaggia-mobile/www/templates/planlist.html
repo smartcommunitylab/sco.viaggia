@@ -2,7 +2,7 @@
     <ion-content id="content" has-header="true">
         <div class="row">
             <div class="col col-50">{{planConfigure.date}}</div>
-            <div class="col col-50 text-right"> {{planConfigure.departureTime}}</div>
+            <div class="col col-50 text-right"> {{planConfigure.departureTime  | date:'HH:mm'}}</div>
         </div>
         <div class="row">
             <div class="col col-50 ">{{nameFrom}}</div>

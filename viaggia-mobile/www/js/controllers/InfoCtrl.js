@@ -136,7 +136,8 @@ angular.module('viaggia.controllers.info', [])
             scope: $scope,
             buttons: [
                 {
-                    text: $filter('translate')('btn_close')
+                    text: $filter('translate')('btn_close'),
+                    type: 'button-close'
                 },
                 {
                     text: $filter('translate')('btn_nav_to'),
@@ -316,7 +317,8 @@ angular.module('viaggia.controllers.info', [])
             scope: $scope,
             buttons: [
                 {
-                    text: $filter('translate')('btn_close')
+                    text: $filter('translate')('btn_close'),
+                    type: 'button-close'
                 },
                 {
                     text: $filter('translate')('btn_nav_to'),

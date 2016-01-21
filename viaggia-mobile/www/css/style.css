@@ -970,3 +970,15 @@ ion-header-bar .title {
 .date-label {
     white-space: nowrap;
 }
+
+.parking-item-label {
+  line-height: normal;
+}
+
+.parking-item-label.highlight {
+  font-weight: bold;
+}
+
+.button-cancel {
+  background-color: #a3a2a2 !important;
+}

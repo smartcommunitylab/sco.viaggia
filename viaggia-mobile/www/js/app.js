@@ -167,6 +167,9 @@ angular.module('viaggia', [
             .state('app.plan', {
                 cache: false,
                 url: "/plan",
+                params: {
+                            'replan': false
+                        },
                 views: {
                     'menuContent': {
                         templateUrl: "templates/plan.html",
@@ -204,6 +207,15 @@ angular.module('viaggia', [
                     }
                 }
             }).state('app.tripdetails', {
+                cache: false,
+                url: "/tripdetails/:tripId",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/tripdetails.html",
+                        controller: 'TripDetailsCtrl'
+                    }
+                }
+            }).state('app.newtripdetails', {
                 cache: false,
                 url: "/tripdetails",
                 views: {
@@ -450,7 +462,7 @@ angular.module('viaggia', [
             popup_datepicker_sun: 'D',
             journey_details_sustainable: 'Itinerario sostenibile ',
             journey_details_modify: 'Modifica',
-            journey_details_delete: 'Cancella',
+            journey_details_delete: 'Elimina',
             journey_details_to: 'A ',
             journey_details_from: 'Da ',
             journey_details_from_bike: 'Prendi una bicicletta alla stazione di bike sharing ',
@@ -477,9 +489,9 @@ angular.module('viaggia', [
             err_too_many_markers: 'Too many objects on the map. Please zoom in.',
             lbl_lines: 'Corse:',
             lbl_line: 'Linea',
-            popup_delete_trip_message: 'Sicuro di voler cancellare il viaggio salvato?',
-            popup_delete_trip_title: 'Cancella',
-            tripdeleted_message_feedback: 'Il viaggio selezionato è stato cancellato',
+            popup_delete_trip_message: 'Sicuro di voler eleminare il viaggio salvato?',
+            popup_delete_trip_title: 'Elimina',
+            tripdeleted_message_feedback: 'Il viaggio selezionato è stato eliminato',
             my_trip_empty_list: 'Non ci sono viaggi salvati',
             my_trip_from: 'Da',
             my_trip_to: 'A',

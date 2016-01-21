@@ -121,6 +121,9 @@ angular.module('viaggia.services.conf', [])
             icon: 'img/ic_park_walk.png'
 
         },
+        TRIP: {
+            color: '#3bbacf'
+        },
         PARKING: {
             color: '#36a3dc'
         },

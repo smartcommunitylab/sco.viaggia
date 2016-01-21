@@ -50,7 +50,7 @@ angular.module('viaggia.controllers.common', [])
             buttons: [
                 {
                     text: $filter('translate')("pop_up_cancel"),
-                    type: 'button-custom'
+                    type: 'button-cancel'
                             },
                 {
                     text: $filter('translate')("pop_up_ok"),
