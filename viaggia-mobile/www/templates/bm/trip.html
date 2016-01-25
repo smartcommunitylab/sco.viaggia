@@ -1,4 +1,4 @@
-<div class="parking-item-label">{{m.label | translate}}</div>
-<div class="parking-item-label highlight">
-  <span>Partenza a ... da ...</span>
+<div class="bm-item-label">{{m.label | translate}}</div>
+<div class="bm-item-label highlight" ng-if="m.trip">
+  <span class="bm-detail">Partenza a {{m.trip.data.data.startime | date : 'HH:mm'}} da {{m.trip.data.originalRequest.from.name}}</span>
 </div>

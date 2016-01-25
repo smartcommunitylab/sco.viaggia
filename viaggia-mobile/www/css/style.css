@@ -971,14 +971,20 @@ ion-header-bar .title {
     white-space: nowrap;
 }
 
-.parking-item-label {
+.bm-item-label {
   line-height: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.parking-item-label.highlight {
+.bm-item-label.highlight {
   font-weight: bold;
 }
 
 .button-cancel {
   background-color: #a3a2a2 !important;
+}
+
+.bm-detail {
+    font-size: 12px;
 }

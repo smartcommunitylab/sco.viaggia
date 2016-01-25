@@ -21,7 +21,7 @@ angular.module('viaggia.controllers.home', [])
             },
             events: {}
         });
-        bookmarkService.getBookmarks().then(function(list) {
+        bookmarkService.getBookmarksRT().then(function(list) {
           var homeList = [];
           list.forEach(function(e) {if (e.home) homeList.push(e);});
           $scope.primaryLinks = homeList;//Config.getPrimaryLinks();

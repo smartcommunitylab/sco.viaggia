@@ -194,7 +194,7 @@ angular.module('viaggia.controllers.tripdetails', [])
     }
 
     $scope.bookmark = function() {
-      bookmarkService.toggleBookmark($location.path(), $scope.tripName, 'TRIP').then(function(style) {
+      bookmarkService.toggleBookmark($location.path(), $scope.tripName, 'TRIP', {tripId: $scope.tripId}).then(function(style) {
         $scope.bookmarkStyle = style;
       });
     };
