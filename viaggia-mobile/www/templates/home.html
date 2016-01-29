@@ -1,17 +1,8 @@
 <ion-view title="{{title}}">
     <ion-nav-buttons side="right">
+        <button ng-click="openNotifications()" class="button button-icon button-home "><i class="icon ic_notification home_notification"></i><span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{countNotification}}</span></button>
+    </ion-nav-buttons>
 
-        <!--
-        <nav mfb-menu position="tr" effect="zoomin" active-icon="ion-ios-close-empty" resting-icon="ion-ios-plus-empty" toggling-method="click">
-            <a mfb-button label="{{button.label}}" icon="{{button.icon}}" ng-repeat="button in buttons"></a>
-        </nav>
--->
-    </ion-nav-buttons>
-    <!--
-    <ion-nav-buttons side="right">
-        <button class="button button-balanced button-fab" ng-click="plan()"> <i class="icon ion-search"></i> </button>
-    </ion-nav-buttons>
--->
     <ion-content>
         <!--
         <div id="map-container" data-tap-disabled="true">
@@ -24,9 +15,11 @@
             <ion-item ng-repeat="m in primaryLinks" ng-last-repeat="primaryLinks" ng-click="go(m.state)">
                 <button class="button button-block">
                     <div class="row">
-                    <i class="col-center icon" ng-class="m.icon" style="{{'color: '+m.color}}"></i>
-                      <div class="col col-center"><ng-include src="getBookmarkItemTemplate(m.type)"></ng-include></div>
-                  </div>
+                        <i class="col-center icon" ng-class="m.icon" style="{{'color: '+m.color}}"></i>
+                        <div class="col col-center">
+                            <ng-include src="getBookmarkItemTemplate(m.type)"></ng-include>
+                        </div>
+                    </div>
                 </button>
             </ion-item>
 

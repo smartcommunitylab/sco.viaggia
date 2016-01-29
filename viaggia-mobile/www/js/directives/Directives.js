@@ -219,12 +219,12 @@ angular.module('viaggia.directives', [])
                 var keycode = e.keyCode || e.which;
 
                 switch (keycode) {
-                    case key.esc:
-                        // disable suggestions on escape
-                        scope.select();
-                        scope.setIndex(-1);
-                        scope.$apply();
-                        e.preventDefault();
+                case key.esc:
+                    // disable suggestions on escape
+                    scope.select();
+                    scope.setIndex(-1);
+                    scope.$apply();
+                    e.preventDefault();
                 }
             }, true);
 
@@ -248,72 +248,72 @@ angular.module('viaggia.directives', [])
 
                 // implementation of the up and down movement in the list of suggestions
                 switch (keycode) {
-                    case key.up:
-                        index = scope.getIndex() - 1;
-                        if (index < -1) {
-                            index = l - 1;
-                        } else if (index >= l) {
-                            index = -1;
-                            scope.setIndex(index);
-                            scope.preSelectOff();
-                            break;
-                        }
+                case key.up:
+                    index = scope.getIndex() - 1;
+                    if (index < -1) {
+                        index = l - 1;
+                    } else if (index >= l) {
+                        index = -1;
                         scope.setIndex(index);
-
-                        if (index !== -1)
-                            scope.preSelect(angular.element(angular.element(this).find('li')[index]).text());
-
-                        scope.$apply();
-
+                        scope.preSelectOff();
                         break;
-                    case key.down:
-                        index = scope.getIndex() + 1;
-                        if (index < -1) {
-                            index = l - 1;
-                        } else if (index >= l) {
-                            index = -1;
-                            scope.setIndex(index);
-                            scope.preSelectOff();
-                            scope.$apply();
-                            break;
-                        }
+                    }
+                    scope.setIndex(index);
+
+                    if (index !== -1)
+                        scope.preSelect(angular.element(angular.element(this).find('li')[index]).text());
+
+                    scope.$apply();
+
+                    break;
+                case key.down:
+                    index = scope.getIndex() + 1;
+                    if (index < -1) {
+                        index = l - 1;
+                    } else if (index >= l) {
+                        index = -1;
                         scope.setIndex(index);
-
-                        if (index !== -1) {
-                            scope.preSelect(angular.element(angular.element(this).find('li')[index]).text());
-                        }
-
-                        break;
-                    case key.left:
-                        break;
-                    case key.right:
-                    case key.enter:
-                    case key.tab:
-                        index = scope.getIndex();
-                        // scope.preSelectOff();
-                        if (index !== -1) {
-                            scope.select(angular.element(angular.element(this).find('li')[index]).text());
-                            if (keycode == key.enter) {
-                                e.preventDefault();
-                            }
-                        } else {
-                            if (keycode == key.enter) {
-                                scope.select();
-                            }
-                        }
-                        scope.setIndex(-1);
+                        scope.preSelectOff();
                         scope.$apply();
+                        break;
+                    }
+                    scope.setIndex(index);
 
-                        break;
-                    case key.esc:
-                        // disable suggestions on escape
-                        scope.select();
-                        scope.setIndex(-1);
-                        scope.$apply();
-                        e.preventDefault();
-                        break;
-                    default:
-                        return;
+                    if (index !== -1) {
+                        scope.preSelect(angular.element(angular.element(this).find('li')[index]).text());
+                    }
+
+                    break;
+                case key.left:
+                    break;
+                case key.right:
+                case key.enter:
+                case key.tab:
+                    index = scope.getIndex();
+                    // scope.preSelectOff();
+                    if (index !== -1) {
+                        scope.select(angular.element(angular.element(this).find('li')[index]).text());
+                        if (keycode == key.enter) {
+                            e.preventDefault();
+                        }
+                    } else {
+                        if (keycode == key.enter) {
+                            scope.select();
+                        }
+                    }
+                    scope.setIndex(-1);
+                    scope.$apply();
+
+                    break;
+                case key.esc:
+                    // disable suggestions on escape
+                    scope.select();
+                    scope.setIndex(-1);
+                    scope.$apply();
+                    e.preventDefault();
+                    break;
+                default:
+                    return;
                 }
             });
         },
@@ -342,35 +342,63 @@ angular.module('viaggia.directives', [])
 })
 
 .filter('highlight', ['$sce', function ($sce) {
-    return function (input, searchParam) {
-        if (typeof input === 'function') return '';
-        if (searchParam) {
-            var words = '(' +
-                searchParam.split(/\ /).join(' |') + '|' +
-                searchParam.split(/\ /).join('|') +
-                ')',
-                exp = new RegExp(words, 'gi');
-            if (words.length) {
-                input = input.replace(exp, "<span class=\"highlight\">$1</span>");
+        return function (input, searchParam) {
+            if (typeof input === 'function') return '';
+            if (searchParam) {
+                var words = '(' +
+                    searchParam.split(/\ /).join(' |') + '|' +
+                    searchParam.split(/\ /).join('|') +
+                    ')',
+                    exp = new RegExp(words, 'gi');
+                if (words.length) {
+                    input = input.replace(exp, "<span class=\"highlight\">$1</span>");
+                }
+            }
+            return $sce.trustAsHtml(input);
+        };
+}])
+    .directive('browseTo', function ($ionicGesture) {
+        return {
+            restrict: 'A',
+            link: function ($scope, $element, $attrs) {
+                var handleTap = function (e) {
+                    var inAppBrowser = window.open(encodeURI($attrs.browseTo), '_system');
+                };
+                var tapGesture = $ionicGesture.on('tap', handleTap, $element);
+                $scope.$on('$destroy', function () {
+                    // Clean up - unbind drag gesture handler
+                    $ionicGesture.off(tapGesture, 'tap', handleTap);
+                });
             }
         }
-        return $sce.trustAsHtml(input);
-    };
+    })
+
+.directive('compile', ['$compile', function ($compile) {
+        return function (scope, element, attrs) {
+            scope.$watch(
+                function (scope) {
+                    return scope.$eval(attrs.compile);
+                },
+                function (value) {
+                    element.html(value);
+                    $compile(element.contents())(scope);
+                }
+            )
+        };
 }])
+    .directive('suggestion', function () {
+        return {
+            restrict: 'A',
+            require: '^placeautocomplete', // ^look for controller on parents element
+            link: function (scope, element, attrs, autoCtrl) {
+                element.bind('mouseenter', function () {
+                    autoCtrl.preSelect(attrs.val);
+                    autoCtrl.setIndex(attrs.index);
+                });
 
-.directive('suggestion', function () {
-    return {
-        restrict: 'A',
-        require: '^placeautocomplete', // ^look for controller on parents element
-        link: function (scope, element, attrs, autoCtrl) {
-            element.bind('mouseenter', function () {
-                autoCtrl.preSelect(attrs.val);
-                autoCtrl.setIndex(attrs.index);
-            });
-
-            element.bind('mouseleave', function () {
-                autoCtrl.preSelectOff();
-            });
-        }
-    };
-});
+                element.bind('mouseleave', function () {
+                    autoCtrl.preSelectOff();
+                });
+            }
+        };
+    });

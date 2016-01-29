@@ -1,0 +1,342 @@
+{
+    "notifications": [
+        {
+            "id": "56a206abebc23d3da4e4604b",
+            "updateTime": 1453459115063,
+            "version": 123,
+            "user": null,
+            "title": "Batch Geocode",
+            "description": "Test App",
+            "type": "mobility.trento",
+            "content": {
+                "type": "announcement",
+                "from": 1447196400000,
+                "to": 1485990000000
+            },
+            "timestamp": 1453459115063,
+            "starred": false,
+            "labelIds": [],
+            "channelIds": [
+        "mobility.trento"
+      ],
+            "entities": [],
+            "author": {
+                "appId": "mobility.trento",
+                "userId": null
+            },
+            "readed": false
+    },
+        {
+            "id": "56a20e44ebc23d3da4e4604f",
+            "updateTime": 1453461060656,
+            "version": 127,
+            "user": null,
+            "title": "Batch Geocode",
+            "description": "Test App",
+            "type": "mobility.trento",
+            "content": {
+                "type": "announcement",
+                "from": 1447196400000,
+                "to": 1485990000000
+            },
+            "timestamp": 1453461060656,
+            "starred": false,
+            "labelIds": [],
+            "channelIds": [
+        "mobility.trento"
+      ],
+            "entities": [],
+            "author": {
+                "appId": "mobility.trento",
+                "userId": null
+            },
+            "readed": false
+    },
+        {
+            "id": "56a20ea9ebc23d3da4e46050",
+            "updateTime": 1453461161072,
+            "version": 128,
+            "user": null,
+            "title": "Batch Geocode",
+            "description": "Test App",
+            "type": "mobility.trento",
+            "content": {
+                "type": "announcement",
+                "from": 1447196400000,
+                "to": 1485990000000
+            },
+            "timestamp": 1453461161072,
+            "starred": false,
+            "labelIds": [],
+            "channelIds": [
+        "mobility.trento"
+      ],
+            "entities": [],
+            "author": {
+                "appId": "mobility.trento",
+                "userId": null
+            },
+            "readed": false
+    },
+        {
+            "id": "56a2109debc27ebe6392a312",
+            "updateTime": 1453461661715,
+            "version": 131,
+            "user": null,
+            "title": "Batch Geocode",
+            "description": "Test App",
+            "type": "mobility.trento",
+            "content": {
+                "type": "announcement",
+                "from": 1447196400000,
+                "to": 1485990000000
+            },
+            "timestamp": 1453461661715,
+            "starred": false,
+            "labelIds": [],
+            "channelIds": [
+        "mobility.trento"
+      ],
+            "entities": [],
+            "author": {
+                "appId": "mobility.trento",
+                "userId": null
+            },
+            "readed": false
+    },
+        {
+            "id": "56a2247aebc2d3230ec32d82",
+            "updateTime": 1453466746377,
+            "version": 136,
+            "user": null,
+            "title": "Batch Geocode",
+            "description": "Test App",
+            "type": "mobility.trento",
+            "content": {
+                "type": "announcement",
+                "from": 1447196400000,
+                "to": 1485990000000
+            },
+            "timestamp": 1453466746377,
+            "starred": false,
+            "labelIds": [],
+            "channelIds": [
+        "mobility.trento"
+      ],
+            "entities": [],
+            "author": {
+                "appId": "mobility.trento",
+                "userId": null
+            },
+            "readed": false
+    },
+        {
+            "id": "56a22f3aebc224abc5dd84e1",
+            "updateTime": 1453469498621,
+            "version": 140,
+            "user": null,
+            "title": "Batch Geocode",
+            "description": "Test App",
+            "type": "mobility.trento",
+            "content": {
+                "type": "announcement",
+                "from": 1447196400000,
+                "to": 1485990000000
+            },
+            "timestamp": 1453469498621,
+            "starred": false,
+            "labelIds": [],
+            "channelIds": [
+        "mobility.trento"
+      ],
+            "entities": [],
+            "author": {
+                "appId": "mobility.trento",
+                "userId": null
+            },
+            "readed": false
+    },
+        {
+            "id": "56a22f94ebc224abc5dd84e3",
+            "updateTime": 1453469588324,
+            "version": 142,
+            "user": null,
+            "title": "Batch Geocode",
+            "description": "Test App",
+            "type": "mobility.trento",
+            "content": {
+                "type": "announcement",
+                "from": 1447196400000,
+                "to": 1485990000000
+            },
+            "timestamp": 1453469588324,
+            "starred": false,
+            "labelIds": [],
+            "channelIds": [
+        "mobility.trento"
+      ],
+            "entities": [],
+            "author": {
+                "appId": "mobility.trento",
+                "userId": null
+            },
+            "readed": false
+    },
+        {
+            "id": "56a23077ebc224abc5dd84e5",
+            "updateTime": 1453469815291,
+            "version": 144,
+            "user": null,
+            "title": "Batch Geocode",
+            "description": "All work and no play makes Jack a dull boy",
+            "type": "mobility.trento",
+            "content": {
+                "type": "announcement",
+                "from": 1447196400000,
+                "to": 1485990000000
+            },
+            "timestamp": 1453469815291,
+            "starred": false,
+            "labelIds": [],
+            "channelIds": [
+        "mobility.trento"
+      ],
+            "entities": [],
+            "author": {
+                "appId": "mobility.trento",
+                "userId": null
+            },
+            "readed": false
+    },
+        {
+            "id": "56a230bbebc224abc5dd84e7",
+            "updateTime": 1453469883219,
+            "version": 146,
+            "user": null,
+            "title": "Batch Geocode",
+            "description": "prova",
+            "type": "mobility.trento",
+            "content": {
+                "type": "announcement",
+                "from": 1447196400000,
+                "to": 1485990000000
+            },
+            "timestamp": 1453469883219,
+            "starred": false,
+            "labelIds": [],
+            "channelIds": [
+        "mobility.trento"
+      ],
+            "entities": [],
+            "author": {
+                "appId": "mobility.trento",
+                "userId": null
+            },
+            "readed": false
+    },
+        {
+            "id": "56a230deebc224abc5dd84e8",
+            "updateTime": 1453469918986,
+            "version": 147,
+            "user": null,
+            "title": "Batch Geocode",
+            "description": "prova",
+            "type": "mobility.trento",
+            "content": {
+                "type": "announcement",
+                "from": 1447196400000,
+                "to": 1485990000000
+            },
+            "timestamp": 1453469918986,
+            "starred": false,
+            "labelIds": [],
+            "channelIds": [
+        "mobility.trento"
+      ],
+            "entities": [],
+            "author": {
+                "appId": "mobility.trento",
+                "userId": null
+            },
+            "readed": false
+    },
+        {
+            "id": "56a230ebebc224abc5dd84e9",
+            "updateTime": 1453469931585,
+            "version": 148,
+            "user": null,
+            "title": "Batch Geocode",
+            "description": "prova",
+            "type": "mobility.trento",
+            "content": {
+                "type": "announcement",
+                "from": 1447196400000,
+                "to": 1485990000000
+            },
+            "timestamp": 1453469931585,
+            "starred": false,
+            "labelIds": [],
+            "channelIds": [
+        "mobility.trento"
+      ],
+            "entities": [],
+            "author": {
+                "appId": "mobility.trento",
+                "userId": null
+            },
+            "readed": false
+    },
+        {
+            "id": "56a23168ebc224abc5dd84ea",
+            "updateTime": 1453470056713,
+            "version": 149,
+            "user": null,
+            "title": "Batch Geocode",
+            "description": "prova",
+            "type": "mobility.trento",
+            "content": {
+                "type": "announcement",
+                "from": 1447196400000,
+                "to": 1485990000000
+            },
+            "timestamp": 1453470056713,
+            "starred": false,
+            "labelIds": [],
+            "channelIds": [
+        "mobility.trento"
+      ],
+            "entities": [],
+            "author": {
+                "appId": "mobility.trento",
+                "userId": null
+            },
+            "readed": false
+    },
+        {
+            "id": "56a23237ebc224abc5dd84eb",
+            "updateTime": 1453470263279,
+            "version": 150,
+            "user": null,
+            "title": "Batch Geocode",
+            "description": "prova",
+            "type": "mobility.trento",
+            "content": {
+                "type": "announcement",
+                "from": 1447196400000,
+                "to": 1485990000000
+            },
+            "timestamp": 1453470263279,
+            "starred": false,
+            "labelIds": [],
+            "channelIds": [
+        "mobility.trento"
+      ],
+            "entities": [],
+            "author": {
+                "appId": "mobility.trento",
+                "userId": null
+            },
+            "readed": false
+    }
+  ]
+}

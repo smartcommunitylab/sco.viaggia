@@ -76,13 +76,14 @@ angular.module('viaggia', [
     'viaggia.services.timetable',
     'viaggia.services.markets',
     'viaggia.services.info',
+    'viaggia.services.notification',
     'viaggia.directives',
     'viaggia.services.geo',
     'viaggia.services.bookmarks',
     'viaggia.filters'
 ])
 
-.run(function ($ionicPlatform, $cordovaFile, $rootScope, $translate, DataManager, Config, GeoLocate) {
+.run(function ($ionicPlatform, $cordovaFile, $rootScope, $translate, DataManager, Config, GeoLocate, notificationService) {
 
         $rootScope.locationWatchID = undefined;
 
@@ -143,6 +144,8 @@ angular.module('viaggia', [
                     navigator.splashscreen.hide();
                 }
             }, 1500);
+            notificationService.register();
+
         });
     })
     .config(function ($stateProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider) {
@@ -168,8 +171,8 @@ angular.module('viaggia', [
                 cache: false,
                 url: "/plan",
                 params: {
-                            'replan': false
-                        },
+                    'replan': false
+                },
                 views: {
                     'menuContent': {
                         templateUrl: "templates/plan.html",
@@ -251,13 +254,25 @@ angular.module('viaggia', [
                         controller: 'BookmarksCtrl'
                     }
                 }
-            }).state('app.notfications', {
+            }).state('app.notifications', {
                 cache: false,
-                url: "/notfications",
+                url: "/notifications",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/notifications.html",
-                        controller: 'NotficationsCtrl'
+                        controller: 'NotificationsCtrl'
+                    }
+                }
+            }).state('app.notificationdetail', {
+                cache: false,
+                url: "/notificationdetail",
+                params: {
+                    notification: null
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/notification.html",
+                        controller: 'NotificationDetailCtrl'
                     }
                 }
             })
@@ -349,7 +364,7 @@ angular.module('viaggia', [
                     }
                 }
             })
-          .state('app.markets', {
+            .state('app.markets', {
                 cache: false,
                 url: "/markets",
                 views: {
@@ -545,7 +560,11 @@ angular.module('viaggia', [
             error_select_type_feedback: 'Selezionare almeno un mezzo di trasporto',
             planlist_empty_list: 'La ricerca non ha prodotto risultati validi',
             no_tt: 'In questa giornata non ci sono corse disponibili per questa linea.',
-            lbl_no_trips: 'Non sono previste corse nelle prossime 24 ore.'
+            lbl_no_trips: 'Non sono previste corse nelle prossime 24 ore.',
+            notifications_empty_list: 'Non sono presenti notifiche',
+            notifications_title: 'Notifiche',
+            notifications_detail_title: 'Dettagli notifica'
+
 
 
         });
@@ -702,7 +721,11 @@ angular.module('viaggia', [
             error_select_type_feedback: 'Select at least one mean of transport ',
             planlist_empty_list: 'Your search did not match any journey',
             no_tt: 'No trips available for this line on this date.',
-            lbl_no_trips: 'No lines due in the next 24 hours.'
+            lbl_no_trips: 'No lines due in the next 24 hours.',
+            notifications_empty_list: 'No notifications available',
+            notifications_title: 'Notifications',
+            notifications_detail_title: 'Notification detail'
+
 
         });
 

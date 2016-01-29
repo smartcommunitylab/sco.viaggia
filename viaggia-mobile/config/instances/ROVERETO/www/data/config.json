@@ -1,9 +1,12 @@
 {
     "apptoken": "viaggiarovereto",
     "appid": "rovereto",
+    "messagingAppId": "mobility.rovereto",
+    "senderID": "12453",
     "appversion": "1.0.1",
     "appname": "Viaggia Rovereto",
     "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
+    "messagingServerURL": "https://dev.smartcommunitylab.it/core.communicator",
     "smartcheck_options": [
         1,
         4,
@@ -17,7 +20,7 @@
         ]
     },
     "plan_policy": "Rovereto",
-    "agencies": [5,6,10,16,17],
+    "agencies": [5, 6, 10, 16, 17],
     "extraurban_agencies": [17],
     "broadcast_notifications_options": [
         1,
@@ -30,20 +33,70 @@
     "zoom_map": 15,
     "db_version": 25,
     "visualization": {
-      "primaryLinks": [
-        {"state":"/app/plan","label":"menu_plan", "icon": "ic_search", "color": "#3BBACF"},
-        {"state":"/app/ttlist/urbano","label":"menu_real_time_bus_urban", "icon": "ic_urban-bus", "color": "#EB8919"},
-        {"state":"/app/ttlist/trains","label":"menu_real_time_train", "icon": "ic_train", "color": "#cd251c"},
-        {"state":"/app/ttlist/extraurbano","label":"menu_real_time_bus_suburban", "icon": "ic_extraurban-bus", "color": "#00588e"},
-        {"state":"/app/parking/COMUNE_DI_ROVERETO","label":"menu_real_time_park", "icon": "ic_parking-lot", "color": "#164286"},
-        {"state":"/app/bikesharing/rovereto","label":"menu_real_time_bike", "icon": "ic_bike", "color": "#922d66"}
+        "primaryLinks": [
+            {
+                "state": "/app/plan",
+                "label": "menu_plan",
+                "icon": "ic_search",
+                "color": "#3BBACF"
+            },
+            {
+                "state": "/app/ttlist/urbano",
+                "label": "menu_real_time_bus_urban",
+                "icon": "ic_urban-bus",
+                "color": "#EB8919"
+            },
+            {
+                "state": "/app/ttlist/trains",
+                "label": "menu_real_time_train",
+                "icon": "ic_train",
+                "color": "#cd251c"
+            },
+            {
+                "state": "/app/ttlist/extraurbano",
+                "label": "menu_real_time_bus_suburban",
+                "icon": "ic_extraurban-bus",
+                "color": "#00588e"
+            },
+            {
+                "state": "/app/parking/COMUNE_DI_ROVERETO",
+                "label": "menu_real_time_park",
+                "icon": "ic_parking-lot",
+                "color": "#164286"
+            },
+            {
+                "state": "/app/bikesharing/rovereto",
+                "label": "menu_real_time_bike",
+                "icon": "ic_bike",
+                "color": "#922d66"
+            }
       ],
-      "infomenu" : [
-        {"state":"/app/ttlist/urbano","label":"menu_real_time_bus_urban", "icon": "ic_urban-bus"},
-        {"state":"/app/ttlist/extraurbano","label":"menu_real_time_bus_suburban", "icon": "ic_extraurban-bus"},
-        {"state":"/app/ttlist/trains","label":"menu_real_time_train", "icon": "ic_train"},
-        {"state":"/app/bikesharing/rovereto","label":"menu_real_time_bike", "icon": "ic_bike"},
-        {"state":"/app/parking/COMUNE_DI_ROVERETO","label":"menu_real_time_park", "icon": "ic_parking-lot"}
+        "infomenu": [
+            {
+                "state": "/app/ttlist/urbano",
+                "label": "menu_real_time_bus_urban",
+                "icon": "ic_urban-bus"
+            },
+            {
+                "state": "/app/ttlist/extraurbano",
+                "label": "menu_real_time_bus_suburban",
+                "icon": "ic_extraurban-bus"
+            },
+            {
+                "state": "/app/ttlist/trains",
+                "label": "menu_real_time_train",
+                "icon": "ic_train"
+            },
+            {
+                "state": "/app/bikesharing/rovereto",
+                "label": "menu_real_time_bike",
+                "icon": "ic_bike"
+            },
+            {
+                "state": "/app/parking/COMUNE_DI_ROVERETO",
+                "label": "menu_real_time_park",
+                "icon": "ic_parking-lot"
+            }
       ]
     }
 }

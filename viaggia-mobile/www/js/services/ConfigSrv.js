@@ -3,7 +3,7 @@ angular.module('viaggia.services.conf', [])
 .factory('Config', function ($q, $http, $window, $filter, $rootScope, $ionicLoading) {
 
     var isDarkColor = function (color) {
-      if (!color) return true;
+        if (!color) return true;
         var c = color.substring(1); // strip #
         var rgb = parseInt(c, 16); // convert rrggbb to decimal
         var r = (rgb >> 16) & 0xff; // extract red
@@ -34,29 +34,29 @@ angular.module('viaggia.services.conf', [])
     var GEOCODER_URL = 'https://os.smartcommunitylab.it/core.geocoder/spring';
     var APP_BUILD = '';
     var PLAN_TYPES = ['WALK', 'TRANSIT', 'CAR', 'BICYCLE', 'SHAREDCAR', 'SHAREDBIKE'];
-    var convertMeans = function(means) {
-    	res = [];
-    	if (means.indexOf('TRANSIT') >= 0) {
-          res.push('TRANSIT');
+    var convertMeans = function (means) {
+        res = [];
+        if (means.indexOf('TRANSIT') >= 0) {
+            res.push('TRANSIT');
         }
-    	if (means.indexOf('CAR') >= 0) {
-          res.push('CAR');
-          res.push('CARWITHPARKING');
+        if (means.indexOf('CAR') >= 0) {
+            res.push('CAR');
+            res.push('CARWITHPARKING');
         }
-    	if (means.indexOf('SHAREDCAR') >= 0) {
-          res.push('SHAREDCAR_WITHOUT_STATION');
+        if (means.indexOf('SHAREDCAR') >= 0) {
+            res.push('SHAREDCAR_WITHOUT_STATION');
         }
-    	if (means.indexOf('WALK') >= 0) {
-          res.push('WALK');
+        if (means.indexOf('WALK') >= 0) {
+            res.push('WALK');
         }
-    	if (means.indexOf('BICYCLE') >= 0) {
-          res.push('BICYCLE');
+        if (means.indexOf('BICYCLE') >= 0) {
+            res.push('BICYCLE');
         }
-    	if (means.indexOf('SHAREDBIKE') >= 0) {
-          res.push('SHAREDBIKE');
-          res.push('SHAREDBIKE_WITHOUT_STATION');
+        if (means.indexOf('SHAREDBIKE') >= 0) {
+            res.push('SHAREDBIKE');
+            res.push('SHAREDBIKE_WITHOUT_STATION');
         }
-    	return res;
+        return res;
     };
 
     var PLAN_PREFERENCES = [
@@ -204,8 +204,8 @@ angular.module('viaggia.services.conf', [])
                 zoom: mapJsonConfig['zoom_map']
             };
         },
-        getPlanPolicy: function() {
-          return mapJsonConfig['plan_policy'];
+        getPlanPolicy: function () {
+            return mapJsonConfig['plan_policy'];
         },
         getGeocoderURL: function () {
             return GEOCODER_URL;
@@ -217,18 +217,27 @@ angular.module('viaggia.services.conf', [])
         getColorsTypes: function () {
             return COLORS_TRIP;
         },
-        getColorType: function(transportType, agencyId) {
-          if (transportType == 'BUS') {
-              if (this.getExtraurbanAgencies() && this.getExtraurbanAgencies().indexOf(parseInt(agencyId)) != -1)
-                  return COLORS_TRIP['BUSSUBURBAN'];
-          }
-          return COLORS_TRIP[transportType];
+        getColorType: function (transportType, agencyId) {
+            if (transportType == 'BUS') {
+                if (this.getExtraurbanAgencies() && this.getExtraurbanAgencies().indexOf(parseInt(agencyId)) != -1)
+                    return COLORS_TRIP['BUSSUBURBAN'];
+            }
+            return COLORS_TRIP[transportType];
         },
         getPlanPreferences: function () {
             return PLAN_PREFERENCES;
         },
         getAppId: function () {
             return mapJsonConfig["appid"];
+        },
+        getMessagingAppId: function () {
+            return mapJsonConfig["messagingAppId"];
+        },
+        getMessagingServerURL: function () {
+            return mapJsonConfig["messagingServerURL"];
+        },
+        getSenderID: function () {
+            return mapJsonConfig["senderID"];
         },
         getAppName: function () {
             return mapJsonConfig["appname"];

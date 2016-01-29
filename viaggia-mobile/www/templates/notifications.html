@@ -1,5 +1,20 @@
-<ion-view id="notifications">
+<ion-view id="notifications" title="{{'notifications_title' | translate}}">
     <ion-content id="content" has-header="true">
         Notifications
+        <!--    notification list-->
+        <div ng-hide="notifications.length>0" class="text-center">
+            <h4>{{'notifications_empty_list'|translate}}</h4>
+        </div>
+
+        <ion-list class="animate-ripple" ng-hide="notifications.length==0">
+
+            <div class="card" ng-repeat="notification in notifications | orderBy:'updateTime':true track by $index" ng-last-repeat="notifications" ng-click="showNotification(notification)">
+                <div> {{notification.updateTime| date:' dd-MM-yyyy'}} <i class="icon ic_new alignright" style="font-size:25px;" ng-hide="isInArray($index,notification.id)"></i></div>
+                <div>{{notification.title }}</div>
+
+            </div>
+        </ion-list>
+        <ion-infinite-scroll ng-if="!noMoreNotificationsAvailable" on-infinite="loadMore()" distance="1%">
+        </ion-infinite-scroll>
     </ion-content>
 </ion-view>
