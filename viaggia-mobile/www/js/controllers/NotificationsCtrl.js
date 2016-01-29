@@ -14,6 +14,9 @@ angular.module('viaggia.controllers.notifications', [])
         }
 
         $scope.showNotification = function (notification) {
+
+            //add element read in the object
+            notification['seen'] = true;
             $state.go('app.notificationdetail', {
                 notification: notification
             });
