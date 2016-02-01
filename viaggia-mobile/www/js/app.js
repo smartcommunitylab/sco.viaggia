@@ -255,7 +255,7 @@ angular.module('viaggia', [
                     }
                 }
             }).state('app.notifications', {
-                cache: false,
+                cache: true,
                 url: "/notifications",
                 views: {
                     'menuContent': {

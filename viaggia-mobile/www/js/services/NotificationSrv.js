@@ -26,7 +26,7 @@ angular.module('viaggia.services.notification', [])
 
     // Register to GCM
     notificationService.register = function () {
-        console.log("registration xxxxxxxxxxx")
+        console.log("registration")
         var push = PushNotification.init({
             android: {
                 senderID: Config.getSenderID(),
@@ -81,10 +81,12 @@ angular.module('viaggia.services.notification', [])
                 '&position=' + 0 +
                 '&count=' + numberNotification, Config.getHTTPConfig())
             .success(function (data) {
-                var lastUpdateTime = new Date();
-                localStorage.setItem('lastUpdateTime', lastUpdateTime);
-                //update the local notifications and not readed index
-                localStorage.setItem('notifications', JSON.stringify(data.notifications));
+                if (data.notifications) {
+                    var lastUpdateTime = new Date(data.notifications[0].updateTime);
+                    localStorage.setItem('lastUpdateTime', lastUpdateTime);
+                    //update the local notifications and not readed index
+                    localStorage.setItem('notifications', JSON.stringify(data.notifications));
+                }
                 console.log('updated');
             })
             .error(function (err) {

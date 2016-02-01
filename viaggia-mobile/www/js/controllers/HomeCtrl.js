@@ -7,35 +7,41 @@ angular.module('viaggia.controllers.home', [])
             notificationInit();
         }, false);
     });
+
     //aggoiorna le notifiche
     var notificationInit = function () {
         //scrico le ultime di una settimana
         if (localStorage.getItem('lastUpdateTime') == null) {
-            lastUpdateTime = new Date();
-            lastUpdateTime.setDate(lastUpdateTime.getDate() - 7);
+            date = new Date();
+            date.setDate(date.getDate() - 7);
+            lastUpdateTime = date.getTime();
         } else {
-            lastUpdateTime = new Date(localStorage.getItem('lastUpdateTime'));
+            lastUpdateTime = localStorage.getItem('lastUpdateTime');
         }
-        notificationService.getNotifications(lastUpdateTime.getTime(), 1).then(function (items) {
-            $scope.notifications = items;
-            $scope.notificationsIsRead = JSON.parse(localStorage.getItem('notificationsIsRead')) || [];
+        notificationService.getNotifications(lastUpdateTime, 0).then(function (items) {
+            //            $scope.notifications = items;
+            //            $scope.notificationsIsRead = JSON.parse(localStorage.getItem('notificationsIsRead')) || [];
 
             //solo le nuove
-            //            $rootScope.countNotification = $scope.notifications.length - $scope.notificationsIsRead.length;
-            $rootScope.countNotification = $scope.notifications.length;
-            lastUpdateTime = new Date();
+            //            $rootScope.countNotification = $scope.notifications.length;
+            $rootScope.countNotification = items.length;
+            //last update time is the last time of notification
+            if (items.length > 0) {
+
+                lastUpdateTime = items[0].updateTime + 1;
+            }
             localStorage.setItem('lastUpdateTime', lastUpdateTime);
 
         }, function (err) {
-            $scope.notifications = JSON.parse(localStorage.getItem('notifications')) || [];
-            $scope.notificationsIsRead = JSON.parse(localStorage.getItem('notificationsIsRead')) || [];
-
-            //            $rootScope.countNotification = $scope.notifications.length - $scope.notificationsIsRead.length;
-            $rootScope.countNotification = $scope.notifications.length;
-            lastUpdateTime = new Date();
-            localStorage.setItem('lastUpdateTime', lastUpdateTime);
+            //$scope.notifications = JSON.parse(localStorage.getItem('notifications')) || [];
+            //            $scope.notificationsIsRead = JSON.parse(localStorage.getItem('notificationsIsRead')) || [];
+            //$rootScope.countNotification = $scope.notifications.length;
+            $rootScope.countNotification = 0;
+            //            lastUpdateTime = new Date();
+            //            localStorage.setItem('lastUpdateTime', lastUpdateTime);
         });
     }
+
     $scope.buttons = [{
         label: $filter('translate')('menu_news'),
         icon: 'ic_news'
