@@ -1,15 +1,12 @@
 <ion-view id="notification" title="{{'notifications_detail_title' | translate}}">
     <ion-content id="content" has-header="true">
-        <div class="card">
-            <div class="item item-divider">
+        <div class="notification-container">
+            <div class="notification-title">
                 {{notification.title}}
             </div>
-            <div class="item item-text-wrap" compile="notification.content._html">
+            <div class="notification-content" compile="notification.content._html">
             </div>
         </div>
-<!--
-<div class="notification-title">{{notification.title}}</div>
-<div compile="notification.content._html" class="notification-description"></div>
--->
+
     </ion-content>
 </ion-view>
