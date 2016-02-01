@@ -1,1 +1,7 @@
-<span>{{m.label | translate}}</span>
+<div class="bm-item-label">{{m.label | translate}}</div>
+<div class="bm-item-label highlight" ng-if="m.parking">
+  <span class="bm-detail">{{m.parking.bikes}} {{'bikesharings_bikes' | translate}} -
+        {{m.parking.slots}} {{'bikesharings_free_slots' | translate}}
+  </span>
+</div>
+

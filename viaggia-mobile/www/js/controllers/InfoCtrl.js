@@ -25,7 +25,7 @@ angular.module('viaggia.controllers.info', [])
                     e.availLevel = e.slotsAvailable <= 5 ? 'avail-red' : e.slotsAvailable > 20 ? 'avail-green' : 'avail-yellow';
                 }
                 if (decodeURI(selectedId) == e.id) {
-                  $scope.select(e,$location.path());
+                  $scope.select(e);
                 }
 
             });
@@ -51,12 +51,17 @@ angular.module('viaggia.controllers.info', [])
     };
 
     $scope.selected = null;
-    $scope.select = function (p, path) {
+    $scope.select = function (p) {
         if ($scope.selected == p) {
           $scope.selected = null;
         } else {
           $scope.selected = p;
-          $scope.bookmarkStyle = bookmarkService.getBookmarkStyle(path ? path : $location.path()+'/'+p.id);
+          var path = $location.path();
+          if ($state.current.name == 'app.parkingstation') {
+            path = path.substr(0,path.lastIndexOf('/'));
+          }
+          path += '/'+p.id;
+          $scope.bookmarkStyle = bookmarkService.getBookmarkStyle(path);
         }
     };
 
@@ -182,7 +187,7 @@ angular.module('viaggia.controllers.info', [])
     $scope.bookmark = function() {
       var ref = Config.getTTData($stateParams.ref);
       var path = $stateParams.id ? $location.path() : ($location.path()+'/'+$scope.selected.id);
-      bookmarkService.toggleBookmark(path, $scope.selected.name, 'PARKING').then(function(style) {
+      bookmarkService.toggleBookmark(path, $scope.selected.name, 'PARKING', {agencyId: $scope.agencyId, parkingId: $scope.selected.id}).then(function(style) {
         $scope.bookmarkStyle = style;
       });
     };
@@ -212,7 +217,7 @@ angular.module('viaggia.controllers.info', [])
             $scope.parkings = data;
             $scope.parkings.forEach(function (e) {
                 if (decodeURI(selectedId) == e.id) {
-                  $scope.select(e,$location.path());
+                  $scope.select(e);
                 }
 
             });
@@ -243,7 +248,12 @@ angular.module('viaggia.controllers.info', [])
           $scope.selected = null;
         } else {
           $scope.selected = p;
-          $scope.bookmarkStyle = bookmarkService.getBookmarkStyle(path ? path : $location.path()+'/'+p.id);
+          var path = $location.path();
+          if ($state.current.name == 'app.bikestation') {
+            path = path.substr(0,path.lastIndexOf('/'));
+          }
+          path += '/'+p.id;
+          $scope.bookmarkStyle = bookmarkService.getBookmarkStyle(path);
         }
     };
 
@@ -365,7 +375,7 @@ angular.module('viaggia.controllers.info', [])
     $scope.bookmark = function() {
       var ref = Config.getTTData($stateParams.ref);
       var path = $stateParams.id ? $location.path() : ($location.path()+'/'+$scope.selected.id);
-      bookmarkService.toggleBookmark(path, $scope.selected.name, 'BIKESHARING').then(function(style) {
+      bookmarkService.toggleBookmark(path, $scope.selected.name, 'BIKESHARING',{agencyId: $scope.agencyId, parkingId: $scope.selected.id}).then(function(style) {
         $scope.bookmarkStyle = style;
       });
     };

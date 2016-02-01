@@ -1,6 +1,6 @@
 angular.module('viaggia.services.bookmarks', [])
 
-.factory('bookmarkService', function ($q, $rootScope, Config) {
+.factory('bookmarkService', function ($q, $rootScope, Config, parkingService, bikeSharingService, planService) {
   var repo = '';
   Config.init().then(function(){
     repo = Config.getAppId()+'_bookmarks';
@@ -27,6 +27,9 @@ angular.module('viaggia.services.bookmarks', [])
       return getStoredBookmarks();
   };
 
+  /**
+   * Custom template for specific bookmark type
+   */
   $rootScope.getBookmarkItemTemplate = function(type) {
         switch(type) {
           case 'TRAINSTOP':
@@ -55,6 +58,33 @@ angular.module('viaggia.services.bookmarks', [])
   }
 
 
+  var updateRT = function(b) {
+    switch (b.type) {
+        case 'PARKING': {
+          parkingService.getParking(b.data.agencyId, b.data.parkingId).then(function(p) {
+            if (p.monitored && p.slotsAvailable > -2) {
+                p.availLevel = p.slotsAvailable <= 5 ? 'avail-red' : p.slotsAvailable > 20 ? 'avail-green' : 'avail-yellow';
+            }
+            b.parking = p;
+          });
+          break;
+        }
+        case 'BIKESHARING' : {
+          bikeSharingService.getStation(b.data.agencyId, b.data.parkingId).then(function(p) {
+            b.parking = p;
+          });
+          break;
+        }
+        case 'TRIP' : {
+          planService.getTrip(b.data.tripId).then(function(trip) {
+              b.trip = trip;
+          });
+          break;
+        }
+        default: {}
+    }
+  }
+
   return {
     /**
      * add bookmark to the list. Return promise of the update bookmark list
@@ -69,6 +99,19 @@ angular.module('viaggia.services.bookmarks', [])
       localStorage.setItem(repo, JSON.stringify(list));
       deferred.resolve(list);
 
+      return deferred.promise;
+    },
+    /**
+     * Return promise of current list of bookmarks with real time data.
+     */
+    getBookmarksRT: function() {
+      var deferred = $q.defer();
+      var list = getBookmarks();
+      var filtered = [];
+      list.forEach(function(b) {
+          updateRT(b);
+      });
+      deferred.resolve(list);
       return deferred.promise;
     },
     /**
@@ -143,7 +186,7 @@ angular.module('viaggia.services.bookmarks', [])
     /**
      * Add/remove a bookmark for the element of the specified type, path, and title. Returns promise for the update style.
      */
-    toggleBookmark: function(path, title, type) {
+    toggleBookmark: function(path, title, type, data) {
       var deferred = $q.defer();
       var pos = this.indexOfBookmark(path);
       if (pos >= 0) {
@@ -210,7 +253,7 @@ angular.module('viaggia.services.bookmarks', [])
           }
         }
 
-        this.addBookmark({"state":path,"label": title, "icon": icon, "color": color, type: type}).then(function() {
+        this.addBookmark({"state":path,"label": title, "icon": icon, "color": color, type: type, data: data}).then(function() {
           deferred.resolve('ic_bookmark');
         });
       }

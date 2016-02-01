@@ -1,6 +1,6 @@
-<div class="parking-item-label">{{m.label | translate}}</div>
-<div class="parking-item-label highlight" ng-if="m.parking">
+<div class="bm-item-label">{{m.label | translate}}</div>
+<div class="bm-item-label highlight" ng-if="m.parking">
   <span ng-if="!m.parking.monitored || m.parking.slotsAvailable == -2" >{{m.parking.slotsTotal}} {{'lbl_places' | translate}}</span>
-  <span ng-if="m.parking.monitored && m.parking.slotsAvailable > -2" >{{m.parking.slotsAvailable > 0? m.parking.slotsAvailable : 0}} {{'parking_on' | translate}} {{m.parking.slotsTotal}}</span>
+  <span class="bm-detail" ng-class="m.parking.availLevel" ng-if="m.parking.monitored && m.parking.slotsAvailable > -2" >{{m.parking.slotsAvailable > 0? m.parking.slotsAvailable : 0}} {{'parking_on' | translate}} {{m.parking.slotsTotal}}</span>
 </div>
 
