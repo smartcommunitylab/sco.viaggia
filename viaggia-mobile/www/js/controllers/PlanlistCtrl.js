@@ -6,6 +6,7 @@ angular.module('viaggia.controllers.planlist', [])
     $scope.journeys = planService.getplanJourneyResults();
     $scope.empty = false;
     $scope.planConfigure = planService.getPlanConfigure();
+    $scope.departureTime = convertTo24Hour($scope.planConfigure.departureTime);
     $scope.nameFrom = planService.getName('from');
     $scope.nameTo = planService.getName('to');
     if ($scope.journeys && $scope.journeys.length > 0) {
@@ -30,5 +31,18 @@ angular.module('viaggia.controllers.planlist', [])
     $scope.showPlan = function (journey) {
         planService.setSelectedJourney(journey);
         $state.go('app.newtripdetails');
+    }
+
+    function convertTo24Hour(time) {
+        var hours = parseInt(time.substr(0, 2));
+        if (time.indexOf('AM') != -1 && hours == 12) {
+            time = time.replace('12', '0');
+        }
+        if (time.indexOf('PM') != -1 && hours < 12) {
+            time = time.replace(hours, (hours + 12));
+        }
+        if (time.match(/0..:/))
+            time = time.substring(1);
+        return time.replace(/(AM|PM)/, '');
     }
 })

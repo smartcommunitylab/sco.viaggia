@@ -2,7 +2,7 @@ angular.module('viaggia.controllers.plan', [])
 
 .controller('PlanCtrl', function ($scope, $rootScope, Config, $q, $http, $ionicPlatform, $ionicPopup, $ionicModal, $ionicLoading, $filter, $state, $stateParams, $window, Toast, leafletData, planService, GeoLocate, mapService) {
     if (!$stateParams.replan) {
-      planService.setEditInstance(null);
+        planService.setEditInstance(null);
     }
 
     //$scope.refresh = true;
@@ -116,8 +116,8 @@ angular.module('viaggia.controllers.plan', [])
             console.log('Time not selected');
         } else {
             $scope.timePickerObject24Hour.inputEpochTime = val;
-            var selectedTime = new Date(val * 1000);
-            $scope.hourTimestamp = $filter('date')(val * 1000, 'hh:mma');
+            var selectedTime = new Date(val * 1000 + new Date().getTimezoneOffset() * 60 * 1000);
+            $scope.hourTimestamp = $filter('date')(val * 1000 + new Date().getTimezoneOffset() * 60 * 1000, 'hh:mma');
         }
     }
 
@@ -704,14 +704,14 @@ angular.module('viaggia.controllers.plan', [])
         setDefaultOptions();
     }
 
-//    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-//        var oldConfig = planService.getPlanConfigure();
-//
-//        if ((toState.name == 'app.plan') && (fromState.name == 'app.tripdetails') && (oldConfig != null)) {
-//            planService.setPlanConfigure(oldConfig);
-//            $scope.planParams = planService.getPlanConfigure();
-//            var planOptionConfig = Config.getPlanDefaultOptions();
-//            manageOptions();
-//        }
-//    });
+    //    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+    //        var oldConfig = planService.getPlanConfigure();
+    //
+    //        if ((toState.name == 'app.plan') && (fromState.name == 'app.tripdetails') && (oldConfig != null)) {
+    //            planService.setPlanConfigure(oldConfig);
+    //            $scope.planParams = planService.getPlanConfigure();
+    //            var planOptionConfig = Config.getPlanDefaultOptions();
+    //            manageOptions();
+    //        }
+    //    });
 })
