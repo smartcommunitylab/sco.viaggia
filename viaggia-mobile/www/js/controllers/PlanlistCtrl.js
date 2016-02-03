@@ -5,8 +5,12 @@ angular.module('viaggia.controllers.planlist', [])
     $scope.containsGreen = false;
     $scope.journeys = planService.getplanJourneyResults();
     $scope.empty = false;
-    $scope.planConfigure = planService.getPlanConfigure();
-    $scope.departureTime = convertTo24Hour($scope.planConfigure.departureTime);
+    if (!$scope.planConfigure) {
+        $scope.planConfigure = planService.getPlanConfigure();
+    }
+    if ($scope.planConfigure) {
+        $scope.departureTime = convertTo24Hour($scope.planConfigure.departureTime);
+    }
     $scope.nameFrom = planService.getName('from');
     $scope.nameTo = planService.getName('to');
     if ($scope.journeys && $scope.journeys.length > 0) {
@@ -44,5 +48,6 @@ angular.module('viaggia.controllers.planlist', [])
         if (time.match(/0..:/))
             time = time.substring(1);
         return time.replace(/(AM|PM)/, '');
+
     }
 })

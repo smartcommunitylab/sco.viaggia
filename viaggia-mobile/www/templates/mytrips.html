@@ -4,16 +4,16 @@
             <h4>{{'my_trip_empty_list'|translate}}</h4>
         </div>
 
-<!--
+        <!--
         <div class="card empty-list-card" ng-hide="savedTrips.length>0">
             {{'my_trip_empty_list'|translate}}
         </div>
 -->
-        <ion-list class="animate-ripple" ng-hide="savedTrips.length==0">
+        <ion-list ng-hide="savedTrips.length==0">
             <div class="card" ng-repeat="journey in savedTrips" ng-last-repeat="savedTrips" ng-click="showPlan(journey)">
-                    <div class="trip-title text-center">
-                        {{journey.data.name }}
-                    </div>
+                <div class="trip-title text-center">
+                    {{journey.data.name }}
+                </div>
                 <!--<div class="col-md-10">-->
 
                 <div class="row">

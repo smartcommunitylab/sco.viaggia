@@ -79,22 +79,22 @@ angular.module('viaggia.services.plan', [])
         fromOrTo = value;
     }
     planService.getFromOrTo = function () {
-        return fromOrTo;
-    }
-//    planService.setTripId = function (id) {
-//        tripId = id;
-//    }
-//    planService.getTripId = function () {
-//        return tripId;
-//    }
-//
-//    var tripName = null;
-//    planService.setTripName = function (name) {
-//        tripName = name;
-//    }
-//    planService.getTripName = function () {
-//        return tripName;
-//    }
+            return fromOrTo;
+        }
+        //    planService.setTripId = function (id) {
+        //        tripId = id;
+        //    }
+        //    planService.getTripId = function () {
+        //        return tripId;
+        //    }
+        //
+        //    var tripName = null;
+        //    planService.setTripName = function (name) {
+        //        tripName = name;
+        //    }
+        //    planService.getTripName = function () {
+        //        return tripName;
+        //    }
     planService.setName = function (place, complexName) {
         if (place == 'from') {
             if (!position.nameFrom) {
@@ -253,11 +253,11 @@ angular.module('viaggia.services.plan', [])
             return (it.length / 1000).toFixed(2);
         }
         return 0;
-//        var l = 0;
-//        for (var i = 0; i < it.leg.length; i++) {
-//            l += it.leg[i].length;
-//        }
-//        return (l / 1000).toFixed(2);
+        //        var l = 0;
+        //        for (var i = 0; i < it.leg.length; i++) {
+        //            l += it.leg[i].length;
+        //        }
+        //        return (l / 1000).toFixed(2);
     };
     var getLegCost = function (plan, i) {
         var fareMap = {};
@@ -441,8 +441,8 @@ angular.module('viaggia.services.plan', [])
     planService.setPlanConfigure = function (configure) {
         planConfigure = configure;
         if (planConfigure == null) {
-          planService.setName('from', null);
-          planService.setName('to', null);
+            planService.setName('from', null);
+            planService.setName('to', null);
         }
     }
     planService.getSelectedJourney = function () {
@@ -456,7 +456,7 @@ angular.module('viaggia.services.plan', [])
         var deferred = $q.defer();
         $http({
             method: 'POST',
-            url: Config.getServerURL() + '/plansinglejourney?policyId='+Config.getPlanPolicy(),
+            url: Config.getServerURL() + '/plansinglejourney?policyId=' + Config.getPlanPolicy(),
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -594,7 +594,7 @@ angular.module('viaggia.services.plan', [])
         savedTrips[tripId] = tripToSave;
         localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
 
-        planService.setPlanConfigure(null);
+        //planService.setPlanConfigure(null);
 
         deferred.resolve(tripToSave);
 
@@ -636,11 +636,11 @@ angular.module('viaggia.services.plan', [])
     }
 
     var editInstance = null;
-    planService.setEditInstance = function(trip) {
-      editInstance = trip;
+    planService.setEditInstance = function (trip) {
+        editInstance = trip;
     };
-    planService.getEditInstance = function() {
-      return editInstance;
+    planService.getEditInstance = function () {
+        return editInstance;
     };
 
     planService.getTrip = function (tripId) {

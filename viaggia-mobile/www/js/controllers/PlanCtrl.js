@@ -1,11 +1,10 @@
 angular.module('viaggia.controllers.plan', [])
 
 .controller('PlanCtrl', function ($scope, $rootScope, Config, $q, $http, $ionicPlatform, $ionicPopup, $ionicModal, $ionicLoading, $filter, $state, $stateParams, $window, Toast, leafletData, planService, GeoLocate, mapService) {
+
     if (!$stateParams.replan) {
         planService.setEditInstance(null);
     }
-
-    //$scope.refresh = true;
     $scope.plantitle = $filter('translate')('plan_title');
     $scope.preferences = Config.getPlanPreferences();
     $scope.types = Config.getPlanTypes();
@@ -18,9 +17,7 @@ angular.module('viaggia.controllers.plan', [])
     $scope.favoriteFrom = false;
     $scope.favoriteTo = false;
     $scope.placesandcoordinates = null;
-    //$scope.located = false;
     $scope.favoritePlaces = JSON.parse(localStorage.getItem(Config.getAppId() + "_favoritePlaces"));
-
     if (!$scope.favoritePlaces) {
         $scope.favoritePlaces = [];
     }
@@ -45,6 +42,33 @@ angular.module('viaggia.controllers.plan', [])
         }
     };
 
+    var initMapTypes = function (types) {
+        var map = {};
+        for (var i = 0; i < types.length; i++) {
+            map[types[i]] = false;
+        }
+        return map;
+    }
+    var setDefaultOptions = function () {
+        //var planOptionConfig = Config.getPlanDefaultOptions();
+        $scope.planParams.departureTime = $filter('date')(new Date().getTime(), 'hh:mma');
+        $scope.planParams.date = $filter('date')(new Date().getTime(), 'dd/MM/yyyy');
+        $scope.planParams.routeType = planOptionConfig.routeType;
+        $scope.planParams.transportTypes = planOptionConfig.transportTypes;
+        for (var i = 0; i < $scope.types.length; i++) {
+            $scope.mapTypes[$scope.planParams.transportTypes[i]] = true;
+        }
+    }
+
+    var setSavedOptions = function (Configure) {
+        $scope.planParams.departureTime = $filter('date')(new Date().getTime(), 'hh:mma');
+        $scope.planParams.date = $filter('date')(new Date().getTime(), 'dd/MM/yyyy');
+        $scope.planParams.routeType = Configure.routeType;
+        $scope.planParams.transportTypes = Configure.transportTypes;
+        for (var i = 0; i < $scope.types.length; i++) {
+            $scope.mapTypes[$scope.planParams.transportTypes[i]] = true;
+        }
+    }
     var monthList = [
         $filter('translate')('popup_datepicker_jan'),
         $filter('translate')('popup_datepicker_feb'),
@@ -59,7 +83,6 @@ angular.module('viaggia.controllers.plan', [])
         $filter('translate')('popup_datepicker_nov'),
         $filter('translate')('popup_datepicker_dic')
     ];
-
     var weekDaysList = [
         $filter('translate')('popup_datepicker_sun'),
         $filter('translate')('popup_datepicker_mon'),
@@ -70,46 +93,48 @@ angular.module('viaggia.controllers.plan', [])
         $filter('translate')('popup_datepicker_sat')
     ];
 
-    var initMapTypes = function (types) {
-        var map = {};
-        for (var i = 0; i < types.length; i++) {
-            map[types[i]] = false;
-        }
-        return map;
-    }
-    var setDefaultOptions = function () {
-        //var planOptionConfig = Config.getPlanDefaultOptions();
-        $scope.planParams.departureTime = $filter('date')(new Date().getTime(), 'hh:mma');
-        $scope.planParams.date = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
-        $scope.planParams.routeType = planOptionConfig.routeType;
-        $scope.planParams.transportTypes = planOptionConfig.transportTypes;
-        for (var i = 0; i < $scope.types.length; i++) {
-            $scope.mapTypes[$scope.planParams.transportTypes[i]] = true;
-        }
+    function setDateWidget() {
+
+        $scope.datepickerObjectPopup = {
+            titleLabel: $filter('translate')('popup_datepicker_title'), //Optional
+            todayLabel: $filter('translate')('popup_datepicker_today'), //Optional
+            closeLabel: $filter('translate')('popup_datepicker_close'), //Optional
+            setLabel: $filter('translate')('popup_datepicker_set'), //Optional
+            errorMsgLabel: $filter('translate')('popup_datepicker_error_label'), //Optional
+            setButtonType: 'button-popup', //Optional
+            todayButtonType: 'button-popup', //Optional
+            closeButtonType: 'button-popup', //Optional
+            modalHeaderColor: 'bar-positive', //Optional
+            modalFooterColor: 'bar-positive', //Optional
+            templateType: 'popup', //Optional
+            showTodayButton: 'true',
+            inputDate: $scope.datepickerObject.inputDate, //Optional
+            mondayFirst: true, //Optional
+            monthList: monthList, //Optional
+            weekDaysList: weekDaysList,
+            from: new Date(), //Optional
+            to: new Date(2020, 12, 1), //Optional
+            callback: function (val) { //Optional
+                datePickerCallbackPopup(val);
+            }
+        };
     }
 
-    var setSavedOptions = function (Configure) {
-        $scope.planParams.departureTime = $filter('date')(new Date().getTime(), 'hh:mma');
-        $scope.planParams.date = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
-        $scope.planParams.routeType = Configure.routeType;
-        $scope.planParams.transportTypes = Configure.transportTypes;
-        for (var i = 0; i < $scope.types.length; i++) {
-            $scope.mapTypes[$scope.planParams.transportTypes[i]] = true;
-        }
+    function setTimeWidget() {
+        $scope.timePickerObject24Hour = {
+            inputEpochTime: ((new Date()).getHours() * 60 * 60 + (new Date()).getMinutes() * 60), //Optional
+            step: 1, //Optional
+            format: 24, //Optional
+            titleLabel: $filter('translate')('popup_timepicker_title'), //Optional
+            closeLabel: $filter('translate')('popup_timepicker_cancel'), //Optional
+            setLabel: $filter('translate')('popup_timepicker_select'), //Optional
+            setButtonType: 'button-popup', //Optional
+            closeButtonType: 'button-popup', //Optional
+            callback: function (val) { //Mandatory
+                timePicker24Callback(val);
+            }
+        };
     }
-    $scope.timePickerObject24Hour = {
-        inputEpochTime: ((new Date()).getHours() * 60 * 60 + (new Date()).getMinutes() * 60), //Optional
-        step: 1, //Optional
-        format: 24, //Optional
-        titleLabel: $filter('translate')('popup_timepicker_title'), //Optional
-        closeLabel: $filter('translate')('popup_timepicker_cancel'), //Optional
-        setLabel: $filter('translate')('popup_timepicker_select'), //Optional
-        setButtonType: 'button-popup', //Optional
-        closeButtonType: 'button-popup', //Optional
-        callback: function (val) { //Mandatory
-            timePicker24Callback(val);
-        }
-    };
 
     function timePicker24Callback(val) {
         if (typeof (val) === 'undefined') {
@@ -120,60 +145,24 @@ angular.module('viaggia.controllers.plan', [])
             $scope.hourTimestamp = $filter('date')(val * 1000 + new Date().getTimezoneOffset() * 60 * 1000, 'hh:mma');
         }
     }
+    setTimeWidget();
 
     var datePickerCallbackPopup = function (val) {
         if (typeof (val) === 'undefined') {
             console.log('No date selected');
         } else {
             $scope.datepickerObjectPopup.inputDate = val;
-            //            console.log('Selected date is : ', val.getTime())
-            $scope.dateTimestamp = $filter('date')(val.getTime(), 'MM/dd/yyyy');
+            $scope.dateTimestamp = $filter('date')(val.getTime(), 'dd/MM/yyyy');
         }
     };
+    setDateWidget();
 
     //super CPU draining. I would need another way to check it
     $scope.isFavorite = function (fromOrTo, name) {
         if (fromOrTo == 'from')
             return $scope.favoriteFrom;
         else $scope.favoriteTo;
-        //        return $scopeisFavorite
-        // return true;
-        //var found = false;
-        //        if ($scope.planParams[fromOrTo].name == '') {
-        //            return false;
-        //        }
-        //        for (var i = 0; i < $scope.favoritePlaces.length; i++) {
-        //            if ($scope.favoritePlaces[i].name == name) {
-        //                return true;
-        // break;
-        //            }
-        //        }
-        //        return false;
     }
-
-    $scope.datepickerObjectPopup = {
-        titleLabel: $filter('translate')('popup_datepicker_title'), //Optional
-        todayLabel: $filter('translate')('popup_datepicker_today'), //Optional
-        closeLabel: $filter('translate')('popup_datepicker_close'), //Optional
-        setLabel: $filter('translate')('popup_datepicker_set'), //Optional
-        errorMsgLabel: $filter('translate')('popup_datepicker_error_label'), //Optional
-        setButtonType: 'button-popup', //Optional
-        todayButtonType: 'button-popup', //Optional
-        closeButtonType: 'button-popup', //Optional
-        modalHeaderColor: 'bar-positive', //Optional
-        modalFooterColor: 'bar-positive', //Optional
-        templateType: 'popup', //Optional
-        showTodayButton: 'true',
-        inputDate: $scope.datepickerObject.inputDate, //Optional
-        mondayFirst: true, //Optional
-        monthList: monthList, //Optional
-        weekDaysList: weekDaysList,
-        from: new Date(), //Optional
-        to: new Date(2020, 12, 1), //Optional
-        callback: function (val) { //Optional
-            datePickerCallbackPopup(val);
-        }
-    };
 
     $scope.togglePreferences = function () {
         if ($scope.isPreferencesShown()) {
@@ -375,22 +364,18 @@ angular.module('viaggia.controllers.plan', [])
     /* part for the map */
     $scope.locateMe = function () {
         $ionicLoading.show();
-        // if ($window.navigator.geolocation) {
-        // $window.navigator.geolocation.getCurrentPosition(function (position) {
+
         GeoLocate.locate().then(function (position) {
-            //                $scope.$apply(function () {
             $scope.position = position;
             var placedata = $q.defer();
             var places = {};
             var url = Config.getGeocoderURL() + '/location?latlng=' + position[0] + ',' + position[1];
-
             //add timeout
             $http.get(encodeURI(url), {
                 timeout: 5000
             })
 
             .success(function (data, status, headers, config) {
-                //                         planService.setName($scope.place, data.response.docs[0]);
                 places = data.response.docs;
                 name = '';
                 if (data.response.docs[0]) {
@@ -424,7 +409,6 @@ angular.module('viaggia.controllers.plan', [])
             //                });
         }, function () {
             $ionicLoading.hide();
-            //$scope.showNoConnection();
             $scope.refresh = true;
             console.log('CANNOT LOCATE!');
         });
@@ -520,9 +504,6 @@ angular.module('viaggia.controllers.plan', [])
 
 
     var typePlace = function (typedthings, fromOrTo) {
-        //        if ($scope.located) {
-        //            $scope.located = false
-        //        } else
         if (($scope.placesandcoordinates && $scope.placesandcoordinates[typedthings] == null) || typedthings == '' || $scope.placesandcoordinates == null) {
             $scope.planParams[fromOrTo] = {
                 name: '',
@@ -533,12 +514,7 @@ angular.module('viaggia.controllers.plan', [])
                 $scope.favoriteFrom = false;
             $scope.favoriteTo = false;
         };
-        //        if (fromOrTo = 'from') {
-        //            $scope.fromName = '';
-        //        }
-        //        if (fromOrTo = 'to') {
-        //            $scope.toName = '';
-        //        }
+
         $scope.result = typedthings;
         $scope.newplaces = planService.getTypedPlaces(typedthings);
         $scope.newplaces.then(function (data) {
@@ -673,6 +649,26 @@ angular.module('viaggia.controllers.plan', [])
                 long: ''
             };
         }
+        if ($scope.planParams.departureTime) {
+            var configdate = new Date();
+            var time = convertTo24Hour($scope.planParams.departureTime);
+            configdate.setHours(time.substr(0, 2));
+            configdate.setMinutes(time.substr(3, 2));
+            $scope.timePickerObject24Hour.inputEpochTime = configdate.getHours() * 60 * 60 + configdate.getMinutes() * 60;
+        } else {
+            $scope.planParams['departureTime'] = $filter('date')(new Date().getTime(), 'hh:mma');
+        }
+        if ($scope.planParams.date) {
+            var configdate = new Date();
+            configdate.setFullYear($scope.planParams.date.substr(6, 4), $scope.planParams.date.substr(3, 2) - 1, $scope.planParams.date.substr(0, 2));
+            $scope.datepickerObjectPopup.dateTimestamp = $filter('date')((new Date(configdate)).getTime());
+            $scope.datepickerObject.inputDate = new Date(configdate);
+            setDateWidget();
+
+
+        } else {
+            $scope.planParams['date'] = $filter('date')(new Date().getTime(), 'dd/MM/yyyy');
+        }
         if (!$scope.planParams.routeType) {
             $scope.planParams['routeType'] = planOptionConfig.routeType;
         }
@@ -686,7 +682,7 @@ angular.module('viaggia.controllers.plan', [])
             $scope.planParams['departureTime'] = $filter('date')(new Date().getTime(), 'hh:mma');
         }
         if (!$scope.planParams.date) {
-            $scope.planParams['date'] = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
+            $scope.planParams['date'] = $filter('date')(new Date().getTime(), 'dd/MM/yyyy');
         }
 
     }
@@ -704,14 +700,37 @@ angular.module('viaggia.controllers.plan', [])
         setDefaultOptions();
     }
 
-    //    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-    //        var oldConfig = planService.getPlanConfigure();
-    //
-    //        if ((toState.name == 'app.plan') && (fromState.name == 'app.tripdetails') && (oldConfig != null)) {
-    //            planService.setPlanConfigure(oldConfig);
-    //            $scope.planParams = planService.getPlanConfigure();
-    //            var planOptionConfig = Config.getPlanDefaultOptions();
-    //            manageOptions();
-    //        }
-    //    });
+
+    var oldConfig = null;
+    if (planService.getPlanConfigure() != null) {
+        oldConfig = planService.getPlanConfigure();
+    }
+    planService.setPlanConfigure(null);
+    $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+        var oldConfig = planService.getPlanConfigure();
+
+        if ((toState.name == 'app.plan') && (fromState.name == 'app.planlist') && (oldConfig != null)) {
+            planService.setPlanConfigure(oldConfig);
+            $scope.planParams = planService.getPlanConfigure();
+            var planOptionConfig = Config.getPlanDefaultOptions();
+            manageOptions();
+        }
+    });
+
+    function convertTo24Hour(time) {
+        var hours = parseInt(time.substr(0, 2));
+        if (time.indexOf('AM') != -1 && hours == 12) {
+            time = time.replace('12', '0');
+        }
+        if (time.indexOf('PM') != -1 && hours < 12) {
+            time = time.replace(hours, (hours + 12));
+        }
+        if (time.match(/0..:/))
+            time = time.substring(1);
+        return time.replace(/(AM|PM)/, '');
+
+    }
+
+
+
 })
