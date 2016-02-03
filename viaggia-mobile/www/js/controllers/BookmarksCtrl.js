@@ -40,10 +40,10 @@ angular.module('viaggia.controllers.bookmarks', [])
   };
   $scope.reorder = function(from, to) {
     Config.loading();
-    bookmarkService.reorderBookmark(from, to).then(function(list){
-      $scope.bookmarks = list;
-      $ionicHistory.clearCache();
-      Config.loaded();
+    bookmarkService.reorderBookmark(from, to).then(function (list) {
+        $scope.bookmarks = list;
+        $ionicHistory.clearCache();
+        Config.loaded();
     });
   };
 
