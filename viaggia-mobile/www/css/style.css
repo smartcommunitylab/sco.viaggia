@@ -924,7 +924,13 @@ ion-header-bar .title {
 
 .bookmark-list ion-item {
     padding: 0px;
-    width: inherit !important;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border: 1px solid #d2d2d2!important;
+    width: 100% !important;
+    overflow: hidden;
+    border-radius: 2px;
+    background-color: #fff;
 }
 
 .bookmark-list .bookmark {
@@ -936,6 +942,12 @@ ion-header-bar .title {
 
 .bookmark-list .ctrl {
     float: right;
+}
+
+.bookmark-margin {
+    /*    margin: 20px 10px;*/
+    /*    width: inherit !important;*/
+    /*    transition: margin 0.2s ease;*/
 }
 
 .bookmark-list .bookmark .img {
@@ -1007,6 +1019,7 @@ ion-header-bar .title {
 .header-badge {
     top: -30px !important;
     /*    left: 10px !important;*/
+    /*
     font-size: x-small !important;
     margin-left: -5px!important;
     display: table!important;
@@ -1015,6 +1028,7 @@ ion-header-bar .title {
     padding: 3px 3px 3px 3px;
     width: 22px;
     display: block!inspect;
+*/
 }
 
 .home_notification {
