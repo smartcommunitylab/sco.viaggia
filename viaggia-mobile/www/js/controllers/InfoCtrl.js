@@ -25,16 +25,16 @@ angular.module('viaggia.controllers.info', [])
                     e.availLevel = e.slotsAvailable <= 5 ? 'avail-red' : e.slotsAvailable > 20 ? 'avail-green' : 'avail-yellow';
                 }
                 if (decodeURI(selectedId) == e.id) {
-                  $scope.select(e);
+                    $scope.select(e);
                 }
 
             });
             $scope.loading = false;
             Config.loaded();
             $scope.$broadcast('scroll.refreshComplete');
-            if ($scope.selected) {
-              $scope.showMap(true);
-            }
+            //            if ($scope.selected) {
+            //                $scope.showMap(true);
+            //            }
         }, function (err) {
             $scope.parkings = null;
             $scope.showNoConnection();
@@ -52,24 +52,24 @@ angular.module('viaggia.controllers.info', [])
 
     $scope.selected = null;
     $scope.select = function (p) {
-        if ($scope.selected == p) {
-          $scope.selected = null;
-        } else {
-          $scope.selected = p;
-          var path = $location.path();
-          if ($state.current.name == 'app.parkingstation') {
-            path = path.substr(0,path.lastIndexOf('/'));
-          }
-          path += '/'+p.id;
-          $scope.bookmarkStyle = bookmarkService.getBookmarkStyle(path);
+        //        if ($scope.selected == p) {
+        //            $scope.selected = null;
+        //        } else {
+        $scope.selected = p;
+        var path = $location.path();
+        if ($state.current.name == 'app.parkingstation') {
+            path = path.substr(0, path.lastIndexOf('/'));
         }
+        path += '/' + p.id;
+        $scope.bookmarkStyle = bookmarkService.getBookmarkStyle(path);
+        //        }
+        $scope.showMap(true);
     };
 
     $scope.showMap = function (withPopup) {
         $scope.modalMap.show().then(function () {
             var markers = [];
-
-            var list = $scope.selected != null ? [$scope.selected] : $scope.parkings;
+            var list = ($scope.selected != null && withPopup) ? [$scope.selected] : $scope.parkings;
             if (list == null) list = [];
             var boundsArray = [];
             for (var i = 0; i < list.length; i++) {
@@ -95,13 +95,13 @@ angular.module('viaggia.controllers.info', [])
             }
             $scope.markers = markers;
             if (withPopup) {
-              showPopup(list[0]);
+                showPopup(list[0]);
             }
         });
     };
 
-    $scope.$on('$ionicView.beforeEnter', function(){
-      mapService.refresh('ttMap');
+    $scope.$on('$ionicView.beforeEnter', function () {
+        mapService.refresh('ttMap');
     });
 
     $ionicModal.fromTemplateUrl('templates/mapModal.html', {
@@ -132,7 +132,7 @@ angular.module('viaggia.controllers.info', [])
         });
     };
 
-    var showPopup = function(p) {
+    var showPopup = function (p) {
         $scope.popupParking = p;
         $ionicPopup.show({
             templateUrl: 'templates/parkingPopup.html',
@@ -184,12 +184,15 @@ angular.module('viaggia.controllers.info', [])
 
     init();
 
-    $scope.bookmark = function() {
-      var ref = Config.getTTData($stateParams.ref);
-      var path = $stateParams.id ? $location.path() : ($location.path()+'/'+$scope.selected.id);
-      bookmarkService.toggleBookmark(path, $scope.selected.name, 'PARKING', {agencyId: $scope.agencyId, parkingId: $scope.selected.id}).then(function(style) {
-        $scope.bookmarkStyle = style;
-      });
+    $scope.bookmark = function () {
+        var ref = Config.getTTData($stateParams.ref);
+        var path = $stateParams.id ? $location.path() : ($location.path() + '/' + $scope.selected.id);
+        bookmarkService.toggleBookmark(path, $scope.selected.name, 'PARKING', {
+            agencyId: $scope.agencyId,
+            parkingId: $scope.selected.id
+        }).then(function (style) {
+            $scope.bookmarkStyle = style;
+        });
     };
 
 })
@@ -202,6 +205,7 @@ angular.module('viaggia.controllers.info', [])
     $scope.markers = [];
 
     $scope.title = $filter('translate')('menu_real_time_bike');
+    $scope.bookmarkStyle = bookmarkService.getBookmarkStyle($scope.selected);
 
     $scope.$on('ngLastRepeat.parkings', function (e) {
         $timeout(function () {
@@ -217,16 +221,16 @@ angular.module('viaggia.controllers.info', [])
             $scope.parkings = data;
             $scope.parkings.forEach(function (e) {
                 if (decodeURI(selectedId) == e.id) {
-                  $scope.select(e);
+                    $scope.select(e);
                 }
 
             });
             $scope.loading = false;
             Config.loaded();
             $scope.$broadcast('scroll.refreshComplete');
-            if ($scope.selected) {
-              $scope.showMap(true);
-            }
+            //            if ($scope.selected) {
+            //                $scope.showMap(true);
+            //            }
         }, function (err) {
             $scope.parkings = null;
             $scope.$broadcast('scroll.refreshComplete');
@@ -244,24 +248,25 @@ angular.module('viaggia.controllers.info', [])
 
     $scope.selected = null;
     $scope.select = function (p, path) {
-        if ($scope.selected == p) {
-          $scope.selected = null;
-        } else {
-          $scope.selected = p;
-          var path = $location.path();
-          if ($state.current.name == 'app.bikestation') {
-            path = path.substr(0,path.lastIndexOf('/'));
-          }
-          path += '/'+p.id;
-          $scope.bookmarkStyle = bookmarkService.getBookmarkStyle(path);
+        //        if ($scope.selected == p) {
+        //          $scope.selected = null;
+        //        } else {
+        $scope.selected = p;
+        var path = $location.path();
+        if ($state.current.name == 'app.bikestation') {
+            path = path.substr(0, path.lastIndexOf('/'));
         }
+        path += '/' + p.id;
+        $scope.bookmarkStyle = bookmarkService.getBookmarkStyle(path);
+        //        }
+        $scope.showMap(true);
     };
 
     $scope.showMap = function (withPopup) {
         $scope.modalMap.show().then(function () {
             var markers = [];
 
-            var list = $scope.selected != null ? [$scope.selected] : $scope.parkings;
+            var list = ($scope.selected != null && withPopup) ? [$scope.selected] : $scope.parkings;
             if (list == null) list = [];
             var boundsArray = [];
             for (var i = 0; i < list.length; i++) {
@@ -287,7 +292,7 @@ angular.module('viaggia.controllers.info', [])
             }
             $scope.markers = markers;
             if (withPopup) {
-              showPopup(list[0]);
+                showPopup(list[0]);
             }
         });
     };
@@ -318,7 +323,7 @@ angular.module('viaggia.controllers.info', [])
         mapService.initMap('modalMap').then(function () {});
     };
 
-    var showPopup = function(p) {
+    var showPopup = function (p) {
         $scope.popupParking = p;
         $ionicPopup.show({
             templateUrl: 'templates/bikesharingPopup.html',
@@ -355,8 +360,8 @@ angular.module('viaggia.controllers.info', [])
         showPopup(p);
     });
 
-    $scope.$on('$ionicView.beforeEnter', function(){
-      mapService.refresh('ttMap');
+    $scope.$on('$ionicView.beforeEnter', function () {
+        mapService.refresh('ttMap');
     });
 
     $scope.navigate = function () {
@@ -372,13 +377,16 @@ angular.module('viaggia.controllers.info', [])
         $state.go('app.plan');
     };
 
-    $scope.bookmark = function() {
-      var ref = Config.getTTData($stateParams.ref);
-      var path = $stateParams.id ? $location.path() : ($location.path()+'/'+$scope.selected.id);
-      bookmarkService.toggleBookmark(path, $scope.selected.name, 'BIKESHARING',{agencyId: $scope.agencyId, parkingId: $scope.selected.id}).then(function(style) {
-        $scope.bookmarkStyle = style;
-      });
+    $scope.bookmark = function () {
+        var ref = Config.getTTData($stateParams.ref);
+        var path = $stateParams.id ? $location.path() : ($location.path() + '/' + $scope.selected.id);
+        bookmarkService.toggleBookmark(path, $scope.selected.name, 'BIKESHARING', {
+            agencyId: $scope.agencyId,
+            parkingId: $scope.selected.id
+        }).then(function (style) {
+            $scope.bookmarkStyle = style;
+        });
     };
 
-  init();
+    init();
 })
