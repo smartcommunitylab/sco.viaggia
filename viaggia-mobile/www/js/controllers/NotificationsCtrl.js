@@ -1,11 +1,12 @@
 angular.module('viaggia.controllers.notifications', [])
 
-.controller('NotificationsCtrl', function ($scope, $state, $rootScope, Toast, $filter, notificationService) {
+.controller('NotificationsCtrl', function ($scope, $state, $rootScope, Config, $filter, Toast, notificationService) {
         $scope.notificationService = notificationService;
+        $scope.emptylist = false;
         //load from localstorage the id notifications read
-        $scope.notificationsIsRead = JSON.parse(localStorage.getItem('notificationsIsRead')) || [];
-        $scope.notifications = JSON.parse(localStorage.getItem('notifications')) || [];
-        $scope.lastUpdateTime = localStorage.getItem('lastUpdateTime');
+        $scope.notificationsIsRead = JSON.parse(localStorage.getItem(Config.getAppId() + '_notificationsIsRead')) || [];
+        $scope.notifications = JSON.parse(localStorage.getItem(Config.getAppId() + '_notifications')) || [];
+        $scope.lastUpdateTime = localStorage.getItem(Config.getAppId() + '_lastUpdateTime');
         //scrico le ultime di una settimana
         if ($scope.lastUpdateTime == null) {
             date = new Date();
@@ -37,20 +38,29 @@ angular.module('viaggia.controllers.notifications', [])
 
         $scope.loadMore = function () {
             notificationService.getNotifications(0, $scope.start).then(function (notifics) {
-                $scope.notifications = !!$scope.notifications ? $scope.notifications.concat(notifics) : notifics;
-                if ($scope.notifications.length > 0) {
-                    lastUpdateTime = $scope.notifications[0].updateTime + 1;
-                    localStorage.setItem('lastUpdateTime', lastUpdateTime);
+                if (notifics) {
+                    $scope.notifications = !!$scope.notifications ? $scope.notifications.concat(notifics) : notifics;
 
-                }
-                if (notifics.length >= $scope.all) {
-                    $scope.$broadcast('scroll.infiniteScrollComplete');
-                    $scope.start += 1;
-                    $scope.end_reached = false;
+                    if ($scope.notifications.length > 0) {
+                        lastUpdateTime = $scope.notifications[0].updateTime + 1;
+                        localStorage.setItem(Config.getAppId() + '_lastUpdateTime', lastUpdateTime);
+
+                    } else {
+                        $scope.emptylist = true;
+                    }
+                    if (notifics.length >= $scope.all) {
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
+                        $scope.start += 1;
+                        $scope.end_reached = false;
+                    } else {
+                        $scope.end_reached = true;
+                    }
                 } else {
+                    $scope.emptylist = true;
                     $scope.end_reached = true;
-                }
+                    Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
 
+                }
             }, function (err) {
                 console.error(err);
                 $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -78,12 +88,12 @@ angular.module('viaggia.controllers.notifications', [])
             }
         });
     })
-    .controller('NotificationDetailCtrl', function ($scope, $stateParams, notificationService) {
+    .controller('NotificationDetailCtrl', function ($scope, $stateParams, Config, notificationService) {
         $scope.notification = $stateParams.notification;
         //put the id in the list of readed
-        var notificationsIsRead = JSON.parse(localStorage.getItem('notificationsIsRead')) || [];
+        var notificationsIsRead = JSON.parse(localStorage.getItem(Config.getAppId() + '_notificationsIsRead')) || [];
         if (notificationsIsRead.indexOf($scope.notification.id) == -1) {
             notificationsIsRead.push($scope.notification.id);
-            localStorage.setItem('notificationsIsRead', JSON.stringify(notificationsIsRead));
+            localStorage.setItem(Config.getAppId() + '_notificationsIsRead', JSON.stringify(notificationsIsRead));
         }
     });

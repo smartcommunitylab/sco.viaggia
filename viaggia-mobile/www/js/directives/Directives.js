@@ -386,19 +386,47 @@ angular.module('viaggia.directives', [])
             )
         };
 }])
-    .directive('suggestion', function () {
-        return {
-            restrict: 'A',
-            require: '^placeautocomplete', // ^look for controller on parents element
-            link: function (scope, element, attrs, autoCtrl) {
-                element.bind('mouseenter', function () {
-                    autoCtrl.preSelect(attrs.val);
-                    autoCtrl.setIndex(attrs.index);
-                });
+    .directive('a', [
+  function () {
+            return {
+                restrict: 'E',
+                link: function (scope, element, attrs, ctrl) {
+                    element.on('click', function (event) {
+                        // process only non-angular links / links starting with hash
+                        if (element[0].href && !element[0].attributes['ng-href'] && element[0].attributes['href'].value.indexOf('#') != 0) {
+                            event.preventDefault();
 
-                element.bind('mouseleave', function () {
-                    autoCtrl.preSelectOff();
-                });
-            }
-        };
-    });
+                            var url = element[0].attributes['href'].value.replace(/“/gi, '').replace(/”/gi, '').replace(/"/gi, '').replace(/‘/gi, '').replace(/’/gi, '').replace(/'/gi, '');
+                            console.log('url: <' + url + '>');
+                            //var protocol = element[0].protocol;
+                            //console.log('protocol: '+protocol);
+                            //if (protocol && url.indexOf(protocol) == 0) {
+
+                            // do not open broken/relative links
+                            if (url.indexOf('http://') == 00 || url.indexOf('https://') == 0 || url.indexOf('mailto:') == 0 || url.indexOf('tel:') == 0 || url.indexOf('sms:') == 0) {
+                                window.open(url, '_system');
+                            } else {
+                                console.log("blocking broken link: " + url);
+                            }
+                        }
+                    });
+                }
+            };
+      }])
+
+.directive('suggestion', function () {
+    return {
+        restrict: 'A',
+        require: '^placeautocomplete', // ^look for controller on parents element
+        link: function (scope, element, attrs, autoCtrl) {
+            element.bind('mouseenter', function () {
+                autoCtrl.preSelect(attrs.val);
+                autoCtrl.setIndex(attrs.index);
+            });
+
+            element.bind('mouseleave', function () {
+                autoCtrl.preSelectOff();
+            });
+        }
+    };
+});

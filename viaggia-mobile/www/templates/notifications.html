@@ -1,11 +1,11 @@
 <ion-view id="notifications" title="{{'notifications_title' | translate}}">
     <ion-content id="content" has-header="true">
         <!--    notification list-->
-        <div ng-hide="notifications.length>0" class="text-center">
+        <div ng-show="emptylist" class="text-center">
             <h4>{{'notifications_empty_list'|translate}}</h4>
         </div>
 
-        <ion-list ng-hide="notifications.length==0">
+        <ion-list ng-show="!emptylist">
 
             <div class="card notification-card" ng-repeat="notification in notifications | orderBy:'updateTime':true track by $index" ng-last-repeat="notifications" ng-click="showNotification(notification)">
 

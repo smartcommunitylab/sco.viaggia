@@ -11,34 +11,28 @@ angular.module('viaggia.controllers.home', [])
     //aggoiorna le notifiche
     var notificationInit = function () {
         //scrico le ultime di una settimana
-        if (localStorage.getItem('lastUpdateTime') == null) {
+        if (localStorage.getItem(Config.getAppId() + '_lastUpdateTime') == null) {
             date = new Date();
             date.setDate(date.getDate() - 7);
             lastUpdateTime = date.getTime();
         } else {
-            lastUpdateTime = localStorage.getItem('lastUpdateTime');
+            lastUpdateTime = localStorage.getItem(Config.getAppId() + '_lastUpdateTime');
         }
         notificationService.getNotifications(lastUpdateTime, 0).then(function (items) {
-            //            $scope.notifications = items;
-            //            $scope.notificationsIsRead = JSON.parse(localStorage.getItem('notificationsIsRead')) || [];
-
             //solo le nuove
-            //            $rootScope.countNotification = $scope.notifications.length;
-            $rootScope.countNotification = items.length;
-            //last update time is the last time of notification
-            if (items.length > 0) {
+            if (items) {
+                $rootScope.countNotification = items.length;
+                //last update time is the last time of notification
+                if (items.length > 0) {
 
-                lastUpdateTime = items[0].updateTime + 1;
+                    lastUpdateTime = items[0].updateTime + 1;
+                }
+                localStorage.setItem(Config.getAppId() + '_lastUpdateTime', lastUpdateTime);
             }
-            localStorage.setItem('lastUpdateTime', lastUpdateTime);
-
         }, function (err) {
-            //$scope.notifications = JSON.parse(localStorage.getItem('notifications')) || [];
-            //            $scope.notificationsIsRead = JSON.parse(localStorage.getItem('notificationsIsRead')) || [];
-            //$rootScope.countNotification = $scope.notifications.length;
+
             $rootScope.countNotification = 0;
-            //            lastUpdateTime = new Date();
-            //            localStorage.setItem('lastUpdateTime', lastUpdateTime);
+
         });
     }
 

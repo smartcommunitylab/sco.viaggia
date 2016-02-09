@@ -52,7 +52,7 @@ angular.module('viaggia.services.notification', [])
         push.on('notification', function (data) {
             //alert("notification" + JSON.stringify(data));
             console.log("notification" + JSON.stringify(data));
-            var lastTimeUpdate = new Date(localStorage.getItem('lastUpdateTime'));
+            var lastTimeUpdate = new Date(localStorage.getItem(Config.getAppId() + '_lastUpdateTime'));
             console.log('received');
             $rootScope.countNotification = $rootScope.countNotification + 1;
             //alert("number of notification" + JSON.stringify($rootScope.countNotification));
@@ -83,9 +83,9 @@ angular.module('viaggia.services.notification', [])
             .success(function (data) {
                 if (data.notifications) {
                     var lastUpdateTime = new Date(data.notifications[0].updateTime);
-                    localStorage.setItem('lastUpdateTime', lastUpdateTime);
+                    localStorage.setItem(Config.getAppId() + '_lastUpdateTime', lastUpdateTime);
                     //update the local notifications and not readed index
-                    localStorage.setItem('notifications', JSON.stringify(data.notifications));
+                    localStorage.setItem(Config.getAppId() + '_notifications', JSON.stringify(data.notifications));
                 }
                 console.log('updated');
             })

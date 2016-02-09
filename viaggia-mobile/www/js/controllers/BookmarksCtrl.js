@@ -2,14 +2,8 @@ angular.module('viaggia.controllers.bookmarks', [])
 
 .controller('BookmarksCtrl', function ($scope, $location, $filter, $ionicHistory, $timeout, $ionicModal, $ionicListDelegate, Config, bookmarkService) {
 
-    $scope.languageTutorial = "en";
 
-    function initTutorial() {
-        $scope.showReorder = false;
-        $scope.tutorialIndex = 1;
-        $scope.stepTutorial = 2;
-        $scope.endTutorial = false;
-    }
+    $scope.languageTutorial = "en";
 
 
     var init = function () {
@@ -23,53 +17,6 @@ angular.module('viaggia.controllers.bookmarks', [])
 
     };
 
-    function setLanguageTutorial() {
-        if (typeof navigator.globalization !== "undefined") {
-            navigator.globalization.getPreferredLanguage(function (language) {
-                $scope.languageTutorial = language.value.split("-")[0];
-            }, null);
-        }
-    }
-
-    function doTutorial() {
-        //check if present window storage
-        if (!window.localStorage.getItem('tutorialDone') || window.localStorage.getItem('tutorialDone') == 'false') {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    $scope.forceTutorial = function () {
-        window.localStorage.setItem('tutorialDone', false);
-        $scope.showTutorial();
-
-    }
-    $scope.showTutorial = function () {
-        if (doTutorial()) {
-            if (window.cordova && window.cordova.plugins.screenorientation) {
-                screen.lockOrientation('portrait');
-            }
-
-            $ionicModal.fromTemplateUrl('templates/bookmarkstutorial.html', {
-                scope: $scope,
-                animation: 'slide-in-up'
-            }).then(function (modal) {
-                $scope.modal = modal;
-                initTutorial();
-                $scope.showImage($scope.tutorialIndex);
-                $scope.openModal();
-            });
-        }
-        //return true;
-    }
-    $scope.closeTutorial = function () {
-        $scope.closeModal();
-        if (window.cordova && window.cordova.plugins.screenorientation) {
-            screen.unlockOrientation()
-        }
-        window.localStorage.setItem('tutorialDone', true);
-    }
     $scope.$on('ngLastRepeat.bookmarks', function (e) {
         $timeout(function () {
             ionicMaterialMotion.ripple();
@@ -127,23 +74,61 @@ angular.module('viaggia.controllers.bookmarks', [])
         $scope.modal.hide();
     };
 
-    //Cleanup the modal when we're done with it!
-    $scope.$on('$destroy', function () {
-        $scope.modal.remove();
-    });
-    // Execute action on hide modal
-    $scope.$on('modal.hide', function () {
-        // Execute action
-    });
-    // Execute action on remove modal
-    $scope.$on('modal.removed', function () {
-        // Execute action
-    });
-    $scope.$on('modal.shown', function () {
-        console.log('Modal is shown!');
-    });
+    function initTutorial() {
+        $scope.imageSrc = '';
+        $scope.showReorder = false;
+        $scope.tutorialIndex = 1;
+        $scope.stepTutorial = 2;
+        $scope.endTutorial = false;
 
-    $scope.imageSrc = 'img/bookmarks/tutorial1.png';
+    }
+
+    function setLanguageTutorial() {
+        if (typeof navigator.globalization !== "undefined") {
+            navigator.globalization.getPreferredLanguage(function (language) {
+                $scope.languageTutorial = language.value.split("-")[0];
+            }, null);
+        }
+    }
+
+    function doTutorial() {
+        if (!window.localStorage.getItem(Config.getAppId() + '_tutorialDone') || window.localStorage.getItem(Config.getAppId() + '_tutorialDone') == 'false') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    $scope.forceTutorial = function () {
+        window.localStorage.setItem(Config.getAppId() + '_tutorialDone', false);
+        $scope.showTutorial();
+
+    }
+    $scope.showTutorial = function () {
+        if (doTutorial()) {
+            if (window.cordova && window.cordova.plugins.screenorientation) {
+                screen.lockOrientation('portrait');
+            }
+
+            $ionicModal.fromTemplateUrl('templates/bookmarkstutorial.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.modal = modal;
+                initTutorial();
+                $scope.showImage($scope.tutorialIndex);
+                $scope.openModal();
+            });
+        }
+        //return true;
+    }
+    $scope.closeTutorial = function () {
+        $scope.closeModal();
+        if (window.cordova && window.cordova.plugins.screenorientation) {
+            screen.unlockOrientation()
+        }
+        window.localStorage.setItem(Config.getAppId() + '_tutorialDone', true);
+    }
     $scope.nextStep = function () {
         if ($scope.tutorialIndex < $scope.stepTutorial) {
             $scope.tutorialIndex = $scope.tutorialIndex + 1;
@@ -152,20 +137,12 @@ angular.module('viaggia.controllers.bookmarks', [])
             }
             $scope.showImage($scope.tutorialIndex);
         } else {
-            $scope.closeModal();
+            $scope.closeTutorial();
         }
     }
     $scope.showImage = function (index) {
-        switch (index) {
-        case 1:
-            $scope.imageSrc = 'img/bookmarks/step_01_' + $scope.languageTutorial + '.png';
-            break;
-        case 2:
-            $scope.imageSrc = 'img/bookmarks/step_02_' + $scope.languageTutorial + '.png';
-            break;
+        $scope.imageSrc = 'img/bookmarks/step_' + index + '_' + $scope.languageTutorial + '.png';
 
-        }
-        //$scope.openModal();
     }
     init();
 })

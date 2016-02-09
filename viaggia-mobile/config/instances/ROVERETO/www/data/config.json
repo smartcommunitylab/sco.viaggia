@@ -2,11 +2,11 @@
     "apptoken": "viaggiarovereto",
     "appid": "rovereto",
     "messagingAppId": "mobility.rovereto",
-    "senderID": "12453",
+    "senderID": "",
     "appversion": "1.0.1",
     "appname": "Viaggia Rovereto",
     "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
-    "messagingServerURL": "https://dev.smartcommunitylab.it/core.communicator",
+    "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
     "smartcheck_options": [
         1,
         4,

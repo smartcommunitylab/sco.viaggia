@@ -41,13 +41,16 @@
       ],
             "angular-simple-logger": "bower_components/angular-leaflet-directive/dist/angular-simple-logger.min.js",
             "ionic-timepicker": [
-        "bower_components/ionic-timepicker/dist/ionic-timepicker.bundle.min.js",
-        "bower_components/ionic-timepicker/dist/templates.js"
+        "bower_components/ionic-timepicker/dist/ionic-timepicker.bundle.min.js"
       ],
-            "ionic-datepicker": "bower_components/ionic-datepicker/dist/ionic-datepicker.bundle.min.js",
+            "ionic-datepicker": "bower_components/ionic-datepicker/ionic-datepicker.bundle.min.js",
             "ng-material-floating-button": [
         "bower_components/ng-material-floating-button/mfb/dist/mfb.css"
-      ]
+      ],
+            "ng-walkthrough": [
+                "bower_components/ng-walkthrough/css/ng-walkthrough.css",
+                "bower_components/ng-walkthrough/ng-walkthrough.js"
+            ]
         }
     }
 }

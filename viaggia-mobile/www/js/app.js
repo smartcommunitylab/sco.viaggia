@@ -54,7 +54,7 @@ angular.module('viaggia', [
     'nemLogging',
     'leaflet-directive',
     'pascalprecht.translate',
-    'ng-walkthrough',
+//    'ng-walkthrough',
     'viaggia.controllers.common',
     'viaggia.controllers.table1',
     'viaggia.controllers.table2',

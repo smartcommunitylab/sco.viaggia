@@ -517,6 +517,11 @@
     text-align: center;
 }
 
+.parking-card-footer .slots-text span {
+    text-align: center;
+    width: 100%;
+}
+
 ion-header-bar .title {
     color: #fff !important;
 }
@@ -979,6 +984,11 @@ ion-header-bar .title {
     padding: 0 8px;
 }
 
+.bookmark-popup {
+    color: rgb(41, 117, 167)!important;
+    font-size: x-large;
+}
+
 .date-label {
     white-space: nowrap;
 }
@@ -989,6 +999,10 @@ ion-header-bar .title {
 
 .parking-item-label.highlight {
     font-weight: bold;
+}
+
+.parking-info {
+    margin-left: 16px;
 }
 
 .bm-item-label {
@@ -1017,18 +1031,8 @@ ion-header-bar .title {
 }
 
 .header-badge {
-    top: -30px !important;
-    /*    left: 10px !important;*/
-    /*
-    font-size: x-small !important;
-    margin-left: -5px!important;
-    display: table!important;
-    margin-right: 10px!important;
-    margin-top: -10px;
-    padding: 3px 3px 3px 3px;
-    width: 22px;
-    display: block!inspect;
-*/
+    top: -32px !important;
+    padding: 2px 12px 2px 3px;
 }
 
 .home_notification {
@@ -1055,4 +1059,46 @@ ion-header-bar .title {
 
 .bm-detail {
     font-size: 12px;
+}
+
+.control-tutorial {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
+
+
+/*close button of popup*/
+
+.leaflet-container a.leaflet-popup-close-button {
+    font-size: 25px !important;
+    line-height: 20px !important;
+    padding: 8px 16px 0 0 !important;
+}
+
+.fullscreen-tutorial {
+    max-width: 100%;
+    max-height: 100%;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    overflow: auto;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+.tutorial-button {
+    font-size: large;
+}
+
+.transparent {
+    background-color: rgba(0, 0, 0, 0.6)!important;
+}
+
+.image-modal {
+    width: 100% !important;
+    height: 100%;
+    top: 0 !important;
+    left: 0 !important;
 }
