@@ -54,6 +54,7 @@ angular.module('viaggia', [
     'nemLogging',
     'leaflet-directive',
     'pascalprecht.translate',
+    'ng-walkthrough',
     'viaggia.controllers.common',
     'viaggia.controllers.table1',
     'viaggia.controllers.table2',
@@ -556,14 +557,21 @@ angular.module('viaggia', [
             action_train: 'Prendi il treno ',
             action_park: 'Lascia la macchina a ',
             action_move: 'Prosegui',
-            parking_search_time: 'Trova parcheggio: ',
+            parking_search_time: ' per trovare parcheggio',
             error_select_type_feedback: 'Selezionare almeno un mezzo di trasporto',
             planlist_empty_list: 'La ricerca non ha prodotto risultati validi',
             no_tt: 'In questa giornata non ci sono corse disponibili per questa linea.',
             lbl_no_trips: 'Non sono previste corse nelle prossime 24 ore.',
             notifications_empty_list: 'Non sono presenti notifiche',
             notifications_title: 'Notifiche',
-            notifications_detail_title: 'Dettagli notifica'
+            notifications_detail_title: 'Dettagli notifica',
+            bikesharings_distance: 'Distanza: ',
+            parking_cost: 'Costo di parcheggio: ',
+            parking_time: 'Tempo stimato per parcheggiare: ',
+            tutorial_next: 'AVANTI',
+            tutorial_end: 'FINE',
+            tutorial_skip: 'SALTA'
+
 
 
 
@@ -717,16 +725,20 @@ angular.module('viaggia', [
             action_train: 'Take the train ',
             action_park: 'Leave the car to ',
             action_move: 'Move ',
-            parking_search_time: 'Time to park: ',
+            parking_search_time: ' searching time',
             error_select_type_feedback: 'Select at least one mean of transport ',
             planlist_empty_list: 'Your search did not match any journey',
             no_tt: 'No trips available for this line on this date.',
             lbl_no_trips: 'No lines due in the next 24 hours.',
             notifications_empty_list: 'No notifications available',
             notifications_title: 'Notifications',
-            notifications_detail_title: 'Notification detail'
-
-
+            notifications_detail_title: 'Notification detail',
+            bikesharings_distance: 'Distance: ',
+            parking_cost: 'Parking cost: ',
+            parking_time: 'Parking average time: ',
+            tutorial_next: 'NEXT',
+            tutorial_end: 'END',
+            tutorial_skip: 'SKIP'
         });
 
 

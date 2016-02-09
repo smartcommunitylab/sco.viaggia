@@ -174,11 +174,19 @@ angular.module('viaggia.services.plan', [])
                     cost = parseFloat(cost) > 0 ? ($filter('number')(cost, 2) + '\u20AC') : 'gratis';
                 }
                 res.cost = cost;
-                res.note.push(cost);
+                var costnote = {
+                    type: 'cost',
+                    value: cost
+                };
+                res.note.push(costnote);
             }
             if (leg.extra.searchTime && leg.extra.searchTime.max > 0) {
-                res.time = leg.extra.searchTime.min + '-' + leg.extra.searchTime.max + 'min';
-                res.note.push(res.time);
+                res.time = leg.extra.searchTime.min + '-' + leg.extra.searchTime.max + '\'';
+                var timenote = {
+                    type: 'time',
+                    value: leg.extra.searchTime.min + '-' + leg.extra.searchTime.max + '\''
+                };
+                res.note.push(timenote);
             }
             res.type = 'STREET';
         }
@@ -193,7 +201,11 @@ angular.module('viaggia.services.plan', [])
                 }
             }
             res.cost = cost;
-            res.note.push(cost);
+            var costnote = {
+                type: 'cost',
+                value: cost
+            };
+            res.note.push(costnote);
             res.type = 'PARK';
         }
         if (leg.to.stopId && leg.to.stopId.id) {
@@ -229,12 +241,18 @@ angular.module('viaggia.services.plan', [])
                     var parking = extractParking(it.leg[i], false);
                     if (parking) {
                         if (parking.type == 'STREET') {
-                            elem.note = parking.note;
+                            //elem.note = parking.note;
+                            means.push(elem);
+                            elem = {
+                                note: parking.note,
+                                parking_street: true
+                            };
                         } else {
                             means.push(elem);
                             elem = {
                                 img: parking.img,
-                                note: parking.note
+                                note: parking.note,
+                                parking_street: false
                             };
                         }
                     }

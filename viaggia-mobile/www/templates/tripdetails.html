@@ -1,8 +1,8 @@
 <ion-view id="tripdetails" title="{{'journey_detail' | translate}}">
     <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-map" ng-click="openMapTrip()" ></button>
+        <button class="button button-icon button-clear ion-map" ng-click="openMapTrip()"></button>
         <button ng-if="!editMode" class="button button-icon button-clear" ng-class="bookmarkStyle" ng-click="bookmark()"></button>
-<!--
+        <!--
         <nav ng-if="tripId!=null" mfb-menu position="tr" effect="zoomin" active-icon="ion-ios-close-empty" resting-icon="ion-ios-plus-empty" toggling-method="click">
             <a mfb-button label="{{labelModify}}" icon="ion-edit" ng-click="modifyTrip()"></a>
             <a mfb-button label="{{labelDelete}}" icon="ion-trash-b" ng-click="deleteTrip()"></a>
@@ -33,7 +33,8 @@
                                 <div class="col inter-leg">{{requestedFrom}}</div>
                             </div>
                             <!-- ROW -->
-                            <div class="row leg" ng-repeat="step in currentItinerary.steps" ng-if="step.length>0">
+                            <div class="row leg" ng-repeat="step in currentItinerary.steps">
+                                <!--                            <div class="row leg" ng-repeat="step in currentItinerary.steps" ng-if="step.length>0">-->
                                 <div class="line-background">
                                     <img src="img/ic_point.png">
                                 </div>
@@ -45,11 +46,19 @@
                                     </p>
                                     <p ng-if="step.to != null">{{step.toLabel}}<strong>{{step.to}}</strong>
                                     </p>
+                                    <!--
                                     <p ng-if="step.parking && step.parking.cost">
                                         <img src="img/ic_price_parking.png" />{{step.parking.cost| number:2}}
                                     </p>
                                     <p ng-if="step.parking && step.parking.time">
                                         <img src="img/ic_look_for_parking.png" />{{'parking_search_time' | translate}} {{step.parking.time}}
+                                    </p>
+-->
+                                    <p ng-if="step.parking && step.parking.cost">
+                                        {{'parking_cost' | translate}}<b>{{step.parking.cost}}</b>
+                                    </p>
+                                    <p ng-if="step.parking && step.parking.time">
+                                        {{'parking_time' | translate}}<b>{{step.parking.time}}</b>
                                     </p>
                                 </div>
                                 <div>
@@ -74,9 +83,9 @@
                                 <div>{{requestedTo}}</div>
                             </div>
                             <button ng-if="editMode" class="button button-viaggia-header button-block" ng-click="saveTrip()">{{'journey_details_save' | translate}} </button>
-                            <div class="popup-buttons"  ng-if="!editMode" >
-                              <button class="button button-cancel" ng-click="deleteTrip()">{{'journey_details_delete' | translate}} </button>
-                              <button class="button button-default" ng-click="modifyTrip()">{{'journey_details_modify' | translate}} </button>
+                            <div class="popup-buttons" ng-if="!editMode">
+                                <button class="button button-cancel" ng-click="deleteTrip()">{{'journey_details_delete' | translate}} </button>
+                                <button class="button button-default" ng-click="modifyTrip()">{{'journey_details_modify' | translate}} </button>
                             </div>
                         </div>
                     </div>

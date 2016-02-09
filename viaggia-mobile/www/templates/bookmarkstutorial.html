@@ -1,0 +1,18 @@
+<div class="modal image-modal transparent">
+    <ion-pane class="transparent">
+        <img ng-src="{{imageSrc}}" class="fullscreen-tutorial" />
+        <div class="control-tutorial">
+            <div class="row">
+                <div class="col col-33">
+                    <button class="button button-clear button-light tutorial-button" ng-click="closeTutorial()" ng-show="!endTutorial">{{'tutorial_skip' | translate}} </button>
+                </div>
+                <div class="col col-33 col-offset-33">
+                    <div class="text-right">
+                        <button class="button button-clear button-light tutorial-button" ng-click="nextStep()" ng-show="!endTutorial">{{'tutorial_next' | translate}} </button>
+                        <button class="button button-clear button-light tutorial-button" ng-click="nextStep()" ng-show="endTutorial">{{'tutorial_end' | translate}} </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-pane>
+</div>

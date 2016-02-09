@@ -4,10 +4,10 @@ angular.module('viaggia.services.map', [])
     var cachedMap = {};
 
     var getColorByType = function (transport) {
-      return Config.getColorType(transport.type, transport.agencyId).color;
+        return Config.getColorType(transport.type, transport.agencyId).color;
     }
     var getIconByType = function (transport) {
-      return Config.getColorType(transport.type, transport.agencyId).icon;
+        return Config.getColorType(transport.type, transport.agencyId).icon;
     }
     var getPopUpMessage = function (trip, leg, i) {
         //from step to step
@@ -17,33 +17,33 @@ angular.module('viaggia.services.map', [])
             var toIndex = trip.leg[i].toStep;
             var steps = toIndex - fromIndex;
             var internalIndex = fromIndex;
-            //for (var k = 0; k < steps; k++) {
-            //                if (steps > 1) {
-            //                    divreturn = divreturn + '<div>' + $filter('translate')('popup_step_number') + k + '</div>';
-            //                }
-            if (trip.steps[internalIndex].startime) {
-                divreturn = divreturn + '<div><strong>' + planService.getTimeStr(new Date(trip.steps[internalIndex].startime)) + '</strong></div><div class="col inter-leg">'
+            for (var k = 0; k < steps; k++) {
+                //                if (steps > 1) {
+                //                    divreturn = divreturn + '<div>' + $filter('translate')('popup_step_number') + k + '</div>';
+                //                }
+                if (internalIndex == fromIndex && trip.steps[internalIndex].startime) {
+                    divreturn = divreturn + '<div><strong>' + planService.getTimeStr(new Date(trip.steps[internalIndex].startime)) + '</strong></div><div class="col inter-leg">'
+                }
+                if (internalIndex == fromIndex && trip.steps[internalIndex].action) {
+                    divreturn = divreturn + '<p>' + trip.steps[internalIndex].action
+                }
+                if (internalIndex == fromIndex && trip.steps[internalIndex].actionDetails) {
+                    divreturn = divreturn + '<strong>' + trip.steps[internalIndex].actionDetails + '</strong></p>'
+                }
+                if (internalIndex == fromIndex && trip.steps[internalIndex].from) {
+                    divreturn = divreturn + '<p>' + trip.steps[internalIndex].fromLabel + '<strong>' + trip.steps[internalIndex].from + '</strong></p>'
+                }
+                if (internalIndex == fromIndex && trip.steps[internalIndex].to) {
+                    divreturn = divreturn + '<p>' + trip.steps[internalIndex].toLabel + '<strong>' + trip.steps[internalIndex].to + '</strong></p>'
+                }
+                if (trip.steps[internalIndex].parking && trip.steps[internalIndex].parking.cost) {
+                    divreturn = divreturn + '<p>' + $filter('translate')("parking_cost") + '<strong>' + trip.steps[internalIndex].parking.cost + '</strong></p>'
+                }
+                if (trip.steps[internalIndex].parking && trip.steps[internalIndex].parking.time) {
+                    divreturn = divreturn + '<p>' + $filter('translate')("parking_time") + '<strong>' + trip.steps[internalIndex].parking.time + '</strong></p></div>'
+                }
+                internalIndex++;
             }
-            if (trip.steps[internalIndex].action) {
-                divreturn = divreturn + '<p>' + trip.steps[internalIndex].action
-            }
-            if (trip.steps[internalIndex].actionDetails) {
-                divreturn = divreturn + '<strong>' + trip.steps[internalIndex].actionDetails + '</strong></p>'
-            }
-            if (trip.steps[internalIndex].from) {
-                divreturn = divreturn + '<p>' + trip.steps[internalIndex].fromLabel + '<strong>' + trip.steps[internalIndex].from + '</strong></p>'
-            }
-            if (trip.steps[internalIndex].to) {
-                divreturn = divreturn + '<p>' + trip.steps[internalIndex].toLabel + '<strong>' + trip.steps[internalIndex].to + '</strong></p>'
-            }
-            if (trip.steps[internalIndex].parking && trip.steps[internalIndex].parking.cost) {
-                divreturn = divreturn + '<p>' + trip.steps[internalIndex].parking.cost + '</strong></p>'
-            }
-            if (trip.steps[internalIndex].parking && trip.steps[internalIndex].parking.time) {
-                divreturn = divreturn + '<p><img src="img/ic_look_for_parking.png" />'+$filter('translate')("parking_search_time")+' ' + trip.steps[internalIndex].parking.time + '</p></div>'
-            }
-            internalIndex++;
-            //}
         }
         return divreturn;
     }

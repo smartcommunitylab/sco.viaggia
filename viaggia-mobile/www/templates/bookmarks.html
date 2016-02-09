@@ -1,11 +1,11 @@
 <ion-view title="{{'menu_bookmarks'|translate}}">
     <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-help" ng-click="forceTutorial()"></button>
         <button class="button button-icon button-clear ion-drag" ng-click="toggleReorder()"></button>
     </ion-nav-buttons>
-    <ion-content id="content" has-header="true">
-
+    <ion-content id="content" has-header="true" ng-init="showTutorial()">
         <ion-list class="bookmark-list" can-swipe="true" show-reorder="showReorder">
-            <ion-item class="item-icon-left" ng-class="{'bookmark-margin':!showReorder}" item="item" ng-repeat="m in bookmarks track by $index" ng-last-repeat="bookmarks" ng-click="go(m.state)">
+            <ion-item id="focusHere" class="item-icon-left" ng-class="{'bookmark-margin':!showReorder}" item="item" ng-repeat="m in bookmarks track by $index" ng-last-repeat="bookmarks" ng-click="go(m.state)">
                 <h2>
           <i class="icon img" ng-class="m.icon" style="{{'color: '+m.color}}"></i>
           <span>{{m.label | translate}}</span>
@@ -15,11 +15,10 @@
                 <ion-reorder-button class="button button-clear ion-drag" on-reorder="reorder($fromIndex, $toIndex)"></ion-reorder-button>
             </ion-item>
         </ion-list>
-
-
         <div ng-if="(!bookmarks || bookmarks.length == 0)" class="text-center">
             <h4>{{'no_data' | translate}}</h4>
         </div>
 
     </ion-content>
+
 </ion-view>
