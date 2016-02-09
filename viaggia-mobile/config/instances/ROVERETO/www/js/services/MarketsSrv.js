@@ -12,20 +12,7 @@ angular.module('viaggia.services.markets', [])
         lat: 45.90031,
         long: 11.03626
     };
-    var favorites = [
-        {
-            name: "Piazza Rosmini",
-            lat: 45.89088,
-            long: 11.04354
-    }, {
-            name: "Stadio Quercia",
-            lat: 45.90031,
-            long: 11.03626
-    }, {
-            name: "Mercatini - Via Roma",
-            lat: 45.889568,
-            long: 11.043297
-        }];
+    var favorites = [];
 
     var mercatinoFavorites = function () {
         return favorites;
