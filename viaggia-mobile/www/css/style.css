@@ -405,19 +405,20 @@
 
 .parking-card .row,
 .parking-card .col {
-    padding: 0px;
-}
+/*    padding: 0px;
+    */}
 
 .parking-card.selected {
     background-color: rgba(59, 186, 207, 0.5);
 }
 
-.parking-card .col-80 p {
+.parking-card .col p {
     white-space: normal;
 }
 
 .parking-card-footer {
     min-height: 40px;
+    padding-top: 10px;
 }
 
 .parking-card-footer .col {
