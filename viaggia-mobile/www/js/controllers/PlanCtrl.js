@@ -52,7 +52,7 @@ angular.module('viaggia.controllers.plan', [])
     var setDefaultOptions = function () {
         //var planOptionConfig = Config.getPlanDefaultOptions();
         $scope.planParams.departureTime = $filter('date')(new Date().getTime(), 'hh:mma');
-        $scope.planParams.date = $filter('date')(new Date().getTime(), 'dd/MM/yyyy');
+        $scope.planParams.date = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
         $scope.planParams.routeType = planOptionConfig.routeType;
         $scope.planParams.transportTypes = planOptionConfig.transportTypes;
         for (var i = 0; i < $scope.types.length; i++) {
@@ -62,7 +62,7 @@ angular.module('viaggia.controllers.plan', [])
 
     var setSavedOptions = function (Configure) {
         $scope.planParams.departureTime = $filter('date')(new Date().getTime(), 'hh:mma');
-        $scope.planParams.date = $filter('date')(new Date().getTime(), 'dd/MM/yyyy');
+        $scope.planParams.date = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
         $scope.planParams.routeType = Configure.routeType;
         $scope.planParams.transportTypes = Configure.transportTypes;
         for (var i = 0; i < $scope.types.length; i++) {
@@ -152,7 +152,7 @@ angular.module('viaggia.controllers.plan', [])
             console.log('No date selected');
         } else {
             $scope.datepickerObjectPopup.inputDate = val;
-            $scope.dateTimestamp = $filter('date')(val.getTime(), 'dd/MM/yyyy');
+            $scope.dateTimestamp = $filter('date')(val.getTime(), 'MM/dd/yyyy');
         }
     };
     setDateWidget();
@@ -313,7 +313,9 @@ angular.module('viaggia.controllers.plan', [])
         }
         if ($scope.dateTimestamp) {
             //date
-            $scope.planParams.date = $scope.dateTimestamp;
+            $scope.planParams.date = $filter('date')(selectedDate.getTime(), 'MM/dd/yyyy');
+            //            selectedDate.getMonth() + '/' + selectedDate.getDate + '/' + selectedDate.getYear();
+            //            $scope.dateTimestamp;
         }
         return true;
     };
@@ -667,7 +669,7 @@ angular.module('viaggia.controllers.plan', [])
 
 
         } else {
-            $scope.planParams['date'] = $filter('date')(new Date().getTime(), 'dd/MM/yyyy');
+            $scope.planParams['date'] = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
         }
         if (!$scope.planParams.routeType) {
             $scope.planParams['routeType'] = planOptionConfig.routeType;
@@ -682,7 +684,7 @@ angular.module('viaggia.controllers.plan', [])
             $scope.planParams['departureTime'] = $filter('date')(new Date().getTime(), 'hh:mma');
         }
         if (!$scope.planParams.date) {
-            $scope.planParams['date'] = $filter('date')(new Date().getTime(), 'dd/MM/yyyy');
+            $scope.planParams['date'] = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
         }
 
     }

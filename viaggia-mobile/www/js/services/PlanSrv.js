@@ -496,7 +496,7 @@ angular.module('viaggia.services.plan', [])
             },
             timeout: 10000
         }).
-        success(function (data) {
+        success(function (data, status, headers, config) {
             deferred.resolve(data);
             planJourneyResults = data;
         }).
