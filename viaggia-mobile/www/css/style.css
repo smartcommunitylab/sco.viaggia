@@ -405,8 +405,9 @@
 
 .parking-card .row,
 .parking-card .col {
-/*    padding: 0px;
-    */}
+    /*    padding: 0px;
+    */
+}
 
 .parking-card.selected {
     background-color: rgba(59, 186, 207, 0.5);
@@ -789,6 +790,9 @@ ion-header-bar .title {
 
 .list-of-icons {
     min-width: 50px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
 }
 
 #table-header {
@@ -1004,6 +1008,7 @@ ion-header-bar .title {
 
 .parking-info {
     margin-left: 16px;
+    white-space: normal;
 }
 
 .bm-item-label {
@@ -1032,8 +1037,20 @@ ion-header-bar .title {
 }
 
 .header-badge {
+    top: -30px !important;
+    /*    left: 10px !important;*/
+    font-size: x-small !important;
+    margin-left: -5px!important;
+    display: table!important;
+    margin-right: 10px!important;
+    margin-top: -10px;
+    padding: 3px 3px 3px 3px;
+    width: 22px;
+    display: block!inspect;
+    /*
     top: -32px !important;
     padding: 2px 12px 2px 3px;
+*/
 }
 
 .home_notification {
