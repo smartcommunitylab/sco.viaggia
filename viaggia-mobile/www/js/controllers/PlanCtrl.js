@@ -707,7 +707,7 @@ angular.module('viaggia.controllers.plan', [])
     if (planService.getPlanConfigure() != null) {
         oldConfig = planService.getPlanConfigure();
     }
-    planService.setPlanConfigure(null);
+
     $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
         var oldConfig = planService.getPlanConfigure();
 
@@ -716,6 +716,9 @@ angular.module('viaggia.controllers.plan', [])
             $scope.planParams = planService.getPlanConfigure();
             var planOptionConfig = Config.getPlanDefaultOptions();
             manageOptions();
+        }
+        if ((toState.name == 'app.plan') && (fromState.name == 'app.home')) {
+            planService.setPlanConfigure(null);
         }
     });
 
