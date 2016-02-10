@@ -181,6 +181,7 @@
 
 .plan-buttons-right {
     line-height: 104px;
+    min-width: 130px;
 }
 
 .plan-buttons-right a {
