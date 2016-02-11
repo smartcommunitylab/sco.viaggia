@@ -5,18 +5,18 @@
     </ion-nav-buttons>
     <ion-content id="content" has-header="true" ng-init="showTutorial()">
 
-        <ion-list class="bookmark-list" can-swipe="true" show-reorder="showReorder">
-            <!--            <ion-item id="focusHere" class="item-icon-left" ng-class="{'bookmark-margin':!showReorder}" item="item" ng-repeat="m in bookmarks track by $index" ng-last-repeat="bookmarks" ng-click="go(m.state)">-->
-            <ion-item id="focusHere" class="item-icon-left" ng-class="{'bookmark-margin':!showReorder}" item="item" ng-repeat="m in bookmarks track by $index" ng-click="go(m.state)">
-                <h2>
+<ion-list class="bookmark-list" can-swipe="true" show-reorder="showReorder">
+    <!--            <ion-item id="focusHere" class="item-icon-left" ng-class="{'bookmark-margin':!showReorder}" item="item" ng-repeat="m in bookmarks track by $index" ng-last-repeat="bookmarks" ng-click="go(m.state)">-->
+    <ion-item id="focusHere" class="item-icon-left" ng-class="{'bookmark-margin':!showReorder}" item="item" ng-repeat="m in bookmarks track by $index" ng-click="go(m.state)">
+        <h2>
           <i class="icon img" ng-class="m.icon" style="{{'color: '+m.color}}"></i>
           <span>{{m.label | translate}}</span>
         </h2>
-                <ion-option-button ng-if="m.removable" class="button button-clear" ng-click="delete($index, $event)"><i class="icon ic_delete"></i></ion-option-button>
-                <ion-option-button class="button button-clear" ng-click="toggleHome($index)"><i class="icon" ng-class="{'ion-ios-home': m.home, 'ion-ios-home-outline': !m.home}"></i></ion-option-button>
-                <ion-reorder-button class="button button-clear ion-drag" on-reorder="reorder($fromIndex, $toIndex)"></ion-reorder-button>
-            </ion-item>
-        </ion-list>
+        <ion-option-button ng-if="m.removable" class="button button-clear" ng-click="delete($index, $event)"><i class="icon ic_delete"></i></ion-option-button>
+        <ion-option-button class="button button-clear" ng-click="toggleHome($index)"><i class="icon" ng-class="{'ion-ios-home': m.home, 'ion-ios-home-outline': !m.home}"></i></ion-option-button>
+        <ion-reorder-button class="button button-clear ion-drag" on-reorder="reorder($fromIndex, $toIndex)"></ion-reorder-button>
+    </ion-item>
+</ion-list>
 
 
 

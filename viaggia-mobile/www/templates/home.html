@@ -4,14 +4,16 @@
 
     </ion-nav-buttons>
 
-    <ion-content>
+    <ion-content ng-class="{'empty_bookmarks': primaryLinks.length==0}">
         <!--
         <div id="map-container" data-tap-disabled="true">
             <leaflet event-broadcast="events" center="center" markers="markers" paths="pathLine" style="width: 100%; height: 320px;" ng-init="initMap()"  id="homeMap"></leaflet>
         </div>
 -->
-
-        <ion-list class="home-list">
+        <div ng-if="primaryLinks.length==0">
+            <ng-include src="'templates/emptyHomepage.html'"></ng-include>
+        </div>
+        <ion-list class="home-list" ng-if="primaryLinks.length>0">
 
             <ion-item ng-repeat="m in primaryLinks" ng-last-repeat="primaryLinks" ng-click="go(m.state)">
                 <button class="button button-block">

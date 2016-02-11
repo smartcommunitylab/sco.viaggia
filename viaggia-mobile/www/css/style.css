@@ -1121,3 +1121,30 @@ ion-header-bar .title {
     top: 0 !important;
     left: 0 !important;
 }
+
+.empty_bookmarks {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+}
+
+.empty_home_ops {
+    font-size: medium;
+    color: #666;
+    font-weight: bold;
+    white-space: normal;
+    font-style: italic;
+}
+
+.empty_home_bookmarks {
+    color: #2975a7;
+    font-size: medium;
+    font-weight: bold;
+    white-space: normal;
+}
+
+.row_empty_home {
+    padding: 25px;
+}

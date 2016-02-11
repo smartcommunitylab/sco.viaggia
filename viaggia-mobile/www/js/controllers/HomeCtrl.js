@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.home', [])
 
-.controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $filter, $location, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService) {
+.controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService) {
     //load from localstorage the id notifications read
     $ionicPlatform.ready(function () {
         document.addEventListener("resume", function () {
@@ -122,5 +122,11 @@ angular.module('viaggia.controllers.home', [])
     $scope.go = function (state) {
         $location.path(state);
     }
+    $scope.goToBookmarks = function () {
+        $state.go('app.bookmarks');
+        $ionicHistory.nextViewOptions({
+            disableBack: true
+        });
 
+    }
 })

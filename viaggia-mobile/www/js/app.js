@@ -570,7 +570,9 @@ angular.module('viaggia', [
             parking_time: 'Tempo stimato per parcheggiare: ',
             tutorial_next: 'AVANTI',
             tutorial_end: 'FINE',
-            tutorial_skip: 'SALTA'
+            tutorial_skip: 'SALTA',
+            empty_home_label_1: 'Ops... hai nascosto tutte le schede della pagina principale',
+            empty_home_label_2: 'Vai nei PREFERITI per ripristinare i contenuti che ti interessano'
 
 
 
@@ -738,7 +740,9 @@ angular.module('viaggia', [
             parking_time: 'Parking average time: ',
             tutorial_next: 'NEXT',
             tutorial_end: 'END',
-            tutorial_skip: 'SKIP'
+            tutorial_skip: 'SKIP',
+            empty_home_label_1: 'Oops... you removed all the tabs from the main page',
+            empty_home_label_2: 'Go to BOOKMARKS to restore the contents you are interested in'
         });
 
 
