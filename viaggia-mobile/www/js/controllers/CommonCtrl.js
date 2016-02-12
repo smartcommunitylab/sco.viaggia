@@ -1,15 +1,16 @@
 angular.module('viaggia.controllers.common', [])
 
 .controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, DataManager, $ionicPopup, $ionicModal, $filter, $ionicLoading, Config, planService) {
-    $scope.shownGroup = true;
-
     /*menu group*/
+    $scope.shownGroup = false;
     $scope.toggleGroupRealTime = function () {
         if ($scope.isGroupRealTimeShown()) {
             $scope.shownGroup = false;
         } else {
             $scope.shownGroup = true;
         }
+        localStorage.setItem(Config.getAppId() + '_shownGroup', $scope.shownGroup);
+
     };
     $scope.isGroupRealTimeShown = function () {
         return $scope.shownGroup === true;
@@ -89,6 +90,8 @@ angular.module('viaggia.controllers.common', [])
     Config.init().then(function () {
         $scope.infomenu = Config.getInfoMenu();
         $scope.version = Config.getVersion();
+        $scope.shownGroup = JSON.parse(localStorage.getItem(Config.getAppId() + '_shownGroup')) || false;
+
     });
 
     $scope.selectInfomenu = function (m) {

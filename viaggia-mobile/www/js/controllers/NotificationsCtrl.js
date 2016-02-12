@@ -1,19 +1,8 @@
 angular.module('viaggia.controllers.notifications', [])
 
 .controller('NotificationsCtrl', function ($scope, $state, $rootScope, Config, $filter, Toast, notificationService) {
-        $scope.notificationService = notificationService;
-        $scope.emptylist = false;
-        //load from localstorage the id notifications read
-        $scope.notificationsIsRead = JSON.parse(localStorage.getItem(Config.getAppId() + '_notificationsIsRead')) || [];
-        $scope.notifications = JSON.parse(localStorage.getItem(Config.getAppId() + '_notifications')) || [];
-        $scope.lastUpdateTime = localStorage.getItem(Config.getAppId() + '_lastUpdateTime');
-        //scrico le ultime di una settimana
-        if ($scope.lastUpdateTime == null) {
-            date = new Date();
-            date.setDate(date.getDate() - 7);
-            $scope.lastUpdateTime = date.getTime();
-        }
 
+        init();
         $scope.showNotification = function (notification) {
 
             //add element read in the object
@@ -30,10 +19,6 @@ angular.module('viaggia.controllers.notifications', [])
             return $scope.notificationsIsRead.indexOf(notificationId) > -1;
         }
 
-        $scope.notifications = [];
-        $scope.start = 0;
-        $scope.all = 10;
-        $scope.end_reached = false;
 
 
         $scope.loadMore = function () {
@@ -78,12 +63,40 @@ angular.module('viaggia.controllers.notifications', [])
             return false;
         }
 
+        function init() {
+            $scope.notificationService = notificationService;
+            $scope.emptylist = false;
+            //load from localstorage the id notifications read
+            $scope.notificationsIsRead = JSON.parse(localStorage.getItem(Config.getAppId() + '_notificationsIsRead')) || [];
+            $scope.notifications = JSON.parse(localStorage.getItem(Config.getAppId() + '_notifications')) || [];
+            $scope.lastUpdateTime = localStorage.getItem(Config.getAppId() + '_lastUpdateTime');
+            //scrico le ultime di una settimana
+            if ($scope.lastUpdateTime == null) {
+                date = new Date();
+                date.setDate(date.getDate() - 7);
+                $scope.lastUpdateTime = date.getTime();
+            }
+            $scope.notifications = [];
+            $scope.start = 0;
+            $scope.all = 10;
+            $scope.end_reached = false;
+        }
         $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
             $rootScope.previousState = from.name;
             $rootScope.currentState = to.name;
-            //tmp workaraound for tabs
+            //            if ($rootScope.currentState == "app.notifications" && $rootScope.previousState == "app.home") {
+            //                //reload the notification
+            //                init();
+            //                $scope.loadMore();
+            //            } else if ($rootScope.currentState == "app.notifications" && $rootScope.previousState != "app.notificationdetail") {
+            //                $scope.loadMore();
+            //            }
             if ($rootScope.currentState == "app.notifications" && $rootScope.previousState != "app.notificationdetail") {
-                // $scope.notifications = [];
+                //reload the notification
+                $scope.loadMore();
+            } else {
+                init();
+
                 $scope.loadMore();
             }
         });

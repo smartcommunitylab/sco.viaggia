@@ -250,7 +250,7 @@ angular.module('viaggia.services.bookmarks', [])
                     }
                 case 'BUSSUBURBANSTOP':
                     {
-                        var ct = Config.getColorsTypes()['BUSSUBURNAN'];
+                        var ct = Config.getColorsTypes()['BUSSUBURBAN'];
                         color = ct.color;
                         icon = 'ic_m_extraurban_bus';
                         break;

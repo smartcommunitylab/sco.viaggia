@@ -125,10 +125,10 @@ angular.module('viaggia.services.conf', [])
             color: '#3bbacf'
         },
         PARKING: {
-            color: '#36a3dc'
+            color: '#164286'
         },
         BIKESHARING: {
-            color: '#8cc04c'
+            color: '#922d66'
         }
     };
 

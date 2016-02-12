@@ -123,7 +123,7 @@ angular.module('viaggia.controllers.tripdetails', [])
         $ionicPopup.prompt({
             title: $filter('translate')('save_trip_title'),
             templateUrl: 'templates/popup-savetrip.html',
-            subTitle: $filter('translate')('save_trip_text'),
+            //subTitle: $filter('translate')('save_trip_text'),
             scope: $scope,
             buttons: [
                 {
