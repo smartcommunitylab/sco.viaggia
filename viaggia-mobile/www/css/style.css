@@ -961,6 +961,14 @@ ion-header-bar .title {
     /*    transition: margin 0.2s ease;*/
 }
 
+.text_books {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    width: inherit;
+}
+
 .bookmark-list .bookmark .img {
     font-size: 36px;
 }
@@ -993,6 +1001,10 @@ ion-header-bar .title {
 .bookmark-popup {
     color: rgb(41, 117, 167)!important;
     font-size: x-large;
+}
+
+.parking-title {
+    white-space: nowrap;
 }
 
 .date-label {
