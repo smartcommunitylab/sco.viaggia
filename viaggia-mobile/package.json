@@ -1,20 +1,20 @@
 {
-    "name": "viaggia-mobile",
-    "version": "1.0.0",
-    "description": "viaggia-mobile: An Ionic project",
-    "dependencies": {
-        "gulp": "^3.5.6",
-        "gulp-sass": "^1.3.3",
-        "gulp-concat": "^2.2.0",
-        "gulp-minify-css": "^0.3.0",
-        "gulp-rename": "^1.2.0"
-    },
-    "devDependencies": {
-        "bower": "^1.3.3",
-        "gulp-util": "^2.2.14",
-        "shelljs": "^0.3.0"
-    },
-    "cordovaPlugins": [
+  "name": "viaggia-mobile",
+  "version": "1.0.0",
+  "description": "viaggia-mobile: An Ionic project",
+  "dependencies": {
+    "gulp": "^3.5.6",
+    "gulp-sass": "^1.3.3",
+    "gulp-concat": "^2.2.0",
+    "gulp-minify-css": "^0.3.0",
+    "gulp-rename": "^1.2.0"
+  },
+  "devDependencies": {
+    "bower": "^1.3.3",
+    "gulp-util": "^2.2.14",
+    "shelljs": "^0.3.0"
+  },
+  "cordovaPlugins": [
     "org.apache.cordova.console",
     "org.apache.cordova.device",
     "org.apache.cordova.statusbar",
@@ -29,10 +29,18 @@
     "cordova-sqlite-storage",
     "https://github.com/samikrc/CordovaSQLite.git",
     "cordova-plugin-whitelist",
-      "https://github.com/phonegap/phonegap-plugin-push",
-        "net.yoik.cordova.plugins.screenorientation"
+    "net.yoik.cordova.plugins.screenorientation",
+    "https://github.com/phonegap/phonegap-plugin-push",
+    {
+      "variables": {
+        "SENDER_ID": "453601816446",
+        "GOOGLE_APP_ID": "453601816446"
+      },
+      "locator": "phonegap-plugin-push",
+      "id": "phonegap-plugin-push"
+    }
   ],
-    "cordovaPlatforms": [
+  "cordovaPlatforms": [
     "ios",
     "android"
   ]
