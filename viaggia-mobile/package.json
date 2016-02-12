@@ -29,7 +29,8 @@
     "cordova-sqlite-storage",
     "https://github.com/samikrc/CordovaSQLite.git",
     "cordova-plugin-whitelist",
-      "https://github.com/phonegap/phonegap-plugin-push"
+      "https://github.com/phonegap/phonegap-plugin-push",
+        "net.yoik.cordova.plugins.screenorientation"
   ],
     "cordovaPlatforms": [
     "ios",
