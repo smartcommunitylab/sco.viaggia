@@ -53,15 +53,16 @@
                 <ion-item nav-clear menu-close href="#/app/notifications" class="menu-main item-icon-left">
                     <i class="icon ic_notification"></i>{{'menu_notifications' | translate}}
                 </ion-item>
-                <!--
-<ion-item nav-clear menu-close href="#/app/login" class="menu-last item-icon-left">
-    <i class="icon ic_user"></i>{{'menu_login' | translate}}
-</ion-item>
--->
                 <ion-item nav-clear menu-close ng-click="openCredits()" class="menu-last item-icon-left">
                     <i class="icon ic_info"></i>{{'menu_credits' | translate}}
                 </ion-item>
-
+                <!--                betatesting menu-->
+                <ion-item nav-clear menu-close href="mailto:viaggiatrento@smartcommunitylab.it?subject=ViaggiaTrento:%20segnalazione%20problema" class="item-icon-left item-accordion  menu-rt">
+                    <i class="icon ic_segnala_problemi"></i>{{'menu_betatesting_bug' | translate}}
+                </ion-item>
+                <ion-item nav-clear menu-close onclick="window.open('http://www.google.it', '_system', 'location=yes'); return false;" class="item-icon-left item-accordion menu-rt">
+                    <i class="icon ic_questionario"></i>{{'menu_betatesting_questionnaire' | translate}}
+                </ion-item>
             </ion-list>
         </ion-content>
     </ion-side-menu>

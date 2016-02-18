@@ -147,7 +147,10 @@ angular.module('viaggia', [
             }, 1500);
             notificationService.register();
 
+
         });
+
+
     })
     .config(function ($stateProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider) {
         $ionicConfigProvider.views.swipeBackEnabled(false);
@@ -572,10 +575,11 @@ angular.module('viaggia', [
             tutorial_end: 'FINE',
             tutorial_skip: 'SALTA',
             empty_home_label_1: 'Ops... hai nascosto tutte le schede della pagina principale',
-            empty_home_label_2: 'Vai nei PREFERITI per ripristinare i contenuti che ti interessano'
-
-
-
+            empty_home_label_2: 'Vai nei PREFERITI per ripristinare i contenuti che ti interessano',
+            menu_betatesting_bug: 'Segnala un problema',
+            menu_betatesting_questionnaire: 'Ti piace la app?',
+            lbl_betatesting: 'BETA TESTING',
+            lbl_betatesting_forced: 'Grazie per la tua partecipazione al beta test di Trento! Ti chiediamo 3 minuti per rispondere a qualche domanda.'
 
         });
 
@@ -742,7 +746,11 @@ angular.module('viaggia', [
             tutorial_end: 'END',
             tutorial_skip: 'SKIP',
             empty_home_label_1: 'Oops... you removed all the tabs from the main page',
-            empty_home_label_2: 'Go to BOOKMARKS to restore the contents you are interested in'
+            empty_home_label_2: 'Go to BOOKMARKS to restore the contents you are interested in',
+            menu_betatesting_bug: 'Report an issue',
+            menu_betatesting_questionnaire: 'Do you like the app?',
+            lbl_betatesting: 'BETA TESTING',
+            lbl_betatesting_forced: 'Grazie per la tua partecipazione al beta test di Trento! Ti chiediamo 3 minuti per rispondere a qualche domanda.'
         });
 
 

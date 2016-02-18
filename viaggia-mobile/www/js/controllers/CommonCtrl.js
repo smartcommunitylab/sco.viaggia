@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.common', [])
 
-.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, DataManager, $ionicPopup, $ionicModal, $filter, $ionicLoading, Config, planService) {
+.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, $ionicPlatform, DataManager, $ionicPopup, $ionicModal, $filter, $ionicLoading, Config, planService) {
     /*menu group*/
     $scope.shownGroup = false;
     $scope.toggleGroupRealTime = function () {
@@ -28,13 +28,70 @@ angular.module('viaggia.controllers.common', [])
         $scope.creditsModal.hide();
     };
     $scope.openCredits = function () {
-            $scope.creditsModal.show();
+        $scope.creditsModal.show();
+    }
+
+    $scope.openBetaTesting = function () {
+        $scope.forced = false;
+        showBetaPopup();
+    }
+
+    function showBetaPopup() {
+        $ionicPopup.show({
+            templateUrl: 'templates/betatestingPopup.html',
+            title: $filter('translate')('lbl_betatesting'),
+            cssClass: 'parking-popup',
+            scope: $scope,
+            buttons: [
+                {
+                    text: $filter('translate')('btn_close'),
+                    type: 'button-close'
+                }
+            ]
+        });
+
+    }
+    $ionicPlatform.ready(function () {
+        /*manage beta testing*/
+        console.log("new start");
+        Config.init().then(function () {
+            //add counter on hard resume
+            hardstart = JSON.parse(localStorage.getItem(Config.getAppId() + '_hardstart')) || 0;
+            $scope.forced = false;
+
+            hardstart++;
+            localStorage.setItem(Config.getAppId() + '_hardstart', hardstart);
+            document.addEventListener("resume", onResume, false);
+            //check if open popup
+            if (shouldForcePopup(hardstart, 'h')) {
+                $scope.forced = true;
+                showBetaPopup();
+            }
+        });
+    });
+
+    function onResume() {
+        // Handle the resume event
+        console.log("resume");
+        //add counter on soft resume
+        $scope.forced = false;
+        softstart = JSON.parse(localStorage.getItem(Config.getAppId() + '_softstart')) || 0;
+        softstart++;
+        localStorage.setItem(Config.getAppId() + '_softstart', softstart);
+        //check if open popup
+        if (shouldForcePopup(softstart, 's')) {
+            $scope.forced = true;
+            showBetaPopup();
         }
-        /*pop up managers*/
-        //    $scope.newPlan = function () {
-        //        planService.setTripId(null); //reset data for pianification
-        //        $state.go('app.plan');
-        //    };
+    }
+
+    function shouldForcePopup(counter, type) {
+        if ((type === 'h' && counter === 5) || (type === 's' && counter === 10)) {
+            return true;
+        }
+        return false;
+    }
+
     $scope.popupLoadingShow = function () {
         $ionicLoading.show({
             template: $filter('translate')("pop_up_loading")

@@ -1,0 +1,42 @@
+<div>
+    <div class="row row-center map-stop-title">
+        <i class="icon popup-icon ic_advice"></i>
+        <div class="col">
+            <b class="parking-title"> {{'lbl_betatesting'|translate}}</b>
+        </div>
+        <!--        bookmark button-->
+    </div>
+    <div class="map-stop-hline"></div>
+    <div class="row">
+        <!--
+        <button class="button button-block button-viaggia icon-left">
+            <i class="icon ic_segnala_problemi"></i>{{'menu_betatesting_bug' | translate}}
+        </button>
+-->
+        <a class="button button-block button-viaggia beta-button" ng-if="!forced" ng-href="mailto:viaggiatrento@smartcommunitylab.it?subject=ViaggiaTrento:%20segnalazione%20problema">
+            <div class="row beta-button">
+                <i class="col-center icon ic_segnala_problemi"></i>
+                <div class="col col-center">
+                    {{'menu_betatesting_bug' | translate}} </div>
+            </div>
+        </a>
+        <div ng-if="forced" class="lbl-betatesting">
+            {{'lbl_betatesting_forced' | translate}}
+        </div>
+    </div>
+    <div class="row">
+        <!--
+        <button class="button button-block button-viaggia icon-left">
+            <i class="icon ic_questionario"></i>{{'menu_betatesting_questionnaire' | translate}}
+        </button>
+-->
+        <button class="button button-block button-viaggia beta-button" onclick="window.open('http://www.google.it', '_system', 'location=yes'); return false;">
+            <div class="row beta-button">
+                <i class="col-center icon ic_questionario"></i>
+                <div class="col col-center">
+                    {{'menu_betatesting_questionnaire' | translate}} </div>
+            </div>
+        </button>
+    </div>
+
+</div>
