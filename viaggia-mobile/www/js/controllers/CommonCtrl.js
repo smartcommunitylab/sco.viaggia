@@ -37,19 +37,17 @@ angular.module('viaggia.controllers.common', [])
     }
 
     function showBetaPopup() {
-        $ionicPopup.show({
+        $scope.betapopup = $ionicPopup.show({
             templateUrl: 'templates/betatestingPopup.html',
             title: $filter('translate')('lbl_betatesting'),
             cssClass: 'parking-popup',
-            scope: $scope,
-            buttons: [
-                {
-                    text: $filter('translate')('btn_close'),
-                    type: 'button-close'
-                }
-            ]
+            scope: $scope
+
         });
 
+    }
+    $scope.closePopup = function () {
+        $scope.betapopup.close();
     }
     $ionicPlatform.ready(function () {
         /*manage beta testing*/

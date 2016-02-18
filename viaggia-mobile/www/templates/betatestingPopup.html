@@ -25,16 +25,21 @@
         </div>
     </div>
     <div class="row">
-        <!--
-        <button class="button button-block button-viaggia icon-left">
-            <i class="icon ic_questionario"></i>{{'menu_betatesting_questionnaire' | translate}}
-        </button>
--->
+
         <button class="button button-block button-viaggia beta-button" onclick="window.open('http://www.google.it', '_system', 'location=yes'); return false;">
             <div class="row beta-button">
                 <i class="col-center icon ic_questionario"></i>
                 <div class="col col-center">
                     {{'menu_betatesting_questionnaire' | translate}} </div>
+            </div>
+        </button>
+    </div>
+    <div class="row">
+
+        <button class="button button-block button-close button-viaggia beta-button" ng-click="closePopup()">
+            <div class="row beta-button">
+                <div class="col col-center">
+                    {{'btn_close' | translate}} </div>
             </div>
         </button>
     </div>
