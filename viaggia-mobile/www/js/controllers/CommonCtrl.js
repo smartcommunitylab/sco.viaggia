@@ -63,6 +63,7 @@ angular.module('viaggia.controllers.common', [])
             //check if open popup
             if (shouldForcePopup(hardstart, 'h')) {
                 $scope.forced = true;
+                localStorage.setItem(Config.getAppId() + '_forced', true);
                 showBetaPopup();
             }
         });
@@ -79,14 +80,18 @@ angular.module('viaggia.controllers.common', [])
         //check if open popup
         if (shouldForcePopup(softstart, 's')) {
             $scope.forced = true;
+            localStorage.setItem(Config.getAppId() + '_forced', true);
             showBetaPopup();
         }
     }
 
     function shouldForcePopup(counter, type) {
-        if ((type === 'h' && counter === 5) || (type === 's' && counter === 10)) {
-            return true;
+        if (!(JSON.parse(localStorage.getItem(Config.getAppId() + '_forced')) || false)) {
+            if ((type === 'h' && counter === 5) || (type === 's' && counter === 10)) {
+                return true;
+            }
         }
+
         return false;
     }
 
