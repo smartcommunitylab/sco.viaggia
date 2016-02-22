@@ -70,6 +70,7 @@ angular.module('viaggia', [
     'viaggia.controllers.plan',
     'viaggia.controllers.planlist',
     'viaggia.controllers.tripdetails',
+    'viaggia.controllers.login',
     'viaggia.services.data',
     'viaggia.services.conf',
     'viaggia.services.map',
@@ -78,6 +79,7 @@ angular.module('viaggia', [
     'viaggia.services.markets',
     'viaggia.services.info',
     'viaggia.services.notification',
+    'viaggia.services.login',
     'viaggia.directives',
     'viaggia.services.geo',
     'viaggia.services.bookmarks',
@@ -152,11 +154,21 @@ angular.module('viaggia', [
     .config(function ($stateProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider) {
         $ionicConfigProvider.views.swipeBackEnabled(false);
         $stateProvider.state('app', {
-            url: "/app",
-            abstract: true,
-            templateUrl: "templates/menu.html",
-            controller: 'AppCtrl'
-        })
+                url: "/app",
+                abstract: true,
+                templateUrl: "templates/menu.html",
+                controller: 'AppCtrl'
+            })
+            .state('app.login', {
+                cache: false,
+                url: "/login",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/login.html",
+                        controller: 'LoginCtrl'
+                    }
+                }
+            })
 
         .state('app.home', {
                 cache: false,
@@ -408,7 +420,7 @@ angular.module('viaggia', [
 
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/home');
+        $urlRouterProvider.otherwise('/app/login');
 
         $translateProvider.translations('it', {
             menu_home: 'Home',

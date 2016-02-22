@@ -1,0 +1,24 @@
+<ion-view id="login">
+    <ion-nav-bar class="bar-positive-100" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="left">
+        <ion-nav-buttons side="left">
+            <!-- Toggle left side menu -->
+
+        </ion-nav-buttons>
+
+    </ion-nav-bar>
+    <ion-content id=" content " has-header="true ">
+        <div class="bottom-content row">
+            <div class="col col-bottom">
+                <a class="facebook-sign-in button button-block" ng-click="facebookSignIn()">
+          Log in with Facebook
+        </a>
+            </div>
+        </div>
+        <div class="bottom-content row">
+            <div class="col col-bottom">
+                <a class="google-sign-in button button-block" ng-click="googleSignIn()">Sign in with Google</a>
+
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
