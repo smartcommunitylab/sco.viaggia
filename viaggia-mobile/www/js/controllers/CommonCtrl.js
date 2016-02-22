@@ -46,6 +46,20 @@ angular.module('viaggia.controllers.common', [])
         });
 
     }
+
+    function showFirstOpenPopup() {
+        $scope.firstOpenPopup = $ionicPopup.show({
+            templateUrl: 'templates/betaWelcomePopup.html',
+            title: $filter('translate')('lbl_betatesting'),
+            cssClass: 'parking-popup',
+            scope: $scope
+
+        });
+
+    }
+    $scope.closeFirstOpenPopup = function () {
+        $scope.firstOpenPopup.close();
+    }
     $scope.closePopup = function () {
         $scope.betapopup.close();
     }
@@ -53,10 +67,18 @@ angular.module('viaggia.controllers.common', [])
         /*manage beta testing*/
         console.log("new start");
         Config.init().then(function () {
+
+            //check if first open
+            firstopen = JSON.parse(localStorage.getItem(Config.getAppId() + '_firstopen'));
+            if (null === firstopen) {
+                //show betawelcome;
+                localStorage.setItem(Config.getAppId() + '_firstopen', false);
+                showFirstOpenPopup();
+
+            }
             //add counter on hard resume
             hardstart = JSON.parse(localStorage.getItem(Config.getAppId() + '_hardstart')) || 0;
             $scope.forced = false;
-
             hardstart++;
             localStorage.setItem(Config.getAppId() + '_hardstart', hardstart);
             document.addEventListener("resume", onResume, false);
@@ -87,7 +109,7 @@ angular.module('viaggia.controllers.common', [])
 
     function shouldForcePopup(counter, type) {
         if (!(JSON.parse(localStorage.getItem(Config.getAppId() + '_forced')) || false)) {
-            if ((type === 'h' && counter === 5) || (type === 's' && counter === 10)) {
+            if ((type === 'h' && counter === 10) || (type === 's' && counter === 30)) {
                 return true;
             }
         }
