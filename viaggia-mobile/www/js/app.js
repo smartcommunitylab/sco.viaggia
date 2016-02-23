@@ -579,8 +579,8 @@ angular.module('viaggia', [
             menu_betatesting_bug: 'Segnala un problema',
             menu_betatesting_questionnaire: 'Ti piace la app?',
             lbl_betatesting: 'BETA TESTING',
-            lbl_betatesting_forced: 'Grazie per la tua partecipazione al beta test di Trento! Ti chiediamo 3 minuti per rispondere a qualche domanda.',
-            lbl_betatesting_welcome: 'Grazie per aver scaricato questa versione di test di ViaggiaTrento! Quando vorrai, potrai farci sapere cosa ne pensi utilizzando le apposite funzionalità nel menù o nella action bar.',
+            lbl_betatesting_forced: 'Stai utilizzando questa versione di test da un po’ di tempo. Potresti dirci cosa ne pensi? Ci vorranno solo 2 minuti.',
+            lbl_betatesting_welcome: 'Grazie per aver scaricato questa versione di test di ViaggiaTrento! Potrai farci sapere cosa ne pensi utilizzando le apposite funzionalità nel menù o nella action bar.',
             btn_start: 'Inizia'
 
         });
@@ -752,8 +752,8 @@ angular.module('viaggia', [
             menu_betatesting_bug: 'Report an issue',
             menu_betatesting_questionnaire: 'Do you like the app?',
             lbl_betatesting: 'BETA TESTING',
-            lbl_betatesting_forced: 'Thank you for your participation in the Viaggia Trento\'s beta test. We kindly ask you to answer few questions',
-            lbl_betatesting_welcome: 'Thank you for downloading this test version of ViaggiaTrento! When you want, you can let us know what you think using the appropriate functionality in the menu or the action bar',
+            lbl_betatesting_forced: 'You have been using this test version for a while. Would you let us know your opinion? It will take just two minutes.',
+            lbl_betatesting_welcome: 'Thank you for downloading this test version of ViaggiaTrento! You can let us know what you think using the appropriate functionalities in the menu or in the action bar.',
             btn_start: 'Start'
         });
 
