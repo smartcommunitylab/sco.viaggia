@@ -4,14 +4,14 @@ angular.module('viaggia.services.login', [])
 //
 //A Service to work with login server's services
 //
-.factory('loginService', function ($q, $http, $rootScope, $ionicPlatform, Config, StorageSrv) {
+.factory('loginService', function ($q, $http, $rootScope, $ionicPlatform, Config, storageService) {
         var loginService = {};
         var facebookToken = null;
         var googleToken = null;
         var authWindow = null;
 
         loginService.userIsLogged = function () {
-            return (StorageSrv.getUser() != null);
+            return (storageService.getUser() != null);
         };
 
         loginService.login = function (token, provider) {
@@ -104,10 +104,10 @@ angular.module('viaggia.services.login', [])
             authapi.authorize().then(
                 function (profile) {
                     console.log('success: ' + profile.userId);
-                    StorageSrv.saveUser(profile).then(function () {
+                    storageService.saveUser(profile).then(function () {
                         deferred.resolve(profile);
                     }, function (reason) {
-                        StorageSrv.saveUser(null).then(function () {
+                        storageService.saveUser(null).then(function () {
                             deferred.reject(reason);
                         });
                     });
