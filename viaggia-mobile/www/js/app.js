@@ -71,6 +71,7 @@ angular.module('viaggia', [
     'viaggia.controllers.planlist',
     'viaggia.controllers.tripdetails',
     'viaggia.controllers.login',
+    'viaggia.controllers.login',
     'viaggia.services.data',
     'viaggia.services.conf',
     'viaggia.services.map',
@@ -83,6 +84,7 @@ angular.module('viaggia', [
     'viaggia.directives',
     'viaggia.services.geo',
     'viaggia.services.bookmarks',
+    'viaggia.services.tracking',
     'viaggia.filters'
 ])
 
@@ -420,7 +422,7 @@ angular.module('viaggia', [
 
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/login');
+        $urlRouterProvider.otherwise('/app/home');
 
         $translateProvider.translations('it', {
             menu_home: 'Home',
@@ -429,7 +431,7 @@ angular.module('viaggia', [
             menu_news: 'News e avvisi',
             menu_info: 'Info e tariffe',
             menu_bookmarks: 'Preferiti',
-            menu_notifications: 'Notifiche',
+            menu_notifications: 'Avvisi',
             menu_info_real_time: 'Info in tempo reale',
             menu_monitoring: 'Monitoring',
             menu_real_time_bus_urban: 'Autobus Urbani',
@@ -574,9 +576,9 @@ angular.module('viaggia', [
             planlist_empty_list: 'La ricerca non ha prodotto risultati validi',
             no_tt: 'In questa giornata non ci sono corse disponibili per questa linea.',
             lbl_no_trips: 'Non sono previste corse nelle prossime 24 ore.',
-            notifications_empty_list: 'Non sono presenti notifiche',
-            notifications_title: 'Notifiche',
-            notifications_detail_title: 'Dettagli notifica',
+            notifications_empty_list: 'Non ci sono avvisi in questo momento',
+            notifications_title: 'Avvisi',
+            notifications_detail_title: 'Dettagli avviso',
             bikesharings_distance: 'Distanza: ',
             parking_cost: 'Costo di parcheggio: ',
             parking_time: 'Tempo stimato per parcheggiare: ',
@@ -744,7 +746,7 @@ angular.module('viaggia', [
             planlist_empty_list: 'Your search did not match any journey',
             no_tt: 'No trips available for this line on this date.',
             lbl_no_trips: 'No lines due in the next 24 hours.',
-            notifications_empty_list: 'No notifications available',
+            notifications_empty_list: 'There are no notification at the moment',
             notifications_title: 'Notifications',
             notifications_detail_title: 'Notification detail',
             bikesharings_distance: 'Distance: ',

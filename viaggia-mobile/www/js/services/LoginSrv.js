@@ -175,6 +175,7 @@ angular.module('viaggia.services.login', [])
             return deferred.promise;
 
         }
+        return loginService;
     })
     .factory('userService', function ($http, $q, Config) {
         var userService = {};
@@ -205,6 +206,11 @@ angular.module('viaggia.services.login', [])
         }
         userService.setGoogleToken = function (token) {
             googleToken = token;
+        }
+        userService.validUserForGamification = function () {
+            var deferred = $q.defer();
+            deferred.resolve(false);
+            return deferred.promise;;
         }
         return userService;
     })
