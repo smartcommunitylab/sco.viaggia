@@ -34,7 +34,7 @@
     <div class="stop-line-grid" ng-if="popupStop.visualization.view == 'grid'">
         <div class="route-grid-element" ng-repeat="(routeId, route) in popupStop.data" style="{{route.routeElement.color ? ('background-color: '+route.routeElement.color) : 'color:#000;border: 2px solid #000; text-shadow: none;'}}">
             <span ng-if="!route.routeElement.gridCode">{{route.routeElement.label}}</span>
-            <span ng-if="route.routeElement.gridCode"><i class="icon" ng-class="route.gridCode"></i>
+            <span ng-if="route.routeElement.gridCode"><i class="icon {{route.routeElement.gridCode}}"></i>
             </span>
         </div>
 
