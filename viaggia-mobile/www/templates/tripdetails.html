@@ -80,7 +80,7 @@
                                 <div class="end-leg"><img src="img/ic_point_outline.png">
                                 </div>
                                 <div class="margin-right-16 margin-left-16">{{toTime(currentItinerary.endtime)}} </div>
-                                <div>{{requestedTo}}</div>
+                                <div class="col inter-leg">{{requestedTo}}</div>
                             </div>
                             <button ng-if="editMode" class="button button-viaggia-header button-block" ng-click="saveTrip()">{{'journey_details_save' | translate}} </button>
                             <div class="popup-buttons" ng-if="!editMode">
