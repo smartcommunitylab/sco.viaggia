@@ -577,10 +577,10 @@ angular.module('viaggia', [
             empty_home_label_1: 'Ops... hai nascosto tutte le schede della pagina principale',
             empty_home_label_2: 'Vai nei PREFERITI per ripristinare i contenuti che ti interessano',
             menu_betatesting_bug: 'Segnala un problema',
-            menu_betatesting_questionnaire: 'Ti piace la app?',
-            lbl_betatesting: 'BETA TESTING',
+            menu_betatesting_questionnaire: 'Compila il questionario',
+            lbl_betatesting: 'NUOVA VERSIONE',
             lbl_betatesting_forced: 'Stai utilizzando questa versione di test da un po’ di tempo. Potresti dirci cosa ne pensi? Ci vorranno solo 2 minuti.',
-            lbl_betatesting_welcome: 'Grazie per aver scaricato questa versione di test di ViaggiaTrento! Potrai farci sapere cosa ne pensi utilizzando le apposite funzionalità nel menù o nella action bar.',
+            lbl_betatesting_welcome: 'Benvenuto nella nuova versione di Viaggia Trento. Facci sapere cosa ne pensi utilizzando le apposite funzionalità nel menù e nella pagina principale',
             btn_start: 'Inizia'
 
         });
@@ -750,10 +750,13 @@ angular.module('viaggia', [
             empty_home_label_1: 'Oops... you removed all the tabs from the main page',
             empty_home_label_2: 'Go to BOOKMARKS to restore the contents you are interested in',
             menu_betatesting_bug: 'Report an issue',
-            menu_betatesting_questionnaire: 'Do you like the app?',
-            lbl_betatesting: 'BETA TESTING',
+            menu_betatesting_questionnaire: 'Fill in the questionnaire',
+            //                        lbl_betatesting: 'NUOVA VERSIONE',
+            //            lbl_betatesting_forced: 'Stai utilizzando questa versione di test da un po’ di tempo. Potresti dirci cosa ne pensi? Ci vorranno solo 2 minuti.',
+            //            lbl_betatesting_welcome: 'Benvenuto nella nuova versione di Viaggia Trento. Potrai farci sapere cosa ne pensi utilizzando le apposite funzionalità nel menù e nella pagina principale',
+            lbl_betatesting: 'NEW VERSION',
             lbl_betatesting_forced: 'You have been using this test version for a while. Would you let us know your opinion? It will take just two minutes.',
-            lbl_betatesting_welcome: 'Thank you for downloading this test version of ViaggiaTrento! You can let us know what you think using the appropriate functionalities in the menu or in the action bar.',
+            lbl_betatesting_welcome: 'Welcome to the new version of Viaggia Trento. Let us know you opinion using the functionalities in the side menu or in the home page',
             btn_start: 'Start'
         });
 

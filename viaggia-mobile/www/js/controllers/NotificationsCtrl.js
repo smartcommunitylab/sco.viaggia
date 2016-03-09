@@ -47,8 +47,12 @@ angular.module('viaggia.controllers.notifications', [])
 
                 }
             }, function (err) {
+                if ($scope.notifications.length == 0) {
+                    $scope.emptylist = true;
+                }
                 console.error(err);
                 $scope.$broadcast('scroll.infiniteScrollComplete');
+                $scope.showNoConnection();
                 $scope.end_reached = true;
             });
         };
