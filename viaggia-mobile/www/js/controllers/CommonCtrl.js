@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.common', [])
 
-.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, DataManager, $ionicPopup, $ionicModal, $filter, $ionicLoading, Config, planService) {
+.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, DataManager, $ionicPopup, $ionicModal, $filter, $ionicLoading, Config, planService, userService) {
     /*menu group*/
     $scope.shownGroup = false;
     $scope.toggleGroupRealTime = function () {
@@ -28,7 +28,14 @@ angular.module('viaggia.controllers.common', [])
         $scope.creditsModal.hide();
     };
     $scope.openCredits = function () {
-            $scope.creditsModal.show();
+        $scope.creditsModal.show();
+    }
+
+    $scope.openGamificationBoard = function () {
+            userService.getValidToken().then(function (validToken) {
+                var url = Config.getGamificationURL() + "/mobile?token=" + validToken;
+                window.open(url, "_system", "location=yes");
+            })
         }
         /*pop up managers*/
         //    $scope.newPlan = function () {

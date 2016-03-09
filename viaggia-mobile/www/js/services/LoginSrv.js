@@ -20,6 +20,81 @@ angular.module('viaggia.services.login', [])
 
             // log into the system and set userId
             var authapi = {
+                authorizeWeb: function (url) {
+                    var deferred = $q.defer();
+
+                    //Build the OAuth consent page URL
+                    var authUrl = Config.getAuthServerURL() + '/' + provider + '?client_id=' + Config.getClientId() + "&response_type=code&redirect_uri=" + Config.getRedirectUri();
+                    //Open the OAuth consent page in the InAppBrowser
+                    if (!authWindow) {
+                        authWindow = window.open(authUrl, '_blank', 'location=no,toolbar=no');
+                        processThat = !!authWindow;
+                    }
+
+                    var processURL = function (url, deferred, w) {
+                        var success = /http:\/\/localhost(\/)?\?code=(.+)$/.exec(url);
+                        var error = /\?error=(.+)$/.exec(url);
+                        if (w && (success || error)) {
+                            //Always close the browser when match is found
+                            w.close();
+                            authWindow = null;
+                        }
+
+                        if (success) {
+                            var str = success[0];
+                            if (str.substring(str.length - 4) == '#_=_') {
+                                str = str.substring(0, str.length - 4);
+                            }
+                            console.log('success:' + decodeURIComponent(str));
+                            var token = str.substr(str.indexOf('=') + 1, str.length - str.indexOf('='));
+                            // make second http post token.
+                            loginService.makeTokenPost(token).then(function (tokenInfo) {
+                                        // append token info to data.
+                                        tokenInfo.token = token;
+
+                                        loginService.makeProfileCall(tokenInfo).then(function (profile) {
+                                                profile.token = tokenInfo;
+                                                // set expiry (after removing 1 hr).
+                                                var t = new Date();
+                                                t.setSeconds(t.getSeconds() + (profile.token.expires_in - 3600));
+                                                profile.token.validUntil = t;
+
+                                                deferred.resolve(profile);
+                                            },
+                                            function (error) {
+                                                deferred.reject(error[1]);
+                                            });
+                                    },
+                                    function (error) {
+                                        deferred.reject(error[1]);
+                                    })
+                                //loginService.makeTokenPost(str).then();
+                        } else if (error) {
+                            //The user denied access to the app
+                            deferred.reject({
+                                error: error[1]
+                            });
+                        }
+                    }
+
+                    if (ionic.Platform.isWebView()) {
+                        if (processThat) {
+                            authWindow.addEventListener('loadstart', function (e) {
+                                //console.log(e);
+                                var url = e.url;
+                                processURL(url, deferred, authWindow);
+                            });
+                        }
+                    } else {
+                        angular.element($window).bind('message', function (event) {
+                            $rootScope.$apply(function () {
+                                processURL(event.data, deferred);
+                            });
+                        });
+                    }
+
+                    return deferred.promise;
+                },
                 authorize: function (url) {
                     var deferred = $q.defer();
 
@@ -100,9 +175,8 @@ angular.module('viaggia.services.login', [])
                     return deferred.promise;
                 }
             };
-
-            authapi.authorize().then(
-                function (profile) {
+            if (token == null) {
+                authapi.authorizeWeb().then(function (profile) {
                     console.log('success: ' + profile.userId);
                     storageService.saveUser(profile).then(function () {
                         deferred.resolve(profile);
@@ -111,8 +185,21 @@ angular.module('viaggia.services.login', [])
                             deferred.reject(reason);
                         });
                     });
-                }
-            );
+                });
+            } else {
+                authapi.authorize().then(
+                    function (profile) {
+                        console.log('success: ' + profile.userId);
+                        storageService.saveUser(profile).then(function () {
+                            deferred.resolve(profile);
+                        }, function (reason) {
+                            storageService.saveUser(null).then(function () {
+                                deferred.reject(reason);
+                            });
+                        });
+                    }
+                )
+            };
 
             return deferred.promise;
         };
@@ -177,7 +264,7 @@ angular.module('viaggia.services.login', [])
         }
         return loginService;
     })
-    .factory('userService', function ($http, $q, Config) {
+    .factory('userService', function ($http, $q, Config, storageService) {
         var userService = {};
 
 
@@ -207,10 +294,69 @@ angular.module('viaggia.services.login', [])
         userService.setGoogleToken = function (token) {
             googleToken = token;
         }
-        userService.validUserForGamification = function () {
+        userService.validUserForGamification = function (profile) {
             var deferred = $q.defer();
-            deferred.resolve(false);
-            return deferred.promise;;
+            //check if user (profile.userId) is valid or not
+            var url = Config.getGamificationURL() + "/out/rest/checkuser/" + profile.userId;
+
+            $http.get(url).then(
+                function (response) {
+                    if (!response.data.registered) {
+                        deferred.resolve(false);
+
+                    } else {
+                        deferred.resolve(true);
+                    }
+                },
+                function (responseError) {
+                    deferred.reject(responseError);
+                }
+            );
+
+            return deferred.promise;
+        }
+        userService.getValidToken = function () {
+            var user = storageService.getUser();
+            var deferred = $q.defer();
+
+            // check for expiry.
+            var now = new Date();
+            var saved = new Date(user.token.validUntil);
+            if (saved.getTime() >= now.getTime()) {
+                deferred.resolve(user.token.access_token);
+            } else {
+                var url = Config.getServerTokenURL();
+                var params = "?client_id=" + Config.getClientId() + "&client_secret=" + Config.getClientSecKey() + "&code=" + user.token.code + "&refresh_token=" + user.token.refresh_token + "&grant_type=refresh_token";
+
+                $http.post(url + params)
+
+                .then(
+                    function (response) {
+                        if (response.data.access_token) {
+                            var access_token = response.data.access_token;
+                            user.token.access_token = response.data.access_token;
+                            user.token.refresh_token = response.data.refresh_token;
+                            user.token.expires_in = response.data.expires_in;
+                            // calculate expiry (after removing 1 hr).
+                            var t = new Date();
+                            t.setSeconds(t.getSeconds() + (response.data.expires_in - 3600));
+                            user.token.validUntil = t;
+                            // update token
+                            storageService.saveUser(user).then(function (success) {}, function (error) {});;
+
+                            deferred.resolve(access_token);
+                        } else {
+                            deferred.reject(null);
+                        }
+                    },
+                    function (responseError) {
+                        deferred.reject(responseError);
+                    }
+                );
+
+            }
+
+            return deferred.promise;
         }
         return userService;
     })

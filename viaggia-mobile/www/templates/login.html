@@ -1,12 +1,13 @@
-<ion-view id="login">
+<ion-view id="login" hide-nav-bar="true">
     <ion-nav-bar class="bar-positive-100" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="left">
         <ion-nav-buttons side="left">
-            <!-- Toggle left side menu -->
 
         </ion-nav-buttons>
 
     </ion-nav-bar>
-    <ion-content id=" content " has-header="true ">
+    <ion-content id=" content " has-header="true" scroll="false" class="login-page">
+        <div class="login-title">fsgsfgfsfg</div>
+        <div class="login-subtitle">sgsgsfgssfgfs</div>
         <div class="bottom-content row">
             <div class="col col-bottom">
                 <a class="facebook-sign-in button button-block" ng-click="facebookSignIn()">
@@ -20,5 +21,7 @@
 
             </div>
         </div>
+        <img src="img/img_login.png" class="bckImage" />
+
     </ion-content>
 </ion-view>

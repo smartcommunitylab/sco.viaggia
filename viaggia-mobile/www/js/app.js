@@ -422,7 +422,7 @@ angular.module('viaggia', [
 
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/home');
+        $urlRouterProvider.otherwise('/app/login');
 
         $translateProvider.translations('it', {
             menu_home: 'Home',
@@ -586,7 +586,10 @@ angular.module('viaggia', [
             tutorial_end: 'FINE',
             tutorial_skip: 'SALTA',
             empty_home_label_1: 'Ops... hai nascosto tutte le schede della pagina principale',
-            empty_home_label_2: 'Vai nei PREFERITI per ripristinare i contenuti che ti interessano'
+            empty_home_label_2: 'Vai nei PREFERITI per ripristinare i contenuti che ti interessano',
+            menu_gamification: 'GreenGame',
+            home_gamification: 'GREEN GAME',
+
 
 
 
@@ -756,7 +759,9 @@ angular.module('viaggia', [
             tutorial_end: 'END',
             tutorial_skip: 'SKIP',
             empty_home_label_1: 'Oops... you removed all the tabs from the main page',
-            empty_home_label_2: 'Go to BOOKMARKS to restore the contents you are interested in'
+            empty_home_label_2: 'Go to BOOKMARKS to restore the contents you are interested in',
+            home_gamification: 'GREEN GAME',
+            menu_gamification: 'GreenGame'
         });
 
 

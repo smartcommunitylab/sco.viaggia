@@ -190,6 +190,9 @@ angular.module('viaggia.services.conf', [])
         getHTTPConfig: function () {
             return HTTP_CONFIG;
         },
+        getTrackingConfig: function () {
+            return mapJsonConfig['trackingConfigure'];
+        },
         getDistanceForAutocomplete: function () {
             return DISTANCE_AUTOCOMPLETE;
         },
@@ -208,6 +211,9 @@ angular.module('viaggia.services.conf', [])
         },
         getGeocoderURL: function () {
             return GEOCODER_URL;
+        },
+        getGamificationURL: function () {
+            return mapJsonConfig['gamificationURL'];
         },
         getPlanTypes: function () {
             return PLAN_TYPES;

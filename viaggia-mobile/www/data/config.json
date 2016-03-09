@@ -10,6 +10,7 @@
     "authServerURL": "https://dev.smartcommunitylab.it/aac/eauth/authorize",
     "serverTokenURL": "https://dev.smartcommunitylab.it/aac/oauth/token",
     "serverProfileURL": "https://dev.smartcommunitylab.it/aac/basicprofile/me",
+    "gamificationURL": "https://dev.smartcommunitylab.it/gamificationweb",
     "cliendID": "ec03a596-e41e-49cc-808c-62f39e01de0b",
     "clientSecID": "6c6829bc-6621-4273-84b8-d74d23744f04",
     "redirectURL": "http://localhost",
@@ -59,6 +60,12 @@
                 "color": "#cd251c"
             },
             {
+                "state": "openGamificationBoard()",
+                "label": "home_gamification",
+                "icon": "ion-leaf",
+                "color": "#60b35c"
+            },
+            {
                 "state": "/app/parking/COMUNE_DI_TRENTO",
                 "label": "menu_real_time_park",
                 "icon": "ic_parking-lot",
@@ -94,5 +101,32 @@
                 "icon": "ic_parking-lot"
             }
       ]
+    },
+    "trackingConfigure": {
+        "desiredAccuracy": 10,
+        "stationaryRadius": 30,
+        "distanceFilter": 30,
+        "disableElasticity": false,
+        "locationUpdateInterval": 5000,
+        "stopAfterElapsedMinutes": 10,
+        "minimumActivityRecognitionConfidence": 50,
+        "fastestLocationUpdateInterval": 5000,
+        "activityRecognitionInterval": 10000,
+        "stopDetectionDelay": 1,
+        "stopTimeout": 2,
+        "activityType": "Other",
+        "debug": true,
+        "forceReloadOnLocationChange": false,
+        "forceReloadOnMotionChange": false,
+        "forceReloadOnGeofence": false,
+        "stopOnTerminate": false,
+        "startOnBoot": false,
+        "foregroundService": true,
+        "url": "https://dev.smartcommunitylab.it/core.mobility",
+        "method": "POST",
+        "batchSync": true,
+        "autoSync": false,
+        "maxDaysToPersist": 14
+
     }
 }

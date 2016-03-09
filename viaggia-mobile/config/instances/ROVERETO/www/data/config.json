@@ -5,8 +5,15 @@
     "senderID": "453601816446",
     "appversion": "2.0.0",
     "appname": "Viaggia Rovereto",
-    "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
-    "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
+    "serverURL": "https://dev.smartcommunitylab.it/core.mobility",
+    "messagingServerURL": "https://dev.smartcommunitylab.it/core.communicator",
+    "authServerURL": "https://dev.smartcommunitylab.it/aac/eauth/authorize",
+    "serverTokenURL": "https://dev.smartcommunitylab.it/aac/oauth/token",
+    "serverProfileURL": "https://dev.smartcommunitylab.it/aac/basicprofile/me",
+    "gamificationURL": "https://dev.smartcommunitylab.it/gamificationweb",
+    "cliendID": "ec03a596-e41e-49cc-808c-62f39e01de0b",
+    "clientSecID": "6c6829bc-6621-4273-84b8-d74d23744f04",
+    "redirectURL": "http://localhost",
     "smartcheck_options": [
         1,
         4,
@@ -59,6 +66,12 @@
                 "color": "#00588e"
             },
             {
+                "state": "openGamificationBoard()",
+                "label": "home_gamification",
+                "icon": "ion-leaf",
+                "color": "#60b35c"
+            },
+            {
                 "state": "/app/parking/COMUNE_DI_ROVERETO",
                 "label": "menu_real_time_park",
                 "icon": "ic_parking-lot",
@@ -98,5 +111,36 @@
                 "icon": "ic_parking-lot"
             }
       ]
+    },
+    "trackingConfigure": {
+        // Geolocation config
+        "desiredAccuracy": 10,
+        "stationaryRadius": 30,
+        "distanceFilter": 30, //min distance generate event. Changing speed the value change dinamically
+        "disableElasticity": false, // <-- [iOS] Default is 'false'.  Set true to disable speed-based distanceFilter elasticity
+        "locationUpdateInterval": 5000,
+        "stopAfterElapsedMinutes": 10, //<-- default value, after it will be assigned using the specific value
+        "minimumActivityRecognitionConfidence": 50, // 0-100%.  Minimum activity-confidence for a state-change
+        "fastestLocationUpdateInterval": 5000,
+        "activityRecognitionInterval": 10000,
+        "stopDetectionDelay": 1, // Wait x minutes to engage stop-detection system
+        "stopTimeout": 2, // Wait x miutes to turn off location system after stop-detection
+        "activityType": 'Other',
+
+        // Application config
+        "debug": true, // <-- enable this hear sounds for background-geolocation life-cycle.
+        "forceReloadOnLocationChange": false, // <-- [Android] If the user closes the app **while location-tracking is started** , reboot app when a new location is recorded (WARNING: possibly distruptive to user)
+        "forceReloadOnMotionChange": false, // <-- [Android] If the user closes the app **while location-tracking is started** , reboot app when device changes stationary-state (stationary->moving or vice-versa) --WARNING: possibly distruptive to user)
+        "forceReloadOnGeofence": false, // <-- [Android] If the user closes the app **while location-tracking is started** , reboot app when a geofence crossing occurs --WARNING: possibly distruptive to user)
+        "stopOnTerminate": false, // <-- [Android] Allow the background-service to run headless when user closes the app.
+        "startOnBoot": false, // <-- [Android] Auto start background-service in headless mode when device is powered-up.
+        "foregroundService": true, //<-- [Android Make] the Android service run in the foreground, supplying the ongoing notification to be shown to the user while in this state.
+        // HTTP / SQLite config
+        "url": "https://dev.smartcommunitylab.it/core.mobility",
+        "method": 'POST',
+        "batchSync": true, // <-- [Default: false] Set true to sync locations to server in a single HTTP request.
+        "autoSync": false, // <-- [Default: true] Set true to sync each location to server as it arrives.
+        "maxDaysToPersist": 14 // <-- Maximum days to persist a location in plugin's SQLite database when HTTP fails
+
     }
 }
