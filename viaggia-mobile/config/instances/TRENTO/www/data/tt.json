@@ -450,6 +450,7 @@
             },
                         {
                             "label": "Funivia",
+                            "color": "#016a6a",
                             "gridCode": "ic_funivia",
                             "routes": [
                                 {

@@ -703,5 +703,24 @@ angular.module('viaggia.services.plan', [])
 
         return deferred.promise;
     }
+
+    planService.mmddyyyy2date = function(s) {
+      return new Date(s.substr(6, 4), s.substr(0, 2) - 1, s.substr(3, 2));
+    }
+
+    planService.convertTo24Hour = function(time) {
+        var hours = parseInt(time.substr(0, 2));
+        if (time.indexOf('AM') != -1 && hours == 12) {
+            time = time.replace('12', '0');
+        }
+        if (time.indexOf('PM') != -1 && hours < 12) {
+            time = time.replace(hours, (hours + 12));
+        }
+        if (time.match(/0..:/))
+            time = time.substring(1);
+        return time.replace(/(AM|PM)/, '');
+
+    }
+
     return planService;
 })
