@@ -31,6 +31,8 @@
     "cordova-plugin-whitelist",
     "net.yoik.cordova.plugins.screenorientation",
     "https://github.com/phonegap/phonegap-plugin-push",
+    "cordova-plugin-googleplus --variable REVERSED_CLIENT_ID=myreversedclientid",
+    "../cordova-plugin-facebook4 --variable APP_ID='987886727948557' --variable APP_NAME='Smart Community Lab'",
     {
       "variables": {
         "SENDER_ID": "453601816446",
