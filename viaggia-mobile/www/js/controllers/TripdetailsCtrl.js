@@ -100,6 +100,12 @@ angular.module('viaggia.controllers.tripdetails', [])
     $scope.closeMap = function () {
         $scope.modalMap.hide();
     }
+    $scope.journey = {
+        recursiveTrip: true
+    }
+    $scope.recursiveChange = function () {
+        console.log('Push Notification Change', $scope.journey.recursiveTrip);
+    };
     $scope.saveTrip = function () {
         var editInstance = planService.getEditInstance();
         if ($scope.tripId && editInstance) {
@@ -119,11 +125,97 @@ angular.module('viaggia.controllers.tripdetails', [])
         }
         $scope.data = {};
         $scope.showError = false;
+        //        $scope.days = [
+        //            {
+        //                text: "L",
+        //                checked: false
+        //            },
+        //            {
+        //                text: "M",
+        //                checked: false
+        //            },
+        //            {
+        //                text: "M",
+        //                checked: false
+        //            },
+        //            {
+        //                text: "G",
+        //                checked: false
+        //            },
+        //            {
+        //                text: "V",
+        //                checked: false
+        //            },
+        //            {
+        //                text: "S",
+        //                checked: false
+        //            },
+        //            {
+        //                text: "D",
+        //                checked: false
+        //            }
+        //  ];
+        //        $scope.recursiveChange = function () {
+        //            console.log('Push Notification Change', $scope.data.recursiveTrip);
+        //        };
+        //        $scope.data.recursiveTrip = true;
+
+
+
+        $scope.recurrencyPopupDoW = [
+            {
+                name: 'dow_monday',
+                shortname: 'dow_monday_short',
+                value: 2,
+                checked: true
+        },
+            {
+                name: 'dow_tuesday',
+                shortname: 'dow_tuesday_short',
+                value: 3,
+                checked: true
+        },
+            {
+                name: 'dow_wednesday',
+                shortname: 'dow_wednesday_short',
+                value: 4,
+                checked: false
+        },
+            {
+                name: 'dow_thursday',
+                shortname: 'dow_thursday_short',
+                value: 5,
+                checked: false
+        },
+            {
+                name: 'dow_friday',
+                shortname: 'dow_friday_short',
+                value: 6,
+                checked: false
+        },
+            {
+                name: 'dow_saturday',
+                shortname: 'dow_saturday_short',
+                value: 7,
+                checked: false
+        },
+            {
+                name: 'dow_sunday',
+                shortname: 'dow_sunday_short',
+                value: 1,
+                checked: false
+        }
+    ];
         // Prompt popup code
         $ionicPopup.prompt({
-            title: $filter('translate')('save_trip_title'),
             templateUrl: 'templates/popup-savetrip.html',
-            //subTitle: $filter('translate')('save_trip_text'),
+            title: $filter('translate')('save_trip_title'),
+            cssClass: 'parking-popup',
+            scope: $scope,
+
+            //            title: $filter('translate')('save_trip_title'),
+            //            templateUrl: 'templates/popup-savetrip.html',
+            //            //subTitle: $filter('translate')('save_trip_text'),
             scope: $scope,
             buttons: [
                 {
@@ -204,10 +296,46 @@ angular.module('viaggia.controllers.tripdetails', [])
     };
 
     $scope.trackStart = function () {
-        trackService.start(); //params= idTrip, endTime, latEnd, longEnd
+        if (!$scope.fogEffect()) {
+            trackService.start($scope.tripId); //params= idTrip, endTime, latEnd, longEnd
+        }
     }
     $scope.trackState = function () {
-        trackService.getState();
+            trackService.getState();
+        }
+        //return true if this is the journey is going to track
+    $scope.isThisJourney = function () {
+        if (localStorage.getItem(Config.getAppId() + '_tripId') == $scope.tripId) {
+            return true;
+        }
+        return false;
+    }
+    $scope.isTracking = function () {
+        //return true if this is the tracking is going to track and is going
+        if ($scope.isThisJourney() && $scope.trackingIsGoingOn()) {
+            return true;
+        }
+        return false;
+    }
+
+    $scope.trackingIsGoingOn = function () {
+        //check local storage is tracking
+        if (localStorage.getItem(Config.getAppId() + '_state') != null) {
+            return true;
+        }
+        return false;
+    }
+    $scope.fogEffect = function () {
+        if (!$scope.isThisJourney() && $scope.trackingIsGoingOn()) {
+            return true
+        }
+        return false;
+    }
+    $scope.showPopupIfNotThisJourney = function () {
+        if ($scope.fogEffect()) {
+            Toast.show('si sta gia monitorando un altro percorso', "short", "bottom");
+        }
+
     }
     $scope.trackStop = function () {
         trackService.stop();

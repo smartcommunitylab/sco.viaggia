@@ -16,6 +16,10 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div>
+                            <div ng-class="{'fog': fogEffect()}" ng-click="showPopupIfNotThisJourney()">
+                                <button class="button button-viaggia-header button-block" ng-show="!isTracking()&&tripId!=null" ng-click="trackStart()">{{'labl_start_tracking'|translate}} </button>
+                                <button class="button button-viaggia-header button-block" ng-show="isTracking()&&tripId!=null" ng-click="trackStop()">{{'labl_stop_tracking'|translate}} </button>
+                            </div>
 
                             <div class="green-head" ng-if="currentItinerary.promoted">
                                 <div class="green-thumb"><img src="img/ic_leaf.png" />

@@ -589,8 +589,28 @@ angular.module('viaggia', [
             empty_home_label_2: 'Vai nei PREFERITI per ripristinare i contenuti che ti interessano',
             menu_gamification: 'GreenGame',
             home_gamification: 'GREEN GAME',
-
-
+            login_title: 'GreenGame',
+            login_subtitle: 'con ViaggiaRovereto',
+            login_warning: 'Attenzione! Per accedere al gioco devi essere registrato al sistema',
+            login_facebook: 'Accedi con Facebook',
+            login_google: 'Accedi con Google',
+            login_register: 'Registrati',
+            labl_start_tracking: 'INIZIA',
+            labl_stop_tracking: 'TERMINA VIAGGIO',
+            dow_monday: 'Lunedì',
+            dow_tuesday: 'Martedì',
+            dow_wednesday: 'Mercoledì',
+            dow_thursday: 'Giovedì',
+            dow_friday: 'Venerdì',
+            dow_saturday: 'Sabato',
+            dow_sunday: 'Domenica',
+            dow_monday_short: 'L',
+            dow_tuesday_short: 'M',
+            dow_wednesday_short: 'M',
+            dow_thursday_short: 'G',
+            dow_friday_short: 'V',
+            dow_saturday_short: 'S',
+            dow_sunday_short: 'D'
 
 
 
@@ -761,7 +781,30 @@ angular.module('viaggia', [
             empty_home_label_1: 'Oops... you removed all the tabs from the main page',
             empty_home_label_2: 'Go to BOOKMARKS to restore the contents you are interested in',
             home_gamification: 'GREEN GAME',
-            menu_gamification: 'GreenGame'
+            menu_gamification: 'GreenGame',
+            login_title: 'GreenGame',
+            login_subtitle: 'with ViaggiaRovereto',
+            login_warning: 'Warning! To access the game you have to be registered to the system',
+            login_facebook: 'Login with Facebook',
+            login_google: 'Login with Google',
+            login_register: 'Register',
+            labl_start_tracking: 'START',
+            labl_stop_tracking: 'STOP JOURNEY',
+            dow_monday: 'Monday',
+            dow_tuesday: 'Tuesday',
+            dow_wednesday: 'Wednsday',
+            dow_thursday: 'Thursday',
+            dow_friday: 'Friday',
+            dow_saturday: 'Saturday',
+            dow_sunday: 'Sunday',
+            dow_monday_short: 'M',
+            dow_tuesday_short: 'T',
+            dow_wednesday_short: 'W',
+            dow_thursday_short: 'T',
+            dow_friday_short: 'F',
+            dow_saturday_short: 'S',
+            dow_sunday_short: 'S'
+
         });
 
 
