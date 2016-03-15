@@ -1,6 +1,6 @@
 angular.module('viaggia.services.plan', [])
 
-.factory('planService', function ($q, $http, $filter, Config) {
+.factory('planService', function ($q, $http, $filter, Config, userService, trackService) {
 
     var planService = {};
     var position = {};
@@ -581,11 +581,22 @@ angular.module('viaggia.services.plan', [])
         return placedata.promise;
     }
 
-    planService.saveTrip = function (tripId, trip, name, requestedFrom, requestedTo) {
+    function getDaysOfRecurrency(days) {
+        var returndays = [];
+        for (var len = 0; len < days.length; len++) {
+            if (days[len].checked) {
+                returndays.push(len + 1);
+            }
+        }
+        return returndays;
+    };
+    planService.saveTrip = function (tripId, trip, name, requestedFrom, requestedTo, recurrency) {
         var deferred = $q.defer();
+        var daysOfWeek = getDaysOfRecurrency(recurrency);
         if (!tripId) {
             tripId = new Date().getTime();
         }
+        console.log(JSON.stringify(trip));
         var tripToSave = {
             "tripId": tripId,
             "data": {
@@ -605,50 +616,44 @@ angular.module('viaggia.services.plan', [])
                 "data": trip
             }
         };
-        var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
-        if (!savedTrips) {
-            savedTrips = {};
-        }
-        savedTrips[tripId] = tripToSave;
-        localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
+        userService.getValidToken().then(function (token) {
+            $http({
+                method: 'POST',
+                url: Config.getServerURL() + "/itinerary",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
 
-        //planService.setPlanConfigure(null);
+                },
+                data: {
+                    'data': trip.original,
+                    'recurrency': {
+                        'daysOfWeek': daysOfWeek
+                    }
+                }
+            }).
+            success(function (data) {
+                var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
+                if (!savedTrips) {
+                    savedTrips = {};
+                }
+                savedTrips[tripId] = tripToSave;
+                localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
 
-        deferred.resolve(tripToSave);
+                trackService.updateNotification(data, tripId);
+                //planService.setPlanConfigure(null);
+
+                deferred.resolve(tripToSave);
+            }).
+            error(function (data, status, headers, config) {
+                console.log(data + status + headers + JSON.stringify(config));
+                deferred.reject(data);
+            });
+        });
 
 
-        //     later for the server
-        //$http({
-        //            method: 'POST',
-        //            url: Config.getServerURL(),
-        //            headers: {
-        //                'Accept': 'application/json',
-        //                'Content-Type': 'application/json'
-        //            },
-        //            data: {
-        //                "originalFrom": {
-        //                    "name": requestedFrom,
-        //                    "lat": trip.from.lat,
-        //                    "lon": trip.from.lon
-        //                },
-        //                "originalTo": {
-        //                    "name": requestedTo,
-        //                    "lat": trip.to.lat,
-        //                    "lon": trip.to.lon
-        //                },
-        //                "monitor": true,
-        //                "name": name,
-        //                "data": trip
-        //
-        //            }
-        //        }).
-        //        success(function (data) {
-        //            deferred.resolve(data);
-        //        }).
-        //        error(function (data, status, headers, config) {
-        //            console.log(data + status + headers + config);
-        //            deferred.reject(data);
-        //        });
+
 
         return deferred.promise;
     }

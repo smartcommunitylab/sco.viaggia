@@ -18,6 +18,9 @@ angular.module('viaggia.controllers.planlist', [])
             if (it.promoted) {
                 $scope.containsGreen = true;
             }
+            if (!it.hasOwnProperty("original")) {
+                it.original = JSON.parse(JSON.stringify(it));
+            }
             it.length = planService.getLength(it);
             it.means = planService.extractItineraryMeans(it);
             it.price = planService.getItineraryCost(it);

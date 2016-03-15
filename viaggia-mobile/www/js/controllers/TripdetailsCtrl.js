@@ -2,6 +2,7 @@ angular.module('viaggia.controllers.tripdetails', [])
 
 .controller('TripDetailsCtrl', function ($scope, $stateParams, $ionicModal, $filter, $ionicPopup, planService, mapService, Config, Toast, trackService, $filter, $ionicHistory, $state, $location, bookmarkService) {
     $scope.title = $filter('translate')('journey_detail');
+    $scope.empty_rec = Config.getDaysRec();
 
     var initMyTrip = function () {
         planService.setEditInstance(null);
@@ -14,6 +15,7 @@ angular.module('viaggia.controllers.tripdetails', [])
             $scope.requestedTo = trip.data.originalTo.name;
 
             planService.setPlanConfigure(trip.data.originalRequest);
+
             planService.process(trip.data.data, $scope.requestedFrom, $scope.requestedTo);
             $scope.currentItinerary = trip.data.data;
             $scope.pathLine = mapService.getTripPolyline(trip.data.data);
@@ -47,6 +49,10 @@ angular.module('viaggia.controllers.tripdetails', [])
         }
         var editInstance = planService.getEditInstance();
         $scope.tripId = editInstance ? editInstance.tripId : null;
+//        if (trip.original) {
+//            //not yet processed
+//            delete trip.original;
+//        }
         planService.process(trip, $scope.requestedFrom, $scope.requestedTo);
         $scope.currentItinerary = trip;
         $scope.pathLine = mapService.getTripPolyline(trip);
@@ -101,11 +107,30 @@ angular.module('viaggia.controllers.tripdetails', [])
         $scope.modalMap.hide();
     }
     $scope.journey = {
-        recursiveTrip: true
+        recursiveTrip: false
     }
     $scope.recursiveChange = function () {
         console.log('Push Notification Change', $scope.journey.recursiveTrip);
+        if (!$scope.journey.recursiveTrip) {
+            $scope.recurrencyPopupDoW = JSON.parse(JSON.stringify(Config.getDaysRec()));
+        }
     };
+
+    $scope.allDays = {
+        checked: false
+    };
+    $scope.selectAll = function () {
+        if ($scope.allDays.checked) {
+            for (var k = 0; k < $scope.recurrencyPopupDoW.length; k++) {
+                $scope.recurrencyPopupDoW[k].checked = true;
+            }
+        } else {
+            for (var k = 0; k < $scope.recurrencyPopupDoW.length; k++) {
+                $scope.recurrencyPopupDoW[k].checked = false;
+            }
+        }
+    }
+
     $scope.saveTrip = function () {
         var editInstance = planService.getEditInstance();
         if ($scope.tripId && editInstance) {
@@ -125,87 +150,8 @@ angular.module('viaggia.controllers.tripdetails', [])
         }
         $scope.data = {};
         $scope.showError = false;
-        //        $scope.days = [
-        //            {
-        //                text: "L",
-        //                checked: false
-        //            },
-        //            {
-        //                text: "M",
-        //                checked: false
-        //            },
-        //            {
-        //                text: "M",
-        //                checked: false
-        //            },
-        //            {
-        //                text: "G",
-        //                checked: false
-        //            },
-        //            {
-        //                text: "V",
-        //                checked: false
-        //            },
-        //            {
-        //                text: "S",
-        //                checked: false
-        //            },
-        //            {
-        //                text: "D",
-        //                checked: false
-        //            }
-        //  ];
-        //        $scope.recursiveChange = function () {
-        //            console.log('Push Notification Change', $scope.data.recursiveTrip);
-        //        };
-        //        $scope.data.recursiveTrip = true;
-
-
-
-        $scope.recurrencyPopupDoW = [
-            {
-                name: 'dow_monday',
-                shortname: 'dow_monday_short',
-                value: 2,
-                checked: true
-        },
-            {
-                name: 'dow_tuesday',
-                shortname: 'dow_tuesday_short',
-                value: 3,
-                checked: true
-        },
-            {
-                name: 'dow_wednesday',
-                shortname: 'dow_wednesday_short',
-                value: 4,
-                checked: false
-        },
-            {
-                name: 'dow_thursday',
-                shortname: 'dow_thursday_short',
-                value: 5,
-                checked: false
-        },
-            {
-                name: 'dow_friday',
-                shortname: 'dow_friday_short',
-                value: 6,
-                checked: false
-        },
-            {
-                name: 'dow_saturday',
-                shortname: 'dow_saturday_short',
-                value: 7,
-                checked: false
-        },
-            {
-                name: 'dow_sunday',
-                shortname: 'dow_sunday_short',
-                value: 1,
-                checked: false
-        }
-    ];
+        //        $scope.recurrencyPopupDoW = JSON.parse(JSON.stringify($scope.empty_rec));
+        $scope.recurrencyPopupDoW = JSON.parse(JSON.stringify(Config.getDaysRec()));
         // Prompt popup code
         $ionicPopup.prompt({
             templateUrl: 'templates/popup-savetrip.html',
@@ -216,7 +162,7 @@ angular.module('viaggia.controllers.tripdetails', [])
             //            title: $filter('translate')('save_trip_title'),
             //            templateUrl: 'templates/popup-savetrip.html',
             //            //subTitle: $filter('translate')('save_trip_text'),
-            scope: $scope,
+            // scope: $scope,
             buttons: [
                 {
                     text: $filter('translate')('save_trip_close_button'),
@@ -237,7 +183,7 @@ angular.module('viaggia.controllers.tripdetails', [])
                                 }]
         }).then(function (res) {
             if (res) {
-                planService.saveTrip($scope.tripId, $scope.trip, res, $scope.requestedFrom, $scope.requestedTo).then(function (res) {
+                planService.saveTrip($scope.tripId, $scope.trip, res, $scope.requestedFrom, $scope.requestedTo, $scope.recurrencyPopupDoW).then(function (res) {
                     planService.setEditInstance(null);
                     $scope.editMode = false;
                     $scope.tripId = res.tripId;
@@ -249,6 +195,9 @@ angular.module('viaggia.controllers.tripdetails', [])
         });
 
 
+    }
+    $scope.addDay = function (day) {
+        console.log(day);
     }
     $scope.modifyTrip = function () {
         //get configuration with tripid

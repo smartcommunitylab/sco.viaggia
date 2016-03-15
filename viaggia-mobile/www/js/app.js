@@ -610,7 +610,11 @@ angular.module('viaggia', [
             dow_thursday_short: 'G',
             dow_friday_short: 'V',
             dow_saturday_short: 'S',
-            dow_sunday_short: 'D'
+            dow_sunday_short: 'D',
+            save_trip_recurrent: 'Ricorrente',
+            save_trip_alldays: 'Tutti',
+            notification_tracking_title: 'Green Game',
+            notification_tracking_text: 'Il tuo viaggio sta per iniziare'
 
 
 
@@ -803,7 +807,11 @@ angular.module('viaggia', [
             dow_thursday_short: 'T',
             dow_friday_short: 'F',
             dow_saturday_short: 'S',
-            dow_sunday_short: 'S'
+            dow_sunday_short: 'S',
+            save_trip_recurrent: 'Recurrent',
+            save_trip_alldays: 'All',
+            notification_tracking_title: 'Green Game',
+            notification_tracking_text: 'Your journey is going to start'
 
         });
 

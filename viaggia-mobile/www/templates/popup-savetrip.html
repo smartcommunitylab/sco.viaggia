@@ -9,15 +9,16 @@
 
     </div>
     <div class="map-stop-hline"></div>
-    <input type="text" placeholder="{{'save_trip_text'|translate}}" style="padding-left:10px;" ng-model="data.nametrip">
+    <input type="text" placeholder="{{'save_trip_text'|translate}}" style="padding-left:10px;" ng-model="data.nametrip" />
     <p ng-if="showError" class="error">{{'save_trip_error_message'|translate}}</p>
     <ion-toggle ng-model="journey.recursiveTrip" ng-change="recursiveChange()">
-        <div ng-if="journey.recursiveTrip">
-
-            Ricorrente
+        <div>
+            {{'save_trip_recurrent' | translate}}
+        </div>
     </ion-toggle>
-    <div class="list recurrence-days">
+    <div ng-hide="!journey.recursiveTrip" class="list recurrence-days">
         <ion-checkbox ng-repeat="dow in recurrencyPopupDoW" ng-model="dow.checked">{{dow.shortname | translate}}</ion-checkbox>
-    </div>
+        <ion-checkbox ng-model="allDays.checked" ng-change="selectAll()">{{'save_trip_alldays' | translate}}</ion-checkbox>
+
     </div>
 </div>

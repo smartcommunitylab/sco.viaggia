@@ -130,7 +130,50 @@ angular.module('viaggia.services.conf', [])
             color: '#922d66'
         }
     };
-
+    var DAYS_REC = [
+        {
+            name: 'dow_monday',
+            shortname: 'dow_monday_short',
+            value: 2,
+            checked: false
+        },
+        {
+            name: 'dow_tuesday',
+            shortname: 'dow_tuesday_short',
+            value: 3,
+            checked: false
+        },
+        {
+            name: 'dow_wednesday',
+            shortname: 'dow_wednesday_short',
+            value: 4,
+            checked: false
+        },
+        {
+            name: 'dow_thursday',
+            shortname: 'dow_thursday_short',
+            value: 5,
+            checked: false
+        },
+        {
+            name: 'dow_friday',
+            shortname: 'dow_friday_short',
+            value: 6,
+            checked: false
+        },
+        {
+            name: 'dow_saturday',
+            shortname: 'dow_saturday_short',
+            value: 7,
+            checked: false
+        },
+        {
+            name: 'dow_sunday',
+            shortname: 'dow_sunday_short',
+            value: 1,
+            checked: false
+        }
+    ];
 
     var flattenElement = function (e, res, ref, agencyId) {
         var localAgency = agencyId;
@@ -234,6 +277,9 @@ angular.module('viaggia.services.conf', [])
         },
         getAppId: function () {
             return mapJsonConfig["appid"];
+        },
+        getDaysRec: function () {
+            return DAYS_REC;
         },
         getMessagingAppId: function () {
             return mapJsonConfig["messagingAppId"];
