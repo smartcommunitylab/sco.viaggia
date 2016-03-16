@@ -110,6 +110,7 @@ angular.module('viaggia.services.timetable', [])
       result.stops = toTrimmedList(data[0].stopsNames);
       result.tripIds = toTrimmedList(data[0].tripIds);
       result.times = uncompressTime(data[0].times,result.stops.length);
+      deferred.notify(result);
       getDelays(agency, route, date).then(function(delays){
         result.delays = delays;
         deferred.resolve(result);
@@ -244,6 +245,7 @@ angular.module('viaggia.services.timetable', [])
             if (data.times) data.times = data.times[0];
             if (data.tripIds) data.tripIds = data.tripIds[0];
             if (data.delays) data.delays = data.delays[0];
+            deferred.notify(data);
             deferred.resolve(data);
           })
           .error(function(err) {

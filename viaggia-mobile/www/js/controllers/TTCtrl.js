@@ -174,14 +174,22 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     // load timetable data
     $scope.getTT = function (date) {
         Config.loading();
-        ttService.getTT($stateParams.agencyId, $scope.route.routeSymId, date).then(function (data) {
-            constructTable(data);
-            Config.loaded();
-        }, function (err) {
+        ttService.getTT($stateParams.agencyId, $scope.route.routeSymId, date).then(
+        function (data) {
+          if (data.delays && data.delays.length > 0) {
+            $scope.tt.delays = data.delays;
+            updateDelays(data);
+          }
+        },
+        function (err) {
             $scope.tt = {
                 tripIds: []
             };
             Config.loaded();
+        },
+        function(data) {
+          constructTable(data);
+          Config.loaded();
         });
     };
 
@@ -300,8 +308,17 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
     }
 
+    var updateDelays = function(data) {
+      str = '';
+      for (var i = 0; i < data.delays.length; i++) {
+        str += expandStr(getDelayValue(data.delays[i]));
+      }
+      $scope.headStr[0] = str;
+    }
+
     // construct the table
     var constructTable = function (data) {
+
         $scope.header_row_number = $scope.route.showTrips ? 2 : 1;
 
         var dataStr = '';
