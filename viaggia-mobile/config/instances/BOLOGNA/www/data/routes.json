@@ -1,0 +1,3151 @@
+[{
+  "id": {
+    "agency": "TPERBO",
+    "id": "1_TPERBO_0"
+  },
+  "routeShortName": "1",
+  "routeLongName": "Ospedale Nuovo - Stazione F.S. - Porta dei Servi"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "1_TPERBO_1"
+  },
+  "routeShortName": "1",
+  "routeLongName": "Ospedale Nuovo - Stazione F.S. - Porta dei Servi"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "101_TPERBO_0"
+  },
+  "routeShortName": "101",
+  "routeLongName": "Bologna - Castel San Pietro Terme - Imola"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "101_TPERBO_1"
+  },
+  "routeShortName": "101",
+  "routeLongName": "Bologna - Castel San Pietro Terme - Imola"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "103_TPERBO_0"
+  },
+  "routeShortName": "103",
+  "routeLongName": "Piancaldoli - Castel San Pietro Terme"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "103_TPERBO_1"
+  },
+  "routeShortName": "103",
+  "routeLongName": "Piancaldoli - Castel San Pietro Terme"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "106_TPERBO_1"
+  },
+  "routeShortName": "106",
+  "routeLongName": "Bologna - Z.I. Ponte Rizzoli"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "106_TPERBO_0"
+  },
+  "routeShortName": "106",
+  "routeLongName": "Bologna - Z.I. Ponte Rizzoli"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "11_TPERBO_1"
+  },
+  "routeShortName": "11",
+  "routeLongName": "Istituto R. Luxemburg / Bertalia / Arcoveggio - rot. Corelli / Ponticella"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "11_TPERBO_0"
+  },
+  "routeShortName": "11",
+  "routeLongName": "Istituto R. Luxemburg / Bertalia / Arcoveggio - rot. Corelli / Ponticella"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "110_TPERBO_0"
+  },
+  "routeShortName": "110",
+  "routeLongName": "Castel San Pietro Terme Stazione F.S. - Montecalderaro"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "110_TPERBO_1"
+  },
+  "routeShortName": "110",
+  "routeLongName": "Castel San Pietro Terme Stazione F.S. - Montecalderaro"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "111_TPERBO_1"
+  },
+  "routeShortName": "111",
+  "routeLongName": "Varignana - Osteria Grande"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "111_TPERBO_0"
+  },
+  "routeShortName": "111",
+  "routeLongName": "Varignana - Osteria Grande"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "112_TPERBO_0"
+  },
+  "routeShortName": "112",
+  "routeLongName": "Castel San Pietro Terme Stazione F.S. - Castel San Pietro Terme"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "112_TPERBO_1"
+  },
+  "routeShortName": "112",
+  "routeLongName": "Castel San Pietro Terme Stazione F.S. - Castel San Pietro Terme"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "113_TPERBO_1"
+  },
+  "routeShortName": "113",
+  "routeLongName": "Castel San Pietro Terme Stazione F.S. - Scania - Castel San Pietro Terme"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "113_TPERBO_0"
+  },
+  "routeShortName": "113",
+  "routeLongName": "Castel San Pietro Terme Stazione F.S. - Scania - Castel San Pietro Terme"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "114_TPERBO_1"
+  },
+  "routeShortName": "114",
+  "routeLongName": "Ponte Quaderna - Castel San Pietro Terme Scuole"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "114_TPERBO_0"
+  },
+  "routeShortName": "114",
+  "routeLongName": "Ponte Quaderna - Castel San Pietro Terme Scuole"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "116_TPERBO_0"
+  },
+  "routeShortName": "116",
+  "routeLongName": "Medicina Castelguelfo - Castel San Pietro Terme"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "116_TPERBO_1"
+  },
+  "routeShortName": "116",
+  "routeLongName": "Medicina Castelguelfo - Castel San Pietro Terme"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "117_TPERBO_0"
+  },
+  "routeShortName": "117",
+  "routeLongName": "Linea 116 AGI: Medicina - Castel San Pietro Terme"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "119_TPERBO_1"
+  },
+  "routeShortName": "119",
+  "routeLongName": "Bologna - Mirabilandia"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "119_TPERBO_0"
+  },
+  "routeShortName": "119",
+  "routeLongName": "Bologna - Mirabilandia"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "121_TPERBO_1"
+  },
+  "routeShortName": "121",
+  "routeLongName": "San Lazzaro di Savena - Mirandola"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "121_TPERBO_0"
+  },
+  "routeShortName": "121",
+  "routeLongName": "San Lazzaro di Savena - Mirandola"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "122_TPERBO_0"
+  },
+  "routeShortName": "122",
+  "routeLongName": "San Lazzaro di Savena - Villanova - Castenaso"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "122_TPERBO_1"
+  },
+  "routeShortName": "122",
+  "routeLongName": "San Lazzaro di Savena - Villanova - Castenaso"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "123_TPERBO_1"
+  },
+  "routeShortName": "123",
+  "routeLongName": "Mazzini - Ponticella"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "123_TPERBO_0"
+  },
+  "routeShortName": "123",
+  "routeLongName": "Mazzini - Ponticella"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "124_TPERBO_0"
+  },
+  "routeShortName": "124",
+  "routeLongName": "Ponticella - Ospedale Bellaria - San Lazzaro di Savena"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "124_TPERBO_1"
+  },
+  "routeShortName": "124",
+  "routeLongName": "Ponticella - Ospedale Bellaria - San Lazzaro di Savena"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "125_TPERBO_0"
+  },
+  "routeShortName": "125",
+  "routeLongName": "Villaggio Martino - Ospedale Bellaria - San Lazzaro di Savena"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "125_TPERBO_1"
+  },
+  "routeShortName": "125",
+  "routeLongName": "Villaggio Martino - Ospedale Bellaria - San Lazzaro di Savena"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "126_TPERBO_1"
+  },
+  "routeShortName": "126",
+  "routeLongName": "San Lazzaro di Savena - Lago dei Castori - Pianoro"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "126_TPERBO_0"
+  },
+  "routeShortName": "126",
+  "routeLongName": "San Lazzaro di Savena - Lago dei Castori - Pianoro"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "13_TPERBO_0"
+  },
+  "routeShortName": "13",
+  "routeLongName": "Borgo Panigale - S. Ruffillo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "13_TPERBO_1"
+  },
+  "routeShortName": "13",
+  "routeLongName": "Borgo Panigale - S. Ruffillo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "130_TPERBO_0"
+  },
+  "routeShortName": "130",
+  "routeLongName": "Ozzano Emilia - Facolt�eterinaria"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "130_TPERBO_1"
+  },
+  "routeShortName": "130",
+  "routeLongName": "Ozzano Emilia - Facolt�eterinaria"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "132_TPERBO_1"
+  },
+  "routeShortName": "132",
+  "routeLongName": "Ponte Rizzoli - Ozzano Galvani"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "132_TPERBO_0"
+  },
+  "routeShortName": "132",
+  "routeLongName": "Ponte Rizzoli - Ozzano Galvani"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "136_TPERBO_0"
+  },
+  "routeShortName": "136",
+  "routeLongName": "Imola - Z.I. Quaderna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "136_TPERBO_1"
+  },
+  "routeShortName": "136",
+  "routeLongName": "Imola - Z.I. Quaderna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "14_TPERBO_1"
+  },
+  "routeShortName": "14",
+  "routeLongName": "Barca - Ospedale S. Orsola - Due Madonne / Pilastro"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "14_TPERBO_0"
+  },
+  "routeShortName": "14",
+  "routeLongName": "Barca - Ospedale S. Orsola - Due Madonne / Pilastro"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "140_TPERBO_1"
+  },
+  "routeShortName": "140",
+  "routeLongName": "Imola - Montecatone - Montebello"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "140_TPERBO_0"
+  },
+  "routeShortName": "140",
+  "routeLongName": "Imola - Montecatone - Montebello"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "141_TPERBO_0"
+  },
+  "routeShortName": "141",
+  "routeLongName": "Imola - Castel del Rio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "141_TPERBO_1"
+  },
+  "routeShortName": "141",
+  "routeLongName": "Imola - Castel del Rio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "142_TPERBO_1"
+  },
+  "routeShortName": "142",
+  "routeLongName": "Imola - Piancaldoli"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "142_TPERBO_0"
+  },
+  "routeShortName": "142",
+  "routeLongName": "Imola - Piancaldoli"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "143_TPERBO_1"
+  },
+  "routeShortName": "143",
+  "routeLongName": "Piancaldoli - Castel del Rio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "143_TPERBO_0"
+  },
+  "routeShortName": "143",
+  "routeLongName": "Piancaldoli - Castel del Rio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "144_TPERBO_1"
+  },
+  "routeShortName": "144",
+  "routeLongName": "Imola - Casalfiumanese"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "144_TPERBO_0"
+  },
+  "routeShortName": "144",
+  "routeLongName": "Imola - Casalfiumanese"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "145_TPERBO_0"
+  },
+  "routeShortName": "145",
+  "routeLongName": "Castel del Rio - Firenzuola"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "145_TPERBO_1"
+  },
+  "routeShortName": "145",
+  "routeLongName": "Castel del Rio - Firenzuola"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "147_TPERBO_0"
+  },
+  "routeShortName": "147",
+  "routeLongName": "Dozza Imolese - Toscanella di Dozza Imolese"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "147_TPERBO_1"
+  },
+  "routeShortName": "147",
+  "routeLongName": "Dozza Imolese - Toscanella di Dozza Imolese"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "150_TPERBO_0"
+  },
+  "routeShortName": "150",
+  "routeLongName": "Autostazione - San Prospero"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "150_TPERBO_1"
+  },
+  "routeShortName": "150",
+  "routeLongName": "Autostazione - San Prospero"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "151_TPERBO_0"
+  },
+  "routeShortName": "151",
+  "routeLongName": "Imola - Mordano - Bagnara - Massalombarda - Lugo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "151_TPERBO_1"
+  },
+  "routeShortName": "151",
+  "routeLongName": "Imola - Mordano - Bagnara - Massalombarda - Lugo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "152_TPERBO_1"
+  },
+  "routeShortName": "152",
+  "routeLongName": "Imola - Fruges - Massalombarda - Lugo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "152_TPERBO_0"
+  },
+  "routeShortName": "152",
+  "routeLongName": "Imola - Fruges - Massalombarda - Lugo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "153_TPERBO_0"
+  },
+  "routeShortName": "153",
+  "routeLongName": "Imola - Sesto Imolese - Conselice"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "153_TPERBO_1"
+  },
+  "routeShortName": "153",
+  "routeLongName": "Imola - Sesto Imolese - Conselice"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "154_TPERBO_0"
+  },
+  "routeShortName": "154",
+  "routeLongName": "Imola - Massalombarda - Conselice - Campotto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "154_TPERBO_1"
+  },
+  "routeShortName": "154",
+  "routeLongName": "Imola - Massalombarda - Conselice - Campotto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "156_TPERBO_0"
+  },
+  "routeShortName": "156",
+  "routeLongName": "Imola - Castel Guelfo di Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "156_TPERBO_1"
+  },
+  "routeShortName": "156",
+  "routeLongName": "Imola - Castel Guelfo di Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "157_TPERBO_0"
+  },
+  "routeShortName": "157",
+  "routeLongName": "Linea AGI: Imola - Castel Guelfo - Medicina"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "157_TPERBO_1"
+  },
+  "routeShortName": "157",
+  "routeLongName": "Linea AGI: Imola - Castel Guelfo - Medicina"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "16_TPERBO_0"
+  },
+  "routeShortName": "16",
+  "routeLongName": "P.zza Cavour - P.zale Atleti Azzurri"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "16_TPERBO_1"
+  },
+  "routeShortName": "16",
+  "routeLongName": "P.zza Cavour - P.zale Atleti Azzurri"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "160_TPERBO_0"
+  },
+  "routeShortName": "160",
+  "routeLongName": "Autostazione Via Andrea Costa - Zello"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "160_TPERBO_1"
+  },
+  "routeShortName": "160",
+  "routeLongName": "Autostazione Via Andrea Costa - Zello"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "161_TPERBO_1"
+  },
+  "routeShortName": "161",
+  "routeLongName": "Autostazione - Istituto Agrario Scarabelli"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "161_TPERBO_0"
+  },
+  "routeShortName": "161",
+  "routeLongName": "Autostazione - Istituto Agrario Scarabelli"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "162_TPERBO_0"
+  },
+  "routeShortName": "162",
+  "routeLongName": "Autostazione - Istituto Alberghetti"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "162_TPERBO_1"
+  },
+  "routeShortName": "162",
+  "routeLongName": "Autostazione - Istituto Alberghetti"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "163_TPERBO_1"
+  },
+  "routeShortName": "163",
+  "routeLongName": "Autostazione - Zona Scolastica"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "163_TPERBO_0"
+  },
+  "routeShortName": "163",
+  "routeLongName": "Autostazione - Zona Scolastica"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "164_TPERBO_1"
+  },
+  "routeShortName": "164",
+  "routeLongName": "Pedagna - Zona scolastica"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "164_TPERBO_0"
+  },
+  "routeShortName": "164",
+  "routeLongName": "Pedagna - Zona scolastica"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "165_TPERBO_0"
+  },
+  "routeShortName": "165",
+  "routeLongName": "Pasquala - Istituto Alberghetti"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "165_TPERBO_1"
+  },
+  "routeShortName": "165",
+  "routeLongName": "Pasquala - Istituto Alberghetti"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "179_TPERBO_1"
+  },
+  "routeShortName": "179",
+  "routeLongName": "Borgo Panigale - Istituto Belluzzi"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "179_TPERBO_0"
+  },
+  "routeShortName": "179",
+  "routeLongName": "Borgo Panigale - Istituto Belluzzi"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "18_TPERBO_1"
+  },
+  "routeShortName": "18",
+  "routeLongName": "P.za Roosevelt / P.za S. Francesco - Noce - (Trebbo di Reno)"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "18_TPERBO_0"
+  },
+  "routeShortName": "18",
+  "routeLongName": "P.za Roosevelt / P.za S. Francesco - Noce - (Trebbo di Reno)"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "180_TPERBO_0"
+  },
+  "routeShortName": "180",
+  "routeLongName": "Via Populonia - Istituto Aldini Valeriani"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "180_TPERBO_1"
+  },
+  "routeShortName": "180",
+  "routeLongName": "Via Populonia - Istituto Aldini Valeriani"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "181_TPERBO_0"
+  },
+  "routeShortName": "181",
+  "routeLongName": "Via Marconi / Autostazione - Istituto Serpieri"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "181_TPERBO_1"
+  },
+  "routeShortName": "181",
+  "routeLongName": "Via Marconi / Autostazione - Istituto Serpieri"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "182_TPERBO_1"
+  },
+  "routeShortName": "182",
+  "routeLongName": "Via Populonia - P.zza dell'Unita"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "182_TPERBO_0"
+  },
+  "routeShortName": "182",
+  "routeLongName": "Via Populonia - P.zza dell'Unita"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "183_TPERBO_0"
+  },
+  "routeShortName": "183",
+  "routeLongName": "Istituto Luxemburg - Istituto Belluzzi"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "183_TPERBO_1"
+  },
+  "routeShortName": "183",
+  "routeLongName": "Istituto Luxemburg - Istituto Belluzzi"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "184_TPERBO_0"
+  },
+  "routeShortName": "184",
+  "routeLongName": "Autostazione - Istituto Luxemburg"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "184_TPERBO_1"
+  },
+  "routeShortName": "184",
+  "routeLongName": "Autostazione - Istituto Luxemburg"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "185_TPERBO_0"
+  },
+  "routeShortName": "185",
+  "routeLongName": "P.zza dei Martiri - Istituto Luxemburg"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "185_TPERBO_1"
+  },
+  "routeShortName": "185",
+  "routeLongName": "P.zza dei Martiri - Istituto Luxemburg"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "186_TPERBO_1"
+  },
+  "routeShortName": "186",
+  "routeLongName": "Autostazione - Via Marchetti"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "186_TPERBO_0"
+  },
+  "routeShortName": "186",
+  "routeLongName": "Autostazione - Via Marchetti"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "187_TPERBO_1"
+  },
+  "routeShortName": "187",
+  "routeLongName": "Stazione Centrale - Via Marchetti"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "187_TPERBO_0"
+  },
+  "routeShortName": "187",
+  "routeLongName": "Stazione Centrale - Via Marchetti"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "188_TPERBO_1"
+  },
+  "routeShortName": "188",
+  "routeLongName": "Stazione Centrale - Via Marchetti"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "188_TPERBO_0"
+  },
+  "routeShortName": "188",
+  "routeLongName": "Stazione Centrale - Via Marchetti"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "19_TPERBO_0"
+  },
+  "routeShortName": "19",
+  "routeLongName": "Casteldebole - San Lazzaro di Savena / San Camillo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "19_TPERBO_1"
+  },
+  "routeShortName": "19",
+  "routeLongName": "Casteldebole - San Lazzaro di Savena / San Camillo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "20_TPERBO_1"
+  },
+  "routeShortName": "20",
+  "routeLongName": "San Biagio - Casalecchio di Reno - Pilastro"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "20_TPERBO_0"
+  },
+  "routeShortName": "20",
+  "routeLongName": "San Biagio - Casalecchio di Reno - Pilastro"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "200_TPERBO_1"
+  },
+  "routeShortName": "200",
+  "routeLongName": "Linea AGI: Medicina-Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "205_TPERBO_1"
+  },
+  "routeShortName": "205",
+  "routeLongName": "Linea AGI: Bologna - Castel Guelfo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "205_TPERBO_0"
+  },
+  "routeShortName": "205",
+  "routeLongName": "Linea AGI: Bologna - Castel Guelfo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "206_TPERBO_0"
+  },
+  "routeShortName": "206",
+  "routeLongName": "Bologna - Sesto Imolese - Massa Lombarda - Lugo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "206_TPERBO_1"
+  },
+  "routeShortName": "206",
+  "routeLongName": "Bologna - Sesto Imolese - Massa Lombarda - Lugo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "207_TPERBO_1"
+  },
+  "routeShortName": "207",
+  "routeLongName": "Linea 206 AGI: Bologna - Sesto Imolese - Massa Lombarda - Lugo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "207_TPERBO_0"
+  },
+  "routeShortName": "207",
+  "routeLongName": "Linea 206 AGI: Bologna - Sesto Imolese - Massa Lombarda - Lugo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "21_TPERBO_1"
+  },
+  "routeShortName": "21",
+  "routeLongName": "Filanda - Stazione Centrale - San Donato"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "21_TPERBO_0"
+  },
+  "routeShortName": "21",
+  "routeLongName": "Filanda - Stazione Centrale - San Donato"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "211_TPERBO_1"
+  },
+  "routeShortName": "211",
+  "routeLongName": "Linea AGI: Bologna - Budrio - Medicina"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "211_TPERBO_0"
+  },
+  "routeShortName": "211",
+  "routeLongName": "Linea AGI: Bologna - Budrio - Medicina"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "212_TPERBO_1"
+  },
+  "routeShortName": "212",
+  "routeLongName": "Linea AGI: Bologna - Fiesso - Budrio - Medicina"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "212_TPERBO_0"
+  },
+  "routeShortName": "212",
+  "routeLongName": "Linea AGI: Bologna - Fiesso - Budrio - Medicina"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "213_TPERBO_0"
+  },
+  "routeShortName": "213",
+  "routeLongName": "Linea AGI: Bologna - Fiesso - Budrio - Vigorso - Medicina"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "213_TPERBO_1"
+  },
+  "routeShortName": "213",
+  "routeLongName": "Linea AGI: Bologna - Fiesso - Budrio - Vigorso - Medicina"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "214_TPERBO_1"
+  },
+  "routeShortName": "214",
+  "routeLongName": "Linea AGI: Bologna - Budrio - Vigorso - Medicina"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "214_TPERBO_0"
+  },
+  "routeShortName": "214",
+  "routeLongName": "Linea AGI: Bologna - Budrio - Vigorso - Medicina"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "231_TPERBO_1"
+  },
+  "routeShortName": "231",
+  "routeLongName": "Mondonuovo - Granarolo dell'Emilia - Budrio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "231_TPERBO_0"
+  },
+  "routeShortName": "231",
+  "routeLongName": "Mondonuovo - Granarolo dell'Emilia - Budrio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "237_TPERBO_1"
+  },
+  "routeShortName": "237",
+  "routeLongName": "Bologna - Alberino"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "237_TPERBO_0"
+  },
+  "routeShortName": "237",
+  "routeLongName": "Bologna - Alberino"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "242_TPERBO_0"
+  },
+  "routeShortName": "242",
+  "routeLongName": "Linea AGI: Notturno Sabato  Bologna - Budrio - Molinella"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "242_TPERBO_1"
+  },
+  "routeShortName": "242",
+  "routeLongName": "Linea AGI: Notturno Sabato  Bologna - Budrio - Molinella"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "243_TPERBO_1"
+  },
+  "routeShortName": "243",
+  "routeLongName": "Linea AGI: Bologna - Budrio - Molinella - Marmorta"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "243_TPERBO_0"
+  },
+  "routeShortName": "243",
+  "routeLongName": "Linea AGI: Bologna - Budrio - Molinella - Marmorta"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "244_TPERBO_1"
+  },
+  "routeShortName": "244",
+  "routeLongName": "Linea AGI: Budrio - Mezzolara - Molinella"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "244_TPERBO_0"
+  },
+  "routeShortName": "244",
+  "routeLongName": "Linea AGI: Budrio - Mezzolara - Molinella"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "247_TPERBO_0"
+  },
+  "routeShortName": "247",
+  "routeLongName": "Imola - Alberino"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "247_TPERBO_1"
+  },
+  "routeShortName": "247",
+  "routeLongName": "Imola - Alberino"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "248_TPERBO_0"
+  },
+  "routeShortName": "248",
+  "routeLongName": "Linea AGI: Medicina - Castel San Pietro Terme"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "248_TPERBO_1"
+  },
+  "routeShortName": "248",
+  "routeLongName": "Linea AGI: Medicina - Castel San Pietro Terme"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "25_TPERBO_0"
+  },
+  "routeShortName": "25",
+  "routeLongName": "Dozza - Stazione Centrale - Ospedale Malpighi - Due Madonne"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "25_TPERBO_1"
+  },
+  "routeShortName": "25",
+  "routeLongName": "Dozza - Stazione Centrale - Ospedale Malpighi - Due Madonne"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "256_TPERBO_0"
+  },
+  "routeShortName": "256",
+  "routeLongName": "Medicina - Conselice - Longastrino"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "256_TPERBO_1"
+  },
+  "routeShortName": "256",
+  "routeLongName": "Medicina - Conselice - Longastrino"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "257_TPERBO_0"
+  },
+  "routeShortName": "257",
+  "routeLongName": "Bologna - Argenta"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "257_TPERBO_1"
+  },
+  "routeShortName": "257",
+  "routeLongName": "Bologna - Argenta"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "27_TPERBO_1"
+  },
+  "routeShortName": "27",
+  "routeLongName": "Corticella - Mazzini"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "27_TPERBO_0"
+  },
+  "routeShortName": "27",
+  "routeLongName": "Corticella - Mazzini"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "273_TPERBO_1"
+  },
+  "routeShortName": "273",
+  "routeLongName": "Linea AGI: Bologna - Budrio - Ospitale Monacale"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "273_TPERBO_0"
+  },
+  "routeShortName": "273",
+  "routeLongName": "Linea AGI: Bologna - Budrio - Ospitale Monacale"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "28_TPERBO_0"
+  },
+  "routeShortName": "28",
+  "routeLongName": "Via dell'Indipendenza - Fiera"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "28_TPERBO_1"
+  },
+  "routeShortName": "28",
+  "routeLongName": "Via dell'Indipendenza - Fiera"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "29_TPERBO_0"
+  },
+  "routeShortName": "29",
+  "routeLongName": "Noce / Parcheggio Tanari - Via di Roncrio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "29_TPERBO_1"
+  },
+  "routeShortName": "29",
+  "routeLongName": "Noce / Parcheggio Tanari - Via di Roncrio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "296_TPERBO_1"
+  },
+  "routeShortName": "296",
+  "routeLongName": "Conselice - Lugo - Bagnacavallo - Ravenna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "296_TPERBO_0"
+  },
+  "routeShortName": "296",
+  "routeLongName": "Conselice - Lugo - Bagnacavallo - Ravenna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "299_TPERBO_1"
+  },
+  "routeShortName": "299",
+  "routeLongName": "Linea 99 AGI: Bologna - Medicina - Lugo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "299_TPERBO_0"
+  },
+  "routeShortName": "299",
+  "routeLongName": "Linea 99 AGI: Bologna - Medicina - Lugo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "3_TPERBO_0"
+  },
+  "routeShortName": "3",
+  "routeLongName": "Rivazza - Stazione F.S. - Pedagna Ovest"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "3_TPERBO_1"
+  },
+  "routeShortName": "3",
+  "routeLongName": "Rivazza - Stazione F.S. - Pedagna Ovest"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "30_TPERBO_0"
+  },
+  "routeShortName": "30",
+  "routeLongName": "Istituto Rizzoli - Stazione Centrale - Fioravanti - Sostegno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "30_TPERBO_1"
+  },
+  "routeShortName": "30",
+  "routeLongName": "Istituto Rizzoli - Stazione Centrale - Fioravanti - Sostegno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "300_TPERBO_1"
+  },
+  "routeShortName": "300",
+  "routeLongName": "DIRETTA Mondonuovo - Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "301_TPERBO_0"
+  },
+  "routeShortName": "301",
+  "routeLongName": "Bologna - Z.I.Quarto inferiore"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "32_TPERBO_1"
+  },
+  "routeShortName": "32",
+  "routeLongName": "Circolare esterna destra"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "32_TPERBO_0"
+  },
+  "routeShortName": "32",
+  "routeLongName": "Circolare esterna destra"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "33_TPERBO_0"
+  },
+  "routeShortName": "33",
+  "routeLongName": "Circolare esterna sinistra"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "33_TPERBO_1"
+  },
+  "routeShortName": "33",
+  "routeLongName": "Circolare esterna sinistra"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "35_TPERBO_1"
+  },
+  "routeShortName": "35",
+  "routeLongName": "Facolt�di Ingegneria - Ospedale Maggiore - Stazione Centrale - Fiera - Facolt�di Agraria"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "35_TPERBO_0"
+  },
+  "routeShortName": "35",
+  "routeLongName": "Facolt�di Ingegneria - Ospedale Maggiore - Stazione Centrale - Fiera - Facolt�di Agraria"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "353_TPERBO_0"
+  },
+  "routeShortName": "353",
+  "routeLongName": "Menarini - Ferrara Corso Isonzo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "353_TPERBO_1"
+  },
+  "routeShortName": "353",
+  "routeLongName": "Menarini - Ferrara Corso Isonzo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "354_TPERBO_0"
+  },
+  "routeShortName": "354",
+  "routeLongName": "Bologna - Altedo - Gallo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "354_TPERBO_1"
+  },
+  "routeShortName": "354",
+  "routeLongName": "Bologna - Altedo - Gallo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "355_TPERBO_1"
+  },
+  "routeShortName": "355",
+  "routeLongName": "Altedo - Boschi"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "355_TPERBO_0"
+  },
+  "routeShortName": "355",
+  "routeLongName": "Altedo - Boschi"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "356_TPERBO_0"
+  },
+  "routeShortName": "356",
+  "routeLongName": "Bologna - Altedo - Malalbergo - Ferrara"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "356_TPERBO_1"
+  },
+  "routeShortName": "356",
+  "routeLongName": "Bologna - Altedo - Malalbergo - Ferrara"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "357_TPERBO_0"
+  },
+  "routeShortName": "357",
+  "routeLongName": "Bologna - Altedo - Passosegni"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "357_TPERBO_1"
+  },
+  "routeShortName": "357",
+  "routeLongName": "Bologna - Altedo - Passosegni"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "358_TPERBO_0"
+  },
+  "routeShortName": "358",
+  "routeLongName": "Altedo - Molinella"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "358_TPERBO_1"
+  },
+  "routeShortName": "358",
+  "routeLongName": "Altedo - Molinella"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "36_TPERBO_0"
+  },
+  "routeShortName": "36",
+  "routeLongName": "Centro Sportivo Barca - Stazione Centrale - Ospedale S. Orsola - Ospedale Bellaria"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "36_TPERBO_1"
+  },
+  "routeShortName": "36",
+  "routeLongName": "Centro Sportivo Barca - Stazione Centrale - Ospedale S. Orsola - Ospedale Bellaria"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "37_TPERBO_0"
+  },
+  "routeShortName": "37",
+  "routeLongName": "Stazione Centrale - Via Bombicci"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "37_TPERBO_1"
+  },
+  "routeShortName": "37",
+  "routeLongName": "Stazione Centrale - Via Bombicci"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "38_TPERBO_1"
+  },
+  "routeShortName": "38",
+  "routeLongName": "Circolare periferica destra"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "38_TPERBO_0"
+  },
+  "routeShortName": "38",
+  "routeLongName": "Circolare periferica destra"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "39_TPERBO_1"
+  },
+  "routeShortName": "39",
+  "routeLongName": "Circolare periferica sinistra"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "39_TPERBO_0"
+  },
+  "routeShortName": "39",
+  "routeLongName": "Circolare periferica sinistra"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "4_TPERBO_1"
+  },
+  "routeShortName": "4",
+  "routeLongName": "Pedagna - Ospedale Nuovo - Stazione - Via Grieco (Poste)"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "4_TPERBO_0"
+  },
+  "routeShortName": "4",
+  "routeLongName": "Pedagna - Ospedale Nuovo - Stazione - Via Grieco (Poste)"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "40_TPERBO_1"
+  },
+  "routeShortName": "40",
+  "routeLongName": "BLQ: Aeroporto - Stazione Centrale - Fiera"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "40_TPERBO_0"
+  },
+  "routeShortName": "40",
+  "routeLongName": "BLQ: Aeroporto - Stazione Centrale - Fiera"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "41_TPERBO_0"
+  },
+  "routeShortName": "41",
+  "routeLongName": "Navetta A: Parcheggio Tanari - Poliambulatorio Rizzoli"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "41_TPERBO_1"
+  },
+  "routeShortName": "41",
+  "routeLongName": "Navetta A: Parcheggio Tanari - Poliambulatorio Rizzoli"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "410_TPERBO_0"
+  },
+  "routeShortName": "410",
+  "routeLongName": "Case Nuove - Fiera"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "410_TPERBO_1"
+  },
+  "routeShortName": "410",
+  "routeLongName": "Case Nuove - Fiera"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "411_TPERBO_1"
+  },
+  "routeShortName": "411",
+  "routeLongName": "Agelato - Trebbo di Reno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "411_TPERBO_0"
+  },
+  "routeShortName": "411",
+  "routeLongName": "Agelato - Trebbo di Reno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "413_TPERBO_1"
+  },
+  "routeShortName": "413",
+  "routeLongName": "Castel Maggiore - Z.I. Saliceto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "413_TPERBO_0"
+  },
+  "routeShortName": "413",
+  "routeLongName": "Castel Maggiore - Z.I. Saliceto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "42_TPERBO_1"
+  },
+  "routeShortName": "42",
+  "routeLongName": "Navetta T2: Circolare P.za Maggiore - Via dei Mille"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "42_TPERBO_0"
+  },
+  "routeShortName": "42",
+  "routeLongName": "Navetta T2: Circolare P.za Maggiore - Via dei Mille"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "43_TPERBO_0"
+  },
+  "routeShortName": "43",
+  "routeLongName": "Navetta T1: Due Torri - Ospedale Malpighi"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "43_TPERBO_1"
+  },
+  "routeShortName": "43",
+  "routeLongName": "Navetta T1: Due Torri - Ospedale Malpighi"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "431_TPERBO_0"
+  },
+  "routeShortName": "431",
+  "routeLongName": "Ospedale Bentivoglio - Minerbio - Baricella - Boschi"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "431_TPERBO_1"
+  },
+  "routeShortName": "431",
+  "routeLongName": "Ospedale Bentivoglio - Minerbio - Baricella - Boschi"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "432_TPERBO_0"
+  },
+  "routeShortName": "432",
+  "routeLongName": "Malalbergo - Altedo - Ospedale Bentivoglio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "432_TPERBO_1"
+  },
+  "routeShortName": "432",
+  "routeLongName": "Malalbergo - Altedo - Ospedale Bentivoglio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "433_TPERBO_0"
+  },
+  "routeShortName": "433",
+  "routeLongName": "Ospedale Bentivoglio - San Pietro in Casale - Galliera"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "433_TPERBO_1"
+  },
+  "routeShortName": "433",
+  "routeLongName": "Ospedale Bentivoglio - San Pietro in Casale - Galliera"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "435_TPERBO_0"
+  },
+  "routeShortName": "435",
+  "routeLongName": "Ospedale Bentivoglio - San Giorgio di Piano - Castello d'Argile - Pieve di Cento"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "435_TPERBO_1"
+  },
+  "routeShortName": "435",
+  "routeLongName": "Ospedale Bentivoglio - San Giorgio di Piano - Castello d'Argile - Pieve di Cento"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "436_TPERBO_0"
+  },
+  "routeShortName": "436",
+  "routeLongName": "Ospedale Bentivoglio - Funo - Castel Maggiore"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "436_TPERBO_1"
+  },
+  "routeShortName": "436",
+  "routeLongName": "Ospedale Bentivoglio - Funo - Castel Maggiore"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "437_TPERBO_1"
+  },
+  "routeShortName": "437",
+  "routeLongName": "Granarolo dell'Emilia - Ospedale di Bentivoglio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "437_TPERBO_0"
+  },
+  "routeShortName": "437",
+  "routeLongName": "Granarolo dell'Emilia - Ospedale di Bentivoglio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "44_TPERBO_1"
+  },
+  "routeShortName": "44",
+  "routeLongName": "Castel del Rio - Pedagna - Ospedale Nuovo - Stazione - Via Grieco (Poste)"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "44_TPERBO_0"
+  },
+  "routeShortName": "44",
+  "routeLongName": "Castel del Rio - Pedagna - Ospedale Nuovo - Stazione - Via Grieco (Poste)"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "442_TPERBO_1"
+  },
+  "routeShortName": "442",
+  "routeLongName": "San Marino di Bentivoglio - Castel Maggiore"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "442_TPERBO_0"
+  },
+  "routeShortName": "442",
+  "routeLongName": "San Marino di Bentivoglio - Castel Maggiore"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "443_TPERBO_1"
+  },
+  "routeShortName": "443",
+  "routeLongName": "Funo - Z.I. C�de Fabbri"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "443_TPERBO_0"
+  },
+  "routeShortName": "443",
+  "routeLongName": "Funo - Z.I. C�de Fabbri"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "444_TPERBO_0"
+  },
+  "routeShortName": "444",
+  "routeLongName": "Castel Maggiore - Granarolo dell'Emilia"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "444_TPERBO_1"
+  },
+  "routeShortName": "444",
+  "routeLongName": "Castel Maggiore - Granarolo dell'Emilia"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "446_TPERBO_0"
+  },
+  "routeShortName": "446",
+  "routeLongName": "Bologna - Bentivoglio - Saletto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "446_TPERBO_1"
+  },
+  "routeShortName": "446",
+  "routeLongName": "Bologna - Bentivoglio - Saletto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "447_TPERBO_0"
+  },
+  "routeShortName": "447",
+  "routeLongName": "Bologna - Z.I. Saliceto - Bentivoglio - Saletto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "447_TPERBO_1"
+  },
+  "routeShortName": "447",
+  "routeLongName": "Bologna - Z.I. Saliceto - Bentivoglio - Saletto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "448_TPERBO_0"
+  },
+  "routeShortName": "448",
+  "routeLongName": "Bologna - Centergross - Interporto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "448_TPERBO_1"
+  },
+  "routeShortName": "448",
+  "routeLongName": "Bologna - Centergross - Interporto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "450_TPERBO_1"
+  },
+  "routeShortName": "450",
+  "routeLongName": "DIRETTA Cento - Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "453_TPERBO_1"
+  },
+  "routeShortName": "453",
+  "routeLongName": "San Giorgio di Piano - Venezzano - Cento"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "453_TPERBO_0"
+  },
+  "routeShortName": "453",
+  "routeLongName": "San Giorgio di Piano - Venezzano - Cento"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "455_TPERBO_1"
+  },
+  "routeShortName": "455",
+  "routeLongName": "Cento - San Pietro in Casale"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "455_TPERBO_0"
+  },
+  "routeShortName": "455",
+  "routeLongName": "Cento - San Pietro in Casale"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "456_TPERBO_1"
+  },
+  "routeShortName": "456",
+  "routeLongName": "Cento - Poggetto - San Pietro in Casale"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "456_TPERBO_0"
+  },
+  "routeShortName": "456",
+  "routeLongName": "Cento - Poggetto - San Pietro in Casale"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "50_TPERBO_0"
+  },
+  "routeShortName": "50",
+  "routeLongName": "Navetta C: Via Castiglione - Stazione Centrale"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "50_TPERBO_1"
+  },
+  "routeShortName": "50",
+  "routeLongName": "Navetta C: Via Castiglione - Stazione Centrale"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "504_TPERBO_1"
+  },
+  "routeShortName": "504",
+  "routeLongName": "Sala Bolognese - Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "504_TPERBO_0"
+  },
+  "routeShortName": "504",
+  "routeLongName": "Sala Bolognese - Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "506_TPERBO_0"
+  },
+  "routeShortName": "506",
+  "routeLongName": "Bonconvento - San Giovanni in Persiceto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "506_TPERBO_1"
+  },
+  "routeShortName": "506",
+  "routeLongName": "Bonconvento - San Giovanni in Persiceto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "507_TPERBO_1"
+  },
+  "routeShortName": "507",
+  "routeLongName": "Osteria Nuova Stazione F.S. - Padulle - San Giovanni in Persiceto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "507_TPERBO_0"
+  },
+  "routeShortName": "507",
+  "routeLongName": "Osteria Nuova Stazione F.S. - Padulle - San Giovanni in Persiceto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "51_TPERBO_1"
+  },
+  "routeShortName": "51",
+  "routeLongName": "(P.za Cavour) - Largo Lercaro - Monte Donato"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "51_TPERBO_0"
+  },
+  "routeShortName": "51",
+  "routeLongName": "(P.za Cavour) - Largo Lercaro - Monte Donato"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "52_TPERBO_1"
+  },
+  "routeShortName": "52",
+  "routeLongName": "P.za Cavour - Cippo di Sabbiuno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "52_TPERBO_0"
+  },
+  "routeShortName": "52",
+  "routeLongName": "P.za Cavour - Cippo di Sabbiuno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "531_TPERBO_0"
+  },
+  "routeShortName": "531",
+  "routeLongName": "San Giovanni in Persiceto - Castelfranco Emilia"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "531_TPERBO_1"
+  },
+  "routeShortName": "531",
+  "routeLongName": "San Giovanni in Persiceto - Castelfranco Emilia"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "533_TPERBO_1"
+  },
+  "routeShortName": "533",
+  "routeLongName": "Anzola dell'Emilia - Le Budrie - San Giovanni in Persiceto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "533_TPERBO_0"
+  },
+  "routeShortName": "533",
+  "routeLongName": "Anzola dell'Emilia - Le Budrie - San Giovanni in Persiceto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "536_TPERBO_0"
+  },
+  "routeShortName": "536",
+  "routeLongName": "Caselle - Palata - Decima - Ospedale San Giovanni in Persiceto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "536_TPERBO_1"
+  },
+  "routeShortName": "536",
+  "routeLongName": "Caselle - Palata - Decima - Ospedale San Giovanni in Persiceto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "537_TPERBO_1"
+  },
+  "routeShortName": "537",
+  "routeLongName": "Bevilacqua - Palata - Crevalcore - Ospedale San Giovanni in Persiceto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "537_TPERBO_0"
+  },
+  "routeShortName": "537",
+  "routeLongName": "Bevilacqua - Palata - Crevalcore - Ospedale San Giovanni in Persiceto"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "538_TPERBO_1"
+  },
+  "routeShortName": "538",
+  "routeLongName": "San Giovanni in Persiceto - Sant'Agata Bolognese - Nonantola"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "538_TPERBO_0"
+  },
+  "routeShortName": "538",
+  "routeLongName": "San Giovanni in Persiceto - Sant'Agata Bolognese - Nonantola"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "54_TPERBO_1"
+  },
+  "routeShortName": "54",
+  "routeLongName": "Aeroporto - Villaggio Speranza"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "54_TPERBO_0"
+  },
+  "routeShortName": "54",
+  "routeLongName": "Aeroporto - Villaggio Speranza"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "55_TPERBO_1"
+  },
+  "routeShortName": "55",
+  "routeLongName": "Facolt�di Agraria - San Rufillo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "55_TPERBO_0"
+  },
+  "routeShortName": "55",
+  "routeLongName": "Facolt�di Agraria - San Rufillo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "554_TPERBO_0"
+  },
+  "routeShortName": "554",
+  "routeLongName": "Crevalcore - Cento"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "554_TPERBO_1"
+  },
+  "routeShortName": "554",
+  "routeLongName": "Crevalcore - Cento"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "556_TPERBO_0"
+  },
+  "routeShortName": "556",
+  "routeLongName": "Cento - San Giovanni in Persiceto - Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "556_TPERBO_1"
+  },
+  "routeShortName": "556",
+  "routeLongName": "Cento - San Giovanni in Persiceto - Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "56_TPERBO_1"
+  },
+  "routeShortName": "56",
+  "routeLongName": "Z.I. rot. Negroni - Via Larga"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "56_TPERBO_0"
+  },
+  "routeShortName": "56",
+  "routeLongName": "Z.I. rot. Negroni - Via Larga"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "57_TPERBO_0"
+  },
+  "routeShortName": "57",
+  "routeLongName": "Navetta D: Ravone - Stazione Centrale"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "57_TPERBO_1"
+  },
+  "routeShortName": "57",
+  "routeLongName": "Navetta D: Ravone - Stazione Centrale"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "576_TPERBO_0"
+  },
+  "routeShortName": "576",
+  "routeLongName": "Bologna - San Giovanni in Persiceto - Crevalcore"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "576_TPERBO_1"
+  },
+  "routeShortName": "576",
+  "routeLongName": "Bologna - San Giovanni in Persiceto - Crevalcore"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "58_TPERBO_0"
+  },
+  "routeShortName": "58",
+  "routeLongName": "Villa Spada - Basilica di San Luca"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "58_TPERBO_1"
+  },
+  "routeShortName": "58",
+  "routeLongName": "Villa Spada - Basilica di San Luca"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "59_TPERBO_1"
+  },
+  "routeShortName": "59",
+  "routeLongName": "P.za Cavour - Villa Guastavillani"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "59_TPERBO_0"
+  },
+  "routeShortName": "59",
+  "routeLongName": "P.za Cavour - Villa Guastavillani"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "60_TPERBO_1"
+  },
+  "routeShortName": "60",
+  "routeLongName": "Ospedale S. Orsola - Centro Zanardi"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "60_TPERBO_0"
+  },
+  "routeShortName": "60",
+  "routeLongName": "Ospedale S. Orsola - Centro Zanardi"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "61_TPERBO_0"
+  },
+  "routeShortName": "61",
+  "routeLongName": "Massarenti - Battindarno (Notturno)"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "61_TPERBO_1"
+  },
+  "routeShortName": "61",
+  "routeLongName": "Massarenti - Battindarno (Notturno)"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "62_TPERBO_0"
+  },
+  "routeShortName": "62",
+  "routeLongName": "Corticella - Due Madonne (Notturno)"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "62_TPERBO_1"
+  },
+  "routeShortName": "62",
+  "routeLongName": "Corticella - Due Madonne (Notturno)"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "646_TPERBO_0"
+  },
+  "routeShortName": "646",
+  "routeLongName": "Bologna - Anzola dell'Emilia - Spilamberto - Bazzano Stazione F.B.V."
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "646_TPERBO_1"
+  },
+  "routeShortName": "646",
+  "routeLongName": "Bologna - Anzola dell'Emilia - Spilamberto - Bazzano Stazione F.B.V."
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "651_TPERBO_0"
+  },
+  "routeShortName": "651",
+  "routeLongName": "Bologna autostazione - Bazzano stazione"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "651_TPERBO_1"
+  },
+  "routeShortName": "651",
+  "routeLongName": "Bologna autostazione - Bazzano stazione"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "654_TPERBO_1"
+  },
+  "routeShortName": "654",
+  "routeLongName": "Vignola - Savigno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "654_TPERBO_0"
+  },
+  "routeShortName": "654",
+  "routeLongName": "Vignola - Savigno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "656_TPERBO_0"
+  },
+  "routeShortName": "656",
+  "routeLongName": "Bazzano Stazione F.B.V. - Zocca"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "656_TPERBO_1"
+  },
+  "routeShortName": "656",
+  "routeLongName": "Bazzano Stazione F.B.V. - Zocca"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "657_TPERBO_0"
+  },
+  "routeShortName": "657",
+  "routeLongName": "Bazzano Stazione F.B.V. - Savigno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "657_TPERBO_1"
+  },
+  "routeShortName": "657",
+  "routeLongName": "Bazzano Stazione F.B.V. - Savigno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "658_TPERBO_0"
+  },
+  "routeShortName": "658",
+  "routeLongName": "Bazzano Stazione F.B.V. - Tole"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "658_TPERBO_1"
+  },
+  "routeShortName": "658",
+  "routeLongName": "Bazzano Stazione F.B.V. - Tole"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "671_TPERBO_1"
+  },
+  "routeShortName": "671",
+  "routeLongName": "Bologna - Bazzano Stazione F.B.V. - Vignola"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "671_TPERBO_0"
+  },
+  "routeShortName": "671",
+  "routeLongName": "Bologna - Bazzano Stazione F.B.V. - Vignola"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "672_TPERBO_0"
+  },
+  "routeShortName": "672",
+  "routeLongName": "Bologna - Casalecchio di Reno - Bazzano Stazione F.B.V. - Vignola"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "672_TPERBO_1"
+  },
+  "routeShortName": "672",
+  "routeLongName": "Bologna - Casalecchio di Reno - Bazzano Stazione F.B.V. - Vignola"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "673_TPERBO_0"
+  },
+  "routeShortName": "673",
+  "routeLongName": "Zola Predosa - Rigosa"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "673_TPERBO_1"
+  },
+  "routeShortName": "673",
+  "routeLongName": "Zola Predosa - Rigosa"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "675_TPERBO_1"
+  },
+  "routeShortName": "675",
+  "routeLongName": "Concerti Unipol Arena"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "675_TPERBO_0"
+  },
+  "routeShortName": "675",
+  "routeLongName": "Concerti Unipol Arena"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "68_TPERBO_1"
+  },
+  "routeShortName": "68",
+  "routeLongName": "Via dei Mille - Camping Citt�i Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "68_TPERBO_0"
+  },
+  "routeShortName": "68",
+  "routeLongName": "Via dei Mille - Camping Citt�i Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "684_TPERBO_1"
+  },
+  "routeShortName": "684",
+  "routeLongName": "Bologna - Savigno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "684_TPERBO_0"
+  },
+  "routeShortName": "684",
+  "routeLongName": "Bologna - Savigno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "686_TPERBO_0"
+  },
+  "routeShortName": "686",
+  "routeLongName": "Bologna - Riale Stazione F.B.V. - Tole"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "686_TPERBO_1"
+  },
+  "routeShortName": "686",
+  "routeLongName": "Bologna - Riale Stazione F.B.V. - Tole"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "687_TPERBO_1"
+  },
+  "routeShortName": "687",
+  "routeLongName": "Sasso Marconi - Mongardino - Ponte Rivabella"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "687_TPERBO_0"
+  },
+  "routeShortName": "687",
+  "routeLongName": "Sasso Marconi - Mongardino - Ponte Rivabella"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "688_TPERBO_0"
+  },
+  "routeShortName": "688",
+  "routeLongName": "Ponte Rivabella - Padernella"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "688_TPERBO_1"
+  },
+  "routeShortName": "688",
+  "routeLongName": "Ponte Rivabella - Padernella"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "689_TPERBO_0"
+  },
+  "routeShortName": "689",
+  "routeLongName": "Ponte Rivabella - Loghetti"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "706_TPERBO_0"
+  },
+  "routeShortName": "706",
+  "routeLongName": "Bologna - Vergato"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "706_TPERBO_1"
+  },
+  "routeShortName": "706",
+  "routeLongName": "Bologna - Vergato"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "716_TPERBO_0"
+  },
+  "routeShortName": "716",
+  "routeLongName": "Marzabotto Stazione F.S. - Tole"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "716_TPERBO_1"
+  },
+  "routeShortName": "716",
+  "routeLongName": "Marzabotto Stazione F.S. - Tole"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "726_TPERBO_1"
+  },
+  "routeShortName": "726",
+  "routeLongName": "Vergato - Labante - Montese"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "726_TPERBO_0"
+  },
+  "routeShortName": "726",
+  "routeLongName": "Vergato - Labante - Montese"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "727_TPERBO_1"
+  },
+  "routeShortName": "727",
+  "routeLongName": "Vergato - Cereglio - Montese"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "727_TPERBO_0"
+  },
+  "routeShortName": "727",
+  "routeLongName": "Vergato - Cereglio - Montese"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "728_TPERBO_1"
+  },
+  "routeShortName": "728",
+  "routeLongName": "Vergato - Tole"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "728_TPERBO_0"
+  },
+  "routeShortName": "728",
+  "routeLongName": "Vergato - Tole"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "737_TPERBO_1"
+  },
+  "routeShortName": "737",
+  "routeLongName": "Vergato - Marano - Montese"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "737_TPERBO_0"
+  },
+  "routeShortName": "737",
+  "routeLongName": "Vergato - Marano - Montese"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "746_TPERBO_0"
+  },
+  "routeShortName": "746",
+  "routeLongName": "Porretta Terme - Riola - Vergato"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "746_TPERBO_1"
+  },
+  "routeShortName": "746",
+  "routeLongName": "Porretta Terme - Riola - Vergato"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "747_TPERBO_1"
+  },
+  "routeShortName": "747",
+  "routeLongName": "Porretta Terme - Marano - Montese"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "747_TPERBO_0"
+  },
+  "routeShortName": "747",
+  "routeLongName": "Porretta Terme - Marano - Montese"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "756_TPERBO_1"
+  },
+  "routeShortName": "756",
+  "routeLongName": "Porretta Terme - Abetaia - Montese"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "756_TPERBO_0"
+  },
+  "routeShortName": "756",
+  "routeLongName": "Porretta Terme - Abetaia - Montese"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "757_TPERBO_1"
+  },
+  "routeShortName": "757",
+  "routeLongName": "Porretta Terme - Querciola - Montese"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "757_TPERBO_0"
+  },
+  "routeShortName": "757",
+  "routeLongName": "Porretta Terme - Querciola - Montese"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "766_TPERBO_1"
+  },
+  "routeShortName": "766",
+  "routeLongName": "Porretta Terme - Ponte della Venturina"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "766_TPERBO_0"
+  },
+  "routeShortName": "766",
+  "routeLongName": "Porretta Terme - Ponte della Venturina"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "767_TPERBO_0"
+  },
+  "routeShortName": "767",
+  "routeLongName": "Porretta Terme - Case Calistri"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "767_TPERBO_1"
+  },
+  "routeShortName": "767",
+  "routeLongName": "Porretta Terme - Case Calistri"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "768_TPERBO_1"
+  },
+  "routeShortName": "768",
+  "routeLongName": "Porretta Terme - Casa Forlai"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "768_TPERBO_0"
+  },
+  "routeShortName": "768",
+  "routeLongName": "Porretta Terme - Casa Forlai"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "770_TPERBO_1"
+  },
+  "routeShortName": "770",
+  "routeLongName": "Porretta Terme (Via Repubblica) - Porretta Terme terminal"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "770_TPERBO_0"
+  },
+  "routeShortName": "770",
+  "routeLongName": "Porretta Terme (Via Repubblica) - Porretta Terme terminal"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "776_TPERBO_1"
+  },
+  "routeShortName": "776",
+  "routeLongName": "Porretta Terme - Vidiciatico - Corno alle Scale"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "776_TPERBO_0"
+  },
+  "routeShortName": "776",
+  "routeLongName": "Porretta Terme - Vidiciatico - Corno alle Scale"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "787_TPERBO_0"
+  },
+  "routeShortName": "787",
+  "routeLongName": "Porretta Terme - Pennola"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "787_TPERBO_1"
+  },
+  "routeShortName": "787",
+  "routeLongName": "Porretta Terme - Pennola"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "79_TPERBO_1"
+  },
+  "routeShortName": "79",
+  "routeLongName": "Barca - Z.I. Casalecchio di Reno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "79_TPERBO_0"
+  },
+  "routeShortName": "79",
+  "routeLongName": "Barca - Z.I. Casalecchio di Reno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "796_TPERBO_1"
+  },
+  "routeShortName": "796",
+  "routeLongName": "Porretta Terme - Baigno / Zanchetto Bivio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "796_TPERBO_0"
+  },
+  "routeShortName": "796",
+  "routeLongName": "Porretta Terme - Baigno / Zanchetto Bivio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "797_TPERBO_1"
+  },
+  "routeShortName": "797",
+  "routeLongName": "Porretta Terme - Badi - Suviana"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "797_TPERBO_0"
+  },
+  "routeShortName": "797",
+  "routeLongName": "Porretta Terme - Badi - Suviana"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "798_TPERBO_1"
+  },
+  "routeShortName": "798",
+  "routeLongName": "Porretta Terme - Casola - Caste di Casio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "798_TPERBO_0"
+  },
+  "routeShortName": "798",
+  "routeLongName": "Porretta Terme - Casola - Caste di Casio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "80_TPERBO_0"
+  },
+  "routeShortName": "80",
+  "routeLongName": "Borgo Panigale - Z.I. Zola Predosa"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "80_TPERBO_1"
+  },
+  "routeShortName": "80",
+  "routeLongName": "Borgo Panigale - Z.I. Zola Predosa"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "806_TPERBO_1"
+  },
+  "routeShortName": "806",
+  "routeLongName": "Vergato - Suviana - Badi"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "806_TPERBO_0"
+  },
+  "routeShortName": "806",
+  "routeLongName": "Vergato - Suviana - Badi"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "808_TPERBO_0"
+  },
+  "routeShortName": "808",
+  "routeLongName": "Vergato - Riola Stazione F.S. - Castiglione dei Pepoli"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "808_TPERBO_1"
+  },
+  "routeShortName": "808",
+  "routeLongName": "Vergato - Riola Stazione F.S. - Castiglione dei Pepoli"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "81_TPERBO_0"
+  },
+  "routeShortName": "81",
+  "routeLongName": "Stazione Centrale - Longara - Padulle - Bagno di Piano"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "81_TPERBO_1"
+  },
+  "routeShortName": "81",
+  "routeLongName": "Stazione Centrale - Longara - Padulle - Bagno di Piano"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "825_TPERBO_1"
+  },
+  "routeShortName": "825",
+  "routeLongName": "Grizzana Stazione F.S. - San Benedetto Val di Sambro Stazione F.S. - Brasimone Enea"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "825_TPERBO_0"
+  },
+  "routeShortName": "825",
+  "routeLongName": "Grizzana Stazione F.S. - San Benedetto Val di Sambro Stazione F.S. - Brasimone Enea"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "826_TPERBO_1"
+  },
+  "routeShortName": "826",
+  "routeLongName": "Bologna - Castiglione dei Pepoli - San Giacomo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "826_TPERBO_0"
+  },
+  "routeShortName": "826",
+  "routeLongName": "Bologna - Castiglione dei Pepoli - San Giacomo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "827_TPERBO_1"
+  },
+  "routeShortName": "827",
+  "routeLongName": "Sasso Marconi Stazione F.S. - Vado - Mozuno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "827_TPERBO_0"
+  },
+  "routeShortName": "827",
+  "routeLongName": "Sasso Marconi Stazione F.S. - Vado - Mozuno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "828_TPERBO_0"
+  },
+  "routeShortName": "828",
+  "routeLongName": "San Benedetto Val di Sambro Stazione F.S. - Castiglione dei Pepoli"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "828_TPERBO_1"
+  },
+  "routeShortName": "828",
+  "routeLongName": "San Benedetto Val di Sambro Stazione F.S. - Castiglione dei Pepoli"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "829_TPERBO_1"
+  },
+  "routeShortName": "829",
+  "routeLongName": "Vergato - Stanco"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "829_TPERBO_0"
+  },
+  "routeShortName": "829",
+  "routeLongName": "Vergato - Stanco"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "83_TPERBO_0"
+  },
+  "routeShortName": "83",
+  "routeLongName": "Bologna - Ospedale Maggiore - Calderino di Monte San Pietro"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "83_TPERBO_1"
+  },
+  "routeShortName": "83",
+  "routeLongName": "Bologna - Ospedale Maggiore - Calderino di Monte San Pietro"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "846_TPERBO_1"
+  },
+  "routeShortName": "846",
+  "routeLongName": "Ponte Locatello - Grizzana Morandi - Vergato"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "846_TPERBO_0"
+  },
+  "routeShortName": "846",
+  "routeLongName": "Ponte Locatello - Grizzana Morandi - Vergato"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "85_TPERBO_1"
+  },
+  "routeShortName": "85",
+  "routeLongName": "Casalecchio di Reno A.U.S.L. - Casalecchio di Reno Palasport"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "85_TPERBO_0"
+  },
+  "routeShortName": "85",
+  "routeLongName": "Casalecchio di Reno A.U.S.L. - Casalecchio di Reno Palasport"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "850_TPERBO_0"
+  },
+  "routeShortName": "850",
+  "routeLongName": "DIRETTA Castel dell'Alpi - Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "850_TPERBO_1"
+  },
+  "routeShortName": "850",
+  "routeLongName": "DIRETTA Castel dell'Alpi - Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "851_TPERBO_1"
+  },
+  "routeShortName": "851",
+  "routeLongName": "DIRETTA Rioveggio - Casalecchio di Reno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "856_TPERBO_1"
+  },
+  "routeShortName": "856",
+  "routeLongName": "Bologna - San Benedetto Val di Sambro - Castel Dell'Alpi / Pian del Voglio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "856_TPERBO_0"
+  },
+  "routeShortName": "856",
+  "routeLongName": "Bologna - San Benedetto Val di Sambro - Castel Dell'Alpi / Pian del Voglio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "857_TPERBO_1"
+  },
+  "routeShortName": "857",
+  "routeLongName": "Bivio C�di Martino - Monghidoro - Loiano; Bivio C�di Martino - Castiglione dei Pepoli"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "857_TPERBO_0"
+  },
+  "routeShortName": "857",
+  "routeLongName": "Bivio C�di Martino - Monghidoro - Loiano; Bivio C�di Martino - Castiglione dei Pepoli"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "858_TPERBO_0"
+  },
+  "routeShortName": "858",
+  "routeLongName": "Castiglione dei Pepoli - San Benedetto Val di Sambro"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "858_TPERBO_1"
+  },
+  "routeShortName": "858",
+  "routeLongName": "Castiglione dei Pepoli - San Benedetto Val di Sambro"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "86_TPERBO_1"
+  },
+  "routeShortName": "86",
+  "routeLongName": "Pza Roosevelt / P.za San Francesco - Casalecchio di Reno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "86_TPERBO_0"
+  },
+  "routeShortName": "86",
+  "routeLongName": "Pza Roosevelt / P.za San Francesco - Casalecchio di Reno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "87_TPERBO_0"
+  },
+  "routeShortName": "87",
+  "routeLongName": "Bologna - Stazione Centrale - Ospedale Maggiore - Anzola dell'Emilia - Castelfranco Emilia"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "87_TPERBO_1"
+  },
+  "routeShortName": "87",
+  "routeLongName": "Bologna - Stazione Centrale - Ospedale Maggiore - Anzola dell'Emilia - Castelfranco Emilia"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "88_TPERBO_0"
+  },
+  "routeShortName": "88",
+  "routeLongName": "Bologna - Cadriano - Viadagola - Granarolo dell'Emilia"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "88_TPERBO_1"
+  },
+  "routeShortName": "88",
+  "routeLongName": "Bologna - Cadriano - Viadagola - Granarolo dell'Emilia"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "89_TPERBO_0"
+  },
+  "routeShortName": "89",
+  "routeLongName": "Villanova - Ospedale S. Orsola - Bologna - Casalecchio di Reno - San Biagio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "89_TPERBO_1"
+  },
+  "routeShortName": "89",
+  "routeLongName": "Villanova - Ospedale S. Orsola - Bologna - Casalecchio di Reno - San Biagio"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "9_TPERBO_1"
+  },
+  "routeShortName": "9",
+  "routeLongName": "Stazione F.S. - Pedagna Ovest"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "9_TPERBO_0"
+  },
+  "routeShortName": "9",
+  "routeLongName": "Stazione F.S. - Pedagna Ovest"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "90_TPERBO_0"
+  },
+  "routeShortName": "90",
+  "routeLongName": "Bologna - Ospedale Bellaria - Ospedale San Camillo / Ozzano dell'Emilia"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "90_TPERBO_1"
+  },
+  "routeShortName": "90",
+  "routeLongName": "Bologna - Ospedale Bellaria - Ospedale San Camillo / Ozzano dell'Emilia"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "900_TPERBO_1"
+  },
+  "routeShortName": "900",
+  "routeLongName": "DIRETTA Monghidoro - Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "900_TPERBO_0"
+  },
+  "routeShortName": "900",
+  "routeLongName": "DIRETTA Monghidoro - Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "903_TPERBO_0"
+  },
+  "routeShortName": "903",
+  "routeLongName": "Pianoro Vecchio - Istituto Majorana di San Lazzaro di Savena"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "903_TPERBO_1"
+  },
+  "routeShortName": "903",
+  "routeLongName": "Pianoro Vecchio - Istituto Majorana di San Lazzaro di Savena"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "904_TPERBO_0"
+  },
+  "routeShortName": "904",
+  "routeLongName": "Pianoro Vecchio - Liceo Fermi di Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "904_TPERBO_1"
+  },
+  "routeShortName": "904",
+  "routeLongName": "Pianoro Vecchio - Liceo Fermi di Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "905_TPERBO_1"
+  },
+  "routeShortName": "905",
+  "routeLongName": "Pianoro Vecchio - Istituto Manfredi Tanari di Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "905_TPERBO_0"
+  },
+  "routeShortName": "905",
+  "routeLongName": "Pianoro Vecchio - Istituto Manfredi Tanari di Bologna"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "906_TPERBO_1"
+  },
+  "routeShortName": "906",
+  "routeLongName": "Bologna - Monghidoro - Castel dell'Alpi"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "906_TPERBO_0"
+  },
+  "routeShortName": "906",
+  "routeLongName": "Bologna - Monghidoro - Castel dell'Alpi"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "907_TPERBO_1"
+  },
+  "routeShortName": "907",
+  "routeLongName": "Monghidoro - Loiano bivio Monzuno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "907_TPERBO_0"
+  },
+  "routeShortName": "907",
+  "routeLongName": "Monghidoro - Loiano bivio Monzuno"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "908_TPERBO_1"
+  },
+  "routeShortName": "908",
+  "routeLongName": "Monghidoro - Pietramala"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "908_TPERBO_0"
+  },
+  "routeShortName": "908",
+  "routeLongName": "Monghidoro - Pietramala"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "91_TPERBO_1"
+  },
+  "routeShortName": "91",
+  "routeLongName": "Stazione Centrale - Calderara di Reno - Padulle - Bagno di Piano"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "91_TPERBO_0"
+  },
+  "routeShortName": "91",
+  "routeLongName": "Stazione Centrale - Calderara di Reno - Padulle - Bagno di Piano"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "916_TPERBO_0"
+  },
+  "routeShortName": "916",
+  "routeLongName": "Bologna - Monghidoro"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "916_TPERBO_1"
+  },
+  "routeShortName": "916",
+  "routeLongName": "Bologna - Monghidoro"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "918_TPERBO_1"
+  },
+  "routeShortName": "918",
+  "routeLongName": "Bologna - Loiano"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "918_TPERBO_0"
+  },
+  "routeShortName": "918",
+  "routeLongName": "Bologna - Loiano"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "92_TPERBO_1"
+  },
+  "routeShortName": "92",
+  "routeLongName": "Trebbo di Reno - Bologna - Ospedale Maggiore - Sasso Marconi - (Vergato)"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "92_TPERBO_0"
+  },
+  "routeShortName": "92",
+  "routeLongName": "Trebbo di Reno - Bologna - Ospedale Maggiore - Sasso Marconi - (Vergato)"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "921_TPERBO_0"
+  },
+  "routeShortName": "921",
+  "routeLongName": "NAVETTA CAPODANNO"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "921_TPERBO_1"
+  },
+  "routeShortName": "921",
+  "routeLongName": "NAVETTA CAPODANNO"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "93_TPERBO_1"
+  },
+  "routeShortName": "93",
+  "routeLongName": "Bologna - Granarolo dell'Emilia - Baricella - Mondonuovo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "93_TPERBO_0"
+  },
+  "routeShortName": "93",
+  "routeLongName": "Bologna - Granarolo dell'Emilia - Baricella - Mondonuovo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "94_TPERBO_0"
+  },
+  "routeShortName": "94",
+  "routeLongName": "Bazzano - Bologna - Ospedale S. Orsola - Ospedale Malpighi - Castel San Pietro Terme"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "94_TPERBO_1"
+  },
+  "routeShortName": "94",
+  "routeLongName": "Bazzano - Bologna - Ospedale S. Orsola - Ospedale Malpighi - Castel San Pietro Terme"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "95_TPERBO_1"
+  },
+  "routeShortName": "95",
+  "routeLongName": "(Bologna) - Funo - Centergross - Interporto - Bentivoglio - (Saletto)"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "95_TPERBO_0"
+  },
+  "routeShortName": "95",
+  "routeLongName": "(Bologna) - Funo - Centergross - Interporto - Bentivoglio - (Saletto)"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "951_TPERBO_1"
+  },
+  "routeShortName": "951",
+  "routeLongName": "Sostitutivo Bologna - Portomaggiore"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "951_TPERBO_0"
+  },
+  "routeShortName": "951",
+  "routeLongName": "Sostitutivo Bologna - Portomaggiore"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "96_TPERBO_0"
+  },
+  "routeShortName": "96",
+  "routeLongName": "Bologna - Carteria di Sesto - Pianoro"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "96_TPERBO_1"
+  },
+  "routeShortName": "96",
+  "routeLongName": "Bologna - Carteria di Sesto - Pianoro"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "97_TPERBO_0"
+  },
+  "routeShortName": "97",
+  "routeLongName": "Bologna - San Giorgio di Piano - Cento / San Venanzio di Galliera"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "97_TPERBO_1"
+  },
+  "routeShortName": "97",
+  "routeLongName": "Bologna - San Giorgio di Piano - Cento / San Venanzio di Galliera"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "972_TPERBO_1"
+  },
+  "routeShortName": "972",
+  "routeLongName": "Imola - Scuola Pelloni Tabanelli"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "972_TPERBO_0"
+  },
+  "routeShortName": "972",
+  "routeLongName": "Imola - Scuola Pelloni Tabanelli"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "973_TPERBO_0"
+  },
+  "routeShortName": "973",
+  "routeLongName": "Scuole Tinti - Scuola Orsini"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "98_TPERBO_1"
+  },
+  "routeShortName": "98",
+  "routeLongName": "Bologna - Castel Maggiore"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "98_TPERBO_0"
+  },
+  "routeShortName": "98",
+  "routeLongName": "Bologna - Castel Maggiore"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "99_TPERBO_0"
+  },
+  "routeShortName": "99",
+  "routeLongName": "Bologna - Medicina - Lugo"
+}, {
+  "id": {
+    "agency": "TPERBO",
+    "id": "99_TPERBO_1"
+  },
+  "routeShortName": "99",
+  "routeLongName": "Bologna - Medicina - Lugo"
+}]

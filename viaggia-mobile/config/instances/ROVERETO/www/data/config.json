@@ -7,6 +7,7 @@
     "appname": "Viaggia Rovereto",
     "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
     "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
+    "newsRSS": "https://tn.smartcommunitylab.it/core.mobility/announcements/rss/rovereto",
     "smartcheck_options": [
         1,
         4,

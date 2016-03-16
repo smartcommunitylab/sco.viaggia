@@ -237,6 +237,15 @@ angular.module('viaggia', [
                         controller: 'NewsCtrl'
                     }
                 }
+            }).state('app.newsitem', {
+                cache: false,
+                url: "/newsitem/:id",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/newsitem.html",
+                        controller: 'NewsItemCtrl'
+                    }
+                }
             }).state('app.info', {
                 cache: false,
                 url: "/info",
@@ -414,7 +423,7 @@ angular.module('viaggia', [
             menu_home: 'Home',
             menu_plan: 'Pianifica viaggio',
             menu_mytrip: 'I miei viaggi',
-            menu_news: 'News e avvisi',
+            menu_news: 'News',
             menu_info: 'Info e tariffe',
             menu_bookmarks: 'Preferiti',
             menu_notifications: 'Avvisi',
@@ -572,10 +581,9 @@ angular.module('viaggia', [
             tutorial_end: 'FINE',
             tutorial_skip: 'SALTA',
             empty_home_label_1: 'Ops... hai nascosto tutte le schede della pagina principale',
-            empty_home_label_2: 'Vai nei PREFERITI per ripristinare i contenuti che ti interessano'
-
-
-
+            empty_home_label_2: 'Vai nei PREFERITI per ripristinare i contenuti che ti interessano',
+            news_empty_list: 'Non ci sono notizie in questo momento',
+            news_title: 'News'
 
         });
 
@@ -742,7 +750,9 @@ angular.module('viaggia', [
             tutorial_end: 'END',
             tutorial_skip: 'SKIP',
             empty_home_label_1: 'Oops... you removed all the tabs from the main page',
-            empty_home_label_2: 'Go to BOOKMARKS to restore the contents you are interested in'
+            empty_home_label_2: 'Go to BOOKMARKS to restore the contents you are interested in',
+            news_empty_list: 'There are no news at the moment',
+            news_title: 'News',
         });
 
 

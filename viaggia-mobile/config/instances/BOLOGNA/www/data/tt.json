@@ -1,0 +1,97 @@
+{
+  "stopVisualization": {
+    "12": {
+      "view": "grid"
+    },
+    "5": {
+      "view": "list"
+    },
+    "6": {
+      "view": "list"
+    },
+    "10": {
+      "view": "list"
+    }
+  },
+  "elements": {
+    "trains": {
+      "view": "list",
+      "label": "menu_real_time_train",
+      "hasMap": true,
+      "markerIcon": "ic_train",
+      "icon": "ic_train",
+      "transportType": "TRAIN",
+      "elements": []
+    },
+    "urbano": {
+      "view": "grid",
+      "label": "menu_real_time_bus_urban",
+      "hasMap": true,
+      "markerIcon": "ic_urbanBus",
+      "icon": "ic_urban-bus",
+      "transportType": "BUS",
+      "elements": [
+        {
+          "agencyId": "TPERBO",
+          "hasMap": true,
+          "groups": [
+            {
+              "label": "1",
+              "routes": [
+                {
+                  "routeId": "1_TPERBO_0",
+                  "routeSymId": "1_TPERBO_0",
+                  "title": "Ospedale Nuovo - Stazione F.S. - Porta dei Servi",
+                  "label": "1"
+                },
+                {
+                  "routeId": "1_TPERBO_1",
+                  "routeSymId": "1_TPERBO_1",
+                  "title": "Porta dei Servi - Stazione F.S. - Ospedale Nuovo",
+                  "label": "1"
+                }
+              ]
+            }
+            ,
+            {
+              "label": "101",
+              "routes": [
+                {
+                  "routeId": "101_TPERBO_0",
+                  "routeSymId": "101_TPERBO_0",
+                  "title": "Bologna - Castel S. Pietro - Imola",
+                  "label": "101"
+                },
+                {
+                  "routeId": "101_TPERBO_1",
+                  "routeSymId": "101_TPERBO_1",
+                  "title": "Imola - Castel S. Pietro - Bologna",
+                  "label": "101"
+                }
+              ]
+            }
+            ,
+            {
+              "label": "3",
+              "routes": [
+                {
+                  "routeId": "3_TPERBO_0",
+                  "routeSymId": "3_TPERBO_0",
+                  "title": "Rivazza - Stazione F.S. - Pedagna Ovest",
+                  "label": "3"
+                },
+                {
+                  "routeId": "3_TPERBO_1",
+                  "routeSymId": "3_TPERBO_1",
+                  "title": "Pedagna Ovest - Autostazione - Stazione F.S.",
+                  "label": "3"
+                }
+              ]
+            }
+
+          ]
+        }
+      ]
+    }
+  }
+}

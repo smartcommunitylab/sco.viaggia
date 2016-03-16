@@ -1,0 +1,25 @@
+<ion-view>
+    <ion-nav-title>
+        {{'news_title'|translate}}
+    </ion-nav-title>
+
+    <ion-content class="home-news contatto" has-bouncing="false">
+        <div class="news-block padding">
+            <div ng-if="!!newsItem.image">
+                <img class="news-image" ng-src="{{newsItem.image}}" />
+            </div>
+            <div class="news-date padding-top">{{newsItem.dateTime| date:'dd/MM/yyyy HH:mm'}}</div>
+            <div class="news-title padding-top" ng-bind-html="newsItem.title"></div>
+            <div class="padding-top" compile="newsItem.content"></div>
+        </div>
+
+        <a class="hidden-link" ng-if="newsItem.link" ng-click="clickLink(newsItem.link)">
+            <div class="row">
+                <button class="col col-15 icon button-balanced button-clear">
+                <i class="icon riciclo-website icon-xlarge"></i>
+                </button>
+                <div class="col col-50 col-center">{{'Dettagli'|translate}}</div>
+            </div>
+        </a>
+    </ion-content>
+</ion-view>
