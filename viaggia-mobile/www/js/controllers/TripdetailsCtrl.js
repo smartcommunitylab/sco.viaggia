@@ -13,7 +13,7 @@ angular.module('viaggia.controllers.tripdetails', [])
             $scope.bookmarkStyle = bookmarkService.getBookmarkStyle($location.path());
             $scope.requestedFrom = trip.data.originalFrom.name;
             $scope.requestedTo = trip.data.originalTo.name;
-
+            $scope.recurrency = trip.data.recurrency;
             planService.setPlanConfigure(trip.data.originalRequest);
 
             planService.process(trip.data.data, $scope.requestedFrom, $scope.requestedTo);
@@ -36,6 +36,8 @@ angular.module('viaggia.controllers.tripdetails', [])
 
     var initNewTrip = function () {
         var trip = planService.getSelectedJourney();
+        //get recurrency
+
         $scope.trip = trip;
         $scope.editMode = true;
 
@@ -49,14 +51,23 @@ angular.module('viaggia.controllers.tripdetails', [])
         }
         var editInstance = planService.getEditInstance();
         $scope.tripId = editInstance ? editInstance.tripId : null;
-//        if (trip.original) {
-//            //not yet processed
-//            delete trip.original;
-//        }
+        //        if (trip.original) {
+        //            //not yet processed
+        //            delete trip.original;
+        //        }
+        if (trip.data && trip.data.recurrency) {
+            $scope.recurrency = trip.data.recurrency;
+        }
         planService.process(trip, $scope.requestedFrom, $scope.requestedTo);
         $scope.currentItinerary = trip;
         $scope.pathLine = mapService.getTripPolyline(trip);
         $scope.pathMarkers = mapService.getTripPoints(trip);
+        planService.getTrip($scope.tripId).then(function (trip) {
+            if (trip) {
+                $scope.recurrency = trip.data.recurrency;
+            }
+
+        });
         angular.extend($scope, {
             center: {
                 lat: Config.getMapPosition().lat,
@@ -67,6 +78,7 @@ angular.module('viaggia.controllers.tripdetails', [])
             events: {},
             pathLine: $scope.pathLine
         });
+
     }
 
     if ($stateParams.tripId) {
@@ -134,23 +146,85 @@ angular.module('viaggia.controllers.tripdetails', [])
     $scope.saveTrip = function () {
         var editInstance = planService.getEditInstance();
         if ($scope.tripId && editInstance) {
-            planService.saveTrip($scope.tripId, $scope.trip, editInstance.data.name, $scope.requestedFrom, $scope.requestedTo).then(function (res) {
-                planService.setEditInstance(null);
-                $scope.editMode = false;
-                $scope.tripId = res.tripId;
-                //toast saved
-                Toast.show($filter('translate')("tripsaved_message_feedback"), "short", "bottom");
-                $ionicHistory.nextViewOptions({
-                    historyRoot: true,
-                    disableBack: true
-                });
-                $state.go('app.mytrips');
-            });
+            //            planService.saveTrip($scope.tripId, $scope.trip, editInstance.data.name, $scope.requestedFrom, $scope.requestedTo, $scope.recurrency).then(function (res) {
+            //                planService.setEditInstance(null);
+            //                $scope.editMode = false;
+            //                $scope.tripId = res.tripId;
+            //                //toast saved
+            //                Toast.show($filter('translate')("tripsaved_message_feedback"), "short", "bottom");
+            //                $ionicHistory.nextViewOptions({
+            //                    historyRoot: true,
+            //                    disableBack: true
+            //                });
+            //                $state.go('app.mytrips');
+            //            }, function (err) {
+            //                Toast.show($filter('translate')("save_trip_error_message"), "short", "bottom");
+            //            });
+            //            return;
+
+            $scope.data = {};
+            $scope.showError = false;
+            $scope.recurrencyPopupDoW = JSON.parse(JSON.stringify(Config.getDaysRec()));
+            if ($scope.recurrency && $scope.recurrency.daysOfWeek) {
+                //set flag to recurrency to true
+                $scope.journey.recursiveTrip = true;
+                //set array to recurrent
+                for (var k = 0; k < $scope.recurrencyPopupDoW.length; k++) {
+                    if (contains($scope.recurrency.daysOfWeek, k + 1)) {
+                        $scope.recurrencyPopupDoW[k].checked = true;
+                    }
+                    //                    if (k == 7 && (contains($scope.recurrency.daysOfWeek, k))) {
+                    //                    }
+                }
+            }
+            $scope.data.nametrip = editInstance.data.name;
+            // Prompt popup code
+            $ionicPopup.prompt({
+                templateUrl: 'templates/popup-savetrip.html',
+                title: $filter('translate')('save_trip_title'),
+                cssClass: 'parking-popup',
+                scope: $scope,
+                buttons: [
+                    {
+                        text: $filter('translate')('save_trip_close_button'),
+                        type: 'button-cancel'
+                },
+                    {
+                        text: '<b>' + $filter('translate')('save_trip_save_button') + '</b>',
+                        onTap: function (e) {
+                            if (!$scope.data.nametrip) {
+                                $scope.showError = true;
+
+                                e.preventDefault();
+                            } else {
+                                return $scope.data.nametrip;
+                            }
+                        }
+                                }]
+            }).then(function (res) {
+                    if (res) {
+                        planService.saveTrip($scope.tripId, $scope.trip, $scope.data.nametrip, $scope.requestedFrom, $scope.requestedTo, $scope.recurrencyPopupDoW).then(function (res) {
+                            planService.setEditInstance(null);
+                            $scope.editMode = false;
+                            $scope.tripId = res.tripId;
+                            //toast saved
+                            Toast.show($filter('translate')("tripsaved_message_feedback"), "short", "bottom");
+                            $ionicHistory.nextViewOptions({
+                                historyRoot: true,
+                                disableBack: true
+                            });
+                            $state.go('app.mytrips');
+                        })
+                    }
+                },
+                function (err) {
+                    Toast.show($filter('translate')("save_trip_error_message"), "short", "bottom");
+                }
+            );
             return;
         }
         $scope.data = {};
         $scope.showError = false;
-        //        $scope.recurrencyPopupDoW = JSON.parse(JSON.stringify($scope.empty_rec));
         $scope.recurrencyPopupDoW = JSON.parse(JSON.stringify(Config.getDaysRec()));
         // Prompt popup code
         $ionicPopup.prompt({
@@ -158,11 +232,6 @@ angular.module('viaggia.controllers.tripdetails', [])
             title: $filter('translate')('save_trip_title'),
             cssClass: 'parking-popup',
             scope: $scope,
-
-            //            title: $filter('translate')('save_trip_title'),
-            //            templateUrl: 'templates/popup-savetrip.html',
-            //            //subTitle: $filter('translate')('save_trip_text'),
-            // scope: $scope,
             buttons: [
                 {
                     text: $filter('translate')('save_trip_close_button'),
@@ -172,7 +241,6 @@ angular.module('viaggia.controllers.tripdetails', [])
                     text: '<b>' + $filter('translate')('save_trip_save_button') + '</b>',
                     onTap: function (e) {
                         if (!$scope.data.nametrip) {
-                            //Toast.show($filter('translate')("save_trip_error_message"), "short", "bottom");
                             $scope.showError = true;
 
                             e.preventDefault();
@@ -245,8 +313,8 @@ angular.module('viaggia.controllers.tripdetails', [])
     };
 
     $scope.trackStart = function () {
-        if (!$scope.fogEffect()) {
-            trackService.start($scope.tripId); //params= idTrip, endTime, latEnd, longEnd
+        if (!$scope.notTrackable()) {
+            trackService.start($scope.currentItinerary, $scope.tripId); //params= trip, idTrip. Enditime is authomatic calculated
         }
     }
     $scope.trackState = function () {
@@ -274,15 +342,52 @@ angular.module('viaggia.controllers.tripdetails', [])
         }
         return false;
     }
-    $scope.fogEffect = function () {
-        if (!$scope.isThisJourney() && $scope.trackingIsGoingOn()) {
+    $scope.notTrackable = function () {
+        if ((!$scope.isThisJourney() && $scope.trackingIsGoingOn()) || $scope.isInTime() != 0) {
             return true
         }
         return false;
     }
+    $scope.isInTime = function () {
+        var now = new Date();
+        //if recurrent check only hours if day is correct;
+        var startTime = $scope.currentItinerary.startime;
+        if ($scope.recurrency) {
+            if (contains($scope.recurrency, now.getDay())) {
+                var startTimeDate = new Date($scope.currentItinerary.startime);
+                //var today = new Date();
+                startTimeDate.setFullYear(today.getFullYear());
+                startTimeDate.setMonth(today.getMonth());
+                startTimeDate.setDate(today.getDate());
+                startTime = startTimeDate.getTime();
+            } else return -1;
+        }
+        if (now.getTime() > new Date(startTime + Config.getThresholdStartTime())) {
+            return 1;
+        }
+        if (now.getTime() < new Date(startTime - Config.getThresholdStartTime())) {
+            return -1;
+        }
+        return 0;
+    }
+
+    function contains(a, obj) {
+        for (var i = 0; i < a.length; i++) {
+            if (a[i] === obj) {
+                return true;
+            }
+        }
+        return false;
+    }
     $scope.showPopupIfNotThisJourney = function () {
-        if ($scope.fogEffect()) {
-            Toast.show('si sta gia monitorando un altro percorso', "short", "bottom");
+        if ($scope.notTrackable()) {
+            if (!$scope.isThisJourney() && $scope.trackingIsGoingOn()) {
+                Toast.show($filter('translate')('toast_already_monitoring'), "short", "bottom");
+            } else if ($scope.isInTime() == -1) {
+                Toast.show($filter('translate')('toast_before_time'), "short", "bottom");
+            } else if ($scope.isInTime() == 1) {
+                Toast.show($filter('translate')('toast_after_time'), "short", "bottom");
+            }
         }
 
     }

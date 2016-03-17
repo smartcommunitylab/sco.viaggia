@@ -261,6 +261,12 @@ angular.module('viaggia.services.conf', [])
         getPlanTypes: function () {
             return PLAN_TYPES;
         },
+        getThresholdEndTime: function () {
+            return mapJsonConfig['thresholdEndTime']
+        },
+        getThresholdStartTime: function () {
+            return mapJsonConfig['thresholdStartTime']
+        },
         convertPlanTypes: convertMeans,
         getColorsTypes: function () {
             return COLORS_TRIP;

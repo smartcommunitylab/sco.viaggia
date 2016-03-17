@@ -614,7 +614,9 @@ angular.module('viaggia', [
             save_trip_recurrent: 'Ricorrente',
             save_trip_alldays: 'Tutti',
             notification_tracking_title: 'Green Game',
-            notification_tracking_text: 'Il tuo viaggio sta per iniziare'
+            notification_tracking_text: 'Il tuo viaggio sta per iniziare',
+            toast_after_time: 'È troppo tardi per tracciare il viaggio',
+            toast_before_time: 'È troppo presto per tracciare il viaggio'
 
 
 
@@ -811,7 +813,11 @@ angular.module('viaggia', [
             save_trip_recurrent: 'Recurrent',
             save_trip_alldays: 'All',
             notification_tracking_title: 'Green Game',
-            notification_tracking_text: 'Your journey is going to start'
+            notification_tracking_text: 'Your journey is going to start',
+            toast_already_monitoring: 'You are already tracking a journey',
+            toast_after_time: 'It is too later for tracking the journey',
+            toast_before_time: 'It is too early for tracking the journey'
+
 
         });
 

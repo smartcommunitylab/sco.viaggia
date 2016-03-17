@@ -613,7 +613,10 @@ angular.module('viaggia.services.plan', [])
                 "originalRequest": planService.getPlanConfigure(),
                 "monitor": true,
                 "name": name,
-                "data": trip
+                "data": trip,
+                "recurrency": {
+                    "daysOfWeek": daysOfWeek
+                }
             }
         };
         userService.getValidToken().then(function (token) {
