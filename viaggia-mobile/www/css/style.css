@@ -394,8 +394,17 @@
 
 .placeautocomplete ul {
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, .95);
+    border: 1px solid #ddd;
     z-index: 99;
+}
+
+.placeautocomplete ul li {
+  padding: 5px;
+}
+
+.placeautocomplete ul li .highlight {
+  font-weight: bold;
 }
 
 .card-tt {
@@ -802,7 +811,7 @@ ion-header-bar .title {
     position: absolute;
     background-color: #fff;
     font-size: 12px;
-    left: 100px;
+/*    left: 100px;*/
     z-index: 10;
 }
 
@@ -817,7 +826,7 @@ ion-header-bar .title {
 #table-table {
     white-space: nowrap;
     font-family: RobotoMono;
-    left: 100px;
+/*    left: 100px;*/
     font-size: 12px;
     position: absolute;
 }
@@ -828,7 +837,7 @@ ion-header-bar .title {
     font-size: 12px;
     position: absolute;
     background-color: #fff;
-    width: 100px;
+/*    width: 100px;*/
     border-right: 1px solid #bbb;
     z-index: 10;
     overflow: hidden;
@@ -841,7 +850,7 @@ ion-header-bar .title {
     font-size: 12px;
     border-right: 1px solid #bbb;
     position: absolute;
-    width: 100px;
+/*    width: 100px;*/
     background-color: #fff;
     z-index: 100;
     text-align: center;

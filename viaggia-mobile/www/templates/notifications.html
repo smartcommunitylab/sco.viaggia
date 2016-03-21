@@ -1,5 +1,7 @@
 <ion-view id="notifications" title="{{'notifications_title' | translate}}">
     <ion-content id="content" has-header="true">
+        <ion-refresher on-refresh="doRefresh()">
+        </ion-refresher>
         <!--    notification list-->
         <div ng-show="emptylist" class="text-center">
             <h4>{{'notifications_empty_list'|translate}}</h4>

@@ -123,7 +123,7 @@ angular.module('viaggia.controllers.plan', [])
     function setTimeWidget() {
         $scope.timePickerObject24Hour = {
             inputEpochTime: ((new Date()).getHours() * 60 * 60 + (new Date()).getMinutes() * 60), //Optional
-            step: 1, //Optional
+            step: 5, //Optional
             format: 24, //Optional
             titleLabel: $filter('translate')('popup_timepicker_title'), //Optional
             closeLabel: $filter('translate')('popup_timepicker_cancel'), //Optional

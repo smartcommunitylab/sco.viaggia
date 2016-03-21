@@ -126,8 +126,9 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 .controller('TTCtrl', function ($scope, $state, $location, $stateParams, $ionicPosition, $ionicScrollDelegate, $timeout, $filter, ttService, Config, Toast, bookmarkService) {
     $scope.data = [];
     var rowHeight = 20;
+    $scope.rowHeight = rowHeight;
     var headerRowHeight = 21; // has a border
-    var stopsColWidth = 101; // has border
+    $scope.stopsColWidth = 100; // has border
 
     $scope.stopsColLineHeight = 20;
     if (ionic.Platform.isWebView() && ionic.Platform.isIOS() && ionic.Platform.version() < 9) {
@@ -140,7 +141,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         headerHeight += 20;
     }
     var cellWidthBase = 50;
-    var firstColWidth = 100;
+//    var firstColWidth = 100;
     var cellHeightBase = 28;
     var firstRowHeight = 28;
 
@@ -221,6 +222,11 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     }
 
     var initMeasures = function (data) {
+        if (window.innerHeight < window.innerWidth) {
+          $scope.stopsColWidth = 170;
+        } else {
+          $scope.stopsColWidth = 100;
+        }
         // header rows
         $scope.header = null;
         // first col with stops

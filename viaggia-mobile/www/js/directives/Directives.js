@@ -333,6 +333,7 @@ angular.module('viaggia.directives', [])
               ng-repeat="suggestion in suggestions | orderBy:\'toString()\' track by $index"\
               index="{{ $index }}"\
               val="{{ suggestion }}"\
+              class="suggestion"\
               ng-class="{ active: ($index === selectedIndex) }"\
               ng-click="select(suggestion)"\
               ng-bind-html="suggestion | highlight:searchParam"></li>\

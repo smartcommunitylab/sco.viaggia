@@ -3,11 +3,12 @@
     "appid": "rovereto",
     "messagingAppId": "mobility.rovereto",
     "senderID": "453601816446",
-    "appversion": "2.0.0",
+    "appversion": "2.1.0",
     "appname": "Viaggia Rovereto",
     "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
     "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
     "newsRSS": "https://tn.smartcommunitylab.it/core.mobility/announcements/rss/rovereto",
+    "contact_link" : "mailto:viaggiatrento@smartcommunitylab.it?subject=ViaggiaRovereto:%20segnalazione%20problema",
     "smartcheck_options": [
         1,
         4,

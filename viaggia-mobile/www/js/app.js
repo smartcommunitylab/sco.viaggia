@@ -582,6 +582,7 @@ angular.module('viaggia', [
             tutorial_skip: 'SALTA',
             empty_home_label_1: 'Ops... hai nascosto tutte le schede della pagina principale',
             empty_home_label_2: 'Vai nei PREFERITI per ripristinare i contenuti che ti interessano',
+            menu_betatesting_bug: 'Segnala un problema',
             news_empty_list: 'Non ci sono notizie in questo momento',
             news_title: 'News'
 
@@ -751,6 +752,7 @@ angular.module('viaggia', [
             tutorial_skip: 'SKIP',
             empty_home_label_1: 'Oops... you removed all the tabs from the main page',
             empty_home_label_2: 'Go to BOOKMARKS to restore the contents you are interested in',
+            menu_betatesting_bug: 'Report an issue',
             news_empty_list: 'There are no news at the moment',
             news_title: 'News',
         });

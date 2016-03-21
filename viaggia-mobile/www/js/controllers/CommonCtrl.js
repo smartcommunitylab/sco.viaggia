@@ -91,7 +91,7 @@ angular.module('viaggia.controllers.common', [])
         $scope.infomenu = Config.getInfoMenu();
         $scope.version = Config.getVersion();
         $scope.shownGroup = JSON.parse(localStorage.getItem(Config.getAppId() + '_shownGroup')) || false;
-
+        $scope.contactLink = Config.getContactLink();
     });
 
     $scope.selectInfomenu = function (m) {
