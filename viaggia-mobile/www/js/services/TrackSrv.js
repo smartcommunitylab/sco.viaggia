@@ -32,7 +32,7 @@ angular.module('viaggia.services.tracking', [])
             return deferred;
 
         }
-        trackService.start = function (trip, idTrip) {
+        trackService.start = function (endtime, idTrip) {
             //            window.plugins.tracking.start(successCallback, errorCallback, trackingIntervalInMs, accelerationDetectionIntervalInMs, accelerationSensorDelay);
             //window.plugins.tracking.start(function successCallback(param) {
             //    console.log(param);
@@ -43,7 +43,7 @@ angular.module('viaggia.services.tracking', [])
             // Turn ON the background-geolocation system.  The user will be tracked whenever they suspend the app.
             userService.getValidToken().then(function (token) {
 
-                var endtimeDate = new Date(trip.endtime);
+                var endtimeDate = new Date(endtime);
                 var today = new Date();
                 endtimeDate.setFullYear(today.getFullYear());
                 endtimeDate.setMonth(today.getMonth());
@@ -53,16 +53,16 @@ angular.module('viaggia.services.tracking', [])
                 var trackingConfigure = Config.getTrackingConfig();
                 var startTimestamp = new Date().getTime();
                 var minutesOfRun = (endTime - startTimestamp) / 60000;
-                //trackingConfigure['stopAfterElapsedMinutes'] = minutesOfRun;
-                trackingConfigure['stopAfterElapsedMinutes'] = 1;
+                trackingConfigure['stopAfterElapsedMinutes'] = minutesOfRun;
+                //trackingConfigure['stopAfterElapsedMinutes'] = 1;
                 trackingConfigure['headers'] = {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + token
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
 
-                    },
+                };
 
-                    bgGeo.configure(callbackFn, failureFn, trackingConfigure);
+                bgGeo.configure(callbackFn, failureFn, trackingConfigure);
                 //setto le variabili in localstorage
                 localStorage.setItem(Config.getAppId() + '_state', 'TRACKING');
                 localStorage.setItem(Config.getAppId() + '_tripId', idTrip);
@@ -79,8 +79,8 @@ angular.module('viaggia.services.tracking', [])
                 }, function (errorCode) {
                     alert('An location error occurred: ' + errorCode);
                 }, {
-                    timeout: 30, // 30 second timeout to fetch location
-                    maximumAge: 5000, // Accept the last-known-location if not older than 5000 ms.
+                    timeout: 100, // 30 second timeout to fetch location
+                    maximumAge: 100000, // Accept the last-known-location if not older than 5000 ms.
                     minimumAccuracy: 10, // Fetch a location with a minimum accuracy of `10` meters.
                     extras: { // [Optional] Attach your own custom `metaData` to this location.  This metaData will be persisted to SQLite and POSTed to your server
                         idTrip: idTrip
@@ -120,7 +120,7 @@ angular.module('viaggia.services.tracking', [])
                 } else {
                     //put just one notification
                     //tripToSave.data.startime - 10 min
-                    var targetDate = new Date(tripToSave.startime - (1000 * 60 * 10));
+                    var targetDate = new Date(tripToSave.data.startime - (1000 * 60 * 10));
                     notifArray.push({
                         id: Math.floor(targetDate.getTime() / 1000),
                         title: $filter('translate')('notification_tracking_title'),
@@ -248,6 +248,16 @@ angular.module('viaggia.services.tracking', [])
         trackService.sync = function () {
             var deferred = $q.defer();
             //synch local db with remote server in batch mode
+            bgGeo.getLocations(function (locations, taskId) {
+                try {
+                    console.log("locations: ", locations);
+                } catch (e) {
+                    console.error("An error occurred in my application code");
+                }
+                bgGeo.finish(taskId);
+
+            });
+
             bgGeo.sync(function (locations, taskId) {
                 try {
                     // Here are all the locations from the database.  The database is now EMPTY.
@@ -312,7 +322,7 @@ angular.module('viaggia.services.tracking', [])
                 } else {
                     //go on with tracking
                     //                    trackService.start(Config.getAppId() + '_tripId', Config.getAppId() + '_endTimestamp')
-                    trackService.start(localStorage.getItem(Config.getAppId() + '_tripId'), localStorage.getItem(Config.getAppId() + '_endTimestamp'));
+                    trackService.start(Config.getAppId() + '_endTimestamp', localStorage.getItem(Config.getAppId() + '_tripId'));
                 }
             } else {
                 //preserve strange state when user delete memory and tracking service start again

@@ -622,7 +622,8 @@ angular.module('viaggia', [
             lbl_validateuser: 'Per accedere al gioco devi essere registrato',
             btn_validate_user: 'Registrati',
             toast_already_monitoring: 'Stai gia registrando un percorso',
-
+            sure_delete_title: 'Termina viaggio',
+            sure_delete_text: 'Terminando il viaggio concludi la sessione di gioco, confermi?'
         });
 
 
@@ -823,8 +824,8 @@ angular.module('viaggia', [
             title_validateuser: 'Warning',
             lbl_validateuser: 'To enter the game you have to be registered',
             btn_validate_user: 'Register',
-
-
+            sure_delete_title: 'Stop journey',
+            sure_delete_text: 'Ending the journey you stop the session game, do you confirm?'
         });
 
 

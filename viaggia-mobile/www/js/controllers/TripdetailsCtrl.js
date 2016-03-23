@@ -291,7 +291,7 @@ angular.module('viaggia.controllers.tripdetails', [])
     $scope.trackStart = function () {
         if (!$scope.notTrackable()) {
             trackService.sendServerStart($scope.tripId);
-            trackService.start($scope.currentItinerary, $scope.tripId); //params= trip, idTrip. Enditime is authomatic calculated
+            trackService.start($scope.currentItinerary.endtime, $scope.tripId); //params= trip, idTrip. Enditime is authomatic calculated
         }
     }
     $scope.trackState = function () {
@@ -365,9 +365,51 @@ angular.module('viaggia.controllers.tripdetails', [])
     }
     $scope.trackStop = function () {
         //build popup
-        trackService.stop();
+        $ionicPopup.show({
+            templateUrl: 'templates/deleteTrackConfirm.html',
+            cssClass: 'parking-popup',
+            scope: $scope,
+            buttons: [
+                {
+                    text: $filter('translate')('btn_close'),
+                    type: 'button-close'
+                                },
+                {
+                    text: $filter('translate')('btn_conferma'),
+                    onTap: function (e) {
+                        //sign the trip as already done for the day
+                        markAsDone($scope.tripId);
+                        trackService.stop();
+                    }
+                    }
+
+                        ]
+        });
+
     }
 
+    function markAsDone(tripId) {
+        var date = new Date();
+        date.setHours(0, 0, 0, 0);
+        var doneTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_doneTrips"));
+        if (!doneTrips) {
+            doneTrips = {};
+        }
+        doneTrips[tripId] = date.getTime();
+        localStorage.setItem(Config.getAppId() + "_doneTrips", JSON.stringify(doneTrips));
+
+
+    }
+    $scope.isAvailableForDay = function () {
+        var date = new Date();
+        date.setHours(0, 0, 0, 0);
+        var doneTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_doneTrips"));
+
+        if (doneTrips && Number(doneTrips[$scope.tripId]) == date.getTime()) {
+            return false;
+        }
+        return true;
+    }
     $scope.isRecurrent = function () {
         if ($scope.recurrency && $scope.recurrency.daysOfWeek && $scope.recurrency.daysOfWeek.length > 0) {
             return true;

@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.home', [])
 
-.controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, trackService, userService) {
+.controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, trackService, userService, planService, $ionicLoading) {
     //load from localstorage the id notifications read
     $ionicPlatform.ready(function () {
         document.addEventListener("resume", function () {
@@ -39,6 +39,11 @@ angular.module('viaggia.controllers.home', [])
     }
     var localDataInit = function () {
         userService.getUserData();
+        planService.getTrips().then(function () {
+            //$ionicLoading.hide();
+        }, function () {
+            //$ionicLoading.hide();
+        });
     }
     $scope.buttons = [{
         label: $filter('translate')('menu_news'),
@@ -50,6 +55,7 @@ angular.module('viaggia.controllers.home', [])
     var mymap = document.getElementById('map-container');
 
     Config.init().then(function () {
+        //$ionicLoading.show();
         $rootScope.title = Config.getAppName();
         angular.extend($scope, {
             center: {
@@ -72,6 +78,8 @@ angular.module('viaggia.controllers.home', [])
         initWatch();
         localDataInit();
         trackService.init();
+    }, function () {
+        $ionicLoading.hide();
     });
 
     $scope.$on('ngLastRepeat.primaryLinks', function (e) {
