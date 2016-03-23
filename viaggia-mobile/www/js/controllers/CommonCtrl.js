@@ -81,6 +81,26 @@ angular.module('viaggia.controllers.common', [])
             ]
         });
     };
+    $scope.getRecurrentDays = function (recurrency) {
+        var returnDays = [];
+        var empty_rec = Config.getDaysRec()
+        for (var k = 0; k < empty_rec.length; k++) {
+            if ($scope.contains(recurrency.daysOfWeek, k + 1)) {
+                returnDays.push(empty_rec[k]);
+            }
+        }
+        return returnDays;
+    }
+
+    $scope.contains = function (a, obj) {
+        for (var i = 0; i < a.length; i++) {
+            if (a[i] === obj) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     $scope.showErrorServer = function () {
         var alertPopup = $ionicPopup.alert({
             title: $filter('translate')("pop_up_error_server_title"),

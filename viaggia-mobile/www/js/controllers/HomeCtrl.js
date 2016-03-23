@@ -1,11 +1,13 @@
 angular.module('viaggia.controllers.home', [])
 
-.controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, trackService) {
+.controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, trackService, userService) {
     //load from localstorage the id notifications read
     $ionicPlatform.ready(function () {
         document.addEventListener("resume", function () {
             notificationInit();
         }, false);
+
+
     });
 
     //aggoiorna le notifiche
@@ -35,7 +37,9 @@ angular.module('viaggia.controllers.home', [])
 
         });
     }
-
+    var localDataInit = function () {
+        userService.getUserData();
+    }
     $scope.buttons = [{
         label: $filter('translate')('menu_news'),
         icon: 'ic_news'
@@ -66,6 +70,7 @@ angular.module('viaggia.controllers.home', [])
         marketService.initMarketFavorites();
         notificationInit();
         initWatch();
+        localDataInit();
         trackService.init();
     });
 

@@ -18,8 +18,9 @@
                         <div>
                             <div ng-class="{'fog': notTrackable()}" ng-click="showPopupIfNotThisJourney()">
                                 <button class="button button-viaggia-header button-block" ng-show="!isTracking()&&tripId!=null" ng-click="trackStart()">{{'labl_start_tracking'|translate}} </button>
-                                <button class="button button-viaggia-header button-block" ng-show="isTracking()&&tripId!=null" ng-click="trackStop()">{{'labl_stop_tracking'|translate}} </button>
                             </div>
+                            <button class="button button-viaggia-header button-block" ng-show="isTracking()&&tripId!=null" ng-click="trackStop()">{{'labl_stop_tracking'|translate}} </button>
+
 
                             <div class="green-head" ng-if="currentItinerary.promoted">
                                 <div class="green-thumb"><img src="img/ic_leaf.png" />
@@ -85,6 +86,11 @@
                                 </div>
                                 <div class="margin-right-16 margin-left-16">{{toTime(currentItinerary.endtime)}} </div>
                                 <div>{{requestedTo}}</div>
+                            </div>
+
+                            <div class="recurrence_days">
+                                <i class="icon ic_recurring recurrent_icon_detail" ng-if="isRecurrent()"></i>
+                                <span class="recurrnce_day_string" ng-repeat="day in recurrentDays">{{day.name|translate}}</span>
                             </div>
                             <button ng-if="editMode" class="button button-viaggia-header button-block" ng-click="saveTrip()">{{'journey_details_save' | translate}} </button>
                             <div class="popup-buttons" ng-if="!editMode">

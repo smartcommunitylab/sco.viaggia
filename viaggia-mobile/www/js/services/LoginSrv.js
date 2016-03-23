@@ -42,8 +42,11 @@ angular.module('viaggia.services.login', [])
 
                         if (success) {
                             var str = success[0];
-                            if (str.substring(str.length - 4) == '#_=_') {
-                                str = str.substring(0, str.length - 4);
+                            //                            if (str.substring(str.length - 4) == '#_=_') {
+                            //                                str = str.substring(0, str.length - 4);
+                            //                            }
+                            if (str.indexOf('#') != -1) {
+                                str = str.substring(0, str.indexOf('#'));
                             }
                             console.log('success:' + decodeURIComponent(str));
                             var token = str.substr(str.indexOf('=') + 1, str.length - str.indexOf('='));
@@ -315,47 +318,54 @@ angular.module('viaggia.services.login', [])
 
             return deferred.promise;
         }
+        userService.getUserData = function () {
+            //get Data from server my trips
+
+        }
         userService.getValidToken = function () {
             var user = storageService.getUser();
             var deferred = $q.defer();
 
             // check for expiry.
             var now = new Date();
-            var saved = new Date(user.token.validUntil);
-            if (saved.getTime() >= now.getTime()) {
-                deferred.resolve(user.token.access_token);
-            } else {
-                var url = Config.getServerTokenURL();
-                var params = "?client_id=" + Config.getClientId() + "&client_secret=" + Config.getClientSecKey() + "&code=" + user.token.code + "&refresh_token=" + user.token.refresh_token + "&grant_type=refresh_token";
+            if (user && user.token) {
+                var saved = new Date(user.token.validUntil);
+                if (saved.getTime() >= now.getTime()) {
+                    deferred.resolve(user.token.access_token);
+                } else {
+                    var url = Config.getServerTokenURL();
+                    var params = "?client_id=" + Config.getClientId() + "&client_secret=" + Config.getClientSecKey() + "&code=" + user.token.code + "&refresh_token=" + user.token.refresh_token + "&grant_type=refresh_token";
 
-                $http.post(url + params)
+                    $http.post(url + params)
 
-                .then(
-                    function (response) {
-                        if (response.data.access_token) {
-                            var access_token = response.data.access_token;
-                            user.token.access_token = response.data.access_token;
-                            user.token.refresh_token = response.data.refresh_token;
-                            user.token.expires_in = response.data.expires_in;
-                            // calculate expiry (after removing 1 hr).
-                            var t = new Date();
-                            t.setSeconds(t.getSeconds() + (response.data.expires_in - 3600));
-                            user.token.validUntil = t;
-                            // update token
-                            storageService.saveUser(user).then(function (success) {}, function (error) {});;
+                    .then(
+                        function (response) {
+                            if (response.data.access_token) {
+                                var access_token = response.data.access_token;
+                                user.token.access_token = response.data.access_token;
+                                user.token.refresh_token = response.data.refresh_token;
+                                user.token.expires_in = response.data.expires_in;
+                                // calculate expiry (after removing 1 hr).
+                                var t = new Date();
+                                t.setSeconds(t.getSeconds() + (response.data.expires_in - 3600));
+                                user.token.validUntil = t;
+                                // update token
+                                storageService.saveUser(user).then(function (success) {}, function (error) {});;
 
-                            deferred.resolve(access_token);
-                        } else {
-                            deferred.reject(null);
+                                deferred.resolve(access_token);
+                            } else {
+                                deferred.reject(null);
+                            }
+                        },
+                        function (responseError) {
+                            deferred.reject(responseError);
                         }
-                    },
-                    function (responseError) {
-                        deferred.reject(responseError);
-                    }
-                );
+                    );
 
+                }
+            } else {
+                deferred.reject(null);
             }
-
             return deferred.promise;
         }
         return userService;
@@ -385,8 +395,8 @@ angular.module('viaggia.services.login', [])
         };
 
         storageService.getUser = function () {
-            if (!!localStorage['userId']) {
-                return JSON.parse(localStorage['userId']);
+            if (!!localStorage['user']) {
+                return JSON.parse(localStorage['user']);
             }
             return null;
         };
@@ -395,9 +405,9 @@ angular.module('viaggia.services.login', [])
             var deferred = $q.defer();
 
             if (!!profile) {
-                localStorage['userId'] = JSON.stringify(profile);
+                localStorage['user'] = JSON.stringify(profile);
             } else {
-                localStorage.removeItem('userId');
+                localStorage.removeItem('user');
             }
 
             deferred.resolve(profile);

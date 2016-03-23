@@ -2,24 +2,27 @@ angular.module('viaggia.controllers.tripdetails', [])
 
 .controller('TripDetailsCtrl', function ($scope, $stateParams, $ionicModal, $filter, $ionicPopup, planService, mapService, Config, Toast, trackService, $filter, $ionicHistory, $state, $location, bookmarkService) {
     $scope.title = $filter('translate')('journey_detail');
-    $scope.empty_rec = Config.getDaysRec();
+    //$scope.empty_rec = Config.getDaysRec();
 
     var initMyTrip = function () {
         planService.setEditInstance(null);
         $scope.editMode = false;
         planService.getTrip($stateParams.tripId).then(function (trip) {
             $scope.tripId = $stateParams.tripId;
-            $scope.tripName = trip.data.name;
+            $scope.tripName = trip.name;
             $scope.bookmarkStyle = bookmarkService.getBookmarkStyle($location.path());
-            $scope.requestedFrom = trip.data.originalFrom.name;
-            $scope.requestedTo = trip.data.originalTo.name;
-            $scope.recurrency = trip.data.recurrency;
-            planService.setPlanConfigure(trip.data.originalRequest);
+            $scope.requestedFrom = trip.originalFrom.name;
+            $scope.requestedTo = trip.originalTo.name;
+            $scope.recurrency = trip.recurrency;
+            if ($scope.isRecurrent()) {
+                $scope.recurrentDays = $scope.getRecurrentDays($scope.recurrency);
+            }
+            planService.setPlanConfigure(trip.originalRequest);
 
-            planService.process(trip.data.data, $scope.requestedFrom, $scope.requestedTo);
-            $scope.currentItinerary = trip.data.data;
-            $scope.pathLine = mapService.getTripPolyline(trip.data.data);
-            $scope.pathMarkers = mapService.getTripPoints(trip.data.data);
+            planService.process(trip.data, $scope.requestedFrom, $scope.requestedTo);
+            $scope.currentItinerary = trip.data;
+            $scope.pathLine = mapService.getTripPolyline(trip.data);
+            $scope.pathMarkers = mapService.getTripPoints(trip.data);
 
             angular.extend($scope, {
                 center: {
@@ -55,8 +58,8 @@ angular.module('viaggia.controllers.tripdetails', [])
         //            //not yet processed
         //            delete trip.original;
         //        }
-        if (trip.data && trip.data.recurrency) {
-            $scope.recurrency = trip.data.recurrency;
+        if (trip && trip.recurrency) {
+            $scope.recurrency = trip.recurrency;
         }
         planService.process(trip, $scope.requestedFrom, $scope.requestedTo);
         $scope.currentItinerary = trip;
@@ -64,7 +67,7 @@ angular.module('viaggia.controllers.tripdetails', [])
         $scope.pathMarkers = mapService.getTripPoints(trip);
         planService.getTrip($scope.tripId).then(function (trip) {
             if (trip) {
-                $scope.recurrency = trip.data.recurrency;
+                $scope.recurrency = trip.recurrency;
             }
 
         });
@@ -145,87 +148,24 @@ angular.module('viaggia.controllers.tripdetails', [])
 
     $scope.saveTrip = function () {
         var editInstance = planService.getEditInstance();
-        if ($scope.tripId && editInstance) {
-            //            planService.saveTrip($scope.tripId, $scope.trip, editInstance.data.name, $scope.requestedFrom, $scope.requestedTo, $scope.recurrency).then(function (res) {
-            //                planService.setEditInstance(null);
-            //                $scope.editMode = false;
-            //                $scope.tripId = res.tripId;
-            //                //toast saved
-            //                Toast.show($filter('translate')("tripsaved_message_feedback"), "short", "bottom");
-            //                $ionicHistory.nextViewOptions({
-            //                    historyRoot: true,
-            //                    disableBack: true
-            //                });
-            //                $state.go('app.mytrips');
-            //            }, function (err) {
-            //                Toast.show($filter('translate')("save_trip_error_message"), "short", "bottom");
-            //            });
-            //            return;
+        // if ($scope.tripId && editInstance) {
 
-            $scope.data = {};
-            $scope.showError = false;
-            $scope.recurrencyPopupDoW = JSON.parse(JSON.stringify(Config.getDaysRec()));
-            if ($scope.recurrency && $scope.recurrency.daysOfWeek) {
-                //set flag to recurrency to true
-                $scope.journey.recursiveTrip = true;
-                //set array to recurrent
-                for (var k = 0; k < $scope.recurrencyPopupDoW.length; k++) {
-                    if (contains($scope.recurrency.daysOfWeek, k + 1)) {
-                        $scope.recurrencyPopupDoW[k].checked = true;
-                    }
-                    //                    if (k == 7 && (contains($scope.recurrency.daysOfWeek, k))) {
-                    //                    }
-                }
-            }
-            $scope.data.nametrip = editInstance.data.name;
-            // Prompt popup code
-            $ionicPopup.prompt({
-                templateUrl: 'templates/popup-savetrip.html',
-                title: $filter('translate')('save_trip_title'),
-                cssClass: 'parking-popup',
-                scope: $scope,
-                buttons: [
-                    {
-                        text: $filter('translate')('save_trip_close_button'),
-                        type: 'button-cancel'
-                },
-                    {
-                        text: '<b>' + $filter('translate')('save_trip_save_button') + '</b>',
-                        onTap: function (e) {
-                            if (!$scope.data.nametrip) {
-                                $scope.showError = true;
-
-                                e.preventDefault();
-                            } else {
-                                return $scope.data.nametrip;
-                            }
-                        }
-                                }]
-            }).then(function (res) {
-                    if (res) {
-                        planService.saveTrip($scope.tripId, $scope.trip, $scope.data.nametrip, $scope.requestedFrom, $scope.requestedTo, $scope.recurrencyPopupDoW).then(function (res) {
-                            planService.setEditInstance(null);
-                            $scope.editMode = false;
-                            $scope.tripId = res.tripId;
-                            //toast saved
-                            Toast.show($filter('translate')("tripsaved_message_feedback"), "short", "bottom");
-                            $ionicHistory.nextViewOptions({
-                                historyRoot: true,
-                                disableBack: true
-                            });
-                            $state.go('app.mytrips');
-                        })
-                    }
-                },
-                function (err) {
-                    Toast.show($filter('translate')("save_trip_error_message"), "short", "bottom");
-                }
-            );
-            return;
-        }
         $scope.data = {};
         $scope.showError = false;
         $scope.recurrencyPopupDoW = JSON.parse(JSON.stringify(Config.getDaysRec()));
+        if ($scope.isRecurrent()) {
+            //set flag to recurrency to true
+            $scope.journey.recursiveTrip = true;
+            //set array to recurrent
+            for (var k = 0; k < $scope.recurrencyPopupDoW.length; k++) {
+                if ($scope.contains($scope.recurrency.daysOfWeek, k + 1)) {
+                    $scope.recurrencyPopupDoW[k].checked = true;
+                }
+            }
+        }
+        if ($scope.tripId && editInstance) {
+            $scope.data.nametrip = editInstance.data.name;
+        }
         // Prompt popup code
         $ionicPopup.prompt({
             templateUrl: 'templates/popup-savetrip.html',
@@ -250,19 +190,55 @@ angular.module('viaggia.controllers.tripdetails', [])
                     }
                                 }]
         }).then(function (res) {
-            if (res) {
-                planService.saveTrip($scope.tripId, $scope.trip, res, $scope.requestedFrom, $scope.requestedTo, $scope.recurrencyPopupDoW).then(function (res) {
-                    planService.setEditInstance(null);
-                    $scope.editMode = false;
-                    $scope.tripId = res.tripId;
-                    //toast saved
-                    Toast.show($filter('translate')("tripsaved_message_feedback"), "short", "bottom");
-                    $ionicHistory.goBack();
-                });
+                if (res) {
+                    if ($scope.isRecurrent()) {
+                        planService.saveTrip($scope.tripId, $scope.trip, res, $scope.requestedFrom, $scope.requestedTo, $scope.recurrencyPopupDoW).then(function (res) {
+                            planService.setEditInstance(null);
+                            $scope.tripId = res.tripId;
+                            Toast.show($filter('translate')("tripsaved_message_feedback"), "short", "bottom");
+                            navigateAfterSave($scope.tripId);
+
+                        });
+
+                    } else {
+                        planService.saveTrip($scope.tripId, $scope.trip, $scope.data.nametrip, $scope.requestedFrom, $scope.requestedTo, $scope.recurrencyPopupDoW).then(function (res) {
+                            planService.setEditInstance(null);
+                            $scope.tripId = res.tripId;
+                            $ionicHistory.nextViewOptions({
+                                historyRoot: true,
+                                disableBack: true
+                            });
+                            Toast.show($filter('translate')("tripsaved_message_feedback"), "short", "bottom");
+                            navigateAfterSave($scope.tripId);
+
+                        })
+                    }
+                }
+
+
+            },
+            function (err) {
+                Toast.show($filter('translate')("save_trip_error_message"), "short", "bottom");
             }
-        });
+        );
+        return;
 
 
+
+    }
+
+    function navigateAfterSave(tripId) {
+        //next view
+        if (!tripId) {
+            $ionicHistory.goBack();
+        } else {
+            $ionicHistory.nextViewOptions({
+                historyRoot: true,
+                disableBack: true
+            });
+            $state.go('app.mytrips');
+        }
+        $scope.editMode = false;
     }
     $scope.addDay = function (day) {
         console.log(day);
@@ -272,10 +248,10 @@ angular.module('viaggia.controllers.tripdetails', [])
         planService.getTrip($scope.tripId).then(function (trip) {
             planService.setName("from", $scope.requestedFrom);
             planService.setName("to", $scope.requestedTo);
-            planService.setPlanConfigure(trip.data.originalRequest);
+            planService.setPlanConfigure(trip.originalRequest);
             planService.setEditInstance(trip);
             //            planService.setTripId($scope.tripId);
-            //            planService.setTripName(trip.data.name);
+            //            planService.setTripName(trip.name);
             $state.go('app.plan', {
                 replan: true
             });
@@ -314,6 +290,7 @@ angular.module('viaggia.controllers.tripdetails', [])
 
     $scope.trackStart = function () {
         if (!$scope.notTrackable()) {
+            trackService.sendServerStart($scope.tripId);
             trackService.start($scope.currentItinerary, $scope.tripId); //params= trip, idTrip. Enditime is authomatic calculated
         }
     }
@@ -327,23 +304,18 @@ angular.module('viaggia.controllers.tripdetails', [])
         }
         return false;
     }
+
     $scope.isTracking = function () {
         //return true if this is the tracking is going to track and is going
-        if ($scope.isThisJourney() && $scope.trackingIsGoingOn()) {
+        if ($scope.isThisJourney() && trackService.trackingIsGoingOn()) {
             return true;
         }
         return false;
     }
 
-    $scope.trackingIsGoingOn = function () {
-        //check local storage is tracking
-        if (localStorage.getItem(Config.getAppId() + '_state') != null) {
-            return true;
-        }
-        return false;
-    }
+
     $scope.notTrackable = function () {
-        if ((!$scope.isThisJourney() && $scope.trackingIsGoingOn()) || $scope.isInTime() != 0) {
+        if ((!$scope.isThisJourney() && trackService.trackingIsGoingOn()) || $scope.isInTime() != 0) {
             return true
         }
         return false;
@@ -352,13 +324,13 @@ angular.module('viaggia.controllers.tripdetails', [])
         var now = new Date();
         //if recurrent check only hours if day is correct;
         var startTime = $scope.currentItinerary.startime;
-        if ($scope.recurrency) {
-            if (contains($scope.recurrency, now.getDay())) {
+        if ($scope.recurrency && $scope.recurrency.daysOfWeek && $scope.recurrency.daysOfWeek.length > 0) {
+            if ($scope.contains($scope.recurrency.daysOfWeek, now.getDay())) {
                 var startTimeDate = new Date($scope.currentItinerary.startime);
                 //var today = new Date();
-                startTimeDate.setFullYear(today.getFullYear());
-                startTimeDate.setMonth(today.getMonth());
-                startTimeDate.setDate(today.getDate());
+                startTimeDate.setFullYear(now.getFullYear());
+                startTimeDate.setMonth(now.getMonth());
+                startTimeDate.setDate(now.getDate());
                 startTime = startTimeDate.getTime();
             } else return -1;
         }
@@ -371,17 +343,17 @@ angular.module('viaggia.controllers.tripdetails', [])
         return 0;
     }
 
-    function contains(a, obj) {
-        for (var i = 0; i < a.length; i++) {
-            if (a[i] === obj) {
-                return true;
-            }
-        }
-        return false;
-    }
+    //    function contains(a, obj) {
+    //        for (var i = 0; i < a.length; i++) {
+    //            if (a[i] === obj) {
+    //                return true;
+    //            }
+    //        }
+    //        return false;
+    //    }
     $scope.showPopupIfNotThisJourney = function () {
         if ($scope.notTrackable()) {
-            if (!$scope.isThisJourney() && $scope.trackingIsGoingOn()) {
+            if (!$scope.isThisJourney() && trackService.trackingIsGoingOn()) {
                 Toast.show($filter('translate')('toast_already_monitoring'), "short", "bottom");
             } else if ($scope.isInTime() == -1) {
                 Toast.show($filter('translate')('toast_before_time'), "short", "bottom");
@@ -392,6 +364,25 @@ angular.module('viaggia.controllers.tripdetails', [])
 
     }
     $scope.trackStop = function () {
+        //build popup
         trackService.stop();
     }
+
+    $scope.isRecurrent = function () {
+        if ($scope.recurrency && $scope.recurrency.daysOfWeek && $scope.recurrency.daysOfWeek.length > 0) {
+            return true;
+        }
+        return false;
+
+    }
+
+    //    function getRecurrentDays(recurrency) {
+    //        var returnDays = [];
+    //        for (var k = 0; k < $scope.empty_rec.length; k++) {
+    //            if (contains(recurrency.daysOfWeek, k + 1)) {
+    //                returnDays.push($scope.empty_rec[k]);
+    //            }
+    //        }
+    //        return returnDays;
+    //    }
 })

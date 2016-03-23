@@ -1,10 +1,37 @@
 angular.module('viaggia.services.tracking', [])
-    .factory('trackService', function (backgroundGeoLocationFake, Config, $q, $http, $state, $filter) {
+    .factory('trackService', function (backgroundGeoLocationFake, Config, $q, $http, $state, $filter, userService, $ionicPlatform) {
         //var trackingIntervalInMs = 500;
         //var accelerationDetectionIntervalInMs = 500;
         //var accelerationSensorDelay = 0;
         //var minimumAccuracyInMeter = 100;
         var trackService = {};
+        var bgGeo = {};
+
+        $ionicPlatform.ready(function () {
+            bgGeo = window.BackgroundGeolocation;
+        });
+        trackService.sendServerStart = function (idTrip) {
+            var deferred = $q.defer();
+            userService.getValidToken().then(function (token) {
+
+                $http({
+                    method: 'PUT',
+                    url: Config.getServerURL() + '/gamification/journey/' + idTrip,
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    }
+                }).success(function () {
+                    deferred.resolve(true);
+                }).error(function (err) {
+                    console.log(err)
+                    deferred.reject(false);
+                });
+            });
+            return deferred;
+
+        }
         trackService.start = function (trip, idTrip) {
             //            window.plugins.tracking.start(successCallback, errorCallback, trackingIntervalInMs, accelerationDetectionIntervalInMs, accelerationSensorDelay);
             //window.plugins.tracking.start(function successCallback(param) {
@@ -14,44 +41,56 @@ angular.module('viaggia.services.tracking', [])
             //}, "idTrip+" + new Date().getTime(), new Date().getTime() + 1000, "46.074494", "11.142317", trackingIntervalInMs, minimumAccuracyInMeter);
             ////params=successCallback, errorCallback, idTrip, endTime, latEnd, longEnd, trackingIntervalInMs, minimumAccuracyInMeter
             // Turn ON the background-geolocation system.  The user will be tracked whenever they suspend the app.
-            var endtimeDate = new Date(trip.endtime);
-            var today = new Date();
-            endtimeDate.setFullYear(today.getFullYear());
-            endtimeDate.setMonth(today.getMonth());
-            endtimeDate.setDate(today.getDate());
-            var endTime = endtimeDate.getTime() + Config.getThresholdEndTime();
-            //configuro il plugin con i vari param
-            var trackingConfigure = Config.getTrackingConfig();
-            var startTimestamp = new Date().getTime();
-            var minutesOfRun = (endTime - startTimestamp) / 60000;
-            trackingConfigure['stopAfterElapsedMinutes'] = minutesOfRun;
-            backgroundGeoLocationFake.configure(callbackFn, failureFn, trackingConfigure);
-            //setto le variabili in localstorage
-            localStorage.setItem(Config.getAppId() + '_state', 'TRACKING');
-            localStorage.setItem(Config.getAppId() + '_tripId', idTrip);
-            localStorage.setItem(Config.getAppId() + '_startTimestamp', startTimestamp);
-            localStorage.setItem(Config.getAppId() + '_endTimestamp', endTime);
-            //taggo la prima locazione con parametro extra
-            backgroundGeoLocationFake.getCurrentPosition(function (location, taskId) {
-                // This location is already persisted to plugin’s SQLite db.
-                // If you’ve configured #autoSync: true, the HTTP POST has already started.
+            userService.getValidToken().then(function (token) {
 
-                console.log("-Current position received: ", location);
-                backgroundGeoLocationFake.finish(taskId);
-            }, function (errorCode) {
-                alert('An location error occurred: ' + errorCode);
-            }, {
-                timeout: 30, // 30 second timeout to fetch location
-                maximumAge: 5000, // Accept the last-known-location if not older than 5000 ms.
-                minimumAccuracy: 10, // Fetch a location with a minimum accuracy of `10` meters.
-                extras: { // [Optional] Attach your own custom `metaData` to this location.  This metaData will be persisted to SQLite and POSTed to your server
-                    idTrip: idTrip
-                }
+                var endtimeDate = new Date(trip.endtime);
+                var today = new Date();
+                endtimeDate.setFullYear(today.getFullYear());
+                endtimeDate.setMonth(today.getMonth());
+                endtimeDate.setDate(today.getDate());
+                var endTime = endtimeDate.getTime() + Config.getThresholdEndTime();
+                //configuro il plugin con i vari param
+                var trackingConfigure = Config.getTrackingConfig();
+                var startTimestamp = new Date().getTime();
+                var minutesOfRun = (endTime - startTimestamp) / 60000;
+                //trackingConfigure['stopAfterElapsedMinutes'] = minutesOfRun;
+                trackingConfigure['stopAfterElapsedMinutes'] = 1;
+                trackingConfigure['headers'] = {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+
+                    },
+
+                    bgGeo.configure(callbackFn, failureFn, trackingConfigure);
+                //setto le variabili in localstorage
+                localStorage.setItem(Config.getAppId() + '_state', 'TRACKING');
+                localStorage.setItem(Config.getAppId() + '_tripId', idTrip);
+                localStorage.setItem(Config.getAppId() + '_startTimestamp', startTimestamp);
+                localStorage.setItem(Config.getAppId() + '_endTimestamp', endTime);
+                //taggo la prima locazione con parametro extra
+                bgGeo.getCurrentPosition(function (location, taskId) {
+                    // This location is already persisted to plugin’s SQLite db.
+                    // If you’ve configured #autoSync: true, the HTTP POST has already started.
+
+                    console.log("-Current position received: ", location);
+                    bgGeo.finish(taskId);
+                    bgGeo.start();
+                }, function (errorCode) {
+                    alert('An location error occurred: ' + errorCode);
+                }, {
+                    timeout: 30, // 30 second timeout to fetch location
+                    maximumAge: 5000, // Accept the last-known-location if not older than 5000 ms.
+                    minimumAccuracy: 10, // Fetch a location with a minimum accuracy of `10` meters.
+                    extras: { // [Optional] Attach your own custom `metaData` to this location.  This metaData will be persisted to SQLite and POSTed to your server
+                        idTrip: idTrip
+                    }
+                });
+
+
             });
-
-            backgroundGeoLocationFake.start();
         };
-        trackService.updateNotification = function (tripToSave, tripId) {
+        trackService.updateNotification = function (tripToSave, tripId, action) {
             if (window.plugin && cordova && cordova.plugins && cordova.plugins.notification) {
                 console.log('initializing notifications...');
                 //create a notification that fire in that day and if it is recursive every n day
@@ -69,9 +108,10 @@ angular.module('viaggia.services.tracking', [])
                             id: Math.floor(targetDate.getTime() / 1000),
                             title: $filter('translate')('notification_tracking_title'),
                             text: $filter('translate')('notification_tracking_text'),
-                            // smallIcon: 'res://icon.png',
-                            // autoCancel: true,
-                            firstAt: targetDate,
+                            icon: 'res://icon.png',
+                            //autoCancel: false,
+                            autoClear: false,
+                            at: targetDate,
                             data: {
                                 tripId: tripId
                             }
@@ -80,74 +120,111 @@ angular.module('viaggia.services.tracking', [])
                 } else {
                     //put just one notification
                     //tripToSave.data.startime - 10 min
-                    var targetDate = new Date(tripToSave.data.startime - (1000 * 60 * 10));
+                    var targetDate = new Date(tripToSave.startime - (1000 * 60 * 10));
                     notifArray.push({
                         id: Math.floor(targetDate.getTime() / 1000),
                         title: $filter('translate')('notification_tracking_title'),
                         text: $filter('translate')('notification_tracking_text'),
-                        // smallIcon: 'res://icon.png',
-                        // autoCancel: true,
-                        firstAt: targetDate,
+                        icon: 'res://icon.png',
+                        //autoCancel: false,
+                        autoClear: false,
+                        at: targetDate,
                         data: {
                             tripId: tripId
                         }
                     });
                 }
                 if (cordova && cordova.plugins && cordova.plugins.notification && notifArray) {
-                    cordova.plugins.notification.local.schedule(notifArray);
-                    cordova.plugins.notification.local.on("click", function (notification) {
-                        JSON.stringify(notification);
-                        $state.go("app.tripdetails", {
-                            tripId: JSON.parse(notification.data).tripId
-                        })
-                    });
+                    switch (action) {
+                    case "create":
+                        cordova.plugins.notification.local.schedule(notifArray);
+                        cordova.plugins.notification.local.on("click", function (notification) {
+                            JSON.stringify(notification);
+                            $state.go("app.tripdetails", {
+                                tripId: JSON.parse(notification.data).tripId
+                            })
+                        });
+                        break;
+                    case "delete":
+
+                        //get id from notifyarray
+                        var indexNotify = [];
+                        for (var i = 0; i < notifArray.length; i++) {
+                            indexNotify.push(notifArray[i].id);
+
+                        }
+                        cordova.plugins.notification.local.getAll(function (notifications) {
+                            cordova.plugins.notification.local.cancel(indexNotify, function () {
+                                cordova.plugins.notification.local.getAll(function (notifications) {
+                                    console.log("done");
+                                });
+
+                            });
+                        });
+
+                        break;
+                    case "modify":
+                        //clear and add new
+                        var indexNotify = [];
+                        for (var i = 0; i < notifArray; i++) {
+                            indexNotify.push(notifArray[i].id);
+
+                        }
+
+                        cordova.plugins.notification.local.schedule(notifArray);
+                        cordova.plugins.notification.local.on("click", function (notification) {
+                            JSON.stringify(notification);
+                            $state.go("app.tripdetails", {
+                                tripId: JSON.parse(notification.data).tripId
+                            })
+                        });
+                        break;
+                    }
                 }
 
             }
         };
 
-        //    function populate_week_range_options(){
-        //    var start_week_date = new Date(2012, 7-1, 2); // no queries exist before this
-        //    var todays_date = new Date();
-        //
-        //    // array to hold week commencing dates
-        //    var week_commencing_dates = new Array();
-        //    var first_monday_date = new Date(2012, 7-1, 2); // no queries exist before this
-        //    week_commencing_dates.push(first_monday_date);
-        //
-        //    while(start_week_date < todays_date){
-        //        var next_date = start_week_date.setDate(start_week_date.getDate() + 1);
-        //
-        //        var next_days_date = new Date(next_date);
-        //        day_index = next_days_date.getDay();
-        //        if(day_index == 1){
-        //            week_commencing_dates.push(next_days_date);
-        //        }
-        //        // increment the date
-        //        start_week_date = new Date(next_date);
-        //    }
-        //
-        //    return week_commencing_dates;
-        //}
 
         function getnotificationDates(trip) {
             var arrayOfDate = [];
+            var tripHour = new Date(trip.data.startime);
+            var now = new Date();
             var dFrom = new Date(); //from today
+            dFrom.setFullYear(tripHour.getFullYear());
+            dFrom.setMonth(tripHour.getMonth());
+            dFrom.setDate(tripHour.getDate());
+            dFrom.setHours(tripHour.getHours());
+            dFrom.setMinutes(tripHour.getMinutes());
+            dFrom.setSeconds(tripHour.getSeconds());
+            dFrom.setMilliseconds(tripHour.getMilliseconds());
             var dTo = new Date(); //to next month
-            dTo.setMonth(dTo.getMonth() + 1);
+            dTo.setFullYear(tripHour.getFullYear());
+            dTo.setMonth(tripHour.getMonth() + 3);
+            dTo.setDate(tripHour.getDate());
+            dTo.setHours(tripHour.getHours());
+            dTo.setMinutes(tripHour.getMinutes());
+            dTo.setSeconds(tripHour.getSeconds());
+            dTo.setMilliseconds(tripHour.getMilliseconds());
+            //dTo.setMonth(dTo.getMonth() + 3);
+            var next_date = dFrom.setDate(dFrom.getDate());
+
             //from today to next month do:
             while (dFrom < dTo) {
-                var next_date = dFrom.setDate(dFrom.getDate() + 1);
 
                 var next_days_date = new Date(next_date);
-                day_index = next_days_date.getDay();
-                if (day_index == 0) {
-                    day_index = 7;
-                }
-                if (trip.recurrency.daysOfWeek.indexOf(day_index) != -1) {
-                    arrayOfDate.push(next_days_date);
+                if (next_days_date > now) {
+                    day_index = next_days_date.getDay();
+                    if (day_index == 0) {
+                        day_index = 7;
+                    }
+                    if (trip.recurrency.daysOfWeek.indexOf(day_index) != -1) {
+                        arrayOfDate.push(next_days_date);
+                    }
                 }
                 // increment the date
+                var next_date = dFrom.setDate(dFrom.getDate() + 1);
+
                 dFrom = new Date(next_date);
             }
             return arrayOfDate;
@@ -171,7 +248,7 @@ angular.module('viaggia.services.tracking', [])
         trackService.sync = function () {
             var deferred = $q.defer();
             //synch local db with remote server in batch mode
-            backgroundGeoLocationFake.sync(function (locations, taskId) {
+            bgGeo.sync(function (locations, taskId) {
                 try {
                     // Here are all the locations from the database.  The database is now EMPTY.
                     console.log('synced locations: ', locations);
@@ -181,7 +258,7 @@ angular.module('viaggia.services.tracking', [])
 
                 // Be sure to call finish(taskId) in order to signal the end of the background-thread.
                 deferred.resolve(true);
-                backgroundGeoLocationFake.finish(taskId);
+                bgGeo.finish(taskId);
             }, function (errorMessage) {
                 console.warn('Sync FAILURE: ', errorMessage);
                 deferred.resolve(false);
@@ -191,15 +268,23 @@ angular.module('viaggia.services.tracking', [])
         };
 
         trackService.stop = function () {
-            var deferred = $q.defer();
-            trackService.sync().then(function (done) {
-                if (done) {
-                    trackService.clean();
-                }
-            }, function (error) {
-                //manage error
+            //var deferred = $q.defer();
+            bgGeo.stop(function () {
+                trackService.sync().then(function (done) {
+                    if (done) {
+                        //is done
+                        trackService.clean(true);
+                    } else {
+                        trackService.clean(false);
+                    }
+                }, function (error) {
+                    //manage error
+                    trackService.clean(false);
 
+                });
+                //trackService.clean(false);
             });
+
         };
 
         trackService.getState = function () {
@@ -211,18 +296,27 @@ angular.module('viaggia.services.tracking', [])
             //or manage the stop and sync the data
             if (trackingIsGoing()) {
                 if (trackingIsFinished()) {
+                    trackService.stop();
                     trackService.sync().then(function (done) {
                         if (done) {
-                            trackService.clean();
+                            trackService.clean(true);
                         }
+                    }, function (error) {
+                        //manage error
+                        trackService.clean(false);
+
                     });
                 } else if (trackingHasFailed()) {
                     //do something like clean or remove everything
-
+                    trackService.stop();
                 } else {
                     //go on with tracking
-                    trackService.start(Config.getAppId() + '_tripId', Config.getAppId() + '_endTimestamp')
+                    //                    trackService.start(Config.getAppId() + '_tripId', Config.getAppId() + '_endTimestamp')
+                    trackService.start(localStorage.getItem(Config.getAppId() + '_tripId'), localStorage.getItem(Config.getAppId() + '_endTimestamp'));
                 }
+            } else {
+                //preserve strange state when user delete memory and tracking service start again
+                trackService.stop();
             }
 
             //check localstorage
@@ -243,7 +337,7 @@ angular.module('viaggia.services.tracking', [])
             if (localStorage.getItem(Config.getAppId() + '_endTimestamp') != null) {
                 //and it is earlier than now
                 var endtimestamp = localStorage.getItem(Config.getAppId() + '_endTimestamp');
-                if (endtimestamp <= new Date.getTime()) {
+                if (Number(endtimestamp) > new Date().getTime()) {
                     return false;
                 }
             }
@@ -254,21 +348,30 @@ angular.module('viaggia.services.tracking', [])
         function trackingHasFailed() {
             //if last stored value is very old, do something
         }
-        trackService.clean = function () {
+        trackService.clean = function (dbclean) {
             //clean local db
-            backgroundGeoLocationFake.clearDatabase(function () {
-                console.log('- cleared database');
-                //clean local storage data from localstorage
-                localStorage.removeItem(Config.getAppId() + '_state');
-                localStorage.removeItem(Config.getAppId() + '_tripId');
-                localStorage.removeItem(Config.getAppId() + '_endTimestamp');
-                localStorage.removeItem(Config.getAppId() + '_endTimestamp');
-            });
-        };
+            if (dbclean) {
+                bgGeo.clearDatabase(function () {
+                    console.log('- cleared database');
 
-        /**
-         * This callback will be executed every time a geolocation is recorded in the background.
-         */
+                });
+            }
+            //clean local storage data from localstorage
+            localStorage.removeItem(Config.getAppId() + '_state');
+            localStorage.removeItem(Config.getAppId() + '_tripId');
+            localStorage.removeItem(Config.getAppId() + '_endTimestamp');
+            localStorage.removeItem(Config.getAppId() + '_endTimestamp');
+        };
+        trackService.trackingIsGoingOn = function () {
+                //check local storage is tracking
+                if (localStorage.getItem(Config.getAppId() + '_state') != null) {
+                    return true;
+                }
+                return false;
+            }
+            /**
+             * This callback will be executed every time a geolocation is recorded in the background.
+             */
         var callbackFn = function (location) {
             //console.log('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
             console.log('[js] BackgroundGeoLocation callback:  ' + JSON.stringify(location));

@@ -132,6 +132,8 @@ angular.module('viaggia', [
                 } else {
                     DataManager.syncStopData();
                 }
+                notificationService.register();
+
             });
 
             if (typeof navigator.globalization !== "undefined") {
@@ -149,7 +151,6 @@ angular.module('viaggia', [
                     navigator.splashscreen.hide();
                 }
             }, 1500);
-            notificationService.register();
 
         });
     })
@@ -616,9 +617,11 @@ angular.module('viaggia', [
             notification_tracking_title: 'Green Game',
             notification_tracking_text: 'Il tuo viaggio sta per iniziare',
             toast_after_time: 'È troppo tardi per tracciare il viaggio',
-            toast_before_time: 'È troppo presto per tracciare il viaggio'
-
-
+            toast_before_time: 'È troppo presto per tracciare il viaggio',
+            title_validateuser: 'Attenzione',
+            lbl_validateuser: 'Per accedere al gioco devi essere registrato',
+            btn_validate_user: 'Registrati',
+            toast_already_monitoring: 'Stai gia registrando un percorso',
 
         });
 
@@ -816,7 +819,10 @@ angular.module('viaggia', [
             notification_tracking_text: 'Your journey is going to start',
             toast_already_monitoring: 'You are already tracking a journey',
             toast_after_time: 'It is too later for tracking the journey',
-            toast_before_time: 'It is too early for tracking the journey'
+            toast_before_time: 'It is too early for tracking the journey',
+            title_validateuser: 'Warning',
+            lbl_validateuser: 'To enter the game you have to be registered',
+            btn_validate_user: 'Register',
 
 
         });

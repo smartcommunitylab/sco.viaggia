@@ -1,10 +1,7 @@
 angular.module('viaggia.controllers.login', [])
 
-.controller('LoginCtrl', function ($scope, $ionicSideMenuDelegate, $ionicLoading, $state, $ionicHistory, $ionicPopup, $filter, loginService, userService, Config) {
+.controller('LoginCtrl', function ($scope, $ionicSideMenuDelegate, $ionicLoading, $ionicPlatform, $state, $ionicHistory, $ionicPopup, $timeout, $filter, loginService, userService, Config, storageService) {
     $ionicSideMenuDelegate.canDragContent(false);
-    $scope.$on('$ionicView.leave', function () {
-        $ionicSideMenuDelegate.canDragContent(true);
-    });
 
 
 
@@ -15,7 +12,8 @@ angular.module('viaggia.controllers.login', [])
             });
 
             window.plugins.googleplus.login({
-                    'scopes': 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
+                    //                    'scopes': 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
+                    'scopes': 'profile email',
                     'offline': true
                 },
                 function (user_data) {
@@ -34,20 +32,9 @@ angular.module('viaggia.controllers.login', [])
                     userService.setGoogleToken(user_data.oauthToken);
                     loginService.login(user_data.oauthToken, 'googlelocal').then(function (profile) {
                         //check if user is valid
-                        userService.validUserForGamification(profile).then(function (valid) {
-                            if (valid) {
-                                //go on to home page
-                                $state.go('app.home');
-                                $ionicHistory.nextViewOptions({
-                                    disableBack: true,
-                                    historyRoot: true
-                                });
-                            } else {
-                                // open popup for validating user
-                                validateUserPopup();
-                            }
 
-                        });
+                        $scope.validateUserForGamification(profile);
+
                     })
                 },
                 function (msg) {
@@ -56,6 +43,26 @@ angular.module('viaggia.controllers.login', [])
             );
         }
         //This is the success callback from the login method
+    $scope.validateUserForGamification = function (profile) {
+        if (profile != null) {
+            userService.validUserForGamification(profile).then(function (valid) {
+                if (valid) {
+                    //memorize profile;
+                    storageService.saveUser(profile);
+                    //go on to home page
+                    $state.go('app.home');
+                    $ionicHistory.nextViewOptions({
+                        disableBack: true,
+                        historyRoot: true
+                    });
+                } else {
+                    // open popup for validating user
+                    validateUserPopup();
+                }
+
+            });
+        }
+    }
     var fbLoginSuccess = function (response) {
         if (!response.authResponse) {
             fbLoginError("Cannot find the authResponse");
@@ -102,6 +109,7 @@ angular.module('viaggia.controllers.login', [])
             },
             function (response) {
                 console.log(response);
+                $ionicLoading.hide();
                 info.reject(response);
             }
         );
@@ -112,10 +120,14 @@ angular.module('viaggia.controllers.login', [])
         $ionicLoading.show({
             template: 'Logging in...'
         });
+        $timeout(function () {
+            $ionicLoading.hide(); //close the popup after 3 seconds for some reason
+        }, 3000);
         loginService.login(null, 'facebook').then(function (profile) {
             //                                       check if user is valid
             userService.validUserForGamification(profile).then(function (valid) {
                     $ionicLoading.hide();
+                    storageService.saveUser(profile);
 
                     if (valid) {
                         //go on to home page
@@ -133,118 +145,11 @@ angular.module('viaggia.controllers.login', [])
                 function (msg) {
                     $ionicLoading.hide();
                 });
+        }, function (err) {
+            $ionicLoading.hide();
         });
 
-        //        facebookConnectPlugin.getLoginStatus(function (success) {
-        //            if (success.status === 'connected') {
-        //                // the user is logged in and has authenticated your app, and response.authResponse supplies
-        //                // the user's ID, a valid access token, a signed request, and the time the access token
-        //                // and signed request each expire
-        //                console.log('getLoginStatus', success.status);
-        //
-        //                //check if we have our user saved
-        //                var user = UserService.getUser('facebook');
-        //
-        //                if (!user.userID) {
-        //                    getFacebookProfileInfo(success.authResponse)
-        //                        .then(function (profileInfo) {
-        //
-        //                            //for the purpose of this example I will store user data on local storage
-        //                            UserService.setUser({
-        //                                authResponse: success.authResponse,
-        //                                userID: profileInfo.id,
-        //                                name: profileInfo.name,
-        //                                email: profileInfo.email,
-        //                                picture: "http://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
-        //                            });
-        //                                loginService.login(user_data.oauthToken, 'facebooklocal').then(function (profile) {
-        //                                //check if user is valid
-        //                                userService.validUserForGamification().then(function (valid) {
-        //                                    if (valid) {
-        //                                        //go on to home page
-        //                                        $state.go('app.home');
-        //                                        $ionicHistory.nextViewOptions({
-        //                                            disableBack: true,
-        //                                            historyRoot: true
-        //                                        });
-        //                                    } else {
-        //                                        // open popup for validating user
-        //                                        validateUserPopup();
-        //                                    }
-        //
-        //                                });
-        //                            })
-        //
-        //                        }, function (fail) {
-        //                            //fail get profile info
-        //                            console.log('profile info fail', fail);
-        //                        });
-        //                } else {
-        //                    $state.go('app.home');
-        //                }
-        //
-        //            } else {
-        //                //if (success.status === 'not_authorized') the user is logged in to Facebook, but has not authenticated your app
-        //                //else The person is not logged into Facebook, so we're not sure if they are logged into this app or not.
-        //                console.log('getLoginStatus', success.status);
-        //
-        //                $ionicLoading.show({
-        //                    template: 'Logging in...'
-        //                });
-        //
-        //                //ask the permissions you need. You can learn more about FB permissions here: https://developers.facebook.com/docs/facebook-login/permissions/v2.4
-        //                //facebookConnectPlugin.login(['email', 'public_profile'], fbLoginSuccess, fbLoginError);
-        //                var fbLoginSuccess1 = function (userData) {
-        //                    console.log("UserInfo: ", userData);
-        //                }
-        //
-        //                facebookConnectPlugin.login(["public_profile"], fbLoginSuccess1,
-        //                    function loginError(error) {
-        //                        console.error(error)
-        //                    }
-        //                );
-        //            }
-        //        });
-        //        window.plugins.googleplus.login({
-        //                'scopes': 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
-        //                'offline': true
-        //            },
-        //            function (user_data) {
-        //                userService.setGoogleUser({
-        //                    userID: user_data.userId,
-        //                    name: user_data.displayName,
-        //                    email: user_data.email,
-        //                    picture: user_data.imageUrl,
-        //                    oauthToken: user_data.oauthToken,
-        //                    idToken: user_data.idToken
-        //                });
-        //
-        //                $ionicLoading.hide();
-        //
-        //                //$state.go('app.home');
-        //                userService.setGoogleToken(user_data.oauthToken);
-        //                loginService.login(user_data.oauthToken, 'googlelocal').then(function (profile) {
-        //                    //check if user is valid
-        //                    userService.validUserForGamification().then(function (valid) {
-        //                        if (valid) {
-        //                            //go on to home page
-        //                            $state.go('app.home');
-        //                            $ionicHistory.nextViewOptions({
-        //                                disableBack: true,
-        //                                historyRoot: true
-        //                            });
-        //                        } else {
-        //                            // open popup for validating user
-        //                            validateUserPopup();
-        //                        }
-        //
-        //                    });
-        //                })
-        //            },
-        //            function (msg) {
-        //                $ionicLoading.hide();
-        //            }
-        //        );
+
     }
 
     function validateUserPopup() {
@@ -266,17 +171,12 @@ angular.module('viaggia.controllers.login', [])
                 {
                     text: $filter('translate')('btn_validate_user'),
                     onTap: function (e) {
-                        //redirect to https://dev.smartcommunitylab.it/gamificationweb/mobile?token=aijcijiad
                         userService.getValidToken().then(function (validToken) {
                             var url = Config.getGamificationURL() + "/mobile?token=" + validToken;
                             window.open(url, "_system", "location=yes");
                         });
 
-                        //                        $state.go('app.home');
-                        //                        $ionicHistory.nextViewOptions({
-                        //                            disableBack: true,
-                        //                            historyRoot: true
-                        //                        });
+
                     }
 
                 }
@@ -284,4 +184,27 @@ angular.module('viaggia.controllers.login', [])
         });
 
     }
+    $ionicPlatform.ready(function () {
+        Config.init().then(function () {
+            if (window.cordova && window.cordova.plugins.screenorientation) {
+                screen.lockOrientation('portrait');
+            }
+            $scope.$on('$ionicView.leave', function () {
+                $ionicSideMenuDelegate.canDragContent(true);
+                $ionicLoading.hide();
+                if (window.cordova && window.cordova.plugins.screenorientation) {
+                    screen.unlockOrientation()
+                }
+            });
+            $scope.$on('$ionicView.enter', function () {
+                $ionicLoading.hide();
+            });
+            userService.getValidToken().then(function (validToken) {
+                var profile = storageService.getUser();
+                $scope.validateUserForGamification(profile);
+
+            })
+        });
+
+    });
 });
