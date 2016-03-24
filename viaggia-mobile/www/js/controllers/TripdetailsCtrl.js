@@ -194,7 +194,7 @@ angular.module('viaggia.controllers.tripdetails', [])
                     if ($scope.isRecurrent()) {
                         planService.saveTrip($scope.tripId, $scope.trip, res, $scope.requestedFrom, $scope.requestedTo, $scope.recurrencyPopupDoW).then(function (res) {
                             planService.setEditInstance(null);
-                            $scope.tripId = res.tripId;
+                            $scope.tripId = res.clientId;
                             Toast.show($filter('translate')("tripsaved_message_feedback"), "short", "bottom");
                             navigateAfterSave($scope.tripId);
 
@@ -203,7 +203,7 @@ angular.module('viaggia.controllers.tripdetails', [])
                     } else {
                         planService.saveTrip($scope.tripId, $scope.trip, $scope.data.nametrip, $scope.requestedFrom, $scope.requestedTo, $scope.recurrencyPopupDoW).then(function (res) {
                             planService.setEditInstance(null);
-                            $scope.tripId = res.tripId;
+                            $scope.tripId = res.clientId;
                             $ionicHistory.nextViewOptions({
                                 historyRoot: true,
                                 disableBack: true
@@ -230,15 +230,16 @@ angular.module('viaggia.controllers.tripdetails', [])
     function navigateAfterSave(tripId) {
         //next view
         if (!tripId) {
-            $ionicHistory.goBack();
+            $state.go('app.mytrips');
+//            $ionicHistory.goBack();
         } else {
             $ionicHistory.nextViewOptions({
                 historyRoot: true,
                 disableBack: true
             });
-            $state.go('app.mytrips');
+            $state.go('app.tripdetails',{tripId:tripId});
         }
-        $scope.editMode = false;
+//        $scope.editMode = false;
     }
     $scope.addDay = function (day) {
         console.log(day);
@@ -267,8 +268,7 @@ angular.module('viaggia.controllers.tripdetails', [])
             planService.deleteTrip($scope.tripId).then(function (res) {
                 //delete actual from localStorage and memory
                 //go back in the stack
-
-                $ionicHistory.goBack();
+                navigateAfterSave(null);
             });
         });
 

@@ -295,7 +295,7 @@ angular.module('viaggia.services.plan', [])
         return (time.getHours() < 10 ? '0' : '') + time.getHours() + ':' + (time.getMinutes() < 10 ? '0' : '') + time.getMinutes();
     };
 
-    var extractDetails = function (step, leg, legs, idx, from) {
+    var extractDetails = function (step, leg, legs, idx, from, to) {
         step.action = actionMap(leg.transport.type);
         if (leg.transport.type == 'BICYCLE' && leg.transport.agencyId && leg.transport.agencyId != 'null') {
             step.fromLabel = $filter('translate')('journey_details_from_bike');
@@ -313,13 +313,23 @@ angular.module('viaggia.services.plan', [])
             step.actionDetails = leg.transport.routeShortName;
         }
 
-        if (planConfigure) {
-            step.from = buildDescriptionFrom(planConfigure.from.name, legs, idx);
+//        if (planConfigure) {
+//            step.from = buildDescriptionFrom(planConfigure.from.name, legs, idx);
+//        } else {
+//            step.from = buildDescriptionFrom(position.fromName, legs, idx);
+//        }
+//        if (planConfigure) {
+//            step.to = buildDescriptionTo(planConfigure.to.name, legs, idx);
+//        } else {
+//            step.to = buildDescriptionTo(position.toName, legs, idx);
+//        }
+        if (from) {
+            step.from = buildDescriptionFrom(from, legs, idx);
         } else {
             step.from = buildDescriptionFrom(position.fromName, legs, idx);
         }
-        if (planConfigure) {
-            step.to = buildDescriptionTo(planConfigure.to.name, legs, idx);
+        if (to) {
+            step.to = buildDescriptionTo(to, legs, idx);
         } else {
             step.to = buildDescriptionTo(position.toName, legs, idx);
         }
@@ -367,7 +377,7 @@ angular.module('viaggia.services.plan', [])
 
     planService.process = function (plan, from, to, useCoordinates) {
         plan.steps = [];
-        var nextFrom = !useCoordinates ? from : nextFrom = plan.leg[0].from.name + ' (' + plan.leg[0].from.lat + ',' + plan.leg[0].from.lon + ')';
+        var nextFrom = from;
 
         for (var i = 0; i < plan.leg.length; i++) {
             plan.leg[i]['fromStep'] = plan.steps.length; //connection between step and leg
@@ -376,7 +386,7 @@ angular.module('viaggia.services.plan', [])
             step.endtime = plan.leg[i].endtime;
             step.mean = {};
 
-            extractDetails(step, plan.leg[i], plan.leg, i, nextFrom);
+            extractDetails(step, plan.leg[i], plan.leg, i, nextFrom, i == plan.leg.length - 1 ? to : null);
             nextFrom = null;
             step.length = getLength(plan.leg[i]);
             step.cost = getLegCost(plan, i);
@@ -415,7 +425,7 @@ angular.module('viaggia.services.plan', [])
                     }
                 }
             }
-            if (useCoordinates && i == plan.leg.length - 1) step.to += ' (' + plan.leg[i].to.lat + ',' + plan.leg[i].to.lon + ')';
+
             plan.steps.push(step);
             if (parkingStep != null) {
                 plan.steps.push(parkingStep);
@@ -622,10 +632,11 @@ angular.module('viaggia.services.plan', [])
         //            }
         //        };
 
-        var urlBuilded = ""
+        var urlBuilt = "";
+        var databuilt = null;
         if (!newTrip) {
-            urlBuilded = Config.getServerURL() + "/itinerary/" + tripId;
-            databuilded = {
+            urlBuilt = Config.getServerURL() + "/itinerary/" + tripId;
+            databuilt = {
                 'clientId': tripId,
                 'data': trip.original,
                 'originalFrom': {
@@ -644,8 +655,8 @@ angular.module('viaggia.services.plan', [])
                 }
             }
         } else {
-            urlBuilded = Config.getServerURL() + "/itinerary";
-            databuilded = {
+            urlBuilt = Config.getServerURL() + "/itinerary";
+            databuilt = {
                 'data': trip.original,
                 'originalFrom': {
                     'name': requestedFrom,
@@ -672,39 +683,38 @@ angular.module('viaggia.services.plan', [])
 
             $http({
                 method: methodTrip,
-                url: urlBuilded,
+                url: urlBuilt,
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + token
 
                 },
-                data: databuilded,
+                data: databuilt,
                 timeout: 5000
             }).
             success(function (data) {
                 var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
                 if (data.clientId) {
-                    databuilded.clientId = data.clientId;
+                    databuilt.clientId = data.clientId;
                 } else {
-                    databuilded.clientId = tripId;
+                    databuilt.clientId = tripId;
 
                 }
                 if (!savedTrips) {
                     savedTrips = {};
                 }
-                savedTrips[databuilded.clientId] = databuilded;
+                savedTrips[databuilt.clientId] = databuilt;
                 localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
                 if (!newTrip) {
-                    trackService.updateNotification(databuilded, databuilded.clientId, "modify");
+                    trackService.updateNotification(databuilt, databuilt.clientId, "modify");
                 } else {
-                    trackService.updateNotification(databuilded, databuilded.clientId, "create");
+                    trackService.updateNotification(databuilt, databuilt.clientId, "create");
                 }
-
 
                 //planService.setPlanConfigure(null);
 
-                deferred.resolve(databuilded);
+                deferred.resolve(databuilt);
             }).error(function (data, status, headers, config) {
                 console.log(data + status + headers + JSON.stringify(config));
                 deferred.reject(data);
@@ -794,17 +804,27 @@ angular.module('viaggia.services.plan', [])
 
     }
 
+    var localDelete = function(tripId, deferred) {
+      var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
+      if (!savedTrips) {
+          deferred.reject();
+      }
+      var trip = savedTrips[tripId];
+      delete savedTrips[tripId];
+      localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
+      planService.setPlanConfigure(null);
+      trackService.updateNotification(trip, tripId, "delete");
+      deferred.resolve(true);
+    }
+
 
     planService.deleteTrip = function (tripId) {
-
         var deferred = $q.defer();
         if (!tripId) {
             deferred.reject();
         } else {
             userService.getValidToken().then(function (token) {
-                $http({
-                    method: 'DELETE',
-                    url: Config.getServerURL() + "/itinerary/" + tripId,
+                $http.delete(Config.getServerURL() + "/itinerary/" + tripId, {
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
@@ -814,50 +834,16 @@ angular.module('viaggia.services.plan', [])
                     timeout: 5000
                 }).
                 success(function (data) {
-                    var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
-                    if (!savedTrips || !data) {
-                        deferred.reject();
-                    }
-                    var trip = savedTrips[tripId].data;
-                    delete savedTrips[tripId];
-                    localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
-                    deferred.resolve(true);
-
-                    planService.setPlanConfigure(null);
-                    trackService.updateNotification(trip, tripId, "delete");
-
-                    //}
-                    //                var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
-                    //                var tripId = data.clientId;
-                    //                tripToSave.tripId = tripId;
-                    //                if (!savedTrips) {
-                    //                    savedTrips = {};
-                    //                }
-                    //                savedTrips[tripId] = tripToSave;
-                    //                localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
-                    //
-                    //                trackService.updateNotification(data, tripId);
-                    //                //planService.setPlanConfigure(null);
-                    //
-                    //                deferred.resolve(tripToSave);
+                  localDelete(tripId, deferred);
                 }).error(function (data, status, headers, config) {
-                    console.log(data + status + headers + JSON.stringify(config));
-                    deferred.reject(data);
+                    // does not exist server side
+                    if (status == 400) {
+                      localDelete(tripId, deferred);
+                    } else {
+                      console.log(data + status + headers + JSON.stringify(config));
+                      deferred.reject(data);
+                    }
                 });
-                //        var deferred = $q.defer();
-                //        if (!tripId) {
-                //            deferred.reject();
-                //        }
-
-                //        var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
-                //        if (!savedTrips) {
-                //            deferred.reject();
-                //        }
-                //        delete savedTrips[tripId]
-                //        localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
-                //        deferred.resolve(true);
-                //
-                //        planService.setPlanConfigure(null);
             })
         }
         return deferred.promise;

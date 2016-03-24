@@ -9,7 +9,9 @@
 
     </div>
     <div class="map-stop-hline"></div>
-    <input type="text" placeholder="{{'save_trip_text'|translate}}" style="padding-left:10px;" ng-model="data.nametrip" />
+    <div class="item item-input">
+      <input type="text" placeholder="{{'save_trip_text'|translate}}" style="padding-left:10px;" ng-model="data.nametrip" />
+    </div>
     <p ng-if="showError" class="error">{{'save_trip_error_message'|translate}}</p>
     <ion-toggle ng-model="journey.recursiveTrip" ng-change="recursiveChange()">
         <div>

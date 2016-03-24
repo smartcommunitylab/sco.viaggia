@@ -1323,3 +1323,12 @@ ion-header-bar .title {
 .fog {
     opacity: 0.5;
 }
+
+.trip-card {
+  width: inherit !important;
+}
+
+.trip-card .item-content {
+  padding: 0 !important;
+  background-color: #fff;
+}

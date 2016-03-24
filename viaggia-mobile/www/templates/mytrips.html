@@ -9,8 +9,8 @@
             {{'my_trip_empty_list'|translate}}
         </div>
 -->
-        <ion-list ng-hide="savedTrips.length==0">
-            <div class="card" ng-repeat="journey in savedTrips" ng-last-repeat="savedTrips" ng-click="showPlan(journey)">
+        <ion-list ng-hide="savedTrips.length==0" can-swipe="true">
+            <ion-item class="card trip-card" ng-repeat="journey in savedTrips" ng-last-repeat="savedTrips" ng-click="showPlan(journey)">
                 <div class="trip-title text-center">
                     <strong>{{journey.name }}</strong>
                     <i class="icon ic_recurring recurrent_icon" ng-if="isRecurrency(journey)"></i>
@@ -35,9 +35,10 @@
                         <small class="text-muted"><strong>{{'my_trip_time'|translate}}</strong>: {{journey.data.startime| date:' HH:mm'}} </small>
                     </div>
                 </div>
+                <ion-option-button class="button button-assertive icon ion-android-delete" ng-click="deleteTrip($index)"></ion-option-button>
 
                 <!--</div>-->
-            </div>
+            </ion-item>
         </ion-list>
     </ion-content>
 </ion-view>
