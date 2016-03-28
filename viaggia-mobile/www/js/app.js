@@ -88,7 +88,7 @@ angular.module('viaggia', [
     'viaggia.filters'
 ])
 
-.run(function ($ionicPlatform, $cordovaFile, $rootScope, $translate, DataManager, Config, GeoLocate, notificationService) {
+.run(function ($ionicPlatform, $cordovaFile, $rootScope, $translate, trackService, DataManager, Config, GeoLocate, notificationService) {
 
         $rootScope.locationWatchID = undefined;
 
@@ -127,6 +127,10 @@ angular.module('viaggia', [
                 StatusBar.styleDefault();
             }
             Config.init().then(function () {
+                if (window.BackgroundGeolocation) {
+                  trackService.startup();
+                }
+
                 if (ionic.Platform.isWebView()) {
                     DataManager.dbSetup();
                 } else {

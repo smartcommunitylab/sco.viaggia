@@ -228,15 +228,15 @@ angular.module('viaggia.controllers.tripdetails', [])
     }
 
     function navigateAfterSave(tripId) {
+        $ionicHistory.nextViewOptions({
+            historyRoot: true,
+            disableBack: true
+        });
         //next view
         if (!tripId) {
             $state.go('app.mytrips');
 //            $ionicHistory.goBack();
         } else {
-            $ionicHistory.nextViewOptions({
-                historyRoot: true,
-                disableBack: true
-            });
             $state.go('app.tripdetails',{tripId:tripId});
         }
 //        $scope.editMode = false;
@@ -288,10 +288,12 @@ angular.module('viaggia.controllers.tripdetails', [])
         });
     };
 
+    /*****************************************************
+     *  TRACKING PROPERTIES. TODO: SIMPLIFY AND MOVE TO THE SERVICE, PASS CALLBACK TO START
+     *****************************************************/
     $scope.trackStart = function () {
         if (!$scope.notTrackable()) {
-            trackService.sendServerStart($scope.tripId);
-            trackService.start($scope.currentItinerary.endtime, $scope.tripId); //params= trip, idTrip. Enditime is authomatic calculated
+            trackService.start($scope.tripId, $scope.currentItinerary.endtime); //params= trip, idTrip. Enditime is authomatic calculated
         }
     }
     $scope.trackState = function () {
@@ -378,7 +380,6 @@ angular.module('viaggia.controllers.tripdetails', [])
                     text: $filter('translate')('btn_conferma'),
                     onTap: function (e) {
                         //sign the trip as already done for the day
-                        markAsDone($scope.tripId);
                         trackService.stop();
                     }
                     }
@@ -388,18 +389,6 @@ angular.module('viaggia.controllers.tripdetails', [])
 
     }
 
-    function markAsDone(tripId) {
-        var date = new Date();
-        date.setHours(0, 0, 0, 0);
-        var doneTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_doneTrips"));
-        if (!doneTrips) {
-            doneTrips = {};
-        }
-        doneTrips[tripId] = date.getTime();
-        localStorage.setItem(Config.getAppId() + "_doneTrips", JSON.stringify(doneTrips));
-
-
-    }
     $scope.isAvailableForDay = function () {
         var date = new Date();
         date.setHours(0, 0, 0, 0);
