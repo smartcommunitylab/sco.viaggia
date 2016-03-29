@@ -30,7 +30,7 @@ angular.module('viaggia.controllers.login', [])
 
                     //$state.go('app.home');
                     userService.setGoogleToken(user_data.oauthToken);
-                    loginService.login(user_data.oauthToken, 'googlelocal').then(function (profile) {
+                    loginService.login(user_data.oauthToken ? user_data.oauthToken : user_data.accessToken, 'googlelocal').then(function (profile) {
                         //check if user is valid
 
                         $scope.validateUserForGamification(profile);
