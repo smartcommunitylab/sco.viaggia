@@ -105,11 +105,8 @@ angular.module('viaggia.services.tracking', [])
                 var minutesOfRun = (endTime - startTimestamp) / 60000;
                 trackingConfigure['stopAfterElapsedMinutes'] = minutesOfRun;
                 trackingConfigure['notificationTitle'] = $filter('translate')('tracking_notification_text');
-                //                trackingConfigure['headers'] = {
-                //                    'Accept': 'application/json',
-                //                    'Content-Type': 'application/json',
-                //                    'Authorization': 'Bearer ' + token
-                //                };
+
+                trackingConfigure['url'] += token;
                 bgGeo.configure(callbackFn, failureFn, trackingConfigure);
 
                 //setto le variabili in localstorage
@@ -154,28 +151,25 @@ angular.module('viaggia.services.tracking', [])
         var sync = function () {
             var deferred = $q.defer();
             userService.getValidToken().then(function (token) {
-                var trackingConfigure = Config.getTrackingConfig();
-                //                trackingConfigure['headers'] = {
-                //                    'Accept': 'application/json',
-                //                    'Content-Type': 'application/json',
-                //                    'Authorization': 'Bearer ' + token
-                //                };
-                bgGeo.configure(callbackFn, failureFn, trackingConfigure);
-                bgGeo.sync(function (locations, taskId) {
-                    try {
-                        // Here are all the locations from the database.  The database is now EMPTY.
-                        console.log('synced locations: ', locations);
-                    } catch (e) {
-                        console.error('An error occurred in my application code', e);
-                    }
 
-                    // Be sure to call finish(taskId) in order to signal the end of the background-thread.
-                    bgGeo.finish(taskId);
-                    deferred.resolve(true);
-                }, function (errorMessage) {
-                    console.warn('Sync FAILURE: ', errorMessage);
-                    deferred.resolve(false);
-                });
+              var trackingConfigure = Config.getTrackingConfig();
+              trackingConfigure['url'] += token;
+              bgGeo.configure(callbackFn, failureFn, trackingConfigure);
+              bgGeo.sync(function (locations, taskId) {
+                  try {
+                      // Here are all the locations from the database.  The database is now EMPTY.
+                      console.log('synced locations: ', locations);
+                  } catch (e) {
+                      console.error('An error occurred in my application code', e);
+                  }
+
+                  // Be sure to call finish(taskId) in order to signal the end of the background-thread.
+                  bgGeo.finish(taskId);
+                  deferred.resolve(true);
+              }, function (errorMessage) {
+                  console.warn('Sync FAILURE: ', errorMessage);
+                  deferred.resolve(false);
+              });
             });
             return deferred.promise;
         };
