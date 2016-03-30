@@ -234,7 +234,7 @@ angular.module('viaggia.services.conf', [])
             return HTTP_CONFIG;
         },
         getTrackingConfig: function () {
-            return mapJsonConfig['trackingConfigure'];
+            return angular.copy(mapJsonConfig['trackingConfigure']);
         },
         getDistanceForAutocomplete: function () {
             return DISTANCE_AUTOCOMPLETE;
