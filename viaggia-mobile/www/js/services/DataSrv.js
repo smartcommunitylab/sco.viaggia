@@ -262,8 +262,10 @@ angular.module('viaggia.services.data', [])
         if (!localStops || localVersion < remoteVersion) {
             $http.get(Config.getServerURL() + '/geostops/'+a+'?lat='+Config.getMapPosition().lat+'&lng='+Config.getMapPosition().long+'&radius=5')
             .success(function (stops) {
-              localStorage[key] = JSON.stringify(stops);
-              writeLocalStopVersion(a, remoteVersion);
+              if (Object.prototype.toString.call( stops ) === '[object Array]') {
+                localStorage[key] = JSON.stringify(stops);
+                writeLocalStopVersion(a, remoteVersion);
+              }
             })
             .error(function (error) {
               console.error('ERROR SYNC STOP DATA: '+error);

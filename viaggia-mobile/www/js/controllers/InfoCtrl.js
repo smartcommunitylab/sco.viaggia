@@ -134,6 +134,8 @@ angular.module('viaggia.controllers.info', [])
 
     var showPopup = function (p) {
         $scope.popupParking = p;
+        $scope.selected = p;
+
         $ionicPopup.show({
             templateUrl: 'templates/parkingPopup.html',
             title: $filter('translate')('lbl_parking'),
@@ -325,6 +327,8 @@ angular.module('viaggia.controllers.info', [])
 
     var showPopup = function (p) {
         $scope.popupParking = p;
+        $scope.selected = p;
+
         $ionicPopup.show({
             templateUrl: 'templates/bikesharingPopup.html',
             title: $filter('translate')('lbl_bike_station'),

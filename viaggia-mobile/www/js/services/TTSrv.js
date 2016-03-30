@@ -15,10 +15,12 @@ angular.module('viaggia.services.timetable', [])
       var local = localStorage[Config.getAppId()+"_stops_"+a];
       if (local) {
         local = JSON.parse(local);
-        local.forEach(function(s) {
-          s.agencyId = a;
-          res.push(s);
-        });
+        if (local && local.length > 0) {
+          local.forEach(function(s) {
+            s.agencyId = a;
+            res.push(s);
+          });
+        }
       }
     });
     return res;
