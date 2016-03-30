@@ -141,8 +141,11 @@ angular.module('viaggia.controllers.plan', [])
             console.log('Time not selected');
         } else {
             $scope.timePickerObject24Hour.inputEpochTime = val;
-            var selectedTime = new Date(val * 1000 + new Date().getTimezoneOffset() * 60 * 1000);
-            $scope.hourTimestamp = $filter('date')(val * 1000 + new Date().getTimezoneOffset() * 60 * 1000, 'hh:mma');
+            var selectedTime = new Date();
+            selectedTime.setHours(val / 3600);
+            selectedTime.setMinutes((val % 3600) / 60);
+            selectedTime.setSeconds(0);
+            $scope.hourTimestamp = $filter('date')(selectedTime,'hh:mma');
         }
     }
     setTimeWidget();
