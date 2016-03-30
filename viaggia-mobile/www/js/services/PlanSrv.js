@@ -313,16 +313,16 @@ angular.module('viaggia.services.plan', [])
             step.actionDetails = leg.transport.routeShortName;
         }
 
-//        if (planConfigure) {
-//            step.from = buildDescriptionFrom(planConfigure.from.name, legs, idx);
-//        } else {
-//            step.from = buildDescriptionFrom(position.fromName, legs, idx);
-//        }
-//        if (planConfigure) {
-//            step.to = buildDescriptionTo(planConfigure.to.name, legs, idx);
-//        } else {
-//            step.to = buildDescriptionTo(position.toName, legs, idx);
-//        }
+        //        if (planConfigure) {
+        //            step.from = buildDescriptionFrom(planConfigure.from.name, legs, idx);
+        //        } else {
+        //            step.from = buildDescriptionFrom(position.fromName, legs, idx);
+        //        }
+        //        if (planConfigure) {
+        //            step.to = buildDescriptionTo(planConfigure.to.name, legs, idx);
+        //        } else {
+        //            step.to = buildDescriptionTo(position.toName, legs, idx);
+        //        }
         if (from) {
             step.from = buildDescriptionFrom(from, legs, idx);
         } else {
@@ -604,9 +604,10 @@ angular.module('viaggia.services.plan', [])
         var deferred = $q.defer();
 
         var daysOfWeek = getDaysOfRecurrency(recurrency);
+        var newTrip = false;
         if (!tripId) {
             tripId = new Date().getTime();
-            var newTrip = true;
+            newTrip = true;
         }
         console.log(JSON.stringify(trip));
         //        var tripToSave = {
@@ -695,12 +696,12 @@ angular.module('viaggia.services.plan', [])
             }).
             success(function (data) {
                 var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
-                if (data.clientId) {
-                    databuilt.clientId = data.clientId;
-                } else {
-                    databuilt.clientId = tripId;
+                //if (data.clientId) {
+                //    databuilt.clientId = data.clientId;
+                //} else {
+                databuilt.clientId = tripId;
 
-                }
+                //}
                 if (!savedTrips) {
                     savedTrips = {};
                 }
@@ -726,7 +727,23 @@ angular.module('viaggia.services.plan', [])
 
         return deferred.promise;
     }
+    planService.mmddyyyy2date = function (s) {
+        return new Date(s.substr(6, 4), s.substr(0, 2) - 1, s.substr(3, 2));
+    }
 
+    planService.convertTo24Hour = function (time) {
+        var hours = parseInt(time.substr(0, 2));
+        if (time.indexOf('AM') != -1 && hours == 12) {
+            time = time.replace('12', '0');
+        }
+        if (time.indexOf('PM') != -1 && hours < 12) {
+            time = time.replace(hours, (hours + 12));
+        }
+        if (time.match(/0..:/))
+            time = time.substring(1);
+        return time.replace(/(AM|PM)/, '');
+
+    }
     var editInstance = null;
     planService.setEditInstance = function (trip) {
         editInstance = trip;
@@ -750,7 +767,26 @@ angular.module('viaggia.services.plan', [])
 
         return deferred.promise;
     }
+    planService.buildConfigureOptions = function (trip) {
 
+        var data = $filter('date')(new Date(trip.data.startime), 'MM/dd/yyyy');
+        var time = $filter('date')(new Date(trip.data.startime), 'hh:mma');
+        var configure = {
+            "from": {
+                "name": trip.originalFrom.name,
+                "lat": trip.originalFrom.lat,
+                "long": trip.originalFrom.lon
+            },
+            "to": {
+                "name": trip.originalTo.name,
+                "lat": trip.originalTo.lat,
+                "long": trip.originalTo.lon
+            },
+            "departureTime": time,
+            "date": data,
+        }
+        return configure;
+    }
     planService.getTrips = function () {
         var deferred = $q.defer();
         var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
@@ -804,17 +840,17 @@ angular.module('viaggia.services.plan', [])
 
     }
 
-    var localDelete = function(tripId, deferred) {
-      var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
-      if (!savedTrips) {
-          deferred.reject();
-      }
-      var trip = savedTrips[tripId];
-      delete savedTrips[tripId];
-      localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
-      planService.setPlanConfigure(null);
-      trackService.updateNotification(trip, tripId, "delete");
-      deferred.resolve(true);
+    var localDelete = function (tripId, deferred) {
+        var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
+        if (!savedTrips) {
+            deferred.reject();
+        }
+        var trip = savedTrips[tripId];
+        delete savedTrips[tripId];
+        localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
+        planService.setPlanConfigure(null);
+        trackService.updateNotification(trip, tripId, "delete");
+        deferred.resolve(true);
     }
 
 
@@ -834,14 +870,14 @@ angular.module('viaggia.services.plan', [])
                     timeout: 5000
                 }).
                 success(function (data) {
-                  localDelete(tripId, deferred);
+                    localDelete(tripId, deferred);
                 }).error(function (data, status, headers, config) {
                     // does not exist server side
                     if (status == 400) {
-                      localDelete(tripId, deferred);
+                        localDelete(tripId, deferred);
                     } else {
-                      console.log(data + status + headers + JSON.stringify(config));
-                      deferred.reject(data);
+                        console.log(data + status + headers + JSON.stringify(config));
+                        deferred.reject(data);
                     }
                 });
             })

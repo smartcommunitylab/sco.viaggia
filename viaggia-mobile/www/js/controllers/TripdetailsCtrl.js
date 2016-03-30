@@ -1,15 +1,16 @@
 angular.module('viaggia.controllers.tripdetails', [])
 
-.controller('TripDetailsCtrl', function ($scope, $stateParams, $ionicModal, $filter, $ionicPopup, planService, mapService, Config, Toast, trackService, $filter, $ionicHistory, $state, $location, bookmarkService) {
+.controller('TripDetailsCtrl', function ($scope, $stateParams, $ionicModal, $filter, $ionicPopup, planService, mapService, Config, Toast, trackService, $filter, $ionicHistory, $state, $location, bookmarkService, Utils) {
     $scope.title = $filter('translate')('journey_detail');
     //$scope.empty_rec = Config.getDaysRec();
 
     var initMyTrip = function () {
-        planService.setEditInstance(null);
         $scope.editMode = false;
         planService.getTrip($stateParams.tripId).then(function (trip) {
+            $scope.trip = trip;
             $scope.tripId = $stateParams.tripId;
             $scope.tripName = trip.name;
+
             $scope.bookmarkStyle = bookmarkService.getBookmarkStyle($location.path());
             $scope.requestedFrom = trip.originalFrom.name;
             $scope.requestedTo = trip.originalTo.name;
@@ -17,13 +18,21 @@ angular.module('viaggia.controllers.tripdetails', [])
             if ($scope.isRecurrent()) {
                 $scope.recurrentDays = $scope.getRecurrentDays($scope.recurrency);
             }
-            planService.setPlanConfigure(trip.originalRequest);
+            planService.setPlanConfigure(planService.buildConfigureOptions(trip));
 
             planService.process(trip.data, $scope.requestedFrom, $scope.requestedTo);
             $scope.currentItinerary = trip.data;
             $scope.pathLine = mapService.getTripPolyline(trip.data);
             $scope.pathMarkers = mapService.getTripPoints(trip.data);
-
+            if ($stateParams.replan) {
+                $scope.editMode = true;
+                var trip = planService.getSelectedJourney();
+                if (trip && trip.recurrency) {
+                    $scope.recurrency = trip.recurrency;
+                }
+            } else {
+                planService.setEditInstance(null);
+            }
             angular.extend($scope, {
                 center: {
                     lat: Config.getMapPosition().lat,
@@ -158,13 +167,13 @@ angular.module('viaggia.controllers.tripdetails', [])
             $scope.journey.recursiveTrip = true;
             //set array to recurrent
             for (var k = 0; k < $scope.recurrencyPopupDoW.length; k++) {
-                if ($scope.contains($scope.recurrency.daysOfWeek, k + 1)) {
+                if (Utils.contains($scope.recurrency.daysOfWeek, k + 1)) {
                     $scope.recurrencyPopupDoW[k].checked = true;
                 }
             }
         }
         if ($scope.tripId && editInstance) {
-            $scope.data.nametrip = editInstance.data.name;
+            $scope.data.nametrip = editInstance.name;
         }
         // Prompt popup code
         $ionicPopup.prompt({
@@ -235,11 +244,13 @@ angular.module('viaggia.controllers.tripdetails', [])
         //next view
         if (!tripId) {
             $state.go('app.mytrips');
-//            $ionicHistory.goBack();
+            //            $ionicHistory.goBack();
         } else {
-            $state.go('app.tripdetails',{tripId:tripId});
+            $state.go('app.tripdetails', {
+                tripId: tripId
+            });
         }
-//        $scope.editMode = false;
+        //        $scope.editMode = false;
     }
     $scope.addDay = function (day) {
         console.log(day);
@@ -249,13 +260,15 @@ angular.module('viaggia.controllers.tripdetails', [])
         planService.getTrip($scope.tripId).then(function (trip) {
             planService.setName("from", $scope.requestedFrom);
             planService.setName("to", $scope.requestedTo);
-            planService.setPlanConfigure(trip.originalRequest);
+            planService.setPlanConfigure(planService.buildConfigureOptions(trip));
             planService.setEditInstance(trip);
             //            planService.setTripId($scope.tripId);
             //            planService.setTripName(trip.name);
-            $state.go('app.plan', {
-                replan: true
-            });
+            var params = {
+                replan: true,
+                tripId: $scope.tripId
+            }
+            $state.go('app.plan', params);
         });
         //        planService.setName("from", $scope.requestedFrom);
         //        planService.setName("to", $scope.requestedTo);
@@ -292,19 +305,21 @@ angular.module('viaggia.controllers.tripdetails', [])
      *  TRACKING PROPERTIES. TODO: SIMPLIFY AND MOVE TO THE SERVICE, PASS CALLBACK TO START
      *****************************************************/
     $scope.trackStart = function () {
-        if (!$scope.notTrackable()) {
-            trackService.start($scope.tripId, $scope.currentItinerary.endtime); //params= trip, idTrip. Enditime is authomatic calculated
+            if (!$scope.notTrackable()) {
+                trackService.start($scope.tripId, $scope.currentItinerary.endtime); //params= trip, idTrip. Enditime is authomatic calculated
+            }
         }
-    }
-    $scope.trackState = function () {
-            trackService.getState();
-        }
-        //return true if this is the journey is going to track
+        //    $scope.trackState = function () {
+        //        trackService.getState();
+        //    }
+
     $scope.isThisJourney = function () {
-        if (localStorage.getItem(Config.getAppId() + '_tripId') == $scope.tripId) {
-            return true;
-        }
-        return false;
+        //return true if this journey is stored to be tracked
+        return trackService.isThisTheJourney($scope.tripId);
+        //        if (localStorage.getItem(Config.getAppId() + '_tripId') == $scope.tripId) {
+        //            return true;
+        //        }
+        //        return false;
     }
 
     $scope.isTracking = function () {
@@ -317,32 +332,38 @@ angular.module('viaggia.controllers.tripdetails', [])
 
 
     $scope.notTrackable = function () {
+        //return true if it is not trackable = not in time or there is another track is going on
         if ((!$scope.isThisJourney() && trackService.trackingIsGoingOn()) || $scope.isInTime() != 0) {
             return true
         }
         return false;
     }
     $scope.isInTime = function () {
-        var now = new Date();
-        //if recurrent check only hours if day is correct;
-        var startTime = $scope.currentItinerary.startime;
-        if ($scope.recurrency && $scope.recurrency.daysOfWeek && $scope.recurrency.daysOfWeek.length > 0) {
-            if ($scope.contains($scope.recurrency.daysOfWeek, now.getDay())) {
-                var startTimeDate = new Date($scope.currentItinerary.startime);
-                //var today = new Date();
-                startTimeDate.setFullYear(now.getFullYear());
-                startTimeDate.setMonth(now.getMonth());
-                startTimeDate.setDate(now.getDate());
-                startTime = startTimeDate.getTime();
-            } else return -1;
+        if ($scope.currentItinerary) {
+            return trackService.isInTime($scope.currentItinerary.startime, $scope.recurrency);
+        } else {
+            return false
         }
-        if (now.getTime() > new Date(startTime + Config.getThresholdStartTime())) {
-            return 1;
-        }
-        if (now.getTime() < new Date(startTime - Config.getThresholdStartTime())) {
-            return -1;
-        }
-        return 0;
+        //        var now = new Date();
+        //        //if recurrent check only hours if day is correct;
+        //        var startTime = $scope.currentItinerary.startime;
+        //        if ($scope.recurrency && $scope.recurrency.daysOfWeek && $scope.recurrency.daysOfWeek.length > 0) {
+        //            if ($scope.contains($scope.recurrency.daysOfWeek, now.getDay())) {
+        //                var startTimeDate = new Date($scope.currentItinerary.startime);
+        //                //var today = new Date();
+        //                startTimeDate.setFullYear(now.getFullYear());
+        //                startTimeDate.setMonth(now.getMonth());
+        //                startTimeDate.setDate(now.getDate());
+        //                startTime = startTimeDate.getTime();
+        //            } else return -1;
+        //        }
+        //        if (now.getTime() > new Date(startTime + Config.getThresholdStartTime())) {
+        //            return 1;
+        //        }
+        //        if (now.getTime() < new Date(startTime - Config.getThresholdStartTime())) {
+        //            return -1;
+        //        }
+        //        return 0;
     }
 
     //    function contains(a, obj) {
@@ -390,14 +411,15 @@ angular.module('viaggia.controllers.tripdetails', [])
     }
 
     $scope.isAvailableForDay = function () {
-        var date = new Date();
-        date.setHours(0, 0, 0, 0);
-        var doneTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_doneTrips"));
-
-        if (doneTrips && Number(doneTrips[$scope.tripId]) == date.getTime()) {
-            return false;
-        }
-        return true;
+        return trackService.isAvailableForDay($scope.tripId);
+        //        var date = new Date();
+        //        date.setHours(0, 0, 0, 0);
+        //        var doneTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_doneTrips"));
+        //
+        //        if (doneTrips && Number(doneTrips[$scope.tripId]) == date.getTime()) {
+        //            return false;
+        //        }
+        //        return true;
     }
     $scope.isRecurrent = function () {
         if ($scope.recurrency && $scope.recurrency.daysOfWeek && $scope.recurrency.daysOfWeek.length > 0) {
@@ -407,13 +429,4 @@ angular.module('viaggia.controllers.tripdetails', [])
 
     }
 
-    //    function getRecurrentDays(recurrency) {
-    //        var returnDays = [];
-    //        for (var k = 0; k < $scope.empty_rec.length; k++) {
-    //            if (contains(recurrency.daysOfWeek, k + 1)) {
-    //                returnDays.push($scope.empty_rec[k]);
-    //            }
-    //        }
-    //        return returnDays;
-    //    }
 })

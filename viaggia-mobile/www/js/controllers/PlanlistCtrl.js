@@ -1,15 +1,20 @@
 angular.module('viaggia.controllers.planlist', [])
 
-.controller('PlanlistCtrl', function ($scope, planService, ionicMaterialMotion, ionicMaterialInk, $timeout, $state, $filter) {
+.controller('PlanlistCtrl', function ($scope, planService, ionicMaterialMotion, ionicMaterialInk, $timeout, $state, $filter, $stateParams) {
     $scope.plantitle = $filter('translate')('plan_title');
     $scope.containsGreen = false;
     $scope.journeys = planService.getplanJourneyResults();
     $scope.empty = false;
+    if ($stateParams.tripId) {
+        $scope.tripId = $stateParams.tripId
+    }
     if (!$scope.planConfigure) {
         $scope.planConfigure = planService.getPlanConfigure();
     }
     if ($scope.planConfigure) {
-        $scope.departureTime = convertTo24Hour($scope.planConfigure.departureTime);
+        //$scope.departureTime = convertTo24Hour($scope.planConfigure.departureTime);
+        $scope.departureTime = planService.convertTo24Hour($scope.planConfigure.departureTime);
+        $scope.departureDate = $filter('date')(planService.mmddyyyy2date($scope.planConfigure.date), 'dd/MM/yyyy');
     }
     $scope.nameFrom = planService.getName('from');
     $scope.nameTo = planService.getName('to');
@@ -37,20 +42,27 @@ angular.module('viaggia.controllers.planlist', [])
     });
     $scope.showPlan = function (journey) {
         planService.setSelectedJourney(journey);
-        $state.go('app.newtripdetails');
+        if ($scope.tripId) {
+            $state.go('app.newtripdetails', {
+                tripId: $scope.tripId,
+                replan: true
+            });
+        } else {
+            $state.go('app.newtripdetails');
+        }
     }
 
-    function convertTo24Hour(time) {
-        var hours = parseInt(time.substr(0, 2));
-        if (time.indexOf('AM') != -1 && hours == 12) {
-            time = time.replace('12', '0');
-        }
-        if (time.indexOf('PM') != -1 && hours < 12) {
-            time = time.replace(hours, (hours + 12));
-        }
-        if (time.match(/0..:/))
-            time = time.substring(1);
-        return time.replace(/(AM|PM)/, '');
-
-    }
+    //    function convertTo24Hour(time) {
+    //        var hours = parseInt(time.substr(0, 2));
+    //        if (time.indexOf('AM') != -1 && hours == 12) {
+    //            time = time.replace('12', '0');
+    //        }
+    //        if (time.indexOf('PM') != -1 && hours < 12) {
+    //            time = time.replace(hours, (hours + 12));
+    //        }
+    //        if (time.match(/0..:/))
+    //            time = time.substring(1);
+    //        return time.replace(/(AM|PM)/, '');
+    //
+    //    }
 })

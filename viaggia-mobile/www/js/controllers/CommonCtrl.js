@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.common', [])
 
-.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, DataManager, $ionicPopup, $ionicModal, $filter, $ionicLoading, Config, planService, userService) {
+.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, DataManager, $ionicPopup, $ionicModal, $filter, $ionicLoading, Config, planService, userService, Utils) {
     /*menu group*/
     $scope.shownGroup = false;
     $scope.toggleGroupRealTime = function () {
@@ -85,21 +85,14 @@ angular.module('viaggia.controllers.common', [])
         var returnDays = [];
         var empty_rec = Config.getDaysRec()
         for (var k = 0; k < empty_rec.length; k++) {
-            if ($scope.contains(recurrency.daysOfWeek, k + 1)) {
+            if (Utils.contains(recurrency.daysOfWeek, k + 1)) {
                 returnDays.push(empty_rec[k]);
             }
         }
         return returnDays;
     }
 
-    $scope.contains = function (a, obj) {
-        for (var i = 0; i < a.length; i++) {
-            if (a[i] === obj) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 
     $scope.showErrorServer = function () {
         var alertPopup = $ionicPopup.alert({
@@ -159,4 +152,16 @@ angular.module('viaggia.controllers.common', [])
     };
 })
 
-.controller('TutorialCtrl', function ($scope, $ionicLoading) {});
+.factory('Utils', function ($rootScope, $timeout, $ionicPopup, $cordovaToast) {
+        return {
+            contains: function (a, obj) {
+                for (var i = 0; i < a.length; i++) {
+                    if (a[i] === obj) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        };
+    })
+    .controller('TutorialCtrl', function ($scope, $ionicLoading) {});

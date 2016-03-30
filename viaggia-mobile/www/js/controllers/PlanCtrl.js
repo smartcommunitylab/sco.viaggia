@@ -5,6 +5,11 @@ angular.module('viaggia.controllers.plan', [])
     if (!$stateParams.replan) {
         planService.setEditInstance(null);
     }
+    if ($stateParams.tripId) {
+        $scope.tripId = $stateParams.tripId
+    } else {
+        planService.setEditInstance(null);
+    }
     $scope.plantitle = $filter('translate')('plan_title');
     $scope.preferences = Config.getPlanPreferences();
     $scope.types = Config.getPlanTypes();
@@ -113,7 +118,7 @@ angular.module('viaggia.controllers.plan', [])
             monthList: monthList, //Optional
             weekDaysList: weekDaysList,
             from: new Date(), //Optional
-            to: new Date(2020, 12, 1), //Optional
+            to: new Date(2220, 12, 1), //Optional
             callback: function (val) { //Optional
                 datePickerCallbackPopup(val);
             }
@@ -326,7 +331,13 @@ angular.module('viaggia.controllers.plan', [])
             planService.planJourney($scope.planParams).then(function (value) {
                 //if ok let's go to visualization
                 $scope.popupLoadingHide();
-                $state.go('app.planlist')
+                if ($scope.tripId) {
+                    $state.go('app.planlist', {
+                        tripId: $scope.tripId
+                    })
+                } else {
+                    $state.go('app.planlist');
+                }
             }, function (error) {
                 //error then pop up some problem
                 $scope.showErrorServer()
@@ -653,7 +664,8 @@ angular.module('viaggia.controllers.plan', [])
         }
         if ($scope.planParams.departureTime) {
             var configdate = new Date();
-            var time = convertTo24Hour($scope.planParams.departureTime);
+            //var time = convertTo24Hour($scope.planParams.departureTime);
+            var time = planService.convertTo24Hour($scope.planParams.departureTime);
             configdate.setHours(time.substr(0, 2));
             configdate.setMinutes(time.substr(3, 2));
             $scope.timePickerObject24Hour.inputEpochTime = configdate.getHours() * 60 * 60 + configdate.getMinutes() * 60;
@@ -662,8 +674,11 @@ angular.module('viaggia.controllers.plan', [])
         }
         if ($scope.planParams.date) {
             var configdate = new Date();
-            configdate.setFullYear($scope.planParams.date.substr(6, 4), $scope.planParams.date.substr(3, 2) - 1, $scope.planParams.date.substr(0, 2));
-            $scope.datepickerObjectPopup.dateTimestamp = $filter('date')((new Date(configdate)).getTime());
+            //configdate.setFullYear($scope.planParams.date.substr(6, 4), $scope.planParams.date.substr(3, 2) - 1, $scope.planParams.date.substr(0, 2));
+            //$scope.datepickerObjectPopup.dateTimestamp = $filter('date')(configdate, 'MM/dd/yyyy');
+            var configdate = planService.mmddyyyy2date($scope.planParams.date);
+            //            configdate.setFullYear($scope.planParams.date.substr(6, 4), $scope.planParams.date.substr(0, 2) - 1, $scope.planParams.date.substr(3, 2));
+            $scope.datepickerObjectPopup.dateTimestamp = $filter('date')(configdate.getTime());
             $scope.datepickerObject.inputDate = new Date(configdate);
             setDateWidget();
 
@@ -722,19 +737,19 @@ angular.module('viaggia.controllers.plan', [])
         }
     });
 
-    function convertTo24Hour(time) {
-        var hours = parseInt(time.substr(0, 2));
-        if (time.indexOf('AM') != -1 && hours == 12) {
-            time = time.replace('12', '0');
-        }
-        if (time.indexOf('PM') != -1 && hours < 12) {
-            time = time.replace(hours, (hours + 12));
-        }
-        if (time.match(/0..:/))
-            time = time.substring(1);
-        return time.replace(/(AM|PM)/, '');
-
-    }
+    //    function convertTo24Hour(time) {
+    //        var hours = parseInt(time.substr(0, 2));
+    //        if (time.indexOf('AM') != -1 && hours == 12) {
+    //            time = time.replace('12', '0');
+    //        }
+    //        if (time.indexOf('PM') != -1 && hours < 12) {
+    //            time = time.replace(hours, (hours + 12));
+    //        }
+    //        if (time.match(/0..:/))
+    //            time = time.substring(1);
+    //        return time.replace(/(AM|PM)/, '');
+    //
+    //    }
 
 
 
