@@ -115,29 +115,34 @@
     "thresholdEndTime": 600000,
     "thresholdStartTime": 600000,
     "trackingConfigure": {
-        "desiredAccuracy": 10,
-        "stationaryRadius": 30,
-        "distanceFilter": 30,
-        "disableElasticity": false,
-        "locationUpdateInterval": 5000,
-        "stopAfterElapsedMinutes": 10,
-        "minimumActivityRecognitionConfidence": 50,
-        "fastestLocationUpdateInterval": 5000,
-        "activityRecognitionInterval": 10000,
-        "stopDetectionDelay": 1,
-        "stopTimeout": 2,
+        "desiredAccuracy": 0,
+        "distanceFilter": 20,
+        "stationaryRadius": 20,
         "activityType": "Other",
+        "disableElasticity": false,
+
+        "stopDetectionDelay": 0,
+        "stopTimeout": 1,
+        "activityRecognitionInterval": 10000,
+
+        "preventSuspend": false,
+        "heartbeatInterval": 60,
+        "stopOnTerminate": false,
         "debug": true,
+
+        "locationUpdateInterval": 5000,
+        "minimumActivityRecognitionConfidence": 50,
+        "fastestLocationUpdateInterval": 1000,
         "forceReloadOnLocationChange": false,
         "forceReloadOnMotionChange": false,
         "forceReloadOnGeofence": false,
-        "stopOnTerminate": false,
         "startOnBoot": false,
         "foregroundService": true,
-        "url": "https://dev.smartcommunitylab.it/core.mobility/gamification/geolocations",
+        "maxDaysToPersist": 14,
+        "triggerActivities": "in_vehicle, on_bicycle, running, walking, on_foot",
+
+        "url": "https://dev.smartcommunitylab.it/core.mobility/gamification/geolocations?token=",
         "method": "POST",
         "batchSync": true,
-        "autoSync": false,
-        "maxDaysToPersist": 14
+        "autoSync": false
     }
-}

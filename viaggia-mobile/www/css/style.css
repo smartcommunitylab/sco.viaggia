@@ -209,6 +209,12 @@
     color: white;
 }
 
+.no-shadow {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
 .button-viaggia:hover {
     background-color: #3bbacf;
     color: white;
@@ -1325,10 +1331,18 @@ ion-header-bar .title {
 }
 
 .trip-card {
-  width: inherit !important;
+    width: inherit !important;
 }
 
 .trip-card .item-content {
-  padding: 0 !important;
-  background-color: #fff;
+    padding: 0 !important;
+    background-color: #fff;
+}
+
+.trip-card .item-options {
+    background-color: #3bbacf !important;
+}
+
+.trip-card .ion-option-button {
+    color: white;
 }
