@@ -35,7 +35,8 @@
                         <small class="text-muted"><strong>{{'my_trip_time'|translate}}</strong>: {{journey.data.startime| date:' HH:mm'}} </small>
                     </div>
                 </div>
-                <ion-option-button class="button button-assertive icon ion-android-delete" ng-click="deleteTrip($index)"></ion-option-button>
+                <ion-option-button class="button button-viaggia no-shadow icon ion-edit" ng-click="modifyTrip($index)"></ion-option-button>
+                <ion-option-button class="button button-viaggia no-shadow icon ion-android-delete" ng-click="deleteTrip($index)"></ion-option-button>
 
                 <!--</div>-->
             </ion-item>

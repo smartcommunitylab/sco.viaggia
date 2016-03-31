@@ -735,9 +735,9 @@ angular.module('viaggia.controllers.plan', [])
             var planOptionConfig = Config.getPlanDefaultOptions();
             manageOptions();
         }
-        if ((toState.name == 'app.plan') && (fromState.name == 'app.home')) {
-            planService.setPlanConfigure(null);
-        }
+//        if ((toState.name == 'app.plan') && (fromState.name == 'app.home')) {
+    //            planService.setPlanConfigure(null);
+    //        }
     });
 
     //    function convertTo24Hour(time) {

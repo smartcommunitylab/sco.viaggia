@@ -16,7 +16,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div>
-                            <div ng-if="isAvailableForDay()">
+                            <div ng-if="isAvailable">
                                 <div ng-class="{'fog': notTrackable()}" ng-click="showPopupIfNotThisJourney()">
                                     <button class="button button-viaggia-header button-block" ng-show="!isTracking()&&tripId!=null" ng-click="trackStart()">{{'labl_start_tracking'|translate}} </button>
                                 </div>
@@ -96,8 +96,8 @@
                             </div>
                             <button ng-if="editMode" class="button button-viaggia-header button-block" ng-click="saveTrip()">{{'journey_details_save' | translate}} </button>
                             <div class="popup-buttons" ng-if="!editMode">
-                                <button class="button button-cancel" ng-click="deleteTrip()">{{'journey_details_delete' | translate}} </button>
-                                <button class="button button-default" ng-click="modifyTrip()">{{'journey_details_modify' | translate}} </button>
+                                <button ng-class="{'fog': !modifiable}" class="button button-cancel" ng-click="deleteTrip()">{{'journey_details_delete' | translate}} </button>
+                                <button ng-class="{'fog': !modifiable}" class="button button-default" ng-click="modifyTrip()">{{'journey_details_modify' | translate}} </button>
                             </div>
                         </div>
                     </div>

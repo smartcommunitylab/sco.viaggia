@@ -330,7 +330,7 @@ angular.module('viaggia.services.login', [])
             var now = new Date();
             if (user && user.token) {
                 var saved = new Date(user.token.validUntil);
-                if (saved.getTime() >= now.getTime()) {
+                if (saved.getTime() >= now.getTime() + 60 * 60 * 1000) {
                     deferred.resolve(user.token.access_token);
                 } else {
                     var url = Config.getServerTokenURL();

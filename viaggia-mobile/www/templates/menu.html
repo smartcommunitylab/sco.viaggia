@@ -19,7 +19,12 @@
                 <ion-item nav-clear menu-close href="#/app/home" class="menu-main item-icon-left">
                     <i class="icon ic_home"></i>{{'menu_home' | translate}}
                 </ion-item>
+                <!--
                 <ion-item nav-clear menu-close href="#/app/plan" class="menu-main item-icon-left">
+                    <i class="icon ic_search"></i>{{'menu_plan' | translate}}
+                </ion-item>
+                -->
+                <ion-item nav-clear menu-close ng-click="newPlan()" class="menu-main item-icon-left">
                     <i class="icon ic_search"></i>{{'menu_plan' | translate}}
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/mytrips" class="menu-main item-icon-left">

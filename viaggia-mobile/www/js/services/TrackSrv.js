@@ -103,9 +103,10 @@ angular.module('viaggia.services.tracking', [])
                 var trackingConfigure = Config.getTrackingConfig();
                 var startTimestamp = new Date().getTime();
                 var minutesOfRun = (endTime - startTimestamp) / 60000;
-                trackingConfigure['stopAfterElapsedMinutes'] = minutesOfRun;
-                trackingConfigure['notificationTitle'] = $filter('translate')('tracking_notification_text');
-
+                trackingConfigure['stopAfterElapsedMinutes'] = Math.floor(minutesOfRun);
+                //trackingConfigure['stopAfterElapsedMinutes'] = 1;
+                trackingConfigure['notificationTitle'] = $filter('translate')('tracking_notification_title');
+                trackingConfigure['notificationText'] = $filter('translate')('tracking_notification_text');
                 trackingConfigure['url'] += token;
                 bgGeo.configure(callbackFn, failureFn, trackingConfigure);
 
@@ -120,6 +121,10 @@ angular.module('viaggia.services.tracking', [])
                     trackService.stop();
                     if (callback) callback();
                 }, endTime - startTimestamp);
+//                                $timeout(function() {
+//trackService.stop();
+//if (callback) callback();
+//}, 5000);
 
                 bgGeo.start(function () {
                     bgGeo.changePace(true);
@@ -152,24 +157,24 @@ angular.module('viaggia.services.tracking', [])
             var deferred = $q.defer();
             userService.getValidToken().then(function (token) {
 
-              var trackingConfigure = Config.getTrackingConfig();
-              trackingConfigure['url'] += token;
-              bgGeo.configure(callbackFn, failureFn, trackingConfigure);
-              bgGeo.sync(function (locations, taskId) {
-                  try {
-                      // Here are all the locations from the database.  The database is now EMPTY.
-                      console.log('synced locations: ', locations);
-                  } catch (e) {
-                      console.error('An error occurred in my application code', e);
-                  }
+                var trackingConfigure = Config.getTrackingConfig();
+                trackingConfigure['url'] += token;
+                bgGeo.configure(callbackFn, failureFn, trackingConfigure);
+                bgGeo.sync(function (locations, taskId) {
+                    try {
+                        // Here are all the locations from the database.  The database is now EMPTY.
+                        console.log('synced locations: ', locations);
+                    } catch (e) {
+                        console.error('An error occurred in my application code', e);
+                    }
 
-                  // Be sure to call finish(taskId) in order to signal the end of the background-thread.
-                  bgGeo.finish(taskId);
-                  deferred.resolve(true);
-              }, function (errorMessage) {
-                  console.warn('Sync FAILURE: ', errorMessage);
-                  deferred.resolve(false);
-              });
+                    // Be sure to call finish(taskId) in order to signal the end of the background-thread.
+                    bgGeo.finish(taskId);
+                    deferred.resolve(true);
+                }, function (errorMessage) {
+                    console.warn('Sync FAILURE: ', errorMessage);
+                    deferred.resolve(false);
+                });
             });
             return deferred.promise;
         };
@@ -308,7 +313,13 @@ angular.module('viaggia.services.tracking', [])
             console.log('BackgroundGeoLocation error');
         };
 
-
+        trackService.isTracking = function (id) {
+            //return true if this is the tracking is going to track and is going
+            if (trackService.isThisTheJourney(id) && trackService.trackingIsGoingOn()) {
+                return true;
+            }
+            return false;
+        }
         trackService.updateNotification = function (tripToSave, tripId, action) {
             if (window.plugin && cordova && cordova.plugins && cordova.plugins.notification) {
                 console.log('initializing notifications...');

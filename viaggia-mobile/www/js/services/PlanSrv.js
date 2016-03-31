@@ -602,7 +602,6 @@ angular.module('viaggia.services.plan', [])
     };
     planService.saveTrip = function (tripId, trip, name, requestedFrom, requestedTo, recurrency) {
         var deferred = $q.defer();
-
         var daysOfWeek = getDaysOfRecurrency(recurrency);
         var newTrip = false;
         if (!tripId) {
@@ -610,70 +609,15 @@ angular.module('viaggia.services.plan', [])
             newTrip = true;
         }
         console.log(JSON.stringify(trip));
-        //        var tripToSave = {
-        //            // "tripId": tripId,
-        //            "data": {
-        //                "originalFrom": {
-        //                    "name": requestedFrom,
-        //                    "lat": trip.from.lat,
-        //                    "lon": trip.from.lon
-        //                },
-        //                "originalTo": {
-        //                    "name": requestedTo,
-        //                    "lat": trip.to.lat,
-        //                    "lon": trip.to.lon
-        //                },
-        //                "originalRequest": planService.getPlanConfigure(),
-        //                "monitor": true,
-        //                "name": name,
-        //                "data": trip,
-        //                "recurrency": {
-        //                    "daysOfWeek": daysOfWeek
-        //                }
-        //            }
-        //        };
 
         var urlBuilt = "";
         var databuilt = null;
         if (!newTrip) {
             urlBuilt = Config.getServerURL() + "/itinerary/" + tripId;
-            databuilt = {
-                'clientId': tripId,
-                'data': trip.original,
-                'originalFrom': {
-                    'name': requestedFrom,
-                    'lat': trip.from.lat,
-                    'lon': trip.from.lon
-                },
-                'originalTo': {
-                    'name': requestedTo,
-                    'lat': trip.to.lat,
-                    'lon': trip.to.lon
-                },
-                'name': name,
-                'recurrency': {
-                    'daysOfWeek': daysOfWeek
-                }
-            }
+            databuilt = buildData(tripId, trip, name, requestedFrom, requestedTo, recurrency, daysOfWeek);
         } else {
             urlBuilt = Config.getServerURL() + "/itinerary";
-            databuilt = {
-                'data': trip.original,
-                'originalFrom': {
-                    'name': requestedFrom,
-                    'lat': trip.from.lat,
-                    'lon': trip.from.lon
-                },
-                'originalTo': {
-                    'name': requestedTo,
-                    'lat': trip.to.lat,
-                    'lon': trip.to.lon
-                },
-                'name': name,
-                'recurrency': {
-                    'daysOfWeek': daysOfWeek
-                }
-            }
+            databuilt = buildData(null, trip, name, requestedFrom, requestedTo, recurrency, daysOfWeek);
         }
         var methodTrip = 'POST';
         if (!newTrip) {
@@ -696,12 +640,12 @@ angular.module('viaggia.services.plan', [])
             }).
             success(function (data) {
                 var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
-                //if (data.clientId) {
-                //    databuilt.clientId = data.clientId;
-                //} else {
-                databuilt.clientId = tripId;
+                if (data.clientId) {
+                    databuilt.clientId = data.clientId;
+                } else {
+                    databuilt.clientId = tripId;
 
-                //}
+                }
                 if (!savedTrips) {
                     savedTrips = {};
                 }
@@ -712,9 +656,6 @@ angular.module('viaggia.services.plan', [])
                 } else {
                     trackService.updateNotification(databuilt, databuilt.clientId, "create");
                 }
-
-                //planService.setPlanConfigure(null);
-
                 deferred.resolve(databuilt);
             }).error(function (data, status, headers, config) {
                 console.log(data + status + headers + JSON.stringify(config));
@@ -726,6 +667,49 @@ angular.module('viaggia.services.plan', [])
 
 
         return deferred.promise;
+    }
+
+    function buildData(tripId, trip, name, requestedFrom, requestedTo, recurrency, daysOfWeek) {
+        databuilt = null;
+        if (tripId) {
+            databuilt = {
+                'clientId': tripId,
+                'data': trip.original,
+                'originalFrom': {
+                    'name': requestedFrom,
+                    'lat': trip.from.lat,
+                    'lon': trip.from.lon
+                },
+                'originalTo': {
+                    'name': requestedTo,
+                    'lat': trip.to.lat,
+                    'lon': trip.to.lon
+                },
+                'name': name,
+                'recurrency': {
+                    'daysOfWeek': daysOfWeek
+                }
+            }
+        } else {
+            databuilt = {
+                'data': trip.original,
+                'originalFrom': {
+                    'name': requestedFrom,
+                    'lat': trip.from.lat,
+                    'lon': trip.from.lon
+                },
+                'originalTo': {
+                    'name': requestedTo,
+                    'lat': trip.to.lat,
+                    'lon': trip.to.lon
+                },
+                'name': name,
+                'recurrency': {
+                    'daysOfWeek': daysOfWeek
+                }
+            }
+        }
+        return databuilt;
     }
     planService.mmddyyyy2date = function (s) {
         return new Date(s.substr(6, 4), s.substr(0, 2) - 1, s.substr(3, 2));

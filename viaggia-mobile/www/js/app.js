@@ -536,9 +536,13 @@ angular.module('viaggia', [
             err_too_many_markers: 'Too many objects on the map. Please zoom in.',
             lbl_lines: 'Corse:',
             lbl_line: 'Linea',
-            popup_delete_trip_message: 'Sicuro di voler eleminare il viaggio salvato?',
+            popup_delete_trip_message: 'Sicuro di voler eliminare il viaggio salvato?',
             popup_delete_trip_title: 'Elimina',
             tripdeleted_message_feedback: 'Il viaggio selezionato è stato eliminato',
+            popup_modify_trip_title: 'Modifica',
+            popup_modify_trip_message: 'Sicuro di voler modificare il viaggio salvato?',
+            tripdeleted_message_feedback: 'Il viaggio selezionato è stato modificato',
+
             my_trip_empty_list: 'Non ci sono viaggi salvati',
             my_trip_from: 'Da',
             my_trip_to: 'A',
@@ -640,7 +644,10 @@ angular.module('viaggia', [
             toast_already_monitoring: 'Stai già registrando un percorso',
             sure_delete_title: 'Termina viaggio',
             sure_delete_text: 'Terminando il viaggio concludi la sessione di gioco, confermi?',
-            tracking_notification_text: 'Monitoraggio di viaggio attivato'
+            tracking_notification_title: 'Viaggia Rovereto',
+            tracking_notification_text: 'Monitoraggio di viaggio attivato',
+            toast_not_deletable: 'Impossibile cancellare un viaggio in corso',
+            toast_not_modifiable: 'Impossibile modificare un viaggio in corso'
         });
 
 
@@ -742,6 +749,9 @@ angular.module('viaggia', [
             popup_delete_trip_message: 'Are you sure to delete the saved journey?',
             popup_delete_trip_title: 'Delete',
             tripdeleted_message_feedback: 'The selected journey has been deleted',
+            popup_modify_trip_title: 'Modify',
+            popup_modify_trip_message: 'Are you sure to modify the saved journey?',
+            tripdeleted_message_feedback: 'The selected journey has been modified',
             my_trip_empty_list: 'No saved journeys',
             my_trip_from: 'From',
             my_trip_to: 'To',
@@ -843,7 +853,10 @@ angular.module('viaggia', [
             btn_validate_user: 'Register',
             sure_delete_title: 'Stop journey',
             sure_delete_text: 'Ending the journey you stop the session game, do you confirm?',
-            tracking_notification_text: 'Journey monitoring activated'
+            tracking_notification_title: 'Viaggia Rovereto',
+            tracking_notification_text: 'Journey monitoring activated',
+            toast_not_deletable: 'Impossible to delete a running journey',
+            toast_not_modifiable: 'Impossible to modify a running journey'
 
         });
 

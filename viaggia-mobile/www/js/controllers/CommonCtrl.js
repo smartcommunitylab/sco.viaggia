@@ -32,10 +32,14 @@ angular.module('viaggia.controllers.common', [])
     }
 
     $scope.openGamificationBoard = function () {
-            userService.getValidToken().then(function (validToken) {
-                var url = Config.getGamificationURL() + "/mobile?token=" + validToken;
-                window.open(url, "_system", "location=yes");
-            })
+        userService.getValidToken().then(function (validToken) {
+            var url = Config.getGamificationURL() + "/mobile?token=" + validToken;
+            window.open(url, "_system", "location=yes");
+        })
+    }
+    $scope.newPlan = function () {
+            planService.setPlanConfigure(null);
+            $state.go('app.plan');
         }
         /*pop up managers*/
         //    $scope.newPlan = function () {
