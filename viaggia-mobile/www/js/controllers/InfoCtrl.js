@@ -89,7 +89,7 @@ angular.module('viaggia.controllers.info', [])
             }
             if (boundsArray.length > 0) {
                 var bounds = L.latLngBounds(boundsArray);
-                mapService.getMap('modalMap').then(function (map) {
+                mapService.getMap('modalMapParking').then(function (map) {
                     map.fitBounds(bounds);
                 });
             }
@@ -101,10 +101,10 @@ angular.module('viaggia.controllers.info', [])
     };
 
     $scope.$on('$ionicView.beforeEnter', function () {
-        mapService.refresh('ttMap');
+        mapService.refresh('modalMapParking');
     });
 
-    $ionicModal.fromTemplateUrl('templates/mapModal.html', {
+    $ionicModal.fromTemplateUrl('templates/mapModalParking.html', {
         id: '1',
         scope: $scope,
         backdropClickToClose: false,
@@ -127,7 +127,7 @@ angular.module('viaggia.controllers.info', [])
         $scope.modalMap.hide();
     };
     $scope.initMap = function () {
-        mapService.initMap('modalMap').then(function () {
+        mapService.initMap('modalMapParking').then(function () {
             console.log('map initialized');
         });
     };
@@ -166,7 +166,7 @@ angular.module('viaggia.controllers.info', [])
 
     }
 
-    $scope.$on('leafletDirectiveMarker.modalMap.click', function (e, args) {
+    $scope.$on('leafletDirectiveMarker.modalMapParking.click', function (e, args) {
         var p = $scope.markers[args.modelName].parking;
         showPopup(p);
     });
@@ -288,7 +288,7 @@ angular.module('viaggia.controllers.info', [])
             }
             if (boundsArray.length > 0) {
                 var bounds = L.latLngBounds(boundsArray);
-                mapService.getMap('modalMap').then(function (map) {
+                mapService.getMap('modalMapBike').then(function (map) {
                     map.fitBounds(bounds);
                 });
             }
@@ -299,7 +299,7 @@ angular.module('viaggia.controllers.info', [])
         });
     };
 
-    $ionicModal.fromTemplateUrl('templates/mapModal.html', {
+    $ionicModal.fromTemplateUrl('templates/mapModalBike.html', {
         id: '1',
         scope: $scope,
         backdropClickToClose: false,
@@ -322,7 +322,7 @@ angular.module('viaggia.controllers.info', [])
         $scope.modalMap.hide();
     };
     $scope.initMap = function () {
-        mapService.initMap('modalMap').then(function () {});
+        mapService.initMap('modalMapBike').then(function () {});
     };
 
     var showPopup = function (p) {
@@ -359,13 +359,13 @@ angular.module('viaggia.controllers.info', [])
 
     }
 
-    $scope.$on('leafletDirectiveMarker.modalMap.click', function (e, args) {
+    $scope.$on('leafletDirectiveMarker.modalMapBike.click', function (e, args) {
         var p = $scope.markers[args.modelName].parking;
         showPopup(p);
     });
 
     $scope.$on('$ionicView.beforeEnter', function () {
-        mapService.refresh('ttMap');
+        mapService.refresh('modalMapBike');
     });
 
     $scope.navigate = function () {
