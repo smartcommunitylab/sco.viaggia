@@ -875,6 +875,7 @@ ion-header-bar .title {
 
 .table-container {
     padding: 0px;
+    margin-top: 0 !important;
 }
 
 .table-container ion-scroll {
@@ -1203,4 +1204,55 @@ ion-header-bar .title {
 
 .row_empty_home {
     padding: 25px;
+}
+
+.stop-cell {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  border-right: 1px solid #bbb;
+}
+
+.time-cell {
+  text-align: center;
+  border-right: 1px solid #bbb;
+}
+
+.even {
+  background-color: #ddd;
+}
+
+.timetable .row {
+  padding: 0px;
+  margin: 0px !important;
+}
+
+.timetable .col {
+  padding: 0px 4px;
+
+}
+.timetable {
+  font-size: 12px;
+}
+
+.tt-header {
+  border-bottom: 1px solid #bbb;
+}
+
+.tt-header .col {
+  padding: 0px 4px !important;
+}
+
+.time-cell.delay {
+  color: #cd251c;
+}
+
+.timetable .range {
+  padding: 0;
+  border: 0;
+  border-top: 1px solid #bbb;
+}
+.timetable .range input {
+  padding: 0;
+  margin: 0;
 }

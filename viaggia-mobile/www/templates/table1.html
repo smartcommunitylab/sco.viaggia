@@ -10,11 +10,11 @@
             <div class="col col-25 tt-day btn" ng-click="nextDate()"><a><i class="icon ion-arrow-right-b"></i></a>
             </div>
         </div>
+<!--
         <div ng-if="dataStr" id="table-corner" style="width:{{stopsColWidth}}px; height:{{tableHeaderHeight}}px">
             <div>{{tableCornerStr[0]}}</div>
             <div ng-if="header_row_number == 2">{{tableCornerStr[1]}}</div>
         </div>
-
         <div class="row table-container" ng-if="dataStr">
 
             <ion-scroll direction="xy" has-bouncing="false" id="tablescroll" style="height:{{scrollHeight}}px; width: {{scrollWidth}}px" class="overlapDiv" on-scroll="doScroll()" delegate-handle="list">
@@ -43,16 +43,45 @@
                             linear-gradient(180deg,transparent, transparent {{rowHeight}}px, #eee {{rowHeight}}px, #eee {{rowHeight*2}}px);"></div>
             </ion-scroll>
         </div>
-
-        <!--
-        <div ng-if="tt && tt.tripIds.length > 0" ngc-table data="data" scroll-delay="0" show-footer="false" left-column-number="1" left-column-widths="'100'" header-row-number="header_row_number" header-row-heights="row_height" right-column-number="0" show-row-numbers="false" show-column-names="false" center-column-widths="[column_width]" center-column-number="column_number" row-number="row_number" row-heights="[row_height]" scroll-left-position="scrollLeftPosition">
-            <ngc-range top="0" bottom="header_row_number" left="1" right="tt.tripIds.length+1" style-fn="styleFn"></ngc-range>
-            <ngc-range top="header_row_number" bottom="tt.stops.length+header_row_number" left="1" right="tt.tripIds.length+1" style-fn="styleFn"></ngc-range>
-        </div>
+        <div id="measurer" style="white-space: nowrap;font-family: RobotoMono;font-size: 12px;color: transparent;background-color: transparent;position:absolute;">123456789</div>
 -->
+      <div class="timetable">
+        <div class="row tt-header">
+          <div class="col stop-cell text-center" style="min-width:{{stopsColWidth}}px;max-width:{{stopsColWidth}}px;">{{tableCornerStr[0]}}</div>
+          <div class="col time-cell delay" ng-repeat="t in tripIds" style="min-width:{{colwidth}}px;max-width:{{colwidth}}px">{{getDelayValue(tt.delays[$index+range.startCol])}}</div>
+        </div>
+        <div class="row tt-header" ng-if="header_row_number == 2">
+          <div class="col stop-cell text-center" style="font-size:12px;font-family: RobotoMono;min-width:{{stopsColWidth}}px;max-width:{{stopsColWidth}}px">{{tableCornerStr[1]}}</div>
+          <div class="col time-cell" ng-repeat="t in tripIds" style="min-width:{{colwidth}}px;max-width:{{colwidth}}px">{{getTripText(t)}}</div>
+        </div>
+
+        <div class="row table-container">
+            <ion-scroll direction="y" has-bouncing="false" style="height:{{scrollHeight}}px; width: {{scrollWidth}}px" class="overlapDiv" on-swipe-right="onSwipeRight()" on-swipe-left="onSwipeLeft()" delegate-handle="list">
+              <div class="row" style="line-height: {{stopsColLineHeight}}px;
+                            background-size: 100% {{rowHeight*2}}px;
+                            background-image:
+                            -webkit-linear-gradient(90deg,#fff, #fff {{rowHeight}}px, #eee {{rowHeight}}px, #eee {{rowHeight*2}}px);
+                            background-image:
+                            linear-gradient(180deg,#fff, #fff {{rowHeight}}px, #eee {{rowHeight}}px, #eee {{rowHeight*2}}px);">
+                <div class="col stop-cell" ng-bind-html="colStr" ng-click="showStop($event)" style="min-width:{{stopsColWidth}}px;max-width:{{stopsColWidth}}px"></div>
+                <div class="col time-cell" ng-repeat="t in dataStr" style="min-width:{{colwidth}}px;max-width:{{colwidth}}px" ng-bind-html="t"></div>
+              </div>
+<!--
+              <div class="row" ng-repeat="s in tt.stops track by $index" ng-class="{even: $index % 2 == 0}">
+                <div class="col stop-cell" style="min-width:{{stopsColWidth}}px;max-width:{{stopsColWidth}}px" ng-click="showStopTxt(s)">{{s}}</div>
+                <div class="col time-cell" ng-repeat="t in tripIds" style="min-width:{{colwidth}}px;max-width:{{colwidth}}px">{{tt.times[$index + range.startCol][$parent.$index]}}</div>
+              </div>
+-->
+            </ion-scroll>
+        </div>
+        <div class="item range range-positive">
+          <input type="range" name="hour" min="0" max="{{tt.tripIds.length}}" ng-model="range.startCol" ng-change="rangeChange()">
+        </div>
+      </div>
+
+
         <div ng-if="tt && tt.tripIds.length == 0" class="text-center">
             <h4>{{'no_tt' | translate}}</h4>
         </div>
-        <div id="measurer" style="white-space: nowrap;font-family: RobotoMono;font-size: 12px;color: transparent;background-color: transparent;position:absolute;">123456789</div>
     </ion-content>
 </ion-view>

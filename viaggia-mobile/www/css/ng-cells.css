@@ -120,6 +120,8 @@ table.ngc td {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 22px;
+    border-right: 1px solid #bbb;
 /*
     min-height: 28px;
     line-height: 28px;
@@ -215,4 +217,8 @@ table.ngc td {
 
 .ngc.table_part.middle div.ngc.row.data:first-child div.cell {
     border-top: 2px dotted darkred;
+}
+
+.evenRow {
+  background-color: #eee;
 }
