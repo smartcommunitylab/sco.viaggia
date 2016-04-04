@@ -467,7 +467,7 @@ angular.module('viaggia', [
             plan_preferences_fastest: 'Itinerario piu veloce',
             plan_preferences_leastChanges: 'Con meno cambi',
             plan_preferences_leastWalking: 'Minimo tragitto a piedi',
-            plan_map_title: 'Seleziona l\' indirizzo',
+            plan_map_title: 'Seleziona l\'indirizzo',
             plan_insert_to_address: 'Inserisci l\'indirizzo di destinazione',
             plan_insert_from_address: 'Inserisci l\'indirizzo di partenza',
             add_favorites_template: 'Vuoi aggiungere l\'indirizzo ai tuoi preferiti?',
