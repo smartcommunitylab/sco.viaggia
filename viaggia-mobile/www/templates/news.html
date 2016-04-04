@@ -1,5 +1,19 @@
-<ion-view id="News">
+<ion-view id="news" title="{{'news_title' | translate}}">
     <ion-content id="content" has-header="true">
-        News
+        <ion-refresher on-refresh="doRefresh()">
+        </ion-refresher>
+        <!--    notification list-->
+        <div ng-if="news != null && news.length == 0" class="text-center">
+            <h4>{{'news_empty_list'|translate}}</h4>
+        </div>
+        <ion-list ng-if="news != null && news.length > 0">
+
+            <div class="card notification-card" ng-repeat="n in news track by $index" ng-last-repeat="news" ng-click="showNews($index)">
+
+                <div> {{b.dateTime| date:' dd-MM-yyyy'}}</div>
+                <div class="notification-title">{{n.title }}</div>
+                <p>{{n.contentSnippet}}</p>
+            </div>
+        </ion-list>
     </ion-content>
 </ion-view>

@@ -7,6 +7,7 @@
     "appname": "Viaggia Trento",
     "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
     "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
+    "newsRSS": "https://dev.smartcommunitylab.it/core.mobility/announcements/rss/trento",
     "authServerURL": "https://dev.smartcommunitylab.it/aac/eauth/authorize",
     "serverTokenURL": "https://dev.smartcommunitylab.it/aac/oauth/token",
     "serverProfileURL": "https://dev.smartcommunitylab.it/aac/basicprofile/me",

@@ -7,6 +7,7 @@
     "appname": "Viaggia Rovereto",
     "serverURL": "https://dev.smartcommunitylab.it/core.mobility",
     "messagingServerURL": "https://dev.smartcommunitylab.it/core.communicator",
+    "newsRSS": "https://dev.smartcommunitylab.it/core.mobility/announcements/rss/rovereto",
     "authServerURL": "https://dev.smartcommunitylab.it/aac/eauth/authorize",
     "serverTokenURL": "https://dev.smartcommunitylab.it/aac/oauth/token",
     "serverProfileURL": "https://dev.smartcommunitylab.it/aac/basicprofile/me",
