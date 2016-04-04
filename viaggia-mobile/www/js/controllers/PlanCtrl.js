@@ -150,7 +150,7 @@ angular.module('viaggia.controllers.plan', [])
             selectedTime.setHours(val / 3600);
             selectedTime.setMinutes((val % 3600) / 60);
             selectedTime.setSeconds(0);
-            $scope.hourTimestamp = $filter('date')(selectedTime,'hh:mma');
+            $scope.hourTimestamp = $filter('date')(selectedTime, 'hh:mma');
         }
     }
     setTimeWidget();
@@ -676,7 +676,7 @@ angular.module('viaggia.controllers.plan', [])
             $scope.planParams['departureTime'] = $filter('date')(new Date().getTime(), 'hh:mma');
         }
         if ($scope.planParams.date) {
-            var configdate = new Date();
+            //var configdate = new Date();
             //configdate.setFullYear($scope.planParams.date.substr(6, 4), $scope.planParams.date.substr(3, 2) - 1, $scope.planParams.date.substr(0, 2));
             //$scope.datepickerObjectPopup.dateTimestamp = $filter('date')(configdate, 'MM/dd/yyyy');
             var configdate = planService.mmddyyyy2date($scope.planParams.date);
@@ -735,9 +735,9 @@ angular.module('viaggia.controllers.plan', [])
             var planOptionConfig = Config.getPlanDefaultOptions();
             manageOptions();
         }
-//        if ((toState.name == 'app.plan') && (fromState.name == 'app.home')) {
-    //            planService.setPlanConfigure(null);
-    //        }
+        //        if ((toState.name == 'app.plan') && (fromState.name == 'app.home')) {
+        //            planService.setPlanConfigure(null);
+        //        }
     });
 
     //    function convertTo24Hour(time) {
