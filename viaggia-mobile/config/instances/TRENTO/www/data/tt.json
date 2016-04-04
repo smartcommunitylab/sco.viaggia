@@ -20,7 +20,7 @@
             "hasMap": true,
             "markerIcon": "ic_train",
             "icon": "ic_train",
-            "transportType" : "TRAIN",
+            "transportType": "TRAIN",
             "elements": [
                 {
                     "agencyId": "5",
@@ -88,7 +88,7 @@
             "hasMap": true,
             "markerIcon": "ic_urbanBus",
             "icon": "ic_urban-bus",
-            "transportType" : "BUS",
+            "transportType": "BUS",
             "elements": [
                 {
                     "agencyId": "12",
@@ -450,6 +450,7 @@
             },
                         {
                             "label": "Funivia",
+                            "color": "#016a6a",
                             "gridCode": "ic_funivia",
                             "routes": [
                                 {
