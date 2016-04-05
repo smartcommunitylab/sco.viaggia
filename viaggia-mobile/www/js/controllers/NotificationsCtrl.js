@@ -46,9 +46,11 @@ angular.module('viaggia.controllers.notifications', [])
                     Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
 
                 }
+                $scope.$broadcast('scroll.refreshComplete');
             }, function (err) {
                 console.error(err);
                 $scope.$broadcast('scroll.infiniteScrollComplete');
+                $scope.$broadcast('scroll.refreshComplete');
                 $scope.end_reached = true;
             });
         };
@@ -80,6 +82,10 @@ angular.module('viaggia.controllers.notifications', [])
             $scope.start = 0;
             $scope.all = 10;
             $scope.end_reached = false;
+        }
+        $scope.doRefresh = function () {
+            init();
+            $scope.loadMore();
         }
         $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
             $rootScope.previousState = from.name;

@@ -352,6 +352,9 @@ angular.module('viaggia.services.conf', [])
         getPrimaryLinks: function () {
             return mapJsonConfig.visualization.primaryLinks;
         },
+        getContactLink: function () {
+            return mapJsonConfig["contact_link"];
+        },
         getTTData: function (ref, agencyId, groupId, routeId) {
             var res = ttJsonConfig;
             if (!!ref) {

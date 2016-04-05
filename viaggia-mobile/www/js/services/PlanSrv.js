@@ -235,7 +235,9 @@ angular.module('viaggia.services.plan', [])
             elem.img = 'img/' + elem.img + '.png';
 
             if (t == 'BUS' || t == 'TRAIN') {
-                elem.note = [it.leg[i].transport.routeShortName];
+                elem.note = [{
+                    value: it.leg[i].transport.routeShortName
+                }];
             } else if (t == 'CAR') {
                 if (meanTypes.indexOf('CAR') < 0) {
                     var parking = extractParking(it.leg[i], false);
@@ -259,7 +261,7 @@ angular.module('viaggia.services.plan', [])
                 }
             }
 
-            var newMt = t + (elem.note.length > 0 ? elem.note.join(',') : '');
+            var newMt = t + (elem.note.length > 0 ? elem.note[0].value : '');
             if (meanTypes.indexOf(newMt) >= 0) continue;
             meanTypes.push(newMt);
             means.push(elem);
