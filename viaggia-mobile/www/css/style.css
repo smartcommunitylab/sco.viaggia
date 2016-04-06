@@ -363,6 +363,16 @@
     color: #fff !important;
 }
 
+.menu-main {
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+}
+
+.menu-main .item-content {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
 .menu-rt {
     background-color: #3bbacf !important;
 }
@@ -391,8 +401,11 @@
 .menu-main .item-content,
 .menu-last .item-content {
     padding-left: 59px !important;
+    line-height: 22px;
+    /*
     padding-top: 8px;
     padding-bottom: 8px;
+*/
 }
 
 .menu-left {

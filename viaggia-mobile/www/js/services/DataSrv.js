@@ -10,25 +10,25 @@ angular.module('viaggia.services.data', [])
     // limit the data to the necessary one only
     var db = null;
 
-    var getDBFileShortName = function() {
-      return Config.getAppId() + "routesdb";
+    var getDBFileShortName = function () {
+        return Config.getAppId() + "routesdb";
     };
-    var getDBPath = function() {
-      if (ionic.Platform.isIOS()) {
-        return cordova.file.documentsDirectory;
-      } else if (ionic.Platform.isAndroid()) {
-        var filesdir = cordova.file.dataDirectory;
-        if (filesdir.charAt(filesdir.length-1) == '/') {
-          filesdir = filesdir.substr(0, filesdir.length - 1);
+    var getDBPath = function () {
+        if (ionic.Platform.isIOS()) {
+            return cordova.file.documentsDirectory;
+        } else if (ionic.Platform.isAndroid()) {
+            var filesdir = cordova.file.dataDirectory;
+            if (filesdir.charAt(filesdir.length - 1) == '/') {
+                filesdir = filesdir.substr(0, filesdir.length - 1);
+            }
+            filesdir = filesdir.substr(0, filesdir.lastIndexOf('/')) + '/databases/';
+            return filesdir;
+        } else {
+            return cordova.file.dataDirectory;
         }
-        filesdir = filesdir.substr(0, filesdir.lastIndexOf('/'))+'/databases/';
-        return filesdir;
-      } else {
-        return cordova.file.dataDirectory;
-      }
     }
-    var getDBFileName = function() {
-      return getDBPath() + getDBFileShortName();
+    var getDBFileName = function () {
+        return getDBPath() + getDBFileShortName();
     };
 
     var errorDB = function (deferred, error) {
@@ -60,55 +60,55 @@ angular.module('viaggia.services.data', [])
       }
     };
 
-    var size = function(obj) {
-        var size = 0, key;
+    var size = function (obj) {
+        var size = 0,
+            key;
         for (key in obj) {
             if (obj.hasOwnProperty(key)) size++;
         }
         return size;
     };
 
-    var convertData = function(res) {
-      var data = [];
-      var rowsize = 0;
-      if (res.rows.length > 0) {
-        rowsize = size(res.rows.item(0));
-        for (var i = 0; i < res.rows.length; i++) {
-//          var rowArray = [];
-//          var row = res.rows.item(i);
-//          for (var key in row) {
-//            rowArray.p
-//          }
-          var row = res.rows.item(i);
-          if (rowsize == 1) {
-            for (var k in row) data.push(row[k]);
-          }
-          else data.push(row);
+    var convertData = function (res) {
+        var data = [];
+        var rowsize = 0;
+        if (res.rows.length > 0) {
+            rowsize = size(res.rows.item(0));
+            for (var i = 0; i < res.rows.length; i++) {
+                //          var rowArray = [];
+                //          var row = res.rows.item(i);
+                //          for (var key in row) {
+                //            rowArray.p
+                //          }
+                var row = res.rows.item(i);
+                if (rowsize == 1) {
+                    for (var k in row) data.push(row[k]);
+                } else data.push(row);
+            }
         }
-      }
-      if (data.length == 1 && rowsize == 1) return data[0];
-      return data;
+        if (data.length == 1 && rowsize == 1) return data[0];
+        return data;
     };
 
     var openDB = function (successcallback, errorcallback) {
-      var _do = function () {
-        db.executeSql("select * from version", [], function(res) {
-          var data = convertData(res);
-          successcallback(data);
-        }, errorcallback);
-//                cordovaSQLite.execQueryArrayResult("select * from version", [],
-//                    successcallback,
-//                    errorcallback
-//                );
-      };
-      doWithDB(_do,errorcallback);
+        var _do = function () {
+            db.executeSql("select * from version", [], function (res) {
+                var data = convertData(res);
+                successcallback(data);
+            }, errorcallback);
+            //                cordovaSQLite.execQueryArrayResult("select * from version", [],
+            //                    successcallback,
+            //                    errorcallback
+            //                );
+        };
+        doWithDB(_do, errorcallback);
 
     }
     var process = function (url) {
         var deferred = $q.defer();
         JSZipUtils.getBinaryContent(url, function (err, data) {
             if (err) {
-              console.log("Error reading ZIP file: "+err);
+                console.log("Error reading ZIP file: " + err);
                 deferred.reject(err);
                 return;
             }
@@ -167,11 +167,11 @@ angular.module('viaggia.services.data', [])
 
     var mapVersions = function (arrayOfVersions) {
         var returnVersions = {};
-         for (var i = 0; i < arrayOfVersions.length; ++i) {
-           returnVersions[''+arrayOfVersions[i].agencyID] = arrayOfVersions[i].version;
-         }
-//        for (var i = 0; i < arrayOfVersions.length; ++i)
-//            returnVersions[arrayOfVersions[i][0]] = parseInt(arrayOfVersions[i][1]);
+        for (var i = 0; i < arrayOfVersions.length; ++i) {
+            returnVersions['' + arrayOfVersions[i].agencyID] = arrayOfVersions[i].version;
+        }
+        //        for (var i = 0; i < arrayOfVersions.length; ++i)
+        //            returnVersions[arrayOfVersions[i][0]] = parseInt(arrayOfVersions[i][1]);
         return returnVersions;
     }
 
@@ -203,7 +203,7 @@ angular.module('viaggia.services.data', [])
     var synchDB = function () {
         var deferred = $q.defer();
         var err = function (e) {
-            console.log("DB SYNC ERROR: "+e);
+            console.log("DB SYNC ERROR: " + e);
             deferred.reject(e);
         }
         var success = function () {
@@ -224,93 +224,97 @@ angular.module('viaggia.services.data', [])
         return deferred.promise;
     }
 
-    var syncStops = function() {
-            $http.get(Config.getServerURL() + '/versions')
+    var syncStops = function () {
+        $http.get(Config.getServerURL() + '/versions')
             .success(function (remoteversion) {
                 syncStopsForVersions(remoteversion);
             })
             .error(function (error) {
-              console.error('ERROR SYNC STOP DATA: '+error);
+                console.error('ERROR SYNC STOP DATA: ' + error);
             });
     };
 
-    var readLocalStopVersions = function() {
-      var localStopVersionsKey = Config.getAppId()+"_localStopVersions";
-      var localVersions = localStorage[localStopVersionsKey];
-      if (localVersions) localVersions = JSON.parse(localVersions);
-      else localVersions = {};
-      return localVersions;
+    var readLocalStopVersions = function () {
+        var localStopVersionsKey = Config.getAppId() + "_localStopVersions";
+        var localVersions = localStorage[localStopVersionsKey];
+        if (localVersions) localVersions = JSON.parse(localVersions);
+        else localVersions = {};
+        return localVersions;
     };
-    var writeLocalStopVersion = function(agency,version) {
-      var localStopVersionsKey = Config.getAppId()+"_localStopVersions";
-      var lv = readLocalStopVersions();
-      lv[agency] = version;
-      localStorage[localStopVersionsKey] = JSON.stringify(lv);
+    var writeLocalStopVersion = function (agency, version) {
+        var localStopVersionsKey = Config.getAppId() + "_localStopVersions";
+        var lv = readLocalStopVersions();
+        lv[agency] = version;
+        localStorage[localStopVersionsKey] = JSON.stringify(lv);
     };
 
-    var syncStopsForVersions = function(remoteversion) {
-      var agencies = Config.getAppAgencies();
-      var versions = {};
-      var localStopVersionsKey = Config.getAppId()+"_localStopVersions";
-      var localversion = readLocalStopVersions();
+    var syncStopsForVersions = function (remoteversion) {
+        var agencies = Config.getAppAgencies();
+        var versions = {};
+        var localStopVersionsKey = Config.getAppId() + "_localStopVersions";
+        var localversion = readLocalStopVersions();
 
-      agencies.forEach(function(a){
-        var key = Config.getAppId()+"_stops_"+a
-        var localStops = localStorage[key];
-        var localVersion = localversion[a] ? localversion[a] : -1;
-        var remoteVersion = remoteversion[a] ? remoteversion[a] : -1;
+        agencies.forEach(function (a) {
+            var key = Config.getAppId() + "_stops_" + a
+            var localStops = localStorage[key];
+            var localVersion = localversion[a] ? localversion[a] : -1;
+            var remoteVersion = remoteversion[a] ? remoteversion[a] : -1;
 
-        if (!localStops || localVersion < remoteVersion) {
-            $http.get(Config.getServerURL() + '/geostops/'+a+'?lat='+Config.getMapPosition().lat+'&lng='+Config.getMapPosition().long+'&radius=5')
-            .success(function (stops) {
-              localStorage[key] = JSON.stringify(stops);
-              writeLocalStopVersion(a, remoteVersion);
-            })
-            .error(function (error) {
-              console.error('ERROR SYNC STOP DATA: '+error);
-            });
-        }
-      });
+            if (!localStops || localVersion < remoteVersion) {
+                $http.get(Config.getServerURL() + '/geostops/' + a + '?lat=' + Config.getMapPosition().lat + '&lng=' + Config.getMapPosition().long + '&radius=5')
+                    .success(function (stops) {
+                        //              localStorage[key] = JSON.stringify(stops);
+                        //              writeLocalStopVersion(a, remoteVersion);
+                        if (Object.prototype.toString.call(stops) === '[object Array]') {
+                            localStorage[key] = JSON.stringify(stops);
+                            writeLocalStopVersion(a, remoteVersion);
+                        }
+                    })
+                    .error(function (error) {
+                        console.error('ERROR SYNC STOP DATA: ' + error);
+                    });
+            }
+        });
     }
 
     return {
-        doQuery: function(query, params) {
-          var deferred = $q.defer();
-          var _do = function () {
-            db.executeSql(query, params, function(res) {
-              var data = convertData(res);
-              deferred.resolve(data);
-            }, function(err) {
-              deferred.reject(err);
-            });
-//                  cordovaSQLite.execQuerySingleResult(query, params,
-//                      function(result) {
-//                        deferred.resolve(result);
-//                      },
-//                      function(err) {
-//                        deferred.reject(err);
-//                      }
-//                  );
-              };
-          doWithDB(_do,function(e) {
-                  console.error("!DB ERROR: "+e);
-                  deferred.reject(e);
+        doQuery: function (query, params) {
+            var deferred = $q.defer();
+            var _do = function () {
+                db.executeSql(query, params, function (res) {
+                    var data = convertData(res);
+                    deferred.resolve(data);
+                }, function (err) {
+                    deferred.reject(err);
                 });
-          return deferred.promise;
+                //                  cordovaSQLite.execQuerySingleResult(query, params,
+                //                      function(result) {
+                //                        deferred.resolve(result);
+                //                      },
+                //                      function(err) {
+                //                        deferred.reject(err);
+                //                      }
+                //                  );
+            };
+            doWithDB(_do, function (e) {
+                console.error("!DB ERROR: " + e);
+                deferred.reject(e);
+            });
+            return deferred.promise;
         },
-        syncStopData : syncStops,
+        syncStopData: syncStops,
         dbSetup: function () {
             var deferred = $q.defer();
             var err = function (error) {
                 deferred.reject(error);
-                console.log("NOT synch: "+error);
+                console.log("NOT synch: " + error);
 
             }
             var success = function () {
-                    deferred.resolve(true);
-                    console.log("synch done");
+                deferred.resolve(true);
+                console.log("synch done");
 
-                }
+            }
 
             //try to open db (check if db is present)
             localDBisPresent().then(function (result) {

@@ -21,24 +21,23 @@
                 <div id="table-col" ng-bind-html="colStr" style="width:{{stopsColWidth}}px;
                             line-height: {{stopsColLineHeight}}px;
                             top: {{tableHeaderHeight}}px;
-                            background:
-                            -webkit-repeating-linear-gradient(90deg,#fff, #fff {{rowHeight}}px, #eee {{rowHeight}}px, #eee {{rowHeight*2}}px);
-                            background:
-                            repeating-linear-gradient(180deg,#fff, #fff {{rowHeight}}px, #eee {{rowHeight}}px, #eee {{rowHeight*2}}px);" ng-click="showStop($event)"></div>
-                <div id="table-header" style="left:{{stopsColWidth}}px;background: -webkit-repeating-linear-gradient(0deg,#fff, #fff {{colwidth-1}}px, #bbb {{colwidth-1}}px, #bbb {{colwidth}}px);
-background: repeating-linear-gradient(90deg,#fff, #fff {{colwidth-1}}px, #bbb {{colwidth-1}}px, #bbb {{colwidth}}px);">
+                            background-size: 100% {{rowHeight*2}}px;
+                            background-image:
+                            -webkit-linear-gradient(90deg,#fff, #fff {{rowHeight}}px, #eee {{rowHeight}}px, #eee {{rowHeight*2}}px);
+                            background-image:
+                            linear-gradient(180deg,#fff, #fff {{rowHeight}}px, #eee {{rowHeight}}px, #eee {{rowHeight*2}}px);" ng-click="showStop($event)"></div>
+                <div id="table-header" style="left:{{stopsColWidth}}px;">
                     <div ng-bind-html="headStr[0]"></div>
                     <div ng-if="header_row_number == 2" ng-bind-html="headStr[1]"></div>
                 </div>
 
                 <div id="table-table" ng-bind-html="dataStr" style="left:{{stopsColWidth}}px;
                             top: {{tableHeaderHeight}}px;
-                            background:
-                            -webkit-repeating-linear-gradient(0deg, transparent, transparent {{colwidth-1}}px, #bbb {{colwidth-1}}px, #bbb {{colwidth}}px),
-                            -webkit-repeating-linear-gradient(90deg,transparent, transparent {{rowHeight}}px, #eee {{rowHeight}}px, #eee {{rowHeight*2}}px);
-                            background:
-                            repeating-linear-gradient(90deg,transparent, transparent {{colwidth-1}}px, #bbb {{colwidth-1}}px, #bbb {{colwidth}}px),
-                            repeating-linear-gradient(180deg,transparent, transparent {{rowHeight}}px, #eee {{rowHeight}}px, #eee {{rowHeight*2}}px);"></div>
+                            background-size: 100% {{rowHeight*2}}px;
+                            background-image:
+                            -webkit-linear-gradient(90deg,transparent, transparent {{rowHeight}}px, #eee {{rowHeight}}px, #eee {{rowHeight*2}}px);
+                            background-image:
+                            linear-gradient(180deg,transparent, transparent {{rowHeight}}px, #eee {{rowHeight}}px, #eee {{rowHeight*2}}px);"></div>
             </ion-scroll>
         </div>
 
@@ -51,6 +50,7 @@ background: repeating-linear-gradient(90deg,#fff, #fff {{colwidth-1}}px, #bbb {{
         <div ng-if="tt && tt.tripIds.length == 0" class="text-center">
             <h4>{{'no_tt' | translate}}</h4>
         </div>
+        <!--        <div id="measurer" style="white-space: nowrap;font-family: RobotoMono;font-size: 90%;color: transparent;background-color: transparent;position:absolute;">123456789</div>-->
         <div id="measurer" style="white-space: nowrap;font-family: RobotoMono;font-size: 12px;color: transparent;background-color: transparent;position:absolute;">123456789</div>
     </ion-content>
 </ion-view>

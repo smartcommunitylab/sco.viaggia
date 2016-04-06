@@ -507,8 +507,8 @@ angular.module('viaggia.controllers.plan', [])
         });
     };
 
-    var addFavoritePlaces = function (typedthings) {
-        var newplaces = $scope.places;
+    var addFavoritePlaces = function (typedthings, places) {
+        var newplaces = places;
         for (var i = 0; i < $scope.favoritePlaces.length; i++) {
             if (($scope.favoritePlaces[i].name.toUpperCase().indexOf(typedthings.toUpperCase()) > -1) && (newplaces.indexOf($scope.favoritePlaces[i].name) == -1)) { //se favorites places contiene la stringa e non fa ancora parte di places
                 //if is not already present in the array
@@ -532,16 +532,21 @@ angular.module('viaggia.controllers.plan', [])
         };
 
         $scope.result = typedthings;
-        $scope.newplaces = planService.getTypedPlaces(typedthings);
-        $scope.newplaces.then(function (data) {
+        //        $scope.newplaces = planService.getTypedPlaces(typedthings);
+        //        $scope.newplaces.then(function (data) {
+        planService.getTypedPlaces(typedthings).then(function (data) {
             //merge with favorites and check no double values
-            $scope.places = data;
+            //            $scope.places = data;
+            $scope['places' + fromOrTo] = data;
+
             if (data.length > 0) {
-                $scope.places = addFavoritePlaces(typedthings);
+                //                $scope.places = addFavoritePlaces(typedthings);
+                $scope['places' + fromOrTo] = addFavoritePlaces(typedthings, $scope['places' + fromOrTo]);
                 $scope.placesandcoordinates = planService.getnames();
                 $scope.placesandcoordinates = planService.addnames($scope.favoritePlaces);
             } else {
-                $scope.places = null;
+                // $scope.places = null;
+                $scope['places' + fromOrTo] = null;
                 $scope.placesandcoordinates = null;
             }
         });
@@ -555,7 +560,8 @@ angular.module('viaggia.controllers.plan', [])
     };
 
     $scope.resetParams = function (fromOrTo) {
-        $scope.places = null;
+        //$scope.places = null;
+        $scope['places' + fromOrTo] = null;
         $scope.placesandcoordinates = null;
         $scope.planParams[fromOrTo] = {
             name: '',
