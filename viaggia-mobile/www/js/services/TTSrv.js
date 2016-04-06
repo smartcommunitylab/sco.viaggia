@@ -112,6 +112,7 @@ angular.module('viaggia.services.timetable', [])
         DataManager.doQuery("SELECT * FROM route WHERE agencyID = '" + agency + "' AND linehash = '" + hash + "'", [])
             .then(function (data) {
                 if (!data || !data[0] || !data[0].stopsNames) {
+                    deferred.notify(result);
                     deferred.resolve(result);
                     return;
                 }
