@@ -37,26 +37,27 @@ angular.module('viaggia.services.data', [])
 
     }
 
-    var doWithDB = function (successcallback, errorcallback) {
-        if (db == null) {
-            window.sqlitePlugin.openDatabase({
-                name: getDBFileShortName(),
-                bgType: 1,
-                skipBackup: true
-            }, function (dbres) {
-                db = dbres;
-                successcallback();
-            }, function () {
-                console.log('DBOPEN ERROR');
-                errorcallback();
-            });
-            //        db = cordovaSQLite.openDatabase(getDBFileName(), false,
-            //            _do,
-            //            errorcallback
-            //        );
-        } else {
-            successcallback();
-        }
+    var doWithDB = function(successcallback, errorcallback) {
+      if (db == null) {
+        window.sqlitePlugin.openDatabase({
+            name: getDBFileShortName(),
+            bgType: 1,
+            skipBackup: true,
+            iosDatabaseLocation: 'Documents'
+        }, function(dbres){
+          db = dbres;
+          successcallback();
+        },function(){
+          console.log('DBOPEN ERROR');
+          errorcallback();
+        });
+//        db = cordovaSQLite.openDatabase(getDBFileName(), false,
+//            _do,
+//            errorcallback
+//        );
+      } else {
+        successcallback();
+      }
     };
 
     var size = function (obj) {

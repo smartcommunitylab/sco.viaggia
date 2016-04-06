@@ -24,11 +24,11 @@ angular.module('viaggia.services.markets', [])
         return park;
     }
     marketService.initMarketFavorites = function () {
-//        var alreadywritten = localStorage.getItem(Config.getAppId() + "_alreadywritten");
-//        if (favorites && !!!alreadywritten) {
-//            localStorage.setItem(Config.getAppId() + "_favoritePlaces", JSON.stringify(favorites));
-//            localStorage.setItem(Config.getAppId() + "_alreadywritten", "true");
-//        };
+        var alreadywritten = localStorage.getItem(Config.getAppId() + "_alreadywritten");
+        if (favorites && !!!alreadywritten) {
+            localStorage.setItem(Config.getAppId() + "_favoritePlaces", JSON.stringify(favorites));
+            localStorage.setItem(Config.getAppId() + "_alreadywritten", "true");
+        };
     }
 
     return marketService;

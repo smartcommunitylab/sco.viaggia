@@ -4,7 +4,7 @@
     "messagingAppId": "mobility.rovereto",
     "senderID": "453601816446",
     "appversion": "2.1.0",
-    "appname": "Viaggia Rovereto",
+    "appname": "Viaggia Rovereto Play&Go",
     "serverURL": "https://dev.smartcommunitylab.it/core.mobility",
     "messagingServerURL": "https://dev.smartcommunitylab.it/core.communicator",
     "newsRSS": "https://dev.smartcommunitylab.it/core.mobility/announcements/rss/rovereto",
@@ -130,7 +130,7 @@
         "preventSuspend": false,
         "heartbeatInterval": 60,
         "stopOnTerminate": false,
-        "debug": true,
+        "debug": false,
 
         "locationUpdateInterval": 5000,
         "minimumActivityRecognitionConfidence": 50,
@@ -148,3 +148,4 @@
         "batchSync": true,
         "autoSync": false
     }
+}

@@ -31,6 +31,11 @@
                                     <p class="green-title">{{'journey_details_sustainable' | translate}}</p>
                                 </div>
                             </div>
+                            <div class="green-points">
+                                <img class="points-image" src="img/ribbon.png">
+                                <span class="text-muted text-center points" ng-if="currentItinerary.customData['estimatedScore']">{{currentItinerary.customData["estimatedScore"]}}</span>
+                                <span class="text-muted text-center points" ng-if="!currentItinerary.customData['estimatedScore']">0</span>
+                            </div>
                             <!-- START -->
                             <div class="row leg">
                                 <div class=" start-leg">

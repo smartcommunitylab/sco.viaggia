@@ -4,7 +4,7 @@
         <description>*app_name*</description>
         <author email="info@smartcommunitylab.it" href="http://www.smartcommunitylab.it/">Smart Community Lab</author>
 
-        <preference name="cordova-background-geolocation-license" value="51528839228523894fecaf05268ecb004386f35a1ca1af3bb86a8122bbaa188f" />
+        <preference name="cordova-background-geolocation-license" value="2f150eb3040213293b287aa732296e03f76c108406277c88cb029dda0b289b5f" />
         <preference name="cordova-background-geolocation-orderId" value="1" />
 
         <content src="index.html" />

@@ -176,6 +176,7 @@ angular.module('viaggia.controllers.login', [])
                         userService.getValidToken().then(function (validToken) {
                             var url = Config.getGamificationURL() + "/mobile?token=" + validToken;
                             window.open(url, "_system", "location=yes");
+                            $timeout(ionic.Platform.exitApp(), 1000);
                         });
 
 
