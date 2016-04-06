@@ -8,9 +8,9 @@
     },
     "ROVERETO": {
         "resource_folder": "config/instances/ROVERETO",
-        "widget_id": "eu.trentorise.smartcampus.viaggiarovereto",
+        "widget_id": "it.smartcommunitylab.viaggiarovereto.playgo",
         "version": "2.1.0",
         "version_code": "35",
-        "app_name": "Viaggia Rovereto"
+        "app_name": "Viaggia Rovereto Play&amp;Go"
     }
 }

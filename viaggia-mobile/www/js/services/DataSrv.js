@@ -42,7 +42,8 @@ angular.module('viaggia.services.data', [])
         window.sqlitePlugin.openDatabase({
             name: getDBFileShortName(),
             bgType: 1,
-            skipBackup: true
+            skipBackup: true,
+            iosDatabaseLocation: 'Documents'
         }, function(dbres){
           db = dbres;
           successcallback();
