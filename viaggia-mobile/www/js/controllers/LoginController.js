@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.login', [])
 
-.controller('LoginCtrl', function ($scope, $ionicSideMenuDelegate, $ionicLoading, $ionicPlatform, $state, $ionicHistory, $ionicPopup, $timeout, $filter, loginService, userService, Config, storageService) {
+.controller('LoginCtrl', function ($scope, $ionicSideMenuDelegate, $ionicLoading, $ionicPlatform, $state, $ionicHistory, $ionicPopup, $timeout, $filter, loginService, userService, Config, storageService, Toast) {
     $ionicSideMenuDelegate.canDragContent(false);
 
 
@@ -39,6 +39,8 @@ angular.module('viaggia.controllers.login', [])
                 },
                 function (msg) {
                     $ionicLoading.hide();
+                    Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
+
                 }
             );
         }
