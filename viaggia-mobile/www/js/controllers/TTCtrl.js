@@ -126,17 +126,16 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 .controller('TTCtrl', function ($scope, $state, $location, $stateParams, $ionicPosition, $ionicScrollDelegate, $timeout, $filter, ttService, Config, Toast, bookmarkService) {
     $scope.data = [];
     var rowHeight = 20;
-    $scope.rowHeight = rowHeight
+    $scope.rowHeight = rowHeight;
     var headerRowHeight = 21; // has a border
     $scope.stopsColWidth = 100; // has border
 
     $scope.stopsColLineHeight = 20;
     if (ionic.Platform.isWebView() && ionic.Platform.isIOS() && ionic.Platform.version() < 9) {
         $scope.stopsColLineHeight = 21;
+        rowHeight = 21;
+        $scope.rowHeight = rowHeight;
     }
-    rowHeight = 21;
-    $scope.rowHeight = rowHeight;
-
     // header height from the standard style. Augmented in case of iOS non-fullscreen.
     var headerHeight = 44 + 50 + 1;
     if (ionic.Platform.isIOS() && !ionic.Platform.isFullScreen) {
