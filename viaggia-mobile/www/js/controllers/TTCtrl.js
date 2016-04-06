@@ -259,6 +259,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
             //      }
 
             var columnScrollTo = ttService.locateTablePosition(data, new Date());
+            columnScrollTo = Math.min(columnScrollTo, data.tripIds.length - ($scope.scrollWidth - $scope.stopsColWidth) / $scope.colwidth);
             var pos = $scope.colwidth * columnScrollTo;
             //alert('scroll to:' + pos);
             $ionicScrollDelegate.$getByHandle('list').scrollTo(pos, 0, true);

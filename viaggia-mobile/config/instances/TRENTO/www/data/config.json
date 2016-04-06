@@ -3,7 +3,7 @@
     "appid": "trento",
     "messagingAppId": "mobility.trento",
     "senderID": "453601816446",
-    "appversion": "2.1.0",
+    "appversion": "2.1.1",
     "appname": "Viaggia Trento",
     "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
     "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",

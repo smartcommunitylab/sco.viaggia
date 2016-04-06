@@ -278,7 +278,7 @@ angular.module('viaggia.services.timetable', [])
                         if (data.times[i][j].localeCompare(time) >= 0) {
                             return i;
                         }
-                        break;
+                        // break;
                     }
                 }
             }
