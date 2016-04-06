@@ -49,7 +49,7 @@
                 "color": "#60b35c"
             },
             {
-                "state": "/app/plan",
+                "state": "newPlan()",
                 "label": "menu_plan",
                 "icon": "ic_search",
                 "color": "#3BBACF"

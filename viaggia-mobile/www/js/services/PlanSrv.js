@@ -61,6 +61,8 @@ angular.module('viaggia.services.plan', [])
             return $filter('translate')('action_train');
         case 'PARKWALK':
             return $filter('translate')('action_walk');
+        case 'TRANSIT':
+            return $filter('translate')('action_cablecar');
         default:
             return $filter('translate')('action_walk');
         }
@@ -311,7 +313,8 @@ angular.module('viaggia.services.plan', [])
             step.fromLabel = $filter('translate')('journey_details_from');
             step.toLabel = $filter('translate')('journey_details_to');
         }
-        if (leg.transport.type == 'BUS' || leg.transport.type == 'TRAIN' || leg.transport.type == 'TRANSIT') {
+        //        if (leg.transport.type == 'BUS' || leg.transport.type == 'TRAIN' || leg.transport.type == 'TRANSIT') {
+        if (leg.transport.type == 'BUS' || leg.transport.type == 'TRAIN') {
             step.actionDetails = leg.transport.routeShortName;
         }
 

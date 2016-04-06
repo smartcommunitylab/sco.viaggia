@@ -134,6 +134,8 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     if (ionic.Platform.isWebView() && ionic.Platform.isIOS() && ionic.Platform.version() < 9) {
         $scope.stopsColLineHeight = 21;
     }
+    rowHeight = 21;
+    $scope.rowHeight = rowHeight;
 
     // header height from the standard style. Augmented in case of iOS non-fullscreen.
     var headerHeight = 44 + 50 + 1;
@@ -547,6 +549,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                 long: $scope.popupStop.coordinates[1]
             },
         });
+        planService.setName('to', $scope.popupStop.name);
         $state.go('app.plan');
     };
 
