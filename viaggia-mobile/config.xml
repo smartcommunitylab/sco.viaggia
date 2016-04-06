@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-    <widget id="eu.trentorise.smartcampus.viaggiarovereto" version="2.0.0" android-versionCode="26" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-        <name>Viaggia Rovereto</name>
-        <description>Viaggia Rovereto</description>
+    <widget id="it.smartcommunitylab.viaggiarovereto.playgo" version="2.1.0" android-versionCode="35" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+        <name>Viaggia Rovereto Play&amp;Go</name>
+        <description>Viaggia Rovereto Play&amp;Go</description>
         <author email="info@smartcommunitylab.it" href="http://www.smartcommunitylab.it/">Smart Community Lab</author>
 
-        <preference name="cordova-background-geolocation-license" value="51528839228523894fecaf05268ecb004386f35a1ca1af3bb86a8122bbaa188f" />
+        <preference name="cordova-background-geolocation-license" value="2f150eb3040213293b287aa732296e03f76c108406277c88cb029dda0b289b5f" />
         <preference name="cordova-background-geolocation-orderId" value="1" />
 
         <content src="index.html" />

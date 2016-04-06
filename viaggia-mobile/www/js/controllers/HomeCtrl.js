@@ -133,10 +133,10 @@ angular.module('viaggia.controllers.home', [])
         $state.go('app.notifications');
     }
     $scope.go = function (state) {
-        if ("openGamificationBoard()" === state) {
-            $scope.openGamificationBoard();
+        if (state.indexOf('(') > 0) {
+          eval('$scope.'+state);
         } else {
-            $location.path(state);
+          $location.path(state);
         }
 
     }

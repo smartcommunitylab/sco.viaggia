@@ -7,42 +7,70 @@ angular.module('viaggia.controllers.login', [])
 
     // This method is executed when the user press the "Sign in with Google" button
     $scope.googleSignIn = function () {
-            $ionicLoading.show({
-                template: 'Logging in...'
-            });
-
-            window.plugins.googleplus.login({
-                    //                    'scopes': 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
-                    'scopes': 'profile email',
-                    'offline': true
-                },
-                function (user_data) {
-                    userService.setGoogleUser({
-                        userID: user_data.userId,
-                        name: user_data.displayName,
-                        email: user_data.email,
-                        picture: user_data.imageUrl,
-                        oauthToken: user_data.oauthToken,
-                        idToken: user_data.idToken
-                    });
-
+        $ionicLoading.show({
+            template: 'Logging in...'
+        });
+        $timeout(function () {
+            $ionicLoading.hide(); //close the popup after 3 seconds for some reason
+        }, 3000);
+        loginService.login(null, 'google').then(function (profile) {
+            //                                       check if user is valid
+            userService.validUserForGamification(profile).then(function (valid) {
                     $ionicLoading.hide();
+                    storageService.saveUser(profile);
 
-                    //$state.go('app.home');
-                    userService.setGoogleToken(user_data.oauthToken);
-                    loginService.login(user_data.oauthToken ? user_data.oauthToken : user_data.accessToken, 'googlelocal').then(function (profile) {
-                        //check if user is valid
+                    if (valid) {
+                        //go on to home page
+                        $state.go('app.home');
+                        $ionicHistory.nextViewOptions({
+                            disableBack: true,
+                            historyRoot: true
+                        });
+                    } else {
+                        // open popup for validating user
+                        validateUserPopup();
+                    }
 
-                        $scope.validateUserForGamification(profile);
-
-                    })
                 },
                 function (msg) {
                     $ionicLoading.hide();
-                    Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
+                });
+        }, function (err) {
+            $ionicLoading.hide();
+        });
 
-                }
-            );
+//            window.plugins.googleplus.login({
+//                    //                    'scopes': 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
+//                    'scopes': 'profile email',
+//                    'offline': true
+//                },
+//                function (user_data) {
+//                    userService.setGoogleUser({
+//                        userID: user_data.userId,
+//                        name: user_data.displayName,
+//                        email: user_data.email,
+//                        picture: user_data.imageUrl,
+//                        oauthToken: user_data.oauthToken,
+//                        idToken: user_data.idToken
+//                    });
+//
+//                    $ionicLoading.hide();
+//
+//                    //$state.go('app.home');
+//                    userService.setGoogleToken(user_data.oauthToken);
+//                    loginService.login(user_data.oauthToken ? user_data.oauthToken : user_data.accessToken, 'googlelocal').then(function (profile) {
+//                        //check if user is valid
+//
+//                        $scope.validateUserForGamification(profile);
+//
+//                    })
+//                },
+//                function (msg) {
+//                    $ionicLoading.hide();
+//                    Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
+//
+//                }
+//            );
         }
         //This is the success callback from the login method
     $scope.validateUserForGamification = function (profile) {

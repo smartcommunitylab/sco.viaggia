@@ -35,10 +35,11 @@
     "https://github.com/transistorsoft/cordova-background-geolocation.git",
     {
       "variables": {
-        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.453601816446-vvnphv5menkcvcadar9tkm1ev5b1462n"
+        "SENDER_ID": "453601816446",
+        "GOOGLE_APP_ID": "453601816446"
       },
-      "locator": "https://github.com/smartcommunitylab/cordova-plugin-googleplus",
-      "id": "cordova-plugin-googleplus"
+      "locator": "phonegap-plugin-push@1.5.3",
+      "id": "phonegap-plugin-push"
     }
   ],
   "cordovaPlatforms": [
