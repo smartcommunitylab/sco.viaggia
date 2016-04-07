@@ -33,6 +33,11 @@
     src: local('RobotoDraft Italic'), local('RobotoDraft-Italic'), url(../fonts/RobotoDraft-Italic.woff) format('woff');
 }
 
+em,
+i {
+    font-style: italic;
+}
+
 .mfb-component__button--main i,
 .mfb-component__button--child i {
     font-size: 24px;
@@ -618,6 +623,12 @@ ion-header-bar .title {
 .empty-list-card {
     min-height: 50px;
     text-align: center;
+}
+
+.empty-favorites-card {
+    min-height: 50px;
+    text-align: center;
+    margin-top: 30px;
 }
 
 .credits_title {

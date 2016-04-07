@@ -7,8 +7,8 @@
 
     </ion-header-bar>
     <ion-content>
-        <div class="empty-list-card" ng-hide="favoritePlaces.length>0">
-            {{'favorites_empty_list'|translate}}
+        <div class="empty-favorites-card" ng-hide="favoritePlaces.length>0">
+            <p ng-bind-html="'favorites_empty_list'|translate"></p>
         </div>
         <ion-list ng-hide="favoritePlaces.length==0">
             <a class="item  item-icon-right" ng-repeat="favorite in favoritePlaces track by $index">
