@@ -43,10 +43,18 @@ angular.module('viaggia.controllers.planlist', [])
     $scope.showPlan = function (journey) {
         planService.setSelectedJourney(journey);
         if ($scope.tripId) {
-            $state.go('app.newtripdetails', {
-                tripId: $scope.tripId,
-                replan: true
-            });
+            if (planService.getEditInstance()) {
+                $state.go('app.newtripdetails', {
+                    tripId: $scope.tripId,
+                    replan: true,
+                    lastStep: true
+                });
+            } else {
+                $state.go('app.newtripdetails', {
+                    tripId: $scope.tripId,
+                    replan: true
+                })
+            };
         } else {
             $state.go('app.newtripdetails');
         }

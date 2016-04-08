@@ -108,7 +108,9 @@ angular.module('viaggia.services.tracking', [])
                 trackingConfigure['notificationTitle'] = $filter('translate')('tracking_notification_title');
                 trackingConfigure['notificationText'] = $filter('translate')('tracking_notification_text');
                 trackingConfigure['url'] += token;
-                trackingConfigure['extras'] = { idTrip: idTrip };
+                trackingConfigure['extras'] = {
+                    idTrip: idTrip
+                };
                 bgGeo.configure(callbackFn, failureFn, trackingConfigure);
 
                 //setto le variabili in localstorage
@@ -122,10 +124,10 @@ angular.module('viaggia.services.tracking', [])
                     trackService.stop();
                     if (callback) callback();
                 }, endTime - startTimestamp);
-//                                $timeout(function() {
-//trackService.stop();
-//if (callback) callback();
-//}, 5000);
+                //                                $timeout(function() {
+                //trackService.stop();
+                //if (callback) callback();
+                //}, 5000);
 
                 bgGeo.start(function () {
                     bgGeo.changePace(true);
@@ -335,6 +337,26 @@ angular.module('viaggia.services.tracking', [])
                     var arrayOfDate = getnotificationDates(tripToSave);
                     arrayOfDate.forEach(function (calculateddate) {
                         var targetDate = new Date(calculateddate - (1000 * 60 * 10));
+                        if (targetDate > dFrom) {
+                            notifArray.push({
+                                id: Math.floor(targetDate.getTime() / 1000),
+                                title: $filter('translate')('notification_tracking_title'),
+                                text: $filter('translate')('notification_tracking_text'),
+                                icon: 'res://icon.png',
+                                //autoCancel: false,
+                                autoClear: false,
+                                at: targetDate,
+                                data: {
+                                    tripId: tripId
+                                }
+                            })
+                        }
+                    });
+                } else {
+                    //put just one notification
+                    //tripToSave.data.startime - 10 min
+                    var targetDate = new Date(tripToSave.data.startime - (1000 * 60 * 10));
+                    if (targetDate > dFrom) {
                         notifArray.push({
                             id: Math.floor(targetDate.getTime() / 1000),
                             title: $filter('translate')('notification_tracking_title'),
@@ -346,24 +368,8 @@ angular.module('viaggia.services.tracking', [])
                             data: {
                                 tripId: tripId
                             }
-                        })
-                    });
-                } else {
-                    //put just one notification
-                    //tripToSave.data.startime - 10 min
-                    var targetDate = new Date(tripToSave.data.startime - (1000 * 60 * 10));
-                    notifArray.push({
-                        id: Math.floor(targetDate.getTime() / 1000),
-                        title: $filter('translate')('notification_tracking_title'),
-                        text: $filter('translate')('notification_tracking_text'),
-                        icon: 'res://icon.png',
-                        //autoCancel: false,
-                        autoClear: false,
-                        at: targetDate,
-                        data: {
-                            tripId: tripId
-                        }
-                    });
+                        });
+                    }
                 }
                 if (cordova && cordova.plugins && cordova.plugins.notification && notifArray) {
                     switch (action) {
@@ -450,6 +456,7 @@ angular.module('viaggia.services.tracking', [])
                         day_index = 7;
                     }
                     if (trip.recurrency.daysOfWeek.indexOf(day_index) != -1) {
+                        console.log(next_days_date);
                         arrayOfDate.push(next_days_date);
                     }
                 }

@@ -605,6 +605,7 @@ angular.module('viaggia.services.plan', [])
         }
         return returndays;
     };
+
     planService.saveTrip = function (tripId, trip, name, requestedFrom, requestedTo, recurrency) {
         var deferred = $q.defer();
         var daysOfWeek = getDaysOfRecurrency(recurrency);
@@ -615,19 +616,20 @@ angular.module('viaggia.services.plan', [])
         }
         console.log(JSON.stringify(trip));
 
-        var urlBuilt = "";
-        var databuilt = null;
-        if (!newTrip) {
-            urlBuilt = Config.getServerURL() + "/itinerary/" + tripId;
-            databuilt = buildData(tripId, trip, name, requestedFrom, requestedTo, recurrency, daysOfWeek);
-        } else {
-            urlBuilt = Config.getServerURL() + "/itinerary";
-            databuilt = buildData(null, trip, name, requestedFrom, requestedTo, recurrency, daysOfWeek);
-        }
+        var urlBuilt = Config.getServerURL() + "/itinerary";
+        var databuilt = buildData(null, trip, name, requestedFrom, requestedTo, recurrency, daysOfWeek);
+        //        if (!newTrip) {
+        //            //create a new and delete the old one
+        //            //urlBuilt = Config.getServerURL() + "/itinerary/" + tripId;
+        //            databuilt = buildData(tripId, trip, name, requestedFrom, requestedTo, recurrency, daysOfWeek);
+        //        } else {
+        //            //urlBuilt = Config.getServerURL() + "/itinerary";
+        //            databuilt = buildData(null, trip, name, requestedFrom, requestedTo, recurrency, daysOfWeek);
+        //        }
         var methodTrip = 'POST';
-        if (!newTrip) {
-            methodTrip = 'PUT';
-        }
+        //        if (!newTrip) {
+        //            methodTrip = 'PUT';
+        //}
         userService.getValidToken().then(function (token) {
             userId = storageService.getUserId();
 
@@ -658,6 +660,14 @@ angular.module('viaggia.services.plan', [])
                 localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
                 if (!newTrip) {
                     trackService.updateNotification(databuilt, databuilt.clientId, "modify");
+                    //delete the old one from local storage and from server
+                    planService.deleteTrip(tripId).then(function (value) {
+                        console.log(JSON.stringify(value));
+                    }, function (error) {
+                        //in case delete has some problems delete from localstorage
+                        localDelete(tripId, deferred);
+                        console.log(JSON.stringify(error));
+                    });
                 } else {
                     trackService.updateNotification(databuilt, databuilt.clientId, "create");
                 }
@@ -673,6 +683,7 @@ angular.module('viaggia.services.plan', [])
 
         return deferred.promise;
     }
+
 
     function buildData(tripId, trip, name, requestedFrom, requestedTo, recurrency, daysOfWeek) {
         databuilt = null;

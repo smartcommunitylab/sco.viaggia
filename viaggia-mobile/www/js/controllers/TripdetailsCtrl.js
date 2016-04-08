@@ -62,24 +62,38 @@ angular.module('viaggia.controllers.tripdetails', [])
             $scope.requestedTo = trip.to.name;
         }
         var editInstance = planService.getEditInstance();
-        $scope.tripId = editInstance ? editInstance.tripId : null;
+        $scope.tripId = editInstance ? editInstance.clientId : null;
         //        if (trip.original) {
         //            //not yet processed
         //            delete trip.original;
         //        }
-        if (trip && trip.recurrency) {
-            $scope.recurrency = trip.recurrency;
+        if (editInstance && editInstance.recurrency) {
+            $scope.recurrency = editInstance.recurrency;
+        }
+        if (editInstance && editInstance.name) {
+            $scope.tripName = editInstance.name;
         }
         planService.process(trip, $scope.requestedFrom, $scope.requestedTo);
         $scope.currentItinerary = trip;
         $scope.pathLine = mapService.getTripPolyline(trip);
         $scope.pathMarkers = mapService.getTripPoints(trip);
-        planService.getTrip($scope.tripId).then(function (trip) {
-            if (trip) {
-                $scope.recurrency = trip.recurrency;
-            }
-
-        });
+        //        planService.getTrip($scope.tripId).then(function (trip) {
+        //            if (trip) {
+        //                $scope.recurrency = trip.recurrency;
+        //            }
+        //
+        //        });
+        //        if ($stateParams.lastStep) {
+        //            planService.getTrip($stateParams.tripId).then(function (trip) {
+        //                $scope.tripName = trip.name;
+        //                $scope.recurrency = trip.recurrency;
+        //                if ($scope.isRecurrent()) {
+        //                    $scope.recurrentDays = $scope.getRecurrentDays($scope.recurrency);
+        //                }
+        //
+        //            });
+        //
+        //        }
         angular.extend($scope, {
             center: {
                 lat: Config.getMapPosition().lat,
@@ -168,7 +182,7 @@ angular.module('viaggia.controllers.tripdetails', [])
                 }
             }
         }
-        if ($scope.tripId && editInstance) {
+        if (editInstance && editInstance.clientId) {
             $scope.data.nametrip = editInstance.name;
         }
         // Prompt popup code
@@ -205,21 +219,29 @@ angular.module('viaggia.controllers.tripdetails', [])
                             navigateAfterSave($scope.tripId);
                             Config.loaded();
 
+                        }, function (error) {
+                            Toast.show($filter('translate')("save_trip_error_message"), "short", "bottom");
+                            Config.loaded();
                         })
 
                     } else {
                         planService.saveTrip($scope.tripId, $scope.trip, $scope.data.nametrip, $scope.requestedFrom, $scope.requestedTo, $scope.recurrencyPopupDoW).then(function (res) {
-                            planService.setEditInstance(null);
-                            $scope.tripId = res.clientId;
-                            $ionicHistory.nextViewOptions({
-                                historyRoot: true,
-                                disableBack: true
-                            });
-                            Toast.show($filter('translate')("tripsaved_message_feedback"), "short", "bottom");
-                            navigateAfterSave($scope.tripId);
-                            Config.loaded();
+                                planService.setEditInstance(null);
+                                $scope.tripId = res.clientId;
+                                $ionicHistory.nextViewOptions({
+                                    historyRoot: true,
+                                    disableBack: true
+                                });
+                                Toast.show($filter('translate')("tripsaved_message_feedback"), "short", "bottom");
+                                navigateAfterSave($scope.tripId);
+                                Config.loaded();
 
-                        });
+                            },
+
+                            function (error) {
+                                Toast.show($filter('translate')("save_trip_error_message"), "short", "bottom");
+                                Config.loaded();
+                            });
                     }
                 }
 
@@ -451,7 +473,7 @@ angular.module('viaggia.controllers.tripdetails', [])
     if (!$scope.isAvailableForDay()) {
         $scope.isAvailable = false;
     }
-    if ($stateParams.tripId) {
+    if ($stateParams.tripId && $stateParams.lastStep == false) {
         initMyTrip();
     } else {
         initNewTrip();

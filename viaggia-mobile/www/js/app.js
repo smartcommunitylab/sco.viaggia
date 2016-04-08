@@ -238,7 +238,8 @@ angular.module('viaggia', [
                 url: "/tripdetails/:tripId",
                 params: {
                     tripId: null,
-                    replan: false
+                    replan: false,
+                    lastStep: false
                 },
                 views: {
                     'menuContent': {
@@ -251,7 +252,8 @@ angular.module('viaggia', [
                 url: "/tripdetails",
                 params: {
                     tripId: null,
-                    replan: false
+                    replan: false,
+                    lastStep: false
                 },
                 views: {
                     'menuContent': {
