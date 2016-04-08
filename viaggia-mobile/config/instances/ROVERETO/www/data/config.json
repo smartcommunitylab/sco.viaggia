@@ -120,7 +120,7 @@
         "desiredAccuracy": 0,
         "distanceFilter": 20,
         "stationaryRadius": 20,
-        "activityType": "Other",
+        "activityType": "OtherNavigation",
         "disableElasticity": false,
 
         "stopDetectionDelay": 0,
