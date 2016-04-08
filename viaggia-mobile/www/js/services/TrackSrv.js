@@ -108,6 +108,7 @@ angular.module('viaggia.services.tracking', [])
                 trackingConfigure['notificationTitle'] = $filter('translate')('tracking_notification_title');
                 trackingConfigure['notificationText'] = $filter('translate')('tracking_notification_text');
                 trackingConfigure['url'] += token;
+                trackingConfigure['extras'] = { idTrip: idTrip };
                 bgGeo.configure(callbackFn, failureFn, trackingConfigure);
 
                 //setto le variabili in localstorage
