@@ -38,6 +38,12 @@ i {
     font-style: italic;
 }
 
+.list-welcome {
+    list-style-type: disc;
+    text-align: left;
+    padding-left: 20px;
+}
+
 .mfb-component__button--main i,
 .mfb-component__button--child i {
     font-size: 24px;

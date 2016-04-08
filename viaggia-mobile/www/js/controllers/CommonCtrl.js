@@ -37,6 +37,20 @@ angular.module('viaggia.controllers.common', [])
             window.open(url, "_system", "location=yes");
         })
     }
+
+    $scope.closePopup = function () {
+        $scope.firstOpenPopup.close();
+    }
+    $scope.showPlayAndGoPopup = function () {
+        $scope.firstOpenPopup = $ionicPopup.show({
+            templateUrl: 'templates/welcomePopup.html',
+            title: $filter('translate')('lbl_betatesting'),
+            cssClass: 'parking-popup',
+            scope: $scope
+
+        });
+
+    }
     $scope.newPlan = function () {
             planService.setPlanConfigure(null);
             $state.go('app.plan');

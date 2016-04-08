@@ -664,7 +664,12 @@ angular.module('viaggia', [
             tracking_notification_title: 'Viaggia Rovereto',
             tracking_notification_text: 'Monitoraggio di viaggio attivato',
             toast_not_deletable: 'Impossibile cancellare un viaggio in corso',
-            toast_not_modifiable: 'Impossibile modificare un viaggio in corso'
+            toast_not_modifiable: 'Impossibile modificare un viaggio in corso',
+            lbl_welcome_title: 'Play&Go',
+            lbl_welcome_text: '<ul class="list-welcome"><li>Pianifica i tuoi viaggi</li><li>Salva il tuo itinerario</li><li>Ricordati di tracciare il tuo percorso quando esegui il viaggio!</li></ul>',
+            btn_rules: 'REGOLE',
+            btn_score: 'PUNTEGGIO'
+
         });
 
 
@@ -877,7 +882,11 @@ angular.module('viaggia', [
             tracking_notification_title: 'Viaggia Rovereto Play&Go',
             tracking_notification_text: 'Journey monitoring activated',
             toast_not_deletable: 'Impossible to delete a running journey',
-            toast_not_modifiable: 'Impossible to modify a running journey'
+            toast_not_modifiable: 'Impossible to modify a running journey',
+            lbl_welcome_title: 'Play&Go',
+            lbl_welcome_text: '<ul class="list-welcome"><li>Plan your journey</li><li>Save your journey</li><li>Remember to track your route when you do the journey!</li></ul>',
+            btn_rules: 'RULES',
+            btn_score: 'SCORE'
 
         });
 

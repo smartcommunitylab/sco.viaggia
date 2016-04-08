@@ -190,6 +190,7 @@ angular.module('viaggia.controllers.plan', [])
         backdropClickToClose: false,
         animation: 'slide-in-up'
     }).then(function (modal) {
+        mapService.initMap('planMapModal');
         $scope.modalMap = modal;
     });
 

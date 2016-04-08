@@ -44,7 +44,7 @@
     "visualization": {
         "primaryLinks": [
             {
-                "state": "openGamificationBoard()",
+                "state": "showPlayAndGoPopup()",
                 "label": "home_gamification",
                 "icon": "ion-leaf",
                 "color": "#60b35c"
@@ -126,7 +126,7 @@
         "stopDetectionDelay": 0,
         "stopTimeout": 1,
         "activityRecognitionInterval": 10000,
-        "disableMotionActivityUpdates" : false,
+        "disableMotionActivityUpdates": false,
 
         "preventSuspend": false,
         "heartbeatInterval": 60,

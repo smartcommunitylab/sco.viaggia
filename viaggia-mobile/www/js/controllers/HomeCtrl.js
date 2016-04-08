@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.home', [])
 
-.controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, userService, planService, $ionicLoading) {
+.controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, userService, planService, $ionicLoading, $ionicPopup) {
     //load from localstorage the id notifications read
     $ionicPlatform.ready(function () {
         document.addEventListener("resume", function () {
@@ -9,6 +9,7 @@ angular.module('viaggia.controllers.home', [])
 
 
     });
+
 
     //aggoiorna le notifiche
     var notificationInit = function () {
@@ -134,9 +135,9 @@ angular.module('viaggia.controllers.home', [])
     }
     $scope.go = function (state) {
         if (state.indexOf('(') > 0) {
-          eval('$scope.'+state);
+            eval('$scope.' + state);
         } else {
-          $location.path(state);
+            $location.path(state);
         }
 
     }
