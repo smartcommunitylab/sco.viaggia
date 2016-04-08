@@ -124,7 +124,7 @@
         "disableElasticity": false,
 
         "stopDetectionDelay": 0,
-        "stopTimeout": 1,
+        "stopTimeout": 10,
         "activityRecognitionInterval": 10000,
 
         "preventSuspend": false,
