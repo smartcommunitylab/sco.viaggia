@@ -184,13 +184,13 @@ angular.module('viaggia.controllers.plan', [])
         return $scope.shownPreferences === true;
     };
 
-    $ionicModal.fromTemplateUrl('templates/planMapModal.html', {
+    $ionicModal.fromTemplateUrl('templates/mapModalPlan.html', {
         id: '1',
         scope: $scope,
         backdropClickToClose: false,
         animation: 'slide-in-up'
     }).then(function (modal) {
-        mapService.initMap('planMapModal');
+        //mapService.initMap('planMapModal');
         $scope.modalMap = modal;
     });
 
@@ -433,9 +433,9 @@ angular.module('viaggia.controllers.plan', [])
     };
 
     $scope.initMap = function () {
-        mapService.initMap('planMapModal').then(function () {
+        mapService.initMap('modalMapPlan').then(function () {
 
-            $scope.$on("leafletDirectiveMap.planMapModal.click", function (event, args) {
+            $scope.$on("leafletDirectiveMap.modalMapPlan.click", function (event, args) {
                 $ionicLoading.show();
                 planService.setPosition($scope.place, args.leafletEvent.latlng.lat, args.leafletEvent.latlng.lng);
                 var placedata = $q.defer();
@@ -503,7 +503,7 @@ angular.module('viaggia.controllers.plan', [])
     };
 
     $scope.closeWin = function () {
-        mapService.getMap('planMapModal').then(function (map) {
+        mapService.getMap('modalMapPlan').then(function (map) {
             map.closePopup();
         });
     };

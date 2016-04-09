@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.tripdetails', [])
 
-.controller('TripDetailsCtrl', function ($scope, $stateParams, $ionicModal, $filter, $ionicPopup, planService, mapService, Config, Toast, trackService, $filter, $ionicHistory, $state, $ionicLoading, $location, bookmarkService, Utils) {
+.controller('TripDetailsCtrl', function ($scope, $rootScope, $stateParams, $ionicModal, $window, $filter, $ionicPopup, planService, mapService, Config, Toast, trackService, $filter, $ionicHistory, $state, $ionicLoading, $location, bookmarkService, Utils) {
     $scope.title = $filter('translate')('journey_detail');
     //$scope.empty_rec = Config.getDaysRec();
 
@@ -112,7 +112,7 @@ angular.module('viaggia.controllers.tripdetails', [])
     $scope.toTime = function (millis) {
         return planService.getTimeStr(new Date(millis));
     };
-    $ionicModal.fromTemplateUrl('templates/planMapModal.html', {
+    $ionicModal.fromTemplateUrl('templates/mapModalDetail.html', {
         id: '1',
         scope: $scope,
         backdropClickToClose: false,
@@ -129,7 +129,7 @@ angular.module('viaggia.controllers.tripdetails', [])
             }
             if (boundsArray.length > 0) {
                 var bounds = L.latLngBounds(boundsArray);
-                mapService.getMap('planMapModal').then(function (map) {
+                mapService.getMap('modalMapDetail').then(function (map) {
                     map.fitBounds(bounds);
                 });
             }
@@ -319,7 +319,7 @@ angular.module('viaggia.controllers.tripdetails', [])
         //delete $scope.placesandcoordinates[favorite.name];
     }
     $scope.initMap = function () {
-        mapService.initMap('planMapModal').then(function () {
+        mapService.initMap('modalMapDetail').then(function () {
             //add polyline
         })
     }
@@ -478,4 +478,22 @@ angular.module('viaggia.controllers.tripdetails', [])
     } else {
         initNewTrip();
     }
+
+    //    $rootScope.previousState;
+    //    $rootScope.currentState;
+    //    $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+    //        $rootScope.previousState = from.name;
+    //        $rootScope.currentState = to.name;
+    //        console.log('Previous state:' + $rootScope.previousState);
+    //        console.log('Current state:' + $rootScope.currentState);
+    //        if (to.name === 'app.tripdetails') {
+    //            $window.dispatchEvent(new Event('resize'));
+    //        }
+    //    });
+    $scope.$on('$ionicView.afterEnter', function (e) {
+        // Prevent destroying of leaflet
+        if ($state.current.name == 'app.tripdetails') {
+            $scope.initMap();
+        };
+    });
 })

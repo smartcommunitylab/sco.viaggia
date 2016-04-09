@@ -16,7 +16,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div>
-                            <div ng-if="isAvailable">
+                            <div ng-if="isAvailable && !editMode">
                                 <div ng-class="{'fog': notTrackable()}" ng-click="showPopupIfNotThisJourney()">
                                     <button class="button button-viaggia-header button-block" ng-show="!isTracking()&&tripId!=null" ng-click="trackStart()">{{'labl_start_tracking'|translate}} </button>
                                 </div>
