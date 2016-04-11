@@ -15,6 +15,9 @@ angular.module('viaggia.controllers.login', [])
             }, 3000);
             loginService.login(null, 'google').then(function (profile) {
                 //                                       check if user is valid
+                $ionicLoading.show({
+                    template: $filter('translate')('user_check')
+                });
                 userService.validUserForGamification(profile).then(function (valid) {
                         //$ionicLoading.hide();
                         storageService.saveUser(profile);
@@ -34,9 +37,11 @@ angular.module('viaggia.controllers.login', [])
 
                     },
                     function (msg) {
+                        Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
                         $ionicLoading.hide();
                     });
             }, function (err) {
+                Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
                 $ionicLoading.hide();
             });
 
@@ -78,7 +83,9 @@ angular.module('viaggia.controllers.login', [])
         if (profile != null) {
             userService.validUserForGamification(profile).then(function (valid) {
                 if (valid) {
-                    $ionicLoading.show();
+                    $ionicLoading.show({
+                        template: $filter('translate')('user_check')
+                    });
                     //memorize profile;
                     storageService.saveUser(profile);
                     //go on to home page
@@ -89,6 +96,7 @@ angular.module('viaggia.controllers.login', [])
                     });
                 } else {
                     // open popup for validating user
+                    $ionicLoading.hide();
                     validateUserPopup();
                 }
 
@@ -158,6 +166,9 @@ angular.module('viaggia.controllers.login', [])
         }, 3000);
         loginService.login(null, 'facebook').then(function (profile) {
             //                                       check if user is valid
+            $ionicLoading.show({
+                template: $filter('translate')('user_check')
+            });
             userService.validUserForGamification(profile).then(function (valid) {
                     //$ionicLoading.hide();
                     storageService.saveUser(profile);
@@ -171,14 +182,17 @@ angular.module('viaggia.controllers.login', [])
                         });
                     } else {
                         // open popup for validating user
+                        $ionicLoading.hide();
                         validateUserPopup();
                     }
 
                 },
                 function (msg) {
+                    Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
                     $ionicLoading.hide();
                 });
         }, function (err) {
+            Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
             $ionicLoading.hide();
         });
 

@@ -179,6 +179,7 @@ angular.module('viaggia.services.login', [])
                 }
             };
             if (token == null) {
+                authWindow = null;
                 authapi.authorizeWeb().then(function (profile) {
                     console.log('success: ' + profile.userId);
                     storageService.saveUser(profile).then(function () {

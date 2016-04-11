@@ -6,7 +6,6 @@ angular.module('viaggia.controllers.home', [])
         document.addEventListener("resume", function () {
             notificationInit();
         }, false);
-        $ionicLoading.hide();
 
     });
 
@@ -78,10 +77,14 @@ angular.module('viaggia.controllers.home', [])
         notificationInit();
         initWatch();
         localDataInit();
-    }, function () {
-        $ionicLoading.hide();
-    });
 
+    }, function () {
+        //$ionicLoading.hide();
+    });
+    $scope.$on("$ionicView.afterEnter", function (scopes, states) {
+        $ionicLoading.hide();
+
+    });
     $scope.$on('ngLastRepeat.primaryLinks', function (e) {
         $timeout(function () {
             ionicMaterialMotion.ripple();
