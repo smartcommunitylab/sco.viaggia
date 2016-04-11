@@ -79,6 +79,7 @@ angular.module('viaggia.directives', [])
             suggestions: '=data',
             onType: '=onType',
             onSelect: '=onSelect',
+            onClear: '=onClear',
             placeautocompleteRequired: '='
         },
         controller: [
@@ -105,6 +106,7 @@ angular.module('viaggia.directives', [])
 
                 $scope.clear = function () {
                     $scope.searchParam = '';
+                    $scope.onClear();
                 };
 
                 // watches if the parameter filter should be changed

@@ -350,6 +350,12 @@ angular.module('viaggia.controllers.plan', [])
             });
         }
     };
+    $scope.clearFrom = function () {
+        $scope.fromName = '';
+    }
+    $scope.clearTo = function () {
+        $scope.toName = '';
+    }
 
     var selectPlace = function (placeSelected) {
         if ($scope.place == 'from') {
@@ -456,7 +462,13 @@ angular.module('viaggia.controllers.plan', [])
                                 buttons: [
                                     {
                                         text: $filter('translate')('btn_close'),
-                                        type: 'button-close'
+                                        type: 'button-close',
+                                        onTap: function (e) {
+                                            //                                            selectPlace("");
+                                            //                                            if (!$scope.placesandcoordinates) {
+                                            //                                                $scope.placesandcoordinates = [];
+                                            //                                            }
+                                        }
                                 },
                                     {
                                         text: $filter('translate')('btn_conferma'),
