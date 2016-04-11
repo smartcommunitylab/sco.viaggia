@@ -38,6 +38,12 @@ angular.module('viaggia.controllers.common', [])
         })
     }
 
+    $scope.openRules = function () {
+        userService.getValidToken().then(function (validToken) {
+            var url = Config.getGamificationURL() + "/mobile?token=" + validToken + "&redirect_url=rules";
+            window.open(url, "_system", "location=yes");
+        })
+    }
     $scope.closePopup = function () {
         $scope.firstOpenPopup.close();
     }

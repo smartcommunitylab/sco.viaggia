@@ -15,8 +15,8 @@ angular.module('viaggia.services.tracking', [])
          * INITIALIZE THE TRACKER. RESTART IF IS RUNNING, OR SYNCHRONIZE IF IS FINISHED.
          */
         trackService.startup = function () {
-//            var trackingConfigure = Config.getTrackingConfig();
-//            bgGeo.configure(callbackFn, failureFn, trackingConfigure);
+            //            var trackingConfigure = Config.getTrackingConfig();
+            //            bgGeo.configure(callbackFn, failureFn, trackingConfigure);
             init();
         }
 
@@ -108,7 +108,9 @@ angular.module('viaggia.services.tracking', [])
                 trackingConfigure['notificationTitle'] = $filter('translate')('tracking_notification_title');
                 trackingConfigure['notificationText'] = $filter('translate')('tracking_notification_text');
                 trackingConfigure['url'] += token;
-                trackingConfigure['extras'] = { idTrip: idTrip };
+                trackingConfigure['extras'] = {
+                    idTrip: idTrip
+                };
                 bgGeo.configure(callbackFn, failureFn, trackingConfigure);
 
                 //setto le variabili in localstorage
@@ -122,10 +124,10 @@ angular.module('viaggia.services.tracking', [])
                     trackService.stop();
                     if (callback) callback();
                 }, endTime - startTimestamp);
-//                                $timeout(function() {
-//trackService.stop();
-//if (callback) callback();
-//}, 5000);
+                //                                $timeout(function() {
+                //trackService.stop();
+                //if (callback) callback();
+                //}, 5000);
 
                 bgGeo.start(function () {
                     bgGeo.changePace(true);
@@ -160,20 +162,20 @@ angular.module('viaggia.services.tracking', [])
                 var trackingConfigure = Config.getTrackingConfig();
                 trackingConfigure['url'] += token;
                 bgGeo.configure(callbackFn, failureFn, trackingConfigure);
-                bgGeo.start(function(){
-                  bgGeo.sync(function (locations, taskId) {
-                    console.log('synced locations: ', locations);
-                    // Be sure to call finish(taskId) in order to signal the end of the background-thread.
-                    bgGeo.finish(taskId);
-                    deferred.resolve(true);
-                  }, function (errorMessage) {
-                    console.warn('Sync FAILURE: ', errorMessage);
-                    deferred.resolve(false);
-                  });
+                bgGeo.start(function () {
+                    bgGeo.sync(function (locations, taskId) {
+                        console.log('synced locations: ', locations);
+                        // Be sure to call finish(taskId) in order to signal the end of the background-thread.
+                        bgGeo.finish(taskId);
+                        deferred.resolve(true);
+                    }, function (errorMessage) {
+                        console.warn('Sync FAILURE: ', errorMessage);
+                        deferred.resolve(false);
+                    });
                 });
-            }, function() {
-              // no token obtained
-              deferred.resolve(false);
+            }, function () {
+                // no token obtained
+                deferred.resolve(false);
             });
             return deferred.promise;
         };
@@ -182,20 +184,20 @@ angular.module('viaggia.services.tracking', [])
          * STOP THE TRACKER.
          */
         trackService.stop = function () {
-          markAsDone();
-          sync().then(function (done) {
-            bgGeo.stop(function () {
-              if (done) {
-                  clean(true);
-              } else {
-                  clean(false);
-              }
+            markAsDone();
+            sync().then(function (done) {
+                bgGeo.stop(function () {
+                    if (done) {
+                        clean(true);
+                    } else {
+                        clean(false);
+                    }
+                });
+            }, function (error) {
+                bgGeo.stop(function () {
+                    clean(false);
+                });
             });
-          }, function (error) {
-              bgGeo.stop(function () {
-                clean(false);
-              });
-          });
         };
 
         //        trackService.getState = function () {};
@@ -214,15 +216,15 @@ angular.module('viaggia.services.tracking', [])
 
 
         var init = function () {
-          //choose if go on with tracking
-          //or manage the stop and sync the data
-          if (trackingIsGoing() && !trackingIsFinished()) {
-            trackService.start(localStorage.getItem(Config.getAppId() + '_tripId'));
-          } else {
-            //preserve strange state when user delete memory and tracking service start again
-            trackService.stop();
-          }
-          //check localstorage
+            //choose if go on with tracking
+            //or manage the stop and sync the data
+            if (trackingIsGoing() && !trackingIsFinished()) {
+                trackService.start(localStorage.getItem(Config.getAppId() + '_tripId'));
+            } else {
+                //preserve strange state when user delete memory and tracking service start again
+                trackService.stop();
+            }
+            //check localstorage
         };
 
 
@@ -319,7 +321,7 @@ angular.module('viaggia.services.tracking', [])
                         var targetDate = new Date(calculateddate - (1000 * 60 * 10));
                         if (targetDate > dFrom) {
                             notifArray.push({
-                                id: Math.floor(targetDate.getTime() / 1000),
+                                id: tripId,
                                 title: $filter('translate')('notification_tracking_title'),
                                 text: $filter('translate')('notification_tracking_text'),
                                 icon: 'res://icon.png',
@@ -338,7 +340,7 @@ angular.module('viaggia.services.tracking', [])
                     var targetDate = new Date(tripToSave.data.startime - (1000 * 60 * 10));
                     if (targetDate > dFrom) {
                         notifArray.push({
-                            id: Math.floor(targetDate.getTime() / 1000),
+                            id: tripId,
                             title: $filter('translate')('notification_tracking_title'),
                             text: $filter('translate')('notification_tracking_text'),
                             icon: 'res://icon.png',
@@ -381,20 +383,27 @@ angular.module('viaggia.services.tracking', [])
 
                         break;
                     case "modify":
-                        //clear and add new
+                        //clear with id and add new
                         var indexNotify = [];
                         for (var i = 0; i < notifArray; i++) {
                             indexNotify.push(notifArray[i].id);
 
                         }
+                        cordova.plugins.notification.local.getAll(function (notifications) {
+                            cordova.plugins.notification.local.cancel(indexNotify, function () {
+                                cordova.plugins.notification.local.getAll(function (notifications) {
+                                    cordova.plugins.notification.local.schedule(notifArray);
+                                    cordova.plugins.notification.local.on("click", function (notification) {
+                                        JSON.stringify(notification);
+                                        $state.go("app.tripdetails", {
+                                            tripId: JSON.parse(notification.data).tripId
+                                        })
+                                    });
+                                });
 
-                        cordova.plugins.notification.local.schedule(notifArray);
-                        cordova.plugins.notification.local.on("click", function (notification) {
-                            JSON.stringify(notification);
-                            $state.go("app.tripdetails", {
-                                tripId: JSON.parse(notification.data).tripId
-                            })
+                            });
                         });
+
                         break;
                     }
                 }

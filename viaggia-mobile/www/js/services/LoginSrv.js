@@ -188,20 +188,25 @@ angular.module('viaggia.services.login', [])
                             deferred.reject(reason);
                         });
                     });
+                }, function (err) {
+                    console.log(err);
                 });
             } else {
                 authapi.authorize().then(
-                    function (profile) {
-                        console.log('success: ' + profile.userId);
-                        storageService.saveUser(profile).then(function () {
-                            deferred.resolve(profile);
-                        }, function (reason) {
-                            storageService.saveUser(null).then(function () {
-                                deferred.reject(reason);
+                        function (profile) {
+                            console.log('success: ' + profile.userId);
+                            storageService.saveUser(profile).then(function () {
+                                deferred.resolve(profile);
+                            }, function (reason) {
+                                storageService.saveUser(null).then(function () {
+                                    deferred.reject(reason);
+                                });
                             });
-                        });
+                        }
+                    ),
+                    function (err) {
+                        console.log(err);
                     }
-                )
             };
 
             return deferred.promise;

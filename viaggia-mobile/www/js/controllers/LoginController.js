@@ -7,76 +7,78 @@ angular.module('viaggia.controllers.login', [])
 
     // This method is executed when the user press the "Sign in with Google" button
     $scope.googleSignIn = function () {
-        $ionicLoading.show({
-            template: 'Logging in...'
-        });
-        $timeout(function () {
-            $ionicLoading.hide(); //close the popup after 3 seconds for some reason
-        }, 3000);
-        loginService.login(null, 'google').then(function (profile) {
-            //                                       check if user is valid
-            userService.validUserForGamification(profile).then(function (valid) {
-                    $ionicLoading.hide();
-                    storageService.saveUser(profile);
+            $ionicLoading.show({
+                template: 'Logging in...'
+            });
+            $timeout(function () {
+                $ionicLoading.hide(); //close the popup after 3 seconds for some reason
+            }, 3000);
+            loginService.login(null, 'google').then(function (profile) {
+                //                                       check if user is valid
+                userService.validUserForGamification(profile).then(function (valid) {
+                        //$ionicLoading.hide();
+                        storageService.saveUser(profile);
 
-                    if (valid) {
-                        //go on to home page
-                        $state.go('app.home');
-                        $ionicHistory.nextViewOptions({
-                            disableBack: true,
-                            historyRoot: true
-                        });
-                    } else {
-                        // open popup for validating user
-                        validateUserPopup();
-                    }
+                        if (valid) {
+                            //go on to home page
+                            $state.go('app.home');
+                            $ionicHistory.nextViewOptions({
+                                disableBack: true,
+                                historyRoot: true
+                            });
+                        } else {
+                            // open popup for validating user
+                            $ionicLoading.hide();
+                            validateUserPopup();
+                        }
 
-                },
-                function (msg) {
-                    $ionicLoading.hide();
-                });
-        }, function (err) {
-            $ionicLoading.hide();
-        });
+                    },
+                    function (msg) {
+                        $ionicLoading.hide();
+                    });
+            }, function (err) {
+                $ionicLoading.hide();
+            });
 
-//            window.plugins.googleplus.login({
-//                    //                    'scopes': 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
-//                    'scopes': 'profile email',
-//                    'offline': true
-//                },
-//                function (user_data) {
-//                    userService.setGoogleUser({
-//                        userID: user_data.userId,
-//                        name: user_data.displayName,
-//                        email: user_data.email,
-//                        picture: user_data.imageUrl,
-//                        oauthToken: user_data.oauthToken,
-//                        idToken: user_data.idToken
-//                    });
-//
-//                    $ionicLoading.hide();
-//
-//                    //$state.go('app.home');
-//                    userService.setGoogleToken(user_data.oauthToken);
-//                    loginService.login(user_data.oauthToken ? user_data.oauthToken : user_data.accessToken, 'googlelocal').then(function (profile) {
-//                        //check if user is valid
-//
-//                        $scope.validateUserForGamification(profile);
-//
-//                    })
-//                },
-//                function (msg) {
-//                    $ionicLoading.hide();
-//                    Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
-//
-//                }
-//            );
+            //            window.plugins.googleplus.login({
+            //                    //                    'scopes': 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
+            //                    'scopes': 'profile email',
+            //                    'offline': true
+            //                },
+            //                function (user_data) {
+            //                    userService.setGoogleUser({
+            //                        userID: user_data.userId,
+            //                        name: user_data.displayName,
+            //                        email: user_data.email,
+            //                        picture: user_data.imageUrl,
+            //                        oauthToken: user_data.oauthToken,
+            //                        idToken: user_data.idToken
+            //                    });
+            //
+            //                    $ionicLoading.hide();
+            //
+            //                    //$state.go('app.home');
+            //                    userService.setGoogleToken(user_data.oauthToken);
+            //                    loginService.login(user_data.oauthToken ? user_data.oauthToken : user_data.accessToken, 'googlelocal').then(function (profile) {
+            //                        //check if user is valid
+            //
+            //                        $scope.validateUserForGamification(profile);
+            //
+            //                    })
+            //                },
+            //                function (msg) {
+            //                    $ionicLoading.hide();
+            //                    Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
+            //
+            //                }
+            //            );
         }
         //This is the success callback from the login method
     $scope.validateUserForGamification = function (profile) {
         if (profile != null) {
             userService.validUserForGamification(profile).then(function (valid) {
                 if (valid) {
+                    $ionicLoading.show();
                     //memorize profile;
                     storageService.saveUser(profile);
                     //go on to home page
@@ -112,11 +114,12 @@ angular.module('viaggia.controllers.login', [])
                     picture: "http://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
                 });
 
-                $ionicLoading.hide();
+                //$ionicLoading.hide();
                 $state.go('app.home');
 
             }, function (fail) {
                 //fail get profile info
+                $ionicLoading.hide();
                 console.log('profile info fail', fail);
             });
     };
@@ -156,7 +159,7 @@ angular.module('viaggia.controllers.login', [])
         loginService.login(null, 'facebook').then(function (profile) {
             //                                       check if user is valid
             userService.validUserForGamification(profile).then(function (valid) {
-                    $ionicLoading.hide();
+                    //$ionicLoading.hide();
                     storageService.saveUser(profile);
 
                     if (valid) {
@@ -215,25 +218,34 @@ angular.module('viaggia.controllers.login', [])
         });
 
     }
+    $scope.$on('$ionicView.leave', function () {
+        $ionicSideMenuDelegate.canDragContent(true);
+        //$ionicLoading.hide();
+        if (window.cordova && window.cordova.plugins.screenorientation) {
+            screen.unlockOrientation()
+        }
+    });
+    $scope.$on('$ionicView.beforeEnter', function () {
+        $ionicLoading.show({
+            template: $filter('translate')('user_check')
+        });
+
+    });
     $ionicPlatform.ready(function () {
         Config.init().then(function () {
             if (window.cordova && window.cordova.plugins.screenorientation) {
                 screen.lockOrientation('portrait');
             }
-            $scope.$on('$ionicView.leave', function () {
-                $ionicSideMenuDelegate.canDragContent(true);
-                $ionicLoading.hide();
-                if (window.cordova && window.cordova.plugins.screenorientation) {
-                    screen.unlockOrientation()
-                }
-            });
-            $scope.$on('$ionicView.enter', function () {
-                $ionicLoading.hide();
-            });
+
+            //            $scope.$on('$ionicView.enter', function () {
+            //                $ionicLoading.hide();
+            //            });
             userService.getValidToken().then(function (validToken) {
                 var profile = storageService.getUser();
                 $scope.validateUserForGamification(profile);
 
+            }, function (err) {
+                $ionicLoading.hide();
             })
         });
 
