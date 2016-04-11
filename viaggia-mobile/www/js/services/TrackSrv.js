@@ -15,8 +15,9 @@ angular.module('viaggia.services.tracking', [])
          * INITIALIZE THE TRACKER. RESTART IF IS RUNNING, OR SYNCHRONIZE IF IS FINISHED.
          */
         trackService.startup = function () {
-            //            var trackingConfigure = Config.getTrackingConfig();
-            //            bgGeo.configure(callbackFn, failureFn, trackingConfigure);
+
+            var trackingConfigure = Config.getTrackingConfig();
+            bgGeo.configure(callbackFn, failureFn, trackingConfigure);
             init();
         }
 
@@ -161,8 +162,21 @@ angular.module('viaggia.services.tracking', [])
             userService.getValidToken().then(function (token) {
                 var trackingConfigure = Config.getTrackingConfig();
                 trackingConfigure['url'] += token;
+                trackingConfigure['foregroundService'] = false;
                 bgGeo.configure(callbackFn, failureFn, trackingConfigure);
                 bgGeo.start(function () {
+                    bgGeo.onHttp(function (response) {
+                        var status = response.status;
+                        console.log("- HTTP success", status);
+                        if (status == 200) {
+                            bgGeo.clearDatabase(function () {
+                                console.log('- cleared database');
+                            });
+                        }
+                    }, function (response) {
+                        var status = response.status;
+                        console.log("- HTTP failure: ", status);
+                    });
                     bgGeo.sync(function (locations, taskId) {
                         console.log('synced locations: ', locations);
                         // Be sure to call finish(taskId) in order to signal the end of the background-thread.
@@ -185,18 +199,11 @@ angular.module('viaggia.services.tracking', [])
          */
         trackService.stop = function () {
             markAsDone();
+            clean();
             sync().then(function (done) {
-                bgGeo.stop(function () {
-                    if (done) {
-                        clean(true);
-                    } else {
-                        clean(false);
-                    }
-                });
+                bgGeo.stop();
             }, function (error) {
-                bgGeo.stop(function () {
-                    clean(false);
-                });
+                bgGeo.stop();
             });
         };
 
@@ -253,14 +260,8 @@ angular.module('viaggia.services.tracking', [])
         function trackingHasFailed() {
             //if last stored value is very old, do something
         }
-        var clean = function (dbclean) {
+        var clean = function () {
             //clean local db
-            if (dbclean) {
-                bgGeo.clearDatabase(function () {
-                    console.log('- cleared database');
-
-                });
-            }
             //clean local storage data from localstorage
             localStorage.removeItem(Config.getAppId() + '_state');
             localStorage.removeItem(Config.getAppId() + '_tripId');
