@@ -106,13 +106,13 @@ angular.module('viaggia', [
             console.log('app resumed');
             GeoLocate.locate();
         }, false);
-//
-//        GeoLocate.locate().then(function (position) {
-//            $rootScope.myPosition = position;
-//            //console.log('first geolocation: ' + position);
-//        }, function () {
-//            console.log('CANNOT LOCATE!');
-//        });
+        //
+        //        GeoLocate.locate().then(function (position) {
+        //            $rootScope.myPosition = position;
+        //            //console.log('first geolocation: ' + position);
+        //        }, function () {
+        //            console.log('CANNOT LOCATE!');
+        //        });
 
         //        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
         //          console.log(toState);
@@ -660,7 +660,7 @@ angular.module('viaggia', [
             btn_validate_user: 'Registrati',
             toast_already_monitoring: 'Stai già registrando un percorso',
             sure_delete_title: 'Termina viaggio',
-            sure_delete_text: 'Terminando il viaggio concludi la sessione di gioco, confermi?',
+            sure_delete_text: 'Confermi di essere arrivato a destinazione per il viaggio corrente?',
             tracking_notification_title: 'Viaggia Rovereto',
             tracking_notification_text: 'Monitoraggio di viaggio attivato',
             toast_not_deletable: 'Impossibile cancellare un viaggio in corso',
@@ -879,7 +879,7 @@ angular.module('viaggia', [
             lbl_validateuser: 'Register to the game and start playing!',
             btn_validate_user: 'Register',
             sure_delete_title: 'Stop journey',
-            sure_delete_text: 'Ending the journey you stop the session game, do you confirm?',
+            sure_delete_text: 'Do you confirm you reached your destination?',
             tracking_notification_title: 'Viaggia Rovereto Play&Go',
             tracking_notification_text: 'Journey monitoring activated',
             toast_not_deletable: 'Impossible to delete a running journey',
