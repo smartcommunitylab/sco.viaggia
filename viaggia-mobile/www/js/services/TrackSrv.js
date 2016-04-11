@@ -196,14 +196,11 @@ angular.module('viaggia.services.tracking', [])
          */
         trackService.stop = function () {
           markAsDone();
+          clean();
           sync().then(function (done) {
-            bgGeo.stop(function () {
-              clean();
-            });
+            bgGeo.stop();
           }, function (error) {
-              bgGeo.stop(function () {
-                clean();
-              });
+            bgGeo.stop();
           });
         };
 
