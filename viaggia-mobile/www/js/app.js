@@ -106,13 +106,13 @@ angular.module('viaggia', [
             console.log('app resumed');
             GeoLocate.locate();
         }, false);
-
-        GeoLocate.locate().then(function (position) {
-            $rootScope.myPosition = position;
-            //console.log('first geolocation: ' + position);
-        }, function () {
-            console.log('CANNOT LOCATE!');
-        });
+//
+//        GeoLocate.locate().then(function (position) {
+//            $rootScope.myPosition = position;
+//            //console.log('first geolocation: ' + position);
+//        }, function () {
+//            console.log('CANNOT LOCATE!');
+//        });
 
         //        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
         //          console.log(toState);
