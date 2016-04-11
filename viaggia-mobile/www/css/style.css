@@ -44,6 +44,11 @@ i {
     padding-left: 20px;
 }
 
+.bookmarks-entry {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .mfb-component__button--main i,
 .mfb-component__button--child i {
     font-size: 24px;

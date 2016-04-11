@@ -17,7 +17,7 @@
 
             <ion-item ng-repeat="m in primaryLinks" ng-last-repeat="primaryLinks" ng-click="go(m.state)">
                 <button class="button button-block">
-                    <div class="row">
+                    <div class="row bookmarks-entry">
                         <i class="col-center icon" ng-class="m.icon" style="{{'color: '+m.color}}"></i>
                         <div class="col col-center">
                             <ng-include src="getBookmarkItemTemplate(m.type)"></ng-include>

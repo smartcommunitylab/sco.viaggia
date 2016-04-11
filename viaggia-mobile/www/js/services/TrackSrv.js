@@ -306,108 +306,123 @@ angular.module('viaggia.services.tracking', [])
             return false;
         }
 
-        trackService.updateNotification = function (tripToSave, tripId, action) {
+        trackService.updateNotification = function (tripToSave, trips, tripId, action) {
             if (window.plugin && cordova && cordova.plugins && cordova.plugins.notification) {
                 console.log('initializing notifications...');
                 //create a notification that fire in that day and if it is recursive every n day
                 // notifications for 1 month range
                 var dFrom = new Date(); //from today
                 var dTo = new Date(); //to next month
-                dTo.setMonth(dTo.getMonth() + 1);
+                dTo.setMonth(dTo.getMonth() + 3);
                 var notifArray = [];
-                if (tripToSave.recurrency && tripToSave.recurrency.daysOfWeek && tripToSave.recurrency.daysOfWeek.length != 0) {
-                    //add into array one notification for every trip if recursive
-                    var arrayOfDate = getnotificationDates(tripToSave);
-                    arrayOfDate.forEach(function (calculateddate) {
-                        var targetDate = new Date(calculateddate - (1000 * 60 * 10));
-                        if (targetDate > dFrom) {
-                            notifArray.push({
-                                id: tripId,
-                                title: $filter('translate')('notification_tracking_title'),
-                                text: $filter('translate')('notification_tracking_text'),
-                                icon: 'res://icon.png',
-                                //autoCancel: false,
-                                autoClear: false,
-                                at: targetDate,
-                                data: {
-                                    tripId: tripId
+                var tripsArray = [];
+                if (trips) {
+                    for (var key in trips) {
+                        tripsArray.push(trips[key]);
+                    }
+                }
+                cordova.plugins.notification.local.clearAll(function () {
+                    //for all trips regens notifications
+                    action = "create";
+                    for (var k = 0; k < tripsArray.length; k++) {
+                        tripToSave = tripsArray[k];
+                        if (tripToSave.recurrency && tripToSave.recurrency.daysOfWeek && tripToSave.recurrency.daysOfWeek.length != 0) {
+                            //add into array one notification for every trip if recursive
+                            var arrayOfDate = getnotificationDates(tripToSave);
+                            arrayOfDate.forEach(function (calculateddate) {
+                                var targetDate = new Date(calculateddate - (1000 * 60 * 10));
+                                if (targetDate > dFrom) {
+                                    notifArray.push({
+                                        id: tripId + "" + calculateddate,
+                                        title: $filter('translate')('notification_tracking_title'),
+                                        text: $filter('translate')('notification_tracking_text'),
+                                        icon: 'res://icon.png',
+                                        //autoCancel: false,
+                                        autoClear: false,
+                                        at: targetDate,
+                                        data: {
+                                            tripId: tripToSave.clientId
+                                        }
+                                    })
                                 }
-                            })
-                        }
-                    });
-                } else {
-                    //put just one notification
-                    //tripToSave.data.startime - 10 min
-                    var targetDate = new Date(tripToSave.data.startime - (1000 * 60 * 10));
-                    if (targetDate > dFrom) {
-                        notifArray.push({
-                            id: tripId,
-                            title: $filter('translate')('notification_tracking_title'),
-                            text: $filter('translate')('notification_tracking_text'),
-                            icon: 'res://icon.png',
-                            //autoCancel: false,
-                            autoClear: false,
-                            at: targetDate,
-                            data: {
-                                tripId: tripId
+                            });
+                        } else {
+                            //put just one notification
+                            //tripToSave.data.startime - 10 min
+                            var targetDate = new Date(tripToSave.data.startime - (1000 * 60 * 10));
+                            if (targetDate > dFrom) {
+                                notifArray.push({
+                                    id: tripId + "" + tripToSave.data.startime,
+                                    title: $filter('translate')('notification_tracking_title'),
+                                    text: $filter('translate')('notification_tracking_text'),
+                                    icon: 'res://icon.png',
+                                    //autoCancel: false,
+                                    autoClear: false,
+                                    at: targetDate,
+                                    data: {
+                                        tripId: tripToSave.clientId
+                                    }
+                                });
                             }
-                        });
-                    }
-                }
-                if (cordova && cordova.plugins && cordova.plugins.notification && notifArray) {
-                    switch (action) {
-                    case "create":
-                        cordova.plugins.notification.local.schedule(notifArray);
-                        cordova.plugins.notification.local.on("click", function (notification) {
-                            JSON.stringify(notification);
-                            $state.go("app.tripdetails", {
-                                tripId: JSON.parse(notification.data).tripId
-                            })
-                        });
-                        break;
-                    case "delete":
-
-                        //get id from notifyarray
-                        var indexNotify = [];
-                        for (var i = 0; i < notifArray.length; i++) {
-                            indexNotify.push(notifArray[i].id);
-
                         }
-                        cordova.plugins.notification.local.getAll(function (notifications) {
-                            cordova.plugins.notification.local.cancel(indexNotify, function () {
-                                cordova.plugins.notification.local.getAll(function (notifications) {
-                                    console.log("done");
-                                });
-
-                            });
-                        });
-
-                        break;
-                    case "modify":
-                        //clear with id and add new
-                        var indexNotify = [];
-                        for (var i = 0; i < notifArray; i++) {
-                            indexNotify.push(notifArray[i].id);
-
-                        }
-                        cordova.plugins.notification.local.getAll(function (notifications) {
-                            cordova.plugins.notification.local.cancel(indexNotify, function () {
-                                cordova.plugins.notification.local.getAll(function (notifications) {
-                                    cordova.plugins.notification.local.schedule(notifArray);
-                                    cordova.plugins.notification.local.on("click", function (notification) {
-                                        JSON.stringify(notification);
-                                        $state.go("app.tripdetails", {
-                                            tripId: JSON.parse(notification.data).tripId
-                                        })
-                                    });
-                                });
-
-                            });
-                        });
-
-                        break;
                     }
-                }
+                    if (cordova && cordova.plugins && cordova.plugins.notification && notifArray) {
+                        switch (action) {
+                        case "create":
+                            cordova.plugins.notification.local.schedule(notifArray);
+                            cordova.plugins.notification.local.on("click", function (notification) {
+                                JSON.stringify(notification);
+                                $state.go("app.tripdetails", {
+                                    tripId: JSON.parse(notification.data).tripId
+                                })
+                            });
+                            break;
+                        case "delete":
+
+                            //get id from notifyarray
+                            //                                var indexNotify = [];
+                            //                                for (var i = 0; i < notifArray.length; i++) {
+                            //                                    indexNotify.push(notifArray[i].id);
+                            //
+                            //                                }
+                            //                                //erase all notifications and recreate
+                            //
+                            //                                cordova.plugins.notification.local.getAll(function (notifications) {
+                            //                                    cordova.plugins.notification.local.cancel(indexNotify, function () {
+                            //                                        cordova.plugins.notification.local.getAll(function (notifications) {
+                            //                                            console.log("done");
+                            //                                        });
+                            //
+                            //                                    });
+                            //                                });
+
+                            break;
+                        case "modify":
+                            //clear with id and add new
+                            var indexNotify = [];
+                            for (var i = 0; i < notifArray.length; i++) {
+                                indexNotify.push(notifArray[i].id);
+
+                            }
+                            //                            cordova.plugins.notification.local.getAll(function (notifications) {
+                            //                                cordova.plugins.notification.local.cancel(indexNotify, function () {
+                            //                                    cordova.plugins.notification.local.getAll(function (notifications) {
+                            cordova.plugins.notification.local.schedule(notifArray);
+                            cordova.plugins.notification.local.on("click", function (notification) {
+                                JSON.stringify(notification);
+                                $state.go("app.tripdetails", {
+                                    tripId: JSON.parse(notification.data).tripId
+                                })
+                            });
+                            //                                    });
+                            //
+                            //                                });
+                            //                            });
+
+                            break;
+                        }
+                    }
+                }, this);
 
             }
         };

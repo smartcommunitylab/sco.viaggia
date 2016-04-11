@@ -310,6 +310,8 @@ angular.module('viaggia.controllers.tripdetails', [])
                     //delete actual from localStorage and memory
                     //go back in the stack
                     navigateAfterSave(null);
+                    Toast.show($filter('translate')('toast_deleted'), "short", "bottom");
+
                 });
             });
         } else {
