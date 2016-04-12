@@ -659,20 +659,28 @@ angular.module('viaggia.services.plan', [])
                 savedTrips[databuilt.clientId] = databuilt;
                 localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
                 if (!newTrip) {
-                    planService.getTrips().then(function (trips) {
-                        trackService.updateNotification(databuilt, trips, databuilt.clientId, "modify");
-                        deferred.resolve(databuilt);
-
-                    });
                     // trackService.updateNotification(databuilt, planService.getTrips(), databuilt.clientId, "modify");
                     //delete the old one from local storage and from server
                     planService.deleteTrip(tripId).then(function (value) {
                         console.log(JSON.stringify(value));
+                        planService.getTrips().then(function (trips) {
+                            trackService.updateNotification(databuilt, trips, databuilt.clientId, "modify");
+                            //change bookmark if present
+                            deferred.resolve(databuilt);
+
+                        });
                     }, function (error) {
                         //in case delete has some problems delete from localstorage
                         localDelete(tripId, deferred);
+                        planService.getTrips().then(function (trips) {
+                            trackService.updateNotification(databuilt, trips, databuilt.clientId, "modify");
+                            deferred.resolve(true);
+
+                        });
                         console.log(JSON.stringify(error));
                     });
+
+
                 } else {
                     planService.getTrips().then(function (trips) {
                         trackService.updateNotification(databuilt, trips, databuilt.clientId, "create");
@@ -861,12 +869,16 @@ angular.module('viaggia.services.plan', [])
         var trip = savedTrips[tripId];
         delete savedTrips[tripId];
         localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
-        planService.setPlanConfigure(null);
-        planService.getTrips().then(function (trips) {
-            trackService.updateNotification(trip, trips, trip.clientId, "delete");
-            deferred.resolve(true);
+        //delete from bookmarks
 
-        });
+        planService.setPlanConfigure(null);
+        deferred.resolve(true);
+
+        //        planService.getTrips().then(function (trips) {
+        //            trackService.updateNotification(trip, trips, trip.clientId, "delete");
+        //            deferred.resolve(true);
+        //
+        //        });
         //        trackService.updateNotification(trip, planService.getTrips(), tripId, "delete");
     }
 
@@ -888,10 +900,21 @@ angular.module('viaggia.services.plan', [])
                 }).
                 success(function (data) {
                     localDelete(tripId, deferred);
+                    planService.getTrips().then(function (trips) {
+                        trackService.updateNotification(databuilt, trips, databuilt.clientId, "modify");
+                        deferred.resolve(true);
+
+                    });
                 }).error(function (data, status, headers, config) {
                     // does not exist server side
                     if (status == 400) {
                         localDelete(tripId, deferred);
+                        //delete notif
+                        planService.getTrips().then(function (trips) {
+                            trackService.updateNotification(databuilt, trips, databuilt.clientId, "modify");
+                            deferred.reject(data);
+
+                        });
                     } else {
                         console.log(data + status + headers + JSON.stringify(config));
                         deferred.reject(data);

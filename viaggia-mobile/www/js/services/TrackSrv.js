@@ -84,26 +84,32 @@ angular.module('viaggia.services.tracking', [])
             /**
              * START THE TRACKER.
              */
-        trackService.start = function (idTrip, endtime, callback) {
+        trackService.start = function (idTrip, trip, callback) {
             userService.getValidToken().then(function (token) {
                 sendServerStart(idTrip, token);
-
+                var today = new Date();
                 var endtimeDate = null;
-                if (endtime) {
+                var duration = trip.data.duration;
+                console.log('trip.duration:' + trip.data.duration)
+                console.log('trip:' + JSON.stringify(trip));
+
+                var endtime = today.getTime() + duration;
+                if (trip) {
                     endtimeDate = new Date(endtime);
                 } else {
                     var lastRememberedEnd = localStorage.getItem(Config.getAppId() + '_endTimestamp');
                     endtimeDate = new Date(Number(lastRememberedEnd));
                 }
-                var today = new Date();
-                endtimeDate.setFullYear(today.getFullYear());
-                endtimeDate.setMonth(today.getMonth());
-                endtimeDate.setDate(today.getDate());
-                var endTime = endtimeDate.getTime() + Config.getThresholdEndTime();
-                //configuro il plugin con i vari param
+
+                //                endtimeDate.setFullYear(today.getFullYear());
+                //                endtimeDate.setMonth(today.getMonth());
+                //                endtimeDate.setDate(today.getDate());
+                endtime = endtimeDate.getTime() + Config.getThresholdEndTime();
+                console.log('endtime:' + endtime)
+                    //configuro il plugin con i vari param
                 var trackingConfigure = Config.getTrackingConfig();
                 var startTimestamp = new Date().getTime();
-                var minutesOfRun = (endTime - startTimestamp) / 60000;
+                var minutesOfRun = (endtime - startTimestamp) / 60000;
                 trackingConfigure['stopAfterElapsedMinutes'] = Math.floor(minutesOfRun);
                 //trackingConfigure['stopAfterElapsedMinutes'] = 1;
                 trackingConfigure['notificationTitle'] = $filter('translate')('tracking_notification_title');
@@ -118,13 +124,13 @@ angular.module('viaggia.services.tracking', [])
                 localStorage.setItem(Config.getAppId() + '_state', 'TRACKING');
                 localStorage.setItem(Config.getAppId() + '_tripId', idTrip);
                 localStorage.setItem(Config.getAppId() + '_startTimestamp', startTimestamp);
-                localStorage.setItem(Config.getAppId() + '_endTimestamp', endTime);
+                localStorage.setItem(Config.getAppId() + '_endTimestamp', endtime);
                 //taggo la prima locazione con parametro extra
 
                 $timeout(function () {
                     trackService.stop();
                     if (callback) callback();
-                }, endTime - startTimestamp);
+                }, endtime - startTimestamp);
                 //                                $timeout(function() {
                 //trackService.stop();
                 //if (callback) callback();
@@ -324,7 +330,9 @@ angular.module('viaggia.services.tracking', [])
                 cordova.plugins.notification.local.clearAll(function () {
                     //for all trips regens notifications
                     action = "create";
+                    var idNotification = 0;
                     for (var k = 0; k < tripsArray.length; k++) {
+
                         tripToSave = tripsArray[k];
                         if (tripToSave.recurrency && tripToSave.recurrency.daysOfWeek && tripToSave.recurrency.daysOfWeek.length != 0) {
                             //add into array one notification for every trip if recursive
@@ -333,7 +341,7 @@ angular.module('viaggia.services.tracking', [])
                                 var targetDate = new Date(calculateddate - (1000 * 60 * 10));
                                 if (targetDate > dFrom) {
                                     notifArray.push({
-                                        id: tripId + "" + calculateddate,
+                                        id: idNotification,
                                         title: $filter('translate')('notification_tracking_title'),
                                         text: $filter('translate')('notification_tracking_text'),
                                         icon: 'res://icon.png',
@@ -345,6 +353,7 @@ angular.module('viaggia.services.tracking', [])
                                         }
                                     })
                                 }
+                                idNotification++;
                             });
                         } else {
                             //put just one notification
@@ -352,7 +361,7 @@ angular.module('viaggia.services.tracking', [])
                             var targetDate = new Date(tripToSave.data.startime - (1000 * 60 * 10));
                             if (targetDate > dFrom) {
                                 notifArray.push({
-                                    id: tripId + "" + tripToSave.data.startime,
+                                    id: idNotification,
                                     title: $filter('translate')('notification_tracking_title'),
                                     text: $filter('translate')('notification_tracking_text'),
                                     icon: 'res://icon.png',
@@ -364,12 +373,17 @@ angular.module('viaggia.services.tracking', [])
                                     }
                                 });
                             }
+                            idNotification++;
                         }
                     }
                     if (cordova && cordova.plugins && cordova.plugins.notification && notifArray) {
                         switch (action) {
                         case "create":
                             cordova.plugins.notification.local.schedule(notifArray);
+                            console.log(JSON.stringify(notifArray))
+                            cordova.plugins.notification.local.getAll(function (notifications) {
+                                console.log(JSON.stringify(notifications))
+                            });
                             cordova.plugins.notification.local.on("click", function (notification) {
                                 JSON.stringify(notification);
                                 $state.go("app.tripdetails", {

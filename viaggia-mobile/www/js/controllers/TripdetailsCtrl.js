@@ -277,6 +277,16 @@ angular.module('viaggia.controllers.tripdetails', [])
     $scope.addDay = function (day) {
         console.log(day);
     }
+
+    function removeFromBookmarked() {
+        if (bookmarkService.getBookmarkStyle($location.path()) == 'ic_bookmark') {
+            bookmarkService.toggleBookmark($location.path(), $scope.tripName, 'TRIP', {
+                tripId: $scope.tripId
+            }).then(function (style) {
+                console.log('removed from bookmarked');
+            });
+        }
+    }
     $scope.modifyTrip = function () {
         //get configuration with tripid
         if ($scope.modifiable) {
@@ -292,6 +302,8 @@ angular.module('viaggia.controllers.tripdetails', [])
                     tripId: $scope.tripId
                 }
                 $state.go('app.plan', params);
+                removeFromBookmarked();
+
             });
         } else {
             Toast.show($filter('translate')('toast_not_modifiable'), "short", "bottom");
@@ -308,6 +320,8 @@ angular.module('viaggia.controllers.tripdetails', [])
             $scope.showConfirm($filter('translate')("popup_delete_trip_message"), $filter('translate')("popup_delete_trip_title"), function () {
                 planService.deleteTrip($scope.tripId).then(function (res) {
                     //delete actual from localStorage and memory
+                    //delete bookmark if present
+                    removeFromBookmarked();
                     //go back in the stack
                     navigateAfterSave(null);
                     Toast.show($filter('translate')('toast_deleted'), "short", "bottom");
@@ -345,7 +359,7 @@ angular.module('viaggia.controllers.tripdetails', [])
      *****************************************************/
     $scope.trackStart = function () {
             if (!$scope.notTrackable()) {
-                trackService.start($scope.tripId, $scope.currentItinerary.endtime, refreshTripDetail); //params= trip, idTrip. Enditime is authomatic calculated
+                trackService.start($scope.tripId, $scope.trip, refreshTripDetail); //params= trip, idTrip. Enditime is authomatic calculated
                 $scope.modifiable = false;
             }
         }
