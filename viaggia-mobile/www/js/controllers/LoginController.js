@@ -100,6 +100,9 @@ angular.module('viaggia.controllers.login', [])
                     validateUserPopup();
                 }
 
+            }, function (error) {
+                Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
+                $ionicLoading.hide();
             });
         }
     }
