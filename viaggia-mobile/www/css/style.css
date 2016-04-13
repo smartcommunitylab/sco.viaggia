@@ -690,6 +690,10 @@ ion-header-bar .title {
     padding: 8px;
 }
 
+.collaboration {
+    margin-bottom: 18px;
+}
+
 .image.center {
     display: block;
     margin-left: auto;

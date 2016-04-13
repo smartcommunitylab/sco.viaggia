@@ -43,6 +43,7 @@
     "db_version": 25,
     "visualization": {
         "primaryLinks": [
+
             {
                 "state": "showPlayAndGoPopup()",
                 "label": "home_gamification",
@@ -126,7 +127,6 @@
         "stopDetectionDelay": 0,
         "stopTimeout": 10,
         "activityRecognitionInterval": 10000,
-        "disableMotionActivityUpdates": false,
 
         "preventSuspend": false,
         "heartbeatInterval": 60,

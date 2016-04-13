@@ -395,7 +395,7 @@ angular.module('viaggia.controllers.plan', [])
             var url = Config.getGeocoderURL() + '/location?latlng=' + position[0] + ',' + position[1];
             //add timeout
             $http.get(encodeURI(url), {
-                timeout: 5000
+                timeout: 8000
             })
 
             .success(function (data, status, headers, config) {
@@ -427,7 +427,7 @@ angular.module('viaggia.controllers.plan', [])
                 //temporary
                 $ionicLoading.hide();
                 $scope.refresh = true;
-                $scope.showNoConnection();
+                // $scope.showNoConnection();
             });
             //                });
         }, function () {

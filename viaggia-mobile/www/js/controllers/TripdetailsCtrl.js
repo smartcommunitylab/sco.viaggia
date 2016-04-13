@@ -3,7 +3,20 @@ angular.module('viaggia.controllers.tripdetails', [])
 .controller('TripDetailsCtrl', function ($scope, $rootScope, $stateParams, $ionicModal, $window, $filter, $ionicPopup, planService, mapService, Config, Toast, trackService, $filter, $ionicHistory, $state, $ionicLoading, $location, bookmarkService, Utils) {
     $scope.title = $filter('translate')('journey_detail');
     //$scope.empty_rec = Config.getDaysRec();
+    //    document.addEventListener("resume", function () {
+    //        console.log('app resumed');
+    //
+    //        if (trackService.trackingIsGoingOn() && trackService.trackingIsFinished()) {
+    //            trackService.stop();
+    //            refreshTripDetail();
+    //        }
+    //    }, false);
 
+    //    $scope.$on("$ionicView.beforeEnter", function (scopes, states) {
+    //        if (trackService.trackingIsGoingOn() && trackService.trackingIsFinished()) {
+    //            refreshTripDetail();
+    //        }
+    //    });
     var initMyTrip = function () {
         $scope.editMode = false;
         planService.getTrip($stateParams.tripId).then(function (trip) {

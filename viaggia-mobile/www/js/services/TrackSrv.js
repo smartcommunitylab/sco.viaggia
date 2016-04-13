@@ -6,10 +6,23 @@ angular.module('viaggia.services.tracking', [])
         //var minimumAccuracyInMeter = 100;
         var trackService = {};
         var bgGeo = {};
-
+        var refreshCallback = null;
         $ionicPlatform.ready(function () {
             bgGeo = window.BackgroundGeolocation;
         });
+
+        document.addEventListener("resume", function () {
+            console.log('app resumed');
+
+            if (trackService.trackingIsGoingOn() && trackService.trackingIsFinished()) {
+                trackService.stop();
+                if (refreshCallback) {
+                    refreshCallback();
+                    refreshCallback = null;
+                }
+            }
+        }, false);
+
 
         /**
          * INITIALIZE THE TRACKER. RESTART IF IS RUNNING, OR SYNCHRONIZE IF IS FINISHED.
@@ -88,6 +101,7 @@ angular.module('viaggia.services.tracking', [])
             userService.getValidToken().then(function (token) {
                 sendServerStart(idTrip, token);
                 var today = new Date();
+                refreshCallback = callback;
                 var endtimeDate = null;
                 var duration = trip.data.duration;
                 console.log('trip.duration:' + trip.data.duration)
@@ -109,7 +123,9 @@ angular.module('viaggia.services.tracking', [])
                     //configuro il plugin con i vari param
                 var trackingConfigure = Config.getTrackingConfig();
                 var startTimestamp = new Date().getTime();
-                var minutesOfRun = (endtime - startTimestamp) / 60000;
+                //var minutesOfRun = (endtime - startTimestamp) / 60000;
+                var msOfRun = duration + Config.getThresholdEndTime();
+                var minutesOfRun = msOfRun / 60000;
                 trackingConfigure['stopAfterElapsedMinutes'] = Math.floor(minutesOfRun);
                 //trackingConfigure['stopAfterElapsedMinutes'] = 1;
                 trackingConfigure['notificationTitle'] = $filter('translate')('tracking_notification_title');
@@ -130,11 +146,11 @@ angular.module('viaggia.services.tracking', [])
                 $timeout(function () {
                     trackService.stop();
                     if (callback) callback();
-                }, endtime - startTimestamp);
-                //                                $timeout(function() {
-                //trackService.stop();
-                //if (callback) callback();
-                //}, 5000);
+                }, msOfRun);
+                //                $timeout(function () {
+                //                    trackService.stop();
+                //                    if (callback) callback();
+                //                }, 60000);
 
                 bgGeo.start(function () {
                     bgGeo.changePace(true);
@@ -250,7 +266,7 @@ angular.module('viaggia.services.tracking', [])
             return false;
         }
 
-        function trackingIsFinished() {
+        trackService.trackingIsFinished = function () {
             //if is present timestamp of finish
             if (localStorage.getItem(Config.getAppId() + '_endTimestamp') != null) {
                 //and it is earlier than now
