@@ -103,6 +103,11 @@ angular.module('viaggia.services.tracking', [])
                 var today = new Date();
                 refreshCallback = callback;
                 var endtimeDate = null;
+                var duration = null;
+                if (trip == null) {
+                    var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
+                    trip = savedTrips[tripId];
+                }
                 var duration = trip.data.duration;
                 console.log('trip.duration:' + trip.data.duration)
                 console.log('trip:' + JSON.stringify(trip));
@@ -247,7 +252,7 @@ angular.module('viaggia.services.tracking', [])
         var init = function () {
             //choose if go on with tracking
             //or manage the stop and sync the data
-            if (trackingIsGoing() && !trackingIsFinished()) {
+            if (trackingIsGoing() && !trackService.trackingIsFinished()) {
                 trackService.start(localStorage.getItem(Config.getAppId() + '_tripId'));
             } else {
                 //preserve strange state when user delete memory and tracking service start again

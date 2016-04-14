@@ -614,7 +614,7 @@ angular.module('viaggia.services.plan', [])
             tripId = new Date().getTime();
             newTrip = true;
         }
-        console.log(JSON.stringify(trip));
+        //console.log(JSON.stringify(trip));
 
         var urlBuilt = Config.getServerURL() + "/itinerary";
         var databuilt = buildData(null, trip, name, requestedFrom, requestedTo, recurrency, daysOfWeek);
@@ -662,7 +662,7 @@ angular.module('viaggia.services.plan', [])
                     // trackService.updateNotification(databuilt, planService.getTrips(), databuilt.clientId, "modify");
                     //delete the old one from local storage and from server
                     planService.deleteTrip(tripId).then(function (value) {
-                        console.log(JSON.stringify(value));
+                        //console.log(JSON.stringify(value));
                         planService.getTrips().then(function (trips) {
                             trackService.updateNotification(databuilt, trips, databuilt.clientId, "modify");
                             //change bookmark if present
