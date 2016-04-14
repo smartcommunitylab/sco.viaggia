@@ -1144,6 +1144,11 @@ ion-header-bar .title {
     text-overflow: ellipsis;
 }
 
+.row-my-trips {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .bm-item-label.highlight {
     font-weight: bold;
 }

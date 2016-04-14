@@ -103,34 +103,22 @@ angular.module('viaggia.services.tracking', [])
                 var today = new Date();
                 refreshCallback = callback;
                 var endtimeDate = null;
-                var duration = null;
-                if (trip == null) {
-                    var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
-                    trip = savedTrips[tripId];
-                }
-                var duration = trip.data.duration;
-                console.log('trip.duration:' + trip.data.duration)
-                console.log('trip:' + JSON.stringify(trip));
-
-                var endtime = today.getTime() + duration;
                 if (trip) {
-                    endtimeDate = new Date(endtime);
+                    endtimeDate = new Date(Number(trip.data.endtime));
                 } else {
                     var lastRememberedEnd = localStorage.getItem(Config.getAppId() + '_endTimestamp');
                     endtimeDate = new Date(Number(lastRememberedEnd));
                 }
 
-                //                endtimeDate.setFullYear(today.getFullYear());
-                //                endtimeDate.setMonth(today.getMonth());
-                //                endtimeDate.setDate(today.getDate());
+
                 endtime = endtimeDate.getTime() + Config.getThresholdEndTime();
-                console.log('endtime:' + endtime)
-                    //configuro il plugin con i vari param
+                var duration = endtime - today.getTime();
+
+                //configuro il plugin con i vari param
                 var trackingConfigure = Config.getTrackingConfig();
                 var startTimestamp = new Date().getTime();
-                //var minutesOfRun = (endtime - startTimestamp) / 60000;
-                var msOfRun = duration + Config.getThresholdEndTime();
-                var minutesOfRun = msOfRun / 60000;
+
+                var minutesOfRun = duration / 60000;
                 trackingConfigure['stopAfterElapsedMinutes'] = Math.floor(minutesOfRun);
                 //trackingConfigure['stopAfterElapsedMinutes'] = 1;
                 trackingConfigure['notificationTitle'] = $filter('translate')('tracking_notification_title');
@@ -142,16 +130,17 @@ angular.module('viaggia.services.tracking', [])
                 bgGeo.configure(callbackFn, failureFn, trackingConfigure);
 
                 //setto le variabili in localstorage
-                localStorage.setItem(Config.getAppId() + '_state', 'TRACKING');
-                localStorage.setItem(Config.getAppId() + '_tripId', idTrip);
-                localStorage.setItem(Config.getAppId() + '_startTimestamp', startTimestamp);
-                localStorage.setItem(Config.getAppId() + '_endTimestamp', endtime);
-                //taggo la prima locazione con parametro extra
-
+                if (trip) {
+                    localStorage.setItem(Config.getAppId() + '_state', 'TRACKING');
+                    localStorage.setItem(Config.getAppId() + '_tripId', idTrip);
+                    localStorage.setItem(Config.getAppId() + '_startTimestamp', startTimestamp);
+                    localStorage.setItem(Config.getAppId() + '_endTimestamp', endtime);
+                    //taggo la prima locazione con parametro extra
+                }
                 $timeout(function () {
                     trackService.stop();
                     if (callback) callback();
-                }, msOfRun);
+                }, duration);
                 //                $timeout(function () {
                 //                    trackService.stop();
                 //                    if (callback) callback();
@@ -160,7 +149,7 @@ angular.module('viaggia.services.tracking', [])
                 bgGeo.start(function () {
                     bgGeo.changePace(true);
                     bgGeo.getCurrentPosition(function (location, taskId) {
-                        console.log("-Current position received: ", location);
+                        //console.log("-Current position received: ", location);
                         location.extras = {
                             idTrip: idTrip
                         }; // <-- add some arbitrary extras-data
@@ -401,10 +390,10 @@ angular.module('viaggia.services.tracking', [])
                         switch (action) {
                         case "create":
                             cordova.plugins.notification.local.schedule(notifArray);
-                            console.log(JSON.stringify(notifArray))
-                            cordova.plugins.notification.local.getAll(function (notifications) {
-                                console.log(JSON.stringify(notifications))
-                            });
+                            //console.log(JSON.stringify(notifArray))
+                            //                            cordova.plugins.notification.local.getAll(function (notifications) {
+                            //                                console.log(JSON.stringify(notifications))
+                            //                            });
                             cordova.plugins.notification.local.on("click", function (notification) {
                                 JSON.stringify(notification);
                                 $state.go("app.tripdetails", {
