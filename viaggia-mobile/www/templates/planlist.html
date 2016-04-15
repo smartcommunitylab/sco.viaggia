@@ -29,18 +29,20 @@
                         </div>
                         <div class="col">
 
+
+
                             <div class="row">
                                 <div class="list-of-icons thumbnail col-md-2" ng-repeat="mean in journey.means">
                                     <img ng-src="{{mean.img}}">
                                     <div ng-show="!mean.parking_street" class="text-center">
-                                        <div ng-repeat="n in mean.note.value">{{n.value}}</div>
+                                        <div ng-repeat="n in mean.note">{{n.value}}</div>
                                     </div>
                                     <div ng-show="mean.parking_street" class="col parking-info">
-                                        <div class="col" ng-repeat="n in mean.note">
-
+                                        <div ng-repeat="n in mean.note">
                                             <span ng-if="n.type=='cost'">{{'parking_cost' | translate}}</span>
                                             <span ng-if="n.type=='time'">{{'parking_time' | translate}}</span><b>{{n.value}}</b>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>

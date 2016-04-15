@@ -442,7 +442,7 @@ angular.module('viaggia.controllers.tripdetails', [])
     //        }
     //        return false;
     //    }
-    $scope.showPopupIfNotThisJourney = function () {
+    $scope.startOrShowPopupIfNotThisJourney = function () {
         if ($scope.notTrackable()) {
             if (!$scope.isThisJourney() && trackService.trackingIsGoingOn()) {
                 Toast.show($filter('translate')('toast_already_monitoring'), "short", "bottom");
@@ -451,6 +451,8 @@ angular.module('viaggia.controllers.tripdetails', [])
             } else if ($scope.isInTime() == 1) {
                 Toast.show($filter('translate')('toast_after_time'), "short", "bottom");
             }
+        } else {
+            $scope.trackStart();
         }
 
     }

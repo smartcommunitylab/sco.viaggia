@@ -558,7 +558,6 @@ angular.module('viaggia', [
             popup_modify_trip_title: 'Modifica',
             popup_modify_trip_message: 'Sicuro di voler modificare il viaggio salvato?',
             tripdeleted_message_feedback: 'Il viaggio selezionato è stato modificato',
-
             my_trip_empty_list: 'Non ci sono viaggi salvati',
             my_trip_from: 'Da',
             my_trip_to: 'A',
@@ -673,7 +672,8 @@ angular.module('viaggia', [
             lbl_welcome_text: '<ul class="list-welcome"><li>Pianifica i tuoi viaggi</li><li>Salva il tuo itinerario</li><li>Ricordati di tracciare il tuo percorso quando esegui il viaggio!</li></ul>',
             btn_rules: 'REGOLE',
             btn_score: 'PUNTEGGIO',
-            user_check: 'Verifica utente'
+            user_check: 'Verifica utente',
+            credits_main_sponsors: 'Sponsor premi finali:'
 
         });
 
@@ -893,7 +893,9 @@ angular.module('viaggia', [
             lbl_welcome_text: '<ul class="list-welcome"><li>Plan your journey</li><li>Save your journey</li><li>Remember to track your route when you do the journey!</li></ul>',
             btn_rules: 'RULES',
             btn_score: 'SCORE',
-            user_check: 'Check user'
+            user_check: 'Check user',
+            credits_main_sponsors: 'Sponsors of final prizes:'
+
         });
 
 
