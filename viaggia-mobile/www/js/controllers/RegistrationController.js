@@ -4,11 +4,11 @@ angular.module('viaggia.controllers.registration', [])
     $ionicLoading.hide();
     $scope.user = {
         nickname: '',
-        age: '20',
-        km: '',
+        age_range: '',
+        averagekm: '',
         publictransport: null,
         listOftransport: [],
-        advice: ''
+        nick_recommandation: ''
     }
     $scope.publicTransport = null;
     initPublicTransport();
@@ -30,19 +30,23 @@ angular.module('viaggia.controllers.registration', [])
         $scope.publicTransport = [
             {
                 text: $filter('translate')('registration_transport_train'),
-                checked: false
+                checked: false,
+                value: 'train'
         },
             {
                 text: $filter('translate')('registration_transport_bus'),
-                checked: false
+                checked: false,
+                value: 'bus'
         },
             {
                 text: $filter('translate')('registration_transport_carsharing'),
-                checked: false
+                checked: false,
+                value: 'shared car'
         },
             {
                 text: $filter('translate')('registration_transport_bikesharing'),
-                checked: false
+                checked: false,
+                value: 'shared bike'
         }
   ];
     }
@@ -51,15 +55,18 @@ angular.module('viaggia.controllers.registration', [])
         $scope.privateTransport = [
             {
                 text: $filter('translate')('registration_transport_car'),
-                checked: false
+                checked: false,
+                value: 'private car'
         },
             {
                 text: $filter('translate')('registration_transport_bike'),
-                checked: false
+                checked: false,
+                value: 'private bike'
         },
             {
                 text: $filter('translate')('registration_transport_foot'),
-                checked: false
+                checked: false,
+                value: 'walk'
         }
 
     ];
@@ -74,12 +81,39 @@ angular.module('viaggia.controllers.registration', [])
     $scope.read = {
         isChecked: false
     }
+    var getVehicles = function() {
+      var res = [];
+      if ($cope.data.publictransport) {
+        $scope.publicTransport.forEach(function(t) {
+          if (t.checked) {
+            res.push(t.value);
+          }
+        });
+      } else {
+        $scope.privateTransport.forEach(function(t) {
+          if (t.checked) {
+            res.push(t.value);
+          }
+        });
+      }
+      return res;
+    }
+
     $scope.register = function () {
         if (!$scope.read.isChecked) {
             Toast.show($filter('translate')('registration_must_accept'), "short", "bottom");
             return;
         } else {
             if (checkParams()) {
+
+              var nickname = $scope.user.nickname;
+              var personalData = {
+                age_range: $scope.user.age_range,
+                averagekm: $scope.user.averagekm,
+                use_transport: $scope.data.publictransport,
+                vehicles: getVehicles(),
+                nick_recommandation: $scope.user.nick_recommandation
+              };
                 Toast.show("registra", "short", "bottom");
             }
         }
@@ -90,11 +124,11 @@ angular.module('viaggia.controllers.registration', [])
             Toast.show($filter('translate')('registration_empty_nick'), "short", "bottom");
             return false;
         }
-        if ($scope.user.age == '') {
+        if ($scope.user.age_range == '') {
             Toast.show($filter('translate')('registration_empty_age'), "short", "bottom");
             return false;
         }
-        if ($scope.user.km == '' || isNaN($scope.user.km)) {
+        if ($scope.user.averagekm == '' || isNaN($scope.user.averagekm)) {
             Toast.show($filter('translate')('registration_empty_km'), "short", "bottom");
             return false;
         }

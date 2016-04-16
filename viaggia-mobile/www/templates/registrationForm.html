@@ -19,19 +19,21 @@
             <div class="input-label">
                 {{'registration_age' | translate}}
             </div>
-            <select ng-model="user.age" ng-change="showSelectValue(mySelect)">
-                <option selected>20</option>
-                <option>20-40</option>
-                <option>40-70</option>
+            <select ng-model="user.age_range" ng-change="showSelectValue(mySelect)">
+                <option selected>{{'age_placeholder' | translate}}</option>
+                <option value="0-20">{{'age_option1' | translate}}</option>
+                <option value="20-40">{{'age_option2' | translate}}</option>
+                <option value="40-70">{{'age_option3' | translate}}</option>
+                <option value="70-100">{{'age_option4' | translate}}</option>
             </select>
         </label>
         <label class="item item-input item-stacked-label">
             <span class="input-label">{{'registration_km' | translate}}</span>
-            <input type="text" placeholder="{{'registration_km_placeholder' | translate}}" ng-model="user.km">
+            <input type="text" placeholder="{{'registration_km_placeholder' | translate}}" ng-model="user.averagekm">
         </label>
         <div class="item item-text-wrap">{{'registration_public_transport' | translate}}</div>
         <ion-list>
-            <ion-radio ng-repeat="item in usetransports" ng-value="item.value" ng-model="data.publictransport" ng-click="initTransport()">{{ item.text }}
+            <ion-radio ng-repeat="item in usetransports" ng-value="item.value" ng-model="data.publictransport" ng-click="initTransport()"/>{{ item.text }}
                 <!--
                 <ion-radio ng-model="uses_public_transport" ng-value="true" ng-model="publictransport.checked">{{'registration_true' | translate}}</ion-radio>
                 <ion-radio ng-model="uses_public_transport" ng-value="false" ng-model="publictransport.checked">{{'registration_false' | translate}}</ion-radio>
@@ -65,7 +67,7 @@
         </ion-list>
         <label class="item item-input item-stacked-label">
             <span class="input-label">{{'registration_invite' | translate}}</span>
-            <input type="text" placeholder="{{'registration_invite_placeholder' | translate}}">
+            <input type="text" placeholder="{{'registration_invite_placeholder' | translate}}" ng-model="user.nick_recommandation">
         </label>
         <button class="button button-viaggia-header button-block" ng-click="register()">
             Registra
