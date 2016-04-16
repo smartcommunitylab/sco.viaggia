@@ -1399,3 +1399,7 @@ ion-header-bar .title {
 .trip-card .ion-option-button {
     color: white;
 }
+
+.rules_list {
+    margin: 20px;
+}

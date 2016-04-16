@@ -72,6 +72,7 @@ angular.module('viaggia', [
     'viaggia.controllers.tripdetails',
     'viaggia.controllers.login',
     'viaggia.controllers.login',
+    'viaggia.controllers.registration',
     'viaggia.services.data',
     'viaggia.services.conf',
     'viaggia.services.map',
@@ -85,6 +86,7 @@ angular.module('viaggia', [
     'viaggia.services.geo',
     'viaggia.services.bookmarks',
     'viaggia.services.tracking',
+    'viaggia.services.registration',
     'viaggia.filters'
 ])
 
@@ -179,8 +181,17 @@ angular.module('viaggia', [
                     }
                 }
             })
-
-        .state('app.home', {
+            .state('app.registration', {
+                cache: false,
+                url: "/registration",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/registrationForm.html",
+                        controller: 'RegistrationCtrl'
+                    }
+                }
+            })
+            .state('app.home', {
                 cache: false,
                 url: "/home",
                 views: {
@@ -673,7 +684,39 @@ angular.module('viaggia', [
             btn_rules: 'REGOLE',
             btn_score: 'PUNTEGGIO',
             user_check: 'Verifica utente',
-            credits_main_sponsors: 'Sponsor premi finali:'
+            credits_main_sponsors: 'Sponsor premi finali:',
+            registration_title: 'Benvenuto',
+            registration_answer: 'Rispondi a queste veloci e semplici domande per registrarti al gioco. Questo permettera\' al sistema di recuperare informazioni utili per offrire un servizio piu\' personalizzato e adatto alle tue abitudini.',
+            registration_read: 'Ho letto e accettato il regolamento di gioco e l\'informativa sulla privacy:',
+            registration_link_rule: 'Regolamento di gioco',
+            registration_privacy: 'Informativa privacy',
+            registration_prizes: 'Premi',
+            registration_nick: 'Nick name:*',
+            registration_nick_placeholder: 'Inserisci un nickname che ti rappresenti nel gioco',
+            registration_age: 'Eta\':*',
+            registration_km: 'Km medi percorsi giornalmente:*',
+            registration_km_placeholder: 'Inserisci il numero di Km medi percorsi giornalmente',
+            registration_public_transport: 'Utilizzi quotidianamente i mezzi pubblici? ',
+            registration_true: 'Si',
+            registration_false: 'No',
+            registration_which_public_transport: 'Mezzi usati abitualmente per gli spostamenti: ',
+            registration_invite: 'Chi ti ha invitato a questo gioco? (nickname)',
+            registration_invite_placeholder: 'Inserisci il nickname di chi ti ha invitato al gioco',
+            registration_transport_train: 'treno',
+            registration_transport_bus: 'autobus',
+            registration_transport_carsharing: 'auto condivisa',
+            registration_transport_bikesharing: 'bici condivisa',
+            registration_transport_car: 'auto privata',
+            registration_transport_bike: 'bici privata',
+            registration_transport_foot: 'a piedi',
+            registration_must_accept: 'Devi accettare il regolamento per procedere con la registrazione',
+            registration_empty_nick: 'Nickname obbligatorio',
+            registration_empty_age: 'Eta\' obbligatoria',
+            registration_empty_km: 'Inserisci un numero di kilometri valido',
+            registration_empty_transport: 'Selezionare almeno un mezzo di trasporto'
+
+
+
 
         });
 
@@ -894,7 +937,37 @@ angular.module('viaggia', [
             btn_rules: 'RULES',
             btn_score: 'SCORE',
             user_check: 'Check user',
-            credits_main_sponsors: 'Sponsors of final prizes:'
+            credits_main_sponsors: 'Sponsors of final prizes:',
+            registration_title: 'Benvenuto',
+            registration_answer: 'Rispondi a queste veloci e semplici domande per registrarti al gioco. Questo permettera\' al sistema di recuperare informazioni utili per offrire un servizio piu\' personalizzato e adatto alle tue abitudini.',
+            registration_read: 'Ho letto e accettato il regolamento di gioco e l\'informativa sulla privacy:',
+            registration_link_rule: 'Regolamento di gioco',
+            registration_privacy: 'Informativa privacy',
+            registration_prizes: 'Premi',
+            registration_nick: 'Nick name:*',
+            registration_nick_placeholder: 'Inserisci un nickname che ti rappresenti nel gioco',
+            registration_age: 'Eta\':*',
+            registration_km: 'Km medi percorsi giornalmente:*',
+            registration_km_placeholder: 'Inserisci il numero di Km medi percorsi giornalmente',
+            registration_public_transport: 'Utilizzi quotidianamente i mezzi pubblici? ',
+            registration_true: 'Si',
+            registration_false: 'No',
+            registration_which_public_transport: 'Mezzi usati abitualmente per gli spostamenti: ',
+            registration_invite: 'Chi ti ha invitato a questo gioco? (nickname)',
+            registration_invite_placeholder: 'Inserisci il nickname di chi ti ha invitato al gioco',
+            registration_transport_train: 'treno',
+            registration_transport_bus: 'autobus',
+            registration_transport_carsharing: 'auto condivisa',
+            registration_transport_bikesharing: 'bici condivisa',
+            registration_transport_car: 'auto privata',
+            registration_transport_bike: 'bici privata',
+            registration_transport_foot: 'a piedi',
+            registration_must_accept: 'You must accept the rules if you want to proceed with the registration',
+            registration_empty_nick: 'The nickname is mandatory',
+            registration_empty_age: 'The age is mandatory',
+            registration_empty_km: 'Write a number of kilometers valid',
+            registration_empty_transport: 'Choose at least a mean'
+
 
         });
 
