@@ -1,13 +1,13 @@
 angular.module('viaggia.controllers.registration', [])
 
-.controller('RegistrationCtrl', function ($scope, $ionicLoading, $filter, Toast) {
+.controller('RegistrationCtrl', function ($scope, $ionicLoading, $filter, Toast, registrationService) {
     $ionicLoading.hide();
     $scope.user = {
         nickname: '',
         age_range: '',
         averagekm: '',
-        publictransport: null,
-        listOftransport: [],
+        use_transport: null,
+        vehicles: [],
         nick_recommandation: ''
     }
     $scope.publicTransport = null;
@@ -76,27 +76,10 @@ angular.module('viaggia.controllers.registration', [])
         initPublicTransport();
     }
     $scope.data = {
-        publictransport: true
+        use_transport: true
     };
     $scope.read = {
         isChecked: false
-    }
-    var getVehicles = function() {
-      var res = [];
-      if ($cope.data.publictransport) {
-        $scope.publicTransport.forEach(function(t) {
-          if (t.checked) {
-            res.push(t.value);
-          }
-        });
-      } else {
-        $scope.privateTransport.forEach(function(t) {
-          if (t.checked) {
-            res.push(t.value);
-          }
-        });
-      }
-      return res;
     }
 
     $scope.register = function () {
@@ -105,21 +88,36 @@ angular.module('viaggia.controllers.registration', [])
             return;
         } else {
             if (checkParams()) {
+              registrationService.register($scope.user).then(function () {
+                  Toast.show("registrato", "short", "bottom");
 
-              var nickname = $scope.user.nickname;
-              var personalData = {
-                age_range: $scope.user.age_range,
-                averagekm: $scope.user.averagekm,
-                use_transport: $scope.data.publictransport,
-                vehicles: getVehicles(),
-                nick_recommandation: $scope.user.nick_recommandation
-              };
-                Toast.show("registra", "short", "bottom");
+              }, function (err) {
+                  if (err == '409') {
+                      Toast.show("nickname presente", "short", "bottom");
+
+                  }
+              });
+            }
+        }
+    }
+
+    function createArrayOfVeicles() {
+        if ($scope.user.use_transport) {
+            for (var i = 0; i < $scope.publicTransport.length; i++) {
+                if ($scope.publicTransport[i].checked)
+                    $scope.user.vehicles.push($scope.publicTransport[i].value);
+            }
+        } else {
+            for (var i = 0; i < $scope.privateTransport.length; i++) {
+                if ($scope.privateTransport[i].checked)
+                    $scope.user.vehicles.push($scope.privateTransport[i].value);
             }
         }
     }
 
     function checkParams() {
+        $scope.user.use_transport = $scope.data.use_transport;
+        createArrayOfVeicles();
         if ($scope.user.nickname == '') {
             Toast.show($filter('translate')('registration_empty_nick'), "short", "bottom");
             return false;
@@ -132,7 +130,7 @@ angular.module('viaggia.controllers.registration', [])
             Toast.show($filter('translate')('registration_empty_km'), "short", "bottom");
             return false;
         }
-        if ($scope.user.listOftransport.length == 0) {
+        if ($scope.user.vehicles.length == 0) {
             Toast.show($filter('translate')('registration_empty_transport'), "short", "bottom");
             return false;
         }

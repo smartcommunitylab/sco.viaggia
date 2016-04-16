@@ -246,38 +246,37 @@ angular.module('viaggia.controllers.login', [])
     //    });
 
     function validateUserPopup() {
-        $scope.validatePopup = $ionicPopup.show({
-            templateUrl: 'templates/validateUserPopup.html',
-            title: $filter('translate')('lbl_validateuser'),
-            cssClass: 'parking-popup',
-            scope: $scope,
-            buttons: [
-                {
+        var buttons = [
+          {
                     text: $filter('translate')('btn_close'),
                     type: 'button-close',
                     onTap: function (e) {
                         //close app
                         ionic.Platform.exitApp();
                     }
+          },
+          {
+              text: $filter('translate')('btn_validate_user'),
+              onTap: function (e) {
+                  $ionicLoading.show();
 
-                },
-                {
-                    text: $filter('translate')('btn_validate_user'),
-                    onTap: function (e) {
-                        $ionicLoading.show();
-
-                        registrationForm();
-                        //                        userService.getValidToken().then(function (validToken) {
-                        //                            var url = Config.getGamificationURL() + "/mobile?token=" + validToken;
-                        //                            window.open(url, "_system", "location=yes");
-                        //                            //$timeout(ionic.Platform.exitApp(), 1000);
-                        //                        });
-
-
-                    }
-
-                }
-                ]
+                  registrationForm();
+                  //                        userService.getValidToken().then(function (validToken) {
+                  //                            var url = Config.getGamificationURL() + "/mobile?token=" + validToken;
+                  //                            window.open(url, "_system", "location=yes");
+                  //                            //$timeout(ionic.Platform.exitApp(), 1000);
+                  //                        });
+              }
+        }];
+        if (ionic.Platform.isIOS()) {
+          buttons.splice(0,1);
+        }
+        $scope.validatePopup = $ionicPopup.show({
+            templateUrl: 'templates/validateUserPopup.html',
+            title: $filter('translate')('lbl_validateuser'),
+            cssClass: 'parking-popup',
+            scope: $scope,
+            buttons: buttons
         });
 
     }

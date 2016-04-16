@@ -685,6 +685,7 @@ angular.module('viaggia', [
             btn_score: 'PUNTEGGIO',
             user_check: 'Verifica utente',
             credits_main_sponsors: 'Sponsor premi finali:',
+
             registration_title: 'Benvenuto',
             registration_answer: 'Rispondi a queste veloci e semplici domande per registrarti al gioco. Questo permettera\' al sistema di recuperare informazioni utili per offrire un servizio piu\' personalizzato e adatto alle tue abitudini.',
             registration_read: 'Ho letto e accettato il regolamento di gioco e l\'informativa sulla privacy:',
@@ -713,9 +714,12 @@ angular.module('viaggia', [
             registration_empty_nick: 'Nickname obbligatorio',
             registration_empty_age: 'Eta\' obbligatoria',
             registration_empty_km: 'Inserisci un numero di kilometri valido',
-            registration_empty_transport: 'Selezionare almeno un mezzo di trasporto'
-
-
+            registration_empty_transport: 'Selezionare almeno un mezzo di trasporto',
+            age_placeholder: 'Seleziona una fascia età',
+            age_option1: '< 20 anni',
+            age_option2: '20-40 anni',
+            age_option3: '40-70 anni',
+            age_option4: '> 70 anni',
 
 
         });
@@ -938,7 +942,7 @@ angular.module('viaggia', [
             btn_score: 'SCORE',
             user_check: 'Check user',
             credits_main_sponsors: 'Sponsors of final prizes:',
-            registration_title: 'Benvenuto',
+            registration_title: 'Welcome',
             registration_answer: 'Rispondi a queste veloci e semplici domande per registrarti al gioco. Questo permettera\' al sistema di recuperare informazioni utili per offrire un servizio piu\' personalizzato e adatto alle tue abitudini.',
             registration_read: 'Ho letto e accettato il regolamento di gioco e l\'informativa sulla privacy:',
             registration_link_rule: 'Regolamento di gioco',
@@ -966,7 +970,12 @@ angular.module('viaggia', [
             registration_empty_nick: 'The nickname is mandatory',
             registration_empty_age: 'The age is mandatory',
             registration_empty_km: 'Write a number of kilometers valid',
-            registration_empty_transport: 'Choose at least a mean'
+            registration_empty_transport: 'Choose at least one mean of transport',
+            age_placeholder: 'Seleziona una fascia età',
+            age_option1: '< 20 anni',
+            age_option2: '20-40 anni',
+            age_option3: '40-70 anni',
+            age_option4: '> 70 anni',
 
 
         });
