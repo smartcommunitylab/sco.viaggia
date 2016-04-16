@@ -28,7 +28,7 @@ angular.module('viaggia.services.registration', [])
             }).
             error(function (data, status, headers, config) {
                 console.log(data + status + headers + config);
-                deferred.reject(data);
+                deferred.reject(status);
             });
 
         });

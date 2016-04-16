@@ -1,4 +1,7 @@
-<ion-view title="{{title}}">
+<ion-view>
+    <ion-nav-title>
+        {{title}}
+    </ion-nav-title>
     <ion-nav-buttons side="right">
         <button ng-click="openNotifications()" class="button button-icon button-home ic_notification"><span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{countNotification}}</span></button>
 

@@ -1,12 +1,12 @@
 angular.module('viaggia.controllers.registration', [])
 
-.controller('RegistrationCtrl', function ($scope, $ionicLoading, $filter, Toast, registrationService) {
-    $ionicLoading.hide();
+.controller('RegistrationCtrl', function ($scope, $state, $filter, $ionicHistory, Toast, Config, registrationService) {
+    Config.loaded();
     $scope.user = {
         nickname: '',
         age_range: '',
         averagekm: '',
-        use_transport: null,
+        use_transport: true,
         vehicles: [],
         nick_recommandation: ''
     }
@@ -75,9 +75,6 @@ angular.module('viaggia.controllers.registration', [])
         initPrivateTransport();
         initPublicTransport();
     }
-    $scope.data = {
-        use_transport: true
-    };
     $scope.read = {
         isChecked: false
     }
@@ -88,12 +85,18 @@ angular.module('viaggia.controllers.registration', [])
             return;
         } else {
             if (checkParams()) {
+              Config.loading();
               registrationService.register($scope.user).then(function () {
-                  Toast.show("registrato", "short", "bottom");
+                Config.loaded();
+                $ionicHistory.nextViewOptions({
+                    disableBack: true,
+                    historyRoot: true
+                });
+                $state.go('app.home');
 
-              }, function (err) {
+              }, function (errStatus) {
                   if (err == '409') {
-                      Toast.show("nickname presente", "short", "bottom");
+                      Toast.show($filter('translate')('nickname_inuse'), "short", "bottom");
 
                   }
               });
@@ -116,7 +119,6 @@ angular.module('viaggia.controllers.registration', [])
     }
 
     function checkParams() {
-        $scope.user.use_transport = $scope.data.use_transport;
         createArrayOfVeicles();
         if ($scope.user.nickname == '') {
             Toast.show($filter('translate')('registration_empty_nick'), "short", "bottom");
