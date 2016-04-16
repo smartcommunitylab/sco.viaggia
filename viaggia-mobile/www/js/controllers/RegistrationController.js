@@ -1,14 +1,14 @@
 angular.module('viaggia.controllers.registration', [])
 
-.controller('RegistrationCtrl', function ($scope, $ionicLoading, $filter, Toast) {
+.controller('RegistrationCtrl', function ($scope, $ionicLoading, $filter, Toast, registrationService) {
     $ionicLoading.hide();
     $scope.user = {
         nickname: '',
-        age: '20',
-        km: '',
-        publictransport: null,
-        listOftransport: [],
-        advice: ''
+        age_range: '0-20',
+        averagekm: '',
+        use_transport: null,
+        vehicles: [],
+        nick_recommandation: ''
     }
     $scope.publicTransport = null;
     initPublicTransport();
@@ -30,19 +30,23 @@ angular.module('viaggia.controllers.registration', [])
         $scope.publicTransport = [
             {
                 text: $filter('translate')('registration_transport_train'),
-                checked: false
+                checked: false,
+                value: "train"
         },
             {
                 text: $filter('translate')('registration_transport_bus'),
-                checked: false
+                checked: false,
+                value: "bus"
         },
             {
                 text: $filter('translate')('registration_transport_carsharing'),
-                checked: false
+                checked: false,
+                value: "shared car"
         },
             {
                 text: $filter('translate')('registration_transport_bikesharing'),
-                checked: false
+                checked: false,
+                value: "shared bike"
         }
   ];
     }
@@ -51,15 +55,18 @@ angular.module('viaggia.controllers.registration', [])
         $scope.privateTransport = [
             {
                 text: $filter('translate')('registration_transport_car'),
-                checked: false
+                checked: false,
+                value: "private car"
         },
             {
                 text: $filter('translate')('registration_transport_bike'),
-                checked: false
+                checked: false,
+                value: "private bike"
         },
             {
                 text: $filter('translate')('registration_transport_foot'),
-                checked: false
+                checked: false,
+                value: "walk"
         }
 
     ];
@@ -69,7 +76,7 @@ angular.module('viaggia.controllers.registration', [])
         initPublicTransport();
     }
     $scope.data = {
-        publictransport: true
+        use_transport: true
     };
     $scope.read = {
         isChecked: false
@@ -80,25 +87,49 @@ angular.module('viaggia.controllers.registration', [])
             return;
         } else {
             if (checkParams()) {
-                Toast.show("registra", "short", "bottom");
+                registrationService.register($scope.user).then(function () {
+                    Toast.show("registrato", "short", "bottom");
+
+                }, function (err) {
+                    if (err == '409') {
+                        Toast.show("nickname presente", "short", "bottom");
+
+                    }
+                });
+            }
+        }
+    }
+
+    function createArrayOfVeicles() {
+        if ($scope.user.use_transport) {
+            for (var i = 0; i < $scope.publicTransport.length; i++) {
+                if ($scope.publicTransport[i].checked)
+                    $scope.user.vehicles.push($scope.publicTransport[i].value);
+            }
+        } else {
+            for (var i = 0; i < $scope.privateTransport.length; i++) {
+                if ($scope.privateTransport[i].checked)
+                    $scope.user.vehicles.push($scope.privateTransport[i].value);
             }
         }
     }
 
     function checkParams() {
+        $scope.user.use_transport = $scope.data.use_transport;
+        createArrayOfVeicles();
         if ($scope.user.nickname == '') {
             Toast.show($filter('translate')('registration_empty_nick'), "short", "bottom");
             return false;
         }
-        if ($scope.user.age == '') {
+        if ($scope.user.age_range == '') {
             Toast.show($filter('translate')('registration_empty_age'), "short", "bottom");
             return false;
         }
-        if ($scope.user.km == '' || isNaN($scope.user.km)) {
+        if ($scope.user.averagekm == '' || isNaN($scope.user.averagekm)) {
             Toast.show($filter('translate')('registration_empty_km'), "short", "bottom");
             return false;
         }
-        if ($scope.user.listOftransport.length == 0) {
+        if ($scope.user.vehicles.length == 0) {
             Toast.show($filter('translate')('registration_empty_transport'), "short", "bottom");
             return false;
         }
