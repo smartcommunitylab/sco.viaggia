@@ -10,7 +10,7 @@
         "resource_folder": "config/instances/ROVERETO",
         "widget_id": "it.smartcommunitylab.viaggiarovereto.playgo",
         "version": "1.0.0",
-        "version_code": "1",
+        "version_code": "2",
         "app_name": "Viaggia Rovereto Play&amp;Go"
     }
 }
