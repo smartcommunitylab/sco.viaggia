@@ -720,7 +720,9 @@ angular.module('viaggia', [
             age_option2: '20-40 anni',
             age_option3: '40-70 anni',
             age_option4: '> 70 anni',
-            nickname_inuse: 'Nickname è già usato'
+            nickname_inuse: 'Nickname è già usato',
+            more_rules: 'Espandi regolamento',
+            less_rules: 'Riduci regolamento'
 
 
         });
@@ -978,7 +980,9 @@ angular.module('viaggia', [
             age_option2: '20-40 years',
             age_option3: '40-70 years',
             age_option4: '> 70 years',
-            nickname_inuse: 'The specified nickname is already in use'
+            nickname_inuse: 'The specified nickname is already in use',
+            more_rules: 'Expand rules',
+            less_rules: 'Collapse Rules'
         });
 
 
