@@ -5,7 +5,7 @@
         <ion-checkbox ng-model="read.isChecked" class="tac-check"><b>{{'registration_read' | translate}}</b></ion-checkbox>
         <div class="rules_list">
             <ul class="list-welcome">
-                <li><a href="#" onclick="window.open('https://tn.smartcommunitylab.it/gamificationweb/view_rules', '_system', 'location=yes'); return false;">{{'registration_link_rule' | translate}}</a></li>
+                <li><a href="#" ng-click="openRulesModal()">{{'registration_link_rule' | translate}}</a></li>
                 <li><a href="#" onclick="window.open('https://tn.smartcommunitylab.it/gamificationweb/view_privacy', '_system', 'location=yes'); return false;">{{'registration_privacy' | translate}}</a></li>
                 <li><a href="#" onclick="window.open('https://tn.smartcommunitylab.it/gamificationweb/view_prizes', '_system', 'location=yes'); return false;">{{'registration_prizes' | translate}}</a></li>
             </ul>
@@ -33,8 +33,8 @@
         </label>
         <div class="item item-text-wrap">{{'registration_public_transport' | translate}}</div>
         <ion-list>
-            <ion-radio ng-repeat="item in usetransports" ng-value="item.value" ng-model="user.use_transport" ng-click="initTransport()"/>{{ item.text }}
-                <!--
+            <ion-radio ng-repeat="item in usetransports" ng-value="item.value" ng-model="user.use_transport" ng-click="initTransport()" />{{ item.text }}
+            <!--
                 <ion-radio ng-model="uses_public_transport" ng-value="true" ng-model="publictransport.checked">{{'registration_true' | translate}}</ion-radio>
                 <ion-radio ng-model="uses_public_transport" ng-value="false" ng-model="publictransport.checked">{{'registration_false' | translate}}</ion-radio>
 -->

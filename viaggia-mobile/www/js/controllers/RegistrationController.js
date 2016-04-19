@@ -1,6 +1,7 @@
 angular.module('viaggia.controllers.registration', [])
 
-.controller('RegistrationCtrl', function ($scope, $state, $filter, $ionicHistory, Toast, Config, registrationService) {
+.controller('RegistrationCtrl', function ($scope, $state, $filter, $ionicHistory, $ionicModal, $location, $ionicScrollDelegate, Toast, Config, registrationService) {
+    $scope.expandedRules = false;
     Config.loaded();
     $scope.user = {
         nickname: '',
@@ -79,27 +80,74 @@ angular.module('viaggia.controllers.registration', [])
         isChecked: false
     }
 
+//    $scope.openModal = function () {
+        //        $scope.modal.show();
+        //    };
+        //    $scope.hideExpandRulesButton = function () {
+        //        if (!$scope.expandedRules) {
+        //            return false;
+        //        }
+        //        return true;
+        //    }
+        //    $scope.hideCloseRulesButton = function () {
+        //        if ($scope.expandedRules) {
+        //            return false;
+        //        }
+        //        return true;
+        //    }
+        //    $scope.closeModal = function () {
+        //        $scope.modal.hide();
+        //    };
+        //    $scope.openRulesModal = function () {
+        //
+        //        $ionicModal.fromTemplateUrl('templates/rulesModal.html', {
+        //            scope: $scope,
+        //            animation: 'slide-in-up'
+        //        }).then(function (modal) {
+        //            $scope.modal = modal;
+        //            $scope.openModal();
+        //        });
+        //
+        //
+        //    }
+        //    $scope.scrollTo = function (id) {
+        //        $location.hash(id)
+        //        $ionicScrollDelegate.anchorScroll(true);
+        //    };
+        //    $scope.toggleRules = function () {
+        //        if ($scope.isLongRulesShown()) {
+        //            $scope.expandedRules = false;
+        //            //$scope.scrollTo("firstSeparator");
+        //        } else {
+        //            $scope.expandedRules = true;
+        //
+        //        }
+        //    };
+        //
+        //    $scope.isLongRulesShown = function () {
+        //        return $scope.expandedRules;
+        //    };
     $scope.register = function () {
         if (!$scope.read.isChecked) {
             Toast.show($filter('translate')('registration_must_accept'), "short", "bottom");
             return;
         } else {
             if (checkParams()) {
-              Config.loading();
-              registrationService.register($scope.user).then(function () {
-                Config.loaded();
-                $ionicHistory.nextViewOptions({
-                    disableBack: true,
-                    historyRoot: true
+                Config.loading();
+                registrationService.register($scope.user).then(function () {
+                    Config.loaded();
+                    $ionicHistory.nextViewOptions({
+                        disableBack: true,
+                        historyRoot: true
+                    });
+                    $state.go('app.home');
+
+                }, function (errStatus) {
+                    if (err == '409') {
+                        Toast.show($filter('translate')('nickname_inuse'), "short", "bottom");
+
+                    }
                 });
-                $state.go('app.home');
-
-              }, function (errStatus) {
-                  if (err == '409') {
-                      Toast.show($filter('translate')('nickname_inuse'), "short", "bottom");
-
-                  }
-              });
             }
         }
     }

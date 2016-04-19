@@ -1,0 +1,123 @@
+<ion-modal-view>
+    <ion-header-bar align-title="left" class="bar-positive-100">
+        <div class="buttons">
+            <i class="icon close-modal" ng-class="{'ion-android-arrow-back': platform.isAndroid(), 'ion-ios-arrow-back': !platform.isAndroid()}" ng-click="closeModal()"></i>
+        </div>
+        <h1 class="title" left-title "">{{'registration_link_rule' | translate}}</h1>
+
+    </ion-header-bar>
+    <ion-content class="rules">
+        <h4>Benvenuto nel Gioco Play&Go con ViaggiaRovereto!</h4>
+        <div align="justify">
+            Partecipare &egrave; semplice: pianifica i tuoi viaggi con ViaggiaRovereto e scegli delle soluzioni di mobilit&agrave; sostenibile per guadagnare punti e avanzare nel gioco. Divertiti a collezionare punti, badges e mettiti alla prova con le challenges settimanali. Sfida i tuoi amici a scalare le classifiche: ogni settimana puoi vincere ricchi premi e contribuire, divertendoti, a rendere la tua citt&agrave; pi&ugrave; sostenibile e smart!
+        </div>
+        <br/>
+        <h4>Come si gioca?</h4>
+        <div align="justify">
+            Pianifica i tuoi viaggi con ViaggiaRovereto Play&Go (<strong>"Pianifica viaggio"</strong> nella home), salva il tuo itinerario (<strong>"Salva itinerario"</strong> nella pagina di dettaglio) e ricordati di tracciare il tuo percorso quando esegui il viaggio (<strong>"Inizia"</strong> e <strong>"Termina Viaggio"</strong> in dettaglio viaggio ne "I miei viaggi"). Ogni viaggio ti permette di guadagnare <strong>punti Green Leaves</strong> in proporzione ai km fatti con mezzi sostenibili (a piedi, in bici/bike sharing, e con i mezzi pubblici).
+        </div>
+        <div align="left">
+            Puoi vincere dei bonus in punti Green Leaves:
+            <br>
+            <ul class="list-welcome">
+                <li>Scegliendo dei viaggi ad emissioni zero di CO2, cio&egrave; esclusivamente in bici o a piedi; </li>
+                <li>Scegliendo viaggi sostenibili: suggeriti e marcati in verde da ViaggiaRovereto;</li>
+                <li>Superando le tue sfide settimanali, quando ti vengono proposte;</li>
+                <li>Invitando i tuoi amici a registrarsi al gioco: &egrave; sufficiente che il tuo amico, in fase di registrazione, indichi il tuo nickname Giocatore.</li>
+            </ul>
+        </div>
+        <br/>
+        <h4>Incentivi e premi</h4>
+        <div align="justify">
+            Durante il gioco sono previsti <strong>premi settimanali e finali</strong> che andranno a premiare i primi classificati nella classifica (settimanale e generale, rispettivamente) a punti Green Leaves.
+            <br/> Il gioco &egrave; accessibile tramite App iPhone, tuttavia Apple non sponsorizza in alcun modo questo gioco e non offre premi.
+        </div>
+        <div id="firstSeparator"></div>
+        <div class="text-button" ng-click="toggleRules()" ng-hide="hideExpandRulesButton()">
+            <!--            <div class="text-button">-->
+
+            {{'more_rules' | translate}}
+            <!--            </div>-->
+        </div>
+        <div class="text-button" ng-click="toggleRules()" ng-hide="hideCloseRulesButton()">
+            <!--            <div class="text-button">-->
+
+            {{'less_rules' | translate}}
+            <!--            </div>-->
+
+        </div>
+        <div ng-if="isLongRulesShown()">
+            <h4>Benvenuto nel Gioco Rovereto Play&Go!</h4>
+            <div align="justify">
+                Partecipare è semplice: pianifica i tuoi viaggi con ViaggiaRovereto Play&Go e scegli delle soluzioni di mobilità sostenibile per guadagnare punti e avanzare nel gioco. Divertiti a collezionare punti, badge e mettiti alla prova con le challenge settimanali. Sfida i tuoi amici a scalare le classifiche: ogni settimana puoi vincere ricchi premi e contribuire, divertendoti, a rendere la tua città più sostenibile e smart!
+            </div>
+            <h4>IMPIANTO GENERALE</h4>
+            <div align="justify">
+                Il Gioco ha una durata di 9 settimane, dalle 0:00 di lunedì 18/04/2016, alle 23:59 di domenica 19/06/2016. Ogni Giocatore che utilizza l’App ViaggiaRovereto Play&Go durante il Gioco per pianificare e tracciare i propri itinerari ha la possibilità di guadagnare punti e badge (distintivi) che riconoscono l’utilizzo di soluzioni di mobilità sostenibile. In base ai punti accumulati i Giocatori vanno ad occupare una posizione in classifiche globali e settimanali che vengono aggiornate quotidianamente per tutta la durata del Gioco. I badge vengono raccolti in collezioni che testimoniano il raggiungimento di particolari obiettivi che fanno parte della logica del Gioco. Durante il Gioco saranno proposte delle sfide personalizzate – challenge - che, se superate, permettono di guadagnare dei bonus in punti.
+            </div>
+            <h4><strong>FUNZIONAMENTO DEL GIOCO</strong></h4>
+            <div align="justify">
+                <ul class="list-welcome">
+                    <li align="justify"> <strong>Azioni rilevanti ai fini del gioco:</strong> Il Giocatore, a valle della registrazione al Gioco, può iniziare a collezionare punti e badge. La funzionalità di ViaggiaRovereto Play&Go rilevante ai fini del gioco, è la pianificazione di un viaggio, seguita dal salvataggio dell’itinerario scelto e dal suo tracciamento in corso di esecuzione:
+                        <ul class="list-welcome">
+                            <li align="justify"> Aprire ViaggiaRovereto Play&Go e selezionare “Pianifica viaggio”. Inserire le informazioni riguardanti il viaggio, i mezzi di trasporto che si intendono utilizzare e cercare gli itinerari disponibili (lente in alto a destra);</li>
+                            <li align="justify"> Selezionare l’itinerario che si intende compiere e, dalla finestra di dettaglio, salvare il viaggio selezionando “Salva itinerario”. Se è un viaggio che si fa abitualmente, è possibile salvarlo come viaggio ricorrente e specificare i giorni della settimana in cui il viaggio si ripete. </li>
+                            <li align="justify"> Poco prima dell’inizio del viaggio riceverai una notifica che ti ricorderà di iniziare a tracciare il tuo viaggio. Cliccando sulla notifica (o accedendo a “I miei viaggi” dal menù della App) potrai accedere al dettaglio del viaggio salvato. Quando stai per iniziare il viaggio, seleziona “Inizia” e la App inizierà a tracciare il tuo itinerario, salvando alcune informazioni utili ai fini della validazione del Gioco. </li>
+                            <li align="justify"> Selezionando “Termina Viaggio”, dal dettaglio del viaggio salvato, è possibile comunicare la fine del viaggio. Se il Giocatore non confermasse la fine del viaggio tramite “Termina Viaggio”, la App è impostata in modo da terminare automaticamente il tracciamento del viaggio dieci minuti dopo l’orario di fine previsto in pianificazione. </li>
+                        </ul>La funzionalità di tracciamento del viaggio viene utilizzata ai fini del Gioco per la validazione della scelta di viaggio compiuta dal Giocatore. In questo senso, è essenziale che il Giocatore, per poter procedere nel Gioco, salvi l’itinerario e utilizzi il comando “Inizia” per ogni viaggio. Un’altra azione che permette di procedere nel gioco è la registrazione di altri Giocatori su invito. A tale scopo, è sufficiente comunicare il proprio nickname utilizzato nel Gioco ad un amico, che dovrà registrarsi al gioco segnalando di essere stato invitato da un Giocatore con suddetto nickname (sezione “Chi ti ha invitato a questo gioco?” nella pagina di registrazione). In caso di evidenti violazioni delle regole del gioco e di registrazione di viaggi non effettivamente effettuati da parte del Giocatore, gli Organizzatori a proprio insindacabile diritto si riservano di revocare punti Green Leaves e badge già assegnati al Giocatore. In caso di reiterazione di comportamenti scorretti gli Organizzatori si riservano il diritto di escludere il Giocatore dal Gioco. </li>
+                    <li align="justify"> <strong>Come guadagnare punti:</strong> Con ogni itinerario salvato ed effettuato, il Giocatore può guadagnare punti Green Leaves. Le modalità di acquisizione punti sono le seguenti: Il Giocatore guadagna un numero di Green Leaves proporzionale ai Km percorsi a piedi, in bicicletta e con mezzi pubblici, misurati secondo l’itinerario salvato tramite l'App. In fase di pianificazione viaggio, la App mostra i punti Green Leaves associati ad ogni itinerario. Si prevede un bonus di punti Green Leaves ogni qual volta il Giocatore scelga i) un itinerario ad impatto zero (che preveda cioè solamente l’utilizzo di bici o spostamento a piedi) oppure ii) una delle soluzione sostenibili (evidenziate dall’App in verde e con l’icona della foglia).</li>
+                    <li align="justify"> <strong>Come collezionare badge:</strong>  I badge sono assegnati automaticamente, ogni qual volta il Giocatore raggiunga determinati obiettivi previsti dalla logica del Gioco. I badge che possono essere conseguiti dai Giocatori sono suddivisi in una varietà di collezioni. Tutti i badge che possono essere conseguiti all’interno del Gioco sono stati decisi in anticipo dagli Organizzatori; tuttavia, non pubblichiamo una lista dei possibili badge, in accordo con la necessità ludica di mantenere un “effetto sorpresa” per il conseguimento di un badge, come aspetto incentivante per la partecipazione attiva dei Giocatori al Gioco. </li>
+                    <li align="justify"><strong> Challenge settimanali: </strong>Durante lo svolgimento del gioco potranno essere proposte delle challenge personalizzate di durata settimanale. Il superamento di ogni challenge permetterà al Giocatore di guadagnare dei bonus in punti Green Leaves e di avanzare nel gioco.</li>
+                    <li align="justify"><strong> Stato del Gioco e aggiornamento:</strong> Il Giocatore può controllare il proprio stato nel Gioco, per quanto riguarda punti, classifiche, badge, e challenge selezionando “Play&Go” nella home della App e accedendo al sito Web del Gioco. Inoltre, ogni Giocatore riceverà all’indirizzo email indicato al momento della propria registrazione delle email che riassumono i risultati ottenuti nel gioco ed eventuali aggiornamenti riguardanti le nuove sfide e premi settimanali.
+                    </li>
+                </ul>
+            </div>
+            <h4><strong>RISULTATI E INCENTIVI</strong></h4>
+            <div align="justify">
+                Alla fine del Gioco, ogni Giocatore riceverà un attestato che riporterà i risultati raggiunti. I primi tre Giocatori nella classifica globale a punti Green Leaves (vedasi “FUNZIONAMENTO DEL GIOCO” - al punto iii.) alla fine del Gioco riceveranno i seguenti premi: 1) primo classificato: n. 1 abbonamento semestrale in palestra 2) secondo classificato: n. 1 bicicletta city bike per adulti 3) terzo classificato: n.1 abbonamento stagionale-estivo per piscina In alcune settimane di Gioco saranno inoltre messi a diposizione dei premi settimanali che andranno a premiare i primi classificati nella classifica settimanale a punti Green Leaves. Una premiazione, con consegna degli attestati e dei premi summenzionati, avverrà presso e a cura del Comune di Rovereto al termine del Gioco. Il gioco è accessibile tramite App iPhone, tuttavia Apple non sponsorizza in alcun modo questo gioco e non offre premi.
+            </div>
+            <h4><strong>UTILIZZO DEI DATI E PRIVACY</strong></h4>
+            <div align="justify">
+                Al fine di permettere lo svolgimento del gioco si rendono necessari la raccolta ed il trattamento delle informazioni relative ai viaggi pianificati e salvati, al tracciato dei viaggi effettuati tramite App, ai risultati del gioco. I dati personali del Giocatore verranno trattati nel pieno rispetto della vigente normativa sulla privacy, come specificato nel documento Trattamento dati e privacy Play&Go.
+            </div>
+            <h4><strong>ORGANIZZATORI</strong></h4>
+            <div align="justify">Gli enti che organizzano e gestiscono il Gioco sono il Comune di Rovereto, la Fondazione Bruno Kessler e CAIRE - Cooperativa Architetti e Ingegneri – Urbanistica, nell’ambito del progetto Europeo STREETLIFE.
+            </div>
+            <div class="row credits_row collaboration">
+                <div class="col col-center">
+                    <a href="#" onclick="window.open('http://www.fbk.eu', '_system', 'location=yes'); return false;"><img class="image center" src="img/credits/fbk.png" width="50%" />
+                    </a>
+                </div>
+                <div class="col col-center">
+                    <a href="#" onclick="window.open('http://www.comune.rovereto.tn.it', '_system', 'location=yes'); return false;"><img class="image center" src="img/credits/logo_rovereto.png" width="50%" />
+                    </a>
+                </div>
+            </div>
+            <div class="row credits_row collaboration">
+
+                <div class="col col-center">
+                    <a href="#" onclick="window.open('http://www.caire.it/', '_system', 'location=yes'); return false;"><img class="image center" src="img/credits/caire.png" width="50%" />
+                    </a>
+                </div>
+                <div class="col col-center">
+                    <a href="#" onclick="window.open('http://www.streetlife-project.eu', '_system', 'location=yes'); return false;"><img class="image center" src="img/credits/streetlife.png" width="50%" />
+                    </a>
+                </div>
+            </div>
+            <h4><strong>SPONSOR</strong></h4> I premi finali sono gentilmente offerti da:
+            <div class="row credits_row collaboration">
+                <div class="col col-center">
+                    <a href="#" onclick="window.open('http://www.tettamantibike.it', '_system', 'location=yes'); return false;"><img class="image center" src="img/sponsors/sponsor_bici.png" width="50%" />
+                    </a>
+                </div>
+            </div>
+            <div class="row credits_row collaboration">
+
+                <div class="col col-center">
+                    <a href="#" onclick="window.open('http://www.2001team.com/rovereto/', '_system', 'location=yes'); return false;"><img class="image center" src="img/sponsors/sponsor_piscina.png" width="50%" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

@@ -1403,8 +1403,20 @@ ion-header-bar .title {
 .rules_list {
     margin: 20px;
 }
+
 .tac-check .item-content {
-  overflow: auto;
-  white-space: normal;
-  text-overflow: inherit;
+    overflow: auto;
+    white-space: normal;
+    text-overflow: inherit;
+}
+
+.rules {
+    margin: 20px;
+}
+
+.text-button {
+    color: #3bbacf;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

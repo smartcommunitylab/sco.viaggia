@@ -39,10 +39,12 @@ angular.module('viaggia.controllers.common', [])
     }
 
     $scope.openRules = function () {
-        userService.getValidToken().then(function (validToken) {
-            var url = Config.getGamificationURL() + "/mobile?token=" + validToken + "&redirect_url=rules";
-            window.open(url, "_system", "location=yes");
-        })
+        $scope.firstOpenPopup.close();
+        $scope.openRulesModal();
+        //        userService.getValidToken().then(function (validToken) {
+        //            var url = Config.getGamificationURL() + "/mobile?token=" + validToken + "&redirect_url=rules";
+        //            window.open(url, "_system", "location=yes");
+        //        })
     }
     $scope.closePopup = function () {
         $scope.firstOpenPopup.close();
@@ -116,7 +118,53 @@ angular.module('viaggia.controllers.common', [])
         return returnDays;
     }
 
+    $scope.openModal = function () {
+        $scope.modal.show();
+    };
+    $scope.hideExpandRulesButton = function () {
+        if (!$scope.expandedRules) {
+            return false;
+        }
+        return true;
+    }
+    $scope.hideCloseRulesButton = function () {
+        if ($scope.expandedRules) {
+            return false;
+        }
+        return true;
+    }
+    $scope.closeModal = function () {
+        $scope.modal.hide();
+    };
+    $scope.openRulesModal = function () {
 
+        $ionicModal.fromTemplateUrl('templates/rulesModal.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            $scope.modal = modal;
+            $scope.openModal();
+        });
+
+
+    }
+    $scope.scrollTo = function (id) {
+        $location.hash(id)
+        $ionicScrollDelegate.anchorScroll(true);
+    };
+    $scope.toggleRules = function () {
+        if ($scope.isLongRulesShown()) {
+            $scope.expandedRules = false;
+            //$scope.scrollTo("firstSeparator");
+        } else {
+            $scope.expandedRules = true;
+
+        }
+    };
+
+    $scope.isLongRulesShown = function () {
+        return $scope.expandedRules;
+    };
 
     $scope.showErrorServer = function () {
         var alertPopup = $ionicPopup.alert({
