@@ -9,6 +9,19 @@ angular.module('viaggia.services.tracking', [])
         var refreshCallback = null;
         $ionicPlatform.ready(function () {
             bgGeo = window.BackgroundGeolocation;
+            bgGeo.onHttp(function (response) {
+                var status = response.status;
+                console.log("- HTTP success", status);
+                if (status == 200 && response.responseText && 'OK' == JSON.parse(response.responseText).storeResult) {
+                    bgGeo.clearDatabase(function () {
+                        console.log('- cleared database');
+                    });
+                }
+            }, function (response) {
+                var status = response.status;
+                console.log("- HTTP failure: ", status);
+            });
+
         });
 
         document.addEventListener("resume", function () {
@@ -30,7 +43,7 @@ angular.module('viaggia.services.tracking', [])
         trackService.startup = function () {
 
             var trackingConfigure = Config.getTrackingConfig();
-            bgGeo.configure(callbackFn, failureFn, trackingConfigure);
+            bgGeo.configure(trackingConfigure, callbackFn, failureFn);
             init();
         }
 
@@ -39,6 +52,7 @@ angular.module('viaggia.services.tracking', [])
                 $http({
                     method: 'PUT',
                     url: Config.getServerURL() + '/gamification/journey/' + idTrip,
+                    data: ionic.Platform.device(),
                     headers: {
                         //                        'Accept': 'application/json',
                         //                        'Content-Type': 'application/json',
@@ -127,7 +141,7 @@ angular.module('viaggia.services.tracking', [])
                 trackingConfigure['extras'] = {
                     idTrip: idTrip
                 };
-                bgGeo.configure(callbackFn, failureFn, trackingConfigure);
+                bgGeo.configure(trackingConfigure, callbackFn, failureFn);
 
                 //setto le variabili in localstorage
                 if (trip) {
@@ -179,20 +193,8 @@ angular.module('viaggia.services.tracking', [])
                 var trackingConfigure = Config.getTrackingConfig();
                 trackingConfigure['url'] += token;
                 trackingConfigure['foregroundService'] = false;
-                bgGeo.configure(callbackFn, failureFn, trackingConfigure);
+                bgGeo.configure(trackingConfigure, callbackFn, failureFn);
                 bgGeo.start(function () {
-                    bgGeo.onHttp(function (response) {
-                        var status = response.status;
-                        console.log("- HTTP success", status);
-                        if (status == 200) {
-                            bgGeo.clearDatabase(function () {
-                                console.log('- cleared database');
-                            });
-                        }
-                    }, function (response) {
-                        var status = response.status;
-                        console.log("- HTTP failure: ", status);
-                    });
                     bgGeo.sync(function (locations, taskId) {
                         console.log('synced locations: ', locations);
                         // Be sure to call finish(taskId) in order to signal the end of the background-thread.
@@ -294,20 +296,8 @@ angular.module('viaggia.services.tracking', [])
             /**
              * This callback will be executed every time a geolocation is recorded in the background.
              */
-        var callbackFn = function (location, taskId) {
-            //console.log('[js] BackgroundGeoLocation callback:  ' + location.latitude + ',' + location.longitude);
-            console.log('[js] BackgroundGeoLocation callback:  ' + JSON.stringify(location));
-
-            // Do your HTTP request here to POST location to your server.
-            // jQuery.post(url, JSON.stringify(location));
-
-            /*
-            IMPORTANT:  You must execute the finish method here to inform the native plugin that you're finished,
-            and the background-task may be completed.  You must do this regardless if your HTTP request is successful or not.
-            IF YOU DON'T, ios will CRASH YOUR APP for spending too much time in the background.
-            */
-            //backgroundGeoLocation.finish();
-            bgGeo.finish(taskId);
+        var callbackFn = function () {
+            console.log('[js] BackgroundGeoLocation configure callback');
         };
 
         var failureFn = function (error) {
