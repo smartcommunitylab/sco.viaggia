@@ -1,0 +1,44 @@
+{
+    "sponsor": [{
+            "img": "img/sponsors/mart.png",
+            "link": "http://www.mart.trento.it/",
+            "from_date": "30/04/2016",
+            "to_date": "6/05/2016"
+        },
+        {
+            "img": "img/sponsors/Pat.png",
+            "link": "http://www.provincia.tn.it/",
+            "from_date": "7/05/2016",
+            "to_date": "13/05/2016"
+        },
+        {
+            "img": "img/sponsors/AMI.png",
+            "link": "http://www.mozartitalia.org/it/",
+            "from_date": "14/05/2016",
+            "to_date": "20/05/2016"
+        },
+        {
+            "img": "img/sponsors/leno2001.png",
+            "link": "http://www.2001team.com/rovereto/",
+            "from_date": "21/05/2016",
+            "to_date": "27/05/2016"
+        },
+        {
+            "img": "img/sponsors/carSharing.png",
+            "link": "http://www.carsharing.tn.it/",
+            "from_date": "28/05/2016",
+            "to_date": "3/06/2016"
+        },
+        {
+            "img": "img/sponsors/leno2001.png",
+            "link": "http://www.2001team.com/rovereto/",
+            "from_date": "4/06/2016",
+            "to_date": "10/06/2016"
+        },
+        {
+            "img": "img/sponsors/orienteOccidente.png",
+            "link": "http://www.orienteoccidente.it/",
+            "from_date": "11/06/2016",
+            "to_date": "17/06/2016"
+        }]
+}

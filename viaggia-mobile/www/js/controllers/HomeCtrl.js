@@ -37,6 +37,10 @@ angular.module('viaggia.controllers.home', [])
 
         });
     }
+    $scope.openSponsorLink = function (link) {
+        window.open(link, '_system', 'location=yes');
+        return false;
+    }
     var localDataInit = function () {
         userService.getUserData();
         planService.getTrips().then(function () {

@@ -142,7 +142,7 @@ angular.module('viaggia', [
                     DataManager.syncStopData();
                 }
                 notificationService.register();
-
+                Config.setWeeklySposnsor();
             });
 
             if (typeof navigator.globalization !== "undefined") {
@@ -722,7 +722,8 @@ angular.module('viaggia', [
             age_option4: '> 70 anni',
             nickname_inuse: 'Nickname è già usato',
             more_rules: 'Espandi regolamento',
-            less_rules: 'Riduci regolamento'
+            less_rules: 'Riduci regolamento',
+            sponsor_week: 'QUESTA SETTIMANA I PREMI SONO OFFERTI DA '
 
 
         });
@@ -982,7 +983,9 @@ angular.module('viaggia', [
             age_option4: '> 70 years',
             nickname_inuse: 'The specified nickname is already in use',
             more_rules: 'Expand rules',
-            less_rules: 'Collapse Rules'
+            less_rules: 'Collapse Rules',
+            sponsor_week: 'THIS WEEK THE PRIZES ARE KINDLY OFFERED BY '
+
         });
 
 

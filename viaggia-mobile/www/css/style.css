@@ -663,6 +663,22 @@ ion-header-bar .title {
     margin-bottom: 10px;
 }
 
+.sponsor_banner {
+    background: rgba(96, 179, 92, 1);
+    background: -moz-linear-gradient(top, rgba(96, 179, 92, 1) 0%, rgba(255, 255, 255, 0.68) 93%, rgba(250, 250, 250, 0.66) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(96, 179, 92, 1)), color-stop(93%, rgba(255, 255, 255, 0.68)), color-stop(100%, rgba(250, 250, 250, 0.66)));
+    background: -webkit-linear-gradient(top, rgba(96, 179, 92, 1) 0%, rgba(255, 255, 255, 0.68) 93%, rgba(250, 250, 250, 0.66) 100%);
+    background: -o-linear-gradient(top, rgba(96, 179, 92, 1) 0%, rgba(255, 255, 255, 0.68) 93%, rgba(250, 250, 250, 0.66) 100%);
+    background: -ms-linear-gradient(top, rgba(96, 179, 92, 1) 0%, rgba(255, 255, 255, 0.68) 93%, rgba(250, 250, 250, 0.66) 100%);
+    background: linear-gradient(to bottom, rgba(96, 179, 92, 1) 0%, rgba(255, 255, 255, 0.68) 93%, rgba(250, 250, 250, 0.66) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#60b35c', endColorstr='#fafafa', GradientType=0);
+}
+
+.sponsor_text {
+    text-align: center;
+    color: white;
+}
+
 .credits_row.last {
     margin-bottom: 20px;
 }

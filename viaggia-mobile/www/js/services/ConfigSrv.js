@@ -58,19 +58,7 @@ angular.module('viaggia.services.conf', [])
         return res;
     };
 
-    var PLAN_PREFERENCES = [
-        {
-            label: $filter('translate')('plan_preferences_fastest'),
-            value: "fastest"
-        }, {
-            label: $filter('translate')('plan_preferences_leastChanges'),
-            value: "leastChanges"
-        }, {
-            label: $filter('translate')('plan_preferences_leastWalking'),
-            value: "leastWalking"
-        }
 
-    ];
     var COLORS_TRIP = {
         TRAIN: {
             color: '#cd251c',
@@ -279,6 +267,19 @@ angular.module('viaggia.services.conf', [])
             return COLORS_TRIP[transportType];
         },
         getPlanPreferences: function () {
+            var PLAN_PREFERENCES = [
+                {
+                    label: $filter('translate')('plan_preferences_fastest'),
+                    value: "fastest"
+        }, {
+                    label: $filter('translate')('plan_preferences_leastChanges'),
+                    value: "leastChanges"
+        }, {
+                    label: $filter('translate')('plan_preferences_leastWalking'),
+                    value: "leastWalking"
+        }
+
+    ];
             return PLAN_PREFERENCES;
         },
         getAppId: function () {
@@ -354,6 +355,52 @@ angular.module('viaggia.services.conf', [])
         },
         getContactLink: function () {
             return mapJsonConfig["contact_link"];
+        },
+        setWeeklySposnsor: function () {
+            $rootScope.weekly_sponsor = null;
+            $http.get('data/sponsor.json').success(function (response) {
+                var sponsors = response.sponsor;
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1; //January is 0!
+
+                var yyyy = today.getFullYear();
+                if (dd < 10) {
+                    dd = '0' + dd
+                }
+                if (mm < 10) {
+                    mm = '0' + mm
+                }
+                var today = dd + '/' + mm + '/' + yyyy;
+
+                //ciclo del json con gli sponsor
+                for (var i = 0; i < sponsors.length; i++) {
+                    var dateFrom = sponsors[i].from_date;
+                    var dateTo = sponsors[i].to_date;
+
+
+                    var d1 = dateFrom.split("/");
+                    var d2 = dateTo.split("/");
+                    var t = today.split("/");
+
+                    var from = new Date(d1[2], d1[1] - 1, d1[0]); // -1 because months are from 0 to 11
+                    var to = new Date(d2[2], d2[1] - 1, d2[0]);
+                    var check = new Date(t[2], t[1] - 1, t[0]);
+
+                    if (check >= from && check <= to) {
+                        //set
+                        $rootScope.weekly_sponsor = {
+                            "link": sponsors[i].link,
+                            "img": sponsors[i].img
+                        }
+                        break;
+                    }
+                }
+            });
+
+
+
+
         },
         getTTData: function (ref, agencyId, groupId, routeId) {
             var res = ttJsonConfig;
