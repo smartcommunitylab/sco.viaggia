@@ -142,7 +142,6 @@ angular.module('viaggia', [
                     DataManager.syncStopData();
                 }
                 notificationService.register();
-                Config.setWeeklySposnsor();
             });
 
             if (typeof navigator.globalization !== "undefined") {

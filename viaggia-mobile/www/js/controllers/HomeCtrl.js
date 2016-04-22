@@ -5,7 +5,10 @@ angular.module('viaggia.controllers.home', [])
     $ionicPlatform.ready(function () {
         document.addEventListener("resume", function () {
             notificationInit();
+            Config.setWeeklySposnsor();
+
         }, false);
+        Config.setWeeklySposnsor();
 
     });
 
