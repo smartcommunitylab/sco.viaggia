@@ -5,23 +5,48 @@
         </ion-nav-buttons>
 
     </ion-nav-bar>
-    <ion-content id=" content " has-header="true" scroll="false" class="login-page">
+    <ion-content id=" content " has-header="true" class="login-page">
         <div class="login-title">{{'login_title'|translate}}</div>
         <div class="login-subtitle" style="margin-bottom:30px;">{{'login_subtitle'|translate}}</div>
 <!--        <div class="login-warning">{{'login_warning'|translate}}</div>-->
-        <div class="bottom-content row">
-            <div class="col col-bottom text-center">
-                <a class="facebook-button button button-block" ng-click="facebookSignIn()">
-         {{'login_facebook'|translate}}
-        </a>
-            </div>
-        </div>
-        <div class="bottom-content row">
-            <div class="col col-bottom text-center">
-                <a class="google-button button button-block" ng-click="googleSignIn()">{{'login_google'|translate}}</a>
 
+        <div class="login">
+          <div class="login-buttons">
+            <div class="stuffcontainer">
+              <h4>{{'signin_title' | translate}}</h4>
+              <label class="item item-input">
+                <input type="email" placeholder="{{'signup_email'|translate}}" ng-model="user.email">
+              </label>
+              <label class="item item-input">
+                <input type="password" placeholder="{{'signup_pwd'|translate}}" ng-model="user.password">
+              </label>
+              <a class="text-left login-link" ng-click="passwordRecover()">
+                  {{'signin_pwd_reset' | translate}}
+              </a>
+              <button class="button button-block login-button-internal" ng-click="signin()">
+                  {{'login_signin' | translate}}
+              </button>
+                <a class=" login-link" ng-click="goRegister()">
+                    {{'login_signup' | translate}}
+                </a>
+                <br/>
+                <span>{{'text_login_use' | translate}}</span>
+              <div class="row">
+                  <div class="col col-bottom text-center">
+                    <button class="button button-block login-button-facebook" ng-click="facebookSignIn()">
+                        Facebook
+                    </button>
+                  </div>
+                  <div class="col col-bottom text-center">
+                    <button class="button button-block login-button-google" ng-click="googleSignIn()">
+                        Google
+                    </button>
+                  </div>
+              </div>
             </div>
+          </div>
         </div>
+
         <img src="img/img_login.png" class="bckImage" />
 
     </ion-content>

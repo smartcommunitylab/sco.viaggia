@@ -4,6 +4,10 @@ angular.module('viaggia.controllers.login', [])
     $ionicSideMenuDelegate.canDragContent(false);
 
 
+    $scope.user = {
+      email: '',
+      password: ''
+    };
 
     // This method is executed when the user press the "Sign in with Google" button
     $scope.googleSignIn = function () {
@@ -293,9 +297,9 @@ angular.module('viaggia.controllers.login', [])
         }
     });
     $scope.$on('$ionicView.beforeEnter', function () {
-        $ionicLoading.show({
-            template: $filter('translate')('user_check')
-        });
+//        $ionicLoading.show({
+//            template: $filter('translate')('user_check')
+//        });
 
     });
     $ionicPlatform.ready(function () {
@@ -317,4 +321,112 @@ angular.module('viaggia.controllers.login', [])
         });
 
     });
+
+    $scope.goRegister = function() {
+    $state.go('app.signup');
+  }
+
+  $scope.passwordRecover = function () {
+    window.open(Config.getAACURL()+'/internal/reset?lang=en', '_system', 'location=no,toolbar=no')
+  }
+  $scope.signin = function () {
+      Config.loading();
+      loginService.signin($scope.user).then(
+          function (profile) {
+            $ionicLoading.show({
+                template: $filter('translate')('user_check')
+            });
+            userService.validUserForGamification(profile).then(function (valid) {
+                    //$ionicLoading.hide();
+                    storageService.saveUser(profile);
+
+                    if (valid) {
+                        //go on to home page
+                        $state.go('app.home');
+                        $ionicHistory.nextViewOptions({
+                            disableBack: true,
+                            historyRoot: true
+                        });
+                    } else {
+                        // open popup for validating user
+                        $ionicLoading.hide();
+                        validateUserPopup();
+                    }
+
+                },
+                function (msg) {
+                    Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
+                    $ionicLoading.hide();
+                });
+          },
+          function (error) {
+            storageService.saveUser(null);
+            $ionicPopup.alert({
+              title: $filter('translate')('error_popup_title'),
+              template: $filter('translate')('error_signin')
+            });
+
+          }
+      ).finally(Config.loaded);
+  };
+
+})
+
+
+.controller('RegisterCtrl', function ($scope, $rootScope, $state, $filter, $ionicHistory, $ionicPopup, $translate, loginService, Config) {
+    $scope.user = {
+      lang : $translate.preferredLanguage(),
+      name: '',
+      surname: '',
+      email: '',
+      password: ''
+    };
+
+    var validate = function() {
+      if (!$scope.user.name.trim() || !$scope.user.surname.trim() || !$scope.user.email.trim() || !$scope.user.password.trim()) {
+        return 'error_required_fields';
+      }
+      if ($scope.user.password.trim().length < 6) {
+        return 'error_password_short';
+      }
+      return null;
+    };
+
+    $scope.toLogin = function() {
+      window.location.hash = '';
+      window.location.reload(true);
+    }
+
+    $scope.resend = function () {
+      window.open(Config.getAACURL()+'/internal/resend?lang=en', '_system', 'location=no,toolbar=no')
+    }
+
+
+    $scope.register = function () {
+        var msg = validate();
+        if (msg) {
+          $ionicPopup.alert({
+            title: $filter('translate')('error_popup_title'),
+            template: $filter('translate')(msg)
+          });
+          return;
+        }
+
+        Config.loading();
+        loginService.register($scope.user).then(
+            function (data) {
+              $state.go('app.signupsuccess');
+            },
+            function (error) {
+              var errorMsg = 'error_generic';
+              if (error == 409) {
+                errorMsg = 'error_email_inuse';
+              }
+              $ionicPopup.alert({
+                title: $filter('translate')('error_popup_title'),
+                template: $filter('translate')(errorMsg)
+              });
+            }
+        ).finally(Config.loaded);
+    };
 });

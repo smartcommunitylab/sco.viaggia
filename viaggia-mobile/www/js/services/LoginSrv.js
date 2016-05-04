@@ -4,7 +4,7 @@ angular.module('viaggia.services.login', [])
 //
 //A Service to work with login server's services
 //
-.factory('loginService', function ($q, $http, $rootScope, $ionicPlatform, Config, storageService) {
+.factory('loginService', function ($q, $http, $window, $rootScope, $ionicPlatform, Config, storageService) {
         var loginService = {};
         var facebookToken = null;
         var googleToken = null;
@@ -271,6 +271,72 @@ angular.module('viaggia.services.login', [])
             return deferred.promise;
 
         }
+
+        loginService.signin = function(user) {
+            var deferred = $q.defer();
+            $http.post(Config.getServerTokenURL() + '?username='+user.email+'&password='+user.password+
+                      "&grant_type=password&client_id="+Config.getClientId()+"&client_secret="+Config.getClientSecKey(),{}, {
+              headers: {
+                'Accept': 'application/json',
+              }
+            })
+            .then(
+              function (res) {
+                var tokenInfo = res.data;
+
+                loginService.makeProfileCall(tokenInfo).then(function (profile) {
+                    profile.token = tokenInfo;
+                    // set expiry (after removing 1 hr).
+                    var t = new Date();
+                    t.setSeconds(t.getSeconds() + (profile.token.expires_in - 3600));
+                    profile.token.validUntil = t;
+
+                    console.log('success: ' + profile.userId);
+                    storageService.saveUser(profile).then(function () {
+                        deferred.resolve(profile);
+                    }, function (reason) {
+                        storageService.saveUser(null).then(function () {
+                            deferred.reject(reason);
+                        });
+                    });
+                },
+                function (error) {
+                    deferred.reject(error[1]);
+                });
+              },
+              function (reason) {
+                storageService.saveUser(null).then(function () {
+                    deferred.reject(reason);
+                });
+              }
+            );
+
+            return deferred.promise;
+        }
+
+        loginService.register = function (user) {
+            var deferred = $q.defer();
+            $http.post(Config.getServerRegisterURL() + "?client_id="+Config.getClientId()+"&client_secret="+Config.getClientSecKey(), user, {
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              }
+            })
+            .then(
+              function (response) {
+                deferred.resolve();
+              },
+              function (responseError) {
+                deferred.reject(responseError.status);
+              }
+            );
+
+            return deferred.promise;
+
+        };
+
+
+
         return loginService;
     })
     .factory('userService', function ($http, $q, Config, storageService) {

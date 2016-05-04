@@ -47,26 +47,30 @@ angular.module('viaggia.services.tracking', [])
             init();
         }
 
-        var sendServerStart = function (idTrip, token) {
-                var deferred = $q.defer();
-                $http({
-                    method: 'PUT',
-                    url: Config.getServerURL() + '/gamification/journey/' + idTrip,
-                    data: ionic.Platform.device(),
-                    headers: {
-                        //                        'Accept': 'application/json',
-                        //                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + token
-                    }
-                }).success(function () {
-                    deferred.resolve(true);
-                }).error(function (err) {
-                    console.log(err)
-                    deferred.reject(false);
-                });
-                return deferred;
+        var sendServerStart = function (idTrip, token, status) {
+            var deferred = $q.defer();
 
-            }
+            var data = angular.copy(ionic.Platform.device());
+            data.trackingStatus = status;
+
+            $http({
+                method: 'PUT',
+                url: Config.getServerURL() + '/gamification/journey/' + idTrip,
+                data: data,
+                headers: {
+                    //                        'Accept': 'application/json',
+                    //                        'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                }
+            }).success(function () {
+                deferred.resolve(true);
+            }).error(function (err) {
+                console.log(err)
+                deferred.reject(false);
+            });
+            return deferred;
+
+        }
             /*check if the trip is currently tracked*/
         trackService.isThisTheJourney = function (tripId) {
             if (localStorage.getItem(Config.getAppId() + '_tripId') == tripId) {
@@ -113,7 +117,6 @@ angular.module('viaggia.services.tracking', [])
              */
         trackService.start = function (idTrip, trip, callback) {
             userService.getValidToken().then(function (token) {
-                sendServerStart(idTrip, token);
                 var today = new Date();
                 refreshCallback = callback;
                 var endtimeDate = null;
@@ -163,6 +166,7 @@ angular.module('viaggia.services.tracking', [])
                 bgGeo.start(function () {
                     bgGeo.changePace(true);
                     bgGeo.getCurrentPosition(function (location, taskId) {
+                        sendServerStart(idTrip, token, -1);
                         //console.log("-Current position received: ", location);
                         location.extras = {
                             idTrip: idTrip
@@ -172,11 +176,11 @@ angular.module('viaggia.services.tracking', [])
                             bgGeo.finish(taskId);
                         });
                     }, function (errorCode) {
-                        alert('An location error occurred: ' + errorCode);
+                        sendServerStart(idTrip, token, errorCode);
                     }, {
-                        timeout: 100, // 30 second timeout to fetch location
-                        maximumAge: 100000, // Accept the last-known-location if not older than 5000 ms.
-                        minimumAccuracy: 10, // Fetch a location with a minimum accuracy of `10` meters.
+                        timeout: 5, // 5 seconds timeout to fetch location
+                        maximumAge: 100000, // Accept the last-known-location if not older than 100 secs.
+                        minimumAccuracy: 1000, // Fetch a location with a minimum accuracy of `1000` meters.
                         extras: {
                             idTrip: idTrip
                         }

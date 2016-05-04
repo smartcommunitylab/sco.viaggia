@@ -1363,8 +1363,8 @@ ion-header-bar .title {
 }
 
 .bckImage {
-    position: fixed;
-    bottom: 0px;
+/*    position: fixed;*/
+/*    bottom: 0px;*/
     width: 100%;
 }
 
@@ -1393,6 +1393,75 @@ ion-header-bar .title {
     margin-left: auto;
     margin-right: auto;
     display: block;
+}
+
+/* Login */
+
+.login .login-buttons {
+    position: relative;
+    text-align: center;
+}
+
+
+.login .login-buttons .stuffcontainer {
+    padding: 0 2em;
+}
+
+.login .item {
+  border: 0;
+}
+.login label input {
+  background-color: #fff;
+  padding-left: 5px;
+}
+
+.login .login-title h1,
+.login .login-title h3 {
+    color: #fff;
+}
+.login .login-buttons h3, .login .login-buttons h4, .login-buttons span {
+    color: #FFF;
+}
+.login-buttons .row, .login-buttons .col {
+  padding: 0;
+}
+.login-buttons .col:first-child {
+    padding-right: 5px;
+}
+.login-buttons .button {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+}
+.login .login-button-google {
+    text-transform: uppercase;
+    border-color: #DB4437;
+    background-color: #DB4437;
+    color: #FFFFFF;
+}
+.login .login-button-facebook {
+    text-transform: uppercase;
+    border-color: #3a5795;
+    background-color: #3a5795;
+    color: #FFFFFF;
+}
+.login .login-button-internal {
+    text-transform: uppercase;
+    border-color: #4EB0E6;
+    background-color: #4EB0E6;
+    color: #FFFFFF;
+}
+.login .login-button-signup {
+    border-color: #fff;
+    background-color: transparent;
+    color: #fff;
+    box-shadow: none;
+}
+
+.login .login-link {
+  display: block;
+  color: #fff;
+  padding: 0 1em;
 }
 
 .fog {

@@ -461,7 +461,26 @@ angular.module('viaggia', [
                         controller: 'TTTable3Ctrl'
                     }
                 }
-            });
+            })
+            .state('app.signup', {
+                url: '/signup',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/signup.html',
+                        controller: 'RegisterCtrl'
+                    }
+                }
+            })
+            .state('app.signupsuccess', {
+                url: '/signupsuccess',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/signupsuccess.html',
+                        controller: 'RegisterCtrl'
+                    }
+                }
+            })
+        ;
 
 
         // if none of the above states are matched, use this as the fallback
@@ -722,8 +741,27 @@ angular.module('viaggia', [
             nickname_inuse: 'Nickname è già usato',
             more_rules: 'Espandi regolamento',
             less_rules: 'Riduci regolamento',
-            sponsor_week: 'QUESTA SETTIMANA I PREMI SONO OFFERTI DA '
-
+            sponsor_week: 'QUESTA SETTIMANA I PREMI SONO OFFERTI DA ',
+            login_signin: 'ENTRA',
+            login_signup: 'REGISTRATI',
+            signin_title: 'Accedi con le tue credenziali',
+            signin_pwd_reset: 'Password dimenticata?',
+            text_login_use: 'oppure accedi con',
+            error_popup_title: 'Errore',
+            error_generic: 'La registrazione non è andata a buon fine. Riprova più tardi.',
+            error_email_inuse: 'L\'indirizzo email è già in uso.',
+            signup_name: 'Nome',
+            signup_surname: 'Cognome',
+            signup_email: 'Email',
+            signup_pwd: 'Password',
+            error_required_fields: 'Tutti i campi sono obbligatori',
+            error_password_short: 'La lunghezza della password deve essere di almeno 6 caratteri',
+            signup_success_title: 'Registrazione completata!',
+            signup_success_text: 'Completa la registrazione cliccando sul link che trovi nella email che ti abbiamo inviato.',
+            signup_resend: 'Re-inviare l\'email di conferma',
+            error_signin: 'Username/password non validi',
+            signup_signup: 'Registrati',
+            signup_title: 'Registrati con',
 
         });
 
@@ -983,7 +1021,27 @@ angular.module('viaggia', [
             nickname_inuse: 'The specified nickname is already in use',
             more_rules: 'Expand rules',
             less_rules: 'Collapse Rules',
-            sponsor_week: 'THIS WEEK THE PRIZES ARE KINDLY OFFERED BY '
+            sponsor_week: 'THIS WEEK THE PRIZES ARE KINDLY OFFERED BY ',
+            login_signup: 'REGISTER',
+            login_signin: 'SIGN IN',
+            signin_title: 'Sign in with your credentials',
+            signin_pwd_reset: 'Forgot password?',
+            text_login_use: 'or sign in with',
+            error_popup_title: 'Error',
+            error_generic: 'Registration failed. Please try again later.',
+            error_email_inuse: 'Email address is already in use.',
+            signup_name: 'Name',
+            signup_surname: 'Surname',
+            signup_email: 'Email',
+            signup_pwd: 'Password',
+            error_required_fields: 'All the fields are required',
+            error_password_short: 'Password length should be at least 6 symbols',
+            signup_success_title: 'Registration complete!',
+            signup_success_text: 'Complete the registration by clicking the link you can find in the mail we have just sent you.',
+            signup_resend: 'Re-send the verification mail',
+            error_signin: 'Username/password invalid',
+            signup_signup: 'Register',
+            signup_title: 'Register with',
 
         });
 

@@ -448,13 +448,19 @@ angular.module('viaggia.services.conf', [])
         },
         isDarkColor: isDarkColor,
         getAuthServerURL: function () {
-            return mapJsonConfig["authServerURL"];
+            return mapJsonConfig["AACURL"]+mapJsonConfig["authServerURL"];
         },
         getServerTokenURL: function () {
-            return mapJsonConfig["serverTokenURL"];
+            return mapJsonConfig["AACURL"]+mapJsonConfig["serverTokenURL"];
+        },
+        getServerRegisterURL: function () {
+            return mapJsonConfig["AACURL"]+mapJsonConfig["serverRegisterURL"];
         },
         getServerProfileURL: function () {
-            return mapJsonConfig["serverProfileURL"];
+            return mapJsonConfig["AACURL"]+mapJsonConfig["serverProfileURL"];
+        },
+        getAACURL: function () {
+            return mapJsonConfig["AACURL"];
         },
 
         getRedirectUri: function () {

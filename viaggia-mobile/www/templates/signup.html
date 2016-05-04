@@ -1,0 +1,45 @@
+<ion-view id="login" hide-nav-bar="true">
+    <ion-nav-bar class="bar-positive-100" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="left">
+        <ion-nav-buttons side="left">
+
+        </ion-nav-buttons>
+
+    </ion-nav-bar>
+    <ion-content id=" content " has-header="true" scroll="false" class="login-page">
+        <div class="login-title">{{'login_title'|translate}}</div>
+        <div class="login-subtitle" style="margin-bottom:30px;">{{'login_subtitle'|translate}}</div>
+<!--        <div class="login-warning">{{'login_warning'|translate}}</div>-->
+
+        <div class="login">
+          <div class="login-buttons">
+            <div class="stuffcontainer">
+                <h4>{{'signup_title' | translate}}</h4>
+                <br/>
+              <label class="item item-input">
+                <input type="text" placeholder="{{'signup_name'|translate}}" ng-model="user.name">
+              </label>
+              <label class="item item-input">
+                <input type="text" placeholder="{{'signup_surname'|translate}}" ng-model="user.surname">
+              </label>
+              <label class="item item-input">
+                <input type="email" placeholder="{{'signup_email'|translate}}" ng-model="user.email">
+              </label>
+              <label class="item item-input">
+                <input type="password" placeholder="{{'signup_pwd'|translate}}" ng-model="user.password">
+              </label>
+              <button class="button button-block login-button-internal" ng-click="register()">
+                    <!--<i class="ion ion-social-facebook"></i>-->
+                    {{'signup_signup' | translate}}
+              </button>
+              <button class="button button-block login-button-signup" ui-sref="app.login">
+                  {{'cancel' | translate}}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <img src="img/img_login.png" class="bckImage" />
+
+    </ion-content>
+
+</ion-view>
