@@ -401,7 +401,7 @@ angular.module('viaggia.controllers.tripdetails', [])
 
     $scope.notTrackable = function () {
         //return true if it is not trackable = not in time or there is another track is going on
-        if ((!$scope.isThisJourney() && trackService.trackingIsGoingOn()) || $scope.isInTime() != 0) {
+        if ((!$scope.isThisJourney() && trackService.trackingIsGoingOn())) {
             return true
         }
         return false;
@@ -443,16 +443,20 @@ angular.module('viaggia.controllers.tripdetails', [])
     //        return false;
     //    }
     $scope.startOrShowPopupIfNotThisJourney = function () {
+        var inTime = $scope.isInTime();
+
         if ($scope.notTrackable()) {
             if (!$scope.isThisJourney() && trackService.trackingIsGoingOn()) {
                 Toast.show($filter('translate')('toast_already_monitoring'), "short", "bottom");
-            } else if ($scope.isInTime() == -1) {
-                Toast.show($filter('translate')('toast_before_time'), "short", "bottom");
-            } else if ($scope.isInTime() == 1) {
-                Toast.show($filter('translate')('toast_after_time'), "short", "bottom");
+//            } else if ($scope.isInTime() == -1) {
+//                Toast.show($filter('translate')('toast_before_time'), "short", "bottom");
+//            } else if ($scope.isInTime() == 1) {
+//                Toast.show($filter('translate')('toast_after_time'), "short", "bottom");
             }
+        } else if (inTime != 0) {
+          $scope.showConfirm($filter('translate')("popup_start_trip_message"),$filter('translate')("popup_start_trip_title"),$scope.trackStart);
         } else {
-            $scope.trackStart();
+          $scope.trackStart();
         }
 
     }

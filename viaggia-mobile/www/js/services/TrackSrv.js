@@ -89,6 +89,25 @@ angular.module('viaggia.services.tracking', [])
             return true;
         }
 
+        var getEndTime = function(startime, endtime, recurrency) {
+            var now = new Date();
+            //if recurrent check only hours if day is correct;
+
+            var duration = endtime - startime;
+            var newEndTime = now.getTime()+duration;
+//            if (recurrency && recurrency.daysOfWeek && recurrency.daysOfWeek.length > 0) {
+//                if (Utils.contains(recurrency.daysOfWeek, now.getDay())) {
+////                    var startDate = new Date(now.getTime());
+////                    startDate.setFullYear(now.getFullYear());
+////                    startDate.setMonth(now.getMonth());
+////                    startDate.setDate(now.getDate());
+//                    var timeDate = new Date(now.getTime()+(duration));
+//                    newEndTime = timeDate.getTime();
+//                }
+//            }
+            return newEndTime;
+        }
+
         trackService.isInTime = function (startime, recurrency) {
                 // return trackService.isInTime($scope.currentItinerary.startime,$scope.recurrency.daysOfWeek);
                 var now = new Date();
@@ -121,7 +140,7 @@ angular.module('viaggia.services.tracking', [])
                 refreshCallback = callback;
                 var endtimeDate = null;
                 if (trip) {
-                    endtimeDate = new Date(Number(trip.data.endtime));
+                    endtimeDate = new Date(getEndTime(Number(trip.data.startime),Number(trip.data.endtime), trip.recurrency));
                 } else {
                     var lastRememberedEnd = localStorage.getItem(Config.getAppId() + '_endTimestamp');
                     endtimeDate = new Date(Number(lastRememberedEnd));

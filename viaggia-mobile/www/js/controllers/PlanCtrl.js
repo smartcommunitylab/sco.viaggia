@@ -249,6 +249,13 @@ angular.module('viaggia.controllers.plan', [])
 
     $scope.openMapPlan = function (place) {
         $scope.place = place;
+        if ($scope.position) {
+          $scope.center = {
+              lat: $scope.position[0],
+              lng: $scope.position[1],
+              zoom: Config.getMapPosition().zoom
+          };
+        }
         $scope.refresh = false;
         if ($scope.modalMap) {
             $scope.modalMap.show();

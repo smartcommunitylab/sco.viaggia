@@ -38,6 +38,16 @@ angular.module('viaggia.controllers.common', [])
         })
     }
 
+    $scope.planFromPopup = function () {
+      $scope.closePopup();
+      $scope.newPlan();
+    }
+    $scope.myTripsFromPopup = function () {
+      $scope.closePopup();
+      $state.go('app.mytrips');
+    }
+
+
     $scope.openRules = function () {
         $scope.firstOpenPopup.close();
         $scope.openRulesModal();
