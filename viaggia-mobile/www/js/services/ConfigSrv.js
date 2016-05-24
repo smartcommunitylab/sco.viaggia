@@ -59,19 +59,19 @@ angular.module('viaggia.services.conf', [])
         return res;
     };
 
-    var PLAN_PREFERENCES = [
-        {
-            label: $filter('translate')('plan_preferences_fastest'),
-            value: "fastest"
-        }, {
-            label: $filter('translate')('plan_preferences_leastChanges'),
-            value: "leastChanges"
-        }, {
-            label: $filter('translate')('plan_preferences_leastWalking'),
-            value: "leastWalking"
-        }
-
-    ];
+    //    var PLAN_PREFERENCES = [
+    //        {
+    //            label: $filter('translate')('plan_preferences_fastest'),
+    //            value: "fastest"
+    //        }, {
+    //            label: $filter('translate')('plan_preferences_leastChanges'),
+    //            value: "leastChanges"
+    //        }, {
+    //            label: $filter('translate')('plan_preferences_leastWalking'),
+    //            value: "leastWalking"
+    //        }
+    //
+    //    ];
     var COLORS_TRIP = {
         TRAIN: {
             color: '#cd251c',
@@ -225,8 +225,22 @@ angular.module('viaggia.services.conf', [])
             return COLORS_TRIP[transportType];
         },
         getPlanPreferences: function () {
+            var PLAN_PREFERENCES = [
+                {
+                    label: $filter('translate')('plan_preferences_fastest'),
+                    value: "fastest"
+        }, {
+                    label: $filter('translate')('plan_preferences_leastChanges'),
+                    value: "leastChanges"
+        }, {
+                    label: $filter('translate')('plan_preferences_leastWalking'),
+                    value: "leastWalking"
+        }
+
+    ];
             return PLAN_PREFERENCES;
         },
+
         getAppId: function () {
             return mapJsonConfig["appid"];
         },
@@ -245,7 +259,7 @@ angular.module('viaggia.services.conf', [])
         getAppAgencies: function () {
             return mapJsonConfig["agencies"];
         },
-        getRSSUrl: function() {
+        getRSSUrl: function () {
             return mapJsonConfig["newsRSS"];
         },
         getVersion: function () {
@@ -295,7 +309,7 @@ angular.module('viaggia.services.conf', [])
         getPrimaryLinks: function () {
             return mapJsonConfig.visualization.primaryLinks;
         },
-        getContactLink: function() {
+        getContactLink: function () {
             return mapJsonConfig["contact_link"];
         },
         getTTData: function (ref, agencyId, groupId, routeId) {

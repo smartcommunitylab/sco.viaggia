@@ -587,7 +587,10 @@ angular.module('viaggia', [
             news_empty_list: 'Non ci sono notizie in questo momento',
             news_title: 'News',
             popup_modify_trip_title: 'Modifica',
-            popup_modify_trip_message: 'Sicuro di voler modificare il viaggio salvato?'
+            popup_modify_trip_message: 'Sicuro di voler modificare il viaggio salvato?',
+            plan_preferences_fastest: 'Itinerario piu veloce',
+            plan_preferences_leastChanges: 'Con meno cambi',
+            plan_preferences_leastWalking: 'Minimo tragitto a piedi',
 
         });
 
@@ -761,6 +764,9 @@ angular.module('viaggia', [
             news_title: 'News',
             popup_modify_trip_title: 'Modify',
             popup_modify_trip_message: 'Are you sure to modify the saved journey?',
+            plan_preferences_fastest: 'Fastest',
+            plan_preferences_leastChanges: 'Least changes',
+            plan_preferences_leastWalking: 'Least walking'
         });
 
 
