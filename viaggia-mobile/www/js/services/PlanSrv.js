@@ -77,6 +77,27 @@ angular.module('viaggia.services.plan', [])
 
         return ttMap[tt];
     }
+
+    planService.buildConfigureOptions = function (trip) {
+
+        var data = $filter('date')(new Date(trip.data.data.startime), 'MM/dd/yyyy');
+        var time = $filter('date')(new Date(trip.data.data.startime), 'hh:mma');
+        var configure = {
+            "from": {
+                "name": trip.data.originalFrom.name,
+                "lat": trip.data.originalFrom.lat,
+                "long": trip.data.originalFrom.lon
+            },
+            "to": {
+                "name": trip.data.originalTo.name,
+                "lat": trip.data.originalTo.lat,
+                "long": trip.data.originalTo.lon
+            },
+            "departureTime": time,
+            "date": data,
+        }
+        return configure;
+    }
     planService.setFromOrTo = function (value) {
         fromOrTo = value;
     }
@@ -237,7 +258,9 @@ angular.module('viaggia.services.plan', [])
             elem.img = 'img/' + elem.img + '.png';
 
             if (t == 'BUS' || t == 'TRAIN') {
-                elem.note = [{value:it.leg[i].transport.routeShortName}];
+                elem.note = [{
+                    value: it.leg[i].transport.routeShortName
+                }];
             } else if (t == 'CAR') {
                 if (meanTypes.indexOf('CAR') < 0) {
                     var parking = extractParking(it.leg[i], false);
@@ -706,11 +729,11 @@ angular.module('viaggia.services.plan', [])
         return deferred.promise;
     }
 
-    planService.mmddyyyy2date = function(s) {
-      return new Date(s.substr(6, 4), s.substr(0, 2) - 1, s.substr(3, 2));
+    planService.mmddyyyy2date = function (s) {
+        return new Date(s.substr(6, 4), s.substr(0, 2) - 1, s.substr(3, 2));
     }
 
-    planService.convertTo24Hour = function(time) {
+    planService.convertTo24Hour = function (time) {
         var hours = parseInt(time.substr(0, 2));
         if (time.indexOf('AM') != -1 && hours == 12) {
             time = time.replace('12', '0');
