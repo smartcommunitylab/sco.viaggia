@@ -143,7 +143,7 @@ angular.module('viaggia.controllers.registration', [])
                     $state.go('app.home');
 
                 }, function (errStatus) {
-                    if (err == '409') {
+                    if (errStatus == '409') {
                         Toast.show($filter('translate')('nickname_inuse'), "short", "bottom");
 
                     }

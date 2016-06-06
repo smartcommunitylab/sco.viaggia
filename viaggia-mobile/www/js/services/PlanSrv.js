@@ -487,12 +487,16 @@ angular.module('viaggia.services.plan', [])
     planService.planJourney = function (newPlanConfigure) {
         planConfigure = newPlanConfigure;
         var deferred = $q.defer();
+        var userId = storageService.getUser().userId;
+        var appName = Config.getAppName();
         $http({
             method: 'POST',
             url: Config.getServerURL() + '/plansinglejourney?policyId=' + Config.getPlanPolicy(),
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'UserID': userId,
+                'AppName': appName
             },
             data: {
                 "to": {
@@ -631,8 +635,6 @@ angular.module('viaggia.services.plan', [])
         //            methodTrip = 'PUT';
         //}
         userService.getValidToken().then(function (token) {
-            userId = storageService.getUserId();
-
             $http({
                 method: methodTrip,
                 url: urlBuilt,

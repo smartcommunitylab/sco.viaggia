@@ -21,7 +21,7 @@ angular.module('viaggia.services.registration', [])
                     "averagekm": user.averagekm,
                     "nick_recommandation": user.nick_recommandation
                 },
-                timeout: 10000
+                timeout: 20000
             }).
             success(function (data, status, headers, config) {
                 deferred.resolve(data);
