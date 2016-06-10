@@ -235,8 +235,8 @@ angular.module('viaggia.services.timetable', [])
                 if (calendarCache[agency][route] == null) {
                     DataManager.doQuery("SELECT calendar FROM calendar WHERE agencyID = '" + agency + "' AND route = '" + route + "'", [])
                         .then(function (data) {
-                            if (!data) {
-                              deferred.resolve({});
+                            if (!data || data.length == 0) {
+                              deferred.reject({});
                               return;
                             }
                             calendarCache[agency][route] = JSON.parse(data);
