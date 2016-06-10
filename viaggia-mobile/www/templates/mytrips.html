@@ -10,7 +10,9 @@
         </div>
 -->
         <ion-list ng-hide="savedTrips.length==0">
-            <div class="card" ng-repeat="journey in savedTrips" ng-last-repeat="savedTrips" ng-click="showPlan(journey)">
+            <ion-item class="card trip-card" ng-repeat="journey in savedTrips" ng-last-repeat="savedTrips" ng-click="showPlan(journey)">
+                <!--                <div class="item item-text-wrap">-->
+
                 <div class="trip-title text-center">
                     <strong>{{journey.data.name }}</strong>
                 </div>
@@ -18,12 +20,12 @@
 
                 <div class="row">
                     <div>
-                        <small class="text-muted"><strong>{{'my_trip_from'|translate}}</strong>: {{journey.data.originalFrom.name}}</small>
+                        <small class="item-text-wrap text-muted"><strong>{{'my_trip_from'|translate}}</strong>: {{journey.data.originalFrom.name}}</small>
                     </div>
                 </div>
                 <div class="row">
                     <div>
-                        <small class="text-muted"><strong>{{'my_trip_to'|translate}}</strong>: {{journey.data.originalTo.name}}</small>
+                        <small class="item-text-wrap  text-muted"><strong>{{'my_trip_to'|translate}}</strong>: {{journey.data.originalTo.name}}</small>
                     </div>
                 </div>
                 <div class="row">
@@ -31,9 +33,10 @@
                         <small class="text-muted"><strong>{{'my_trip_time'|translate}}</strong>: {{journey.data.data.startime| date:'dd/MM/yyyy HH:mm'}}</small>
                     </div>
                 </div>
-
-                <!--</div>-->
-            </div>
+                <ion-option-button class="button button-viaggia no-shadow icon ion-edit" ng-click="modifyTrip($index)"></ion-option-button>
+                <ion-option-button class="button button-viaggia no-shadow icon ion-android-delete" ng-click="deleteTrip($index)"></ion-option-button>
+                <!--                </div>-->
+            </ion-item>
         </ion-list>
     </ion-content>
 </ion-view>

@@ -585,7 +585,12 @@ angular.module('viaggia', [
             empty_home_label_2: 'Vai nei PREFERITI per ripristinare i contenuti che ti interessano',
             menu_betatesting_bug: 'Segnala un problema',
             news_empty_list: 'Non ci sono notizie in questo momento',
-            news_title: 'News'
+            news_title: 'News',
+            popup_modify_trip_title: 'Modifica',
+            popup_modify_trip_message: 'Sicuro di voler modificare il viaggio salvato?',
+            plan_preferences_fastest: 'Itinerario piu veloce',
+            plan_preferences_leastChanges: 'Con meno cambi',
+            plan_preferences_leastWalking: 'Minimo tragitto a piedi',
 
         });
 
@@ -757,6 +762,11 @@ angular.module('viaggia', [
             menu_betatesting_bug: 'Report an issue',
             news_empty_list: 'There are no news at the moment',
             news_title: 'News',
+            popup_modify_trip_title: 'Modify',
+            popup_modify_trip_message: 'Are you sure to modify the saved journey?',
+            plan_preferences_fastest: 'Fastest',
+            plan_preferences_leastChanges: 'Least changes',
+            plan_preferences_leastWalking: 'Least walking'
         });
 
 

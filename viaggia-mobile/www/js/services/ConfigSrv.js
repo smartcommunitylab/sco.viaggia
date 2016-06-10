@@ -59,6 +59,7 @@ angular.module('viaggia.services.conf', [])
         return res;
     };
 
+
     var COLORS_TRIP = {
         TRAIN: {
             color: '#cd251c',
@@ -225,6 +226,7 @@ angular.module('viaggia.services.conf', [])
               }
           ];
         },
+
         getAppId: function () {
             return mapJsonConfig["appid"];
         },
@@ -243,7 +245,7 @@ angular.module('viaggia.services.conf', [])
         getAppAgencies: function () {
             return mapJsonConfig["agencies"];
         },
-        getRSSUrl: function() {
+        getRSSUrl: function () {
             return mapJsonConfig["newsRSS"];
         },
         getVersion: function () {
@@ -293,7 +295,7 @@ angular.module('viaggia.services.conf', [])
         getPrimaryLinks: function () {
             return mapJsonConfig.visualization.primaryLinks;
         },
-        getContactLink: function() {
+        getContactLink: function () {
             return mapJsonConfig["contact_link"];
         },
         getTTData: function (ref, agencyId, groupId, routeId) {
