@@ -59,19 +59,6 @@ angular.module('viaggia.services.conf', [])
         return res;
     };
 
-    var PLAN_PREFERENCES = [
-        {
-            label: $filter('translate')('plan_preferences_fastest'),
-            value: "fastest"
-        }, {
-            label: $filter('translate')('plan_preferences_leastChanges'),
-            value: "leastChanges"
-        }, {
-            label: $filter('translate')('plan_preferences_leastWalking'),
-            value: "leastWalking"
-        }
-
-    ];
     var COLORS_TRIP = {
         TRAIN: {
             color: '#cd251c',
@@ -225,7 +212,18 @@ angular.module('viaggia.services.conf', [])
             return COLORS_TRIP[transportType];
         },
         getPlanPreferences: function () {
-            return PLAN_PREFERENCES;
+          return [
+              {
+                  label: $filter('translate')('plan_preferences_fastest'),
+                  value: "fastest"
+              }, {
+                  label: $filter('translate')('plan_preferences_leastChanges'),
+                  value: "leastChanges"
+              }, {
+                  label: $filter('translate')('plan_preferences_leastWalking'),
+                  value: "leastWalking"
+              }
+          ];
         },
         getAppId: function () {
             return mapJsonConfig["appid"];
