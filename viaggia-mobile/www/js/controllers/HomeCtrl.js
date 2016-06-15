@@ -22,6 +22,7 @@ angular.module('viaggia.controllers.home', [])
             //solo le nuove
             if (items) {
                 $rootScope.countNotification = items.length;
+
                 //last update time is the last time of notification
                 if (items.length > 0) {
 
@@ -129,4 +130,11 @@ angular.module('viaggia.controllers.home', [])
         });
 
     }
+    $scope.getCountNotification = function (counter) {
+        if (counter > 9) {
+            return counter + "+";
+        }
+        return coutner;
+    }
+
 })
