@@ -13,12 +13,12 @@ angular.module('viaggia.controllers.home', [])
         //scrico le ultime di una settimana
         if (localStorage.getItem(Config.getAppId() + '_lastUpdateTime') == null) {
             date = new Date();
-            date.setDate(date.getDate() - 7);
+            //date.setDate(date.getDate() - 7);
             lastUpdateTime = date.getTime();
         } else {
             lastUpdateTime = localStorage.getItem(Config.getAppId() + '_lastUpdateTime');
         }
-        notificationService.getNotifications(lastUpdateTime, 0).then(function (items) {
+        notificationService.getNotifications(lastUpdateTime, 0, 10).then(function (items) {
             //solo le nuove
             if (items) {
                 $rootScope.countNotification = items.length;
