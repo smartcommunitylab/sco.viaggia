@@ -13,16 +13,16 @@ angular.module('viaggia.controllers.notifications', [])
         }
 
         $scope.isInArray = function (index, notificationId) {
-            if (index > 9) {
-                return true;
-            }
+            //            if (index > 9) {
+            //                return true;
+            //            }
             return $scope.notificationsIsRead.indexOf(notificationId) > -1;
         }
 
 
 
         $scope.loadMore = function () {
-            notificationService.getNotifications(0, $scope.start).then(function (notifics) {
+            notificationService.getNotifications(0, $scope.start, $scope.all).then(function (notifics) {
                 if (notifics) {
                     $scope.notifications = !!$scope.notifications ? $scope.notifications.concat(notifics) : notifics;
 
@@ -35,7 +35,7 @@ angular.module('viaggia.controllers.notifications', [])
                     }
                     if (notifics.length >= $scope.all) {
                         $scope.$broadcast('scroll.infiniteScrollComplete');
-                        $scope.start += 1;
+                        $scope.start += $scope.all;
                         $scope.end_reached = false;
                     } else {
                         $scope.end_reached = true;
@@ -46,7 +46,7 @@ angular.module('viaggia.controllers.notifications', [])
                     Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
 
                 }
-              $scope.$broadcast('scroll.refreshComplete');
+                $scope.$broadcast('scroll.refreshComplete');
             }, function (err) {
                 console.error(err);
                 $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -84,9 +84,9 @@ angular.module('viaggia.controllers.notifications', [])
             $scope.end_reached = false;
         }
 
-        $scope.doRefresh = function(){
-          init();
-          $scope.loadMore();
+        $scope.doRefresh = function () {
+            init();
+            $scope.loadMore();
         }
         $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
             $rootScope.previousState = from.name;
