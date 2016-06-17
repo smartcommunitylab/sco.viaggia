@@ -8,7 +8,7 @@
     "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
     "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
     "newsRSS": "https://tn.smartcommunitylab.it/core.mobility/announcements/rss/trento",
-    "contact_link" : "mailto:viaggiatrento@smartcommunitylab.it?subject=ViaggiaTrento:%20segnalazione%20problema",
+    "contact_link": "mailto:viaggiatrento@smartcommunitylab.it?subject=ViaggiaTrento:%20segnalazione%20problema",
     "smartcheck_options": [
         1,
         4,
@@ -42,6 +42,7 @@
                 "icon": "ic_search",
                 "color": "#3BBACF"
             },
+
             {
                 "state": "/app/ttlist/urbano",
                 "label": "menu_real_time_bus_urban",
@@ -69,11 +70,13 @@
 
       ],
         "infomenu": [
+
             {
                 "state": "/app/ttlist/urbano",
                 "label": "menu_real_time_bus_urban",
                 "icon": "ic_urban-bus"
             },
+
             {
                 "state": "/app/ttlist/trains",
                 "label": "menu_real_time_train",

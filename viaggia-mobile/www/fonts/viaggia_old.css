@@ -1,0 +1,206 @@
+@font-face {
+	font-family: 'viaggia';
+	src:url('viaggia.eot?i4isab');
+	src:url('viaggia.eot?i4isab#iefix') format('embedded-opentype'),
+		url('viaggia.ttf?i4isab') format('truetype'),
+		url('viaggia.woff?i4isab') format('woff'),
+		url('viaggia.svg?i4isab#viaggia') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="ic_"], [class*=" ic_"] {
+	font-family: 'viaggia';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.ic_m_extraurban_bus:before {
+    content: "\e936";
+}
+.ic_m_urban_bus:before {
+    content: "\e937";
+}
+.ic_m_train:before {
+    content: "\e938";
+}
+.ic_m_parking-lot:before {
+    content: "\e939";
+}
+.ic_m_bike:before {
+    content: "\e93a";
+}
+.ic_m_funivia:before {
+    content: "\e93b";
+}
+.ic_one:before {
+	content: "\e926";
+}
+.ic_two:before {
+	content: "\e927";
+}
+.ic_three:before {
+	content: "\e928";
+}
+.ic_four:before {
+	content: "\e929";
+}
+.ic_five:before {
+	content: "\e92a";
+}
+.ic_six:before {
+	content: "\e92b";
+}
+.ic_seven:before {
+	content: "\e92c";
+}
+.ic_eight:before {
+	content: "\e92d";
+}
+.ic_nine:before {
+	content: "\e92e";
+}
+.ic_zero:before {
+	content: "\e92f";
+}
+.ic_A:before {
+	content: "\e930";
+}
+.ic_B:before {
+	content: "\e931";
+}
+.ic_C:before {
+	content: "\e932";
+}
+.ic_N:before {
+	content: "\e933";
+}
+.ic_P:before {
+	content: "\e934";
+}
+.ic_funivia:before {
+	content: "\e935";
+}
+.ic_car:before {
+	content: "\e925";
+}
+.ic_star-outline:before {
+	content: "\e923";
+}
+.ic_star:before {
+	content: "\e924";
+}
+.ic_monitoring:before {
+	content: "\e900";
+}
+.ic_bike:before {
+	content: "\e901";
+}
+.ic_urban-bus:before {
+	content: "\e902";
+}
+.ic_train:before {
+	content: "\e903";
+}
+.ic_extraurban-bus:before {
+	content: "\e904";
+}
+.ic_real-time-info:before {
+	content: "\e905";
+}
+.ic_home:before {
+	content: "\e906";
+}
+.ic_search:before {
+	content: "\e907";
+}
+.ic_folder:before {
+	content: "\e908";
+}
+.ic_back:before {
+	content: "\e909";
+}
+.ic_nav:before {
+	content: "\e90a";
+}
+.ic_map:before {
+	content: "\e90b";
+}
+.ic_info:before {
+	content: "\e90c";
+}
+.ic_user:before {
+	content: "\e90d";
+}
+.ic_notification:before {
+	content: "\e90e";
+}
+.ic_bookmark-outline:before {
+	content: "\e90f";
+}
+.ic_bookmark:before {
+	content: "\e910";
+}
+.ic_parking-lot:before {
+	content: "\e911";
+}
+.ic_euro:before {
+	content: "\e912";
+}
+.ic_news:before {
+	content: "\e913";
+}
+.ic_navigator:before {
+	content: "\e914";
+}
+.ic_advice:before {
+	content: "\e915";
+}
+.ic_delete:before {
+	content: "\e916";
+}
+.ic_edit:before {
+	content: "\e917";
+}
+.ic_new:before {
+	content: "\e918";
+}
+.ic_list:before {
+	content: "\e919";
+}
+.ic_clear:before {
+	content: "\e91a";
+}
+.ic_more:before {
+	content: "\e91b";
+}
+.ic_foot:before {
+	content: "\e91c";
+}
+.ic_car-sharing:before {
+	content: "\e91d";
+}
+.ic_bike-sharing:before {
+	content: "\e91e";
+}
+.ic_public-transport:before {
+	content: "\e91f";
+}
+.ic_parking-garage:before {
+	content: "\e920";
+}
+.ic_localization:before {
+	content: "\e921";
+}
+.ic_ic_-35:before {
+	content: "\e922";
+}
+

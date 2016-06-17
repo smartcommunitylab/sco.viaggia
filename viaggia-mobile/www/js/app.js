@@ -68,6 +68,7 @@ angular.module('viaggia', [
     'viaggia.controllers.news',
     'viaggia.controllers.notifications',
     'viaggia.controllers.plan',
+    'viaggia.controllers.taxi',
     'viaggia.controllers.planlist',
     'viaggia.controllers.tripdetails',
     'viaggia.services.data',
@@ -77,6 +78,7 @@ angular.module('viaggia', [
     'viaggia.services.timetable',
     'viaggia.services.markets',
     'viaggia.services.info',
+    'viaggia.services.taxi',
     'viaggia.services.notification',
     'viaggia.directives',
     'viaggia.services.geo',
@@ -149,8 +151,9 @@ angular.module('viaggia', [
 
         });
     })
-    .config(function ($stateProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider) {
+    .config(function ($stateProvider, $compileProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider) {
         $ionicConfigProvider.views.swipeBackEnabled(false);
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(sms|tel|mailto):/);
         $stateProvider.state('app', {
             url: "/app",
             abstract: true,
@@ -364,13 +367,24 @@ angular.module('viaggia', [
                     }
                 }
             })
-            .state('app.bikestation', {
+
+        .state('app.bikestation', {
                 //                cache: false,
                 url: "/bikesharing/:agencyId/:id",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/bikesharing.html",
                         controller: 'BikeSharingCtrl'
+                    }
+                }
+            })
+            .state('app.taxi', {
+                //                cache: false,
+                url: "/taxi",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/taxi.html",
+                        controller: 'TaxiCtrl'
                     }
                 }
             })
@@ -434,6 +448,7 @@ angular.module('viaggia', [
             menu_real_time_train: 'Treni',
             menu_real_time_bike: 'Biciclette condivise',
             menu_real_time_park: 'Parcheggi',
+            menu_taxi: 'Taxi',
             menu_credits: "Credits",
             menu_login: "Login",
             menu_logout: "Logout",
@@ -591,7 +606,7 @@ angular.module('viaggia', [
             plan_preferences_fastest: 'Itinerario piu veloce',
             plan_preferences_leastChanges: 'Con meno cambi',
             plan_preferences_leastWalking: 'Minimo tragitto a piedi',
-
+            lbl_taxi_station: 'Stazione Taxi'
         });
 
 
@@ -610,6 +625,7 @@ angular.module('viaggia', [
             menu_real_time_train: 'Trains',
             menu_real_time_bike: 'Shared bikes',
             menu_real_time_park: 'Parking lots',
+            menu_taxi: 'Taxi',
             menu_credits: "Credits",
             menu_login: "Login",
             menu_logout: "Logout",
@@ -766,7 +782,9 @@ angular.module('viaggia', [
             popup_modify_trip_message: 'Are you sure to modify the saved journey?',
             plan_preferences_fastest: 'Fastest',
             plan_preferences_leastChanges: 'Least changes',
-            plan_preferences_leastWalking: 'Least walking'
+            plan_preferences_leastWalking: 'Least walking',
+            lbl_taxi_station: 'Taxi Station'
+
         });
 
 

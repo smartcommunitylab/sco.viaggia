@@ -5,10 +5,10 @@
     "senderID": "453601816446",
     "appversion": "2.1.2",
     "appname": "Viaggia Trento",
-    "serverURL": "https://dev.smartcommunitylab.it/core.mobility",
-    "messagingServerURL": "https://dev.smartcommunitylab.it/core.communicator",
-    "newsRSS": "https://dev.smartcommunitylab.it/core.mobility/announcements/rss/trento",
-    "contact_link" : "mailto:viaggiatrento@smartcommunitylab.it?subject=ViaggiaTrento:%20segnalazione%20problema",
+    "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
+    "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
+    "newsRSS": "https://tn.smartcommunitylab.it/core.mobility/announcements/rss/trento",
+    "contact_link": "mailto:viaggiatrento@smartcommunitylab.it?subject=ViaggiaTrento:%20segnalazione%20problema",
     "smartcheck_options": [
         1,
         4,
@@ -43,6 +43,12 @@
                 "color": "#3BBACF"
             },
             {
+                "state": "/app/taxi",
+                "label": "menu_taxi",
+                "icon": "ic_taxi",
+                "color": "#f8cf20"
+            },
+            {
                 "state": "/app/ttlist/urbano",
                 "label": "menu_real_time_bus_urban",
                 "icon": "ic_urban-bus",
@@ -69,11 +75,13 @@
 
       ],
         "infomenu": [
+
             {
                 "state": "/app/ttlist/urbano",
                 "label": "menu_real_time_bus_urban",
                 "icon": "ic_urban-bus"
             },
+
             {
                 "state": "/app/ttlist/trains",
                 "label": "menu_real_time_train",

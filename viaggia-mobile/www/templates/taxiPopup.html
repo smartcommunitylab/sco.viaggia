@@ -1,0 +1,22 @@
+<div>
+    <div class="row row-center map-stop-title">
+        <i class="icon popup-icon ic_taxi"></i>
+        <div class="col">
+            <b class="parking-title"> {{'lbl_taxi_station'|translate}}</b>
+        </div>
+        <!--        bookmark button-->
+    </div>
+    <div class="map-stop-hline"></div>
+    <div class="row map-stop-name">
+        <div class="col">
+            <h4>{{popupTaxi.address}}</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <b><p ng-if="popupTaxi.distance">{{'bikesharings_distance' | translate}} {{popupTaxi.distance| number:1}}km</p></b>
+        </div>
+    </div>
+
+</div>
