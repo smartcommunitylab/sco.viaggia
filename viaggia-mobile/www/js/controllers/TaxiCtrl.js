@@ -9,7 +9,7 @@ angular.module('viaggia.controllers.taxi', [])
 
 
     $scope.load = function () {
-        taxiService.getCompanies(Config.getAppId()).then(function (data) {
+        taxiService.getCompanies(Config.getAppId(), Config.getTaxiId()).then(function (data) {
             $scope.taxiCompanies = data;
             $scope.loading = false;
             Config.loaded();
@@ -33,7 +33,7 @@ angular.module('viaggia.controllers.taxi', [])
     $scope.showMap = function (withPopup) {
         $scope.modalMap.show().then(function () {
             Config.loading();
-            taxiService.getTaxiPoints(Config.getAppId()).then(function (data) {
+            taxiService.getTaxiPoints(Config.getAppId(), Config.getTaxiId()).then(function (data) {
                 Config.loaded();
                 $scope.taxiPoints = data;
                 var markers = [];

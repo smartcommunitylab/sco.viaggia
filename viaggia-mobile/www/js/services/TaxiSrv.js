@@ -21,7 +21,7 @@ angular.module('viaggia.services.taxi', [])
     //        deferred.resolve(null);
     //    }
     return {
-        getCompanies: function (appId) {
+        getCompanies: function (appId, agencyId) {
             var deferred = $q.defer();
             //            $http.get(Config.getServerURL() + '/bikesharing/' + agencyId,
             if (!cacheCompanies.length || cacheCompanies.length === 0) {
@@ -46,7 +46,7 @@ angular.module('viaggia.services.taxi', [])
 
             return deferred.promise;
         },
-        getTaxiPoints: function (appId) {
+        getTaxiPoints: function (appId, agencyId) {
             var deferred = $q.defer();
             if (!cacheTaxiPoints.length || cacheTaxiPoints.length === 0) {
                 $http.get("https://dev.smartcommunitylab.it/smart-planner2/trentino/rest/taxis",

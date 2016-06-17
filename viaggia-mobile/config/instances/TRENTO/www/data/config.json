@@ -22,6 +22,7 @@
         ]
     },
     "plan_policy": "Trento",
+    "taxi_id": "TAXI_TRENTO",
     "agencies": [5, 6, 10, 12, 17],
     "extraurban_agencies": [17],
     "broadcast_notifications_options": [
@@ -42,7 +43,12 @@
                 "icon": "ic_search",
                 "color": "#3BBACF"
             },
-
+            {
+                "state": "/app/taxi",
+                "label": "menu_taxi",
+                "icon": "ic_taxi",
+                "color": "#f8cf20"
+            },
             {
                 "state": "/app/ttlist/urbano",
                 "label": "menu_real_time_bus_urban",

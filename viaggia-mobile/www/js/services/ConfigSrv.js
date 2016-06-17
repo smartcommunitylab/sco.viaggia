@@ -213,16 +213,16 @@ angular.module('viaggia.services.conf', [])
             return COLORS_TRIP[transportType];
         },
         getPlanPreferences: function () {
-          return [
-              {
-                  label: $filter('translate')('plan_preferences_fastest'),
-                  value: "fastest"
+            return [
+                {
+                    label: $filter('translate')('plan_preferences_fastest'),
+                    value: "fastest"
               }, {
-                  label: $filter('translate')('plan_preferences_leastChanges'),
-                  value: "leastChanges"
+                    label: $filter('translate')('plan_preferences_leastChanges'),
+                    value: "leastChanges"
               }, {
-                  label: $filter('translate')('plan_preferences_leastWalking'),
-                  value: "leastWalking"
+                    label: $filter('translate')('plan_preferences_leastWalking'),
+                    value: "leastWalking"
               }
           ];
         },
@@ -232,6 +232,9 @@ angular.module('viaggia.services.conf', [])
         },
         getMessagingAppId: function () {
             return mapJsonConfig["messagingAppId"];
+        },
+        getTaxiId: function () {
+            return mapJsonConfig["taxi_id"];
         },
         getMessagingServerURL: function () {
             return mapJsonConfig["messagingServerURL"];
