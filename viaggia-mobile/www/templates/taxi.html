@@ -5,6 +5,16 @@
     <ion-content has-header="true" padding="true">
         <ion-refresher on-refresh="load()">
         </ion-refresher>
+        <!--        <div ng-init="locateMe()" ng-if="showStreetName">-->
+        <div ng-init="locateMe()">
+            <div class="user-position" ng-if="showStreetName">
+                <div class="user-position-warning">
+                    Attenzione! L'indirizzo mostrato potrebe non essere corretto.
+                </div>
+                <div class="user-position-your-position"> La tua posizione: <b>{{userPosition.name}}</b></div>
+            </div>
+
+        </div>
         <ion-list class="list">
             <div class="item card" ng-repeat="t in taxiCompanies">
                 <div class=" item taxi-card ">
@@ -19,10 +29,6 @@
                             <i class="icon voice-menu ion-android-chat taxi-icon " style="margin-right: 20px; "></i><a href="sms:{{sms}} " class="taxi-number ">{{sms}}</a>
                         </ion-item>
                     </ion-list>
-                    <div class="row parking-card-footer ">
-                        <div class="col "><span ng-if="t.distance ">{{t.distance| number:1}}km</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </ion-list>

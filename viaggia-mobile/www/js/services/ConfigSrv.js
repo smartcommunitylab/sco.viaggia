@@ -236,6 +236,10 @@ angular.module('viaggia.services.conf', [])
         getTaxiId: function () {
             return mapJsonConfig["taxi_id"];
         },
+        getTaxiAccuracy: function () {
+            return mapJsonConfig["taxi_accuracy"];
+
+        },
         getMessagingServerURL: function () {
             return mapJsonConfig["messagingServerURL"];
         },

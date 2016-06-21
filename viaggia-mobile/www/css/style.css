@@ -1245,3 +1245,13 @@ ion-header-bar .title {
 .taxi-icon {
     font-size: 30px;
 }
+
+.user-position-warning {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+.user-position-your-position {
+    margin-bottom: 8px;
+}

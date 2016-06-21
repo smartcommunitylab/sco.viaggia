@@ -132,6 +132,6 @@ angular.module('viaggia.controllers.home', [])
         if (counter > 9) {
             return counter + "+";
         }
-        return coutner;
+        return counter;
     }
 })

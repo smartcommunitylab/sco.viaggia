@@ -3,10 +3,11 @@ angular.module('viaggia.controllers.taxi', [])
 /**
  * A SERVICE TO WORK WITH TAXI DATA FROM SERVER
  */
-.controller('TaxiCtrl', function ($scope, $http, $q, $filter, Config, $ionicModal, $ionicPopup, $state, planService, mapService, taxiService) {
+.controller('TaxiCtrl', function ($scope, $http, $q, $filter, Config, $ionicModal, $ionicPopup, $state, $ionicLoading, planService, mapService, taxiService, GeoLocate) {
 
 
-
+    $scope.showStreetName = false;
+    $scope.userPosition = {}
 
     $scope.load = function () {
         taxiService.getCompanies(Config.getAppId(), Config.getTaxiId()).then(function (data) {
@@ -37,6 +38,8 @@ angular.module('viaggia.controllers.taxi', [])
                 Config.loaded();
                 $scope.taxiPoints = data;
                 var markers = [];
+                //set message on popup
+
                 var list = ($scope.selected != null && withPopup) ? [$scope.selected] : $scope.taxiPoints;
                 if (list == null) list = [];
                 var boundsArray = [];
@@ -53,11 +56,14 @@ angular.module('viaggia.controllers.taxi', [])
                         },
                         //                        focus: true
                     });
-                    boundsArray.push(list[i].position);
+                    boundsArray.push(list[i].location);
                 }
                 if (boundsArray.length > 0) {
                     var bounds = L.latLngBounds(boundsArray);
                     mapService.getMap('modalMapTaxi').then(function (map) {
+                        if ($scope.userPosition && $scope.userPosition.name) {
+                            mapService.setMyLocationMessage('modalMapTaxi', $scope.userPosition.name);
+                        }
                         map.fitBounds(bounds);
                     });
                 }
@@ -65,7 +71,9 @@ angular.module('viaggia.controllers.taxi', [])
                 if (withPopup) {
                     showPopup(list[0]);
                 }
+
             });
+
         }, function (err) {
             //output error
             Config.loaded();
@@ -155,11 +163,50 @@ angular.module('viaggia.controllers.taxi', [])
         $scope.closeMap();
         $state.go('app.plan');
     };
-    $scope.callPhone = function (number) {
 
-    }
-    $scope.messagePhone = function (number) {
 
-    }
+    $scope.locateMe = function () {
+        $ionicLoading.show();
+
+        GeoLocate.locate().then(function (position) {
+            $scope.position = position;
+            var placedata = $q.defer();
+            var places = {};
+            var url = Config.getGeocoderURL() + '/location?latlng=' + position[0] + ',' + position[1];
+            //add timeout
+            $http.get(encodeURI(url), {
+                timeout: 5000
+            })
+
+            .success(function (data, status, headers, config) {
+                places = data.response.docs;
+                name = '';
+                if (data.response.docs[0]) {
+                    $scope.userPosition = data.response.docs[0];
+                    if (GeoLocate.getAccuracy() <= Config.getTaxiAccuracy()) {
+                        $scope.showStreetName = true;
+
+                    } else {
+                        $scope.showStreetName = false;
+                    }
+                }
+                $ionicLoading.hide();
+                // $scope.$apply();
+            })
+
+            .error(function (data, status, headers, config) {
+                //temporary
+                $ionicLoading.hide();
+                // $scope.refresh = true;
+                $scope.showNoConnection();
+            });
+            //                });
+        }, function () {
+            $ionicLoading.hide();
+            //$scope.refresh = true;
+            console.log('CANNOT LOCATE!');
+        });
+        // }
+    };
     init();
 });

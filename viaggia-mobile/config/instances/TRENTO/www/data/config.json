@@ -23,6 +23,7 @@
     },
     "plan_policy": "Trento",
     "taxi_id": "TAXI_TRENTO",
+    "taxi_accuracy": 20,
     "agencies": [5, 6, 10, 12, 17],
     "extraurban_agencies": [17],
     "broadcast_notifications_options": [
