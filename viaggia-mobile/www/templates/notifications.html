@@ -12,10 +12,6 @@
             <div class="card notification-card" ng-repeat="notification in notifications | orderBy:'updateTime':true track by $index" ng-last-repeat="notifications" ng-click="showNotification(notification)">
 
                 <div> {{notification.updateTime| date:' dd-MM-yyyy'}} <i class="icon ic_new alignright" style="font-size:25px;" ng-hide="notification.seen || isInArray($index,notification.id)"></i></div>
-<<<<<<< HEAD
-=======
-
->>>>>>> 93f5c40b29e97e5f8890e32a07fe744beaa7d67d
                 <div class="notification-title">{{notification.title }}</div>
 
             </div>
