@@ -153,7 +153,6 @@ angular.module('viaggia', [
     })
     .config(function ($stateProvider, $compileProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider) {
         $ionicConfigProvider.views.swipeBackEnabled(false);
-        $compileProvider.aHrefSanitizationWhitelist(/^\s*(sms|tel|mailto):/);
         $stateProvider.state('app', {
             url: "/app",
             abstract: true,
@@ -790,4 +789,5 @@ angular.module('viaggia', [
 
         $translateProvider.preferredLanguage(DEFAULT_LANG);
         $translateProvider.fallbackLanguage(DEFAULT_LANG);
+        $compileProvider.aHrefSanitizationWhitelist(/.*/);
     });

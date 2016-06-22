@@ -13,15 +13,6 @@ angular.module('viaggia.controllers.notifications', [])
         }
 
         $scope.isInArray = function (index, notificationId) {
-<<<<<<< HEAD
-//            if (index > 9) {
-//                return true;
-//            }
-=======
-            //            if (index > 9) {
-            //                return true;
-            //            }
->>>>>>> 93f5c40b29e97e5f8890e32a07fe744beaa7d67d
             return $scope.notificationsIsRead.indexOf(notificationId) > -1;
         }
 
@@ -94,16 +85,16 @@ angular.module('viaggia.controllers.notifications', [])
             init();
             $scope.loadMore();
         }
-        $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
-            $rootScope.previousState = from.name;
-            $rootScope.currentState = to.name;
-            if ($rootScope.currentState == "app.notifications" && $rootScope.previousState != "app.notificationdetail") {
-                //reload the notification
-                init();
-
-                //$scope.loadMore();
-            }
-        });
+//        $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+//            $rootScope.previousState = from.name;
+//            $rootScope.currentState = to.name;
+//            if ($rootScope.currentState == "app.notifications" && $rootScope.previousState != "app.notificationdetail") {
+//                //reload the notification
+//                init();
+//
+//                //$scope.loadMore();
+//            }
+//        });
     })
     .controller('NotificationDetailCtrl', function ($scope, $stateParams, Config, notificationService) {
         $scope.notification = $stateParams.notification;

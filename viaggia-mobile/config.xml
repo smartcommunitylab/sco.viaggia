@@ -4,6 +4,7 @@
         <description>Viaggia Trento</description>
         <author email="info@smartcommunitylab.it" href="http://www.smartcommunitylab.it/">Smart Community Lab</author>
         <content src="index.html" />
+        <allow-navigation href="http://*/*" />
         <access origin="*" />
         <access origin="sms:*" launch-external="yes" />
         <access origin="tel:*" launch-external="yes" />
@@ -17,8 +18,8 @@
         <preference name="BackupWebStorage" value="none" />
         <preference name="SplashScreen" value="screen" />
         <preference name="SplashScreenDelay" value="3000" />
-        <preference name="FadeSplashScreen" value="false"/>
-        <preference name="ShowSplashScreenSpinner" value="false"/>
+        <preference name="FadeSplashScreen" value="false" />
+        <preference name="ShowSplashScreenSpinner" value="false" />
         <preference name="android-minSdkVersion" value="16" />
         <preference name="android-targetSdkVersion" value="20" />
         <feature name="StatusBar">
