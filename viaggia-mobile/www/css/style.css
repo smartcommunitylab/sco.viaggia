@@ -1228,3 +1228,30 @@ ion-header-bar .title {
     -moz-box-shadow: none;
     box-shadow: none;
 }
+
+.taxi-name {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.taxi-number {
+    color: #3bbacf;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.taxi-icon {
+    font-size: 30px;
+}
+
+.user-position-warning {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+.user-position-your-position {
+    margin-bottom: 8px;
+}

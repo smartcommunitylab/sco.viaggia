@@ -87,10 +87,10 @@ angular.module('viaggia.services.map', [])
                 }).addTo(map);
                 $ionicPlatform.ready(function () {
                     GeoLocate.locate().then(function (e) {
-                        L.marker(L.latLng(e[0], e[1])).addTo(map);
+                        var myPos = L.marker(L.latLng(e[0], e[1])).addTo(map);
+                        cachedMap[mapId].myPos = myPos;
                     });
                 });
-
                 deferred.resolve(map);
             },
             function (error) {
@@ -98,6 +98,18 @@ angular.module('viaggia.services.map', [])
                 deferred.reject(error);
             });
         return deferred.promise;
+    }
+    mapService.setMyLocationMessage = function (mapId, message) {
+        //        var deferred = $q.defer();
+        mapService.getMap(mapId).then(function (map) {
+            var customPopup = "<b>" + message + "</b>";
+            map.myPos.bindPopup(customPopup).openPopup();
+            map.myPos.openPopup();
+
+
+        });
+
+
     }
     mapService.centerOnMe = function (mapId, zoom) {
         leafletData.getMap(mapId).then(function (map) {

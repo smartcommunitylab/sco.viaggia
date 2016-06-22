@@ -145,4 +145,8 @@ angular.module('viaggia.services.notification', [])
         load: load,
         getByIdx: getByIdx
     }
+<<<<<<< HEAD
 });;
+=======
+});
+>>>>>>> 93f5c40b29e97e5f8890e32a07fe744beaa7d67d

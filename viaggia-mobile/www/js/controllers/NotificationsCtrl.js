@@ -13,9 +13,15 @@ angular.module('viaggia.controllers.notifications', [])
         }
 
         $scope.isInArray = function (index, notificationId) {
+<<<<<<< HEAD
 //            if (index > 9) {
 //                return true;
 //            }
+=======
+            //            if (index > 9) {
+            //                return true;
+            //            }
+>>>>>>> 93f5c40b29e97e5f8890e32a07fe744beaa7d67d
             return $scope.notificationsIsRead.indexOf(notificationId) > -1;
         }
 

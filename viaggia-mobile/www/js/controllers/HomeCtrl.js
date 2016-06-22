@@ -18,8 +18,7 @@ angular.module('viaggia.controllers.home', [])
         } else {
             lastUpdateTime = localStorage.getItem(Config.getAppId() + '_lastUpdateTime');
         }
-        notificationService.getNotifications(lastUpdateTime, 0, 10).then(function (items) {
-            //solo le nuove
+        notificationService.getNotifications(lastUpdateTime, 0, 10).then(function (items) { //solo le nuove
             if (items) {
                 $rootScope.countNotification = items.length;
 
