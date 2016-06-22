@@ -1255,3 +1255,15 @@ ion-header-bar .title {
 .user-position-your-position {
     margin-bottom: 8px;
 }
+
+.accessibility {
+    font-size: 22px;
+    border-radius: 6px;
+    padding: 6px;
+    background-color: #007cc2;
+    color: #fff;
+}
+
+.accessibility-ttstop {
+    font-size: 24px;
+}
