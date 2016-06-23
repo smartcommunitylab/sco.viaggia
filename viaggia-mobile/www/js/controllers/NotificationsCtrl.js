@@ -88,16 +88,6 @@ angular.module('viaggia.controllers.notifications', [])
             init();
             $scope.loadMore();
         }
-        $rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
-            $rootScope.previousState = from.name;
-            $rootScope.currentState = to.name;
-            if ($rootScope.currentState == "app.notifications" && $rootScope.previousState != "app.notificationdetail") {
-                //reload the notification
-                init();
-
-                //$scope.loadMore();
-            }
-        });
     })
     .controller('NotificationDetailCtrl', function ($scope, $stateParams, Config, notificationService) {
         $scope.notification = $stateParams.notification;

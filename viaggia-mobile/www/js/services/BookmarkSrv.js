@@ -2,8 +2,13 @@ angular.module('viaggia.services.bookmarks', [])
 
 .factory('bookmarkService', function ($q, $rootScope, Config, parkingService, bikeSharingService, planService) {
     var repo = '';
+    var mapBookmarks = {};
     Config.init().then(function () {
         repo = Config.getAppId() + '_bookmarks';
+        // taxi = Config.getAppId() + '_bookmarks_taxi';
+        //take map of flags
+        mapBookmarks = Config.getAppId() + '_bookmarks_map'
+
     });
 
     var getStoredBookmarks = function () {
@@ -15,16 +20,60 @@ angular.module('viaggia.services.bookmarks', [])
         }
         return value;
     };
+    var getMapBookmarks = function () {
+        var value = localStorage.getItem(mapBookmarks);
+        if (!value) {
+            value = [];
+        } else {
+            value = JSON.parse(value);
+        }
+        return value;
+    };
     var getDefaultBookmarks = function () {
         return angular.copy(Config.getPrimaryLinks());
     };
+    var allNewBookMarksArePresent = function () {
+        var areAllNewBookMarkPresent = true;
+        var map = getMapBookmarks();
+        //if all default bookmarks are present in the object mapbookmark
+        var defList = getDefaultBookmarks();
+        var keysOfDef = {};
+        for (var i = 0; i < defList.length; i++) {
+            if (!map[defList[i].state])
+                return false;
+            keysOfDef[defList[i].state] = true;
+        }
+
+        //..and viceversa in case of remove
+        for (var key in map) {
+            if (!keysOfDef[key])
+                return false;
+        }
+        return true;
+
+    }
+    var getMapDefaultBookmark = function () {
+        //get the new map object based on bookmarks
+        var mapBookMarks = {};
+        // var map = getStoredBookmarks();
+        var defList = getDefaultBookmarks();
+        for (var i = 0; i < defList.length; i++) {
+            mapBookMarks[defList[i].state] = true;
+        }
+        return mapBookMarks;
+    }
     var getBookmarks = function () {
-        if (!localStorage.getItem(repo)) {
+        //if (!localStorage.getItem(repo) || (localStorage.getItem(repo) && !taxi)) {+
+        if (!localStorage.getItem(repo) || !allNewBookMarksArePresent()) {
+            //first install or update
             var defList = getDefaultBookmarks();
+            var mapDefaultBookMark = getMapDefaultBookmark();
             defList.forEach(function (e) {
                 e.home = true;
             });
             localStorage.setItem(repo, JSON.stringify(defList));
+            //localStorage.setItem(taxi, true);
+            localStorage.setItem(mapBookmarks, JSON.stringify(mapDefaultBookMark));
         }
         return getStoredBookmarks();
     };
