@@ -131,12 +131,12 @@ angular.module('viaggia.controllers.taxi', [])
                     onTap: function (e) {
                         planService.setPlanConfigure({
                             to: {
-                                address: $scope.popupTaxi.address,
+                                name: $scope.popupTaxi.address,
                                 lat: $scope.popupTaxi.location[0],
                                 long: $scope.popupTaxi.location[1]
                             },
                         });
-                        planService.setName('to', $scope.popupTaxi.description);
+                        planService.setName('to', $scope.popupTaxi.address);
                         $scope.closeMap();
                         $state.go('app.plan');
                     }
