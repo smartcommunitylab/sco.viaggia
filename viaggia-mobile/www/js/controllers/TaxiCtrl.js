@@ -61,7 +61,7 @@ angular.module('viaggia.controllers.taxi', [])
                 if (boundsArray.length > 0) {
                     var bounds = L.latLngBounds(boundsArray);
                     mapService.getMap('modalMapTaxi').then(function (map) {
-                        if ($scope.userPosition && $scope.userPosition.name) {
+                        if ($scope.userPosition && $scope.userPosition.name && $scope.showStreetName) {
                             mapService.setMyLocationMessage('modalMapTaxi', $scope.userPosition.name);
                         }
                         map.fitBounds(bounds);
