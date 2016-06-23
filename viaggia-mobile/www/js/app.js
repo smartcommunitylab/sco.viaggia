@@ -231,7 +231,7 @@ angular.module('viaggia', [
                     }
                 }
             }).state('app.news', {
-                cache: false,
+                cache: true,
                 url: "/news",
                 views: {
                     'menuContent': {
