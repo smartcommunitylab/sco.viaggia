@@ -605,7 +605,9 @@ angular.module('viaggia', [
             plan_preferences_fastest: 'Itinerario piu veloce',
             plan_preferences_leastChanges: 'Con meno cambi',
             plan_preferences_leastWalking: 'Minimo tragitto a piedi',
-            lbl_taxi_station: 'Stazione Taxi'
+            lbl_taxi_station: 'Stazione Taxi',
+            taxi_label_your_position: 'La tua posizione attuale, rilevata dal dispositivo, è: ',
+            taxi_label_check_it: 'Verificala prima di comunicarla al taxi.'
         });
 
 
@@ -782,7 +784,9 @@ angular.module('viaggia', [
             plan_preferences_fastest: 'Fastest',
             plan_preferences_leastChanges: 'Least changes',
             plan_preferences_leastWalking: 'Least walking',
-            lbl_taxi_station: 'Taxi Station'
+            lbl_taxi_station: 'Taxi Station',
+            taxi_label_your_position: 'You current position, as detected by the device, is:',
+            taxi_label_check_it: 'Check it before communicating it to the taxi driver.'
 
         });
 

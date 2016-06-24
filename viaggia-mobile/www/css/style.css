@@ -1246,6 +1246,10 @@ ion-header-bar .title {
     font-size: 30px;
 }
 
+.user-position {
+    padding-top: 16px;
+}
+
 .user-position-warning {
     margin-top: 8px;
     margin-bottom: 8px;
