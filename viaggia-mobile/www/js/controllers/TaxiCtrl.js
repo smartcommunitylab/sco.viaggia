@@ -3,7 +3,7 @@ angular.module('viaggia.controllers.taxi', [])
 /**
  * A SERVICE TO WORK WITH TAXI DATA FROM SERVER
  */
-.controller('TaxiCtrl', function ($scope, $http, $q, $filter, Config, $ionicModal, $ionicPopup, $state, $ionicLoading, planService, mapService, taxiService, GeoLocate) {
+.controller('TaxiCtrl', function ($scope, $http, $q, $filter, Config, $ionicModal, $cordovaGeolocation, $ionicPopup, $state, $ionicLoading, planService, mapService, taxiService, GeoLocate) {
 
 
     $scope.showStreetName = false;
@@ -27,10 +27,11 @@ angular.module('viaggia.controllers.taxi', [])
         });
     }
     var init = function () {
-        $scope.loading = true;
-        Config.loading();
-        $scope.load();
+                            $scope.loading = true;
+                            Config.loading();
+                            $scope.load();
     };
+
     $scope.showMap = function (withPopup) {
         $scope.modalMap.show().then(function () {
             Config.loading();
@@ -145,6 +146,10 @@ angular.module('viaggia.controllers.taxi', [])
         });
 
     }
+    $scope.$on("$ionicView.enter", function (event, data) {
+        console.log("refresh geocoder");
+        $scope.locateMe();
+    });
 
     $scope.$on('leafletDirectiveMarker.modalMapTaxi.click', function (e, args) {
         var p = $scope.markers[args.modelName].taxi;
@@ -166,7 +171,7 @@ angular.module('viaggia.controllers.taxi', [])
 
 
     $scope.locateMe = function () {
-        $ionicLoading.show();
+        //  $ionicLoading.show();
 
         GeoLocate.locate().then(function (position) {
             $scope.position = position;
