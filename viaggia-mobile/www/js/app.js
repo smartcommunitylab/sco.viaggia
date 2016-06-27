@@ -607,7 +607,8 @@ angular.module('viaggia', [
             plan_preferences_leastWalking: 'Minimo tragitto a piedi',
             lbl_taxi_station: 'Stazione Taxi',
             taxi_label_your_position: 'La tua posizione attuale, rilevata dal dispositivo, è: ',
-            taxi_label_check_it: 'Verificala prima di comunicarla al taxi.'
+            taxi_label_check_it: 'Verificala prima di comunicarla al taxi.',
+            taxi_label_no_accuracy: 'Non è stato possibile determinare la tua posizione con sufficiente accuratezza per permetterti di comunicarla al tassista. Prova ad accendere un sistema di localizzazione sul tuo dispositivo (GPS, WiFi, ...).'
         });
 
 
@@ -786,7 +787,8 @@ angular.module('viaggia', [
             plan_preferences_leastWalking: 'Least walking',
             lbl_taxi_station: 'Taxi Station',
             taxi_label_your_position: 'You current position, as detected by the device, is:',
-            taxi_label_check_it: 'Check it before communicating it to the taxi driver.'
+            taxi_label_check_it: 'Check it before communicating it to the taxi driver.',
+            taxi_label_no_accuracy: 'It has not been possible to determine with sufficient accuracy your position to let you communicate it to the taxi driver. Try to switch on a tracking system on your device (GPS, WiFi, ...)'
 
         });
 
