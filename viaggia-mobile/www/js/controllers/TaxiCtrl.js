@@ -21,15 +21,15 @@ angular.module('viaggia.controllers.taxi', [])
         }, function (err) {
             $scope.taxiCompanies = null;
             $scope.$broadcast('scroll.refreshComplete');
-            $scope.showNoConnection();
+            // $scope.showNoConnection();
             $scope.loading = true;
             Config.loaded();
         });
     }
     var init = function () {
-                            $scope.loading = true;
-                            Config.loading();
-                            $scope.load();
+        $scope.loading = true;
+        Config.loading();
+        $scope.load();
     };
 
     $scope.showMap = function (withPopup) {
@@ -73,6 +73,9 @@ angular.module('viaggia.controllers.taxi', [])
                     showPopup(list[0]);
                 }
 
+            }, function (err) {
+                //output error
+                Config.loaded();
             });
 
         }, function (err) {
@@ -203,7 +206,9 @@ angular.module('viaggia.controllers.taxi', [])
                 //temporary
                 $ionicLoading.hide();
                 // $scope.refresh = true;
-                $scope.showNoConnection();
+                // $scope.showNoConnection();
+                $scope.loading = false;
+                $scope.taxiCompanies = null;
             });
             //                });
         }, function () {

@@ -20,7 +20,7 @@
             </div>
 
         </div>
-        <ion-list class="list">
+        <ion-list class="list" ng-if="taxiCompanies && taxiCompanies.length >0">
             <div class="item card" ng-repeat="t in taxiCompanies">
                 <div class=" item taxi-card ">
                     <div class="taxi-name ">{{t.name}}</div>
