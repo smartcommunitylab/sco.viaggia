@@ -344,34 +344,42 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                 for (var col = 0; col <= data.tripIds.length; col++) {
                     // corner 0
                     if (col == 0 && row == 0) {
-                        var str = $filter('translate')('lbl_delays');
+                        // corner accessibility
+                        var str = "acc";
                         rowContent.push(str);
                         tableCornerStr[0] = str;
+                    } else if (col == 0) {
+                        // stops accessibility
+                        colStr += '&nbsp;&nbsp;*&nbsp;&nbsp';
+                    } else if (col == 1 && row == 0) {
+                        var str = $filter('translate')('lbl_delays');
+                        rowContent.push(str);
+                        //tableCornerStr[0] = str;
                         // corner 1
-                    } else if ($scope.header_row_number == 2 && row == 1 && col == 0) {
+                    } else if ($scope.header_row_number == 2 && row == 1 && col == 1) {
                         var str = $filter('translate')('lbl_trips');
                         rowContent.push(str);
                         tableCornerStr[1] = str;
                         // stops column
-                    } else if (col == 0) {
+                    } else if (col == 1) {
                         rowContent.push(data.stops[row - $scope.header_row_number]);
                         colStr += data.stops[row - $scope.header_row_number] + '<br/>';
                         // delays header row
                     } else if (row == 0) {
                         var str = '';
-                        if (data.delays) str = getDelayValue(data.delays[col - 1]);
+                        if (data.delays) str = getDelayValue(data.delays[col - 2]);
                         rowContent.push(str);
                         str = expandStr(str);
                         headStr[0] += str;
                         // train lines header row
                     } else if ($scope.header_row_number == 2 && row == 1) {
-                        var str = getTripText(data.tripIds[col - 1]);
+                        var str = getTripText(data.tripIds[col - 2]);
                         rowContent.push(str);
                         str = expandStr(str, true);
                         headStr[1] += str;
                         // table data
                     } else {
-                        var str = data.times[col - 1][row - $scope.header_row_number];
+                        var str = data.times[col - 2][row - $scope.header_row_number];
                         rowContent.push(str);
                         if (!str) str = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
                         dataStr += '&nbsp;&nbsp;' + str + '&nbsp;&nbsp;';
