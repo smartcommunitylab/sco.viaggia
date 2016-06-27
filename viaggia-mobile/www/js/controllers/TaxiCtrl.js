@@ -21,7 +21,6 @@ angular.module('viaggia.controllers.taxi', [])
         }, function (err) {
             $scope.taxiCompanies = null;
             $scope.$broadcast('scroll.refreshComplete');
-            $scope.showNoConnection();
             $scope.loading = true;
             Config.loaded();
         });
@@ -198,7 +197,8 @@ angular.module('viaggia.controllers.taxi', [])
                 //temporary
                 $ionicLoading.hide();
                 // $scope.refresh = true;
-                $scope.showNoConnection();
+                $scope.loading = false;
+                $scope.taxiCompanies = null;
             });
             //                });
         }, function () {
