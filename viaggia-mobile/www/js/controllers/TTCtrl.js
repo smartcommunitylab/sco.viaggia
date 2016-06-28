@@ -341,20 +341,20 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         if (data.stops) {
             for (var row = 0; row < data.stops.length + $scope.header_row_number; row++) {
                 var rowContent = [];
-                for (var col = 0; col <= data.tripIds.length; col++) {
+                for (var col = 0; col <= data.tripIds.length + 1; col++) {
                     // corner 0
                     if (col == 0 && row == 0) {
                         // corner accessibility
-                        var str = "acc";
+                        var str = '&nbsp;&nbsp;acc&nbsp;&nbsp';
                         rowContent.push(str);
-                        tableCornerStr[0] = str;
+                        // tableCornerStr[0] = str;
                     } else if (col == 0) {
                         // stops accessibility
                         colStr += '&nbsp;&nbsp;*&nbsp;&nbsp';
                     } else if (col == 1 && row == 0) {
                         var str = $filter('translate')('lbl_delays');
                         rowContent.push(str);
-                        //tableCornerStr[0] = str;
+                        tableCornerStr[0] = tableCornerStr[0] + str;
                         // corner 1
                     } else if ($scope.header_row_number == 2 && row == 1 && col == 1) {
                         var str = $filter('translate')('lbl_trips');
@@ -383,7 +383,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                         rowContent.push(str);
                         if (!str) str = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
                         dataStr += '&nbsp;&nbsp;' + str + '&nbsp;&nbsp;';
-                        if (col == data.tripIds.length) dataStr += '<br/>';
+                        if (col == data.tripIds.length + 1) dataStr += '<br/>';
                     }
                 }
                 rows.push(rowContent);
@@ -463,7 +463,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     }
 
     function getAccessibilityStyle() {
-        return $scope.flagAccessibility ? 'ic_bookmark' : 'ic_bookmark-outline';
+        return $scope.flagAccessibility ? 'ic_access' : 'ic_access_outline';
     }
 })
 
