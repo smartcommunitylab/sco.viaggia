@@ -350,7 +350,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                         // tableCornerStr[0] = str;
                     } else if (col == 0) {
                         // stops accessibility
-                        colStr += '&nbsp;&nbsp;*&nbsp;&nbsp';
+                        colStr += '&nbsp;&nbsp;&#8226;&nbsp;&nbsp';
                     } else if (col == 1 && row == 0) {
                         var str = $filter('translate')('lbl_delays');
                         rowContent.push(str);

@@ -866,7 +866,7 @@ ion-header-bar .title {
     /*    width: 100px;*/
     background-color: #fff;
     z-index: 100;
-    text-align: center;
+    text-align: left;
     top: 50px;
 }
 
@@ -1270,4 +1270,8 @@ ion-header-bar .title {
 
 .accessibility-ttstop {
     font-size: 24px;
+}
+
+.table_accessibility {
+    color: #2975a7;
 }
