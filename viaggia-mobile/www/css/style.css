@@ -841,7 +841,12 @@ ion-header-bar .title {
     font-family: RobotoMono;
     /*    left: 100px;*/
     font-size: 12px;
-    position: absolute;
+    position: fixed;
+    left: 0;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
 }
 
 #table-col {
@@ -861,17 +866,23 @@ ion-header-bar .title {
 
 #table-corner {
     font-size: 12px;
+    height: 20px;
     border-right: 1px solid #bbb;
     position: absolute;
     /*    width: 100px;*/
     background-color: #fff;
     z-index: 100;
     text-align: left;
-    top: 50px;
+    /*    top: 50px;*/
 }
 
 #table-corner div {
+    height: 20.5px;
     border-bottom: 1px solid #bbb;
+}
+
+.delay {
+    margin-left: 40px;
 }
 
 .table-container {
@@ -1272,6 +1283,69 @@ ion-header-bar .title {
     font-size: 24px;
 }
 
-.table_accessibility {
+.table-accessibility {
     color: #2975a7;
+    margin-right: 4px;
+    /*    margin-left: 4px;
+    */
+    font-size: 20px;
 }
+
+
+/*
+
+#tablescroll {
+    position: fixed;
+    left: -20px;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+*/
+
+
+/*
+#slideout_accessibility {
+    z-index: 100;
+    position: fixed;
+    left: -50px;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+*/
+
+
+/*
+#tablescroll:hover {
+    left: 0px;
+}
+*/
+
+.tt-table {
+    position: fixed;
+    left: -20px;
+    -webkit-transition-duration: 0.3s;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+.tt-table-acc {
+    left: 0px;
+}
+
+
+/*
+#tablescroll:hover #slideout_accessibility {
+    left: 0;
+}
+*/
+
+
+/*
+#table-table:hover {
+    left: 50;
+}*/

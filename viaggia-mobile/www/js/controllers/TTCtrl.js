@@ -127,7 +127,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     $scope.data = [];
     var rowHeight = 20;
     $scope.rowHeight = rowHeight;
-    var headerRowHeight = 21; // has a border
+    var headerRowHeight = 20; // has a border
     $scope.stopsColWidth = 100; // has border
     $scope.flagAccessibility = false;
 
@@ -335,6 +335,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         var dataStr = '';
         var headStr = $scope.header_row_number == 2 ? ['', ''] : [''];
         var colStr = '';
+        var colAcc = '';
         var tableCornerStr = ['', ''];
 
         var rows = [];
@@ -350,7 +351,12 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                         // tableCornerStr[0] = str;
                     } else if (col == 0) {
                         // stops accessibility
-                        colStr += '&nbsp;&nbsp;&#8226;&nbsp;&nbsp';
+                        if (stop.acc) {
+                            colStr += '&nbsp;&#8226;&nbsp;&nbsp;&nbsp';
+                        } else {
+                            colStr += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp';
+                        }
+                        //                        colAcc += 'test<br/>';
                     } else if (col == 1 && row == 0) {
                         var str = $filter('translate')('lbl_delays');
                         rowContent.push(str);
@@ -397,6 +403,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         $scope.dataStr = dataStr;
         $scope.tableCornerStr = tableCornerStr;
         $scope.colStr = colStr;
+        $scope.colAcc = colAcc;
 
         $scope.tt = data;
 
@@ -455,11 +462,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     $scope.toggleAccessibility = function () {
         $scope.flagAccessibility = !$scope.flagAccessibility;
         $scope.accessibilityStyle = getAccessibilityStyle();
-        if ($scope.flagAccessibility) {
-
-        } else {
-
-        }
+        if ($scope.flagAccessibility) {} else {}
     }
 
     function getAccessibilityStyle() {
