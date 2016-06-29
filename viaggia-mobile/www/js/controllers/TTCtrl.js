@@ -288,7 +288,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     };
 
     var expandStr = function (str) {
-        if (str.length < 9) {
+        if (str && str.length < 9) {
             var m = 9 - str.length;
             var l = Math.round(m / 2);
             for (var i = 0; i < l; i++) {
@@ -349,13 +349,13 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                         var str = '&nbsp;&nbsp;acc&nbsp;&nbsp';
                         rowContent.push(str);
                         // tableCornerStr[0] = str;
-                    } else if (col == 0) {
+                    } else if (col == 0 && row >= $scope.header_row_number) {
                         // stops accessibility
-                        if (stop.acc) {
-                            colStr += '&nbsp;&#8226;&nbsp;&nbsp;&nbsp';
-                        } else {
-                            colStr += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp';
-                        }
+                        // if (stop.acc) {
+                        colStr += '&nbsp;&#8226;&nbsp;&nbsp;&nbsp';
+                        //} else {
+                        // colStr = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp';
+                        //    }
                         //                        colAcc += 'test<br/>';
                     } else if (col == 1 && row == 0) {
                         var str = $filter('translate')('lbl_delays');

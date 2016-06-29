@@ -882,7 +882,7 @@ ion-header-bar .title {
 }
 
 .delay {
-    margin-left: 40px;
+    padding-left: 40px;
 }
 
 .table-container {
