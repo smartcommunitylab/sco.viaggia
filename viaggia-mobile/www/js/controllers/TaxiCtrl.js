@@ -10,6 +10,7 @@ angular.module('viaggia.controllers.taxi', [])
     $scope.userPosition = {}
 
     $scope.load = function () {
+        $scope.locateMe();
         taxiService.getCompanies(Config.getAppId(), Config.getTaxiId()).then(function (data) {
             $scope.taxiCompanies = data;
             $scope.loading = false;
@@ -208,6 +209,7 @@ angular.module('viaggia.controllers.taxi', [])
                 // $scope.refresh = true;
                 // $scope.showNoConnection();
                 $scope.loading = false;
+                $scope.showStreetName = false;
                 $scope.taxiCompanies = null;
             });
             //                });

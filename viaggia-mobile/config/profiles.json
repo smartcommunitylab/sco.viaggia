@@ -2,8 +2,8 @@
     "TRENTO": {
         "resource_folder": "config/instances/TRENTO",
         "widget_id": "eu.trentorise.smartcampus.viaggiatrento",
-        "version": "2.2.0",
-        "version_code": "40",
+        "version": "2.2.1",
+        "version_code": "41",
         "app_name": "Viaggia Trento"
     },
     "ROVERETO": {
