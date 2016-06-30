@@ -335,61 +335,53 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         var dataStr = '';
         var headStr = $scope.header_row_number == 2 ? ['', ''] : [''];
         var colStr = '';
-        var colAcc = '';
         var tableCornerStr = ['', ''];
 
         var rows = [];
         if (data.stops) {
             for (var row = 0; row < data.stops.length + $scope.header_row_number; row++) {
                 var rowContent = [];
-                for (var col = 0; col <= data.tripIds.length + 1; col++) {
+                for (var col = 0; col <= data.tripIds.length; col++) {
                     // corner 0
                     if (col == 0 && row == 0) {
-                        // corner accessibility
-                        var str = '&nbsp;&nbsp;acc&nbsp;&nbsp';
-                        rowContent.push(str);
-                        // tableCornerStr[0] = str;
-                    } else if (col == 0 && row >= $scope.header_row_number) {
-                        // stops accessibility
-                        // if (stop.acc) {
-                        colStr += '&nbsp;&#8226;&nbsp;&nbsp;&nbsp';
-                        //} else {
-                        // colStr = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp';
-                        //    }
-                        //                        colAcc += 'test<br/>';
-                    } else if (col == 1 && row == 0) {
                         var str = $filter('translate')('lbl_delays');
                         rowContent.push(str);
-                        tableCornerStr[0] = tableCornerStr[0] + str;
+                        tableCornerStr[0] = str;
                         // corner 1
-                    } else if ($scope.header_row_number == 2 && row == 1 && col == 1) {
+                    } else if ($scope.header_row_number == 2 && row == 1 && col == 0) {
                         var str = $filter('translate')('lbl_trips');
                         rowContent.push(str);
                         tableCornerStr[1] = str;
                         // stops column
-                    } else if (col == 1) {
+                    } else if (col == 0) {
                         rowContent.push(data.stops[row - $scope.header_row_number]);
+                        //check from data if accessibility
+                        if (true) {
+                            colStr += '&nbsp;&#8226;&nbsp;&nbsp;&nbsp';
+                        } else {
+
+                        }
                         colStr += data.stops[row - $scope.header_row_number] + '<br/>';
                         // delays header row
                     } else if (row == 0) {
                         var str = '';
-                        if (data.delays) str = getDelayValue(data.delays[col - 2]);
+                        if (data.delays) str = getDelayValue(data.delays[col - 1]);
                         rowContent.push(str);
                         str = expandStr(str);
                         headStr[0] += str;
                         // train lines header row
                     } else if ($scope.header_row_number == 2 && row == 1) {
-                        var str = getTripText(data.tripIds[col - 2]);
+                        var str = getTripText(data.tripIds[col - 1]);
                         rowContent.push(str);
                         str = expandStr(str, true);
                         headStr[1] += str;
                         // table data
                     } else {
-                        var str = data.times[col - 2][row - $scope.header_row_number];
+                        var str = data.times[col - 1][row - $scope.header_row_number];
                         rowContent.push(str);
                         if (!str) str = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
                         dataStr += '&nbsp;&nbsp;' + str + '&nbsp;&nbsp;';
-                        if (col == data.tripIds.length + 1) dataStr += '<br/>';
+                        if (col == data.tripIds.length) dataStr += '<br/>';
                     }
                 }
                 rows.push(rowContent);
@@ -403,7 +395,6 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         $scope.dataStr = dataStr;
         $scope.tableCornerStr = tableCornerStr;
         $scope.colStr = colStr;
-        $scope.colAcc = colAcc;
 
         $scope.tt = data;
 
