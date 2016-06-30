@@ -841,7 +841,7 @@ ion-header-bar .title {
     font-family: RobotoMono;
     /*    left: 100px;*/
     font-size: 12px;
-    position: fixed;
+    position: absolute;
     left: 0;
     -webkit-transition-duration: 0.3s;
     -moz-transition-duration: 0.3s;
