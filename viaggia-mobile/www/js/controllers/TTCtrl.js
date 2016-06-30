@@ -356,9 +356,10 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                     } else if (col == 0) {
                         rowContent.push(data.stops[row - $scope.header_row_number]);
                         //check from data if accessibility
-                        if (true) {
+                        if (data.wheelChairBoarding[row - $scope.header_row_number]==1) {
                             colStr += '&nbsp;&#8226;&nbsp;&nbsp;&nbsp';
                         } else {
+                            colStr += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp';
 
                         }
                         colStr += data.stops[row - $scope.header_row_number] + '<br/>';
