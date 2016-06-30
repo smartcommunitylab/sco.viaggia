@@ -288,7 +288,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     };
 
     var expandStr = function (str) {
-        if (str && str.length < 9) {
+        if (str.length < 9) {
             var m = 9 - str.length;
             var l = Math.round(m / 2);
             for (var i = 0; i < l; i++) {
