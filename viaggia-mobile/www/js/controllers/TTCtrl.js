@@ -249,7 +249,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
         $scope.tableHeight = data.stops.length * rowHeight;
         //        $scope.scrollWidth = stopsColWidth + data.tripIds.length * $scope.colwidth;
-        $scope.scrollWidth = window.innerWidth + 20; //plus accessibility
+        $scope.scrollWidth = window.innerWidth;
         $scope.scrollHeight = window.innerHeight - headerHeight;
         $scope.tableHeaderHeight = $scope.header_row_number * headerRowHeight;
 
