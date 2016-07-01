@@ -249,7 +249,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
         $scope.tableHeight = data.stops.length * rowHeight;
         //        $scope.scrollWidth = stopsColWidth + data.tripIds.length * $scope.colwidth;
-        $scope.scrollWidth = window.innerWidth;
+        $scope.scrollWidth = window.innerWidth + 20; //plus accessibility
         $scope.scrollHeight = window.innerHeight - headerHeight;
         $scope.tableHeaderHeight = $scope.header_row_number * headerRowHeight;
 
@@ -356,7 +356,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                     } else if (col == 0) {
                         rowContent.push(data.stops[row - $scope.header_row_number]);
                         //check from data if accessibility
-                        if (data.wheelChairBoarding[row - $scope.header_row_number]==1) {
+                        if (data.wheelChairBoarding[row - $scope.header_row_number] == 1) {
                             colStr += '&nbsp;&#8226;&nbsp;&nbsp;&nbsp';
                         } else {
                             colStr += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp';
