@@ -338,6 +338,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         var tableCornerStr = ['', ''];
 
         var rows = [];
+        var stopAcc = JSON.parse(localStorage[Config.getAppId() + "_stops_" + $stateParams.agencyId + "_acc"]);
         if (data.stops) {
             for (var row = 0; row < data.stops.length + $scope.header_row_number; row++) {
                 var rowContent = [];
@@ -356,8 +357,9 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                     } else if (col == 0) {
                         rowContent.push(data.stops[row - $scope.header_row_number]);
                         //check from data if accessibility
-                        if (data.wheelChairBoarding[row - $scope.header_row_number] == 1) {
-                            colStr += '&nbsp;&#8226;&nbsp;&nbsp;&nbsp';
+                        if (stopAcc[data.stopsId[row - $scope.header_row_number]] == 1) {
+                            // if (data.wheelChairBoarding && data.wheelChairBoarding[row - $scope.header_row_number] == 1) {
+                            colStr += '&nbsp;&#9899;&nbsp';
                         } else {
                             colStr += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp';
 
@@ -452,13 +454,21 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         });
     };
     $scope.toggleAccessibility = function () {
-        $scope.flagAccessibility = !$scope.flagAccessibility;
         $scope.accessibilityStyle = getAccessibilityStyle();
+
+        if ($scope.route.wheelChairBoarding == 1) {
+            $scope.flagAccessibility = !$scope.flagAccessibility;
+        } else {
+            Toast.show($filter('translate')('not_acc_label'), "short", "bottom");
+
+        }
         if ($scope.flagAccessibility) {} else {}
     }
 
     function getAccessibilityStyle() {
-        return $scope.flagAccessibility ? 'ic_access' : 'ic_access_outline';
+        if ($scope.route.wheelChairBoarding == 1) {
+            return $scope.flagAccessibility ? 'ic_access' : 'ic_access_outline';
+        } else return "ic_access not_acc"
     }
 })
 
