@@ -24,7 +24,7 @@ angular.module('viaggia.controllers.plan', [])
 
     $scope.initParams = function () {
         $scope.refresh = true;
-            $scope.planParams = {
+        $scope.planParams = {
             from: {
                 name: '',
                 lat: '',
@@ -39,7 +39,7 @@ angular.module('viaggia.controllers.plan', [])
             transportTypes: [],
             departureTime: '',
             date: '',
-            weelchair: false
+            wheelchair: false
         }
     };
 
@@ -56,18 +56,23 @@ angular.module('viaggia.controllers.plan', [])
         $scope.planParams.date = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
         $scope.planParams.routeType = planOptionConfig.routeType;
         $scope.planParams.transportTypes = planOptionConfig.transportTypes;
-        $scope.planParams.weelchair = false;
+        $scope.planParams.wheelchair = false;
         for (var i = 0; i < $scope.types.length; i++) {
             $scope.mapTypes[$scope.planParams.transportTypes[i]] = true;
         }
     }
-
+    $scope.switchAcc = function () {
+        $scope.planParams.wheelchair = !$scope.planParams.wheelchair;
+    }
+    $scope.isSwitchedAcc = function () {
+        return $scope.planParams.wheelchair;
+    }
     var setSavedOptions = function (Configure) {
         $scope.planParams.departureTime = $filter('date')(new Date().getTime(), 'hh:mma');
         $scope.planParams.date = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
         $scope.planParams.routeType = Configure.routeType;
         $scope.planParams.transportTypes = Configure.transportTypes;
-        $scope.planParams.weelchair = Configure.weelchair;
+        $scope.planParams.wheelchair = Configure.wheelchair;
         for (var i = 0; i < $scope.types.length; i++) {
             $scope.mapTypes[$scope.planParams.transportTypes[i]] = true;
         }
@@ -311,6 +316,10 @@ angular.module('viaggia.controllers.plan', [])
         }
         if ($scope.planParams.transportTypes.length == 0) {
             Toast.show($filter('translate')("error_select_type_feedback"), "short", "bottom");
+            return false
+        }
+        if ($scope.planParams.wheelchair && !$scope.mapTypes['WALK'] && !$scope.mapTypes['TRANSIT']) {
+            Toast.show($filter('translate')("error_select_type_accessibility_feedback"), "short", "bottom");
             return false
         }
         if ($scope.hourTimestamp) {

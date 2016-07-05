@@ -241,8 +241,8 @@
 }
 
 .button-plan-type {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     margin: 8px;
     padding: 0px;
 }
@@ -1080,6 +1080,32 @@ ion-header-bar .title {
     box-shadow: none !important;
     padding-top: 10px!important;
     padding-left: 10px!important;
+}
+
+.acc_button {
+    width: 270px;
+    height: 80px;
+    margin: 8px;
+    padding: 0px;
+    font-size: x-large;
+}
+
+.acc_button:before {
+    font-size: 40px !important;
+}
+
+.acc_button_text {
+    clear: both;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: x-large;
+    font-family: RobotoDraft, Roboto, 'Helvetica Neue', 'Segoe UI', sans-serif;
+    vertical-align: middle
+}
+
+.not_acc {
+    opacity: 0.6;
 }
 
 .header-badge {
