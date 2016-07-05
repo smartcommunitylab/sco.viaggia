@@ -71,6 +71,8 @@ angular.module('viaggia', [
     'viaggia.controllers.taxi',
     'viaggia.controllers.planlist',
     'viaggia.controllers.tripdetails',
+    'viaggia.controllers.login',
+    'viaggia.controllers.registration',
     'viaggia.services.data',
     'viaggia.services.conf',
     'viaggia.services.map',
@@ -83,6 +85,8 @@ angular.module('viaggia', [
     'viaggia.directives',
     'viaggia.services.geo',
     'viaggia.services.bookmarks',
+    'viaggia.services.login',
+    'viaggia.services.registration',
     'viaggia.filters'
 ])
 
@@ -424,6 +428,26 @@ angular.module('viaggia', [
                     'menuContent': {
                         templateUrl: "templates/table3.html",
                         controller: 'TTTable3Ctrl'
+                    }
+                }
+            })
+            .state('app.login', {
+                cache: false,
+                url: "/login",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/login.html",
+                        controller: 'LoginCtrl'
+                    }
+                }
+            })
+            .state('app.registration', {
+                cache: false,
+                url: "/registration",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/registration.html",
+                        controller: 'RegistrationCtrl'
                     }
                 }
             });
