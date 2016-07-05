@@ -53,13 +53,14 @@
             <button class="button button-raised button-plan-type icon ic_foot" ng-class="{'button-viaggia-selected ': isSwitched('WALK'),'button-viaggia-notselected': !isSwitched('WALK')}" ng-click="switch('WALK')"></button>
             <button class="button button-raised button-plan-type icon ic_public-transport" ng-class="{'button-viaggia-selected ': isSwitched('TRANSIT'),'button-viaggia-notselected': !isSwitched('TRANSIT')}" ng-click="switch('TRANSIT')"></button>
             <button class="button button-raised button-plan-type icon ic_car" ng-class="{'button-viaggia-selected ': isSwitched('CAR'),'button-viaggia-notselected': !isSwitched('CAR')}" ng-click="switch('CAR')"></button>
-            <button class="button button-raised button-plan-type icon ic_ac" ng-class="{'button-viaggia-selected ': isSwitchedAcc(),'button-viaggia-notselected': !isSwitchedAcc()}" ng-click="switchAcc()"></button>
+            <button class="button button-raised button-plan-type icon ic_bike" ng-class="{'button-viaggia-selected ': isSwitched('BICYCLE'),'button-viaggia-notselected': !isSwitched('BICYCLE')}" ng-click="switch('BICYCLE')"></button>
         </div>
 
         <div class="row">
-            <button class="button button-raised button-plan-type icon ic_bike" ng-class="{'button-viaggia-selected ': isSwitched('BICYCLE'),'button-viaggia-notselected': !isSwitched('BICYCLE')}" ng-click="switch('BICYCLE')"></button>
+
             <button class="button button-raised button-plan-type icon ic_car-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDCAR'),'button-viaggia-notselected': !isSwitched('SHAREDCAR')}" ng-click="switch('SHAREDCAR')"></button>
             <button class="button button-raised button-plan-type icon ic_bike-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDBIKE'),'button-viaggia-notselected': !isSwitched('SHAREDBIKE')}" ng-click="switch('SHAREDBIKE')"></button>
+            <button class="button button-raised button-plan-type icon ic_ac" ng-class="{'button-viaggia-selected ': isSwitchedAcc(),'button-viaggia-notselected': !isSwitchedAcc()}" ng-click="switchAcc()"></button>
             <!--            <span class="button-plan-type"></span>-->
         </div>
         <!--
