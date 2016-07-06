@@ -660,7 +660,24 @@ angular.module('viaggia', [
             signup_signup: 'Registrati',
             signup_title: 'Registrati con',
             login_popup_title: 'Login',
-            login_popup_template: 'Per accedere a questa funzionalità devi effettuare il login'
+            login_popup_template: 'Per accedere a questa funzionalità devi effettuare il login',
+            dow_monday: 'Lunedì',
+            dow_tuesday: 'Martedì',
+            dow_wednesday: 'Mercoledì',
+            dow_thursday: 'Giovedì',
+            dow_friday: 'Venerdì',
+            dow_saturday: 'Sabato',
+            dow_sunday: 'Domenica',
+            dow_monday_short: 'L',
+            dow_tuesday_short: 'M',
+            dow_wednesday_short: 'M',
+            dow_thursday_short: 'G',
+            dow_friday_short: 'V',
+            dow_saturday_short: 'S',
+            dow_sunday_short: 'D',
+            save_trip_recurrent: 'Ricorrente',
+            save_trip_alldays: 'Tutti',
+
         });
 
 
@@ -868,8 +885,24 @@ angular.module('viaggia', [
             signup_signup: 'Register',
             signup_title: 'Register with',
             login_popup_title: 'Login',
-            login_popup_template: 'In orer to access to this functionality you must login'
+            login_popup_template: 'In orer to access to this functionality you must login',
 
+            dow_monday: 'Monday',
+            dow_tuesday: 'Tuesday',
+            dow_wednesday: 'Wednsday',
+            dow_thursday: 'Thursday',
+            dow_friday: 'Friday',
+            dow_saturday: 'Saturday',
+            dow_sunday: 'Sunday',
+            dow_monday_short: 'M',
+            dow_tuesday_short: 'T',
+            dow_wednesday_short: 'W',
+            dow_thursday_short: 'T',
+            dow_friday_short: 'F',
+            dow_saturday_short: 'S',
+            dow_sunday_short: 'S',
+            save_trip_recurrent: 'Recurrent',
+            save_trip_alldays: 'All',
 
         });
 

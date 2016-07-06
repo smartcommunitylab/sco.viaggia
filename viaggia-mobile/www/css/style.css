@@ -1372,6 +1372,9 @@ ion-header-bar .title {
     left: 0px;
 }
 
+
+/*Login pages*/
+
 .login .login-buttons {
     position: relative;
     text-align: center;
@@ -1522,6 +1525,25 @@ ion-header-bar .title {
 .item-input input[type='password'],
 .item-input input[type='text'] {
     border-bottom: 1px solid #ddd;
+}
+
+.recurrence-days label.item-checkbox {
+    display: inline-block;
+    padding: 0;
+    text-align: center;
+    width: 50px;
+}
+
+
+/*Recurrency */
+
+.recurrence-days label.item-checkbox .checkbox {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    margin-top: auto;
+    padding-bottom: 0;
 }
 
 
