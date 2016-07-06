@@ -441,7 +441,7 @@ angular.module('viaggia', [
                     }
                 }
             })
-            .state('app.registration', {
+            .state('app.signup', {
                 cache: false,
                 url: "/registration",
                 views: {
@@ -634,8 +634,33 @@ angular.module('viaggia', [
             taxi_label_check_it: 'Verificala prima di comunicarla al taxi.',
             taxi_label_no_accuracy: 'Non è stato possibile determinare la tua posizione con sufficiente accuratezza per permetterti di comunicarla al tassista. Prova ad accendere un sistema di localizzazione sul tuo dispositivo (GPS, WiFi, ...).',
             error_select_type_accessibility_feedback: 'Per visualizzare un percorso accessibile è necessario selezionare i mezzi pubblici o a piedi',
-            not_acc_label: 'Questa linea non è accessibile'
-
+            not_acc_label: 'Questa linea non è accessibile',
+            login_warning: 'Attenzione! Per accedere alle funzionalia devi essere registrato al sistema',
+            login_facebook: 'Accedi con Facebook',
+            login_google: 'Accedi con Google',
+            login_register: 'Registrati',
+            login_signin: 'ENTRA',
+            login_signup: 'REGISTRATI',
+            signin_title: 'Accedi con le tue credenziali',
+            signin_pwd_reset: 'Password dimenticata?',
+            text_login_use: 'oppure accedi con',
+            error_popup_title: 'Errore',
+            error_generic: 'La registrazione non è andata a buon fine. Riprova più tardi.',
+            error_email_inuse: 'L\'indirizzo email è già in uso.',
+            signup_name: 'Nome',
+            signup_surname: 'Cognome',
+            signup_email: 'Email',
+            signup_pwd: 'Password',
+            error_required_fields: 'Tutti i campi sono obbligatori',
+            error_password_short: 'La lunghezza della password deve essere di almeno 6 caratteri',
+            signup_success_title: 'Registrazione completata!',
+            signup_success_text: 'Completa la registrazione cliccando sul link che trovi nella email che ti abbiamo inviato.',
+            signup_resend: 'Re-inviare l\'email di conferma',
+            error_signin: 'Username/password non validi',
+            signup_signup: 'Registrati',
+            signup_title: 'Registrati con',
+            login_popup_title: 'Login',
+            login_popup_template: 'Per accedere a questa funzionalità devi effettuare il login'
         });
 
 
@@ -817,7 +842,33 @@ angular.module('viaggia', [
             taxi_label_check_it: 'Check it before communicating it to the taxi driver.',
             taxi_label_no_accuracy: 'It has not been possible to determine with sufficient accuracy your position to let you communicate it to the taxi driver. Try to switch on a tracking system on your device (GPS, WiFi, ...)',
             error_select_type_accessibility_feedback: 'In order to get an accessible route, you must select public transport or foot',
-            not_acc_label: 'This line is not accessible'
+            not_acc_label: 'This line is not accessible',
+            login_warning: 'Warning! To access these functionallities you have to be registered to the system',
+            login_facebook: 'Login with Facebook',
+            login_google: 'Login with Google',
+            login_register: 'Register',
+            login_signup: 'REGISTER',
+            login_signin: 'SIGN IN',
+            signin_title: 'Sign in with your credentials',
+            signin_pwd_reset: 'Forgot password?',
+            text_login_use: 'or sign in with',
+            error_popup_title: 'Error',
+            error_generic: 'Registration failed. Please try again later.',
+            error_email_inuse: 'Email address is already in use.',
+            signup_name: 'Name',
+            signup_surname: 'Surname',
+            signup_email: 'Email',
+            signup_pwd: 'Password',
+            error_required_fields: 'All the fields are required',
+            error_password_short: 'Password length should be at least 6 symbols',
+            signup_success_title: 'Registration complete!',
+            signup_success_text: 'Complete the registration by clicking the link you can find in the mail we have just sent you.',
+            signup_resend: 'Re-send the verification mail',
+            error_signin: 'Username/password invalid',
+            signup_signup: 'Register',
+            signup_title: 'Register with',
+            login_popup_title: 'Login',
+            login_popup_template: 'In orer to access to this functionality you must login'
 
 
         });

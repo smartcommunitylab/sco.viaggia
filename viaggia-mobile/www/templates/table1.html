@@ -1,10 +1,17 @@
 <ion-view title="{{title}}">
     <ion-nav-buttons side="right">
         <button class="button button-icon button-clear" ng-class="accessibilityStyle" ng-click="toggleAccessibility()"></button>
+        <button class="button button-icon button-clear" ng-class="monitoringStyle" ng-click="toggleMonitor()"></button>
         <button class="button button-icon button-clear" ng-class="bookmarkStyle" ng-click="bookmark()"></button>
     </ion-nav-buttons>
     <ion-content id="content" has-header="true" has-bouncing="false">
-
+        <div class="row" style="background-color: {{color}}; color: {{textColor(color)}} !important;">
+            <div class="col col-10 ">
+            </div>
+            <div class="col col-80 tt-subtitle">{{subtitle}}</div>
+            <div class="col col-10 ">
+            </div>
+        </div>
         <div class="row" style="background-color: {{color}}; color: {{textColor(color)}} !important;">
             <div class="col col-25 tt-day btn" ng-click="prevDate()"><a><i class="icon ion-arrow-left-b"></i></a>
             </div>
@@ -12,7 +19,8 @@
             <div class="col col-25 tt-day btn" ng-click="nextDate()"><a><i class="icon ion-arrow-right-b"></i></a>
             </div>
         </div>
-<div class="tt-table" ng-class="{'tt-table-acc':flagAccessibility}">            <div ng-if="dataStr" id="table-corner" style="width:{{stopsColWidth}}px; height:{{tableHeaderHeight}}px">
+        <div class="tt-table" ng-class="{'tt-table-acc':flagAccessibility}">
+            <div ng-if="dataStr" id="table-corner" style="width:{{stopsColWidth}}px; height:{{tableHeaderHeight}}px">
                 <div> <i class="icon ic_access table-accessibility"></i> {{tableCornerStr[0]}}
                 </div>
                 <!--            <div>{{tableCornerStr[0]}}</div>-->
@@ -44,6 +52,7 @@
                             linear-gradient(180deg,transparent, transparent {{rowHeight}}px, #eee {{rowHeight}}px, #eee {{rowHeight*2}}px);"></div>
                 </ion-scroll>
             </div>
+            <button class="button button-icon button-clear" ng-class="accessibilityStyle" ng-click="toggleAccessibility()"></button>
         </div>
         <!--
         <div ng-if="tt && tt.tripIds.length > 0" ngc-table data="data" scroll-delay="0" show-footer="false" left-column-number="1" left-column-widths="'100'" header-row-number="header_row_number" header-row-heights="row_height" right-column-number="0" show-row-numbers="false" show-column-names="false" center-column-widths="[column_width]" center-column-number="column_number" row-number="row_number" row-heights="[row_height]" scroll-left-position="scrollLeftPosition">

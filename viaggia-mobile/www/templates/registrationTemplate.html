@@ -1,0 +1,43 @@
+<ion-content id=" content " has-header="true" class="login-page">
+
+    <div class="buttons" ng-click="backToLogin()">
+        <i class="icon back-login-modal" ng-class="{'ion-android-arrow-back': platform.isAndroid(), 'ion-ios-arrow-back': !platform.isAndroid()}"></i>
+    </div>
+    <div class="buttons" ng-click="closeLogin()">
+        <i class="icon close-login-modal ion-close-round"></i>
+    </div>
+    <div class="login">
+        <div class="login-title">
+            <div class="stuffcontainer">
+                <h1>{{title|translate}}</h1>
+            </div>
+            <img class="bgimg" src="img/ic_mt_bus.png" />
+        </div>
+        <div class="login-buttons">
+            <div class="stuffcontainer">
+                <h4>{{'signup_title' | translate}}</h4>
+                <br/>
+                <label class="item item-input">
+                    <input type="text" placeholder="{{'signup_name'|translate}}" ng-model="user.name">
+                </label>
+                <label class="item item-input">
+                    <input type="text" placeholder="{{'signup_surname'|translate}}" ng-model="user.surname">
+                </label>
+                <label class="item item-input">
+                    <input type="email" placeholder="{{'signup_email'|translate}}" ng-model="user.email">
+                </label>
+                <label class="item item-input">
+                    <input type="password" placeholder="{{'signup_pwd'|translate}}" ng-model="user.password">
+                </label>
+                <button class="button button-block login-button-internal" ng-click="register()">
+                    <!--<i class="ion ion-social-facebook"></i>-->
+                    {{'signup_signup' | translate}}
+                </button>
+                <button class="button button-block login-button-signup" ui-sref="app.login">
+                    {{'cancel' | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+
+</ion-content>

@@ -9,6 +9,11 @@
     "messagingServerURL": "https://dev.smartcommunitylab.it/core.communicator",
     "newsRSS": "https://dev.smartcommunitylab.it/core.mobility/announcements/rss/trento",
     "contact_link": "mailto:viaggiatrento@smartcommunitylab.it?subject=ViaggiaTrento:%20segnalazione%20problema",
+    "AACURL": "https://tn.smartcommunitylab.it/aac",
+    "authServerURL": "/eauth/authorize",
+    "serverTokenURL": "/oauth/token",
+    "serverRegisterURL": "/internal/register/rest",
+    "serverProfileURL": "/basicprofile/me",
     "smartcheck_options": [
         1,
         4,

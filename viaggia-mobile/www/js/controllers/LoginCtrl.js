@@ -2,7 +2,7 @@ angular.module('viaggia.controllers.login', [])
 
 .controller('LoginCtrl', function ($scope, $ionicSideMenuDelegate, $ionicLoading, $ionicPlatform, $state, $ionicHistory, $ionicPopup, $timeout, $filter, loginService, userService, Config, storageService, Toast) {
     $ionicSideMenuDelegate.canDragContent(false);
-
+    $scope.title = Config.getAppName();
 
     $scope.user = {
         email: '',

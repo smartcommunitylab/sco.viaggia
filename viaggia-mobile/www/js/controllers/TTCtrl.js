@@ -123,7 +123,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
 })
 
-.controller('TTCtrl', function ($scope, $state, $location, $stateParams, $ionicPosition, $ionicScrollDelegate, $timeout, $filter, ttService, Config, Toast, bookmarkService) {
+.controller('TTCtrl', function ($scope, $state, $location, $stateParams, $ionicPosition, $ionicScrollDelegate, $timeout, $filter, ttService, Config, Toast, bookmarkService, loginService) {
     $scope.data = [];
     var rowHeight = 20;
     $scope.rowHeight = rowHeight;
@@ -357,7 +357,6 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                     } else if (col == 0) {
                         rowContent.push(data.stops[row - $scope.header_row_number]);
                         //check from data if accessibility
-
                         if (stopAcc[data.stopsId[row - $scope.header_row_number]] == 1) {
                             // if (data.wheelChairBoarding && data.wheelChairBoarding[row - $scope.header_row_number] == 1) {
                             colStr += '&nbsp;&#9899;&nbsp';
@@ -408,9 +407,11 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     // initialize
     $scope.load = function () {
         $scope.route = Config.getTTData($stateParams.ref, $stateParams.agencyId, $stateParams.groupId, $stateParams.routeId);
-        $scope.title = ($scope.route.label ? ($scope.route.label + ': ') : '') + $scope.route.title;
+        $scope.title = ($scope.route.label ? ($scope.route.label) : $scope.route.title);
+        $scope.subtitle = ($scope.route.label ? ($scope.route.title) : '');
         $scope.bookmarkStyle = bookmarkService.getBookmarkStyle($location.path());
         $scope.accessibilityStyle = getAccessibilityStyle();
+        $scope.monitoringStyle = getMonitoringStyle();
 
         if (!$scope.route.color) {
             var group = Config.getTTData($stateParams.ref, $stateParams.agencyId, $stateParams.groupId);
@@ -450,12 +451,12 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
     $scope.bookmark = function () {
         var ref = Config.getTTData($stateParams.ref);
-        bookmarkService.toggleBookmark($location.path(), $scope.title, ref.transportType).then(function (style) {
+        var stringHome = $scope.title + ($scope.subtitle ? (': ' + $scope.subtitle) : '');
+        bookmarkService.toggleBookmark($location.path(), stringHome, ref.transportType).then(function (style) {
             $scope.bookmarkStyle = style;
         });
     };
     $scope.toggleAccessibility = function () {
-        $scope.accessibilityStyle = getAccessibilityStyle();
 
         if ($scope.route.wheelChairBoarding == 1) {
             $scope.flagAccessibility = !$scope.flagAccessibility;
@@ -463,13 +464,30 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
             Toast.show($filter('translate')('not_acc_label'), "short", "bottom");
 
         }
-        if ($scope.flagAccessibility) {} else {}
+        $scope.accessibilityStyle = getAccessibilityStyle();
+
     }
 
     function getAccessibilityStyle() {
         if ($scope.route.wheelChairBoarding == 1) {
-            return $scope.flagAccessibility ? 'ic_access' : 'ic_access_outline';
+            return $scope.flagAccessibility ? 'ic_access ' : 'ic_access_outline ';
         } else return "ic_access not_acc"
+    }
+    $scope.toggleMonitor = function () {
+        //check if user is logged
+        if (loginService.userIsLogged()) {
+            //open monitoring page
+            $scope.flagMonitoring = !$scope.flagMonitoring;
+
+        } else {
+            //open login page
+            $scope.popupLogin();
+        }
+        $scope.monitoringStyle = getMonitoringStyle();
+    }
+
+    function getMonitoringStyle() {
+        return $scope.flagMonitoring ? 'ion-ios-eye ' : 'ion-ios-eye-outline ';
     }
 })
 

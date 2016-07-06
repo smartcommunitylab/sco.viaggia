@@ -1,0 +1,59 @@
+<!--<ion-modal-view id="login" hide-nav-bar="true">-->
+<!--
+<ion-header-bar align-title="left" class="bar-positive-100">
+    <div class="buttons" ng-click="closeLogin()">
+        <i class="icon close-modal" ng-class="{'ion-android-arrow-back': platform.isAndroid(), 'ion-ios-arrow-back': !platform.isAndroid()}"></i>
+    </div>
+</ion-header-bar>
+-->
+
+<ion-content id=" content " has-header="true" class="login-page">
+    <div class="buttons" ng-click="closeLogin()">
+        <i class="icon close-login-modal ion-close-round"></i>
+    </div>
+
+    <div class="login">
+        <div class="login-title">
+            <div class="stuffcontainer">
+                <h1>{{title|translate}}</h1>
+            </div>
+            <img class="bgimg" src="img/ic_mt_bus.png" />
+        </div>
+        <div class="login-buttons">
+            <div class="stuffcontainer">
+                <h4>{{'signin_title' | translate}}</h4>
+                <label class="item item-input">
+                    <input type="email" placeholder="{{'signup_email'|translate}}" ng-model="user.email">
+                </label>
+                <label class="item item-input">
+                    <input type="password" placeholder="{{'signup_pwd'|translate}}" ng-model="user.password">
+                </label>
+                <a class="text-left login-link" ng-click="passwordRecover()">
+                  {{'signin_pwd_reset' | translate}}
+              </a>
+                <button class="button button-block login-button-internal" ng-click="signin()">
+                    {{'login_signin' | translate}}
+                </button>
+                <a class=" login-link" ng-click="goRegister()">
+                    {{'login_signup' | translate}}
+                </a>
+                <br/>
+                <span>{{'text_login_use' | translate}}</span>
+                <div class="row">
+                    <div class="col col-bottom text-center">
+                        <button class="button button-block login-button-facebook" ng-click="facebookSignIn()">
+                            Facebook
+                        </button>
+                    </div>
+                    <div class="col col-bottom text-center">
+                        <button class="button button-block login-button-google" ng-click="googleSignIn()">
+                            Google
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>
+
+<!--</ion-modal-view>-->

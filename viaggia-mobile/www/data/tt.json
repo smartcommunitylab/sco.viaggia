@@ -31,14 +31,16 @@
                             "routeSymId": "BV_R1_G",
                             "title": "Bolzano - Verona",
                             "color": "#cd251c",
-                            "showTrips": true
+                            "showTrips": true,
+                            "wheelChairBoarding": 1
                         },
                         {
                             "routeId": "BV_R1_R",
                             "routeSymId": "BV_R1_R",
                             "title": "Verona - Bolzano",
                             "color": "#cd251c",
-                            "showTrips": true
+                            "showTrips": true,
+                            "wheelChairBoarding": 1
                         }
           ]
         },
@@ -51,14 +53,16 @@
                             "routeSymId": "TB_R2_G",
                             "title": "Trento - Bassano D.G.",
                             "color": "#cd251c",
-                            "showTrips": true
+                            "showTrips": true,
+                            "wheelChairBoarding": 1
                         },
                         {
                             "routeId": "TB_R2_R",
                             "routeSymId": "TB_R2_R",
                             "title": "Bassano D.G. - Trento",
                             "color": "#cd251c",
-                            "showTrips": true
+                            "showTrips": true,
+                            "wheelChairBoarding": 1
                         }
           ]
         },
@@ -70,13 +74,15 @@
                             "routeId": "555",
                             "routeSymId": "555",
                             "color": "#cd251c",
-                            "title": "Trento - Malé"
+                            "title": "Trento - Malé",
+                            "wheelChairBoarding": 1
                         },
                         {
                             "routeId": "556",
                             "routeSymId": "556",
                             "color": "#cd251c",
-                            "title": "Malé - Trento"
+                            "title": "Malé - Trento",
+                            "wheelChairBoarding": 1
                         }
           ]
         }

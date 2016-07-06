@@ -28,13 +28,29 @@ angular.module('viaggia.controllers.common', [])
         $scope.creditsModal.hide();
     };
     $scope.openCredits = function () {
-            $scope.creditsModal.show();
-        }
-        /*pop up managers*/
-        //    $scope.newPlan = function () {
-        //        planService.setTripId(null); //reset data for pianification
-        //        $state.go('app.plan');
-        //    };
+        $scope.creditsModal.show();
+    }
+
+
+    //Login and registration Modal managed with ng-include
+    $ionicModal.fromTemplateUrl('templates/loginRegModal.html', {
+        id: '4',
+        scope: $scope,
+        backdropClickToClose: false,
+        animation: 'slide-in-up'
+    }).then(function (modal) {
+        $scope.templateLogin = 'templates/loginTemplate.html';
+        $scope.loginModal = modal;
+    });
+    $scope.closeLogin = function () {
+        $scope.loginModal.hide();
+        $scope.templateLogin = 'templates/loginTemplate.html';
+
+    };
+    $scope.openLogin = function () {
+        $scope.loginModal.show();
+    }
+
     $scope.popupLoadingShow = function () {
         $ionicLoading.show({
             template: $filter('translate')("pop_up_loading")
@@ -44,6 +60,24 @@ angular.module('viaggia.controllers.common', [])
         $ionicLoading.hide();
     };
 
+    $scope.popupLogin = function () {
+        var confirmPopup = $ionicPopup.confirm({
+            title: $filter('translate')('login_popup_title'),
+            template: $filter('translate')('login_popup_template')
+        });
+
+        confirmPopup.then(function (res) {
+            if (res) {
+                $scope.openLogin();
+            }
+        });
+    }
+    $scope.goRegister = function () {
+        $scope.templateLogin = 'templates/registrationTemplate.html';
+    }
+    $scope.backToLogin = function () {
+        $scope.templateLogin = 'templates/loginTemplate.html';
+    }
     $scope.showConfirm = function (template, title, functionOnTap) {
         var confirmPopup = $ionicPopup.confirm({
             title: title,

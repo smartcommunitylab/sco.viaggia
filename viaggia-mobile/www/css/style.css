@@ -1104,6 +1104,15 @@ ion-header-bar .title {
     vertical-align: middle
 }
 
+.tt-subtitle {
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    min-width: 80%;
+    text-align: center;
+}
+
 .not_acc {
     opacity: 0.6;
 }
@@ -1361,6 +1370,158 @@ ion-header-bar .title {
 
 .tt-table-acc {
     left: 0px;
+}
+
+.login .login-buttons {
+    position: relative;
+    text-align: center;
+}
+
+.login .login-buttons .stuffcontainer {
+    padding: 0 2em;
+}
+
+.login .item {
+    border: 0;
+}
+
+.login label input {
+    background-color: #fff;
+    padding-left: 5px;
+}
+
+.login .login-title {
+    position: relative;
+    padding: 1em 2em;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 0 30px 5px #222;
+    background-color: #2975a7;
+}
+
+.login .login-title .bgimg {
+    width: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    opacity: 0.1;
+}
+
+.login .login-title h1,
+.login .login-title h3 {
+    color: #fff;
+}
+
+.login .login-buttons h3,
+.login .login-buttons h4,
+.login-buttons span {
+    color: #666;
+}
+
+.login-buttons .row,
+.login-buttons .col {
+    padding: 0;
+}
+
+.login-buttons .col:first-child {
+    padding-right: 5px;
+}
+
+.login-buttons .button {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+}
+
+.login .login-button-google {
+    text-transform: uppercase;
+    border-color: #DB4437;
+    background-color: #DB4437;
+    color: #FFFFFF;
+}
+
+.login .login-button-facebook {
+    text-transform: uppercase;
+    border-color: #3a5795;
+    background-color: #3a5795;
+    color: #FFFFFF;
+}
+
+.login .login-button-internal {
+    text-transform: uppercase;
+    border-color: #4EB0E6;
+    background-color: #4EB0E6;
+    color: #FFFFFF;
+}
+
+.login .login-button-signup {
+    border-color: #fff;
+    background-color: transparent;
+    color: #fff;
+    box-shadow: none;
+}
+
+.login .login-link {
+    display: block;
+    color: #666;
+    padding: 0 1em;
+}
+
+.close-login-modal {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 999;
+    color: white;
+    font-size: x-large;
+}
+
+.back-login-modal {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    z-index: 999;
+    color: white;
+    font-size: x-large;
+}
+
+.google-button {
+    border-radius: 4px;
+    font-weight: 500;
+    width: 300px;
+    color: #fff;
+    background-color: #dd4c39;
+    border-color: darken(#dd4c39, 2);
+}
+
+.facebook-button {
+    border-radius: 4px;
+    font-weight: 500;
+    width: 300px;
+    color: #fff;
+    background-color: #294886;
+    border-color: darken(#294886, 2);
+}
+
+.register-button {
+    border-radius: 4px;
+    font-weight: 500;
+    width: 300px;
+    color: #fff;
+    background-color: #B1B1B1;
+    border-color: darken(#294886, 2);
+}
+
+.login-page {
+    background-image: url("../img/background_login.jpg");
+    height: 100%;
+}
+
+.item-input input[type='text'],
+.item-input input[type='email'],
+.item-input input[type='password'],
+.item-input input[type='text'] {
+    border-bottom: 1px solid #ddd;
 }
 
 

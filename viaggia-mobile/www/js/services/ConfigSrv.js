@@ -22,7 +22,7 @@ angular.module('viaggia.services.conf', [])
     };
 
 
-
+    var LOGIN_EXPIRED = 'LOGIN_EXPIRED';
     var DISTANCE_AUTOCOMPLETE = '6';
     var HTTP_CONFIG = {
         timeout: 5000
@@ -349,6 +349,35 @@ angular.module('viaggia.services.conf', [])
             if (!ttJsonConfig || !ttJsonConfig.stopVisualization || !ttJsonConfig.stopVisualization[agencyId]) return {};
             return ttJsonConfig.stopVisualization[agencyId];
         },
-        isDarkColor: isDarkColor
+        isDarkColor: isDarkColor,
+        getAuthServerURL: function () {
+            return mapJsonConfig["AACURL"] + mapJsonConfig["authServerURL"];
+        },
+        getServerTokenURL: function () {
+            return mapJsonConfig["AACURL"] + mapJsonConfig["serverTokenURL"];
+        },
+        getServerRegisterURL: function () {
+            return mapJsonConfig["AACURL"] + mapJsonConfig["serverRegisterURL"];
+        },
+        getServerProfileURL: function () {
+            return mapJsonConfig["AACURL"] + mapJsonConfig["serverProfileURL"];
+        },
+        getAACURL: function () {
+            return mapJsonConfig["AACURL"];
+        },
+
+        getRedirectUri: function () {
+            return mapJsonConfig["redirectURL"];
+        },
+        getClientId: function () {
+            return mapJsonConfig["cliendID"];
+        },
+        getClientSecKey: function () {
+            return mapJsonConfig["clientSecID"];
+        },
+        getHTTPConfig: function () {
+            return HTTP_CONFIG;
+        },
+        LOGIN_EXPIRED: LOGIN_EXPIRED
     }
 })
