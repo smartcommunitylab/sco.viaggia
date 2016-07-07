@@ -71,6 +71,7 @@ angular.module('viaggia', [
     'viaggia.controllers.taxi',
     'viaggia.controllers.planlist',
     'viaggia.controllers.tripdetails',
+    'viaggia.controllers.game',
     'viaggia.services.data',
     'viaggia.services.conf',
     'viaggia.services.map',
@@ -426,7 +427,49 @@ angular.module('viaggia', [
                         controller: 'TTTable3Ctrl'
                     }
                 }
-            });
+            })
+            // setup an abstract state for the tabs directive
+            .state('app.game', {
+                url: "/game",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/game/game.html",
+                        controller: 'GameCtrl'
+                    }
+                }
+            })
+
+        // Each tab has its own nav history stack:
+
+        .state('app.game.points', {
+            url: '/points',
+            views: {
+                'tab-points': {
+                    templateUrl: 'templates/game/points.html',
+                    controller: 'PointsCtrl'
+                }
+            }
+        })
+
+        .state('app.game.challenges', {
+            url: '/challenges',
+            views: {
+                'tab-challenges': {
+                    templateUrl: 'templates/game/challenges.html',
+                    controller: 'ChallengesCtrl'
+                }
+            }
+        })
+
+        .state('app.game.rankings', {
+            url: '/rankings',
+            views: {
+                'tab-rankings': {
+                    templateUrl: 'templates/game/rankings.html',
+                    controller: 'RankingsCtrl'
+                }
+            }
+        });
 
 
         // if none of the above states are matched, use this as the fallback
@@ -608,7 +651,12 @@ angular.module('viaggia', [
             lbl_taxi_station: 'Stazione Taxi',
             taxi_label_your_position: 'La tua posizione attuale, rilevata dal dispositivo, è: ',
             taxi_label_check_it: 'Verificala prima di comunicarla al taxi.',
-            taxi_label_no_accuracy: 'Non è stato possibile determinare la tua posizione con sufficiente accuratezza per permetterti di comunicarla al tassista. Prova ad accendere un sistema di localizzazione sul tuo dispositivo (GPS, WiFi, ...).'
+            taxi_label_no_accuracy: 'Non è stato possibile determinare la tua posizione con sufficiente accuratezza per permetterti di comunicarla al tassista. Prova ad accendere un sistema di localizzazione sul tuo dispositivo (GPS, WiFi, ...).',
+            menu_gamification: 'Play&Go',
+            home_gamification: 'Play&Go',
+            game_tab_points_label: 'PUNTI',
+            game_tab_challenges_label: 'SFIDA',
+            game_tab_rankings_label: 'CLASSIFICA',
         });
 
 
@@ -788,7 +836,12 @@ angular.module('viaggia', [
             lbl_taxi_station: 'Taxi Station',
             taxi_label_your_position: 'You current position, as detected by the device, is:',
             taxi_label_check_it: 'Check it before communicating it to the taxi driver.',
-            taxi_label_no_accuracy: 'It has not been possible to determine with sufficient accuracy your position to let you communicate it to the taxi driver. Try to switch on a tracking system on your device (GPS, WiFi, ...)'
+            taxi_label_no_accuracy: 'It has not been possible to determine with sufficient accuracy your position to let you communicate it to the taxi driver. Try to switch on a tracking system on your device (GPS, WiFi, ...)',
+            home_gamification: 'Play&Go',
+            menu_gamification: 'Play&Go',
+            game_tab_points_label: 'POINTS',
+            game_tab_challenges_label: 'CHALLENGES',
+            game_tab_rankings_label: 'RANKING',
 
         });
 

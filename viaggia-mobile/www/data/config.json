@@ -39,6 +39,12 @@
     "visualization": {
         "primaryLinks": [
             {
+                "state": "/app/game/points",
+                "label": "home_gamification",
+                "icon": "ion-leaf",
+                "color": "#60b35c"
+            },
+            {
                 "state": "/app/plan",
                 "label": "menu_plan",
                 "icon": "ic_search",
