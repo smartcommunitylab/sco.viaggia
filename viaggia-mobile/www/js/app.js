@@ -90,9 +90,10 @@ angular.module('viaggia', [
     'viaggia.filters'
 ])
 
-.run(function ($ionicPlatform, $cordovaFile, $rootScope, $translate, DataManager, Config, GeoLocate, notificationService) {
+.run(function ($ionicPlatform, $cordovaFile, $rootScope, $translate, DataManager, Config, GeoLocate, loginService, $q, notificationService) {
 
         $rootScope.locationWatchID = undefined;
+
 
         document.addEventListener("pause", function () {
             console.log('app paused');
