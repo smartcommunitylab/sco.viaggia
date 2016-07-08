@@ -16,6 +16,24 @@ angular.module('viaggia.controllers.common', [])
         return $scope.shownGroup === true;
     };
 
+    $rootScope.login = function () {
+        $scope.openLogin();
+    }
+
+    $rootScope.logout = function () {
+        var deferred = $q.defer();
+        loginService.logout().then(function (data) {
+                deferred.resolve(data);
+            },
+            function (error) {
+
+                deferred.reject(error);
+
+
+            });
+        return deferred.promise;
+    };
+
     $ionicModal.fromTemplateUrl('templates/credits.html', {
         id: '3',
         scope: $scope,

@@ -65,6 +65,13 @@
     <i class="icon ic_user"></i>{{'menu_login' | translate}}
 </ion-item>
 -->
+                <ion-item nav-clear menu-close class="item-icon-left menu-main " ng-click="logout()" ng-if="userIsLogged">
+                    <i class="icon voice-menu  ic_user"></i>{{'menu_logout' | translate}}
+                </ion-item>
+
+                <ion-item nav-clear menu-close class="item-icon-left menu-main " ng-click="login()" ng-if="!userIsLogged">
+                    <i class="icon voice-menu  ic_user"></i>{{'menu_login' | translate}}
+                </ion-item>
                 <ion-item nav-clear menu-close href="{{contactLink}}" class="item-icon-left menu-main ">
                     <i class="icon ic_segnala_problemi"></i>{{'menu_betatesting_bug' | translate}}
                 </ion-item>
