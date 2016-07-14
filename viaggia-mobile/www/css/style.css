@@ -33,6 +33,22 @@
     src: local('RobotoDraft Italic'), local('RobotoDraft-Italic'), url(../fonts/RobotoDraft-Italic.woff) format('woff');
 }
 
+em,
+i {
+    font-style: italic;
+}
+
+.list-welcome {
+    list-style-type: disc;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.bookmarks-entry {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .mfb-component__button--main i,
 .mfb-component__button--child i {
     font-size: 24px;
@@ -207,6 +223,12 @@
 .button-viaggia {
     background-color: #3bbacf;
     color: white;
+}
+
+.no-shadow {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 .button-viaggia:hover {
@@ -609,6 +631,12 @@ ion-header-bar .title {
     text-align: center;
 }
 
+.empty-favorites-card {
+    min-height: 50px;
+    text-align: center;
+    margin-top: 30px;
+}
+
 .credits_title {
     text-align: center;
     color: #2975a7;
@@ -628,6 +656,22 @@ ion-header-bar .title {
 .credits_row {
     padding: 0;
     margin-bottom: 10px;
+}
+
+.sponsor_banner {
+    background: rgba(96, 179, 92, 1);
+    background: -moz-linear-gradient(top, rgba(96, 179, 92, 1) 0%, rgba(255, 255, 255, 0.68) 93%, rgba(250, 250, 250, 0.66) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(96, 179, 92, 1)), color-stop(93%, rgba(255, 255, 255, 0.68)), color-stop(100%, rgba(250, 250, 250, 0.66)));
+    background: -webkit-linear-gradient(top, rgba(96, 179, 92, 1) 0%, rgba(255, 255, 255, 0.68) 93%, rgba(250, 250, 250, 0.66) 100%);
+    background: -o-linear-gradient(top, rgba(96, 179, 92, 1) 0%, rgba(255, 255, 255, 0.68) 93%, rgba(250, 250, 250, 0.66) 100%);
+    background: -ms-linear-gradient(top, rgba(96, 179, 92, 1) 0%, rgba(255, 255, 255, 0.68) 93%, rgba(250, 250, 250, 0.66) 100%);
+    background: linear-gradient(to bottom, rgba(96, 179, 92, 1) 0%, rgba(255, 255, 255, 0.68) 93%, rgba(250, 250, 250, 0.66) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#60b35c', endColorstr='#fafafa', GradientType=0);
+}
+
+.sponsor_text {
+    text-align: center;
+    color: white;
 }
 
 .credits_row.last {
@@ -655,6 +699,10 @@ ion-header-bar .title {
 
 .close-credits {
     padding: 8px;
+}
+
+.collaboration {
+    margin-bottom: 18px;
 }
 
 .image.center {
@@ -925,6 +973,61 @@ ion-header-bar .title {
     bottom: 5px;
 }
 
+.green-points {
+    position: absolute;
+    width: 50px;
+    right: 5px;
+    top: 5px;
+}
+
+.green-points .points {
+    color: white;
+    position: absolute;
+    top: 15px;
+    text-align: center;
+    left: 0;
+    width: 50px;
+    font-weight: bold;
+}
+
+.recurrence-days label.item-checkbox {
+    display: inline-block;
+    padding: 0;
+    text-align: center;
+    width: 50px;
+}
+
+.recurrence-days label.item-checkbox .checkbox {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    margin-top: auto;
+    padding-bottom: 0;
+}
+
+.recurrent_icon {
+    position: absolute;
+    right: 30px;
+    color: #2975a7;
+}
+
+.recurrent_icon_detail {
+    color: #2975a7;
+}
+
+.recurrence_days {
+    height: 50px;
+}
+
+.recurrnce_day_string {
+    margin: 2px;
+}
+
+.green-points .points-image {
+    width: 100%;
+}
+
 .card .trip-title {
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -1059,6 +1162,11 @@ ion-header-bar .title {
 
 .bm-item-label {
     line-height: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.row-my-trips {
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -1215,6 +1323,155 @@ ion-header-bar .title {
 
 .row_empty_home {
     padding: 25px;
+}
+
+.beta-button {
+    height: 100%;
+    width: 100%;
+}
+
+.lbl-betatesting {
+    text-align: center;
+    line-height: 2;
+    font-size: medium;
+}
+
+.google-button {
+    border-radius: 4px;
+    font-weight: 500;
+    width: 300px;
+    color: #fff;
+    background-color: #dd4c39;
+    border-color: darken(#dd4c39, 2);
+}
+
+.facebook-button {
+    border-radius: 4px;
+    font-weight: 500;
+    width: 300px;
+    color: #fff;
+    background-color: #294886;
+    border-color: darken(#294886, 2);
+}
+
+.register-button {
+    border-radius: 4px;
+    font-weight: 500;
+    width: 300px;
+    color: #fff;
+    background-color: #B1B1B1;
+    border-color: darken(#294886, 2);
+}
+
+.login-page {
+    background-image: url("../img/background_login.jpg");
+    height: 100%;
+}
+
+.bckImage {
+/*    position: fixed;*/
+/*    bottom: 0px;*/
+    width: 100%;
+}
+
+.login-title {
+    padding-top: 20%;
+    padding-bottom: 20px;
+    color: #B1B1B1;
+    font-size: 50px;
+    width: 100%;
+    text-align: center;
+}
+
+.login-subtitle {
+    color: black;
+    font-size: 25px;
+    width: 100%;
+    text-align: center;
+}
+
+.login-warning {
+    padding: 5%;
+    color: white;
+    font-size: large;
+    width: 50%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+/* Login */
+
+.login .login-buttons {
+    position: relative;
+    text-align: center;
+}
+
+
+.login .login-buttons .stuffcontainer {
+    padding: 0 2em;
+}
+
+.login .item {
+  border: 0;
+}
+.login label input {
+  background-color: #fff;
+  padding-left: 5px;
+}
+
+.login .login-title h1,
+.login .login-title h3 {
+    color: #fff;
+}
+.login .login-buttons h3, .login .login-buttons h4, .login-buttons span {
+    color: #FFF;
+}
+.login-buttons .row, .login-buttons .col {
+  padding: 0;
+}
+.login-buttons .col:first-child {
+    padding-right: 5px;
+}
+.login-buttons .button {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+}
+.login .login-button-google {
+    text-transform: uppercase;
+    border-color: #DB4437;
+    background-color: #DB4437;
+    color: #FFFFFF;
+}
+.login .login-button-facebook {
+    text-transform: uppercase;
+    border-color: #3a5795;
+    background-color: #3a5795;
+    color: #FFFFFF;
+}
+.login .login-button-internal {
+    text-transform: uppercase;
+    border-color: #4EB0E6;
+    background-color: #4EB0E6;
+    color: #FFFFFF;
+}
+.login .login-button-signup {
+    border-color: #fff;
+    background-color: transparent;
+    color: #fff;
+    box-shadow: none;
+}
+
+.login .login-link {
+  display: block;
+  color: #fff;
+  padding: 0 1em;
+}
+
+.fog {
+    opacity: 0.5;
 }
 
 .trip-card {

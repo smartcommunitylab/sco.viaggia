@@ -5,10 +5,19 @@
     "senderID": "453601816446",
     "appversion": "2.1.2",
     "appname": "Viaggia Trento",
-    "serverURL": "https://dev.smartcommunitylab.it/core.mobility",
-    "messagingServerURL": "https://dev.smartcommunitylab.it/core.communicator",
-    "newsRSS": "https://dev.smartcommunitylab.it/core.mobility/announcements/rss/trento",
-    "contact_link": "mailto:viaggiatrento@smartcommunitylab.it?subject=ViaggiaTrento:%20segnalazione%20problema",
+    "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
+    "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
+    "newsRSS": "https://tn.smartcommunitylab.it/core.mobility/announcements/rss/trento",
+    "contact_link": "mailto:viaggiatrento@smartcommunitylab.it?subject=ViaggiaRovereto:%20segnalazione%20problema",
+    "AACURL": "https://tn.smartcommunitylab.it/aac",
+    "authServerURL": "/eauth/authorize",
+    "serverTokenURL": "/oauth/token",
+    "serverRegisterURL": "/internal/register/rest",
+    "serverProfileURL": "/basicprofile/me",
+    "gamificationURL": "https://tn.smartcommunitylab.it/gamificationweb",
+    "cliendID": "ec03a596-e41e-49cc-808c-62f39e01de0b",
+    "clientSecID": "6c6829bc-6621-4273-84b8-d74d23744f04",
+    "redirectURL": "http://localhost",
     "smartcheck_options": [
         1,
         4,
@@ -39,14 +48,14 @@
     "visualization": {
         "primaryLinks": [
             {
-                "state": "/app/game/points",
+                "state": "showPlayAndGoPopup()",
                 "label": "home_gamification",
                 "icon": "ion-leaf",
                 "color": "#60b35c"
             },
             {
-                "state": "/app/plan",
-                "label": "menu_plan",
+                "state": "newPlan()",
+		"label": "menu_plan",
                 "icon": "ic_search",
                 "color": "#3BBACF"
             },

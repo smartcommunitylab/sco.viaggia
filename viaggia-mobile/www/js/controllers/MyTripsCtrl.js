@@ -1,17 +1,19 @@
 angular.module('viaggia.controllers.mytrips', [])
 
-.controller('MyTripsCtrl', function ($scope, Config, $timeout, ionicMaterialMotion, ionicMaterialInk, planService, $state, $filter) {
+.controller('MyTripsCtrl', function ($scope, Config, $timeout, $filter, ionicMaterialMotion, ionicMaterialInk, planService, $state, trackService, Toast) {
 
     planService.getTrips().then(function (data) {
-        $scope.savedTripsDB = data;
-        $scope.savedTripsKeys = [];
-        if ($scope.savedTripsDB) {
-            $scope.savedTripsKeys = Object.keys($scope.savedTripsDB);
+        var array = [];
+        if (data) {
+            for (var key in data) {
+                array.push(data[key]);
+            }
         }
-        $scope.savedTrips = [];
-        for (var k = 0; k < $scope.savedTripsKeys.length; k++) {
-            $scope.savedTrips.push($scope.savedTripsDB[$scope.savedTripsKeys[k]]);
-        }
+        array.sort(function (t1, t2) {
+            return t2.data.startime - t1.data.startime;
+        });
+
+        $scope.savedTrips = array;
     });
     $scope.$on('ngLastRepeat.savedTrips', function (e) {
         $timeout(function () {
@@ -22,33 +24,42 @@ angular.module('viaggia.controllers.mytrips', [])
 
     $scope.showPlan = function (journey) {
         $state.go('app.tripdetails', {
-            tripId: journey.tripId
+            tripId: journey.clientId
         });
     }
+    $scope.isRecurrency = function (trip) {
+        if (trip.recurrency && trip.recurrency.daysOfWeek && trip.recurrency.daysOfWeek.length > 0) {
+            return true;
+        }
+        return false;
+    }
+
     $scope.deleteTrip = function ($index) {
         var journey = $scope.savedTrips[$index];
+        if (!trackService.isTracking(journey.clientId)) {
 
-        $scope.showConfirm($filter('translate')("popup_delete_trip_message"), $filter('translate')("popup_delete_trip_title"), function () {
-            Config.loading();
-            planService.deleteTrip(journey.tripId).then(function (res) {
-                $scope.savedTrips.splice($index, 1);
-            }).finally(Config.loaded);
-        });
+            $scope.showConfirm($filter('translate')("popup_delete_trip_message"), $filter('translate')("popup_delete_trip_title"), function () {
+                Config.loading();
+                planService.deleteTrip(journey.clientId).then(function (res) {
+                    $scope.savedTrips.splice($index, 1);
+                }).finally(Config.loaded);
+            });
 
-
+        } else {
+            Toast.show($filter('translate')('toast_not_deletable'), "short", "bottom");
+        }
 
         //delete $scope.placesandcoordinates[favorite.name];
     }
     $scope.modifyTrip = function ($index) {
         var journey = $scope.savedTrips[$index];
+        if (!trackService.isTracking(journey.clientId)) {
 
-
-        $scope.showConfirm($filter('translate')("popup_modify_trip_message"), $filter('translate')("popup_modify_trip_title"), function () {
-            Config.loading();
-            planService.getTrip(journey.tripId).then(function (trip) {
-                if (trip.data) {
-                    planService.setName("from", trip.data.originalFrom.name);
-                    planService.setName("to", trip.data.originalTo.name);
+            $scope.showConfirm($filter('translate')("popup_modify_trip_message"), $filter('translate')("popup_modify_trip_title"), function () {
+                Config.loading();
+                planService.getTrip(journey.clientId).then(function (trip) {
+                    planService.setName("from", $scope.requestedFrom);
+                    planService.setName("to", $scope.requestedTo);
                     planService.setPlanConfigure(planService.buildConfigureOptions(trip));
                     planService.setEditInstance(trip);
                     //            planService.setTripId($scope.tripId);
@@ -58,8 +69,13 @@ angular.module('viaggia.controllers.mytrips', [])
                         tripId: journey.clientId
                     }
                     $state.go('app.plan', params);
-                }
-            }).finally(Config.loaded);
-        });
+                }).finally(Config.loaded);
+            });
+
+        } else {
+            Toast.show($filter('translate')('toast_not_modifiable'), "short", "bottom");
+        }
+
+        //delete $scope.placesandcoordinates[favorite.name];
     }
 })

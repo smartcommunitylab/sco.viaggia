@@ -1,11 +1,15 @@
 angular.module('viaggia.controllers.home', [])
 
-.controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService) {
+.controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, userService, planService, $ionicLoading, $ionicPopup) {
     //load from localstorage the id notifications read
     $ionicPlatform.ready(function () {
         document.addEventListener("resume", function () {
             notificationInit();
+            Config.setWeeklySposnsor();
+
         }, false);
+        Config.setWeeklySposnsor();
+
     });
 
     //aggoiorna le notifiche
@@ -34,7 +38,18 @@ angular.module('viaggia.controllers.home', [])
 
         });
     }
-
+    $scope.openSponsorLink = function (link) {
+        window.open(link, '_system', 'location=yes');
+        return false;
+    }
+    var localDataInit = function () {
+        userService.getUserData();
+        planService.getTrips().then(function () {
+            //$ionicLoading.hide();
+        }, function () {
+            //$ionicLoading.hide();
+        });
+    }
     $scope.buttons = [{
         label: $filter('translate')('menu_news'),
         icon: 'ic_news'
@@ -65,8 +80,15 @@ angular.module('viaggia.controllers.home', [])
         marketService.initMarketFavorites();
         notificationInit();
         initWatch();
-    });
+        localDataInit();
 
+    }, function () {
+        //$ionicLoading.hide();
+    });
+    $scope.$on("$ionicView.afterEnter", function (scopes, states) {
+        $ionicLoading.hide();
+
+    });
     $scope.$on('ngLastRepeat.primaryLinks', function (e) {
         $timeout(function () {
             ionicMaterialMotion.ripple();
@@ -119,7 +141,12 @@ angular.module('viaggia.controllers.home', [])
         $state.go('app.notifications');
     }
     $scope.go = function (state) {
-        $location.path(state);
+        if (state.indexOf('(') > 0) {
+            eval('$scope.' + state);
+        } else {
+            $location.path(state);
+        }
+
     }
     $scope.goToBookmarks = function () {
         $state.go('app.bookmarks');

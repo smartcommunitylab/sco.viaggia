@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.common', [])
 
-.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, DataManager, $ionicPopup, $ionicModal, $filter, $ionicLoading, Config, planService) {
+.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, DataManager, $ionicPopup, $ionicModal, $filter, $ionicLoading, Config, planService, userService, Utils) {
     /*menu group*/
     $scope.shownGroup = false;
     $scope.toggleGroupRealTime = function () {
@@ -28,7 +28,50 @@ angular.module('viaggia.controllers.common', [])
         $scope.creditsModal.hide();
     };
     $scope.openCredits = function () {
-            $scope.creditsModal.show();
+        $scope.creditsModal.show();
+    }
+
+    $scope.openGamificationBoard = function () {
+        userService.getValidToken().then(function (validToken) {
+            var url = Config.getGamificationURL() + "/mobile?token=" + validToken;
+            window.open(url, "_system", "location=yes");
+        })
+    }
+
+    $scope.planFromPopup = function () {
+      $scope.closePopup();
+      $scope.newPlan();
+    }
+    $scope.myTripsFromPopup = function () {
+      $scope.closePopup();
+      $state.go('app.mytrips');
+    }
+
+
+    $scope.openRules = function () {
+        $scope.firstOpenPopup.close();
+        $scope.openRulesModal();
+        //        userService.getValidToken().then(function (validToken) {
+        //            var url = Config.getGamificationURL() + "/mobile?token=" + validToken + "&redirect_url=rules";
+        //            window.open(url, "_system", "location=yes");
+        //        })
+    }
+    $scope.closePopup = function () {
+        $scope.firstOpenPopup.close();
+    }
+    $scope.showPlayAndGoPopup = function () {
+        $scope.firstOpenPopup = $ionicPopup.show({
+            templateUrl: 'templates/welcomePopup.html',
+            title: $filter('translate')('lbl_betatesting'),
+            cssClass: 'parking-popup',
+            scope: $scope
+
+        });
+
+    }
+    $scope.newPlan = function () {
+            planService.setPlanConfigure(null);
+            $state.go('app.plan');
         }
         /*pop up managers*/
         //    $scope.newPlan = function () {
@@ -74,6 +117,65 @@ angular.module('viaggia.controllers.common', [])
             ]
         });
     };
+    $scope.getRecurrentDays = function (recurrency) {
+        var returnDays = [];
+        var empty_rec = Config.getDaysRec()
+        for (var k = 0; k < empty_rec.length; k++) {
+            if (Utils.contains(recurrency.daysOfWeek, k + 1)) {
+                returnDays.push(empty_rec[k]);
+            }
+        }
+        return returnDays;
+    }
+
+    $scope.openModal = function () {
+        $scope.modal.show();
+    };
+    $scope.hideExpandRulesButton = function () {
+        if (!$scope.expandedRules) {
+            return false;
+        }
+        return true;
+    }
+    $scope.hideCloseRulesButton = function () {
+        if ($scope.expandedRules) {
+            return false;
+        }
+        return true;
+    }
+    $scope.closeModal = function () {
+        $scope.modal.hide();
+    };
+    $scope.openRulesModal = function () {
+
+        $ionicModal.fromTemplateUrl('templates/rulesModal.html', {
+            scope: $scope,
+            animation: 'slide-in-up'
+        }).then(function (modal) {
+            $scope.modal = modal;
+            $scope.openModal();
+        });
+
+
+    }
+    $scope.scrollTo = function (id) {
+        $location.hash(id)
+        $ionicScrollDelegate.anchorScroll(true);
+    };
+    $scope.toggleRules = function () {
+        if ($scope.isLongRulesShown()) {
+            $scope.expandedRules = false;
+            //$scope.scrollTo("firstSeparator");
+        } else {
+            $scope.expandedRules = true;
+
+        }
+    };
+
+    $scope.isLongRulesShown = function () {
+        return $scope.expandedRules;
+    };
+
     $scope.showErrorServer = function () {
         var alertPopup = $ionicPopup.alert({
             title: $filter('translate')("pop_up_error_server_title"),
@@ -133,4 +235,16 @@ angular.module('viaggia.controllers.common', [])
     };
 })
 
-.controller('TutorialCtrl', function ($scope, $ionicLoading) {});
+.factory('Utils', function ($rootScope, $timeout, $ionicPopup, $cordovaToast) {
+        return {
+            contains: function (a, obj) {
+                for (var i = 0; i < a.length; i++) {
+                    if (a[i] === obj) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        };
+    })
+    .controller('TutorialCtrl', function ($scope, $ionicLoading) {});

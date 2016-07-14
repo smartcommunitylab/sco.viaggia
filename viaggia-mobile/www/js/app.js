@@ -72,6 +72,9 @@ angular.module('viaggia', [
     'viaggia.controllers.planlist',
     'viaggia.controllers.tripdetails',
     'viaggia.controllers.game',
+    'viaggia.controllers.login',
+    'viaggia.controllers.login',
+    'viaggia.controllers.registration',
     'viaggia.services.data',
     'viaggia.services.conf',
     'viaggia.services.map',
@@ -81,13 +84,16 @@ angular.module('viaggia', [
     'viaggia.services.info',
     'viaggia.services.taxi',
     'viaggia.services.notification',
+    'viaggia.services.login',
     'viaggia.directives',
     'viaggia.services.geo',
     'viaggia.services.bookmarks',
+    'viaggia.services.tracking',
+    'viaggia.services.registration',
     'viaggia.filters'
 ])
 
-.run(function ($ionicPlatform, $cordovaFile, $rootScope, $translate, DataManager, Config, GeoLocate, notificationService) {
+.run(function ($ionicPlatform, $cordovaFile, $rootScope, $translate, trackService, DataManager, Config, GeoLocate, notificationService) {
 
         $rootScope.locationWatchID = undefined;
 
@@ -104,14 +110,17 @@ angular.module('viaggia', [
         document.addEventListener("resume", function () {
             console.log('app resumed');
             GeoLocate.locate();
+            if (trackService.trackingIsGoingOn() && trackService.trackingIsFinished()) {
+                trackService.stop();
+            }
         }, false);
-
-        GeoLocate.locate().then(function (position) {
-            $rootScope.myPosition = position;
-            //console.log('first geolocation: ' + position);
-        }, function () {
-            console.log('CANNOT LOCATE!');
-        });
+        //
+        //        GeoLocate.locate().then(function (position) {
+        //            $rootScope.myPosition = position;
+        //            //console.log('first geolocation: ' + position);
+        //        }, function () {
+        //            console.log('CANNOT LOCATE!');
+        //        });
 
         //        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
         //          console.log(toState);
@@ -119,18 +128,23 @@ angular.module('viaggia', [
 
         $ionicPlatform.ready(function () { // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
-            if (window.cordova && window.cordova.plugins.Keyboard) {
+            if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             }
             if (window.StatusBar) {
                 StatusBar.styleDefault();
             }
             Config.init().then(function () {
+                if (window.BackgroundGeolocation) {
+                    trackService.startup();
+                }
+
                 if (ionic.Platform.isWebView()) {
                     DataManager.dbSetup();
                 } else {
                     DataManager.syncStopData();
                 }
+                notificationService.register();
             });
 
             if (typeof navigator.globalization !== "undefined") {
@@ -148,20 +162,38 @@ angular.module('viaggia', [
                     navigator.splashscreen.hide();
                 }
             }, 1500);
-            notificationService.register();
 
         });
     })
     .config(function ($stateProvider, $compileProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider) {
         $ionicConfigProvider.views.swipeBackEnabled(false);
         $stateProvider.state('app', {
-            url: "/app",
-            abstract: true,
-            templateUrl: "templates/menu.html",
-            controller: 'AppCtrl'
-        })
-
-        .state('app.home', {
+                url: "/app",
+                abstract: true,
+                templateUrl: "templates/menu.html",
+                controller: 'AppCtrl'
+            })
+            .state('app.login', {
+                cache: false,
+                url: "/login",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/login.html",
+                        controller: 'LoginCtrl'
+                    }
+                }
+            })
+            .state('app.registration', {
+                cache: false,
+                url: "/registration",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/registrationForm.html",
+                        controller: 'RegistrationCtrl'
+                    }
+                }
+            })
+            .state('app.home', {
                 cache: false,
                 url: "/home",
                 views: {
@@ -428,7 +460,25 @@ angular.module('viaggia', [
                     }
                 }
             })
-            // setup an abstract state for the tabs directive
+           .state('app.signup', {
+                url: '/signup',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/signup.html',
+                        controller: 'RegisterCtrl'
+                    }
+                }
+            })
+            .state('app.signupsuccess', {
+                url: '/signupsuccess',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/signupsuccess.html',
+                        controller: 'RegisterCtrl'
+                    }
+                }
+            })
+	    // setup an abstract state for the tabs directive
             .state('app.game', {
                 url: "/game",
                 views: {
@@ -473,7 +523,7 @@ angular.module('viaggia', [
 
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/home');
+        $urlRouterProvider.otherwise('/app/login');
 
         $translateProvider.translations('it', {
             menu_home: 'Home',
@@ -571,8 +621,10 @@ angular.module('viaggia', [
             err_too_many_markers: 'Too many objects on the map. Please zoom in.',
             lbl_lines: 'Corse:',
             lbl_line: 'Linea',
-            popup_delete_trip_message: 'Sicuro di voler eleminare il viaggio salvato?',
+            popup_delete_trip_message: 'Sicuro di voler eliminare il viaggio salvato?',
             popup_delete_trip_title: 'Elimina',
+            popup_start_trip_message: "L'orario previsto per la partenza del viaggio non corrisponde a quello corrente. Confermi di voler iniziare?",
+            popup_start_trip_title: 'Attenzione',
             tripdeleted_message_feedback: 'Il viaggio selezionato è stato eliminato',
             my_trip_empty_list: 'Non ci sono viaggi salvati',
             my_trip_from: 'Da',
@@ -654,6 +706,111 @@ angular.module('viaggia', [
             taxi_label_no_accuracy: 'Non è stato possibile determinare la tua posizione con sufficiente accuratezza per permetterti di comunicarla al tassista. Prova ad accendere un sistema di localizzazione sul tuo dispositivo (GPS, WiFi, ...).',
             menu_gamification: 'Play&Go',
             home_gamification: 'Play&Go',
+            login_title: 'Play&Go',
+            login_subtitle: 'con ViaggiaRovereto',
+            login_warning: 'Attenzione! Per accedere al gioco devi essere registrato al sistema',
+            login_facebook: 'Accedi con Facebook',
+            login_google: 'Accedi con Google',
+            login_register: 'Registrati',
+            labl_start_tracking: 'INIZIA',
+            btn_start_tracking: 'INIZIA VIAGGIO',
+            labl_stop_tracking: 'TERMINA VIAGGIO',
+            dow_monday: 'Lunedì',
+            dow_tuesday: 'Martedì',
+            dow_wednesday: 'Mercoledì',
+            dow_thursday: 'Giovedì',
+            dow_friday: 'Venerdì',
+            dow_saturday: 'Sabato',
+            dow_sunday: 'Domenica',
+            dow_monday_short: 'L',
+            dow_tuesday_short: 'M',
+            dow_wednesday_short: 'M',
+            dow_thursday_short: 'G',
+            dow_friday_short: 'V',
+            dow_saturday_short: 'S',
+            dow_sunday_short: 'D',
+            save_trip_recurrent: 'Ricorrente',
+            save_trip_alldays: 'Tutti',
+            notification_tracking_title: 'Play&Go',
+            notification_tracking_text: 'Il tuo viaggio sta per iniziare',
+            toast_after_time: 'È troppo tardi per tracciare il viaggio',
+            toast_before_time: 'È troppo presto per tracciare il viaggio',
+            title_validateuser: 'Attenzione',
+            lbl_validateuser: 'Procedi con la registrazione al gioco e inizia a giocare!',
+            btn_validate_user: 'Registrati',
+            toast_already_monitoring: 'Stai già registrando un percorso',
+            sure_delete_title: 'Termina viaggio',
+            sure_delete_text: 'Confermi di essere arrivato a destinazione per il viaggio corrente?',
+            tracking_notification_title: 'Viaggia Rovereto',
+            tracking_notification_text: 'Monitoraggio di viaggio attivato',
+            toast_not_deletable: 'Impossibile cancellare un viaggio in corso',
+            toast_deleted: 'Viaggio cancellato',
+            toast_not_modifiable: 'Impossibile modificare un viaggio in corso',
+            lbl_welcome_title: 'Play&Go',
+            lbl_welcome_text: '<ul class="list-welcome"><li>Pianifica i tuoi viaggi</li><li>Salva il tuo itinerario</li><li>Ricordati di tracciare il tuo percorso quando esegui il viaggio!</li></ul>',
+            btn_rules: 'REGOLE',
+            btn_score: 'PUNTEGGIO',
+            user_check: 'Verifica utente',
+            credits_main_sponsors: 'Sponsor premi finali:',
+
+            registration_title: 'Benvenuto',
+            registration_answer: 'Rispondi a queste veloci e semplici domande per registrarti al gioco. Questo permetterà al sistema di recuperare informazioni utili per offrire un servizio piu\' personalizzato e adatto alle tue abitudini.',
+            registration_read: 'Ho letto e accettato il regolamento di gioco e l\'informativa sulla privacy:',
+            registration_link_rule: 'Regolamento di gioco',
+            registration_privacy: 'Informativa privacy',
+            registration_prizes: 'Premi',
+            registration_nick: 'Nick name:*',
+            registration_nick_placeholder: 'Inserisci un nickname che ti rappresenti nel gioco',
+            registration_age: 'Età:*',
+            registration_km: 'Km medi percorsi giornalmente:*',
+            registration_km_placeholder: 'Inserisci il numero di Km medi percorsi giornalmente',
+            registration_public_transport: 'Utilizzi quotidianamente i mezzi pubblici? ',
+            registration_true: 'Si',
+            registration_false: 'No',
+            registration_which_public_transport: 'Mezzi usati abitualmente per gli spostamenti: ',
+            registration_invite: 'Chi ti ha invitato a questo gioco? (nickname)',
+            registration_invite_placeholder: 'Inserisci il nickname di chi ti ha invitato al gioco',
+            registration_transport_train: 'treno',
+            registration_transport_bus: 'autobus',
+            registration_transport_carsharing: 'auto condivisa',
+            registration_transport_bikesharing: 'bici condivisa',
+            registration_transport_car: 'auto privata',
+            registration_transport_bike: 'bici privata',
+            registration_transport_foot: 'a piedi',
+            registration_must_accept: 'Devi accettare il regolamento per procedere con la registrazione',
+            registration_empty_nick: 'Nickname è obbligatorio',
+            registration_empty_age: 'Età è obbligatoria',
+            registration_empty_km: 'Inserisci un numero di kilometri valido',
+            registration_empty_transport: 'Selezionare almeno un mezzo di trasporto',
+            age_placeholder: 'Seleziona una fascia età',
+            age_option1: '< 20 anni',
+            age_option2: '20-40 anni',
+            age_option3: '40-70 anni',
+            age_option4: '> 70 anni',
+            nickname_inuse: 'Nickname è già usato',
+            more_rules: 'Espandi regolamento',
+            less_rules: 'Riduci regolamento',
+            sponsor_week: 'QUESTA SETTIMANA I PREMI SONO OFFERTI DA ',
+            login_signin: 'ENTRA',
+            login_signup: 'REGISTRATI',
+            signin_title: 'Accedi con le tue credenziali',
+            signin_pwd_reset: 'Password dimenticata?',
+            text_login_use: 'oppure accedi con',
+            error_popup_title: 'Errore',
+            error_generic: 'La registrazione non è andata a buon fine. Riprova più tardi.',
+            error_email_inuse: 'L\'indirizzo email è già in uso.',
+            signup_name: 'Nome',
+            signup_surname: 'Cognome',
+            signup_email: 'Email',
+            signup_pwd: 'Password',
+            error_required_fields: 'Tutti i campi sono obbligatori',
+            error_password_short: 'La lunghezza della password deve essere di almeno 6 caratteri',
+            signup_success_title: 'Registrazione completata!',
+            signup_success_text: 'Completa la registrazione cliccando sul link che trovi nella email che ti abbiamo inviato.',
+            signup_resend: 'Re-inviare l\'email di conferma',
+            error_signin: 'Username/password non validi',
+            signup_signup: 'Registrati',
+            signup_title: 'Registrati con',
             game_tab_points_label: 'PUNTI',
             game_tab_challenges_label: 'SFIDA',
             game_tab_rankings_label: 'CLASSIFICA',
@@ -758,6 +915,8 @@ angular.module('viaggia', [
             lbl_line: 'Line',
             popup_delete_trip_message: 'Are you sure to delete the saved journey?',
             popup_delete_trip_title: 'Delete',
+            popup_start_trip_message: 'The journey departure time does not correspond to the current one. Are you sure to start anyway?',
+            popup_start_trip_title: 'Attention',
             tripdeleted_message_feedback: 'The selected journey has been deleted',
             my_trip_empty_list: 'No saved journeys',
             my_trip_from: 'From',
@@ -839,6 +998,111 @@ angular.module('viaggia', [
             taxi_label_no_accuracy: 'It has not been possible to determine with sufficient accuracy your position to let you communicate it to the taxi driver. Try to switch on a tracking system on your device (GPS, WiFi, ...)',
             home_gamification: 'Play&Go',
             menu_gamification: 'Play&Go',
+            login_title: 'Play&Go',
+            login_subtitle: 'with ViaggiaRovereto',
+            login_warning: 'Warning! To access the game you have to be registered to the system',
+            login_facebook: 'Login with Facebook',
+            login_google: 'Login with Google',
+            login_register: 'Register',
+            labl_start_tracking: 'START',
+            btn_start_tracking: 'START JOURNEY',
+            labl_stop_tracking: 'STOP JOURNEY',
+            dow_monday: 'Monday',
+            dow_tuesday: 'Tuesday',
+            dow_wednesday: 'Wednsday',
+            dow_thursday: 'Thursday',
+            dow_friday: 'Friday',
+            dow_saturday: 'Saturday',
+            dow_sunday: 'Sunday',
+            dow_monday_short: 'M',
+            dow_tuesday_short: 'T',
+            dow_wednesday_short: 'W',
+            dow_thursday_short: 'T',
+            dow_friday_short: 'F',
+            dow_saturday_short: 'S',
+            dow_sunday_short: 'S',
+            save_trip_recurrent: 'Recurrent',
+            save_trip_alldays: 'All',
+            notification_tracking_title: 'Play&Go',
+            notification_tracking_text: 'Your journey is going to start',
+            toast_already_monitoring: 'You are already tracking a journey',
+            toast_after_time: 'It is too late for tracking the journey',
+            toast_before_time: 'It is too early for tracking the journey',
+            title_validateuser: 'Warning',
+            lbl_validateuser: 'Register to the game and start playing!',
+            btn_validate_user: 'Register',
+            sure_delete_title: 'Stop journey',
+            sure_delete_text: 'Do you confirm you reached your destination?',
+            tracking_notification_title: 'Viaggia Rovereto Play&Go',
+            tracking_notification_text: 'Journey monitoring activated',
+            toast_not_deletable: 'Impossible to delete a running journey',
+            toast_deleted: 'Journey deleted',
+            toast_not_modifiable: 'Impossible to modify a running journey',
+            lbl_welcome_title: 'Play&Go',
+            lbl_welcome_text: '<ul class="list-welcome"><li>Plan your journey</li><li>Save your journey</li><li>Remember to track your route when you do the journey!</li></ul>',
+            btn_rules: 'RULES',
+            btn_score: 'SCORE',
+            user_check: 'Check user',
+            credits_main_sponsors: 'Sponsors of final prizes:',
+
+            registration_title: 'Welcome',
+            registration_answer: 'Answer to these quick and easy questions in order to register for the game. The information you give will let the App better fit your needs and preferences.',
+            registration_read: 'I have read and agreed the game rules and the privacy terms:',
+            registration_link_rule: 'Game rules',
+            registration_privacy: 'Privacy terms',
+            registration_prizes: 'Prizes',
+            registration_nick: 'Nickname:*',
+            registration_nick_placeholder: 'Insert a nickname that will represent you in the game',
+            registration_age: 'Age:*',
+            registration_km: 'Km travelled daily:*',
+            registration_km_placeholder: 'Insert average km travelled daily',
+            registration_public_transport: 'Do you use public transport means every day? ',
+            registration_true: 'Yes',
+            registration_false: 'No',
+            registration_which_public_transport: 'Transport means usually used: ',
+            registration_invite: 'Who has invited you to the game? (nickname)',
+            registration_invite_placeholder: 'Insert the nickname of the person who has invited you',
+            registration_transport_train: 'train',
+            registration_transport_bus: 'bus',
+            registration_transport_carsharing: 'shared car',
+            registration_transport_bikesharing: 'shared bike',
+            registration_transport_car: 'private car',
+            registration_transport_bike: 'private bike',
+            registration_transport_foot: 'walk',
+            registration_must_accept: 'You must accept the game rules and privacy terms if you want to proceed with the registration',
+            registration_empty_nick: 'The nickname is mandatory',
+            registration_empty_age: 'The age is mandatory',
+            registration_empty_km: 'Specify a valid distance value',
+            registration_empty_transport: 'Choose at least one mean of transport',
+            age_placeholder: 'Select the age range',
+            age_option1: '< 20 years',
+            age_option2: '20-40 years',
+            age_option3: '40-70 years',
+            age_option4: '> 70 years',
+            nickname_inuse: 'The specified nickname is already in use',
+            more_rules: 'Expand rules',
+            less_rules: 'Collapse Rules',
+            sponsor_week: 'THIS WEEK THE PRIZES ARE KINDLY OFFERED BY ',
+            login_signup: 'REGISTER',
+            login_signin: 'SIGN IN',
+            signin_title: 'Sign in with your credentials',
+            signin_pwd_reset: 'Forgot password?',
+            text_login_use: 'or sign in with',
+            error_popup_title: 'Error',
+            error_generic: 'Registration failed. Please try again later.',
+            error_email_inuse: 'Email address is already in use.',
+            signup_name: 'Name',
+            signup_surname: 'Surname',
+            signup_email: 'Email',
+            signup_pwd: 'Password',
+            error_required_fields: 'All the fields are required',
+            error_password_short: 'Password length should be at least 6 symbols',
+            signup_success_title: 'Registration complete!',
+            signup_success_text: 'Complete the registration by clicking the link you can find in the mail we have just sent you.',
+            signup_resend: 'Re-send the verification mail',
+            error_signin: 'Username/password invalid',
+            signup_signup: 'Register',
+            signup_title: 'Register with',
             game_tab_points_label: 'POINTS',
             game_tab_challenges_label: 'CHALLENGES',
             game_tab_rankings_label: 'RANKING',

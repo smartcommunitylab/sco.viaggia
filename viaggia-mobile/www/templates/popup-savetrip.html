@@ -1,2 +1,26 @@
-<input type="text" placeholder="{{'save_trip_text'|translate}}" style="padding-left:10px;" ng-model="data.nametrip">
-<p ng-if="showError" class="error">{{'save_trip_error_message'|translate}}</p>
+<!--<input type="text" placeholder="{{'save_trip_text'|translate}}" style="padding-left:10px;" ng-model="data.nametrip">
+<p ng-if="showError" class="error">{{'save_trip_error_message'|translate}}</p>-->
+<div>
+    <div class="row row-center map-stop-title">
+        <i class="icon popup-icon ion-android-folder"></i>
+        <div class="col">
+            <b class="parking-title">{{'save_trip_title'|translate}}</b>
+        </div>
+
+    </div>
+    <div class="map-stop-hline"></div>
+    <div class="item item-input">
+      <input type="text" placeholder="{{'save_trip_text'|translate}}" style="padding-left:10px;" ng-model="data.nametrip" />
+    </div>
+    <p ng-if="showError" class="error">{{'save_trip_error_message'|translate}}</p>
+    <ion-toggle ng-model="journey.recursiveTrip" ng-change="recursiveChange()">
+        <div>
+            {{'save_trip_recurrent' | translate}}
+        </div>
+    </ion-toggle>
+    <div ng-hide="!journey.recursiveTrip" class="list recurrence-days">
+        <ion-checkbox ng-repeat="dow in recurrencyPopupDoW" ng-model="dow.checked">{{dow.shortname | translate}}</ion-checkbox>
+        <ion-checkbox ng-model="allDays.checked" ng-change="selectAll()">{{'save_trip_alldays' | translate}}</ion-checkbox>
+
+    </div>
+</div>

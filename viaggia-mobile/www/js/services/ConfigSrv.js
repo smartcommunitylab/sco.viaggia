@@ -21,8 +21,7 @@ angular.module('viaggia.services.conf', [])
         return '#000';
     };
 
-
-
+    var LOGIN_EXPIRED = 'LOGIN_EXPIRED';
     var DISTANCE_AUTOCOMPLETE = '6';
     var HTTP_CONFIG = {
         timeout: 5000
@@ -119,7 +118,50 @@ angular.module('viaggia.services.conf', [])
             color: '#922d66'
         }
     };
-
+    var DAYS_REC = [
+        {
+            name: 'dow_monday',
+            shortname: 'dow_monday_short',
+            value: 2,
+            checked: false
+        },
+        {
+            name: 'dow_tuesday',
+            shortname: 'dow_tuesday_short',
+            value: 3,
+            checked: false
+        },
+        {
+            name: 'dow_wednesday',
+            shortname: 'dow_wednesday_short',
+            value: 4,
+            checked: false
+        },
+        {
+            name: 'dow_thursday',
+            shortname: 'dow_thursday_short',
+            value: 5,
+            checked: false
+        },
+        {
+            name: 'dow_friday',
+            shortname: 'dow_friday_short',
+            value: 6,
+            checked: false
+        },
+        {
+            name: 'dow_saturday',
+            shortname: 'dow_saturday_short',
+            value: 7,
+            checked: false
+        },
+        {
+            name: 'dow_sunday',
+            shortname: 'dow_sunday_short',
+            value: 1,
+            checked: false
+        }
+    ];
 
     var flattenElement = function (e, res, ref, agencyId) {
         var localAgency = agencyId;
@@ -179,6 +221,9 @@ angular.module('viaggia.services.conf', [])
         getHTTPConfig: function () {
             return HTTP_CONFIG;
         },
+        getTrackingConfig: function () {
+            return angular.copy(mapJsonConfig['trackingConfigure']);
+        },
         getDistanceForAutocomplete: function () {
             return DISTANCE_AUTOCOMPLETE;
         },
@@ -198,8 +243,17 @@ angular.module('viaggia.services.conf', [])
         getGeocoderURL: function () {
             return GEOCODER_URL;
         },
+        getGamificationURL: function () {
+            return mapJsonConfig['gamificationURL'];
+        },
         getPlanTypes: function () {
             return PLAN_TYPES;
+        },
+        getThresholdEndTime: function () {
+            return mapJsonConfig['thresholdEndTime']
+        },
+        getThresholdStartTime: function () {
+            return mapJsonConfig['thresholdStartTime']
         },
         convertPlanTypes: convertMeans,
         getColorsTypes: function () {
@@ -229,6 +283,9 @@ angular.module('viaggia.services.conf', [])
 
         getAppId: function () {
             return mapJsonConfig["appid"];
+        },
+        getDaysRec: function () {
+            return DAYS_REC;
         },
         getMessagingAppId: function () {
             return mapJsonConfig["messagingAppId"];
@@ -305,6 +362,52 @@ angular.module('viaggia.services.conf', [])
         getContactLink: function () {
             return mapJsonConfig["contact_link"];
         },
+        setWeeklySposnsor: function () {
+            $rootScope.weekly_sponsor = null;
+            $http.get('data/sponsor.json').success(function (response) {
+                var sponsors = response.sponsor;
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1; //January is 0!
+
+                var yyyy = today.getFullYear();
+                if (dd < 10) {
+                    dd = '0' + dd
+                }
+                if (mm < 10) {
+                    mm = '0' + mm
+                }
+                var today = dd + '/' + mm + '/' + yyyy;
+
+                //ciclo del json con gli sponsor
+                for (var i = 0; i < sponsors.length; i++) {
+                    var dateFrom = sponsors[i].from_date;
+                    var dateTo = sponsors[i].to_date;
+
+
+                    var d1 = dateFrom.split("/");
+                    var d2 = dateTo.split("/");
+                    var t = today.split("/");
+
+                    var from = new Date(d1[2], d1[1] - 1, d1[0]); // -1 because months are from 0 to 11
+                    var to = new Date(d2[2], d2[1] - 1, d2[0]);
+                    var check = new Date(t[2], t[1] - 1, t[0]);
+
+                    if (check >= from && check <= to) {
+                        //set
+                        $rootScope.weekly_sponsor = {
+                            "link": sponsors[i].link,
+                            "img": sponsors[i].img
+                        }
+                        break;
+                    }
+                }
+            });
+
+
+
+
+        },
         getTTData: function (ref, agencyId, groupId, routeId) {
             var res = ttJsonConfig;
             if (!!ref) {
@@ -349,6 +452,35 @@ angular.module('viaggia.services.conf', [])
             if (!ttJsonConfig || !ttJsonConfig.stopVisualization || !ttJsonConfig.stopVisualization[agencyId]) return {};
             return ttJsonConfig.stopVisualization[agencyId];
         },
-        isDarkColor: isDarkColor
+        isDarkColor: isDarkColor,
+        getAuthServerURL: function () {
+            return mapJsonConfig["AACURL"]+mapJsonConfig["authServerURL"];
+        },
+        getServerTokenURL: function () {
+            return mapJsonConfig["AACURL"]+mapJsonConfig["serverTokenURL"];
+        },
+        getServerRegisterURL: function () {
+            return mapJsonConfig["AACURL"]+mapJsonConfig["serverRegisterURL"];
+        },
+        getServerProfileURL: function () {
+            return mapJsonConfig["AACURL"]+mapJsonConfig["serverProfileURL"];
+        },
+        getAACURL: function () {
+            return mapJsonConfig["AACURL"];
+        },
+
+        getRedirectUri: function () {
+            return mapJsonConfig["redirectURL"];
+        },
+        getClientId: function () {
+            return mapJsonConfig["cliendID"];
+        },
+        getClientSecKey: function () {
+            return mapJsonConfig["clientSecID"];
+        },
+        getHTTPConfig: function () {
+            return HTTP_CONFIG;
+        },
+        LOGIN_EXPIRED: LOGIN_EXPIRED
     }
 })

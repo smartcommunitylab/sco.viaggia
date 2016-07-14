@@ -30,7 +30,12 @@
     "https://github.com/samikrc/CordovaSQLite.git",
     "cordova-plugin-whitelist",
     "net.yoik.cordova.plugins.screenorientation",
-    "https://github.com/phonegap/phonegap-plugin-push",
+    "https://github.com/katzer/cordova-plugin-local-notifications",
+    "https://github.com/transistorsoft/cordova-background-geolocation.git",
+    {
+      "locator": "https://github.com/transistorsoft/cordova-background-geolocation.git",
+      "id": "com.transistorsoft.cordova.background-geolocation"
+    },
     {
       "variables": {
         "SENDER_ID": "453601816446",
@@ -41,7 +46,6 @@
     }
   ],
   "cordovaPlatforms": [
-    "ios",
-    "android"
+    "ios"
   ]
 }

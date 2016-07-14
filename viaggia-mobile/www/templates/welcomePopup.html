@@ -1,0 +1,59 @@
+<div>
+    <div class="row row-center map-stop-title">
+        <i class="icon popup-icon ion-leaf"></i>
+        <div class="col">
+            <b class="parking-title"> {{'lbl_welcome_title'|translate}}</b>
+        </div>
+    </div>
+    <div class="map-stop-hline"></div>
+<!--
+    <div class="row">
+
+
+        <div class="lbl-betatesting">
+            <p ng-bind-html="'lbl_welcome_text' | translate"></p>
+        </div>
+    </div>
+-->
+
+    <button class="button button-viaggia-header button-block beta-button" ng-click="planFromPopup()">
+        <div class="row beta-button">
+            <div class="col col-center">
+                {{'menu_plan' | translate}} </div>
+        </div>
+    </button>
+
+    <button class="button button-viaggia-header button-block beta-button" ng-click="myTripsFromPopup()">
+        <div class="row beta-button">
+            <div class="col col-center">
+                {{'btn_start_tracking' | translate}} </div>
+        </div>
+    </button>
+
+    <button class="button button-viaggia-header button-block beta-button" ng-click="openRules()">
+        <div class="row beta-button">
+            <div class="col col-center">
+                {{'btn_rules' | translate}} </div>
+        </div>
+    </button>
+
+    <!--        <div class="col">-->
+
+    <button class="button button-viaggia-header button-block beta-button" ng-click="openGamificationBoard()">
+        <div class="row beta-button">
+            <i class="col-center icon"></i>
+            <div class="col col-center">
+                {{'btn_score' | translate}} </div>
+        </div>
+    </button>
+    <!--    </div>-->
+    <!--        <div class="col">-->
+
+    <button class="button button-close button-block button-viaggia beta-button" ng-click="closePopup()">
+        <div class="row beta-button">
+            <i class="col-center icon"></i>
+            <div class="col col-center">
+                {{'btn_close' | translate}} </div>
+        </div>
+    </button>
+</div>

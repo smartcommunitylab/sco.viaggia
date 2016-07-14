@@ -1,10 +1,13 @@
 angular.module('viaggia.controllers.planlist', [])
 
-.controller('PlanlistCtrl', function ($scope, planService, ionicMaterialMotion, ionicMaterialInk, $timeout, $state, $filter) {
+.controller('PlanlistCtrl', function ($scope, planService, ionicMaterialMotion, ionicMaterialInk, $timeout, $state, $filter, $stateParams) {
     $scope.plantitle = $filter('translate')('plan_title');
     $scope.containsGreen = false;
     $scope.journeys = planService.getplanJourneyResults();
     $scope.empty = false;
+    if ($stateParams.tripId) {
+        $scope.tripId = $stateParams.tripId
+    }
     if (!$scope.planConfigure) {
         $scope.planConfigure = planService.getPlanConfigure();
     }
@@ -18,6 +21,9 @@ angular.module('viaggia.controllers.planlist', [])
         $scope.journeys.forEach(function (it, idx) {
             if (it.promoted) {
                 $scope.containsGreen = true;
+            }
+            if (!it.hasOwnProperty("original")) {
+                it.original = JSON.parse(JSON.stringify(it));
             }
             it.length = planService.getLength(it);
             it.means = planService.extractItineraryMeans(it);
@@ -35,7 +41,22 @@ angular.module('viaggia.controllers.planlist', [])
     });
     $scope.showPlan = function (journey) {
         planService.setSelectedJourney(journey);
-        $state.go('app.newtripdetails');
+        if ($scope.tripId) {
+            if (planService.getEditInstance()) {
+                $state.go('app.newtripdetails', {
+                    tripId: $scope.tripId,
+                    replan: true,
+                    lastStep: true
+                });
+            } else {
+                $state.go('app.newtripdetails', {
+                    tripId: $scope.tripId,
+                    replan: true
+                })
+            };
+        } else {
+            $state.go('app.newtripdetails');
+        }
     }
 
 })

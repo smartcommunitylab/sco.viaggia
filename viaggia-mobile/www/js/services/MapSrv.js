@@ -78,11 +78,11 @@ angular.module('viaggia.services.map', [])
 
         leafletData.getMap(mapId).then(function (map) {
                 cachedMap[mapId] = map;
-                L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
+                L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.{ext}', {
                     type: 'map',
-                    ext: 'jpg',
-                    attribution: '',
-                    subdomains: '1234',
+                    ext: 'png',
+					attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+                    subdomains: 'abc',
                     maxZoom: 18
                 }).addTo(map);
                 $ionicPlatform.ready(function () {

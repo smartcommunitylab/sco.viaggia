@@ -9,7 +9,9 @@
         <div class="row space-from-top">
             <div class="input-plan-fromto col">
                 <span class="input-label"><b>{{'plan_from' | translate}}</b></span>
-                <placeautocomplete ng-if="refresh" ng-model="fromName" attr-placeholder="{{'plan_insert_from_address' | translate}}" click-activation="false" data="placesfrom" on-type="typePlaceFrom" placeholder="{{'plan_from' | translate}}" on-select="changeStringFrom" ng-blur="setNameParam"></placeautocomplete>
+                <!--                <placeautocomplete ng-if="refresh" ng-model="fromName" attr-placeholder="{{'plan_insert_from_address' | translate}}" click-activation="false" data="places" on-type="typePlaceFrom" placeholder="{{'plan_from' | translate}}" on-select="changeStringFrom" ng-blur="setNameParam"></placeautocomplete>-->
+                <placeautocomplete ng-if="refresh" on-clear="clearFrom" ng-model="fromName" attr-placeholder="{{'plan_insert_from_address' | translate}}" click-activation="false" data="placesfrom" on-type="typePlaceFrom" placeholder="{{'plan_from' | translate}}" on-select="changeStringFrom" ng-blur="setNameParam"></placeautocomplete>
+
             </div>
             <div class="plan-buttons-right">
                 <a class="button-icon plan-viaggia-fromto  icon ion-map" ng-click="openMapPlan('from')"></a>
@@ -21,7 +23,9 @@
         <div class="row">
             <div class="input-plan-fromto col">
                 <span class="input-label"><b>{{'plan_to' | translate}}</b></span>
-                <placeautocomplete ng-if="refresh" ng-model="toName" attr-placeholder="{{'plan_insert_to_address' | translate}}" click-activation="false" data="placesto" on-type="typePlaceTo" placeholder="{{'plan_to' | translate}}" on-select="changeStringTo" ng-blur="setNameParam"></placeautocomplete>
+                <!--                <placeautocomplete ng-if="refresh" ng-model="toName" attr-placeholder="{{'plan_insert_to_address' | translate}}" click-activation="false" data="places" on-type="typePlaceTo" placeholder="{{'plan_to' | translate}}" on-select="changeStringTo" ng-blur="setNameParam"></placeautocomplete>-->
+                <placeautocomplete ng-if="refresh" on-clear="clearTo" ng-model="toName" attr-placeholder="{{'plan_insert_to_address' | translate}}" click-activation="false" data="placesto" on-type="typePlaceTo" placeholder="{{'plan_to' | translate}}" on-select="changeStringTo" ng-blur="setNameParam"></placeautocomplete>
+
             </div>
             <div class="plan-buttons-right">
 
