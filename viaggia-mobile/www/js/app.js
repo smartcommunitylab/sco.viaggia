@@ -207,7 +207,8 @@ angular.module('viaggia', [
                 cache: false,
                 url: "/plan",
                 params: {
-                    'replan': false
+                    replan: false,
+                    tripId: null
                 },
                 views: {
                     'menuContent': {
@@ -219,6 +220,9 @@ angular.module('viaggia', [
             .state('app.planlist', {
                 cache: false,
                 url: "/planlist",
+                params: {
+                    tripId: null
+                },
                 views: {
                     'menuContent': {
                         templateUrl: "templates/planlist.html",
@@ -248,6 +252,11 @@ angular.module('viaggia', [
             }).state('app.tripdetails', {
                 cache: false,
                 url: "/tripdetails/:tripId",
+                params: {
+                    tripId: null,
+                    replan: false,
+                    lastStep: false
+                },
                 views: {
                     'menuContent': {
                         templateUrl: "templates/tripdetails.html",
@@ -257,6 +266,11 @@ angular.module('viaggia', [
             }).state('app.newtripdetails', {
                 cache: false,
                 url: "/tripdetails",
+                params: {
+                    tripId: null,
+                    replan: false,
+                    lastStep: false
+                },
                 views: {
                     'menuContent': {
                         templateUrl: "templates/tripdetails.html",

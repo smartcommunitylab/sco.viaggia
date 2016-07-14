@@ -46,6 +46,11 @@
                             </div>
                         </div>
                     </div>
+                    <div class="green-points">
+                        <img class="points-image" src="img/ribbon.png">
+                        <span class="text-muted text-center points" ng-if="journey.customData['estimatedScore']">{{journey.customData["estimatedScore"]}}</span>
+                        <span class="text-muted text-center points" ng-if="!journey.customData['estimatedScore']">0</span>
+                    </div>
                     <div class="length-price">
                         <span class="text-muted text-center">{{journey.length}}km</span>
                         <span class="text-muted text-center" ng-if="journey.price > 0">/ {{journey.price| number:2}}  &#8364;</span>

@@ -335,7 +335,7 @@ angular.module('viaggia.services.tracking', [])
             return false;
         }
 
-        trackService.updateNotification = function (tripToSave, trips, tripId, action) {
+        trackService.updateNotification = function (trips, tripId, action) {
             if (window.plugin && cordova && cordova.plugins && cordova.plugins.notification) {
                 console.log('initializing notifications...');
                 //create a notification that fire in that day and if it is recursive every n day
