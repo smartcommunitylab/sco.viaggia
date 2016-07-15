@@ -1,10 +1,10 @@
 {
     "TRENTO": {
         "resource_folder": "config/instances/TRENTO",
-        "widget_id" : "eu.trentorise.smartcampus.viaggiatrento",
+        "widget_id" : "it.smartcommunitylab.viaggiarovereto.playgo",
         "version": "2.1.2",
         "version_code": "38",
-        "app_name": "Viaggia Trento"
+        "app_name": "Viaggia Trento Play&amp;Go"
     },
     "ROVERETO": {
         "resource_folder": "config/instances/ROVERETO",

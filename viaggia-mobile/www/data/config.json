@@ -4,7 +4,7 @@
     "messagingAppId": "mobility.trento",
     "senderID": "453601816446",
     "appversion": "2.1.2",
-    "appname": "Viaggia Trento",
+    "appname": "Viaggia Trento Play&Go",
     "serverURL": "https://dev.smartcommunitylab.it/core.mobility",
     "messagingServerURL": "https://dev.smartcommunitylab.it/core.communicator",
     "newsRSS": "https://dev.smartcommunitylab.it/core.mobility/announcements/rss/trento",
@@ -115,5 +115,39 @@
                 "icon": "ic_parking-lot"
             }
       ]
+    },
+    "thresholdEndTime": 600000,
+    "thresholdStartTime": 600000,
+    "trackingConfigure": {
+        "desiredAccuracy": 0,
+        "distanceFilter": 20,
+        "stationaryRadius": 20,
+        "activityType": "OtherNavigation",
+        "disableElasticity": false,
+
+        "stopDetectionDelay": 0,
+        "stopTimeout": 10,
+        "activityRecognitionInterval": 10000,
+
+        "preventSuspend": false,
+        "heartbeatInterval": 60,
+        "stopOnTerminate": false,
+        "debug": false,
+
+        "locationUpdateInterval": 5000,
+        "minimumActivityRecognitionConfidence": 50,
+        "fastestLocationUpdateInterval": 1000,
+        "forceReloadOnLocationChange": false,
+        "forceReloadOnMotionChange": false,
+        "forceReloadOnGeofence": false,
+        "startOnBoot": false,
+        "foregroundService": true,
+        "maxDaysToPersist": 14,
+        "triggerActivities": "in_vehicle, on_bicycle, running, walking, on_foot",
+
+        "url": "https://dev.smartcommunitylab.it/core.mobility/gamification/geolocations?token=",
+        "method": "POST",
+        "batchSync": true,
+        "autoSync": false
     }
 }
