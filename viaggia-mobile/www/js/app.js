@@ -523,7 +523,7 @@ angular.module('viaggia', [
 
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/login');
+        $urlRouterProvider.otherwise('/app/login'); // FIXME
 
         $translateProvider.translations('it', {
             menu_home: 'Home',
@@ -812,8 +812,11 @@ angular.module('viaggia', [
             signup_signup: 'Registrati',
             signup_title: 'Registrati con',
             game_tab_points_label: 'PUNTI',
-            game_tab_challenges_label: 'SFIDA',
+            game_tab_challenges_label: 'SFIDE',
             game_tab_rankings_label: 'CLASSIFICA',
+			game_tab_challenges_filter_active: "Attive",
+			game_tab_challenges_filter_old: "Passate",
+			game_tab_challenges_info: "Info sfida"
         });
 
 

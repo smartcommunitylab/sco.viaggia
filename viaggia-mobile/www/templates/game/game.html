@@ -1,22 +1,16 @@
 <ion-tabs title="{{title}}">
+	<!-- Dashboard Tab -->
+	<ion-tab title="{{'game_tab_points_label' | translate}}" ui-sref="app.game.points">
+		<ion-nav-view name="tab-points"></ion-nav-view>
+	</ion-tab>
 
+	<!-- Friends Tab -->
+	<ion-tab title="{{'game_tab_challenges_label' | translate}}" ui-sref="app.game.challenges">
+		<ion-nav-view name="tab-challenges"></ion-nav-view>
+	</ion-tab>
 
-    <!-- Dashboard Tab -->
-    <ion-tab title="{{'game_tab_points_label'|translate}}" ui-sref="app.game.points">
-        <ion-nav-view name="tab-points"></ion-nav-view>
-    </ion-tab>
-
-
-    <!-- Friends Tab -->
-    <ion-tab title="{{'game_tab_challenges_label'|translate}}" ui-sref="app.game.challenges">
-        <ion-nav-view name="tab-challenges"></ion-nav-view>
-    </ion-tab>
-
-
-    <!-- Account Tab -->
-    <ion-tab title="{{'game_tab_rankings_label'|translate}}" ui-sref="app.game.rankings">
-        <ion-nav-view name="tab-rankings"></ion-nav-view>
-    </ion-tab>
-
-
+	<!-- Account Tab -->
+	<ion-tab title="{{'game_tab_rankings_label' | translate}}" ui-sref="app.game.rankings">
+		<ion-nav-view name="tab-rankings"></ion-nav-view>
+	</ion-tab>
 </ion-tabs>
