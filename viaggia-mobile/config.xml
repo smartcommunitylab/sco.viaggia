@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-    <widget id="eu.trentorise.smartcampus.viaggiatrento" version="2.1.2" android-versionCode="38" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-        <name>Viaggia Trento</name>
-        <description>Viaggia Trento</description>
+    <widget id="it.smartcommunitylab.viaggiarovereto.playgo" version="2.1.2" android-versionCode="38" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+        <name>Viaggia Trento Play&amp;Go</name>
+        <description>Viaggia Trento Play&amp;Go</description>
         <author email="info@smartcommunitylab.it" href="http://www.smartcommunitylab.it/">Smart Community Lab</author>
 
         <preference name="cordova-background-geolocation-license" value="2f150eb3040213293b287aa732296e03f76c108406277c88cb029dda0b289b5f" />

@@ -30,7 +30,48 @@
 			</div>
 		</div>
 
-		<div ng-if="primaryLinks.length == 0">
+		<div class="tracking-dashboard">
+			<div ng-if="trackingIsOn">
+				<div class="row">
+					<div class="col text-center">
+						<h4><i class="icon ion-leaf"></i>{{'play_is_on' | translate}}</h4>
+						<div ng-if="trackingInfo.transport"><b>{{'play_is_on_for' | translate: trackingInfo}}</b></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col text-center">
+						<button class="button button-stop" ng-click="stopTracking()">{{'stop_tracking' | translate}}</button>
+					</div>
+				</div>
+			</div>
+			<div ng-if="!trackingIsOn">
+				<div class="row">
+					<div class="col text-center">
+						<h4><i class="icon ion-leaf"></i>{{'play_now' | translate}}</h4>
+						<div><b>{{'play_now_sub' | translate}}</b></div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<a ng-click="startTracking('walk')">
+							<div class="tracking-ds-button"><i class="icon ic_foot"></i><span>{{'track_walk' | translate}}</span></div>
+						</a>
+					</div>
+					<div class="col">
+						<a ng-click="startTracking('bike')">
+							<div class="tracking-ds-button"><i class="icon ic_bike"></i><span>{{'track_bike' | translate}}</span></div>
+						</a>
+					</div>
+					<div class="col">
+						<a ng-click="openSavedTracks()">
+							<div class="tracking-ds-button"><i class="icon ic_folder"></i><span>{{'track_saved' | translate}}</span></div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div ng-if="primaryLinks.length==0">
 			<ng-include src="'templates/emptyHomepage.html'"></ng-include>
 		</div>
 

@@ -16,6 +16,12 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div>
+                            <div ng-if="isAvailableForDay() && !editMode">
+                                <div ng-class="{'fog': notTrackable()}" ng-click="startOrShowPopupIfNotThisJourney()">
+                                    <button class="button button-viaggia-header button-block" ng-show="!isTracking()&&tripId!=null">{{'labl_start_tracking'|translate}} </button>
+                                </div>
+                                <button class="button button-viaggia-header button-block" ng-show="isTracking()&&tripId!=null" ng-click="trackStop()">{{'labl_stop_tracking'|translate}} </button>
+                            </div>
 
                             <div class="green-head" ng-if="currentItinerary.promoted">
                                 <div class="green-thumb"><img src="img/ic_leaf.png" />
@@ -23,6 +29,11 @@
                                 <div class="green-content">
                                     <p class="green-title">{{'journey_details_sustainable' | translate}}</p>
                                 </div>
+                            </div>
+                            <div class="green-points">
+                                <img class="points-image" src="img/ribbon.png">
+                                <span class="text-muted text-center points" ng-if="currentItinerary.customData['estimatedScore']">{{currentItinerary.customData["estimatedScore"]}}</span>
+                                <span class="text-muted text-center points" ng-if="!currentItinerary.customData['estimatedScore']">0</span>
                             </div>
                             <!-- START -->
                             <div class="row leg">
@@ -82,10 +93,15 @@
                                 <div class="margin-right-16 margin-left-16">{{toTime(currentItinerary.endtime)}} </div>
                                 <div class="col inter-leg">{{requestedTo}}</div>
                             </div>
+
+                            <div class="recurrence_days">
+                                <i class="icon ic_recurring recurrent_icon_detail" ng-if="isRecurrent()"></i>
+                                <span class="recurrnce_day_string" ng-repeat="day in recurrentDays">{{day.name|translate}}</span>
+                            </div>
                             <button ng-if="editMode" class="button button-viaggia-header button-block" ng-click="saveTrip()">{{'journey_details_save' | translate}} </button>
                             <div class="popup-buttons" ng-if="!editMode">
-                                <button class="button button-cancel" ng-click="deleteTrip()">{{'journey_details_delete' | translate}} </button>
-                                <button class="button button-default" ng-click="modifyTrip()">{{'journey_details_modify' | translate}} </button>
+                                <button ng-class="{'fog': isTracking()}" class="button button-cancel" ng-click="deleteTrip()">{{'journey_details_delete' | translate}} </button>
+                                <button ng-class="{'fog': isTracking()}" class="button button-default" ng-click="modifyTrip()">{{'journey_details_modify' | translate}} </button>
                             </div>
                         </div>
                     </div>

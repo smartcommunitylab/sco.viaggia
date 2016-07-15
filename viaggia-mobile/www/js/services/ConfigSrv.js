@@ -205,18 +205,22 @@ angular.module('viaggia.services.conf', [])
         return res;
     }
 
+    var configDeferred = null;
+
     return {
         init: function () {
-            var deferred = $q.defer();
-            if (mapJsonConfig != null) deferred.resolve(true);
+            if (configDeferred != null) return configDeferred.promise;
+
+            var configDeferred = $q.defer();
+            if (mapJsonConfig != null) configDeferred.resolve(true);
             else $http.get('data/config.json').success(function (response) {
                 mapJsonConfig = response;
                 $http.get('data/tt.json').success(function (ttResponse) {
                     ttJsonConfig = ttResponse;
-                    deferred.resolve(true);
+                    configDeferred.resolve(true);
                 });
             });
-            return deferred.promise;
+            return configDeferred.promise;
         },
         getHTTPConfig: function () {
             return HTTP_CONFIG;
