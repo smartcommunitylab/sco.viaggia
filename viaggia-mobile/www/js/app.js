@@ -842,7 +842,12 @@ angular.module('viaggia', [
 			track_other_action: 'viaggiando',
 			game_tab_challenges_filter_active: "Attive",
 			game_tab_challenges_filter_old: "Passate",
-			game_tab_challenges_info: "Info sfida"
+			game_tab_challenges_info: "Info sfida",
+            pop_up_no_geo_title: 'Errore di geolocalizzazione',
+            pop_up_no_geo_template: 'Attenzione! Non è stato possibile rilevare la tua posizione. Accedi alle impostazioni del tuo dispositivo e controlla che il servizio di localizzazione è attivo',
+            pop_up_points_title: 'Complimenti!',
+            pop_up_points_template: 'Con il viaggio appena tracciato ai guadagnato {{points}} punti!',
+            pop_up_points_btn: 'Vedi punti',
 		});
 
 
@@ -1147,6 +1152,11 @@ angular.module('viaggia', [
 			track_walk_action: 'walking',
 			track_bike_action: 'cycling',
 			track_other_action: 'travelling',
+            pop_up_no_geo_title: 'Geolocation error',
+            pop_up_no_geo_template: 'Warning! Your location cannot be retrieved. Enable location information in the device/app settings.',
+            pop_up_points_title: 'Congratulations!',
+            pop_up_points_template: 'With the trip just tracked you have earned {{points}} points!',
+            pop_up_points_btn: 'See points',
 		});
 
 

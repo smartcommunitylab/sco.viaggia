@@ -1,5 +1,5 @@
 angular.module('viaggia.services.tracking', [])
-    .factory('trackService', function (Config, $q, $http, $state, $timeout, $filter, userService, $ionicPlatform, Utils) {
+    .factory('trackService', function (Config, $q, $http, $state, $timeout, $filter, userService, $ionicPlatform, $ionicPopup, Utils, GeoLocate) {
         //var trackingIntervalInMs = 500;
         //var accelerationDetectionIntervalInMs = 500;
         //var accelerationSensorDelay = 0;
@@ -7,6 +7,10 @@ angular.module('viaggia.services.tracking', [])
         var trackService = {};
         var bgGeo = {};
         var refreshCallback = null;
+
+        /**
+         * initialize bgPlugin. Setup default HTTP response processor for sync operation - clear DB upon successful sync
+         */
         $ionicPlatform.ready(function () {
             bgGeo = window.BackgroundGeolocation;
             bgGeo.onHttp(function (response) {
@@ -24,6 +28,9 @@ angular.module('viaggia.services.tracking', [])
 
         });
 
+        /**
+         * check tracking state on app resume: if finished - stop, cleanup and call refresg callback if active.
+         */
         document.addEventListener("resume", function () {
             console.log('app resumed');
 
@@ -47,6 +54,9 @@ angular.module('viaggia.services.tracking', [])
             init();
         }
 
+        /**
+         * send to server the information about tracking start: tripId, transport type (in case of direct tracking), status of geolocalization, and device information
+         */
         var sendServerStart = function (idTrip, token, transportType, status) {
             var deferred = $q.defer();
 
@@ -75,13 +85,21 @@ angular.module('viaggia.services.tracking', [])
             return deferred;
 
         }
-            /*check if the trip is currently tracked*/
+
+        /**
+         * check if the specified trip is currently tracked
+         */
         trackService.isThisTheJourney = function (tripId) {
             if (localStorage.getItem(Config.getAppId() + '_tripId') == tripId) {
                 return true;
             }
             return false;
         }
+        /**
+         * If the specified trip tracking is available for tracking: non recurrent is available on its
+         * specified day, recurrent - on any day corresponding to the recurrency information.
+         * If already tracked for the day, then is not available
+         */
         trackService.isAvailableForDay = function (tripId) {
             var date = new Date();
             date.setHours(0, 0, 0, 0);
@@ -112,6 +130,10 @@ angular.module('viaggia.services.tracking', [])
             return newEndTime;
         }
 
+        /**
+         * Check whether the trip with the specified start time and recurrency is currently applicable
+         * (i.e., current time is within +-threshold from the start time)
+         */
         trackService.isInTime = function (startime, recurrency) {
                 // return trackService.isInTime($scope.currentItinerary.startime,$scope.recurrency.daysOfWeek);
                 var now = new Date();
@@ -136,7 +158,9 @@ angular.module('viaggia.services.tracking', [])
                 return 0;
             }
 
-
+        /**
+         * Start direct tracking of the specified transport type
+         */
         trackService.startTransportTrack = function(transport) {
           var deferred = $q.defer();
           if (trackService.trackingIsGoingOn() && !trackService.trackingIsFinished()) {
@@ -146,15 +170,58 @@ angular.module('viaggia.services.tracking', [])
             var ts = new Date().getTime();
             var tripId = transport + '_' + ts;
             // default duration set to 1 month
-            trackService.start(tripId, {data:{startime: ts, endtime: ts + 2*24*60*60*1000}}, null, deferred);
+            trackService.start(tripId, {data:{startime: ts, endtime: ts + 2*24*60*60*1000}}, null)
+            .then(function() {
+              deferred.resolve();
+            }, function(errorCode) {
+              deferred.reject(errorCode);
+            });
           }
           return deferred.promise;
         }
 
-            /**
-             * START THE TRACKER.
-             */
-        trackService.start = function (idTrip, trip, callback, deferred) {
+        /**
+         * Compute tracked information of the saved track with the specified ID.
+         *
+         */
+        trackService.computeInfo = function() {
+          var trackId = localStorage.getItem(Config.getAppId() + '_tripId');
+          var deferred = $q.defer();
+          bgGeo.getLocations(function(locations, taskId) {
+            bgGeo.finish(taskId);
+            var tripLocs = [];
+            locations.forEach(function(l){
+              if (l.extras && trackId == l.extras.idTrip) {
+                tripLocs.push(l);
+              }
+            });
+            tripLocs.sort(function(la, lb){
+              return la.timestamp - lb.timestamp;
+            });
+            var dist = 0;
+            for (var i = 1; i < tripLocs.length; i++) {
+              dist += GeoLocate.distance([tripLocs[i-1].coords.latitude,tripLocs[i-1].coords.longitude],[tripLocs[i].coords.latitude,tripLocs[i].coords.longitude]);
+            }
+            var data = {};
+            if (tripLocs.length > 0) {
+              data.dist = dist*1000; // in meters
+              data.start = tripLocs[0].timestamp;
+              data.end = tripLocs[tripLocs.length - 1].timestamp;
+              data.transport = localStorage.getItem(Config.getAppId() + '_trackedTransport');
+              data.avgSpeed = data.dist / (data.end - data.start) * 1000; // in m/s
+            }
+            deferred.resolve(data);
+          });
+          return deferred.promise;
+        }
+
+        /**
+         * START THE TRACKER FOR THE SPECIFIED TRIP.
+         * If trip object is specified, then the tracking data is updated with its properties (start/end time).
+         * If callback is specified, this will be executed upon end of tracking time.
+         */
+        trackService.start = function (idTrip, trip, callback) {
+            var deferred = $q.defer();
             userService.getValidToken().then(function (token) {
                 var today = new Date();
                 refreshCallback = callback;
@@ -166,7 +233,7 @@ angular.module('viaggia.services.tracking', [])
                 } else {
                     var lastRememberedEnd = localStorage.getItem(Config.getAppId() + '_endTimestamp');
                     endtimeDate = new Date(Number(lastRememberedEnd));
-                    startTimestamp = new Date(Number(localStorage.getItem(Config.getAppId() + '_startTimestamp')));
+                    startTimestamp = new Date(Number(localStorage.getItem(Config.getAppId() + '_startTimestamp'))).getTime();
                 }
 
 
@@ -200,11 +267,10 @@ angular.module('viaggia.services.tracking', [])
                     //taggo la prima locazione con parametro extra
                 }
 
-                if (!bgGeo && deferred) {
+                if (!bgGeo) {
                   deferred.resolve();
                   return;
                 }
-
 
                 bgGeo.configure(trackingConfigure, callbackFn, failureFn);
 
@@ -232,10 +298,11 @@ angular.module('viaggia.services.tracking', [])
                           bgGeo.insertLocation(location, function () {
                               bgGeo.finish(taskId);
                           });
-                          if (deferred) deferred.resolve();
+                          deferred.resolve();
                       }, function (errorCode) {
                           sendServerStart(idTrip, token, transportType, errorCode);
-                          if (deferred) deferred.reject(errorCode);
+                          clean();
+                          deferred.reject(errorCode);
                       }, {
                           timeout: 5, // 5 seconds timeout to fetch location
                           maximumAge: 100000, // Accept the last-known-location if not older than 100 secs.
@@ -246,13 +313,14 @@ angular.module('viaggia.services.tracking', [])
                               transportType: transportType
                           }
                       });
-                    } else if (deferred) {
+                    } else {
                       deferred.resolve();
                     }
                 });
 
 
             });
+            return deferred.promise;
         };
 
         var sync = function () {
@@ -286,6 +354,7 @@ angular.module('viaggia.services.tracking', [])
 
         /**
          * STOP THE TRACKER.
+         * Synchronize data and stop the plugin.
          */
         trackService.stop = function () {
             var deferred = $q.defer();
@@ -329,7 +398,9 @@ angular.module('viaggia.services.tracking', [])
             //check localstorage
         };
 
-
+        /**
+         * Checki if the tracking has finished
+         */
         trackService.trackingIsFinished = function () {
             //if is present timestamp of finish
             if (localStorage.getItem(Config.getAppId() + '_endTimestamp') != null) {
@@ -343,9 +414,6 @@ angular.module('viaggia.services.tracking', [])
 
         }
 
-        function trackingHasFailed() {
-            //if last stored value is very old, do something
-        }
         var clean = function () {
             //clean local db
             //clean local storage data from localstorage
@@ -356,14 +424,23 @@ angular.module('viaggia.services.tracking', [])
             localStorage.removeItem(Config.getAppId() + '_trackedTransport');
         };
 
+        /**
+         * Return type of transport used for direct tracking (if any)
+         */
         trackService.trackedTransport = function () {
           return localStorage.getItem(Config.getAppId() + '_trackedTransport');
         }
 
+        /**
+         * Return timestamp of the tracking start.
+         */
         trackService.trackingTimeStart = function () {
           return new Date(Number(localStorage.getItem(Config.getAppId() + '_startTimestamp')));
         }
 
+        /**
+         * Return true if tracking is currently goes on according to the state recorded.
+         */
         trackService.trackingIsGoingOn = function () {
                 //check local storage is tracking
                 if (localStorage.getItem(Config.getAppId() + '_state') != null) {
@@ -371,9 +448,9 @@ angular.module('viaggia.services.tracking', [])
                 }
                 return false;
             }
-            /**
-             * This callback will be executed every time a geolocation is recorded in the background.
-             */
+        /**
+         * This callback will be executed every time a geolocation is recorded in the background.
+         */
         var callbackFn = function () {
             console.log('[js] BackgroundGeoLocation configure callback');
         };
@@ -382,6 +459,9 @@ angular.module('viaggia.services.tracking', [])
             console.log('BackgroundGeoLocation error');
         };
 
+        /**
+         * Return true if the tracking is going on (estimated end time is not yet reached and the state is 'tracking')
+         */
         trackService.isTracking = function (id) {
             //return true if this is the tracking is going to track and is going
             if (trackService.isThisTheJourney(id) && trackService.trackingIsGoingOn()) {
@@ -390,6 +470,25 @@ angular.module('viaggia.services.tracking', [])
             return false;
         }
 
+        /**
+         * Popup to show in case no geolocation options are available
+         */
+        trackService.geolocationPopup = function() {
+          $ionicPopup.alert({
+            title: $filter('translate')("pop_up_no_geo_title"),
+            template: $filter('translate')("pop_up_no_geo_template"),
+            buttons: [
+                {
+                    text: $filter('translate')("btn_close"),
+                    type: 'button-custom'
+                }
+            ]
+        });
+        }
+
+        /**
+         * Update the local notifications to be triggered before the start time of the instances to track.
+         */
         trackService.updateNotification = function (trips, tripId, action) {
             if (window.plugin && cordova && cordova.plugins && cordova.plugins.notification) {
                 console.log('initializing notifications...');
