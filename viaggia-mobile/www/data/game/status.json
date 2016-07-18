@@ -1,0 +1,195 @@
+{
+	"playerData": {
+		"playerId": "4",
+		"gameId": "56fbd2cae4b0090bdacde8c2",
+		"nickName": "mBortFbk"
+	},
+	"pointConcept": [
+		{
+			"name": "green leaves",
+			"score": 660
+    	}
+  	],
+	"badgeCollectionConcept": [
+		{
+			"name": "recommendations",
+			"badgeEarned": [
+				{
+					"name": "3_recommendations",
+					"url": "https://dev.smartcommunitylab.it/gamificationweb/img/recommendation/inviteFriends3.svg"
+				},
+				{
+					"name": "5_recommendations",
+					"url": "https://dev.smartcommunitylab.it/gamificationweb/img/recommendation/inviteFriends5.svg"
+        		},
+				{
+					"name": "10_recommendations",
+					"url": "https://dev.smartcommunitylab.it/gamificationweb/img/recommendation/inviteFriends10.svg"
+				}
+      		]
+    	},
+		{
+			"name": "leaderboard top 3",
+			"badgeEarned": []
+    	},
+		{
+			"name": "public transport aficionado",
+			"badgeEarned": []
+    	},
+		{
+			"name": "park and ride pioneer",
+			"badgeEarned": []
+    	},
+		{
+			"name": "bike aficionado",
+			"badgeEarned": []
+    	},
+		{
+			"name": "green leaves",
+			"badgeEarned": [
+				{
+					"name": "50_point_green",
+					"url": "https://dev.smartcommunitylab.it/gamificationweb/img/green/greenLeaves50.svg"
+				},
+				{
+					"name": "100_point_green",
+					"url": "https://dev.smartcommunitylab.it/gamificationweb/img/green/greenLeaves100.svg"
+        		},
+				{
+					"name": "200_point_green",
+					"url": "https://dev.smartcommunitylab.it/gamificationweb/img/green/greenLeaves200.svg"
+        		},
+				{
+					"name": "400_point_green",
+					"url": "https://dev.smartcommunitylab.it/gamificationweb/img/green/greenLeaves400.svg"
+        		}
+      		]
+    	},
+		{
+			"name": "sustainable life",
+			"badgeEarned": []
+    	},
+		{
+			"name": "bike sharing pioneer",
+			"badgeEarned": []
+    	}
+  	],
+	"challengeConcept": {
+		"activeChallengeData": [
+		{
+				"challId": "260004cf-d6d7-4b30-8fb7-9107d77e72f9",
+				"challDesc": "Fai almeno 1 viaggio in autobus e avrai un bonus di 50 punti Green Leaves",
+				"challCompleteDesc": "Per vincere la sfida vale il numero di itinerari che utilizzano il trasporto pubblico pianificati con ViaggiaRovereto Play&Go e compiuti durante la validita' della sfida.",
+				"challTarget": 1,
+				"status": 0,
+				"row_status": 0,
+				"type": "TRIPNUMBER",
+				"active": true,
+				"success": false,
+				"startDate": 1460671201175,
+				"endDate": 1460930401175,
+				"daysToEnd": 1
+      },
+			{
+				"challId": "6b37c81c-30ae-4563-bf69-e9620ca52b52",
+				"challDesc": "Raccomanda la App ad almeno 2 utenti e guadagni 50 punti Green Leaves",
+				"challCompleteDesc": "Per vincere la sfida, almeno 2 tuoi amici si devono registrare al gioco indicando il tuo nickname nell'apposito campo durante la registrazione.",
+				"challTarget": 2,
+				"status": 50,
+				"row_status": 1,
+				"type": "RECOMMENDATION",
+				"active": true,
+				"success": false,
+				"startDate": 1461189601815,
+				"endDate": 1461276001815,
+				"daysToEnd": 3
+      }
+		],
+		"oldChallengeData": [
+			{
+				"challId": "260004cf-d6d7-4b30-8fb7-9107d77e72f9",
+				"challDesc": "Fai almeno 1 viaggio in autobus e avrai un bonus di 50 punti Green Leaves",
+				"challCompleteDesc": "Per vincere la sfida vale il numero di itinerari che utilizzano il trasporto pubblico pianificati con ViaggiaRovereto Play&Go e compiuti durante la validita' della sfida.",
+				"challTarget": 1,
+				"status": 0,
+				"row_status": 0,
+				"type": "TRIPNUMBER",
+				"active": false,
+				"success": false,
+				"startDate": 1460671201175,
+				"endDate": 1460930401175,
+				"daysToEnd": 0
+      },
+			{
+				"challId": "6b37c81c-30ae-4563-bf69-e9620ca52b52",
+				"challDesc": "Raccomanda la App ad almeno 2 utenti e guadagni 50 punti Green Leaves",
+				"challCompleteDesc": "Per vincere la sfida, almeno 2 tuoi amici si devono registrare al gioco indicando il tuo nickname nell'apposito campo durante la registrazione.",
+				"challTarget": 2,
+				"status": 50,
+				"row_status": 1,
+				"type": "RECOMMENDATION",
+				"active": false,
+				"success": false,
+				"startDate": 1461189601815,
+				"endDate": 1461276001815,
+				"daysToEnd": 0
+      },
+			{
+				"challId": "76a2256f-da36-4d7d-957a-86399c091d52",
+				"challDesc": "Ottieni almeno 1 badge nella Badge Collection green leaves e vinci un bonus di 30 punti Green Leaves",
+				"challCompleteDesc": "I badge della collezione green leaves vengono assegnati al raggiungimento di 50, 100, 200, 400, 800, 1500, 2500, 5000, 10000 e 20000 punti.",
+				"challTarget": 1,
+				"status": 0,
+				"row_status": 0,
+				"type": "NEXTBADGE",
+				"active": false,
+				"success": false,
+				"startDate": 1461362401208,
+				"endDate": 1461621601208,
+				"daysToEnd": 0
+      },
+			{
+				"challId": "f936c43c-e73d-421f-abc1-92b561fbbbe7",
+				"challDesc": "Fai almeno 1 viaggio in bici e avrai un bonus di 30 punti Green Leaves",
+				"challCompleteDesc": "Per vincere la sfida effettua almeno un viaggio utilizzando la bici nel corso del periodo di validita' della sfida.",
+				"challTarget": 1,
+				"status": 0,
+				"row_status": 0,
+				"type": "TRIPNUMBER",
+				"active": false,
+				"success": false,
+				"startDate": 1461362401506,
+				"endDate": 1461621601506,
+				"daysToEnd": 0
+      },
+			{
+				"challId": "124254ca-5f83-4081-8c06-f20d757fd7f4",
+				"challDesc": "Raccomanda la App ad almeno 1 utente e guadagni 50 punti Green Leaves",
+				"challCompleteDesc": "Per vincere la sfida, almeno 1 tuo amico si deve registrare al gioco indicando il tuo nickname nell'apposito campo durante la registrazione.",
+				"challTarget": 1,
+				"status": 100,
+				"row_status": 4,
+				"type": "RECOMMENDATION",
+				"active": false,
+				"success": true,
+				"startDate": 1460671201950,
+				"endDate": 1460930401950,
+				"daysToEnd": 0
+      },
+			{
+				"challId": "656f644b-a272-45e1-91d8-afd9af72a927",
+				"challDesc": "Fai almeno 1 viaggio a impatto zero e avrai un bonus di 20 punti Green Leaves",
+				"challCompleteDesc": "Gli itinerari a impatto zero sono quelli che comprendono solo tratte in bici, bike sharing o a piedi.",
+				"challTarget": 1,
+				"status": 0,
+				"row_status": 0,
+				"type": "ZEROIMPACT",
+				"active": false,
+				"success": false,
+				"startDate": 1461189601431,
+				"endDate": 1461276001431,
+				"daysToEnd": 0
+      }
+    ]
+	}
+}

@@ -18,12 +18,20 @@
 		<!-- Results -->
 		<div class="padding-right padding-left challenges">
 			<ion-list>
-				<ion-item class="challenge" ng-repeat="i in [1, 2, 3, 4]">
-					<div class="challenge-desc">Fai almeno 4 viaggi a impatto zero e avrai un bonus di 400 punti Green Leaves</div>
-					<div class="challenge-countdown">Hai ancora 12 giorni per completare la sfida!</div>
+				<ion-item class="challenge" ng-repeat="challenge in challenges" ng-class="{'challenge-old': !challenge.active, success: !!challenge.success, fail: !challenge.success}">
+					<div class="challenge-desc">{{challenge.challDesc}}</div>
+					<div class="challenge-countdown" ng-if="!!challenge.active" ng-init="days = {days: challenge.daysToEnd}">
+						{{'game_tab_challenges_daysToEnd' + (challenge.daysToEnd == 1 ? '_1' : '') | translate:days}}
+					</div>
+					<div class="challenge-result" ng-if="!challenge.active">
+						{{'game_tab_challenge_success_' + challenge.success | translate}}
+					</div>
 					<div class="challenge-status">
-						<a class="challenge-info" href="" ng-click=""><i class="icon ion-information-circled"></i></a>
-						<span class="challenge-count">Stato completamento: 2/4</span>
+						<a class="challenge-info" href="" ng-click="showChallengeInfo(challenge)"><i class="icon ion-information-circled"></i></a>
+						<span class="challenge-count">
+							{{'game_tab_challenges_status' + (!challenge.active ? '_final' : '') | translate}}:
+							{{!!challenge.success ? challenge.challTarget : challenge.row_status}}/{{challenge.challTarget}}
+						</span>
 					</div>
 				</ion-item>
 			</ion-list>

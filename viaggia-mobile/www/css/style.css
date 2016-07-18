@@ -1351,7 +1351,7 @@ Play&Go
 	margin-top: 24px;
 }
 .game-points .badges {
-	text-align: left;
+	/*text-align: left;*/
 }
 .game-points .badges li {
 	display: inline-block;
@@ -1380,6 +1380,9 @@ Play&Go
 .game-challenges .challenge div:not(:first-child) {
 	margin-top: 8px;
 }
+.game-challenges .challenge .challenge-status {
+	text-align: center;
+}
 .game-challenges .challenge .challenge-status .challenge-info {
 	float: left;
 	color: #000;
@@ -1387,6 +1390,32 @@ Play&Go
 .game-challenges .challenge .challenge-status .challenge-count {
 	float: right;
 	font-weight: bold;
+}
+.game-challenges .challenge.challenge-old .challenge-result {
+	text-align: center;
+	text-transform: uppercase;
+}
+.game-challenges .challenge.challenge-old {
+	background-repeat: no-repeat;
+	background-position: bottom right;
+}
+.game-challenges .challenge.challenge-old.success {
+	background-image: url('../img/game/cup_10.png');
+}
+.game-challenges .challenge.challenge-old.fail {
+	background-image: url('../img/game/cup_0.png');
+}
+.game-challenges .challenge.challenge-old.success .challenge-result {
+	color: #6AB64D;
+}
+.game-challenges .challenge.challenge-old.fail .challenge-result {
+	color: red;
+}
+.game-challenges .challenge.challenge-old .challenge-status .challenge-info {
+	display: none;
+}
+.game-challenges .challenge.challenge-old .challenge-status .challenge-count {
+	float: none;
 }
 /* Tabs */
 

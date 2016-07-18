@@ -9,50 +9,24 @@
 		</div>-->
 		<div class="row game-mypoints">
 			<div class="col col-33 col-center">
-				<img class="game-badge" src="http://placehold.it/150x150" />
+				<img class="game-badge" src="img/game/greenleaves.png" />
 			</div>
 			<div class="col col-67 col-center">
 				<div class="description">
-					<h1 class="points">1234</h1>
-					<h5 class="label">Punti Green Leaves</h5>
+					<h1 class="points">{{status['pointConcept'][0]['score']}}</h1>
+					<h5 class="label">{{'green_leaves_points' | translate}}</h5>
 				</div>
 			</div>
 		</div>
-		<h4 class="title">Green Leaves Badge</h4>
-		<ul class="badges">
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-		</ul>
-		<h4 class="title">Bike Trip Badge</h4>
-		<ul class="badges">
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-		</ul>
-		<h4 class="title">Zero Impact Badge</h4>
-		<ul class="badges">
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-			<li><img class="game-badge-s" src="http://placehold.it/150x150" /></li>
-		</ul>
+
+		<div ng-repeat="badgeType in badgeTypes" ng-if="badges[badgeType].length > 0">
+			<!--badgeEarned-->
+			<h4 class="title">{{badgeType | translate}}</h4>
+			<ul class="badges">
+				<li ng-repeat="badge in badges[badgeType]">
+					<img class="game-badge-s" ng-src="{{badge.url}}" />
+				</li>
+			</ul>
+		</div>
 	</ion-content>
 </ion-view>
