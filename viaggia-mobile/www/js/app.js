@@ -90,6 +90,7 @@ angular.module('viaggia', [
     'viaggia.services.bookmarks',
     'viaggia.services.tracking',
     'viaggia.services.registration',
+	'viaggia.services.game',
     'viaggia.filters'
 ])
 
