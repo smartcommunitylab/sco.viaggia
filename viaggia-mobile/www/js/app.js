@@ -808,7 +808,6 @@ angular.module('viaggia', [
 		btn_score: 'PUNTEGGIO',
 		user_check: 'Verifica utente',
 		credits_main_sponsors: 'Sponsor premi finali:',
-
 		registration_title: 'Benvenuto',
 		registration_answer: 'Rispondi a queste veloci e semplici domande per registrarti al gioco. Questo permetterà al sistema di recuperare informazioni utili per offrire un servizio piu\' personalizzato e adatto alle tue abitudini.',
 		registration_read: 'Ho letto e accettato il regolamento di gioco e l\'informativa sulla privacy:',
@@ -909,7 +908,6 @@ angular.module('viaggia', [
 		"recommendations": "User Recommendation Badge",
 		"leaderboard top 3": "Leaderboard Top 3 Badge"
 	});
-
 
 	$translateProvider.translations('en', {
 		menu_home: 'Home',
@@ -1139,7 +1137,6 @@ angular.module('viaggia', [
 		btn_score: 'SCORE',
 		user_check: 'Check user',
 		credits_main_sponsors: 'Sponsors of final prizes:',
-
 		registration_title: 'Welcome',
 		registration_answer: 'Answer to these quick and easy questions in order to register for the game. The information you give will let the App better fit your needs and preferences.',
 		registration_read: 'I have read and agreed the game rules and the privacy terms:',
@@ -1237,7 +1234,6 @@ angular.module('viaggia', [
 		"recommendations": "User Recommendation Badge",
 		"leaderboard top 3": "Leaderboard Top 3 Badge"
 	});
-
 
 	$translateProvider.preferredLanguage(DEFAULT_LANG);
 	$translateProvider.fallbackLanguage(DEFAULT_LANG);
