@@ -202,13 +202,15 @@ angular.module('viaggia.services.tracking', [])
             for (var i = 1; i < tripLocs.length; i++) {
               dist += GeoLocate.distance([tripLocs[i-1].coords.latitude,tripLocs[i-1].coords.longitude],[tripLocs[i].coords.latitude,tripLocs[i].coords.longitude]);
             }
-            var data = {};
+            var data = {dist : 0, transport : localStorage.getItem(Config.getAppId() + '_trackedTransport'), points: 0};
             if (tripLocs.length > 0) {
               data.dist = dist*1000; // in meters
               data.start = tripLocs[0].timestamp;
               data.end = tripLocs[tripLocs.length - 1].timestamp;
-              data.transport = localStorage.getItem(Config.getAppId() + '_trackedTransport');
               data.avgSpeed = data.dist / (data.end - data.start) * 1000; // in m/s
+              if (data.transport == 'walk') data.points = Math.min(53,data.dist / 1000 * 15);
+              else if (data.transport == 'bike') data.points = Math.min(53,data.dist / 1000 * 7.5);
+              else data.points = localStorage.getItem(Config.getAppId() + '_expectedPoints');
             }
             deferred.resolve(data);
           });
@@ -264,6 +266,9 @@ angular.module('viaggia.services.tracking', [])
                     localStorage.setItem(Config.getAppId() + '_tripId', idTrip);
                     localStorage.setItem(Config.getAppId() + '_startTimestamp', startTimestamp);
                     localStorage.setItem(Config.getAppId() + '_endTimestamp', endtime);
+                    if (trip.data && trip.data.customData) {
+                      localStorage.setItem(Config.getAppId() + '_expectedPoints', trip.data.customData['estimatedScore']);
+                    }
                     //taggo la prima locazione con parametro extra
                 }
 
@@ -422,6 +427,7 @@ angular.module('viaggia.services.tracking', [])
             localStorage.removeItem(Config.getAppId() + '_startTimestamp');
             localStorage.removeItem(Config.getAppId() + '_endTimestamp');
             localStorage.removeItem(Config.getAppId() + '_trackedTransport');
+            localStorage.removeItem(Config.getAppId() + '_expectedPoints');
         };
 
         /**
@@ -483,7 +489,7 @@ angular.module('viaggia.services.tracking', [])
                     type: 'button-custom'
                 }
             ]
-        });
+          });
         }
 
         /**

@@ -848,6 +848,7 @@ angular.module('viaggia', [
             pop_up_points_title: 'Complimenti!',
             pop_up_points_template: 'Con il viaggio appena tracciato ai guadagnato {{points}} punti!',
             pop_up_points_btn: 'Vedi punti',
+            no_points: 'Nessun punto guadagnato dal viaggio appena tracciato.'
 		});
 
 
@@ -1157,6 +1158,7 @@ angular.module('viaggia', [
             pop_up_points_title: 'Congratulations!',
             pop_up_points_template: 'With the trip just tracked you have earned {{points}} points!',
             pop_up_points_btn: 'See points',
+            no_points: 'No points earned from the tracked trip.'
 		});
 
 

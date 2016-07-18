@@ -134,14 +134,11 @@ angular.module('viaggia.controllers.home', [])
 
       trackService.computeInfo().then(function(data){
         trackService.stop().then(function(){
-          // TODO: show distance if needed
-          if (data.transport && data.dist){
-            if (data.transport == 'walk') data.points = Math.max(53,data.dist / 1000 * 15);
-            if (data.transport == 'bike') data.points = Math.max(53,data.dist / 1000 * 7.5);
 //            alert(JSON.stringify(data));
+          if (data.points > 0) {
             $ionicPopup.confirm({
                 title: $filter('translate')("pop_up_points_title"),
-                template: $filter('translate')("pop_up_points_template", {points:data.points}),
+                template: $filter('translate')("pop_up_points_template", {points:Math.floor(data.points)}),
                 buttons: [
                     {
                         text: $filter('translate')("btn_close"),
@@ -156,6 +153,8 @@ angular.module('viaggia.controllers.home', [])
                     }
                 ]
             });
+          } else {
+          Toast.show($filter('translate')("no_points"), "short", "bottom");
           }
         }).finally(function(){
           Config.loaded();
