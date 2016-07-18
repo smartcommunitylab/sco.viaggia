@@ -90,7 +90,6 @@ angular.module('viaggia', [
     'viaggia.services.bookmarks',
     'viaggia.services.tracking',
     'viaggia.services.registration',
-	'viaggia.services.game',
     'viaggia.filters'
 ])
 
@@ -527,27 +526,27 @@ angular.module('viaggia', [
 	})
 
 	.state('app.signupsuccess', {
-		url: '/signupsuccess',
-		views: {
-			'menuContent': {
-				templateUrl: 'templates/signupsuccess.html',
-				controller: 'RegisterCtrl'
+			url: '/signupsuccess',
+			views: {
+				'menuContent': {
+					templateUrl: 'templates/signupsuccess.html',
+					controller: 'RegisterCtrl'
+				}
 			}
-		}
-	})
-
-	// setup an abstract state for the tabs directive
-	.state('app.game', {
-		url: "/game",
-		views: {
-			'menuContent': {
-				templateUrl: "templates/game/game.html",
-				controller: 'GameCtrl'
+		})
+		// setup an abstract state for the tabs directive
+		.state('app.game', {
+			url: "/game",
+			views: {
+				'menuContent': {
+					templateUrl: "templates/game/game.html",
+					controller: 'GameCtrl'
+				}
 			}
-		}
-	})
+		})
 
 	// Each tab has its own nav history stack:
+
 	.state('app.game.points', {
 		url: '/points',
 		views: {
@@ -578,9 +577,8 @@ angular.module('viaggia', [
 		}
 	});
 
-
 	// if none of the above states are matched, use this as the fallback
-	$urlRouterProvider.otherwise('/app/login'); // FIXME
+	$urlRouterProvider.otherwise('/app/login');
 
 	$translateProvider.translations('it', {
 		menu_home: 'Home',
@@ -872,7 +870,6 @@ angular.module('viaggia', [
 		game_tab_points_label: 'PUNTI',
 		game_tab_challenges_label: 'SFIDE',
 		game_tab_rankings_label: 'CLASSIFICA',
-		game_tab_challenges_infopopup_title: 'Info sfida',
 		no_saved_tracks_to_track: 'Nessun viaggio salvato. Creane uno per tracciare e giocare!',
 		play_now: 'GIOCA ORA!',
 		play_now_sub: 'Inizia a tracciare un percorso',
@@ -885,6 +882,15 @@ angular.module('viaggia', [
 		track_walk_action: 'camminando',
 		track_bike_action: 'ciclando',
 		track_other_action: 'viaggiando',
+		game_tab_challenges_filter_active: "Attive",
+		game_tab_challenges_filter_old: "Passate",
+		game_tab_challenges_info: "Info sfida",
+		pop_up_no_geo_title: 'Errore di geolocalizzazione',
+		pop_up_no_geo_template: 'Attenzione! Non è stato possibile rilevare la tua posizione. Accedi alle impostazioni del tuo dispositivo e controlla che il servizio di localizzazione è attivo',
+		pop_up_points_title: 'Complimenti!',
+		pop_up_points_template: 'Con il viaggio appena tracciato ai guadagnato {{points}} punti!',
+		pop_up_points_btn: 'Vedi punti',
+		no_points: 'Nessun punto guadagnato dal viaggio appena tracciato.',
 		game_tab_challenges_filter_active: "Attive",
 		game_tab_challenges_filter_old: "Passate",
 		game_tab_challenges_info: "Info sfida",
@@ -939,7 +945,8 @@ angular.module('viaggia', [
 		add_favorites_title: 'Add to favorites',
 		pop_up_loading: 'Loading...',
 		pop_up_cancel: 'Cancel',
-		pop_up_ok: 'Ok',
+		pop_up_ok: 'OK',
+		pop_up_close: 'Close',
 		pop_up_no_connection_title: 'Error',
 		pop_up__no_connection_template: 'No connection',
 		popup_address: 'Address',
@@ -1206,6 +1213,12 @@ angular.module('viaggia', [
 		track_walk_action: 'walking',
 		track_bike_action: 'cycling',
 		track_other_action: 'travelling',
+		pop_up_no_geo_title: 'Geolocation error',
+		pop_up_no_geo_template: 'Warning! Your location cannot be retrieved. Enable location information in the device/app settings.',
+		pop_up_points_title: 'Congratulations!',
+		pop_up_points_template: 'With the trip just tracked you have earned {{points}} points!',
+		pop_up_points_btn: 'See points',
+		no_points: 'No points earned from the tracked trip.',
 		game_tab_challenges_filter_active: "Now",
 		game_tab_challenges_filter_old: "Past",
 		game_tab_challenges_info: "Challnenge Info",

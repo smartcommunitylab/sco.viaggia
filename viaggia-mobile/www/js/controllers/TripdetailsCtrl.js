@@ -372,8 +372,14 @@ angular.module('viaggia.controllers.tripdetails', [])
      *****************************************************/
     $scope.trackStart = function () {
             if (!$scope.notTrackable()) {
-                trackService.start($scope.tripId, $scope.trip, refreshTripDetail); //params= trip, idTrip. Enditime is authomatic calculated
-                $scope.modifiable = false;
+                Config.loading();
+                //params= trip, idTrip. Enditime is authomatic calculated
+                trackService.start($scope.tripId, $scope.trip, refreshTripDetail)
+                .then(function(){
+                  $scope.modifiable = false;
+                }, function(errorCode) {
+                  trackService.geolocationPopup();
+                }).finally(Config.loaded);
             }
         }
         //    $scope.trackState = function () {

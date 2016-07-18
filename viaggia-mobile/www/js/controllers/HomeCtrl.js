@@ -104,12 +104,17 @@ angular.module('viaggia.controllers.home', [])
       return $filter('translate')('track_other_action');
     }
 
-    var updateTrackingInfo = function() {
-      $scope.trackInfoInterval = $interval(function(){
+    function setTrackingInfo() {
         $scope.trackingInfo = {
           transport: translateTransport(trackService.trackedTransport()),
           time: $filter('date')(new Date().getTime() - trackService.trackingTimeStart(),'HH:mm:ss','+0000')
         };
+    };
+
+    var updateTrackingInfo = function() {
+      setTrackingInfo();
+      $scope.trackInfoInterval = $interval(function(){
+        setTrackingInfo();
       }, 1000);
     }
 
@@ -120,19 +125,43 @@ angular.module('viaggia.controllers.home', [])
           $scope.trackingIsOn = true;
           updateTrackingInfo();
         }, function(errorCode) {
-          // TODO
+          trackService.geolocationPopup();
         }).finally(Config.loaded);
       }
     }
     $scope.stopTracking = function() {
       Config.loading();
-      trackService.stop().then(function(){
-        // TODO
-      }).finally(function(){
-        Config.loaded();
-        $scope.trackingIsOn = false;
-        $interval.cancel($scope.trackInfoInterval);
-        $scope.trackingInfo = {};
+
+      trackService.computeInfo().then(function(data){
+        trackService.stop().then(function(){
+//            alert(JSON.stringify(data));
+          if (data.points > 0) {
+            $ionicPopup.confirm({
+                title: $filter('translate')("pop_up_points_title"),
+                template: $filter('translate')("pop_up_points_template", {points:Math.floor(data.points)}),
+                buttons: [
+                    {
+                        text: $filter('translate')("btn_close"),
+                        type: 'button-cancel'
+                                },
+                    {
+                        text: $filter('translate')("pop_up_points_btn"),
+                        type: 'button-custom',
+                        onTap: function(){
+                          $state.go('app.game');
+                        }
+                    }
+                ]
+            });
+          } else {
+          Toast.show($filter('translate')("no_points"), "short", "bottom");
+          }
+        }).finally(function(){
+          Config.loaded();
+          $scope.trackingIsOn = false;
+          $interval.cancel($scope.trackInfoInterval);
+          $scope.trackingInfo = {};
+        });
       });
     }
 
