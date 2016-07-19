@@ -1417,6 +1417,15 @@ Play&Go
 .game-challenges .challenge.challenge-old .challenge-status .challenge-count {
 	float: none;
 }
+.game-ranking {
+	text-align: center;
+}
+.game-ranking .my-ranking {
+	background-color: #6AB64D;
+}
+.game-ranking .pos-even {
+	background-color: #F2F2F2;
+}
 /* Tabs */
 
 .tabs {

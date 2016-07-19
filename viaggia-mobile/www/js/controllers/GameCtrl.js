@@ -1,11 +1,22 @@
 angular.module('viaggia.controllers.game', [])
 
 .controller('GameCtrl', function ($scope, GameSrv) {
+	$scope.currentUser = null;
 	$scope.status = null;
+	$scope.ranking = null;
+
+	$scope.rankingFilterOptions = ['now', 'last', 'global'];
 
 	GameSrv.getLocalStatus().then(
 		function (status) {
 			$scope.status = status;
+		}
+	);
+
+	GameSrv.getRanking($scope.rankingFilterOptions[0]).then(
+		function (ranking) {
+			$scope.currentUser = ranking['actualUser'];
+			$scope.ranking = ranking['classificationList'];
 		}
 	);
 })
@@ -102,4 +113,39 @@ angular.module('viaggia.controllers.game', [])
 
 })
 
-.controller('RankingsCtrl', function ($scope) {})
+.controller('RankingsCtrl', function ($scope, $ionicScrollDelegate, GameSrv) {
+	$scope.filter = {
+		open: false,
+		toggle: function () {
+			this.open = !this.open;
+			$ionicScrollDelegate.resize();
+		},
+		filterBy: function (selection) {
+			if (this.selected !== selection) {
+				this.selected = selection;
+				this.filter(this.selected);
+			}
+			this.toggle();
+		},
+		update: function () {
+			this.filter(this.selected);
+		},
+		filter: function (selection) {},
+		options: [],
+		selected: null
+	};
+
+	$scope.filter.options = $scope.rankingFilterOptions;
+	$scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
+
+	$scope.filter.filter = function (selection) {
+		GameSrv.getRanking(selection).then(
+			function (ranking) {
+				$scope.currentUser = ranking['actualUser'];
+				$scope.ranking = ranking['classificationList'];
+			}
+		);
+	};
+
+	$scope.filter.filter($scope.filter.selected);
+});

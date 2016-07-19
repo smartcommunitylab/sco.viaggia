@@ -1,0 +1,40 @@
+{
+	"actualUser": {
+		"playerId": "4",
+		"nickName": "mBortF",
+		"score": 72,
+		"position": 4
+	},
+	"classificationList": [
+		{
+			"playerId": "3",
+			"nickName": "regolo985",
+			"score": 302,
+			"position": 1
+       	},
+		{
+			"playerId": "128",
+			"nickName": "Test10",
+			"score": 112,
+			"position": 2
+       	},
+		{
+			"playerId": "157",
+			"nickName": "userTest12",
+			"score": 87,
+			"position": 3
+       	},
+		{
+			"playerId": "4",
+			"nickName": "mBortF",
+			"score": 72,
+			"position": 4
+		},
+		{
+			"playerId": "13",
+			"nickName": "RenÃ©",
+			"score": 0,
+			"position": 5
+		}
+	]
+}
