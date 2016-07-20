@@ -579,7 +579,7 @@ angular.module('viaggia', [
 	});
 
 	// if none of the above states are matched, use this as the fallback
-	$urlRouterProvider.otherwise('/app/home'); // FIXME dev only
+	$urlRouterProvider.otherwise('/app/login');
 
 	$translateProvider.translations('it', {
 		menu_home: 'Home',
