@@ -4,6 +4,7 @@ angular.module('viaggia.controllers.game', [])
 	$scope.currentUser = null;
 	$scope.status = null;
 	$scope.ranking = null;
+	$scope.prize = null;
 
 	$scope.rankingFilterOptions = ['now', 'last', 'global'];
 
@@ -148,4 +149,20 @@ angular.module('viaggia.controllers.game', [])
 	};
 
 	$scope.filter.filter($scope.filter.selected);
+
+	$scope.rankingStyle = {};
+
+	var generateRankingStyle = function () {
+		// header 44, tabs 49, filter 44, listheader 44, my ranking 48
+		$scope.rankingStyle = {
+			'height': window.innerHeight - (44 + 49 + 44 + 44 + 48) + 'px'
+		};
+		$ionicScrollDelegate.$getByHandle('rankingScroll').resize();
+	};
+
+	generateRankingStyle();
+
+	window.addEventListener('orientationchange', function () {
+		generateRankingStyle();
+	}, false);
 });

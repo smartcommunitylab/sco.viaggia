@@ -3,7 +3,7 @@ angular.module('viaggia.services.game', [])
 .factory('GameSrv', function ($q, $http, Config) {
 	var gameService = {};
 
-	var token = 'acd3296f-fa7b-4326-9b42-51f9c3d8c346';
+	var token = '35cd7ce8-785b-4b5f-8a91-d30fa0228312';
 
 	var localStatus = null;
 	var localRanking = null;

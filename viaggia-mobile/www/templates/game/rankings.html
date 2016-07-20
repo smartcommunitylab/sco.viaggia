@@ -1,5 +1,5 @@
 <ion-view title="{{'home_gamification' | translate}} {{currentUser.nickName}}">
-	<ion-content class="game-ranking">
+	<ion-content class="game-ranking" has-bouncing="false" scroll="false">
 		<!-- Filter -->
 		<div class="filter item-accordion" ng-if="!!filter.options">
 			<ion-item class="item-accordion-header item-icon-right" ng-click="filter.toggle()">
@@ -14,24 +14,33 @@
 				</ion-list>
 			</div>
 		</div>
-
-		<div class="ranking">
-			<ion-list>
-				<div class="ranking my-ranking">
-					<div class="row">
-						<div class="col col-20">{{currentUser.position}}</div>
-						<div class="col col-60">{{currentUser.nickName}}</div>
-						<div class="col col-20">{{currentUser.score}}</div>
-					</div>
-				</div>
-				<div class="ranking" ng-repeat="rankingUser in ranking" ng-class="{'pos-even': ($index % 2 == 0)}">
-					<div class="row">
-						<div class="col col-20">{{rankingUser.position}}</div>
-						<div class="col col-60">{{rankingUser.nickName}}</div>
-						<div class="col col-20">{{rankingUser.score}}</div>
-					</div>
-				</div>
-			</ion-list>
+		<div class="listheader" ng-class="{hasprize: (filter.selected === 'now' && !!prize)}">
+			<div class="prize" ng-if="filter.selected === 'now' && !!prize">
+				<div>{{'game_tab_ranking_listheader_price' | translate}}</div>
+				<div>Lorem ipsum sic dolor amet</div>
+			</div>
+			<div class="row">
+				<div class="col col-25">{{'game_tab_ranking_listheader_position' | translate}}</div>
+				<div class="col col-50">{{'game_tab_ranking_listheader_player' | translate}}</div>
+				<div class="col col-25">{{'game_tab_ranking_listheader_points' | translate}}</div>
+			</div>
 		</div>
+		<div class="my-ranking">
+			<div class="row">
+				<div class="col col-25">{{currentUser.position}}</div>
+				<div class="col col-50">{{currentUser.nickName}}</div>
+				<div class="col col-25">{{currentUser.score}}</div>
+			</div>
+		</div>
+
+		<ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="rankingScroll">
+			<div ng-repeat="rankingUser in ranking" ng-class="{'pos-even': ($index % 2 == 0)}">
+				<div class="row">
+					<div class="col col-25">{{rankingUser.position}}</div>
+					<div class="col col-50">{{rankingUser.nickName}}</div>
+					<div class="col col-25">{{rankingUser.score}}</div>
+				</div>
+			</div>
+		</ion-scroll>
 	</ion-content>
 </ion-view>

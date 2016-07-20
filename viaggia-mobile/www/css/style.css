@@ -1420,12 +1420,31 @@ Play&Go
 .game-ranking {
 	text-align: center;
 }
+.game-ranking .listheader {
+	font-weight: bold;
+	height: 44px;
+}
+.game-ranking .listheader .row {
+	height: 44px;
+}
+.game-ranking .listheader.hasprize {
+	background-color: #6AB64D;
+	background-image: linear-gradient(#6AB64D, white);
+}
+.game-ranking .listheader.hasprize .prize {
+	padding: 8px 0;
+	color: white;
+	text-align: center;
+}
 .game-ranking .my-ranking {
 	background-color: #6AB64D;
+	margin-bottom: 8px;
+	box-shadow: 0px 4px 10px 0px #666666;
 }
 .game-ranking .pos-even {
 	background-color: #F2F2F2;
 }
+
 /* Tabs */
 
 .tabs {
@@ -1464,6 +1483,7 @@ Play&Go
 
 .item-accordion {
 	height: 44px;
+	transition: all 0.2s linear;
 }
 .item-accordion .item-accordion-header,
 .item-accordion .item-accordion-content,
@@ -1486,11 +1506,13 @@ Play&Go
 	font-size: 0.5em;
 }
 .item-accordion .item-accordion-content {
+	max-height: 1000px;
 	border-top: 0;
 	transition: all 0.2s linear;
 }
 .item-accordion .item-accordion-content.ng-hide {
-	line-height: 0px;
+	max-height: 0;
+	/*line-height: 0px;*/
 	opacity: 0;
 }
 .filter {
@@ -1499,16 +1521,17 @@ Play&Go
 	/*top: 0;*/
 	width: 100%;
 	height: auto;
-	background: #2975A7;
+	/*background: #2975A7;*/
 }
 .filter.item-accordion .item {
 	background-color: #2975A7;
 	border: none;
 	color: #fff;
-	padding: 8px;
+	padding: 8px 16px;
+	margin: 0;
 }
 .filter.item-accordion .item.reset {
-	color: $balanced;
+	color: #2975A7;
 }
 .filter.item-accordion .item-accordion-header {
 	padding: 0 8px;
@@ -1522,8 +1545,6 @@ Play&Go
 }
 .filter.item-accordion .item-accordion-content {
 	box-shadow: 0 4px 4px #A0A0A0;
-	padding: 0 8px;
-	text-align: center;
 }
 .filter.item-accordion .item-divider {
 	font-style: italic;
@@ -1531,58 +1552,43 @@ Play&Go
 .filter.item-accordion .list {
 	margin-bottom: 0;
 }
-.filter.item-accordion .list-mycommunities .list {
-	border-bottom: 2px solid #fff;
-}
-.filter.item-accordion .list-mycommunities .list .item {
-	font-weight: bold;
-}
-.filter.item-accordion .list-mycommunities .list .item.item-divider {
-	font-weight: normal;
-}
-
 .tracking-dashboard {
-  margin: 0px 8px;
-  border-bottom: 1px solid #2975a7;
+	margin: 0px 8px;
+	border-bottom: 1px solid #2975a7;
 }
 .tracking-dashboard h4 {
-  margin-bottom: 0px;
-  margin-top: 0px;
+	margin-bottom: 0px;
+	margin-top: 0px;
 }
 .tracking-dashboard h4 i {
-  font-size: 32px;
-  color: #4caf4f;
+	font-size: 32px;
+	color: #4caf4f;
 }
-
 .tracking-dashboard .tracking-ds-button {
-  background-color: #4caf4f;
-  border-radius: 4px;
-  padding: 4px;
-  color: #fff;
-  text-align: center;
-  max-width: 88px;
-  margin: auto;
+	background-color: #4caf4f;
+	border-radius: 4px;
+	padding: 4px;
+	color: #fff;
+	text-align: center;
+	max-width: 88px;
+	margin: auto;
 }
-
 .tracking-dashboard .tracking-ds-button i {
-  font-size: 48px;
+	font-size: 48px;
 }
 .tracking-dashboard .tracking-ds-button span {
-  display: block;
+	display: block;
 }
-
 .tracking-dashboard a > div {
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
-  display: block;
-  background-color: transparent;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+	display: block;
+	background-color: transparent;
 }
-
 .tracking-dashboard a.activated > div {
-  border-color: #a2a2a2;
-  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
+	border-color: #a2a2a2;
+	box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
 }
-
 .button-stop {
-  background-color: #c1272d;
-  color: #fff;
+	background-color: #c1272d;
+	color: #fff;
 }

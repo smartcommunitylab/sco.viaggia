@@ -579,7 +579,7 @@ angular.module('viaggia', [
 	});
 
 	// if none of the above states are matched, use this as the fallback
-	$urlRouterProvider.otherwise('/app/login');
+	$urlRouterProvider.otherwise('/app/home'); // FIXME dev only
 
 	$translateProvider.translations('it', {
 		menu_home: 'Home',
@@ -903,6 +903,10 @@ angular.module('viaggia', [
 		game_tab_ranking_filter_now: "Settimana corrente",
 		game_tab_ranking_filter_last: "Settimana scorsa",
 		game_tab_ranking_filter_global: "Globale",
+		game_tab_ranking_listheader_price: "Premio della settimana",
+		game_tab_ranking_listheader_position: "Posizione",
+		game_tab_ranking_listheader_player: "Giocatore",
+		game_tab_ranking_listheader_points: "Punti",
 		green_leaves_points: "Punti Green Leaves Points",
 		"green leaves": "Green Leaves",
 		"bike aficionado": "Bike Trip Badge",
@@ -1232,6 +1236,10 @@ angular.module('viaggia', [
 		game_tab_ranking_filter_now: "Current week",
 		game_tab_ranking_filter_last: "Last week",
 		game_tab_ranking_filter_global: "Overall",
+		game_tab_ranking_listheader_price: "Prize of the week",
+		game_tab_ranking_listheader_position: "Position",
+		game_tab_ranking_listheader_player: "Player",
+		game_tab_ranking_listheader_points: "Points",
 		green_leaves_points: "Green Leaves Points",
 		"green leaves": "Green Leaves",
 		"bike aficionado": "Bike Trip Badge",
