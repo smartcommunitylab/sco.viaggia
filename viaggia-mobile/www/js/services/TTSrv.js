@@ -5,6 +5,7 @@ angular.module('viaggia.services.timetable', [])
  */
 .factory('ttService', function ($http, $q, $filter, Config, DataManager) {
   var calendarCache = {};
+  var stopCache = {};
 
   var ttMapData = {};
   var ttStopData = {};
@@ -25,6 +26,19 @@ angular.module('viaggia.services.timetable', [])
     });
     return res;
   };
+
+  var getStop = function(agencyId, stopId) {
+    var key = agencyId+'_'+stopId;
+    if (!stopCache[key]) {
+      var stops = getStopsData([agencyId]);
+      if (stops) {
+        stops.forEach(function(s){
+          stopCache[agencyId+'_'+s.id] = s;
+        });
+      }
+    }
+    return stopCache[key];
+  }
 
   var toTrimmedList = function(str) {
     if (!str) return [];
@@ -62,6 +76,16 @@ angular.module('viaggia.services.timetable', [])
 
 
     return deferred.promise;
+  }
+
+  var toWheelChairBoarding = function(agencyId, stops) {
+    var res = [];
+    stops.forEach(function(s) {
+      var stop = getStop(agencyId, s);
+      if (!!stop) res.push(stop.wheelChairBoarding);
+      else res.push(0);
+    });
+    return res;
   }
 
   /**
@@ -112,6 +136,7 @@ angular.module('viaggia.services.timetable', [])
       }
       result.stops = toTrimmedList(data[0].stopsNames);
       result.tripIds = toTrimmedList(data[0].tripIds);
+      result.wheelChairBoarding = toWheelChairBoarding(agency, toTrimmedList(data[0].stopsIDs));
       result.times = uncompressTime(data[0].times,result.stops.length);
       deferred.notify(result);
       getDelays(agency, route, date).then(function(delays){
@@ -309,7 +334,8 @@ angular.module('viaggia.services.timetable', [])
     },
     setTTStopData: function(stopData){
       ttStopData = stopData;
-    }
+    },
+    getStop: getStop
 //    ,
 //    getDelays: function(data, agency, route, date) {
 //      var deferred = $q.defer();
