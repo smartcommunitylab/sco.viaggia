@@ -70,12 +70,13 @@ angular.module('viaggia.controllers.common', [])
 	};
 
 	$scope.showPlayAndGoPopup = function () {
-		$scope.firstOpenPopup = $ionicPopup.show({
-			templateUrl: 'templates/welcomePopup.html',
-			title: $filter('translate')('lbl_betatesting'),
-			cssClass: 'parking-popup',
-			scope: $scope
-		});
+      $state.go('app.game');
+//		$scope.firstOpenPopup = $ionicPopup.show({
+//			templateUrl: 'templates/welcomePopup.html',
+//			title: $filter('translate')('lbl_betatesting'),
+//			cssClass: 'parking-popup',
+//			scope: $scope
+//		});
 	};
 
 	$scope.newPlan = function () {

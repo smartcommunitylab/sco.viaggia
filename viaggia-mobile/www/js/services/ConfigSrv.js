@@ -483,7 +483,7 @@ angular.module('viaggia.services.conf', [])
             return mapJsonConfig["clientSecID"];
         },
         getHTTPConfig: function () {
-            return HTTP_CONFIG;
+            return angular.copy(HTTP_CONFIG);
         },
         LOGIN_EXPIRED: LOGIN_EXPIRED
     }
