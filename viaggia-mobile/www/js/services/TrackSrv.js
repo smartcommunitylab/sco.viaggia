@@ -208,8 +208,8 @@ angular.module('viaggia.services.tracking', [])
               data.start = tripLocs[0].timestamp;
               data.end = tripLocs[tripLocs.length - 1].timestamp;
               data.avgSpeed = data.dist / (data.end - data.start) * 1000; // in m/s
-              if (data.transport == 'walk') data.points = Math.min(53,data.dist / 1000 * 15);
-              else if (data.transport == 'bike') data.points = Math.min(53,data.dist / 1000 * 7.5);
+              if (data.transport == 'walk') data.points = Math.floor(Math.min(53,data.dist / 1000 * 15));
+              else if (data.transport == 'bike') data.points = Math.floor(Math.min(53,data.dist / 1000 * 7.5));
               else data.points = localStorage.getItem(Config.getAppId() + '_expectedPoints');
             }
             deferred.resolve(data);

@@ -135,10 +135,10 @@ angular.module('viaggia.controllers.home', [])
       trackService.computeInfo().then(function(data){
         trackService.stop().then(function(){
 //            alert(JSON.stringify(data));
-          if (data.points > 0) {
+          if (Math.floor(data.points > 0) {
             $ionicPopup.confirm({
                 title: $filter('translate')("pop_up_points_title"),
-                template: $filter('translate')("pop_up_points_template", {points:Math.floor(data.points)}),
+                template: $filter('translate')("pop_up_points_template", {points:data.points}),
                 buttons: [
                     {
                         text: $filter('translate')("btn_close"),
