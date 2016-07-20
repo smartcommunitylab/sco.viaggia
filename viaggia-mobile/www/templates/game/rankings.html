@@ -1,4 +1,8 @@
 <ion-view title="{{'home_gamification' | translate}} {{currentUser.nickName}}">
+	<ion-nav-buttons side="right">
+		<button ng-click="openRules()" class="button button-icon button-home ion-information-circled"></button>
+	</ion-nav-buttons>
+
 	<ion-content class="game-ranking" has-bouncing="false" scroll="false">
 		<!-- Filter -->
 		<div class="filter item-accordion" ng-if="!!filter.options">

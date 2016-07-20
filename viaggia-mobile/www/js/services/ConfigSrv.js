@@ -223,7 +223,7 @@ angular.module('viaggia.services.conf', [])
             return configDeferred.promise;
         },
         getHTTPConfig: function () {
-            return HTTP_CONFIG;
+            return angular.copy(HTTP_CONFIG);
         },
         getTrackingConfig: function () {
             return angular.copy(mapJsonConfig['trackingConfigure']);
@@ -481,9 +481,6 @@ angular.module('viaggia.services.conf', [])
         },
         getClientSecKey: function () {
             return mapJsonConfig["clientSecID"];
-        },
-        getHTTPConfig: function () {
-            return angular.copy(HTTP_CONFIG);
         },
         LOGIN_EXPIRED: LOGIN_EXPIRED
     }

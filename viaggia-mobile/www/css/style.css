@@ -968,8 +968,8 @@ ion-header-bar .title {
 .button-home {
 	color: white !important;
 	box-shadow: none !important;
-	padding-top: 10px!important;
-	padding-left: 10px!important;
+	/*padding-top: 10px!important;
+	padding-left: 10px!important;*/
 }
 .header-badge {
 	top: -30px !important;

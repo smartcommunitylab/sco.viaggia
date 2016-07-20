@@ -1,4 +1,8 @@
 <ion-view title="{{'home_gamification' | translate}} {{currentUser.nickName}}">
+	<ion-nav-buttons side="right">
+		<button ng-click="openRules()" class="button icon button-icon button-home ion-information-circled"></button>
+	</ion-nav-buttons>
+
 	<ion-content class="padding-right padding-left game-points">
 		<!--<div class="game-mypoints">
 			<img class="game-badge" src="http://placehold.it/150x150" />
