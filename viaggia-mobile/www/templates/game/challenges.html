@@ -1,5 +1,5 @@
 <ion-view title="{{'home_gamification' | translate}} {{currentUser.nickName}}">
-	<ion-content class="game-challenges">
+	<ion-content class="game-challenges" has-bouncing="false" scroll="false">
 		<!-- Filter -->
 		<div class="filter item-accordion" ng-if="!!filter.options">
 			<ion-item class="item-accordion-header item-icon-right" ng-click="filter.toggle()">
@@ -16,7 +16,7 @@
 		</div>
 
 		<!-- Results -->
-		<div class="padding-right padding-left challenges">
+		<ion-scroll class="padding-right padding-left challenges" ng-style="challengesStyle" delegate-handle="challengesScroll">
 			<ion-list>
 				<ion-item class="challenge" ng-repeat="challenge in challenges" ng-class="{'challenge-old': !challenge.active, success: !!challenge.success, fail: !challenge.success}">
 					<div class="challenge-desc">{{challenge.challDesc}}</div>
@@ -35,6 +35,6 @@
 					</div>
 				</ion-item>
 			</ion-list>
-		</div>
+		</ion-scroll>
 	</ion-content>
 </ion-view>

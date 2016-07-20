@@ -34,13 +34,16 @@
 		</div>
 
 		<ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="rankingScroll">
-			<div ng-repeat="rankingUser in ranking" ng-class="{'pos-even': ($index % 2 == 0)}">
-				<div class="row">
-					<div class="col col-25">{{rankingUser.position}}</div>
-					<div class="col col-50">{{rankingUser.nickName}}</div>
-					<div class="col col-25">{{rankingUser.score}}</div>
+			<ion-list>
+				<div ng-repeat="rankingUser in ranking" ng-class="{'pos-even': ($index % 2 == 0)}">
+					<div class="row">
+						<div class="col col-25">{{rankingUser.position}}</div>
+						<div class="col col-50">{{rankingUser.nickName}}</div>
+						<div class="col col-25">{{rankingUser.score}}</div>
+					</div>
 				</div>
-			</div>
+			</ion-list>
+			<ion-infinite-scroll ng-if="maybeMore" on-infinite="loadMore()"></ion-infinite-scroll>
 		</ion-scroll>
 	</ion-content>
 </ion-view>

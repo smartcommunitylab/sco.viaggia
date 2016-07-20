@@ -7,19 +7,23 @@ angular.module('viaggia.controllers.game', [])
 	$scope.prize = null;
 
 	$scope.rankingFilterOptions = ['now', 'last', 'global'];
+	$scope.rankingPerPage = 10;
 
-	GameSrv.getLocalStatus().then(
-		function (status) {
-			$scope.status = status;
-		}
-	);
+	$scope.$on('$stateChangeSuccess', function () {
+		GameSrv.getLocalStatus().then(
+			function (status) {
+				$scope.status = status;
+			}
+		);
 
-	GameSrv.getRanking($scope.rankingFilterOptions[0]).then(
-		function (ranking) {
-			$scope.currentUser = ranking['actualUser'];
-			$scope.ranking = ranking['classificationList'];
-		}
-	);
+		GameSrv.getRanking($scope.rankingFilterOptions[0], 0, $scope.rankingPerPage).then(
+			function (ranking) {
+				$scope.currentUser = ranking['actualUser'];
+				$scope.ranking = ranking['classificationList'];
+				$scope.$broadcast('scroll.infiniteScrollComplete');
+			}
+		);
+	});
 })
 
 .controller('PointsCtrl', function ($scope) {
@@ -35,9 +39,7 @@ angular.module('viaggia.controllers.game', [])
 	$scope.badgeTypes = ['green leaves', 'bike aficionado', 'sustainable life', 'public transport aficionado', 'park and ride pioneer', 'recommendations', 'leaderboard top 3'];
 
 	$scope.$watch('status.badgeCollectionConcept', function (newBadges, oldBadges) {
-
 		var badges = {};
-
 		if (!!$scope.status) {
 			angular.forEach($scope.badgeTypes, function (badgeType) {
 				for (var i = 0; i < $scope.status['badgeCollectionConcept'].length; i++) {
@@ -47,12 +49,11 @@ angular.module('viaggia.controllers.game', [])
 				}
 			});
 		}
-
 		$scope.badges = badges;
 	});
 })
 
-.controller('ChallengesCtrl', function ($scope, $http, $filter, $ionicScrollDelegate, $ionicPopup) {
+.controller('ChallengesCtrl', function ($scope, $http, $filter, $ionicScrollDelegate, $ionicPopup, $window, $timeout) {
 	$scope.challenges = [];
 
 	$scope.filter = {
@@ -111,10 +112,30 @@ angular.module('viaggia.controllers.game', [])
 		);
 	};
 
+	/* Resize ion-scroll */
+	$scope.challengesStyle = {};
 
+	var generateChallengesStyle = function () {
+		// header 44, tabs 49, filter 44, listheader 44, my ranking 48
+		$scope.challengesStyle = {
+			'height': window.innerHeight - (44 + 49 + 44) + 'px'
+		};
+		$ionicScrollDelegate.$getByHandle('challengesScroll').resize();
+	};
+
+	generateChallengesStyle();
+
+	$window.onresize = function (event) {
+		// Timeout required for our purpose
+		$timeout(function () {
+			generateChallengesStyle();
+		}, 200);
+	};
 })
 
-.controller('RankingsCtrl', function ($scope, $ionicScrollDelegate, GameSrv) {
+.controller('RankingsCtrl', function ($scope, $ionicScrollDelegate, $window, $timeout, GameSrv) {
+	$scope.maybeMore = true;
+
 	$scope.filter = {
 		open: false,
 		toggle: function () {
@@ -140,16 +161,39 @@ angular.module('viaggia.controllers.game', [])
 	$scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
 
 	$scope.filter.filter = function (selection) {
-		GameSrv.getRanking(selection).then(
+		// reload using new selection
+		$scope.maybeMore = true;
+
+		GameSrv.getRanking(selection, 0, $scope.rankingPerPage).then(
 			function (ranking) {
 				$scope.currentUser = ranking['actualUser'];
 				$scope.ranking = ranking['classificationList'];
+				$scope.$broadcast('scroll.infiniteScrollComplete');
 			}
 		);
 	};
 
-	$scope.filter.filter($scope.filter.selected);
+	//$scope.filter.filter($scope.filter.selected);
 
+	/* Infinite scrolling */
+	$scope.loadMore = function () {
+		var start = $scope.ranking.length;
+		var end = start + $scope.rankingPerPage;
+		GameSrv.getRanking($scope.filter.selected, start, end).then(
+			function (ranking) {
+				$scope.currentUser = ranking['actualUser'];
+				$scope.ranking = $scope.ranking.concat(ranking['classificationList']);
+
+				if (ranking['classificationList'].length < $scope.rankingPerPage) {
+					$scope.maybeMore = false;
+				}
+
+				$scope.$broadcast('scroll.infiniteScrollComplete');
+			}
+		);
+	};
+
+	/* Resize ion-scroll */
 	$scope.rankingStyle = {};
 
 	var generateRankingStyle = function () {
@@ -162,7 +206,10 @@ angular.module('viaggia.controllers.game', [])
 
 	generateRankingStyle();
 
-	window.addEventListener('orientationchange', function () {
-		generateRankingStyle();
-	}, false);
+	$window.onresize = function (event) {
+		// Timeout required for our purpose
+		$timeout(function () {
+			generateRankingStyle();
+		}, 200);
+	};
 });

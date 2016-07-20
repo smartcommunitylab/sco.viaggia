@@ -48,7 +48,7 @@ angular.module('viaggia.services.game', [])
 	};
 
 	/* get ranking */
-	gameService.getRanking = function (when) {
+	gameService.getRanking = function (when, start, end) {
 		var deferred = $q.defer();
 
 		var timestamp = null;
@@ -65,8 +65,30 @@ angular.module('viaggia.services.game', [])
 			timestamp = d.getTime();
 		}
 
-		//$http.get('data/game/ranking.json')
-		$http.get(Config.getGamificationURL() + '/out/rest/classification' + '?token=' + token + (!!timestamp ? '&timestamp=' + timestamp : ''), Config.getHTTPConfig())
+		var config = Config.getHTTPConfig();
+		if (!config.params) {
+			config.params = {};
+		}
+
+		config.params['token'] = token;
+
+		if ((!!timestamp && timestamp < 0) || (!!start && start < 0) || (!!end && end < 1) || (!!start && !!end && end <= start)) {
+			deferred.reject();
+		}
+
+		if (!!timestamp) {
+			config.params['timestamp'] = timestamp;
+		}
+
+		if (!!start) {
+			config.params['start'] = start;
+		}
+
+		if (!!end) {
+			config.params['end'] = end;
+		}
+
+		$http.get(Config.getGamificationURL() + '/out/rest/classification', config)
 
 		.success(function (ranking) {
 			localRanking = ranking;

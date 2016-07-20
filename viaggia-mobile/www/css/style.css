@@ -1374,6 +1374,13 @@ Play&Go
 	border: 1px solid #000;
 	margin-top: 16px;
 }
+.game-challenges .challenge {
+	border: 1px solid #000;
+	margin-top: 16px;
+}
+.game-challenges .challenge:last-child {
+	margin-bottom: 16px;
+}
 .game-challenges .challenge div {
 	white-space: normal;
 }
