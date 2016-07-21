@@ -870,14 +870,14 @@ angular.module('viaggia', [
 		game_tab_points_label: 'PUNTI',
 		game_tab_challenges_label: 'SFIDE',
 		game_tab_rankings_label: 'CLASSIFICA',
-		no_saved_tracks_to_track: 'Nessun viaggio salvato. Creane uno per tracciare e giocare!',
+		no_saved_tracks_to_track: 'Nessun viaggio salvato. Pianifica un itinerario e salvalo per iniziare a giocare!',
 		play_now: 'GIOCA ORA!',
 		play_now_sub: 'Inizia a tracciare un percorso',
 		track_walk: 'a piedi',
 		track_bike: 'in bici',
 		track_saved: 'salvato',
 		play_is_on: 'GIOCO IN CORSO',
-		play_is_on_for: 'Stai {{transport}} per {{time}} ore',
+		play_is_on_for: 'Stai {{transport}} da {{time}} ore',
 		stop_tracking: 'Termina viaggio',
 		track_walk_action: 'camminando',
 		track_bike_action: 'ciclando',
@@ -914,7 +914,8 @@ angular.module('viaggia', [
 		"public transport aficionado": "Public Transport Badge",
 		"park and ride pioneer": "Park And Ride Badge",
 		"recommendations": "User Recommendation Badge",
-		"leaderboard top 3": "Leaderboard Top 3 Badge"
+		"leaderboard top 3": "Leaderboard Top 3 Badge",
+        "no_challenges": "Al momento non ci sono sfide attive"
 	});
 
 	$translateProvider.translations('en', {
@@ -1206,14 +1207,14 @@ angular.module('viaggia', [
 		game_tab_points_label: 'POINTS',
 		game_tab_challenges_label: 'CHALLENGES',
 		game_tab_rankings_label: 'RANKING',
-		no_saved_tracks_to_track: 'No saved trips found. Create one and activate tracking to participate to the game!',
+		no_saved_tracks_to_track: 'No saved trips found. Plan a trip and save it in order to start playing!',
 		play_now: 'PLAY NOW!',
 		play_now_sub: 'Start tracking a trip',
 		track_walk: 'walk',
 		track_bike: 'bike',
 		track_saved: 'saved',
 		play_is_on: 'TRACKING IS ON',
-		play_is_on_for: 'You are {{transport}} for {{time}} hours',
+		play_is_on_for: 'You are {{transport}} since {{time}} hours',
 		stop_tracking: 'Stop tracking',
 		track_walk_action: 'walking',
 		track_bike_action: 'cycling',
@@ -1247,7 +1248,8 @@ angular.module('viaggia', [
 		"public transport aficionado": "Public Transport Badge",
 		"park and ride pioneer": "Park And Ride Badge",
 		"recommendations": "User Recommendation Badge",
-		"leaderboard top 3": "Leaderboard Top 3 Badge"
+		"leaderboard top 3": "Leaderboard Top 3 Badge",
+        "no_challenges": "No active challenges present at this moment"
 	});
 
 	$translateProvider.preferredLanguage(DEFAULT_LANG);

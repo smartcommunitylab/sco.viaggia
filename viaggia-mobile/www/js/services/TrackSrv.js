@@ -288,10 +288,18 @@ angular.module('viaggia.services.tracking', [])
                 //                    if (callback) callback();
                 //                }, 60000);
 
+                var ACCURACY = 50;
                 bgGeo.start(function () {
                     bgGeo.changePace(true);
                     if (trip) {
                       bgGeo.getCurrentPosition(function (location, taskId) {
+                          if (location.coords.accuracy > ACCURACY) {
+                            bgGeo.finish(taskId);
+                            bgGeo.stop();
+                            clean();
+                            deferred.reject();
+                            return;
+                          }
                           sendServerStart(idTrip, token, transportType, -1);
                           //console.log("-Current position received: ", location);
                           location.extras = {
@@ -305,13 +313,15 @@ angular.module('viaggia.services.tracking', [])
                           });
                           deferred.resolve();
                       }, function (errorCode) {
-                          sendServerStart(idTrip, token, transportType, errorCode);
+                          bgGeo.stop();
+                          //sendServerStart(idTrip, token, transportType, errorCode);
                           clean();
                           deferred.reject(errorCode);
                       }, {
                           timeout: 5, // 5 seconds timeout to fetch location
-                          maximumAge: 100000, // Accept the last-known-location if not older than 100 secs.
-                          minimumAccuracy: 1000, // Fetch a location with a minimum accuracy of `1000` meters.
+                          maximumAge: 50000, // Accept the last-known-location if not older than 100 secs.
+                          //minimumAccuracy: ACCURACY,
+                          desiredAccuracy: ACCURACY,// Fetch a location with a minimum accuracy of `1000` meters.
                           extras: {
                               idTrip: idTrip,
                               start: startTimestamp,

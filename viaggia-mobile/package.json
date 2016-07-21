@@ -33,10 +33,6 @@
     "https://github.com/katzer/cordova-plugin-local-notifications",
     "https://github.com/transistorsoft/cordova-background-geolocation.git",
     {
-      "locator": "https://github.com/transistorsoft/cordova-background-geolocation.git",
-      "id": "com.transistorsoft.cordova.background-geolocation"
-    },
-    {
       "variables": {
         "SENDER_ID": "453601816446",
         "GOOGLE_APP_ID": "453601816446"

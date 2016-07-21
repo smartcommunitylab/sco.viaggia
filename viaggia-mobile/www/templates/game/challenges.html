@@ -20,7 +20,7 @@
 		</div>
 
 		<!-- Results -->
-		<ion-scroll class="padding-right padding-left challenges" ng-style="challengesStyle" delegate-handle="challengesScroll">
+		<ion-scroll class="padding-right padding-left challenges" ng-style="challengesStyle" delegate-handle="challengesScroll" ng-if="challenges != null && challenges.length > 0">
 			<ion-list>
 				<ion-item class="challenge" ng-repeat="challenge in challenges" ng-class="{'challenge-old': !challenge.active, success: !!challenge.success, fail: !challenge.success}">
 					<div class="challenge-desc">{{challenge.challDesc}}</div>
@@ -40,5 +40,9 @@
 				</ion-item>
 			</ion-list>
 		</ion-scroll>
+
+        <div ng-if="challenges != null && challenges.length == 0" class="text-center">
+          <h4>{{'no_challenges' | translate}}</h4>
+        </div>
 	</ion-content>
 </ion-view>

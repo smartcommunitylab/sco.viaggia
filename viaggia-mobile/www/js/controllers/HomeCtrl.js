@@ -131,11 +131,14 @@ angular.module('viaggia.controllers.home', [])
     }
     $scope.stopTracking = function() {
       Config.loading();
+      $scope.trackingIsOn = false;
+      $interval.cancel($scope.trackInfoInterval);
+      $scope.trackingInfo = {};
 
       trackService.computeInfo().then(function(data){
         trackService.stop().then(function(){
 //            alert(JSON.stringify(data));
-          if (Math.floor(data.points > 0) {
+          if (Math.floor(data.points > 0)) {
             $ionicPopup.confirm({
                 title: $filter('translate')("pop_up_points_title"),
                 template: $filter('translate')("pop_up_points_template", {points:data.points}),
@@ -154,15 +157,13 @@ angular.module('viaggia.controllers.home', [])
                 ]
             });
           } else {
-          Toast.show($filter('translate')("no_points"), "short", "bottom");
+            Toast.show($filter('translate')("no_points"), "short", "bottom");
           }
         }).finally(function(){
           Config.loaded();
-          $scope.trackingIsOn = false;
-          $interval.cancel($scope.trackInfoInterval);
-          $scope.trackingInfo = {};
         });
       });
+
     }
 
     $scope.openSavedTracks = function() {
