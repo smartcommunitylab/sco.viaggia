@@ -318,10 +318,10 @@ angular.module('viaggia.services.tracking', [])
                           clean();
                           deferred.reject(errorCode);
                       }, {
-                          timeout: 5, // 5 seconds timeout to fetch location
-                          maximumAge: 50000, // Accept the last-known-location if not older than 100 secs.
+                          timeout: 10, // 10 seconds timeout to fetch location
+                          maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
                           //minimumAccuracy: ACCURACY,
-                          desiredAccuracy: ACCURACY,// Fetch a location with a minimum accuracy of `1000` meters.
+                          desiredAccuracy: ACCURACY,// Fetch a location with a minimum accuracy of ACCURACY meters.
                           extras: {
                               idTrip: idTrip,
                               start: startTimestamp,
