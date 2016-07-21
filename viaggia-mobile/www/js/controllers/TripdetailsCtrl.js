@@ -467,27 +467,11 @@ angular.module('viaggia.controllers.tripdetails', [])
 
     }
     $scope.trackStop = function () {
-        //build popup
-        $ionicPopup.show({
-            templateUrl: 'templates/deleteTrackConfirm.html',
-            cssClass: 'parking-popup',
-            scope: $scope,
-            buttons: [
-                {
-                    text: $filter('translate')('btn_close'),
-                    type: 'button-close'
-                                },
-                {
-                    text: $filter('translate')('btn_conferma'),
-                    onTap: function (e) {
-                        //sign the trip as already done for the day
-                        trackService.stop();
-                        $scope.modifiable = true;
-                        $scope.isAvailable = false;
-                    }
-                    }
-
-                        ]
+        $scope.showConfirm($filter('translate')("sure_delete_text"), $filter('translate')("sure_delete_title"), function () {
+          //sign the trip as already done for the day
+          trackService.stop();
+          $scope.modifiable = true;
+          $scope.isAvailable = false;
         });
 
     }

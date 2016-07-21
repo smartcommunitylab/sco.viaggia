@@ -288,7 +288,7 @@ angular.module('viaggia.services.tracking', [])
                 //                    if (callback) callback();
                 //                }, 60000);
 
-                var ACCURACY = 50;
+                var ACCURACY = 100;
                 bgGeo.start(function () {
                     bgGeo.changePace(true);
                     if (trip) {
