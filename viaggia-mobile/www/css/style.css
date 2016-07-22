@@ -746,22 +746,27 @@ ion-header-bar .title {
 }
 #table-corner {
 	font-size: 12px;
-	height: 20px;
 	border-right: 1px solid #bbb;
 	position: absolute;
 	/*    width: 100px;*/
 	background-color: #fff;
 	z-index: 100;
-	text-align: left;
-	/*    top: 50px;*/
+    text-align: left;
+/*    top: 50px;*/
 }
 #table-corner div {
-	height: 20.5px;
-	border-bottom: 1px solid #bbb;
+  padding: 0px;
+  margin: 0px;
 }
-.delay {
-	padding-left: 40px;
+#table-corner > div {
+    border-bottom: 1px solid #bbb;
+    height: 21px;
 }
+
+#table-corner div.delay {
+  padding-left: 24px;
+}
+
 .table-container {
 	padding: 0px;
 }
@@ -1285,41 +1290,9 @@ ion-header-bar .title {
     */
 	font-size: 20px;
 }
-
-/*
-
-#tablescroll {
-    position: fixed;
-    left: -20px;
-    -webkit-transition-duration: 0.3s;
-    -moz-transition-duration: 0.3s;
-    -o-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-}
-*/
-
-
-/*
-#slideout_accessibility {
-    z-index: 100;
-    position: fixed;
-    left: -50px;
-    -webkit-transition-duration: 0.3s;
-    -moz-transition-duration: 0.3s;
-    -o-transition-duration: 0.3s;
-    transition-duration: 0.3s;
-}
-*/
-
-
-/*
-#tablescroll:hover {
-    left: 0px;
-}
-*/
-
 .tt-table {
-	position: fixed;
+	position: absolute;
+    top: 50px;
 	left: -20px;
 	-webkit-transition-duration: 0.3s;
 	-moz-transition-duration: 0.3s;

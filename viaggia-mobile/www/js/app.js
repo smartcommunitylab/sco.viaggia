@@ -886,7 +886,7 @@ angular.module('viaggia', [
 		game_tab_challenges_filter_old: "Passate",
 		game_tab_challenges_info: "Info sfida",
 		pop_up_no_geo_title: 'Errore di geolocalizzazione',
-		pop_up_no_geo_template: 'Attenzione! Non è stato possibile rilevare la tua posizione. Accedi alle impostazioni del tuo dispositivo e controlla che il servizio di localizzazione è attivo',
+		pop_up_no_geo_template: 'Attenzione! Non è stato possibile rilevare la tua posizione. Accedi alle impostazioni del tuo dispositivo e controlla che il servizio di localizzazione sia attivo',
 		pop_up_points_title: 'Complimenti!',
 		pop_up_points_template: 'Con il viaggio appena tracciato ai guadagnato {{points}} punti!',
 		pop_up_points_btn: 'Vedi punti',
