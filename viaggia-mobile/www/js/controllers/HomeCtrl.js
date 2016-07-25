@@ -139,23 +139,33 @@ angular.module('viaggia.controllers.home', [])
         trackService.stop().then(function(){
 //            alert(JSON.stringify(data));
           if (Math.floor(data.points > 0)) {
-            $ionicPopup.confirm({
-                title: $filter('translate')("pop_up_points_title"),
-                template: $filter('translate')("pop_up_points_template", {points:data.points}),
-                buttons: [
-                    {
-                        text: $filter('translate')("btn_close"),
-                        type: 'button-cancel'
-                                },
-                    {
-                        text: $filter('translate')("pop_up_points_btn"),
-                        type: 'button-custom',
-                        onTap: function(){
-                          $state.go('app.game');
-                        }
-                    }
-                ]
+            if (data.valid) {
+              $ionicPopup.confirm({
+                  title: $filter('translate')("pop_up_points_title"),
+                  template: $filter('translate')("pop_up_points_template", {points:data.points}),
+                  buttons: [
+                      {
+                          text: $filter('translate')("btn_close"),
+                          type: 'button-cancel'
+                                  },
+                      {
+                          text: $filter('translate')("pop_up_points_btn"),
+                          type: 'button-custom',
+                          onTap: function(){
+                            $state.go('app.game');
+                          }
+                      }
+                  ]
+              });
+            } else {
+              $ionicPopup.alert({
+                title: $filter('translate')("pop_up_invalid_tracking_title"),
+                template: $filter('translate')("pop_up_invalid_tracking_template", {points:data.points}),
+                okText: $filter('translate')("btn_close"),
+                okType: 'button-cancel'
             });
+
+            }
           } else {
             Toast.show($filter('translate')("no_points"), "short", "bottom");
           }

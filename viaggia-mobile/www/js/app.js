@@ -915,7 +915,9 @@ angular.module('viaggia', [
 		"park and ride pioneer": "Park And Ride Badge",
 		"recommendations": "User Recommendation Badge",
 		"leaderboard top 3": "Leaderboard Top 3 Badge",
-        "no_challenges": "Al momento non ci sono sfide attive"
+        "no_challenges": "Al momento non ci sono sfide attive",
+        pop_up_invalid_tracking_title: "Viaggio non valido",
+        pop_up_invalid_tracking_template: "Le caratteristiche del viaggio fatto non corrispondono al mezzo di trasporto specificato. I punti non saranno assegnati."
 	});
 
 	$translateProvider.translations('en', {
@@ -1249,7 +1251,9 @@ angular.module('viaggia', [
 		"park and ride pioneer": "Park And Ride Badge",
 		"recommendations": "User Recommendation Badge",
 		"leaderboard top 3": "Leaderboard Top 3 Badge",
-        "no_challenges": "No active challenges present at this moment"
+        "no_challenges": "No active challenges present at this moment",
+        pop_up_invalid_tracking_title: "Trip is not valid",
+        pop_up_invalid_tracking_template: "The properties of the executed trip do not match the specified mean of transport. No points will be assigned."
 	});
 
 	$translateProvider.preferredLanguage(DEFAULT_LANG);

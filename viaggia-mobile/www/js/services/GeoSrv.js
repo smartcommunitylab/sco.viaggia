@@ -9,6 +9,36 @@ angular.module('viaggia.services.geo', [])
         }
     }
 
+    function compute(v1, a1, v2, a2, d) {
+      if ((a1 + a2)/1000 > d) {
+        var v = a1 > a2 ? (v2 - (v2-v1)*a2/a1) : (v1+ (v2-v1)*a1/a2);
+        return [v,v];
+      }
+      return [v1 + (v2-v1)*a1/d/1000, v2 - (v2-v1)*a2/d/1000];
+    }
+
+    function computeLats(p1, p2, d) {
+      if (p1.coords.latitude > p2.coords.latitude) {
+        var res = computeLats(p2, p1, d);
+        return [res[1],res[0]];
+      }
+      return compute(p1.coords.latitude, p1.coords.accuracy, p2.coords.latitude, p2.coords.accuracy, d);
+    }
+    function computeLngs(p1, p2, d) {
+      if (p1.coords.longitude > p2.coords.longitude) {
+        var res = computeLngs(p2, p1, d);
+        return [res[1],res[0]];
+      }
+      return compute(p1.coords.longitude, p1.coords.accuracy, p2.coords.longitude, p2.coords.accuracy, d);
+    }
+
+    function transformPair(p1, p2, res, distFunc) {
+      var d = distFunc(p1,p2);
+      var lats = computeLats(p1,p2,d);
+      var lngs = computeLngs(p1,p2,d);
+      res.push({lat: lats[0], lng: lngs[0]});
+      res.push({lat: lats[1], lng: lngs[1]});
+    }
 
     var myPosition = null;
 
@@ -55,7 +85,7 @@ angular.module('viaggia.services.geo', [])
         }
         return localization.promise;
     };
-    return {
+    var geo = {
         reset: function () {
             localization = undefined;
         },
@@ -98,6 +128,24 @@ angular.module('viaggia.services.geo', [])
                 //console.log('gotoPosition: ' + JSON.stringify(gotoPosition));
                 return GL.distance(myPosition, gotoPosition);
             });
+        },
+        /**
+         * Input: array of objects of type {coords:{latitude:..., longitude:..., accuracy:...}}
+         * Output: array of object of type {lat:..., lng:...}
+         */
+        transform: function(array) {
+          var res = [];
+
+          var distFunc = function(p1, p2) {
+            return geo.distance([p1.coords.latitude, p1.coords.longitude],[p2.coords.latitude, p2.coords.longitude]);
+          }
+
+          for (var i = 1; i < array.length; i++) {
+            transformPair(array[i-1], array[i], res, distFunc);
+          }
+          return res;
         }
     };
+
+    return geo;
 })
