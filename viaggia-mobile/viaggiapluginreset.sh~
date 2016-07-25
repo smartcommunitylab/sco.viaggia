@@ -1,0 +1,3 @@
+#!/bin/bash
+ionic plugin remove de.dfki.iui.mmir.Tracking
+ionic plugin add ../tracking_modified

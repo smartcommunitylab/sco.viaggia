@@ -1360,16 +1360,23 @@ ion-header-bar .title {
 }
 
 .tt-table-acc {
-    left: 0px;
+    left: 0px !important;
 }
 
+
+}
+.tt-table #table-col div {
+    width: 20px;
+    display: inline-block;
+    margin-right: 5px;
+    text-align: center;
+}
 
 /*
 #tablescroll:hover #slideout_accessibility {
     left: 0;
 }
 */
-
 
 /*
 #table-table:hover {

@@ -1,6 +1,6 @@
 <ion-view title="{{title}}">
     <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear" ng-class="accessibilityStyle" ng-click="toggleAccessibility()"></button>
+        <button class="button button-icon button-clear" ng-class="accessibilityStyle" ng-click="toggleAccessibility()" ng-show="accesibilityKnow"></button>
         <button class="button button-icon button-clear" ng-class="bookmarkStyle" ng-click="bookmark()"></button>
     </ion-nav-buttons>
     <ion-content id="content" has-header="true" has-bouncing="false">
@@ -12,7 +12,8 @@
             <div class="col col-25 tt-day btn" ng-click="nextDate()"><a><i class="icon ion-arrow-right-b"></i></a>
             </div>
         </div>
-<div class="tt-table" ng-class="{'tt-table-acc':flagAccessibility}">            <div ng-if="dataStr" id="table-corner" style="width:{{stopsColWidth}}px; height:{{tableHeaderHeight}}px">
+        <div class="tt-table" ng-class="{'tt-table-acc':flagAccessibility}">
+            <div ng-if="dataStr" id="table-corner" style="width:{{stopsColWidth}}px; height:{{tableHeaderHeight}}px">
                 <div> <i class="icon ic_access table-accessibility"></i> {{tableCornerStr[0]}}
                 </div>
                 <!--            <div>{{tableCornerStr[0]}}</div>-->
