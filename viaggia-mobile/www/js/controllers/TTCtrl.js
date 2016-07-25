@@ -323,7 +323,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
     var updateDelays = function (data) {
         str = '';
-        for (var i = 0; i < data.delays.length; i++) {
+        for (var i = 0; i < data.tripIds.length; i++) {
             str += expandStr(getDelayValue(data.delays[i]));
         }
         $scope.headStr[0] = str;
