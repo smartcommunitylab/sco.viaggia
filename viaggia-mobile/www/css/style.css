@@ -840,6 +840,17 @@ ion-header-bar .title {
     color: #cd251c;
 }
 
+.tt-table #table-col div {
+    width: 20px;
+    display: inline-block;
+    margin-right: 5px;
+    text-align: center;
+}
+
+.header-row-types {
+    height: 20px;
+}
+
 #table-table {
     white-space: nowrap;
     font-family: RobotoMono;
