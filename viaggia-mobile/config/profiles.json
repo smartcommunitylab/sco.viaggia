@@ -1,21 +1,21 @@
 {
     "TRENTO": {
         "resource_folder": "config/instances/TRENTO",
-        "widget_id" : "it.smartcommunitylab.viaggiarovereto.playgo",
+        "widget_id": "it.smartcommunitylab.viaggiarovereto.playgo",
         "version": "2.1.2",
         "version_code": "38",
         "app_name": "Viaggia Trento Play&amp;Go"
     },
     "ROVERETO": {
         "resource_folder": "config/instances/ROVERETO",
-        "widget_id" : "eu.trentorise.smartcampus.viaggiarovereto",
+        "widget_id": "eu.trentorise.smartcampus.viaggiarovereto",
         "version": "2.1.1",
         "version_code": "36",
         "app_name": "Viaggia Rovereto"
     },
     "BOLOGNA": {
         "resource_folder": "config/instances/BOLOGNA",
-        "widget_id" : "eu.trentorise.smartcampus.viaggiabologna",
+        "widget_id": "eu.trentorise.smartcampus.viaggiabologna",
         "version": "0.0.1",
         "version_code": "1",
         "app_name": "Viaggia Bologna"

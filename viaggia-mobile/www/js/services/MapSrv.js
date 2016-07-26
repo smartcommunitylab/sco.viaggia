@@ -76,13 +76,29 @@ angular.module('viaggia.services.map', [])
     mapService.initMap = function (mapId) {
         var deferred = $q.defer();
 
+        //        leafletData.getMap(mapId).then(function (map) {
+        //                cachedMap[mapId] = map;
+        //                L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
+        //                    type: 'map',
+        //                    ext: 'jpg',
+        //                    attribution: '',
+        //                    subdomains: '1234',
+        //                    maxZoom: 18
+        //                }).addTo(map);
+        //                $ionicPlatform.ready(function () {
+        //                    GeoLocate.locate().then(function (e) {
+        //                        var myPos = L.marker(L.latLng(e[0], e[1])).addTo(map);
+        //                        cachedMap[mapId].myPos = myPos;
+        //                    });
+        //                });
+        //                deferred.resolve(map);
+        //            },
         leafletData.getMap(mapId).then(function (map) {
                 cachedMap[mapId] = map;
-                L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.{ext}', {
+
+                L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     type: 'map',
-                    ext: 'png',
-					attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-                    subdomains: 'abc',
+                    attribution: '',
                     maxZoom: 18
                 }).addTo(map);
                 $ionicPlatform.ready(function () {

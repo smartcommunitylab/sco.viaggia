@@ -29,7 +29,7 @@ angular.module('viaggia.controllers.plan', [])
 
     $scope.initParams = function () {
         $scope.refresh = true;
-            $scope.planParams = {
+        $scope.planParams = {
             from: {
                 name: '',
                 lat: '',
@@ -66,7 +66,12 @@ angular.module('viaggia.controllers.plan', [])
             $scope.mapTypes[$scope.planParams.transportTypes[i]] = true;
         }
     }
-
+    $scope.switchAcc = function () {
+        $scope.planParams.wheelchair = !$scope.planParams.wheelchair;
+    }
+    $scope.isSwitchedAcc = function () {
+        return $scope.planParams.wheelchair;
+    }
     var setSavedOptions = function (Configure) {
         $scope.planParams.departureTime = $filter('date')(new Date().getTime(), 'hh:mma');
         $scope.planParams.date = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
@@ -323,6 +328,10 @@ angular.module('viaggia.controllers.plan', [])
         }
         if ($scope.planParams.transportTypes.length == 0) {
             Toast.show($filter('translate')("error_select_type_feedback"), "short", "bottom");
+            return false
+        }
+        if ($scope.planParams.wheelchair && !$scope.mapTypes['WALK'] && !$scope.mapTypes['TRANSIT']) {
+            Toast.show($filter('translate')("error_select_type_accessibility_feedback"), "short", "bottom");
             return false
         }
         if ($scope.hourTimestamp) {

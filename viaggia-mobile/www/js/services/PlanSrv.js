@@ -77,6 +77,29 @@ angular.module('viaggia.services.plan', [])
 
         return ttMap[tt];
     }
+
+
+    planService.buildConfigureOptions = function (trip) {
+
+        var data = $filter('date')(new Date(trip.data.data.startime), 'MM/dd/yyyy');
+        var time = $filter('date')(new Date(trip.data.data.startime), 'hh:mma');
+        var configure = {
+            "from": {
+                "name": trip.data.originalFrom.name,
+                "lat": trip.data.originalFrom.lat,
+                "long": trip.data.originalFrom.lon
+            },
+            "to": {
+                "name": trip.data.originalTo.name,
+                "lat": trip.data.originalTo.lat,
+                "long": trip.data.originalTo.lon
+            },
+            "departureTime": time,
+            "date": data,
+            "wheelchair": trip.data.wheelchair
+        }
+        return configure;
+    }
     planService.setFromOrTo = function (value) {
         fromOrTo = value;
     }

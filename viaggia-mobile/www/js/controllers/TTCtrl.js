@@ -249,25 +249,27 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
         $scope.tableHeight = data.stops.length * rowHeight;
         //        $scope.scrollWidth = stopsColWidth + data.tripIds.length * $scope.colwidth;
-        $scope.scrollWidth = window.innerWidth + ($scope.flagAccessibility ? 0 : 20);
+
+        $scope.scrollWidth = window.innerWidth + ($scope.flagAccessibility ? 0 : 20); //plus accessibility
         $scope.scrollHeight = window.innerHeight - headerHeight;
         $scope.tableHeaderHeight = $scope.header_row_number * headerRowHeight;
 
         if (!noscroll) {
-          $timeout(function () {
-              //      if ($scope.header == null) {
-              //        $scope.header = document.getElementById('table-header');
-              //        $scope.colwidth = ($scope.header.getBoundingClientRect().width) / data.tripIds.length;
-              //      }
 
-              var columnScrollTo = ttService.locateTablePosition(data, new Date());
-              columnScrollTo = Math.min(columnScrollTo, data.tripIds.length - ($scope.scrollWidth - $scope.stopsColWidth) / $scope.colwidth);
-              var pos = $scope.colwidth * columnScrollTo;
-              //alert('scroll to:' + pos);
-              //            $ionicScrollDelegate.$getByHandle('list').scrollTo(0, 0, false);
-              $ionicScrollDelegate.$getByHandle('list').scrollTo(pos, 0, true);
+            $timeout(function () {
+                //      if ($scope.header == null) {
+                //        $scope.header = document.getElementById('table-header');
+                //        $scope.colwidth = ($scope.header.getBoundingClientRect().width) / data.tripIds.length;
+                //      }
 
-          }, 300);
+                var columnScrollTo = ttService.locateTablePosition(data, new Date());
+                columnScrollTo = Math.min(columnScrollTo, data.tripIds.length - ($scope.scrollWidth - $scope.stopsColWidth) / $scope.colwidth);
+                var pos = $scope.colwidth * columnScrollTo;
+                //alert('scroll to:' + pos);
+                //            $ionicScrollDelegate.$getByHandle('list').scrollTo(0, 0, false);
+                $ionicScrollDelegate.$getByHandle('list').scrollTo(pos, 0, true);
+
+            }, 300);
         }
     }
 
@@ -323,7 +325,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
     var updateDelays = function (data) {
         str = '';
-        for (var i = 0; i < data.delays.length; i++) {
+        for (var i = 0; i < data.tripIds.length; i++) {
             str += expandStr(getDelayValue(data.delays[i]));
         }
         $scope.headStr[0] = str;
@@ -340,6 +342,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         var tableCornerStr = ['', ''];
 
         var rows = [];
+        var stopAcc = JSON.parse(localStorage[Config.getAppId() + "_stops_" + $stateParams.agencyId + "_acc"]);
         if (data.stops) {
             for (var row = 0; row < data.stops.length + $scope.header_row_number; row++) {
                 var rowContent = [];
@@ -358,8 +361,10 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                     } else if (col == 0) {
                         rowContent.push(data.stops[row - $scope.header_row_number]);
                         //check from data if accessibility
-                        if (!!data.wheelChairBoarding && data.wheelChairBoarding[row - $scope.header_row_number]==1) {
-                            colStr += '<div>&#8226;</div>';
+
+                        if (!!data.wheelChairBoarding && data.wheelChairBoarding[row - $scope.header_row_number] == 1) {
+                            // if (data.wheelChairBoarding && data.wheelChairBoarding[row - $scope.header_row_number] == 1) {
+                            colStr += '<div><i class="icon ion-record"></i></div>';
                         } else {
                             colStr += '<div></div>';
 
@@ -454,14 +459,28 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         });
     };
     $scope.toggleAccessibility = function () {
-        $scope.flagAccessibility = !$scope.flagAccessibility;
+
+        if ($scope.route.wheelChairBoarding == 1) {
+            $scope.flagAccessibility = !$scope.flagAccessibility;
+        } else {
+            Toast.show($filter('translate')('not_acc_label'), "short", "bottom");
+
+        }
         $scope.accessibilityStyle = getAccessibilityStyle();
-        if ($scope.flagAccessibility) {} else {}
+
+
         initMeasures($scope.tt, true);
     }
 
     function getAccessibilityStyle() {
-        return $scope.flagAccessibility ? 'ic_access' : 'ic_access_outline';
+        if ($scope.route.wheelChairBoarding == 1) {
+            $scope.accesibilityKnow = true;
+            return $scope.flagAccessibility ? 'ic_access' : 'ic_access_outline';
+        } else if ($scope.route.wheelChairBoarding == 2) {
+            $scope.accesibilityKnow = true;
+        } else { // if I don't know, don't see it
+            $scope.accesibilityKnow = false;
+        }
     }
 })
 
