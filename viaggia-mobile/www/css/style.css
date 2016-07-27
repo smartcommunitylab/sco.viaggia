@@ -929,6 +929,7 @@ ion-header-bar .title {
 
 #table-corner {
     font-size: 12px;
+    height: 20px;
     border-right: 1px solid #bbb;
     position: absolute;
     /*    width: 100px;*/
@@ -939,17 +940,17 @@ ion-header-bar .title {
 }
 
 #table-corner div {
-    padding: 0px;
-    margin: 0px;
-}
-
-#table-corner > div {
+    height: 20.5px;
     border-bottom: 1px solid #bbb;
-    height: 21px;
 }
 
-#table-corner div.delay {
-    padding-left: 24px;
+#table-corner > div .corner-delay {
+    margin-left: 10px;
+    vertical-align: top;
+}
+
+.delay {
+    padding-left: 40px;
 }
 
 .table-container {
