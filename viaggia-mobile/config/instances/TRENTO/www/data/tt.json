@@ -32,7 +32,8 @@
                             "title": "Bolzano - Verona",
                             "color": "#cd251c",
                             "showTrips": true,
-                            "wheelChairBoarding": 1
+                            "wheelChairBoarding": 0
+
                         },
                         {
                             "routeId": "BV_R1_R",
@@ -40,7 +41,7 @@
                             "title": "Verona - Bolzano",
                             "color": "#cd251c",
                             "showTrips": true,
-                            "wheelChairBoarding": 1
+                            "wheelChairBoarding": 0
                         }
           ]
         },
@@ -54,7 +55,7 @@
                             "title": "Trento - Bassano D.G.",
                             "color": "#cd251c",
                             "showTrips": true,
-                            "wheelChairBoarding": 1
+                            "wheelChairBoarding": 0
                         },
                         {
                             "routeId": "TB_R2_R",
@@ -62,7 +63,7 @@
                             "title": "Bassano D.G. - Trento",
                             "color": "#cd251c",
                             "showTrips": true,
-                            "wheelChairBoarding": 1
+                            "wheelChairBoarding": 0
                         }
           ]
         },
@@ -75,14 +76,14 @@
                             "routeSymId": "555",
                             "color": "#cd251c",
                             "title": "Trento - Malé",
-                            "wheelChairBoarding": 1
+                            "wheelChairBoarding": 0
                         },
                         {
                             "routeId": "556",
                             "routeSymId": "556",
                             "color": "#cd251c",
                             "title": "Malé - Trento",
-                            "wheelChairBoarding": 1
+                            "wheelChairBoarding": 0
                         }
           ]
         }

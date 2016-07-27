@@ -180,7 +180,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         Config.loading();
         ttService.getTT($stateParams.agencyId, $scope.route.routeSymId, date).then(
             function (data) {
-                if (data.delays && data.delays.length > 0) {
+                if ($scope.tt && data.delays && data.delays.length > 0) {
                     $scope.tt.delays = data.delays;
                     updateDelays(data);
                 }
@@ -224,7 +224,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         }
     }
 
-    var initMeasures = function (data) {
+    var initMeasures = function (data, noscroll) {
         if (window.innerHeight < window.innerWidth) {
             $scope.stopsColWidth = 170;
         } else {
@@ -249,24 +249,26 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
         $scope.tableHeight = data.stops.length * rowHeight;
         //        $scope.scrollWidth = stopsColWidth + data.tripIds.length * $scope.colwidth;
-        $scope.scrollWidth = window.innerWidth + 20; //plus accessibility
+        $scope.scrollWidth = window.innerWidth + ($scope.flagAccessibility ? 0 : 20); //plus accessibility
         $scope.scrollHeight = window.innerHeight - headerHeight;
         $scope.tableHeaderHeight = $scope.header_row_number * headerRowHeight;
 
-        $timeout(function () {
-            //      if ($scope.header == null) {
-            //        $scope.header = document.getElementById('table-header');
-            //        $scope.colwidth = ($scope.header.getBoundingClientRect().width) / data.tripIds.length;
-            //      }
+        if (!noscroll) {
+            $timeout(function () {
+                //      if ($scope.header == null) {
+                //        $scope.header = document.getElementById('table-header');
+                //        $scope.colwidth = ($scope.header.getBoundingClientRect().width) / data.tripIds.length;
+                //      }
 
-            var columnScrollTo = ttService.locateTablePosition(data, new Date());
-            columnScrollTo = Math.min(columnScrollTo, data.tripIds.length - ($scope.scrollWidth - $scope.stopsColWidth) / $scope.colwidth);
-            var pos = $scope.colwidth * columnScrollTo;
-            //alert('scroll to:' + pos);
-            //            $ionicScrollDelegate.$getByHandle('list').scrollTo(0, 0, false);
-            $ionicScrollDelegate.$getByHandle('list').scrollTo(pos, 0, true);
+                var columnScrollTo = ttService.locateTablePosition(data, new Date());
+                columnScrollTo = Math.min(columnScrollTo, data.tripIds.length - ($scope.scrollWidth - $scope.stopsColWidth) / $scope.colwidth);
+                var pos = $scope.colwidth * columnScrollTo;
+                //alert('scroll to:' + pos);
+                //            $ionicScrollDelegate.$getByHandle('list').scrollTo(0, 0, false);
+                $ionicScrollDelegate.$getByHandle('list').scrollTo(pos, 0, true);
 
-        }, 300);
+            }, 300);
+        }
     }
 
     var lastResize = 0;
@@ -321,7 +323,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
     var updateDelays = function (data) {
         str = '';
-        for (var i = 0; i < data.delays.length; i++) {
+        for (var i = 0; i < data.tripIds.length; i++) {
             str += expandStr(getDelayValue(data.delays[i]));
         }
         $scope.headStr[0] = str;
@@ -357,11 +359,11 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                     } else if (col == 0) {
                         rowContent.push(data.stops[row - $scope.header_row_number]);
                         //check from data if accessibility
-                        if (stopAcc[data.stopsId[row - $scope.header_row_number]] == 1) {
+                        if (!!data.wheelChairBoarding && data.wheelChairBoarding[row - $scope.header_row_number] == 1) {
                             // if (data.wheelChairBoarding && data.wheelChairBoarding[row - $scope.header_row_number] == 1) {
-                            colStr += '&nbsp;&#9899;&nbsp';
+                            colStr += '<div><i class="icon ion-record"></i></div>';
                         } else {
-                            colStr += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp';
+                            colStr += '<div></div>';
 
                         }
                         colStr += data.stops[row - $scope.header_row_number] + '<br/>';
@@ -466,12 +468,20 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         }
         $scope.accessibilityStyle = getAccessibilityStyle();
 
+
+        initMeasures($scope.tt, true);
     }
 
     function getAccessibilityStyle() {
         if ($scope.route.wheelChairBoarding == 1) {
-            return $scope.flagAccessibility ? 'ic_access ' : 'ic_access_outline ';
-        } else return "ic_access not_acc"
+
+            $scope.accesibilityKnow = true;
+            return $scope.flagAccessibility ? 'ic_access' : 'ic_access_outline';
+        } else if ($scope.route.wheelChairBoarding == 2) {
+            $scope.accesibilityKnow = true;
+        } else { // if I don't know, don't see it
+            $scope.accesibilityKnow = false;
+        }
     }
     $scope.toggleMonitor = function () {
         //check if user is logged

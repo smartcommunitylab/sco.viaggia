@@ -551,6 +551,10 @@ ion-header-bar .title {
     color: #fff !important;
 }
 
+.bar .title {
+    margin-right: 20px;
+}
+
 .close-modal {
     font-size: 24px;
     padding-left: 16px;
@@ -834,6 +838,17 @@ ion-header-bar .title {
 
 #table-header div:first-child {
     color: #cd251c;
+}
+
+.tt-table #table-col div {
+    width: 20px;
+    display: inline-block;
+    margin-right: 5px;
+    text-align: center;
+}
+
+.header-row-types {
+    height: 20px;
 }
 
 #table-table {
@@ -1369,7 +1384,7 @@ ion-header-bar .title {
 }
 
 .tt-table-acc {
-    left: 0px;
+    left: 0px !important;
 }
 
 
