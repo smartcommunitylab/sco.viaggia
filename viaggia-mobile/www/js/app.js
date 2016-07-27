@@ -678,6 +678,8 @@ angular.module('viaggia', [
             dow_sunday_short: 'D',
             save_trip_recurrent: 'Ricorrente',
             save_trip_alldays: 'Tutti',
+            sign_in_success: 'Accesso effettuato con successo'
+
 
         });
 
@@ -887,7 +889,6 @@ angular.module('viaggia', [
             signup_title: 'Register with',
             login_popup_title: 'Login',
             login_popup_template: 'In orer to access to this functionality you must login',
-
             dow_monday: 'Monday',
             dow_tuesday: 'Tuesday',
             dow_wednesday: 'Wednsday',
@@ -904,6 +905,7 @@ angular.module('viaggia', [
             dow_sunday_short: 'S',
             save_trip_recurrent: 'Recurrent',
             save_trip_alldays: 'All',
+            sign_in_success: 'Login succeeded'
 
         });
 

@@ -212,6 +212,29 @@ angular.module('viaggia.services.login', [])
 
             return deferred.promise;
         };
+        loginService.logout = function () {
+            var deferred = $q.defer();
+
+            $http({
+                method: 'GET',
+                url: Config.getServerURL() + '/' + Config.getAppId() + '/logout',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+
+                }
+            }).
+            success(function (data, status, headers, config) {
+                $rootScope.userIsLogged = false;
+                localStorage.userId = "null";
+                deferred.resolve(data);
+            }).
+            error(function (data, status, headers, config) {
+                deferred.reject(data);
+            });
+            return deferred.promise;
+
+        };
         loginService.makeTokenPost = function makeTokenPost(code) {
 
             var deferred = $q.defer();
@@ -312,7 +335,7 @@ angular.module('viaggia.services.login', [])
                 );
 
             return deferred.promise;
-        }
+        };
 
         loginService.register = function (user) {
             var deferred = $q.defer();

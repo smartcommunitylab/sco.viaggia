@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.common', [])
 
-.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, DataManager, $ionicPopup, $ionicModal, $filter, $ionicLoading, Config, planService) {
+.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, DataManager, $ionicPopup, $ionicModal, $filter, $ionicLoading, loginService, Config, planService) {
     /*menu group*/
     $scope.shownGroup = false;
     $scope.toggleGroupRealTime = function () {
@@ -21,17 +21,13 @@ angular.module('viaggia.controllers.common', [])
     }
 
     $rootScope.logout = function () {
-        var deferred = $q.defer();
         loginService.logout().then(function (data) {
-                deferred.resolve(data);
+                //toast ok
+
             },
             function (error) {
-
-                deferred.reject(error);
-
-
+                //toast ok
             });
-        return deferred.promise;
     };
 
     $ionicModal.fromTemplateUrl('templates/credits.html', {
@@ -145,6 +141,11 @@ angular.module('viaggia.controllers.common', [])
         $scope.shownGroup = JSON.parse(localStorage.getItem(Config.getAppId() + '_shownGroup')) || false;
         $scope.contactLink = Config.getContactLink();
         $scope.taxiEnabled = (Config.getTaxiId() != 'undefined');
+        if (loginService.userIsLogged()) {
+            $rootScope.userIsLogged = true;
+        } else {
+            $rootScope.userIsLogged = false;
+        }
     });
 
     $scope.selectInfomenu = function (m) {
@@ -154,48 +155,7 @@ angular.module('viaggia.controllers.common', [])
     };
 
 
-    // This method is executed when the user press the "Sign in with Google" button
-    $scope.googleSignIn = function () {
-        $ionicLoading.show({
-            template: 'Logging in...'
-        });
-        $timeout(function () {
-            $ionicLoading.hide(); //close the popup after 3 seconds for some reason
-        }, 3000);
-        loginService.login(null, 'google').then(function (profile) {
-            //                                       check if user is valid
-            $ionicLoading.show({
-                template: $filter('translate')('user_check')
-            });
-            userService.validUserForGamification(profile).then(function (valid) {
-                    //$ionicLoading.hide();
-                    storageService.saveUser(profile);
 
-                    if (valid) {
-                        //go on to home page
-                        $state.go('app.home');
-                        $ionicHistory.nextViewOptions({
-                            disableBack: true,
-                            historyRoot: true
-                        });
-                    } else {
-                        // open popup for validating user
-                        $ionicLoading.hide();
-                        validateUserPopup();
-                    }
-
-                },
-                function (msg) {
-                    Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
-                    $ionicLoading.hide();
-                });
-        }, function (err) {
-            Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
-            $ionicLoading.hide();
-        });
-
-
-    }
 })
 
 .factory('Toast', function ($rootScope, $timeout, $ionicPopup, $cordovaToast) {

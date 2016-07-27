@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.login', [])
 
-.controller('LoginCtrl', function ($scope, $ionicSideMenuDelegate, $ionicLoading, $ionicPlatform, $state, $ionicHistory, $ionicPopup, $timeout, $filter, loginService, userService, Config, storageService, Toast) {
+.controller('LoginCtrl', function ($scope, $ionicSideMenuDelegate, $rootScope, $ionicLoading, $ionicPlatform, $state, $ionicHistory, $ionicPopup, $timeout, $filter, loginService, userService, Config, storageService, Toast) {
     $ionicSideMenuDelegate.canDragContent(false);
     $scope.title = Config.getAppName();
 
@@ -11,74 +11,35 @@ angular.module('viaggia.controllers.login', [])
 
     // This method is executed when the user press the "Sign in with Google" button
     $scope.googleSignIn = function () {
+        $ionicLoading.show({
+            template: 'Logging in...'
+        });
+        $timeout(function () {
+            $ionicLoading.hide(); //close the popup after 3 seconds for some reason
+        }, 3000);
+        loginService.login(null, 'google').then(function (profile) {
+            //                                       check if user is valid
             $ionicLoading.show({
-                template: 'Logging in...'
+                template: $filter('translate')('user_check')
             });
-            $timeout(function () {
-                $ionicLoading.hide(); //close the popup after 3 seconds for some reason
-            }, 3000);
-            loginService.login(null, 'google').then(function (profile) {
-                //                                       check if user is valid
-                $ionicLoading.show({
-                    template: $filter('translate')('user_check')
-                });
-                userService.validUserForGamification(profile).then(function (valid) {
-                        //$ionicLoading.hide();
-                        storageService.saveUser(profile);
-
-                        if (valid) {
-                            //go on to home page
-                            $state.go('app.home');
-                            $ionicHistory.nextViewOptions({
-                                disableBack: true,
-                                historyRoot: true
-                            });
-                        } else {
-                            // open popup for validating user
-                            $ionicLoading.hide();
-                            validateUserPopup();
-                        }
-
-                    },
-                    function (msg) {
-                        Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
-                        $ionicLoading.hide();
-                    });
-            }, function (err) {
-                Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
-                $ionicLoading.hide();
+            storageService.saveUser(profile);
+            $state.go('app.home');
+            $ionicHistory.nextViewOptions({
+                disableBack: true,
+                historyRoot: true
             });
+            $scope.closeLogin();
+            Toast.show($filter('translate')('sign_in_success'), "short", "bottom");
+            $rootScope.userIsLogged = true;
+
+        }, function (err) {
+            Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
+            $ionicLoading.hide();
+        }).finally(Config.loaded);
 
 
-        }
-        //This is the success callback from the login method
-    $scope.validateUserForGamification = function (profile) {
-        if (profile != null) {
-            userService.validUserForGamification(profile).then(function (valid) {
-                if (valid) {
-                    $ionicLoading.show({
-                        template: $filter('translate')('user_check')
-                    });
-                    //memorize profile;
-                    storageService.saveUser(profile);
-                    //go on to home page
-                    $state.go('app.home');
-                    $ionicHistory.nextViewOptions({
-                        disableBack: true,
-                        historyRoot: true
-                    });
-                } else {
-                    // open popup for validating user
-                    $ionicLoading.hide();
-                    validateUserPopup();
-                }
-
-            }, function (error) {
-                Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
-                $ionicLoading.hide();
-            });
-        }
     }
+
     var fbLoginSuccess = function (response) {
         if (!response.authResponse) {
             fbLoginError("Cannot find the authResponse");
@@ -145,78 +106,26 @@ angular.module('viaggia.controllers.login', [])
             $ionicLoading.show({
                 template: $filter('translate')('user_check')
             });
-            userService.validUserForGamification(profile).then(function (valid) {
-                    //$ionicLoading.hide();
-                    storageService.saveUser(profile);
+            storageService.saveUser(profile);
+            //go on to home page
+            $state.go('app.home');
+            $ionicHistory.nextViewOptions({
+                disableBack: true,
+                historyRoot: true
+            });
+            $scope.closeLogin();
+            Toast.show($filter('translate')('sign_in_success'), "short", "bottom");
+            $rootScope.userIsLogged = true;
 
-                    if (valid) {
-                        //go on to home page
-                        $state.go('app.home');
-                        $ionicHistory.nextViewOptions({
-                            disableBack: true,
-                            historyRoot: true
-                        });
-                    } else {
-                        // open popup for validating user
-                        $ionicLoading.hide();
-                        validateUserPopup();
-                    }
-
-                },
-                function (msg) {
-                    Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
-                    $ionicLoading.hide();
-                });
         }, function (err) {
             Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
             $ionicLoading.hide();
-        });
+        }).finally(Config.loaded);
 
 
     }
 
-    //    function validateUserPopup() {
-    //        $ionicPopup.show({
-    //            templateUrl: 'templates/validateUserPopup.html',
-    //            title: $filter('translate')('lbl_validateuser'),
-    //            cssClass: 'parking-popup',
-    //            scope: $scope,
-    //            buttons: [
-    //                {
-    //                    text: $filter('translate')('btn_close'),
-    //                    type: 'button-close',
-    //                    onTap: function (e) {
-    //                        //close app
-    //                        ionic.Platform.exitApp();
-    //                    }
-    //
-    //                },
-    //                {
-    //                    text: $filter('translate')('btn_validate_user'),
-    //                    onTap: function (e) {
-    //                        userService.getValidToken().then(function (validToken) {
-    //                            var url = Config.getGamificationURL() + "/mobile?token=" + validToken;
-    //                            window.open(url, "_system", "location=yes");
-    //                            //$timeout(ionic.Platform.exitApp(), 1000);
-    //                        });
-    //
-    //
-    //                    }
-    //
-    //                }
-    //                ]
-    //        });
-    //
-    //    }
-    //    $ionicModal.fromTemplateUrl('templates/registrationFormModal.html', {
-    //        id: '1',
-    //        scope: $scope,
-    //        backdropClickToClose: false,
-    //        animation: 'slide-in-up'
-    //    }).then(function (modal) {
-    //        //mapService.initMap('planMapModal');
-    //        $scope.registrationModal = modal;
-    //    });
+
 
     function validateUserPopup() {
         var buttons = [
@@ -234,11 +143,6 @@ angular.module('viaggia.controllers.login', [])
                     $ionicLoading.show();
 
                     registrationForm();
-                    //                        userService.getValidToken().then(function (validToken) {
-                    //                            var url = Config.getGamificationURL() + "/mobile?token=" + validToken;
-                    //                            window.open(url, "_system", "location=yes");
-                    //                            //$timeout(ionic.Platform.exitApp(), 1000);
-                    //                        });
                 }
         }];
         if (ionic.Platform.isIOS()) {
@@ -282,7 +186,7 @@ angular.module('viaggia.controllers.login', [])
             //            });
             userService.getValidToken().then(function (validToken) {
                 var profile = storageService.getUser();
-                $scope.validateUserForGamification(profile);
+                //$scope.validateUserForGamification(profile);
 
             }, function (err) {
                 $ionicLoading.hide();
@@ -305,28 +209,15 @@ angular.module('viaggia.controllers.login', [])
                 $ionicLoading.show({
                     template: $filter('translate')('user_check')
                 });
-                userService.validUserForGamification(profile).then(function (valid) {
-                        //$ionicLoading.hide();
-                        storageService.saveUser(profile);
-
-                        if (valid) {
-                            //go on to home page
-                            $state.go('app.home');
-                            $ionicHistory.nextViewOptions({
-                                disableBack: true,
-                                historyRoot: true
-                            });
-                        } else {
-                            // open popup for validating user
-                            $ionicLoading.hide();
-                            validateUserPopup();
-                        }
-
-                    },
-                    function (msg) {
-                        Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
-                        $ionicLoading.hide();
-                    });
+                storageService.saveUser(profile);
+                $state.go('app.home');
+                $ionicHistory.nextViewOptions({
+                    disableBack: true,
+                    historyRoot: true
+                });
+                $scope.closeLogin();
+                Toast.show($filter('translate')('sign_in_success'), "short", "bottom");
+                $rootScope.userIsLogged = true;
             },
             function (error) {
                 storageService.saveUser(null);
