@@ -135,7 +135,7 @@
         "debug": false,
 
         "locationUpdateInterval": 5000,
-        "minimumActivityRecognitionConfidence": 50,
+        "minimumActivityRecognitionConfidence": 80,
         "fastestLocationUpdateInterval": 1000,
         "forceReloadOnLocationChange": false,
         "forceReloadOnMotionChange": false,
