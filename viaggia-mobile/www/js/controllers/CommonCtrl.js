@@ -152,6 +152,50 @@ angular.module('viaggia.controllers.common', [])
         //      Config.setInfoMenuParams(m.data);
         //      $state.go(m.state);
     };
+
+
+    // This method is executed when the user press the "Sign in with Google" button
+    $scope.googleSignIn = function () {
+        $ionicLoading.show({
+            template: 'Logging in...'
+        });
+        $timeout(function () {
+            $ionicLoading.hide(); //close the popup after 3 seconds for some reason
+        }, 3000);
+        loginService.login(null, 'google').then(function (profile) {
+            //                                       check if user is valid
+            $ionicLoading.show({
+                template: $filter('translate')('user_check')
+            });
+            userService.validUserForGamification(profile).then(function (valid) {
+                    //$ionicLoading.hide();
+                    storageService.saveUser(profile);
+
+                    if (valid) {
+                        //go on to home page
+                        $state.go('app.home');
+                        $ionicHistory.nextViewOptions({
+                            disableBack: true,
+                            historyRoot: true
+                        });
+                    } else {
+                        // open popup for validating user
+                        $ionicLoading.hide();
+                        validateUserPopup();
+                    }
+
+                },
+                function (msg) {
+                    Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
+                    $ionicLoading.hide();
+                });
+        }, function (err) {
+            Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
+            $ionicLoading.hide();
+        });
+
+
+    }
 })
 
 .factory('Toast', function ($rootScope, $timeout, $ionicPopup, $cordovaToast) {

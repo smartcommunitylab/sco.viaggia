@@ -49,38 +49,7 @@ angular.module('viaggia.controllers.login', [])
                 $ionicLoading.hide();
             });
 
-            //            window.plugins.googleplus.login({
-            //                    //                    'scopes': 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
-            //                    'scopes': 'profile email',
-            //                    'offline': true
-            //                },
-            //                function (user_data) {
-            //                    userService.setGoogleUser({
-            //                        userID: user_data.userId,
-            //                        name: user_data.displayName,
-            //                        email: user_data.email,
-            //                        picture: user_data.imageUrl,
-            //                        oauthToken: user_data.oauthToken,
-            //                        idToken: user_data.idToken
-            //                    });
-            //
-            //                    $ionicLoading.hide();
-            //
-            //                    //$state.go('app.home');
-            //                    userService.setGoogleToken(user_data.oauthToken);
-            //                    loginService.login(user_data.oauthToken ? user_data.oauthToken : user_data.accessToken, 'googlelocal').then(function (profile) {
-            //                        //check if user is valid
-            //
-            //                        $scope.validateUserForGamification(profile);
-            //
-            //                    })
-            //                },
-            //                function (msg) {
-            //                    $ionicLoading.hide();
-            //                    Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
-            //
-            //                }
-            //            );
+
         }
         //This is the success callback from the login method
     $scope.validateUserForGamification = function (profile) {
