@@ -10,7 +10,7 @@ angular.module('viaggia.controllers.planlist', [])
     }
     if ($scope.planConfigure) {
         $scope.departureTime = planService.convertTo24Hour($scope.planConfigure.departureTime);
-        $scope.departureDate = $filter('date')(planService.mmddyyyy2date($scope.planConfigure.date),'dd/MM/yyyy');
+        $scope.departureDate = $filter('date')(planService.mmddyyyy2date($scope.planConfigure.date), 'dd/MM/yyyy');
     }
     $scope.nameFrom = planService.getName('from');
     $scope.nameTo = planService.getName('to');
@@ -18,6 +18,9 @@ angular.module('viaggia.controllers.planlist', [])
         $scope.journeys.forEach(function (it, idx) {
             if (it.promoted) {
                 $scope.containsGreen = true;
+            }
+            if (!it.hasOwnProperty("original")) {
+                it.original = JSON.parse(JSON.stringify(it));
             }
             it.length = planService.getLength(it);
             it.means = planService.extractItineraryMeans(it);
