@@ -1,6 +1,6 @@
 angular.module('viaggia.services.plan', [])
 
-.factory('planService', function ($q, $http, $filter, Config) {
+.factory('planService', function ($q, $http, $filter, $rootScope, userService, Config) {
 
     var planService = {};
     var position = {};
@@ -80,8 +80,8 @@ angular.module('viaggia.services.plan', [])
 
     planService.buildConfigureOptions = function (trip) {
 
-        var data = $filter('date')(new Date(trip.data.data.startime), 'MM/dd/yyyy');
-        var time = $filter('date')(new Date(trip.data.data.startime), 'hh:mma');
+        var data = $filter('date')(new Date(trip.data.startime), 'MM/dd/yyyy');
+        var time = $filter('date')(new Date(trip.data.startime), 'hh:mma');
         var configure = {
             "from": {
                 "name": trip.data.originalFrom.name,
@@ -608,51 +608,120 @@ angular.module('viaggia.services.plan', [])
         return placedata.promise;
     }
 
-    planService.saveTrip = function (tripId, trip, name, requestedFrom, requestedTo) {
+
+    function getDaysOfRecurrency(days) {
+        var returndays = [];
+        for (var len = 0; len < days.length; len++) {
+            if (days[len].checked) {
+                returndays.push(len + 1);
+            }
+        }
+        return returndays;
+    };
+
+
+
+    planService.saveTrip = function (tripId, trip, name, requestedFrom, requestedTo, recurrency) {
         var deferred = $q.defer();
+        if ($rootScope.userIsLogged) {
+            return planService.saveTripLogged(tripId, trip, name, requestedFrom, requestedTo, recurrency);
+        } else {
+            return planService.saveTripNotLogged(tripId, trip, name, requestedFrom, requestedTo, recurrency);
+        }
+    }
+
+    planService.saveTripLogged = function (tripId, trip, name, requestedFrom, requestedTo, recurrency) {
+        var deferred = $q.defer();
+        var daysOfWeek = getDaysOfRecurrency(recurrency);
+        var newTrip = false;
         if (!tripId) {
             tripId = new Date().getTime();
+            newTrip = true;
         }
-        var tripToSave = {
-            "tripId": tripId,
-            "data": {
-                "originalFrom": {
-                    "name": requestedFrom,
-                    "lat": trip.from.lat,
-                    "lon": trip.from.lon
+        //console.log(JSON.stringify(trip));
+
+        var urlBuilt = Config.getServerURL() + "/itinerary";
+        var databuilt = buildData(null, trip, name, requestedFrom, requestedTo, recurrency, daysOfWeek);
+        var methodTrip = 'POST';
+        userService.getValidToken().then(function (token) {
+            $http({
+                method: methodTrip,
+                url: urlBuilt,
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+
                 },
-                "originalTo": {
-                    "name": requestedTo,
-                    "lat": trip.to.lat,
-                    "lon": trip.to.lon
-                },
-                "originalRequest": planService.getPlanConfigure(),
-                "monitor": true,
-                "name": name,
-                "data": trip
-            }
-        };
-        var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
-        if (!savedTrips) {
-            savedTrips = {};
+                data: databuilt,
+                timeout: 5000
+            }).
+            success(function (data) {
+                var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
+                if (data.clientId) {
+                    databuilt.clientId = data.clientId;
+                } else {
+                    databuilt.clientId = tripId;
+
+                }
+                if (!savedTrips) {
+                    savedTrips = {};
+                }
+                savedTrips[databuilt.clientId] = databuilt;
+                localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
+                if (!newTrip) {
+                    //delete the old one from local storage and from server
+                    planService.deleteTrip(tripId).then(function (value) {
+                        //console.log(JSON.stringify(value));
+                        planService.getTrips().then(function (trips) {
+                            //change bookmark if present
+                            deferred.resolve(databuilt);
+
+                        });
+                    }, function (error) {
+                        //in case delete has some problems delete from localstorage
+                        localDelete(tripId, deferred);
+                        planService.getTrips().then(function (trips) {
+                            deferred.resolve(true);
+
+                        });
+                        console.log(JSON.stringify(error));
+                    });
+
+
+                } else {
+                    planService.getTrips().then(function (trips) {
+                        deferred.resolve(databuilt);
+
+                    });
+                }
+            }).error(function (data, status, headers, config) {
+                console.log(data + status + headers + JSON.stringify(config));
+                deferred.reject(data);
+            });
+        });
+
+
+
+
+        return deferred.promise;
+    }
+
+
+    planService.saveTripNotLogged = function (tripId, trip, name, requestedFrom, requestedTo, recurrency) {
+        var deferred = $q.defer();
+        var daysOfWeek = getDaysOfRecurrency(recurrency);
+        var newTrip = false;
+        if (!tripId) {
+            tripId = new Date().getTime();
+            newTrip = true;
         }
-        savedTrips[tripId] = tripToSave;
-        localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
 
-        //planService.setPlanConfigure(null);
+        var tripToSave = buildData(tripId, trip, name, requestedFrom, requestedTo, recurrency, daysOfWeek);
 
-        deferred.resolve(tripToSave);
-
-
-        //     later for the server
-        //$http({
-        //            method: 'POST',
-        //            url: Config.getServerURL(),
-        //            headers: {
-        //                'Accept': 'application/json',
-        //                'Content-Type': 'application/json'
-        //            },
-        //            data: {
+        //        var tripToSave = {
+        //            "tripId": tripId,
+        //            "data": {
         //                "originalFrom": {
         //                    "name": requestedFrom,
         //                    "lat": trip.from.lat,
@@ -663,23 +732,66 @@ angular.module('viaggia.services.plan', [])
         //                    "lat": trip.to.lat,
         //                    "lon": trip.to.lon
         //                },
+        //                "originalRequest": planService.getPlanConfigure(),
         //                "monitor": true,
         //                "name": name,
         //                "data": trip
-        //
         //            }
-        //        }).
-        //        success(function (data) {
-        //            deferred.resolve(data);
-        //        }).
-        //        error(function (data, status, headers, config) {
-        //            console.log(data + status + headers + config);
-        //            deferred.reject(data);
-        //        });
+        //        };
+        var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
+        if (!savedTrips) {
+            savedTrips = {};
+        }
+        savedTrips[tripId] = tripToSave;
+        localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
 
+
+        deferred.resolve(tripToSave);
         return deferred.promise;
     }
 
+    function buildData(tripId, trip, name, requestedFrom, requestedTo, recurrency, daysOfWeek) {
+        databuilt = null;
+        if (tripId) {
+            databuilt = {
+                'clientId': tripId,
+                'data': trip.original,
+                'originalFrom': {
+                    'name': requestedFrom,
+                    'lat': trip.from.lat,
+                    'lon': trip.from.lon
+                },
+                'originalTo': {
+                    'name': requestedTo,
+                    'lat': trip.to.lat,
+                    'lon': trip.to.lon
+                },
+                'name': name,
+                'recurrency': {
+                    'daysOfWeek': daysOfWeek
+                }
+            }
+        } else {
+            databuilt = {
+                'data': trip.original,
+                'originalFrom': {
+                    'name': requestedFrom,
+                    'lat': trip.from.lat,
+                    'lon': trip.from.lon
+                },
+                'originalTo': {
+                    'name': requestedTo,
+                    'lat': trip.to.lat,
+                    'lon': trip.to.lon
+                },
+                'name': name,
+                'recurrency': {
+                    'daysOfWeek': daysOfWeek
+                }
+            }
+        }
+        return databuilt;
+    }
     var editInstance = null;
     planService.setEditInstance = function (trip) {
         editInstance = trip;

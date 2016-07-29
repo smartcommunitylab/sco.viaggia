@@ -20,17 +20,20 @@
 
                 <div class="row">
                     <div>
-                        <small class="item-text-wrap text-muted"><strong>{{'my_trip_from'|translate}}</strong>: {{journey.data.originalFrom.name}}</small>
+                        <small class="item-text-wrap text-muted"><strong>{{'my_trip_from'|translate}}</strong>: {{journey.originalFrom.name}}</small>
                     </div>
                 </div>
                 <div class="row">
                     <div>
-                        <small class="item-text-wrap  text-muted"><strong>{{'my_trip_to'|translate}}</strong>: {{journey.data.originalTo.name}}</small>
+                        <small class="item-text-wrap  text-muted"><strong>{{'my_trip_to'|translate}}</strong>: {{journey.originalTo.name}}</small>
                     </div>
                 </div>
                 <div class="row">
-                    <div>
-                        <small class="text-muted"><strong>{{'my_trip_time'|translate}}</strong>: {{journey.data.data.startime| date:'dd/MM/yyyy HH:mm'}}</small>
+                    <div ng-if="!isRecurrency(journey)">
+                        <small class="text-muted"><strong>{{'my_trip_time'|translate}}</strong>: {{journey.data.startime| date:'dd/MM/yyyy HH:mm'}}</small>
+                    </div>
+                    <div ng-if="isRecurrency(journey)">
+                        <small class="text-muted"><strong>{{'my_trip_time'|translate}}</strong>: {{journey.data.startime| date:' HH:mm'}} </small>
                     </div>
                 </div>
                 <ion-option-button class="button button-viaggia no-shadow icon ion-edit" ng-click="modifyTrip($index)"></ion-option-button>

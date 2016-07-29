@@ -465,6 +465,109 @@ angular.module('viaggia.services.login', [])
         }
         return userService;
     })
+    .factory('userService', function ($http, $q, Config, storageService) {
+        var userService = {};
+
+
+        userService.setGoogleUser = function (user_data) {
+            window.localStorage.starter_google_user = JSON.stringify(user_data);
+        };
+        userService.seFacebookUser = function (user_data) {
+            window.localStorage.starter_facebook_user = JSON.stringify(user_data);
+        };
+        userService.getGoogleUser = function () {
+            return JSON.parse(window.localStorage.starter_google_user || '{}');
+        };
+
+        userService.getFacebookUser = function () {
+            return JSON.parse(window.localStorage.starter_facebook_user || '{}');
+        };
+        userService.getFacebookToken = function () {
+            return facebookToken;
+        }
+        userService.getGoogleToken = function () {
+            return googleToken;
+
+        }
+        userService.setFacebookToken = function (token) {
+            facebookToken = token;
+        }
+        userService.setGoogleToken = function (token) {
+            googleToken = token;
+        }
+        userService.validUserForGamification = function (profile) {
+            var deferred = $q.defer();
+            //check if user (profile.userId) is valid or not
+            var url = Config.getGamificationURL() + "/out/rest/checkuser/" + profile.userId;
+
+            $http.get(url).then(
+                function (response) {
+                    if (!response.data.registered) {
+                        deferred.resolve(false);
+
+                    } else {
+                        deferred.resolve(true);
+                    }
+                },
+                function (responseError) {
+                    deferred.reject(responseError);
+                }
+            );
+
+            return deferred.promise;
+        }
+        userService.getUserData = function () {
+            //get Data from server my trips
+
+        }
+        userService.getValidToken = function () {
+            var user = storageService.getUser();
+            var deferred = $q.defer();
+
+            // check for expiry.
+            var now = new Date();
+            if (user && user.token) {
+                var saved = new Date(user.token.validUntil);
+                if (saved.getTime() >= now.getTime() + 60 * 60 * 1000) {
+                    deferred.resolve(user.token.access_token);
+                } else {
+                    var url = Config.getServerTokenURL();
+                    var params = "?client_id=" + Config.getClientId() + "&client_secret=" + Config.getClientSecKey() + "&code=" + user.token.code + "&refresh_token=" + user.token.refresh_token + "&grant_type=refresh_token";
+
+                    $http.post(url + params)
+
+                    .then(
+                        function (response) {
+                            if (response.data.access_token) {
+                                var access_token = response.data.access_token;
+                                user.token.access_token = response.data.access_token;
+                                user.token.refresh_token = response.data.refresh_token;
+                                user.token.expires_in = response.data.expires_in;
+                                // calculate expiry (after removing 1 hr).
+                                var t = new Date();
+                                t.setSeconds(t.getSeconds() + (response.data.expires_in - 3600));
+                                user.token.validUntil = t;
+                                // update token
+                                storageService.saveUser(user).then(function (success) {}, function (error) {});;
+
+                                deferred.resolve(access_token);
+                            } else {
+                                deferred.reject(null);
+                            }
+                        },
+                        function (responseError) {
+                            deferred.reject(responseError);
+                        }
+                    );
+
+                }
+            } else {
+                deferred.reject(null);
+            }
+            return deferred.promise;
+        }
+        return userService;
+    })
     .factory('storageService', function ($http, $q, Config) {
         var storageService = {};
 

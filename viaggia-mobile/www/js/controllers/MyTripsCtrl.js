@@ -22,7 +22,7 @@ angular.module('viaggia.controllers.mytrips', [])
 
     $scope.showPlan = function (journey) {
         $state.go('app.tripdetails', {
-            tripId: journey.tripId
+            tripId: journey.clientId
         });
     }
     $scope.deleteTrip = function ($index) {
