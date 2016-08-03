@@ -32,6 +32,10 @@
     "net.yoik.cordova.plugins.screenorientation",
     "https://github.com/phonegap/phonegap-plugin-push",
     {
+      "locator": "https://github.com/kristianhristov/cordova-cookie-master.git",
+      "id": "com.cordova.plugins.cookiemaster"
+    },
+    {
       "variables": {
         "SENDER_ID": "453601816446",
         "GOOGLE_APP_ID": "453601816446"

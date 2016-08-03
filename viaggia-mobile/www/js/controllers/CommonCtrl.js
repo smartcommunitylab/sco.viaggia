@@ -1,14 +1,13 @@
 angular.module('viaggia.controllers.common', [])
 
-.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, DataManager, $ionicPopup, $ionicModal, $filter, $ionicLoading, loginService, Config, planService) {
+.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $ionicHistory,$timeout, DataManager, $ionicPopup, $ionicModal, $filter, $ionicLoading, $ionicSideMenuDelegate, loginService, Config, Toast, planService) {
     /*menu group*/
     $scope.shownGroup = false;
     $scope.toggleGroupRealTime = function () {
         if ($scope.isGroupRealTimeShown()) {
             $scope.shownGroup = false;
         } else {
-            $scope.shownGroup = true;
-        }
+            $scope.shownGroup = true;}
         localStorage.setItem(Config.getAppId() + '_shownGroup', $scope.shownGroup);
 
     };
@@ -16,17 +15,23 @@ angular.module('viaggia.controllers.common', [])
         return $scope.shownGroup === true;
     };
 
+    //open the popup for login
     $rootScope.login = function () {
         $scope.openLogin();
     }
 
     $rootScope.logout = function () {
         loginService.logout().then(function (data) {
-                //toast ok
-
+                Toast.show($filter('translate')('sign_out_success'), "short", "bottom");
+                $ionicSideMenuDelegate.toggleLeft();
+                            $state.go('app.home');
+                            $ionicHistory.nextViewOptions({
+                                disableBack: true,
+                                historyRoot: true
+                            });
             },
             function (error) {
-                //toast ok
+                Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
             });
     };
 

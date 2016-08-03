@@ -678,7 +678,10 @@ angular.module('viaggia', [
             dow_sunday_short: 'D',
             save_trip_recurrent: 'Ricorrente',
             save_trip_alldays: 'Tutti',
-            sign_in_success: 'Accesso effettuato con successo'
+            sign_in_success: 'Accesso effettuato con successo',
+            user_check: 'Verifica utente',
+            sign_out_success: 'Logout effettuato con successo'
+
 
 
         });
@@ -905,8 +908,9 @@ angular.module('viaggia', [
             dow_sunday_short: 'S',
             save_trip_recurrent: 'Recurrent',
             save_trip_alldays: 'All',
-            sign_in_success: 'Login succeeded'
-
+            sign_in_success: 'Login succeeded',
+            user_check: 'Check user',
+            sign_out_success: 'Logout succeeded'
         });
 
 

@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.mytrips', [])
 
-.controller('MyTripsCtrl', function ($scope, Config, $timeout, ionicMaterialMotion, ionicMaterialInk, planService, $state, $filter) {
+.controller('MyTripsCtrl', function ($scope, Config, $timeout, ionicMaterialMotion, ionicMaterialInk, planService, $state, $filter, loginService) {
 
     planService.getTrips().then(function (data) {
         $scope.savedTripsDB = data;
@@ -13,6 +13,26 @@ angular.module('viaggia.controllers.mytrips', [])
             $scope.savedTrips.push($scope.savedTripsDB[$scope.savedTripsKeys[k]]);
         }
     });
+    $scope.load = function () {
+        Config.loading();
+        planService.getTrips(true).then(function (data) {
+            $scope.savedTripsDB = data;
+            $scope.savedTripsKeys = [];
+            if ($scope.savedTripsDB) {
+                $scope.savedTripsKeys = Object.keys($scope.savedTripsDB);
+            }
+            $scope.savedTrips = [];
+            for (var k = 0; k < $scope.savedTripsKeys.length; k++) {
+                $scope.savedTrips.push($scope.savedTripsDB[$scope.savedTripsKeys[k]]);
+            }
+            Config.loaded();
+            $scope.$broadcast('scroll.refreshComplete');
+            //$scope.$apply();
+        }, function () {
+            Config.loaded();
+            $scope.$broadcast('scroll.refreshComplete');
+        });
+    }
     $scope.$on('ngLastRepeat.savedTrips', function (e) {
         $timeout(function () {
             ionicMaterialMotion.ripple();
@@ -38,6 +58,9 @@ angular.module('viaggia.controllers.mytrips', [])
 
 
         //delete $scope.placesandcoordinates[favorite.name];
+    }
+    $scope.userIsLogged = function () {
+        return loginService.userIsLogged();
     }
     $scope.modifyTrip = function ($index) {
         var journey = $scope.savedTrips[$index];

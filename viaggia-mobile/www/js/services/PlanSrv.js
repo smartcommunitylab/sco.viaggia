@@ -1,6 +1,6 @@
 angular.module('viaggia.services.plan', [])
 
-.factory('planService', function ($q, $http, $filter, $rootScope, userService, Config) {
+.factory('planService', function ($q, $http, $filter, $rootScope, userService, storageService, Config) {
 
     var planService = {};
     var position = {};
@@ -816,13 +816,93 @@ angular.module('viaggia.services.plan', [])
         return deferred.promise;
     }
 
-    planService.getTrips = function () {
+    //    planService.getTrips = function () {
+    //        var deferred = $q.defer();
+    //        var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
+    //        deferred.resolve(savedTrips);
+    //        return deferred.promise;
+    //    }
+    //save all the local trips on server, used after login for synch
+    planService.createLocalTrips = function () {
         var deferred = $q.defer();
-        var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
-        deferred.resolve(savedTrips);
+        //get all the local trips
+        planService.getTrips().then(function (data) {
+                var all = []
+                for (var trip in data) {
+                    //if has not id, it means the trip is only local
+
+                    if (!data[trip].hasOwnProperty('id')) {
+                        if (!data[trip].data.hasOwnProperty("original")) {
+                            data[trip].data.original = JSON.parse(JSON.stringify(data[trip].data));
+                        }
+                        all.push(planService.saveTrip(null, data[trip].data, data[trip].name, data[trip].originalFrom.name, data[trip].originalTo.name, data[trip].recurrency));
+                    }
+                }
+                $q.all(all).then(function (savedTrips) {
+                    storageService.deleteTrips();
+                    deferred.resolve(savedTrips);
+                }, function (error) {
+                    deferred.reject(error);
+                });
+            },
+            function (error) {
+                deferred.reject(error);
+            });
+        //save all the local trips remotly
         return deferred.promise;
     }
 
+
+
+    //get the trips, if first time (empty list) or after login (remote == true) take them from server
+
+    planService.getTrips = function (sync) {
+        var deferred = $q.defer();
+        var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
+        if (!savedTrips || sync) {
+            //try sync with server
+            userService.getValidToken().then(function (token) {
+                $http({
+                    method: 'GET',
+                    url: Config.getServerURL() + "/itinerary",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+
+                    },
+                    timeout: 5000
+                }).
+                success(function (data) {
+                    // if (!savedTrips) {
+                    savedTrips = {};
+                    //}
+                    //delete old trips from local storage
+                    storageService.deleteTrips();
+                    //if I already had saved trip and it is a login (sync == true) then try to merge the savedtrip
+                    for (var i = 0; i < data.length; i++) {
+                        savedTrips[data[i].clientId] = data[i];
+
+                    }
+                    localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
+                    planService.setPlanConfigure(null);
+                    deferred.resolve(data);
+
+                }).error(function (data, status, headers, config) {
+                    console.log(data + status + headers + JSON.stringify(config));
+                    deferred.reject(data);
+                });
+            }, function (error) {
+                console.log(error);
+                deferred.reject(error);
+            });
+        } else {
+            deferred.resolve(savedTrips);
+
+        }
+        return deferred.promise;
+
+    }
     var localDelete = function (tripId, deferred) {
         var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
         if (!savedTrips) {
@@ -841,39 +921,38 @@ angular.module('viaggia.services.plan', [])
         if (!tripId) {
             deferred.reject();
         } else {
-            userService.getValidToken().then(function (token) {
-                $http.delete(Config.getServerURL() + "/itinerary/" + tripId, {
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + token
+            if ($rootScope.userIsLogged) {
+                userService.getValidToken().then(function (token) {
+                    $http.delete(Config.getServerURL() + "/itinerary/" + tripId, {
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + token
 
-                    },
-                    timeout: 5000
-                }).
-                success(function (data) {
-                    localDelete(tripId, deferred);
-                    planService.getTrips().then(function (trips) {
-                        trackService.updateNotification(databuilt, trips, databuilt.clientId, "modify");
+                        },
+                        timeout: 5000
+                    }).
+                    success(function (data) {
+                        localDelete(tripId, deferred);
                         deferred.resolve(true);
 
-                    });
-                }).error(function (data, status, headers, config) {
-                    // does not exist server side
-                    if (status == 400) {
-                        localDelete(tripId, deferred);
-                        //delete notif
-                        planService.getTrips().then(function (trips) {
-                            trackService.updateNotification(databuilt, trips, databuilt.clientId, "modify");
+                    }).error(function (data, status, headers, config) {
+                        // does not exist server side
+                        if (status == 400) {
+                            localDelete(tripId, deferred);
                             deferred.reject(data);
 
-                        });
-                    } else {
-                        console.log(data + status + headers + JSON.stringify(config));
-                        deferred.reject(data);
-                    }
-                });
-            })
+                        } else {
+                            console.log(data + status + headers + JSON.stringify(config));
+                            deferred.reject(data);
+                        }
+                    });
+                })
+            } else {
+                localDelete(tripId, deferred);
+                deferred.resolve(true);
+
+            }
         }
         return deferred.promise;
     }

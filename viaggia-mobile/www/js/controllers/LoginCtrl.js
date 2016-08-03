@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.login', [])
 
-.controller('LoginCtrl', function ($scope, $ionicSideMenuDelegate, $rootScope, $ionicLoading, $ionicPlatform, $state, $ionicHistory, $ionicPopup, $timeout, $filter, loginService, userService, Config, storageService, Toast) {
+.controller('LoginCtrl', function ($scope, $ionicSideMenuDelegate, $rootScope, $ionicLoading, $ionicPlatform, $state, $q, $ionicHistory, $ionicPopup, $timeout, $filter, loginService, userService, planService, Config, storageService, Toast) {
     $ionicSideMenuDelegate.canDragContent(false);
     $scope.title = Config.getAppName();
 
@@ -18,27 +18,31 @@ angular.module('viaggia.controllers.login', [])
             $ionicLoading.hide(); //close the popup after 3 seconds for some reason
         }, 3000);
         loginService.login(null, 'google').then(function (profile) {
-            //                                       check if user is valid
+            $rootScope.userIsLogged = true;
+
             $ionicLoading.show({
                 template: $filter('translate')('user_check')
             });
             storageService.saveUser(profile);
-            $state.go('app.home');
-            $ionicHistory.nextViewOptions({
-                disableBack: true,
-                historyRoot: true
-            });
+            //            $state.go('app.home');
+            //            $ionicHistory.nextViewOptions({
+            //                disableBack: true,
+            //                historyRoot: true
+            //            });
             $scope.closeLogin();
             Toast.show($filter('translate')('sign_in_success'), "short", "bottom");
-            $rootScope.userIsLogged = true;
-
+            $scope.localDataInit().then(function () {
+                Config.loaded;
+                if ($state.is('app.mytrips')) {
+                    $state.reload();
+                }
+            });
         }, function (err) {
             Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
             $ionicLoading.hide();
         }).finally(Config.loaded);
-
-
     }
+
 
     var fbLoginSuccess = function (response) {
         if (!response.authResponse) {
@@ -102,20 +106,22 @@ angular.module('viaggia.controllers.login', [])
             $ionicLoading.hide(); //close the popup after 3 seconds for some reason
         }, 3000);
         loginService.login(null, 'facebook').then(function (profile) {
-            //                                       check if user is valid
+            $rootScope.userIsLogged = true;
             $ionicLoading.show({
                 template: $filter('translate')('user_check')
             });
             storageService.saveUser(profile);
-            //go on to home page
-            $state.go('app.home');
-            $ionicHistory.nextViewOptions({
-                disableBack: true,
-                historyRoot: true
-            });
+            //            $state.go('app.home');
+            //            $ionicHistory.nextViewOptions({
+            //                disableBack: true,
+            //                historyRoot: true
+            //            });
             $scope.closeLogin();
             Toast.show($filter('translate')('sign_in_success'), "short", "bottom");
-            $rootScope.userIsLogged = true;
+            $scope.localDataInit().then(function () {
+
+                Config.loaded
+            });
 
         }, function (err) {
             Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
@@ -206,18 +212,21 @@ angular.module('viaggia.controllers.login', [])
         Config.loading();
         loginService.signin($scope.user).then(
             function (profile) {
+                $rootScope.userIsLogged = true;
                 $ionicLoading.show({
                     template: $filter('translate')('user_check')
                 });
                 storageService.saveUser(profile);
-                $state.go('app.home');
-                $ionicHistory.nextViewOptions({
-                    disableBack: true,
-                    historyRoot: true
-                });
+                //                $state.go('app.home');
+                //                $ionicHistory.nextViewOptions({
+                //                    disableBack: true,
+                //                    historyRoot: true
+                //                });
                 $scope.closeLogin();
                 Toast.show($filter('translate')('sign_in_success'), "short", "bottom");
-                $rootScope.userIsLogged = true;
+                $scope.localDataInit().then(function () {
+                    Config.loaded
+                });
             },
             function (error) {
                 storageService.saveUser(null);
@@ -229,7 +238,23 @@ angular.module('viaggia.controllers.login', [])
             }
         ).finally(Config.loaded);
     };
-
+    $scope.localDataInit = function () {
+        var deferred = $q.defer();
+        //create the local trips on the server
+        planService.createLocalTrips().then(function () {
+            planService.getTrips(true).then(function () {
+                //$ionicLoading.hide();
+                deferred.resolve();
+            }, function () {
+                //$ionicLoading.hide();
+                deferred.reject();
+            });
+        }, function () {
+            //$ionicLoading.hide();
+            deferred.reject();
+        });
+        return deferred.promise;
+    }
 })
 
 

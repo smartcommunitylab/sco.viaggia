@@ -4,20 +4,14 @@
             <h4>{{'my_trip_empty_list'|translate}}</h4>
         </div>
 
-        <!--
-        <div class="card empty-list-card" ng-hide="savedTrips.length>0">
-            {{'my_trip_empty_list'|translate}}
-        </div>
--->
+        <ion-refresher on-refresh="load()" ng-if="userIsLogged()">
+        </ion-refresher>
         <ion-list ng-hide="savedTrips.length==0">
-            <ion-item class="card trip-card" ng-repeat="journey in savedTrips" ng-last-repeat="savedTrips" ng-click="showPlan(journey)">
-                <!--                <div class="item item-text-wrap">-->
+            <ion-item class="card trip-card" ng-repeat="journey in savedTrips |orderBy: '-data.startime'" ng-last-repeat="savedTrips" ng-click="showPlan(journey)">
 
                 <div class="trip-title text-center">
-                    <strong>{{journey.data.name }}</strong>
+                    <strong>{{journey.name }}</strong>
                 </div>
-                <!--<div class="col-md-10">-->
-
                 <div class="row">
                     <div>
                         <small class="item-text-wrap text-muted"><strong>{{'my_trip_from'|translate}}</strong>: {{journey.originalFrom.name}}</small>

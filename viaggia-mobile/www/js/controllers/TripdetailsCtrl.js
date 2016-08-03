@@ -297,7 +297,7 @@ angular.module('viaggia.controllers.tripdetails', [])
         planService.getTrip($scope.tripId).then(function (trip) {
             planService.setName("from", $scope.requestedFrom);
             planService.setName("to", $scope.requestedTo);
-            planService.setPlanConfigure(trip.data.originalRequest);
+            planService.setPlanConfigure(planService.buildConfigureOptions(trip));
             planService.setEditInstance(trip);
             //            planService.setTripId($scope.tripId);
             //            planService.setTripName(trip.data.name);
