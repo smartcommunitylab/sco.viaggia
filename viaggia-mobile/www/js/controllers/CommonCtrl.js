@@ -1,13 +1,14 @@
 angular.module('viaggia.controllers.common', [])
 
-.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $ionicHistory,$timeout, DataManager, $ionicPopup, $ionicModal, $filter, $ionicLoading, $ionicSideMenuDelegate, loginService, Config, Toast, planService) {
+.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $ionicHistory, $timeout, DataManager, $ionicPopup, $ionicModal, $filter, $ionicLoading, $ionicSideMenuDelegate, loginService, Config, Toast, planService) {
     /*menu group*/
     $scope.shownGroup = false;
     $scope.toggleGroupRealTime = function () {
         if ($scope.isGroupRealTimeShown()) {
             $scope.shownGroup = false;
         } else {
-            $scope.shownGroup = true;}
+            $scope.shownGroup = true;
+        }
         localStorage.setItem(Config.getAppId() + '_shownGroup', $scope.shownGroup);
 
     };
@@ -24,11 +25,11 @@ angular.module('viaggia.controllers.common', [])
         loginService.logout().then(function (data) {
                 Toast.show($filter('translate')('sign_out_success'), "short", "bottom");
                 $ionicSideMenuDelegate.toggleLeft();
-                            $state.go('app.home');
-                            $ionicHistory.nextViewOptions({
-                                disableBack: true,
-                                historyRoot: true
-                            });
+                $state.go('app.home');
+                $ionicHistory.nextViewOptions({
+                    disableBack: true,
+                    historyRoot: true
+                });
             },
             function (error) {
                 Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
@@ -50,8 +51,11 @@ angular.module('viaggia.controllers.common', [])
         $scope.creditsModal.show();
     }
 
-
-    //Login and registration Modal managed with ng-include
+    $scope.plan = function () {
+            planService.setPlanConfigure(null);
+            $state.go('app.plan');
+        }
+        //Login and registration Modal managed with ng-include
     $ionicModal.fromTemplateUrl('templates/loginRegModal.html', {
         id: '4',
         scope: $scope,

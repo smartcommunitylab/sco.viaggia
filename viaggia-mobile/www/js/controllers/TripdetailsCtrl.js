@@ -195,7 +195,7 @@ angular.module('viaggia.controllers.tripdetails', [])
             $scope.journey.recursiveTrip = true;
             //set array to recurrent
             for (var k = 0; k < $scope.recurrencyPopupDoW.length; k++) {
-                if (Utils.contains($scope.recurrency.daysOfWeek, k + 1)) {
+                if ($scope.recurrency.daysOfWeek.indexOf(k + 1) >= 0) {
                     $scope.recurrencyPopupDoW[k].checked = true;
                 }
             }
