@@ -473,15 +473,20 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     }
 
     function getAccessibilityStyle() {
+        var style = '';
+        //1= accessible , 2= not accessible, 0 = I don't know
         if ($scope.route.wheelChairBoarding == 1) {
 
             $scope.accesibilityKnow = true;
-            return $scope.flagAccessibility ? 'ic_access' : 'ic_access_outline';
+            style = $scope.flagAccessibility ? 'ic_access' : 'ic_access_outline';
         } else if ($scope.route.wheelChairBoarding == 2) {
+            style = 'ic_access not_accessible';
             $scope.accesibilityKnow = true;
-        } else { // if I don't know, don't see it
+        } else {
+            // if I don't know, don't see it
             $scope.accesibilityKnow = false;
         }
+        return style;
     }
     $scope.toggleMonitor = function () {
         //check if user is logged

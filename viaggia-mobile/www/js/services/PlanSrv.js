@@ -1,6 +1,6 @@
 angular.module('viaggia.services.plan', [])
 
-.factory('planService', function ($q, $http, $filter, $rootScope, userService, storageService, Config) {
+.factory('planService', function ($q, $http, $filter, $rootScope, userService, storageService, Config, Utils) {
 
     var planService = {};
     var position = {};
@@ -609,15 +609,7 @@ angular.module('viaggia.services.plan', [])
     }
 
 
-    function getDaysOfRecurrency(days) {
-        var returndays = [];
-        for (var len = 0; len < days.length; len++) {
-            if (days[len].checked) {
-                returndays.push(len + 1);
-            }
-        }
-        return returndays;
-    };
+
 
 
 
@@ -632,7 +624,7 @@ angular.module('viaggia.services.plan', [])
 
     planService.saveTripLogged = function (tripId, trip, name, requestedFrom, requestedTo, recurrency) {
         var deferred = $q.defer();
-        var daysOfWeek = getDaysOfRecurrency(recurrency);
+        var daysOfWeek = Utils.getDaysOfRecurrency(recurrency);
         var newTrip = false;
         if (!tripId) {
             tripId = new Date().getTime();
@@ -710,7 +702,7 @@ angular.module('viaggia.services.plan', [])
 
     planService.saveTripNotLogged = function (tripId, trip, name, requestedFrom, requestedTo, recurrency) {
         var deferred = $q.defer();
-        var daysOfWeek = getDaysOfRecurrency(recurrency);
+        var daysOfWeek = Utils.getDaysOfRecurrency(recurrency);
         var newTrip = false;
         if (!tripId) {
             tripId = new Date().getTime();

@@ -45,6 +45,14 @@ angular.module('viaggia.controllers.mytrips', [])
             tripId: journey.clientId
         });
     }
+
+    $scope.isRecurrency = function (trip) {
+        if (trip.recurrency && trip.recurrency.daysOfWeek && trip.recurrency.daysOfWeek.length > 0) {
+            return true;
+        }
+        return false;
+    }
+
     $scope.deleteTrip = function ($index) {
         var journey = $scope.savedTrips[$index];
 

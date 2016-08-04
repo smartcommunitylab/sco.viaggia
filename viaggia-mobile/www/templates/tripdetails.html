@@ -82,6 +82,10 @@
                                 <div class="margin-right-16 margin-left-16">{{toTime(currentItinerary.endtime)}} </div>
                                 <div class="col inter-leg">{{requestedTo}}</div>
                             </div>
+                            <div class="recurrence_days">
+                                <i class="icon ic_recurring recurrent_icon_detail" ng-if="isRecurrent()"></i>
+                                <span class="recurrnce_day_string" ng-repeat="day in recurrentDays">{{day.name|translate}}</span>
+                            </div>
                             <button ng-if="editMode" class="button button-viaggia-header button-block" ng-click="saveTrip()">{{'journey_details_save' | translate}} </button>
                             <div class="popup-buttons" ng-if="!editMode">
                                 <button class="button button-cancel" ng-click="deleteTrip()">{{'journey_details_delete' | translate}} </button>

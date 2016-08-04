@@ -1,17 +1,17 @@
 angular.module('viaggia.controllers.tripdetails', [])
 
-.controller('TripDetailsCtrl', function ($scope, $stateParams, $ionicModal, $filter, $ionicPopup, planService, mapService, Config, Toast, $filter, $ionicHistory, $state, $location, bookmarkService) {
+.controller('TripDetailsCtrl', function ($scope, $stateParams, $ionicModal, $filter, $ionicPopup, planService, mapService, Config, Toast, $filter, $ionicHistory, $state, $location, Utils, bookmarkService) {
     $scope.title = $filter('translate')('journey_detail');
 
-    function getDaysOfRecurrency(days) {
-        var returndays = [];
-        for (var len = 0; len < days.length; len++) {
-            if (days[len].checked) {
-                returndays.push(len + 1);
-            }
-        }
-        return returndays;
-    };
+    //    function getDaysOfRecurrency(days) {
+    //        var returndays = [];
+    //        for (var len = 0; len < days.length; len++) {
+    //            if (days[len].checked) {
+    //                returndays.push(len + 1);
+    //            }
+    //        }
+    //        return returndays;
+    //    };
     var initMyTrip = function () {
         $scope.editMode = false;
         planService.getTrip($stateParams.tripId).then(function (trip) {
@@ -24,7 +24,7 @@ angular.module('viaggia.controllers.tripdetails', [])
             $scope.requestedTo = trip.originalTo.name;
             $scope.recurrency = trip.recurrency;
             if ($scope.isRecurrent()) {
-                $scope.recurrentDays = getDaysOfRecurrency($scope.recurrency);
+                $scope.recurrentDays = $scope.getRecurrentDays($scope.recurrency);
             }
             planService.setPlanConfigure(planService.buildConfigureOptions(trip));
 
@@ -218,9 +218,20 @@ angular.module('viaggia.controllers.tripdetails', [])
                     text: '<b>' + $filter('translate')('save_trip_save_button') + '</b>',
                     onTap: function (e) {
                         if (!$scope.data.nametrip) {
-                            $scope.showError = true;
-
-                            e.preventDefault();
+                            //$scope.showError = true;
+                            //put a  default name
+                            if ($scope.journey.recursiveTrip) {
+                                $scope.data.nametrip = "";
+                                var days = Utils.getDaysOfRecurrency($scope.recurrencyPopupDoW);
+                                for (var i = 0; i < days.length - 1; i++) {
+                                    $scope.data.nametrip += $filter('translate')($scope.recurrencyPopupDoW[days[i] - 1].name).substring(0, 3) + ", ";
+                                }
+                                $scope.data.nametrip += $filter('translate')($scope.recurrencyPopupDoW[days.length - 1].name).substring(0, 3)
+                            } else {
+                                $scope.data.nametrip = $filter('date')($scope.trip.startime, 'dd/MM/yyyy');
+                            }
+                            //e.preventDefault();
+                            return $scope.data.nametrip;
                         } else {
                             Config.loading();
                             return $scope.data.nametrip;

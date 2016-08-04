@@ -19,16 +19,14 @@
                 </div>
                 <div class="row">
                     <div>
-                        <small class="item-text-wrap  text-muted"><strong>{{'my_trip_to'|translate}}</strong>: {{journey.originalTo.name}}</small>
+                        <small class="item-text-wrap  text-muted "><strong>{{'my_trip_to'|translate}}</strong>: {{journey.originalTo.name}}</small>
                     </div>
                 </div>
                 <div class="row">
-                    <div ng-if="!isRecurrency(journey)">
-                        <small class="text-muted"><strong>{{'my_trip_time'|translate}}</strong>: {{journey.data.startime| date:'dd/MM/yyyy HH:mm'}}</small>
-                    </div>
-                    <div ng-if="isRecurrency(journey)">
-                        <small class="text-muted"><strong>{{'my_trip_time'|translate}}</strong>: {{journey.data.startime| date:' HH:mm'}} </small>
-                    </div>
+                    <small class="text-muted col"><strong>{{'my_trip_time'|translate}}</strong>: {{journey.data.startime| date:'HH:mm'}}</small>
+                    <small class="text-muted col text-right"><strong>{{'my_trip_time'|translate}}</strong>: {{journey.data.endtime| date:'HH:mm'}}</small>
+                    <small class="col col-10"><i class="icon ic_recurring recurrent_icon_detail"></i></small>
+
                 </div>
                 <ion-option-button class="button button-viaggia no-shadow icon ion-edit" ng-click="modifyTrip($index)"></ion-option-button>
                 <ion-option-button class="button button-viaggia no-shadow icon ion-android-delete" ng-click="deleteTrip($index)"></ion-option-button>
