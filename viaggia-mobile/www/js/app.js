@@ -87,6 +87,7 @@ angular.module('viaggia', [
     'viaggia.services.bookmarks',
     'viaggia.services.login',
     'viaggia.services.registration',
+    'viaggia.services.monitor',
     'viaggia.filters'
 ])
 
@@ -200,7 +201,7 @@ angular.module('viaggia', [
             })
             .state('app.monitoring', {
                 cache: false,
-                url: "/monitoring",
+                url: "/monitoring/:ref/:agencyId/:groupId/:routeId",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/monitoring.html",
@@ -681,7 +682,18 @@ angular.module('viaggia', [
             save_trip_alldays: 'Tutti',
             sign_in_success: 'Accesso effettuato con successo',
             user_check: 'Verifica utente',
-            sign_out_success: 'Logout effettuato con successo'
+            sign_out_success: 'Logout effettuato con successo',
+            monitoing_add_new: 'Aggiungi',
+            new_monitor: 'Nuovo monitor',
+            active_monitors: 'Monitor attivi',
+            monitoing_close_new: 'Chiudi',
+            monitor_time_from: 'Dalle: ',
+            monitor_time_to: 'Alle: ',
+            new_monitor_days: 'Giorni',
+            onitor_delete_popup_title: 'Cancella monitor',
+            monitor_delete_popup_text: 'Sei sicuro di voler cancellare il monitor attivo?',
+            monitor_delete_confirmed: 'Il monitor è stato cancellato',
+            monitor_saved_confirmed: 'Il nuovo monitor è stato creato'
 
 
 
@@ -912,7 +924,18 @@ angular.module('viaggia', [
             save_trip_alldays: 'All',
             sign_in_success: 'Login succeeded',
             user_check: 'Check user',
-            sign_out_success: 'Logout succeeded'
+            sign_out_success: 'Logout succeeded',
+            monitoing_add_new: 'Add',
+            new_monitor: 'New monitor',
+            active_monitors: 'Active monitors',
+            monitoing_close_new: 'Chiudi',
+            monitor_time_from: 'From: ',
+            monitor_time_to: 'To: ',
+            new_monitor_days: 'Days',
+            monitor_delete_popup_title: 'Delete monitor',
+            monitor_delete_popup_text: 'Are you sure you want to delete the active monitor?',
+            monitor_delete_confirmed: 'The monitor has been deleted',
+            monitor_saved_confirmed: 'The monitor has been saved'
         });
 
 

@@ -493,6 +493,12 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         if (loginService.userIsLogged()) {
             //open monitoring page
             $scope.flagMonitoring = !$scope.flagMonitoring;
+            $state.go('app.monitoring', {
+                ref: $stateParams.ref,
+                agencyId: $stateParams.agencyId,
+                groupId: $stateParams.groupId,
+                routeId: $stateParams.routeId
+            });
 
         } else {
             //open login page

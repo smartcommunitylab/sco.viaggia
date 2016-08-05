@@ -1583,15 +1583,46 @@ ion-header-bar .title {
     margin: 2px;
 }
 
-
-/*
-#tablescroll:hover #slideout_accessibility {
-    left: 0;
+#monitoring #newMonitor {
+    transition: 0.09s all linear;
 }
-*/
+
+#monitoring #newMonitor.ng-hide {
+    line-height: 0px;
+}
+
+#monitoring .monitor-title {
+    text-align: center;
+    margin: 8px;
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+#monitoring .monitor-card {
+    position: relative;
+}
+
+#monitoring .monitor-card i {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 18px;
+}
+
+#monitoring .monitor-card .time-row {
+    margin-top: 20px;
+}
+
+#monitoring .monitor-card span {
+    margin-left: 4px;
+}
 
 
 /*
-#table-table:hover {
-    left: 50;
+#monitoring #newMonitorButton {
+    transition: opacity 0.09s all linear;
+}
+
+#monitoring #newMonitorButton.ng-hide {
+    opacity: 0;
 }*/
