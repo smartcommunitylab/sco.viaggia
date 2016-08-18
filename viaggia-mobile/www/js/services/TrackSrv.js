@@ -74,7 +74,8 @@ angular.module('viaggia.services.tracking', [])
                 headers: {
                     //                        'Accept': 'application/json',
                     //                        'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
+                    'Authorization': 'Bearer ' + token,
+                    'appId' : Config.getAppId()
                 }
             }).success(function () {
                 deferred.resolve(true);

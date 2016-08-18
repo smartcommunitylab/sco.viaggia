@@ -68,18 +68,28 @@ angular.module('viaggia.controllers.common', [])
 		*/
 	};
 
+  	$scope.openPrizes = function () {
+		if (!!$scope.firstOpenPopup) {
+			$scope.firstOpenPopup.close();
+		}
+		userService.getValidToken().then(function (validToken) {
+			var url = Config.getGamificationURL() + "/mobile?token=" + validToken;
+			window.open(url, "_system", "location=yes");
+		});
+	};
+
 	$scope.closePopup = function () {
 		$scope.firstOpenPopup.close();
 	};
 
 	$scope.showPlayAndGoPopup = function () {
-		$state.go('app.game');
-		//		$scope.firstOpenPopup = $ionicPopup.show({
-		//			templateUrl: 'templates/welcomePopup.html',
-		//			title: $filter('translate')('lbl_betatesting'),
-		//			cssClass: 'parking-popup',
-		//			scope: $scope
-		//		});
+//		$state.go('app.game');
+        $scope.firstOpenPopup = $ionicPopup.show({
+            templateUrl: 'templates/welcomePopup.html',
+            title: $filter('translate')('lbl_betatesting'),
+            cssClass: 'parking-popup',
+            scope: $scope
+        });
 	};
 
 	$scope.newPlan = function () {

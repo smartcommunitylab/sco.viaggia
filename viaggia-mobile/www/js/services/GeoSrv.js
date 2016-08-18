@@ -34,6 +34,8 @@ angular.module('viaggia.services.geo', [])
 
     function transformPair(p1, p2, res, distFunc) {
       var d = distFunc(p1,p2);
+      if (d == 0) return;
+
       var lats = computeLats(p1,p2,d);
       var lngs = computeLngs(p1,p2,d);
       res.push({lat: lats[0], lng: lngs[0]});

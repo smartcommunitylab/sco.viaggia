@@ -241,10 +241,20 @@ angular.module('viaggia.services.login', [])
 
         }
 
+        var getEmail = function(accounts) {
+          for (var authority in accounts) {
+            var vals = accounts[authority];
+            for (var k in vals) {
+              if (k.indexOf('email') >= 0) {
+                return vals[k];
+              }
+            }
+          }
+          return null;
+        };
+
         loginService.makeProfileCall = function makeProfileCall(tokenInfo) {
-
             var deferred = $q.defer();
-
             var url = Config.getServerProfileURL();
 
             $http.get(url, {
@@ -252,16 +262,29 @@ angular.module('viaggia.services.login', [])
                     "Authorization": "Bearer " + tokenInfo.access_token
                 }
             })
-
             .then(
                 function (response) {
-                    if (response.data.userId) {
+                    if (response.data && response.data.userId) {
+                        url = Config.getServerAccountProfileURL();
+                        $http.get(url, {
+                            headers: {
+                                "Authorization": "Bearer " + tokenInfo.access_token
+                            }
+                        })
+                        .then(function(accountResponse){
+                          var email = getEmail(accountResponse.data.accounts);
+                          if (email != null) {
+                            response.data.mail = email;
+                          }
+                          deferred.resolve(response.data);
+                        }, function(){
+                          deferred.resolve(response.data);
+                        });
+
                         deferred.resolve(response.data);
                     } else {
                         deferred.resolve(null);
                     }
-
-
                 },
                 function (responseError) {
                     deferred.reject(responseError);

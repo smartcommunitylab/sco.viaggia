@@ -215,6 +215,8 @@ angular.module('viaggia.services.conf', [])
             if (mapJsonConfig != null) configDeferred.resolve(true);
             else $http.get('data/config.json').success(function (response) {
                 mapJsonConfig = response;
+                $http.defaults.headers.common.appId = mapJsonConfig["appid"];
+
                 $http.get('data/tt.json').success(function (ttResponse) {
                     ttJsonConfig = ttResponse;
                     configDeferred.resolve(true);
@@ -226,6 +228,9 @@ angular.module('viaggia.services.conf', [])
             return angular.copy(HTTP_CONFIG);
         },
         getTrackingConfig: function () {
+            mapJsonConfig['trackingConfigure'].headers = {
+              appId: mapJsonConfig["appid"]
+            };
             return angular.copy(mapJsonConfig['trackingConfigure']);
         },
         getDistanceForAutocomplete: function () {
@@ -467,7 +472,10 @@ angular.module('viaggia.services.conf', [])
             return mapJsonConfig["AACURL"]+mapJsonConfig["serverRegisterURL"];
         },
         getServerProfileURL: function () {
-            return mapJsonConfig["AACURL"]+mapJsonConfig["serverProfileURL"];
+            return mapJsonConfig["AACURL"]+'/basicprofile/me';
+        },
+        getServerAccountProfileURL: function () {
+            return mapJsonConfig["AACURL"]+'/accountprofile/me';
         },
         getAACURL: function () {
             return mapJsonConfig["AACURL"];
