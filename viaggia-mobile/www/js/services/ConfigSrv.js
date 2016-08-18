@@ -169,7 +169,9 @@ angular.module('viaggia.services.conf', [])
             if (mapJsonConfig != null) deferred.resolve(true);
             else $http.get('data/config.json').success(function (response) {
                 mapJsonConfig = response;
-                mapJsonConfig['serverURL'] = $window.location.protocol+"//"+$window.location.host+mapJsonConfig['serverURL'];
+                $http.defaults.headers.common.appId = mapJsonConfig["appid"];
+
+
                 $http.get('data/tt.json').success(function (ttResponse) {
                     ttJsonConfig = ttResponse;
                     deferred.resolve(true);
