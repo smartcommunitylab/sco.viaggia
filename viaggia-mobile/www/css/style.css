@@ -1236,17 +1236,18 @@ ion-header-bar .title {
     opacity: 0.6;
 }
 
-y .header-badge {
-    top: -30px !important;
+.header-badge {
+    top: 3px !important;
     /*    left: 10px !important;*/
     font-size: x-small !important;
     margin-left: -5px!important;
-    display: table!important;
+/*    display: table !important;*/
     margin-right: 10px!important;
-    margin-top: -10px;
+/*    margin-top: -10px;*/
     padding: 3px 3px 3px 3px;
     width: 22px;
-    display: block!inspect;
+/*    display: block !inspect;*/
+    position: absolute !important;
     /*
     top: -32px !important;
     padding: 2px 12px 2px 3px;
