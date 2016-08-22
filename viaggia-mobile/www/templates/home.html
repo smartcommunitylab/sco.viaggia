@@ -53,6 +53,11 @@
 				</div>
 				<div class="row">
 					<div class="col">
+						<a ng-click="openSavedTracks()">
+							<div class="tracking-ds-button"><i class="icon ic_folder"></i><span>{{'track_saved' | translate}}</span></div>
+						</a>
+					</div>
+					<div class="col">
 						<a ng-click="startTracking('walk')">
 							<div class="tracking-ds-button"><i class="icon ic_foot"></i><span>{{'track_walk' | translate}}</span></div>
 						</a>
@@ -60,11 +65,6 @@
 					<div class="col">
 						<a ng-click="startTracking('bike')">
 							<div class="tracking-ds-button"><i class="icon ic_bike"></i><span>{{'track_bike' | translate}}</span></div>
-						</a>
-					</div>
-					<div class="col">
-						<a ng-click="openSavedTracks()">
-							<div class="tracking-ds-button"><i class="icon ic_folder"></i><span>{{'track_saved' | translate}}</span></div>
 						</a>
 					</div>
 				</div>
