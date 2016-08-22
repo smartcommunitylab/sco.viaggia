@@ -233,8 +233,8 @@ angular.module('viaggia.services.plan', [])
         }
         if (leg.to.stopId && leg.to.stopId.id) {
             //            var parkingPlace = parking.getParking(leg.to.stopId.agencyId, leg.to.stopId.id);
-            var parkingPlace = null;
-            res.place = parkingPlace != null ? parkingPlace.description : leg.to.stopId.id;
+            var parkingPlace = leg.to.name;
+            res.place = parkingPlace != null ? parkingPlace : leg.to.stopId.id;
         }
         if (res.type) {
             res.img = 'img/' + getImageName(res.type) + '.png';
