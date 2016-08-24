@@ -1974,3 +1974,23 @@ Play&Go
     background-color: #c1272d;
     color: #fff;
 }
+.button-stop.activated {
+    background-color: #c1272d !important;
+}
+
+.button-stop:hover {
+    background-color: #c1272d;
+    color: #fff;
+}
+.button-start {
+    background-color: #4caf4f;
+    color: #fff;
+}
+.button-start.activated {
+    background-color: #4caf4f !important;
+}
+
+.button-start:hover {
+    background-color: #4caf4f;
+    color: #fff;
+}

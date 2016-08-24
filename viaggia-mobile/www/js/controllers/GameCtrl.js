@@ -83,6 +83,7 @@ angular.module('viaggia.controllers.game', [])
 	$scope.filter.filter = function (selection) {
 		if (!!$scope.status && !!$scope.status['challengeConcept'] && (selection === 'active' || selection === 'old')) {
 			$scope.challenges = $scope.status['challengeConcept'][selection + 'ChallengeData'];
+            if (!$scope.challenges) $scope.challenges = [];
 		}
 	};
 

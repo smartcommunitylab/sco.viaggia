@@ -91,6 +91,7 @@ angular.module('viaggia', [
     'viaggia.services.tracking',
     'viaggia.services.registration',
 	'viaggia.services.game',
+	'viaggia.services.tutorial',
     'viaggia.filters'
 ])
 
@@ -748,6 +749,7 @@ angular.module('viaggia', [
         tutorial_next: 'AVANTI',
         tutorial_end: 'FINE',
         tutorial_skip: 'SALTA',
+        tutorial: 'Tutorial',
         empty_home_label_1: 'Ops... hai nascosto tutte le schede della pagina principale',
         empty_home_label_2: 'Vai nei PREFERITI per ripristinare i contenuti che ti interessano',
         menu_betatesting_bug: 'Segnala un problema',
@@ -797,6 +799,7 @@ angular.module('viaggia', [
         lbl_validateuser: 'Procedi con la registrazione al gioco e inizia a giocare!',
         btn_validate_user: 'Registrati',
         toast_already_monitoring: 'Stai già registrando un percorso',
+        toast_already_monitored: 'Viaggio già tracciato.',
         sure_delete_title: 'Termina viaggio',
         sure_delete_text: 'Confermi di essere arrivato a destinazione per il viaggio corrente?',
         tracking_notification_title: 'Viaggia Trento',
@@ -921,7 +924,8 @@ angular.module('viaggia', [
         "leaderboard top 3": "Leaderboard Top 3 Badge",
         "no_challenges": "Al momento non ci sono sfide attive",
         pop_up_invalid_tracking_title: "Viaggio non valido",
-        pop_up_invalid_tracking_template: "Le caratteristiche del viaggio fatto non corrispondono al mezzo di trasporto specificato. I punti non saranno assegnati."
+        pop_up_invalid_tracking_template: "Le caratteristiche del viaggio fatto non corrispondono al mezzo di trasporto specificato. I punti non saranno assegnati.",
+        pop_up_plan: "Pianifica"
     });
 
     $translateProvider.translations('en', {
@@ -1090,6 +1094,7 @@ angular.module('viaggia', [
         tutorial_next: 'NEXT',
         tutorial_end: 'END',
         tutorial_skip: 'SKIP',
+        tutorial: 'Tutorial',
         empty_home_label_1: 'Oops... you removed all the tabs from the main page',
         empty_home_label_2: 'Go to BOOKMARKS to restore the contents you are interested in',
         menu_betatesting_bug: 'Report an issue',
@@ -1134,6 +1139,7 @@ angular.module('viaggia', [
         notification_tracking_title: 'Play&Go',
         notification_tracking_text: 'Your journey is going to start',
         toast_already_monitoring: 'You are already tracking a journey',
+        toast_already_monitored: 'The journey has already been tracked',
         toast_after_time: 'It is too late for tracking the journey',
         toast_before_time: 'It is too early for tracking the journey',
         title_validateuser: 'Warning',
@@ -1260,7 +1266,8 @@ angular.module('viaggia', [
         "leaderboard top 3": "Leaderboard Top 3 Badge",
         "no_challenges": "No active challenges present at this moment",
         pop_up_invalid_tracking_title: "Trip is not valid",
-        pop_up_invalid_tracking_template: "The properties of the executed trip do not match the specified mean of transport. No points will be assigned."
+        pop_up_invalid_tracking_template: "The properties of the executed trip do not match the specified mean of transport. No points will be assigned.",
+        pop_up_plan: "Plan"
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

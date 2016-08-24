@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.common', [])
 
-.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, userService, Utils) {
+.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, userService, Utils, tutorial) {
 	/* menu group */
 	$scope.shownGroup = false;
 	$scope.toggleGroupRealTime = function () {
@@ -77,6 +77,13 @@ angular.module('viaggia.controllers.common', [])
 			window.open(url, "_system", "location=yes");
 		});
 	};
+
+    $scope.forceTutorial = function () {
+		if (!!$scope.firstOpenPopup) {
+			$scope.firstOpenPopup.close();
+		}
+      tutorial.showTutorial('main', 'main', 4, $scope, true);
+    }
 
 	$scope.closePopup = function () {
 		$scope.firstOpenPopup.close();

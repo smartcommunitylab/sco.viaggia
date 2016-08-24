@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.home', [])
 
-.controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, userService, planService, $ionicLoading, $ionicPopup, trackService, Toast) {
+.controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, userService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial) {
     //load from localstorage the id notifications read
     $ionicPlatform.ready(function () {
         document.addEventListener("resume", function () {
@@ -181,7 +181,26 @@ angular.module('viaggia.controllers.home', [])
         if (trips && !angular.equals(trips, {})) {
           $state.go('app.mytrips');
         } else {
-          Toast.show($filter('translate')("no_saved_tracks_to_track"), "short", "bottom");
+          //Toast.show($filter('translate')("no_saved_tracks_to_track"), "short", "bottom");
+          var confirmPopup = $ionicPopup.confirm({
+              title: $filter('translate')("my_trip_empty_list"),
+              template: $filter('translate')("no_saved_tracks_to_track"),
+              buttons: [
+                  {
+                      text: $filter('translate')("pop_up_close"),
+                      type: 'button-cancel'
+                              },
+                  {
+                      text: $filter('translate')("pop_up_plan"),
+                      type: 'button-custom',
+                      onTap: function(){
+                        confirmPopup.close();
+                        planService.setPlanConfigure(null);
+                        $state.go('app.plan');
+                      }
+                  }
+              ]
+          });
         }
       });
     }
@@ -258,4 +277,8 @@ angular.module('viaggia.controllers.home', [])
         }
         return counter;
     }
+    $scope.showTutorial = function () {
+      tutorial.showTutorial('main', 'main', 4, $scope);
+    }
+
 })
