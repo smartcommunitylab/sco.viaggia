@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.home', [])
 
-.controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, userService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial) {
+.controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, userService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv) {
     //load from localstorage the id notifications read
     $ionicPlatform.ready(function () {
         document.addEventListener("resume", function () {
@@ -140,6 +140,7 @@ angular.module('viaggia.controllers.home', [])
 //            alert(JSON.stringify(data));
           if (Math.floor(data.points > 0)) {
             if (data.valid) {
+              GameSrv.resetLocalStatus();
               $ionicPopup.confirm({
                   title: $filter('translate')("pop_up_points_title"),
                   template: $filter('translate')("pop_up_points_template", {points:data.points}),

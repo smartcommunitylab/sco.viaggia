@@ -31,6 +31,12 @@ angular.module('viaggia.services.game', [])
 		return deferred.promise;
 	};
 
+    	/* get local status (get remote first if null) */
+	gameService.resetLocalStatus = function () {
+      localStatus = null;
+    }
+
+
 	/* get local status (get remote first if null) */
 	gameService.getLocalStatus = function () {
 		var deferred = $q.defer();

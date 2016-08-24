@@ -38,8 +38,8 @@ angular.module('viaggia.services.geo', [])
 
       var lats = computeLats(p1,p2,d);
       var lngs = computeLngs(p1,p2,d);
-      res.push({lat: lats[0], lng: lngs[0]});
-      res.push({lat: lats[1], lng: lngs[1]});
+      res.push({lat: lats[0], lng: lngs[0], timestamp: p1.timestamp});
+      res.push({lat: lats[1], lng: lngs[1], timestamp: p2.timestamp});
     }
 
     var myPosition = null;
