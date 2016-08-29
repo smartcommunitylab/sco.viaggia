@@ -200,40 +200,56 @@ angular.module('viaggia.services.tracking', [])
               return la.timestamp - lb.timestamp;
             });
 
+            var data = {dist : 0, transport : localStorage.getItem(Config.getAppId() + '_trackedTransport'), points: 0, valid: true};
+
             var transLocs = GeoLocate.transform(tripLocs);
             var dist = 0;
             var maxSpeed = 0;
+            var maxSpeedCount = 0;
             for (var i = 1; i < transLocs.length; i++) {
               var iv = GeoLocate.distance([transLocs[i-1].lat,transLocs[i-1].lng],[transLocs[i].lat,transLocs[i].lng]);
               var time = Math.abs(transLocs[i].timestamp - transLocs[i-1].timestamp);
               if (time > 0) {
-                maxSpeed = Math.max(maxSpeed,iv / time);
+                var speed = iv * 1000 * 1000 / time;
+                if (checkMaxSpeed(data.transport, speed)) {
+                  maxSpeedCount = 0;
+                } else {
+                  maxSpeedCount++;
+                  if (maxSpeedCount >= 3) {
+                    data.valid = false;
+                  }
+                }
+                maxSpeed = Math.max(maxSpeed, speed);
               }
               dist += iv;
             }
-            var data = {dist : 0, transport : localStorage.getItem(Config.getAppId() + '_trackedTransport'), points: 0};
             if (tripLocs.length > 0) {
               data.dist = dist*1000; // in meters
               data.start = tripLocs[0].timestamp;
               data.end = tripLocs[tripLocs.length - 1].timestamp;
               data.avgSpeed = data.dist / (data.end - data.start) * 1000; // in m/s
-              data.maxSpeed = maxSpeed * 1000 * 1000; // in m/s
+              data.maxSpeed = maxSpeed; // in m/s
               if (data.transport == 'walk') {
-                data.points = Math.round(Math.min(53,data.dist / 1000 * 15));
-                data.valid = (data.avgSpeed*3.6) < 15 && (data.maxSpeed*3.6) < 20; // avg (max) speed should be less than 15 (20) km/h (consider running)
+                data.points = data.dist > 250 ? Math.round(Math.min(53,data.dist / 1000 * 10 * 1.5)) : 0;
+                data.valid = data.valid && (data.avgSpeed*3.6) < 15; // avg (max) speed should be less than 15 (20) km/h (consider running)
               }
               else if (data.transport == 'bike') {
-                data.points = Math.round(Math.min(53,data.dist / 1000 * 7.5));
-                data.valid = (data.avgSpeed*3.6) < 27 && (data.maxSpeed*3.6) < 45; // avg (max) speed should be less than 15 (20) km/h
+                data.points = Math.round(Math.min(53,data.dist / 1000 * 5 * 1.5));
+                data.valid = data.valid && (data.avgSpeed*3.6) < 27; // avg (max) speed should be less than 15 (65) km/h
               }
               else {
-                data.valid = true;
                 data.points = localStorage.getItem(Config.getAppId() + '_expectedPoints');
               }
             }
             deferred.resolve(data);
           });
           return deferred.promise;
+        }
+
+        var checkMaxSpeed = function(mean, speed) {
+          if (mean == 'walk') return (speed * 3.6 < 20);
+          else if (mean == 'bike') return (speed * 3.6 < 65);
+          else return true;
         }
 
         /**

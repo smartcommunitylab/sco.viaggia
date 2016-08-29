@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.tripdetails', [])
 
-.controller('TripDetailsCtrl', function ($scope, $rootScope, $stateParams, $ionicModal, $window, $filter, $ionicPopup, planService, mapService, Config, Toast, trackService, $filter, $ionicHistory, $state, $ionicLoading, $location, bookmarkService, Utils) {
+.controller('TripDetailsCtrl', function ($scope, $rootScope, $stateParams, $ionicModal, $window, $filter, $ionicPopup, planService, mapService, Config, Toast, trackService, $filter, $ionicHistory, $state, $ionicLoading, $location, bookmarkService, Utils, GameSrv) {
     $scope.title = $filter('translate')('journey_detail');
     //$scope.empty_rec = Config.getDaysRec();
     //    document.addEventListener("resume", function () {
@@ -472,6 +472,7 @@ angular.module('viaggia.controllers.tripdetails', [])
           trackService.stop();
           $scope.modifiable = true;
           $scope.isAvailable = false;
+          GameSrv.resetLocalStatus();
         });
 
     }

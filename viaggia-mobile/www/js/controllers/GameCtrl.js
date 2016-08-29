@@ -36,7 +36,7 @@ angular.module('viaggia.controllers.game', [])
 	// leaderboard top 3: Leaderboard Top 3 Badge
 
 	$scope.badges = {};
-	$scope.badgeTypes = ['green leaves', 'bike aficionado', 'sustainable life', 'public transport aficionado', 'park and ride pioneer', 'recommendations', 'leaderboard top 3'];
+	$scope.badgeTypes = ['green leaves', 'bike aficionado', 'sustainable life', 'public transport aficionado', 'bike sharing pioneer', 'park and ride pioneer', 'recommendations', 'leaderboard top 3'];
 
 	$scope.$watch('status.badgeCollectionConcept', function (newBadges, oldBadges) {
 		var badges = {};
@@ -77,7 +77,7 @@ angular.module('viaggia.controllers.game', [])
 		selected: null
 	};
 
-	$scope.filter.options = ['old', 'active'];
+	$scope.filter.options = ['active', 'old'];
 	$scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
 
 	$scope.filter.filter = function (selection) {
@@ -100,7 +100,7 @@ angular.module('viaggia.controllers.game', [])
 		}
 
 		var infoPopup = $ionicPopup.alert({
-			title: $filter('translate')('game_tab_challenges_infopopup_title'),
+			title: $filter('translate')('game_tab_challenges_info'),
 			subTitle: '',
 			cssClass: '',
 			template: challenge.challCompleteDesc,

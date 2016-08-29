@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.common', [])
 
-.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, userService, Utils, tutorial) {
+.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $translate, $ionicLoading, DataManager, Config, planService, userService, Utils, tutorial) {
 	/* menu group */
 	$scope.shownGroup = false;
 	$scope.toggleGroupRealTime = function () {
@@ -68,14 +68,18 @@ angular.module('viaggia.controllers.common', [])
 		*/
 	};
 
+    $scope.openExtLink = function(link) {
+			window.open(link, "_system", "location=yes");
+    }
+
   	$scope.openPrizes = function () {
 		if (!!$scope.firstOpenPopup) {
 			$scope.firstOpenPopup.close();
 		}
-		userService.getValidToken().then(function (validToken) {
-			var url = Config.getGamificationURL() + "/mobile?token=" + validToken;
+//		userService.getValidToken().then(function (validToken) {
+			var url = Config.getGamificationURL() + "/view_prizes";
 			window.open(url, "_system", "location=yes");
-		});
+//		});
 	};
 
     $scope.forceTutorial = function () {
@@ -187,6 +191,7 @@ angular.module('viaggia.controllers.common', [])
 	};
 
 	$scope.openRulesModal = function () {
+        $scope.lang = $translate.use();
 		$ionicModal.fromTemplateUrl('templates/rulesModal.html', {
 			scope: $scope,
 			animation: 'slide-in-up'

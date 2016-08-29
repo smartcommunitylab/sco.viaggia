@@ -651,6 +651,7 @@ ion-header-bar .title {
 }
 
 .credits_subtitle {
+    margin-top: 20px !important;
     text-align: center;
     color: #2975a7;
     font-size: 18px;

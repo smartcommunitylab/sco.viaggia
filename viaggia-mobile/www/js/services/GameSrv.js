@@ -41,7 +41,7 @@ angular.module('viaggia.services.game', [])
 	gameService.getLocalStatus = function () {
 		var deferred = $q.defer();
 
-		if (!localStatus) {
+//		if (!localStatus) {
 			gameService.getStatus().then(
 				function (localStatus) {
 					deferred.resolve(localStatus);
@@ -50,9 +50,9 @@ angular.module('viaggia.services.game', [])
 					deferred.reject(response);
 				}
 			);
-		} else {
-			deferred.resolve(localStatus);
-		}
+//		} else {
+//			deferred.resolve(localStatus);
+//		}
 
 		return deferred.promise;
 	};
