@@ -1,6 +1,6 @@
 angular.module('viaggia.services.conf', [])
 
-.factory('Config', function ($q, $http, $window, $filter, $rootScope, $ionicLoading) {
+.factory('Config', function ($q, $http, $window, $filter, $rootScope, $ionicLoading, $translate) {
 
     var isDarkColor = function (color) {
         if (!color) return true;
@@ -331,31 +331,21 @@ angular.module('viaggia.services.conf', [])
             return mapJsonConfig["extraurban_agencies"];
         },
         getLang: function () {
-            var browserLanguage = '';
-            // works for earlier version of Android (2.3.x)
-            var androidLang;
-            if ($window.navigator && $window.navigator.userAgent && (androidLang = $window.navigator.userAgent.match(/android.*\W(\w\w)-(\w\w)\W/i))) {
-                browserLanguage = androidLang[1];
-            } else {
-                // works for iOS, Android 4.x and other devices
-                browserLanguage = $window.navigator.userLanguage || $window.navigator.language;
-            }
-            var lang = browserLanguage.substring(0, 2);
-            if (lang != 'it' && lang != 'en' && lang != 'de') lang = 'en';
+//            var browserLanguage = '';
+//            // works for earlier version of Android (2.3.x)
+//            var androidLang;
+//            if ($window.navigator && $window.navigator.userAgent && (androidLang = $window.navigator.userAgent.match(/android.*\W(\w\w)-(\w\w)\W/i))) {
+//                browserLanguage = androidLang[1];
+//            } else {
+//                // works for iOS, Android 4.x and other devices
+//                browserLanguage = $window.navigator.userLanguage || $window.navigator.language;
+//            }
+//            var lang = browserLanguage.substring(0, 2);
+            var lang = $translate.use();
+            if (lang != 'it' && lang != 'en') lang = DEFAULT_LANG;
             return lang;
         },
-        getLanguage: function () {
 
-            navigator.globalization.getLocaleName(
-                function (locale) {
-                    alert('locale: ' + locale.value + '\n');
-                },
-                function () {
-                    alert('Error getting locale\n');
-                }
-            );
-
-        },
         loading: function () {
             $ionicLoading.show();
         },

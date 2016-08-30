@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.common', [])
 
-.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $translate, $ionicLoading, DataManager, Config, planService, userService, Utils, tutorial) {
+.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, userService, Utils, tutorial) {
 	/* menu group */
 	$scope.shownGroup = false;
 	$scope.toggleGroupRealTime = function () {
@@ -191,7 +191,7 @@ angular.module('viaggia.controllers.common', [])
 	};
 
 	$scope.openRulesModal = function () {
-        $scope.lang = $translate.use();
+        $scope.lang = Config.getLang();
 		$ionicModal.fromTemplateUrl('templates/rulesModal.html', {
 			scope: $scope,
 			animation: 'slide-in-up'

@@ -6,7 +6,11 @@ angular.module('viaggia.services.registration', [])
     registrationService.register = function (user) {
         var deferred = $q.defer();
         userService.getValidToken().then(function (validToken) {
-            var urlReg = Config.getGamificationURL() + "/out/rest/register?nickname=" + user.nickname + "&token=" + validToken +"&email="+user.mail;
+            var urlReg = Config.getGamificationURL() + "/out/rest/register?"+
+                "nickname=" + user.nickname +
+                "&token=" + validToken +
+                "&email="+user.mail +
+                "&language=" + Config.getLang();
             $http({
                 method: 'POST',
                 url: urlReg,

@@ -215,7 +215,7 @@ angular.module('viaggia.services.tracking', [])
                   maxSpeedCount = 0;
                 } else {
                   maxSpeedCount++;
-                  if (maxSpeedCount >= 3) {
+                  if (maxSpeedCount > 3) {
                     data.valid = false;
                   }
                 }
