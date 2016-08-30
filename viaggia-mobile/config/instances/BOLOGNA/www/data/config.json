@@ -20,7 +20,7 @@
         ]
     },
     "plan_policy": "Dummy",
-    "agencies": ["TPERBO_URBAN","TPERBO_EXTRA","TPERBO_SUB","TPERIMO_URBAN","TPERFE_URBAN","TPERFE_EXTRA","TPER_BLQ"],
+    "agencies": ["TPERBO_URBAN","TPERBO_EXTRA","TPERBO_SUB","TPERIMO_URBAN","TPERFE_URBAN","TPERFE_EXTRA","TPER_BLQ","TPER_TRAIN"],
     "extraurban_agencies": ["TPERBO_EXTRA","TPERIMO_URBAN","TPERFE_EXTRA"],
     "broadcast_notifications_options": [
         1,

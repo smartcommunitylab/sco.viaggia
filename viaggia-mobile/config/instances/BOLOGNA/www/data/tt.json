@@ -30,7 +30,624 @@
 			"markerIcon": "ic_train",
 			"icon": "ic_train",
 			"transportType": "TRAIN",
-			"elements": []
+			"elements": [{
+                "agencyId": "TPERBO_TRAIN",
+                "hasMap": true,
+                "groups": [
+                    	{
+                            "routes": [{
+                                "title": "PARMA / SUZZARA",
+                                "routeSymId": "PAR-SUZ",
+                                "routeId": "PAR-SUZ",
+                                "label": "PASU"
+                            }],
+                            "label": "PASU"
+                        },
+                        {
+                            "routes": [{
+                                "title": "SUZZARA / PARMA",
+                                "routeSymId": "SUZ-PAR",
+                                "routeId": "SUZ-PAR",
+                                "label": "SUPA"
+                            }],
+                            "label": "SUPA"
+                        },
+                        {
+                            "routes": [{
+                                "title": "PARMA / Guastalla",
+                                "routeSymId": "PAR-GUA",
+                                "routeId": "PAR-GUA",
+                                "label": "PAGU"
+                            }],
+                            "label": "PAGU"
+                        },
+                        {
+                            "routes": [{
+                                "title": "POGGIO RUSCO / BOLOGNA CENTRALE",
+                                "routeSymId": "POG-BOC",
+                                "routeId": "POG-BOC",
+                                "label": "PRBO"
+                            }],
+                            "label": "PRBO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "BOLOGNA CENTRALE / POGGIO RUSCO",
+                                "routeSymId": "BOC-POG",
+                                "routeId": "BOC-POG",
+                                "label": "BOPO"
+                            }],
+                            "label": "BOPO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "CODIGORO / FERRARA",
+                                "routeSymId": "COD-FER",
+                                "routeId": "COD-FER",
+                                "label": "COFE"
+                            }],
+                            "label": "COFE"
+                        },
+                        {
+                            "routes": [{
+                                "title": "RIMINI / BOLOGNA CENTRALE",
+                                "routeSymId": "RIM-BOC",
+                                "routeId": "RIM-BOC",
+                                "label": "RIBO"
+                            }],
+                            "label": "RIBO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "IMOLA / FERRARA",
+                                "routeSymId": "IMO-FER",
+                                "routeId": "IMO-FER",
+                                "label": "IMFE"
+                            }],
+                            "label": "IMFE"
+                        },
+                        {
+                            "routes": [{
+                                "title": "FERRARA / RAVENNA",
+                                "routeSymId": "FER-RAV",
+                                "routeId": "FER-RAV",
+                                "label": "FERA"
+                            }],
+                            "label": "FERA"
+                        },
+                        {
+                            "routes": [{
+                                "title": "IMOLA / BOLOGNA CENTRALE",
+                                "routeSymId": "IMO-BOC",
+                                "routeId": "IMO-BOC",
+                                "label": "IMBO"
+                            }],
+                            "label": "IMBO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "BOLOGNA CENTRALE / Bazzano",
+                                "routeSymId": "BOC-BAZ",
+                                "routeId": "BOC-BAZ",
+                                "label": "BOBA"
+                            }],
+                            "label": "BOBA"
+                        },
+                        {
+                            "routes": [{
+                                "title": "Vignola / BOLOGNA CENTRALE",
+                                "routeSymId": "VIG-BOC",
+                                "routeId": "VIG-BOC",
+                                "label": "VIBO"
+                            }],
+                            "label": "VIBO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "BOLOGNA CENTRALE / Vignola",
+                                "routeSymId": "BOC-VIG",
+                                "routeId": "BOC-VIG",
+                                "label": "BOVI"
+                            }],
+                            "label": "BOVI"
+                        },
+                        {
+                            "routes": [{
+                                "title": "Bazzano / BOLOGNA CENTRALE",
+                                "routeSymId": "BAZ-BOC",
+                                "routeId": "BAZ-BOC",
+                                "label": "BABO"
+                            }],
+                            "label": "BABO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "RAVENNA / PESARO",
+                                "routeSymId": "RAV-PES",
+                                "routeId": "RAV-PES",
+                                "label": "RAPE"
+                            }],
+                            "label": "RAPE"
+                        },
+                        {
+                            "routes": [{
+                                "title": "RAVENNA / FERRARA",
+                                "routeSymId": "RAV-FER",
+                                "routeId": "RAV-FER",
+                                "label": "RAFE"
+                            }],
+                            "label": "RAFE"
+                        },
+                        {
+                            "routes": [{
+                                "title": "S.PIETRO IN CASALE / IMOLA",
+                                "routeSymId": "SPT-IMO",
+                                "routeId": "SPT-IMO",
+                                "label": "SPIM"
+                            }],
+                            "label": "SPIM"
+                        },
+                        {
+                            "routes": [{
+                                "title": "PESARO / RAVENNA",
+                                "routeSymId": "PES-RAV",
+                                "routeId": "PES-RAV",
+                                "label": "PERA"
+                            }],
+                            "label": "PERA"
+                        },
+                        {
+                            "routes": [{
+                                "title": "BOLOGNA CENTRALE / RIMINI",
+                                "routeSymId": "BOC-RIM",
+                                "routeId": "BOC-RIM",
+                                "label": "BORI"
+                            }],
+                            "label": "BORI"
+                        },
+                        {
+                            "routes": [{
+                                "title": "FERRARA / BOLOGNA CENTRALE",
+                                "routeSymId": "FER-BOC",
+                                "routeId": "FER-BOC",
+                                "label": "FEBO"
+                            }],
+                            "label": "FEBO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "PESARO / BERGAMO",
+                                "routeSymId": "PES-BER",
+                                "routeId": "PES-BER",
+                                "label": "PEBE"
+                            }],
+                            "label": "PEBE"
+                        },
+                        {
+                            "routes": [{
+                                "title": "BERGAMO / PESARO",
+                                "routeSymId": "BER-PES",
+                                "routeId": "BER-PES",
+                                "label": "BEPE"
+                            }],
+                            "label": "BEPE"
+                        },
+                        {
+                            "routes": [{
+                                "title": "SUZZARA / RIMINI",
+                                "routeSymId": "SUZ-RIM",
+                                "routeId": "SUZ-RIM",
+                                "label": "SURI"
+                            }],
+                            "label": "SURI"
+                        },
+                        {
+                            "routes": [{
+                                "title": "RIMINI / SUZZARA",
+                                "routeSymId": "RIM-SUZ",
+                                "routeId": "RIM-SUZ",
+                                "label": "RISU"
+                            }],
+                            "label": "RISU"
+                        },
+                        {
+                            "routes": [{
+                                "title": "Reggio Emilia / Guastalla",
+                                "routeSymId": "REG-GUA",
+                                "routeId": "REG-GUA",
+                                "label": "REGU"
+                            }],
+                            "label": "REGU"
+                        },
+                        {
+                            "routes": [{
+                                "title": "Guastalla / Reggio S.Lazzaro",
+                                "routeSymId": "GUA-REG",
+                                "routeId": "GUA-REG",
+                                "label": "GURE"
+                            }],
+                            "label": "GURE"
+                        },
+                        {
+                            "routes": [{
+                                "title": "Reggio S.Lazzaro / Guastalla",
+                                "routeSymId": "RSL-GUA",
+                                "routeId": "RSL-GUA",
+                                "label": "REGU"
+                            }],
+                            "label": "REGU"
+                        },
+                        {
+                            "routes": [{
+                                "title": "MANTOVA / MODENA",
+                                "routeSymId": "MAN-MOD",
+                                "routeId": "MAN-MOD",
+                                "label": "MAMO"
+                            }],
+                            "label": "MAMO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "Ciano d`Enza / Reggio Emilia",
+                                "routeSymId": "CIE-REG",
+                                "routeId": "CIE-REG",
+                                "label": "CIRE"
+                            }],
+                            "label": "CIRE"
+                        },
+                        {
+                            "routes": [{
+                                "title": "Reggio Emilia / Ciano d`Enza",
+                                "routeSymId": "REG-CIE",
+                                "routeId": "REG-CIE",
+                                "label": "RECI"
+                            }],
+                            "label": "RECI"
+                        },
+                        {
+                            "routes": [{
+                                "title": "MODENA / Sassuolo Terminal",
+                                "routeSymId": "MOD-SAT",
+                                "routeId": "MOD-SAT",
+                                "label": "MOSA"
+                            }],
+                            "label": "MOSA"
+                        },
+                        {
+                            "routes": [{
+                                "title": "Sassuolo Terminal / MODENA",
+                                "routeSymId": "SAT-MOD",
+                                "routeId": "SAT-MOD",
+                                "label": "SAMO"
+                            }],
+                            "label": "SAMO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "Reggio Emilia / Sassuolo Radici",
+                                "routeSymId": "REG-SAR",
+                                "routeId": "REG-SAR",
+                                "label": "RESA"
+                            }],
+                            "label": "RESA"
+                        },
+                        {
+                            "routes": [{
+                                "title": "Sassuolo Radici / Reggio Emilia",
+                                "routeSymId": "SAR-REG",
+                                "routeId": "SAR-REG",
+                                "label": "SARE"
+                            }],
+                            "label": "SARE"
+                        },
+                        {
+                            "routes": [{
+                                "title": "SUZZARA / FERRARA",
+                                "routeSymId": "SUZ-FER",
+                                "routeId": "SUZ-FER",
+                                "label": "SUFE"
+                            }],
+                            "label": "SUFE"
+                        },
+                        {
+                            "routes": [{
+                                "title": "SERMIDE / SUZZARA",
+                                "routeSymId": "SER-SUZ",
+                                "routeId": "SER-SUZ",
+                                "label": "SESU"
+                            }],
+                            "label": "SESU"
+                        },
+                        {
+                            "routes": [{
+                                "title": "SUZZARA / SERMIDE",
+                                "routeSymId": "SUZ-SER",
+                                "routeId": "SUZ-SER",
+                                "label": "SUSE"
+                            }],
+                            "label": "SUSE"
+                        },
+                        {
+                            "routes": [{
+                                "title": "FERRARA / SUZZARA",
+                                "routeSymId": "FER-SUZ",
+                                "routeId": "FER-SUZ",
+                                "label": "FESU"
+                            }],
+                            "label": "FESU"
+                        },
+                        {
+                            "routes": [{
+                                "title": "PORTOMAGGIORE / BOLOGNA CENTRALE",
+                                "routeSymId": "POM-BOC",
+                                "routeId": "POM-BOC",
+                                "label": "PMBO"
+                            }],
+                            "label": "PMBO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "BOLOGNA CENTRALE / PORTOMAGGIORE",
+                                "routeSymId": "BOC-POM",
+                                "routeId": "BOC-POM",
+                                "label": "BOPO"
+                            }],
+                            "label": "BOPO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "BOLOGNA CENTRALE / Budrio",
+                                "routeSymId": "BOC-BUD",
+                                "routeId": "BOC-BUD",
+                                "label": "BOBU"
+                            }],
+                            "label": "BOBU"
+                        },
+                        {
+                            "routes": [{
+                                "title": "Budrio / BOLOGNA CENTRALE",
+                                "routeSymId": "BUD-BOC",
+                                "routeId": "BUD-BOC",
+                                "label": "BUBO"
+                            }],
+                            "label": "BUBO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "SERMIDE / FERRARA",
+                                "routeSymId": "SER-FER",
+                                "routeId": "SER-FER",
+                                "label": "SEFE"
+                            }],
+                            "label": "SEFE"
+                        },
+                        {
+                            "routes": [{
+                                "title": "FERRARA / SERMIDE",
+                                "routeSymId": "FER-SER",
+                                "routeId": "FER-SER",
+                                "label": "FESE"
+                            }],
+                            "label": "FESE"
+                        },
+                        {
+                            "routes": [{
+                                "title": "FERRARA / POGGIO RUSCO",
+                                "routeSymId": "FER-POG",
+                                "routeId": "FER-POG",
+                                "label": "FEPO"
+                            }],
+                            "label": "FEPO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "PARMA / BOLOGNA CENTRALE",
+                                "routeSymId": "PAR-BOC",
+                                "routeId": "PAR-BOC",
+                                "label": "PABO"
+                            }],
+                            "label": "PABO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "BOLOGNA CENTRALE / PARMA",
+                                "routeSymId": "BOC-PAR",
+                                "routeId": "BOC-PAR",
+                                "label": "BOPA"
+                            }],
+                            "label": "BOPA"
+                        },
+                        {
+                            "routes": [{
+                                "title": "FERRARA / CODIGORO",
+                                "routeSymId": "FER-COD",
+                                "routeId": "FER-COD",
+                                "label": "FECO"
+                            }],
+                            "label": "FECO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "RIMINI / FERRARA",
+                                "routeSymId": "RIM-FER",
+                                "routeId": "RIM-FER",
+                                "label": "RIFE"
+                            }],
+                            "label": "RIFE"
+                        },
+                        {
+                            "routes": [{
+                                "title": "FERRARA / IMOLA",
+                                "routeSymId": "FER-IMO",
+                                "routeId": "FER-IMO",
+                                "label": "FEIM"
+                            }],
+                            "label": "FEIM"
+                        },
+                        {
+                            "routes": [{
+                                "title": "BOLOGNA CENTRALE / FERRARA",
+                                "routeSymId": "BOC-FER",
+                                "routeId": "BOC-FER",
+                                "label": "BOFE"
+                            }],
+                            "label": "BOFE"
+                        },
+                        {
+                            "routes": [{
+                                "title": "MODENA / BOLOGNA CENTRALE",
+                                "routeSymId": "MOD-BOC",
+                                "routeId": "MOD-BOC",
+                                "label": "MOBO"
+                            }],
+                            "label": "MOBO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "IMOLA / S.PIETRO IN CASALE",
+                                "routeSymId": "IMO-SPC",
+                                "routeId": "IMO-SPC",
+                                "label": "IMSP"
+                            }],
+                            "label": "IMSP"
+                        },
+                        {
+                            "routes": [{
+                                "title": "FERRARA / LAVEZZOLA",
+                                "routeSymId": "FER-LAV",
+                                "routeId": "FER-LAV",
+                                "label": "FELA"
+                            }],
+                            "label": "FELA"
+                        },
+                        {
+                            "routes": [{
+                                "title": "FERRARA / RIMINI",
+                                "routeSymId": "FER-RIM",
+                                "routeId": "FER-RIM",
+                                "label": "FERI"
+                            }],
+                            "label": "FERI"
+                        },
+                        {
+                            "routes": [{
+                                "title": "Reggio Emilia / Reggio S.Stefano",
+                                "routeSymId": "REG-RES",
+                                "routeId": "REG-RES",
+                                "label": "RERS"
+                            }],
+                            "label": "RERS"
+                        },
+                        {
+                            "routes": [{
+                                "title": "Reggio S.Stefano / Reggio Emilia",
+                                "routeSymId": "RES-REG",
+                                "routeId": "RES-REG",
+                                "label": "RSRE"
+                            }],
+                            "label": "RSRE"
+                        },
+                        {
+                            "routes": [{
+                                "title": "MODENA / MANTOVA",
+                                "routeSymId": "MOD-MAN",
+                                "routeId": "MOD-MAN",
+                                "label": "MOMA"
+                            }],
+                            "label": "MOMA"
+                        },
+                        {
+                            "routes": [{
+                                "title": "MILANO CENTRALE / BOLOGNA CENTRALE",
+                                "routeSymId": "MIC-BOC",
+                                "routeId": "MIC-BOC",
+                                "label": "MIBO"
+                            }],
+                            "label": "MIBO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "PORRETTA  TERME / BOLOGNA CENTRALE",
+                                "routeSymId": "POT-BOC",
+                                "routeId": "POT-BOC",
+                                "label": "PTBO"
+                            }],
+                            "label": "PTBO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "BOLOGNA CENTRALE / PORRETTA  TERME",
+                                "routeSymId": "BOC-POT",
+                                "routeId": "BOC-POT",
+                                "label": "BOPT"
+                            }],
+                            "label": "BOPT"
+                        },
+                        {
+                            "routes": [{
+                                "title": "Reggio Mediopadana / Reggio Emilia",
+                                "routeSymId": "REM-REG",
+                                "routeId": "REM-REG",
+                                "label": "RMRE"
+                            }],
+                            "label": "RMRE"
+                        },
+                        {
+                            "routes": [{
+                                "title": "Reggio Emilia / Reggio Mediopadana",
+                                "routeSymId": "REG-REM",
+                                "routeId": "REG-REM",
+                                "label": "RERM"
+                            }],
+                            "label": "RERM"
+                        },
+                        {
+                            "routes": [{
+                                "title": "BOLOGNA CENTRALE / MILANO CENTRALE",
+                                "routeSymId": "BOC-MIC",
+                                "routeId": "BOC-MIC",
+                                "label": "BOMI"
+                            }],
+                            "label": "BOMI"
+                        },
+                        {
+                            "routes": [{
+                                "title": "MILANO CENTRALE / PARMA",
+                                "routeSymId": "MIC-PAR",
+                                "routeId": "MIC-PAR",
+                                "label": "MIPA"
+                            }],
+                            "label": "MIPA"
+                        },
+                        {
+                            "routes": [{
+                                "title": "PARMA / MILANO CENTRALE",
+                                "routeSymId": "PAR-MIC",
+                                "routeId": "PAR-MIC",
+                                "label": "PAMI"
+                            }],
+                            "label": "PAMI"
+                        },
+                        {
+                            "routes": [{
+                                "title": "PORTOMAGGIORE / DOGATO",
+                                "routeSymId": "POR-DOG",
+                                "routeId": "POR-DOG",
+                                "label": "PMDO"
+                            }],
+                            "label": "PMDO"
+                        },
+                        {
+                            "routes": [{
+                                "title": "DOGATO / PORTOMAGGIORE",
+                                "routeSymId": "DOG-POR",
+                                "routeId": "DOG-POR",
+                                "label": "DOPM"
+                            }],
+                            "label": "DOPM"
+                        }
+                ]
+            }]
 		},
 		"urbano": {
 			"view": "grid",
