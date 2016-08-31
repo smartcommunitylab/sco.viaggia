@@ -22,7 +22,7 @@ angular.module('viaggia.services.conf', [])
     };
 
     var LOGIN_EXPIRED = 'LOGIN_EXPIRED';
-    var DISTANCE_AUTOCOMPLETE = '25';
+    var DISTANCE_AUTOCOMPLETE = '50';
     var HTTP_CONFIG = {
         timeout: 5000
     };
