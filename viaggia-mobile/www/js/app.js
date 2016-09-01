@@ -139,6 +139,7 @@ angular.module('viaggia', [
             StatusBar.styleDefault();
         }
         Config.init().then(function () {
+
             if (window.BackgroundGeolocation) {
                 trackService.startup();
             }
@@ -551,7 +552,7 @@ angular.module('viaggia', [
     // Each tab has its own nav history stack:
 
     .state('app.game.points', {
-        cache: false,
+//        cache: false,
         url: '/points',
         views: {
             'tab-points': {
@@ -562,7 +563,7 @@ angular.module('viaggia', [
     })
 
     .state('app.game.challenges', {
-        cache: false,
+//        cache: false,
         url: '/challenges',
         views: {
             'tab-challenges': {
@@ -573,7 +574,7 @@ angular.module('viaggia', [
     })
 
     .state('app.game.rankings', {
-        cache: false,
+//        cache: false,
         url: '/rankings',
         views: {
             'tab-rankings': {

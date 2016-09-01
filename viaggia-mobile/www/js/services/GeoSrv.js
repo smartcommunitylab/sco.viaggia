@@ -103,17 +103,15 @@ angular.module('viaggia.services.geo', [])
         distance: function (pt1, pt2) {
             var d = false;
             if (pt1 && pt1[0] && pt1[1] && pt2 && pt2[0] && pt2[1]) {
-                var lat1 = Number(pt1[0]);
-                var lon1 = Number(pt1[1]);
-                var lat2 = Number(pt2[0]);
-                var lon2 = Number(pt2[1]);
+                var lat1 = Number(pt1[0]).toRad();
+                var lon1 = Number(pt1[1]).toRad();
+                var lat2 = Number(pt2[0]).toRad();
+                var lon2 = Number(pt2[1]).toRad();
 
                 var R = 6371; // km
                 //var R = 3958.76; // miles
-                var dLat = (lat2 - lat1).toRad();
-                var dLon = (lon2 - lon1).toRad();
-                var lat1 = lat1.toRad();
-                var lat2 = lat2.toRad();
+                var dLat = (lat2 - lat1);
+                var dLon = (lon2 - lon1);
                 var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                     Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
                 var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));

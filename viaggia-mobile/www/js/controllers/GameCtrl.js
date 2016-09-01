@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.game', [])
 
-.controller('GameCtrl', function ($scope, GameSrv) {
+.controller('GameCtrl', function ($scope, GameSrv, Config) {
 	$scope.currentUser = null;
 	$scope.status = null;
 	$scope.ranking = null;
@@ -9,21 +9,21 @@ angular.module('viaggia.controllers.game', [])
 	$scope.rankingFilterOptions = ['now', 'last', 'global'];
 	$scope.rankingPerPage = 10;
 
-	$scope.$on('$stateChangeSuccess', function () {
-		GameSrv.getLocalStatus().then(
-			function (status) {
-				$scope.status = status;
-			}
-		);
-
-		GameSrv.getRanking($scope.rankingFilterOptions[0], 0, $scope.rankingPerPage).then(
-			function (ranking) {
-				$scope.currentUser = ranking['actualUser'];
-				$scope.ranking = ranking['classificationList'];
-				$scope.$broadcast('scroll.infiniteScrollComplete');
-			}
-		);
-	});
+    Config.loading();
+    GameSrv.getLocalStatus().then(
+        function (status) {
+            $scope.status = status;
+            GameSrv.getRanking($scope.rankingFilterOptions[0], 0, $scope.rankingPerPage).then(
+                function (ranking) {
+                    $scope.currentUser = ranking['actualUser'];
+                    $scope.ranking = ranking['classificationList'];
+                    $scope.$broadcast('scroll.infiniteScrollComplete');
+                }
+            );
+        }
+    ).finally(Config.loaded);
+//	$scope.$on('$stateChangeSuccess', function () {
+//	});
 })
 
 .controller('PointsCtrl', function ($scope) {
@@ -35,7 +35,7 @@ angular.module('viaggia.controllers.game', [])
 	// recommendations: User Recommendation Badge
 	// leaderboard top 3: Leaderboard Top 3 Badge
 
-	$scope.badges = {};
+	$scope.badges = null;
 	$scope.badgeTypes = ['green leaves', 'bike aficionado', 'sustainable life', 'public transport aficionado', 'bike sharing pioneer', 'park and ride pioneer', 'recommendations', 'leaderboard top 3'];
 
 	$scope.$watch('status.badgeCollectionConcept', function (newBadges, oldBadges) {
@@ -54,7 +54,7 @@ angular.module('viaggia.controllers.game', [])
 })
 
 .controller('ChallengesCtrl', function ($scope, $http, $filter, $ionicScrollDelegate, $ionicPopup, $window, $timeout) {
-	$scope.challenges = [];
+	$scope.challenges = null;
 
 	$scope.filter = {
 		open: false,
@@ -82,8 +82,12 @@ angular.module('viaggia.controllers.game', [])
 
 	$scope.filter.filter = function (selection) {
 		if (!!$scope.status && !!$scope.status['challengeConcept'] && (selection === 'active' || selection === 'old')) {
-			$scope.challenges = $scope.status['challengeConcept'][selection + 'ChallengeData'];
-            if (!$scope.challenges) $scope.challenges = [];
+            if ($scope.status) {
+              $scope.challenges = $scope.status['challengeConcept'][selection + 'ChallengeData'];
+              if (!$scope.challenges) $scope.challenges = [];
+            } else {
+              $scope.challenges = null;
+            }
 		}
 	};
 
