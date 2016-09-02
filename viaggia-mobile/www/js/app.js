@@ -930,6 +930,7 @@ angular.module('viaggia', [
         "recommendations": "User Recommendation Badge",
         "leaderboard top 3": "Leaderboard Top 3 Badge",
         "no_challenges": "Al momento non ci sono sfide attive",
+        "no_challenges_old": "Nessuna sfida presente",
         pop_up_invalid_tracking_title: "Viaggio non valido",
         pop_up_invalid_tracking_template: "Le caratteristiche del viaggio fatto non corrispondono al mezzo di trasporto specificato. I punti non saranno assegnati.",
         pop_up_plan: "Pianifica"
@@ -1274,6 +1275,7 @@ angular.module('viaggia', [
         "recommendations": "User Recommendation Badge",
         "leaderboard top 3": "Leaderboard Top 3 Badge",
         "no_challenges": "No active challenges present at this moment",
+        "no_challenges_old": "No challenges found",
         pop_up_invalid_tracking_title: "Trip is not valid",
         pop_up_invalid_tracking_template: "The properties of the executed trip do not match the specified mean of transport. No points will be assigned.",
         pop_up_plan: "Plan"
