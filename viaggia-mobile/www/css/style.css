@@ -575,8 +575,27 @@ ion-header-bar .title {
 
 .bar .title {
 /*    margin-right: 20px;*/
-  left: 48px !important;
   right: inherit !important;
+}
+
+/*
+.bar .title {
+  margin-right: 10px !important;
+  margin-left: 0px !important;
+  left: 40px !important;
+  padding-left: 10px;
+}
+.bar .title-long {
+  margin-left: -10px;
+}
+*/
+
+.title-short {
+  position: absolute;
+  left: 0;
+  right: 74px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .close-modal {
@@ -1642,11 +1661,11 @@ Play&Go
 }
 
 .game-badge {
-    width: 80px;
+    width: 90px;
 }
 
 .game-badge-s {
-    width: 60px;
+    width: 80px;
 }
 
 .game-points {
@@ -1654,7 +1673,7 @@ Play&Go
 }
 
 .game-points .title {
-    margin-top: 24px;
+/*    margin-top: 24px;*/
 }
 
 .game-points .badges {

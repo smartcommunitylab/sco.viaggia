@@ -86,6 +86,7 @@ angular.module('viaggia.controllers.login', [])
     $scope.validateUserForGamification = function (profile) {
         if (profile != null) {
             userService.validUserForGamification(profile).then(function (valid) {
+                $ionicLoading.hide();
                 if (valid) {
                     $ionicLoading.show({
                         template: $filter('translate')('user_check')
@@ -107,6 +108,7 @@ angular.module('viaggia.controllers.login', [])
             }, function (error) {
                 Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
                 $ionicLoading.hide();
+                checkValidNoNetworkAndGoHome(profile);
             });
         }
     }
@@ -302,6 +304,19 @@ angular.module('viaggia.controllers.login', [])
 //        });
 
     });
+
+    var checkValidNoNetworkAndGoHome = function(profile){
+      var locallyValid = userService.validUserForGamificationLocal();
+
+      if (profile != null && locallyValid) {
+        $state.go('app.home');
+        $ionicHistory.nextViewOptions({
+            disableBack: true,
+            historyRoot: true
+        });
+      }
+    }
+
     $ionicPlatform.ready(function () {
         Config.init().then(function () {
             if (window.cordova && window.cordova.plugins.screenorientation) {
@@ -311,12 +326,15 @@ angular.module('viaggia.controllers.login', [])
             //            $scope.$on('$ionicView.enter', function () {
             //                $ionicLoading.hide();
             //            });
+            $ionicLoading.show();
             userService.getValidToken().then(function (validToken) {
                 var profile = storageService.getUser();
                 $scope.validateUserForGamification(profile);
 
             }, function (err) {
                 $ionicLoading.hide();
+                var profile = storageService.getUser();
+                checkValidNoNetworkAndGoHome(profile);
             })
         });
 

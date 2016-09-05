@@ -15,7 +15,7 @@ angular.module('viaggia.services.tracking', [])
             bgGeo = window.BackgroundGeolocation;
             bgGeo.onHttp(function (response) {
                 var status = response.status;
-                console.log("- HTTP success", status);
+                console.log("- HTTP result", status);
                 if (status == 200 && response.responseText && 'OK' == JSON.parse(response.responseText).storeResult) {
                     bgGeo.clearDatabase(function () {
                         console.log('- cleared database');
@@ -76,7 +76,8 @@ angular.module('viaggia.services.tracking', [])
                     //                        'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + token,
                     'appId' : Config.getAppId()
-                }
+                },
+                timeout: Config.getHTTPConfig().timeout
             }).success(function () {
                 deferred.resolve(true);
             }).error(function (err) {

@@ -28,6 +28,7 @@ angular.module('viaggia.services.registration', [])
                 timeout: 20000
             }).
             success(function (data, status, headers, config) {
+                localStorage.userValid = true;
                 deferred.resolve(data);
             }).
             error(function (data, status, headers, config) {

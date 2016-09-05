@@ -552,7 +552,7 @@ angular.module('viaggia', [
     // Each tab has its own nav history stack:
 
     .state('app.game.points', {
-//        cache: false,
+        cache: false,
         url: '/points',
         views: {
             'tab-points': {
@@ -563,7 +563,7 @@ angular.module('viaggia', [
     })
 
     .state('app.game.challenges', {
-//        cache: false,
+        cache: false,
         url: '/challenges',
         views: {
             'tab-challenges': {
@@ -574,7 +574,7 @@ angular.module('viaggia', [
     })
 
     .state('app.game.rankings', {
-//        cache: false,
+        cache: false,
         url: '/rankings',
         views: {
             'tab-rankings': {
@@ -901,7 +901,7 @@ angular.module('viaggia', [
         pop_up_no_geo_title: 'Errore di geolocalizzazione',
         pop_up_no_geo_template: 'Attenzione! Non è stato possibile rilevare la tua posizione. Accedi alle impostazioni del tuo dispositivo e controlla che il servizio di localizzazione sia attivo',
         pop_up_points_title: 'Complimenti!',
-        pop_up_points_template: 'La stima dei punti guadagnati con questo viaggio è {{points}}!',
+        pop_up_points_template: 'La stima dei punti guadagnati con questo viaggio è {{points}}! Il tuo punteggio sarà aggiornato a breve.',
         pop_up_points_btn: 'Vedi punti',
         no_points: 'Nessun punto guadagnato dal viaggio appena tracciato.',
         game_tab_challenges_filter_active: "Attive",
@@ -930,7 +930,7 @@ angular.module('viaggia', [
         "recommendations": "User Recommendation Badge",
         "leaderboard top 3": "Leaderboard Top 3 Badge",
         "no_challenges": "Al momento non ci sono sfide attive",
-        "no_challenges_old": "Nessuna sfida presente",
+        "no_challenges_old": "Nessuna sfida trovata",
         pop_up_invalid_tracking_title: "Viaggio non valido",
         pop_up_invalid_tracking_template: "Le caratteristiche del viaggio fatto non corrispondono al mezzo di trasporto specificato. I punti non saranno assegnati.",
         pop_up_plan: "Pianifica"
@@ -1246,7 +1246,7 @@ angular.module('viaggia', [
         pop_up_no_geo_title: 'Geolocation error',
         pop_up_no_geo_template: 'Warning! Your location cannot be retrieved. Enable location information in the device/app settings.',
         pop_up_points_title: 'Congratulations!',
-        pop_up_points_template: 'The estimation of points earned with this trip is {{points}}!',
+        pop_up_points_template: 'The estimation of points earned with this trip is {{points}}! Your points will be updated in a while.',
         pop_up_points_btn: 'See points',
         no_points: 'No points earned from the tracked trip.',
         game_tab_challenges_filter_active: "Now",

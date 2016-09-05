@@ -403,6 +403,7 @@ angular.module('viaggia.services.login', [])
                         deferred.resolve(false);
 
                     } else {
+                        localStorage.userValid = true;
                         deferred.resolve(true);
                     }
                 },
@@ -412,6 +413,9 @@ angular.module('viaggia.services.login', [])
             );
 
             return deferred.promise;
+        }
+        userService.validUserForGamificationLocal = function() {
+          return 'true' == localStorage.userValid;
         }
         userService.getUserData = function () {
             //get Data from server my trips
