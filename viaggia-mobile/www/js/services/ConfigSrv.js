@@ -23,7 +23,7 @@ angular.module('viaggia.services.conf', [])
 
 
 
-    var DISTANCE_AUTOCOMPLETE = '6';
+    var DISTANCE_AUTOCOMPLETE = '25';
     var HTTP_CONFIG = {
         timeout: 5000
     };

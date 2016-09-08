@@ -605,19 +605,42 @@
                             "color": "#B9BAB5",
                             "routes": [
                                 {
-                                    "routeId": "AA_Rov",
-                                    "routeSymId": "AA",
-                                    "title": "Brione-S.Giorgio-Lizzana-Ossario",
+                                    "routeId": "AC_Rov",
+                                    "routeSymId": "AC",
+                                    "title": "Brione-Cesari-Ospedale-Podesta-Brione",
                                     "label": "A"
+                                }              ]
+            },
+                        {
+                            "label": "B",
+                            "color": "#B9BAB5",
+                            "routes": [
+                                {
+                                    "routeId": "BC_Rov",
+                                    "routeSymId": "BC",
+                                    "title": "Ossario-Osp.-S.Giorgio-Osp.-Ossario",
+                                    "label": "B"
+                                }              ]
+            },
+                        {
+                            "label": "AB",
+                            "color": "#B9BAB5",
+                            "routes": [
+                                {
+                                    "routeId": "AA_Rov",
+                                    "routeSymId": "ABA",
+                                    "title": "Via Magazol-S.Giorgio-Cornacalda",
+                                    "label": "AB"
                                 },
                                 {
                                     "routeId": "AR_Rov",
-                                    "routeSymId": "AR",
-                                    "title": "Ossario-Ospedale-Rosmini-Brione",
-                                    "label": "A"
+                                    "routeSymId": "ABR",
+                                    "title": "Cornacalda-Ospedale-Via Magazol",
+                                    "label": "AB"
                                 }
               ]
             }
+
           ]
         }
       ]
