@@ -168,8 +168,10 @@ angular.module('viaggia.controllers.home', [])
         } else {
           Toast.show($filter('translate')("no_points"), "short", "bottom");
         }
-      }).finally(function(){
+      }, function(){
         Config.loaded();
+        $scope.showErrorServer();
+        trackService.stop();
       });
 
     }

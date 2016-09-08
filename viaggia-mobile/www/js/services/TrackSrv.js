@@ -15,7 +15,7 @@ angular.module('viaggia.services.tracking', [])
             bgGeo = window.BackgroundGeolocation;
             bgGeo.onHttp(function (response) {
                 var status = response.status;
-                console.log("- HTTP result", status);
+                console.log("- HTTP result: " + JSON.stringify(response));
                 if (status == 200 && response.responseText && 'OK' == JSON.parse(response.responseText).storeResult) {
                     bgGeo.clearDatabase(function () {
                         console.log('- cleared database');
@@ -23,7 +23,7 @@ angular.module('viaggia.services.tracking', [])
                 }
             }, function (response) {
                 var status = response.status;
-                console.log("- HTTP failure: ", status);
+                console.log("- HTTP failure: " + status);
             });
 
         });
@@ -189,6 +189,7 @@ angular.module('viaggia.services.tracking', [])
         trackService.computeInfo = function() {
           var trackId = localStorage.getItem(Config.getAppId() + '_tripId');
           var deferred = $q.defer();
+//          var testMap = {};
           bgGeo.getLocations(function(locations, taskId) {
             bgGeo.finish(taskId);
             var tripLocs = [];
@@ -196,10 +197,18 @@ angular.module('viaggia.services.tracking', [])
               if (l.extras && trackId == l.extras.idTrip) {
                 tripLocs.push(l);
               }
+//              if (l.extras) {
+//                if(testMap[l.extras.idTrip] == null) {
+//                  testMap[l.extras.idTrip] = 0;
+//                }
+//                testMap[l.extras.idTrip] = testMap[l.extras.idTrip] + 1;
+//              }
             });
             tripLocs.sort(function(la, lb){
               return la.timestamp - lb.timestamp;
             });
+
+//            alert('found '+ JSON.stringify(testMap));
 
             var data = {dist : 0, transport : localStorage.getItem(Config.getAppId() + '_trackedTransport'), points: 0, valid: true};
 
@@ -243,6 +252,8 @@ angular.module('viaggia.services.tracking', [])
               }
             }
             deferred.resolve(data);
+          },function(error) {
+            deferred.reject();
           });
           return deferred.promise;
         }
@@ -386,15 +397,48 @@ angular.module('viaggia.services.tracking', [])
                 }
                 bgGeo.configure(trackingConfigure, callbackFn, failureFn);
                 bgGeo.start(function () {
-                    bgGeo.sync(function (locations, taskId) {
-                        console.log('synced locations: ', locations);
-                        // Be sure to call finish(taskId) in order to signal the end of the background-thread.
-                        bgGeo.finish(taskId);
-                        deferred.resolve(true);
-                    }, function (errorMessage) {
-                        console.warn('Sync FAILURE: ', errorMessage);
+                  bgGeo.getLocations(function(locations, taskId) {
+                    bgGeo.finish(taskId);
+                    if (locations == null || locations.length == 0) {
+                      deferred.resolve(true);
+                      return;
+                    }
+                    $http({
+                        method: 'POST',
+                        url: trackingConfigure['url'],
+                        data: {location: locations, device: ionic.Platform.device()},
+                        headers: {
+                            'appId' : Config.getAppId()
+                        }
+                    }).then(function (response) {
+                        console.log('Geo Sync SUCCESS: '+locations.length);
+                        if (response.status == 200 && response.data && 'OK' == response.data.storeResult) {
+                            bgGeo.clearDatabase(function () {
+                                console.log('- cleared database');
+                            });
+                            deferred.resolve(true);
+                        } else {
+                        console.log('Geo Sync FAILURE: ' + JSON.stringify(response));
+                          deferred.resolve(false);
+                        }
+                    }, function (err) {
+                        console.log('Geo Sync FAILURE: ' + JSON.stringify(err));
+                        console.log(err)
                         deferred.resolve(false);
                     });
+
+                  },function(error) {
+                    deferred.resolve(false);
+                  });
+//                    bgGeo.sync(function (locations, taskId) {
+//                        console.log('synced locations: ', locations);
+//                        // Be sure to call finish(taskId) in order to signal the end of the background-thread.
+//                        bgGeo.finish(taskId);
+//                        deferred.resolve(true);
+//                    }, function (errorMessage) {
+//                        console.log('Sync FAILURE: ' + errorMessage);
+//                        deferred.resolve(false);
+//                    });
                 });
             }, function () {
                 // no token obtained
