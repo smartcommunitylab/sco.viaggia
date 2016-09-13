@@ -23,7 +23,7 @@ angular.module('viaggia.services.conf', [])
 
 
 
-    var DISTANCE_AUTOCOMPLETE = '6';
+    var DISTANCE_AUTOCOMPLETE = '25';
     var HTTP_CONFIG = {
         timeout: 5000
     };
@@ -169,6 +169,9 @@ angular.module('viaggia.services.conf', [])
             if (mapJsonConfig != null) deferred.resolve(true);
             else $http.get('data/config.json').success(function (response) {
                 mapJsonConfig = response;
+                $http.defaults.headers.common.appId = mapJsonConfig["appid"];
+
+
                 $http.get('data/tt.json').success(function (ttResponse) {
                     ttJsonConfig = ttResponse;
                     deferred.resolve(true);

@@ -1,11 +1,11 @@
 {
     "apptoken": "viaggiabologna",
-    "appid": "trento",
+    "appid": "bologna",
     "messagingAppId": "mobility.bologna",
     "senderID": "",
     "appversion": "0.0.1",
     "appname": "Viaggia Bologna",
-    "serverURL": "https://dev.smartcommunitylab.it/bologna.mobility",
+    "serverURL": "/core.mobility",
     "messagingServerURL": "https://dev.smartcommunitylab.it/core.communicator",
     "smartcheck_options": [
         1,
@@ -19,14 +19,14 @@
             "TRANSIT"
         ]
     },
-    "plan_policy": "Trento",
-    "agencies": [5, 6, 10, 12, 17],
-    "extraurban_agencies": [17],
+    "plan_policy": "Dummy",
+    "agencies": ["TPERBO_URBAN","TPERBO_EXTRA","TPERBO_SUB","TPERIMO_URBAN","TPERFE_URBAN","TPERFE_EXTRA","TPER_BLQ","TPERBO_TRAIN"],
+    "extraurban_agencies": ["TPERBO_EXTRA","TPERIMO_URBAN","TPERFE_EXTRA"],
     "broadcast_notifications_options": [
         1,
         4
     ],
-    "center_map": [44.497383, 11.341640],
+    "center_map": [44.502951, 11.341280],
     "zoom_map": 15,
     "db_version": 25,
     "visualization": {
@@ -44,30 +44,34 @@
                 "color": "#eb8919"
             },
             {
+                "state": "/app/ttlist/sub_urbano",
+                "label": "menu_real_time_bus_suburban",
+                "icon": "ic_extraurban-bus",
+                "color": "#eb8919"
+            },
+            {
+                "state": "/app/ttlist/extra_urbano",
+                "label": "menu_real_time_bus_extraurban",
+                "icon": "ic_extraurban-bus",
+                "color": "#eb8919"
+            },
+            {
                 "state": "/app/ttlist/trains",
                 "label": "menu_real_time_train",
                 "icon": "ic_train",
                 "color": "#cd251c"
-            },
-            {
-                "state": "/app/parking/COMUNE_DI_BOLOGNA",
-                "label": "menu_real_time_park",
-                "icon": "ic_parking-lot",
-                "color": "#164286"
-            },
-            {
-                "state": "/app/bikesharing/bologna",
-                "label": "menu_real_time_bike",
-                "icon": "ic_bike",
-                "color": "#922d66"
             }
-
       ],
         "infomenu": [
             {
                 "state": "/app/ttlist/urbano",
                 "label": "menu_real_time_bus_urban",
                 "icon": "ic_urban-bus"
+            },
+            {
+                "state": "/app/ttlist/extra_urbano",
+                "label": "menu_real_time_bus_extraurban",
+                "icon": "ic_extraurban-bus"
             },
             {
                 "state": "/app/ttlist/trains",

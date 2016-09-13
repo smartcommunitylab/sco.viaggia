@@ -2,15 +2,15 @@
     "TRENTO": {
         "resource_folder": "config/instances/TRENTO",
         "widget_id": "eu.trentorise.smartcampus.viaggiatrento",
-        "version": "2.2.1",
-        "version_code": "41",
+        "version": "2.2.2",
+        "version_code": "42",
         "app_name": "Viaggia Trento"
     },
     "ROVERETO": {
         "resource_folder": "config/instances/ROVERETO",
         "widget_id": "eu.trentorise.smartcampus.viaggiarovereto",
-        "version": "2.1.2",
-        "version_code": "37",
+        "version": "2.1.4",
+        "version_code": "39",
         "app_name": "Viaggia Rovereto"
     },
     "BOLOGNA": {
