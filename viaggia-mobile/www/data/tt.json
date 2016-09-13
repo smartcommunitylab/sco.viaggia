@@ -1,3001 +1,523 @@
 {
-	"stopVisualization": {
-		"TPERBO_URBAN": {
-			"view": "list"
-		},
-		"TPERBO_EXTRA": {
-			"view": "list"
-		},
-		"TPERBO_SUB": {
-			"view": "list"
-		},
-		"TPERIMO_URBAN": {
-			"view": "list"
-		},
-		"TPERFE_URBAN": {
-			"view": "list"
-		},
-		"TPERFE_EXTRA": {
-			"view": "list"
-		},
-		"TPER_BLQ": {
-			"view": "list"
-		}
-	},
-	"elements": {
-		"trains": {
-			"view": "list",
-			"label": "menu_real_time_train",
-			"hasMap": true,
-			"markerIcon": "ic_train",
-			"icon": "ic_train",
-			"transportType": "TRAIN",
-			"elements": [{
-            "agencyId": "TPERBO_TRAIN",
+    "stopVisualization": {
+        "12": {
+            "view": "grid"
+        },
+        "5": {
+            "view": "list"
+        },
+        "6": {
+            "view": "list"
+        },
+        "10": {
+            "view": "list"
+        }
+    },
+    "elements": {
+        "trains": {
+            "view": "list",
+            "label": "menu_real_time_train",
             "hasMap": true,
-            "groups": [
+            "markerIcon": "ic_train",
+            "icon": "ic_train",
+            "transportType": "TRAIN",
+            "elements": [
                 {
-                    "routes": [{
-                        "title": "PARMA / GUASTALLA",
-                        "routeSymId": "PAR-GUA",
-                        "routeId": "PAR-GUA",
-                        "label": "PAR-GUA"
-                    }],
-                    "label": "PARMA-GUASTALLA"
-                },
+                    "agencyId": "5",
+                    "color": "#cd251c",
+                    "routes": [
+                        {
+                            "routeId": "BV_R1_G",
+                            "routeSymId": "BV_R1_G",
+                            "title": "Bolzano - Verona",
+                            "color": "#cd251c",
+                            "showTrips": true,
+                            "wheelChairBoarding": 0
+
+                        },
+                        {
+                            "routeId": "BV_R1_R",
+                            "routeSymId": "BV_R1_R",
+                            "title": "Verona - Bolzano",
+                            "color": "#cd251c",
+                            "showTrips": true,
+                            "wheelChairBoarding": 0
+
+                        }
+          ]
+        },
                 {
-                    "routes": [{
-                        "title": "IMOLA / BOLOGNA CENTRALE",
-                        "routeSymId": "IMO-BOC",
-                        "routeId": "IMO-BOC",
-                        "label": "IMO-BOCE"
-                    }],
-                    "label": "IMOLA-BOLOGNA CENTRALE"
-                },
+                    "agencyId": "6",
+                    "color": "#cd251c",
+                    "routes": [
+                        {
+                            "routeId": "TB_R2_G",
+                            "routeSymId": "TB_R2_G",
+                            "title": "Trento - Bassano D.G.",
+                            "color": "#cd251c",
+                            "showTrips": true,
+                            "wheelChairBoarding": 0
+                        },
+                        {
+                            "routeId": "TB_R2_R",
+                            "routeSymId": "TB_R2_R",
+                            "title": "Bassano D.G. - Trento",
+                            "color": "#cd251c",
+                            "showTrips": true,
+                            "wheelChairBoarding": 0
+                        }
+          ]
+        },
                 {
-                    "routes": [{
-                        "title": "FERRARA / POGGIO RUSCO",
-                        "routeSymId": "FER-POG",
-                        "routeId": "FER-POG",
-                        "label": "FEPO"
-                    }],
-                    "label": "FERRARA-POGGIO RUSCO"
-                },
+                    "agencyId": "10",
+                    "color": "#cd251c",
+                    "routes": [
+                        {
+                            "routeId": "555",
+                            "routeSymId": "555",
+                            "color": "#cd251c",
+                            "title": "Trento - Malé",
+                            "wheelChairBoarding": 0
+                        },
+                        {
+                            "routeId": "556",
+                            "routeSymId": "556",
+                            "color": "#cd251c",
+                            "title": "Malé - Trento",
+                            "wheelChairBoarding": 0
+                        }
+          ]
+        }
+      ]
+        },
+        "urbano": {
+            "view": "grid",
+            "label": "menu_real_time_bus_urban",
+            "hasMap": true,
+            "markerIcon": "ic_urbanBus",
+            "icon": "ic_urban-bus",
+            "transportType": "BUS",
+            "elements": [
                 {
-                    "routes": [{
-                        "title": "MODENA / BOLOGNA CENTRALE",
-                        "routeSymId": "MOD-BOC",
-                        "routeId": "MOD-BOC",
-                        "label": "MOBO"
-                    }],
-                    "label": "MODENA-BOLOGNA CENTRALE"
-                },
-                {
-                    "routes": [{
-                        "title": "FERRARA / LAVEZZOLA",
-                        "routeSymId": "FER-LAV",
-                        "routeId": "FER-LAV",
-                        "label": "FELA"
-                    }],
-                    "label": "FERRARA-LAVEZZOLA"
-                },
-                {
-                    "routes": [{
-                        "label": "PARM-SUZZ",
-                        "title": "PARMA / SUZZARA",
-                        "routeSymId": "PAR-SUZ",
-                        "routeId": "PAR-SUZ"
-                    },
-                    {
-                        "label": "SUZZ-PARM",
-                        "title": "SUZZARA / PARMA",
-                        "routeSymId": "SUZ-PAR",
-                        "routeId": "SUZ-PAR"
-                    }],
-                    "label": "SUZZARA-PARMA"
-                },
-                {
-                    "routes": [{
-                        "label": "POGGR-BOCE",
-                        "title": "POGGIO RUSCO / BOLOGNA CENTRALE",
-                        "routeSymId": "POG-BOC",
-                        "routeId": "POG-BOC"
-                    },
-                    {
-                        "label": "BOCE-POGGR",
-                        "title": "BOLOGNA CENTRALE / POGGIO RUSCO",
-                        "routeSymId": "BOC-POG",
-                        "routeId": "BOC-POG"
-                    }],
-                    "label": "BOLOGNA CENTRALE-POGGIO RUSCO"
-                },
-                {
-                    "routes": [{
-                        "label": "VIGN-BOCE",
-                        "title": "Vignola / BOLOGNA CENTRALE",
-                        "routeSymId": "VIG-BOC",
-                        "routeId": "VIG-BOC"
-                    },
-                    {
-                        "label": "BOCE-VIGN",
-                        "title": "BOLOGNA CENTRALE / Vignola",
-                        "routeSymId": "BOC-VIG",
-                        "routeId": "BOC-VIG"
-                    }],
-                    "label": "BOLOGNA CENTRALE-VIGNOLA"
-                },
-                {
-                    "routes": [{
-                        "label": "BOCE-BAZZ",
-                        "title": "BOLOGNA CENTRALE / Bazzano",
-                        "routeSymId": "BOC-BAZ",
-                        "routeId": "BOC-BAZ"
-                    },
-                    {
-                        "label": "BAZZ-BOCE",
-                        "title": "Bazzano / BOLOGNA CENTRALE",
-                        "routeSymId": "BAZ-BOC",
-                        "routeId": "BAZ-BOC"
-                    }],
-                    "label": "BAZZANO-BOLOGNA CENTRALE"
-                },
-                {
-                    "routes": [{
-                        "label": "FERR-RAVE",
-                        "title": "FERRARA / RAVENNA",
-                        "routeSymId": "FER-RAV",
-                        "routeId": "FER-RAV"
-                    },
-                    {
-                        "label": "RAVE-FERR",
-                        "title": "RAVENNA / FERRARA",
-                        "routeSymId": "RAV-FER",
-                        "routeId": "RAV-FER"
-                    }],
-                    "label": "RAVENNA-FERRARA"
-                },
-                {
-                    "routes": [{
-                        "label": "RAVE-PESA",
-                        "title": "RAVENNA / PESARO",
-                        "routeSymId": "RAV-PES",
-                        "routeId": "RAV-PES"
-                    },
-                    {
-                        "label": "PESA-RAVE",
-                        "title": "PESARO / RAVENNA",
-                        "routeSymId": "PES-RAV",
-                        "routeId": "PES-RAV"
-                    }],
-                    "label": "PESARO-RAVENNA"
-                },
-                {
-                    "routes": [{
-                        "label": "RIMI-BOCE",
-                        "title": "RIMINI / BOLOGNA CENTRALE",
-                        "routeSymId": "RIM-BOC",
-                        "routeId": "RIM-BOC"
-                    },
-                    {
-                        "label": "BOCE-RIMI",
-                        "title": "BOLOGNA CENTRALE / RIMINI",
-                        "routeSymId": "BOC-RIM",
-                        "routeId": "BOC-RIM"
-                    }],
-                    "label": "BOLOGNA CENTRALE-RIMINI"
-                },
-                {
-                    "routes": [{
-                        "label": "PESA-BERG",
-                        "title": "PESARO / BERGAMO",
-                        "routeSymId": "PES-BER",
-                        "routeId": "PES-BER"
-                    },
-                    {
-                        "label": "BERG-PESA",
-                        "title": "BERGAMO / PESARO",
-                        "routeSymId": "BER-PES",
-                        "routeId": "BER-PES"
-                    }],
-                    "label": "BERGAMO-PESARO"
-                },
-                {
-                    "routes": [{
-                        "label": "SUZZ-RIMI",
-                        "title": "SUZZARA / RIMINI",
-                        "routeSymId": "SUZ-RIM",
-                        "routeId": "SUZ-RIM"
-                    },
-                    {
-                        "label": "RIMI-SUZZ",
-                        "title": "RIMINI / SUZZARA",
-                        "routeSymId": "RIM-SUZ",
-                        "routeId": "RIM-SUZ"
-                    }],
-                    "label": "RIMINI-SUZZARA"
-                },
-                {
-                    "routes": [{
-                        "label": "REGG-GUAS",
-                        "title": "Reggio Emilia / Guastalla",
-                        "routeSymId": "REG-GUA",
-                        "routeId": "REG-GUA"
-                    },
-                    {
-                        "label": "GUAS-REGG",
-                        "title": "Guastalla / Reggio Emilia",
-                        "routeSymId": "GUA-REG",
-                        "routeId": "GUA-REG"
-                    }],
-                    "label": "GUASTALLA-REGGIO EMILIA"
-                },
-                {
-                    "routes": [{
-                        "label": "GUAS-RSLAZ",
-                        "title": "Guastalla / Reggio S.Lazzaro",
-                        "routeSymId": "GUA-RSL",
-                        "routeId": "GUA-RSL"
-                    },
-                    {
-                        "label": "RSLAZ-GUAS",
-                        "title": "Reggio S.Lazzaro / Guastalla",
-                        "routeSymId": "RSL-GUA",
-                        "routeId": "RSL-GUA"
-                    }],
-                    "label": "REGGIO S.LAZZARO-GUASTALLA"
-                },
-                {
-                    "routes": [{
-                        "label": "CDENZ-REGG",
-                        "title": "Ciano d`Enza / Reggio Emilia",
-                        "routeSymId": "CIE-REG",
-                        "routeId": "CIE-REG"
-                    },
-                    {
-                        "label": "REGG-CDENZ",
-                        "title": "Reggio Emilia / Ciano d`Enza",
-                        "routeSymId": "REG-CIE",
-                        "routeId": "REG-CIE"
-                    }],
-                    "label": "REGGIO EMILIA-CIANO D'ENZA"
-                },
-                {
-                    "routes": [{
-                        "label": "MODE-SASST",
-                        "title": "MODENA / Sassuolo Terminal",
-                        "routeSymId": "MOD-SAT",
-                        "routeId": "MOD-SAT"
-                    },
-                    {
-                        "label": "SASST-MODE",
-                        "title": "Sassuolo Terminal / MODENA",
-                        "routeSymId": "SAT-MOD",
-                        "routeId": "SAT-MOD"
-                    }],
-                    "label": "SASSUOLO TERMINAL-MODENA"
-                },
-                {
-                    "routes": [{
-                        "label": "REGG-SASSR",
-                        "title": "Reggio Emilia / Sassuolo Radici",
-                        "routeSymId": "REG-SAR",
-                        "routeId": "REG-SAR"
-                    },
-                    {
-                        "label": "SASSR-REGG",
-                        "title": "Sassuolo Radici / Reggio Emilia",
-                        "routeSymId": "SAR-REG",
-                        "routeId": "SAR-REG"
-                    }],
-                    "label": "SASSUOLO RADICI-REGGIO EMILIA"
-                },
-                {
-                    "routes": [{
-                        "label": "SERM-SUZZ",
-                        "title": "SERMIDE / SUZZARA",
-                        "routeSymId": "SER-SUZ",
-                        "routeId": "SER-SUZ"
-                    },
-                    {
-                        "label": "SUZZ-SERM",
-                        "title": "SUZZARA / SERMIDE",
-                        "routeSymId": "SUZ-SER",
-                        "routeId": "SUZ-SER"
-                    }],
-                    "label": "SUZZARA-SERMIDE"
-                },
-                {
-                    "routes": [{
-                        "label": "SUZZ-FERR",
-                        "title": "SUZZARA / FERRARA",
-                        "routeSymId": "SUZ-FER",
-                        "routeId": "SUZ-FER"
-                    },
-                    {
-                        "label": "FERR-SUZZ",
-                        "title": "FERRARA / SUZZARA",
-                        "routeSymId": "FER-SUZ",
-                        "routeId": "FER-SUZ"
-                    }],
-                    "label": "FERRARA-SUZZARA"
-                },
-                {
-                    "routes": [{
-                        "label": "PORMA-BOCE",
-                        "title": "PORTOMAGGIORE / BOLOGNA CENTRALE",
-                        "routeSymId": "POM-BOC",
-                        "routeId": "POM-BOC"
-                    },
-                    {
-                        "label": "BOCE-PORMA",
-                        "title": "BOLOGNA CENTRALE / PORTOMAGGIORE",
-                        "routeSymId": "BOC-POM",
-                        "routeId": "BOC-POM"
-                    }],
-                    "label": "BOLOGNA CENTRALE-PORTOMAGGIORE"
-                },
-                {
-                    "routes": [{
-                        "label": "BOCE-BUDR",
-                        "title": "BOLOGNA CENTRALE / Budrio",
-                        "routeSymId": "BOC-BUD",
-                        "routeId": "BOC-BUD"
-                    },
-                    {
-                        "label": "BUDR-BOCE",
-                        "title": "Budrio / BOLOGNA CENTRALE",
-                        "routeSymId": "BUD-BOC",
-                        "routeId": "BUD-BOC"
-                    }],
-                    "label": "BUDRIO-BOLOGNA CENTRALE"
-                },
-                {
-                    "routes": [{
-                        "label": "SERM-FERR",
-                        "title": "SERMIDE / FERRARA",
-                        "routeSymId": "SER-FER",
-                        "routeId": "SER-FER"
-                    },
-                    {
-                        "label": "FERR-SERM",
-                        "title": "FERRARA / SERMIDE",
-                        "routeSymId": "FER-SER",
-                        "routeId": "FER-SER"
-                    }],
-                    "label": "FERRARA-SERMIDE"
-                },
-                {
-                    "routes": [{
-                        "label": "PARM-BOCE",
-                        "title": "PARMA / BOLOGNA CENTRALE",
-                        "routeSymId": "PAR-BOC",
-                        "routeId": "PAR-BOC"
-                    },
-                    {
-                        "label": "BOCE-PARM",
-                        "title": "BOLOGNA CENTRALE / PARMA",
-                        "routeSymId": "BOC-PAR",
-                        "routeId": "BOC-PAR"
-                    }],
-                    "label": "BOLOGNA CENTRALE-PARMA"
-                },
-                {
-                    "routes": [{
-                        "label": "CODI-FERR",
-                        "title": "CODIGORO / FERRARA",
-                        "routeSymId": "COD-FER",
-                        "routeId": "COD-FER"
-                    },
-                    {
-                        "label": "FERR-CODI",
-                        "title": "FERRARA / CODIGORO",
-                        "routeSymId": "FER-COD",
-                        "routeId": "FER-COD"
-                    }],
-                    "label": "FERRARA-CODIGORO"
-                },
-                {
-                    "routes": [{
-                        "label": "IMOL-FERR",
-                        "title": "IMOLA / FERRARA",
-                        "routeSymId": "IMO-FER",
-                        "routeId": "IMO-FER"
-                    },
-                    {
-                        "label": "FERR-IMOL",
-                        "title": "FERRARA / IMOLA",
-                        "routeSymId": "FER-IMO",
-                        "routeId": "FER-IMO"
-                    }],
-                    "label": "FERRARA-IMOLA"
-                },
-                {
-                    "routes": [{
-                        "label": "FERR-BOCE",
-                        "title": "FERRARA / BOLOGNA CENTRALE",
-                        "routeSymId": "FER-BOC",
-                        "routeId": "FER-BOC"
-                    },
-                    {
-                        "label": "BOCE-FERR",
-                        "title": "BOLOGNA CENTRALE / FERRARA",
-                        "routeSymId": "BOC-FER",
-                        "routeId": "BOC-FER"
-                    }],
-                    "label": "BOLOGNA CENTRALE-FERRARA"
-                },
-                {
-                    "routes": [{
-                        "label": "RIMI-FERR",
-                        "title": "RIMINI / FERRARA",
-                        "routeSymId": "RIM-FER",
-                        "routeId": "RIM-FER"
-                    },
-                    {
-                        "label": "FERR-RIMI",
-                        "title": "FERRARA / RIMINI",
-                        "routeSymId": "FER-RIM",
-                        "routeId": "FER-RIM"
-                    }],
-                    "label": "FERRARA-RIMINI"
-                },
-                {
-                    "routes": [{
-                        "label": "REGG-REGSS",
-                        "title": "Reggio Emilia / Reggio S.Stefano",
-                        "routeSymId": "REG-RES",
-                        "routeId": "REG-RES"
-                    },
-                    {
-                        "label": "REGSS-REGG",
-                        "title": "Reggio S.Stefano / Reggio Emilia",
-                        "routeSymId": "RES-REG",
-                        "routeId": "RES-REG"
-                    }],
-                    "label": "REGGIO S.STEFANO-REGGIO EMILIA"
-                },
-                {
-                    "routes": [{
-                        "label": "MANT-MODE",
-                        "title": "MANTOVA / MODENA",
-                        "routeSymId": "MAN-MOD",
-                        "routeId": "MAN-MOD"
-                    },
-                    {
-                        "label": "MODE-MANT",
-                        "title": "MODENA / MANTOVA",
-                        "routeSymId": "MOD-MAN",
-                        "routeId": "MOD-MAN"
-                    }],
-                    "label": "MODENA-MANTOVA"
-                },
-                {
-                    "routes": [{
-                        "label": "PORT-BOCE",
-                        "title": "PORRETTA  TERME / BOLOGNA CENTRALE",
-                        "routeSymId": "POT-BOC",
-                        "routeId": "POT-BOC"
-                    },
-                    {
-                        "label": "BOCE-PORT",
-                        "title": "BOLOGNA CENTRALE / PORRETTA  TERME",
-                        "routeSymId": "BOC-POT",
-                        "routeId": "BOC-POT"
-                    }],
-                    "label": "BOLOGNA CENTRALE-PORRETTA TERME"
-                },
-                {
-                    "routes": [{
-                        "label": "REGME-REGG",
-                        "title": "Reggio Mediopadana / Reggio Emilia",
-                        "routeSymId": "REM-REG",
-                        "routeId": "REM-REG"
-                    },
-                    {
-                        "label": "REGG-REGME",
-                        "title": "Reggio Emilia / Reggio Mediopadana",
-                        "routeSymId": "REG-REM",
-                        "routeId": "REG-REM"
-                    }],
-                    "label": "REGGIO EMILIA-REGGIO MEDIOPADANA"
-                },
-                {
-                    "routes": [{
-                        "label": "MICE-BOCE",
-                        "title": "MILANO CENTRALE / BOLOGNA CENTRALE",
-                        "routeSymId": "MIC-BOC",
-                        "routeId": "MIC-BOC"
-                    },
-                    {
-                        "label": "BOCE-MICE",
-                        "title": "BOLOGNA CENTRALE / MILANO CENTRALE",
-                        "routeSymId": "BOC-MIC",
-                        "routeId": "BOC-MIC"
-                    }],
-                    "label": "BOLOGNA CENTRALE-MILANO CENTRALE"
-                },
-                {
-                    "routes": [{
-                        "label": "MICE-PARM",
-                        "title": "MILANO CENTRALE / PARMA",
-                        "routeSymId": "MIC-PAR",
-                        "routeId": "MIC-PAR"
-                    },
-                    {
-                        "label": "PARM-MICE",
-                        "title": "PARMA / MILANO CENTRALE",
-                        "routeSymId": "PAR-MIC",
-                        "routeId": "PAR-MIC"
-                    }],
-                    "label": "PARMA-MILANO CENTRALE"
-                },
-                {
-                    "routes": [{
-                        "label": "PORMA-DOGA",
-                        "title": "PORTOMAGGIORE / DOGATO",
-                        "routeSymId": "POR-DOG",
-                        "routeId": "POR-DOG"
-                    },
-                    {
-                        "label": "DOGA-PORMA",
-                        "title": "DOGATO / PORTOMAGGIORE",
-                        "routeSymId": "DOG-POR",
-                        "routeId": "DOG-POR"
-                    }],
-                    "label": "DOGATO-PORTOMAGGIORE"
-                }]
-            }]
-		},
-		"urbano": {
-			"view": "grid",
-			"label": "menu_real_time_bus_urban",
-			"hasMap": true,
-			"markerIcon": "ic_urbanBus",
-			"icon": "ic_urban-bus",
-			"transportType": "BUS",
-			"elements": [{
-				"agencyId": "TPERBO_URBAN",
-				"hasMap": true,
-				"groups": [{
-					"routes": [{
-						"routeSymId": "11_TPERBO_URBAN_1",
-						"routeId": "11_TPERBO_URBAN_1",
-						"label": "11",
-						"title": "Istituto R. Luxemburg - Bertalia - Arcoveggio, rot. Corelli - Ponticella"
-					},
-					{
-						"routeSymId": "11_TPERBO_URBAN_0",
-						"routeId": "11_TPERBO_URBAN_0",
-						"label": "11",
-						"title": "Ponticella - Arcoveggio, rot. Corelli - Bertalia - Istituto R. Luxemburg"
-					}],
-					"label": "11"
-				},
-				{
-					"routes": [{
-						"routeSymId": "124_TPERBO_URBAN_1",
-						"routeId": "124_TPERBO_URBAN_1",
-						"label": "124",
-						"title": "Ponticella - Ospedale Bellaria - San Lazzaro di Savena"
-					},
-					{
-						"routeSymId": "124_TPERBO_URBAN_0",
-						"routeId": "124_TPERBO_URBAN_0",
-						"label": "124",
-						"title": "San Lazzaro di Savena - Ospedale Bellaria - Ponticella"
-					}],
-					"label": "124"
-				},
-				{
-					"routes": [{
-						"routeSymId": "125_TPERBO_URBAN_1",
-						"routeId": "125_TPERBO_URBAN_1",
-						"label": "125",
-						"title": "Villaggio Martino - Ospedale Bellaria - San Lazzaro di Savena"
-					},
-					{
-						"routeSymId": "125_TPERBO_URBAN_0",
-						"routeId": "125_TPERBO_URBAN_0",
-						"label": "125",
-						"title": "San Lazzaro di Savena - Ospedale Bellaria - Villaggio Martino"
-					}],
-					"label": "125"
-				},
-				{
-					"routes": [{
-						"routeSymId": "13_TPERBO_URBAN_0",
-						"routeId": "13_TPERBO_URBAN_0",
-						"label": "13",
-						"title": "Borgo Panigale - S. Ruffillo"
-					},
-					{
-						"routeSymId": "13_TPERBO_URBAN_1",
-						"routeId": "13_TPERBO_URBAN_1",
-						"label": "13",
-						"title": "S. Ruffillo - Borgo Panigale"
-					}],
-					"label": "13"
-				},
-				{
-					"routes": [{
-						"routeSymId": "14_TPERBO_URBAN_1",
-						"routeId": "14_TPERBO_URBAN_1",
-						"label": "14",
-						"title": "Barca - Ospedale S. Orsola - Due Madonne / Pilastro"
-					},
-					{
-						"routeSymId": "14_TPERBO_URBAN_0",
-						"routeId": "14_TPERBO_URBAN_0",
-						"label": "14",
-						"title": "Due Madonne, Pilastro - Ospedale S. Orsola - Barca"
-					}],
-					"label": "14"
-				},
-				{
-					"routes": [{
-						"routeSymId": "16_TPERBO_URBAN_1",
-						"routeId": "16_TPERBO_URBAN_1",
-						"label": "16",
-						"title": "P.zza Cavour - P.zale Atleti Azzurri"
-					},
-					{
-						"routeSymId": "16_TPERBO_URBAN_0",
-						"routeId": "16_TPERBO_URBAN_0",
-						"label": "16",
-						"title": "P.zale Atleti Azzurri - P.zza Cavour"
-					}],
-					"label": "16"
-				},
-				{
-					"routes": [{
-						"routeSymId": "18_TPERBO_URBAN_1",
-						"routeId": "18_TPERBO_URBAN_1",
-						"label": "18",
-						"title": "P.za Roosevelt, Marconi - Noce - (Trebbo di Reno)"
-					},
-					{
-						"routeSymId": "18_TPERBO_URBAN_0",
-						"routeId": "18_TPERBO_URBAN_0",
-						"label": "18",
-						"title": "(Trebbo di Reno) - Noce - P.za Roosevelt, Marconi"
-					}],
-					"label": "18"
-				},
-				{
-					"routes": [{
-						"routeSymId": "19_TPERBO_URBAN_1",
-						"routeId": "19_TPERBO_URBAN_1",
-						"label": "19",
-						"title": "Casteldebole - San Lazzaro di Savena, San Camillo"
-					},
-					{
-						"routeSymId": "19_TPERBO_URBAN_0",
-						"routeId": "19_TPERBO_URBAN_0",
-						"label": "19",
-						"title": "San Lazzaro di Savena, San Camillo - Casteldebole"
-					}],
-					"label": "19"
-				},
-				{
-					"routes": [{
-						"routeSymId": "20_TPERBO_URBAN_1",
-						"routeId": "20_TPERBO_URBAN_1",
-						"label": "20",
-						"title": "San Biagio - Casalecchio di Reno - Pilastro"
-					},
-					{
-						"routeSymId": "20_TPERBO_URBAN_0",
-						"routeId": "20_TPERBO_URBAN_0",
-						"label": "20",
-						"title": "Pilastro - Casalecchio di Reno - San Biagio"
-					}],
-					"label": "20"
-				},
-				{
-					"routes": [{
-						"routeSymId": "21_TPERBO_URBAN_1",
-						"routeId": "21_TPERBO_URBAN_1",
-						"label": "21",
-						"title": "Filanda - Stazione Centrale - San Donato"
-					},
-					{
-						"routeSymId": "21_TPERBO_URBAN_0",
-						"routeId": "21_TPERBO_URBAN_0",
-						"label": "21",
-						"title": "San Donato - Stazione Centrale - Filanda"
-					}],
-					"label": "21"
-				},
-				{
-					"routes": [{
-						"routeSymId": "25_TPERBO_URBAN_0",
-						"routeId": "25_TPERBO_URBAN_0",
-						"label": "25",
-						"title": "Dozza - Stazione Centrale - Ospedale Malpighi - Due Madonne"
-					},
-					{
-						"routeSymId": "25_TPERBO_URBAN_1",
-						"routeId": "25_TPERBO_URBAN_1",
-						"label": "25",
-						"title": "Due Madonne - Ospedale Malpighi - Stazione Centrale - Dozza"
-					}],
-					"label": "25"
-				},
-				{
-					"routes": [{
-						"routeSymId": "27_TPERBO_URBAN_1",
-						"routeId": "27_TPERBO_URBAN_1",
-						"label": "27",
-						"title": "Corticella - Mazzini"
-					},
-					{
-						"routeSymId": "27_TPERBO_URBAN_0",
-						"routeId": "27_TPERBO_URBAN_0",
-						"label": "27",
-						"title": "Mazzini - Corticella"
-					}],
-					"label": "27"
-				},
-				{
-					"routes": [{
-						"routeSymId": "28_TPERBO_URBAN_1",
-						"routeId": "28_TPERBO_URBAN_1",
-						"label": "28",
-						"title": "Via dell'Indipendenza - Fiera"
-					},
-					{
-						"routeSymId": "28_TPERBO_URBAN_0",
-						"routeId": "28_TPERBO_URBAN_0",
-						"label": "28",
-						"title": "Fiera - Via dell'Indipendenza"
-					}],
-					"label": "28"
-				},
-				{
-					"routes": [{
-						"routeSymId": "29_TPERBO_URBAN_1",
-						"routeId": "29_TPERBO_URBAN_1",
-						"label": "29",
-						"title": "Noce, Parcheggio Tanari - Via di Roncrio"
-					},
-					{
-						"routeSymId": "29_TPERBO_URBAN_0",
-						"routeId": "29_TPERBO_URBAN_0",
-						"label": "29",
-						"title": "Via di Roncrio - Noce, Parcheggio Tanari"
-					}],
-					"label": "29"
-				},
-				{
-					"routes": [{
-						"routeSymId": "32_TPERBO_URBAN_0",
-						"routeId": "32_TPERBO_URBAN_0",
-						"label": "32",
-						"title": "Circolare esterna destra A"
-					},
-					{
-						"routeSymId": "32_TPERBO_URBAN_1",
-						"routeId": "32_TPERBO_URBAN_1",
-						"label": "32",
-						"title": "Circolare esterna destra R"
-					}],
-					"label": "32"
-				},
-				{
-					"routes": [{
-						"routeSymId": "33_TPERBO_URBAN_0",
-						"routeId": "33_TPERBO_URBAN_0",
-						"label": "33",
-						"title": "Circolare esterna sinistra A"
-					},
-					{
-						"routeSymId": "33_TPERBO_URBAN_1",
-						"routeId": "33_TPERBO_URBAN_1",
-						"label": "33",
-						"title": "Circolare esterna sinistra R"
-					}],
-					"label": "33"
-				},
-				{
-					"routes": [{
-						"routeSymId": "35_TPERBO_URBAN_0",
-						"routeId": "35_TPERBO_URBAN_0",
-						"label": "35",
-						"title": "Facolta di Ingegneria - Ospedale Maggiore - Stazione Centrale - Fiera - Facolta di Agraria"
-					},
-					{
-						"routeSymId": "35_TPERBO_URBAN_1",
-						"routeId": "35_TPERBO_URBAN_1",
-						"label": "35",
-						"title": "Facolta di Agraria - Fiera - Stazione Centrale - Ospedale Maggiore - Facolta di Ingegneria"
-					}],
-					"label": "35"
-				},
-				{
-					"routes": [{
-						"routeSymId": "36_TPERBO_URBAN_1",
-						"routeId": "36_TPERBO_URBAN_1",
-						"label": "36",
-						"title": "Centro Sportivo Barca - Stazione Centrale - Ospedale S. Orsola - Ospedale Bellaria"
-					},
-					{
-						"routeSymId": "36_TPERBO_URBAN_0",
-						"routeId": "36_TPERBO_URBAN_0",
-						"label": "36",
-						"title": "Ospedale Bellaria - Ospedale S. Orsola - Stazione Centrale - Centro Sportivo Barca"
-					}],
-					"label": "36"
-				},
-				{
-					"routes": [{
-						"routeSymId": "37_TPERBO_URBAN_0",
-						"routeId": "37_TPERBO_URBAN_0",
-						"label": "37",
-						"title": "Stazione Centrale - Via Bombicci"
-					},
-					{
-						"routeSymId": "37_TPERBO_URBAN_1",
-						"routeId": "37_TPERBO_URBAN_1",
-						"label": "37",
-						"title": "Via Bombicci - Stazione Centrale"
-					}],
-					"label": "37"
-				},
-				{
-					"routes": [{
-						"routeSymId": "38_TPERBO_URBAN_1",
-						"routeId": "38_TPERBO_URBAN_1",
-						"label": "38",
-						"title": "Circolare periferica destra A"
-					},
-					{
-						"routeSymId": "38_TPERBO_URBAN_0",
-						"routeId": "38_TPERBO_URBAN_0",
-						"label": "38",
-						"title": "Circolare periferica destra R"
-					}],
-					"label": "38"
-				},
-				{
-					"routes": [{
-						"routeSymId": "39_TPERBO_URBAN_1",
-						"routeId": "39_TPERBO_URBAN_1",
-						"label": "39",
-						"title": "Circolare periferica sinistra A"
-					},
-					{
-						"routeSymId": "39_TPERBO_URBAN_0",
-						"routeId": "39_TPERBO_URBAN_0",
-						"label": "39",
-						"title": "Circolare periferica sinistra R"
-					}],
-					"label": "39"
-				},
-				{
-					"routes": [{
-						"routeSymId": "41_TPERBO_URBAN_0",
-						"routeId": "41_TPERBO_URBAN_0",
-						"label": "41",
-						"title": "Navetta A: Parcheggio Tanari - Poliambulatorio Rizzoli"
-					},
-					{
-						"routeSymId": "41_TPERBO_URBAN_1",
-						"routeId": "41_TPERBO_URBAN_1",
-						"label": "41",
-						"title": "Poliambulatorio Rizzoli - Navetta A: Parcheggio Tanari"
-					}],
-					"label": "41"
-				},
-				{
-					"routes": [{
-						"routeSymId": "42_TPERBO_URBAN_1",
-						"routeId": "42_TPERBO_URBAN_1",
-						"label": "42",
-						"title": "Navetta T2: Circolare P.za Maggiore - Via dei Mille"
-					},
-					{
-						"routeSymId": "42_TPERBO_URBAN_0",
-						"routeId": "42_TPERBO_URBAN_0",
-						"label": "42",
-						"title": "Via dei Mille - Navetta T2: Circolare P.za Maggiore"
-					}],
-					"label": "42"
-				},
-				{
-					"routes": [{
-						"routeSymId": "43_TPERBO_URBAN_0",
-						"routeId": "43_TPERBO_URBAN_0",
-						"label": "43",
-						"title": "Navetta T1: Due Torri - Ospedale Malpighi"
-					},
-					{
-						"routeSymId": "43_TPERBO_URBAN_1",
-						"routeId": "43_TPERBO_URBAN_1",
-						"label": "43",
-						"title": "Ospedale Malpighi - Navetta T1: Due Torri"
-					}],
-					"label": "43"
-				},
-				{
-					"routes": [{
-						"routeSymId": "50_TPERBO_URBAN_1",
-						"routeId": "50_TPERBO_URBAN_1",
-						"label": "50",
-						"title": "Navetta C: Via Castiglione - Stazione Centrale"
-					},
-					{
-						"routeSymId": "50_TPERBO_URBAN_0",
-						"routeId": "50_TPERBO_URBAN_0",
-						"label": "50",
-						"title": "Stazione Centrale - Navetta C: Via Castiglione"
-					}],
-					"label": "50"
-				},
-				{
-					"routes": [{
-						"routeSymId": "51_TPERBO_URBAN_1",
-						"routeId": "51_TPERBO_URBAN_1",
-						"label": "51",
-						"title": "(P.za Cavour) - Largo Lercaro - Monte Donato"
-					},
-					{
-						"routeSymId": "51_TPERBO_URBAN_0",
-						"routeId": "51_TPERBO_URBAN_0",
-						"label": "51",
-						"title": "Monte Donato - Largo Lercaro - (P.za Cavour)"
-					}],
-					"label": "51"
-				},
-				{
-					"routes": [{
-						"routeSymId": "52_TPERBO_URBAN_1",
-						"routeId": "52_TPERBO_URBAN_1",
-						"label": "52",
-						"title": "P.za Cavour - Cippo di Sabbiuno"
-					},
-					{
-						"routeSymId": "52_TPERBO_URBAN_0",
-						"routeId": "52_TPERBO_URBAN_0",
-						"label": "52",
-						"title": "Cippo di Sabbiuno - P.za Cavour"
-					}],
-					"label": "52"
-				},
-				{
-					"routes": [{
-						"routeSymId": "54_TPERBO_URBAN_1",
-						"routeId": "54_TPERBO_URBAN_1",
-						"label": "54",
-						"title": "Aeroporto - Villaggio Speranza"
-					},
-					{
-						"routeSymId": "54_TPERBO_URBAN_0",
-						"routeId": "54_TPERBO_URBAN_0",
-						"label": "54",
-						"title": "Villaggio Speranza - Aeroporto"
-					}],
-					"label": "54"
-				},
-				{
-					"routes": [{
-						"routeSymId": "55_TPERBO_URBAN_0",
-						"routeId": "55_TPERBO_URBAN_0",
-						"label": "55",
-						"title": "Facolta di Agraria - San Rufillo"
-					},
-					{
-						"routeSymId": "55_TPERBO_URBAN_1",
-						"routeId": "55_TPERBO_URBAN_1",
-						"label": "55",
-						"title": "San Rufillo - Facolta di Agraria"
-					}],
-					"label": "55"
-				},
-				{
-					"routes": [{
-						"routeSymId": "56_TPERBO_URBAN_1",
-						"routeId": "56_TPERBO_URBAN_1",
-						"label": "56",
-						"title": "Z.I. rot. Negroni - Via Larga"
-					},
-					{
-						"routeSymId": "56_TPERBO_URBAN_0",
-						"routeId": "56_TPERBO_URBAN_0",
-						"label": "56",
-						"title": "Via Larga - Z.I. rot. Negroni"
-					}],
-					"label": "56"
-				},
-				{
-					"routes": [{
-						"routeSymId": "57_TPERBO_URBAN_1",
-						"routeId": "57_TPERBO_URBAN_1",
-						"label": "57",
-						"title": "Navetta D: Ravone - Stazione Centrale"
-					},
-					{
-						"routeSymId": "57_TPERBO_URBAN_0",
-						"routeId": "57_TPERBO_URBAN_0",
-						"label": "57",
-						"title": "Stazione Centrale - Navetta D: Ravone"
-					}],
-					"label": "57"
-				},
-				{
-					"routes": [{
-						"routeSymId": "58_TPERBO_URBAN_0",
-						"routeId": "58_TPERBO_URBAN_0",
-						"label": "58",
-						"title": "Villa Spada - Basilica di San Luca"
-					},
-					{
-						"routeSymId": "58_TPERBO_URBAN_1",
-						"routeId": "58_TPERBO_URBAN_1",
-						"label": "58",
-						"title": "Basilica di San Luca - Villa Spada"
-					}],
-					"label": "58"
-				},
-				{
-					"routes": [{
-						"routeSymId": "59_TPERBO_URBAN_1",
-						"routeId": "59_TPERBO_URBAN_1",
-						"label": "59",
-						"title": "P.za Cavour - Villa Guastavillani"
-					},
-					{
-						"routeSymId": "59_TPERBO_URBAN_0",
-						"routeId": "59_TPERBO_URBAN_0",
-						"label": "59",
-						"title": "Villa Guastavillani - P.za Cavour"
-					}],
-					"label": "59"
-				},
-				{
-					"routes": [{
-						"routeSymId": "60_TPERBO_URBAN_0",
-						"routeId": "60_TPERBO_URBAN_0",
-						"label": "60",
-						"title": "Ospedale S. Orsola - Centro Zanardi"
-					},
-					{
-						"routeSymId": "60_TPERBO_URBAN_1",
-						"routeId": "60_TPERBO_URBAN_1",
-						"label": "60",
-						"title": "Centro Zanardi - Ospedale S. Orsola"
-					}],
-					"label": "60"
-				},
-				{
-					"routes": [{
-						"routeSymId": "61_TPERBO_URBAN_1",
-						"routeId": "61_TPERBO_URBAN_1",
-						"label": "61",
-						"title": "Massarenti - Battindarno (Notturno)"
-					},
-					{
-						"routeSymId": "61_TPERBO_URBAN_0",
-						"routeId": "61_TPERBO_URBAN_0",
-						"label": "61",
-						"title": "Battindarno (Notturno) - Massarenti"
-					}],
-					"label": "61"
-				},
-				{
-					"routes": [{
-						"routeSymId": "62_TPERBO_URBAN_0",
-						"routeId": "62_TPERBO_URBAN_0",
-						"label": "62",
-						"title": "Corticella - Due Madonne (Notturno)"
-					},
-					{
-						"routeSymId": "62_TPERBO_URBAN_1",
-						"routeId": "62_TPERBO_URBAN_1",
-						"label": "62",
-						"title": "Due Madonne (Notturno) - Corticella"
-					}],
-					"label": "62"
-				},
-				{
-					"routes": [{
-						"routeSymId": "68_TPERBO_URBAN_0",
-						"routeId": "68_TPERBO_URBAN_0",
-						"label": "68",
-						"title": "Via dei Mille - Camping Citta di Bologna"
-					},
-					{
-						"routeSymId": "68_TPERBO_URBAN_1",
-						"routeId": "68_TPERBO_URBAN_1",
-						"label": "68",
-						"title": "Camping Citta di Bologna - Via dei Mille"
-					}],
-					"label": "68"
-				},
-				{
-					"routes": [{
-						"routeSymId": "79_TPERBO_URBAN_0",
-						"routeId": "79_TPERBO_URBAN_0",
-						"label": "79",
-						"title": "Barca - Z.I. Casalecchio di Reno"
-					},
-					{
-						"routeSymId": "79_TPERBO_URBAN_1",
-						"routeId": "79_TPERBO_URBAN_1",
-						"label": "79",
-						"title": "Z.I. Casalecchio di Reno - Barca"
-					}],
-					"label": "79"
-				},
-				{
-					"routes": [{
-						"routeSymId": "80_TPERBO_URBAN_1",
-						"routeId": "80_TPERBO_URBAN_1",
-						"label": "80",
-						"title": "Borgo Panigale - Z.I. Zola Predosa"
-					},
-					{
-						"routeSymId": "80_TPERBO_URBAN_0",
-						"routeId": "80_TPERBO_URBAN_0",
-						"label": "80",
-						"title": "Z.I. Zola Predosa - Borgo Panigale"
-					}],
-					"label": "80"
-				},
-				{
-					"routes": [{
-						"routeSymId": "85_TPERBO_URBAN_1",
-						"routeId": "85_TPERBO_URBAN_1",
-						"label": "85",
-						"title": "Casalecchio di Reno A.U.S.L. - Casalecchio di Reno Palasport"
-					},
-					{
-						"routeSymId": "85_TPERBO_URBAN_0",
-						"routeId": "85_TPERBO_URBAN_0",
-						"label": "85",
-						"title": "Casalecchio di Reno Palasport - Casalecchio di Reno A.U.S.L."
-					}],
-					"label": "85"
-				},
-				{
-					"routes": [{
-						"routeSymId": "86_TPERBO_URBAN_0",
-						"routeId": "86_TPERBO_URBAN_0",
-						"label": "86",
-						"title": "Pza Roosevelt, Marconi - Casalecchio di Reno"
-					},
-					{
-						"routeSymId": "86_TPERBO_URBAN_1",
-						"routeId": "86_TPERBO_URBAN_1",
-						"label": "86",
-						"title": "Casalecchio di Reno - Pza Roosevelt, Marconi"
-					}],
-					"label": "86"
-				}]
-			}]
-		},
-		"extra_urbano": {
-			"view": "grid",
-			"label": "menu_real_time_bus_extraurban",
-			"hasMap": true,
-			"markerIcon": "ic_extraurbanBus",
-			"icon": "ic_extraurban-bus",
-			"transportType": "BUS",
-			"elements": [{
-				"agencyId": "TPERBO_URBAN",
-				"hasMap": true,
-				"groups": [{
-					"routes": [{
-						"routeSymId": "101_TPERBO_EXTRA_0",
-						"routeId": "101_TPERBO_EXTRA_0",
-						"label": "101",
-						"title": "Bologna - Castel San Pietro Terme - Imola"
-					},
-					{
-						"routeSymId": "101_TPERBO_EXTRA_1",
-						"routeId": "101_TPERBO_EXTRA_1",
-						"label": "101",
-						"title": "Imola - Castel San Pietro Terme - Bologna"
-					}],
-					"label": "101"
-				},
-				{
-					"routes": [{
-						"routeSymId": "103_TPERBO_EXTRA_1",
-						"routeId": "103_TPERBO_EXTRA_1",
-						"label": "103",
-						"title": "Piancaldoli - Castel San Pietro Terme"
-					},
-					{
-						"routeSymId": "103_TPERBO_EXTRA_0",
-						"routeId": "103_TPERBO_EXTRA_0",
-						"label": "103",
-						"title": "Castel San Pietro Terme - Piancaldoli"
-					}],
-					"label": "103"
-				},
-				{
-					"routes": [{
-						"routeSymId": "106_TPERBO_EXTRA_0",
-						"routeId": "106_TPERBO_EXTRA_0",
-						"label": "106",
-						"title": "Bologna - Z.I. Ponte Rizzoli"
-					},
-					{
-						"routeSymId": "106_TPERBO_EXTRA_1",
-						"routeId": "106_TPERBO_EXTRA_1",
-						"label": "106",
-						"title": "Z.I. Ponte Rizzoli - Bologna"
-					}],
-					"label": "106"
-				},
-				{
-					"routes": [{
-						"routeSymId": "111_TPERBO_EXTRA_0",
-						"routeId": "111_TPERBO_EXTRA_0",
-						"label": "111",
-						"title": "Varignana - Osteria Grande"
-					},
-					{
-						"routeSymId": "111_TPERBO_EXTRA_1",
-						"routeId": "111_TPERBO_EXTRA_1",
-						"label": "111",
-						"title": "Osteria Grande - Varignana"
-					}],
-					"label": "111"
-				},
-				{
-					"routes": [{
-						"routeSymId": "119_TPERBO_EXTRA_1",
-						"routeId": "119_TPERBO_EXTRA_1",
-						"label": "119",
-						"title": "Bologna - Mirabilandia"
-					},
-					{
-						"routeSymId": "119_TPERBO_EXTRA_0",
-						"routeId": "119_TPERBO_EXTRA_0",
-						"label": "119",
-						"title": "Mirabilandia - Bologna"
-					}],
-					"label": "119"
-				},
-				{
-					"routes": [{
-						"routeSymId": "121_TPERBO_EXTRA_0",
-						"routeId": "121_TPERBO_EXTRA_0",
-						"label": "121",
-						"title": "San Lazzaro di Savena - Mirandola"
-					},
-					{
-						"routeSymId": "121_TPERBO_EXTRA_1",
-						"routeId": "121_TPERBO_EXTRA_1",
-						"label": "121",
-						"title": "Mirandola - San Lazzaro di Savena"
-					}],
-					"label": "121"
-				},
-				{
-					"routes": [{
-						"routeSymId": "122_TPERBO_EXTRA_0",
-						"routeId": "122_TPERBO_EXTRA_0",
-						"label": "122",
-						"title": "San Lazzaro di Savena - Villanova - Castenaso"
-					},
-					{
-						"routeSymId": "122_TPERBO_EXTRA_1",
-						"routeId": "122_TPERBO_EXTRA_1",
-						"label": "122",
-						"title": "Castenaso - Villanova - San Lazzaro di Savena"
-					}],
-					"label": "122"
-				},
-				{
-					"routes": [{
-						"routeSymId": "126_TPERBO_EXTRA_0",
-						"routeId": "126_TPERBO_EXTRA_0",
-						"label": "126",
-						"title": "San Lazzaro di Savena - Lago dei Castori - Pianoro"
-					},
-					{
-						"routeSymId": "126_TPERBO_EXTRA_1",
-						"routeId": "126_TPERBO_EXTRA_1",
-						"label": "126",
-						"title": "Pianoro - Lago dei Castori - San Lazzaro di Savena"
-					}],
-					"label": "126"
-				},
-				{
-					"routes": [{
-						"routeSymId": "132_TPERBO_EXTRA_0",
-						"routeId": "132_TPERBO_EXTRA_0",
-						"label": "132",
-						"title": "Ponte Rizzoli - Ozzano Galvani"
-					},
-					{
-						"routeSymId": "132_TPERBO_EXTRA_1",
-						"routeId": "132_TPERBO_EXTRA_1",
-						"label": "132",
-						"title": "Ozzano Galvani - Ponte Rizzoli"
-					}],
-					"label": "132"
-				},
-				{
-					"routes": [{
-						"routeSymId": "136_TPERBO_EXTRA_0",
-						"routeId": "136_TPERBO_EXTRA_0",
-						"label": "136",
-						"title": "Imola - Z.I. Quaderna"
-					},
-					{
-						"routeSymId": "136_TPERBO_EXTRA_1",
-						"routeId": "136_TPERBO_EXTRA_1",
-						"label": "136",
-						"title": "Z.I. Quaderna - Imola"
-					}],
-					"label": "136"
-				},
-				{
-					"routes": [{
-						"routeSymId": "145_TPERBO_EXTRA_0",
-						"routeId": "145_TPERBO_EXTRA_0",
-						"label": "145",
-						"title": "Castel del Rio - Firenzuola"
-					},
-					{
-						"routeSymId": "145_TPERBO_EXTRA_1",
-						"routeId": "145_TPERBO_EXTRA_1",
-						"label": "145",
-						"title": "Firenzuola - Castel del Rio"
-					}],
-					"label": "145"
-				},
-				{
-					"routes": [{
-						"routeSymId": "147_TPERBO_EXTRA_0",
-						"routeId": "147_TPERBO_EXTRA_0",
-						"label": "147",
-						"title": "Dozza Imolese - Toscanella di Dozza Imolese"
-					},
-					{
-						"routeSymId": "147_TPERBO_EXTRA_1",
-						"routeId": "147_TPERBO_EXTRA_1",
-						"label": "147",
-						"title": "Toscanella di Dozza Imolese - Dozza Imolese"
-					}],
-					"label": "147"
-				},
-				{
-					"routes": [{
-						"routeSymId": "151_TPERBO_EXTRA_1",
-						"routeId": "151_TPERBO_EXTRA_1",
-						"label": "151",
-						"title": "Imola - Mordano - Bagnara - Massalombarda - Lugo"
-					},
-					{
-						"routeSymId": "151_TPERBO_EXTRA_0",
-						"routeId": "151_TPERBO_EXTRA_0",
-						"label": "151",
-						"title": "Lugo - Massalombarda - Bagnara - Mordano - Imola"
-					}],
-					"label": "151"
-				},
-				{
-					"routes": [{
-						"routeSymId": "153_TPERBO_EXTRA_0",
-						"routeId": "153_TPERBO_EXTRA_0",
-						"label": "153",
-						"title": "Imola - Sesto Imolese - Conselice"
-					},
-					{
-						"routeSymId": "153_TPERBO_EXTRA_1",
-						"routeId": "153_TPERBO_EXTRA_1",
-						"label": "153",
-						"title": "Conselice - Sesto Imolese - Imola"
-					}],
-					"label": "153"
-				},
-				{
-					"routes": [{
-						"routeSymId": "157_TPERBO_EXTRA_0",
-						"routeId": "157_TPERBO_EXTRA_0",
-						"label": "157",
-						"title": "Linea AGI: Imola - Castel Guelfo - Medicina"
-					},
-					{
-						"routeSymId": "157_TPERBO_EXTRA_1",
-						"routeId": "157_TPERBO_EXTRA_1",
-						"label": "157",
-						"title": "Medicina - Castel Guelfo - Linea AGI: Imola"
-					}],
-					"label": "157"
-				},
-				{
-					"routes": [{
-						"routeSymId": "200_TPERBO_EXTRA_1",
-						"routeId": "200_TPERBO_EXTRA_1",
-						"label": "200",
-						"title": "Linea AGI: Medicina - Bologna"
-					},
-					{
-						"routeSymId": "200_TPERBO_EXTRA_0",
-						"routeId": "200_TPERBO_EXTRA_0",
-						"label": "200",
-						"title": "Linea AGI: Bologna - Medicina"
-					}],
-					"label": "200"
-				},
-				{
-					"routes": [{
-						"routeSymId": "205_TPERBO_EXTRA_0",
-						"routeId": "205_TPERBO_EXTRA_0",
-						"label": "205",
-						"title": "Linea AGI: Bologna - Castel Guelfo"
-					},
-					{
-						"routeSymId": "205_TPERBO_EXTRA_1",
-						"routeId": "205_TPERBO_EXTRA_1",
-						"label": "205",
-						"title": "Linea AGI: Castel Guelfo - Bologna"
-					}],
-					"label": "205"
-				},
-				{
-					"routes": [{
-						"routeSymId": "206_TPERBO_EXTRA_1",
-						"routeId": "206_TPERBO_EXTRA_1",
-						"label": "206",
-						"title": "Bologna - Sesto Imolese - Massa Lombarda - Lugo"
-					},
-					{
-						"routeSymId": "206_TPERBO_EXTRA_0",
-						"routeId": "206_TPERBO_EXTRA_0",
-						"label": "206",
-						"title": "Lugo - Massa Lombarda - Sesto Imolese - Bologna"
-					}],
-					"label": "206"
-				},
-				{
-					"routes": [{
-						"routeSymId": "211_TPERBO_EXTRA_0",
-						"routeId": "211_TPERBO_EXTRA_0",
-						"label": "211",
-						"title": "Linea AGI: Bologna - Budrio - Medicina"
-					},
-					{
-						"routeSymId": "211_TPERBO_EXTRA_1",
-						"routeId": "211_TPERBO_EXTRA_1",
-						"label": "211",
-						"title": "Linea AGI: Medicina - Budrio - Bologna"
-					}],
-					"label": "211"
-				},
-				{
-					"routes": [{
-						"routeSymId": "212_TPERBO_EXTRA_0",
-						"routeId": "212_TPERBO_EXTRA_0",
-						"label": "212",
-						"title": "Linea AGI: Bologna - Fiesso - Budrio - Medicina"
-					},
-					{
-						"routeSymId": "212_TPERBO_EXTRA_1",
-						"routeId": "212_TPERBO_EXTRA_1",
-						"label": "212",
-						"title": "Linea AGI: Medicina - Budrio - Fiesso - Bologna"
-					}],
-					"label": "212"
-				},
-				{
-					"routes": [{
-						"routeSymId": "213_TPERBO_EXTRA_0",
-						"routeId": "213_TPERBO_EXTRA_0",
-						"label": "213",
-						"title": "Linea AGI: Bologna - Fiesso - Budrio - Vigorso - Medicina"
-					},
-					{
-						"routeSymId": "213_TPERBO_EXTRA_1",
-						"routeId": "213_TPERBO_EXTRA_1",
-						"label": "213",
-						"title": "Linea AGI: Medicina - Vigorso - Budrio - Fiesso - Bologna"
-					}],
-					"label": "213"
-				},
-				{
-					"routes": [{
-						"routeSymId": "214_TPERBO_EXTRA_0",
-						"routeId": "214_TPERBO_EXTRA_0",
-						"label": "214",
-						"title": "Linea AGI: Bologna - Budrio - Vigorso - Medicina"
-					},
-					{
-						"routeSymId": "214_TPERBO_EXTRA_1",
-						"routeId": "214_TPERBO_EXTRA_1",
-						"label": "214",
-						"title": "Linea AGI: Medicina - Vigorso - Budrio - Bologna"
-					}],
-					"label": "214"
-				},
-				{
-					"routes": [{
-						"routeSymId": "237_TPERBO_EXTRA_1",
-						"routeId": "237_TPERBO_EXTRA_1",
-						"label": "237",
-						"title": "Bologna - Alberino"
-					},
-					{
-						"routeSymId": "237_TPERBO_EXTRA_0",
-						"routeId": "237_TPERBO_EXTRA_0",
-						"label": "237",
-						"title": "Alberino - Bologna"
-					}],
-					"label": "237"
-				},
-				{
-					"routes": [{
-						"routeSymId": "242_TPERBO_EXTRA_1",
-						"routeId": "242_TPERBO_EXTRA_1",
-						"label": "242",
-						"title": "Linea AGI: Notturno Sabato  Bologna - Budrio - Molinella"
-					},
-					{
-						"routeSymId": "242_TPERBO_EXTRA_0",
-						"routeId": "242_TPERBO_EXTRA_0",
-						"label": "242",
-						"title": "Linea AGI: Notturno Sabato  Molinella - Budrio - Bologna"
-					}],
-					"label": "242"
-				},
-				{
-					"routes": [{
-						"routeSymId": "243_TPERBO_EXTRA_1",
-						"routeId": "243_TPERBO_EXTRA_1",
-						"label": "243",
-						"title": "Linea AGI: Bologna - Budrio - Molinella - Marmorta"
-					},
-					{
-						"routeSymId": "243_TPERBO_EXTRA_0",
-						"routeId": "243_TPERBO_EXTRA_0",
-						"label": "243",
-						"title": "Linea AGI: Marmorta - Molinella - Budrio - Bologna"
-					}],
-					"label": "243"
-				},
-				{
-					"routes": [{
-						"routeSymId": "247_TPERBO_EXTRA_1",
-						"routeId": "247_TPERBO_EXTRA_1",
-						"label": "247",
-						"title": "Imola - Alberino"
-					},
-					{
-						"routeSymId": "247_TPERBO_EXTRA_0",
-						"routeId": "247_TPERBO_EXTRA_0",
-						"label": "247",
-						"title": "Alberino - Imola"
-					}],
-					"label": "247"
-				},
-				{
-					"routes": [{
-						"routeSymId": "248_TPERBO_EXTRA_0",
-						"routeId": "248_TPERBO_EXTRA_0",
-						"label": "248",
-						"title": "Linea AGI: Medicina - Castel San Pietro Terme"
-					},
-					{
-						"routeSymId": "248_TPERBO_EXTRA_1",
-						"routeId": "248_TPERBO_EXTRA_1",
-						"label": "248",
-						"title": "Linea AGI: Castel San Pietro Terme - Medicina"
-					}],
-					"label": "248"
-				},
-				{
-					"routes": [{
-						"routeSymId": "256_TPERBO_EXTRA_0",
-						"routeId": "256_TPERBO_EXTRA_0",
-						"label": "256",
-						"title": "Medicina - Conselice - Longastrino"
-					},
-					{
-						"routeSymId": "256_TPERBO_EXTRA_1",
-						"routeId": "256_TPERBO_EXTRA_1",
-						"label": "256",
-						"title": "Longastrino - Conselice - Medicina"
-					}],
-					"label": "256"
-				},
-				{
-					"routes": [{
-						"routeSymId": "257_TPERBO_EXTRA_0",
-						"routeId": "257_TPERBO_EXTRA_0",
-						"label": "257",
-						"title": "Bologna - Argenta"
-					},
-					{
-						"routeSymId": "257_TPERBO_EXTRA_1",
-						"routeId": "257_TPERBO_EXTRA_1",
-						"label": "257",
-						"title": "Argenta - Bologna"
-					}],
-					"label": "257"
-				},
-				{
-					"routes": [{
-						"routeSymId": "273_TPERBO_EXTRA_0",
-						"routeId": "273_TPERBO_EXTRA_0",
-						"label": "273",
-						"title": "Linea AGI: Bologna - Budrio - Ospitale Monacale"
-					},
-					{
-						"routeSymId": "273_TPERBO_EXTRA_1",
-						"routeId": "273_TPERBO_EXTRA_1",
-						"label": "273",
-						"title": "Linea AGI: Ospitale Monacale - Budrio - Bologna"
-					}],
-					"label": "273"
-				},
-				{
-					"routes": [{
-						"routeSymId": "296_TPERBO_EXTRA_1",
-						"routeId": "296_TPERBO_EXTRA_1",
-						"label": "296",
-						"title": "Conselice - Lugo - Bagnacavallo - Ravenna"
-					},
-					{
-						"routeSymId": "296_TPERBO_EXTRA_0",
-						"routeId": "296_TPERBO_EXTRA_0",
-						"label": "296",
-						"title": "Ravenna - Bagnacavallo - Lugo - Conselice"
-					}],
-					"label": "296"
-				},
-				{
-					"routes": [{
-						"routeSymId": "301_TPERBO_EXTRA_1",
-						"routeId": "301_TPERBO_EXTRA_1",
-						"label": "301",
-						"title": "Bologna - Z.I.Quarto inferiore"
-					},
-					{
-						"routeSymId": "301_TPERBO_EXTRA_0",
-						"routeId": "301_TPERBO_EXTRA_0",
-						"label": "301",
-						"title": "Z.I.Quarto inferiore - Bologna"
-					}],
-					"label": "301"
-				},
-				{
-					"routes": [{
-						"routeSymId": "353_TPERBO_EXTRA_1",
-						"routeId": "353_TPERBO_EXTRA_1",
-						"label": "353",
-						"title": "Menarini - Ferrara Corso Isonzo"
-					},
-					{
-						"routeSymId": "353_TPERBO_EXTRA_0",
-						"routeId": "353_TPERBO_EXTRA_0",
-						"label": "353",
-						"title": "Ferrara Corso Isonzo - Menarini"
-					}],
-					"label": "353"
-				},
-				{
-					"routes": [{
-						"routeSymId": "355_TPERBO_EXTRA_0",
-						"routeId": "355_TPERBO_EXTRA_0",
-						"label": "355",
-						"title": "Altedo - Boschi"
-					},
-					{
-						"routeSymId": "355_TPERBO_EXTRA_1",
-						"routeId": "355_TPERBO_EXTRA_1",
-						"label": "355",
-						"title": "Boschi - Altedo"
-					}],
-					"label": "355"
-				},
-				{
-					"routes": [{
-						"routeSymId": "356_TPERBO_EXTRA_1",
-						"routeId": "356_TPERBO_EXTRA_1",
-						"label": "356",
-						"title": "Bologna - Altedo - Malalbergo - Ferrara"
-					},
-					{
-						"routeSymId": "356_TPERBO_EXTRA_0",
-						"routeId": "356_TPERBO_EXTRA_0",
-						"label": "356",
-						"title": "Ferrara - Malalbergo - Altedo - Bologna"
-					}],
-					"label": "356"
-				},
-				{
-					"routes": [{
-						"routeSymId": "357_TPERBO_EXTRA_1",
-						"routeId": "357_TPERBO_EXTRA_1",
-						"label": "357",
-						"title": "Bologna - Altedo - Passosegni"
-					},
-					{
-						"routeSymId": "357_TPERBO_EXTRA_0",
-						"routeId": "357_TPERBO_EXTRA_0",
-						"label": "357",
-						"title": "Passosegni - Altedo - Bologna"
-					}],
-					"label": "357"
-				},
-				{
-					"routes": [{
-						"routeSymId": "411_TPERBO_EXTRA_1",
-						"routeId": "411_TPERBO_EXTRA_1",
-						"label": "411",
-						"title": "Agelato - Trebbo di Reno"
-					},
-					{
-						"routeSymId": "411_TPERBO_EXTRA_0",
-						"routeId": "411_TPERBO_EXTRA_0",
-						"label": "411",
-						"title": "Trebbo di Reno - Agelato"
-					}],
-					"label": "411"
-				},
-				{
-					"routes": [{
-						"routeSymId": "413_TPERBO_EXTRA_1",
-						"routeId": "413_TPERBO_EXTRA_1",
-						"label": "413",
-						"title": "Castel Maggiore - Z.I. Saliceto"
-					},
-					{
-						"routeSymId": "413_TPERBO_EXTRA_0",
-						"routeId": "413_TPERBO_EXTRA_0",
-						"label": "413",
-						"title": "Z.I. Saliceto - Castel Maggiore"
-					}],
-					"label": "413"
-				},
-				{
-					"routes": [{
-						"routeSymId": "431_TPERBO_EXTRA_1",
-						"routeId": "431_TPERBO_EXTRA_1",
-						"label": "431",
-						"title": "Ospedale Bentivoglio - Minerbio - Baricella - Boschi"
-					},
-					{
-						"routeSymId": "431_TPERBO_EXTRA_0",
-						"routeId": "431_TPERBO_EXTRA_0",
-						"label": "431",
-						"title": "Boschi - Baricella - Minerbio - Ospedale Bentivoglio"
-					}],
-					"label": "431"
-				},
-				{
-					"routes": [{
-						"routeSymId": "432_TPERBO_EXTRA_1",
-						"routeId": "432_TPERBO_EXTRA_1",
-						"label": "432",
-						"title": "Malalbergo - Altedo - Ospedale Bentivoglio"
-					},
-					{
-						"routeSymId": "432_TPERBO_EXTRA_0",
-						"routeId": "432_TPERBO_EXTRA_0",
-						"label": "432",
-						"title": "Ospedale Bentivoglio - Altedo - Malalbergo"
-					}],
-					"label": "432"
-				},
-				{
-					"routes": [{
-						"routeSymId": "433_TPERBO_EXTRA_0",
-						"routeId": "433_TPERBO_EXTRA_0",
-						"label": "433",
-						"title": "Ospedale Bentivoglio - San Pietro in Casale - Galliera"
-					},
-					{
-						"routeSymId": "433_TPERBO_EXTRA_1",
-						"routeId": "433_TPERBO_EXTRA_1",
-						"label": "433",
-						"title": "Galliera - San Pietro in Casale - Ospedale Bentivoglio"
-					}],
-					"label": "433"
-				},
-				{
-					"routes": [{
-						"routeSymId": "435_TPERBO_EXTRA_0",
-						"routeId": "435_TPERBO_EXTRA_0",
-						"label": "435",
-						"title": "Ospedale Bentivoglio - San Giorgio di Piano - Castello d'Argile - Pieve di Cento"
-					},
-					{
-						"routeSymId": "435_TPERBO_EXTRA_1",
-						"routeId": "435_TPERBO_EXTRA_1",
-						"label": "435",
-						"title": "Pieve di Cento - Castello d'Argile - San Giorgio di Piano - Ospedale Bentivoglio"
-					}],
-					"label": "435"
-				},
-				{
-					"routes": [{
-						"routeSymId": "436_TPERBO_EXTRA_1",
-						"routeId": "436_TPERBO_EXTRA_1",
-						"label": "436",
-						"title": "Ospedale Bentivoglio - Funo - Castel Maggiore"
-					},
-					{
-						"routeSymId": "436_TPERBO_EXTRA_0",
-						"routeId": "436_TPERBO_EXTRA_0",
-						"label": "436",
-						"title": "Castel Maggiore - Funo - Ospedale Bentivoglio"
-					}],
-					"label": "436"
-				},
-				{
-					"routes": [{
-						"routeSymId": "437_TPERBO_EXTRA_0",
-						"routeId": "437_TPERBO_EXTRA_0",
-						"label": "437",
-						"title": "Granarolo dell'Emilia - Ospedale di Bentivoglio"
-					},
-					{
-						"routeSymId": "437_TPERBO_EXTRA_1",
-						"routeId": "437_TPERBO_EXTRA_1",
-						"label": "437",
-						"title": "Ospedale di Bentivoglio - Granarolo dell'Emilia"
-					}],
-					"label": "437"
-				},
-				{
-					"routes": [{
-						"routeSymId": "44_TPERBO_EXTRA_1",
-						"routeId": "44_TPERBO_EXTRA_1",
-						"label": "44",
-						"title": "Castel del Rio - Pedagna - Ospedale Nuovo - Stazione - Via Grieco (Poste)"
-					},
-					{
-						"routeSymId": "44_TPERBO_EXTRA_0",
-						"routeId": "44_TPERBO_EXTRA_0",
-						"label": "44",
-						"title": "Via Grieco (Poste) - Stazione - Ospedale Nuovo - Pedagna - Castel del Rio"
-					}],
-					"label": "44"
-				},
-				{
-					"routes": [{
-						"routeSymId": "443_TPERBO_EXTRA_0",
-						"routeId": "443_TPERBO_EXTRA_0",
-						"label": "443",
-						"title": "Funo - Z.I. Ca de Fabbri"
-					},
-					{
-						"routeSymId": "443_TPERBO_EXTRA_1",
-						"routeId": "443_TPERBO_EXTRA_1",
-						"label": "443",
-						"title": "Z.I. Ca de Fabbri - Funo"
-					}],
-					"label": "443"
-				},
-				{
-					"routes": [{
-						"routeSymId": "446_TPERBO_EXTRA_1",
-						"routeId": "446_TPERBO_EXTRA_1",
-						"label": "446",
-						"title": "Bologna - Bentivoglio - Saletto"
-					},
-					{
-						"routeSymId": "446_TPERBO_EXTRA_0",
-						"routeId": "446_TPERBO_EXTRA_0",
-						"label": "446",
-						"title": "Saletto - Bentivoglio - Bologna"
-					}],
-					"label": "446"
-				},
-				{
-					"routes": [{
-						"routeSymId": "447_TPERBO_EXTRA_1",
-						"routeId": "447_TPERBO_EXTRA_1",
-						"label": "447",
-						"title": "Bologna - Z.I. Saliceto - Bentivoglio - Saletto"
-					},
-					{
-						"routeSymId": "447_TPERBO_EXTRA_0",
-						"routeId": "447_TPERBO_EXTRA_0",
-						"label": "447",
-						"title": "Saletto - Bentivoglio - Z.I. Saliceto - Bologna"
-					}],
-					"label": "447"
-				},
-				{
-					"routes": [{
-						"routeSymId": "448_TPERBO_EXTRA_1",
-						"routeId": "448_TPERBO_EXTRA_1",
-						"label": "448",
-						"title": "Bologna - Centergross - Interporto"
-					},
-					{
-						"routeSymId": "448_TPERBO_EXTRA_0",
-						"routeId": "448_TPERBO_EXTRA_0",
-						"label": "448",
-						"title": "Interporto - Centergross - Bologna"
-					}],
-					"label": "448"
-				},
-				{
-					"routes": [{
-						"routeSymId": "450_TPERBO_EXTRA_0",
-						"routeId": "450_TPERBO_EXTRA_0",
-						"label": "450",
-						"title": "DIRETTA Cento - Bologna"
-					},
-					{
-						"routeSymId": "450_TPERBO_EXTRA_1",
-						"routeId": "450_TPERBO_EXTRA_1",
-						"label": "450",
-						"title": "DIRETTA Bologna - Cento"
-					}],
-					"label": "450"
-				},
-				{
-					"routes": [{
-						"routeSymId": "453_TPERBO_EXTRA_1",
-						"routeId": "453_TPERBO_EXTRA_1",
-						"label": "453",
-						"title": "San Giorgio di Piano - Venezzano - Cento"
-					},
-					{
-						"routeSymId": "453_TPERBO_EXTRA_0",
-						"routeId": "453_TPERBO_EXTRA_0",
-						"label": "453",
-						"title": "Cento - Venezzano - San Giorgio di Piano"
-					}],
-					"label": "453"
-				},
-				{
-					"routes": [{
-						"routeSymId": "455_TPERBO_EXTRA_1",
-						"routeId": "455_TPERBO_EXTRA_1",
-						"label": "455",
-						"title": "Cento - San Pietro in Casale"
-					},
-					{
-						"routeSymId": "455_TPERBO_EXTRA_0",
-						"routeId": "455_TPERBO_EXTRA_0",
-						"label": "455",
-						"title": "San Pietro in Casale - Cento"
-					}],
-					"label": "455"
-				},
-				{
-					"routes": [{
-						"routeSymId": "456_TPERBO_EXTRA_1",
-						"routeId": "456_TPERBO_EXTRA_1",
-						"label": "456",
-						"title": "Cento - Poggetto - San Pietro in Casale"
-					},
-					{
-						"routeSymId": "456_TPERBO_EXTRA_0",
-						"routeId": "456_TPERBO_EXTRA_0",
-						"label": "456",
-						"title": "San Pietro in Casale - Poggetto - Cento"
-					}],
-					"label": "456"
-				},
-				{
-					"routes": [{
-						"routeSymId": "533_TPERBO_EXTRA_0",
-						"routeId": "533_TPERBO_EXTRA_0",
-						"label": "533",
-						"title": "Anzola dell'Emilia - Le Budrie - San Giovanni in Persiceto"
-					},
-					{
-						"routeSymId": "533_TPERBO_EXTRA_1",
-						"routeId": "533_TPERBO_EXTRA_1",
-						"label": "533",
-						"title": "San Giovanni in Persiceto - Le Budrie - Anzola dell'Emilia"
-					}],
-					"label": "533"
-				},
-				{
-					"routes": [{
-						"routeSymId": "536_TPERBO_EXTRA_0",
-						"routeId": "536_TPERBO_EXTRA_0",
-						"label": "536",
-						"title": "Caselle - Palata - Decima - Ospedale San Giovanni in Persiceto"
-					},
-					{
-						"routeSymId": "536_TPERBO_EXTRA_1",
-						"routeId": "536_TPERBO_EXTRA_1",
-						"label": "536",
-						"title": "Ospedale San Giovanni in Persiceto - Decima - Palata - Caselle"
-					}],
-					"label": "536"
-				},
-				{
-					"routes": [{
-						"routeSymId": "537_TPERBO_EXTRA_1",
-						"routeId": "537_TPERBO_EXTRA_1",
-						"label": "537",
-						"title": "Bevilacqua - Palata - Crevalcore - Ospedale San Giovanni in Persiceto"
-					},
-					{
-						"routeSymId": "537_TPERBO_EXTRA_0",
-						"routeId": "537_TPERBO_EXTRA_0",
-						"label": "537",
-						"title": "Ospedale San Giovanni in Persiceto - Crevalcore - Palata - Bevilacqua"
-					}],
-					"label": "537"
-				},
-				{
-					"routes": [{
-						"routeSymId": "556_TPERBO_EXTRA_1",
-						"routeId": "556_TPERBO_EXTRA_1",
-						"label": "556",
-						"title": "Cento - San Giovanni in Persiceto - Bologna"
-					},
-					{
-						"routeSymId": "556_TPERBO_EXTRA_0",
-						"routeId": "556_TPERBO_EXTRA_0",
-						"label": "556",
-						"title": "Bologna - San Giovanni in Persiceto - Cento"
-					}],
-					"label": "556"
-				},
-				{
-					"routes": [{
-						"routeSymId": "576_TPERBO_EXTRA_1",
-						"routeId": "576_TPERBO_EXTRA_1",
-						"label": "576",
-						"title": "Bologna - San Giovanni in Persiceto - Crevalcore"
-					},
-					{
-						"routeSymId": "576_TPERBO_EXTRA_0",
-						"routeId": "576_TPERBO_EXTRA_0",
-						"label": "576",
-						"title": "Crevalcore - San Giovanni in Persiceto - Bologna"
-					}],
-					"label": "576"
-				},
-				{
-					"routes": [{
-						"routeSymId": "646_TPERBO_EXTRA_0",
-						"routeId": "646_TPERBO_EXTRA_0",
-						"label": "646",
-						"title": "Bologna - Anzola dell'Emilia - Spilamberto - Bazzano Stazione F.B.V."
-					},
-					{
-						"routeSymId": "646_TPERBO_EXTRA_1",
-						"routeId": "646_TPERBO_EXTRA_1",
-						"label": "646",
-						"title": "Bazzano Stazione F.B.V. - Spilamberto - Anzola dell'Emilia - Bologna"
-					}],
-					"label": "646"
-				},
-				{
-					"routes": [{
-						"routeSymId": "651_TPERBO_EXTRA_1",
-						"routeId": "651_TPERBO_EXTRA_1",
-						"label": "651",
-						"title": "Bologna autostazione - Bazzano stazione"
-					},
-					{
-						"routeSymId": "651_TPERBO_EXTRA_0",
-						"routeId": "651_TPERBO_EXTRA_0",
-						"label": "651",
-						"title": "Bazzano stazione - Bologna autostazione"
-					}],
-					"label": "651"
-				},
-				{
-					"routes": [{
-						"routeSymId": "656_TPERBO_EXTRA_1",
-						"routeId": "656_TPERBO_EXTRA_1",
-						"label": "656",
-						"title": "Bazzano Stazione F.B.V. - Zocca"
-					},
-					{
-						"routeSymId": "656_TPERBO_EXTRA_0",
-						"routeId": "656_TPERBO_EXTRA_0",
-						"label": "656",
-						"title": "Zocca - Bazzano Stazione F.B.V."
-					}],
-					"label": "656"
-				},
-				{
-					"routes": [{
-						"routeSymId": "657_TPERBO_EXTRA_0",
-						"routeId": "657_TPERBO_EXTRA_0",
-						"label": "657",
-						"title": "Bazzano Stazione F.B.V. - Savigno"
-					},
-					{
-						"routeSymId": "657_TPERBO_EXTRA_1",
-						"routeId": "657_TPERBO_EXTRA_1",
-						"label": "657",
-						"title": "Savigno - Bazzano Stazione F.B.V."
-					}],
-					"label": "657"
-				},
-				{
-					"routes": [{
-						"routeSymId": "658_TPERBO_EXTRA_1",
-						"routeId": "658_TPERBO_EXTRA_1",
-						"label": "658",
-						"title": "Bazzano Stazione F.B.V. - Tole"
-					},
-					{
-						"routeSymId": "658_TPERBO_EXTRA_0",
-						"routeId": "658_TPERBO_EXTRA_0",
-						"label": "658",
-						"title": "Tole - Bazzano Stazione F.B.V."
-					}],
-					"label": "658"
-				},
-				{
-					"routes": [{
-						"routeSymId": "671_TPERBO_EXTRA_1",
-						"routeId": "671_TPERBO_EXTRA_1",
-						"label": "671",
-						"title": "Bologna - Bazzano Stazione F.B.V. - Vignola"
-					},
-					{
-						"routeSymId": "671_TPERBO_EXTRA_0",
-						"routeId": "671_TPERBO_EXTRA_0",
-						"label": "671",
-						"title": "Vignola - Bazzano Stazione F.B.V. - Bologna"
-					}],
-					"label": "671"
-				},
-				{
-					"routes": [{
-						"routeSymId": "672_TPERBO_EXTRA_1",
-						"routeId": "672_TPERBO_EXTRA_1",
-						"label": "672",
-						"title": "Bologna - Casalecchio di Reno - Bazzano Stazione F.B.V. - Vignola"
-					},
-					{
-						"routeSymId": "672_TPERBO_EXTRA_0",
-						"routeId": "672_TPERBO_EXTRA_0",
-						"label": "672",
-						"title": "Vignola - Bazzano Stazione F.B.V. - Casalecchio di Reno - Bologna"
-					}],
-					"label": "672"
-				},
-				{
-					"routes": [{
-						"routeSymId": "673_TPERBO_EXTRA_1",
-						"routeId": "673_TPERBO_EXTRA_1",
-						"label": "673",
-						"title": "Zola Predosa - Rigosa"
-					},
-					{
-						"routeSymId": "673_TPERBO_EXTRA_0",
-						"routeId": "673_TPERBO_EXTRA_0",
-						"label": "673",
-						"title": "Rigosa - Zola Predosa"
-					}],
-					"label": "673"
-				},
-				{
-					"routes": [{
-						"routeSymId": "686_TPERBO_EXTRA_1",
-						"routeId": "686_TPERBO_EXTRA_1",
-						"label": "686",
-						"title": "Bologna - Riale Stazione F.B.V. - Tole"
-					},
-					{
-						"routeSymId": "686_TPERBO_EXTRA_0",
-						"routeId": "686_TPERBO_EXTRA_0",
-						"label": "686",
-						"title": "Tole - Riale Stazione F.B.V. - Bologna"
-					}],
-					"label": "686"
-				},
-				{
-					"routes": [{
-						"routeSymId": "687_TPERBO_EXTRA_1",
-						"routeId": "687_TPERBO_EXTRA_1",
-						"label": "687",
-						"title": "Sasso Marconi - Mongardino - Ponte Rivabella"
-					},
-					{
-						"routeSymId": "687_TPERBO_EXTRA_0",
-						"routeId": "687_TPERBO_EXTRA_0",
-						"label": "687",
-						"title": "Ponte Rivabella - Mongardino - Sasso Marconi"
-					}],
-					"label": "687"
-				},
-				{
-					"routes": [{
-						"routeSymId": "688_TPERBO_EXTRA_1",
-						"routeId": "688_TPERBO_EXTRA_1",
-						"label": "688",
-						"title": "Ponte Rivabella - Padernella"
-					},
-					{
-						"routeSymId": "688_TPERBO_EXTRA_0",
-						"routeId": "688_TPERBO_EXTRA_0",
-						"label": "688",
-						"title": "Padernella - Ponte Rivabella"
-					}],
-					"label": "688"
-				},
-				{
-					"routes": [{
-						"routeSymId": "706_TPERBO_EXTRA_0",
-						"routeId": "706_TPERBO_EXTRA_0",
-						"label": "706",
-						"title": "Bologna - Vergato"
-					},
-					{
-						"routeSymId": "706_TPERBO_EXTRA_1",
-						"routeId": "706_TPERBO_EXTRA_1",
-						"label": "706",
-						"title": "Vergato - Bologna"
-					}],
-					"label": "706"
-				},
-				{
-					"routes": [{
-						"routeSymId": "716_TPERBO_EXTRA_0",
-						"routeId": "716_TPERBO_EXTRA_0",
-						"label": "716",
-						"title": "Marzabotto Stazione F.S. - Tole"
-					},
-					{
-						"routeSymId": "716_TPERBO_EXTRA_1",
-						"routeId": "716_TPERBO_EXTRA_1",
-						"label": "716",
-						"title": "Tole - Marzabotto Stazione F.S."
-					}],
-					"label": "716"
-				},
-				{
-					"routes": [{
-						"routeSymId": "726_TPERBO_EXTRA_1",
-						"routeId": "726_TPERBO_EXTRA_1",
-						"label": "726",
-						"title": "Vergato - Labante - Montese"
-					},
-					{
-						"routeSymId": "726_TPERBO_EXTRA_0",
-						"routeId": "726_TPERBO_EXTRA_0",
-						"label": "726",
-						"title": "Montese - Labante - Vergato"
-					}],
-					"label": "726"
-				},
-				{
-					"routes": [{
-						"routeSymId": "727_TPERBO_EXTRA_1",
-						"routeId": "727_TPERBO_EXTRA_1",
-						"label": "727",
-						"title": "Vergato - Cereglio - Montese"
-					},
-					{
-						"routeSymId": "727_TPERBO_EXTRA_0",
-						"routeId": "727_TPERBO_EXTRA_0",
-						"label": "727",
-						"title": "Montese - Cereglio - Vergato"
-					}],
-					"label": "727"
-				},
-				{
-					"routes": [{
-						"routeSymId": "728_TPERBO_EXTRA_1",
-						"routeId": "728_TPERBO_EXTRA_1",
-						"label": "728",
-						"title": "Vergato - Tole"
-					},
-					{
-						"routeSymId": "728_TPERBO_EXTRA_0",
-						"routeId": "728_TPERBO_EXTRA_0",
-						"label": "728",
-						"title": "Tole - Vergato"
-					}],
-					"label": "728"
-				},
-				{
-					"routes": [{
-						"routeSymId": "737_TPERBO_EXTRA_0",
-						"routeId": "737_TPERBO_EXTRA_0",
-						"label": "737",
-						"title": "Vergato - Marano - Montese"
-					},
-					{
-						"routeSymId": "737_TPERBO_EXTRA_1",
-						"routeId": "737_TPERBO_EXTRA_1",
-						"label": "737",
-						"title": "Montese - Marano - Vergato"
-					}],
-					"label": "737"
-				},
-				{
-					"routes": [{
-						"routeSymId": "746_TPERBO_EXTRA_1",
-						"routeId": "746_TPERBO_EXTRA_1",
-						"label": "746",
-						"title": "Porretta Terme - Riola - Vergato"
-					},
-					{
-						"routeSymId": "746_TPERBO_EXTRA_0",
-						"routeId": "746_TPERBO_EXTRA_0",
-						"label": "746",
-						"title": "Vergato - Riola - Porretta Terme"
-					}],
-					"label": "746"
-				},
-				{
-					"routes": [{
-						"routeSymId": "747_TPERBO_EXTRA_0",
-						"routeId": "747_TPERBO_EXTRA_0",
-						"label": "747",
-						"title": "Porretta Terme - Marano - Montese"
-					},
-					{
-						"routeSymId": "747_TPERBO_EXTRA_1",
-						"routeId": "747_TPERBO_EXTRA_1",
-						"label": "747",
-						"title": "Montese - Marano - Porretta Terme"
-					}],
-					"label": "747"
-				},
-				{
-					"routes": [{
-						"routeSymId": "756_TPERBO_EXTRA_1",
-						"routeId": "756_TPERBO_EXTRA_1",
-						"label": "756",
-						"title": "Porretta Terme - Abetaia - Montese"
-					},
-					{
-						"routeSymId": "756_TPERBO_EXTRA_0",
-						"routeId": "756_TPERBO_EXTRA_0",
-						"label": "756",
-						"title": "Montese - Abetaia - Porretta Terme"
-					}],
-					"label": "756"
-				},
-				{
-					"routes": [{
-						"routeSymId": "757_TPERBO_EXTRA_0",
-						"routeId": "757_TPERBO_EXTRA_0",
-						"label": "757",
-						"title": "Porretta Terme - Querciola - Montese"
-					},
-					{
-						"routeSymId": "757_TPERBO_EXTRA_1",
-						"routeId": "757_TPERBO_EXTRA_1",
-						"label": "757",
-						"title": "Montese - Querciola - Porretta Terme"
-					}],
-					"label": "757"
-				},
-				{
-					"routes": [{
-						"routeSymId": "760_TPERBO_EXTRA_0",
-						"routeId": "760_TPERBO_EXTRA_0",
-						"label": "760",
-						"title": "Terme di Porretta (stab.Puzzola)-Stazione FS, v.le Repubblica"
-					},
-					{
-						"routeSymId": "760_TPERBO_EXTRA_1",
-						"routeId": "760_TPERBO_EXTRA_1",
-						"label": "760",
-						"title": "Stazione FS, v.le Repubblica - Terme di Porretta (stab.Puzzola)"
-					}],
-					"label": "760"
-				},
-				{
-					"routes": [{
-						"routeSymId": "766_TPERBO_EXTRA_0",
-						"routeId": "766_TPERBO_EXTRA_0",
-						"label": "766",
-						"title": "Porretta Terme - Ponte della Venturina"
-					},
-					{
-						"routeSymId": "766_TPERBO_EXTRA_1",
-						"routeId": "766_TPERBO_EXTRA_1",
-						"label": "766",
-						"title": "Ponte della Venturina - Porretta Terme"
-					}],
-					"label": "766"
-				},
-				{
-					"routes": [{
-						"routeSymId": "767_TPERBO_EXTRA_0",
-						"routeId": "767_TPERBO_EXTRA_0",
-						"label": "767",
-						"title": "Porretta Terme - Case Calistri"
-					},
-					{
-						"routeSymId": "767_TPERBO_EXTRA_1",
-						"routeId": "767_TPERBO_EXTRA_1",
-						"label": "767",
-						"title": "Case Calistri - Porretta Terme"
-					}],
-					"label": "767"
-				},
-				{
-					"routes": [{
-						"routeSymId": "768_TPERBO_EXTRA_0",
-						"routeId": "768_TPERBO_EXTRA_0",
-						"label": "768",
-						"title": "Porretta Terme - Casa Forlai"
-					},
-					{
-						"routeSymId": "768_TPERBO_EXTRA_1",
-						"routeId": "768_TPERBO_EXTRA_1",
-						"label": "768",
-						"title": "Casa Forlai - Porretta Terme"
-					}],
-					"label": "768"
-				},
-				{
-					"routes": [{
-						"routeSymId": "775_TPERBO_EXTRA_1",
-						"routeId": "775_TPERBO_EXTRA_1",
-						"label": "775",
-						"title": "Vidiciatico - Lizzano in Belvedere - Monteacuto"
-					},
-					{
-						"routeSymId": "775_TPERBO_EXTRA_0",
-						"routeId": "775_TPERBO_EXTRA_0",
-						"label": "775",
-						"title": "Monteacuto - Lizzano in Belvedere - Vidiciatico"
-					}],
-					"label": "775"
-				},
-				{
-					"routes": [{
-						"routeSymId": "776_TPERBO_EXTRA_0",
-						"routeId": "776_TPERBO_EXTRA_0",
-						"label": "776",
-						"title": "Porretta Terme - Vidiciatico - Corno alle Scale"
-					},
-					{
-						"routeSymId": "776_TPERBO_EXTRA_1",
-						"routeId": "776_TPERBO_EXTRA_1",
-						"label": "776",
-						"title": "Corno alle Scale - Vidiciatico - Porretta Terme"
-					}],
-					"label": "776"
-				},
-				{
-					"routes": [{
-						"routeSymId": "787_TPERBO_EXTRA_0",
-						"routeId": "787_TPERBO_EXTRA_0",
-						"label": "787",
-						"title": "Porretta Terme - Pennola"
-					},
-					{
-						"routeSymId": "787_TPERBO_EXTRA_1",
-						"routeId": "787_TPERBO_EXTRA_1",
-						"label": "787",
-						"title": "Pennola - Porretta Terme"
-					}],
-					"label": "787"
-				},
-				{
-					"routes": [{
-						"routeSymId": "796_TPERBO_EXTRA_0",
-						"routeId": "796_TPERBO_EXTRA_0",
-						"label": "796",
-						"title": "Porretta Terme - Baigno, Zanchetto Bivio"
-					},
-					{
-						"routeSymId": "796_TPERBO_EXTRA_1",
-						"routeId": "796_TPERBO_EXTRA_1",
-						"label": "796",
-						"title": "Baigno, Zanchetto Bivio - Porretta Terme"
-					}],
-					"label": "796"
-				},
-				{
-					"routes": [{
-						"routeSymId": "797_TPERBO_EXTRA_1",
-						"routeId": "797_TPERBO_EXTRA_1",
-						"label": "797",
-						"title": "Porretta Terme - Badi - Suviana"
-					},
-					{
-						"routeSymId": "797_TPERBO_EXTRA_0",
-						"routeId": "797_TPERBO_EXTRA_0",
-						"label": "797",
-						"title": "Suviana - Badi - Porretta Terme"
-					}],
-					"label": "797"
-				},
-				{
-					"routes": [{
-						"routeSymId": "798_TPERBO_EXTRA_1",
-						"routeId": "798_TPERBO_EXTRA_1",
-						"label": "798",
-						"title": "Porretta Terme - Casola - Caste di Casio"
-					},
-					{
-						"routeSymId": "798_TPERBO_EXTRA_0",
-						"routeId": "798_TPERBO_EXTRA_0",
-						"label": "798",
-						"title": "Caste di Casio - Casola - Porretta Terme"
-					}],
-					"label": "798"
-				},
-				{
-					"routes": [{
-						"routeSymId": "806_TPERBO_EXTRA_0",
-						"routeId": "806_TPERBO_EXTRA_0",
-						"label": "806",
-						"title": "Vergato - Suviana - Badi"
-					},
-					{
-						"routeSymId": "806_TPERBO_EXTRA_1",
-						"routeId": "806_TPERBO_EXTRA_1",
-						"label": "806",
-						"title": "Badi - Suviana - Vergato"
-					}],
-					"label": "806"
-				},
-				{
-					"routes": [{
-						"routeSymId": "808_TPERBO_EXTRA_1",
-						"routeId": "808_TPERBO_EXTRA_1",
-						"label": "808",
-						"title": "Vergato - Riola Stazione F.S. - Castiglione dei Pepoli"
-					},
-					{
-						"routeSymId": "808_TPERBO_EXTRA_0",
-						"routeId": "808_TPERBO_EXTRA_0",
-						"label": "808",
-						"title": "Castiglione dei Pepoli - Riola Stazione F.S. - Vergato"
-					}],
-					"label": "808"
-				},
-				{
-					"routes": [{
-						"routeSymId": "825_TPERBO_EXTRA_1",
-						"routeId": "825_TPERBO_EXTRA_1",
-						"label": "825",
-						"title": "Grizzana Stazione F.S. - San Benedetto Val di Sambro Stazione F.S. - Brasimone Enea"
-					},
-					{
-						"routeSymId": "825_TPERBO_EXTRA_0",
-						"routeId": "825_TPERBO_EXTRA_0",
-						"label": "825",
-						"title": "Brasimone Enea - San Benedetto Val di Sambro Stazione F.S. - Grizzana Stazione F.S."
-					}],
-					"label": "825"
-				},
-				{
-					"routes": [{
-						"routeSymId": "826_TPERBO_EXTRA_0",
-						"routeId": "826_TPERBO_EXTRA_0",
-						"label": "826",
-						"title": "Bologna - Castiglione dei Pepoli - San Giacomo"
-					},
-					{
-						"routeSymId": "826_TPERBO_EXTRA_1",
-						"routeId": "826_TPERBO_EXTRA_1",
-						"label": "826",
-						"title": "San Giacomo - Castiglione dei Pepoli - Bologna"
-					}],
-					"label": "826"
-				},
-				{
-					"routes": [{
-						"routeSymId": "827_TPERBO_EXTRA_1",
-						"routeId": "827_TPERBO_EXTRA_1",
-						"label": "827",
-						"title": "Sasso Marconi Stazione F.S. - Vado - Mozuno"
-					},
-					{
-						"routeSymId": "827_TPERBO_EXTRA_0",
-						"routeId": "827_TPERBO_EXTRA_0",
-						"label": "827",
-						"title": "Mozuno - Vado - Sasso Marconi Stazione F.S."
-					}],
-					"label": "827"
-				},
-				{
-					"routes": [{
-						"routeSymId": "828_TPERBO_EXTRA_1",
-						"routeId": "828_TPERBO_EXTRA_1",
-						"label": "828",
-						"title": "San Benedetto Val di Sambro Stazione F.S. - Castiglione dei Pepoli"
-					},
-					{
-						"routeSymId": "828_TPERBO_EXTRA_0",
-						"routeId": "828_TPERBO_EXTRA_0",
-						"label": "828",
-						"title": "Castiglione dei Pepoli - San Benedetto Val di Sambro Stazione F.S."
-					}],
-					"label": "828"
-				},
-				{
-					"routes": [{
-						"routeSymId": "829_TPERBO_EXTRA_0",
-						"routeId": "829_TPERBO_EXTRA_0",
-						"label": "829",
-						"title": "Vergato - Stanco"
-					},
-					{
-						"routeSymId": "829_TPERBO_EXTRA_1",
-						"routeId": "829_TPERBO_EXTRA_1",
-						"label": "829",
-						"title": "Stanco - Vergato"
-					}],
-					"label": "829"
-				},
-				{
-					"routes": [{
-						"routeSymId": "846_TPERBO_EXTRA_1",
-						"routeId": "846_TPERBO_EXTRA_1",
-						"label": "846",
-						"title": "Ponte Locatello - Grizzana Morandi - Vergato"
-					},
-					{
-						"routeSymId": "846_TPERBO_EXTRA_0",
-						"routeId": "846_TPERBO_EXTRA_0",
-						"label": "846",
-						"title": "Vergato - Grizzana Morandi - Ponte Locatello"
-					}],
-					"label": "846"
-				},
-				{
-					"routes": [{
-						"routeSymId": "856_TPERBO_EXTRA_0",
-						"routeId": "856_TPERBO_EXTRA_0",
-						"label": "856",
-						"title": "Bologna - San Benedetto Val di Sambro - Castel Dell'Alpi, Pian del Voglio"
-					},
-					{
-						"routeSymId": "856_TPERBO_EXTRA_1",
-						"routeId": "856_TPERBO_EXTRA_1",
-						"label": "856",
-						"title": "Castel Dell'Alpi, Pian del Voglio - San Benedetto Val di Sambro - Bologna"
-					}],
-					"label": "856"
-				},
-				{
-					"routes": [{
-						"routeSymId": "858_TPERBO_EXTRA_0",
-						"routeId": "858_TPERBO_EXTRA_0",
-						"label": "858",
-						"title": "Castiglione dei Pepoli - San Benedetto Val di Sambro"
-					},
-					{
-						"routeSymId": "858_TPERBO_EXTRA_1",
-						"routeId": "858_TPERBO_EXTRA_1",
-						"label": "858",
-						"title": "San Benedetto Val di Sambro - Castiglione dei Pepoli"
-					}],
-					"label": "858"
-				},
-				{
-					"routes": [{
-						"routeSymId": "900_TPERBO_EXTRA_1",
-						"routeId": "900_TPERBO_EXTRA_1",
-						"label": "900",
-						"title": "DIRETTA Monghidoro - Bologna"
-					},
-					{
-						"routeSymId": "900_TPERBO_EXTRA_0",
-						"routeId": "900_TPERBO_EXTRA_0",
-						"label": "900",
-						"title": "DIRETTA Bologna - Monghidoro"
-					}],
-					"label": "900"
-				},
-				{
-					"routes": [{
-						"routeSymId": "906_TPERBO_EXTRA_1",
-						"routeId": "906_TPERBO_EXTRA_1",
-						"label": "906",
-						"title": "Bologna - Monghidoro - Castel dell'Alpi"
-					},
-					{
-						"routeSymId": "906_TPERBO_EXTRA_0",
-						"routeId": "906_TPERBO_EXTRA_0",
-						"label": "906",
-						"title": "Castel dell'Alpi - Monghidoro - Bologna"
-					}],
-					"label": "906"
-				},
-				{
-					"routes": [{
-						"routeSymId": "907_TPERBO_EXTRA_0",
-						"routeId": "907_TPERBO_EXTRA_0",
-						"label": "907",
-						"title": "Monghidoro - Loiano bivio Monzuno"
-					},
-					{
-						"routeSymId": "907_TPERBO_EXTRA_1",
-						"routeId": "907_TPERBO_EXTRA_1",
-						"label": "907",
-						"title": "Loiano bivio Monzuno - Monghidoro"
-					}],
-					"label": "907"
-				},
-				{
-					"routes": [{
-						"routeSymId": "908_TPERBO_EXTRA_1",
-						"routeId": "908_TPERBO_EXTRA_1",
-						"label": "908",
-						"title": "Monghidoro - Pietramala"
-					},
-					{
-						"routeSymId": "908_TPERBO_EXTRA_0",
-						"routeId": "908_TPERBO_EXTRA_0",
-						"label": "908",
-						"title": "Pietramala - Monghidoro"
-					}],
-					"label": "908"
-				},
-				{
-					"routes": [{
-						"routeSymId": "916_TPERBO_EXTRA_1",
-						"routeId": "916_TPERBO_EXTRA_1",
-						"label": "916",
-						"title": "Bologna - Monghidoro"
-					},
-					{
-						"routeSymId": "916_TPERBO_EXTRA_0",
-						"routeId": "916_TPERBO_EXTRA_0",
-						"label": "916",
-						"title": "Monghidoro - Bologna"
-					}],
-					"label": "916"
-				},
-				{
-					"routes": [{
-						"routeSymId": "918_TPERBO_EXTRA_1",
-						"routeId": "918_TPERBO_EXTRA_1",
-						"label": "918",
-						"title": "Bologna - Loiano"
-					},
-					{
-						"routeSymId": "918_TPERBO_EXTRA_0",
-						"routeId": "918_TPERBO_EXTRA_0",
-						"label": "918",
-						"title": "Loiano - Bologna"
-					}],
-					"label": "918"
-				}]
-			}]
-		},
-		"sub_urbano": {
-			"view": "grid",
-			"label": "menu_real_time_bus_suburban",
-			"hasMap": true,
-			"markerIcon": "ic_extraurbanBus",
-			"icon": "ic_extraurban-bus",
-			"transportType": "BUS",
-			"elements": [{
-				"agencyId": "TPERBO_SUB",
-				"hasMap": true,
-				"groups": [{
-					"routes": [{
-						"routeSymId": "81_TPERBO_SUB_0",
-						"routeId": "81_TPERBO_SUB_0",
-						"label": "81",
-						"title": "Stazione Centrale - Longara - Padulle - Bagno di Piano"
-					},
-					{
-						"routeSymId": "81_TPERBO_SUB_1",
-						"routeId": "81_TPERBO_SUB_1",
-						"label": "81",
-						"title": "Bagno di Piano - Padulle - Longara - Stazione Centrale"
-					}],
-					"label": "81"
-				},
-				{
-					"routes": [{
-						"routeSymId": "83_TPERBO_SUB_1",
-						"routeId": "83_TPERBO_SUB_1",
-						"label": "83",
-						"title": "Bologna - Ospedale Maggiore - Calderino di Monte San Pietro"
-					},
-					{
-						"routeSymId": "83_TPERBO_SUB_0",
-						"routeId": "83_TPERBO_SUB_0",
-						"label": "83",
-						"title": "Calderino di Monte San Pietro - Ospedale Maggiore - Bologna"
-					}],
-					"label": "83"
-				},
-				{
-					"routes": [{
-						"routeSymId": "87_TPERBO_SUB_1",
-						"routeId": "87_TPERBO_SUB_1",
-						"label": "87",
-						"title": "Bologna - Stazione Centrale - Ospedale Maggiore - Anzola dell'Emilia - Castelfranco Emilia"
-					},
-					{
-						"routeSymId": "87_TPERBO_SUB_0",
-						"routeId": "87_TPERBO_SUB_0",
-						"label": "87",
-						"title": "Castelfranco Emilia - Anzola dell'Emilia - Ospedale Maggiore - Stazione Centrale - Bologna"
-					}],
-					"label": "87"
-				},
-				{
-					"routes": [{
-						"routeSymId": "88_TPERBO_SUB_1",
-						"routeId": "88_TPERBO_SUB_1",
-						"label": "88",
-						"title": "Bologna - Cadriano - Viadagola - Granarolo dell'Emilia"
-					},
-					{
-						"routeSymId": "88_TPERBO_SUB_0",
-						"routeId": "88_TPERBO_SUB_0",
-						"label": "88",
-						"title": "Granarolo dell'Emilia - Viadagola - Cadriano - Bologna"
-					}],
-					"label": "88"
-				},
-				{
-					"routes": [{
-						"routeSymId": "89_TPERBO_SUB_0",
-						"routeId": "89_TPERBO_SUB_0",
-						"label": "89",
-						"title": "Villanova - Ospedale S. Orsola - Bologna - Casalecchio di Reno - San Biagio"
-					},
-					{
-						"routeSymId": "89_TPERBO_SUB_1",
-						"routeId": "89_TPERBO_SUB_1",
-						"label": "89",
-						"title": "San Biagio - Casalecchio di Reno - Bologna - Ospedale S. Orsola - Villanova"
-					}],
-					"label": "89"
-				},
-				{
-					"routes": [{
-						"routeSymId": "90_TPERBO_SUB_1",
-						"routeId": "90_TPERBO_SUB_1",
-						"label": "90",
-						"title": "Bologna - Ospedale Bellaria - Ospedale San Camillo, Ozzano dell'Emilia"
-					},
-					{
-						"routeSymId": "90_TPERBO_SUB_0",
-						"routeId": "90_TPERBO_SUB_0",
-						"label": "90",
-						"title": "Ospedale San Camillo, Ozzano dell'Emilia - Ospedale Bellaria - Bologna"
-					}],
-					"label": "90"
-				},
-				{
-					"routes": [{
-						"routeSymId": "91_TPERBO_SUB_1",
-						"routeId": "91_TPERBO_SUB_1",
-						"label": "91",
-						"title": "Stazione Centrale - Calderara di Reno - Padulle - Bagno di Piano"
-					},
-					{
-						"routeSymId": "91_TPERBO_SUB_0",
-						"routeId": "91_TPERBO_SUB_0",
-						"label": "91",
-						"title": "Bagno di Piano - Padulle - Calderara di Reno - Stazione Centrale"
-					}],
-					"label": "91"
-				},
-				{
-					"routes": [{
-						"routeSymId": "92_TPERBO_SUB_1",
-						"routeId": "92_TPERBO_SUB_1",
-						"label": "92",
-						"title": "Trebbo di Reno - Bologna - Ospedale Maggiore - Sasso Marconi - (Vergato)"
-					},
-					{
-						"routeSymId": "92_TPERBO_SUB_0",
-						"routeId": "92_TPERBO_SUB_0",
-						"label": "92",
-						"title": "(Vergato) - Sasso Marconi - Ospedale Maggiore - Bologna - Trebbo di Reno"
-					}],
-					"label": "92"
-				},
-				{
-					"routes": [{
-						"routeSymId": "93_TPERBO_SUB_1",
-						"routeId": "93_TPERBO_SUB_1",
-						"label": "93",
-						"title": "Bologna - Granarolo dell'Emilia - Baricella - Mondonuovo"
-					},
-					{
-						"routeSymId": "93_TPERBO_SUB_0",
-						"routeId": "93_TPERBO_SUB_0",
-						"label": "93",
-						"title": "Mondonuovo - Baricella - Granarolo dell'Emilia - Bologna"
-					}],
-					"label": "93"
-				},
-				{
-					"routes": [{
-						"routeSymId": "94_TPERBO_SUB_0",
-						"routeId": "94_TPERBO_SUB_0",
-						"label": "94",
-						"title": "Bazzano - Bologna - Ospedale S. Orsola - Ospedale Malpighi - Castel San Pietro Terme"
-					},
-					{
-						"routeSymId": "94_TPERBO_SUB_1",
-						"routeId": "94_TPERBO_SUB_1",
-						"label": "94",
-						"title": "Castel San Pietro Terme - Ospedale Malpighi - Ospedale S. Orsola - Bologna - Bazzano"
-					}],
-					"label": "94"
-				},
-				{
-					"routes": [{
-						"routeSymId": "95_TPERBO_SUB_1",
-						"routeId": "95_TPERBO_SUB_1",
-						"label": "95",
-						"title": "(Bologna) - Funo - Centergross - Interporto - Bentivoglio - (Saletto)"
-					},
-					{
-						"routeSymId": "95_TPERBO_SUB_0",
-						"routeId": "95_TPERBO_SUB_0",
-						"label": "95",
-						"title": "(Saletto) - Bentivoglio - Interporto - Centergross - Funo - (Bologna)"
-					}],
-					"label": "95"
-				},
-				{
-					"routes": [{
-						"routeSymId": "96_TPERBO_SUB_1",
-						"routeId": "96_TPERBO_SUB_1",
-						"label": "96",
-						"title": "Bologna - Carteria di Sesto - Pianoro"
-					},
-					{
-						"routeSymId": "96_TPERBO_SUB_0",
-						"routeId": "96_TPERBO_SUB_0",
-						"label": "96",
-						"title": "Pianoro - Carteria di Sesto - Bologna"
-					}],
-					"label": "96"
-				},
-				{
-					"routes": [{
-						"routeSymId": "97_TPERBO_SUB_1",
-						"routeId": "97_TPERBO_SUB_1",
-						"label": "97",
-						"title": "Bologna - San Giorgio di Piano - Cento, San Venanzio di Galliera"
-					},
-					{
-						"routeSymId": "97_TPERBO_SUB_0",
-						"routeId": "97_TPERBO_SUB_0",
-						"label": "97",
-						"title": "Cento, San Venanzio di Galliera - San Giorgio di Piano - Bologna"
-					}],
-					"label": "97"
-				},
-				{
-					"routes": [{
-						"routeSymId": "98_TPERBO_SUB_0",
-						"routeId": "98_TPERBO_SUB_0",
-						"label": "98",
-						"title": "Bologna - Castel Maggiore"
-					},
-					{
-						"routeSymId": "98_TPERBO_SUB_1",
-						"routeId": "98_TPERBO_SUB_1",
-						"label": "98",
-						"title": "Castel Maggiore - Bologna"
-					}],
-					"label": "98"
-				},
-				{
-					"routes": [{
-						"routeSymId": "99_TPERBO_SUB_0",
-						"routeId": "99_TPERBO_SUB_0",
-						"label": "99",
-						"title": "Bologna - Medicina - Lugo"
-					},
-					{
-						"routeSymId": "99_TPERBO_SUB_1",
-						"routeId": "99_TPERBO_SUB_1",
-						"label": "99",
-						"title": "Lugo - Medicina - Bologna"
-					}],
-					"label": "99"
-				}]
-			}]
-		}
-	}
+                    "agencyId": "12",
+                    "hasMap": true,
+                    "groups": [
+                        {
+                            "label": "A",
+                            "color": "#b8b8b4",
+                            "routes": [
+                                {
+                                    "routeId": "_A",
+                                    "routeSymId": "%20AC",
+                                    "title": "P. Dante - Osp. S. Chiara - Clarina - P. Dante",
+                                    "label": "A",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "B",
+                            "color": "#717780",
+                            "routes": [
+                                {
+                                    "routeId": "_B",
+                                    "routeSymId": "%20BC",
+                                    "title": "Piazza Dante - Laste - Piazza Dante",
+                                    "label": "B",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "C",
+                            "color": "#000000",
+                            "routes": [
+                                {
+                                    "routeId": "Ca",
+                                    "routeSymId": "Ca",
+                                    "title": "RSA S. Bartolomeo - RSA Angeli Custodi",
+                                    "label": "C",
+                                    "wheelChairBoarding": 2
+                                },
+                                {
+                                    "routeId": "Cr",
+                                    "routeSymId": "Cr",
+                                    "title": "RSA Angeli Custodi - RSA S. Bartolomeo",
+                                    "label": "C",
+                                    "wheelChairBoarding": 2
+                                }
+              ]
+            },
+                        {
+                            "label": "NP",
+                            "color": "#7f8080",
+                            "routes": [
+                                {
+                                    "routeId": "NPA",
+                                    "routeSymId": "NPC",
+                                    "title": "Navetta parcheggi: Ex Zuffo - Monte Baldo - Ex Zuffo",
+                                    "label": "NP",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "1",
+                            "color": "#1a3f6f",
+                            "routes": [
+                                {
+                                    "routeId": "1A",
+                                    "routeSymId": "01A",
+                                    "title": "Ospedale - P. Dante - Sopramonte",
+                                    "label": "1",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "1R",
+                                    "routeSymId": "01R",
+                                    "title": "Sopramonte - P.Dante - Ospedale",
+                                    "label": "1",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "2",
+                            "color": "#d4592c",
+                            "routes": [
+                                {
+                                    "routeId": "02",
+                                    "routeSymId": "02C",
+                                    "title": "Piedicastello - Stazione - Osp. S. Chiara - Regione - Piedicastello",
+                                    "label": "2",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "3",
+                            "color": "#bf2c26",
+                            "routes": [
+                                {
+                                    "routeId": "03A",
+                                    "routeSymId": "03A",
+                                    "title": "Cortesano - Gardolo - P. Dante - Villazzano 3",
+                                    "label": "3",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "03R",
+                                    "routeSymId": "03R",
+                                    "title": "Villazzano 3 - P. Dante - Gardolo - Cortesano",
+                                    "label": "3",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "4",
+                            "color": "#0977b7",
+                            "routes": [
+                                {
+                                    "routeId": "04A",
+                                    "routeSymId": "04A",
+                                    "title": "Gardolo - Roncafort - Stazione - Via Degasperi - Madonna Bianca",
+                                    "label": "4",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "04R",
+                                    "routeSymId": "04R",
+                                    "title": "Madonna Bianca - Via Degasperi - Regione - Roncafort - Gardolo",
+                                    "label": "4",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "5",
+                            "color": "#f8ad1e",
+                            "routes": [
+                                {
+                                    "routeId": "05A",
+                                    "routeSymId": "05A",
+                                    "title": "Piazza Dante - P.Fiera - Povo - Oltrecastello",
+                                    "label": "5",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "05R",
+                                    "routeSymId": "05R",
+                                    "title": "Oltrecastello - Povo - P.Aquila - P. Dante",
+                                    "label": "5",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "6",
+                            "color": "#6eae46",
+                            "routes": [
+                                {
+                                    "routeId": "06A",
+                                    "routeSymId": "06A",
+                                    "title": "Vela - P. Dante - Villazzano - Grotta",
+                                    "label": "6",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "06R",
+                                    "routeSymId": "06R",
+                                    "title": "Grotta - Villazzano - P. Dante - Vela",
+                                    "label": "6",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "7",
+                            "color": "#179585",
+                            "routes": [
+                                {
+                                    "routeId": "07A",
+                                    "routeSymId": "07A",
+                                    "title": "Canova - Melta - Piazza Dante - Gocciadoro",
+                                    "label": "7",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "07R",
+                                    "routeSymId": "07R",
+                                    "title": "Gocciadoro - Piazza Dante - Melta - Canova",
+                                    "label": "7",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "8",
+                            "color": "#543428",
+                            "routes": [
+                                {
+                                    "routeId": "08A",
+                                    "routeSymId": "08A",
+                                    "title": "Centochiavi - Piazza Dante - Mattarello",
+                                    "label": "8",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "08R",
+                                    "routeSymId": "08R",
+                                    "title": "Mattarello -  Piazza Dante -  Centochiavi",
+                                    "label": "8",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "9",
+                            "color": "#894d2d",
+                            "routes": [
+                                {
+                                    "routeId": "09A",
+                                    "routeSymId": "09A",
+                                    "title": "P. Dante - S. Donà - Cognola - Villamontagna",
+                                    "label": "9",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "09R",
+                                    "routeSymId": "09R",
+                                    "title": "Villamontagna - Cognola - S. Donà - P. Dante",
+                                    "label": "9",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "10",
+                            "color": "#125547",
+                            "routes": [
+                                {
+                                    "routeId": "10A",
+                                    "routeSymId": "10A",
+                                    "title": "P. Dante - Martignano - Cognola / Montevaccino",
+                                    "label": "10",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "10R",
+                                    "routeSymId": "10R",
+                                    "title": "Cognola / Montevaccino - Martignano - P. Dante",
+                                    "label": "10",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "11",
+                            "color": "#572f75",
+                            "routes": [
+                                {
+                                    "routeId": "11A",
+                                    "routeSymId": "11A",
+                                    "title": "Piazza Dante - Via Brennero - Gardolo - Spini",
+                                    "label": "11",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "11R",
+                                    "routeSymId": "11R",
+                                    "title": "Spini di Gardolo - Via Brennero - Piazza Dante",
+                                    "label": "11",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "12",
+                            "color": "#922840",
+                            "routes": [
+                                {
+                                    "routeId": "12A",
+                                    "routeSymId": "12A",
+                                    "title": "P. Dante - Via Ghiaie - Ravina - Romagnano",
+                                    "label": "12",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "12R",
+                                    "routeSymId": "12R",
+                                    "title": "Romagnano - Ravina - Via Ghiaie - P. Dante",
+                                    "label": "12",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "13",
+                            "color": "#b55f8e",
+                            "routes": [
+                                {
+                                    "routeId": "13A",
+                                    "routeSymId": "13A",
+                                    "title": "P. Dante - Rosmini - S. Rocco - Povo polo soc.",
+                                    "label": "13",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "13R",
+                                    "routeSymId": "13R",
+                                    "title": "Povo - S. Rocco - Rosmini - Piazza Dante",
+                                    "label": "13",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "14",
+                            "color": "#db8fac",
+                            "routes": [
+                                {
+                                    "routeId": "14A",
+                                    "routeSymId": "14A",
+                                    "title": "P. Dante - Via Sanseverino - Belvedere Ravina",
+                                    "label": "14",
+                                    "wheelChairBoarding": 2
+                                },
+                                {
+                                    "routeId": "14R",
+                                    "routeSymId": "14R",
+                                    "title": "Belvedere Ravina - Via Sanseverino - P. Dante",
+                                    "label": "14",
+                                    "wheelChairBoarding": 2
+                                }
+              ]
+            },
+                        {
+                            "label": "15",
+                            "color": "#81bb46",
+                            "routes": [
+                                {
+                                    "routeId": "15A",
+                                    "routeSymId": "15A",
+                                    "title": "Piazza Dante - Interporto - Spini di Gardolo",
+                                    "label": "15",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "15R",
+                                    "routeSymId": "15R",
+                                    "title": "Spini di Gardolo - Interporto - Piazza Dante",
+                                    "label": "15",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "16",
+                            "color": "#262e5f",
+                            "routes": [
+                                {
+                                    "routeId": "16A",
+                                    "routeSymId": "16A",
+                                    "title": "Centochiavi - Martignano - Cognola - Povo",
+                                    "label": "16",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "16R",
+                                    "routeSymId": "16R",
+                                    "title": "Povo - Cognola - Martignano - Centochiavi",
+                                    "label": "16",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "17",
+                            "color": "#2993c4",
+                            "routes": [
+                                {
+                                    "routeId": "17A",
+                                    "routeSymId": "17A",
+                                    "title": "Piazza Dante - Via Bolzano - Lamar - Lavis",
+                                    "label": "17",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "17R",
+                                    "routeSymId": "17R",
+                                    "title": "Lavis - S.Lazzaro - Via Bolzano - P.Dante",
+                                    "label": "17",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "Funivia",
+                            "color": "#016a6a",
+                            "gridCode": "ic_funivia",
+                            "routes": [
+                                {
+                                    "routeId": "FUTSA",
+                                    "routeSymId": "FunA",
+                                    "title": "Funivia Trento Sardagna",
+                                    "label": "Trento - Sardagna",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "FUTSR",
+                                    "routeSymId": "FunR",
+                                    "title": "Funivia Sardagna Trento",
+                                    "label": "Sardagna - Trento",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            }
+          ]
+        }
+      ]
+        }
+    }
 }

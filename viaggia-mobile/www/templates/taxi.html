@@ -9,15 +9,26 @@
         <div>
             <div class="user-position" ng-if="showStreetName">
 
+                <!--
+<div class="user-position-warning">
+    Attenzione! L'indirizzo mostrato potrebe non essere corretto.
+</div>
+-->
                 <div class="user-position-your-position"> {{'taxi_label_your_position'|translate}}</div>
                 <div class="user-position-your-position"> <b>{{userPosition.name}}</b></div>
                 <div class="user-position-your-position"> {{'taxi_label_check_it'|translate}}</div>
 
+<!--
+<<<<<<< HEAD </div>
+    <div class="user-position" ng-if="!showStreetName">
+        <div class="user-position-your-position"> {{'taxi_label_no_accuracy'|translate}}</div>
+        ======= >>>>>>> 13-6-2016_accessibility
+-->
             </div>
             <div class="user-position" ng-if="!showStreetName">
+
                 <div class="user-position-your-position"> {{'taxi_label_no_accuracy'|translate}}</div>
             </div>
-
         </div>
         <ion-list class="list" ng-if="taxiCompanies && taxiCompanies.length >0">
             <div class="item card" ng-repeat="t in taxiCompanies">

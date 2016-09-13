@@ -243,6 +243,9 @@ angular.module('viaggia.services.conf', [])
             return mapJsonConfig["taxi_accuracy"];
 
         },
+        getAccessibility: function () {
+            return mapJsonConfig['accessibility'];
+        },
         getMessagingServerURL: function () {
             return mapJsonConfig["messagingServerURL"];
         },

@@ -16,6 +16,10 @@ angular.module('viaggia.controllers.common', [])
         return $scope.shownGroup === true;
     };
 
+    $scope.isAccessibilitySet = function () {
+        return Config.getAccessibility();
+    }
+
     $ionicModal.fromTemplateUrl('templates/credits.html', {
         id: '3',
         scope: $scope,

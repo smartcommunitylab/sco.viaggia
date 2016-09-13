@@ -5,9 +5,9 @@
     "senderID": "453601816446",
     "appversion": "2.2.2",
     "appname": "Viaggia Trento",
-    "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
-    "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
-    "newsRSS": "https://tn.smartcommunitylab.it/core.mobility/announcements/rss/trento",
+    "serverURL": "https://dev.smartcommunitylab.it/core.mobility",
+    "messagingServerURL": "https://dev.smartcommunitylab.it/core.communicator",
+    "newsRSS": "https://dev.smartcommunitylab.it/core.mobility/announcements/rss/trento",
     "contact_link": "mailto:viaggiatrento@smartcommunitylab.it?subject=ViaggiaTrento:%20segnalazione%20problema",
     "smartcheck_options": [
         1,
@@ -24,6 +24,7 @@
     "plan_policy": "Trento",
     "taxi_id": "TAXI_TRENTO",
     "taxi_accuracy": 65,
+    "accessibility": true,
     "agencies": [5, 6, 10, 12, 17],
     "extraurban_agencies": [17],
     "broadcast_notifications_options": [
