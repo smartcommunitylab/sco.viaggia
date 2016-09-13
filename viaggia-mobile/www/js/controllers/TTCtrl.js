@@ -488,7 +488,8 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     $scope.markerIcon = mapData.markerIcon;
     $scope.icon = mapData.icon;
     $scope.title = mapData.title;
-    $scope.accessibilityStyle = getAccessibilityStyle();
+    $scope.ref = mapData.ref;
+    $scope.accessibilityStyle = getAccessibilityStyle($scope.ref);
 
     var MAX_MARKERS = 20;
     $scope.$on('leafletDirectiveMap.ttMap.moveend', function (event) {
@@ -496,16 +497,32 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     });
 
 
-    function getAccessibilityStyle() {
+    function getAccessibilityStyle(ref) {
 
+        //check if bus or train
+        if (ref === 'urbano') {
+            $scope.accesibilityKnow = true;
+        } else {
+            $scope.accesibilityKnow = false;
+        }
         return $scope.flagAccessibility ? 'ic_access' : 'ic_access_outline';
 
     }
 
+    //        function getAccessibilityStyle() {
+    //        if ($scope.route.wheelChairBoarding == 1) {
+    //            $scope.accesibilityKnow = true;
+    //            return $scope.flagAccessibility ? 'ic_access' : 'ic_access_outline';
+    //        } else if ($scope.route.wheelChairBoarding == 2) {
+    //            $scope.accesibilityKnow = true;
+    //        } else { // if I don't know, don't see it
+    //            $scope.accesibilityKnow = false;
+    //        }
+    //    }
     $scope.toggleAccessibility = function () {
 
         $scope.flagAccessibility = !$scope.flagAccessibility;
-        $scope.accessibilityStyle = getAccessibilityStyle();
+        $scope.accessibilityStyle = getAccessibilityStyle($scope.ref);
         $scope.filterMarkers(true);
     }
     var getAgencies = function () {

@@ -1,7 +1,7 @@
 <ion-view title="{{title}}">
     <ion-nav-buttons side="right">
         <!--        <button class="button button-icon button-clear" ng-class="bookmarkStyle" ng-click="bookmark()"></button>-->
-        <button ng-if="isAccessibilitySet()" class="button button-icon button-clear" ng-class="accessibilityStyle" ng-click="toggleAccessibility()"></button>
+        <button ng-if="isAccessibilitySet()" class="button button-icon button-clear" ng-class="accessibilityStyle" ng-click="toggleAccessibility()" ng-show="accesibilityKnow"></button>
 
     </ion-nav-buttons>
     <ion-content scroll="false">
