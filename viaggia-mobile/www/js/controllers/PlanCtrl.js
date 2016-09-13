@@ -38,7 +38,8 @@ angular.module('viaggia.controllers.plan', [])
             routeType: '',
             transportTypes: [],
             departureTime: '',
-            date: ''
+            date: '',
+            wheelchair: false
         }
     };
 
@@ -55,16 +56,23 @@ angular.module('viaggia.controllers.plan', [])
         $scope.planParams.date = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
         $scope.planParams.routeType = planOptionConfig.routeType;
         $scope.planParams.transportTypes = planOptionConfig.transportTypes;
+        $scope.planParams.wheelchair = false;
         for (var i = 0; i < $scope.types.length; i++) {
             $scope.mapTypes[$scope.planParams.transportTypes[i]] = true;
         }
     }
-
+    $scope.switchAcc = function () {
+        $scope.planParams.wheelchair = !$scope.planParams.wheelchair;
+    }
+    $scope.isSwitchedAcc = function () {
+        return $scope.planParams.wheelchair;
+    }
     var setSavedOptions = function (Configure) {
         $scope.planParams.departureTime = $filter('date')(new Date().getTime(), 'hh:mma');
         $scope.planParams.date = $filter('date')(new Date().getTime(), 'MM/dd/yyyy');
         $scope.planParams.routeType = Configure.routeType;
         $scope.planParams.transportTypes = Configure.transportTypes;
+        $scope.planParams.wheelchair = Configure.wheelchair;
         for (var i = 0; i < $scope.types.length; i++) {
             $scope.mapTypes[$scope.planParams.transportTypes[i]] = true;
         }
@@ -141,11 +149,11 @@ angular.module('viaggia.controllers.plan', [])
             console.log('Time not selected');
         } else {
             $scope.timePickerObject24Hour.inputEpochTime = val;
-          var selectedTime = new Date();
-          selectedTime.setHours(val / 3600);
-          selectedTime.setMinutes((val % 3600) / 60);
-          selectedTime.setSeconds(0);
-          $scope.hourTimestamp = $filter('date')(selectedTime,'hh:mma');
+            var selectedTime = new Date();
+            selectedTime.setHours(val / 3600);
+            selectedTime.setMinutes((val % 3600) / 60);
+            selectedTime.setSeconds(0);
+            $scope.hourTimestamp = $filter('date')(selectedTime, 'hh:mma');
         }
     }
     setTimeWidget();
@@ -308,6 +316,10 @@ angular.module('viaggia.controllers.plan', [])
         }
         if ($scope.planParams.transportTypes.length == 0) {
             Toast.show($filter('translate')("error_select_type_feedback"), "short", "bottom");
+            return false
+        }
+        if ($scope.planParams.wheelchair && !$scope.mapTypes['WALK'] && !$scope.mapTypes['TRANSIT']) {
+            Toast.show($filter('translate')("error_select_type_accessibility_feedback"), "short", "bottom");
             return false
         }
         if ($scope.hourTimestamp) {
@@ -523,13 +535,13 @@ angular.module('viaggia.controllers.plan', [])
         $scope.result = typedthings;
         planService.getTypedPlaces(typedthings).then(function (data) {
             //merge with favorites and check no double values
-            $scope['places'+fromOrTo] = data;
+            $scope['places' + fromOrTo] = data;
             if (data.length > 0) {
-                $scope['places'+fromOrTo] = addFavoritePlaces(typedthings, $scope['places'+fromOrTo]);
+                $scope['places' + fromOrTo] = addFavoritePlaces(typedthings, $scope['places' + fromOrTo]);
                 $scope.placesandcoordinates = planService.getnames();
                 $scope.placesandcoordinates = planService.addnames($scope.favoritePlaces);
             } else {
-                $scope['places'+fromOrTo] = null;
+                $scope['places' + fromOrTo] = null;
                 $scope.placesandcoordinates = null;
             }
         });
@@ -543,7 +555,7 @@ angular.module('viaggia.controllers.plan', [])
     };
 
     $scope.resetParams = function (fromOrTo) {
-        $scope['places'+fromOrTo] = null;
+        $scope['places' + fromOrTo] = null;
         $scope.placesandcoordinates = null;
         $scope.planParams[fromOrTo] = {
             name: '',
@@ -664,7 +676,7 @@ angular.module('viaggia.controllers.plan', [])
         }
         if ($scope.planParams.date) {
             var configdate = planService.mmddyyyy2date($scope.planParams.date);
-//            configdate.setFullYear($scope.planParams.date.substr(6, 4), $scope.planParams.date.substr(0, 2) - 1, $scope.planParams.date.substr(3, 2));
+            //            configdate.setFullYear($scope.planParams.date.substr(6, 4), $scope.planParams.date.substr(0, 2) - 1, $scope.planParams.date.substr(3, 2));
             $scope.datepickerObjectPopup.dateTimestamp = $filter('date')(configdate.getTime());
             $scope.datepickerObject.inputDate = new Date(configdate);
             setDateWidget();

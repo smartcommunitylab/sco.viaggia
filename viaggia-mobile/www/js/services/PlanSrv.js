@@ -95,6 +95,7 @@ angular.module('viaggia.services.plan', [])
             },
             "departureTime": time,
             "date": data,
+            "wheelchair": trip.data.wheelchair
         }
         return configure;
     }
@@ -517,6 +518,7 @@ angular.module('viaggia.services.plan', [])
                     "lat": newPlanConfigure.from.lat
                 },
                 "date": newPlanConfigure.date,
+                "wheelchair": newPlanConfigure.wheelchair,
                 "transportTypes": Config.convertPlanTypes(newPlanConfigure.transportTypes)
             },
             timeout: 10000

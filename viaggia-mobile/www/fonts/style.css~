@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'viaggia';
-    src:    url('viaggia.eot?ug9l9r');
-    src:    url('viaggia.eot?ug9l9r#iefix') format('embedded-opentype'),
-        url('viaggia.ttf?ug9l9r') format('truetype'),
-        url('viaggia.woff?ug9l9r') format('woff'),
-        url('viaggia.svg?ug9l9r#viaggia') format('svg');
+    src:    url('fonts/viaggia.eot?ug9l9r');
+    src:    url('fonts/viaggia.eot?ug9l9r#iefix') format('embedded-opentype'),
+        url('fonts/viaggia.ttf?ug9l9r') format('truetype'),
+        url('fonts/viaggia.woff?ug9l9r') format('woff'),
+        url('fonts/viaggia.svg?ug9l9r#viaggia') format('svg');
     font-weight: normal;
     font-style: normal;
 }
