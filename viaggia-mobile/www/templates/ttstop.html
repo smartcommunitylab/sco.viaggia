@@ -1,24 +1,25 @@
-<ion-view >
-      <ion-nav-title>{{stopData.name}}</ion-nav-title>
-      <ion-nav-buttons side="right">
-          <button class="button button-icon button-clear" ng-class="bookmarkStyle" ng-click="bookmark()"></button>
-      </ion-nav-buttons>
-      <ion-content>
+<ion-view>
+    <ion-nav-title>{{stopData.name}}</ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear" ng-class="bookmarkStyle" ng-click="bookmark()"></button>
+    </ion-nav-buttons>
+    <ion-content>
         <div>
-          <div class="stop-line" ng-repeat="(routeId, route) in stopData.data">
-            <div ng-if="route.routeObject" class="stop-line-title" style="background-color: {{route.color}}; color: {{textColor(route.color)}}">
-              <span ng-if="route.routeObject.label">{{route.routeObject.label}}: </span>{{route.routeObject.title}}
+            <div class="stop-line" ng-repeat="(routeId, route) in stopData.data">
+                <div ng-if="route.routeObject" class="stop-line-title" style="background-color: {{route.color}}; color: {{textColor(route.color)}}">
+                    <i class="icon ic_ac accessibility-ttstop" ng-if="route.routeObject.wheelChairBoarding==1"></i>
+                    <span ng-if="route.routeObject.label">{{route.routeObject.label}}: </span>{{route.routeObject.title}}
+                </div>
+                <div ng-if="!route.routeObject" class="stop-line-title" style="background-color: #eee">
+                    <span ng-if="route.route">{{route.route}}: </span>{{route.name}}
+                </div>
+                <div class="row">
+                    <div class="col text-center" ng-repeat="t in route.times">{{t.time | date:'HH:mm'}}</div>
+                </div>
             </div>
-            <div ng-if="!route.routeObject" class="stop-line-title"  style="background-color: #eee">
-              <span ng-if="route.route">{{route.route}}: </span>{{route.name}}
-            </div>
-            <div class="row">
-              <div class="col text-center" ng-repeat="t in route.times">{{t.time | date:'HH:mm'}}</div>
-            </div>
-          </div>
         </div>
         <div ng-if="isEmpty()" class="text-center">
-          <h4>{{'no_data' | translate}}</h4>
+            <h4>{{'no_data' | translate}}</h4>
         </div>
     </ion-content>
 

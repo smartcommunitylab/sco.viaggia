@@ -7,6 +7,11 @@
     </div>
     <div class="map-stop-hline"></div>
     <div class="row map-stop-name">
+        <div class="col col-10" ng-if="isAccessibilitySet() && popupStop.wheelChairBoarding==1">
+            <div class="text-center">
+                <i class="icon ic_ac accessibility"></i>
+            </div>
+        </div>
         <div class="col">
             {{popupStop.name}}
         </div>
