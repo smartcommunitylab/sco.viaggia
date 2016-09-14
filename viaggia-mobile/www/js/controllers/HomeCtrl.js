@@ -172,7 +172,7 @@ angular.module('viaggia.controllers.home', [])
         Config.loaded();
         $scope.showErrorServer();
         trackService.stop();
-      });
+      }).finally(Config.loaded);
 
     }
 

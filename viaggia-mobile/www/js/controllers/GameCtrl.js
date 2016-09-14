@@ -182,7 +182,7 @@ angular.module('viaggia.controllers.game', [])
 
 	/* Infinite scrolling */
 	$scope.loadMore = function () {
-		var start = $scope.ranking.length;
+		var start = $scope.ranking != null ? $scope.ranking.length : 0;
 		var end = start + $scope.rankingPerPage;
 		GameSrv.getRanking($scope.filter.selected, start, end).then(
 			function (ranking) {
@@ -194,7 +194,10 @@ angular.module('viaggia.controllers.game', [])
 				}
 
 				$scope.$broadcast('scroll.infiniteScrollComplete');
-			}
+			}, function(err) {
+		        $scope.maybeMore = false;
+				$scope.$broadcast('scroll.infiniteScrollComplete');
+            }
 		);
 	};
 
