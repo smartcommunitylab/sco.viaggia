@@ -370,16 +370,63 @@ angular.module('viaggia.controllers.tripdetails', [])
     /*****************************************************
      *  TRACKING PROPERTIES. TODO: SIMPLIFY AND MOVE TO THE SERVICE, PASS CALLBACK TO START
      *****************************************************/
+    var startTrack = function () {
+        trackService.start($scope.tripId, $scope.trip, refreshTripDetail)
+            .then(function () {
+                $scope.modifiable = false;
+            }, function (errorCode) {
+                trackService.geolocationPopup();
+            }).finally(Config.loaded);
+    }
     $scope.trackStart = function () {
             if (!$scope.notTrackable()) {
                 Config.loading();
                 //params= trip, idTrip. Enditime is authomatic calculated
-                trackService.start($scope.tripId, $scope.trip, refreshTripDetail)
-                .then(function(){
-                  $scope.modifiable = false;
-                }, function(errorCode) {
-                  trackService.geolocationPopup();
-                }).finally(Config.loaded);
+
+                if (!trackService.trackingIsGoingOn() || trackService.trackingIsFinished()) {
+                    trackService.checkLocalization().then(function (accuracy) {
+                        console.log(accuracy);
+                        startTrack();
+                    }, function (error) {
+                        if (Config.isErrorLowAccuracy(error)) {
+                            Config.loaded();
+                            //popup "do u wanna go on?"
+                            $ionicPopup.confirm({
+                                title: $filter('translate')("pop_up_low_accuracy_title"),
+                                template: $filter('translate')("pop_up_low_accuracy_template"),
+                                buttons: [
+                                    {
+                                        text: $filter('translate')("btn_close"),
+                                        type: 'button-cancel'
+                                },
+                                    {
+                                        text: $filter('translate')("pop_up_low_accuracy_button_go_on"),
+                                        type: 'button-custom',
+                                        onTap: function () {
+                                            startTrack();
+                                        }
+                    }
+                ]
+                            });
+                        } else if (Config.isErrorGPSNoSignal(error)) {
+                            Config.loaded();
+                            //popup "impossible to track" and stop
+                            $ionicPopup.alert({
+                                title: $filter('translate')("pop_up_no_geo_title"),
+                                template: $filter('translate')("pop_up_no_geo_template"),
+                                okText: $filter('translate')("btn_close"),
+                                okType: 'button-cancel'
+                            });
+                        }
+                    });
+
+                }
+                //                trackService.start($scope.tripId, $scope.trip, refreshTripDetail)
+                //                .then(function(){
+                //                  $scope.modifiable = false;
+                //                }, function(errorCode) {
+                //                  trackService.geolocationPopup();
+                //                }).finally(Config.loaded);
             }
         }
         //    $scope.trackState = function () {
@@ -454,25 +501,25 @@ angular.module('viaggia.controllers.tripdetails', [])
         if ($scope.notTrackable()) {
             if (!$scope.isThisJourney() && trackService.trackingIsGoingOn()) {
                 Toast.show($filter('translate')('toast_already_monitoring'), "short", "bottom");
-//            } else if ($scope.isInTime() == -1) {
-//                Toast.show($filter('translate')('toast_before_time'), "short", "bottom");
-//            } else if ($scope.isInTime() == 1) {
-//                Toast.show($filter('translate')('toast_after_time'), "short", "bottom");
+                //            } else if ($scope.isInTime() == -1) {
+                //                Toast.show($filter('translate')('toast_before_time'), "short", "bottom");
+                //            } else if ($scope.isInTime() == 1) {
+                //                Toast.show($filter('translate')('toast_after_time'), "short", "bottom");
             }
         } else if (inTime != 0) {
-          $scope.showConfirm($filter('translate')("popup_start_trip_message"),$filter('translate')("popup_start_trip_title"),$scope.trackStart);
+            $scope.showConfirm($filter('translate')("popup_start_trip_message"), $filter('translate')("popup_start_trip_title"), $scope.trackStart);
         } else {
-          $scope.trackStart();
+            $scope.trackStart();
         }
 
     }
     $scope.trackStop = function () {
         $scope.showConfirm($filter('translate')("sure_delete_text"), $filter('translate')("sure_delete_title"), function () {
-          //sign the trip as already done for the day
-          trackService.stop();
-          $scope.modifiable = true;
-          $scope.isAvailable = false;
-          GameSrv.resetLocalStatus();
+            //sign the trip as already done for the day
+            trackService.stop();
+            $scope.modifiable = true;
+            $scope.isAvailable = false;
+            GameSrv.resetLocalStatus();
         });
 
     }

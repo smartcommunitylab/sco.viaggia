@@ -679,7 +679,7 @@ angular.module('viaggia.services.plan', [])
                     planService.deleteTrip(tripId).then(function (value) {
                         //console.log(JSON.stringify(value));
                         planService.getTrips().then(function (trips) {
-                            trackService.updateNotification(trips, databuilt.clientId, "modify");
+                            trackService.updateNotification(trips, databuilt.clientId, "delete");
                             //change bookmark if present
                             deferred.resolve(databuilt);
 
@@ -916,7 +916,7 @@ angular.module('viaggia.services.plan', [])
                 success(function (data) {
                     localDelete(tripId, deferred);
                     planService.getTrips().then(function (trips) {
-                        trackService.updateNotification(trips, tripId, "modify");
+                        trackService.updateNotification(trips, tripId, "delete");
                         deferred.resolve(true);
 
                     });
@@ -926,7 +926,7 @@ angular.module('viaggia.services.plan', [])
                         localDelete(tripId, deferred);
                         //delete notif
                         planService.getTrips().then(function (trips) {
-                            trackService.updateNotification(trips, tripId, "modify");
+                            trackService.updateNotification(trips, tripId, "delete");
                             deferred.reject(data);
 
                         });

@@ -33,6 +33,8 @@ angular.module('viaggia.services.conf', [])
     var GEOCODER_URL = 'https://os.smartcommunitylab.it/core.geocoder/spring';
     var APP_BUILD = '';
     var PLAN_TYPES = ['WALK', 'TRANSIT', 'CAR', 'BICYCLE', 'SHAREDCAR', 'SHAREDBIKE'];
+    var ERROR_GPS_NO_SIGNAL = "ERROR_GPS_NO_SIGNAL";
+    var ERROR_LOW_ACCURACY = "ERROR_LOW_ACCURACY";
     var convertMeans = function (means) {
         res = [];
         if (means.indexOf('TRANSIT') >= 0) {
@@ -229,9 +231,21 @@ angular.module('viaggia.services.conf', [])
         },
         getTrackingConfig: function () {
             mapJsonConfig['trackingConfigure'].headers = {
-              appId: mapJsonConfig["appid"]
+                appId: mapJsonConfig["appid"]
             };
             return angular.copy(mapJsonConfig['trackingConfigure']);
+        },
+        getErrorGPSNoSignal: function () {
+            return ERROR_GPS_NO_SIGNAL;
+        },
+        getErrorLowAccuracy: function () {
+            return ERROR_LOW_ACCURACY;
+        },
+        isErrorGPSNoSignal: function (error) {
+            return (error === ERROR_GPS_NO_SIGNAL);
+        },
+        isErrorLowAccuracy: function (error) {
+            return (error === ERROR_LOW_ACCURACY);
         },
         getDistanceForAutocomplete: function () {
             return DISTANCE_AUTOCOMPLETE;
@@ -331,16 +345,16 @@ angular.module('viaggia.services.conf', [])
             return mapJsonConfig["extraurban_agencies"];
         },
         getLang: function () {
-//            var browserLanguage = '';
-//            // works for earlier version of Android (2.3.x)
-//            var androidLang;
-//            if ($window.navigator && $window.navigator.userAgent && (androidLang = $window.navigator.userAgent.match(/android.*\W(\w\w)-(\w\w)\W/i))) {
-//                browserLanguage = androidLang[1];
-//            } else {
-//                // works for iOS, Android 4.x and other devices
-//                browserLanguage = $window.navigator.userLanguage || $window.navigator.language;
-//            }
-//            var lang = browserLanguage.substring(0, 2);
+            //            var browserLanguage = '';
+            //            // works for earlier version of Android (2.3.x)
+            //            var androidLang;
+            //            if ($window.navigator && $window.navigator.userAgent && (androidLang = $window.navigator.userAgent.match(/android.*\W(\w\w)-(\w\w)\W/i))) {
+            //                browserLanguage = androidLang[1];
+            //            } else {
+            //                // works for iOS, Android 4.x and other devices
+            //                browserLanguage = $window.navigator.userLanguage || $window.navigator.language;
+            //            }
+            //            var lang = browserLanguage.substring(0, 2);
             var lang = $translate.use();
             if (lang != 'it' && lang != 'en') lang = DEFAULT_LANG;
             return lang;
@@ -453,19 +467,19 @@ angular.module('viaggia.services.conf', [])
         },
         isDarkColor: isDarkColor,
         getAuthServerURL: function () {
-            return mapJsonConfig["AACURL"]+mapJsonConfig["authServerURL"];
+            return mapJsonConfig["AACURL"] + mapJsonConfig["authServerURL"];
         },
         getServerTokenURL: function () {
-            return mapJsonConfig["AACURL"]+mapJsonConfig["serverTokenURL"];
+            return mapJsonConfig["AACURL"] + mapJsonConfig["serverTokenURL"];
         },
         getServerRegisterURL: function () {
-            return mapJsonConfig["AACURL"]+mapJsonConfig["serverRegisterURL"];
+            return mapJsonConfig["AACURL"] + mapJsonConfig["serverRegisterURL"];
         },
         getServerProfileURL: function () {
-            return mapJsonConfig["AACURL"]+'/basicprofile/me';
+            return mapJsonConfig["AACURL"] + '/basicprofile/me';
         },
         getServerAccountProfileURL: function () {
-            return mapJsonConfig["AACURL"]+'/accountprofile/me';
+            return mapJsonConfig["AACURL"] + '/accountprofile/me';
         },
         getAACURL: function () {
             return mapJsonConfig["AACURL"];

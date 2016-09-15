@@ -7,7 +7,7 @@ angular.module('viaggia.services.tracking', [])
         var trackService = {};
         var bgGeo = {};
         var refreshCallback = null;
-
+        var ACCURACY = 100;
         /**
          * initialize bgPlugin. Setup default HTTP response processor for sync operation - clear DB upon successful sync
          */
@@ -64,8 +64,7 @@ angular.module('viaggia.services.tracking', [])
             data.trackingStatus = status;
 
             var url = !transportType ?
-                (Config.getServerURL() + '/gamification/journey/' + idTrip)
-              : (Config.getServerURL() + '/gamification/freetracking/'+ transportType + '/' + idTrip);
+                (Config.getServerURL() + '/gamification/journey/' + idTrip) : (Config.getServerURL() + '/gamification/freetracking/' + transportType + '/' + idTrip);
 
             $http({
                 method: 'PUT',
@@ -75,7 +74,7 @@ angular.module('viaggia.services.tracking', [])
                     //                        'Accept': 'application/json',
                     //                        'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + token,
-                    'appId' : Config.getAppId()
+                    'appId': Config.getAppId()
                 },
                 timeout: Config.getHTTPConfig().timeout
             }).success(function () {
@@ -88,20 +87,45 @@ angular.module('viaggia.services.tracking', [])
 
         }
 
-        /**
-         * check if the specified trip is currently tracked
+        /*
+         *check if GPS signal is present and accurated
+         *
          */
-        trackService.isThisTheJourney = function (tripId) {
-            if (localStorage.getItem(Config.getAppId() + '_tripId') == tripId) {
-                return true;
+        trackService.checkLocalization = function () {
+                var deferred = $q.defer();
+                //check gps and accuracy
+                bgGeo.getCurrentPosition(function (location, taskId) {
+                    if (location.coords.accuracy > ACCURACY) {
+                        deferred.reject(Config.getErrorLowAccuracy());
+                    } else {
+                        deferred.resolve(location.coords.accuracy);
+
+                    }
+                }, function (errorCode) {
+                    console.log(errorCode);
+                    //if 0,1 -> GPS off
+                    deferred.reject(Config.getErrorGPSNoSignal());
+                    //deferred.reject(errorCode);
+                }, {
+                    timeout: 10, // 10 seconds timeout to fetch location
+                    maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
+                });
+                return deferred.promise;
             }
-            return false;
-        }
-        /**
-         * If the specified trip tracking is available for tracking: non recurrent is available on its
-         * specified day, recurrent - on any day corresponding to the recurrency information.
-         * If already tracked for the day, then is not available
-         */
+            /**
+             * check if the specified trip is currently tracked
+             */
+        trackService.isThisTheJourney = function (tripId) {
+                if (localStorage.getItem(Config.getAppId() + '_tripId') == tripId) {
+                    return true;
+                }
+                return false;
+            }
+            /**
+             * If the specified trip tracking is available for tracking: non recurrent is available on its
+             * specified day, recurrent - on any day corresponding to the recurrency information.
+             * If already tracked for the day, then is not available
+             */
         trackService.isAvailableForDay = function (tripId) {
             var date = new Date();
             date.setHours(0, 0, 0, 0);
@@ -113,22 +137,22 @@ angular.module('viaggia.services.tracking', [])
             return true;
         }
 
-        var getEndTime = function(startime, endtime, recurrency) {
+        var getEndTime = function (startime, endtime, recurrency) {
             var now = new Date();
             //if recurrent check only hours if day is correct;
 
             var duration = endtime - startime;
-            var newEndTime = now.getTime()+duration;
-//            if (recurrency && recurrency.daysOfWeek && recurrency.daysOfWeek.length > 0) {
-//                if (Utils.contains(recurrency.daysOfWeek, now.getDay())) {
-////                    var startDate = new Date(now.getTime());
-////                    startDate.setFullYear(now.getFullYear());
-////                    startDate.setMonth(now.getMonth());
-////                    startDate.setDate(now.getDate());
-//                    var timeDate = new Date(now.getTime()+(duration));
-//                    newEndTime = timeDate.getTime();
-//                }
-//            }
+            var newEndTime = now.getTime() + duration;
+            //            if (recurrency && recurrency.daysOfWeek && recurrency.daysOfWeek.length > 0) {
+            //                if (Utils.contains(recurrency.daysOfWeek, now.getDay())) {
+            ////                    var startDate = new Date(now.getTime());
+            ////                    startDate.setFullYear(now.getFullYear());
+            ////                    startDate.setMonth(now.getMonth());
+            ////                    startDate.setDate(now.getDate());
+            //                    var timeDate = new Date(now.getTime()+(duration));
+            //                    newEndTime = timeDate.getTime();
+            //                }
+            //            }
             return newEndTime;
         }
 
@@ -137,131 +161,139 @@ angular.module('viaggia.services.tracking', [])
          * (i.e., current time is within +-threshold from the start time)
          */
         trackService.isInTime = function (startime, recurrency) {
-                // return trackService.isInTime($scope.currentItinerary.startime,$scope.recurrency.daysOfWeek);
-                var now = new Date();
-                //if recurrent check only hours if day is correct;
-                var startTime = startime;
-                if (recurrency && recurrency.daysOfWeek && recurrency.daysOfWeek.length > 0) {
-                    if (Utils.contains(recurrency.daysOfWeek, now.getDay())) {
-                        var startTimeDate = new Date(startime);
-                        //var today = new Date();
-                        startTimeDate.setFullYear(now.getFullYear());
-                        startTimeDate.setMonth(now.getMonth());
-                        startTimeDate.setDate(now.getDate());
-                        startTime = startTimeDate.getTime();
-                    } else return -1;
-                }
-                if (now.getTime() > new Date(startTime + Config.getThresholdStartTime())) {
-                    return 1;
-                }
-                if (now.getTime() < new Date(startTime - Config.getThresholdStartTime())) {
-                    return -1;
-                }
-                return 0;
+            // return trackService.isInTime($scope.currentItinerary.startime,$scope.recurrency.daysOfWeek);
+            var now = new Date();
+            //if recurrent check only hours if day is correct;
+            var startTime = startime;
+            if (recurrency && recurrency.daysOfWeek && recurrency.daysOfWeek.length > 0) {
+                if (Utils.contains(recurrency.daysOfWeek, now.getDay())) {
+                    var startTimeDate = new Date(startime);
+                    //var today = new Date();
+                    startTimeDate.setFullYear(now.getFullYear());
+                    startTimeDate.setMonth(now.getMonth());
+                    startTimeDate.setDate(now.getDate());
+                    startTime = startTimeDate.getTime();
+                } else return -1;
             }
+            if (now.getTime() > new Date(startTime + Config.getThresholdStartTime())) {
+                return 1;
+            }
+            if (now.getTime() < new Date(startTime - Config.getThresholdStartTime())) {
+                return -1;
+            }
+            return 0;
+        }
 
         /**
          * Start direct tracking of the specified transport type
          */
-        trackService.startTransportTrack = function(transport) {
-          var deferred = $q.defer();
-          if (trackService.trackingIsGoingOn() && !trackService.trackingIsFinished()) {
-            deferred.resolve();
-          } else {
-            localStorage.setItem(Config.getAppId() + '_trackedTransport', transport);
-            var ts = new Date().getTime();
-            var tripId = transport + '_' + ts;
-            // default duration set to 1 month
-            trackService.start(tripId, {data:{startime: ts, endtime: ts + 2*24*60*60*1000}}, null)
-            .then(function() {
-              deferred.resolve();
-            }, function(errorCode) {
-              deferred.reject(errorCode);
-            });
-          }
-          return deferred.promise;
+        trackService.startTransportTrack = function (transport) {
+            var deferred = $q.defer();
+            if (trackService.trackingIsGoingOn() && !trackService.trackingIsFinished()) {
+                deferred.resolve();
+            } else {
+                localStorage.setItem(Config.getAppId() + '_trackedTransport', transport);
+                var ts = new Date().getTime();
+                var tripId = transport + '_' + ts;
+                // default duration set to 1 month
+                trackService.start(tripId, {
+                        data: {
+                            startime: ts,
+                            endtime: ts + 2 * 24 * 60 * 60 * 1000
+                        }
+                    }, null)
+                    .then(function () {
+                        deferred.resolve();
+                    }, function (errorCode) {
+                        deferred.reject(errorCode);
+                    });
+            }
+            return deferred.promise;
         }
 
         /**
          * Compute tracked information of the saved track with the specified ID.
          *
          */
-        trackService.computeInfo = function() {
-          var trackId = localStorage.getItem(Config.getAppId() + '_tripId');
-          var deferred = $q.defer();
-//          var testMap = {};
-          bgGeo.getLocations(function(locations, taskId) {
-            bgGeo.finish(taskId);
-            var tripLocs = [];
-            locations.forEach(function(l){
-              if (l.extras && trackId == l.extras.idTrip) {
-                tripLocs.push(l);
-              }
-//              if (l.extras) {
-//                if(testMap[l.extras.idTrip] == null) {
-//                  testMap[l.extras.idTrip] = 0;
-//                }
-//                testMap[l.extras.idTrip] = testMap[l.extras.idTrip] + 1;
-//              }
-            });
-            tripLocs.sort(function(la, lb){
-              return la.timestamp - lb.timestamp;
-            });
+        trackService.computeInfo = function () {
+            var trackId = localStorage.getItem(Config.getAppId() + '_tripId');
+            var deferred = $q.defer();
+            //          var testMap = {};
+            bgGeo.getLocations(function (locations, taskId) {
+                bgGeo.finish(taskId);
+                var tripLocs = [];
+                locations.forEach(function (l) {
+                    if (l.extras && trackId == l.extras.idTrip) {
+                        tripLocs.push(l);
+                    }
+                    //              if (l.extras) {
+                    //                if(testMap[l.extras.idTrip] == null) {
+                    //                  testMap[l.extras.idTrip] = 0;
+                    //                }
+                    //                testMap[l.extras.idTrip] = testMap[l.extras.idTrip] + 1;
+                    //              }
+                });
+                tripLocs.sort(function (la, lb) {
+                    return la.timestamp - lb.timestamp;
+                });
 
-//            alert('found '+ JSON.stringify(testMap));
+                //            alert('found '+ JSON.stringify(testMap));
 
-            var data = {dist : 0, transport : localStorage.getItem(Config.getAppId() + '_trackedTransport'), points: 0, valid: true};
+                var data = {
+                    dist: 0,
+                    transport: localStorage.getItem(Config.getAppId() + '_trackedTransport'),
+                    points: 0,
+                    valid: true
+                };
 
-            var transLocs = GeoLocate.transform(tripLocs);
-            var dist = 0;
-            var maxSpeed = 0;
-            var maxSpeedCount = 0;
-            for (var i = 1; i < transLocs.length; i++) {
-              var iv = GeoLocate.distance([transLocs[i-1].lat,transLocs[i-1].lng],[transLocs[i].lat,transLocs[i].lng]);
-              var time = Math.abs(transLocs[i].timestamp - transLocs[i-1].timestamp);
-              if (time > 0) {
-                var speed = iv * 1000 * 1000 / time;
-                if (checkMaxSpeed(data.transport, speed)) {
-                  maxSpeedCount = 0;
-                } else {
-                  maxSpeedCount++;
-                  if (maxSpeedCount > 3) {
-                    data.valid = false;
-                  }
+                var transLocs = GeoLocate.transform(tripLocs);
+                var dist = 0;
+                var maxSpeed = 0;
+                var maxSpeedCount = 0;
+                for (var i = 1; i < transLocs.length; i++) {
+                    var iv = GeoLocate.distance([transLocs[i - 1].lat, transLocs[i - 1].lng], [transLocs[i].lat, transLocs[i].lng]);
+                    var time = Math.abs(transLocs[i].timestamp - transLocs[i - 1].timestamp);
+                    if (time > 0) {
+                        var speed = iv * 1000 * 1000 / time;
+                        if (checkMaxSpeed(data.transport, speed)) {
+                            maxSpeedCount = 0;
+                        } else {
+                            maxSpeedCount++;
+                            if (maxSpeedCount > 3) {
+                                data.valid = false;
+                            }
+                        }
+                        maxSpeed = Math.max(maxSpeed, speed);
+                    }
+                    dist += iv;
                 }
-                maxSpeed = Math.max(maxSpeed, speed);
-              }
-              dist += iv;
-            }
-            if (tripLocs.length > 0) {
-              data.dist = dist*1000; // in meters
-              data.start = tripLocs[0].timestamp;
-              data.end = tripLocs[tripLocs.length - 1].timestamp;
-              data.avgSpeed = data.dist / (data.end - data.start) * 1000; // in m/s
-              data.maxSpeed = maxSpeed; // in m/s
-              if (data.transport == 'walk') {
-                data.points = data.dist > 250 ? Math.round(Math.min(53,data.dist / 1000 * 10 * 1.5)) : 0;
-                data.valid = data.valid && (data.avgSpeed*3.6) < 15; // avg (max) speed should be less than 15 (20) km/h (consider running)
-              }
-              else if (data.transport == 'bike') {
-                data.points = Math.round(Math.min(53,data.dist / 1000 * 5 * 1.5));
-                data.valid = data.valid && (data.avgSpeed*3.6) < 27; // avg (max) speed should be less than 15 (65) km/h
-              }
-              else {
-                data.points = localStorage.getItem(Config.getAppId() + '_expectedPoints');
-              }
-            }
-            deferred.resolve(data);
-          },function(error) {
-            deferred.reject();
-          });
-          return deferred.promise;
+                if (tripLocs.length > 0) {
+                    data.dist = dist * 1000; // in meters
+                    data.start = tripLocs[0].timestamp;
+                    data.end = tripLocs[tripLocs.length - 1].timestamp;
+                    data.avgSpeed = data.dist / (data.end - data.start) * 1000; // in m/s
+                    data.maxSpeed = maxSpeed; // in m/s
+                    if (data.transport == 'walk') {
+                        data.points = data.dist > 250 ? Math.round(Math.min(53, data.dist / 1000 * 10 * 1.5)) : 0;
+                        data.valid = data.valid && (data.avgSpeed * 3.6) < 15; // avg (max) speed should be less than 15 (20) km/h (consider running)
+                    } else if (data.transport == 'bike') {
+                        data.points = Math.round(Math.min(53, data.dist / 1000 * 5 * 1.5));
+                        data.valid = data.valid && (data.avgSpeed * 3.6) < 27; // avg (max) speed should be less than 15 (65) km/h
+                    } else {
+                        data.points = localStorage.getItem(Config.getAppId() + '_expectedPoints');
+                    }
+                }
+                deferred.resolve(data);
+            }, function (error) {
+                deferred.reject();
+            });
+            return deferred.promise;
         }
 
-        var checkMaxSpeed = function(mean, speed) {
-          if (mean == 'walk') return (speed * 3.6 < 20);
-          else if (mean == 'bike') return (speed * 3.6 < 65);
-          else return true;
+        var checkMaxSpeed = function (mean, speed) {
+            if (mean == 'walk') return (speed * 3.6 < 20);
+            else if (mean == 'bike') return (speed * 3.6 < 65);
+            else return true;
         }
 
         /**
@@ -277,7 +309,7 @@ angular.module('viaggia.services.tracking', [])
                 var endtimeDate = null;
                 var startTimestamp = null;
                 if (trip) {
-                    endtimeDate = new Date(getEndTime(Number(trip.data.startime),Number(trip.data.endtime), trip.recurrency));
+                    endtimeDate = new Date(getEndTime(Number(trip.data.startime), Number(trip.data.endtime), trip.recurrency));
                     startTimestamp = new Date().getTime();
                 } else {
                     var lastRememberedEnd = localStorage.getItem(Config.getAppId() + '_endTimestamp');
@@ -314,14 +346,14 @@ angular.module('viaggia.services.tracking', [])
                     localStorage.setItem(Config.getAppId() + '_startTimestamp', startTimestamp);
                     localStorage.setItem(Config.getAppId() + '_endTimestamp', endtime);
                     if (trip.data && trip.data.customData) {
-                      localStorage.setItem(Config.getAppId() + '_expectedPoints', trip.data.customData['estimatedScore']);
+                        localStorage.setItem(Config.getAppId() + '_expectedPoints', trip.data.customData['estimatedScore']);
                     }
                     //taggo la prima locazione con parametro extra
                 }
 
                 if (!bgGeo) {
-                  deferred.resolve();
-                  return;
+                    deferred.resolve();
+                    return;
                 }
 
                 bgGeo.configure(trackingConfigure, callbackFn, failureFn);
@@ -335,48 +367,74 @@ angular.module('viaggia.services.tracking', [])
                 //                    if (callback) callback();
                 //                }, 60000);
 
-                var ACCURACY = 1000;
+
                 bgGeo.start(function () {
                     bgGeo.changePace(true);
                     if (trip) {
-                      bgGeo.getCurrentPosition(function (location, taskId) {
-                          if (location.coords.accuracy > ACCURACY) {
-                            bgGeo.finish(taskId);
+                        //                        sendServerStart(idTrip, token, transportType, -1);
+                        //                        //console.log("-Current position received: ", location);
+                        //                        location.extras = {
+                        //                            idTrip: idTrip,
+                        //                            start: startTimestamp,
+                        //                            transportType: transportType
+                        //                        }; // <-- add some arbitrary extras-data
+                        //                        //                      // Insert it.
+                        //                        bgGeo.insertLocation(location, function () {
+                        //                            bgGeo.finish(taskId);
+                        //                        });
+                        //                        deferred.resolve();
+                        //                        bgGeo.setConfig({
+                        //                            timeout: 10, // 10 seconds timeout to fetch location
+                        //                            maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
+                        //                            desiredAccuracy: ACCURACY, // Fetch a location with a minimum accuracy of ACCURACY meters.
+                        //                            extras: {
+                        //                                idTrip: idTrip,
+                        //                                start: startTimestamp,
+                        //                                transportType: transportType
+                        //                            }
+                        //                        }, function () {
+                        //                            console.log('set config success');
+                        //                        }, function () {
+                        //                            console.log('failed to setConfig');
+                        //                        });
+                        bgGeo.getCurrentPosition(function (location, taskId) {
+                            if (location.coords.accuracy > ACCURACY) {
+                                bgGeo.finish(taskId);
+                                bgGeo.stop();
+                                clean();
+                                deferred.reject(); //check if reject for good cases
+                                return;
+                            }
+                            sendServerStart(idTrip, token, transportType, -1);
+                            //console.log("-Current position received: ", location);
+                            location.extras = {
+                                idTrip: idTrip,
+                                start: startTimestamp,
+                                transportType: transportType
+                            }; // <-- add some arbitrary extras-data
+                            //                      // Insert it.
+                            bgGeo.insertLocation(location, function () {
+                                bgGeo.finish(taskId);
+                            });
+                            deferred.resolve();
+                        }, function (errorCode) {
                             bgGeo.stop();
+                            //sendServerStart(idTrip, token, transportType, errorCode);
                             clean();
-                            deferred.reject();
-                            return;
-                          }
-                          sendServerStart(idTrip, token, transportType, -1);
-                          //console.log("-Current position received: ", location);
-                          location.extras = {
-                              idTrip: idTrip,
-                              start: startTimestamp,
-                              transportType: transportType
-                          }; // <-- add some arbitrary extras-data
-                          //                      // Insert it.
-                          bgGeo.insertLocation(location, function () {
-                              bgGeo.finish(taskId);
-                          });
-                          deferred.resolve();
-                      }, function (errorCode) {
-                          bgGeo.stop();
-                          //sendServerStart(idTrip, token, transportType, errorCode);
-                          clean();
-                          deferred.reject(errorCode);
-                      }, {
-                          timeout: 10, // 10 seconds timeout to fetch location
-                          maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
-                          //minimumAccuracy: ACCURACY,
-                          desiredAccuracy: ACCURACY,// Fetch a location with a minimum accuracy of ACCURACY meters.
-                          extras: {
-                              idTrip: idTrip,
-                              start: startTimestamp,
-                              transportType: transportType
-                          }
-                      });
+                            deferred.reject(errorCode);
+                        }, {
+                            timeout: 10, // 10 seconds timeout to fetch location
+                            maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
+                            //minimumAccuracy: ACCURACY,
+                            desiredAccuracy: ACCURACY, // Fetch a location with a minimum accuracy of ACCURACY meters.
+                            extras: {
+                                idTrip: idTrip,
+                                start: startTimestamp,
+                                transportType: transportType
+                            }
+                        });
                     } else {
-                      deferred.resolve();
+                        deferred.resolve();
                     }
                 });
 
@@ -392,53 +450,56 @@ angular.module('viaggia.services.tracking', [])
                 trackingConfigure['url'] += token;
                 trackingConfigure['foregroundService'] = false;
                 if (!bgGeo) {
-                  deferred.resolve(true);
-                  return;
+                    deferred.resolve(true);
+                    return;
                 }
                 bgGeo.configure(trackingConfigure, callbackFn, failureFn);
                 bgGeo.start(function () {
-                  bgGeo.getLocations(function(locations, taskId) {
-                    bgGeo.finish(taskId);
-                    if (locations == null || locations.length == 0) {
-                      deferred.resolve(true);
-                      return;
-                    }
-                    $http({
-                        method: 'POST',
-                        url: trackingConfigure['url'],
-                        data: {location: locations, device: ionic.Platform.device()},
-                        headers: {
-                            'appId' : Config.getAppId()
-                        }
-                    }).then(function (response) {
-                        console.log('Geo Sync SUCCESS: '+locations.length);
-                        if (response.status == 200 && response.data && 'OK' == response.data.storeResult) {
-                            bgGeo.clearDatabase(function () {
-                                console.log('- cleared database');
-                            });
+                    bgGeo.getLocations(function (locations, taskId) {
+                        bgGeo.finish(taskId);
+                        if (locations == null || locations.length == 0) {
                             deferred.resolve(true);
-                        } else {
-                        console.log('Geo Sync FAILURE: ' + JSON.stringify(response));
-                          deferred.resolve(false);
+                            return;
                         }
-                    }, function (err) {
-                        console.log('Geo Sync FAILURE: ' + JSON.stringify(err));
-                        console.log(err)
+                        $http({
+                            method: 'POST',
+                            url: trackingConfigure['url'],
+                            data: {
+                                location: locations,
+                                device: ionic.Platform.device()
+                            },
+                            headers: {
+                                'appId': Config.getAppId()
+                            }
+                        }).then(function (response) {
+                            console.log('Geo Sync SUCCESS: ' + locations.length);
+                            if (response.status == 200 && response.data && 'OK' == response.data.storeResult) {
+                                bgGeo.clearDatabase(function () {
+                                    console.log('- cleared database');
+                                });
+                                deferred.resolve(true);
+                            } else {
+                                console.log('Geo Sync FAILURE: ' + JSON.stringify(response));
+                                deferred.resolve(false);
+                            }
+                        }, function (err) {
+                            console.log('Geo Sync FAILURE: ' + JSON.stringify(err));
+                            console.log(err)
+                            deferred.resolve(false);
+                        });
+
+                    }, function (error) {
                         deferred.resolve(false);
                     });
-
-                  },function(error) {
-                    deferred.resolve(false);
-                  });
-//                    bgGeo.sync(function (locations, taskId) {
-//                        console.log('synced locations: ', locations);
-//                        // Be sure to call finish(taskId) in order to signal the end of the background-thread.
-//                        bgGeo.finish(taskId);
-//                        deferred.resolve(true);
-//                    }, function (errorMessage) {
-//                        console.log('Sync FAILURE: ' + errorMessage);
-//                        deferred.resolve(false);
-//                    });
+                    //                    bgGeo.sync(function (locations, taskId) {
+                    //                        console.log('synced locations: ', locations);
+                    //                        // Be sure to call finish(taskId) in order to signal the end of the background-thread.
+                    //                        bgGeo.finish(taskId);
+                    //                        deferred.resolve(true);
+                    //                    }, function (errorMessage) {
+                    //                        console.log('Sync FAILURE: ' + errorMessage);
+                    //                        deferred.resolve(false);
+                    //                    });
                 });
             }, function () {
                 // no token obtained
@@ -524,14 +585,14 @@ angular.module('viaggia.services.tracking', [])
          * Return type of transport used for direct tracking (if any)
          */
         trackService.trackedTransport = function () {
-          return localStorage.getItem(Config.getAppId() + '_trackedTransport');
+            return localStorage.getItem(Config.getAppId() + '_trackedTransport');
         }
 
         /**
          * Return timestamp of the tracking start.
          */
         trackService.trackingTimeStart = function () {
-          return new Date(Number(localStorage.getItem(Config.getAppId() + '_startTimestamp')));
+            return new Date(Number(localStorage.getItem(Config.getAppId() + '_startTimestamp')));
         }
 
         /**
@@ -544,9 +605,9 @@ angular.module('viaggia.services.tracking', [])
                 }
                 return false;
             }
-        /**
-         * This callback will be executed every time a geolocation is recorded in the background.
-         */
+            /**
+             * This callback will be executed every time a geolocation is recorded in the background.
+             */
         var callbackFn = function () {
             console.log('[js] BackgroundGeoLocation configure callback');
         };
@@ -569,17 +630,17 @@ angular.module('viaggia.services.tracking', [])
         /**
          * Popup to show in case no geolocation options are available
          */
-        trackService.geolocationPopup = function() {
-          $ionicPopup.alert({
-            title: $filter('translate')("pop_up_no_geo_title"),
-            template: $filter('translate')("pop_up_no_geo_template"),
-            buttons: [
-                {
-                    text: $filter('translate')("btn_close"),
-                    type: 'button-custom'
+        trackService.geolocationPopup = function () {
+            $ionicPopup.alert({
+                title: $filter('translate')("pop_up_no_geo_title"),
+                template: $filter('translate')("pop_up_no_geo_template"),
+                buttons: [
+                    {
+                        text: $filter('translate')("btn_close"),
+                        type: 'button-custom'
                 }
             ]
-          });
+            });
         }
 
         /**
@@ -602,6 +663,13 @@ angular.module('viaggia.services.tracking', [])
                 }
                 cordova.plugins.notification.local.clearAll(function () {
                     //for all trips regens notifications
+                    cordova.plugins.notification.local.cancelAll(function () {
+                        cordova.plugins.notification.local.getAll(function (notifications) {
+                            console.log(JSON.stringify(notifications));
+                        });
+                    });
+
+
                     action = "create";
                     var idNotification = 0;
                     for (var k = 0; k < tripsArray.length; k++) {
@@ -708,6 +776,7 @@ angular.module('viaggia.services.tracking', [])
 
                             break;
                         }
+
                     }
                 }, this);
 
@@ -760,71 +829,78 @@ angular.module('viaggia.services.tracking', [])
         };
 
 
-      // FOR testing only
-      trackService.checkLocations = function() {
+        // FOR testing only
+        trackService.checkLocations = function () {
 
-            var NumberLong = function(n) {
-              return n;
+            var NumberLong = function (n) {
+                return n;
             }
-            var ISODate = function(s) {
-              return new Date(s);
+            var ISODate = function (s) {
+                return new Date(s);
             }
             var locations = [];
             var tripLocs = [];
-            locations.forEach(function(l){
-              l.timestamp = l.recorded_at.getTime();
-              l.coords = {latitude: l.latitude, longitude: l.longitude, accuracy: l.accuracy};
+            locations.forEach(function (l) {
+                l.timestamp = l.recorded_at.getTime();
+                l.coords = {
+                    latitude: l.latitude,
+                    longitude: l.longitude,
+                    accuracy: l.accuracy
+                };
                 tripLocs.push(l);
             });
-            tripLocs.sort(function(la, lb){
-              return la.timestamp - lb.timestamp;
+            tripLocs.sort(function (la, lb) {
+                return la.timestamp - lb.timestamp;
             });
 
-            var data = {dist : 0, transport : 'bike', points: 0, valid: true};
+            var data = {
+                dist: 0,
+                transport: 'bike',
+                points: 0,
+                valid: true
+            };
 
             var transLocs = GeoLocate.transform(tripLocs);
-            transLocs.sort(function(la, lb){
-              return la.timestamp - lb.timestamp;
+            transLocs.sort(function (la, lb) {
+                return la.timestamp - lb.timestamp;
             });
             var dist = 0;
             var maxSpeed = 0;
             var maxSpeedCount = 0;
             for (var i = 1; i < transLocs.length; i++) {
-              var iv = GeoLocate.distance([transLocs[i-1].lat,transLocs[i-1].lng],[transLocs[i].lat,transLocs[i].lng]);
-              var time = Math.abs(transLocs[i].timestamp - transLocs[i-1].timestamp);
-              if (time > 0) {
-                var speed = iv * 1000 * 1000 / time;
-                if (checkMaxSpeed(data.transport, speed)) {
-                  maxSpeedCount = 0;
-                } else {
-                  maxSpeedCount++;
-                  if (maxSpeedCount > 3) {
-                    data.valid = false;
-                  }
+                var iv = GeoLocate.distance([transLocs[i - 1].lat, transLocs[i - 1].lng], [transLocs[i].lat, transLocs[i].lng]);
+                var time = Math.abs(transLocs[i].timestamp - transLocs[i - 1].timestamp);
+                if (time > 0) {
+                    var speed = iv * 1000 * 1000 / time;
+                    if (checkMaxSpeed(data.transport, speed)) {
+                        maxSpeedCount = 0;
+                    } else {
+                        maxSpeedCount++;
+                        if (maxSpeedCount > 3) {
+                            data.valid = false;
+                        }
+                    }
+                    maxSpeed = Math.max(maxSpeed, speed);
                 }
-                maxSpeed = Math.max(maxSpeed, speed);
-              }
-              dist += iv;
+                dist += iv;
             }
             if (tripLocs.length > 0) {
-              data.dist = dist*1000; // in meters
-              data.start = tripLocs[0].timestamp;
-              data.end = tripLocs[tripLocs.length - 1].timestamp;
-              data.avgSpeed = data.dist / (data.end - data.start) * 1000; // in m/s
-              data.maxSpeed = maxSpeed; // in m/s
-              if (data.transport == 'walk') {
-                data.points = data.dist > 250 ? Math.round(Math.min(53,data.dist / 1000 * 10 * 1.5)) : 0;
-                data.valid = data.valid && (data.avgSpeed*3.6) < 15; // avg (max) speed should be less than 15 (20) km/h (consider running)
-              }
-              else if (data.transport == 'bike') {
-                data.points = Math.round(Math.min(53,data.dist / 1000 * 5 * 1.5));
-                data.valid = data.valid && (data.avgSpeed*3.6) < 27; // avg (max) speed should be less than 15 (65) km/h
-              }
-              else {
-                data.points = localStorage.getItem(Config.getAppId() + '_expectedPoints');
-              }
+                data.dist = dist * 1000; // in meters
+                data.start = tripLocs[0].timestamp;
+                data.end = tripLocs[tripLocs.length - 1].timestamp;
+                data.avgSpeed = data.dist / (data.end - data.start) * 1000; // in m/s
+                data.maxSpeed = maxSpeed; // in m/s
+                if (data.transport == 'walk') {
+                    data.points = data.dist > 250 ? Math.round(Math.min(53, data.dist / 1000 * 10 * 1.5)) : 0;
+                    data.valid = data.valid && (data.avgSpeed * 3.6) < 15; // avg (max) speed should be less than 15 (20) km/h (consider running)
+                } else if (data.transport == 'bike') {
+                    data.points = Math.round(Math.min(53, data.dist / 1000 * 5 * 1.5));
+                    data.valid = data.valid && (data.avgSpeed * 3.6) < 27; // avg (max) speed should be less than 15 (65) km/h
+                } else {
+                    data.points = localStorage.getItem(Config.getAppId() + '_expectedPoints');
+                }
             }
-    }
+        }
         return trackService;
     })
 
