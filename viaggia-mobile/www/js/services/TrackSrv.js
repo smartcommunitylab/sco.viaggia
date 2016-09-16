@@ -371,40 +371,14 @@ angular.module('viaggia.services.tracking', [])
                 bgGeo.start(function () {
                     bgGeo.changePace(true);
                     if (trip) {
-                        //                        sendServerStart(idTrip, token, transportType, -1);
-                        //                        //console.log("-Current position received: ", location);
-                        //                        location.extras = {
-                        //                            idTrip: idTrip,
-                        //                            start: startTimestamp,
-                        //                            transportType: transportType
-                        //                        }; // <-- add some arbitrary extras-data
-                        //                        //                      // Insert it.
-                        //                        bgGeo.insertLocation(location, function () {
-                        //                            bgGeo.finish(taskId);
-                        //                        });
-                        //                        deferred.resolve();
-                        //                        bgGeo.setConfig({
-                        //                            timeout: 10, // 10 seconds timeout to fetch location
-                        //                            maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
-                        //                            desiredAccuracy: ACCURACY, // Fetch a location with a minimum accuracy of ACCURACY meters.
-                        //                            extras: {
-                        //                                idTrip: idTrip,
-                        //                                start: startTimestamp,
-                        //                                transportType: transportType
-                        //                            }
-                        //                        }, function () {
-                        //                            console.log('set config success');
-                        //                        }, function () {
-                        //                            console.log('failed to setConfig');
-                        //                        });
                         bgGeo.getCurrentPosition(function (location, taskId) {
-                            if (location.coords.accuracy > ACCURACY) {
-                                bgGeo.finish(taskId);
-                                bgGeo.stop();
-                                clean();
-                                deferred.reject(); //check if reject for good cases
-                                return;
-                            }
+//                            if (location.coords.accuracy > ACCURACY) {
+//                                bgGeo.finish(taskId);
+//                                bgGeo.stop();
+//                                clean();
+//                                deferred.reject(); //check if reject for good cases
+//                                return;
+//                            }
                             sendServerStart(idTrip, token, transportType, -1);
                             //console.log("-Current position received: ", location);
                             location.extras = {
