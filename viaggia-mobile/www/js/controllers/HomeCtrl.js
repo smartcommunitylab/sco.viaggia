@@ -119,51 +119,54 @@ angular.module('viaggia.controllers.home', [])
     }
 
     var startTransportTrack = function (transportType) {
+        $scope.trackingIsOn = true;
         trackService.startTransportTrack(transportType).then(function () {
-            $scope.trackingIsOn = true;
             updateTrackingInfo();
         }, function (errorCode) {
+            $scope.trackingIsOn = false;
             trackService.geolocationPopup();
         }).finally(Config.loaded());
     }
     $scope.startTracking = function (transportType) {
-        Config.loading();
-        if (!trackService.trackingIsGoingOn() || trackService.trackingIsFinished()) {
-            trackService.checkLocalization().then(function () {
-                startTransportTrack();
-            }, function (error) {
-                if (Config.isErrorLowAccuracy(error)) {
-                    Config.loaded();
-                    //popup "do u wanna go on?"
-                    $ionicPopup.confirm({
-                        title: $filter('translate')("pop_up_low_accuracy_title"),
-                        template: $filter('translate')("pop_up_low_accuracy_template"),
-                        buttons: [
-                            {
-                                text: $filter('translate')("btn_close"),
-                                type: 'button-cancel'
+        if (!$rootScope.syncRunning) {
+            Config.loading();
+            if (!trackService.trackingIsGoingOn() || trackService.trackingIsFinished()) {
+                trackService.checkLocalization().then(function () {
+                    startTransportTrack();
+                }, function (error) {
+                    if (Config.isErrorLowAccuracy(error)) {
+                        Config.loaded();
+                        //popup "do u wanna go on?"
+                        $ionicPopup.confirm({
+                            title: $filter('translate')("pop_up_low_accuracy_title"),
+                            template: $filter('translate')("pop_up_low_accuracy_template"),
+                            buttons: [
+                                {
+                                    text: $filter('translate')("btn_close"),
+                                    type: 'button-cancel'
                                 },
-                            {
-                                text: $filter('translate')("pop_up_low_accuracy_button_go_on"),
-                                type: 'button-custom',
-                                onTap: function () {
-                                    startTransportTrack();
-                                }
+                                {
+                                    text: $filter('translate')("pop_up_low_accuracy_button_go_on"),
+                                    type: 'button-custom',
+                                    onTap: function () {
+                                        startTransportTrack();
+                                    }
                     }
                 ]
-                    });
-                } else if (Config.isErrorGPSNoSignal(error)) {
-                    Config.loaded();
-                    //popup "impossible to track" and stop
-                    $ionicPopup.alert({
-                        title: $filter('translate')("pop_up_no_geo_title"),
-                        template: $filter('translate')("pop_up_no_geo_template"),
-                        okText: $filter('translate')("btn_close"),
-                        okType: 'button-cancel'
-                    });
-                }
-            });
+                        });
+                    } else if (Config.isErrorGPSNoSignal(error)) {
+                        Config.loaded();
+                        //popup "impossible to track" and stop
+                        $ionicPopup.alert({
+                            title: $filter('translate')("pop_up_no_geo_title"),
+                            template: $filter('translate')("pop_up_no_geo_template"),
+                            okText: $filter('translate')("btn_close"),
+                            okType: 'button-cancel'
+                        });
+                    }
+                });
 
+            }
         }
     }
     $scope.stopTracking = function () {

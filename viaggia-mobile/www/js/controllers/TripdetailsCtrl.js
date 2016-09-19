@@ -496,22 +496,24 @@ angular.module('viaggia.controllers.tripdetails', [])
     //        return false;
     //    }
     $scope.startOrShowPopupIfNotThisJourney = function () {
-        var inTime = $scope.isInTime();
+        if (!$rootScope.syncRunning) {
 
-        if ($scope.notTrackable()) {
-            if (!$scope.isThisJourney() && trackService.trackingIsGoingOn()) {
-                Toast.show($filter('translate')('toast_already_monitoring'), "short", "bottom");
-                //            } else if ($scope.isInTime() == -1) {
-                //                Toast.show($filter('translate')('toast_before_time'), "short", "bottom");
-                //            } else if ($scope.isInTime() == 1) {
-                //                Toast.show($filter('translate')('toast_after_time'), "short", "bottom");
+            var inTime = $scope.isInTime();
+
+            if ($scope.notTrackable()) {
+                if (!$scope.isThisJourney() && trackService.trackingIsGoingOn()) {
+                    Toast.show($filter('translate')('toast_already_monitoring'), "short", "bottom");
+                    //            } else if ($scope.isInTime() == -1) {
+                    //                Toast.show($filter('translate')('toast_before_time'), "short", "bottom");
+                    //            } else if ($scope.isInTime() == 1) {
+                    //                Toast.show($filter('translate')('toast_after_time'), "short", "bottom");
+                }
+            } else if (inTime != 0) {
+                $scope.showConfirm($filter('translate')("popup_start_trip_message"), $filter('translate')("popup_start_trip_title"), $scope.trackStart);
+            } else {
+                $scope.trackStart();
             }
-        } else if (inTime != 0) {
-            $scope.showConfirm($filter('translate')("popup_start_trip_message"), $filter('translate')("popup_start_trip_title"), $scope.trackStart);
-        } else {
-            $scope.trackStart();
         }
-
     }
     $scope.trackStop = function () {
         $scope.showConfirm($filter('translate')("sure_delete_text"), $filter('translate')("sure_delete_title"), function () {

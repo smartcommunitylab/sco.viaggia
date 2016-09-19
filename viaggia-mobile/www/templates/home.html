@@ -1,91 +1,93 @@
 <ion-view>
-	<ion-nav-title>
-		{{title}}
-	</ion-nav-title>
-	<ion-nav-buttons side="right">
-		<!--
+    <ion-nav-title>
+        {{title}}
+    </ion-nav-title>
+    <ion-nav-buttons side="right">
+        <!--
 		<button ng-click="openNotifications()" class="button button-icon button-home ic_notification">
 			<span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{countNotification}}</span>
 		</button>
 		-->
-		<button ng-click="openNotifications()" class="button button-icon button-home ic_notification"><span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span></button>
-	</ion-nav-buttons>
+        <button ng-click="openNotifications()" class="button button-icon button-home ic_notification"><span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span></button>
+    </ion-nav-buttons>
 
-	<ion-content ng-class="{'empty_bookmarks': primaryLinks.length == 0}" ng-init="showTutorial()">
-		<!--
+    <ion-content ng-class="{'empty_bookmarks': primaryLinks.length == 0}" ng-init="showTutorial()">
+        <!--
         <div id="map-container" data-tap-disabled="true">
             <leaflet event-broadcast="events" center="center" markers="markers" paths="pathLine" style="width: 100%; height: 320px;" ng-init="initMap()"  id="homeMap"></leaflet>
         </div>
 		-->
-		<div class="sponsor_banner" ng-if="weekly_sponsor!=null">
-			<div class="row">
-				<div class=" col col-center sponsor_text">
-					<span>{{'sponsor_week' | translate}}</span>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col col-center">
-					<img class="image center" ng-src="{{weekly_sponsor.img}}" width="100%" ng-click="openSponsorLink(weekly_sponsor.link)" />
-				</div>
-			</div>
-		</div>
+        <div class="sponsor_banner" ng-if="weekly_sponsor!=null">
+            <div class="row">
+                <div class=" col col-center sponsor_text">
+                    <span>{{'sponsor_week' | translate}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-center">
+                    <img class="image center" ng-src="{{weekly_sponsor.img}}" width="100%" ng-click="openSponsorLink(weekly_sponsor.link)" />
+                </div>
+            </div>
+        </div>
 
-		<div class="tracking-dashboard">
-			<div ng-if="trackingIsOn">
-				<div class="row">
-					<div class="col text-center">
-						<h4><i class="icon ion-leaf"></i>{{'play_is_on' | translate}}</h4>
-						<div ng-if="trackingInfo.transport"><b>{{'play_is_on_for' | translate: trackingInfo}}</b></div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col text-center">
-						<button class="button button-stop" ng-click="stopTracking()">{{'stop_tracking' | translate}}</button>
-					</div>
-				</div>
-			</div>
-			<div ng-if="!trackingIsOn">
-				<div class="row">
-					<div class="col text-center">
-						<h4><i class="icon ion-leaf"></i>{{'play_now' | translate}}</h4>
-						<div><b>{{'play_now_sub' | translate}}</b></div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col">
-						<a ng-click="openSavedTracks()">
-							<div class="tracking-ds-button"><i class="icon ic_folder"></i><span>{{'track_saved' | translate}}</span></div>
-						</a>
-					</div>
-					<div class="col">
-						<a ng-click="startTracking('walk')">
-							<div class="tracking-ds-button"><i class="icon ic_foot"></i><span>{{'track_walk' | translate}}</span></div>
-						</a>
-					</div>
-					<div class="col">
-						<a ng-click="startTracking('bike')">
-							<div class="tracking-ds-button"><i class="icon ic_bike"></i><span>{{'track_bike' | translate}}</span></div>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
+        <div class="tracking-dashboard">
+            <div ng-if="trackingIsOn">
+                <div class="row">
+                    <div class="col text-center">
+                        <h4><i class="icon ion-leaf"></i>{{'play_is_on' | translate}}</h4>
+                        <div ng-if="trackingInfo.transport"><b>{{'play_is_on_for' | translate: trackingInfo}}</b></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <button class="button button-stop" ng-click="stopTracking()">{{'stop_tracking' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="!trackingIsOn">
+                <div class="row">
+                    <div class="col text-center">
+                        <h4><i class="icon ion-leaf"></i>{{'play_now' | translate}}</h4>
+                        <div ng-if="!syncRunning"><b>{{'play_now_sub' | translate}}</b></div>
+                        <div ng-if="syncRunning"><b>{{'wait_synch_running' | translate}}</b></div>
+                    </div>
+                </div>
 
-		<div ng-if="primaryLinks.length==0">
-			<ng-include src="'templates/emptyHomepage.html'"></ng-include>
-		</div>
+                <div class="row" ng-class="{'synch':syncRunning}">
+                    <div class="col">
+                        <a ng-click="openSavedTracks()">
+                            <div class="tracking-ds-button"><i class="icon ic_folder"></i><span>{{'track_saved' | translate}}</span></div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a ng-click="startTracking('walk')">
+                            <div class="tracking-ds-button"><i class="icon ic_foot"></i><span>{{'track_walk' | translate}}</span></div>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a ng-click="startTracking('bike')">
+                            <div class="tracking-ds-button"><i class="icon ic_bike"></i><span>{{'track_bike' | translate}}</span></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		<ion-list class="home-list" ng-if="primaryLinks.length>0">
-			<ion-item ng-repeat="m in primaryLinks" ng-last-repeat="primaryLinks" ng-click="go(m.state)">
-				<button class="button button-block">
-					<div class="row">
-						<i class="col-center icon" ng-class="m.icon" style="{{'color: ' + m.color}}"></i>
-						<div class="col col-center">
-							<ng-include src="getBookmarkItemTemplate(m.type)"></ng-include>
-						</div>
-					</div>
-				</button>
-			</ion-item>
-		</ion-list>
-	</ion-content>
+        <div ng-if="primaryLinks.length==0">
+            <ng-include src="'templates/emptyHomepage.html'"></ng-include>
+        </div>
+
+        <ion-list class="home-list" ng-if="primaryLinks.length>0">
+            <ion-item ng-repeat="m in primaryLinks" ng-last-repeat="primaryLinks" ng-click="go(m.state)">
+                <button class="button button-block">
+                    <div class="row">
+                        <i class="col-center icon" ng-class="m.icon" style="{{'color: ' + m.color}}"></i>
+                        <div class="col col-center">
+                            <ng-include src="getBookmarkItemTemplate(m.type)"></ng-include>
+                        </div>
+                    </div>
+                </button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
 </ion-view>

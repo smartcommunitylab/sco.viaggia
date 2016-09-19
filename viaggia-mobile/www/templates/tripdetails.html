@@ -17,9 +17,9 @@
                     <div class="panel-body">
                         <div>
                             <div ng-if="!isAvailableForDay() && !editMode">
-                              {{'toast_already_monitored'|translate}}
+                                {{'toast_already_monitored'|translate}}
                             </div>
-                            <div ng-if="isAvailableForDay() && !editMode">
+                            <div ng-if="isAvailableForDay() && !editMode" ng-class="{'synch':syncRunning}">
                                 <div ng-class="{'fog': notTrackable()}" ng-click="startOrShowPopupIfNotThisJourney()">
                                     <button class="button button-start button-block" ng-show="!isTracking()&&tripId!=null">{{'labl_start_tracking'|translate}} </button>
                                 </div>

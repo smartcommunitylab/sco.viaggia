@@ -1,5 +1,5 @@
 angular.module('viaggia.services.tracking', [])
-    .factory('trackService', function (Config, $q, $http, $state, $timeout, $filter, userService, $ionicPlatform, $ionicPopup, Utils, GeoLocate) {
+    .factory('trackService', function (Config, $q, $http, $state, $timeout, $filter, userService, $ionicPlatform, $ionicPopup, $rootScope, Utils, GeoLocate) {
         //var trackingIntervalInMs = 500;
         //var accelerationDetectionIntervalInMs = 500;
         //var accelerationSensorDelay = 0;
@@ -372,13 +372,13 @@ angular.module('viaggia.services.tracking', [])
                     bgGeo.changePace(true);
                     if (trip) {
                         bgGeo.getCurrentPosition(function (location, taskId) {
-//                            if (location.coords.accuracy > ACCURACY) {
-//                                bgGeo.finish(taskId);
-//                                bgGeo.stop();
-//                                clean();
-//                                deferred.reject(); //check if reject for good cases
-//                                return;
-//                            }
+                            //                            if (location.coords.accuracy > ACCURACY) {
+                            //                                bgGeo.finish(taskId);
+                            //                                bgGeo.stop();
+                            //                                clean();
+                            //                                deferred.reject(); //check if reject for good cases
+                            //                                return;
+                            //                            }
                             sendServerStart(idTrip, token, transportType, -1);
                             //console.log("-Current position received: ", location);
                             location.extras = {
@@ -419,11 +419,13 @@ angular.module('viaggia.services.tracking', [])
 
         var sync = function () {
             var deferred = $q.defer();
+            $rootScope.syncRunning = true;
             userService.getValidToken().then(function (token) {
                 var trackingConfigure = Config.getTrackingConfig();
                 trackingConfigure['url'] += token;
                 trackingConfigure['foregroundService'] = false;
                 if (!bgGeo) {
+                    $rootScope.syncRunning = false;
                     deferred.resolve(true);
                     return;
                 }
@@ -432,6 +434,7 @@ angular.module('viaggia.services.tracking', [])
                     bgGeo.getLocations(function (locations, taskId) {
                         bgGeo.finish(taskId);
                         if (locations == null || locations.length == 0) {
+                            $rootScope.syncRunning = false;
                             deferred.resolve(true);
                             return;
                         }
@@ -451,18 +454,22 @@ angular.module('viaggia.services.tracking', [])
                                 bgGeo.clearDatabase(function () {
                                     console.log('- cleared database');
                                 });
+                                $rootScope.syncRunning = false;
                                 deferred.resolve(true);
                             } else {
                                 console.log('Geo Sync FAILURE: ' + JSON.stringify(response));
+                                $rootScope.syncRunning = false;
                                 deferred.resolve(false);
                             }
                         }, function (err) {
                             console.log('Geo Sync FAILURE: ' + JSON.stringify(err));
-                            console.log(err)
+                            console.log(err);
+                            $rootScope.syncRunning = false;
                             deferred.resolve(false);
                         });
 
                     }, function (error) {
+                        $rootScope.syncRunning = false;
                         deferred.resolve(false);
                     });
                     //                    bgGeo.sync(function (locations, taskId) {
@@ -477,6 +484,7 @@ angular.module('viaggia.services.tracking', [])
                 });
             }, function () {
                 // no token obtained
+                $rootScope.syncRunning = false;
                 deferred.resolve(false);
             });
             return deferred.promise;

@@ -574,9 +574,10 @@ ion-header-bar .title {
 }
 
 .bar .title {
-/*    margin-right: 20px;*/
-  right: inherit !important;
+    /*    margin-right: 20px;*/
+    right: inherit !important;
 }
+
 
 /*
 .bar .title {
@@ -591,11 +592,11 @@ ion-header-bar .title {
 */
 
 .title-short {
-  position: absolute;
-  left: 0;
-  right: 74px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    position: absolute;
+    left: 0;
+    right: 74px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .close-modal {
@@ -1263,12 +1264,12 @@ ion-header-bar .title {
     /*    left: 10px !important;*/
     font-size: x-small !important;
     margin-left: -5px!important;
-/*    display: table !important;*/
+    /*    display: table !important;*/
     margin-right: 10px!important;
-/*    margin-top: -10px;*/
+    /*    margin-top: -10px;*/
     padding: 3px 3px 3px 3px;
     width: 22px;
-/*    display: block !inspect;*/
+    /*    display: block !inspect;*/
     position: absolute !important;
     /*
     top: -32px !important;
@@ -1673,7 +1674,7 @@ Play&Go
 }
 
 .game-points .title {
-/*    margin-top: 24px;*/
+    /*    margin-top: 24px;*/
 }
 
 .game-points .badges {
@@ -1996,6 +1997,7 @@ Play&Go
     background-color: #c1272d;
     color: #fff;
 }
+
 .button-stop.activated {
     background-color: #c1272d !important;
 }
@@ -2004,10 +2006,12 @@ Play&Go
     background-color: #c1272d;
     color: #fff;
 }
+
 .button-start {
     background-color: #4caf4f;
     color: #fff;
 }
+
 .button-start.activated {
     background-color: #4caf4f !important;
 }
@@ -2015,4 +2019,8 @@ Play&Go
 .button-start:hover {
     background-color: #4caf4f;
     color: #fff;
+}
+
+.synch {
+    opacity: 0.6;
 }
