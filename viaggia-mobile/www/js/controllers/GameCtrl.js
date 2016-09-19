@@ -138,7 +138,7 @@ angular.module('viaggia.controllers.game', [])
     };
 })
 
-.controller('RankingsCtrl', function ($scope, $ionicScrollDelegate, $window, $timeout, GameSrv) {
+.controller('RankingsCtrl', function ($scope, $ionicScrollDelegate, $window, $timeout, Config, GameSrv) {
     $scope.maybeMore = true;
     $scope.currentUser = {};
     $scope.ranking = [];
@@ -170,14 +170,19 @@ angular.module('viaggia.controllers.game', [])
     $scope.filter.filter = function (selection) {
         // reload using new selection
         $scope.maybeMore = true;
-
-        //        GameSrv.getRanking(selection, 0, $scope.rankingPerPage).then(
-        //            function (ranking) {
-        //                $scope.currentUser = ranking['actualUser'];
-        //                $scope.ranking = ranking['classificationList'];
-        //                $scope.$broadcast('scroll.infiniteScrollComplete');
-        //            }
-        //        );
+        Config.loading();
+        GameSrv.getRanking(selection, 0, $scope.rankingPerPage).then(
+            function (ranking) {
+                $scope.currentUser = ranking['actualUser'];
+                $scope.ranking = ranking['classificationList'];
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+                Config.loaded();
+            },
+            function (err) {
+                console.log(err);
+                Config.loaded();
+            }
+        );
     };
 
     //$scope.filter.filter($scope.filter.selected);
