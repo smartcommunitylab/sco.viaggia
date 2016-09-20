@@ -1,11 +1,11 @@
 angular.module('viaggia.controllers.game', [])
 
-.controller('GameCtrl', function ($scope, GameSrv, Config) {
+.controller('GameCtrl', function ($scope, GameSrv, Config, Toast, $filter) {
     $scope.currentUser = null;
     $scope.status = null;
     $scope.ranking = null;
     $scope.prize = null;
-
+    $scope.noStatus = false;
     $scope.rankingFilterOptions = ['now', 'last', 'global'];
     $scope.rankingPerPage = 50;
 
@@ -18,8 +18,13 @@ angular.module('viaggia.controllers.game', [])
                     $scope.currentUser = ranking['actualUser'];
                     $scope.ranking = ranking['classificationList'];
                     $scope.$broadcast('scroll.infiniteScrollComplete');
+                    $scope.noStatus = false;
                 }
             );
+        },
+        function (err) {
+            $scope.noStatus = true;
+            Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
         }
     ).finally(Config.loaded);
     //	$scope.$on('$stateChangeSuccess', function () {

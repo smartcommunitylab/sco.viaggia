@@ -938,7 +938,8 @@ angular.module('viaggia', [
         pop_up_invalid_tracking_title: "Viaggio non valido",
         pop_up_invalid_tracking_template: "Le caratteristiche del viaggio fatto non corrispondono al mezzo di trasporto specificato. I punti non saranno assegnati.",
         pop_up_plan: "Pianifica",
-        wait_synch_running: "Attendere, sincronizzazione in corso"
+        wait_synch_running: "Attendere, sincronizzazione in corso",
+        no_status: "Errore di comunicazione con il server, nessun dato disponibile"
     });
 
     $translateProvider.translations('en', {
@@ -1288,7 +1289,8 @@ angular.module('viaggia', [
         pop_up_invalid_tracking_title: "Trip is not valid",
         pop_up_invalid_tracking_template: "The properties of the executed trip do not match the specified mean of transport. No points will be assigned.",
         pop_up_plan: "Plan",
-        wait_synch_running: "Wait, synchronization is runningo"
+        wait_synch_running: "Wait, synchronization is running",
+        no_status: "Server communication error, no data available"
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

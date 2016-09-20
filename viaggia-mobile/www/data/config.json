@@ -55,7 +55,7 @@
             },
             {
                 "state": "newPlan()",
-		"label": "menu_plan",
+                "label": "menu_plan",
                 "icon": "ic_search",
                 "color": "#3BBACF"
             },
@@ -116,8 +116,8 @@
             }
       ]
     },
-    "thresholdEndTime": 600000,
-    "thresholdStartTime": 600000,
+    "thresholdEndTime": 1200000,
+    "thresholdStartTime": 1200000,
     "trackingConfigure": {
         "desiredAccuracy": 0,
         "distanceFilter": 20,

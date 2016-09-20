@@ -420,73 +420,74 @@ angular.module('viaggia.services.tracking', [])
         var sync = function () {
             var deferred = $q.defer();
             $rootScope.syncRunning = true;
-            userService.getValidToken().then(function (token) {
-                var trackingConfigure = Config.getTrackingConfig();
-                trackingConfigure['url'] += token;
-                trackingConfigure['foregroundService'] = false;
-                if (!bgGeo) {
-                    $rootScope.syncRunning = false;
-                    deferred.resolve(true);
-                    return;
-                }
-                bgGeo.configure(trackingConfigure, callbackFn, failureFn);
-                bgGeo.start(function () {
-                    bgGeo.getLocations(function (locations, taskId) {
-                        bgGeo.finish(taskId);
-                        if (locations == null || locations.length == 0) {
-                            $rootScope.syncRunning = false;
-                            deferred.resolve(true);
-                            return;
-                        }
-                        $http({
-                            method: 'POST',
-                            url: trackingConfigure['url'],
-                            data: {
-                                location: locations,
-                                device: ionic.Platform.device()
-                            },
-                            headers: {
-                                'appId': Config.getAppId()
-                            }
-                        }).then(function (response) {
-                            console.log('Geo Sync SUCCESS: ' + locations.length);
-                            if (response.status == 200 && response.data && 'OK' == response.data.storeResult) {
-                                bgGeo.clearDatabase(function () {
-                                    console.log('- cleared database');
-                                });
-                                $rootScope.syncRunning = false;
-                                deferred.resolve(true);
-                            } else {
-                                console.log('Geo Sync FAILURE: ' + JSON.stringify(response));
-                                $rootScope.syncRunning = false;
-                                deferred.resolve(false);
-                            }
-                        }, function (err) {
-                            console.log('Geo Sync FAILURE: ' + JSON.stringify(err));
-                            console.log(err);
-                            $rootScope.syncRunning = false;
-                            deferred.resolve(false);
-                        });
 
-                    }, function (error) {
-                        $rootScope.syncRunning = false;
-                        deferred.resolve(false);
-                    });
-                    //                    bgGeo.sync(function (locations, taskId) {
-                    //                        console.log('synced locations: ', locations);
-                    //                        // Be sure to call finish(taskId) in order to signal the end of the background-thread.
-                    //                        bgGeo.finish(taskId);
-                    //                        deferred.resolve(true);
-                    //                    }, function (errorMessage) {
-                    //                        console.log('Sync FAILURE: ' + errorMessage);
-                    //                        deferred.resolve(false);
-                    //                    });
-                });
-            }, function () {
-                // no token obtained
-                $rootScope.syncRunning = false;
-                deferred.resolve(false);
-            });
+                        userService.getValidToken().then(function (token) {
+                 var trackingConfigure = Config.getTrackingConfig();
+                 trackingConfigure['url'] += token;
+                 trackingConfigure['foregroundService'] = false;
+                 if (!bgGeo) {
+                     $rootScope.syncRunning = false;
+                     deferred.resolve(true);
+                     return;
+                 }
+                 bgGeo.configure(trackingConfigure, callbackFn, failureFn);
+                 bgGeo.start(function () {
+                     bgGeo.getLocations(function (locations, taskId) {
+                         bgGeo.finish(taskId);
+                         if (locations == null || locations.length == 0) {
+                             $rootScope.syncRunning = false;
+                             deferred.resolve(true);
+                             return;
+                         }
+                         $http({
+                             method: 'POST',
+                             url: trackingConfigure['url'],
+                             data: {
+                                 location: locations,
+                                 device: ionic.Platform.device()
+                             },
+                             headers: {
+                                 'appId': Config.getAppId()
+                             }
+                         }).then(function (response) {
+                             console.log('Geo Sync SUCCESS: ' + locations.length);
+                             if (response.status == 200 && response.data && 'OK' == response.data.storeResult) {
+                                 bgGeo.clearDatabase(function () {
+                                     console.log('- cleared database');
+                                 });
+                                 $rootScope.syncRunning = false;
+                                 deferred.resolve(true);
+                             } else {
+                                 console.log('Geo Sync FAILURE: ' + JSON.stringify(response));
+                                 $rootScope.syncRunning = false;
+                                 deferred.resolve(false);
+                             }
+                         }, function (err) {
+                             console.log('Geo Sync FAILURE: ' + JSON.stringify(err));
+                             console.log(err);
+                             $rootScope.syncRunning = false;
+                             deferred.resolve(false);
+                         });
+
+                     }, function (error) {
+                         $rootScope.syncRunning = false;
+                         deferred.resolve(false);
+                     });
+                     //                    bgGeo.sync(function (locations, taskId) {
+                     //                        console.log('synced locations: ', locations);
+                     //                        // Be sure to call finish(taskId) in order to signal the end of the background-thread.
+                     //                        bgGeo.finish(taskId);
+                     //                        deferred.resolve(true);
+                     //                    }, function (errorMessage) {
+                     //                        console.log('Sync FAILURE: ' + errorMessage);
+                     //                        deferred.resolve(false);
+                     //                    });
+                 });
+             }, function () {
+                 // no token obtained
+                 $rootScope.syncRunning = false;
+                 deferred.resolve(false);
+             });
             return deferred.promise;
         };
 

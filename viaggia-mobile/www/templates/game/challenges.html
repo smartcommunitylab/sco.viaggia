@@ -1,48 +1,51 @@
 <ion-view title="{{'home_gamification' | translate}} {{currentUser.nickName}}">
-	<ion-nav-buttons side="right">
-		<button ng-click="openRules()" class="button button-icon button-home ion-information-circled"></button>
-	</ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button ng-click="openRules()" class="button button-icon button-home ion-information-circled"></button>
+    </ion-nav-buttons>
 
-	<ion-content class="game-challenges" has-bouncing="false" scroll="false">
-		<!-- Filter -->
-		<div class="filter item-accordion" ng-if="!!filter.options">
-			<ion-item class="item-accordion-header item-icon-right" ng-click="filter.toggle()">
-				<div>{{!!filter.selected ? ('game_tab_challenges_filter_' + filter.selected) : '' | translate}}</div>
-				<i class="icon ion-arrow-down-b" ng-class="{'open': filter.open}"></i>
-			</ion-item>
-			<div class="item-accordion-content" ng-show="filter.open">
-				<ion-list>
-					<ion-item ng-repeat="option in filter.options" ng-click="filter.filterBy(option)">
-						{{'game_tab_challenges_filter_' + option | translate}}
-					</ion-item>
-				</ion-list>
-			</div>
-		</div>
+    <ion-content class="game-challenges" has-bouncing="false" scroll="false">
+        <!-- Filter -->
+        <div class="filter item-accordion" ng-if="!!filter.options">
+            <ion-item class="item-accordion-header item-icon-right" ng-click="filter.toggle()">
+                <div>{{!!filter.selected ? ('game_tab_challenges_filter_' + filter.selected) : '' | translate}}</div>
+                <i class="icon ion-arrow-down-b" ng-class="{'open': filter.open}"></i>
+            </ion-item>
+            <div class="item-accordion-content" ng-show="filter.open">
+                <ion-list>
+                    <ion-item ng-repeat="option in filter.options" ng-click="filter.filterBy(option)">
+                        {{'game_tab_challenges_filter_' + option | translate}}
+                    </ion-item>
+                </ion-list>
+            </div>
+        </div>
 
-		<!-- Results -->
-		<ion-scroll class="padding-right padding-left challenges" ng-style="challengesStyle" delegate-handle="challengesScroll" ng-if="challenges != null && challenges.length > 0">
-			<ion-list>
-				<ion-item class="challenge" ng-repeat="challenge in challenges" ng-class="{'challenge-old': !challenge.active || challenge.success, success: !!challenge.success, fail: !challenge.success}">
-					<div class="challenge-desc">{{challenge.challDesc}}</div>
-					<div class="challenge-countdown" ng-if="!!challenge.active" ng-init="days = {days: challenge.daysToEnd}">
-						{{'game_tab_challenges_daysToEnd' + (challenge.daysToEnd == 1 ? '_1' : '') | translate:days}}
-					</div>
-					<div class="challenge-result" ng-if="!challenge.active || challenge.success">
-						{{'game_tab_challenge_success_' + challenge.success | translate}}
-					</div>
-					<div class="challenge-status">
-						<a class="challenge-info" href="" ng-click="showChallengeInfo(challenge)"><i class="icon ion-information-circled"></i></a>
-						<span class="challenge-count">
+        <!-- Results -->
+        <ion-scroll class="padding-right padding-left challenges" ng-style="challengesStyle" delegate-handle="challengesScroll" ng-if="challenges != null && challenges.length > 0">
+            <ion-list>
+                <ion-item class="challenge" ng-repeat="challenge in challenges" ng-class="{'challenge-old': !challenge.active || challenge.success, success: !!challenge.success, fail: !challenge.success}">
+                    <div class="challenge-desc">{{challenge.challDesc}}</div>
+                    <div class="challenge-countdown" ng-if="!!challenge.active" ng-init="days = {days: challenge.daysToEnd}">
+                        {{'game_tab_challenges_daysToEnd' + (challenge.daysToEnd == 1 ? '_1' : '') | translate:days}}
+                    </div>
+                    <div class="challenge-result" ng-if="!challenge.active || challenge.success">
+                        {{'game_tab_challenge_success_' + challenge.success | translate}}
+                    </div>
+                    <div class="challenge-status">
+                        <a class="challenge-info" href="" ng-click="showChallengeInfo(challenge)"><i class="icon ion-information-circled"></i></a>
+                        <span class="challenge-count">
 							{{'game_tab_challenges_status' + (!challenge.active || challenge.success ? '_final' : '') | translate}}:
 							{{!!challenge.success ? challenge.challTarget : challenge.row_status}}/{{challenge.challTarget}}
 						</span>
-					</div>
-				</ion-item>
-			</ion-list>
-		</ion-scroll>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </ion-scroll>
 
         <div ng-if="challenges != null && challenges.length == 0" class="text-center padding">
-          <h4>{{filter.selected == 'old' ? 'no_challenges_old' : 'no_challenges' | translate}}</h4>
+            <h4>{{filter.selected == 'old' ? 'no_challenges_old' : 'no_challenges' | translate}}</h4>
         </div>
-	</ion-content>
+        <div class="padding-right padding-left game-points" ng-if="!challenges">
+            <h4 class="label">{{'no_status' | translate}}</h4>
+        </div>
+    </ion-content>
 </ion-view>
