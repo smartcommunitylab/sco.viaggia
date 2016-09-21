@@ -132,7 +132,7 @@ angular.module('viaggia.controllers.home', [])
             Config.loading();
             if (!trackService.trackingIsGoingOn() || trackService.trackingIsFinished()) {
                 trackService.checkLocalization().then(function () {
-                    startTransportTrack();
+                    startTransportTrack(transportType);
                 }, function (error) {
                     if (Config.isErrorLowAccuracy(error)) {
                         Config.loaded();
@@ -149,7 +149,7 @@ angular.module('viaggia.controllers.home', [])
                                     text: $filter('translate')("pop_up_low_accuracy_button_go_on"),
                                     type: 'button-custom',
                                     onTap: function () {
-                                        startTransportTrack();
+                                        startTransportTrack(transportType);
                                     }
                     }
                 ]
