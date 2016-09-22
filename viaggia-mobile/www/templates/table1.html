@@ -1,10 +1,22 @@
 <ion-view title="{{title}}">
     <ion-nav-buttons side="right">
+        <!--
+        <button class="button button-icon ion-minus-round" ng-click="changeStyleTable('minus')">
+        </button>
+        <button class="button button-icon ion-plus-round" ng-click="changeStyleTable('plus')"></button>
+-->
+        <button class="button button-icon button-clear" ng-class="tableStyle" ng-click="changeStyleTable()"></button>
         <button ng-if="isAccessibilitySet()" class="button button-icon button-clear" ng-class="accessibilityStyle" ng-click="toggleAccessibility()" ng-show="accesibilityKnow"></button>
         <button class="button button-icon button-clear" ng-class="bookmarkStyle" ng-click="bookmark()"></button>
     </ion-nav-buttons>
     <ion-content id="content" has-header="true" has-bouncing="false">
-
+        <div class="row" style="background-color: {{color}}; color: {{textColor(color)}} !important;">
+            <div class="col col-10 ">
+            </div>
+            <div class="col col-80 tt-subtitle">{{subtitle}}</div>
+            <div class="col col-10 ">
+            </div>
+        </div>
         <div class="row" style="background-color: {{color}}; color: {{textColor(color)}} !important;">
             <div class="col col-25 tt-day btn" ng-click="prevDate()"><a><i class="icon ion-arrow-left-b"></i></a>
             </div>
@@ -14,10 +26,10 @@
         </div>
         <div class="tt-table" ng-class="{'tt-table-acc':flagAccessibility}">
             <div ng-if="dataStr" id="table-corner" style="width:{{stopsColWidth}}px; height:{{tableHeaderHeight}}px">
-                <div> <i class="icon ic_access table-accessibility"></i> {{tableCornerStr[0]}}
+                <div style="font-size:{{fontsize}}px;"> <i class="icon ic_access table-accessibility" ></i> {{tableCornerStr[0]}}
                 </div>
                 <!--            <div>{{tableCornerStr[0]}}</div>-->
-                <div ng-if="header_row_number == 2" class="delay">{{tableCornerStr[1]}}</div>
+                <div ng-if="header_row_number == 2" class="delay" style="font-size:{{fontsize}}px;">{{tableCornerStr[1]}}</div>
             </div>
 
             <div class="row table-container" ng-if="dataStr">
@@ -27,6 +39,9 @@
                             line-height: {{stopsColLineHeight}}px;
                             top: {{tableHeaderHeight}}px;
                             background-size: 100% {{rowHeight*2}}px;
+                            font-size:{{fontsize}}px;
+                            left:{{col.style.left}};
+                             top:{{col.style.top}};
                             background-image:
                             -webkit-linear-gradient(90deg,#fff, #fff {{rowHeight}}px, #eee {{rowHeight}}px, #eee {{rowHeight*2}}px);
                             background-image:
@@ -38,7 +53,9 @@
 
                     <div id="table-table" ng-bind-html="dataStr" style="left:{{stopsColWidth}}px;
                             top: {{tableHeaderHeight}}px;
+                            line-height: {{stopsColLineHeight}}px;
                             background-size: 100% {{rowHeight*2}}px;
+                            font-size:{{fontsize}}px;
                             background-image:
                             -webkit-linear-gradient(90deg,transparent, transparent {{rowHeight}}px, #eee {{rowHeight}}px, #eee {{rowHeight*2}}px);
                             background-image:

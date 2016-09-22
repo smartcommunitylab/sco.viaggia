@@ -841,7 +841,7 @@ ion-header-bar .title {
 }
 
 .tt-table #table-col div {
-    width: 20px;
+    /*    width: 20px;*/
     display: inline-block;
     margin-right: 5px;
     text-align: center;
@@ -894,6 +894,10 @@ ion-header-bar .title {
 #table-corner div {
     height: 20.5px;
     border-bottom: 1px solid #bbb;
+}
+
+.accessibilityBullet {
+    width: 15px;
 }
 
 .delay {

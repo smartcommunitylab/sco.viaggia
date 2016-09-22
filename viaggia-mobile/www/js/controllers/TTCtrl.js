@@ -123,8 +123,10 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
 })
 
-.controller('TTCtrl', function ($scope, $state, $location, $stateParams, $ionicPosition, $ionicScrollDelegate, $timeout, $filter, ttService, Config, Toast, bookmarkService) {
+.controller('TTCtrl', function ($scope, $state, $location, $stateParams, $ionicPosition, $ionicScrollDelegate, $timeout, $filter, ttService, Config, Toast, bookmarkService, $ionicLoading) {
     $scope.data = [];
+    var biggerTable = false;
+    $scope.tableStyle = 'ic_text_size_outline';
     var rowHeight = 20;
     $scope.rowHeight = rowHeight;
     var headerRowHeight = 20; // has a border
@@ -160,6 +162,90 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     //        $ionicScrollDelegate.$getByHandle('list').resize();
     //
     //    }
+
+    //    set the variables for bigger style
+    var setBiggerStyle = function () {
+        biggerTable = true;
+        var rowHeight = 30;
+        $scope.rowHeight = rowHeight;
+        var headerRowHeight = 30; // has a border
+        $scope.stopsColWidth = 150; // has border
+        $scope.stopsColLineHeight = 30;
+        if (ionic.Platform.isWebView() && ionic.Platform.isIOS() && ionic.Platform.version() < 9) {
+            $scope.stopsColLineHeight = 31;
+            rowHeight = 31;
+            $scope.rowHeight = rowHeight;
+        }
+
+        // header height from the standard style. Augmented in case of iOS non-fullscreen.
+        var headerHeight = 54 + 60 + 1;
+        if (ionic.Platform.isIOS() && !ionic.Platform.isFullScreen) {
+            headerHeight += 30;
+        }
+        var cellWidthBase = 60;
+        //    var firstColWidth = 100;
+        var cellHeightBase = 48;
+        var firstRowHeight = 48;
+        $scope.fontsize = 16;
+    };
+
+    //    set the variables for smaller style
+    var setSmallerStyle = function () {
+        biggerTable = false;
+        var rowHeight = 20;
+        $scope.rowHeight = rowHeight;
+        var headerRowHeight = 20; // has a border
+        $scope.stopsColWidth = 100; // has border
+        $scope.fontsize = 12;
+        $scope.stopsColLineHeight = 20;
+        if (ionic.Platform.isWebView() && ionic.Platform.isIOS() && ionic.Platform.version() < 9) {
+            $scope.stopsColLineHeight = 21;
+            rowHeight = 21;
+            $scope.rowHeight = rowHeight;
+        }
+
+        // header height from the standard style. Augmented in case of iOS non-fullscreen.
+        var headerHeight = 44 + 50 + 1;
+        if (ionic.Platform.isIOS() && !ionic.Platform.isFullScreen) {
+            headerHeight += 20;
+        }
+        var cellWidthBase = 50;
+        //    var firstColWidth = 100;
+        var cellHeightBase = 28;
+        var firstRowHeight = 28;
+    };
+
+    $scope.changeStyleTable = function () {
+        //change style to the table
+        //        $ionicLoading.show({
+        //            template: 'Loading...'
+        //        }).then(function () {
+        $ionicLoading.show({
+            duration: 1500
+        });
+        $timeout(function () {
+            if (!biggerTable) {
+                setBiggerStyle();
+            } else {
+                setSmallerStyle();
+            }
+            $scope.tableStyle = biggerTable ? 'ic_text_size' : 'ic_text_size_outline';
+            $scope.doScroll();
+        }, 500);
+        //        if (!biggerTable) {
+        //            setBiggerStyle();
+        //        } else {
+        //            setSmallerStyle();
+        //        }
+        //        $scope.tableStyle = biggerTable ? 'ic_text_size' : 'ic_text_size_outline';
+        //            setTimeout(function () {
+        //                $ionicLoading.hide();
+        //            });
+
+
+        //        $scope.doScroll();
+        //        })
+    }
     var getTextWidth = function (text, font) {
         //    var canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
         //    var context = canvas.getContext("2d");
@@ -228,7 +314,11 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         if (window.innerHeight < window.innerWidth) {
             $scope.stopsColWidth = 170;
         } else {
-            $scope.stopsColWidth = 100;
+            if (biggerTable) {
+                $scope.stopsColWidth = 150;
+            } else {
+                $scope.stopsColWidth = 100;
+            }
         }
         // header rows
         $scope.header = null;
@@ -361,9 +451,9 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                         //check from data if accessibility
                         if (!!data.wheelChairBoarding && data.wheelChairBoarding[row - $scope.header_row_number] == 1) {
                             // if (data.wheelChairBoarding && data.wheelChairBoarding[row - $scope.header_row_number] == 1) {
-                            colStr += '<div><i class="icon ion-record"></i></div>';
+                            colStr += '<div class="accessibilityBullet"><i class="icon ion-record"></i></div>';
                         } else {
-                            colStr += '<div></div>';
+                            colStr += '<div class="accessibilityBullet"></div>';
 
                         }
                         colStr += data.stops[row - $scope.header_row_number] + '<br/>';
@@ -409,7 +499,8 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     // initialize
     $scope.load = function () {
         $scope.route = Config.getTTData($stateParams.ref, $stateParams.agencyId, $stateParams.groupId, $stateParams.routeId);
-        $scope.title = ($scope.route.label ? ($scope.route.label + ': ') : '') + $scope.route.title;
+        $scope.title = ($scope.route.label ? ($scope.route.label) : $scope.route.title);
+        $scope.subtitle = ($scope.route.label ? ($scope.route.title) : '');
         $scope.bookmarkStyle = bookmarkService.getBookmarkStyle($location.path());
         $scope.accessibilityStyle = getAccessibilityStyle();
 
@@ -466,6 +557,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         $scope.accessibilityStyle = getAccessibilityStyle();
 
         initMeasures($scope.tt, true);
+        $scope.doScroll();
     }
 
     function getAccessibilityStyle() {
