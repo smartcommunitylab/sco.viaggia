@@ -26,7 +26,7 @@
         </div>
         <div class="tt-table" ng-class="{'tt-table-acc':flagAccessibility}">
             <div ng-if="dataStr" id="table-corner" style="width:{{stopsColWidth}}px; height:{{tableHeaderHeight}}px">
-                <div style="font-size:{{fontsize}}px;"> <i class="icon ic_access table-accessibility" ></i> {{tableCornerStr[0]}}
+                <div style="font-size:{{fontsize}}px;"> <i class="icon ic_access table-accessibility"></i> <span class="corner-delay">{{tableCornerStr[0]}}</span>
                 </div>
                 <!--            <div>{{tableCornerStr[0]}}</div>-->
                 <div ng-if="header_row_number == 2" class="delay" style="font-size:{{fontsize}}px;">{{tableCornerStr[1]}}</div>

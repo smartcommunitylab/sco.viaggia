@@ -896,6 +896,11 @@ ion-header-bar .title {
     border-bottom: 1px solid #bbb;
 }
 
+#table-corner > div .corner-delay {
+    margin-left: 10px;
+    vertical-align: top;
+}
+
 .accessibilityBullet {
     width: 15px;
 }
