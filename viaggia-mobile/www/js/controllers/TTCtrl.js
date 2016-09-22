@@ -129,10 +129,10 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     $scope.tableStyle = 'ic_text_size_outline';
     var rowHeight = 20;
     $scope.rowHeight = rowHeight;
-    var headerRowHeight = 20; // has a border
+    var headerRowHeight = 25; // has a border
     $scope.stopsColWidth = 100; // has border
     $scope.flagAccessibility = false;
-
+    $scope.headervariable = 80;
     $scope.stopsColLineHeight = 20;
     if (ionic.Platform.isWebView() && ionic.Platform.isIOS() && ionic.Platform.version() < 9) {
         $scope.stopsColLineHeight = 21;
@@ -141,7 +141,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     }
 
     // header height from the standard style. Augmented in case of iOS non-fullscreen.
-    var headerHeight = 44 + 50 + 1;
+    var headerHeight = 44 + $scope.headervariable + 1;
     if (ionic.Platform.isIOS() && !ionic.Platform.isFullScreen) {
         headerHeight += 20;
     }
@@ -176,17 +176,19 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
             rowHeight = 31;
             $scope.rowHeight = rowHeight;
         }
-
+        $scope.headervariable = 80 + 5 * $scope.header_row_number;
         // header height from the standard style. Augmented in case of iOS non-fullscreen.
-        var headerHeight = 54 + 60 + 1;
+        var headerHeight = 44 + $scope.headervariable + 1;
         if (ionic.Platform.isIOS() && !ionic.Platform.isFullScreen) {
-            headerHeight += 30;
+            headerHeight += 20;
         }
         var cellWidthBase = 60;
         //    var firstColWidth = 100;
         var cellHeightBase = 48;
         var firstRowHeight = 48;
         $scope.fontsize = 16;
+        $scope.scrollHeight = window.innerHeight - headerHeight;
+
     };
 
     //    set the variables for smaller style
@@ -203,9 +205,10 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
             rowHeight = 21;
             $scope.rowHeight = rowHeight;
         }
+        $scope.headervariable = 80 + 5 * $scope.header_row_number;
 
         // header height from the standard style. Augmented in case of iOS non-fullscreen.
-        var headerHeight = 44 + 50 + 1;
+        var headerHeight = 44 + $scope.headervariable + 1;
         if (ionic.Platform.isIOS() && !ionic.Platform.isFullScreen) {
             headerHeight += 20;
         }
@@ -213,6 +216,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         //    var firstColWidth = 100;
         var cellHeightBase = 28;
         var firstRowHeight = 28;
+        $scope.scrollHeight = window.innerHeight - headerHeight;
     };
 
     $scope.changeStyleTable = function () {
@@ -221,7 +225,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         //            template: 'Loading...'
         //        }).then(function () {
         $ionicLoading.show({
-            duration: 1500
+            duration: 2000
         });
         $timeout(function () {
             if (!biggerTable) {
@@ -230,8 +234,13 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                 setSmallerStyle();
             }
             $scope.tableStyle = biggerTable ? 'ic_text_size' : 'ic_text_size_outline';
+            //            $scope.doScroll();
+            $ionicScrollDelegate.resize();
+        }, 100);
+        $timeout(function () {
             $scope.doScroll();
-        }, 500);
+            // $ionicScrollDelegate.resize();
+        }, 2000);
         //        if (!biggerTable) {
         //            setBiggerStyle();
         //        } else {
@@ -339,9 +348,10 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
         $scope.tableHeight = data.stops.length * rowHeight;
         //        $scope.scrollWidth = stopsColWidth + data.tripIds.length * $scope.colwidth;
-        $scope.scrollWidth = window.innerWidth + ($scope.flagAccessibility ? 0 : 20); //plus accessibility
+        $scope.scrollWidth = window.innerWidth + ($scope.flagAccessibility ? 0 : 25); //plus accessibility
         $scope.scrollHeight = window.innerHeight - headerHeight;
-        $scope.tableHeaderHeight = $scope.header_row_number * headerRowHeight;
+        // $scope.tableHeaderHeight = $scope.header_row_number * headerRowHeight;
+        $scope.tableHeaderHeight = headerRowHeight;
 
         if (!noscroll) {
             $timeout(function () {

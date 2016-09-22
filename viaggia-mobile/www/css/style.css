@@ -834,6 +834,7 @@ ion-header-bar .title {
 
 #table-header div {
     border-bottom: 1px solid #bbb;
+    height: 25px;
 }
 
 #table-header div:first-child {
@@ -881,8 +882,8 @@ ion-header-bar .title {
 
 #table-corner {
     font-size: 12px;
-    height: 20px;
-    border-right: 1px solid #bbb;
+    height: 25px;
+    /*    border-right: 1px solid #bbb;*/
     position: absolute;
     /*    width: 100px;*/
     background-color: #fff;
@@ -892,8 +893,10 @@ ion-header-bar .title {
 }
 
 #table-corner div {
-    height: 20.5px;
+    height: 25px;
     border-bottom: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+    background-color: white;
 }
 
 #table-corner > div .corner-delay {
@@ -902,7 +905,7 @@ ion-header-bar .title {
 }
 
 .accessibilityBullet {
-    width: 15px;
+    width: 20px;
 }
 
 .delay {
@@ -1338,7 +1341,7 @@ ion-header-bar .title {
     margin-right: 4px;
     /*    margin-left: 4px;
     */
-    font-size: 20px;
+    font-size: 25px;
 }
 
 
@@ -1376,7 +1379,7 @@ ion-header-bar .title {
 
 .tt-table {
     position: fixed;
-    left: -20px;
+    left: -25px;
     -webkit-transition-duration: 0.3s;
     -moz-transition-duration: 0.3s;
     -o-transition-duration: 0.3s;
