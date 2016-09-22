@@ -876,7 +876,7 @@ ion-header-bar .title {
     overflow: hidden;
     text-overflow: ellipsis;
     padding-right: 5px;
-    padding-left: 5px;
+    padding-left: 3px;
 }
 
 #table-corner {
@@ -1393,6 +1393,9 @@ ion-header-bar .title {
     width: 20px;
     display: inline-block;
     margin-right: 5px;
+    text-align: center;
+}
+.tt-subtitle {
     text-align: center;
 }
 
