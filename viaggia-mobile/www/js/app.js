@@ -83,7 +83,8 @@ angular.module('viaggia', [
     'viaggia.directives',
     'viaggia.services.geo',
     'viaggia.services.bookmarks',
-    'viaggia.filters'
+    'viaggia.filters',
+    'viaggia.services.profile'
 ])
 
 .run(function ($ionicPlatform, $cordovaFile, $rootScope, $translate, DataManager, Config, GeoLocate, notificationService) {

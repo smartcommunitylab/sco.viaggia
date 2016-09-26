@@ -85,6 +85,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
             if ($scope.view == 'grid') {
                 prepareGrid();
             }
+
         }
     }
 
@@ -123,16 +124,16 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
 })
 
-.controller('TTCtrl', function ($scope, $state, $location, $stateParams, $ionicPosition, $ionicScrollDelegate, $timeout, $filter, ttService, Config, Toast, bookmarkService, $ionicLoading) {
+.controller('TTCtrl', function ($scope, $state, $location, $stateParams, $ionicPosition, $ionicScrollDelegate, $timeout, $filter, ttService, Config, Toast, bookmarkService, $ionicLoading, profileService) {
     $scope.data = [];
     var biggerTable = false;
-    $scope.tableStyle = 'ic_text_size_outline';
+    $scope.tableStyle = profileService.isLittleSize() ? 'ic_text_size_outline' : 'ic_text_size';
     var rowHeight = 20;
     $scope.rowHeight = rowHeight;
     var headerRowHeight = 25; // has a border
     $scope.stopsColWidth = 100; // has border
-    $scope.flagAccessibility = false;
-    $scope.headervariable = 80;
+    $scope.flagAccessibility = profileService.getAccessibility();
+    $scope.headervariable = 90;
     $scope.stopsColLineHeight = 20;
     if (ionic.Platform.isWebView() && ionic.Platform.isIOS() && ionic.Platform.version() < 9) {
         $scope.stopsColLineHeight = 21;
@@ -176,7 +177,12 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
             rowHeight = 31;
             $scope.rowHeight = rowHeight;
         }
-        $scope.headervariable = 80 + 5 * $scope.header_row_number;
+        var headerTable = document.getElementById('header-table');
+        var headerheight = 90;
+        if (headerTable) {
+            headerheight = headerTable.clientHeight;
+        }
+        $scope.headervariable = headerheight + 5 * $scope.header_row_number;
         // header height from the standard style. Augmented in case of iOS non-fullscreen.
         var headerHeight = 44 + $scope.headervariable + 1;
         if (ionic.Platform.isIOS() && !ionic.Platform.isFullScreen) {
@@ -205,7 +211,13 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
             rowHeight = 21;
             $scope.rowHeight = rowHeight;
         }
-        $scope.headervariable = 80 + 5 * $scope.header_row_number;
+        var headerTable = document.getElementById('header-table');
+        var headerheight = 90;
+        if (headerTable) {
+            headerheight = headerTable.clientHeight;
+        }
+        $scope.headervariable = headerheight + 5 * $scope.header_row_number;
+        //        $scope.headervariable = 90 + 5 * $scope.header_row_number;
 
         // header height from the standard style. Augmented in case of iOS non-fullscreen.
         var headerHeight = 44 + $scope.headervariable + 1;
@@ -224,21 +236,31 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         //        $ionicLoading.show({
         //            template: 'Loading...'
         //        }).then(function () {
+        var actualPosition = {};
+        var actualCol = 0;
+        var actualRow = 0;
         $ionicLoading.show({
             duration: 2000
         });
         $timeout(function () {
             if (!biggerTable) {
                 setBiggerStyle();
+                profileService.setTableBigSize();
             } else {
                 setSmallerStyle();
+                profileService.setTableLittleSize()
             }
             $scope.tableStyle = biggerTable ? 'ic_text_size' : 'ic_text_size_outline';
             //            $scope.doScroll();
-            $ionicScrollDelegate.resize();
+            actualPosition = $ionicScrollDelegate.$getByHandle('list').getScrollPosition();
+            actualCol = actualPosition.left / $scope.colwidth;
+            actualRow = actualPosition.top / $scope.stopsColLineHeight;
+            $ionicScrollDelegate.$getByHandle('list').scrollTo(0, 0, false);
+            $ionicScrollDelegate.$getByHandle('list').resize();
         }, 100);
         $timeout(function () {
-            $scope.doScroll();
+            $ionicScrollDelegate.$getByHandle('list').scrollTo(actualCol * $scope.colwidth, actualRow * $scope.stopsColLineHeight, false);
+            //$scope.doScroll();
             // $ionicScrollDelegate.resize();
         }, 2000);
         //        if (!biggerTable) {
@@ -288,6 +310,13 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
             },
             function (data) {
                 constructTable(data);
+                if (profileService.isLittleSize()) {
+                    setSmallerStyle();
+                } else {
+                    setBiggerStyle();
+                }
+
+
                 Config.loaded();
             });
     };
@@ -512,6 +541,9 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         $scope.title = ($scope.route.label ? ($scope.route.label) : $scope.route.title);
         $scope.subtitle = ($scope.route.label ? ($scope.route.title) : '');
         $scope.bookmarkStyle = bookmarkService.getBookmarkStyle($location.path());
+        if ($scope.accesibilityKnow) {
+            $scope.flagAccessibility = profileService.getAccessibility();
+        }
         $scope.accessibilityStyle = getAccessibilityStyle();
 
         if (!$scope.route.color) {
@@ -564,6 +596,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
             Toast.show($filter('translate')('not_acc_label'), "short", "bottom");
 
         }
+        profileService.setAccessibility($scope.flagAccessibility);
         $scope.accessibilityStyle = getAccessibilityStyle();
 
         initMeasures($scope.tt, true);
@@ -582,7 +615,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     }
 })
 
-.controller('TTMapCtrl', function ($scope, $state, $stateParams, $timeout, $ionicModal, $ionicPopup, $filter, ionicMaterialMotion, ionicMaterialInk, mapService, Config, ttService, planService, GeoLocate, Toast) {
+.controller('TTMapCtrl', function ($scope, $state, $stateParams, $timeout, $ionicModal, $ionicPopup, $filter, ionicMaterialMotion, ionicMaterialInk, mapService, Config, ttService, planService, GeoLocate, Toast, profileService) {
     $scope.allMarkers = null;
 
     var mapData = ttService.getTTMapData();
@@ -591,6 +624,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     $scope.icon = mapData.icon;
     $scope.title = mapData.title;
     $scope.ref = mapData.ref;
+    $scope.flagAccessibility = profileService.getAccessibility();
     $scope.accessibilityStyle = getAccessibilityStyle($scope.ref);
 
     var MAX_MARKERS = 20;
@@ -626,6 +660,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         $scope.flagAccessibility = !$scope.flagAccessibility;
         $scope.accessibilityStyle = getAccessibilityStyle($scope.ref);
         $scope.filterMarkers(true);
+        profileService.setAccessibility($scope.flagAccessibility);
     }
     var getAgencies = function () {
         var res = [];
