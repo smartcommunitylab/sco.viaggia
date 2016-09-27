@@ -1378,7 +1378,7 @@ ion-header-bar .title {
 */
 
 .tt-table {
-    position: fixed;
+    position: absolute;
     left: -25px;
     -webkit-transition-duration: 0.3s;
     -moz-transition-duration: 0.3s;

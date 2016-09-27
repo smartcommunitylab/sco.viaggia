@@ -132,7 +132,8 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     $scope.rowHeight = rowHeight;
     var headerRowHeight = 25; // has a border
     $scope.stopsColWidth = 100; // has border
-    $scope.flagAccessibility = profileService.getAccessibility();
+    // $scope.flagAccessibility = profileService.getAccessibility();
+    $scope.flagAccessibility = false;
     $scope.headervariable = 90;
     $scope.stopsColLineHeight = 20;
     if (ionic.Platform.isWebView() && ionic.Platform.isIOS() && ionic.Platform.version() < 9) {
@@ -156,13 +157,6 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     $scope.runningDate = new Date();
     $scope.color = '#dddddd';
 
-    //    $scope.resizeTable = function () {
-    //        var table = document.getElementById('tablescroll');
-    //        table.style.height = ($scope.scrollHeight + "px");
-    //        table.style.width = ($scope.scrollWidth + "px");
-    //        $ionicScrollDelegate.$getByHandle('list').resize();
-    //
-    //    }
 
     //    set the variables for bigger style
     var setBiggerStyle = function () {
@@ -189,7 +183,6 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
             headerHeight += 20;
         }
         var cellWidthBase = 60;
-        //    var firstColWidth = 100;
         var cellHeightBase = 48;
         var firstRowHeight = 48;
         $scope.fontsize = 16;
@@ -217,7 +210,6 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
             headerheight = headerTable.clientHeight;
         }
         $scope.headervariable = headerheight + 5 * $scope.header_row_number;
-        //        $scope.headervariable = 90 + 5 * $scope.header_row_number;
 
         // header height from the standard style. Augmented in case of iOS non-fullscreen.
         var headerHeight = 44 + $scope.headervariable + 1;
@@ -233,9 +225,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
     $scope.changeStyleTable = function () {
         //change style to the table
-        //        $ionicLoading.show({
-        //            template: 'Loading...'
-        //        }).then(function () {
+
         var actualPosition = {};
         var actualCol = 0;
         var actualRow = 0;
@@ -251,7 +241,6 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                 profileService.setTableLittleSize()
             }
             $scope.tableStyle = biggerTable ? 'ic_text_size' : 'ic_text_size_outline';
-            //            $scope.doScroll();
             actualPosition = $ionicScrollDelegate.$getByHandle('list').getScrollPosition();
             actualCol = actualPosition.left / $scope.colwidth;
             actualRow = actualPosition.top / $scope.stopsColLineHeight;
@@ -260,36 +249,17 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         }, 100);
         $timeout(function () {
             $ionicScrollDelegate.$getByHandle('list').scrollTo(actualCol * $scope.colwidth, actualRow * $scope.stopsColLineHeight, false);
-            //$scope.doScroll();
-            // $ionicScrollDelegate.resize();
+
         }, 2000);
-        //        if (!biggerTable) {
-        //            setBiggerStyle();
-        //        } else {
-        //            setSmallerStyle();
-        //        }
-        //        $scope.tableStyle = biggerTable ? 'ic_text_size' : 'ic_text_size_outline';
-        //            setTimeout(function () {
-        //                $ionicLoading.hide();
-        //            });
 
-
-        //        $scope.doScroll();
-        //        })
     }
     var getTextWidth = function (text, font) {
-        //    var canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
-        //    var context = canvas.getContext("2d");
-        //    context.font = font;
-        //    var metrics = context.measureText(text);
-        //    return metrics.width;
         var measurer = document.getElementById('measurer');
         return (measurer.getBoundingClientRect().width);
     };
 
     $scope.$on('$ionicView.enter', function () {
         $scope.colwidth = getTextWidth("000000000", "12px RobotoMono");
-        //        alert('colwidth:' + $scope.colwidth);
         $scope.load();
     });
     // load timetable data
@@ -315,7 +285,6 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                 } else {
                     setBiggerStyle();
                 }
-
 
                 Config.loaded();
             });
@@ -541,8 +510,12 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         $scope.title = ($scope.route.label ? ($scope.route.label) : $scope.route.title);
         $scope.subtitle = ($scope.route.label ? ($scope.route.title) : '');
         $scope.bookmarkStyle = bookmarkService.getBookmarkStyle($location.path());
-        if ($scope.accesibilityKnow) {
+        //$scope.accessibilityStyle = getAccessibilityStyle();
+        setAccessibilityKnow();
+        if ($scope.accesibilityKnow && $scope.route.wheelChairBoarding != 2) {
             $scope.flagAccessibility = profileService.getAccessibility();
+        } else {
+            $scope.flagAccessibility = false;
         }
         $scope.accessibilityStyle = getAccessibilityStyle();
 
@@ -603,15 +576,28 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         $scope.doScroll();
     }
 
-    function getAccessibilityStyle() {
+    function setAccessibilityKnow() {
         if ($scope.route.wheelChairBoarding == 1) {
             $scope.accesibilityKnow = true;
-            return $scope.flagAccessibility ? 'ic_access' : 'ic_access_outline';
+
         } else if ($scope.route.wheelChairBoarding == 2) {
             $scope.accesibilityKnow = true;
         } else { // if I don't know, don't see it
             $scope.accesibilityKnow = false;
         }
+    }
+
+    function getAccessibilityStyle() {
+        //        if ($scope.route.wheelChairBoarding == 1) {
+        //            $scope.accesibilityKnow = true;
+        //
+        //        } else if ($scope.route.wheelChairBoarding == 2) {
+        //            $scope.accesibilityKnow = true;
+        //        } else { // if I don't know, don't see it
+        //            $scope.accesibilityKnow = false;
+        //        }
+        setAccessibilityKnow();
+        return $scope.flagAccessibility ? 'ic_access' : 'ic_access_outline';
     }
 })
 
@@ -645,16 +631,6 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
     }
 
-    //        function getAccessibilityStyle() {
-    //        if ($scope.route.wheelChairBoarding == 1) {
-    //            $scope.accesibilityKnow = true;
-    //            return $scope.flagAccessibility ? 'ic_access' : 'ic_access_outline';
-    //        } else if ($scope.route.wheelChairBoarding == 2) {
-    //            $scope.accesibilityKnow = true;
-    //        } else { // if I don't know, don't see it
-    //            $scope.accesibilityKnow = false;
-    //        }
-    //    }
     $scope.toggleAccessibility = function () {
 
         $scope.flagAccessibility = !$scope.flagAccessibility;
