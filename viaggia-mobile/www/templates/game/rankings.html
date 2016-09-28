@@ -18,7 +18,7 @@
                 </ion-list>
             </div>
         </div>
-        <div ng-if="!!status">
+        <div ng-if="!!status && singleRankStatus">
             <div class="listheader" ng-class="{hasprize: (filter.selected === 'now' && !!prize)}">
                 <div class="prize" ng-if="filter.selected === 'now' && !!prize">
                     <div>{{'game_tab_ranking_listheader_price' | translate}}</div>
@@ -41,7 +41,7 @@
             <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="rankingScroll">
                 <ion-list>
                     <div ng-repeat="rankingUser in ranking" ng-class="{'pos-even': ($index % 2 == 0)}">
-                        <div class="row">
+                        <div class="row" id="position-{{$index}}">
                             <div class="col col-25">{{rankingUser.position}}</div>
                             <div class="col col-50">{{rankingUser.nickName}}</div>
                             <div class="col col-25">{{rankingUser.score}}</div>
@@ -53,6 +53,11 @@
         </div>
         <div ng-if="!status">
             <h4 class="label">{{'no_status' | translate}}</h4>
+        </div>
+        <div ng-if="status && !singleRankStatus">
+            <h4 class="label">{{'pop_up_error_server_template' | translate}}</h4>
+
+            <button ng-click="loadMore()" class="button button-viaggia reload-rank">ricarica</button>
         </div>
     </ion-content>
 </ion-view>

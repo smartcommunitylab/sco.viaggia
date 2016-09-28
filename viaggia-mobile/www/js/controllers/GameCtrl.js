@@ -143,10 +143,11 @@ angular.module('viaggia.controllers.game', [])
     };
 })
 
-.controller('RankingsCtrl', function ($scope, $ionicScrollDelegate, $window, $timeout, Config, GameSrv) {
+.controller('RankingsCtrl', function ($scope, $ionicScrollDelegate, $window, $timeout, Config, GameSrv, Toast, $filter, $ionicPosition) {
     $scope.maybeMore = true;
     $scope.currentUser = {};
     $scope.ranking = [];
+    $scope.singleRankStatus = true;
     var getRanking = false;
     $scope.filter = {
         open: false,
@@ -175,15 +176,18 @@ angular.module('viaggia.controllers.game', [])
     $scope.filter.filter = function (selection) {
         // reload using new selection
         $scope.maybeMore = true;
+        $scope.singleRankStatus = false;
         Config.loading();
         GameSrv.getRanking(selection, 0, $scope.rankingPerPage).then(
             function (ranking) {
+                $scope.singleRankStatus = true;
                 $scope.currentUser = ranking['actualUser'];
                 $scope.ranking = ranking['classificationList'];
                 $scope.$broadcast('scroll.infiniteScrollComplete');
                 Config.loaded();
             },
             function (err) {
+                $scope.singleRankStatus = false;
                 console.log(err);
                 Config.loaded();
             }
@@ -209,11 +213,24 @@ angular.module('viaggia.controllers.game', [])
 
                     $scope.$broadcast('scroll.infiniteScrollComplete');
                     getRanking = false;
+                    $scope.singleRankStatus = true;
                 },
                 function (err) {
-                    $scope.maybeMore = false;
+                    $scope.maybeMore = true;
+                    Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
                     $scope.$broadcast('scroll.infiniteScrollComplete');
                     getRanking = false;
+                    if ($scope.ranking.length == 0) {
+                        $scope.singleRankStatus = false;
+
+                    }
+                    //position to the last visible so No infinite scroll
+                    if ($scope.ranking.length > 0) {
+                        var visualizedElements = Math.ceil((window.innerHeight - (44 + 49 + 44 + 44 + 48)) / 40);
+                        var lastelementPosition = $ionicPosition.position(angular.element(document.getElementById('position-' + ($scope.ranking.length - visualizedElements))));
+                        $ionicScrollDelegate.scrollTo(lastelementPosition.left, lastelementPosition.top, true);
+                    }
+
 
                 }
             );

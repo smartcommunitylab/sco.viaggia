@@ -1807,6 +1807,10 @@ Play&Go
     background-color: #F2F2F2;
 }
 
+.game-ranking .button-viaggia {
+    margin-top: 40px;
+}
+
 .tt-table-acc {
     left: 0px !important;
 }
