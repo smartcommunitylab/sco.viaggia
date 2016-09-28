@@ -265,13 +265,6 @@ angular.module('viaggia.services.data', [])
                     .success(function (stops) {
                         if (Object.prototype.toString.call(stops) === '[object Array]') {
                             localStorage[key] = JSON.stringify(stops);
-                            stopsAcc = {};
-                            for (var i = 0; i < stops.length; i++) {
-
-
-                                stopsAcc[stops[i].id] = stops[i].wheelChairBoarding;
-                            }
-                            localStorage[key + "_acc"] = JSON.stringify(stopsAcc);
                             writeLocalStopVersion(a, remoteVersion);
                         }
                     })

@@ -438,7 +438,6 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         var tableCornerStr = ['', ''];
 
         var rows = [];
-        var stopAcc = JSON.parse(localStorage[Config.getAppId() + "_stops_" + $stateParams.agencyId + "_acc"]);
         if (data.stops) {
             for (var row = 0; row < data.stops.length + $scope.header_row_number; row++) {
                 var rowContent = [];
