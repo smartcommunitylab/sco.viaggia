@@ -854,7 +854,7 @@ ion-header-bar .title {
 
 #table-table {
     white-space: nowrap;
-    font-family: RobotoMono;
+    font-family: RobotoMono !important;
     /*    left: 100px;*/
     font-size: 12px;
     position: absolute;
@@ -863,6 +863,10 @@ ion-header-bar .title {
     -moz-transition-duration: 0.3s;
     -o-transition-duration: 0.3s;
     transition-duration: 0.3s;
+}
+
+#table-table br{
+    font-family: RobotoMono;
 }
 
 #table-col {
