@@ -134,8 +134,8 @@ angular.module('viaggia.controllers.home', [])
                 trackService.checkLocalization().then(function () {
                     startTransportTrack(transportType);
                 }, function (error) {
+                    Config.loaded();
                     if (Config.isErrorLowAccuracy(error)) {
-                        Config.loaded();
                         //popup "do u wanna go on?"
                         $ionicPopup.confirm({
                             title: $filter('translate')("pop_up_low_accuracy_title"),
@@ -151,11 +151,10 @@ angular.module('viaggia.controllers.home', [])
                                     onTap: function () {
                                         startTransportTrack(transportType);
                                     }
-                    }
-                ]
+                                }
+                            ]
                         });
                     } else if (Config.isErrorGPSNoSignal(error)) {
-                        Config.loaded();
                         //popup "impossible to track" and stop
                         $ionicPopup.alert({
                             title: $filter('translate')("pop_up_no_geo_title"),

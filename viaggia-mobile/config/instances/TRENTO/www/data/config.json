@@ -3,7 +3,7 @@
     "appid": "trentoplaygo",
     "messagingAppId": "mobility.trentoplaygo",
     "senderID": "453601816446",
-    "appversion": "1.0.1",
+    "appversion": "1.0.2",
     "appname": "Viaggia Trento Play&Go",
     "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
     "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
