@@ -34,6 +34,10 @@
     "https://github.com/transistorsoft/cordova-background-geolocation.git"
   ],
   "cordovaPlatforms": [
-    "android"
+    {
+      "platform": "android",
+      "version": "5.2.2",
+      "locator": "android@5.2.2"
+    }
   ]
 }

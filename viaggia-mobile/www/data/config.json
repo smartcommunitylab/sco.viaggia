@@ -148,6 +148,9 @@
         "url": "https://tn.smartcommunitylab.it/core.mobility/gamification/geolocations?token=",
         "method": "POST",
         "batchSync": true,
-        "autoSync": false
+        "autoSync": false,
+
+        "notificationColor": "gray",
+        "notificationIcon": "drawable/notification"
     }
 }

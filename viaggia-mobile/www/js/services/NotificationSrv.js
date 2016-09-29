@@ -30,7 +30,9 @@ angular.module('viaggia.services.notification', [])
         var push = PushNotification.init({
             android: {
                 senderID: Config.getSenderID(),
-                topics: [Config.getMessagingAppId()]
+                topics: [Config.getMessagingAppId()],
+                icon: "notification",
+                iconColor: "#aaaaaa"
             },
             ios: {
                 alert: "true",
