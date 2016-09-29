@@ -8,23 +8,35 @@ angular.module('viaggia.services.tracking', [])
         var bgGeo = {};
         var refreshCallback = null;
         var ACCURACY = 100;
+
+        var hasLocationPermission = function(cb) {
+          cb(true);
+//          cordova.plugins.diagnostic.isLocationAuthorized(function(state){
+//            alert(state);
+//            cb(state);
+//          }, function(e) {
+//            console.log('diagnostic error', e);
+//            cb(false);
+//          });
+        }
+
         /**
          * initialize bgPlugin. Setup default HTTP response processor for sync operation - clear DB upon successful sync
          */
         $ionicPlatform.ready(function () {
             bgGeo = window.BackgroundGeolocation;
-            bgGeo.onHttp(function (response) {
-                var status = response.status;
-                console.log("- HTTP result: " + JSON.stringify(response));
-                if (status == 200 && response.responseText && 'OK' == JSON.parse(response.responseText).storeResult) {
-                    bgGeo.clearDatabase(function () {
-                        console.log('- cleared database');
-                    });
-                }
-            }, function (response) {
-                var status = response.status;
-                console.log("- HTTP failure: " + status);
-            });
+//            bgGeo.onHttp(function (response) {
+//                var status = response.status;
+//                console.log("- HTTP result: " + JSON.stringify(response));
+//                if (status == 200 && response.responseText && 'OK' == JSON.parse(response.responseText).storeResult) {
+//                    bgGeo.clearDatabase(function () {
+//                        console.log('- cleared database');
+//                    });
+//                }
+//            }, function (response) {
+//                var status = response.status;
+//                console.log("- HTTP failure: " + status);
+//            });
 
         });
 
@@ -48,10 +60,13 @@ angular.module('viaggia.services.tracking', [])
          * INITIALIZE THE TRACKER. RESTART IF IS RUNNING, OR SYNCHRONIZE IF IS FINISHED.
          */
         trackService.startup = function () {
-
-            var trackingConfigure = Config.getTrackingConfig();
-            bgGeo.configure(trackingConfigure, callbackFn, failureFn);
-            init();
+            hasLocationPermission(function(status){
+              if (status) {
+                var trackingConfigure = Config.getTrackingConfig();
+                bgGeo.configure(trackingConfigure, callbackFn, failureFn);
+                init();
+              }
+            });
         }
 
         /**
@@ -93,22 +108,28 @@ angular.module('viaggia.services.tracking', [])
          */
         trackService.checkLocalization = function () {
                 var deferred = $q.defer();
-                //check gps and accuracy
-                bgGeo.getCurrentPosition(function (location, taskId) {
-                    if (location.coords.accuracy > ACCURACY) {
-                        deferred.reject(Config.getErrorLowAccuracy());
-                    } else {
-                        deferred.resolve(location.coords.accuracy);
-
-                    }
-                }, function (errorCode) {
-                    console.log(errorCode);
-                    //if 0,1 -> GPS off
+                hasLocationPermission(function(status){
+                  if (!status) {
                     deferred.reject(Config.getErrorGPSNoSignal());
-                    //deferred.reject(errorCode);
-                }, {
-                    timeout: 10, // 10 seconds timeout to fetch location
-                    maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
+                    return;
+                  }
+                  //check gps and accuracy
+                  bgGeo.getCurrentPosition(function (location, taskId) {
+                      if (location.coords.accuracy > ACCURACY) {
+                          deferred.reject(Config.getErrorLowAccuracy());
+                      } else {
+                          deferred.resolve(location.coords.accuracy);
+
+                      }
+                  }, function (errorCode) {
+                      console.log(errorCode);
+                      //if 0,1 -> GPS off
+                      deferred.reject(Config.getErrorGPSNoSignal());
+                      //deferred.reject(errorCode);
+                  }, {
+                      timeout: 10, // 10 seconds timeout to fetch location
+                      maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
+                  });
                 });
                 return deferred.promise;
             }
