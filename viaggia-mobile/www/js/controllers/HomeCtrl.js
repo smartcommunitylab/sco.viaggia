@@ -91,11 +91,27 @@ angular.module('viaggia.controllers.home', [])
     });
     $scope.$on("$ionicView.enter", function (scopes, states) {
         Config.init().then(function () {
-            $scope.trackingIsOn = trackService.trackingIsGoingOn() && !trackService.trackingIsFinished();
-            if ($scope.trackingIsOn) {
-                updateTrackingInfo();
-            }
+            if (window.BackgroundGeolocation) {
+                trackService.startup().then(function () {
+                    $scope.trackingIsOn = trackService.trackingIsGoingOn() && !trackService.trackingIsFinished();
+                    if ($scope.trackingIsOn && $rootScope.GPSAllow) {
+                        updateTrackingInfo();
+                    } else {
+                        //just the timer but it has to update only when it start
+                        //create popup
+                        //stop tracking and variables
+                        if ($scope.trackingIsOn && !$rootScope.GPSAllow) {
+                            trackService.cleanTracking();
+                            $scope.trackingIsOn = false;
+                            trackService.geolocationDisabledPopup();
+                        }
+                    }
+                }, function (err) {
+
+                });
+            };
         });
+
     });
 
     var translateTransport = function (t) {

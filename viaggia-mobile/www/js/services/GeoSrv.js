@@ -2,7 +2,7 @@ angular.module('viaggia.services.geo', [])
 
 .factory('GeoLocate', function ($q, $rootScope) {
     var localization = undefined;
-
+    var positionError = null;
     if (typeof (Number.prototype.toRad) === "undefined") {
         Number.prototype.toRad = function () {
             return this * Math.PI / 180;
@@ -10,90 +10,141 @@ angular.module('viaggia.services.geo', [])
     }
 
     function compute(v1, a1, v2, a2, d) {
-      if ((a1 + a2)/1000 > d) {
-        var v = a1 > a2 ? (v2 - (v2-v1)*a2/a1) : (v1+ (v2-v1)*a1/a2);
-        return [v,v];
-      }
-      return [v1 + (v2-v1)*a1/d/1000, v2 - (v2-v1)*a2/d/1000];
+        if ((a1 + a2) / 1000 > d) {
+            var v = a1 > a2 ? (v2 - (v2 - v1) * a2 / a1) : (v1 + (v2 - v1) * a1 / a2);
+            return [v, v];
+        }
+        return [v1 + (v2 - v1) * a1 / d / 1000, v2 - (v2 - v1) * a2 / d / 1000];
     }
 
     function computeLats(p1, p2, d) {
-      if (p1.coords.latitude > p2.coords.latitude) {
-        var res = computeLats(p2, p1, d);
-        return [res[1],res[0]];
-      }
-      return compute(p1.coords.latitude, p1.coords.accuracy, p2.coords.latitude, p2.coords.accuracy, d);
+        if (p1.coords.latitude > p2.coords.latitude) {
+            var res = computeLats(p2, p1, d);
+            return [res[1], res[0]];
+        }
+        return compute(p1.coords.latitude, p1.coords.accuracy, p2.coords.latitude, p2.coords.accuracy, d);
     }
+
     function computeLngs(p1, p2, d) {
-      if (p1.coords.longitude > p2.coords.longitude) {
-        var res = computeLngs(p2, p1, d);
-        return [res[1],res[0]];
-      }
-      return compute(p1.coords.longitude, p1.coords.accuracy, p2.coords.longitude, p2.coords.accuracy, d);
+        if (p1.coords.longitude > p2.coords.longitude) {
+            var res = computeLngs(p2, p1, d);
+            return [res[1], res[0]];
+        }
+        return compute(p1.coords.longitude, p1.coords.accuracy, p2.coords.longitude, p2.coords.accuracy, d);
     }
 
     function transformPair(p1, p2, res, distFunc) {
-      var d = distFunc(p1,p2);
-      if (d == 0) return;
+        var d = distFunc(p1, p2);
+        if (d == 0) return;
 
-      var lats = computeLats(p1,p2,d);
-      var lngs = computeLngs(p1,p2,d);
-      res.push({lat: lats[0], lng: lngs[0], timestamp: p1.timestamp});
-      res.push({lat: lats[1], lng: lngs[1], timestamp: p2.timestamp});
+        var lats = computeLats(p1, p2, d);
+        var lngs = computeLngs(p1, p2, d);
+        res.push({
+            lat: lats[0],
+            lng: lngs[0],
+            timestamp: p1.timestamp
+        });
+        res.push({
+            lat: lats[1],
+            lng: lngs[1],
+            timestamp: p2.timestamp
+        });
     }
 
     var myPosition = null;
 
-    var initLocalization = function () {
+
+    var startLocalization = function () {
         if (typeof localization == 'undefined') {
             localization = $q.defer();
             if (ionic.Platform.isWebView()) {
                 //console.log('geolocalization initing (cordova)...');
-                document.addEventListener("deviceready", function () {
+                document.addEventListener('deviceready', function () {
                     //console.log('geolocalization inited (cordova)');
-                    $rootScope.locationWatchID = navigator.geolocation.watchPosition(function (position) {
-                        r = [position.coords.latitude, position.coords.longitude];
-                        $rootScope.myPosition = r;
-                        $rootScope.myPositionAccuracy = position.coords.accuracy;
-                        //console.log('geolocated (cordova)');
-                        localization.resolve(r);
-                    }, function (error) {
-                        console.log('cannot geolocate (cordova)');
-                        localization.reject('cannot geolocate (web)');
-                    }, {
-                        //frequency: (20 * 60 * 1000), //20 mins
-                        maximumAge: (10 * 60 * 1000), //10 mins
-                        timeout: 10 * 1000, //1 minute
-                        enableHighAccuracy: (device.version.indexOf('2.') == 0) // true for Android 2.x
-                    });
+                    if (!positionError || (!!positionError && positionError.code != 1)) {
+                        $rootScope.locationWatchID = navigator.geolocation.watchPosition(function (position) {
+                            r = [position.coords.latitude, position.coords.longitude];
+                            $rootScope.myPosition = r;
+                            localization.resolve(r);
+                        }, function (error) {
+                            positionError = error;
+                            console.log('Cannot geolocate (cordova)');
+                            localization.reject('Cannot geolocate (cordova), error.code: ' + error.code);
+                        }, {
+                            //frequency: (20 * 60 * 1000), //20 mins
+                            maximumAge: (10 * 6 * 1000), //10 mins
+                            timeout: 6 * 1000, //1 minute
+                            enableHighAccuracy: (device.version.indexOf('2.') == 0) // true for Android 2.x
+                        });
+                    } else {
+                        localization.reject('Cannot geolocate (permission denied)');
+                    }
                 }, false);
             } else {
                 //console.log('geolocalization inited (web)');
                 $rootScope.locationWatchID = navigator.geolocation.watchPosition(function (position) {
                     r = [position.coords.latitude, position.coords.longitude];
                     $rootScope.myPosition = r;
-                    $rootScope.myPositionAccuracy = position.coords.accuracy;
                     //console.log('geolocated (web)');
                     localization.resolve(r);
                 }, function (error) {
+                    positionError = error;
                     console.log('cannot geolocate (web)');
                     localization.reject('cannot geolocate (web)');
                 }, {
-                    maximumAge: (10 * 60 * 1000), //5 mins
-                    timeout: 10 * 1000, //1 minute
+                    maximumAge: (10 * 60 * 1000), // 10 minutes
+                    timeout: 10 * 1000, // 10 seconds
                     enableHighAccuracy: false
                 });
             }
         }
+
         return localization.promise;
     };
     var geo = {
         reset: function () {
             localization = undefined;
         },
+        initLocalization: function () {
+            var defer = $q.defer();
+            document.addEventListener('deviceready', function () {
+                console.log('Check geolocation permissions');
+
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        console.log('Gelocation permitted and active');
+                        startLocalization()
+                        return defer.resolve();
+                    },
+                    function (error) {
+                        positionError = error;
+                        console.log('Cannot geolocate (cordova)');
+                        if (error.code != 1) {
+                            console.log('Geolocation permission denied!');
+                            startLocalization();
+                            return defer.resolve();
+                        } else {
+                            return defer.reject();
+                        }
+                    }, {
+                        timeout: 100
+                    });
+            }, false);
+            return defer.promise;
+        },
+        clearWatch: function () {
+            navigator.geolocation.clearWatch($rootScope.locationWatchID);
+            $rootScope.locationWatchID = undefined;
+        },
+        reset: function () {
+            localization = undefined;
+        },
         locate: function () {
             //console.log('geolocalizing...');
-            return initLocalization(localization).then(function (firstGeoLocation) {
+            //            return initLocalization(localization).then(function (firstGeoLocation) {
+            //                return $rootScope.myPosition;
+            //            });
+            return startLocalization().then(function (latlng) {
                 return $rootScope.myPosition;
             });
         },
@@ -133,17 +184,17 @@ angular.module('viaggia.services.geo', [])
          * Input: array of objects of type {coords:{latitude:..., longitude:..., accuracy:...}}
          * Output: array of object of type {lat:..., lng:...}
          */
-        transform: function(array) {
-          var res = [];
+        transform: function (array) {
+            var res = [];
 
-          var distFunc = function(p1, p2) {
-            return geo.distance([p1.coords.latitude, p1.coords.longitude],[p2.coords.latitude, p2.coords.longitude]);
-          }
+            var distFunc = function (p1, p2) {
+                return geo.distance([p1.coords.latitude, p1.coords.longitude], [p2.coords.latitude, p2.coords.longitude]);
+            }
 
-          for (var i = 1; i < array.length; i++) {
-            transformPair(array[i-1], array[i], res, distFunc);
-          }
-          return res;
+            for (var i = 1; i < array.length; i++) {
+                transformPair(array[i - 1], array[i], res, distFunc);
+            }
+            return res;
         }
     };
 

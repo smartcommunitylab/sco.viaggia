@@ -31,9 +31,17 @@
     "cordova-plugin-whitelist",
     "net.yoik.cordova.plugins.screenorientation",
     "https://github.com/katzer/cordova-plugin-local-notifications",
-    "https://github.com/transistorsoft/cordova-background-geolocation.git"
+    "https://github.com/transistorsoft/cordova-background-geolocation.git",
+    {
+      "locator": "https://github.com/transistorsoft/cordova-background-geolocation.git#1.7.0",
+      "id": "phonegap-plugin-push"
+    }
   ],
   "cordovaPlatforms": [
-    "android"
+    {
+      "platform": "android",
+      "version": "5.1.1",
+      "locator": "android@5.1.1"
+    }
   ]
 }

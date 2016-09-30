@@ -95,27 +95,43 @@ angular.module('viaggia', [
     'viaggia.filters'
 ])
 
-.run(function ($ionicPlatform, $cordovaFile, $rootScope, $translate, trackService, DataManager, Config, GeoLocate, notificationService) {
+.run(function ($ionicPlatform, $cordovaFile, $q, $rootScope, $translate, trackService, DataManager, Config, GeoLocate, notificationService) {
 
     $rootScope.locationWatchID = undefined;
 
-    document.addEventListener("pause", function () {
-        console.log('app paused');
-        if (typeof $rootScope.locationWatchID != 'undefined') {
-            navigator.geolocation.clearWatch($rootScope.locationWatchID);
-            $rootScope.locationWatchID = undefined;
-            GeoLocate.reset();
-            console.log('geolocation reset');
-        }
-    }, false);
-
-    document.addEventListener("resume", function () {
-        console.log('app resumed');
-        GeoLocate.locate();
-        if (trackService.trackingIsGoingOn() && trackService.trackingIsFinished()) {
-            trackService.stop();
-        }
-    }, false);
+    var geolocate = function () {
+        var defer = $q.defer();
+        GeoLocate.locate().then(
+            function (position) {
+                $rootScope.myPosition = position;
+                $rootScope.GPSAllow = true;
+                defer.resolve();
+            },
+            function () {
+                console.log('Geolocation not possible');
+                $rootScope.GPSAllow = false;
+                defer.reject();
+            }
+        );
+        return defer.promise;
+    };
+    //    document.addEventListener("pause", function () {
+    //        console.log('app paused');
+    //        if (typeof $rootScope.locationWatchID != 'undefined') {
+    //            navigator.geolocation.clearWatch($rootScope.locationWatchID);
+    //            $rootScope.locationWatchID = undefined;
+    //            GeoLocate.reset();
+    //            console.log('geolocation reset');
+    //        }
+    //    }, false);
+    //
+    //    document.addEventListener("resume", function () {
+    //        console.log('app resumed');
+    //        GeoLocate.locate();
+    //        if (trackService.trackingIsGoingOn() && trackService.trackingIsFinished()) {
+    //            trackService.stop();
+    //        }
+    //    }, false);
 
     /*
     GeoLocate.locate().then(function (position) {
@@ -138,11 +154,12 @@ angular.module('viaggia', [
         if (window.StatusBar) {
             StatusBar.styleDefault();
         }
+        //        GeoLocate.initLocalization().then(function () {
         Config.init().then(function () {
-
-            if (window.BackgroundGeolocation) {
-                trackService.startup();
-            }
+            // $rootScope.GPSAllow = true;
+            //            if (window.BackgroundGeolocation) {
+            //                trackService.startup();
+            //            }
 
             if (ionic.Platform.isWebView()) {
                 DataManager.dbSetup();
@@ -151,7 +168,9 @@ angular.module('viaggia', [
             }
             notificationService.register();
         });
-
+        //        }, function (err) {
+        //            $rootScope.GPSAllow = false;
+        //        });
         if (typeof navigator.globalization !== "undefined") {
             navigator.globalization.getPreferredLanguage(function (language) {
                 $translate.use((language.value).split("-")[0]).then(function (data) {
@@ -167,7 +186,28 @@ angular.module('viaggia', [
                 navigator.splashscreen.hide();
             }
         }, 1500);
+        /* Geolocation init */
+        $ionicPlatform.on('pause', function () {
+            console.log('=== PAUSE ===');
+            if (typeof $rootScope.locationWatchID != 'undefined') {
+                GeoLocate.clearWatch();
+                console.log('watchPosition cleared');
+                GeoLocate.reset();
+                console.log('geolocation reset');
+            }
+        });
 
+        $ionicPlatform.on('resume', function () {
+            console.log('+++ RESUME +++');
+
+            geolocate().then(function () {
+                if (trackService.trackingIsGoingOn() && trackService.trackingIsFinished()) {
+                    trackService.stop();
+                } else if (trackService.trackingIsGoingOn() && trackService.trackingIsFinished()) {
+
+                }
+            });
+        });
     });
 })
 
@@ -898,6 +938,8 @@ angular.module('viaggia', [
         game_tab_challenges_filter_active: "Attive",
         game_tab_challenges_filter_old: "Passate",
         game_tab_challenges_info: "Info sfida",
+        gps_disabled_title: "Permessi di Geolocalizzazione",
+        gps_disabled_template: "I permessi di geolocalizzazione risultano disabilitati. I dati memorizzati verranno inviati appena i permessi verranno riabilitati",
         pop_up_no_geo_title: 'Errore di geolocalizzazione',
         pop_up_no_geo_template: 'Attenzione! Non è stato possibile rilevare la tua posizione. Accedi alle impostazioni del tuo dispositivo e controlla che il servizio di localizzazione sia attivo',
         pop_up_low_accuracy_title: 'Attenzione',
@@ -925,6 +967,7 @@ angular.module('viaggia', [
         game_tab_ranking_listheader_player: "Giocatore",
         game_tab_ranking_listheader_points: "Punti",
         green_leaves_points: "Punti Green Leaves Points",
+        ranking_reload: "Ricarica",
         "green leaves": "Green Leaves",
         "bike aficionado": "Bike Trip Badge",
         "sustainable life": "Zero Impact Badge",
@@ -1249,6 +1292,8 @@ angular.module('viaggia', [
         track_walk_action: 'walking',
         track_bike_action: 'cycling',
         track_other_action: 'travelling',
+        gps_disabled_title: "Permission denied",
+        gps_disabled_template: "The GPS's permissions are disabled. Your stored data will be send when the permissions will be enabled",
         pop_up_no_geo_title: 'Geolocation error',
         pop_up_no_geo_template: 'Warning! Your location cannot be retrieved. Enable location information in the device/app settings.',
         pop_up_low_accuracy_title: 'Warning',
@@ -1275,6 +1320,7 @@ angular.module('viaggia', [
         game_tab_ranking_listheader_position: "Position",
         game_tab_ranking_listheader_player: "Player",
         game_tab_ranking_listheader_points: "Points",
+        ranking_reload: "Reload",
         green_leaves_points: "Green Leaves Points",
         "green leaves": "Green Leaves",
         "bike aficionado": "Bike Trip Badge",

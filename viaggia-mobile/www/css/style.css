@@ -1182,6 +1182,13 @@ ion-header-bar .title {
     font-size: x-large;
 }
 
+.bookmark-trip {
+    white-space: nowrap!important;
+    text-overflow: ellipsis!important;
+    overflow: hidden!important;
+    padding-right: 30px!important;
+}
+
 .parking-title {
     white-space: nowrap;
 }
