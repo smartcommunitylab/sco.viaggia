@@ -176,7 +176,7 @@ angular.module('viaggia.controllers.game', [])
     $scope.filter.filter = function (selection) {
         // reload using new selection
         $scope.maybeMore = true;
-        $scope.singleRankStatus = false;
+        $scope.singleRankStatus = true;
         Config.loading();
         GameSrv.getRanking(selection, 0, $scope.rankingPerPage).then(
             function (ranking) {

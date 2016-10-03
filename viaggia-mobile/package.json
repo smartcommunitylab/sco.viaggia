@@ -35,7 +35,8 @@
     {
       "locator": "https://github.com/transistorsoft/cordova-background-geolocation.git#1.7.0",
       "id": "phonegap-plugin-push"
-    }
+    },
+    "cordova-custom-config"
   ],
   "cordovaPlatforms": [
     {

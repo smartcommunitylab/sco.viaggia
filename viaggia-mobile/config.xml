@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-    <widget id="it.smartcommunitylab.viaggiatrento.playgo" version="1.0.2" android-versionCode="4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <widget id="it.smartcommunitylab.viaggiatrento.playgo" version="1.0.2" android-versionCode="4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
         <name>Viaggia Trento Play&amp;Go</name>
         <description>Viaggia Trento Play&amp;Go</description>
         <author email="info@smartcommunitylab.it" href="http://www.smartcommunitylab.it/">Smart Community Lab</author>
@@ -58,6 +58,9 @@
             <splash src="config/instances/TRENTO/resources/android/splash/drawable-port-xhdpi-screen.png" density="port-xhdpi" />
             <splash src="config/instances/TRENTO/resources/android/splash/drawable-port-xxhdpi-screen.png" density="port-xxhdpi" />
             <splash src="config/instances/TRENTO/resources/android/splash/drawable-port-xxxhdpi-screen.png" density="port-xxxhdpi" />
+            <config-file target="AndroidManifest.xml" parent="/*">
+                <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+            </config-file>
         </platform>
         <platform name="ios">
             <icon src="config/instances/TRENTO/resources/ios/icon/icon.png" width="57" height="57" />
