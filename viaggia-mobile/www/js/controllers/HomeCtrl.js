@@ -190,7 +190,7 @@ angular.module('viaggia.controllers.home', [])
     $scope.stopTracking = function () {
         Config.loading();
         $scope.trackingIsOn = false;
-        $interval.cancel($scope.trackInfoInterval);
+        if (!!$scope.trackInfoInterval) $interval.cancel($scope.trackInfoInterval);
         $scope.trackingInfo = {};
         trackService.computeInfo().then(function (data) {
             Config.loaded();
