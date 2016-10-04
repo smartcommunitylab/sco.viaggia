@@ -172,11 +172,14 @@ angular.module('viaggia.controllers.home', [])
                         });
                     } else if (Config.isErrorGPSNoSignal(error)) {
                         //popup "impossible to track" and stop
-                        $ionicPopup.alert({
+                        var alert = $ionicPopup.alert({
                             title: $filter('translate')("pop_up_no_geo_title"),
                             template: $filter('translate')("pop_up_no_geo_template"),
                             okText: $filter('translate')("btn_close"),
                             okType: 'button-cancel'
+                        });
+                        alert.then(function (e) {
+                            trackService.startup();
                         });
                     }
                 });

@@ -649,7 +649,7 @@ angular.module('viaggia.services.tracking', [])
          * Popup to show in case no geolocation options are available
          */
         trackService.geolocationPopup = function () {
-            $ionicPopup.alert({
+            var alert = $ionicPopup.alert({
                 title: $filter('translate')("pop_up_no_geo_title"),
                 template: $filter('translate')("pop_up_no_geo_template"),
                 buttons: [
@@ -659,13 +659,17 @@ angular.module('viaggia.services.tracking', [])
                 }
             ]
             });
+            alert.then(function (e) {
+                trackService.startup();
+            });
         }
 
         /**
          * Popup to show in case permission has been disabled during a record of a track
          */
         trackService.geolocationDisabledPopup = function () {
-            $ionicPopup.alert({
+            //reset the variable
+            var alert = $ionicPopup.alert({
                 title: $filter('translate')("gps_disabled_title"),
                 template: $filter('translate')("gps_disabled_template"),
                 buttons: [
@@ -674,6 +678,9 @@ angular.module('viaggia.services.tracking', [])
                         type: 'button-custom'
                 }
             ]
+            });
+            alert.then(function (e) {
+                trackService.startup();
             });
         }
 
