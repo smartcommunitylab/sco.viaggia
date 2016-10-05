@@ -1,6 +1,6 @@
 angular.module('viaggia.services.conf', [])
 
-.factory('Config', function ($q, $http, $window, $filter, $rootScope, $ionicLoading, $translate) {
+.factory('Config', function ($q, $http, $window, $timeout, $filter, $rootScope, $ionicLoading, $translate) {
 
     var isDarkColor = function (color) {
         if (!color) return true;
@@ -364,7 +364,7 @@ angular.module('viaggia.services.conf', [])
             $ionicLoading.show();
         },
         loaded: function () {
-            $ionicLoading.hide();
+            $timeout($ionicLoading.hide);
         },
         getInfoMenu: function () {
             return mapJsonConfig.visualization.infomenu;
