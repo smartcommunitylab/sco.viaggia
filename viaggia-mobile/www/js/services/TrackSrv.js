@@ -6,9 +6,10 @@ angular.module('viaggia.services.tracking', [])
         //var minimumAccuracyInMeter = 100;
         var trackService = {};
         var bgGeo = {};
+        var appVersion = "-1";
         var refreshCallback = null;
         var ACCURACY = 100;
-
+        var timerTrack = null;
         var hasLocationPermission = function (cb) {
             cb($rootScope.GPSAllow);
             //          cordova.plugins.diagnostic.isLocationAuthorized(function(state){
@@ -25,6 +26,9 @@ angular.module('viaggia.services.tracking', [])
          */
         $ionicPlatform.ready(function () {
             bgGeo = window.BackgroundGeolocation;
+            cordova.getAppVersion(function (version) {
+                appVersion = version;
+            });
             //            bgGeo.onHttp(function (response) {
             //                var status = response.status;
             //                console.log("- HTTP result: " + JSON.stringify(response));
@@ -86,6 +90,8 @@ angular.module('viaggia.services.tracking', [])
 
             var data = angular.copy(ionic.Platform.device());
             data.trackingStatus = status;
+            //add version of application
+            data.appVersion = appVersion;
 
             var url = !transportType ?
                 (Config.getServerURL() + '/gamification/journey/' + idTrip) : (Config.getServerURL() + '/gamification/freetracking/' + transportType + '/' + idTrip);
@@ -388,7 +394,7 @@ angular.module('viaggia.services.tracking', [])
 
                 bgGeo.configure(trackingConfigure, callbackFn, failureFn);
 
-                $timeout(function () {
+                timerTrack = $timeout(function () {
                     trackService.stop();
                     if (callback) callback();
                 }, duration);
@@ -474,7 +480,8 @@ angular.module('viaggia.services.tracking', [])
                             url: trackingConfigure['url'],
                             data: {
                                 location: locations,
-                                device: ionic.Platform.device()
+                                device: ionic.Platform.device(),
+                                appVersion: appVersion
                             },
                             headers: {
                                 'appId': Config.getAppId()
@@ -529,6 +536,8 @@ angular.module('viaggia.services.tracking', [])
             var deferred = $q.defer();
             markAsDone();
             clean();
+            //delete timer if pending
+            $timeout.cancel(timerTrack);
             sync().then(function (done) {
                 deferred.resolve();
                 if (bgGeo) bgGeo.stop();
