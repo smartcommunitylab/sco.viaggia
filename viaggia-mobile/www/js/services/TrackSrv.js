@@ -6,7 +6,9 @@ angular.module('viaggia.services.tracking', [])
         //var minimumAccuracyInMeter = 100;
         var trackService = {};
         var bgGeo = {};
-        var appVersion = "-1";
+        var appVersion = function() {
+          return Config.getVersion();
+        };
         var refreshCallback = null;
         var ACCURACY = 100;
         var timerTrack = null;
@@ -26,9 +28,6 @@ angular.module('viaggia.services.tracking', [])
          */
         $ionicPlatform.ready(function () {
             bgGeo = window.BackgroundGeolocation;
-            cordova.getAppVersion(function (version) {
-                appVersion = version;
-            });
             //            bgGeo.onHttp(function (response) {
             //                var status = response.status;
             //                console.log("- HTTP result: " + JSON.stringify(response));
@@ -91,7 +90,7 @@ angular.module('viaggia.services.tracking', [])
             var data = angular.copy(ionic.Platform.device());
             data.trackingStatus = status;
             //add version of application
-            data.appVersion = appVersion;
+            data.appVersion = appVersion();
 
             var url = !transportType ?
                 (Config.getServerURL() + '/gamification/journey/' + idTrip) : (Config.getServerURL() + '/gamification/freetracking/' + transportType + '/' + idTrip);
@@ -269,6 +268,24 @@ angular.module('viaggia.services.tracking', [])
                     //                testMap[l.extras.idTrip] = testMap[l.extras.idTrip] + 1;
                     //              }
                 });
+
+                var realTripLocs = [];
+                var prev = null;
+                if (tripLocs.length > 0) {
+                  realTripLocs.push(tripLocs[tripLocs.length - 1]);
+                  prev = tripLocs[tripLocs.length - 1].timestamp;
+                }
+                for (var i = tripLocs.length - 2; i >= 0; i--) {
+                  if (tripLocs[i].timestamp > prev) {
+                    console.log('inversion!!!!!');
+                  } else {
+                    realTripLocs.push(tripLocs[i]);
+                    prev = tripLocs[i].timestamp;
+                  }
+                }
+
+                tripLocs = realTripLocs;
+
                 tripLocs.sort(function (la, lb) {
                     return la.timestamp - lb.timestamp;
                 });
@@ -475,13 +492,14 @@ angular.module('viaggia.services.tracking', [])
                             deferred.resolve(true);
                             return;
                         }
+                        var device = angular.copy(ionic.Platform.device());
+                        device.appVersion = appVersion();
                         $http({
                             method: 'POST',
                             url: trackingConfigure['url'],
                             data: {
                                 location: locations,
-                                device: ionic.Platform.device(),
-                                appVersion: appVersion
+                                device: device
                             },
                             headers: {
                                 'appId': Config.getAppId()
