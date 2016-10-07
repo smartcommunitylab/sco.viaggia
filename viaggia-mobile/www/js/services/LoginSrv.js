@@ -421,16 +421,26 @@ angular.module('viaggia.services.login', [])
             //get Data from server my trips
 
         }
+
+        var tokenDeferred = null;
+        var tokenTs = null;
         userService.getValidToken = function () {
-            var user = storageService.getUser();
-            var deferred = $q.defer();
+          var user = storageService.getUser();
+
+          var now = new Date();
+
+          // re-use token promise if not too old
+          if (tokenDeferred != null && now.getTime() - tokenTs > 10000) {
+              return tokenDeferred.promise;
+            }
+            tokenDeferred = $q.defer();
+            tokenTs = now.getTime();
 
             // check for expiry.
-            var now = new Date();
             if (user && user.token) {
                 var saved = new Date(user.token.validUntil);
                 if (saved.getTime() >= now.getTime() + 60 * 60 * 1000) {
-                    deferred.resolve(user.token.access_token);
+                    tokenDeferred.resolve(user.token.access_token);
                 } else {
                     var url = Config.getServerTokenURL();
                     var params = "?client_id=" + Config.getClientId() + "&client_secret=" + Config.getClientSecKey() + "&code=" + user.token.code + "&refresh_token=" + user.token.refresh_token + "&grant_type=refresh_token";
@@ -451,21 +461,21 @@ angular.module('viaggia.services.login', [])
                                 // update token
                                 storageService.saveUser(user).then(function (success) {}, function (error) {});;
 
-                                deferred.resolve(access_token);
+                                tokenDeferred.resolve(access_token);
                             } else {
-                                deferred.reject(null);
+                                tokenDeferred.reject(null);
                             }
                         },
                         function (responseError) {
-                            deferred.reject(responseError);
+                            tokenDeferred.reject(responseError);
                         }
                     );
 
                 }
             } else {
-                deferred.reject(null);
+                tokenDeferred.reject(null);
             }
-            return deferred.promise;
+            return tokenDeferred.promise;
         }
         return userService;
     })
