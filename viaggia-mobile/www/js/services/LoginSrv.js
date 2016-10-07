@@ -430,7 +430,7 @@ angular.module('viaggia.services.login', [])
           var now = new Date();
 
           // re-use token promise if not too old
-          if (tokenDeferred != null && now.getTime() - tokenTs > 10000) {
+          if (tokenDeferred != null && now.getTime() - tokenTs < 10000) {
               return tokenDeferred.promise;
             }
             tokenDeferred = $q.defer();
