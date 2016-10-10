@@ -349,7 +349,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         $scope.scrollWidth = window.innerWidth + ($scope.flagAccessibility ? 0 : 25); //plus accessibility
         $scope.scrollHeight = window.innerHeight - headerHeight;
         // $scope.tableHeaderHeight = $scope.header_row_number * headerRowHeight;
-        $scope.tableHeaderHeight = headerRowHeight;
+        $scope.tableHeaderHeight = $scope.header_row_number * headerRowHeight;
 
         if (!noscroll) {
             $timeout(function () {

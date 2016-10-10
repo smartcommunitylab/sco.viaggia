@@ -12,7 +12,7 @@
 
                 <div> {{b.dateTime| date:' dd-MM-yyyy'}}</div>
                 <div class="notification-title">{{n.title }}</div>
-                <p>{{n.contentSnippet}}</p>
+                <p compile="n.contentSnippet"></p>
             </div>
         </ion-list>
     </ion-content>
