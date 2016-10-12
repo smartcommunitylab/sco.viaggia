@@ -611,7 +611,9 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     $scope.ref = mapData.ref;
     $scope.flagAccessibility = profileService.getAccessibility();
     $scope.accessibilityStyle = getAccessibilityStyle($scope.ref);
-
+    if (!$scope.accesibilityKnow) {
+        $scope.flagAccessibility = false;
+    }
     var MAX_MARKERS = 20;
     $scope.$on('leafletDirectiveMap.ttMap.moveend', function (event) {
         $scope.filterMarkers();
