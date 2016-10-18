@@ -563,7 +563,7 @@ angular.module('viaggia.services.plan', [])
             placedata.resolve(names);
         } else {
             i = i.replace(/\ /g, "+");
-            var url = "https://os.smartcommunitylab.it/core.geocoder/spring/address?latlng=" + Config.getMapPosition().lat + ", " + Config.getMapPosition().long + "&distance=" + Config.getDistanceForAutocomplete() + "&address=" + i;
+            var url = Config.getGeocoderURL() + "/address?latlng=" + Config.getMapPosition().lat + ", " + Config.getMapPosition().long + "&distance=" + Config.getDistanceForAutocomplete() + "&address=" + i;
             $http.get(url, {
                 timeout: 5000
             }).
