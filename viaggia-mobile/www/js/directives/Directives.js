@@ -330,7 +330,7 @@ angular.module('viaggia.directives', [])
           <ul ng-show="completing && (suggestions).length > 0">\
             <li\
               suggestion\
-              ng-repeat="suggestion in suggestions | orderBy:\'toString()\' track by $index"\
+              ng-repeat="suggestion in suggestions track by $index"\
               index="{{ $index }}"\
               val="{{ suggestion }}"\
               class="suggestion"\
