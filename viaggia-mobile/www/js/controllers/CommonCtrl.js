@@ -74,6 +74,49 @@ angular.module('viaggia.controllers.common', [])
             ]
         });
     };
+    $scope.showExpiredPopup = function () {
+        var alertPopup = $ionicPopup.alert({
+            title: $filter('translate')("pop_up_expired_title"),
+            template: $filter('translate')("pop_up__expired_template"),
+            buttons: [
+                {
+                    text: $filter('translate')("pop_up_ok"),
+                    type: 'button-custom',
+                    onTap: function (e) {
+                        ionic.Platform.exitApp();
+                    }
+                            }
+            ]
+        });
+    }
+    $scope.showNotExpiredPopup = function (date) {
+        var alertPopup = $ionicPopup.alert({
+            title: $filter('translate')("pop_up_not_expired_title"),
+            template: $filter('translate')("pop_up_not_expired_template") + date,
+            buttons: [
+                {
+                    text: $filter('translate')("pop_up_ok"),
+                    type: 'button-custom'
+                            }
+            ]
+        });
+    }
+    $scope.isExpired = function () {
+        //check in config if expirationDate is > of today
+        //        var expirationDateString = Config.getExpirationDate();
+        //        var expirationDate
+        var expirationDateString = Config.getExpirationDate();
+        var pattern = /(\d{2})-(\d{2})-(\d{4})/;
+        var expirationDate = new Date(expirationDateString.replace(pattern, '$3-$2-$1'));
+        expirationDate = expirationDate.getTime();
+        var today = new Date().getTime();
+        if (expirationDate < today) {
+            return true;
+        } else if (expirationDate > today) {
+            return false;
+        }
+
+    }
     $scope.showErrorServer = function () {
         var alertPopup = $ionicPopup.alert({
             title: $filter('translate')("pop_up_error_server_title"),
@@ -93,6 +136,11 @@ angular.module('viaggia.controllers.common', [])
         $scope.shownGroup = JSON.parse(localStorage.getItem(Config.getAppId() + '_shownGroup')) || false;
         $scope.contactLink = Config.getContactLink();
         $scope.taxiEnabled = (Config.getTaxiId() != 'undefined');
+        if (!$scope.isExpired()) {
+            $scope.showNotExpiredPopup(Config.getExpirationDate());
+        } else {
+            $scope.showExpiredPopup();
+        }
     });
 
     $scope.selectInfomenu = function (m) {

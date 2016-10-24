@@ -610,7 +610,11 @@ angular.module('viaggia', [
             taxi_label_check_it: 'Verificala prima di comunicarla al taxi.',
             taxi_label_no_accuracy: 'Non è stato possibile determinare la tua posizione con sufficiente accuratezza per permetterti di comunicarla al tassista. Prova ad accendere un sistema di localizzazione sul tuo dispositivo (GPS, WiFi, ...).',
             error_select_type_accessibility_feedback: 'Per visualizzare un percorso accessibile è necessario selezionare i mezzi pubblici o a piedi',
-            not_acc_label: 'Questa linea non è accessibile'
+            not_acc_label: 'Questa linea non è accessibile',
+            pop_up_expired_title: 'Versione scaduta',
+            pop_up__expired_template: 'Ci scusiamo ma non è più possibile utilizzare questa versione dell\'applicazione in quanto il periodo di prova è terminata',
+            pop_up_not_expired_title: 'Versione di prova',
+            pop_up_not_expired_template: 'Questa  è una versione di prova e terminerà il '
 
         });
 
@@ -793,8 +797,11 @@ angular.module('viaggia', [
             taxi_label_check_it: 'Check it before communicating it to the taxi driver.',
             taxi_label_no_accuracy: 'It has not been possible to determine with sufficient accuracy your position to let you communicate it to the taxi driver. Try to switch on a tracking system on your device (GPS, WiFi, ...)',
             error_select_type_accessibility_feedback: 'In order to get an accessible route, you must select public transport or foot',
-            not_acc_label: 'This line is not accessible'
-
+            not_acc_label: 'This line is not accessible',
+            pop_up_expired_title: 'Version expired',
+            pop_up__expired_template: 'The actual version of the app has expired',
+            pop_up_not_expired_title: 'Trial version',
+            pop_up_not_expired_template: 'The actual version of the app end on '
 
         });
 
