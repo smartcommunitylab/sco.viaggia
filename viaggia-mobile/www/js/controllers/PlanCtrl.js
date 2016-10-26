@@ -388,9 +388,7 @@ angular.module('viaggia.controllers.plan', [])
             var places = {};
             var url = Config.getGeocoderURL() + '/location?latlng=' + position[0] + ',' + position[1];
             //add timeout
-            $http.get(encodeURI(url), {
-                timeout: 5000
-            })
+            $http.get(encodeURI(url), Config.getGeocoderConf())
 
             .success(function (data, status, headers, config) {
                 places = data.response.docs;
@@ -440,9 +438,7 @@ angular.module('viaggia.controllers.plan', [])
                 planService.setPosition($scope.place, args.leafletEvent.latlng.lat, args.leafletEvent.latlng.lng);
                 var placedata = $q.defer();
                 var url = Config.getGeocoderURL() + '/location?latlng=' + args.leafletEvent.latlng.lat + ',' + args.leafletEvent.latlng.lng;
-                $http.get(encodeURI(url), {
-                        timeout: 5000
-                    })
+                $http.get(encodeURI(url), Config.getGeocoderConf())
                     .success(function (data, status, headers, config) {
                         $ionicLoading.hide();
                         $scope.name = '';

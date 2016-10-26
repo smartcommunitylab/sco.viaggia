@@ -559,9 +559,7 @@ angular.module('viaggia.services.plan', [])
         } else {
             i = i.replace(/\ /g, "+");
             var url = Config.getGeocoderURL() + "/address?latlng=" + Config.getMapPosition().lat + ", " + Config.getMapPosition().long + "&distance=" + Config.getDistanceForAutocomplete() + "&address=" + i;
-            $http.get(url, {
-                timeout: 5000
-            }).
+            $http.get(url, Config.getGeocoderConf()).
             success(function (data, status, headers, config) {
                 geoCoderPlaces = [];
                 //            places = data.response.docs;

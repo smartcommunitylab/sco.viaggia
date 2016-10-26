@@ -201,6 +201,9 @@ angular.module('viaggia.services.conf', [])
         getGeocoderURL: function () {
             return GEOCODER_URL;
         },
+        getGeocoderConf: function() {
+          return {timeout: 5000, headers: {appId: undefined}};
+        },
         getPlanTypes: function () {
             return PLAN_TYPES;
         },

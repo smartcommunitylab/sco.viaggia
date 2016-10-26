@@ -69,7 +69,7 @@ angular.module('viaggia.directives', [])
 //        };
 //    })
 
-.directive('placeautocomplete', function () {
+.directive('placeautocomplete', function ($timeout) {
     var index = -1;
 
     return {
@@ -127,7 +127,18 @@ angular.module('viaggia.directives', [])
 
                     // function thats passed to on-type attribute gets executed
                     if ($scope.onType) {
-                        $scope.onType($scope.searchParam);
+                      // ignore short input
+                      if (newValue.length < 4) {
+                        return;
+                      }
+                      // wait 500ms before making a call
+                      if ($scope.to != null) {
+                        $timeout.cancel($scope.to);
+                      }
+                      $scope.to = $timeout(function(){
+                        $scope.to = null;
+                        $scope.onType(newValue);
+                      },500);
                     }
                 });
 
@@ -320,7 +331,7 @@ angular.module('viaggia.directives', [])
         template: '\
         <div class="placeautocomplete {{ attrs.class }}" ng-class="{ notempty: (searchParam.length > 0) }" id="{{ attrs.id }}">\
           <input\
-            type="text"\
+            type="text" ng-trim="false"\
             ng-model="searchParam"\
             placeholder="{{ attrs.placeholder }}"\
             class="placeautocomplete-input {{ attrs.inputclass }}"\
