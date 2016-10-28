@@ -26,7 +26,6 @@ angular.module('viaggia.services.taxi', [])
             //            $http.get(Config.getServerURL() + '/bikesharing/' + agencyId,
             if (!cacheCompanies.length || cacheCompanies.length === 0) {
                 $http.get(Config.getServerURL() + '/getTaxiAgencyContacts/',
-//                $http.get("https://dev.smartcommunitylab.it/smart-planner2/trentino/rest/taxi/contacts", //tmp
                         Config.getHTTPConfig())
                     .success(function (data) {
                         if (data) {
@@ -51,7 +50,6 @@ angular.module('viaggia.services.taxi', [])
             var deferred = $q.defer();
             if (!cacheTaxiPoints.length || cacheTaxiPoints.length === 0) {
                 $http.get(Config.getServerURL() + '/getTaxiStation/',
-//                $http.get("https://dev.smartcommunitylab.it/smart-planner2/trentino/rest/taxis",
                         Config.getHTTPConfig())
                     .success(function (data) {
                         if (data) {

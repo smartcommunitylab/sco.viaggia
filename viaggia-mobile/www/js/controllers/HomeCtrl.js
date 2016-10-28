@@ -10,30 +10,6 @@ angular.module('viaggia.controllers.home', [])
 
     //aggoiorna le notifiche
     var notificationInit = function () {
-        //scrico le ultime di una settimana
-        if (localStorage.getItem(Config.getAppId() + '_lastUpdateTime') == null) {
-            date = new Date();
-            //date.setDate(date.getDate() - 7);
-            lastUpdateTime = date.getTime();
-        } else {
-            lastUpdateTime = localStorage.getItem(Config.getAppId() + '_lastUpdateTime');
-        }
-        notificationService.getNotifications(lastUpdateTime, 0, 10).then(function (items) { //solo le nuove
-            if (items) {
-                $rootScope.countNotification = items.length;
-
-                //last update time is the last time of notification
-                if (items.length > 0) {
-
-                    lastUpdateTime = items[0].updateTime + 1;
-                }
-                localStorage.setItem(Config.getAppId() + '_lastUpdateTime', lastUpdateTime);
-            }
-        }, function (err) {
-
-            $rootScope.countNotification = 0;
-
-        });
     }
 
     $scope.buttons = [{

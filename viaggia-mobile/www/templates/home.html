@@ -1,10 +1,4 @@
 <ion-view title="{{title}}">
-    <ion-nav-buttons side="right">
-
-        <button ng-click="openNotifications()" class="button button-icon button-home ic_notification"><span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span></button>
-
-    </ion-nav-buttons>
-
     <ion-content ng-class="{'empty_bookmarks': primaryLinks.length==0}">
         <!--
         <div id="map-container" data-tap-disabled="true">
