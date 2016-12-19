@@ -1416,3 +1416,16 @@ ion-header-bar .title {
 #table-table:hover {
     left: 50;
 }*/
+.alert {
+  color: red;
+}
+.alert:before {
+  font-size: 18px;
+}
+.alert-text {
+  font-size: 12px;
+  color: red;
+}
+.alert-text p{
+  margin-bottom: 0 !important;
+}

@@ -47,6 +47,7 @@
                         </div>
                     </div>
                     <div class="length-price">
+                        <i class="icon ion-alert-circled alert" ng-if="journey.hasAlerts"></i>
                         <span class="text-muted text-center">{{journey.length}}km</span>
                         <span class="text-muted text-center" ng-if="journey.price > 0">/ {{journey.price| number:2}}  &#8364;</span>
                     </div>
@@ -79,6 +80,7 @@
                     </div>
                 </div>
                 <div class="length-price">
+                    <i class="icon ion-alert-circled alert" ng-if="journey.hasAlerts"></i>
                     <span class="text-muted text-center">{{journey.length}}km</span>
                     <span class="text-muted text-center" ng-if="journey.price > 0">/ {{journey.price| number:2}}  &#8364;</span>
                 </div>
