@@ -398,6 +398,7 @@ angular.module('viaggia.services.plan', [])
         for (var i = 0; i < plan.leg.length; i++) {
             plan.leg[i]['fromStep'] = plan.steps.length; //connection between step and leg
             var step = {};
+            step.alertText = planService.buildAlertText(plan.leg[i]);
             step.startime = i == 0 ? plan.startime : plan.leg[i].startime;
             step.endtime = plan.leg[i].endtime;
             step.mean = {};
@@ -747,5 +748,29 @@ angular.module('viaggia.services.plan', [])
 
     }
 
+    planService.hasAlerts = function(it) {
+      var has = false;
+      if (it.leg) it.leg.forEach(function(l) {has = has || planService.legHasAlerts(l)});
+      return has;
+    }
+    planService.legHasAlerts = function(leg) {
+      return checkArray(leg.alertStrikeList) || checkArray(leg.alertDelayList) || checkArray(leg.alertParkingList) || checkArray(leg.alertRoadList) || checkArray(leg.alertAccidentList);
+    }
+    planService.buildAlertText = function(leg) {
+      var txt = [];
+      if (checkArray(leg.alertDelayList)) {
+        leg.alertDelayList.forEach(function(a) {
+          txt.push($filter('translate')('alert_delay',{mins:Math.ceil(a.delay / 60000)}));
+        });
+      }
+      return txt;
+    }
+
+
+
+
+    function checkArray(a) {
+      return a != null && a.length > 0;
+    }
     return planService;
 })

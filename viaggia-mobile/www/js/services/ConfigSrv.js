@@ -31,7 +31,7 @@ angular.module('viaggia.services.conf', [])
     var mapJsonConfig = null;
     var ttJsonConfig = null;
 
-    var GEOCODER_URL = 'https://os.smartcommunitylab.it/core.geocoder/spring';
+    var GEOCODER_URL = 'https://os.smartcommunitylab.it/core.geocoder';
     var APP_BUILD = '';
     var PLAN_TYPES = ['WALK', 'TRANSIT', 'CAR', 'BICYCLE', 'SHAREDCAR', 'SHAREDBIKE'];
     var convertMeans = function (means) {

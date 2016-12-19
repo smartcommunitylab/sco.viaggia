@@ -60,6 +60,9 @@
                                     <p ng-if="step.parking && step.parking.time">
                                         {{'parking_time' | translate}}<b>{{step.parking.time}}</b>
                                     </p>
+                                    <div class="alert-text" ng-if="step.alertText.length > 0">
+                                      <p ng-repeat="t in step.alertText">{{t}}</p>
+                                    </div>
                                 </div>
                                 <div>
                                     <div class="tt thumbnail">
