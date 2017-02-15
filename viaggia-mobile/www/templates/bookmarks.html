@@ -6,7 +6,6 @@
     <ion-content id="content" has-header="true" ng-init="showTutorial()">
 
         <ion-list class="bookmark-list" can-swipe="true" show-reorder="showReorder">
-            <!--            <ion-item id="focusHere" class="item-icon-left" ng-class="{'bookmark-margin':!showReorder}" item="item" ng-repeat="m in bookmarks track by $index" ng-last-repeat="bookmarks" ng-click="go(m.state)">-->
             <ion-item id="focusHere" class="item-icon-left" ng-class="{'bookmark-margin':!showReorder}" item="item" ng-repeat="m in bookmarks track by $index" ng-click="go(m.state)">
                 <h2>
           <i class="icon img" ng-class="m.icon" style="{{'color: '+m.color}}"></i>
@@ -17,18 +16,6 @@
                 <ion-reorder-button class="button button-clear ion-drag" on-reorder="reorder($fromIndex, $toIndex)"></ion-reorder-button>
             </ion-item>
         </ion-list>
-
-
-
-        <!--
-        <ion-list show-reorder="true">
-            <ion-item ng-repeat="m in bookmarks">
-                Item
-                <ion-reorder-button class="ion-navicon" on-reorder="reorder($fromIndex, $toIndex)">
-                </ion-reorder-button>
-            </ion-item>
-        </ion-list>
--->
         <div ng-if="(!bookmarks || bookmarks.length == 0)" class="text-center">
             <h4>{{'no_data' | translate}}</h4>
         </div>

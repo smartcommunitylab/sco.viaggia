@@ -7,7 +7,6 @@ angular.module('viaggia.services.notification', [])
 .factory('notificationService', function ($q, $http, $rootScope, $ionicPlatform, Config) {
 
     var notificationService = {};
-    //var numberNotification = 10;
     notificationService.getNotifications = function (sinceTimestamp, sincePosition, numberNotification) {
         var deferred = $q.defer();
         $http.get(Config.getMessagingServerURL() + '/app/public/notification/' + Config.getMessagingAppId() +
@@ -97,6 +96,10 @@ angular.module('viaggia.services.notification', [])
     return notificationService;
 })
 
+
+//
+//A Service to work with news with Server
+//
 .factory('feedService', function ($q, $rootScope, $http) {
     var cache = [];
 
