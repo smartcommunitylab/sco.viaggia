@@ -8,7 +8,7 @@ angular.module('viaggia.controllers.home', [])
     }, false);
   });
 
-  //aggoiorna le notifiche
+  //update notifications
   var notificationInit = function () {
     //scrico le ultime di una settimana
     if (localStorage.getItem(Config.getAppId() + '_lastUpdateTime') == null) {
@@ -55,7 +55,7 @@ angular.module('viaggia.controllers.home', [])
       },
       events: {}
     });
-
+    //add real time bookmarks on the home page
     bookmarkService.getBookmarksRT().then(function (list) {
       var homeList = [];
       list.forEach(function (e) {

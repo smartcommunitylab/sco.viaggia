@@ -38,9 +38,8 @@ angular.module('ngIOS9UIWebViewPatch', ['ng']).config(['$provide', function ($pr
   }]);
 }]);
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
+
+
 angular.module('viaggia', [
     'ionic',
     'ngIOS9UIWebViewPatch',
@@ -55,14 +54,11 @@ angular.module('viaggia', [
     'leaflet-directive',
     'pascalprecht.translate',
     'viaggia.controllers.common',
-    'viaggia.controllers.table1',
-    'viaggia.controllers.table2',
     'viaggia.controllers.timetable',
     'viaggia.controllers.bookmarks',
     'viaggia.controllers.home',
     'viaggia.controllers.info',
     'viaggia.controllers.mytrips',
-    'viaggia.controllers.monitoring',
     'viaggia.controllers.news',
     'viaggia.controllers.notifications',
     'viaggia.controllers.plan',
@@ -111,7 +107,8 @@ angular.module('viaggia', [
     });
 
 
-    $ionicPlatform.ready(function () { // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    $ionicPlatform.ready(function () {
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       if (window.cordova && window.cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -190,16 +187,6 @@ angular.module('viaggia', [
           }
         }
       })
-      .state('app.monitoring', {
-        cache: false,
-        url: "/monitoring",
-        views: {
-          'menuContent': {
-            templateUrl: "templates/monitoring.html",
-            controller: 'MonitoringCtrl'
-          }
-        }
-      })
       .state('app.mytrips', {
         cache: false,
         url: "/mytrips",
@@ -245,16 +232,8 @@ angular.module('viaggia', [
             controller: 'NewsItemCtrl'
           }
         }
-      }).state('app.info', {
-        cache: false,
-        url: "/info",
-        views: {
-          'menuContent': {
-            templateUrl: "templates/info.html",
-            controller: 'InfoCtrl'
-          }
-        }
-      }).state('app.bookmarks', {
+      })
+      .state('app.bookmarks', {
         cache: false,
         url: "/bookmarks",
         views: {
@@ -375,36 +354,6 @@ angular.module('viaggia', [
           'menuContent': {
             templateUrl: "templates/taxi.html",
             controller: 'TaxiCtrl'
-          }
-        }
-      })
-      .state('app.table1', {
-        cache: false,
-        url: "/table1",
-        views: {
-          'menuContent': {
-            templateUrl: "templates/table1.html",
-            controller: 'Table1Ctrl'
-          }
-        }
-      })
-      .state('app.table2', {
-        cache: false,
-        url: "/table2",
-        views: {
-          'menuContent': {
-            templateUrl: "templates/table2.html",
-            controller: 'Table2Ctrl'
-          }
-        }
-      })
-      .state('app.table3', {
-        cache: false,
-        url: "/table3",
-        views: {
-          'menuContent': {
-            templateUrl: "templates/table3.html",
-            controller: 'TTTable3Ctrl'
           }
         }
       });

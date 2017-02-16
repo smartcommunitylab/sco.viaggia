@@ -1,3 +1,21 @@
 # https://git-scm.com/docs/gitignore
 # https://help.github.com/articles/ignoring-files
 # Example .gitignore files: https://github.com/github/gitignore
+/tracking_modified_log.tar.gz
+/tracking_modified_service_config.tar.gz
+/tracking_modified_service_stable.tar.gz
+/tracking_modified_service.tar.gz
+/viaggia-mobile.tar.gz
+/viaggia-mobile/viaggiapluginreset.sh
+/viaggia-mobile/ViaggiaRoveretoPlayAndGo.apk
+/viaggia-mobile/.grive
+/cordova-plugin-facebook4/
+/cordova-plugin-local-notifications/
+/phonegap-facebook-plugin_old/
+/tracking_modified/
+/tracking_modified_almost_cleaned/
+/tracking_modified_log/
+/tracking_modified_service_config/
+/tracking_modified_service_stable/
+/tracking_modified_with_new_methods/
+/tracking_modified_with_state/
