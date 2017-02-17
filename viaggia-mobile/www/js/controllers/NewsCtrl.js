@@ -4,7 +4,7 @@ angular.module('viaggia.controllers.news', [])
 Controller that manages the news from the feeds URL, download them and store
 */
 
-.controller('NewsCtrl', function ($scope, $state, $ionicLoading, feedService, Config) {
+.controller('NewsCtrl', function ($scope, $state, $ionicLoading, $filter, feedService, Config, Toast) {
   $scope.news = null;
 
   var FEED_URL = Config.getRSSUrl();
@@ -17,6 +17,9 @@ Controller that manages the news from the feeds URL, download them and store
     });
     $scope.news = entries;
     $ionicLoading.hide();
+  }, function (err) {
+    $ionicLoading.hide();
+    Toast.show($filter('translate')('toast_error_server_template'), "short", "bottom");
   });
 
   $scope.doRefresh = function () {
@@ -26,6 +29,9 @@ Controller that manages the news from the feeds URL, download them and store
       });
       $scope.news = entries;
       $scope.$broadcast('scroll.refreshComplete');
+    }, function (err) {
+      $scope.$broadcast('scroll.refreshComplete');
+      Toast.show($filter('translate')('toast_error_server_template'), "short", "bottom");
     });
   };
 
