@@ -469,7 +469,7 @@ angular.module('viaggia', [
       favorites_empty_list: 'Non ci sono favoriti memorizzati',
       pop_up_error_server_title: 'Errore',
       pop_up_error_server_template: 'Errore di comunicazione con il server',
-      toast_error_server_template: 'We had some communication problems',
+      toast_error_server_template: 'Errore di comunicazione con il server',
       error_from_message_feedback: 'Luogo di partenza non valido',
       error_to_message_feedback: 'Luogo di destinazione non valido',
       error_time_message_feedback: 'Selezionare un\'ora recente',
