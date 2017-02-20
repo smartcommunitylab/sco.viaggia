@@ -49,6 +49,7 @@ angular.module('viaggia.directives', [])
       suggestions: '=data',
       onType: '=onType',
       onSelect: '=onSelect',
+      updateFn: '&',
       placeautocompleteRequired: '='
     },
     controller: [
@@ -150,6 +151,10 @@ angular.module('viaggia.directives', [])
             }
         ],
     link: function (scope, element, attrs) {
+
+      scope.callUpdate = function () {
+        scope.updateFn();
+      }
       setTimeout(function () {
         scope.initLock = false;
         scope.$apply();
@@ -307,7 +312,7 @@ angular.module('viaggia.directives', [])
             class="placeautocomplete-input {{ attrs.inputclass }}"\
             id="{{ attrs.inputid }}"\
             ng-required="{{ placeautocompleteRequired }}" />\
-            <a ng-if="searchParam.length > 0" class="placeautocomplete-input-clear" ng-click="clear()"><i class="icon ion-android-cancel"></i></a>\
+            <a ng-if="searchParam.length > 0" class="placeautocomplete-input-clear" ng-click="callUpdate() "><i class="icon ion-android-cancel"></i></a>\
           <ul ng-show="completing && (suggestions).length > 0">\
             <li\
               suggestion\

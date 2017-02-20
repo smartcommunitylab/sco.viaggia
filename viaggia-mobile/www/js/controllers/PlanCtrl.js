@@ -1,7 +1,10 @@
 angular.module('viaggia.controllers.plan', [])
-  /**/
+  /*
+   Controller that manages the pianification view: from and to addresses, time and date, means and the mode.
+   */
   .controller('PlanCtrl', function ($scope, $rootScope, Config, $q, $http, $ionicPlatform, $ionicPopup, $ionicModal, $ionicLoading, $filter, $state, $stateParams, $window, Toast, leafletData, planService, GeoLocate, mapService) {
 
+    // check if I'm modifying a saved journey
     if (!$stateParams.replan) {
       planService.setEditInstance(null);
     }
@@ -22,6 +25,7 @@ angular.module('viaggia.controllers.plan', [])
       $scope.favoritePlaces = [];
     }
 
+    //init the params used for pianifications
     $scope.initParams = function () {
       $scope.refresh = true;
       $scope.planParams = {
@@ -43,6 +47,7 @@ angular.module('viaggia.controllers.plan', [])
       }
     };
 
+    //init a map with all the selected types of means. False default
     var initMapTypes = function (types) {
       var map = {};
       for (var i = 0; i < types.length; i++) {
@@ -61,9 +66,13 @@ angular.module('viaggia.controllers.plan', [])
         $scope.mapTypes[$scope.planParams.transportTypes[i]] = true;
       }
     }
+
+    //change accessibility param
     $scope.switchAcc = function () {
       $scope.planParams.wheelchair = !$scope.planParams.wheelchair;
     }
+
+    //is accessibility selected?
     $scope.isSwitchedAcc = function () {
       return $scope.planParams.wheelchair;
     }
@@ -77,6 +86,8 @@ angular.module('viaggia.controllers.plan', [])
         $scope.mapTypes[$scope.planParams.transportTypes[i]] = true;
       }
     }
+
+    //init the month list in different language
     var monthList = [
         $filter('translate')('popup_datepicker_jan'),
         $filter('translate')('popup_datepicker_feb'),
@@ -91,6 +102,8 @@ angular.module('viaggia.controllers.plan', [])
         $filter('translate')('popup_datepicker_nov'),
         $filter('translate')('popup_datepicker_dic')
     ];
+
+    //init the week list in different language
     var weekDaysList = [
         $filter('translate')('popup_datepicker_sun'),
         $filter('translate')('popup_datepicker_mon'),
@@ -101,8 +114,8 @@ angular.module('viaggia.controllers.plan', [])
         $filter('translate')('popup_datepicker_sat')
     ];
 
+    //set the datepicker object based on ionic-datepicker
     function setDateWidget() {
-
       $scope.datepickerObjectPopup = {
         titleLabel: $filter('translate')('popup_datepicker_title'), //Optional
         todayLabel: $filter('translate')('popup_datepicker_today'), //Optional
@@ -128,6 +141,7 @@ angular.module('viaggia.controllers.plan', [])
       };
     }
 
+    //set the timepicker object based on ionic-timepicker
     function setTimeWidget() {
       $scope.timePickerObject24Hour = {
         inputEpochTime: ((new Date()).getHours() * 60 * 60 + (new Date()).getMinutes() * 60), //Optional
@@ -144,6 +158,7 @@ angular.module('viaggia.controllers.plan', [])
       };
     }
 
+    //the timepicker callback when the hour is choosed and convert the time to a date with selected hour and minutes
     function timePicker24Callback(val) {
       if (typeof (val) === 'undefined') {
         console.log('Time not selected');
@@ -158,6 +173,7 @@ angular.module('viaggia.controllers.plan', [])
     }
     setTimeWidget();
 
+    //the datepicker callback when the date is choosed.
     var datePickerCallbackPopup = function (val) {
       if (typeof (val) === 'undefined') {
         console.log('No date selected');
@@ -187,6 +203,7 @@ angular.module('viaggia.controllers.plan', [])
       return $scope.shownPreferences === true;
     };
 
+    //create the modal for the pianification
     $ionicModal.fromTemplateUrl('templates/planMapModal.html', {
       id: '1',
       scope: $scope,
@@ -196,6 +213,7 @@ angular.module('viaggia.controllers.plan', [])
       $scope.modalMap = modal;
     });
 
+    //create the modal for the list of favorites
     $ionicModal.fromTemplateUrl('templates/favoritesModal.html', {
       id: '2',
       scope: $scope,
@@ -205,6 +223,7 @@ angular.module('viaggia.controllers.plan', [])
       $scope.modalFavorites = modal;
     });
 
+    //open favorites list or add to favorites if the input is a valid address
     $scope.bookmarks = function (fromOrTo, name) {
       //else pop up with list of favorites
       $scope.place = fromOrTo;
@@ -249,6 +268,7 @@ angular.module('viaggia.controllers.plan', [])
       $scope.refresh = true;
     });
 
+    //show the modal map to get the address...
     $scope.openMapPlan = function (place) {
       $scope.place = place;
       $scope.refresh = false;
@@ -257,6 +277,7 @@ angular.module('viaggia.controllers.plan', [])
       }
     };
 
+    //... and close it
     $scope.closeMap = function () {
       $scope.refresh = true;
       if ($scope.modalMap) {
@@ -264,20 +285,24 @@ angular.module('viaggia.controllers.plan', [])
       }
     };
 
+    //show the the modal with favorites list
     $scope.openFavorites = function () {
       $scope.refresh = false;
       $scope.modalFavorites.show();
     };
 
+    //... and close it
     $scope.closeFavorites = function () {
       $scope.refresh = true;
       $scope.modalFavorites.hide();
     };
 
+    //check if the type of mean for plan is selected or not
     $scope.isSwitched = function (type) {
       return $scope.mapTypes[type];
     };
 
+    //select/deselect the type of mean for plan
     $scope.switch = function (type) {
       $scope.mapTypes[type] = !$scope.mapTypes[type];
     };
@@ -288,9 +313,9 @@ angular.module('viaggia.controllers.plan', [])
         localStorage.setItem(Config.getAppId() + "_favoritePlaces", JSON.stringify($scope.favoritePlaces));
         $scope.closeFavorites();
       });
-      //delete $scope.placesandcoordinates[favorite.name];
     };
 
+    //check if the selected params are ok or not and complete them with transport types and the right date
     var setAndCheckPlanParams = function () {
       //routeType
       if (($scope.planParams.from.name == '') || ($scope.fromName == '')) {
@@ -335,6 +360,7 @@ angular.module('viaggia.controllers.plan', [])
       return true;
     };
 
+    //if the paramas are ok, plan the journey and show the results to the planlist view
     $scope.plan = function () {
       if (setAndCheckPlanParams()) {
         $scope.popupLoadingShow();
@@ -351,6 +377,7 @@ angular.module('viaggia.controllers.plan', [])
       }
     };
 
+    //set the coordinates and strings for the pianification based on the selected place (from/to)
     var selectPlace = function (placeSelected) {
       if ($scope.place == 'from') {
         $scope.fromName = placeSelected;
@@ -368,6 +395,7 @@ angular.module('viaggia.controllers.plan', [])
       $scope.closeMap();
     };
 
+    //called when a favorite is selected from the list. Close the modal and set the params
     $scope.favoriteSelect = function (newplace) {
       $scope.closeFavorites();
       planService.setPosition($scope.place, newplace.lat, newplace.long);
@@ -379,6 +407,7 @@ angular.module('viaggia.controllers.plan', [])
     };
 
     /* part for the map */
+    //functions that locate the user, get the address from the geocoder and if it fails use the coordinates
     $scope.locateMe = function () {
       $ionicLoading.show();
 
@@ -421,15 +450,14 @@ angular.module('viaggia.controllers.plan', [])
           $scope.refresh = true;
           $scope.showNoConnection();
         });
-        //                });
       }, function () {
         $ionicLoading.hide();
         $scope.refresh = true;
         console.log('CANNOT LOCATE!');
       });
-      // }
     };
 
+    //init the address selection map: show a popup when the user click on it with the address (trough Geocoder) or the coordinates of where he clicked
     $scope.initMap = function () {
       mapService.initMap('planMapModal').then(function () {
 
@@ -515,7 +543,7 @@ angular.module('viaggia.controllers.plan', [])
       return newplaces;
     };
 
-
+    //try to get a list of places starting with typedthings through Geocoder
     var typePlace = function (typedthings, fromOrTo) {
       if (($scope.placesandcoordinates && $scope.placesandcoordinates[typedthings] == null) || typedthings == '' || $scope.placesandcoordinates == null) {
         $scope.planParams[fromOrTo] = {
@@ -543,13 +571,17 @@ angular.module('viaggia.controllers.plan', [])
       });
     }
 
+    //called every time user types a letter in input from
     $scope.typePlaceFrom = function (typedthings) {
       typePlace(typedthings, 'from');
     };
+
+    //called every time user types a letter in input to
     $scope.typePlaceTo = function (typedthings) {
       typePlace(typedthings, 'to');
     };
 
+    //clean the single param from/to
     $scope.resetParams = function (fromOrTo) {
       $scope['places' + fromOrTo] = null;
       $scope.placesandcoordinates = null;
@@ -572,6 +604,7 @@ angular.module('viaggia.controllers.plan', [])
       console.log(id);
     };
 
+    //called when the from suggestion is selected. Set the parameters for the pianification
     $scope.changeStringFrom = function (suggestion) {
       console.log("changestringfrom");
       $scope.place = 'from';
@@ -587,6 +620,7 @@ angular.module('viaggia.controllers.plan', [])
       selectPlace(suggestion);
     };
 
+    //called when the to suggestion is selected. Set the parameters for the pianification
     $scope.changeStringTo = function (suggestion) {
       console.log("changestringto");
       $scope.place = 'to';
@@ -717,7 +751,17 @@ angular.module('viaggia.controllers.plan', [])
     if (planService.getPlanConfigure() != null) {
       oldConfig = planService.getPlanConfigure();
     }
+    $scope.updateFn = function (fromOrTo) {
+      $scope.resetParams(fromOrTo);
+      if (fromOrTo == 'from') {
+        $scope.fromName = "";
+        //
+      } else {
+        $scope.toName = "";
+        //
 
+      }
+    }
     $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
       var oldConfig = planService.getPlanConfigure();
 
@@ -731,8 +775,4 @@ angular.module('viaggia.controllers.plan', [])
         planService.setPlanConfigure(null);
       }
     });
-
-
-
-
   })

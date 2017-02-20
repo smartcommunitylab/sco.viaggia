@@ -1,69 +1,69 @@
 <ion-view id="plan" title="{{plantitle}}">
-    <ion-nav-buttons side="right">
-        <button class="button button-viaggia-header button-fab" ng-click="plan()">
-            <i class="icon ion-search"></i>
-        </button>
-    </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <button class="button button-viaggia-header button-fab" ng-click="plan()">
+      <i class="icon ion-search"></i>
+    </button>
+  </ion-nav-buttons>
 
-    <ion-content id="content" has-header="true">
-        <div class="row space-from-top">
-            <div class="input-plan-fromto col">
-                <span class="input-label"><b>{{'plan_from' | translate}}</b></span>
-                <placeautocomplete ng-if="refresh" ng-model="fromName" attr-placeholder="{{'plan_insert_from_address' | translate}}" click-activation="false" data="placesfrom" on-type="typePlaceFrom" placeholder="{{'plan_from' | translate}}" on-select="changeStringFrom" ng-blur="setNameParam"></placeautocomplete>
-            </div>
-            <div class="plan-buttons-right">
-                <a class="button-icon plan-viaggia-fromto  icon ion-map" ng-click="openMapPlan('from')"></a>
-                <a class="button-icon plan-viaggia-fromto  icon" ng-class=" favoriteFrom ? 'ion-android-star' : 'ion-android-star-outline'" ng-click="bookmarks('from', fromName)"></a>
-            </div>
+  <ion-content id="content" has-header="true">
+    <div class="row space-from-top">
+      <div class="input-plan-fromto col">
+        <span class="input-label"><b>{{'plan_from' | translate}}</b></span>
+        <placeautocomplete ng-if="refresh" ng-model="fromName" attr-placeholder="{{'plan_insert_from_address' | translate}}" click-activation="false" data="placesfrom" on-type="typePlaceFrom" placeholder="{{'plan_from' | translate}}" on-select="changeStringFrom" update-fn="updateFn('from')" ng-blur="setNameParam"></placeautocomplete>
+      </div>
+      <div class="plan-buttons-right">
+        <a class="button-icon plan-viaggia-fromto  icon ion-map" ng-click="openMapPlan('from')"></a>
+        <a class="button-icon plan-viaggia-fromto  icon" ng-class=" favoriteFrom ? 'ion-android-star' : 'ion-android-star-outline'" ng-click="bookmarks('from', fromName)"></a>
+      </div>
 
-        </div>
+    </div>
 
-        <div class="row">
-            <div class="input-plan-fromto col">
-                <span class="input-label"><b>{{'plan_to' | translate}}</b></span>
-                <placeautocomplete ng-if="refresh" ng-model="toName" attr-placeholder="{{'plan_insert_to_address' | translate}}" click-activation="false" data="placesto" on-type="typePlaceTo" placeholder="{{'plan_to' | translate}}" on-select="changeStringTo" ng-blur="setNameParam"></placeautocomplete>
-            </div>
-            <div class="plan-buttons-right">
+    <div class="row">
+      <div class="input-plan-fromto col">
+        <span class="input-label"><b>{{'plan_to' | translate}}</b></span>
+        <placeautocomplete ng-if="refresh" ng-model="toName" attr-placeholder="{{'plan_insert_to_address' | translate}}" click-activation="false" data="placesto" on-type="typePlaceTo" placeholder="{{'plan_to' | translate}}" on-select="changeStringTo" from-or-to="to" update-fn="updateFn('to')" ng-blur="setNameParam"></placeautocomplete>
+      </div>
+      <div class="plan-buttons-right">
 
-                <a class="button-icon plan-viaggia-fromto icon ion-map" ng-click="openMapPlan('to')"></a>
-                <a class="button-icon plan-viaggia-fromto icon" ng-class="favoriteTo ? 'ion-android-star' : 'ion-android-star-outline'" ng-click="bookmarks('to', toName)"></a>
-            </div>
-        </div>
+        <a class="button-icon plan-viaggia-fromto icon ion-map" ng-click="openMapPlan('to')"></a>
+        <a class="button-icon plan-viaggia-fromto icon" ng-class="favoriteTo ? 'ion-android-star' : 'ion-android-star-outline'" ng-click="bookmarks('to', toName)"></a>
+      </div>
+    </div>
 
-        <div class="row space-from-top">
-            <label class=" item-input plan-item-time">
-                <span class="input-label"><b>{{'plan_day' | translate}}</b></span>
-                <ionic-datepicker input-obj="datepickerObjectPopup">
-                    <span class="input-label date-label">{{datepickerObjectPopup.inputDate | date:'dd/MM/yyyy'}}</span>
-                    <button ng-hide="true"></button>
-                </ionic-datepicker>
-            </label>
-            <label class="item-input plan-item-time">
-                <span class="input-label"><b>{{'plan_time' | translate}}</b></span>
-                <ionic-timepicker input-obj="timePickerObject24Hour">
-                    <button ng-hide="true"></button>
-                    <span class="input-label">
+    <div class="row space-from-top">
+      <label class=" item-input plan-item-time">
+        <span class="input-label"><b>{{'plan_day' | translate}}</b></span>
+        <ionic-datepicker input-obj="datepickerObjectPopup">
+          <span class="input-label date-label">{{datepickerObjectPopup.inputDate | date:'dd/MM/yyyy'}}</span>
+          <button ng-hide="true"></button>
+        </ionic-datepicker>
+      </label>
+      <label class="item-input plan-item-time">
+        <span class="input-label"><b>{{'plan_time' | translate}}</b></span>
+        <ionic-timepicker input-obj="timePickerObject24Hour">
+          <button ng-hide="true"></button>
+          <span class="input-label">
         <standard-time-no-meridian etime='timePickerObject24Hour.inputEpochTime'></standard-time-no-meridian>
         </span>
-                </ionic-timepicker>
-            </label>
-        </div>
+        </ionic-timepicker>
+      </label>
+    </div>
 
-        <div class="row space-from-top">
-            <button class="button button-raised button-plan-type icon ic_foot" ng-class="{'button-viaggia-selected ': isSwitched('WALK'),'button-viaggia-notselected': !isSwitched('WALK')}" ng-click="switch('WALK')"></button>
-            <button class="button button-raised button-plan-type icon ic_public-transport" ng-class="{'button-viaggia-selected ': isSwitched('TRANSIT'),'button-viaggia-notselected': !isSwitched('TRANSIT')}" ng-click="switch('TRANSIT')"></button>
-            <button class="button button-raised button-plan-type icon ic_car" ng-class="{'button-viaggia-selected ': isSwitched('CAR'),'button-viaggia-notselected': !isSwitched('CAR')}" ng-click="switch('CAR')"></button>
-            <button class="button button-raised button-plan-type icon ic_bike" ng-class="{'button-viaggia-selected ': isSwitched('BICYCLE'),'button-viaggia-notselected': !isSwitched('BICYCLE')}" ng-click="switch('BICYCLE')"></button>
-        </div>
+    <div class="row space-from-top">
+      <button class="button button-raised button-plan-type icon ic_foot" ng-class="{'button-viaggia-selected ': isSwitched('WALK'),'button-viaggia-notselected': !isSwitched('WALK')}" ng-click="switch('WALK')"></button>
+      <button class="button button-raised button-plan-type icon ic_public-transport" ng-class="{'button-viaggia-selected ': isSwitched('TRANSIT'),'button-viaggia-notselected': !isSwitched('TRANSIT')}" ng-click="switch('TRANSIT')"></button>
+      <button class="button button-raised button-plan-type icon ic_car" ng-class="{'button-viaggia-selected ': isSwitched('CAR'),'button-viaggia-notselected': !isSwitched('CAR')}" ng-click="switch('CAR')"></button>
+      <button class="button button-raised button-plan-type icon ic_bike" ng-class="{'button-viaggia-selected ': isSwitched('BICYCLE'),'button-viaggia-notselected': !isSwitched('BICYCLE')}" ng-click="switch('BICYCLE')"></button>
+    </div>
 
-        <div class="row">
+    <div class="row">
 
-            <button class="button button-raised button-plan-type icon ic_car-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDCAR'),'button-viaggia-notselected': !isSwitched('SHAREDCAR')}" ng-click="switch('SHAREDCAR')"></button>
-            <button class="button button-raised button-plan-type icon ic_bike-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDBIKE'),'button-viaggia-notselected': !isSwitched('SHAREDBIKE')}" ng-click="switch('SHAREDBIKE')"></button>
-            <button class="button button-raised button-plan-type icon ic_ac" ng-class="{'button-viaggia-selected ': isSwitchedAcc(),'button-viaggia-notselected': !isSwitchedAcc()}" ng-click="switchAcc()"></button>
-            <!--            <span class="button-plan-type"></span>-->
-        </div>
-        <!--
+      <button class="button button-raised button-plan-type icon ic_car-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDCAR'),'button-viaggia-notselected': !isSwitched('SHAREDCAR')}" ng-click="switch('SHAREDCAR')"></button>
+      <button class="button button-raised button-plan-type icon ic_bike-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDBIKE'),'button-viaggia-notselected': !isSwitched('SHAREDBIKE')}" ng-click="switch('SHAREDBIKE')"></button>
+      <button class="button button-raised button-plan-type icon ic_ac" ng-class="{'button-viaggia-selected ': isSwitchedAcc(),'button-viaggia-notselected': !isSwitchedAcc()}" ng-click="switchAcc()"></button>
+      <!--            <span class="button-plan-type"></span>-->
+    </div>
+    <!--
         <div class="row">
             <div class="text-center">
                 <button class="button button-raised icon ic_ac acc_button" ng-class="{'button-viaggia-selected ': isSwitchedAcc(),'button-viaggia-notselected': !isSwitchedAcc()}" ng-click="switchAcc()">
@@ -73,23 +73,23 @@
         </div>
 -->
 
-        <label class="item item-input plan-preference-toggler">
-            <span class="input-label" style="max-width:100%!important;" ng-click="togglePreferences()"><b>{{'plan_preferences' | translate}}</b></span>
-        </label>
-        <div class="list">
-            <label class="item item-radio item-accordion" ng-repeat="preference in preferences">
-                <input type="radio" ng-model="planParams.routeType" ng-value="preference.value" name="group">
-                <div class="item-content">
-                    {{preference.label}}
-                </div>
-                <i class="radio-icon ion-checkmark"></i>
-            </label>
+    <label class="item item-input plan-preference-toggler">
+      <span class="input-label" style="max-width:100%!important;" ng-click="togglePreferences()"><b>{{'plan_preferences' | translate}}</b></span>
+    </label>
+    <div class="list">
+      <label class="item item-radio item-accordion" ng-repeat="preference in preferences">
+        <input type="radio" ng-model="planParams.routeType" ng-value="preference.value" name="group">
+        <div class="item-content">
+          {{preference.label}}
         </div>
-        <!--
+        <i class="radio-icon ion-checkmark"></i>
+      </label>
+    </div>
+    <!--
 <div class="list">
     <ion-toggle ng-model="wheelchair" toggle-class="toggle-calm"><i class="icon ic_access table-accessibility"></i>Accessibility</ion-toggle>
 </div>
 -->
 
-    </ion-content>
+  </ion-content>
 </ion-view>
