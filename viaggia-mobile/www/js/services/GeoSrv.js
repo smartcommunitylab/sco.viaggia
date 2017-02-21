@@ -2,9 +2,9 @@ angular.module('viaggia.services.geo', [])
   /*
   Service that manages the user's localization and some usefull geo methods
   */
-  .factory('GeoLocate', function ($q, $rootScope) {
+  .factory('GeoLocate', function ($q, $rootScope, $cordovaDeviceOrientation) {
     var localization = undefined;
-
+    var compassWatch = null;
     if (typeof (Number.prototype.toRad) === "undefined") {
       Number.prototype.toRad = function () {
         return this * Math.PI / 180;
@@ -102,6 +102,33 @@ angular.module('viaggia.services.geo', [])
         return localization.promise.then(function (myPosition) {
           return GL.distance(myPosition, gotoPosition);
         });
+      },
+
+      initCompassMonitor: function (onSuccess, onError, options) {
+        //        function onSuccess(heading) {
+        //          console.log('Heading: ' + heading.magneticHeading);
+        //        };
+        //
+        //        function onError(compassError) {
+        //          alert('Compass error: ' + compassError.code);
+        //        };
+        //
+        //        var options = {
+        //          frequency: 500
+        //        }; // Update every 3 seconds
+
+        var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+
+      },
+      closeCompassMonitor: function () {
+        $cordovaDeviceOrientation.clearWatch(watch)
+          .then(function (result) {
+            console.log("compass clear");
+          }, function (err) {
+            // An error occurred
+          });
       }
+
+
     };
   })

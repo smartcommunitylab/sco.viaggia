@@ -6,14 +6,27 @@ Controller that manages the parkings: list of the stops with availability, visua
 
 */
 
-.controller('ParkingCtrl', function ($scope, $state, $stateParams, $timeout, $filter, $ionicModal, $ionicPopup, $location, ionicMaterialMotion, ionicMaterialInk, leafletData, mapService, parkingService, Config, planService, bookmarkService) {
+.controller('ParkingCtrl', function ($scope, $state, $stateParams, $timeout, $filter, $ionicModal, $ionicPopup, $location, ionicMaterialMotion, ionicMaterialInk, GeoLocate, leafletData, mapService, parkingService, Config, planService, bookmarkService) {
   $scope.agencyId = $stateParams.agencyId;
   $scope.parkings = null;
   $scope.loading = true;
   $scope.markers = [];
-
   $scope.title = $filter('translate')('menu_real_time_park');
+  $scope.direction = null;
 
+  function onSuccess(heading) {
+    console.log('Heading: ' + heading.magneticHeading);
+  };
+
+  function onError(compassError) {
+    alert('Compass error: ' + compassError.code);
+  };
+
+  var options = {
+    frequency: 500
+  }; // Update every 0.5 seconds
+
+  GeoLocate.initCompassMonitor(onSuccess, onError, options);
   $scope.$on('ngLastRepeat.parkings', function (e) {
     $timeout(function () {
       ionicMaterialMotion.ripple();
