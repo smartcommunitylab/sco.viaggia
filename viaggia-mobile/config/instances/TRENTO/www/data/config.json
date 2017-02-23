@@ -1,105 +1,106 @@
 {
-    "apptoken": "viaggiatrento",
-    "appid": "trento",
-    "messagingAppId": "mobility.trento",
-    "senderID": "453601816446",
-    "appversion": "2.3.3",
-    "appname": "Viaggia Trento",
-    "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
-    "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
-    "newsRSS": "https://tn.smartcommunitylab.it/core.mobility/announcements/rss/trento",
-    "contact_link": "mailto:viaggiatrento@smartcommunitylab.it?subject=ViaggiaTrento:%20segnalazione%20problema",
-    "smartcheck_options": [
+  "apptoken": "viaggiatrento",
+  "appid": "trento",
+  "messagingAppId": "mobility.trento",
+  "senderID": "453601816446",
+  "appversion": "2.3.3",
+  "appname": "Viaggia Trento",
+  "serverURL": "https://dev.smartcommunitylab.it/core.mobility",
+  "metroparco": "https://dev.smartcommunitylab.it/metroparco/data/tn",
+  "messagingServerURL": "https://dev.smartcommunitylab.it/core.communicator",
+  "newsRSS": "https://dev.smartcommunitylab.it/core.mobility/announcements/rss/trento",
+  "contact_link": "mailto:viaggiatrento@smartcommunitylab.it?subject=ViaggiaTrento:%20segnalazione%20problema",
+  "smartcheck_options": [
         1,
         4,
         5
     ],
-    "plan_default_options": {
-        "routeType": "fastest",
-        "transportTypes": [
+  "plan_default_options": {
+    "routeType": "fastest",
+    "transportTypes": [
             "WALK",
             "TRANSIT"
         ]
-    },
-    "plan_policy": "Trento",
-    "taxi_id": "TAXI_TRENTO",
-    "taxi_accuracy": 65,
-    "accessibility": true,
-    "agencies": [5, 6, 10, 12, 17],
-    "extraurban_agencies": [17],
-    "broadcast_notifications_options": [
+  },
+  "plan_policy": "Trento",
+  "taxi_id": "TAXI_TRENTO",
+  "taxi_accuracy": 65,
+  "accessibility": true,
+  "agencies": [5, 6, 10, 12, 17],
+  "extraurban_agencies": [17],
+  "broadcast_notifications_options": [
         1,
         4
     ],
-    "center_map": [
+  "center_map": [
       46.069672,
       11.121270
    ],
-    "zoom_map": 15,
-    "db_version": 25,
-    "visualization": {
-        "primaryLinks": [
-            {
-                "state": "/app/plan",
-                "label": "menu_plan",
-                "icon": "ic_search",
-                "color": "#3BBACF"
+  "zoom_map": 15,
+  "db_version": 25,
+  "visualization": {
+    "primaryLinks": [
+      {
+        "state": "/app/plan",
+        "label": "menu_plan",
+        "icon": "ic_search",
+        "color": "#3BBACF"
             },
-            {
-                "state": "/app/taxi",
-                "label": "menu_taxi",
-                "icon": "ic_taxi",
-                "color": "#f8cf20"
+      {
+        "state": "/app/taxi",
+        "label": "menu_taxi",
+        "icon": "ic_taxi",
+        "color": "#f8cf20"
             },
-            {
-                "state": "/app/ttlist/urbano",
-                "label": "menu_real_time_bus_urban",
-                "icon": "ic_urban-bus",
-                "color": "#eb8919"
+      {
+        "state": "/app/ttlist/urbano",
+        "label": "menu_real_time_bus_urban",
+        "icon": "ic_urban-bus",
+        "color": "#eb8919"
             },
-            {
-                "state": "/app/ttlist/trains",
-                "label": "menu_real_time_train",
-                "icon": "ic_train",
-                "color": "#cd251c"
+      {
+        "state": "/app/ttlist/trains",
+        "label": "menu_real_time_train",
+        "icon": "ic_train",
+        "color": "#cd251c"
             },
-            {
-                "state": "/app/parking/COMUNE_DI_TRENTO",
-                "label": "menu_real_time_park",
-                "icon": "ic_parking-lot",
-                "color": "#164286"
+      {
+        "state": "/app/parking/COMUNE_DI_TRENTO",
+        "label": "menu_real_time_park",
+        "icon": "ic_parking-lot",
+        "color": "#164286"
             },
-            {
-                "state": "/app/bikesharing/trento",
-                "label": "menu_real_time_bike",
-                "icon": "ic_bike",
-                "color": "#922d66"
+      {
+        "state": "/app/bikesharing/trento",
+        "label": "menu_real_time_bike",
+        "icon": "ic_bike",
+        "color": "#922d66"
             }
 
       ],
-        "infomenu": [
+    "infomenu": [
 
-            {
-                "state": "/app/ttlist/urbano",
-                "label": "menu_real_time_bus_urban",
-                "icon": "ic_urban-bus"
+      {
+        "state": "/app/ttlist/urbano",
+        "label": "menu_real_time_bus_urban",
+        "icon": "ic_urban-bus"
             },
 
-            {
-                "state": "/app/ttlist/trains",
-                "label": "menu_real_time_train",
-                "icon": "ic_train"
+      {
+        "state": "/app/ttlist/trains",
+        "label": "menu_real_time_train",
+        "icon": "ic_train"
             },
-            {
-                "state": "/app/bikesharing/trento",
-                "label": "menu_real_time_bike",
-                "icon": "ic_bike"
+      {
+        "state": "/app/bikesharing/trento",
+        "label": "menu_real_time_bike",
+        "icon": "ic_bike"
             },
-            {
-                "state": "/app/parking/COMUNE_DI_TRENTO",
-                "label": "menu_real_time_park",
-                "icon": "ic_parking-lot"
+      {
+        "state": "/app/parking/COMUNE_DI_TRENTO",
+        "label": "menu_real_time_park",
+        "icon": "ic_parking-lot"
             }
       ]
-    }
+  }
 }

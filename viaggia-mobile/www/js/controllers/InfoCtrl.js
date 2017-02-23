@@ -6,7 +6,7 @@ Controller that manages the parkings: list of the stops with availability, visua
 
 */
 
-.controller('ParkingCtrl', function ($scope, $state, $stateParams, $timeout, $filter, $ionicModal, $ionicPopup, $location, ionicMaterialMotion, ionicMaterialInk, GeoLocate, leafletData, mapService, parkingService, Config, planService, bookmarkService) {
+.controller('ParkingCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $filter, $ionicModal, $ionicPopup, $location, ionicMaterialMotion, ionicMaterialInk, GeoLocate, leafletData, mapService, parkingService, Config, planService, bookmarkService) {
   $scope.agencyId = $stateParams.agencyId;
   $scope.parkings = null;
   $scope.loading = true;
@@ -14,19 +14,7 @@ Controller that manages the parkings: list of the stops with availability, visua
   $scope.title = $filter('translate')('menu_real_time_park');
   $scope.direction = null;
 
-  function onSuccess(heading) {
-    console.log('Heading: ' + heading.magneticHeading);
-  };
 
-  function onError(compassError) {
-    alert('Compass error: ' + compassError.code);
-  };
-
-  var options = {
-    frequency: 500
-  }; // Update every 0.5 seconds
-
-  GeoLocate.initCompassMonitor(onSuccess, onError, options);
   $scope.$on('ngLastRepeat.parkings', function (e) {
     $timeout(function () {
       ionicMaterialMotion.ripple();
@@ -79,7 +67,199 @@ Controller that manages the parkings: list of the stops with availability, visua
     $scope.bookmarkStyle = bookmarkService.getBookmarkStyle(path);
     $scope.showMap(true);
   };
+  /*
 
+  Part for Parkimeters: compass, visualization on map
+
+  */
+  $scope.parkingMeter = function () {
+      function onSuccess(heading) {
+        console.log('Heading: ' + heading.magneticHeading);
+        console.log('My position ' + Config.getMapPosition());
+        drawArrow(getDirection(heading.magneticHeading));
+        drawDistance(GeoLocate.distance($rootScope.myPosition, [$scope.selectedParkingMeters.lat, $scope.selectedParkingMeters.lng]));
+      };
+
+      function onError(compassError) {
+        alert('Compass error: ' + compassError.code);
+      };
+
+      var options = {
+        frequency: 500
+      }; // Update every 0.5 seconds
+      angular.extend($scope, {
+        center: {
+          lat: $rootScope.myPosition[0],
+          lng: $rootScope.myPosition[1],
+          zoom: Config.getMapPosition().zoom
+        },
+        markers: [],
+        events: {}
+      });
+      //locate user
+      GeoLocate.locate().then(function (position) {
+        //get parking meter list based on my position and other parameters in configuration service
+        parkingService.getParkingMeters(position[0], position[1]).then(function (parkingMetersZones) {
+          //init the comapss service with callbacks
+          var markers = [];
+          var boundsArray = [];
+          for (var i = 0; i < parkingMetersZones.length; i++) {
+            for (var k = 0; k < parkingMetersZones[i].parkingMeters.length; k++) {
+              var parkingMeter = parkingMetersZones[i].parkingMeters[k];
+              parkingMeter.zone = parkingMetersZones[i].validityPeriod;
+              markers.push({
+                parking: parkingMeter,
+                lat: parseFloat(parkingMetersZones[i].parkingMeters[k].lat),
+                lng: parseFloat(parkingMetersZones[i].parkingMeters[k].lng),
+                icon: {
+                  iconUrl: 'img/ic_parcometro.png',
+                  iconSize: [36, 50],
+                  iconAnchor: [18, 50],
+                  popupAnchor: [-0, -50]
+                },
+              });
+              boundsArray.push([parkingMetersZones[i].parkingMeters[k].lat, parkingMetersZones[i].parkingMeters[k].lng]);
+            }
+          }
+
+          $scope.markers = markers;
+          selectNearest(markers);
+          GeoLocate.initCompassMonitor(onSuccess, onError, options);
+          //open Map with compass and driver user to nearest parking meter
+          $scope.modalMapParkingMeters.show().then(function () {
+            //manage visualization
+            if (boundsArray.length > 0) {
+              var bounds = L.latLngBounds(boundsArray);
+              mapService.getMap('modalMapParkingMeters').then(function (map) {
+                map.fitBounds(bounds);
+              });
+            }
+          });
+        })
+      });
+    }
+    //create the modal with the map for Parking Meters
+  $ionicModal.fromTemplateUrl('templates/mapModalParkingMeters.html', {
+    id: '1',
+    scope: $scope,
+    backdropClickToClose: false,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    $scope.modalMapParkingMeters = modal;
+  });
+  angular.extend($scope, {
+    center: {
+      lat: Config.getMapPosition().lat,
+      lng: Config.getMapPosition().long,
+      zoom: Config.getMapPosition().zoom
+    },
+    markers: [],
+    events: {}
+  });
+  $scope.initMapParkingMeter = function () {
+    mapService.initMap('modalMapParkingMeters').then(function () {
+      console.log('map initialized');
+    });
+  };
+  $scope.closeMapParkingMeters = function () {
+    $scope.modalMapParkingMeters.hide();
+  };
+  var showPopupParkingMeters = function (p) {
+    $scope.popupParkingMeter = p;
+    $scope.selected = p;
+
+    $ionicPopup.show({
+      templateUrl: 'templates/parkingMeterPopup.html',
+      title: $filter('translate')('lbl_parking'),
+      cssClass: 'parking-popup',
+      scope: $scope,
+      buttons: [
+        {
+          text: $filter('translate')('btn_close'),
+          type: 'button-close'
+                }
+//        {
+//          text: $filter('translate')('btn_nav_to'),
+//          onTap: function (e) {
+//            planService.setPlanConfigure({
+//              to: {
+//                name: $scope.popupParking.description,
+//                lat: $scope.popupParking.position[0],
+//                long: $scope.popupParking.position[1]
+//              },
+//            });
+//            planService.setName('to', $scope.popupParking.description);
+//            $scope.closeMap();
+//            $state.go('app.plan');
+//          }
+//          }
+        ]
+    });
+
+  }
+
+  //open popup with the detail if one of the marker is clicked
+  $scope.$on('leafletDirectiveMarker.modalMapParkingMeters.click', function (e, args) {
+    var p = $scope.markers[args.modelName].parking;
+    showPopupParkingMeters(p);
+  });
+
+  function selectNearest(arrayOfPoints) {
+    var minDistance = 9999999;
+    for (var i = 0; i < arrayOfPoints.length; i++) {
+      var distance = GeoLocate.distance($rootScope.myPosition, [arrayOfPoints[i].lat, arrayOfPoints[i].lng]);
+      if (distance < minDistance)
+        $scope.selectedParkingMeters = arrayOfPoints[i];
+    }
+  }
+
+  function getDirection(magneticHeading) {
+
+    //calculate direction between my position and the selected point
+    var bearing = GeoLocate.bearing($rootScope.myPosition, [$scope.selectedParkingMeters.lat, $scope.selectedParkingMeters.lng]);
+    //rotate it of magnetic heading
+    //var rotated_bearing = (bearing > 0 ? bearing : (2 * Math.PI + bearing)) * 360 / (2 * Math.PI);
+    var rotated_bearing = (bearing + 360) % 360;
+    return (rotated_bearing - magneticHeading) % 360;
+    // return rotated_bearing;
+  };
+
+
+  function drawArrow(r) {
+    var context = document.getElementById('arrow').getContext('2d');
+    context.clearRect(0, 0, 100, 100);
+    centerX = Math.floor(document.getElementById('arrow').width / 2);
+    centerY = Math.floor(document.getElementById('arrow').height / 2);
+    context.beginPath();
+    context.moveTo(centerX, centerY);
+    context.strokeStyle = 'black';
+    context.lineWidth = 2;
+    context.lineTo(centerX + 100 * Math.cos(degreesToRadians(r - 90)), centerY + 100 * Math.sin(degreesToRadians(r - 90)));
+    context.stroke();
+
+  }
+
+  function degreesToRadians(degrees) {
+    console.log(degrees * (Math.PI / 180));
+    return degrees * (Math.PI / 180);
+  }
+
+  function radianToDegrees(radians) {
+    console.log(radians * (Math.PI / 180));
+    return radians * 180 / Math.PI;
+  }
+
+  function drawDistance(distance) {
+    //    var ctx = document.getElementById('arrow').getContext('2d');
+    //    ctx.clearRect(0, 0, 256, 256);
+    //    var state = ctx.save();
+    var c = document.getElementById("distance");
+    var ctx = c.getContext("2d");
+    ctx.clearRect(0, 0, 100, 100);
+    ctx.font = "20px Arial";
+    ctx.fillText(Math.round(distance * 1000), 10, 20);
+    ctx.stroke();
+  }
   //open the modal map with all the markers of the parkings. If withPopup is true, open it with the details of selected parking
   $scope.showMap = function (withPopup) {
     $scope.modalMap.show().then(function () {
@@ -129,19 +309,11 @@ Controller that manages the parkings: list of the stops with availability, visua
     $scope.modalMap = modal;
   });
 
-  angular.extend($scope, {
-    center: {
-      lat: Config.getMapPosition().lat,
-      lng: Config.getMapPosition().long,
-      zoom: Config.getMapPosition().zoom
-    },
-    markers: [],
-    events: {}
-  });
 
   $scope.closeMap = function () {
     $scope.modalMap.hide();
   };
+
   $scope.initMap = function () {
     mapService.initMap('modalMapParking').then(function () {
       console.log('map initialized');
@@ -180,6 +352,7 @@ Controller that manages the parkings: list of the stops with availability, visua
         ]
     });
   }
+
 
   //open popup with the detail if one of the marker is clicked
   $scope.$on('leafletDirectiveMarker.modalMapParking.click', function (e, args) {

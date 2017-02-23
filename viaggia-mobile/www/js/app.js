@@ -533,7 +533,11 @@ angular.module('viaggia', [
       taxi_label_no_accuracy: 'Non è stato possibile determinare la tua posizione con sufficiente accuratezza per permetterti di comunicarla al tassista. Prova ad accendere un sistema di localizzazione sul tuo dispositivo (GPS, WiFi, ...).',
       error_select_type_accessibility_feedback: 'Per visualizzare un percorso accessibile è necessario selezionare i mezzi pubblici o a piedi',
       not_acc_label: 'Questa linea non è accessibile',
-      alert_delay: 'Ritardo di {{mins}} minuti'
+      alert_delay: 'Ritardo di {{mins}} minuti',
+      lbl_parking_meter: 'Parking Meter',
+      lbl_parking_meter_price: 'Tariffa oraria:',
+      lbl_parking_meter_orario: 'Orario:',
+      lbl_parking_meter_giorni: 'Giorni:'
     });
 
 
@@ -708,7 +712,11 @@ angular.module('viaggia', [
       taxi_label_no_accuracy: 'It has not been possible to determine with sufficient accuracy your position to let you communicate it to the taxi driver. Try to switch on a tracking system on your device (GPS, WiFi, ...)',
       error_select_type_accessibility_feedback: 'In order to get an accessible route, you must select public transport or foot',
       not_acc_label: 'This line is not accessible',
-      alert_delay: 'Delay of {{mins}} minutes'
+      alert_delay: 'Delay of {{mins}} minutes',
+      lbl_parking_meter: 'Parking Meter',
+      lbl_parking_meter_price: 'Price:',
+      lbl_parking_meter_orario: 'Time:',
+      lbl_parking_meter_giorni: 'Days:'
     });
 
 

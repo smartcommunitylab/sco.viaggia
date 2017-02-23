@@ -1,38 +1,39 @@
 <ion-view title="{{'menu_real_time_park'|translate}}">
-    <ion-nav-buttons side="right">
-        <button ng-if="selected != null" class="button button-icon button-clear" ng-click="bookmark()"></button>
-        <button class="button button-icon button-fab button-viaggia-header ion-map" ng-click="showMap()"></button>
-    </ion-nav-buttons>
-    <ion-content has-header="true" padding="true">
-        <ion-refresher on-refresh="load()">
-        </ion-refresher>
-        <ion-list class="list">
-            <div class="item card" ng-repeat="p in parkings | orderBy:'distance'" ng-last-repeat="parkings" ng-click="select(p)">
-                <div class="item parking-card">
-                    <div class="row">
-                        <div class="col">
-                            <h2>{{p.name}}</h2>
-                            <p>{{p.description}}</p>
-                        </div>
-                        <!--            <div class="col col-20 text-right"><i class="icon ic_bookmark-outline"></i></div>-->
-                    </div>
-                    <div class="row parking-card-footer">
-                        <div class="col"><span ng-if="p.distance">{{p.distance| number:1}}km</span>
-                        </div>
-                        <div ng-if="!p.monitored || p.slotsAvailable == -2" class="col col-right"><span>{{p.slotsTotal}} {{'lbl_places' | translate}}</span>
-                        </div>
-                        <div ng-if="p.monitored && p.slotsAvailable > -2" class="col col-right">
-                            <div>
-                                <div class="text-center"><span ng-class="p.availLevel"> {{p.slotsAvailable > 0? p.slotsAvailable : 0}} {{'parking_on' | translate}} {{p.slotsTotal}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <ion-nav-buttons side="right">
+    <button ng-if="selected != null" class="button button-icon button-clear" ng-click="bookmark()"></button>
+    <button class="button button-icon button-fab button-viaggia-header ic_m_parcometro" ng-click="parkingMeter()"></button>
+    <button class="button button-icon button-fab button-viaggia-header ion-map" ng-click="showMap()"></button>
+  </ion-nav-buttons>
+  <ion-content has-header="true" padding="true">
+    <ion-refresher on-refresh="load()">
+    </ion-refresher>
+    <ion-list class="list">
+      <div class="item card" ng-repeat="p in parkings | orderBy:'distance'" ng-last-repeat="parkings" ng-click="select(p)">
+        <div class="item parking-card">
+          <div class="row">
+            <div class="col">
+              <h2>{{p.name}}</h2>
+              <p>{{p.description}}</p>
             </div>
-        </ion-list>
-        <div ng-if="(!parkings || parkings.length == 0) && !loading" class="text-center">
-            <h4>{{'no_data' | translate}}</h4>
+            <!--            <div class="col col-20 text-right"><i class="icon ic_bookmark-outline"></i></div>-->
+          </div>
+          <div class="row parking-card-footer">
+            <div class="col"><span ng-if="p.distance">{{p.distance| number:1}}km</span>
+            </div>
+            <div ng-if="!p.monitored || p.slotsAvailable == -2" class="col col-right"><span>{{p.slotsTotal}} {{'lbl_places' | translate}}</span>
+            </div>
+            <div ng-if="p.monitored && p.slotsAvailable > -2" class="col col-right">
+              <div>
+                <div class="text-center"><span ng-class="p.availLevel"> {{p.slotsAvailable > 0? p.slotsAvailable : 0}} {{'parking_on' | translate}} {{p.slotsTotal}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </ion-content>
+      </div>
+    </ion-list>
+    <div ng-if="(!parkings || parkings.length == 0) && !loading" class="text-center">
+      <h4>{{'no_data' | translate}}</h4>
+    </div>
+  </ion-content>
 </ion-view>
