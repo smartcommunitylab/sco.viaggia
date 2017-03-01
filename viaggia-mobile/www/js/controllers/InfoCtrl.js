@@ -36,10 +36,12 @@ Controller that manages the parkings: list of the stops with availability, visua
 
       });
       $scope.loading = false;
+      $scope.noConnection = false;
       Config.loaded();
       $scope.$broadcast('scroll.refreshComplete');
     }, function (err) {
       $scope.parkings = null;
+      $scope.noConnection = true;
       $scope.showNoConnection();
       $scope.loading = true;
       $scope.$broadcast('scroll.refreshComplete');
@@ -85,7 +87,7 @@ Controller that manages the parkings: list of the stops with availability, visua
       };
 
       var options = {
-        frequency: 500
+        frequency: 200
       }; // Update every 0.5 seconds
       angular.extend($scope, {
         center: {
@@ -129,9 +131,12 @@ Controller that manages the parkings: list of the stops with availability, visua
           $scope.modalMapParkingMeters.show().then(function () {
             //manage visualization
             if (boundsArray.length > 0) {
+              boundsArray.push([$rootScope.myPosition[0], $rootScope.myPosition[1]]);
               var bounds = L.latLngBounds(boundsArray);
               mapService.getMap('modalMapParkingMeters').then(function (map) {
-                map.fitBounds(bounds);
+                map.fitBounds(bounds, {
+                  padding: [50, 50]
+                });
               });
             }
           });
@@ -164,6 +169,12 @@ Controller that manages the parkings: list of the stops with availability, visua
   $scope.closeMapParkingMeters = function () {
     $scope.modalMapParkingMeters.hide();
   };
+
+  $scope.$on("$destroy", function (event) {
+    mapService.stopPosTimer('modalMapParkingMeters');
+    GeoLocate.closeCompassMonitor();
+    mapService.stopPosTimer('modalMapParking');
+  })
   var showPopupParkingMeters = function (p) {
     $scope.popupParkingMeter = p;
     $scope.selected = p;
@@ -178,24 +189,8 @@ Controller that manages the parkings: list of the stops with availability, visua
           text: $filter('translate')('btn_close'),
           type: 'button-close'
                 }
-//        {
-//          text: $filter('translate')('btn_nav_to'),
-//          onTap: function (e) {
-//            planService.setPlanConfigure({
-//              to: {
-//                name: $scope.popupParking.description,
-//                lat: $scope.popupParking.position[0],
-//                long: $scope.popupParking.position[1]
-//              },
-//            });
-//            planService.setName('to', $scope.popupParking.description);
-//            $scope.closeMap();
-//            $state.go('app.plan');
-//          }
-//          }
         ]
     });
-
   }
 
   //open popup with the detail if one of the marker is clicked
@@ -226,18 +221,41 @@ Controller that manages the parkings: list of the stops with availability, visua
 
 
   function drawArrow(r) {
-    var context = document.getElementById('arrow').getContext('2d');
-    context.clearRect(0, 0, 100, 100);
+    var ctx = document.getElementById('arrow').getContext('2d');
     centerX = Math.floor(document.getElementById('arrow').width / 2);
     centerY = Math.floor(document.getElementById('arrow').height / 2);
-    context.beginPath();
-    context.moveTo(centerX, centerY);
-    context.strokeStyle = 'black';
-    context.lineWidth = 2;
-    context.lineTo(centerX + 100 * Math.cos(degreesToRadians(r - 90)), centerY + 100 * Math.sin(degreesToRadians(r - 90)));
-    context.stroke();
+    var state = ctx.save();
+    ctx.translate(centerX, centerY);
+    ctx.rotate(degreesToRadians(r));
+    ctx.translate(-centerX, -centerY);
+    ctx.clearRect(0, 0, 256, 256);
+    //    centerX = Math.floor(document.getElementById('arrow').width / 2);
+    //    centerY = Math.floor(document.getElementById('arrow').height / 2);
+    //    context.beginPath();
+    //    context.moveTo(centerX, centerY);
+    //    context.strokeStyle = 'black';
+    //    context.lineWidth = 5;
+    //    context.lineTo(centerX + 100 * Math.cos(degreesToRadians(r - 90)), centerY + 100 * Math.sin(degreesToRadians(r - 90)));
+    //    //make an arrow
+    //    context.stroke();
 
+    ctx.beginPath();
+    ctx.moveTo(centerX + 0, centerY - 24);
+    ctx.lineTo(centerX + 24, centerY + 8);
+    ctx.lineTo(centerX + 12, centerY + 8);
+    ctx.lineTo(centerX - 12, centerY + 8);
+    ctx.lineTo(centerX - 24, centerY + 8);
+    ctx.closePath();
+    ctx.fill();
+    ctx.lineWidth = 5;
+    ctx.beginPath();
+    ctx.moveTo(centerX + 0, centerY - 24);
+    ctx.lineTo(centerX + 0, 100);
+    ctx.stroke();
+    ctx.restore(state);
   }
+
+
 
   function degreesToRadians(degrees) {
     console.log(degrees * (Math.PI / 180));
@@ -281,6 +299,8 @@ Controller that manages the parkings: list of the stops with availability, visua
         });
         boundsArray.push(list[i].position);
       }
+      //add also my position
+      boundsArray.push($rootScope.myPosition);
       if (boundsArray.length > 0) {
         var bounds = L.latLngBounds(boundsArray);
         mapService.getMap('modalMapParking').then(function (map) {
@@ -425,10 +445,12 @@ Controller that manages the bike stops: list of the stops with availability, vis
       });
       $scope.loading = false;
       Config.loaded();
+      $scope.noConnection = false;
       $scope.$broadcast('scroll.refreshComplete');
     }, function (err) {
       $scope.parkings = null;
       $scope.$broadcast('scroll.refreshComplete');
+      $scope.noConnection = true;
       $scope.showNoConnection();
       $scope.loading = true;
       Config.loaded();

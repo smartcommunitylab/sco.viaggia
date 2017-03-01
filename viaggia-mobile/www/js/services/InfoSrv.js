@@ -46,7 +46,7 @@ angular.module('viaggia.services.info', [])
       $http.get(Config.getServerURL() + '/getparkingsbyagency/' + agencyId,
           Config.getHTTPConfig())
         .success(function (data) {
-          if (data) {
+          if (data && data instanceof Array) {
             data.forEach(function (d, idx) {
               d.id = generateId(d.name);
             });
@@ -66,7 +66,7 @@ angular.module('viaggia.services.info', [])
               deferred.resolve(data);
             });
           } else {
-            deferred.resolve(data);
+            deferred.reject(data);
           }
         })
         .error(function (err) {

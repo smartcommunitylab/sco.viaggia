@@ -144,16 +144,11 @@ angular.module('viaggia.services.geo', [])
         //          frequency: 500
         //        }; // Update every 3 seconds
 
-        var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+        compassWatch = navigator.compass.watchHeading(onSuccess, onError, options);
 
       },
       closeCompassMonitor: function () {
-        $cordovaDeviceOrientation.clearWatch(watch)
-          .then(function (result) {
-            console.log("compass clear");
-          }, function (err) {
-            // An error occurred
-          });
+        $cordovaDeviceOrientation.clearWatch(compassWatch);
       }
 
 
