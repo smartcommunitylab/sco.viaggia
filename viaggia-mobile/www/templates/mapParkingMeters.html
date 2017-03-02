@@ -1,8 +1,6 @@
-<ion-modal-view>
+<ion-view title="{{title}}">
   <ion-header-bar align-title="center" class="bar-positive-100">
-    <div class="buttons">
-      <i class="icon close-modal" ng-class="{'ion-android-arrow-back': platform.isAndroid(), 'ion-ios-arrow-back': !platform.isAndroid()}" ng-click="closeMapParkingMeters()"></i>
-    </div>
+
     <h1 class="title">{{title}}</h1>
 
   </ion-header-bar>
@@ -15,4 +13,4 @@
       <leaflet event-broadcast="events" center="center" markers="markers" style="width: 100%; height: 700px;" ng-init="initMapParkingMeter()" id="modalMapParkingMeters"></leaflet>
     </div>
   </ion-content>
-</ion-modal-view>
+</ion-view>

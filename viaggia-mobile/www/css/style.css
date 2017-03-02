@@ -542,6 +542,70 @@
   text-align: center;
 }
 
+.first-time-parking-meters-popup .popup {
+  width: 80%;
+  max-width: 400px;
+}
+
+.first-time-parking-meters-popup .popup-title {
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.first-time-parking-meters-popup .popup-head {
+  display: none;
+}
+
+.first-time-parking-meters-popup .button-close {
+  /*  background-color: gray!important;*/
+}
+
+.first-time-parking-meters-popup .popup-buttons button:not(.button-close) {
+  background-color: #3bbacf !important;
+}
+
+.first-time-parking-meters-popup .popup-buttons button {
+  white-space: normal;
+  padding: 0px;
+  color: #fff !important;
+  margin-right: 4px;
+}
+
+.first-time-parking-meters-popup .map-stop-title {
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #2975a7;
+}
+
+.first-time-parking-meters-popup .popup-icon {
+  font-size: 30px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  color: #2975a7;
+}
+
+.first-time-parking-meters-popup .map-stop-name {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.first-time-parking-meters-popup .map-stop-hline {
+  width: 100%;
+  height: 1px;
+  border-bottom: 3px solid #2975a7;
+}
+
+.first-time-parking-meters-popup .map-stop-nocourses {
+  text-align: center;
+}
+
+.first-time-parking-meters-popup p {
+  margin-left: 10px;
+  text-align: justify;
+}
+
 .parking-card-footer .slots-text span {
   text-align: center;
   width: 100%;

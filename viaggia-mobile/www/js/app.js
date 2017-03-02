@@ -319,6 +319,15 @@ angular.module('viaggia', [
           }
         }
       })
+      .state('app.parkingMeters', {
+        url: "/parkingMeters",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/mapParkingMeters.html",
+            controller: 'ParkingMetersCtrl'
+          }
+        }
+      })
       .state('app.parkingstation', {
         url: "/parking/:agencyId/:id",
         views: {
@@ -382,6 +391,7 @@ angular.module('viaggia', [
       menu_credits: "Credits",
       menu_login: "Login",
       menu_logout: "Logout",
+      menu_parking_meters: "Parcometri",
       plan_from: 'Da',
       plan_to: 'A',
       plan_day: 'Giorno',
@@ -537,7 +547,11 @@ angular.module('viaggia', [
       lbl_parking_meter: 'Parking Meter',
       lbl_parking_meter_price: 'Tariffa oraria:',
       lbl_parking_meter_orario: 'Orario:',
-      lbl_parking_meter_giorni: 'Giorni:'
+      lbl_parking_meter_giorni: 'Giorni:',
+      lbl_first_time_parking_meter_title: 'Attenzione',
+      lbl_first_time_parking_meter_gps: 'Per migliorare il funzionamento della funzionalità consenti al dispositivo di attivare la geolocalizzazione.',
+      lbl_first_time_parking_meter_compass: 'Ti chiediamo di prestare attenzione rispetto all\'accuratezza della direzione indicata,potrebbe non essere precisa a causa della calibrazione della bussola del tuo dispositivo',
+      btn_undertood: 'Ho capito'
     });
 
 
@@ -561,6 +575,7 @@ angular.module('viaggia', [
       menu_credits: "Credits",
       menu_login: "Login",
       menu_logout: "Logout",
+      menu_parking_meters: "Parking meters",
       plan_from: 'From',
       plan_to: 'To',
       plan_day: 'Day',
@@ -716,7 +731,12 @@ angular.module('viaggia', [
       lbl_parking_meter: 'Parking Meter',
       lbl_parking_meter_price: 'Price:',
       lbl_parking_meter_orario: 'Time:',
-      lbl_parking_meter_giorni: 'Days:'
+      lbl_parking_meter_giorni: 'Days:',
+      lbl_first_time_parking_meter_title: 'Warning',
+      lbl_first_time_parking_meter_gps: 'In order to use your position allow the device to activate the geolocation.',
+      lbl_first_time_parking_meter_compass: 'We ask you to pay attention that the direction may not be accurate due to the calibration of your device\'s compass',
+      btn_undertood: 'I get it'
+
     });
 
 

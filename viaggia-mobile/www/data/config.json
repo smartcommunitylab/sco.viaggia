@@ -66,6 +66,12 @@
         "color": "#164286"
             },
       {
+        "state": "/app/parkingMeters",
+        "label": "menu_parking_meters",
+        "icon": "ic_parcometro",
+        "color": "#FBA724"
+            },
+      {
         "state": "/app/bikesharing/trento",
         "label": "menu_real_time_bike",
         "icon": "ic_bike",
