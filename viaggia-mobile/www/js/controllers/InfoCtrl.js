@@ -449,27 +449,14 @@ Controller that manages the parkings: list of the stops with availability, visua
       ctx.rotate(degreesToRadians(r));
       ctx.translate(-centerX, -centerY);
       ctx.clearRect(0, 0, 256, 256);
-      //    centerX = Math.floor(document.getElementById('arrow').width / 2);
-      //    centerY = Math.floor(document.getElementById('arrow').height / 2);
-      //    context.beginPath();
-      //    context.moveTo(centerX, centerY);
-      //    context.strokeStyle = 'black';
-      //    context.lineWidth = 5;
-      //    context.lineTo(centerX + 100 * Math.cos(degreesToRadians(r - 90)), centerY + 100 * Math.sin(degreesToRadians(r - 90)));
-      //    //make an arrow
-      //    context.stroke();
-
+      ctx.lineWidth = 4;
       ctx.beginPath();
-      ctx.moveTo(centerX + 0, centerY - 24);
+      ctx.moveTo(centerX - 24, centerY + 8);
+      ctx.lineTo(centerX + 0, centerY - 24);
       ctx.lineTo(centerX + 24, centerY + 8);
-      ctx.lineTo(centerX + 12, centerY + 8);
-      ctx.lineTo(centerX - 12, centerY + 8);
-      ctx.lineTo(centerX - 24, centerY + 8);
-      ctx.closePath();
-      ctx.fill();
-      ctx.lineWidth = 5;
+      ctx.stroke();
       ctx.beginPath();
-      ctx.moveTo(centerX + 0, centerY - 24);
+      ctx.moveTo(centerX + 0, centerY - 23);
       ctx.lineTo(centerX + 0, 100);
       ctx.stroke();
       ctx.restore(state);
