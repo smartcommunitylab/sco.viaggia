@@ -40,7 +40,8 @@
       "locator": "phonegap-plugin-push",
       "id": "phonegap-plugin-push"
     },
-    "cordova-plugin-device-orientation"
+    "cordova-plugin-device-orientation",
+    "cordova-plugin-request-location-accuracy"
   ],
   "cordovaPlatforms": [
     "ios",

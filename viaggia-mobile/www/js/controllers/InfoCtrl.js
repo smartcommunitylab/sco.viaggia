@@ -180,9 +180,9 @@ Controller that manages the parkings: list of the stops with availability, visua
 
   */
 
-.controller('ParkingMetersCtrl', function ($scope, $rootScope, Config, $ionicModal, $ionicPopup, $filter, $cordovaDeviceOrientation, mapService, parkingService, GeoLocate) {
+.controller('ParkingMetersCtrl', function ($scope, $rootScope, $state, $q, Config, $ionicModal, $ionicPopup, $filter, $cordovaDeviceOrientation, mapService, parkingService, GeoLocate) {
 
-    if (firstTimeParkingMeterView()) {
+    if (!firstTimeParkingMeterView()) {
       $ionicPopup.show({
         templateUrl: 'templates/firstTimeParkingMeterPopup.html',
         title: $filter('translate')('lbl_parking'),
@@ -190,11 +190,37 @@ Controller that manages the parkings: list of the stops with availability, visua
         scope: $scope,
         buttons: [
           {
-            text: $filter('translate')('btn_close'),
+            text: $filter('translate')('btn_undertood'),
             type: 'button-close'
                 }
         ]
+      }).then(function () {
+        setFirstTimeParkingMeterView();
       });
+    } else {
+      geolocate().then(function () {
+        //gps allowed and go on
+        console.log('gps allowed');
+
+      }, function () {
+        //gps not allowed, then pop up, let it do it or come back
+        console.log('gps not allowed');
+        $ionicPopup.show({
+          templateUrl: 'templates/noGpsPopup.html',
+          title: $filter('translate')('lbl_parking'),
+          cssClass: 'first-time-parking-meters-popup',
+          scope: $scope,
+          buttons: [
+            {
+              text: $filter('translate')('btn_undertood'),
+              type: 'button-close',
+              onTap: function (e) {
+                cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
+              }
+                }
+        ]
+        });
+      })
     }
     mapService.initMap('modalMapParkingMeters').then(function () {
       console.log('map initialized');
@@ -209,8 +235,46 @@ Controller that manages the parkings: list of the stops with availability, visua
       events: {}
     });
 
+    function onRequestSuccess(success) {
+      console.log("Successfully requested accuracy: " + success.message);
+      $state.go("app.parkingMeters", {}, {
+        reload: true
+      })
+    }
+
+    function onRequestFailure(error) {
+      console.error("Accuracy request failed: error code=" + error.code + "; error message=" + error.message);
+      if (error.code !== cordova.plugins.locationAccuracy.ERROR_USER_DISAGREED) {
+        if (window.confirm("Failed to automatically set Location Mode to 'High Accuracy'. Would you like to switch to the Location Settings page and do this manually?")) {
+          cordova.plugins.diagnostic.switchToLocationSettings();
+        }
+      }
+    }
+
+
+    function geolocate() {
+      var defer = $q.defer();
+      GeoLocate.locate().then(
+        function (position) {
+          $rootScope.myPosition = position;
+          $rootScope.GPSAllow = true;
+          defer.resolve();
+        },
+        function () {
+          console.log('Geolocation not possible');
+          $rootScope.GPSAllow = false;
+          defer.reject();
+        }
+      );
+      return defer.promise;
+    };
+
     function firstTimeParkingMeterView() {
-      return true;
+      return localStorage.getItem(Config.getAppId() + "_firstTimeParkingMeterView");
+    }
+
+    function setFirstTimeParkingMeterView() {
+      localStorage.setItem(Config.getAppId() + "_firstTimeParkingMeterView", true);
     }
     //    $scope.parkingMeter = function () {
     function onSuccess(heading) {
@@ -241,6 +305,7 @@ Controller that manages the parkings: list of the stops with availability, visua
             parkingMeter.zone = parkingMetersZones[i].validityPeriod;
             markers.push({
               parking: parkingMeter,
+              index: k + i,
               lat: parseFloat(parkingMetersZones[i].parkingMeters[k].lat),
               lng: parseFloat(parkingMetersZones[i].parkingMeters[k].lng),
               icon: {
@@ -281,37 +346,86 @@ Controller that manages the parkings: list of the stops with availability, visua
       mapService.stopPosTimer('modalMapParkingMeters');
       GeoLocate.closeCompassMonitor();
     })
-    var showPopupParkingMeters = function (p) {
+    var showPopupParkingMeters = function (p, index) {
       $scope.popupParkingMeter = p;
       $scope.selected = p;
 
       $ionicPopup.show({
         templateUrl: 'templates/parkingMeterPopup.html',
         title: $filter('translate')('lbl_parking'),
-        cssClass: 'parking-popup',
+        cssClass: 'parking-meter-popup',
         scope: $scope,
         buttons: [
           {
             text: $filter('translate')('btn_close'),
             type: 'button-close'
-                }
-        ]
+                },
+          {
+            text: $filter('translate')('btn_drive_me'),
+            type: 'button-close',
+            onTap: function (e) {
+              driveMeParcometer(p, index);
+            }
+        }]
+
       });
     }
 
     //open popup with the detail if one of the marker is clicked
     $scope.$on('leafletDirectiveMarker.modalMapParkingMeters.click', function (e, args) {
       var p = $scope.markers[args.modelName].parking;
-      showPopupParkingMeters(p);
+      var index = $scope.markers[args.modelName].index;
+      showPopupParkingMeters(p, index);
     });
 
     function selectNearest(arrayOfPoints) {
       var minDistance = 9999999;
       for (var i = 0; i < arrayOfPoints.length; i++) {
         var distance = GeoLocate.distance($rootScope.myPosition, [arrayOfPoints[i].lat, arrayOfPoints[i].lng]);
-        if (distance < minDistance)
+        if (distance < minDistance) {
+          minDistance = distance;
           $scope.selectedParkingMeters = arrayOfPoints[i];
+          $scope.selectedParkingMetersIndex = i;
+
+        }
+
       }
+      $scope.markers[$scope.selectedParkingMetersIndex].icon = {
+        iconUrl: "img/ic_parcometro_selected.png",
+        iconSize: [36, 50],
+        iconAnchor: [18, 50],
+        popupAnchor: [-0, -50]
+      }
+    }
+    //    var myIconReplc = L.Icon.extend({
+    //      options: {
+    //        iconUrl: "img/ic_parcometro_selected",
+    //        iconSize: [30, 35],
+    //        shadowAnchor: [8, 20],
+    //        shadowSize: [25, 18],
+    //        iconSize: [20, 25],
+    //        iconAnchor: [8, 30] // horizontal puis vertical
+    //      }
+    //    });
+
+
+    function driveMeParcometer(p, index) {
+      $scope.markers[$scope.selectedParkingMetersIndex].icon = {
+        iconUrl: "img/ic_parcometro.png",
+        iconSize: [36, 50],
+        iconAnchor: [18, 50],
+        popupAnchor: [-0, -50]
+      }
+      $scope.selectedParkingMetersIndex = index;
+      $scope.selectedParkingMeters = p;
+      //update icon for that
+      $scope.markers[$scope.selectedParkingMetersIndex].icon = {
+          iconUrl: "img/ic_parcometro_selected.png",
+          iconSize: [36, 50],
+          iconAnchor: [18, 50],
+          popupAnchor: [-0, -50]
+        }
+        // marker.target.setIcon(new myIconReplc);
     }
 
     function getDirection(magneticHeading) {
@@ -461,6 +575,7 @@ Controller that manages the parkings: list of the stops with availability, visua
       for (var i = 0; i < list.length; i++) {
         markers.push({
           parking: list[i],
+
           lat: parseFloat(list[i].position[0]),
           lng: parseFloat(list[i].position[1]),
           icon: {

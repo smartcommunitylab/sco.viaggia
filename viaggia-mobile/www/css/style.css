@@ -542,6 +542,79 @@
   text-align: center;
 }
 
+.parking-meter-popup .popup {
+  width: 80%;
+  max-width: 400px;
+  font-weight: normal;
+}
+
+.parking-meter-popup .popup-title {
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.parking-meter-popup .popup-head {
+  display: none;
+}
+
+.parking-meter-popup .button-close {
+  background-color: gray!important;
+}
+
+.parking-meter-popup .popup-buttons button:not(.button-close) {
+  background-color: #3bbacf !important;
+}
+
+.parking-meter-popup .popup-buttons button {
+  white-space: normal;
+  padding: 0px;
+  color: #fff !important;
+  margin-right: 4px;
+}
+
+.parking-meter-popup .map-stop-title {
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #2975a7;
+}
+
+.parking-meter-popup .popup-icon {
+  font-size: 30px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.parking-meter-popup .map-stop-name {
+  text-align: left;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.parking-meter-popup .map-stop-hour {
+  text-align: left;
+  font-size: 16px;
+}
+
+.parking-meter-popup .fromtotime {
+  max-width: 40%;
+}
+
+.parking-meter-popup .map-stop-detail {
+  text-align: left;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.parking-meter-popup .map-stop-hline {
+  width: 100%;
+  height: 1px;
+  border-bottom: 3px solid #2975a7;
+}
+
+.parking-meter-popup .map-stop-nocourses {
+  text-align: center;
+}
+
 .first-time-parking-meters-popup .popup {
   width: 80%;
   max-width: 400px;
@@ -1157,7 +1230,7 @@ ion-header-bar .title {
   z-index: 999;
   background-color: white;
   right: 0px;
-  top: 0px;
+  bottom: 0px;
   width: 100px;
   height: 150px;
   margin: 10px;

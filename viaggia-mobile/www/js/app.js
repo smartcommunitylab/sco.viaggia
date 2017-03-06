@@ -321,6 +321,7 @@ angular.module('viaggia', [
       })
       .state('app.parkingMeters', {
         url: "/parkingMeters",
+        cache: false,
         views: {
           'menuContent': {
             templateUrl: "templates/mapParkingMeters.html",
@@ -549,9 +550,12 @@ angular.module('viaggia', [
       lbl_parking_meter_orario: 'Orario:',
       lbl_parking_meter_giorni: 'Giorni:',
       lbl_first_time_parking_meter_title: 'Attenzione',
-      lbl_first_time_parking_meter_gps: 'Per migliorare il funzionamento della funzionalità consenti al dispositivo di attivare la geolocalizzazione.',
-      lbl_first_time_parking_meter_compass: 'Ti chiediamo di prestare attenzione rispetto all\'accuratezza della direzione indicata,potrebbe non essere precisa a causa della calibrazione della bussola del tuo dispositivo',
-      btn_undertood: 'Ho capito'
+      lbl_first_time_parking_meter_gps: 'Per utilizzare al meglio questa funzionalità si consiglia di impostare sul dispositivo il rilevamento della posizione sulla modalità di precisione più elevata.',
+      lbl_first_time_parking_meter_compass: 'L’accuratezza della direzione indicata dalla app per raggiungere il parcometro più vicino dipende anche dall’esatta calibrazione della bussola del tuo dispositivo. (Per sapere come migliorarla, consulta le istruzioni del tuo dispositivo)',
+      btn_undertood: 'Ho capito',
+      lbl_no_gps_title: 'Attenzione',
+      lbl_no_gps_content: 'Per utilizzare al meglio questa funzionalità si consiglia di impostare sul dispositivo il rilevamento della posizione sulla modalità di precisione più elevata.',
+      btn_drive_me: 'Portami là'
     });
 
 
@@ -735,7 +739,10 @@ angular.module('viaggia', [
       lbl_first_time_parking_meter_title: 'Warning',
       lbl_first_time_parking_meter_gps: 'In order to use your position allow the device to activate the geolocation.',
       lbl_first_time_parking_meter_compass: 'We ask you to pay attention that the direction may not be accurate due to the calibration of your device\'s compass',
-      btn_undertood: 'I get it'
+      btn_undertood: 'I get it',
+      lbl_no_gps_title: 'Attenzione',
+      lbl_no_gps_content: 'Per utilizzare al meglio questa funzionalità si consiglia di impostare sul dispositivo il rilevamento della posizione sulla modalità di precisione più elevata.',
+      btn_drive_me: 'Portami là'
 
     });
 
