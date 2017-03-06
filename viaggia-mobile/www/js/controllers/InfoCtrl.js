@@ -362,7 +362,6 @@ Controller that manages the parkings: list of the stops with availability, visua
                 },
           {
             text: $filter('translate')('btn_drive_me'),
-            type: 'button-close',
             onTap: function (e) {
               driveMeParcometer(p, index);
             }
@@ -397,16 +396,7 @@ Controller that manages the parkings: list of the stops with availability, visua
         popupAnchor: [-0, -50]
       }
     }
-    //    var myIconReplc = L.Icon.extend({
-    //      options: {
-    //        iconUrl: "img/ic_parcometro_selected",
-    //        iconSize: [30, 35],
-    //        shadowAnchor: [8, 20],
-    //        shadowSize: [25, 18],
-    //        iconSize: [20, 25],
-    //        iconAnchor: [8, 30] // horizontal puis vertical
-    //      }
-    //    });
+
 
 
     function driveMeParcometer(p, index) {
@@ -475,14 +465,13 @@ Controller that manages the parkings: list of the stops with availability, visua
     }
 
     function drawDistance(distance) {
-      //    var ctx = document.getElementById('arrow').getContext('2d');
-      //    ctx.clearRect(0, 0, 256, 256);
-      //    var state = ctx.save();
       var c = document.getElementById("distance");
+      var center = document.getElementById('distance').width / 2;
       var ctx = c.getContext("2d");
       ctx.clearRect(0, 0, 100, 100);
       ctx.font = "20px Arial";
-      ctx.fillText(Math.round(distance * 1000), 10, 20);
+      ctx.textAlign = "center";
+      ctx.fillText(Math.round(distance * 1000), center, 20);
       ctx.stroke();
     }
   })
@@ -630,6 +619,7 @@ Controller that manages the parkings: list of the stops with availability, visua
                 },
         {
           text: $filter('translate')('btn_nav_to'),
+          type: 'button-close',
           onTap: function (e) {
             planService.setPlanConfigure({
               to: {
