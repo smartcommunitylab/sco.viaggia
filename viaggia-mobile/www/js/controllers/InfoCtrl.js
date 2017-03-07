@@ -498,7 +498,7 @@ Controller that manages the parking meters: compass, visualization on map
       ctx.fill();
       ctx.beginPath();
       ctx.moveTo(centerX + 0, centerY - 23);
-      ctx.lineTo(centerX + 0, 100);
+      ctx.lineTo(centerX + 0, 90);
       ctx.lineCap = 'round';
       ctx.stroke();
       ctx.restore(state);
@@ -523,7 +523,7 @@ Controller that manages the parking meters: compass, visualization on map
       ctx.clearRect(0, 0, 120, 120);
       ctx.font = "20px Arial";
       ctx.textAlign = "center";
-      ctx.fillText(Math.round(distance * 1000), center, 20);
+      ctx.fillText(Math.round(distance * 1000) + ' m', center, 20);
       ctx.stroke();
     }
   })
