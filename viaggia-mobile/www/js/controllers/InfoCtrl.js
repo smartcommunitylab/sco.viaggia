@@ -331,6 +331,7 @@ Controller that manages the parking meters: compass, visualization on map
     }; // Update every 0.5 seconds
 
     //locate user
+    Config.loading();
     GeoLocate.locate().then(function (position) {
       //get parking meter list based on my position and other parameters in configuration service
       parkingService.getParkingMeters(position[0], position[1]).then(function (parkingMetersZones) {
@@ -372,7 +373,13 @@ Controller that manages the parking meters: compass, visualization on map
             });
           });
         }
+        Config.loaded();
+      }, function (err) {
+        $scope.showNoConnection();
+        Config.loaded();
       })
+    }, function (err) {
+      Config.loaded();
     });
     //    }
 
@@ -485,28 +492,7 @@ Controller that manages the parking meters: compass, visualization on map
       div.style.msTransform = 'rotate(' + r + 'deg)';
       div.style.oTransform = 'rotate(' + r + 'deg)';
       div.style.transform = 'rotate(' + r + 'deg)';
-//            var ctx = document.getElementById('arrow').getContext('2d');
-  //      centerX = Math.floor(document.getElementById('arrow').width / 2);
-  //      centerY = Math.floor(document.getElementById('arrow').height / 2);
-  //      var state = ctx.save();
-  //      ctx.translate(centerX, centerY);
-  //      ctx.rotate(degreesToRadians(r));
-  //      ctx.translate(-centerX, -centerY);
-  //      ctx.clearRect(0, 0, 256, 256);
-  //      ctx.lineWidth = 4;
-  //      ctx.beginPath();
-  //      ctx.moveTo(centerX - 24, centerY + 8);
-  //      ctx.lineTo(centerX + 0, centerY - 24);
-  //      ctx.lineTo(centerX + 24, centerY + 8);
-  //      ctx.arcTo(centerX + 0, centerY - 24, centerX - 24, centerY + 8, 30);
-  //
-  //      ctx.stroke();
-  //      ctx.fill();
-  //      ctx.beginPath();
-  //      ctx.moveTo(centerX + 0, centerY - 23);
-  //      ctx.lineTo(centerX + 0, 90);
-  //      ctx.lineCap = 'round';
-  //      ctx.stroke();      ctx.restore(state);
+
     }
 
 

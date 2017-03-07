@@ -752,11 +752,11 @@ angular.module('viaggia', [
       lbl_parking_meter_giorni: 'Days:',
       lbl_first_time_parking_meter_title: 'Warning',
       lbl_first_time_parking_meter_gps: 'In order to use your position allow the device to activate the geolocation.',
-      lbl_first_time_parking_meter_compass: 'We ask you to pay attention that the direction may not be accurate due to the calibration of your device\'s compass',
+      lbl_first_time_parking_meter_compass: 'The accuracy of the directions for reaching the nearest parking meter depends also on the calibration of the compass on your device. (To find out how to improve it, please see your device\'s instructions).',
       btn_undertood: 'I get it',
       lbl_no_gps_title: 'Attenzione',
-      lbl_no_gps_content: 'Per utilizzare al meglio questa funzionalità si consiglia di impostare sul dispositivo il rilevamento della posizione sulla modalità di precisione più elevata.',
-      btn_drive_me: 'Portami là'
+      lbl_no_gps_content: 'To take full advantage of this feature, please enable the highest precision mode for location detection on your device.',
+      btn_drive_me: 'Take me there'
 
     });
 
