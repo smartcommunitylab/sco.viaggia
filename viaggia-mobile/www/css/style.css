@@ -597,6 +597,12 @@
 
 .parking-meter-popup .fromtotime {
   max-width: 40%;
+  display: inline-block
+}
+
+.parking-meter-popup .fromtodays {
+  max-width: 60%;
+  display: inline-block
 }
 
 .parking-meter-popup .map-stop-detail {
@@ -1231,19 +1237,24 @@ ion-header-bar .title {
   background-color: white;
   right: 0px;
   bottom: 0px;
-  width: 100px;
-  height: 150px;
-  margin: 10px;
+  width: 130px;
+  height: 130px;
+  margin: 20px;
+  box-shadow: 5px 5px 20px #575757;
 }
 
-.arrow {
-  width: 100px;
+#arrow {
+  width: 110px;
   height: 100px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-.distance {
-  width: 100px;
+#distance {
+  width: 110px;
   height: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .bm-item-label {

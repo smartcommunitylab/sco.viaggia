@@ -545,7 +545,7 @@ angular.module('viaggia', [
       error_select_type_accessibility_feedback: 'Per visualizzare un percorso accessibile è necessario selezionare i mezzi pubblici o a piedi',
       not_acc_label: 'Questa linea non è accessibile',
       alert_delay: 'Ritardo di {{mins}} minuti',
-      lbl_parking_meter: 'Parking Meter',
+      lbl_parking_meter: 'Parchimetro',
       lbl_parking_meter_price: 'Tariffa oraria:',
       lbl_parking_meter_orario: 'Orario:',
       lbl_parking_meter_giorni: 'Giorni:',

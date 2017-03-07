@@ -6,7 +6,8 @@
     </div>
   </div>
   <div class="map-stop-hline "></div>
-  <div ng-repeat="area in popupParkingMeter.zone ">
+  <!--  <div ng-repeat="area in popupParkingMeter.zone ">-->
+  <div ng-init="area = popupParkingMeter.zone[0] ">
     <div class="row map-stop-name ">
       <div class="col ">
         {{'lbl_parking_meter_price'|translate}} <b>{{area.rateValue}}</b>
@@ -18,19 +19,19 @@
       </div>
     </div>
     <div class="row map-stop-hour">
-      <div class="fromtotime">
-        <b>{{area.timeSlot}}</b>
-      </div>
-      <div>
-
-
-        {{area.weekDays.join(', ')}}
-        <!--
+      <div class="col">
+        <div class="fromtotime">
+          <b>{{area.timeSlot}}</b>
+        </div>
+        <div class="fromtodays">
+          {{area.weekDays.join(', ')}}
+          <!--
         <span ng-repeat="day in area.weekDays">
           {{days| split:',':0}}
         </span>
 -->
 
+        </div>
       </div>
       <!--
     <div class="row map-stop-name ">

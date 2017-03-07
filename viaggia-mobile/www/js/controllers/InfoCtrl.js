@@ -7,178 +7,211 @@ Controller that manages the parkings: list of the stops with availability, visua
 */
 
 .controller('ParkingCtrl', function ($scope, $rootScope, $state, $stateParams, $timeout, $filter, $ionicModal, $ionicPopup, $location, ionicMaterialMotion, ionicMaterialInk, GeoLocate, leafletData, mapService, parkingService, Config, planService, bookmarkService) {
-    $scope.agencyId = $stateParams.agencyId;
-    $scope.parkings = null;
-    $scope.loading = true;
-    $scope.markers = [];
-    $scope.title = $filter('translate')('menu_real_time_park');
-    $scope.direction = null;
+  $scope.agencyId = $stateParams.agencyId;
+  $scope.parkings = null;
+  $scope.loading = true;
+  $scope.markers = [];
+  $scope.title = $filter('translate')('menu_real_time_park');
+  $scope.direction = null;
 
-    angular.extend($scope, {
-      center: {
-        lat: Config.getMapPosition().lat,
-        lng: Config.getMapPosition().long,
-        zoom: Config.getMapPosition().zoom
-      },
-      markers: [],
-      events: {}
-    });
-    $scope.$on('ngLastRepeat.parkings', function (e) {
-      $timeout(function () {
-        ionicMaterialMotion.ripple();
-        ionicMaterialInk.displayEffect()
-      }); // No timeout delay necessary.
-    });
+  angular.extend($scope, {
+    center: {
+      lat: Config.getMapPosition().lat,
+      lng: Config.getMapPosition().long,
+      zoom: Config.getMapPosition().zoom
+    },
+    markers: [],
+    events: {}
+  });
+  $scope.$on('ngLastRepeat.parkings', function (e) {
+    $timeout(function () {
+      ionicMaterialMotion.ripple();
+      ionicMaterialInk.displayEffect()
+    }); // No timeout delay necessary.
+  });
 
-    //get all the parkings data with the specified agencyId and set the availability level
-    $scope.load = function (selectedId) {
-      parkingService.getParkings($scope.agencyId).then(function (data) {
-        $scope.parkings = data;
-        $scope.parkings.forEach(function (e) {
-          if (e.monitored && e.slotsAvailable > -2) {
-            e.availLevel = e.slotsAvailable <= 5 ? 'avail-red' : e.slotsAvailable > 20 ? 'avail-green' : 'avail-yellow';
-          }
-          if (decodeURI(selectedId) == e.id) {
-            $scope.select(e);
-          }
+  //get all the parkings data with the specified agencyId and set the availability level
+  $scope.load = function (selectedId) {
+    parkingService.getParkings($scope.agencyId).then(function (data) {
+      $scope.parkings = data;
+      $scope.parkings.forEach(function (e) {
+        if (e.monitored && e.slotsAvailable > -2) {
+          e.availLevel = e.slotsAvailable <= 5 ? 'avail-red' : e.slotsAvailable > 20 ? 'avail-green' : 'avail-yellow';
+        }
+        if (decodeURI(selectedId) == e.id) {
+          $scope.select(e);
+        }
 
-        });
-        $scope.loading = false;
-        $scope.noConnection = false;
-        Config.loaded();
-        $scope.$broadcast('scroll.refreshComplete');
-      }, function (err) {
-        $scope.parkings = null;
-        $scope.noConnection = true;
-        $scope.showNoConnection();
-        $scope.loading = true;
-        $scope.$broadcast('scroll.refreshComplete');
-        Config.loaded();
       });
-    }
-
-    //start to looad the parkings data
-    var init = function () {
+      $scope.loading = false;
+      $scope.noConnection = false;
+      Config.loaded();
+      $scope.$broadcast('scroll.refreshComplete');
+    }, function (err) {
+      $scope.parkings = null;
+      $scope.noConnection = true;
+      $scope.showNoConnection();
       $scope.loading = true;
-      Config.loading();
-      $scope.load($stateParams.id);
-    };
+      $scope.$broadcast('scroll.refreshComplete');
+      Config.loaded();
+    });
+  }
+
+  //start to looad the parkings data
+  var init = function () {
+    $scope.loading = true;
+    Config.loading();
+    $scope.load($stateParams.id);
+  };
 
 
-    //select a parking lot, set the style of bookmark icon and open the map
-    $scope.selected = null;
-    $scope.select = function (p) {
-      $scope.selected = p;
-      var path = $location.path();
-      if ($state.current.name == 'app.parkingstation') {
-        path = path.substr(0, path.lastIndexOf('/'));
+  //select a parking lot, set the style of bookmark icon and open the map
+  $scope.selected = null;
+  $scope.select = function (p) {
+    $scope.selected = p;
+    var path = $location.path();
+    if ($state.current.name == 'app.parkingstation') {
+      path = path.substr(0, path.lastIndexOf('/'));
+    }
+    path += '/' + p.id;
+    $scope.bookmarkStyle = bookmarkService.getBookmarkStyle(path);
+    $scope.showMap(true);
+  };
+  //open the modal map with all the markers of the parkings. If withPopup is true, open it with the details of selected parking
+  $scope.showMap = function (withPopup) {
+    $scope.modalMap.show().then(function () {
+      var markers = [];
+      var list = ($scope.selected != null && withPopup) ? [$scope.selected] : $scope.parkings;
+      if (list == null) list = [];
+      var boundsArray = [];
+      for (var i = 0; i < list.length; i++) {
+        markers.push({
+          parking: list[i],
+          lat: parseFloat(list[i].position[0]),
+          lng: parseFloat(list[i].position[1]),
+          icon: {
+            iconUrl: 'img/ic_parkingLot.png',
+            iconSize: [36, 50],
+            iconAnchor: [18, 50],
+            popupAnchor: [-0, -50]
+          },
+        });
+        boundsArray.push(list[i].position);
       }
-      path += '/' + p.id;
-      $scope.bookmarkStyle = bookmarkService.getBookmarkStyle(path);
-      $scope.showMap(true);
-    };
-
-    //refresh the map and avoid the grey tiles on it
-    $scope.$on('$ionicView.beforeEnter', function () {
-      mapService.refresh('modalMapParking');
+      if (boundsArray.length > 0) {
+        var bounds = L.latLngBounds(boundsArray);
+        mapService.getMap('modalMapParking').then(function (map) {
+          map.fitBounds(bounds);
+        });
+      }
+      $scope.markers = markers;
+      if (withPopup) {
+        showPopup(list[0]);
+      }
     });
+  };
+  //refresh the map and avoid the grey tiles on it
+  $scope.$on('$ionicView.beforeEnter', function () {
+    mapService.refresh('modalMapParking');
+  });
 
-    //create the modal with the map
-    $ionicModal.fromTemplateUrl('templates/mapModalParking.html', {
-      id: '1',
+  //create the modal with the map
+  $ionicModal.fromTemplateUrl('templates/mapModalParking.html', {
+    id: '1',
+    scope: $scope,
+    backdropClickToClose: false,
+    animation: 'slide-in-up'
+  }).then(function (modal) {
+    $scope.modalMap = modal;
+  });
+
+
+  $scope.closeMap = function () {
+    $scope.modalMap.hide();
+  };
+
+  $scope.initMap = function () {
+    mapService.initMap('modalMapParking').then(function () {
+      console.log('map initialized');
+    });
+  };
+
+  var showPopup = function (p) {
+    $scope.popupParking = p;
+    $scope.selected = p;
+
+    $ionicPopup.show({
+      templateUrl: 'templates/parkingPopup.html',
+      title: $filter('translate')('lbl_parking'),
+      cssClass: 'parking-popup',
       scope: $scope,
-      backdropClickToClose: false,
-      animation: 'slide-in-up'
-    }).then(function (modal) {
-      $scope.modalMap = modal;
-    });
-
-
-    $scope.closeMap = function () {
-      $scope.modalMap.hide();
-    };
-
-    $scope.initMap = function () {
-      mapService.initMap('modalMapParking').then(function () {
-        console.log('map initialized');
-      });
-    };
-
-    var showPopup = function (p) {
-      $scope.popupParking = p;
-      $scope.selected = p;
-
-      $ionicPopup.show({
-        templateUrl: 'templates/parkingPopup.html',
-        title: $filter('translate')('lbl_parking'),
-        cssClass: 'parking-popup',
-        scope: $scope,
-        buttons: [
-          {
-            text: $filter('translate')('btn_close'),
-            type: 'button-close'
+      buttons: [
+        {
+          text: $filter('translate')('btn_close'),
+          type: 'button-close'
                 },
-          {
-            text: $filter('translate')('btn_nav_to'),
-            onTap: function (e) {
-              planService.setPlanConfigure({
-                to: {
-                  name: $scope.popupParking.description,
-                  lat: $scope.popupParking.position[0],
-                  long: $scope.popupParking.position[1]
-                },
-              });
-              planService.setName('to', $scope.popupParking.description);
-              $scope.closeMap();
-              $state.go('app.plan');
-            }
+        {
+          text: $filter('translate')('btn_nav_to'),
+          onTap: function (e) {
+            planService.setPlanConfigure({
+              to: {
+                name: $scope.popupParking.description,
+                lat: $scope.popupParking.position[0],
+                long: $scope.popupParking.position[1]
+              },
+            });
+            planService.setName('to', $scope.popupParking.description);
+            $scope.closeMap();
+            $state.go('app.plan');
+          }
           }
         ]
-      });
-    }
-
-
-    //open popup with the detail if one of the marker is clicked
-    $scope.$on('leafletDirectiveMarker.modalMapParking.click', function (e, args) {
-      var p = $scope.markers[args.modelName].parking;
-      showPopup(p);
     });
+  }
 
 
-    //plan the journey to the selected parking
-    $scope.navigate = function () {
-      planService.setPlanConfigure({
-        to: {
-          name: $scope.selected.description,
-          lat: $scope.selected.position[0],
-          long: $scope.selected.position[1]
-        },
-      });
-      planService.setName('to', $scope.selected.description);
-      $scope.closeMap();
-      $state.go('app.plan');
-    };
+  //open popup with the detail if one of the marker is clicked
+  $scope.$on('leafletDirectiveMarker.modalMapParking.click', function (e, args) {
+    var p = $scope.markers[args.modelName].parking;
+    showPopup(p);
+  });
 
-    init();
 
-    //add/remove the parking from the list of bookmarks
-    $scope.bookmark = function () {
-      var ref = Config.getTTData($stateParams.ref);
-      var path = $stateParams.id ? $location.path() : ($location.path() + '/' + $scope.selected.id);
-      bookmarkService.toggleBookmark(path, $scope.selected.name, 'PARKING', {
-        agencyId: $scope.agencyId,
-        parkingId: $scope.selected.id
-      }).then(function (style) {
-        $scope.bookmarkStyle = style;
-      });
-    };
+  //plan the journey to the selected parking
+  $scope.navigate = function () {
+    planService.setPlanConfigure({
+      to: {
+        name: $scope.selected.description,
+        lat: $scope.selected.position[0],
+        long: $scope.selected.position[1]
+      },
+    });
+    planService.setName('to', $scope.selected.description);
+    $scope.closeMap();
+    $state.go('app.plan');
+  };
 
-  })
-  /*
+  init();
 
-  Controller that manages the parking meters: compass, visualization on map
+  //add/remove the parking from the list of bookmarks
+  $scope.bookmark = function () {
+    var ref = Config.getTTData($stateParams.ref);
+    var path = $stateParams.id ? $location.path() : ($location.path() + '/' + $scope.selected.id);
+    bookmarkService.toggleBookmark(path, $scope.selected.name, 'PARKING', {
+      agencyId: $scope.agencyId,
+      parkingId: $scope.selected.id
+    }).then(function (style) {
+      $scope.bookmarkStyle = style;
+    });
+  };
 
-  */
+})
+
+/*
+
+Controller that manages the parking meters: compass, visualization on map
+
+*/
 
 .controller('ParkingMetersCtrl', function ($scope, $rootScope, $state, $q, Config, $ionicModal, $ionicPopup, $filter, $cordovaDeviceOrientation, mapService, parkingService, GeoLocate) {
 
@@ -237,9 +270,14 @@ Controller that manages the parkings: list of the stops with availability, visua
 
     function onRequestSuccess(success) {
       console.log("Successfully requested accuracy: " + success.message);
-      $state.go("app.parkingMeters", {}, {
-        reload: true
-      })
+      if (success.code == cordova.plugins.locationAccuracy.SUCCESS_USER_AGREED) {
+        $state.go("app.parkingMeters", {}, {
+          reload: true
+        })
+      } else {
+        //se gia l'app geolocalizza probabilmente ho  problemi di geolocalizzazione
+      }
+
     }
 
     function onRequestFailure(error) {
@@ -444,10 +482,14 @@ Controller that manages the parkings: list of the stops with availability, visua
       ctx.moveTo(centerX - 24, centerY + 8);
       ctx.lineTo(centerX + 0, centerY - 24);
       ctx.lineTo(centerX + 24, centerY + 8);
+      ctx.arcTo(centerX + 0, centerY - 24, centerX - 24, centerY + 8, 30);
+
       ctx.stroke();
+      ctx.fill();
       ctx.beginPath();
       ctx.moveTo(centerX + 0, centerY - 23);
       ctx.lineTo(centerX + 0, 100);
+      ctx.lineCap = 'round';
       ctx.stroke();
       ctx.restore(state);
     }
@@ -468,7 +510,7 @@ Controller that manages the parkings: list of the stops with availability, visua
       var c = document.getElementById("distance");
       var center = document.getElementById('distance').width / 2;
       var ctx = c.getContext("2d");
-      ctx.clearRect(0, 0, 100, 100);
+      ctx.clearRect(0, 0, 120, 120);
       ctx.font = "20px Arial";
       ctx.textAlign = "center";
       ctx.fillText(Math.round(distance * 1000), center, 20);
