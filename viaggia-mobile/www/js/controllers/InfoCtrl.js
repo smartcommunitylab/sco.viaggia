@@ -340,7 +340,7 @@ Controller that manages the parking meters: compass, visualization on map
         for (var i = 0; i < parkingMetersZones.length; i++) {
           for (var k = 0; k < parkingMetersZones[i].parkingMeters.length; k++) {
             var parkingMeter = parkingMetersZones[i].parkingMeters[k];
-            parkingMeter.zone = parkingMetersZones[i].validityPeriod;
+            parkingMeter.validityPeriod = parkingMetersZones[i].validityPeriod;
             markers.push({
               parking: parkingMeter,
               index: k + i,
@@ -376,7 +376,17 @@ Controller that manages the parking meters: compass, visualization on map
     });
     //    }
 
-
+    $scope.getValidityPeriodDays = function (weekDays) {
+      var returnString = "";
+      //turn the string to internationalized string
+      var days = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"];
+      for (var k = 0; k < days.length; k++) {
+        if (weekDays.indexOf(days[k]) > -1) {
+          returnString += $filter('translate')('weekdays_' + days[k] + '_period') + ', ';
+        }
+      }
+      return returnString.slice(0, -2);;
+    }
 
 
 
