@@ -479,29 +479,34 @@ Controller that manages the parking meters: compass, visualization on map
 
 
     function drawArrow(r) {
-      var ctx = document.getElementById('arrow').getContext('2d');
-      centerX = Math.floor(document.getElementById('arrow').width / 2);
-      centerY = Math.floor(document.getElementById('arrow').height / 2);
-      var state = ctx.save();
-      ctx.translate(centerX, centerY);
-      ctx.rotate(degreesToRadians(r));
-      ctx.translate(-centerX, -centerY);
-      ctx.clearRect(0, 0, 256, 256);
-      ctx.lineWidth = 4;
-      ctx.beginPath();
-      ctx.moveTo(centerX - 24, centerY + 8);
-      ctx.lineTo(centerX + 0, centerY - 24);
-      ctx.lineTo(centerX + 24, centerY + 8);
-      ctx.arcTo(centerX + 0, centerY - 24, centerX - 24, centerY + 8, 30);
-
-      ctx.stroke();
-      ctx.fill();
-      ctx.beginPath();
-      ctx.moveTo(centerX + 0, centerY - 23);
-      ctx.lineTo(centerX + 0, 90);
-      ctx.lineCap = 'round';
-      ctx.stroke();
-      ctx.restore(state);
+      var div = document.getElementById('arrow');
+      div.style.webkitTransform = 'rotate(' + r + 'deg)';
+      div.style.mozTransform = 'rotate(' + r + 'deg)';
+      div.style.msTransform = 'rotate(' + r + 'deg)';
+      div.style.oTransform = 'rotate(' + r + 'deg)';
+      div.style.transform = 'rotate(' + r + 'deg)';
+//            var ctx = document.getElementById('arrow').getContext('2d');
+  //      centerX = Math.floor(document.getElementById('arrow').width / 2);
+  //      centerY = Math.floor(document.getElementById('arrow').height / 2);
+  //      var state = ctx.save();
+  //      ctx.translate(centerX, centerY);
+  //      ctx.rotate(degreesToRadians(r));
+  //      ctx.translate(-centerX, -centerY);
+  //      ctx.clearRect(0, 0, 256, 256);
+  //      ctx.lineWidth = 4;
+  //      ctx.beginPath();
+  //      ctx.moveTo(centerX - 24, centerY + 8);
+  //      ctx.lineTo(centerX + 0, centerY - 24);
+  //      ctx.lineTo(centerX + 24, centerY + 8);
+  //      ctx.arcTo(centerX + 0, centerY - 24, centerX - 24, centerY + 8, 30);
+  //
+  //      ctx.stroke();
+  //      ctx.fill();
+  //      ctx.beginPath();
+  //      ctx.moveTo(centerX + 0, centerY - 23);
+  //      ctx.lineTo(centerX + 0, 90);
+  //      ctx.lineCap = 'round';
+  //      ctx.stroke();      ctx.restore(state);
     }
 
 

@@ -7,8 +7,9 @@
   <ion-content scroll="false">
     <div id="modal-map-container" data-tap-disabled="true">
       <div class="compass">
-        <canvas id="arrow" width="110" height="100"></canvas>
-        <canvas id="distance" width="110" height="50"></canvas>
+<!--                <canvas id="arrow" width="110" height="100"></canvas>-->
+<div id="arrow" width="110" height="100">
+  <img src="img/ic_compass.png" width=80%/></div>        <canvas id="distance" width="110" height="50"></canvas>
       </div>
       <leaflet event-broadcast="events" center="center" markers="markers" style="width: 100%; height: 700px;" ng-init="initMapParkingMeter()" id="modalMapParkingMeters"></leaflet>
     </div>
