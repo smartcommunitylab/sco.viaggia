@@ -255,9 +255,11 @@ Controller that manages the parking meters: compass, visualization on map
         });
       })
     }
-    mapService.initMap('modalMapParkingMeters').then(function () {
-      console.log('map initialized');
-    });
+    $scope.initMapParkingMeter = function () {
+      mapService.initMap('modalMapParkingMeters').then(function () {
+        console.log('map initialized');
+      });
+    }
     angular.extend($scope, {
       center: {
         lat: Config.getMapPosition().lat,
@@ -271,9 +273,10 @@ Controller that manages the parking meters: compass, visualization on map
     function onRequestSuccess(success) {
       console.log("Successfully requested accuracy: " + success.message);
       if (success.code == cordova.plugins.locationAccuracy.SUCCESS_USER_AGREED) {
-        $state.go("app.parkingMeters", {}, {
-          reload: true
-        })
+        //        $state.go("app.parkingMeters", {}, {
+        //          reload: true
+        //        })
+        $scope.initParkingMeters();
       } else {
         //se gia l'app geolocalizza probabilmente ho  problemi di geolocalizzazione
       }
@@ -330,58 +333,59 @@ Controller that manages the parking meters: compass, visualization on map
       frequency: 200
     }; // Update every 0.5 seconds
 
-    //locate user
-    Config.loading();
-    GeoLocate.locate().then(function (position) {
-      //get parking meter list based on my position and other parameters in configuration service
-      parkingService.getParkingMeters(position[0], position[1]).then(function (parkingMetersZones) {
-        //init the comapss service with callbacks
-        var markers = [];
-        var boundsArray = [];
-        for (var i = 0; i < parkingMetersZones.length; i++) {
-          for (var k = 0; k < parkingMetersZones[i].parkingMeters.length; k++) {
-            var parkingMeter = parkingMetersZones[i].parkingMeters[k];
-            parkingMeter.validityPeriod = parkingMetersZones[i].validityPeriod;
-            markers.push({
-              parking: parkingMeter,
-              index: k + i,
-              lat: parseFloat(parkingMetersZones[i].parkingMeters[k].lat),
-              lng: parseFloat(parkingMetersZones[i].parkingMeters[k].lng),
-              icon: {
-                iconUrl: 'img/ic_parcometro.png',
-                iconSize: [36, 50],
-                iconAnchor: [18, 50],
-                popupAnchor: [-0, -50]
-              },
-            });
-            boundsArray.push([parkingMetersZones[i].parkingMeters[k].lat, parkingMetersZones[i].parkingMeters[k].lng]);
+    $scope.initParkingMeters = function () {
+      //locate user
+      Config.loading();
+      GeoLocate.locate().then(function (position) {
+        //get parking meter list based on my position and other parameters in configuration service
+        parkingService.getParkingMeters(position[0], position[1]).then(function (parkingMetersZones) {
+          //init the comapss service with callbacks
+          var markers = [];
+          var boundsArray = [];
+          for (var i = 0; i < parkingMetersZones.length; i++) {
+            for (var k = 0; k < parkingMetersZones[i].parkingMeters.length; k++) {
+              var parkingMeter = parkingMetersZones[i].parkingMeters[k];
+              parkingMeter.validityPeriod = parkingMetersZones[i].validityPeriod;
+              markers.push({
+                parking: parkingMeter,
+                index: k + i,
+                lat: parseFloat(parkingMetersZones[i].parkingMeters[k].lat),
+                lng: parseFloat(parkingMetersZones[i].parkingMeters[k].lng),
+                icon: {
+                  iconUrl: 'img/ic_parcometro.png',
+                  iconSize: [36, 50],
+                  iconAnchor: [18, 50],
+                  popupAnchor: [-0, -50]
+                },
+              });
+              boundsArray.push([parkingMetersZones[i].parkingMeters[k].lat, parkingMetersZones[i].parkingMeters[k].lng]);
+            }
           }
-        }
 
-        $scope.markers = markers;
-        selectNearest(markers);
-        GeoLocate.initCompassMonitor(onSuccess, onError, options);
-        //open Map with compass and driver user to nearest parking meter
-        //$scope.modalMapParkingMeters.show().then(function () {
-        //manage visualization
-        if (boundsArray.length > 0) {
-          boundsArray.push([$rootScope.myPosition[0], $rootScope.myPosition[1]]);
-          var bounds = L.latLngBounds(boundsArray);
-          mapService.getMap('modalMapParkingMeters').then(function (map) {
-            map.fitBounds(bounds, {
-              padding: [50, 50]
+          $scope.markers = markers;
+          selectNearest(markers);
+          GeoLocate.initCompassMonitor(onSuccess, onError, options);
+          //open Map with compass and driver user to nearest parking meter
+          //$scope.modalMapParkingMeters.show().then(function () {
+          //manage visualization
+          if (boundsArray.length > 0) {
+            boundsArray.push([$rootScope.myPosition[0], $rootScope.myPosition[1]]);
+            var bounds = L.latLngBounds(boundsArray);
+            mapService.getMap('modalMapParkingMeters').then(function (map) {
+              map.fitBounds(bounds, {
+                padding: [50, 50]
+              });
             });
-          });
-        }
-        Config.loaded();
+          }
+          Config.loaded();
+        }, function (err) {
+          $scope.showNoConnection();
+          Config.loaded();
+        })
       }, function (err) {
-        $scope.showNoConnection();
         Config.loaded();
-      })
-    }, function (err) {
-      Config.loaded();
-    });
-    //    }
+      });
+    }
 
     $scope.getValidityPeriodDays = function (weekDays) {
       var returnString = "";
@@ -395,7 +399,7 @@ Controller that manages the parking meters: compass, visualization on map
       return returnString.slice(0, -2);;
     }
 
-
+    $scope.initParkingMeters();
 
     $scope.$on("$destroy", function (event) {
       mapService.stopPosTimer('modalMapParkingMeters');
@@ -516,6 +520,10 @@ Controller that manages the parking meters: compass, visualization on map
       ctx.textAlign = "center";
       ctx.fillText(Math.round(distance * 1000) + ' m', center, 20);
       ctx.stroke();
+    }
+
+    $scope.getPrice = function (price) {
+      return (price / 100).toFixed(2) + " €/ora."
     }
   })
   /*

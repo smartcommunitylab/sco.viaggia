@@ -32,14 +32,7 @@
     "net.yoik.cordova.plugins.screenorientation",
     "https://github.com/phonegap/phonegap-plugin-push",
     "cordova-plugin-device-orientation",
-    {
-      "variables": {
-        "SENDER_ID": "453601816446",
-        "GOOGLE_APP_ID": "453601816446"
-      },
-      "locator": "phonegap-plugin-push",
-      "id": "phonegap-plugin-push"
-    },
+
     "cordova-plugin-device-orientation",
     "cordova-plugin-request-location-accuracy"
   ],
