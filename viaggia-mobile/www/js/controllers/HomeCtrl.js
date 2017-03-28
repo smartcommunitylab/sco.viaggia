@@ -6,22 +6,7 @@ angular.module('viaggia.controllers.home', [])
     document.addEventListener("resume", function () {
       notificationInit();
     }, false);
-    //window.FirebasePlugin.setScreenName("Home");
 
-    window.FirebasePlugin.logEvent("select_content", {
-      content_type: "page_view",
-      item_id: "home"
-    });
-    window.FirebasePlugin.getInfo(function (info) {
-      // the status of the developer mode setting (true/false)
-      console.log(info.configSettings.developerModeEnabled);
-      // the timestamp (milliseconds since epoch) of the last successful fetch
-      console.log(info.fetchTimeMillis);
-      // the status of the most recent fetch attempt (int)
-      console.log(info.lastFetchStatus);
-    }, function (error) {
-      console.error(error);
-    });
   });
 
   //update notifications

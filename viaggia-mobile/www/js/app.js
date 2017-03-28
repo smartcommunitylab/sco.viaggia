@@ -125,7 +125,9 @@ angular.module('viaggia', [
           DataManager.syncStopData();
         }
       });
-
+      if (window.ga) {
+        window.ga.startTrackerWithId('UA-93674885-1', 30);
+      }
       if (typeof navigator.globalization !== "undefined") {
         navigator.globalization.getPreferredLanguage(function (language) {
           $translate.use((language.value).split("-")[0]).then(function (data) {
@@ -562,7 +564,9 @@ angular.module('viaggia', [
       btn_undertood: 'Ho capito',
       lbl_no_gps_title: 'Attenzione',
       lbl_no_gps_content: 'Per utilizzare al meglio questa funzionalità si consiglia di impostare sul dispositivo il rilevamento della posizione sulla modalità di precisione più elevata.',
-      btn_drive_me: 'Portami là'
+      btn_drive_me: 'Portami là',
+      lbl_calibration: 'Calibrazione bussola',
+      lbl_calibration_content: 'Muovi il dispositivo formando un 8 partendo dal punto centrale verso destra, come mostra la figura, finché la bussola non è calibrata. Dovrebbe essere sufficiente eseguire l\'operazione un paio di volte.'
     });
 
 
@@ -756,7 +760,9 @@ angular.module('viaggia', [
       btn_undertood: 'I get it',
       lbl_no_gps_title: 'Attenzione',
       lbl_no_gps_content: 'To take full advantage of this feature, please enable the highest precision mode for location detection on your device.',
-      btn_drive_me: 'Take me there'
+      btn_drive_me: 'Take me there',
+      lbl_calibration: 'Calibrazione bussola',
+      lbl_calibration_content: 'Muovi il dispositivo formando un 8 partendo dal punto centrale verso destra, come mostra la figura, finché la bussola non è calibrata. Dovrebbe essere sufficiente eseguire l\'operazione un paio di volte.'
 
     });
 

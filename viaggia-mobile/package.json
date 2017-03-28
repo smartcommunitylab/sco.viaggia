@@ -32,7 +32,6 @@
     "net.yoik.cordova.plugins.screenorientation",
     "https://github.com/phonegap/phonegap-plugin-push",
     "cordova-plugin-device-orientation",
-
     "cordova-plugin-device-orientation",
     "cordova-plugin-request-location-accuracy"
   ],

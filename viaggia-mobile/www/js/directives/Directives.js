@@ -402,18 +402,35 @@ angular.module('viaggia.directives', [])
       }])
 
 .directive('suggestion', function () {
-  return {
-    restrict: 'A',
-    require: '^placeautocomplete', // ^look for controller on parents element
-    link: function (scope, element, attrs, autoCtrl) {
-      element.bind('mouseenter', function () {
-        autoCtrl.preSelect(attrs.val);
-        autoCtrl.setIndex(attrs.index);
-      });
+    return {
+      restrict: 'A',
+      require: '^placeautocomplete', // ^look for controller on parents element
+      link: function (scope, element, attrs, autoCtrl) {
+        element.bind('mouseenter', function () {
+          autoCtrl.preSelect(attrs.val);
+          autoCtrl.setIndex(attrs.index);
+        });
 
-      element.bind('mouseleave', function () {
-        autoCtrl.preSelectOff();
-      });
+        element.bind('mouseleave', function () {
+          autoCtrl.preSelectOff();
+        });
+      }
+    };
+  })
+  .directive('analytics', function ($ionicPlatform, $window) {
+    return {
+      restrict: 'E',
+      replace: true,
+      scope: {
+        screen: '='
+      },
+            link: function (scope, elem, attrs) {
+              $ionicPlatform.ready(function () {
+                if ($window.ga) {
+                  $window.ga.trackView(attrs.screen)
+                }
+              });
+            }
+
     }
-  };
-});
+  });

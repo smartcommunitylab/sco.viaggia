@@ -213,7 +213,7 @@ Controller that manages the parking meters: compass, visualization on map
 
 */
 
-.controller('ParkingMetersCtrl', function ($scope, $rootScope, $state, $q, Config, $ionicModal, $ionicPopup, $filter, $cordovaDeviceOrientation, mapService, parkingService, GeoLocate) {
+.controller('ParkingMetersCtrl', function ($scope, $rootScope, $state, $ionicHistory, $q, Config, $ionicModal, $ionicPopup, $filter, $cordovaDeviceOrientation, mapService, parkingService, GeoLocate) {
 
     if (!firstTimeParkingMeterView()) {
       $ionicPopup.show({
@@ -223,12 +223,25 @@ Controller that manages the parking meters: compass, visualization on map
         scope: $scope,
         buttons: [
           {
+            text: $filter('translate')('btn_close'),
+            type: 'button-close',
+            onTap: function (e) {
+              $ionicHistory.goBack();
+            }
+                }, {
             text: $filter('translate')('btn_undertood'),
-            type: 'button-close'
+            type: 'button-close',
+            onTap: function (e) {
+              setFirstTimeParkingMeterView();
+              //cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
+              cordova.plugins.locationAccuracy.canRequest(function (canRequest) {
+                if (canRequest) {
+                  cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY); // iOS will ignore this
                 }
-        ]
-      }).then(function () {
-        setFirstTimeParkingMeterView();
+              });
+            }
+                }
+                ]
       });
     } else {
       geolocate().then(function () {
@@ -245,13 +258,26 @@ Controller that manages the parking meters: compass, visualization on map
           scope: $scope,
           buttons: [
             {
+              text: $filter('translate')('btn_close'),
+              type: 'button-close',
+              onTap: function (e) {
+                $ionicHistory.goBack();
+              }
+            },
+            {
               text: $filter('translate')('btn_undertood'),
               type: 'button-close',
               onTap: function (e) {
-                cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
+                //cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
+                cordova.plugins.locationAccuracy.canRequest(function (canRequest) {
+                  if (canRequest) {
+                    cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY); // iOS will ignore this
+                  }
+                });
               }
-                }
-        ]
+              }
+
+         ]
         });
       })
     }
@@ -269,6 +295,21 @@ Controller that manages the parking meters: compass, visualization on map
       markers: [],
       events: {}
     });
+    $scope.openCalibrationPopup = function () {
+      $ionicPopup.show({
+        templateUrl: 'templates/calibrationPopup.html',
+        title: $filter('translate')('lbl_calibration'),
+        cssClass: 'first-time-parking-meters-popup',
+        scope: $scope,
+        buttons: [
+          {
+            text: $filter('translate')('btn_undertood'),
+            type: 'button-close'
+                }
+
+        ]
+      });
+    }
 
     function onRequestSuccess(success) {
       console.log("Successfully requested accuracy: " + success.message);
@@ -286,10 +327,38 @@ Controller that manages the parking meters: compass, visualization on map
     function onRequestFailure(error) {
       console.error("Accuracy request failed: error code=" + error.code + "; error message=" + error.message);
       if (error.code !== cordova.plugins.locationAccuracy.ERROR_USER_DISAGREED) {
-        if (window.confirm("Failed to automatically set Location Mode to 'High Accuracy'. Would you like to switch to the Location Settings page and do this manually?")) {
-          cordova.plugins.diagnostic.switchToLocationSettings();
-        }
+        //manage error with popup
+        $ionicPopup.show({
+          templateUrl: 'templates/calibrationPopup.html',
+          title: $filter('translate')('lbl_calibration'),
+          cssClass: 'first-time-parking-meters-popup',
+          scope: $scope,
+          buttons: [
+            {
+              text: $filter('translate')('btn_close'),
+              type: 'button-close',
+              onTap: function (e) {
+                $ionicHistory.goBack();
+              }
+                },
+            {
+              text: $filter('translate')('btn_yes'),
+              type: 'button-close',
+              onTap: function (e) {
+                cordova.plugins.diagnostic.switchToLocationSettings();
+              }
+                }
+
+        ]
+        });
+        //        if (window.confirm("Failed to automatically set Location Mode to 'High Accuracy'. Would you like to switch to the Location Settings page and do this manually?")) {
+        //          cordova.plugins.diagnostic.switchToLocationSettings();
+        //        }
+      } else {
+        //user disagreed so go back
+        $ionicHistory.goBack();
       }
+
     }
 
 
@@ -404,7 +473,13 @@ Controller that manages the parking meters: compass, visualization on map
     $scope.$on("$destroy", function (event) {
       mapService.stopPosTimer('modalMapParkingMeters');
       GeoLocate.closeCompassMonitor();
-    })
+    });
+
+    window.addEventListener("orientationchange", function () {
+      console.log(screen.orientation);
+      //modify the rotation of the compass with screen.orientation
+      $scope.initParkingMeters();
+    });
     var showPopupParkingMeters = function (p, index) {
       $scope.popupParkingMeter = p;
       $scope.selected = p;
@@ -491,12 +566,13 @@ Controller that manages the parking meters: compass, visualization on map
 
     function drawArrow(r) {
       var div = document.getElementById('arrow');
-      div.style.webkitTransform = 'rotate(' + r + 'deg)';
-      div.style.mozTransform = 'rotate(' + r + 'deg)';
-      div.style.msTransform = 'rotate(' + r + 'deg)';
-      div.style.oTransform = 'rotate(' + r + 'deg)';
-      div.style.transform = 'rotate(' + r + 'deg)';
-
+      if (div) {
+        div.style.webkitTransform = 'rotate(' + (r - screen.orientation.angle) + 'deg)';
+        div.style.mozTransform = 'rotate(' + (r - screen.orientation.angle) + 'deg)';
+        div.style.msTransform = 'rotate(' + (r - screen.orientation.angle) + 'deg)';
+        div.style.oTransform = 'rotate(' + (r - screen.orientation.angle) + 'deg)';
+        div.style.transform = 'rotate(' + (r - screen.orientation.angle) + 'deg)';
+      }
     }
 
 
