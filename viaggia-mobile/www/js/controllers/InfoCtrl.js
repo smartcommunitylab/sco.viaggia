@@ -588,14 +588,15 @@ Controller that manages the parking meters: compass, visualization on map
     }
 
     function drawDistance(distance) {
-      var c = document.getElementById("distance");
-      var center = document.getElementById('distance').width / 2;
-      var ctx = c.getContext("2d");
-      ctx.clearRect(0, 0, 120, 120);
-      ctx.font = "20px Arial";
-      ctx.textAlign = "center";
-      ctx.fillText(Math.round(distance * 1000) + ' m', center, 20);
-      ctx.stroke();
+      //      var c = document.getElementById("distance");
+      //      var center = document.getElementById('distance').width / 2;
+      //      var ctx = c.getContext("2d");
+      //      ctx.clearRect(0, 0, 120, 120);
+      //      ctx.font = "20px Arial";
+      //      ctx.textAlign = "center";
+      //      ctx.fillText(Math.round(distance * 1000) + ' m', center, 20);
+      //      ctx.stroke();
+      $scope.distanceFromParkingMeter = Math.round(distance * 1000) + ' m';
     }
 
     $scope.getPrice = function (price) {

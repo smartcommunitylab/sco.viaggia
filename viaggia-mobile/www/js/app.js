@@ -566,7 +566,8 @@ angular.module('viaggia', [
       lbl_no_gps_content: 'Per utilizzare al meglio questa funzionalità si consiglia di impostare sul dispositivo il rilevamento della posizione sulla modalità di precisione più elevata.',
       btn_drive_me: 'Portami là',
       lbl_calibration: 'Calibrazione bussola',
-      lbl_calibration_content: 'Muovi il dispositivo formando un 8 partendo dal punto centrale verso destra, come mostra la figura, finché la bussola non è calibrata. Dovrebbe essere sufficiente eseguire l\'operazione un paio di volte.'
+      lbl_calibration_content: 'Muovi il dispositivo formando un 8 partendo dal punto centrale verso destra, come mostra la figura, finché la bussola non è calibrata. Dovrebbe essere sufficiente eseguire l\'operazione un paio di volte.',
+      lbl_distance: 'Distanza:'
     });
 
 
@@ -762,7 +763,9 @@ angular.module('viaggia', [
       lbl_no_gps_content: 'To take full advantage of this feature, please enable the highest precision mode for location detection on your device.',
       btn_drive_me: 'Take me there',
       lbl_calibration: 'Calibrazione bussola',
-      lbl_calibration_content: 'Muovi il dispositivo formando un 8 partendo dal punto centrale verso destra, come mostra la figura, finché la bussola non è calibrata. Dovrebbe essere sufficiente eseguire l\'operazione un paio di volte.'
+      lbl_calibration_content: 'Muovi il dispositivo formando un 8 partendo dal punto centrale verso destra, come mostra la figura, finché la bussola non è calibrata. Dovrebbe essere sufficiente eseguire l\'operazione un paio di volte.',
+      lbl_distance: 'Distance:'
+
 
     });
 
