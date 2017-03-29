@@ -762,8 +762,8 @@ angular.module('viaggia', [
       lbl_no_gps_title: 'Attenzione',
       lbl_no_gps_content: 'To take full advantage of this feature, please enable the highest precision mode for location detection on your device.',
       btn_drive_me: 'Take me there',
-      lbl_calibration: 'Calibrazione bussola',
-      lbl_calibration_content: 'Muovi il dispositivo formando un 8 partendo dal punto centrale verso destra, come mostra la figura, finché la bussola non è calibrata. Dovrebbe essere sufficiente eseguire l\'operazione un paio di volte.',
+      lbl_calibration: 'Compass Calibration',
+      lbl_calibration_content: 'Move the device drawing an “8” rightwards starting from a middle point, as shown in the picture, until the compass is calibrated. After a couple of iteration of this movement the calibration should be completed.',
       lbl_distance: 'Distance:'
 
 

@@ -215,7 +215,7 @@ Controller that manages the parking meters: compass, visualization on map
 
 .controller('ParkingMetersCtrl', function ($scope, $rootScope, $state, $ionicHistory, $q, Config, $ionicModal, $ionicPopup, $filter, $cordovaDeviceOrientation, mapService, parkingService, GeoLocate) {
 
-  $scope.isAndroid=ionic.Platform.isAndroid();
+    $scope.isAndroid = ionic.Platform.isAndroid();
     if (!firstTimeParkingMeterView()) {
       $ionicPopup.show({
         templateUrl: 'templates/firstTimeParkingMeterPopup.html',
@@ -404,7 +404,7 @@ Controller that manages the parking meters: compass, visualization on map
     }; // Update every 0.5 seconds
 
     $scope.initParkingMeters = function () {
-            $scope.windowOrientation=window.orientation;
+      $scope.windowOrientation = window.orientation;
 
       //locate user
       Config.loading();
@@ -415,22 +415,24 @@ Controller that manages the parking meters: compass, visualization on map
           var markers = [];
           var boundsArray = [];
           for (var i = 0; i < parkingMetersZones.length; i++) {
-            for (var k = 0; k < parkingMetersZones[i].parkingMeters.length; k++) {
-              var parkingMeter = parkingMetersZones[i].parkingMeters[k];
-              parkingMeter.validityPeriod = parkingMetersZones[i].validityPeriod;
-              markers.push({
-                parking: parkingMeter,
-                index: k + i,
-                lat: parseFloat(parkingMetersZones[i].parkingMeters[k].lat),
-                lng: parseFloat(parkingMetersZones[i].parkingMeters[k].lng),
-                icon: {
-                  iconUrl: 'img/ic_parcometro.png',
-                  iconSize: [36, 50],
-                  iconAnchor: [18, 50],
-                  popupAnchor: [-0, -50]
-                },
-              });
-              boundsArray.push([parkingMetersZones[i].parkingMeters[k].lat, parkingMetersZones[i].parkingMeters[k].lng]);
+            if (parkingMetersZones[i].parkingMeters) {
+              for (var k = 0; k < parkingMetersZones[i].parkingMeters.length; k++) {
+                var parkingMeter = parkingMetersZones[i].parkingMeters[k];
+                parkingMeter.validityPeriod = parkingMetersZones[i].validityPeriod;
+                markers.push({
+                  parking: parkingMeter,
+                  index: k + i,
+                  lat: parseFloat(parkingMetersZones[i].parkingMeters[k].lat),
+                  lng: parseFloat(parkingMetersZones[i].parkingMeters[k].lng),
+                  icon: {
+                    iconUrl: 'img/ic_parcometro.png',
+                    iconSize: [36, 50],
+                    iconAnchor: [18, 50],
+                    popupAnchor: [-0, -50]
+                  },
+                });
+                boundsArray.push([parkingMetersZones[i].parkingMeters[k].lat, parkingMetersZones[i].parkingMeters[k].lng]);
+              }
             }
           }
 
@@ -481,7 +483,7 @@ Controller that manages the parking meters: compass, visualization on map
     window.addEventListener("orientationchange", function () {
       console.log(screen.orientation);
       console.log(window.orientation);
-      $scope.windowOrientation=window.orientation;
+      $scope.windowOrientation = window.orientation;
       //modify the rotation of the compass with screen.orientation
       $scope.initParkingMeters();
     });
