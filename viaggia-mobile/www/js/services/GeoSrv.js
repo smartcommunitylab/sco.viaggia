@@ -32,7 +32,7 @@ angular.module('viaggia.services.geo', [])
               localization.reject('cannot geolocate (web)');
             }, {
               //frequency: (20 * 60 * 1000), //20 mins
-              maximumAge: (10 * 60 * 1000), //10 mins
+              maximumAge: (1 * 60 * 1000), //5 mins
               timeout: 10 * 1000, //1 minute
               enableHighAccuracy: (device.version.indexOf('2.') == 0) // true for Android 2.x
             });
@@ -49,7 +49,7 @@ angular.module('viaggia.services.geo', [])
             console.log('cannot geolocate (web)');
             localization.reject('cannot geolocate (web)');
           }, {
-            maximumAge: (10 * 60 * 1000), //5 mins
+            maximumAge: (1 * 60 * 1000), //5 mins
             timeout: 10 * 1000, //1 minute
             enableHighAccuracy: false
           });
@@ -144,16 +144,11 @@ angular.module('viaggia.services.geo', [])
         //          frequency: 500
         //        }; // Update every 3 seconds
 
-        var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+        compassWatch = navigator.compass.watchHeading(onSuccess, onError, options);
 
       },
       closeCompassMonitor: function () {
-        $cordovaDeviceOrientation.clearWatch(watch)
-          .then(function (result) {
-            console.log("compass clear");
-          }, function (err) {
-            // An error occurred
-          });
+        $cordovaDeviceOrientation.clearWatch(compassWatch);
       }
 
 

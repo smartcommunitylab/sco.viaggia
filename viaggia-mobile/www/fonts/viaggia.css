@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'viaggia';
-  src:  url('viaggia.eot?1vzk5k');
-  src:  url('viaggia.eot?1vzk5k#iefix') format('embedded-opentype'),
-    url('viaggia.ttf?1vzk5k') format('truetype'),
-    url('viaggia.woff?1vzk5k') format('woff'),
-    url('viaggia.svg?1vzk5k#viaggia') format('svg');
+  src:  url('viaggia.eot?hxzrar');
+  src:  url('viaggia.eot?hxzrar#iefix') format('embedded-opentype'),
+    url('viaggia.ttf?hxzrar') format('truetype'),
+    url('viaggia.woff?hxzrar') format('woff'),
+    url('viaggia.svg?hxzrar#viaggia') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ic_parcometro:before {
+  content: "\e945";
+}
 .ic_m_parcometro:before {
   content: "\e944";
 }

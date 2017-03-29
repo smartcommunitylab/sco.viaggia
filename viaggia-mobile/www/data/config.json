@@ -2,7 +2,6 @@
   "apptoken": "viaggiatrento",
   "appid": "trento",
   "messagingAppId": "mobility.trento",
-  "senderID": "453601816446",
   "appversion": "2.3.1",
   "appname": "Viaggia Trento",
   "serverURL": "https://dev.smartcommunitylab.it/core.mobility",
@@ -46,12 +45,7 @@
         "icon": "ic_search",
         "color": "#3BBACF"
             },
-      {
-        "state": "/app/taxi",
-        "label": "menu_taxi",
-        "icon": "ic_taxi",
-        "color": "#f8cf20"
-            },
+
       {
         "state": "/app/ttlist/urbano",
         "label": "menu_real_time_bus_urban",
@@ -71,10 +65,21 @@
         "color": "#164286"
             },
       {
+        "state": "/app/parkingMeters",
+        "label": "menu_parking_meters",
+        "icon": "ic_parcometro",
+        "color": "#FBA724"
+            },
+      {
         "state": "/app/bikesharing/trento",
         "label": "menu_real_time_bike",
         "icon": "ic_bike",
         "color": "#922d66"
+            }, {
+        "state": "/app/taxi",
+        "label": "menu_taxi",
+        "icon": "ic_taxi",
+        "color": "#f8cf20"
             }
 
       ],

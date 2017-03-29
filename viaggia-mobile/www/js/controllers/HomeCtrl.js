@@ -6,6 +6,7 @@ angular.module('viaggia.controllers.home', [])
     document.addEventListener("resume", function () {
       notificationInit();
     }, false);
+
   });
 
   //update notifications
