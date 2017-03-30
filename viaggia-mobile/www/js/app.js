@@ -758,12 +758,12 @@ angular.module('viaggia', [
       lbl_first_time_parking_meter_title: 'Warning',
       lbl_first_time_parking_meter_gps: 'In order to use your position allow the device to activate the geolocation.',
       lbl_first_time_parking_meter_compass: 'The accuracy of the directions for reaching the nearest parking meter depends also on the calibration of the compass on your device. (To find out how to improve it, please see your device\'s instructions).',
-      btn_undertood: 'I get it',
+      btn_undertood: 'I got it',
       lbl_no_gps_title: 'Attenzione',
       lbl_no_gps_content: 'To take full advantage of this feature, please enable the highest precision mode for location detection on your device.',
       btn_drive_me: 'Take me there',
       lbl_calibration: 'Compass Calibration',
-      lbl_calibration_content: 'Move the device drawing an “8” rightwards starting from a middle point, as shown in the picture, until the compass is calibrated. After a couple of iteration of this movement the calibration should be completed.',
+      lbl_calibration_content: 'Drawing an “8” moving the device rightwards from a central point, as shown in the picture, until the compass is calibrated. After a couple of iteration of this movement the calibration should be completed.',
       lbl_distance: 'Distance:'
 
 
