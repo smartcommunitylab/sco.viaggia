@@ -31,8 +31,6 @@
     "cordova-plugin-whitelist",
     "cordova-plugin-screen-orientation",
     "phonegap-plugin-push@1.7.4",
-    "cordova-plugin-device-orientation",
-<<<<<<< HEAD
     {
       "variables": {
         "SENDER_ID": "453601816446",
@@ -42,11 +40,7 @@
       "id": "phonegap-plugin-push"
     },
     "cordova-plugin-device-orientation",
-    "cordova-plugin-console"
-=======
-    "cordova-plugin-device-orientation",
     "cordova-plugin-request-location-accuracy"
->>>>>>> origin/23-02-2017_parking_meters
   ],
   "cordovaPlatforms": [
     "ios",
