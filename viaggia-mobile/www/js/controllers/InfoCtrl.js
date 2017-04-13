@@ -389,8 +389,8 @@ Controller that manages the parking meters: compass, visualization on map
     }
     //    $scope.parkingMeter = function () {
     function onSuccess(heading) {
-      console.log('Heading: ' + heading.magneticHeading);
-      console.log('My position ' + Config.getMapPosition());
+      //console.log('Heading: ' + heading.magneticHeading);
+      //console.log('My position ' + Config.getMapPosition());
       drawArrow(getDirection(heading.magneticHeading));
       drawDistance(GeoLocate.distance($rootScope.myPosition, [$scope.selectedParkingMeters.lat, $scope.selectedParkingMeters.lng]));
     };

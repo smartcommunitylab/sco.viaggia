@@ -96,7 +96,7 @@ angular.module('viaggia.services.map', [])
                 // timer = false;
                 var updatePosTimer = $interval(function () {
                   GeoLocate.locate().then(function (e) {
-                    console.log('change user position');
+                    //console.log('change user position');
                     cachedMap[mapId].myPos.setLatLng([e[0], e[1]]).update();
                   })
                 }, 3000);
