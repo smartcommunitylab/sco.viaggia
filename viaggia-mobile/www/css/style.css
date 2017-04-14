@@ -596,12 +596,12 @@
 }
 
 .parking-meter-popup .fromtotime {
-  max-width: 40%;
+/*  max-width: 40%;*/
   display: inline-block
 }
 
 .parking-meter-popup .fromtodays {
-  max-width: 60%;
+/*  max-width: 60%;*/
   display: inline-block
 }
 

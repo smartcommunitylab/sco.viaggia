@@ -30,7 +30,7 @@
     "https://github.com/samikrc/CordovaSQLite.git",
     "cordova-plugin-whitelist",
     "cordova-plugin-screen-orientation",
-    "phonegap-plugin-push@1.7.4",
+    "phonegap-plugin-push@1.8.4",
     {
       "variables": {
         "SENDER_ID": "453601816446",
