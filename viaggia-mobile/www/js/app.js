@@ -125,7 +125,9 @@ angular.module('viaggia', [
           DataManager.syncStopData();
         }
       });
-
+      if (window.ga) {
+        window.ga.startTrackerWithId('UA-93674885-1', 30);
+      }
       if (typeof navigator.globalization !== "undefined") {
         navigator.globalization.getPreferredLanguage(function (language) {
           $translate.use((language.value).split("-")[0]).then(function (data) {
@@ -319,6 +321,16 @@ angular.module('viaggia', [
           }
         }
       })
+      .state('app.parkingMeters', {
+        url: "/parkingMeters",
+        cache: false,
+        views: {
+          'menuContent': {
+            templateUrl: "templates/mapParkingMeters.html",
+            controller: 'ParkingMetersCtrl'
+          }
+        }
+      })
       .state('app.parkingstation', {
         url: "/parking/:agencyId/:id",
         views: {
@@ -382,6 +394,7 @@ angular.module('viaggia', [
       menu_credits: "Credits",
       menu_login: "Login",
       menu_logout: "Logout",
+      menu_parking_meters: "Parcometri",
       plan_from: 'Da',
       plan_to: 'A',
       plan_day: 'Giorno',
@@ -430,6 +443,13 @@ angular.module('viaggia', [
       popup_datepicker_fri: 'V',
       popup_datepicker_sat: 'S',
       popup_datepicker_sun: 'D',
+      weekdays_MO_period: 'LU',
+      weekdays_TU_period: 'MA',
+      weekdays_WE_period: 'ME',
+      weekdays_TH_period: 'GI',
+      weekdays_FR_period: 'VE',
+      weekdays_SA_period: 'SA',
+      weekdays_SU_period: 'DO',
       journey_details_sustainable: 'Itinerario sostenibile ',
       journey_details_modify: 'Modifica',
       journey_details_delete: 'Elimina',
@@ -533,7 +553,21 @@ angular.module('viaggia', [
       taxi_label_no_accuracy: 'Non è stato possibile determinare la tua posizione con sufficiente accuratezza per permetterti di comunicarla al tassista. Prova ad accendere un sistema di localizzazione sul tuo dispositivo (GPS, WiFi, ...).',
       error_select_type_accessibility_feedback: 'Per visualizzare un percorso accessibile è necessario selezionare i mezzi pubblici o a piedi',
       not_acc_label: 'Questa linea non è accessibile',
-      alert_delay: 'Ritardo di {{mins}} minuti'
+      alert_delay: 'Ritardo di {{mins}} minuti',
+      lbl_parking_meter: 'Parchimetro',
+      lbl_parking_meter_price: 'Tariffa oraria:',
+      lbl_parking_meter_orario: 'Orario:',
+      lbl_parking_meter_giorni: 'Giorni:',
+      lbl_first_time_parking_meter_title: 'Attenzione',
+      lbl_first_time_parking_meter_gps: 'Per utilizzare al meglio questa funzionalità si consiglia di impostare sul dispositivo il rilevamento della posizione sulla modalità di precisione più elevata.',
+      lbl_first_time_parking_meter_compass: 'L’accuratezza della direzione indicata dalla app per raggiungere il parcometro più vicino dipende anche dall’esatta calibrazione della bussola del tuo dispositivo. (Per sapere come migliorarla, consulta le istruzioni del tuo dispositivo)',
+      btn_undertood: 'Ho capito',
+      lbl_no_gps_title: 'Attenzione',
+      lbl_no_gps_content: 'Per utilizzare al meglio questa funzionalità si consiglia di impostare sul dispositivo il rilevamento della posizione sulla modalità di precisione più elevata.',
+      btn_drive_me: 'Portami là',
+      lbl_calibration: 'Calibrazione bussola',
+      lbl_calibration_content: 'Muovi il dispositivo formando un 8 partendo dal punto centrale verso destra, come mostra la figura, finché la bussola non è calibrata. Dovrebbe essere sufficiente eseguire l\'operazione un paio di volte.',
+      lbl_distance: 'Distanza:'
     });
 
 
@@ -557,6 +591,7 @@ angular.module('viaggia', [
       menu_credits: "Credits",
       menu_login: "Login",
       menu_logout: "Logout",
+      menu_parking_meters: "Parking meters",
       plan_from: 'From',
       plan_to: 'To',
       plan_day: 'Day',
@@ -605,6 +640,13 @@ angular.module('viaggia', [
       popup_datepicker_fri: 'F',
       popup_datepicker_sat: 'S',
       popup_datepicker_sun: 'S',
+      weekdays_MO_period: 'MO',
+      weekdays_TU_period: 'TU',
+      weekdays_WE_period: 'WE',
+      weekdays_TH_period: 'TH',
+      weekdays_FR_period: 'FR',
+      weekdays_SA_period: 'SA',
+      weekdays_SU_period: 'SU',
       journey_details_sustainable: 'Sustainable journey ',
       journey_details_modify: 'Modify',
       journey_details_delete: 'Delete',
@@ -708,7 +750,23 @@ angular.module('viaggia', [
       taxi_label_no_accuracy: 'It has not been possible to determine with sufficient accuracy your position to let you communicate it to the taxi driver. Try to switch on a tracking system on your device (GPS, WiFi, ...)',
       error_select_type_accessibility_feedback: 'In order to get an accessible route, you must select public transport or foot',
       not_acc_label: 'This line is not accessible',
-      alert_delay: 'Delay of {{mins}} minutes'
+      alert_delay: 'Delay of {{mins}} minutes',
+      lbl_parking_meter: 'Parking Meter',
+      lbl_parking_meter_price: 'Price:',
+      lbl_parking_meter_orario: 'Time:',
+      lbl_parking_meter_giorni: 'Days:',
+      lbl_first_time_parking_meter_title: 'Warning',
+      lbl_first_time_parking_meter_gps: 'In order to use your position allow the device to activate the geolocation.',
+      lbl_first_time_parking_meter_compass: 'The accuracy of the directions for reaching the nearest parking meter depends also on the calibration of the compass on your device. (To find out how to improve it, please see your device\'s instructions).',
+      btn_undertood: 'I got it',
+      lbl_no_gps_title: 'Attenzione',
+      lbl_no_gps_content: 'To take full advantage of this feature, please enable the highest precision mode for location detection on your device.',
+      btn_drive_me: 'Take me there',
+      lbl_calibration: 'Compass Calibration',
+      lbl_calibration_content: 'Drawing an “8” moving the device rightwards from a central point, as shown in the picture, until the compass is calibrated. After a couple of iteration of this movement the calibration should be completed.',
+      lbl_distance: 'Distance:'
+
+
     });
 
 

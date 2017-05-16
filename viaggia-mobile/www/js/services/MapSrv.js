@@ -2,9 +2,10 @@ angular.module('viaggia.services.map', [])
   /*
   Services that manages informations, markers and popup on map
   */
-  .factory('mapService', function ($q, $http, $ionicPlatform, $filter, $timeout, Config, planService, leafletData, GeoLocate) {
+  .factory('mapService', function ($q, $http, $ionicPlatform, $filter, $interval, $timeout, Config, planService, leafletData, GeoLocate) {
     var cachedMap = {};
-
+    //var timer = true;
+    //var updatePosTimer = null;
     var getColorByType = function (transport) {
       return Config.getColorType(transport.type, transport.agencyId).color;
     }
@@ -89,6 +90,19 @@ angular.module('viaggia.services.map', [])
             GeoLocate.locate().then(function (e) {
               var myPos = L.marker(L.latLng(e[0], e[1])).addTo(map);
               cachedMap[mapId].myPos = myPos;
+              //update my position every 3 second
+
+              if (!cachedMap[mapId].updatePosTimer) {
+                // timer = false;
+                var updatePosTimer = $interval(function () {
+                  GeoLocate.locate().then(function (e) {
+                    //console.log('change user position');
+                    cachedMap[mapId].myPos.setLatLng([e[0], e[1]]).update();
+                  })
+                }, 3000);
+                cachedMap[mapId].updatePosTimer = updatePosTimer;
+                //timer = true;
+              }
             });
           });
           deferred.resolve(map);
@@ -100,6 +114,12 @@ angular.module('viaggia.services.map', [])
       return deferred.promise;
     }
 
+
+    //stop the timer for localizate user associated to the map
+    mapService.stopPosTimer = function (mapId) {
+      $interval.cancel(cachedMap[mapId].updatePosTimer);
+      delete cachedMap[mapId].updatePosTimer;
+    }
 
     //set the pop-up mesage related to my position's marker
     mapService.setMyLocationMessage = function (mapId, message) {

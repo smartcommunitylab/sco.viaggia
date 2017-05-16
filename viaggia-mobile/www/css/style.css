@@ -1,1351 +1,1550 @@
 /* this is just an example - don't use !important */
 
 @font-face {
-    font-family: RobotoMono;
-    src: url(../fonts/Roboto_Mono/RobotoMono-Regular.ttf);
+  font-family: RobotoMono;
+  src: url(../fonts/Roboto_Mono/RobotoMono-Regular.ttf);
 }
 
 @font-face {
-    font-family: 'RobotoDraft';
-    font-style: normal;
-    font-weight: 400;
-    src: local('RobotoDraft'), local('RobotoDraft-Regular'), url(../fonts/RobotoDraft.woff) format('woff');
+  font-family: 'RobotoDraft';
+  font-style: normal;
+  font-weight: 400;
+  src: local('RobotoDraft'), local('RobotoDraft-Regular'), url(../fonts/RobotoDraft.woff) format('woff');
 }
 
 @font-face {
-    font-family: 'RobotoDraft';
-    font-style: normal;
-    font-weight: 500;
-    src: local('RobotoDraft Medium'), local('RobotoDraft-Medium'), url(../fonts/RobotoDraft-Medium.woff) format('woff');
+  font-family: 'RobotoDraft';
+  font-style: normal;
+  font-weight: 500;
+  src: local('RobotoDraft Medium'), local('RobotoDraft-Medium'), url(../fonts/RobotoDraft-Medium.woff) format('woff');
 }
 
 @font-face {
-    font-family: 'RobotoDraft';
-    font-style: normal;
-    font-weight: 700;
-    src: local('RobotoDraft Bold'), local('RobotoDraft-Bold'), url(../fonts/RobotoDraft-Bold.woff) format('woff');
+  font-family: 'RobotoDraft';
+  font-style: normal;
+  font-weight: 700;
+  src: local('RobotoDraft Bold'), local('RobotoDraft-Bold'), url(../fonts/RobotoDraft-Bold.woff) format('woff');
 }
 
 @font-face {
-    font-family: 'RobotoDraft';
-    font-style: italic;
-    font-weight: 400;
-    src: local('RobotoDraft Italic'), local('RobotoDraft-Italic'), url(../fonts/RobotoDraft-Italic.woff) format('woff');
+  font-family: 'RobotoDraft';
+  font-style: italic;
+  font-weight: 400;
+  src: local('RobotoDraft Italic'), local('RobotoDraft-Italic'), url(../fonts/RobotoDraft-Italic.woff) format('woff');
 }
 
 .mfb-component__button--main i,
 .mfb-component__button--child i {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 .mfb-component__button--main [class^="ic_"],
 .mfb-component__button--main [class*=" ic_"],
 .mfb-component__button--child [class^="ic_"],
 .mfb-component__button--child [class*=" ic_"] {
-    line-height: 56px !important;
+  line-height: 56px !important;
 }
 
 
 /*.platform-ios.platform-cordova:not(.fullscreen) */
 
 .fs-header {
-    display: block;
-    height: 20px;
-    background-color: #2975a7 !important;
-    margin-top: -1px;
+  display: block;
+  height: 20px;
+  background-color: #2975a7 !important;
+  margin-top: -1px;
 }
 
 .item-header {
-    font-size: 12px !important;
-    font-weight: bold;
+  font-size: 12px !important;
+  font-weight: bold;
 }
 
 .item-footer {
-    font-size: 12px !important;
-    font-weight: bold;
-    /* the workaround below "fixes" the scrolling */
-    margin-bottom: 28px !important;
+  font-size: 12px !important;
+  font-weight: bold;
+  /* the workaround below "fixes" the scrolling */
+  margin-bottom: 28px !important;
 }
 
 .col-table {
-    text-align: center;
-    /*    padding: 3px 5px 3px 5px !important;*/
-    padding: 0px!important;
-    background-color: #e0f2be;
+  text-align: center;
+  /*    padding: 3px 5px 3px 5px !important;*/
+  padding: 0px!important;
+  background-color: #e0f2be;
 }
 
 .col-fill {
-    padding-top: 0px;
-    padding-bottom: 2px;
-    background-color: white;
+  padding-top: 0px;
+  padding-bottom: 2px;
+  background-color: white;
 }
 
 .col-stop {
-    text-align: center;
-    padding: 0px!important;
-    background-color: beige;
+  text-align: center;
+  padding: 0px!important;
+  background-color: beige;
 }
 
 .stop-row {
-    padding: 0!important;
+  padding: 0!important;
 }
 
 .col-sep {
-    border-left: 1px solid lightgray;
+  border-left: 1px solid lightgray;
 }
 
 .col-head {
-    padding-top: 0px;
-    padding-bottom: 6px;
-    text-align: center;
-    background-color: crimson;
+  padding-top: 0px;
+  padding-bottom: 6px;
+  text-align: center;
+  background-color: crimson;
 }
 
 .min-75 {
-    min-width: 75px;
+  min-width: 75px;
 }
 
 .min-90 {
-    min-width: 90px;
+  min-width: 90px;
 }
 
 .min-50 {
-    min-width: 50px;
+  min-width: 50px;
 }
 
 .min-180 {
-    min-width: 180px;
+  min-width: 180px;
 }
 
 .min-705 {
-    min-width: 705px;
+  min-width: 705px;
 }
 
 .row-item {
-    padding: 0px !important;
-    margin-left: 0 !important;
-    font-size: 12px !important;
+  padding: 0px !important;
+  margin-left: 0 !important;
+  font-size: 12px !important;
 }
 
 .row.header td {
-    width: 80px;
+  width: 80px;
 }
 
 
 /*menu group*/
 
 .list .item.item-accordion {
-    line-height: 38px;
-    padding-top: 0;
-    padding-bottom: 0;
-    transition: 0.09s all linear;
+  line-height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.09s all linear;
 }
 
 .item-accordion item-content {
-    background-color: lightgrey;
+  background-color: lightgrey;
 }
 
 .list .item.item-accordion.ng-hide {
-    line-height: 0px;
+  line-height: 0px;
 }
 
 .list .item.item-accordion.ng-hide-add,
 .list .item.item-accordion.ng-hide-remove {
-    display: block !important;
+  display: block !important;
 }
 
 .no-padding {
-    padding: 0px!important;
+  padding: 0px!important;
 }
 
 .padding-8 {
-    padding: 8px;
+  padding: 8px;
 }
 
 .margin-8 {
-    margin: 8px;
+  margin: 8px;
 }
 
 .margin-left-16 {
-    margin-left: 16px;
+  margin-left: 16px;
 }
 
 .margin-right-16 {
-    margin-right: 16px;
+  margin-right: 16px;
 }
 
 .input-plan-fromto {
-    padding: 8px;
-    margin: 8px;
+  padding: 8px;
+  margin: 8px;
 }
 
 .plan-buttons-right {
-    line-height: 104px;
-    min-width: 130px;
+  line-height: 104px;
+  min-width: 130px;
 }
 
 .plan-buttons-right a {
-    min-width: 65px;
-    margin: auto;
-    vertical-align: middle;
+  min-width: 65px;
+  margin: auto;
+  vertical-align: middle;
 }
 
 .button-viaggia-header {
-    background-color: #3bbacf;
-    color: white;
+  background-color: #3bbacf;
+  color: white;
 }
 
 .button-viaggia-header.activated {
-    background-color: #3bbacf !important;
+  background-color: #3bbacf !important;
 }
 
 .button-viaggia-header:hover {
-    background-color: #3bbacf;
-    color: white;
+  background-color: #3bbacf;
+  color: white;
 }
 
 .button-viaggia {
-    background-color: #3bbacf;
-    color: white;
+  background-color: #3bbacf;
+  color: white;
 }
 
 .button-viaggia:hover {
-    background-color: #3bbacf;
-    color: white;
+  background-color: #3bbacf;
+  color: white;
 }
 
 .button-viaggia-selected {
-    background-color: #3bbacf;
-    color: white;
-    box-shadow: none;
+  background-color: #3bbacf;
+  color: white;
+  box-shadow: none;
 }
 
 .button-viaggia-selected:hover {
-    background-color: #3bbacf;
-    color: white;
+  background-color: #3bbacf;
+  color: white;
 }
 
 .button-viaggia-notselected {
-    background-color: rgba(60, 186, 207, 0.5);
-    color: white;
+  background-color: rgba(60, 186, 207, 0.5);
+  color: white;
 }
 
 .button-viaggia-notselected:hover {
-    background-color: rgba(60, 186, 207, 0.5);
-    color: white;
+  background-color: rgba(60, 186, 207, 0.5);
+  color: white;
 }
 
 .button-plan-fromto {
-    width: 40px;
-    height: 40px
+  width: 40px;
+  height: 40px
 }
 
 .button-plan-type {
-    width: 70px;
-    height: 70px;
-    margin: 8px;
-    padding: 0px;
+  width: 70px;
+  height: 70px;
+  margin: 8px;
+  padding: 0px;
 }
 
 .button-plan-type:before {
-    font-size: 50px !important;
+  font-size: 50px !important;
 }
 
 .plan-preference-toggler {
-    border: 0;
+  border: 0;
 }
 
 .space-from-top {
-    padding-top: 40px!important;
+  padding-top: 40px!important;
 }
 
 .plan-item-time {
-    border-width: 0px !important;
+  border-width: 0px !important;
 }
 
 .button-plan-pressed {
-    background-color: green;
+  background-color: green;
 }
 
 .button-popup {
-    padding: 2px;
+  padding: 2px;
 }
 
 .text-right {
-    text-align: right;
+  text-align: right;
 }
 
 .line-background {
-    background-image: url("../img/ic_point_line.png")
+  background-image: url("../img/ic_point_line.png")
 }
 
 .tt-day {
-    font-size: 20px;
-    line-height: 40px;
-    text-align: center;
-    padding: 0;
-    text-transform: uppercase;
-    white-space: nowrap;
+  font-size: 20px;
+  line-height: 40px;
+  text-align: center;
+  padding: 0;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .tt-day.btn {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 .tt-day.btn a:active,
 .tt-day.btn a:hover,
 .tt-day.btn a:focus,
 .tt-day.btn a.activated {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
 .leaflet-container {
-    height: 100% !important;
+  height: 100% !important;
 }
 
 #modal-map-container {
-    height: 100%!important;
+  height: 100%!important;
 }
 
 .route-list .list {
-    padding-top: 20px;
+  padding-top: 20px;
 }
 
 .route-list .list ion-item {
-    padding-top: 0px;
-    padding-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 .route-list .list ion-item .button {
-    text-align: left;
+  text-align: left;
 }
 
 .route-grid-row {
-    margin-top: 8px !important;
-    margin-bottom: 8px !important;
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
 }
 
 .route-grid-element {
-    width: 60px;
-    height: 60px;
-    margin: auto;
-    border: 2px solid transparent;
-    border-radius: 50%;
-    text-align: center;
-    color: #fff;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  width: 60px;
+  height: 60px;
+  margin: auto;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  text-align: center;
+  color: #fff;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
 .route-grid-element span {
-    text-align: center;
-    font-size: 24px;
-    line-height: 56px;
-    font-weight: bold;
+  text-align: center;
+  font-size: 24px;
+  line-height: 56px;
+  font-weight: bold;
 }
 
 .ic-text {
-    font-family: 'viaggia';
+  font-family: 'viaggia';
 }
 
 .menu-rt:not(.item-accordion) {
-    text-transform: uppercase;
+  text-transform: uppercase;
 }
 
 .menu-rt,
 .menu-main,
 .menu-last {
-    color: #fff !important;
+  color: #fff !important;
 }
 
 .menu-main {
-    padding-top: 16px !important;
-    padding-bottom: 16px !important;
+  padding-top: 16px !important;
+  padding-bottom: 16px !important;
 }
 
 .menu-main .item-content {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .menu-rt {
-    background-color: #3bbacf !important;
+  background-color: #3bbacf !important;
 }
 
 .menu-main {
-    background-color: #2975a7 !important;
+  background-color: #2975a7 !important;
 }
 
 .menu-last {
-    background-color: #2975a7 !important;
+  background-color: #2975a7 !important;
 }
 
 .menu-rt.item-icon-left .icon,
 .menu-rt.item-icon-right .icon,
 .menu-main.item-icon-left .icon,
 .menu-last.item-icon-left .icon {
-    font-size: 22px;
+  font-size: 22px;
 }
 
 .menu-rt .item-content,
 .menu-main .item-content,
 .menu-last .item-content {
-    padding-left: 59px !important;
-    line-height: 22px;
-    /*
+  padding-left: 59px !important;
+  line-height: 22px;
+  /*
     padding-top: 8px;
     padding-bottom: 8px;
 */
 }
 
 .menu-left {
-    background-color: #2975a7;
+  background-color: #2975a7;
 }
 
 .bar-positive-100 {
-    background-color: #2975a7 !important;
+  background-color: #2975a7 !important;
 }
 
 .placeautocomplete ul {
-    position: absolute;
-    background-color: rgba(255, 255, 255, .95);
-    border: 1px solid #ddd;
-    z-index: 99;
+  position: absolute;
+  background-color: rgba(255, 255, 255, .95);
+  border: 1px solid #ddd;
+  z-index: 99;
 }
 
 .placeautocomplete ul li {
-    padding: 5px;
+  padding: 5px;
 }
 
 .placeautocomplete ul li .highlight {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .card-tt {
-    padding: 16px 8px;
-    white-space: normal;
-    text-transform: uppercase;
+  padding: 16px 8px;
+  white-space: normal;
+  text-transform: uppercase;
 }
 
 .parking-card .row,
 .parking-card .col {
-    /*    padding: 0px;
+  /*    padding: 0px;
     */
 }
 
 .parking-card.selected {
-    background-color: rgba(59, 186, 207, 0.5);
+  background-color: rgba(59, 186, 207, 0.5);
 }
 
 .parking-card .col p {
-    white-space: normal;
+  white-space: normal;
 }
 
 .parking-card-footer {
-    min-height: 40px;
-    padding-top: 10px;
+  min-height: 40px;
+  padding-top: 10px;
 }
 
 .parking-card-footer .col {
-    position: relative;
+  position: relative;
 }
 
 .parking-card-footer .col span {
-    position: absolute;
-    top: 50%;
+  position: absolute;
+  top: 50%;
 }
 
 .parking-card-footer .col-right span {
-    right: 0px;
+  right: 0px;
 }
 
 .col-right > div {
-    float: right;
+  float: right;
 }
 
 .parking-meter img {
-    box-shadow: none;
-    margin: auto;
-    width: 70px;
-    height: 30px;
+  box-shadow: none;
+  margin: auto;
+  width: 70px;
+  height: 30px;
 }
 
 .avail-green {
-    font-weight: bold;
-    color: #8cc04c;
+  font-weight: bold;
+  color: #8cc04c;
 }
 
 .avail-red {
-    font-weight: bold;
-    color: #e84539;
+  font-weight: bold;
+  color: #e84539;
 }
 
 .avail-yellow {
-    font-weight: bold;
-    color: #f39619;
+  font-weight: bold;
+  color: #f39619;
 }
 
 .parking-popup .popup {
-    width: 80%;
-    max-width: 400px;
+  width: 80%;
+  max-width: 400px;
 }
 
 .parking-popup .popup-title {
-    text-align: left;
-    text-transform: uppercase;
+  text-align: left;
+  text-transform: uppercase;
 }
 
 .parking-popup .popup-head {
-    display: none;
+  display: none;
 }
 
 .parking-popup .button-close {
-    background-color: gray!important;
+  background-color: gray!important;
 }
 
 .parking-popup .popup-buttons button:not(.button-close) {
-    background-color: #3bbacf !important;
+  background-color: #3bbacf !important;
 }
 
 .parking-popup .popup-buttons button {
-    white-space: normal;
-    padding: 0px;
-    color: #fff !important;
-    margin-right: 4px;
+  white-space: normal;
+  padding: 0px;
+  color: #fff !important;
+  margin-right: 4px;
 }
 
 .parking-popup .map-stop-title {
-    text-transform: uppercase;
-    font-size: 20px;
-    color: #2975a7;
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #2975a7;
 }
 
 .parking-popup .popup-icon {
-    font-size: 30px;
-    margin-right: 8px;
-    margin-bottom: 8px;
+  font-size: 30px;
+  margin-right: 8px;
+  margin-bottom: 8px;
 }
 
 .parking-popup .map-stop-name {
-    text-align: center;
-    font-weight: bold;
-    font-size: 18px;
-    margin-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 20px;
 }
 
 .parking-popup .map-stop-hline {
-    width: 100%;
-    height: 1px;
-    border-bottom: 3px solid #2975a7;
+  width: 100%;
+  height: 1px;
+  border-bottom: 3px solid #2975a7;
 }
 
 .parking-popup .map-stop-nocourses {
-    text-align: center;
+  text-align: center;
+}
+
+.parking-meter-popup .popup {
+  width: 80%;
+  max-width: 400px;
+  font-weight: normal;
+}
+
+.parking-meter-popup .popup-title {
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.parking-meter-popup .popup-head {
+  display: none;
+}
+
+.parking-meter-popup .button-close {
+  background-color: gray!important;
+}
+
+.parking-meter-popup .popup-buttons button:not(.button-close) {
+  background-color: #3bbacf !important;
+}
+
+.parking-meter-popup .popup-buttons button {
+  white-space: normal;
+  padding: 0px;
+  color: #fff !important;
+  margin-right: 4px;
+}
+
+.parking-meter-popup .map-stop-title {
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #2975a7;
+}
+
+.parking-meter-popup .popup-icon {
+  font-size: 30px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.parking-meter-popup .map-stop-name {
+  text-align: left;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.parking-meter-popup .map-stop-hour {
+  text-align: left;
+  font-size: 16px;
+}
+
+.parking-meter-popup .fromtotime {
+/*  max-width: 40%;*/
+  display: inline-block
+}
+
+.parking-meter-popup .fromtodays {
+/*  max-width: 60%;*/
+  display: inline-block
+}
+
+.parking-meter-popup .map-stop-detail {
+  text-align: left;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.parking-meter-popup .map-stop-hline {
+  width: 100%;
+  height: 1px;
+  border-bottom: 3px solid #2975a7;
+}
+
+.parking-meter-popup .map-stop-nocourses {
+  text-align: center;
+}
+
+.img-calibration {
+  width: 100%;
+}
+
+.first-time-parking-meters-popup .popup {
+  width: 80%;
+  max-width: 400px;
+}
+
+.first-time-parking-meters-popup .popup-title {
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.first-time-parking-meters-popup .popup-head {
+  display: none;
+}
+
+.first-time-parking-meters-popup .button-close {
+  /*  background-color: gray!important;*/
+}
+
+.first-time-parking-meters-popup .popup-buttons button:not(.button-close) {
+  background-color: #3bbacf !important;
+}
+
+.first-time-parking-meters-popup .popup-buttons button {
+  white-space: normal;
+  padding: 0px;
+  color: #fff !important;
+  margin-right: 4px;
+}
+
+.first-time-parking-meters-popup .map-stop-title {
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #2975a7;
+}
+
+.first-time-parking-meters-popup .popup-icon {
+  font-size: 30px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  color: #2975a7;
+}
+
+.first-time-parking-meters-popup .map-stop-name {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.first-time-parking-meters-popup .map-stop-hline {
+  width: 100%;
+  height: 1px;
+  border-bottom: 3px solid #2975a7;
+}
+
+.first-time-parking-meters-popup .map-stop-nocourses {
+  text-align: center;
+}
+
+.first-time-parking-meters-popup p {
+  margin-left: 10px;
+  text-align: justify;
 }
 
 .parking-card-footer .slots-text span {
-    text-align: center;
-    width: 100%;
+  text-align: center;
+  width: 100%;
 }
 
 ion-header-bar .title {
-    color: #fff !important;
+  color: #fff !important;
 }
 
 .bar .title {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 .close-modal {
-    font-size: 24px;
-    padding-left: 16px;
-    padding-top: 4px;
-    line-height: 40px;
+  font-size: 24px;
+  padding-left: 16px;
+  padding-top: 4px;
+  line-height: 40px;
 }
 
 .stop-line-list .item {
-    padding: 8px 16px;
-    min-height: 0;
-    white-space: normal;
+  padding: 8px 16px;
+  min-height: 0;
+  white-space: normal;
 }
 
 .stop-line-grid .route-grid-element {
-    margin: 4px 8px 4px 0;
-    display: inline-block;
+  margin: 4px 8px 4px 0;
+  display: inline-block;
 }
 
 .stop-line-title {
-    padding: 8px 16px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  padding: 8px 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .stop-line .row {
-    padding: 0;
+  padding: 0;
 }
 
 .stop-line .row .col {
-    border-bottom: 1px solid #d2d2d2;
-    padding: 16px 0px;
-    border-right: 1px solid #d2d2d2;
+  border-bottom: 1px solid #d2d2d2;
+  padding: 16px 0px;
+  border-right: 1px solid #d2d2d2;
 }
 
 .stop-line .row .col:last-child {
-    border-right: 0;
+  border-right: 0;
 }
 
 .many-options {
-    margin-top: 0px;
-    margin-right: 100px;
+  margin-top: 0px;
+  margin-right: 100px;
 }
 
 .single-options {
-    margin-top: 0px;
-    margin-right: 0px;
+  margin-top: 0px;
+  margin-right: 0px;
 }
 
 .mfb-component__wrap {
-    padding-top: 16px!important;
+  padding-top: 16px!important;
 }
 
 .empty-list-card {
-    min-height: 50px;
-    text-align: center;
+  min-height: 50px;
+  text-align: center;
 }
 
 .credits_title {
-    text-align: center;
-    color: #2975a7;
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 10px;
+  text-align: center;
+  color: #2975a7;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .credits_subtitle {
-    text-align: center;
-    color: #2975a7;
-    font-size: 18px;
-    font-weight: bold;
+  text-align: center;
+  color: #2975a7;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .credits_row {
-    padding: 0;
-    margin-bottom: 10px;
+  padding: 0;
+  margin-bottom: 10px;
 }
 
 .credits_row.last {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .credits_row.version {
-    color: #aaa;
+  color: #aaa;
 }
 
 .credits_row.version .col {
-    font-size: 12px;
-    line-height: 12px;
+  font-size: 12px;
+  line-height: 12px;
 }
 
 .credits_mail {
-    color: black;
-    font-size: 14px;
-    font-weight: normal;
+  color: black;
+  font-size: 14px;
+  font-weight: normal;
 }
 
 .credits_version {
-    text-align: center;
+  text-align: center;
 }
 
 .close-credits {
-    padding: 8px;
+  padding: 8px;
 }
 
 .image.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .popup {
-    max-width: 400px!important;
-    width: 90%!important;
+  max-width: 400px!important;
+  width: 90%!important;
 }
 
 .popup-buttons .button {
-    background-color: #3bbacf;
-    color: #fff;
+  background-color: #3bbacf;
+  color: #fff;
 }
 
 .list-journey {
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
-    display: block;
-    margin: 8px;
-    padding: 0;
-    position: relative;
-    width: auto !important;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26);
+  display: block;
+  margin: 8px;
+  padding: 0;
+  position: relative;
+  width: auto !important;
 }
 
 .home-list .list {
-    padding: 16px 8px;
+  padding: 16px 8px;
 }
 
 .home-list ion-item {
-    padding: 0px;
+  padding: 0px;
 }
 
 .home-list .button {
-    text-align: left;
-    font-size: 16px;
-    background-color: #fff;
-    border: 1px solid #d2d2d2;
-    min-height: 70px;
-    margin: 5px 0px;
-    padding: 0px 16px;
-    text-transform: none;
+  text-align: left;
+  font-size: 16px;
+  background-color: #fff;
+  border: 1px solid #d2d2d2;
+  min-height: 70px;
+  margin: 5px 0px;
+  padding: 0px 16px;
+  text-transform: none;
 }
 
 .home-list .button i {
-    margin-right: 16px;
+  margin-right: 16px;
 }
 
 .home-list .button i::before {
-    font-size: 36px;
+  font-size: 36px;
 }
 
 .line-background-for-list {
-    background-image: url("../img/ic_point_line_list.png");
-    background-repeat: no-repeat;
-    background-position: center center;
+  background-image: url("../img/ic_point_line_list.png");
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .green-bottom {
-    width: 100%;
-    background-color: #4caf4f;
-    color: white;
-    height: 24px;
-    text-align: center;
+  width: 100%;
+  background-color: #4caf4f;
+  color: white;
+  height: 24px;
+  text-align: center;
 }
 
 .green-head {
-    background-color: #4caf4f;
-    padding-top: 4px;
-    height: 40px;
-    overflow: auto
+  background-color: #4caf4f;
+  padding-top: 4px;
+  height: 40px;
+  overflow: auto
 }
 
 .green-thumb {
-    float: right
+  float: right
 }
 
 .green-thumb img {
-    display: block;
-    height: auto;
-    width: auto;
-    max-width: 30px;
-    max-height: 30px;
+  display: block;
+  height: auto;
+  width: auto;
+  max-width: 30px;
+  max-height: 30px;
 }
 
 .green-content {
-    margin-left: 24px
+  margin-left: 24px
 }
 
 .green-title {
-    color: white;
+  color: white;
 }
 
 .trip-detail-panel {
-    padding-top: 24px;
+  padding-top: 24px;
 }
 
 .placeautocomplete {
-    position: relative;
+  position: relative;
 }
 
 .placeautocomplete-input {
-    width: 100%;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .placeautocomplete-input:focus {
-    text-overflow: clip;
+  text-overflow: clip;
 }
 
 .placeautocomplete.notempty .placeautocomplete-input {
-    padding-left: 24px;
+  padding-left: 24px;
 }
 
 .placeautocomplete.notempty .placeautocomplete-input-clear {
-    position: absolute;
-    top: 0.5em;
-    left: 0;
-    color: #AAAAAA;
+  position: absolute;
+  top: 0.5em;
+  left: 0;
+  color: #AAAAAA;
 }
 
 .plan-viaggia-fromto {
-    margin: auto;
-    color: #3bbacf;
-    box-shadow: none;
-    padding: 0 12px;
+  margin: auto;
+  color: #3bbacf;
+  box-shadow: none;
+  padding: 0 12px;
 }
 
 .plan-viaggia-fromto:hover {
-    color: rgba(60, 186, 207, 0.5);
-    box-shadow: none;
+  color: rgba(60, 186, 207, 0.5);
+  box-shadow: none;
 }
 
 
 /*redefine style for checkbox*/
 
 .ion-checkmark:before {
-    color: white;
+  color: white;
 }
 
 .item-radio input:checked ~ .item-content {
-    background: #3bbacf;
+  background: #3bbacf;
 }
 
 .item-radio input:checked + .item-content {
-    background: #3bbacf;
+  background: #3bbacf;
 }
 
 .item-radio input:checked + .radio-icon {
-    visibility: visible;
+  visibility: visible;
 }
 
 .list-of-icons {
-    min-width: 50px;
-    display: inline-block;
-    vertical-align: middle;
-    line-height: normal;
+  min-width: 50px;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
 }
 
 #table-header {
-    white-space: nowrap;
-    font-family: RobotoMono;
-    position: absolute;
-    background-color: #fff;
-    font-size: 12px;
-    /*    left: 100px;*/
-    z-index: 10;
+  white-space: nowrap;
+  font-family: RobotoMono;
+  position: absolute;
+  background-color: #fff;
+  font-size: 12px;
+  /*    left: 100px;*/
+  z-index: 10;
 }
 
 #table-header div {
-    border-bottom: 1px solid #bbb;
-    height: 25px;
+  border-bottom: 1px solid #bbb;
+  height: 25px;
 }
 
 #table-header div:first-child {
-    color: #cd251c;
+  color: #cd251c;
 }
 
 .tt-table #table-col div {
-    /*    width: 20px;*/
-    display: inline-block;
-    margin-right: 5px;
-    text-align: center;
+  /*    width: 20px;*/
+  display: inline-block;
+  margin-right: 5px;
+  text-align: center;
 }
 
 .header-row-types {
-    height: 20px;
+  height: 20px;
 }
 
 #table-table {
-    white-space: nowrap;
-    font-family: RobotoMono !important;
-    /*    left: 100px;*/
-    font-size: 12px;
-    position: absolute;
-    left: 0;
-    -webkit-transition-duration: 0.3s;
-    -moz-transition-duration: 0.3s;
-    -o-transition-duration: 0.3s;
-    transition-duration: 0.3s;
+  white-space: nowrap;
+  font-family: RobotoMono !important;
+  /*    left: 100px;*/
+  font-size: 12px;
+  position: absolute;
+  left: 0;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
 }
 
-#table-table br{
-    font-family: RobotoMono;
+#table-table br {
+  font-family: RobotoMono;
 }
 
 #table-col {
-    line-height: 20px;
-    white-space: nowrap;
-    font-size: 12px;
-    position: absolute;
-    background-color: #fff;
-    /*    width: 100px;*/
-    border-right: 1px solid #bbb;
-    z-index: 10;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding-right: 5px;
-    padding-left: 3px;
+  line-height: 20px;
+  white-space: nowrap;
+  font-size: 12px;
+  position: absolute;
+  background-color: #fff;
+  /*    width: 100px;*/
+  border-right: 1px solid #bbb;
+  z-index: 10;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 5px;
+  padding-left: 3px;
 }
 
 #table-corner {
-    font-size: 12px;
-    height: 25px;
-    /*    border-right: 1px solid #bbb;*/
-    position: absolute;
-    /*    width: 100px;*/
-    background-color: #fff;
-    z-index: 100;
-    text-align: left;
-    /*    top: 50px;*/
+  font-size: 12px;
+  height: 25px;
+  /*    border-right: 1px solid #bbb;*/
+  position: absolute;
+  /*    width: 100px;*/
+  background-color: #fff;
+  z-index: 100;
+  text-align: left;
+  /*    top: 50px;*/
 }
 
 #table-corner div {
-    height: 25px;
-    border-bottom: 1px solid #bbb;
-    border-right: 1px solid #bbb;
-    background-color: white;
+  height: 25px;
+  border-bottom: 1px solid #bbb;
+  border-right: 1px solid #bbb;
+  background-color: white;
 }
 
 #table-corner > div .corner-delay {
-    margin-left: 10px;
-    vertical-align: top;
+  margin-left: 10px;
+  vertical-align: top;
 }
 
 .accessibilityBullet {
-    width: 20px;
+  width: 20px;
 }
 
 .delay {
-    padding-left: 40px;
+  padding-left: 40px;
 }
 
 .table-container {
-    padding: 0px;
+  padding: 0px;
 }
 
 .table-container ion-scroll {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .markets-home img {
-    height: 50px;
-    width: 50px;
-    margin-right: 12px;
-    vertical-align: bottom;
+  height: 50px;
+  width: 50px;
+  margin-right: 12px;
+  vertical-align: bottom;
 }
 
 .markets-home span {
-    line-height: 50px;
+  line-height: 50px;
 }
 
 .market-subtitle {
-    text-align: center;
-    font-weight: bold;
-    color: #2975a7;
+  text-align: center;
+  font-weight: bold;
+  color: #2975a7;
 }
 
 .market-text1 {
-    text-align: center;
-    font-weight: bold;
+  text-align: center;
+  font-weight: bold;
 }
 
 .market-text2 {
-    text-align: justify;
+  text-align: justify;
 }
 
 .length-price {
-    position: absolute;
-    right: 5px;
-    bottom: 5px;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
 }
 
 .card .trip-title {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    padding: 5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding: 5px;
 }
 
 .ionic-datepicker .right_arrow,
 .ionic-datepicker .left_arrow {
-    margin: auto;
+  margin: auto;
 }
 
 .timePickerColon {
-    padding-top: 0px !important;
-    margin-bottom: auto;
-    margin-top: auto;
+  padding-top: 0px !important;
+  margin-bottom: auto;
+  margin-top: auto;
 }
 
 .timePickerArrows {
-    padding-left: 0px;
-    padding-right: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .close-modal {
-    font-size: 32px;
-    padding-top: 2px !important;
+  font-size: 32px;
+  padding-top: 2px !important;
 }
 
 .platform-ios.platform-cordova:not(.fullscreen) .mfb-component--tr {
-    margin-top: 45px;
+  margin-top: 45px;
 }
 
 .error {
-    color: red;
-    text-align: center;
+  color: red;
+  text-align: center;
 }
 
 .bookmark-list .list {
-    padding: 16px 8px;
+  padding: 16px 8px;
 }
 
 .bookmark-list ion-item {
-    padding: 0px;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    border: 1px solid #d2d2d2!important;
-    width: 100% !important;
-    overflow: hidden;
-    border-radius: 2px;
-    background-color: #fff;
+  padding: 0px;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  border: 1px solid #d2d2d2!important;
+  width: 100% !important;
+  overflow: hidden;
+  border-radius: 2px;
+  background-color: #fff;
 }
 
 .bookmark-list .bookmark {
-    text-align: left;
-    font-size: 16px;
-    background-color: #fff;
-    padding: 8px 8px;
+  text-align: left;
+  font-size: 16px;
+  background-color: #fff;
+  padding: 8px 8px;
 }
 
 .bookmark-list .ctrl {
-    float: right;
+  float: right;
 }
 
 .bookmark-margin {
-    /*    margin: 20px 10px;*/
-    /*    width: inherit !important;*/
-    /*    transition: margin 0.2s ease;*/
+  /*    margin: 20px 10px;*/
+  /*    width: inherit !important;*/
+  /*    transition: margin 0.2s ease;*/
 }
 
 .text_books {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: block;
-    width: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  width: inherit;
 }
 
 .bookmark-list .bookmark .img {
-    font-size: 36px;
+  font-size: 36px;
 }
 
 .bookmark-list .bookmark span {
-    padding: 0 0 0 8px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    /*  text-transform: uppercase;*/
-    font-weight: 500;
+  padding: 0 0 0 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /*  text-transform: uppercase;*/
+  font-weight: 500;
 }
 
 .bookmark-list ion-item.activated {
-    background-color: #d2d2d2;
+  background-color: #d2d2d2;
 }
 
 .bookmark-list ion-item.activated .item-content {
-    background-color: #d2d2d2;
+  background-color: #d2d2d2;
 }
 
 .bookmark-list ion-item .item-content {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 .bookmark-list ion-option-button,
 .bookmark-list ion-reorder-button {
-    padding: 0 8px;
+  padding: 0 8px;
 }
 
 .bookmark-popup {
-    color: rgb(41, 117, 167)!important;
-    font-size: x-large;
+  color: rgb(41, 117, 167)!important;
+  font-size: x-large;
 }
 
 .parking-title {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 
 .date-label {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 
 .parking-item-label {
-    line-height: normal;
+  line-height: normal;
 }
 
 .parking-item-label.highlight {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .parking-info {
-    margin-left: 16px;
-    white-space: normal;
+  margin-left: 16px;
+  white-space: normal;
+}
+
+.compass {
+  position: absolute;
+  z-index: 999;
+  background-color: white;
+  right: 0px;
+  bottom: 0px;
+  width: 100px;
+  height: 100px;
+  margin: 0px 10px 60px 0px;
+  box-shadow: 5px 5px 20px #575757;
+  border-radius: 70px;
+}
+
+.distance {
+  position: absolute;
+  bottom: 20px;
+  z-index: 999;
+  background-color: white;
+  width: 100%;
+  height: 30px;
+  font-size: 18px;
+  line-height: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+#arrow {
+  width: 100px;
+  height: 100px;
+  /*
+  margin-left: 5px;
+margin-right: 10px;
+*/
+}
+
+#arrow img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+#distance {
+  width: 110px;
+  height: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.distance-label {
+  color: #2b78bd;
 }
 
 .bm-item-label {
-    line-height: normal;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  line-height: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .bm-item-label.highlight {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .button-cancel {
-    background-color: #a3a2a2 !important;
+  background-color: #a3a2a2 !important;
 }
 
 .alignright {
-    float: right;
+  float: right;
 }
 
 .button-home {
-    color: white !important;
-    box-shadow: none !important;
-    padding-top: 10px!important;
-    padding-left: 10px!important;
+  color: white !important;
+  box-shadow: none !important;
+  padding-top: 10px!important;
+  padding-left: 10px!important;
 }
 
 .acc_button {
-    width: 270px;
-    height: 80px;
-    margin: 8px;
-    padding: 0px;
-    font-size: x-large;
+  width: 270px;
+  height: 80px;
+  margin: 8px;
+  padding: 0px;
+  font-size: x-large;
 }
 
 .acc_button:before {
-    font-size: 40px !important;
+  font-size: 40px !important;
 }
 
 .acc_button_text {
-    clear: both;
-    display: inline-block;
-    overflow: hidden;
-    white-space: nowrap;
-    font-size: x-large;
-    font-family: RobotoDraft, Roboto, 'Helvetica Neue', 'Segoe UI', sans-serif;
-    vertical-align: middle
+  clear: both;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: x-large;
+  font-family: RobotoDraft, Roboto, 'Helvetica Neue', 'Segoe UI', sans-serif;
+  vertical-align: middle
 }
 
 .not_acc {
-    opacity: 0.6;
+  opacity: 0.6;
 }
 
 .header-badge {
-    top: -30px !important;
-    /*    left: 10px !important;*/
-    font-size: x-small !important;
-    margin-left: -5px!important;
-    display: table!important;
-    margin-right: 10px!important;
-    margin-top: -10px;
-    padding: 3px 3px 3px 3px;
-    width: 22px;
-    display: block!inspect;
-    /*
+  top: -30px !important;
+  /*    left: 10px !important;*/
+  font-size: x-small !important;
+  margin-left: -5px!important;
+  display: table!important;
+  margin-right: 10px!important;
+  margin-top: -10px;
+  padding: 3px 3px 3px 3px;
+  width: 22px;
+  display: block!inspect;
+  /*
     top: -32px !important;
     padding: 2px 12px 2px 3px;
 */
 }
 
 .home_notification {
-    margin-right: 20px!important;
-    padding-right: 20px!important;
+  margin-right: 20px!important;
+  padding-right: 20px!important;
 }
 
 .notification-card {
-    padding: 16px;
+  padding: 16px;
 }
 
 .notification-title {
-    font-weight: bold;
-    margin-top: 8px;
+  font-weight: bold;
+  margin-top: 8px;
 }
 
 .notification-container {
-    padding: 8px;
+  padding: 8px;
 }
 
 .notification-content {
-    padding-top: 8px;
+  padding-top: 8px;
 }
 
 .bm-detail {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .control-tutorial {
-    position: absolute;
-    bottom: 10px;
-    width: 100%;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
 }
 
 
 /*close button of popup*/
 
 .leaflet-container a.leaflet-popup-close-button {
-    font-size: 25px !important;
-    line-height: 20px !important;
-    padding: 8px 16px 0 0 !important;
+  font-size: 25px !important;
+  line-height: 20px !important;
+  padding: 8px 16px 0 0 !important;
 }
 
 .fullscreen-tutorial {
-    max-width: 100%;
-    max-height: 100%;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    overflow: auto;
-    position: fixed;
-    right: 0;
-    top: 0;
+  max-width: 100%;
+  max-height: 100%;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  overflow: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
 
 .tutorial-button {
-    font-size: large;
+  font-size: large;
 }
 
 .transparent {
-    background-color: rgba(0, 0, 0, 0.6)!important;
+  background-color: rgba(0, 0, 0, 0.6)!important;
 }
 
 .image-modal {
-    width: 100% !important;
-    height: 100%;
-    top: 0 !important;
-    left: 0 !important;
+  width: 100% !important;
+  height: 100%;
+  top: 0 !important;
+  left: 0 !important;
 }
 
 .empty_bookmarks {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-direction: normal;
-    -moz-box-direction: normal;
-    -webkit-box-orient: horizontal;
-    -moz-box-orient: horizontal;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    -webkit-box-pack: center;
-    -moz-box-pack: center;
-    -webkit-justify-content: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-align-content: stretch;
-    -ms-flex-line-pack: stretch;
-    align-content: stretch;
-    -webkit-box-align: center;
-    -moz-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-direction: normal;
+  -moz-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-content: stretch;
+  -ms-flex-line-pack: stretch;
+  align-content: stretch;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .empty_home_ops {
-    font-size: medium;
-    color: #666;
-    font-weight: bold;
-    white-space: normal;
-    font-style: italic;
+  font-size: medium;
+  color: #666;
+  font-weight: bold;
+  white-space: normal;
+  font-style: italic;
 }
 
 .empty_home_bookmarks {
-    color: #2975a7;
-    font-size: medium;
-    font-weight: bold;
-    white-space: normal;
+  color: #2975a7;
+  font-size: medium;
+  font-weight: bold;
+  white-space: normal;
 }
 
 .row_empty_home {
-    padding: 25px;
+  padding: 25px;
 }
 
 .trip-card {
-    width: inherit !important;
+  width: inherit !important;
 }
 
 .trip-card .item-content {
-    padding: 0 !important;
-    background-color: #fff;
+  padding: 0 !important;
+  background-color: #fff;
 }
 
 .trip-card .item-options {
-    background-color: #3bbacf !important;
+  background-color: #3bbacf !important;
 }
 
 .trip-card .ion-option-button {
-    color: white;
+  color: white;
 }
 
 .no-shadow {
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 }
 
 .taxi-name {
-    font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 8px;
 }
 
 .taxi-number {
-    color: #3bbacf;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 24px;
+  color: #3bbacf;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 24px;
 }
 
 .taxi-icon {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 .user-position {
-    padding-top: 16px;
+  padding-top: 16px;
 }
 
 .user-position-warning {
-    margin-top: 8px;
-    margin-bottom: 8px;
-    font-size: 12px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 12px;
 }
 
 .user-position-your-position {
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .accessibility {
-    font-size: 22px;
-    border-radius: 6px;
-    padding: 6px;
-    background-color: #007cc2;
-    color: #fff;
+  font-size: 22px;
+  border-radius: 6px;
+  padding: 6px;
+  background-color: #007cc2;
+  color: #fff;
 }
 
 .accessibility-ttstop {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 .table-accessibility {
-    color: #2975a7;
-    margin-right: 4px;
-    /*    margin-left: 4px;
+  color: #2975a7;
+  margin-right: 4px;
+  /*    margin-left: 4px;
     */
-    font-size: 25px;
+  font-size: 25px;
 }
 
 
@@ -1382,28 +1581,28 @@ ion-header-bar .title {
 */
 
 .tt-table {
-    position: absolute;
-    left: -25px;
-    -webkit-transition-duration: 0.3s;
-    -moz-transition-duration: 0.3s;
-    -o-transition-duration: 0.3s;
-    transition-duration: 0.3s;
+  position: absolute;
+  left: -25px;
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
 }
 
 .tt-table-acc {
-    left: 0px !important;
+  left: 0px !important;
 }
 
 
 }
 .tt-table #table-col div {
-    width: 20px;
-    display: inline-block;
-    margin-right: 5px;
-    text-align: center;
+  width: 20px;
+  display: inline-block;
+  margin-right: 5px;
+  text-align: center;
 }
 .tt-subtitle {
-    text-align: center;
+  text-align: center;
 }
 
 /*
@@ -1416,7 +1615,6 @@ ion-header-bar .title {
 #table-table:hover {
     left: 50;
 }*/
-
 .alert {
   color: red;
 }
@@ -1427,6 +1625,6 @@ ion-header-bar .title {
   font-size: 12px;
   color: red;
 }
-.alert-text p{
+.alert-text p {
   margin-bottom: 0 !important;
 }

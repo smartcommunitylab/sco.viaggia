@@ -27,6 +27,8 @@ angular.module('viaggia.services.conf', [])
 
 
     var DISTANCE_AUTOCOMPLETE = '25';
+    var PARKING_METERS_RADIUS = '5';
+    var PARKING_METERS_MAX_NUMBER = 5;
     var HTTP_CONFIG = {
       timeout: 5000
     };
@@ -125,6 +127,7 @@ angular.module('viaggia.services.conf', [])
       }
     };
 
+    var PARKING_METERS_AGENCY_IDS = ['tn_mob_091516'];
 
     var flattenElement = function (e, res, ref, agencyId) {
       var localAgency = agencyId;
@@ -193,6 +196,18 @@ angular.module('viaggia.services.conf', [])
       },
       getServerURL: function () {
         return mapJsonConfig['serverURL'];
+      },
+      getMetroparcoServerURL: function () {
+        return mapJsonConfig['metroparco'];
+      },
+      getParkingMetersRadius: function () {
+        return PARKING_METERS_RADIUS;
+      },
+      getParkingMetersMaxNumber: function () {
+        return PARKING_METERS_MAX_NUMBER;
+      },
+      getParkingMetersAgencyIds: function () {
+        return PARKING_METERS_AGENCY_IDS;
       },
       getMapPosition: function () {
         return {

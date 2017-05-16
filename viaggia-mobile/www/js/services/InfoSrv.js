@@ -46,7 +46,7 @@ angular.module('viaggia.services.info', [])
       $http.get(Config.getServerURL() + '/getparkingsbyagency/' + agencyId,
           Config.getHTTPConfig())
         .success(function (data) {
-          if (data) {
+          if (data && data instanceof Array) {
             data.forEach(function (d, idx) {
               d.id = generateId(d.name);
             });
@@ -66,7 +66,7 @@ angular.module('viaggia.services.info', [])
               deferred.resolve(data);
             });
           } else {
-            deferred.resolve(data);
+            deferred.reject(data);
           }
         })
         .error(function (err) {
@@ -76,33 +76,14 @@ angular.module('viaggia.services.info', [])
 
       return deferred.promise;
     },
-    getParkingMeters: function (agencyIdList, lat, long, radius, maxNumber) {
+    getParkingMeters: function (lat, long) {
       var deferred = $q.defer();
-      $http.get(Config.getServerURL() + '/getparkingsbyagency/' + agencyId,
+
+
+      $http.get(Config.getMetroparcoServerURL() + '/nearparkingmeters/' + lat + '/' + long + '/' + Config.getParkingMetersRadius() + '/' + Config.getParkingMetersMaxNumber() + "?agencyIds=" + Config.getParkingMetersAgencyIds().join(", "),
           Config.getHTTPConfig())
         .success(function (data) {
-          if (data) {
-            data.forEach(function (d, idx) {
-              d.id = generateId(d.name);
-            });
-            var all = [];
-            cache[agencyId] = data;
-            GeoLocate.locate().then(function (pos) {
-              data.forEach(function (p) {
-                all.push(GeoLocate.distanceTo(p.position));
-              });
-              $q.all(all).then(function (positions) {
-                data.forEach(function (d, idx) {
-                  d.distance = positions[idx];
-                });
-                deferred.resolve(data);
-              });
-            }, function (err) {
-              deferred.resolve(data);
-            });
-          } else {
-            deferred.resolve(data);
-          }
+          deferred.resolve(data);
         })
         .error(function (err) {
           deferred.reject(err);

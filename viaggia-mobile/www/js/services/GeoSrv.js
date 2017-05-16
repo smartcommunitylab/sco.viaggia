@@ -32,7 +32,7 @@ angular.module('viaggia.services.geo', [])
               localization.reject('cannot geolocate (web)');
             }, {
               //frequency: (20 * 60 * 1000), //20 mins
-              maximumAge: (10 * 60 * 1000), //10 mins
+              maximumAge: (1 * 60 * 1000), //5 mins
               timeout: 10 * 1000, //1 minute
               enableHighAccuracy: (device.version.indexOf('2.') == 0) // true for Android 2.x
             });
@@ -49,7 +49,7 @@ angular.module('viaggia.services.geo', [])
             console.log('cannot geolocate (web)');
             localization.reject('cannot geolocate (web)');
           }, {
-            maximumAge: (10 * 60 * 1000), //5 mins
+            maximumAge: (1 * 60 * 1000), //5 mins
             timeout: 10 * 1000, //1 minute
             enableHighAccuracy: false
           });
@@ -70,7 +70,34 @@ angular.module('viaggia.services.geo', [])
       getAccuracy: function () {
         return $rootScope.myPositionAccuracy;
       },
+      //      calculate bearing between two points
+      bearing: function (pt1, pt2) {
+        var d = false;
+        if (pt1 && pt1[0] && pt1[1] && pt2 && pt2[0] && pt2[1]) {
+          var lat1 = Number(pt1[0]);
+          var lon1 = Number(pt1[1]);
+          var lat2 = Number(pt2[0]);
+          var lon2 = Number(pt2[1]);
 
+          var R = 6371; // km
+          //var R = 3958.76; // miles
+          var dLat = (lat2 - lat1).toRad();
+          var dLon = (lon2 - lon1).toRad();
+          var lat1 = lat1.toRad();
+          var lat2 = lat2.toRad();
+          //          var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          //            Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+          //          var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+          //          d = R * c;
+          var y = Math.sin(dLon) * Math.cos(lat2);
+          var x = Math.cos(lat1) * Math.sin(lat2) -
+            Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+          var brng = Math.atan2(y, x) * (180 / Math.PI)
+        } else {
+          console.log('cannot calculate distance!');
+        }
+        return brng;
+      },
       //      calculate distance between two points
       distance: function (pt1, pt2) {
         var d = false;
@@ -117,16 +144,12 @@ angular.module('viaggia.services.geo', [])
         //          frequency: 500
         //        }; // Update every 3 seconds
 
-        var watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+        compassWatch = navigator.compass.watchHeading(onSuccess, onError, options);
 
       },
       closeCompassMonitor: function () {
-        $cordovaDeviceOrientation.clearWatch(watch)
-          .then(function (result) {
-            console.log("compass clear");
-          }, function (err) {
-            // An error occurred
-          });
+        if (!window.$cordovaDeviceOrientation) return;
+        $cordovaDeviceOrientation.clearWatch(compassWatch);
       }
 
 
