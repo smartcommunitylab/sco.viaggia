@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.common', [])
 
-.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, userService, Utils, tutorial) {
+.controller('AppCtrl', function ($scope, $state, $rootScope, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, Utils, tutorial) {
 	/* menu group */
 	$scope.shownGroup = false;
 	$scope.toggleGroupRealTime = function () {
@@ -16,6 +16,9 @@ angular.module('viaggia.controllers.common', [])
 		return $scope.shownGroup === true;
 	};
 
+  $scope.isAccessibilitySet = function () {
+      return Config.getAccessibility();
+    }
 	$ionicModal.fromTemplateUrl('templates/credits.html', {
 		id: '3',
 		scope: $scope,
@@ -34,12 +37,6 @@ angular.module('viaggia.controllers.common', [])
 	};
 
 	$scope.openGamificationBoard = function () {
-		/*
-		userService.getValidToken().then(function (validToken) {
-			var url = Config.getGamificationURL() + "/mobile?token=" + validToken;
-			window.open(url, "_system", "location=yes");
-		});
-		*/
 		$scope.firstOpenPopup.close();
 		$state.go('app.game');
 	};
@@ -60,12 +57,6 @@ angular.module('viaggia.controllers.common', [])
 		}
 
 		$scope.openRulesModal();
-		/*
-		userService.getValidToken().then(function (validToken) {
-			var url = Config.getGamificationURL() + "/mobile?token=" + validToken + "&redirect_url=rules";
-			window.open(url, "_system", "location=yes");
-		});
-		*/
 	};
 
     $scope.openExtLink = function(link) {
@@ -76,10 +67,8 @@ angular.module('viaggia.controllers.common', [])
 		if (!!$scope.firstOpenPopup) {
 			$scope.firstOpenPopup.close();
 		}
-//		userService.getValidToken().then(function (validToken) {
-			var url = Config.getGamificationURL() + "/view_prizes";
-			window.open(url, "_system", "location=yes");
-//		});
+        var url = Config.getGamificationURL() + "/view_prizes";
+        window.open(url, "_system", "location=yes");
 	};
 
     $scope.forceTutorial = function () {
@@ -142,7 +131,7 @@ angular.module('viaggia.controllers.common', [])
 				}
             ]
 		});
-	};
+    }
 
 	$scope.showNoConnection = function () {
 		var alertPopup = $ionicPopup.alert({

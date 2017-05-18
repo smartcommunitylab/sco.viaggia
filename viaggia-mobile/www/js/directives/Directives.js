@@ -432,4 +432,20 @@ angular.module('viaggia.directives', [])
             });
         }
     };
+  })
+  .directive('analytics', function ($ionicPlatform, $window) {
+    return {
+      restrict: 'E',
+      replace: true,
+      scope: {
+        screen: '='
+      },
+            link: function (scope, elem, attrs) {
+              $ionicPlatform.ready(function () {
+                if ($window.ga) {
+                  $window.ga.trackView(attrs.screen)
+                }
 });
+            }
+    }
+  });

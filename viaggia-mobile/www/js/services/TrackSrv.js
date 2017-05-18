@@ -1,5 +1,5 @@
 angular.module('viaggia.services.tracking', [])
-    .factory('trackService', function (Config, $q, $http, $state, $timeout, $filter, userService, $ionicPlatform, $ionicPopup, $rootScope, Utils, GeoLocate) {
+    .factory('trackService', function (Config, $q, $http, $state, $timeout, $filter, LoginService, $ionicPlatform, $ionicPopup, $rootScope, Utils, GeoLocate) {
         //var trackingIntervalInMs = 500;
         //var accelerationDetectionIntervalInMs = 500;
         //var accelerationSensorDelay = 0;
@@ -356,7 +356,7 @@ angular.module('viaggia.services.tracking', [])
          */
         trackService.start = function (idTrip, trip, callback) {
             var deferred = $q.defer();
-            userService.getValidToken().then(function (token) {
+            LoginService.getValidAACtoken().then(function (token) {
                 var today = new Date();
                 refreshCallback = callback;
                 var endtimeDate = null;
@@ -474,7 +474,7 @@ angular.module('viaggia.services.tracking', [])
             var deferred = $q.defer();
             $rootScope.syncRunning = true;
 
-            userService.getValidToken().then(function (token) {
+            LoginService.getValidAACtoken().then(function (token) {
                 var trackingConfigure = Config.getTrackingConfig();
                 trackingConfigure['url'] += token;
                 trackingConfigure['foregroundService'] = false;

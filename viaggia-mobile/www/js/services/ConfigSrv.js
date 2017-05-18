@@ -22,7 +22,9 @@ angular.module('viaggia.services.conf', [])
     };
 
     var LOGIN_EXPIRED = 'LOGIN_EXPIRED';
-    var DISTANCE_AUTOCOMPLETE = '50';
+    var DISTANCE_AUTOCOMPLETE = '25';
+    var PARKING_METERS_RADIUS = '5';
+    var PARKING_METERS_MAX_NUMBER = 5;
     var HTTP_CONFIG = {
         timeout: 5000
     };
@@ -30,7 +32,7 @@ angular.module('viaggia.services.conf', [])
     var mapJsonConfig = null;
     var ttJsonConfig = null;
 
-    var GEOCODER_URL = 'https://os.smartcommunitylab.it/core.geocoder/spring';
+    var GEOCODER_URL = 'https://os.smartcommunitylab.it/core.geocoder';
     var APP_BUILD = '';
     var PLAN_TYPES = ['WALK', 'TRANSIT', 'CAR', 'BICYCLE', 'SHAREDCAR', 'SHAREDBIKE'];
     var ERROR_GPS_NO_SIGNAL = "ERROR_GPS_NO_SIGNAL";
@@ -120,6 +122,9 @@ angular.module('viaggia.services.conf', [])
             color: '#922d66'
         }
     };
+
+    var PARKING_METERS_AGENCY_IDS = ['tn_mob_091516'];
+
     var DAYS_REC = [
         {
             name: 'dow_monday',
@@ -210,6 +215,7 @@ angular.module('viaggia.services.conf', [])
     var configDeferred = null;
 
     return {
+      //init the application with configuration and timetables from configuration's file
         init: function () {
             if (configDeferred != null) return configDeferred.promise;
 
@@ -250,8 +256,23 @@ angular.module('viaggia.services.conf', [])
         getDistanceForAutocomplete: function () {
             return DISTANCE_AUTOCOMPLETE;
         },
+        getDistanceForAutocomplete: function () {
+          return DISTANCE_AUTOCOMPLETE;
+        },
         getServerURL: function () {
             return mapJsonConfig['serverURL'];
+        },
+        getMetroparcoServerURL: function () {
+          return mapJsonConfig['metroparco'];
+        },
+        getParkingMetersRadius: function () {
+          return PARKING_METERS_RADIUS;
+        },
+        getParkingMetersMaxNumber: function () {
+          return PARKING_METERS_MAX_NUMBER;
+        },
+        getParkingMetersAgencyIds: function () {
+          return PARKING_METERS_AGENCY_IDS;
         },
         getMapPosition: function () {
             return {
@@ -266,6 +287,14 @@ angular.module('viaggia.services.conf', [])
         getGeocoderURL: function () {
             return GEOCODER_URL;
         },
+      getGeocoderConf: function () {
+        return {
+          timeout: 5000,
+          headers: {
+            appId: undefined
+          }
+        };
+      },
         getGamificationURL: function () {
             return mapJsonConfig['gamificationURL'];
         },
@@ -319,6 +348,9 @@ angular.module('viaggia.services.conf', [])
         getTaxiAccuracy: function () {
             return mapJsonConfig["taxi_accuracy"];
 
+      },
+      getAccessibility: function () {
+        return mapJsonConfig['accessibility'];
         },
         getMessagingServerURL: function () {
             return mapJsonConfig["messagingServerURL"];
@@ -493,6 +525,9 @@ angular.module('viaggia.services.conf', [])
         },
         getClientSecKey: function () {
             return mapJsonConfig["clientSecID"];
+        },
+        getWebClientId: function () {
+            return mapJsonConfig["webclientid"];
         },
         LOGIN_EXPIRED: LOGIN_EXPIRED
     }

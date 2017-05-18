@@ -63,7 +63,6 @@ angular.module('viaggia.services.bookmarks', [])
         return mapBookMarks;
     }
     var getBookmarks = function () {
-        //if (!localStorage.getItem(repo) || (localStorage.getItem(repo) && !taxi)) {+
         if (!localStorage.getItem(repo) || !allNewBookMarksArePresent()) {
             //first install or update
             var defList = getDefaultBookmarks();

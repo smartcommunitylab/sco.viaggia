@@ -3,9 +3,11 @@
     "appid": "trentoplaygo",
     "messagingAppId": "mobility.trentoplaygo",
     "senderID": "453601816446",
-    "appversion": "1.0.3",
+    "webclientid": "453601816446-bs9vtikvubnm4k3aa7n5vh9vdl17v893.apps.googleusercontent.com",
+    "appversion": "1.1.0",
     "appname": "Viaggia Trento Play&Go",
     "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
+    "metroparco": "https://tn.smartcommunitylab.it/metroparco/data/tn",
     "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
     "newsRSS": "https://tn.smartcommunitylab.it/core.mobility/announcements/rss/trento",
     "contact_link": "mailto:viaggiatrento@smartcommunitylab.it?subject=ViaggiaTrentoPlayGo:%20segnalazione%20problema",
@@ -32,7 +34,8 @@
     },
     "plan_policy": "Trento",
     "taxi_id": "TAXI_TRENTO",
-    "taxi_accuracy": 30,
+  "taxi_accuracy": 65,
+  "accessibility": true,
     "agencies": [5, 6, 10, 12, 17],
     "extraurban_agencies": [17],
     "broadcast_notifications_options": [
@@ -59,12 +62,7 @@
                 "icon": "ic_search",
                 "color": "#3BBACF"
             },
-            {
-                "state": "/app/taxi",
-                "label": "menu_taxi",
-                "icon": "ic_taxi",
-                "color": "#f8cf20"
-            },
+
             {
                 "state": "/app/ttlist/urbano",
                 "label": "menu_real_time_bus_urban",
@@ -84,10 +82,21 @@
                 "color": "#164286"
             },
             {
+        "state": "/app/parkingMeters",
+        "label": "menu_parking_meters",
+        "icon": "ic_parcometro",
+        "color": "#FBA724"
+            },
+      {
                 "state": "/app/bikesharing/trento",
                 "label": "menu_real_time_bike",
                 "icon": "ic_bike",
                 "color": "#922d66"
+            }, {
+        "state": "/app/taxi",
+        "label": "menu_taxi",
+        "icon": "ic_taxi",
+        "color": "#f8cf20"
             }
 
       ],

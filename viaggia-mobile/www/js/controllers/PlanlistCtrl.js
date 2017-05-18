@@ -28,6 +28,7 @@ angular.module('viaggia.controllers.planlist', [])
             it.length = planService.getLength(it);
             it.means = planService.extractItineraryMeans(it);
             it.price = planService.getItineraryCost(it);
+            it.hasAlerts = planService.hasAlerts(it);
             it.index = idx;
         });
     } else {

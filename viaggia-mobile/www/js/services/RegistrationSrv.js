@@ -1,11 +1,11 @@
 angular.module('viaggia.services.registration', [])
 
-.factory('registrationService', function ($q, $http, $filter, Config, userService) {
+.factory('registrationService', function ($q, $http, $filter, Config, LoginService) {
     var registrationService = {};
 
     registrationService.register = function (user) {
         var deferred = $q.defer();
-        userService.getValidToken().then(function (validToken) {
+        LoginService.getValidAACtoken().then(function (validToken) {
             var urlReg = Config.getGamificationURL() + "/out/rest/register?"+
                 "nickname=" + user.nickname +
                 "&token=" + validToken +

@@ -1,6 +1,6 @@
 angular.module('viaggia.services.game', [])
 
-.factory('GameSrv', function ($q, $http, Config, userService) {
+.factory('GameSrv', function ($q, $http, Config, LoginService) {
 	var gameService = {};
 
 	var localStatus = null;
@@ -10,7 +10,7 @@ angular.module('viaggia.services.game', [])
 	gameService.getStatus = function () {
 		var deferred = $q.defer();
 
-		userService.getValidToken().then(
+		LoginService.getValidAACtoken().then(
 			function (token) {
 				$http.get(Config.getGamificationURL() + '/out/rest/status' + '?token=' + token, Config.getHTTPConfig())
 
@@ -61,7 +61,7 @@ angular.module('viaggia.services.game', [])
 	gameService.getRanking = function (when, start, end) {
 		var deferred = $q.defer();
 
-		userService.getValidToken().then(
+		LoginService.getValidAACtoken().then(
 			function (token) {
 				var timestamp = null;
 
@@ -118,6 +118,33 @@ angular.module('viaggia.services.game', [])
 
 		return deferred.promise;
 	};
+
+    gameService.validUserForGamification = function (profile) {
+        var deferred = $q.defer();
+        //check if user (profile.userId) is valid or not
+        var url = Config.getGamificationURL() + "/out/rest/checkuser/" + profile.userId;
+
+        $http.get(url).then(
+            function (response) {
+                if (!response.data.registered) {
+                    deferred.resolve(false);
+
+                } else {
+                    localStorage.userValid = true;
+                    deferred.resolve(true);
+                }
+            },
+            function (responseError) {
+                deferred.reject(responseError);
+            }
+        );
+
+        return deferred.promise;
+    }
+    gameService.validUserForGamificationLocal = function() {
+      return 'true' == localStorage.userValid;
+    }
+
 
 	return gameService;
 });

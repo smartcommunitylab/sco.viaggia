@@ -564,6 +564,125 @@ i {
     text-align: center;
 }
 
+.parking-meter-popup .popup {
+  width: 80%;
+  max-width: 400px;
+  font-weight: normal;
+}
+.parking-meter-popup .popup-title {
+  text-align: left;
+  text-transform: uppercase;
+}
+.parking-meter-popup .popup-head {
+  display: none;
+}
+.parking-meter-popup .button-close {
+  background-color: gray!important;
+}
+.parking-meter-popup .popup-buttons button:not(.button-close) {
+  background-color: #3bbacf !important;
+}
+.parking-meter-popup .popup-buttons button {
+  white-space: normal;
+  padding: 0px;
+  color: #fff !important;
+  margin-right: 4px;
+}
+.parking-meter-popup .map-stop-title {
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #2975a7;
+}
+.parking-meter-popup .popup-icon {
+  font-size: 30px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+.parking-meter-popup .map-stop-name {
+  text-align: left;
+  font-size: 16px;
+  margin-top: 20px;
+}
+.parking-meter-popup .map-stop-hour {
+  text-align: left;
+  font-size: 16px;
+}
+.parking-meter-popup .fromtotime {
+/*  max-width: 40%;*/
+  display: inline-block
+}
+.parking-meter-popup .fromtodays {
+/*  max-width: 60%;*/
+  display: inline-block
+}
+.parking-meter-popup .map-stop-detail {
+  text-align: left;
+  font-size: 18px;
+  margin-top: 20px;
+}
+.parking-meter-popup .map-stop-hline {
+  width: 100%;
+  height: 1px;
+  border-bottom: 3px solid #2975a7;
+}
+.parking-meter-popup .map-stop-nocourses {
+  text-align: center;
+}
+.img-calibration {
+  width: 100%;
+}
+.first-time-parking-meters-popup .popup {
+  width: 80%;
+  max-width: 400px;
+}
+.first-time-parking-meters-popup .popup-title {
+  text-align: left;
+  text-transform: uppercase;
+}
+.first-time-parking-meters-popup .popup-head {
+  display: none;
+}
+.first-time-parking-meters-popup .button-close {
+  /*  background-color: gray!important;*/
+}
+.first-time-parking-meters-popup .popup-buttons button:not(.button-close) {
+  background-color: #3bbacf !important;
+}
+.first-time-parking-meters-popup .popup-buttons button {
+  white-space: normal;
+  padding: 0px;
+  color: #fff !important;
+  margin-right: 4px;
+}
+.first-time-parking-meters-popup .map-stop-title {
+  text-transform: uppercase;
+  font-size: 20px;
+  color: #2975a7;
+}
+.first-time-parking-meters-popup .popup-icon {
+  font-size: 30px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  color: #2975a7;
+}
+.first-time-parking-meters-popup .map-stop-name {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 20px;
+}
+.first-time-parking-meters-popup .map-stop-hline {
+  width: 100%;
+  height: 1px;
+  border-bottom: 3px solid #2975a7;
+}
+.first-time-parking-meters-popup .map-stop-nocourses {
+  text-align: center;
+}
+.first-time-parking-meters-popup p {
+  margin-left: 10px;
+  text-align: justify;
+}
 .parking-card-footer .slots-text span {
     text-align: center;
     width: 100%;
@@ -905,6 +1024,7 @@ ion-header-bar .title {
 
 #table-header div {
     border-bottom: 1px solid #bbb;
+  height: 25px;
 }
 
 #table-header div:first-child {
@@ -912,7 +1032,7 @@ ion-header-bar .title {
 }
 
 .tt-table #table-col div {
-    width: 20px;
+  /*    width: 20px;*/
     display: inline-block;
     margin-right: 5px;
     text-align: center;
@@ -924,7 +1044,7 @@ ion-header-bar .title {
 
 #table-table {
     white-space: nowrap;
-    font-family: RobotoMono;
+  font-family: RobotoMono !important;
     /*    left: 100px;*/
     font-size: 12px;
     position: absolute;
@@ -933,6 +1053,9 @@ ion-header-bar .title {
     -moz-transition-duration: 0.3s;
     -o-transition-duration: 0.3s;
     transition-duration: 0.3s;
+}
+#table-table br {
+  font-family: RobotoMono;
 }
 
 #table-col {
@@ -947,13 +1070,13 @@ ion-header-bar .title {
     overflow: hidden;
     text-overflow: ellipsis;
     padding-right: 5px;
-    /*	padding-left: 5px;*/
+  padding-left: 3px;
 }
 
 #table-corner {
     font-size: 12px;
-    height: 20px;
-    border-right: 1px solid #bbb;
+  height: 25px;
+  /*    border-right: 1px solid #bbb;*/
     position: absolute;
     /*    width: 100px;*/
     background-color: #fff;
@@ -963,13 +1086,18 @@ ion-header-bar .title {
 }
 
 #table-corner div {
-    height: 20.5px;
+  height: 25px;
     border-bottom: 1px solid #bbb;
+  border-right: 1px solid #bbb;
+  background-color: white;
 }
 
 #table-corner > div .corner-delay {
     margin-left: 10px;
     vertical-align: top;
+}
+.accessibilityBullet {
+  width: 20px;
 }
 
 .delay {
@@ -1210,6 +1338,52 @@ ion-header-bar .title {
     white-space: normal;
 }
 
+.compass {
+  position: absolute;
+  z-index: 999;
+  background-color: white;
+  right: 0px;
+  bottom: 0px;
+  width: 100px;
+  height: 100px;
+  margin: 0px 10px 60px 0px;
+  box-shadow: 5px 5px 20px #575757;
+  border-radius: 70px;
+}
+.distance {
+  position: absolute;
+  bottom: 20px;
+  z-index: 999;
+  background-color: white;
+  width: 100%;
+  height: 30px;
+  font-size: 18px;
+  line-height: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+#arrow {
+  width: 100px;
+  height: 100px;
+  /*
+  margin-left: 5px;
+margin-right: 10px;
+*/
+}
+#arrow img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+#distance {
+  width: 110px;
+  height: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.distance-label {
+  color: #2b78bd;
+}
 .bm-item-label {
     line-height: normal;
     overflow: hidden;
@@ -1634,13 +1808,12 @@ ion-header-bar .title {
     margin-right: 4px;
     /*    margin-left: 4px;
     */
-    font-size: 20px;
+  font-size: 25px;
 }
 
 .tt-table {
     position: absolute;
-    top: 50px;
-    left: -20px;
+  left: -25px;
     -webkit-transition-duration: 0.3s;
     -moz-transition-duration: 0.3s;
     -o-transition-duration: 0.3s;

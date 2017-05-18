@@ -7,6 +7,7 @@ angular.module('viaggia.controllers.news', [])
   var APP_ID = Config.getAppId();
 
   $ionicLoading.show();
+  //get the news elements
   feedService.load(FEED_URL, APP_ID).then(function (entries) {
     entries.forEach(function (entry) {
       entry.dateTime = new Date(entry.pubDate);
@@ -31,6 +32,7 @@ angular.module('viaggia.controllers.news', [])
     });
   };
 
+  //go to news details
   $scope.showNews = function (idx) {
     $state.go("app.newsitem", {
       id: idx

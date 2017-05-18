@@ -1,6 +1,6 @@
 angular.module('viaggia.services.plan', [])
 
-.factory('planService', function ($q, $http, $filter, Config, userService, trackService, storageService) {
+.factory('planService', function ($q, $http, $filter, Config, LoginService, trackService) {
 
     var planService = {};
     var position = {};
@@ -34,6 +34,7 @@ angular.module('viaggia.services.plan', [])
             return name;
         }
     }
+    //map with icons of planning
     var ttMap = {
         'WALK': 'ic_mt_foot',
         'BICYCLE': 'ic_mt_bicycle',
@@ -46,7 +47,7 @@ angular.module('viaggia.services.plan', [])
         'STREET': 'ic_price_parking'
     };
 
-    //    };
+    //map with actions of planning
     var actionMap = function (action) {
         switch (action) {
         case 'WALK':
@@ -67,6 +68,7 @@ angular.module('viaggia.services.plan', [])
             return $filter('translate')('action_walk');
         }
     }
+    //get the image from the map based on different means
     var getImageName = function (tt, agency) {
         if (tt == 'BUS' && Config.getExtraurbanAgencies() && Config.getExtraurbanAgencies().indexOf(parseInt(agency)) >= 0) {
             return ttMap['EXTRA'];
@@ -304,6 +306,7 @@ angular.module('viaggia.services.plan', [])
         //        }
         //        return (l / 1000).toFixed(2);
     };
+    //get the total of the leg cost
     var getLegCost = function (plan, i) {
         var fareMap = {};
         var total = 0;
@@ -318,6 +321,7 @@ angular.module('viaggia.services.plan', [])
         return total;
     };
 
+    //get the time in format xx:xx so 01:08 or 10:18 adding 0 if necessary
     planService.getTimeStr = function (time) {
         return (time.getHours() < 10 ? '0' : '') + time.getHours() + ':' + (time.getMinutes() < 10 ? '0' : '') + time.getMinutes();
     };
@@ -355,6 +359,7 @@ angular.module('viaggia.services.plan', [])
 
     };
 
+    //used to check if there are some strings we can skip for the description
     var isBadString = function (s) {
         if (s.indexOf("road") > -1 || s.indexOf("sidewalk") > -1 || s.indexOf("path") > -1 || s.indexOf("steps") > -1 || s.indexOf("track") > -1 || s.indexOf("node ") > -1 || s.indexOf("way ") > -1) {
             return true;
@@ -399,6 +404,7 @@ angular.module('viaggia.services.plan', [])
         for (var i = 0; i < plan.leg.length; i++) {
             plan.leg[i]['fromStep'] = plan.steps.length; //connection between step and leg
             var step = {};
+        step.alertText = planService.buildAlertText(plan.leg[i]);
             step.startime = i == 0 ? plan.startime : plan.leg[i].startime;
             step.endtime = plan.leg[i].endtime;
             step.mean = {};
@@ -499,7 +505,7 @@ angular.module('viaggia.services.plan', [])
     planService.planJourney = function (newPlanConfigure) {
         planConfigure = newPlanConfigure;
         var deferred = $q.defer();
-        var userId = storageService.getUser().userId;
+        var userId = LoginService.getUserProfile().userId;
         var appName = Config.getAppName();
         $http({
             method: 'POST',
@@ -564,9 +570,7 @@ angular.module('viaggia.services.plan', [])
         } else {
             i = i.replace(/\ /g, "+");
             var url = Config.getGeocoderURL() + "/address?latlng=" + Config.getMapPosition().lat + ", " + Config.getMapPosition().long + "&distance=" + Config.getDistanceForAutocomplete() + "&address=" + i;
-            $http.get(url, {
-                timeout: 5000
-            }).
+        $http.get(url, Config.getGeocoderConf()).
             success(function (data, status, headers, config) {
                 geoCoderPlaces = [];
                 //            places = data.response.docs;
@@ -622,7 +626,7 @@ angular.module('viaggia.services.plan', [])
         }
         return returndays;
     };
-
+    //saves in localstorage the planned trip, with a name and the original request
     planService.saveTrip = function (tripId, trip, name, requestedFrom, requestedTo, recurrency) {
         var deferred = $q.defer();
         var daysOfWeek = getDaysOfRecurrency(recurrency);
@@ -647,7 +651,7 @@ angular.module('viaggia.services.plan', [])
         //        if (!newTrip) {
         //            methodTrip = 'PUT';
         //}
-        userService.getValidToken().then(function (token) {
+        LoginService.getValidAACtoken().then(function (token) {
             $http({
                 method: methodTrip,
                 url: urlBuilt,
@@ -824,7 +828,7 @@ angular.module('viaggia.services.plan', [])
         var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
         if (!savedTrips) {
             //try sync with server
-            userService.getValidToken().then(function (token) {
+            LoginService.getValidAACtoken().then(function (token) {
                 $http({
                     method: 'GET',
                     url: Config.getServerURL() + "/itinerary",
@@ -903,7 +907,7 @@ angular.module('viaggia.services.plan', [])
         if (!tripId) {
             deferred.reject();
         } else {
-            userService.getValidToken().then(function (token) {
+            LoginService.getValidAACtoken().then(function (token) {
                 $http.delete(Config.getServerURL() + "/itinerary/" + tripId, {
                     headers: {
                         'Accept': 'application/json',
@@ -938,6 +942,35 @@ angular.module('viaggia.services.plan', [])
             })
         }
         return deferred.promise;
+    }
+
+    planService.hasAlerts = function (it) {
+      var has = false;
+      if (it.leg) it.leg.forEach(function (l) {
+        has = has || planService.legHasAlerts(l)
+      });
+      return has;
+    }
+    planService.legHasAlerts = function (leg) {
+      return checkArray(leg.alertStrikeList) || checkArray(leg.alertDelayList) || checkArray(leg.alertParkingList) || checkArray(leg.alertRoadList) || checkArray(leg.alertAccidentList);
+    }
+    planService.buildAlertText = function (leg) {
+      var txt = [];
+      if (checkArray(leg.alertDelayList)) {
+        leg.alertDelayList.forEach(function (a) {
+          txt.push($filter('translate')('alert_delay', {
+            mins: Math.ceil(a.delay / 60000)
+          }));
+        });
+      }
+      return txt;
+    }
+
+
+
+
+    function checkArray(a) {
+      return a != null && a.length > 0;
     }
 
     return planService;

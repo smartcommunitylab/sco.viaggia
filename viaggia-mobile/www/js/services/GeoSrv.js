@@ -1,7 +1,8 @@
 angular.module('viaggia.services.geo', [])
 
-.factory('GeoLocate', function ($q, $rootScope) {
+  .factory('GeoLocate', function ($q, $rootScope, $cordovaDeviceOrientation) {
     var localization = undefined;
+    var compassWatch = null;
     var positionError = null;
     if (typeof (Number.prototype.toRad) === "undefined") {
         Number.prototype.toRad = function () {
@@ -65,6 +66,8 @@ angular.module('viaggia.services.geo', [])
                         $rootScope.locationWatchID = navigator.geolocation.watchPosition(function (position) {
                             r = [position.coords.latitude, position.coords.longitude];
                             $rootScope.myPosition = r;
+                            $rootScope.myPositionAccuracy = position.coords.accuracy;
+
                             localization.resolve(r);
                         }, function (error) {
                             positionError = error;
@@ -85,6 +88,7 @@ angular.module('viaggia.services.geo', [])
                 $rootScope.locationWatchID = navigator.geolocation.watchPosition(function (position) {
                     r = [position.coords.latitude, position.coords.longitude];
                     $rootScope.myPosition = r;
+                    $rootScope.myPositionAccuracy = position.coords.accuracy;
                     //console.log('geolocated (web)');
                     localization.resolve(r);
                 }, function (error) {
@@ -109,6 +113,10 @@ angular.module('viaggia.services.geo', [])
             var defer = $q.defer();
             document.addEventListener('deviceready', function () {
                 console.log('Check geolocation permissions');
+//                if (!$rootScope.myPosition) {
+//                  startLocalization();
+//                }
+//                return defer.resolve();
 
                 navigator.geolocation.getCurrentPosition(
                     function (position) {
@@ -127,7 +135,7 @@ angular.module('viaggia.services.geo', [])
                             return defer.reject();
                         }
                     }, {
-                        timeout: 100
+                        timeout: 10* 1000
                     });
             }, false);
             return defer.promise;
@@ -151,18 +159,41 @@ angular.module('viaggia.services.geo', [])
         getAccuracy: function () {
             return $rootScope.myPositionAccuracy;
         },
+      bearing: function (pt1, pt2) {
+        var d = false;
+        if (pt1 && pt1[0] && pt1[1] && pt2 && pt2[0] && pt2[1]) {
+          var lat1 = Number(pt1[0]);
+          var lon1 = Number(pt1[1]);
+          var lat2 = Number(pt2[0]);
+          var lon2 = Number(pt2[1]);
+          var R = 6371; // km
+          var dLat = (lat2 - lat1).toRad();
+          var dLon = (lon2 - lon1).toRad();
+          var lat1 = lat1.toRad();
+          var lat2 = lat2.toRad();
+          var y = Math.sin(dLon) * Math.cos(lat2);
+          var x = Math.cos(lat1) * Math.sin(lat2) -
+            Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+          var brng = Math.atan2(y, x) * (180 / Math.PI)
+        } else {
+          console.log('cannot calculate distance!');
+        }
+        return brng;
+      },
         distance: function (pt1, pt2) {
             var d = false;
             if (pt1 && pt1[0] && pt1[1] && pt2 && pt2[0] && pt2[1]) {
-                var lat1 = Number(pt1[0]).toRad();
-                var lon1 = Number(pt1[1]).toRad();
-                var lat2 = Number(pt2[0]).toRad();
-                var lon2 = Number(pt2[1]).toRad();
+          var lat1 = Number(pt1[0]);
+          var lon1 = Number(pt1[1]);
+          var lat2 = Number(pt2[0]);
+          var lon2 = Number(pt2[1]);
 
                 var R = 6371; // km
                 //var R = 3958.76; // miles
-                var dLat = (lat2 - lat1);
-                var dLon = (lon2 - lon1);
+          var dLat = (lat2 - lat1).toRad();
+          var dLon = (lon2 - lon1).toRad();
+          var lat1 = lat1.toRad();
+          var lat2 = lat2.toRad();
                 var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
                     Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
                 var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
@@ -180,6 +211,26 @@ angular.module('viaggia.services.geo', [])
                 return GL.distance(myPosition, gotoPosition);
             });
         },
+              initCompassMonitor: function (onSuccess, onError, options) {
+        //        function onSuccess(heading) {
+        //          console.log('Heading: ' + heading.magneticHeading);
+        //        };
+        //
+        //        function onError(compassError) {
+        //          alert('Compass error: ' + compassError.code);
+        //        };
+        //
+        //        var options = {
+        //          frequency: 500
+        //        }; // Update every 3 seconds
+
+        compassWatch = navigator.compass.watchHeading(onSuccess, onError, options);
+
+      },
+      closeCompassMonitor: function () {
+        if (!window.$cordovaDeviceOrientation) return;
+        $cordovaDeviceOrientation.clearWatch(compassWatch);
+      },
         /**
          * Input: array of objects of type {coords:{latitude:..., longitude:..., accuracy:...}}
          * Output: array of object of type {lat:..., lng:...}

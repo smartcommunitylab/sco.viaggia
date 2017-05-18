@@ -1,225 +1,237 @@
 @font-face {
-    font-family: 'viaggia';
-    src:    url('viaggia.eot?ug9l9r');
-    src:    url('viaggia.eot?ug9l9r#iefix') format('embedded-opentype'),
-        url('viaggia.ttf?ug9l9r') format('truetype'),
-        url('viaggia.woff?ug9l9r') format('woff'),
-        url('viaggia.svg?ug9l9r#viaggia') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'viaggia';
+  src:  url('viaggia.eot?hxzrar');
+  src:  url('viaggia.eot?hxzrar#iefix') format('embedded-opentype'),
+    url('viaggia.ttf?hxzrar') format('truetype'),
+    url('viaggia.woff?hxzrar') format('woff'),
+    url('viaggia.svg?hxzrar#viaggia') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 [class^="ic_"], [class*=" ic_"] {
-    /* use !important to prevent issues with browser extensions that change fonts */
-    font-family: 'viaggia' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'viaggia' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
 
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+.ic_parcometro:before {
+  content: "\e945";
+}
+.ic_m_parcometro:before {
+  content: "\e944";
+}
+.ic_text_size_outline:before {
+  content: "\e943";
+}
+.ic_text_size:before {
+  content: "\e942";
+}
 .ic_access_outline:before {
-    content: "\e940";
+  content: "\e940";
 }
 .ic_access:before {
-    content: "\e941";
+  content: "\e941";
 }
 .ic_taxi:before {
-    content: "\e93f";
+  content: "\e93f";
 }
 .ic_ac:before {
-    content: "\e93e";
+  content: "\e93e";
 }
 .ic_recurring:before {
-    content: "\e93d";
+  content: "\e93d";
 }
 .ic_questionario:before {
-    content: "\e922";
+  content: "\e922";
 }
 .ic_segnala_problemi:before {
-    content: "\e93c";
+  content: "\e93c";
 }
 .ic_m_extraurban_bus:before {
-    content: "\e936";
+  content: "\e936";
 }
 .ic_m_urban_bus:before {
-    content: "\e937";
+  content: "\e937";
 }
 .ic_m_train:before {
-    content: "\e938";
+  content: "\e938";
 }
 .ic_m_parking-lot:before {
-    content: "\e939";
+  content: "\e939";
 }
 .ic_m_bike:before {
-    content: "\e93a";
+  content: "\e93a";
 }
 .ic_m_funivia:before {
-    content: "\e93b";
+  content: "\e93b";
 }
 .ic_one:before {
-    content: "\e926";
+  content: "\e926";
 }
 .ic_two:before {
-    content: "\e927";
+  content: "\e927";
 }
 .ic_three:before {
-    content: "\e928";
+  content: "\e928";
 }
 .ic_four:before {
-    content: "\e929";
+  content: "\e929";
 }
 .ic_five:before {
-    content: "\e92a";
+  content: "\e92a";
 }
 .ic_six:before {
-    content: "\e92b";
+  content: "\e92b";
 }
 .ic_seven:before {
-    content: "\e92c";
+  content: "\e92c";
 }
 .ic_eight:before {
-    content: "\e92d";
+  content: "\e92d";
 }
 .ic_nine:before {
-    content: "\e92e";
+  content: "\e92e";
 }
 .ic_zero:before {
-    content: "\e92f";
+  content: "\e92f";
 }
 .ic_A:before {
-    content: "\e930";
+  content: "\e930";
 }
 .ic_B:before {
-    content: "\e931";
+  content: "\e931";
 }
 .ic_C:before {
-    content: "\e932";
+  content: "\e932";
 }
 .ic_N:before {
-    content: "\e933";
+  content: "\e933";
 }
 .ic_P:before {
-    content: "\e934";
+  content: "\e934";
 }
 .ic_funivia:before {
-    content: "\e935";
+  content: "\e935";
 }
 .ic_car:before {
-    content: "\e925";
+  content: "\e925";
 }
 .ic_star-outline:before {
-    content: "\e923";
+  content: "\e923";
 }
 .ic_star:before {
-    content: "\e924";
+  content: "\e924";
 }
 .ic_monitoring:before {
-    content: "\e900";
+  content: "\e900";
 }
 .ic_bike:before {
-    content: "\e901";
+  content: "\e901";
 }
 .ic_urban-bus:before {
-    content: "\e902";
+  content: "\e902";
 }
 .ic_train:before {
-    content: "\e903";
+  content: "\e903";
 }
 .ic_extraurban-bus:before {
-    content: "\e904";
+  content: "\e904";
 }
 .ic_real-time-info:before {
-    content: "\e905";
+  content: "\e905";
 }
 .ic_home:before {
-    content: "\e906";
+  content: "\e906";
 }
 .ic_search:before {
-    content: "\e907";
+  content: "\e907";
 }
 .ic_folder:before {
-    content: "\e908";
+  content: "\e908";
 }
 .ic_back:before {
-    content: "\e909";
+  content: "\e909";
 }
 .ic_nav:before {
-    content: "\e90a";
+  content: "\e90a";
 }
 .ic_map:before {
-    content: "\e90b";
+  content: "\e90b";
 }
 .ic_info:before {
-    content: "\e90c";
+  content: "\e90c";
 }
 .ic_user:before {
-    content: "\e90d";
+  content: "\e90d";
 }
 .ic_notification:before {
-    content: "\e90e";
+  content: "\e90e";
 }
 .ic_bookmark-outline:before {
-    content: "\e90f";
+  content: "\e90f";
 }
 .ic_bookmark:before {
-    content: "\e910";
+  content: "\e910";
 }
 .ic_parking-lot:before {
-    content: "\e911";
+  content: "\e911";
 }
 .ic_euro:before {
-    content: "\e912";
+  content: "\e912";
 }
 .ic_news:before {
-    content: "\e913";
+  content: "\e913";
 }
 .ic_navigator:before {
-    content: "\e914";
+  content: "\e914";
 }
 .ic_advice:before {
-    content: "\e915";
+  content: "\e915";
 }
 .ic_delete:before {
-    content: "\e916";
+  content: "\e916";
 }
 .ic_edit:before {
-    content: "\e917";
+  content: "\e917";
 }
 .ic_new:before {
-    content: "\e918";
+  content: "\e918";
 }
 .ic_list:before {
-    content: "\e919";
+  content: "\e919";
 }
 .ic_clear:before {
-    content: "\e91a";
+  content: "\e91a";
 }
 .ic_more:before {
-    content: "\e91b";
+  content: "\e91b";
 }
 .ic_foot:before {
-    content: "\e91c";
+  content: "\e91c";
 }
 .ic_car-sharing:before {
-    content: "\e91d";
+  content: "\e91d";
 }
 .ic_bike-sharing:before {
-    content: "\e91e";
+  content: "\e91e";
 }
 .ic_public-transport:before {
-    content: "\e91f";
+  content: "\e91f";
 }
 .ic_parking-garage:before {
-    content: "\e920";
+  content: "\e920";
 }
 .ic_localization:before {
-    content: "\e921";
+  content: "\e921";
 }
 

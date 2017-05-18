@@ -26,13 +26,14 @@ angular.module('viaggia.services.notification', [])
 
   // Register to GCM
   notificationService.register = function () {
+    if (!window.PushNotification) return;
     console.log("registration")
     var push = PushNotification.init({
       android: {
         senderID: Config.getSenderID(),
-        topics: [Config.getMessagingAppId()],
-        icon: "notification",
-        iconColor: "gray"
+//        icon: "notification",
+//        iconColor: "gray"
+        topics: [Config.getMessagingAppId()]
       },
       ios: {
         alert: "true",

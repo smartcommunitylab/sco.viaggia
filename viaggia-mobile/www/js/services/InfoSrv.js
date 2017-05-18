@@ -34,7 +34,9 @@ angular.module('viaggia.services.info', [])
               deferred.resolve(null);
             }
           },
-          function(){deferred.resolve(null);}
+          function () {
+            deferred.resolve(null);
+          }
          );
       }
       return deferred.promise;
@@ -44,7 +46,7 @@ angular.module('viaggia.services.info', [])
       $http.get(Config.getServerURL()+'/getparkingsbyagency/'+agencyId,
                 Config.getHTTPConfig())
         .success(function(data) {
-          if (data) {
+          if (data && data instanceof Array) {
             data.forEach(function(d, idx) {
                   d.id = generateId(d.name);
             });
@@ -64,8 +66,20 @@ angular.module('viaggia.services.info', [])
               deferred.resolve(data);
             });
           } else {
-            deferred.resolve(data);
+            deferred.reject(data);
           }
+        })
+        .error(function (err) {
+          deferred.reject(err);
+        });
+      return deferred.promise;
+    },
+    getParkingMeters: function (lat, long) {
+      var deferred = $q.defer();
+      $http.get(Config.getMetroparcoServerURL() + '/nearparkingmeters/' + lat + '/' + long + '/' + Config.getParkingMetersRadius() + '/' + Config.getParkingMetersMaxNumber() + "?agencyIds=" + Config.getParkingMetersAgencyIds().join(", "),
+          Config.getHTTPConfig())
+        .success(function (data) {
+          deferred.resolve(data);
         })
         .error(function(err) {
           deferred.reject(err);
@@ -104,7 +118,9 @@ angular.module('viaggia.services.info', [])
               deferred.resolve(null);
             }
           },
-          function(){deferred.resolve(null);}
+          function () {
+            deferred.resolve(null);
+          }
          );
       }
       return deferred.promise;
