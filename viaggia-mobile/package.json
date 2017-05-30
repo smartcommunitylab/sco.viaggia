@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "bower": "^1.3.3",
+    "gulp-sass": "^2.3.2",
     "gulp-util": "^2.2.14",
     "shelljs": "^0.3.0"
   },
@@ -30,7 +31,6 @@
     "https://github.com/samikrc/CordovaSQLite.git",
     "cordova-plugin-whitelist",
     "cordova-plugin-screen-orientation",
-    "phonegap-plugin-push@1.8.4",
     {
       "variables": {
         "SENDER_ID": "453601816446",

@@ -63,6 +63,7 @@ angular.module('viaggia', [
     'viaggia.controllers.notifications',
     'viaggia.controllers.plan',
     'viaggia.controllers.taxi',
+    'viaggia.controllers.pois',
     'viaggia.controllers.planlist',
     'viaggia.controllers.tripdetails',
     'viaggia.services.data',
@@ -72,6 +73,7 @@ angular.module('viaggia', [
     'viaggia.services.timetable',
     'viaggia.services.info',
     'viaggia.services.taxi',
+    'viaggia.services.pois',
     'viaggia.services.notification',
     'viaggia.directives',
     'viaggia.services.geo',
@@ -368,6 +370,26 @@ angular.module('viaggia', [
             controller: 'TaxiCtrl'
           }
         }
+      })
+      .state('app.pois', {
+        //cache: false,
+        url: "/pois",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/pois.html",
+            controller: 'POIsCtrl'
+          }
+        }
+      }) 
+      .state('app.poi', {
+        //cache: false,
+        url: "/poi/:poiId",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/poi.html",
+            controller: 'POICtrl'
+          }
+        }
       });
 
 
@@ -383,15 +405,19 @@ angular.module('viaggia', [
       menu_bookmarks: 'Preferiti',
       menu_notifications: 'Avvisi',
       menu_info_real_time: 'Info in tempo reale',
+      menu_info_transports: 'Info trasporti',
       menu_monitoring: 'Monitoring',
       menu_real_time_bus_urban: 'Autobus Urbani',
-      menu_real_time_bus_extraurban: 'Autobus ExtraUrbani',
+      menu_real_time_bus_extraurban: 'Autobus Extraurbani',
       menu_real_time_bus_suburban: 'Autobus Suburbani',
+      menu_real_time_transport_local: 'Trasporti locali',
       menu_real_time_train: 'Treni',
       menu_real_time_bike: 'Biciclette condivise',
       menu_real_time_park: 'Parcheggi',
       menu_taxi: 'Taxi',
       menu_credits: "Credits",
+      menu_quest: "Questionario",
+      menu_pois: "Punti di interesse",
       menu_login: "Login",
       menu_logout: "Logout",
       menu_parking_meters: "Parcometri",
@@ -479,7 +505,7 @@ angular.module('viaggia', [
       err_too_many_markers: 'Too many objects on the map. Please zoom in.',
       lbl_lines: 'Corse:',
       lbl_line: 'Linea',
-      popup_delete_trip_message: 'Sicuro di voler eleminare il viaggio salvato?',
+      popup_delete_trip_message: 'Sicuro di voler eliminare il viaggio salvato?',
       popup_delete_trip_title: 'Elimina',
       tripdeleted_message_feedback: 'Il viaggio selezionato è stato eliminato',
       my_trip_empty_list: 'Non ci sono viaggi salvati',
@@ -494,7 +520,8 @@ angular.module('viaggia', [
       error_to_message_feedback: 'Luogo di destinazione non valido',
       error_time_message_feedback: 'Selezionare un\'ora recente',
       credits_project: 'Un progetto di:',
-      credits_sponsored: 'Con la collaborazione di:',
+      credits_sponsored: 'In collaborazione con:',
+      credits_participation: 'Con la participazione di:',
       credits_info: 'Per informazioni:',
       credits_licenses_button: 'VEDI LICENZE',
       favorites_title_list: 'Indirizzi preferiti',
@@ -554,6 +581,9 @@ angular.module('viaggia', [
       error_select_type_accessibility_feedback: 'Per visualizzare un percorso accessibile è necessario selezionare i mezzi pubblici o a piedi',
       not_acc_label: 'Questa linea non è accessibile',
       alert_delay: 'Ritardo di {{mins}} minuti',
+      parking_pickup_alert_car:'Solo {{num}} auto disponibili',
+      parking_pickup_alert_bike:'Solo {{num}} bici disponibili',
+      parking_alert:'Solo {{num}} posti disponibili',
       lbl_parking_meter: 'Parchimetro',
       lbl_parking_meter_price: 'Tariffa oraria:',
       lbl_parking_meter_orario: 'Orario:',
@@ -580,15 +610,19 @@ angular.module('viaggia', [
       menu_bookmarks: 'Bookmarks',
       menu_notifications: 'Notifications',
       menu_info_real_time: 'Real Time information',
+      menu_info_transports: 'Transport information',
       menu_monitoring: 'Monitoring',
       menu_real_time_bus_urban: 'Urban Bus',
       menu_real_time_bus_extraurban: 'Extraurban Bus',
       menu_real_time_bus_suburban: 'Suburban Bus',
+      menu_real_time_transport_local: 'Local transport',
       menu_real_time_train: 'Trains',
       menu_real_time_bike: 'Shared bikes',
       menu_real_time_park: 'Parking lots',
       menu_taxi: 'Taxi',
       menu_credits: "Credits",
+      menu_quest: "Survey",
+      menu_pois: "Points of Interest",
       menu_login: "Login",
       menu_logout: "Logout",
       menu_parking_meters: "Parking meters",
@@ -692,6 +726,7 @@ angular.module('viaggia', [
       error_time_message_feedback: 'Choose a recent hour',
       credits_project: 'A project by:',
       credits_sponsored: 'In collaboration with:',
+      credits_participation: 'With participation of:',
       credits_info: 'Further information:',
       credits_licenses_button: 'READ LICENSES',
       favorites_title_list: 'Favorite places',
@@ -751,6 +786,9 @@ angular.module('viaggia', [
       error_select_type_accessibility_feedback: 'In order to get an accessible route, you must select public transport or foot',
       not_acc_label: 'This line is not accessible',
       alert_delay: 'Delay of {{mins}} minutes',
+      parking_pickup_alert_car:'Only {{num}} cars available',
+      parking_pickup_alert_bike:'Only {{num}} bikes available',
+      parking_alert:'Only {{num}} slots available',
       lbl_parking_meter: 'Parking Meter',
       lbl_parking_meter_price: 'Price:',
       lbl_parking_meter_orario: 'Time:',

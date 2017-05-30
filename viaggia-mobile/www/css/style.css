@@ -191,47 +191,31 @@
 }
 
 .button-viaggia-header {
-  background-color: #3bbacf;
   color: white;
 }
 
-.button-viaggia-header.activated {
-  background-color: #3bbacf !important;
-}
-
 .button-viaggia-header:hover {
-  background-color: #3bbacf;
   color: white;
 }
 
 .button-viaggia {
-  background-color: #3bbacf;
   color: white;
 }
 
 .button-viaggia:hover {
-  background-color: #3bbacf;
   color: white;
 }
 
 .button-viaggia-selected {
-  background-color: #3bbacf;
   color: white;
   box-shadow: none;
 }
 
 .button-viaggia-selected:hover {
-  background-color: #3bbacf;
   color: white;
 }
 
-.button-viaggia-notselected {
-  background-color: rgba(60, 186, 207, 0.5);
-  color: white;
-}
-
-.button-viaggia-notselected:hover {
-  background-color: rgba(60, 186, 207, 0.5);
+.button-viaggia-notselected, .button-viaggia-notselected:hover {
   color: white;
 }
 
@@ -367,10 +351,6 @@
   padding-bottom: 0 !important;
 }
 
-.menu-rt {
-  background-color: #3bbacf !important;
-}
-
 .menu-main {
   background-color: #2975a7 !important;
 }
@@ -502,10 +482,6 @@
   background-color: gray!important;
 }
 
-.parking-popup .popup-buttons button:not(.button-close) {
-  background-color: #3bbacf !important;
-}
-
 .parking-popup .popup-buttons button {
   white-space: normal;
   padding: 0px;
@@ -558,11 +534,7 @@
 }
 
 .parking-meter-popup .button-close {
-  background-color: gray!important;
-}
-
-.parking-meter-popup .popup-buttons button:not(.button-close) {
-  background-color: #3bbacf !important;
+  background-color: gray !important;
 }
 
 .parking-meter-popup .popup-buttons button {
@@ -643,9 +615,6 @@
   /*  background-color: gray!important;*/
 }
 
-.first-time-parking-meters-popup .popup-buttons button:not(.button-close) {
-  background-color: #3bbacf !important;
-}
 
 .first-time-parking-meters-popup .popup-buttons button {
   white-space: normal;
@@ -776,6 +745,12 @@ ion-header-bar .title {
   font-weight: bold;
 }
 
+.credits_subtitle p {
+  font-size: 12px;
+  color: #000;
+  font-weight: normal;
+}
+
 .credits_row {
   padding: 0;
   margin-bottom: 10px;
@@ -820,7 +795,6 @@ ion-header-bar .title {
 }
 
 .popup-buttons .button {
-  background-color: #3bbacf;
   color: #fff;
 }
 
@@ -854,6 +828,8 @@ ion-header-bar .title {
 
 .home-list .button i {
   margin-right: 16px;
+  min-width: 36.5px;
+  text-align: center;
 }
 
 .home-list .button i::before {
@@ -933,7 +909,6 @@ ion-header-bar .title {
 
 .plan-viaggia-fromto {
   margin: auto;
-  color: #3bbacf;
   box-shadow: none;
   padding: 0 12px;
 }
@@ -948,14 +923,6 @@ ion-header-bar .title {
 
 .ion-checkmark:before {
   color: white;
-}
-
-.item-radio input:checked ~ .item-content {
-  background: #3bbacf;
-}
-
-.item-radio input:checked + .item-content {
-  background: #3bbacf;
 }
 
 .item-radio input:checked + .radio-icon {
@@ -1482,10 +1449,6 @@ margin-right: 10px;
   background-color: #fff;
 }
 
-.trip-card .item-options {
-  background-color: #3bbacf !important;
-}
-
 .trip-card .ion-option-button {
   color: white;
 }
@@ -1500,10 +1463,11 @@ margin-right: 10px;
   font-weight: bold;
   font-size: 16px;
   margin-bottom: 8px;
+  text-align: center;
+  white-space: normal;
 }
 
 .taxi-number {
-  color: #3bbacf;
   font-weight: bold;
   text-decoration: none;
   font-size: 24px;
@@ -1627,4 +1591,65 @@ margin-right: 10px;
 }
 .alert-text p {
   margin-bottom: 0 !important;
+}
+
+
+.poi-list button {
+  text-align: left;
+  font-size: 16px;
+  background-color: #fff;
+  border: 1px solid #d2d2d2;
+  min-height: 70px;
+  margin: 5px 0px;
+  padding: 0px;
+  text-transform: none;
+}
+
+.poi-list button img {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+}
+
+.poi-list button .col p {
+  line-height: 20px;
+  white-space: normal !important;
+}
+
+.poi .img-container {
+  position: relative;
+}
+
+.poi .img-container .trans {
+  position: absolute;
+  width: 100%;
+  height: 60%;
+  bottom: 5px;
+  background: -webkit-linear-gradient(rgba(0,0,0,0), rgba(255,255,255,1)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(rgba(0,0,0,0), rgba(255,255,255,1)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(rgba(0,0,0,0), rgba(255,255,255,1)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(rgba(0,0,0,0), rgba(255,255,255,1)); /* Standard syntax */
+}
+
+.poi .poi-img {
+  width: 100%;
+  height: auto;
+}
+
+.poi .row.address {
+  position: absolute;
+  bottom: 0;
+}
+.poi .row.address h4 {
+  margin: 0 !important;
+}
+
+.poi .row.web h4 {
+  font-size: 14px;
+  border-bottom: 2px solid #007cc2;
+  padding-bottom: 5px;
+}
+.poi .row.web h4 a {
+  text-decoration: none;
+  color: #000;
 }

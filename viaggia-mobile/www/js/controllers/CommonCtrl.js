@@ -106,7 +106,9 @@ App Controller: it shares some usefull functions called by any controller
     $scope.version = Config.getVersion();
     $scope.shownGroup = JSON.parse(localStorage.getItem(Config.getAppId() + '_shownGroup')) || false;
     $scope.contactLink = Config.getContactLink();
-    $scope.taxiEnabled = (Config.getTaxiId() != 'undefined');
+    $scope.taxiEnabled = (!!Config.getTaxiId());
+    $scope.poiEnabled = (!!Config.getPOIURL());
+    $scope.questLink = Config.getQuestURL();
   });
 })
 

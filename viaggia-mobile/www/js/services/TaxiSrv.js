@@ -10,7 +10,7 @@ angular.module('viaggia.services.taxi', [])
     getCompanies: function (appId, agencyId) {
       var deferred = $q.defer();
       if (!cacheCompanies.length || cacheCompanies.length === 0) {
-        $http.get(Config.getServerURL() + '/getTaxiAgencyContacts/',
+        $http.get(Config.getServerURL() + '/getTaxiAgencyContacts/'+agencyId,
             Config.getHTTPConfig())
           .success(function (data) {
             if (data) {
@@ -34,7 +34,7 @@ angular.module('viaggia.services.taxi', [])
     getTaxiPoints: function (appId, agencyId) {
       var deferred = $q.defer();
       if (!cacheTaxiPoints.length || cacheTaxiPoints.length === 0) {
-        $http.get(Config.getServerURL() + '/getTaxiStation/',
+        $http.get(Config.getServerURL() + '/getTaxiStation/'+agencyId,
             Config.getHTTPConfig())
           .success(function (data) {
             if (data) {

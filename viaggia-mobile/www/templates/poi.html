@@ -1,0 +1,26 @@
+<ion-view>
+  <ion-nav-title>
+    {{poi.properties.title[lang]}}
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-fab button-viaggia-header ion-navigate" ng-click="navigate()"></button>
+  </ion-nav-buttons>
+  <ion-content has-header="true" class="poi">
+    <div class="img-container">
+      <img class="poi-img" ng-src="{{poi.properties.image}}"/>
+      <div class="trans"></div>
+      <div class="row address">
+        <div class="col">
+          <h4><i class="icon ion-ios-location"></i> {{poi.properties.address}}</h4>
+        </div>  
+      </div>  
+    </div>  
+    <div class="row"><div class="col"><p>{{poi.properties.abstract[lang]}}</p></div></div>
+    <div class="row web" ng-if="poi.properties.web != null">
+      <div class="col">
+        <h4><a ng-href="{{poi.properties.web}}" target="_system">{{poi.properties.web}}</a></h4>
+      </div>  
+    </div>
+    <div class="row"><div class="col"><p>{{poi.properties.description[lang]}}</p></div></div>
+  </ion-content>  
+</ion-view>  

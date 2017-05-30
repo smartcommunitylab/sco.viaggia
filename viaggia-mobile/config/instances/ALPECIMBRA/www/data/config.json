@@ -1,0 +1,105 @@
+{
+    "appid": "alpecimbra",
+    "messagingAppId": "mobility.alpecimbra",
+    "senderID": "453601816446",
+    "appversion": "1.0.0",
+    "appname": "Viaggia Alpe Cimbra",
+    "serverURL": "https://dev.smartcommunitylab.it/core.mobility",
+    "messagingServerURL": "https://dev.smartcommunitylab.it/core.communicator",
+    "newsRSS": "https://dev.smartcommunitylab.it/core.mobility/announcements/rss/alpecimbra",
+    "POIURL": "data/poi.json",
+    "QuestURL": "http://www.google.it",
+    "contact_link" : "mailto:viaggiaalpecimbra@smartcommunitylab.it?subject=ViaggiaAlpeCimbra:%20segnalazione%20problema",
+    "smartcheck_options": [
+        1,
+        4,
+        5
+    ],
+    "plan_default_options": {
+        "routeType": "fastest",
+        "transportTypes": [
+            "WALK",
+            "TRANSIT"
+        ]
+    },
+    "taxi_id": "TAXI_ALPECIMBRA",
+    "taxi_accuracy": 65,
+    "plan_policy": "Rovereto",
+    "agencies": [5, 6, 7, 8, 10, 17],
+    "extraurban_agencies": [17],
+    "broadcast_notifications_options": [
+        1,
+        4
+    ],
+    "center_map": [45.928159, 11.219151],
+    "zoom_map": 12,
+    "db_version": 25,
+    "visualization": {
+        "primaryLinks": [
+            {
+                "state": "/app/plan",
+                "label": "menu_plan",
+                "icon": "ic_search",
+                "color": "#3BBACF"
+            },
+            {
+                "state": "/app/ttlist/local",
+                "label": "menu_real_time_transport_local",
+                "icon": "ic_urban-bus",
+                "color": "#EB8919"
+            },
+            {
+                "state": "/app/ttlist/extraurbano",
+                "label": "menu_real_time_bus_extraurban",
+                "icon": "ic_extraurban-bus",
+                "color": "#00588e"
+            },
+            {
+                "state": "/app/ttlist/trains",
+                "label": "menu_real_time_train",
+                "icon": "ic_train",
+                "color": "#cd251c"
+            },
+            {
+                "state": "/app/pois",
+                "label": "menu_pois",
+                "icon": "ion-ios-location",
+                "color": "#a9a836"
+            }, 
+            {
+                "state": "/app/parking/ALPECIMBRA",
+                "label": "menu_real_time_park",
+                "icon": "ic_parking-lot",
+                "color": "#164286"
+            }, 
+            {
+                "state": "/app/taxi",
+                "label": "menu_taxi",
+                "icon": "ic_taxi",
+                "color": "#f8cf20"
+            }
+      ],
+        "infomenu": [
+            {
+                "state": "/app/ttlist/urbano",
+                "label": "menu_real_time_transport_local",
+                "icon": "ic_urban-bus"
+            },
+            {
+                "state": "/app/ttlist/extraurbano",
+                "label": "menu_real_time_bus_extraurban",
+                "icon": "ic_extraurban-bus"
+            },
+            {
+                "state": "/app/ttlist/trains",
+                "label": "menu_real_time_train",
+                "icon": "ic_train"
+            },
+            {
+                "state": "/app/parking/ALPECIMBRA",
+                "label": "menu_real_time_park",
+                "icon": "ic_parking-lot"
+            }
+      ]
+    }
+}

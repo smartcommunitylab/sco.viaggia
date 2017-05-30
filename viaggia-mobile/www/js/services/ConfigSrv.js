@@ -3,7 +3,7 @@ angular.module('viaggia.services.conf', [])
   Configuration service. Here Are stored most of the constants and variables.
   This service works combined with the config.json file and many methods defined get the json value from it
   */
-  .factory('Config', function ($q, $http, $window, $filter, $rootScope, $ionicLoading) {
+  .factory('Config', function ($q, $http, $window, $filter, $timeout, $rootScope, $ionicLoading) {
 
     var isDarkColor = function (color) {
       if (!color) return true;
@@ -290,6 +290,12 @@ angular.module('viaggia.services.conf', [])
       getRSSUrl: function () {
         return mapJsonConfig["newsRSS"];
       },
+      getPOIURL: function () {
+        return mapJsonConfig["POIURL"];
+      },
+      getQuestURL: function () {
+        return mapJsonConfig["QuestURL"];
+      },
       getVersion: function () {
         return 'v ' + mapJsonConfig["appversion"] + (APP_BUILD && APP_BUILD != '' ? '<br/>(' + APP_BUILD + ')' : '');
       },
@@ -329,7 +335,7 @@ angular.module('viaggia.services.conf', [])
         $ionicLoading.show();
       },
       loaded: function () {
-        $ionicLoading.hide();
+        $timeout($ionicLoading.hide());
       },
       getInfoMenu: function () {
         return mapJsonConfig.visualization.infomenu;

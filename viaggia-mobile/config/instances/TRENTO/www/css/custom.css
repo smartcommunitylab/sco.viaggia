@@ -1,0 +1,25 @@
+.button-viaggia-header, .button-viaggia-header.activated, .button-viaggia-header:hover,
+.button-viaggia, .button-viaggia:hover,
+.button-viaggia-selected, .button-viaggia-selected:hover,
+.menu-rt, 
+.parking-popup .popup-buttons button:not(.button-close),
+.parking-meter-popup .popup-buttons button:not(.button-close),
+.first-time-parking-meters-popup .popup-buttons button:not(.button-close),
+.popup-buttons .button,
+.trip-card .item-options
+{
+  background-color: #3bbacf !important;
+}
+ 
+.item-radio input:checked ~ .item-content {
+  background: #3bbacf !important;
+}
+
+.plan-viaggia-fromto,
+.taxi-number
+{
+  color: #3bbacf !important;
+}
+.button-viaggia-notselected, .button-viaggia-notselected:hover {
+  background-color: rgba(60, 186, 207, 0.5);
+}

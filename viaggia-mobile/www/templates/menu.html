@@ -27,7 +27,7 @@
                 </ion-item>
                 <div>
                     <ion-item class="item item-icon-left item-icon-right menu-main" ng-click="toggleGroupRealTime()" ng-class="{active: isGroupRealTimeShown()}">
-                        <i class="icon ic_real-time-info"></i> {{'menu_info_real_time' | translate}}
+                        <i class="icon ic_real-time-info"></i> {{'menu_info_transports' | translate}}
                         <i class="icon" ng-class="isGroupRealTimeShown() ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i>
                     </ion-item>
                     <div>
@@ -44,6 +44,9 @@
 -->
                 <ion-item nav-clear menu-close href="#/app/taxi" class="menu-main item-icon-left" ng-if="taxiEnabled">
                     <i class="icon ic_taxi"></i>{{'menu_taxi' | translate}}
+                </ion-item>
+                <ion-item nav-clear menu-close href="#/app/pois" class="menu-main item-icon-left" ng-if="poiEnabled">
+                    <i class="icon ion-ios-location"></i>{{'menu_pois' | translate}}
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/app/news" class="menu-main item-icon-left">
                     <i class="icon ic_news"></i>{{'menu_news' | translate}}
@@ -65,8 +68,11 @@
     <i class="icon ic_user"></i>{{'menu_login' | translate}}
 </ion-item>
 -->
+                <ion-item nav-clear menu-close ng-href="{{questLink}}" target="_system" class="menu-main item-icon-left" ng-if="!!questLink">
+                    <i class="icon ic_questionario"></i>{{'menu_quest' | translate}}
+                </ion-item>
                 <ion-item nav-clear menu-close href="{{contactLink}}" class="item-icon-left menu-main ">
-                    <i class="icon ic_segnala_problemi"></i>{{'menu_betatesting_bug' | translate}}
+                    <i class="icon ion-person"></i>{{'menu_betatesting_bug' | translate}}
                 </ion-item>
                 <ion-item nav-clear menu-close ng-click="openCredits()" class="menu-last item-icon-left">
                     <i class="icon ic_info"></i>{{'menu_credits' | translate}}

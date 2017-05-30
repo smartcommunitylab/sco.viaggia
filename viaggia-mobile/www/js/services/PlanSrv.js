@@ -769,6 +769,28 @@ angular.module('viaggia.services.plan', [])
             mins: Math.ceil(a.delay / 60000)
           }));
         });
+      } else if (checkArray(leg.alertParkingList)) {
+        leg.alertParkingList.forEach(function (a) {
+          if (!!a.place && !!a.place.id && !!a.from.stopId && a.place.id == leg.from.stopId.id) {
+            if (leg.transport.type == 'CAR') {
+              txt.push($filter('translate')('parking_pickup_alert_car', {
+                num: a.noOfvehicles
+              }));
+            } else if (leg.transport.type == 'BYCICLE') {
+              txt.push($filter('translate')('parking_pickup_alert_bike', {
+                num: a.noOfvehicles
+              }));
+            }
+          } else if (!!leg.to.stopId && !!leg.to.stopId.id){
+            txt.push($filter('translate')('parking_alert', {
+              num: a.placesAvailable
+            }));                     
+          }
+          
+//          txt.push($filter('translate')('alert_delay', {
+//            mins: Math.ceil(a.delay / 60000)
+//          }));
+        });
       }
       return txt;
     }
