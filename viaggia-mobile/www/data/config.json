@@ -47,23 +47,21 @@
             },
 
       {
-        "state": "/app/ttlist/urbano",
-        "label": "menu_real_time_bus_urban",
-        "icon": "ic_urban-bus",
-        "color": "#eb8919"
-            },
-      {
-        "state": "/app/ttlist/trains",
-        "label": "menu_real_time_train",
-        "icon": "ic_train",
-        "color": "#cd251c"
-            },
-      {
-        "state": "/app/parking/COMUNE_DI_TRENTO",
-        "label": "menu_real_time_park",
-        "icon": "ic_parking-lot",
-        "color": "#164286"
-            },
+    "state": "/app/ttlist/urbano",
+    "label": "menu_real_time_bus_urban",
+    "icon": "ic_urban-bus",
+    "color": "#eb8919"
+  }, {
+    "state": "/app/ttlist/trains",
+    "label": "menu_real_time_train",
+    "icon": "ic_train",
+    "color": "#cd251c"
+  }, {
+    "state": "/app/parking/COMUNE_DI_TRENTO",
+    "label": "menu_real_time_park",
+    "icon": "ic_parking-lot",
+    "color": "#164286"
+  },
       {
         "state": "/app/parkingMeters",
         "label": "menu_parking_meters",

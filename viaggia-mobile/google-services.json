@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "278940801715",
+    "firebase_url": "https://demoprj-857cb.firebaseio.com",
+    "project_id": "demoprj-857cb",
+    "storage_bucket": "demoprj-857cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278940801715:android:1aae75e82cd0e3fe",
+        "android_client_info": {
+          "package_name": "it.tn.chin8.testfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "278940801715-flc1srnlmdc01rppmuvt42ddfcvcboej.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0r9bSGceEoEkpvt_nJhyVt0BigkrjI4o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278940801715:android:206b5dc5c480d540",
+        "android_client_info": {
+          "package_name": "eu.trentorise.smartcampus.viaggiatrento"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "278940801715-flc1srnlmdc01rppmuvt42ddfcvcboej.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0r9bSGceEoEkpvt_nJhyVt0BigkrjI4o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
