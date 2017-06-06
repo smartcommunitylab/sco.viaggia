@@ -235,7 +235,7 @@ Controller that manages the parking meters: compass, visualization on map
             onTap: function (e) {
               setFirstTimeParkingMeterView();
               //cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
-              if (winfow.cordova) 
+              if (window.cordova) 
                 cordova.plugins.locationAccuracy.canRequest(function (canRequest) {
                   if (canRequest) {
                     cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY); // iOS will ignore this
