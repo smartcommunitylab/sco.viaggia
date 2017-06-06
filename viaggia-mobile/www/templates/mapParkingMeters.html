@@ -21,7 +21,7 @@
           <img src="img/ic_compass.png" /></div>
         <!--        <canvas id="distance" width="110" height="50"></canvas>-->
       </div>
-      <div class="distance">
+      <div class="distance" ng-if="!!distanceFromParkingMeter">
         {{'lbl_distance'|translate}}<span class="distance-label">{{distanceFromParkingMeter}}</span>
       </div>
       <leaflet event-broadcast="events" center="center" markers="markers" style="width: 100%; height: 700px;" ng-init="initMapParkingMeter()" id="modalMapParkingMeters"></leaflet>

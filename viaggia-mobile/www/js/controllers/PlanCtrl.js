@@ -367,7 +367,9 @@ angular.module('viaggia.controllers.plan', [])
         planService.planJourney($scope.planParams).then(function (value) {
           //if ok let's go to visualization
           $scope.popupLoadingHide();
-          window.ga.trackEvent('Pianification', 'Plan', 'Label', 2)
+          if (window.ga) {
+            window.ga.trackEvent('Pianification', 'Plan', 'Label', 2)
+          }
           $state.go('app.planlist')
         }, function (error) {
           //error then pop up some problem

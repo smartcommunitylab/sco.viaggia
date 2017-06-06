@@ -148,6 +148,7 @@ angular.module('viaggia.services.geo', [])
 
       },
       closeCompassMonitor: function () {
+        if (!window.$cordovaDeviceOrientation) return;
         $cordovaDeviceOrientation.clearWatch(compassWatch);
       }
 
