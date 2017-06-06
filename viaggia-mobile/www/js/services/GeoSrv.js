@@ -144,7 +144,8 @@ angular.module('viaggia.services.geo', [])
         //          frequency: 500
         //        }; // Update every 3 seconds
 
-        compassWatch = navigator.compass.watchHeading(onSuccess, onError, options);
+        if (window.navigator && navigator.compass)
+          compassWatch = navigator.compass.watchHeading(onSuccess, onError, options);
 
       },
       closeCompassMonitor: function () {
