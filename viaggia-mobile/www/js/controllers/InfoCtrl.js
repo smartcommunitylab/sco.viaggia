@@ -397,7 +397,7 @@ Controller that manages the parking meters: compass, visualization on map
     };
 
     function onError(compassError) {
-      alert('Compass error: ' + compassError.code);
+      console.log('Compass error: ' + compassError.code);
     };
 
     var options = {
