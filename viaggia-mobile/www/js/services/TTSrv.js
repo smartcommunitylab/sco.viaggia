@@ -80,6 +80,7 @@ angular.module('viaggia.services.timetable', [])
   }
 
   var toWheelChairBoarding = function (agencyId, stops) {
+    if (!stops) return;
     var res = [];
     stops.forEach(function (s) {
       var stop = getStop(agencyId, s);
