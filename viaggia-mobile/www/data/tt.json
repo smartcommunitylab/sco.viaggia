@@ -514,6 +514,46 @@
                                     "wheelChairBoarding": 1
                                 }
               ]
+            },
+                        {
+                            "label": "CM",
+                            "color": "#f8ad1e",
+                            "routes": [
+                                {
+                                    "routeId": "CMA",
+                                    "routeSymId": "CMA",
+                                    "title": "Povo - Borino - Celva - Passo Cimirlo",
+                                    "label": "Povo - Borino - Celva - Passo Cimirlo",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "CMR",
+                                    "routeSymId": "CMR",
+                                    "title": "Passo Cimirlo - Celva - Borino - Povo",
+                                    "label": "Passo Cimirlo - Celva - Borino - Povo",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "G",
+                            "color": "#572f75",
+                            "routes": [
+                                {
+                                    "routeId": "%20GA",
+                                    "routeSymId": "%20GA",
+                                    "title": "Gardolo - Gardolo di Mezzo e Spini",
+                                    "label": "Gardolo - Gardolo di Mezzo e Spini",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "%20GR",
+                                    "routeSymId": "%20GR",
+                                    "title": "Spini e Gardolo di Mezzo - Gardolo",
+                                    "label": "Spini e Gardolo di Mezzo - Gardolo",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
             }
           ]
         }
