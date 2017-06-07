@@ -214,10 +214,11 @@ angular.module('viaggia.controllers.info', [])
   */
 
   .controller('ParkingMetersCtrl', function ($scope, $rootScope, $state, $ionicHistory, $q, Config, $ionicModal, $ionicPopup, $filter, $cordovaDeviceOrientation, mapService, parkingService, GeoLocate) {
-
+    var firstTimeModal = null;
+    $scope.compassPresent=false;
     $scope.isAndroid = ionic.Platform.isAndroid();
     if (!firstTimeParkingMeterView()) {
-      $ionicPopup.show({
+      firstTimeModal = $ionicPopup.show({
         templateUrl: 'templates/firstTimeParkingMeterPopup.html',
         title: $filter('translate')('lbl_parking'),
         cssClass: 'first-time-parking-meters-popup',
@@ -234,12 +235,13 @@ angular.module('viaggia.controllers.info', [])
             type: 'button-close',
             onTap: function (e) {
               setFirstTimeParkingMeterView();
-              //cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
-              cordova.plugins.locationAccuracy.canRequest(function (canRequest) {
-                if (canRequest) {
-                  cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY); // iOS will ignore this
-                }
-              });
+              if (ionic.Platform.isWebView()) {
+                cordova.plugins.locationAccuracy.canRequest(function (canRequest) {
+                  if (canRequest) {
+                    cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY); // iOS will ignore this
+                  }
+                });
+              }
             }
           }
         ]
@@ -269,12 +271,13 @@ angular.module('viaggia.controllers.info', [])
               text: $filter('translate')('btn_undertood'),
               type: 'button-close',
               onTap: function (e) {
-                //cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
-                cordova.plugins.locationAccuracy.canRequest(function (canRequest) {
-                  if (canRequest) {
-                    cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY); // iOS will ignore this
-                  }
-                });
+                if (ionic.Platform.isWebView()) {
+                  cordova.plugins.locationAccuracy.canRequest(function (canRequest) {
+                    if (canRequest) {
+                      cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY); // iOS will ignore this
+                    }
+                  });
+                }
               }
             }
 
@@ -315,14 +318,12 @@ angular.module('viaggia.controllers.info', [])
     function onRequestSuccess(success) {
       console.log("Successfully requested accuracy: " + success.message);
       if (success.code == cordova.plugins.locationAccuracy.SUCCESS_USER_AGREED) {
-        //        $state.go("app.parkingMeters", {}, {
-        //          reload: true
-        //        })
-        $scope.initParkingMeters();
+
+
       } else {
         //se gia l'app geolocalizza probabilmente ho  problemi di geolocalizzazione
       }
-
+      $scope.initParkingMeters();
     }
 
     function onRequestFailure(error) {
@@ -391,12 +392,14 @@ angular.module('viaggia.controllers.info', [])
     function onSuccess(heading) {
       //console.log('Heading: ' + heading.magneticHeading);
       //console.log('My position ' + Config.getMapPosition());
+      $scope.compassPresent=true;
       drawArrow(getDirection(heading.magneticHeading));
       drawDistance(GeoLocate.distance($rootScope.myPosition, [$scope.selectedParkingMeters.lat, $scope.selectedParkingMeters.lng]));
     };
 
     function onError(compassError) {
-      alert('Compass error: ' + compassError.code);
+      console.log('Compass error: ' + compassError.code);
+      $scope.compassPresent=false;
     };
 
     var options = {
@@ -439,9 +442,10 @@ angular.module('viaggia.controllers.info', [])
 
             $scope.markers = markers;
             selectNearest(markers);
+            if (ionic.Platform.isWebView()) {
             GeoLocate.initCompassMonitor(onSuccess, onError, options);
+            }
             //open Map with compass and driver user to nearest parking meter
-            //$scope.modalMapParkingMeters.show().then(function () {
             //manage visualization
             if (boundsArray.length > 0) {
               boundsArray.push([$rootScope.myPosition[0], $rootScope.myPosition[1]]);
@@ -453,10 +457,12 @@ angular.module('viaggia.controllers.info', [])
               });
             }
           }
-          
+
           Config.loaded();
         }, function (err) {
-          $scope.showNoConnection();
+          if (!$scope.alertPopup) {
+            $scope.showNoConnection();
+          }
           Config.loaded();
         })
       }, function (err) {
@@ -475,8 +481,10 @@ angular.module('viaggia.controllers.info', [])
       }
       return returnString.slice(0, -2);;
     }
-
-    $scope.initParkingMeters();
+    //if no modal open
+    if (!firstTimeModal) {
+      $scope.initParkingMeters();
+    }
 
     $scope.$on("$destroy", function (event) {
       mapService.stopPosTimer('modalMapParkingMeters');
