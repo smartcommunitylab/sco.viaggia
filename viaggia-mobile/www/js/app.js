@@ -41,48 +41,48 @@ angular.module('ngIOS9UIWebViewPatch', ['ng']).config(['$provide', function ($pr
 
 
 angular.module('viaggia', [
-    'ionic',
-    'ngIOS9UIWebViewPatch',
-    'ionic-material',
-    'ng-mfb',
-    'ionic-datepicker',
-    'ionic-timepicker',
-    'ngCordova',
-    'ngSanitize',
-    'ngcTableDirective',
-    'nemLogging',
-    'leaflet-directive',
-    'pascalprecht.translate',
-    'viaggia.controllers.common',
-    'viaggia.controllers.timetable',
-    'viaggia.controllers.bookmarks',
-    'viaggia.controllers.home',
-    'viaggia.controllers.info',
-    'viaggia.controllers.mytrips',
-    'viaggia.controllers.news',
-    'viaggia.controllers.notifications',
-    'viaggia.controllers.plan',
-    'viaggia.controllers.taxi',
-    'viaggia.controllers.pois',
-    'viaggia.controllers.planlist',
-    'viaggia.controllers.tripdetails',
-    'viaggia.services.data',
-    'viaggia.services.conf',
-    'viaggia.services.map',
-    'viaggia.services.plan',
-    'viaggia.services.timetable',
-    'viaggia.services.info',
-    'viaggia.services.taxi',
-    'viaggia.services.pois',
-    'viaggia.services.notification',
-    'viaggia.directives',
-    'viaggia.services.geo',
-    'viaggia.services.bookmarks',
-    'viaggia.filters',
-    'viaggia.services.profile'
+  'ionic',
+  'ngIOS9UIWebViewPatch',
+  'ionic-material',
+  'ng-mfb',
+  'ionic-datepicker',
+  'ionic-timepicker',
+  'ngCordova',
+  'ngSanitize',
+  'ngcTableDirective',
+  'nemLogging',
+  'leaflet-directive',
+  'pascalprecht.translate',
+  'viaggia.controllers.common',
+  'viaggia.controllers.timetable',
+  'viaggia.controllers.bookmarks',
+  'viaggia.controllers.home',
+  'viaggia.controllers.info',
+  'viaggia.controllers.mytrips',
+  'viaggia.controllers.news',
+  'viaggia.controllers.notifications',
+  'viaggia.controllers.plan',
+  'viaggia.controllers.taxi',
+  'viaggia.controllers.pois',
+  'viaggia.controllers.planlist',
+  'viaggia.controllers.tripdetails',
+  'viaggia.services.data',
+  'viaggia.services.conf',
+  'viaggia.services.map',
+  'viaggia.services.plan',
+  'viaggia.services.timetable',
+  'viaggia.services.info',
+  'viaggia.services.taxi',
+  'viaggia.services.pois',
+  'viaggia.services.notification',
+  'viaggia.directives',
+  'viaggia.services.geo',
+  'viaggia.services.bookmarks',
+  'viaggia.filters',
+  'viaggia.services.profile'
 ])
 
-.run(function ($ionicPlatform, $cordovaFile, $rootScope, $translate, DataManager, Config, GeoLocate, notificationService) {
+  .run(function ($ionicPlatform, $cordovaFile, $rootScope, $translate, DataManager, Config, GeoLocate, notificationService) {
 
     $rootScope.locationWatchID = undefined;
 
@@ -158,7 +158,7 @@ angular.module('viaggia', [
       controller: 'AppCtrl'
     })
 
-    .state('app.home', {
+      .state('app.home', {
         cache: false,
         url: "/home",
         views: {
@@ -352,7 +352,7 @@ angular.module('viaggia', [
         }
       })
 
-    .state('app.bikestation', {
+      .state('app.bikestation', {
         url: "/bikesharing/:agencyId/:id",
         views: {
           'menuContent': {
@@ -380,7 +380,7 @@ angular.module('viaggia', [
             controller: 'POIsCtrl'
           }
         }
-      }) 
+      })
       .state('app.poi', {
         //cache: false,
         url: "/poi/:poiId",
@@ -581,9 +581,9 @@ angular.module('viaggia', [
       error_select_type_accessibility_feedback: 'Per visualizzare un percorso accessibile è necessario selezionare i mezzi pubblici o a piedi',
       not_acc_label: 'Questa linea non è accessibile',
       alert_delay: 'Ritardo di {{mins}} minuti',
-      parking_pickup_alert_car:'Solo {{num}} auto disponibili',
-      parking_pickup_alert_bike:'Solo {{num}} bici disponibili',
-      parking_alert:'Solo {{num}} posti disponibili',
+      parking_pickup_alert_car: 'Solo {{num}} auto disponibili',
+      parking_pickup_alert_bike: 'Solo {{num}} bici disponibili',
+      parking_alert: 'Solo {{num}} posti disponibili',
       lbl_parking_meter: 'Parchimetro',
       lbl_parking_meter_price: 'Tariffa oraria:',
       lbl_parking_meter_orario: 'Orario:',
@@ -597,7 +597,10 @@ angular.module('viaggia', [
       btn_drive_me: 'Portami là',
       lbl_calibration: 'Calibrazione bussola',
       lbl_calibration_content: 'Muovi il dispositivo formando un 8 partendo dal punto centrale verso destra, come mostra la figura, finché la bussola non è calibrata. Dovrebbe essere sufficiente eseguire l\'operazione un paio di volte.',
-      lbl_distance: 'Distanza:'
+      lbl_distance: 'Distanza:',
+      lbl_parking_meter_payment_card: 'moneta e carte',
+      lbl_parking_meter_payment_cash: 'moneta',
+      lbl_parking_meter_payment: 'Metodo di pagamento: '
     });
 
 
@@ -786,9 +789,9 @@ angular.module('viaggia', [
       error_select_type_accessibility_feedback: 'In order to get an accessible route, you must select public transport or foot',
       not_acc_label: 'This line is not accessible',
       alert_delay: 'Delay of {{mins}} minutes',
-      parking_pickup_alert_car:'Only {{num}} cars available',
-      parking_pickup_alert_bike:'Only {{num}} bikes available',
-      parking_alert:'Only {{num}} slots available',
+      parking_pickup_alert_car: 'Only {{num}} cars available',
+      parking_pickup_alert_bike: 'Only {{num}} bikes available',
+      parking_alert: 'Only {{num}} slots available',
       lbl_parking_meter: 'Parking Meter',
       lbl_parking_meter_price: 'Price:',
       lbl_parking_meter_orario: 'Time:',
@@ -802,7 +805,10 @@ angular.module('viaggia', [
       btn_drive_me: 'Take me there',
       lbl_calibration: 'Compass Calibration',
       lbl_calibration_content: 'Drawing an “8” moving the device rightwards from a central point, as shown in the picture, until the compass is calibrated. After a couple of iteration of this movement the calibration should be completed.',
-      lbl_distance: 'Distance:'
+      lbl_distance: 'Distance:',
+      lbl_parking_meter_payment_card: 'cash and card',
+      lbl_parking_meter_payment_cash: 'cash',
+      lbl_parking_meter_payment: 'Payment methods: '
 
 
     });

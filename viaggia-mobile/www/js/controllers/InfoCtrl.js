@@ -215,7 +215,7 @@ angular.module('viaggia.controllers.info', [])
 
   .controller('ParkingMetersCtrl', function ($scope, $rootScope, $state, $ionicHistory, $q, Config, $ionicModal, $ionicPopup, $filter, $cordovaDeviceOrientation, mapService, parkingService, GeoLocate) {
     var firstTimeModal = null;
-    $scope.compassPresent=false;
+    $scope.compassPresent = false;
     $scope.isAndroid = ionic.Platform.isAndroid();
     if (!firstTimeParkingMeterView()) {
       firstTimeModal = $ionicPopup.show({
@@ -393,7 +393,7 @@ angular.module('viaggia.controllers.info', [])
     function onSuccess(heading) {
       //console.log('Heading: ' + heading.magneticHeading);
       //console.log('My position ' + Config.getMapPosition());
-      $scope.compassPresent=true;
+      $scope.compassPresent = true;
       drawArrow(getDirection(heading.magneticHeading));
       drawDistance(GeoLocate.distance($rootScope.myPosition, [$scope.selectedParkingMeters.lat, $scope.selectedParkingMeters.lng]));
     };
@@ -401,7 +401,7 @@ angular.module('viaggia.controllers.info', [])
     function onError(compassError) {
       console.log('Compass error: ' + compassError.code);
 
-      $scope.compassPresent=false;
+      $scope.compassPresent = false;
     };
 
     var options = {
@@ -425,13 +425,17 @@ angular.module('viaggia.controllers.info', [])
                 for (var k = 0; k < parkingMetersZones[i].parkingMeters.length; k++) {
                   var parkingMeter = parkingMetersZones[i].parkingMeters[k];
                   parkingMeter.validityPeriod = parkingMetersZones[i].validityPeriod;
+                  var icon = 'img/ic_parcometro.png';
+                  if (paymentByCard(parkingMeter)) {
+                    icon = 'img/ic_parcometro_euro-card.png'
+                  }
                   markers.push({
                     parking: parkingMeter,
                     index: k + i,
                     lat: parseFloat(parkingMetersZones[i].parkingMeters[k].lat),
                     lng: parseFloat(parkingMetersZones[i].parkingMeters[k].lng),
                     icon: {
-                      iconUrl: 'img/ic_parcometro.png',
+                      iconUrl: icon,
                       iconSize: [36, 50],
                       iconAnchor: [18, 50],
                       popupAnchor: [-0, -50]
@@ -445,7 +449,7 @@ angular.module('viaggia.controllers.info', [])
             $scope.markers = markers;
             selectNearest(markers);
             if (ionic.Platform.isWebView()) {
-            GeoLocate.initCompassMonitor(onSuccess, onError, options);
+              GeoLocate.initCompassMonitor(onSuccess, onError, options);
             }
             //open Map with compass and driver user to nearest parking meter
             //manage visualization
@@ -471,7 +475,11 @@ angular.module('viaggia.controllers.info', [])
         Config.loaded();
       });
     }
-
+    $scope.getPaymentMethod = function (parking) {
+      if (paymentByCard(parking))
+        return $filter('translate')('lbl_parking_meter_payment_card');
+      return $filter('translate')('lbl_parking_meter_payment_cash');
+    }
     $scope.getValidityPeriodDays = function (weekDays) {
       var returnString = "";
       //turn the string to internationalized string
@@ -543,8 +551,12 @@ angular.module('viaggia.controllers.info', [])
         }
 
       }
+      var icon = 'img/ic_parcometro_selected.png';
+      if (paymentByCard($scope.selectedParkingMeters.parking)) {
+        icon = 'img/ic_parcometro_euro-card_selected.png'
+      }
       $scope.markers[$scope.selectedParkingMetersIndex].icon = {
-        iconUrl: "img/ic_parcometro_selected.png",
+        iconUrl: icon,
         iconSize: [36, 50],
         iconAnchor: [18, 50],
         popupAnchor: [-0, -50]
@@ -554,17 +566,25 @@ angular.module('viaggia.controllers.info', [])
 
 
     function driveMeParcometer(p, index) {
+      var icon = 'img/ic_parcometro.png';
+      if (paymentByCard($scope.selectedParkingMeters.parking)) {
+        icon = 'img/ic_parcometro_euro-card.png'
+      }
       $scope.markers[$scope.selectedParkingMetersIndex].icon = {
-        iconUrl: "img/ic_parcometro.png",
+        iconUrl: icon,
         iconSize: [36, 50],
         iconAnchor: [18, 50],
         popupAnchor: [-0, -50]
       }
       $scope.selectedParkingMetersIndex = index;
-      $scope.selectedParkingMeters = p;
+      $scope.selectedParkingMeters = $scope.markers[index];
       //update icon for that
+      var icon = 'img/ic_parcometro_selected.png';
+      if (paymentByCard($scope.selectedParkingMeters.parking)) {
+        icon = 'img/ic_parcometro_euro-card_selected.png'
+      }
       $scope.markers[$scope.selectedParkingMetersIndex].icon = {
-        iconUrl: "img/ic_parcometro_selected.png",
+        iconUrl: icon,
         iconSize: [36, 50],
         iconAnchor: [18, 50],
         popupAnchor: [-0, -50]
@@ -583,7 +603,15 @@ angular.module('viaggia.controllers.info', [])
       // return rotated_bearing;
     };
 
-
+    function paymentByCard(parkometer) {
+      if (parkometer.paymentMethods) {
+        for (var i = 0; i < parkometer.paymentMethods.length; i++) {
+          if (parkometer.paymentMethods[i] == "Cash_And_CreditCard")
+            return true
+        }
+      }
+      return false
+    }
     function drawArrow(r) {
       var div = document.getElementById('arrow');
       if (div) {
