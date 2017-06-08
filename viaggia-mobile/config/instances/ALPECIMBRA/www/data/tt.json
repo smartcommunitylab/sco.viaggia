@@ -12,6 +12,9 @@
         "8": {
             "view": "list"
         },
+        "9": {
+            "view": "list"
+        },
         "10": {
             "view": "list"
         },
@@ -505,6 +508,18 @@
                             "routeId": "100R",
                             "routeSymId": "100R",
                             "title": "LUSERNA-LAVARONE-MONTEROVERE-ASIAGO-VICENZA (RITORNO)",
+                            "color": "#EB8919"
+                        }
+                    ]
+                },
+                {
+                    "agencyId": "9",
+                    "color": "#EB8919",
+                    "routes": [
+                        {
+                            "routeId": "LV_TRENTINO",
+                            "routeSymId": "LV_TRENTINO",
+                            "title": "Forte Belvedere - Lago di Lavarone",
                             "color": "#EB8919"
                         }
                     ]
