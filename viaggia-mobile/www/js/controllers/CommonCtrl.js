@@ -40,7 +40,7 @@ angular.module('viaggia.controllers.common', [])
 			window.open(url, "_system", "location=yes");
 		});
 		*/
-		$scope.firstOpenPopup.close();
+		//$scope.firstOpenPopup.close();
 		$state.go('app.game');
 	};
 
@@ -94,14 +94,24 @@ angular.module('viaggia.controllers.common', [])
 	};
 
 	$scope.showPlayAndGoPopup = function () {
-//		$state.go('app.game');
-        $scope.firstOpenPopup = $ionicPopup.show({
-            templateUrl: 'templates/welcomePopup.html',
-            title: $filter('translate')('lbl_betatesting'),
-            cssClass: 'parking-popup',
-            scope: $scope
-        });
+        		$state.go('app.gamemenu');
+
+//        $scope.firstOpenPopup = $ionicPopup.show({
+//            templateUrl: 'templates/welcomePopup.html',
+//            title: $filter('translate')('lbl_betatesting'),
+//            cssClass: 'parking-popup',
+//            scope: $scope
+//        });
 	};
+
+
+    $scope.openDiary = function () {
+       		$state.go('app.diary');
+    };
+
+    $scope.openStatistics = function () {
+        $state.go('app.statistics')
+    };
 
 	$scope.newPlan = function () {
 		planService.setPlanConfigure(null);

@@ -142,7 +142,24 @@ angular.module('viaggia.controllers.game', [])
         }, 200);
     };
 })
+.controller('GameMenuCtrl', function($scope,GameSrv){
+    $scope.title="Play&Go";
+    $scope.init = function() {
+        GameSrv.getLocalStatus().then(
+        function (status) {
+          $scope.title = status.playerData.nickName
+        });
+    }
 
+    $scope.init();
+
+})
+.controller('StatisticsCtrl', function($scope){
+     $scope.title="Game statistics"
+})
+.controller('DiaryCtrl', function($scope){
+ $scope.title="Game diary"
+})
 .controller('RankingsCtrl', function ($scope, $ionicScrollDelegate, $window, $timeout, Config, GameSrv, Toast, $filter, $ionicPosition) {
     $scope.maybeMore = true;
     $scope.currentUser = {};

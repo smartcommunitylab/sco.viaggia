@@ -577,6 +577,37 @@ angular.module('viaggia', [
         }
       }
     })
+   // setup an abstract state for the tabs directive
+    .state('app.gamemenu', {
+      cache: true,
+      url: "/gamemenu",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/game/gamemenu.html",
+          controller: 'GameMenuCtrl'
+        }
+      }
+    })
+    .state('app.diary', {
+      cache: false,
+      url: "/diary",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/game/diary.html",
+          controller: 'DiaryCtrl'
+        }
+      }
+    })
+    .state('app.statistics', {
+      cache: false,
+      url: "/statistics",
+      views: {
+        'menuContent': {
+          templateUrl: "templates/game/statistics.html",
+          controller: 'StatisticsCtrl'
+        }
+      }
+    })
     // setup an abstract state for the tabs directive
     .state('app.game', {
       cache: false,
@@ -983,7 +1014,9 @@ angular.module('viaggia', [
     pop_up_plan: "Pianifica",
     wait_synch_running: "Attendere, sincronizzazione in corso",
     no_status: "Errore di comunicazione con il server, nessun dato disponibile",
-    toast_error_server_template: 'Errore di comunicazione con il server'
+    toast_error_server_template: 'Errore di comunicazione con il server',
+    lbl_game_diary: 'Diario di gioco',
+    lbl_game_statistics: 'Statistiche di gioco'
   });
 
   $translateProvider.translations('en', {
@@ -1338,7 +1371,9 @@ angular.module('viaggia', [
     pop_up_plan: "Plan",
     wait_synch_running: "Wait, synchronization is running",
     no_status: "Server communication error, no data available",
-    toast_error_server_template: 'We had some communication problems'
+    toast_error_server_template: 'We had some communication problems',
+    lbl_game_diary: 'Game diary',
+    lbl_game_statistics: 'Game statistics'
   });
 
   $translateProvider.preferredLanguage(DEFAULT_LANG);

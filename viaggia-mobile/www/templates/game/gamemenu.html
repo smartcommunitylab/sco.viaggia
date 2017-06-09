@@ -1,0 +1,57 @@
+<ion-view>
+    <ion-nav-title>
+            {{title}}
+    </ion-nav-title>
+      <ion-content>
+          <div class="list padding">
+                <button  class="button button-block button-light" ng-click="openDiary()" style="height: 58px;">
+                    <div class="row">
+                        <i class="col-center icon ion-clipboard" style="color: #60b35c"></i>
+                        <div class="col col-center">
+                            <span class="ng-binding">{{'lbl_game_diary' | translate}}</span>
+                        </div>
+                    </div>
+                </button>
+                <button class="button button-block button-light" ng-click="openGamificationBoard()" style="height: 58px;">
+                    <div class="row">
+                        <i class="col-center icon ion-leaf" style="color: #60b35c"></i>
+                        <div class="col col-center">
+                            <span class="ng-binding">{{'btn_score' | translate}}</span>
+                        </div>
+                    </div>
+                </button>
+                <button class="button button-block button-light" ng-click="openStatistics()" style="height: 58px;">
+                    <div class="row">
+                        <i class="col-center icon ion-arrow-graph-up-right" style="color: #60b35c"></i>
+                        <div class="col col-center">
+                            <span class="ng-binding">{{'lbl_game_statistics' | translate}}</span>
+                        </div>
+                    </div>
+                </button>
+                <button class="button button-block button-light" ng-click="openRules()" style="height: 58px;">
+                    <div class="row">
+                        <i class="col-center icon icon icon-left ion-document-text" style="color: #60b35c"></i>
+                        <div class="col col-center">
+                            <span class="ng-binding">{{'btn_rules' | translate}}</span>
+                        </div>
+                    </div>
+                </button>
+                <button class="button button-block button-light" ng-click="openPrizes()" style="height: 58px;">
+                    <div class="row">
+                        <i class="col-center icon icon-left ion-trophy" style="color: #60b35c"></i>
+                        <div class="col col-center">
+                            <span class="ng-binding"> {{'registration_prizes' | translate}}</span>
+                        </div>
+                    </div>
+                </button>
+                <button class="button button-block button-light" ng-click="forceTutorial()" style="height: 58px;">
+                    <div class="row">
+                        <i class="col-center icon icon-left ion-information-circled" style="color: #60b35c"></i>
+                        <div class="col col-center">
+                            <span class="ng-binding">{{'tutorial' | translate}}</span>
+                        </div>
+                    </div>
+                </button>
+        </div>
+    </ion-content>
+</ion-view>
