@@ -1349,7 +1349,57 @@ ion-header-bar .title {
     margin-left: 16px;
     white-space: normal;
 }
+.compass {
+  position: absolute;
+  z-index: 999;
+  background-color: white;
+  right: 0px;
+  bottom: 0px;
+  width: 100px;
+  height: 100px;
+  margin: 0px 10px 60px 0px;
+  box-shadow: 5px 5px 20px #575757;
+  border-radius: 70px;
+}
 
+.distance {
+  position: absolute;
+  bottom: 20px;
+  z-index: 999;
+  background-color: white;
+  width: 100%;
+  height: 30px;
+  font-size: 18px;
+  line-height: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+#arrow {
+  width: 100px;
+  height: 100px;
+  /*
+  margin-left: 5px;
+margin-right: 10px;
+*/
+}
+
+#arrow img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+#distance {
+  width: 110px;
+  height: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.distance-label {
+  color: #2b78bd;
+}
 .bm-item-label {
     line-height: normal;
     overflow: hidden;
