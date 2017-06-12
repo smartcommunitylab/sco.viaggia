@@ -480,7 +480,16 @@ angular.module('viaggia', [
           }
         }
       })
-
+      .state('app.parkingMeters', {
+        url: "/parkingMeters",
+        cache: false,
+        views: {
+          'menuContent': {
+            templateUrl: "templates/mapParkingMeters.html",
+            controller: 'ParkingMetersCtrl'
+          }
+        }
+      })
       .state('app.bikesharing', {
         //                cache: false,
         url: "/bikesharing/:agencyId",
@@ -728,6 +737,13 @@ angular.module('viaggia', [
       popup_datepicker_fri: 'V',
       popup_datepicker_sat: 'S',
       popup_datepicker_sun: 'D',
+      weekdays_MO_period: 'LU',
+      weekdays_TU_period: 'MA',
+      weekdays_WE_period: 'ME',
+      weekdays_TH_period: 'GI',
+      weekdays_FR_period: 'VE',
+      weekdays_SA_period: 'SA',
+      weekdays_SU_period: 'DO',
       journey_details_sustainable: 'Itinerario sostenibile ',
       journey_details_modify: 'Modifica',
       journey_details_delete: 'Elimina',
@@ -1107,6 +1123,13 @@ angular.module('viaggia', [
       popup_datepicker_fri: 'F',
       popup_datepicker_sat: 'S',
       popup_datepicker_sun: 'S',
+      weekdays_MO_period: 'MO',
+      weekdays_TU_period: 'TU',
+      weekdays_WE_period: 'WE',
+      weekdays_TH_period: 'TH',
+      weekdays_FR_period: 'FR',
+      weekdays_SA_period: 'SA',
+      weekdays_SU_period: 'SU',
       journey_details_sustainable: 'Sustainable journey ',
       journey_details_modify: 'Modify',
       journey_details_delete: 'Delete',

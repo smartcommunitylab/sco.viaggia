@@ -6,6 +6,7 @@
     "appversion": "1.0.3",
     "appname": "Viaggia Trento Play&Go",
     "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
+    "metroparco": "https://dev.smartcommunitylab.it/metroparco/data/tn",
     "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
     "newsRSS": "https://tn.smartcommunitylab.it/core.mobility/announcements/rss/trento",
     "contact_link": "mailto:viaggiatrento@smartcommunitylab.it?subject=ViaggiaTrentoPlayGo:%20segnalazione%20problema",
