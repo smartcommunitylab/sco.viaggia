@@ -1,0 +1,51 @@
+<div>
+  <div class="row row-center map-stop-title">
+    <i class="icon popup-icon ic_m_parcometro"></i>
+    <div class=" col ">
+      <b class="parking-title"> {{'lbl_parking_meter'|translate}}</b>
+    </div>
+  </div>
+  <div class="map-stop-hline "></div>
+            <div class="row map-stop-name ">
+      <div class="col ">
+        <b>{{'lbl_parking_meter_payment'|translate}}</b>
+      </div>
+    </div>
+    <div class="row map-stop-hour">
+      <div class="col">
+        {{getPaymentMethod(popupParkingMeter)}}
+      </div>
+    </div>
+  <div ng-repeat="validityPeriod in popupParkingMeter.validityPeriod ">
+    <!--  <div ng-init="area = popupParkingMeter.validityPeriod[0] ">-->
+
+    <div class="row map-stop-name ">
+      <div class="col ">
+        <b>{{'lbl_parking_meter_price'|translate}}</b>
+      </div>
+    </div>
+    <div class="row map-stop-hour">
+      <div class="col">
+        {{getPrice(validityPeriod.rateValue)}}
+      </div>
+    </div>
+    <!--<div class="row map-stop-hour ">
+      <div class="col">
+        <b>{{'lbl_parking_meter_orario'|translate}}</b>
+      </div>
+    </div>-->
+    <div class="row map-stop-hour">
+      <div class="col">
+        <div class="fromtotime">
+          {{validityPeriod.timeSlot}}
+        </div>
+      </div>
+    </div>
+    <div class="row map-stop-hour">
+      <div class="col">
+        <div class="fromtodays">
+          {{getValidityPeriodDays(validityPeriod.weekDays)}}
+        </div>
+      </div>
+    </div>
+  </div>

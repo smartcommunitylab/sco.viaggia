@@ -195,7 +195,18 @@ angular.module('viaggia.services.geo', [])
                 transformPair(array[i - 1], array[i], res, distFunc);
             }
             return res;
-        }
+        },
+         initCompassMonitor: function (onSuccess, onError, options) {
+
+
+        if (window.navigator && navigator.compass)
+          compassWatch = navigator.compass.watchHeading(onSuccess, onError, options);
+
+      },
+      closeCompassMonitor: function () {
+        if (!window.$cordovaDeviceOrientation) return;
+        $cordovaDeviceOrientation.clearWatch(compassWatch);
+      }
     };
 
     return geo;
