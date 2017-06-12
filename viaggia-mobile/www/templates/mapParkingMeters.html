@@ -11,7 +11,7 @@
 
     <button ng-click="openNotifications()" class="button button-icon button-home ic_notification"><span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span></button>
 -->
-    <button class="button button-icon button-home ion-android-compass" ng-if="isAndroid" ng-click="openCalibrationPopup()"></button>
+    <button class="button button-icon button-clear ion-android-compass" ng-if="isAndroid" ng-click="openCalibrationPopup()"></button>
   </ion-nav-buttons>
   <ion-content scroll="false">
     <div id="modal-map-container" data-tap-disabled="true">
