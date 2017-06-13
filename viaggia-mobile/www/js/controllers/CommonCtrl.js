@@ -105,6 +105,14 @@ angular.module('viaggia.controllers.common', [])
 	};
 
 
+    $scope.openPlan = function () {
+        $state.go('app.plan');
+    };
+
+    $scope.openTT = function () {
+        $state.go('app.ttlist')
+    }
+
     $scope.openDiary = function () {
        		$state.go('app.diary');
     };

@@ -140,7 +140,7 @@ angular.module('viaggia', [
     }, function () {
       console.log('CANNOT LOCATE!');
     });
-  
+
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
       console.log(toState);
     });
@@ -381,6 +381,16 @@ angular.module('viaggia', [
         }
       })
 
+  .state('app.ttlist', {
+    cache: false,
+    url: "/ttlist/:ref",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/ttroutelist.html",
+        controller: 'TTRouteListCtrl'
+      }
+    }
+  })
       .state('app.notifications', {
         cache: true,
         url: "/notifications",
@@ -406,16 +416,7 @@ angular.module('viaggia', [
         }
       })
 
-      .state('app.ttlist', {
-        //                cache: false,
-        url: "/ttlist/:ref",
-        views: {
-          'menuContent': {
-            templateUrl: "templates/ttroutelist.html",
-            controller: 'TTRouteListCtrl'
-          }
-        }
-      })
+
 
       .state('app.ttmap', {
         url: "/ttmap",

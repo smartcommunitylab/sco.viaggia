@@ -65,8 +65,8 @@
                         </a>
                     </div>
                     <div class="col">
-                        <a ng-click="startTracking('bike')">
-                            <div class="tracking-ds-button"><i class="icon ic_urban-bus"></i><span>{{'track_bike' | translate}}</span></div>
+                        <a ng-click="">
+                            <div class="tracking-ds-button"><i class="icon ic_urban-bus"></i><span>{{'registration_transport_bus' | translate}}</span></div>
                         </a>
                     </div>
                 </div>
@@ -74,8 +74,8 @@
 
                 <div class="row" ng-class="{'synch':syncRunning}">
                     <div class="col">
-                        <a ng-click="openSavedTracks()">
-                            <div class="tracking-ds-button"><i class="icon ic_train"></i><span>{{'track_saved' | translate}}</span></div>
+                        <a ng-click="">
+                            <div class="tracking-ds-button"><i class="icon ic_train"></i><span>{{'menu_real_time_train' | translate}}</span></div>
                         </a>
                     </div>
                     <div class="col">
@@ -84,18 +84,34 @@
                         </a>
                     </div>
                     <div class="col">
-                        <a ng-click="startTracking('bike')">
-                            <div class="tracking-ds-button"><i class="icon ic_search"></i><span>{{'track_bike' | translate}}</span></div>
+                        <a ng-click="openPlan()">
+                            <div class="tracking-ds-button"><i class="icon ic_search"></i><span>{{'menu_plan' | translate}}</span></div>
                         </a>
                     </div>
                 </div>
-
+            <ion-list class="home-list">
+               <button class="button button-block" ng-click="showPlayAndGoPopup()">
+                    <div class="row">
+                        <i class="col-center icon ion-leaf" style="color: #60b35c"></i>
+                        <div class="col col-center">
+                            <span >PLAY&GO</span>
+                        </div>
+                    </div>
+                </button>
+            </ion-list>
             </div>
+
         </div>
 
+
+<!--
         <div ng-if="primaryLinks.length==0">
+
             <ng-include src="'templates/emptyHomepage.html'"></ng-include>
+
         </div>
+-->
+
 
         <ion-list class="home-list" ng-if="primaryLinks.length>0">
             <ion-item ng-repeat="m in primaryLinks" ng-last-repeat="primaryLinks" ng-click="go(m.state)">

@@ -5,20 +5,17 @@
     <ion-content class="game-ranking" has-bouncing="false" scroll="false">
         <div class="filter item-accordion">
             <ion-item class="item-accordion-header item-icon-right item" ng-click="filter.toggle()">
-                <div class="ng-binding">Current week</div>
+                <div class="ng-binding">Daily</div>
                 <i class="icon ion-arrow-down-b open" ng-class="{'open': filter.open}"></i>
             </ion-item>
             <div class="item-accordion-content ng-hide" ng-show="filter.open">
                 <ion-list class="disable-user-behavior">
                     <div class="list">
                     <ion-item ng-repeat="option in filter.options" ng-click="filter.filterBy(option)" class="item ng-binding">
-                        Current week
+                        Daily
                     </ion-item>
                     <ion-item ng-repeat="option in filter.options" ng-click="filter.filterBy(option)" class="item ng-binding">
-                        Last week
-                    </ion-item>
-                    <ion-item ng-repeat="option in filter.options" ng-click="filter.filterBy(option)" class="item ng-binding">
-                        Overall
+                        Weekly
                     </ion-item>
                     </div>
                 </ion-list>
