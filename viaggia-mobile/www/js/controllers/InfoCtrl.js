@@ -18,7 +18,8 @@ angular.module('viaggia.controllers.info', [])
     });
 
     $scope.load = function (selectedId) {
-        parkingService.getParkings($scope.agencyId).then(function (data) {
+        var parkids= Config.getParkingAgencyIds();
+        parkingService.getParkings(parkids).then(function (data) {
             $scope.parkings = data;
             $scope.parkings.forEach(function (e) {
                 if (e.monitored && e.slotsAvailable > -2) {
@@ -652,7 +653,8 @@ angular.module('viaggia.controllers.info', [])
 
 
     $scope.load = function (selectedId) {
-        bikeSharingService.getStations($scope.agencyId).then(function (data) {
+        var bikeids= Config.getBikeSharingAgencyIds();
+        bikeSharingService.getStations(bikeids).then(function (data) {
             $scope.parkings = data;
             $scope.parkings.forEach(function (e) {
                 if (decodeURI(selectedId) == e.id) {
@@ -663,9 +665,6 @@ angular.module('viaggia.controllers.info', [])
             $scope.loading = false;
             Config.loaded();
             $scope.$broadcast('scroll.refreshComplete');
-            //            if ($scope.selected) {
-            //                $scope.showMap(true);
-            //            }
         }, function (err) {
             $scope.parkings = null;
             $scope.$broadcast('scroll.refreshComplete');
@@ -683,9 +682,7 @@ angular.module('viaggia.controllers.info', [])
 
     $scope.selected = null;
     $scope.select = function (p, path) {
-        //        if ($scope.selected == p) {
-        //          $scope.selected = null;
-        //        } else {
+
         $scope.selected = p;
         var path = $location.path();
         if ($state.current.name == 'app.bikestation') {

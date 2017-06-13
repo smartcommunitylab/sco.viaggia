@@ -43,6 +43,15 @@
       46.069672,
       11.121270
    ],
+   "parkings_agency_ids":[
+       "COMUNE_DI_TRENTO",
+       "COMUNE_DI_ROVERETO"
+   ],
+    "bikesharing_agency_ids":[
+       "trento",
+       "rovereto",
+       "pergine_valsugana"
+   ],
     "zoom_map": 15,
     "db_version": 25,
     "visualization": {
@@ -78,13 +87,13 @@
                 "color": "#cd251c"
             },
             {
-                "state": "/app/parking/COMUNE_DI_TRENTO",
+                "state": "/app/parking",
                 "label": "menu_real_time_park",
                 "icon": "ic_parking-lot",
                 "color": "#164286"
             },
             {
-                "state": "/app/bikesharing/trento",
+                "state": "/app/bikesharing",
                 "label": "menu_real_time_bike",
                 "icon": "ic_bike",
                 "color": "#922d66"
@@ -105,12 +114,12 @@
                 "icon": "ic_train"
             },
             {
-                "state": "/app/bikesharing/trento",
+                "state": "/app/bikesharing",
                 "label": "menu_real_time_bike",
                 "icon": "ic_bike"
             },
             {
-                "state": "/app/parking/COMUNE_DI_TRENTO",
+                "state": "/app/parking",
                 "label": "menu_real_time_park",
                 "icon": "ic_parking-lot"
             }
