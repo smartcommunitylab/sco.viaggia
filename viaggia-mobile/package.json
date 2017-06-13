@@ -32,6 +32,8 @@
     "https://github.com/samikrc/CordovaSQLite.git",
     "cordova-plugin-whitelist",
     "cordova-plugin-screen-orientation",
+    "cordova-plugin-device-orientation",
+    "cordova-plugin-request-location-accuracy",
     "https://github.com/katzer/cordova-plugin-local-notifications",
     "https://github.com/transistorsoft/cordova-background-geolocation.git",
     {

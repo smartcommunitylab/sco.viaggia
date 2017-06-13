@@ -73,9 +73,30 @@ angular.module('viaggia.services.info', [])
 
 
       return deferred.promise;
+    },
+          getParkingMeters: function (lat, long) {
+        var deferred = $q.defer();
+
+
+        $http.get(Config.getMetroparcoServerURL() + '/nearparkingmeters/' + lat + '/' + long + '/' + Config.getParkingMetersRadius() + '/' + Config.getParkingMetersMaxNumber() + "?agencyIds=" + Config.getParkingMetersAgencyIds().join(", "),
+          Config.getHTTPConfig())
+          .success(function (data) {
+            if (data instanceof Array) {
+              deferred.resolve(data);
+            } else {
+              deferred.reject(data);
+            }
+          })
+          .error(function (err) {
+            deferred.reject(err);
+          });
+
+
+        return deferred.promise;
+      }
     }
-  }
-})
+  })
+
 
 .factory('bikeSharingService', function ($http, $q, $filter, Config, DataManager, GeoLocate) {
   var cache = {};

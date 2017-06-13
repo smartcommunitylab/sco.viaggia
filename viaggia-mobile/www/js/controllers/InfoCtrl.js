@@ -199,7 +199,440 @@ angular.module('viaggia.controllers.info', [])
 
 })
 
+  /*
+  Controller that manages the parking meters: compass, visualization on map
+  */
 
+  .controller('ParkingMetersCtrl', function ($scope, $rootScope, $state, $ionicHistory, $q, Config, $ionicModal, $ionicPopup, $filter, $cordovaDeviceOrientation, mapService, parkingService, GeoLocate) {
+    var firstTimeModal = null;
+    $scope.compassPresent = false;
+    $scope.isAndroid = ionic.Platform.isAndroid();
+    if (!firstTimeParkingMeterView()) {
+      firstTimeModal = $ionicPopup.show({
+        templateUrl: 'templates/firstTimeParkingMeterPopup.html',
+        title: $filter('translate')('lbl_parking'),
+        cssClass: 'first-time-parking-meters-popup',
+        scope: $scope,
+        buttons: [
+          {
+            text: $filter('translate')('btn_close'),
+            type: 'button-close',
+            onTap: function (e) {
+              $ionicHistory.goBack();
+            }
+          }, {
+            text: $filter('translate')('btn_undertood'),
+            type: 'button-close',
+            onTap: function (e) {
+              setFirstTimeParkingMeterView();
+              if (ionic.Platform.isWebView()) {
+                cordova.plugins.locationAccuracy.canRequest(function (canRequest) {
+                  if (canRequest) {
+                    cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY); // iOS will ignore this
+                  }
+                });
+
+              }
+            }
+          }
+        ]
+      });
+    } else {
+      geolocate().then(function () {
+        //gps allowed and go on
+        console.log('gps allowed');
+
+      }, function () {
+        //gps not allowed, then pop up, let it do it or come back
+        console.log('gps not allowed');
+        $ionicPopup.show({
+          templateUrl: 'templates/noGpsPopup.html',
+          title: $filter('translate')('lbl_parking'),
+          cssClass: 'first-time-parking-meters-popup',
+          scope: $scope,
+          buttons: [
+            {
+              text: $filter('translate')('btn_close'),
+              type: 'button-close',
+              onTap: function (e) {
+                $ionicHistory.goBack();
+              }
+            },
+            {
+              text: $filter('translate')('btn_undertood'),
+              type: 'button-close',
+              onTap: function (e) {
+                if (ionic.Platform.isWebView()) {
+                  cordova.plugins.locationAccuracy.canRequest(function (canRequest) {
+                    if (canRequest) {
+                      cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY); // iOS will ignore this
+                    }
+                  });
+                }
+              }
+            }
+
+          ]
+        });
+      })
+    }
+    $scope.initMapParkingMeter = function () {
+      mapService.initMap('modalMapParkingMeters').then(function () {
+        console.log('map initialized');
+      });
+    }
+    angular.extend($scope, {
+      center: {
+        lat: Config.getMapPosition().lat,
+        lng: Config.getMapPosition().long,
+        zoom: Config.getMapPosition().zoom
+      },
+      markers: [],
+      events: {}
+    });
+    $scope.openCalibrationPopup = function () {
+      $ionicPopup.show({
+        templateUrl: 'templates/calibrationPopup.html',
+        title: $filter('translate')('lbl_calibration'),
+        cssClass: 'first-time-parking-meters-popup',
+        scope: $scope,
+        buttons: [
+          {
+            text: $filter('translate')('btn_undertood'),
+            type: 'button-close'
+          }
+
+        ]
+      });
+    }
+
+    function onRequestSuccess(success) {
+      console.log("Successfully requested accuracy: " + success.message);
+      if (success.code == cordova.plugins.locationAccuracy.SUCCESS_USER_AGREED) {
+
+
+      } else {
+        //se gia l'app geolocalizza probabilmente ho  problemi di geolocalizzazione
+      }
+      $scope.initParkingMeters();
+    }
+
+    function onRequestFailure(error) {
+      console.error("Accuracy request failed: error code=" + error.code + "; error message=" + error.message);
+      if (error.code !== cordova.plugins.locationAccuracy.ERROR_USER_DISAGREED) {
+        //manage error with popup
+        $ionicPopup.show({
+          templateUrl: 'templates/calibrationPopup.html',
+          title: $filter('translate')('lbl_calibration'),
+          cssClass: 'first-time-parking-meters-popup',
+          scope: $scope,
+          buttons: [
+            {
+              text: $filter('translate')('btn_close'),
+              type: 'button-close',
+              onTap: function (e) {
+                $ionicHistory.goBack();
+              }
+            },
+            {
+              text: $filter('translate')('btn_yes'),
+              type: 'button-close',
+              onTap: function (e) {
+                cordova.plugins.diagnostic.switchToLocationSettings();
+              }
+            }
+
+          ]
+        });
+        //        if (window.confirm("Failed to automatically set Location Mode to 'High Accuracy'. Would you like to switch to the Location Settings page and do this manually?")) {
+        //          cordova.plugins.diagnostic.switchToLocationSettings();
+        //        }
+      } else {
+        //user disagreed so go back
+        $ionicHistory.goBack();
+      }
+
+    }
+
+
+    function geolocate() {
+      var defer = $q.defer();
+      GeoLocate.locate().then(
+        function (position) {
+          $rootScope.myPosition = position;
+          $rootScope.GPSAllow = true;
+          defer.resolve();
+        },
+        function () {
+          console.log('Geolocation not possible');
+          $rootScope.GPSAllow = false;
+          defer.reject();
+        }
+      );
+      return defer.promise;
+    };
+
+    function firstTimeParkingMeterView() {
+      return localStorage.getItem(Config.getAppId() + "_firstTimeParkingMeterView");
+    }
+
+    function setFirstTimeParkingMeterView() {
+      localStorage.setItem(Config.getAppId() + "_firstTimeParkingMeterView", true);
+    }
+    //    $scope.parkingMeter = function () {
+    function onSuccess(heading) {
+      //console.log('Heading: ' + heading.magneticHeading);
+      //console.log('My position ' + Config.getMapPosition());
+      $scope.compassPresent = true;
+      drawArrow(getDirection(heading.magneticHeading));
+      drawDistance(GeoLocate.distance($rootScope.myPosition, [$scope.selectedParkingMeters.lat, $scope.selectedParkingMeters.lng]));
+    };
+
+    function onError(compassError) {
+      console.log('Compass error: ' + compassError.code);
+
+      $scope.compassPresent = false;
+    };
+
+    var options = {
+      frequency: 200
+    }; // Update every 0.5 seconds
+
+    $scope.initParkingMeters = function () {
+      $scope.windowOrientation = window.orientation;
+
+      //locate user
+      Config.loading();
+      GeoLocate.locate().then(function (position) {
+        //get parking meter list based on my position and other parameters in configuration service
+        parkingService.getParkingMeters(position[0], position[1]).then(function (parkingMetersZones) {
+          //init the comapss service with callbacks
+          var markers = [];
+          var boundsArray = [];
+          if (parkingMetersZones instanceof Array) {
+            for (var i = 0; i < parkingMetersZones.length; i++) {
+              if (parkingMetersZones[i].parkingMeters) {
+                for (var k = 0; k < parkingMetersZones[i].parkingMeters.length; k++) {
+                  var parkingMeter = parkingMetersZones[i].parkingMeters[k];
+                  parkingMeter.validityPeriod = parkingMetersZones[i].validityPeriod;
+                  var icon = 'img/ic_parcometro.png';
+                  if (paymentByCard(parkingMeter)) {
+                    icon = 'img/ic_parcometro_euro-card.png'
+                  }
+                  markers.push({
+                    parking: parkingMeter,
+                    index: k + i,
+                    lat: parseFloat(parkingMetersZones[i].parkingMeters[k].lat),
+                    lng: parseFloat(parkingMetersZones[i].parkingMeters[k].lng),
+                    icon: {
+                      iconUrl: icon,
+                      iconSize: [36, 50],
+                      iconAnchor: [18, 50],
+                      popupAnchor: [-0, -50]
+                    },
+                  });
+                  boundsArray.push([parkingMetersZones[i].parkingMeters[k].lat, parkingMetersZones[i].parkingMeters[k].lng]);
+                }
+              }
+            }
+
+            $scope.markers = markers;
+            selectNearest(markers);
+            if (ionic.Platform.isWebView()) {
+              GeoLocate.initCompassMonitor(onSuccess, onError, options);
+            }
+            //open Map with compass and driver user to nearest parking meter
+            //manage visualization
+            if (boundsArray.length > 0) {
+              boundsArray.push([$rootScope.myPosition[0], $rootScope.myPosition[1]]);
+              var bounds = L.latLngBounds(boundsArray);
+              mapService.getMap('modalMapParkingMeters').then(function (map) {
+                map.fitBounds(bounds, {
+                  padding: [50, 50]
+                });
+              });
+            }
+          }
+
+          Config.loaded();
+        }, function (err) {
+          if (!$scope.alertPopup) {
+            $scope.showNoConnection();
+          }
+          Config.loaded();
+        })
+      }, function (err) {
+        Config.loaded();
+      });
+    }
+    $scope.getPaymentMethod = function (parking) {
+      if (paymentByCard(parking))
+        return $filter('translate')('lbl_parking_meter_payment_card');
+      return $filter('translate')('lbl_parking_meter_payment_cash');
+    }
+    $scope.getValidityPeriodDays = function (weekDays) {
+      var returnString = "";
+      //turn the string to internationalized string
+      var days = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"];
+      for (var k = 0; k < days.length; k++) {
+        if (weekDays.indexOf(days[k]) > -1) {
+          returnString += $filter('translate')('weekdays_' + days[k] + '_period') + ', ';
+        }
+      }
+      return returnString.slice(0, -2);;
+    }
+    //if no modal open
+    if (!firstTimeModal) {
+      $scope.initParkingMeters();
+    }
+
+    $scope.$on("$destroy", function (event) {
+      mapService.stopPosTimer('modalMapParkingMeters');
+      GeoLocate.closeCompassMonitor();
+    });
+
+    window.addEventListener("orientationchange", function () {
+      console.log(screen.orientation);
+      console.log(window.orientation);
+      $scope.windowOrientation = window.orientation;
+      //modify the rotation of the compass with screen.orientation
+      $scope.initParkingMeters();
+    });
+    var showPopupParkingMeters = function (p, index) {
+      $scope.popupParkingMeter = p;
+      $scope.selected = p;
+
+      $ionicPopup.show({
+        templateUrl: 'templates/parkingMeterPopup.html',
+        title: $filter('translate')('lbl_parking'),
+        cssClass: 'parking-meter-popup',
+        scope: $scope,
+        buttons: [
+          {
+            text: $filter('translate')('btn_close'),
+            type: 'button-close'
+          },
+          {
+            text: $filter('translate')('btn_drive_me'),
+            onTap: function (e) {
+              driveMeParcometer(p, index);
+            }
+          }]
+
+      });
+    }
+
+    //open popup with the detail if one of the marker is clicked
+    $scope.$on('leafletDirectiveMarker.modalMapParkingMeters.click', function (e, args) {
+      var p = $scope.markers[args.modelName].parking;
+      var index = $scope.markers[args.modelName].index;
+      showPopupParkingMeters(p, index);
+    });
+
+    function selectNearest(arrayOfPoints) {
+      var minDistance = 9999999;
+      for (var i = 0; i < arrayOfPoints.length; i++) {
+        var distance = GeoLocate.distance($rootScope.myPosition, [arrayOfPoints[i].lat, arrayOfPoints[i].lng]);
+        if (distance < minDistance) {
+          minDistance = distance;
+          $scope.selectedParkingMeters = arrayOfPoints[i];
+          $scope.selectedParkingMetersIndex = i;
+
+        }
+
+      }
+      var icon = 'img/ic_parcometro_selected.png';
+      if (paymentByCard($scope.selectedParkingMeters.parking)) {
+        icon = 'img/ic_parcometro_euro-card_selected.png'
+      }
+      $scope.markers[$scope.selectedParkingMetersIndex].icon = {
+        iconUrl: icon,
+        iconSize: [36, 50],
+        iconAnchor: [18, 50],
+        popupAnchor: [-0, -50]
+      }
+    }
+
+
+
+    function driveMeParcometer(p, index) {
+      var icon = 'img/ic_parcometro.png';
+      if (paymentByCard($scope.selectedParkingMeters.parking)) {
+        icon = 'img/ic_parcometro_euro-card.png'
+      }
+      $scope.markers[$scope.selectedParkingMetersIndex].icon = {
+        iconUrl: icon,
+        iconSize: [36, 50],
+        iconAnchor: [18, 50],
+        popupAnchor: [-0, -50]
+      }
+      $scope.selectedParkingMetersIndex = index;
+      $scope.selectedParkingMeters = $scope.markers[index];
+      //update icon for that
+      var icon = 'img/ic_parcometro_selected.png';
+      if (paymentByCard($scope.selectedParkingMeters.parking)) {
+        icon = 'img/ic_parcometro_euro-card_selected.png'
+      }
+      $scope.markers[$scope.selectedParkingMetersIndex].icon = {
+        iconUrl: icon,
+        iconSize: [36, 50],
+        iconAnchor: [18, 50],
+        popupAnchor: [-0, -50]
+      }
+      // marker.target.setIcon(new myIconReplc);
+    }
+
+    function getDirection(magneticHeading) {
+
+      //calculate direction between my position and the selected point
+      var bearing = GeoLocate.bearing($rootScope.myPosition, [$scope.selectedParkingMeters.lat, $scope.selectedParkingMeters.lng]);
+      //rotate it of magnetic heading
+      //var rotated_bearing = (bearing > 0 ? bearing : (2 * Math.PI + bearing)) * 360 / (2 * Math.PI);
+      var rotated_bearing = (bearing + 360) % 360;
+      return (rotated_bearing - magneticHeading) % 360;
+      // return rotated_bearing;
+    };
+
+    function paymentByCard(parkometer) {
+      if (parkometer.paymentMethods) {
+        for (var i = 0; i < parkometer.paymentMethods.length; i++) {
+          if (parkometer.paymentMethods[i] == "Cash_And_CreditCard")
+            return true
+        }
+      }
+      return false
+    }
+    function drawArrow(r) {
+      var div = document.getElementById('arrow');
+      if (div) {
+        div.style.webkitTransform = 'rotate(' + (r - $scope.windowOrientation) + 'deg)';
+        div.style.mozTransform = 'rotate(' + (r - $scope.windowOrientation) + 'deg)';
+        div.style.msTransform = 'rotate(' + (r - $scope.windowOrientation) + 'deg)';
+        div.style.oTransform = 'rotate(' + (r - $scope.windowOrientation) + 'deg)';
+        div.style.transform = 'rotate(' + (r - $scope.windowOrientation) + 'deg)';
+      }
+    }
+
+
+
+    function degreesToRadians(degrees) {
+      console.log(degrees * (Math.PI / 180));
+      return degrees * (Math.PI / 180);
+    }
+
+    function radianToDegrees(radians) {
+      console.log(radians * (Math.PI / 180));
+      return radians * 180 / Math.PI;
+    }
+
+    function drawDistance(distance) {
+      $scope.distanceFromParkingMeter = Math.round(distance * 1000) + ' m';
+    }
+
+    $scope.getPrice = function (price) {
+      return (price / 100).toFixed(2) + " €/ora."
+    }
+  })
 .controller('BikeSharingCtrl', function ($scope, $state, $stateParams, $timeout, $filter, $ionicModal, $ionicPopup, $location, ionicMaterialMotion, ionicMaterialInk, leafletData, mapService, bikeSharingService, Config, planService, bookmarkService) {
     $scope.agencyId = $stateParams.agencyId;
     $scope.parkings = null;
