@@ -407,7 +407,7 @@ angular.module('viaggia', [
   })
 
   .state('app.ttlist', {
-    //                cache: false,
+                  cache: false,
     url: "/ttlist/:ref",
     views: {
       'menuContent': {

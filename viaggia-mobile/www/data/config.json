@@ -47,18 +47,7 @@
     "db_version": 25,
     "visualization": {
         "primaryLinks": [
-            {
-                "state": "showPlayAndGoPopup()",
-                "label": "home_gamification",
-                "icon": "ion-leaf",
-                "color": "#60b35c"
-            },
-            {
-                "state": "newPlan()",
-                "label": "menu_plan",
-                "icon": "ic_search",
-                "color": "#3BBACF"
-            },
+
             {
                 "state": "/app/taxi",
                 "label": "menu_taxi",
