@@ -30,7 +30,7 @@ angular.module('viaggia.services.conf', [])
         var mapJsonConfig = null;
         var ttJsonConfig = null;
         var PARKING_METERS_RADIUS = '5';
-        var PARKING_METERS_MAX_NUMBER = 5;
+        var PARKING_METERS_MAX_NUMBER = 52;
         var PARKING_METERS_AGENCY_IDS = ['tn_mob_091516'];
         var GEOCODER_URL = 'https://os.smartcommunitylab.it/core.geocoder/spring';
         var APP_BUILD = '';
@@ -273,6 +273,9 @@ angular.module('viaggia.services.conf', [])
                     long: mapJsonConfig['center_map'][1],
                     zoom: mapJsonConfig['zoom_map']
                 };
+            },
+            getZoomParkingMeter: function() {
+                return 17;
             },
             getPlanPolicy: function () {
                 return mapJsonConfig['plan_policy'];
