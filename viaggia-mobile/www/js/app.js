@@ -416,8 +416,6 @@ angular.module('viaggia', [
         }
       })
 
-
-
       .state('app.ttmap', {
         url: "/ttmap",
         views: {
@@ -796,6 +794,7 @@ angular.module('viaggia', [
       credits_licenses_button: 'VEDI LICENZE',
       favorites_title_list: 'Indirizzi preferiti',
       plan_title: 'Pianifica viaggio',
+      plan_home: 'Pianifica',
       journey_detail: 'Dettagli viaggio',
       planlist_sustanainable: 'Itinerari sostenibili',
       popup_step_number: 'Passo ',
@@ -1182,6 +1181,7 @@ angular.module('viaggia', [
       credits_licenses_button: 'READ LICENSES',
       favorites_title_list: 'Favorite places',
       plan_title: 'Plan journey',
+      plan_home: 'Plan',
       journey_detail: 'Journey detail',
       planlist_sustanainable: 'Sustainable Itineraries',
       popup_step_number: 'Step ',
