@@ -40,8 +40,8 @@ Controller that manages the POIs
         planService.setPlanConfigure({
             to: {
                 name: $scope.poi.properties.title[$scope.lang],
-                lat: $scope.poi.geometry.coordinates[1],
-                long: $scope.poi.geometry.coordinates[0]
+                lat: $scope.poi.geometry.coordinates[0],
+                long: $scope.poi.geometry.coordinates[1]
             },
         });
         planService.setName('to', $scope.poi.properties.title[$scope.lang]);
