@@ -1,84 +1,94 @@
 angular.module('viaggia.services.info', [])
 
-/**
- * A SERVICE TO WORK WITH PARKING DATA FROM SERVER
- */
-.factory('parkingService', function ($http, $q, $filter, Config, DataManager, GeoLocate) {
-  var cache = {};
+  /**
+   * A SERVICE TO WORK WITH PARKING DATA FROM SERVER
+   */
+  .factory('parkingService', function ($http, $q, $filter, Config, DataManager, GeoLocate) {
+    var cache = {};
 
-  var generateId = function(name) {
-    return name ? name.replace('/','_') : '_';
-  };
+    var generateId = function (name) {
+      return name ? name.replace('/', '_') : '_';
+    };
 
-  var getFromCache = function(agencyId, parkingId, deferred) {
-    for (var i = 0; i < cache[agencyId].length;i++) {
-      if (cache[agencyId][i].id == parkingId) {
-        deferred.resolve(cache[agencyId][i]);
-        return;
+    var getFromCache = function (agencyId, parkingId, deferred) {
+      for (var i = 0; i < cache[agencyId].length; i++) {
+        if (cache[agencyId][i].id == parkingId) {
+          deferred.resolve(cache[agencyId][i]);
+          return;
+        }
       }
+      deferred.resolve(null);
     }
-    deferred.resolve(null);
-  }
 
-  return {
-    getParking: function(agencyId, parkingId) {
-      var deferred = $q.defer();
-      if (cache[agencyId]) {
-        getFromCache(agencyId, parkingId, deferred);
-      } else {
-        this.getParkings(agencyId).then(
-          function(){
-            if (cache[agencyId]) {
-              getFromCache(agencyId, parkingId, deferred);
-            } else {
-              deferred.resolve(null);
-            }
-          },
-          function(){deferred.resolve(null);}
-         );
-      }
-      return deferred.promise;
-    },
-    getParkings : function(agencyId) {
-      var deferred = $q.defer();
-      $http.get(Config.getServerURL()+'/getparkingsbyagency/'+agencyId,
-                Config.getHTTPConfig())
-        .success(function(data) {
-          if (data) {
-            data.forEach(function(d, idx) {
-                  d.id = generateId(d.name);
+    return {
+      getParking: function (agencyId, parkingId) {
+        var deferred = $q.defer();
+        if (cache[agencyId]) {
+          getFromCache(agencyId, parkingId, deferred);
+        } else {
+          var parkids = Config.getParkingAgencyIds();
+
+          this.getParkings(parkids).then(
+            function () {
+              if (cache[agencyId]) {
+                getFromCache(agencyId, parkingId, deferred);
+              } else {
+                deferred.resolve(null);
+              }
+            },
+            function () { deferred.resolve(null); }
+          );
+        }
+        return deferred.promise;
+      },
+      getParkings: function (agencyIds) {
+        var deferred = $q.defer();
+        var promises = [];
+
+        function lastTask(results) {
+          // console.log(results);
+          // defer.resolve();
+          var parkings = [];
+          for (var i = 0; i < results.length; i++) {
+            parkings = parkings.concat(results[i].data);
+            cache[agencyIds[i]] = results[i].data;
+          }
+          if (parkings) {
+            parkings.forEach(function (d, idx) {
+              d.id = generateId(d.name);
             });
+
             var all = [];
-            cache[agencyId] = data;
-            GeoLocate.locate().then(function(pos) {
-              data.forEach(function(p) {
+            GeoLocate.locate().then(function (pos) {
+              parkings.forEach(function (p) {
                 all.push(GeoLocate.distanceTo(p.position));
               });
-              $q.all(all).then(function(positions){
-                data.forEach(function(d, idx) {
+              $q.all(all).then(function (positions) {
+                parkings.forEach(function (d, idx) {
                   d.distance = positions[idx];
                 });
-                deferred.resolve(data);
+                deferred.resolve(parkings);
               });
-            }, function(err) {
-              deferred.resolve(data);
+            }, function (err) {
+              deferred.resolve(parkings);
             });
           } else {
-            deferred.resolve(data);
+            deferred.resolve(parkings);
           }
-        })
-        .error(function(err) {
-          deferred.reject(err);
+        };
+
+
+        angular.forEach(agencyIds, function (value) {
+          promises.push($http.get(Config.getServerURL() + '/getparkingsbyagency/' + value, Config.getHTTPConfig()));
         });
-
-
-      return deferred.promise;
-    },
-          getParkingMeters: function (lat, long) {
+        $q.all(promises).then(lastTask);
+        return deferred.promise;
+      },
+      getParkingMeters: function (lat, long,number) {
         var deferred = $q.defer();
 
 
-        $http.get(Config.getMetroparcoServerURL() + '/nearparkingmeters/' + lat + '/' + long + '/' + Config.getParkingMetersRadius() + '/' + Config.getParkingMetersMaxNumber() + "?agencyIds=" + Config.getParkingMetersAgencyIds().join(", "),
+        $http.get(Config.getMetroparcoServerURL() + '/nearparkingmeters/' + lat + '/' + long + '/' + Config.getParkingMetersRadius() + '/' + number + "?agencyIds=" + Config.getParkingMetersAgencyIds().join(", "),
           Config.getHTTPConfig())
           .success(function (data) {
             if (data instanceof Array) {
@@ -98,70 +108,77 @@ angular.module('viaggia.services.info', [])
   })
 
 
-.factory('bikeSharingService', function ($http, $q, $filter, Config, DataManager, GeoLocate) {
-  var cache = {};
+  .factory('bikeSharingService', function ($http, $q, $filter, Config, DataManager, GeoLocate) {
+    var cache = {};
 
-  var getFromCache = function(agencyId, parkingId, deferred) {
-    for (var i = 0; i < cache[agencyId].length;i++) {
-      if (cache[agencyId][i].id == parkingId) {
-        deferred.resolve(cache[agencyId][i]);
-        return;
+    var getFromCache = function (agencyId, parkingId, deferred) {
+      for (var i = 0; i < cache[agencyId].length; i++) {
+        if (cache[agencyId][i].id == parkingId) {
+          deferred.resolve(cache[agencyId][i]);
+          return;
+        }
       }
+      deferred.resolve(null);
     }
-    deferred.resolve(null);
-  }
 
-  return {
-    getStation: function(agencyId, parkingId) {
-      var deferred = $q.defer();
-      if (cache[agencyId]) {
-        getFromCache(agencyId, parkingId, deferred);
-      } else {
-        this.getStations(agencyId).then(
-          function(){
-            if (cache[agencyId]) {
-              getFromCache(agencyId, parkingId, deferred);
-            } else {
-              deferred.resolve(null);
-            }
-          },
-          function(){deferred.resolve(null);}
-         );
-      }
-      return deferred.promise;
-    },
-    getStations : function(agencyId) {
-      var deferred = $q.defer();
-      $http.get(Config.getServerURL()+'/bikesharing/'+agencyId,
-                Config.getHTTPConfig())
-        .success(function(data) {
-          if (data) {
+    return {
+      getStation: function (agencyId, parkingId) {
+        var deferred = $q.defer();
+        if (cache[agencyId]) {
+          getFromCache(agencyId, parkingId, deferred);
+        } else {
+          var bikeids = Config.getBikeSharingAgencyIds();
+
+          this.getStations(bikeids).then(
+            function () {
+              if (cache[agencyId]) {
+                getFromCache(agencyId, parkingId, deferred);
+              } else {
+                deferred.resolve(null);
+              }
+            },
+            function () { deferred.resolve(null); }
+          );
+        }
+        return deferred.promise;
+      },
+      getStations: function (agencyIds) {
+        var deferred = $q.defer();
+        var promises = [];
+        function lastTask(results) {
+          var bikeStops = [];
+          for (var i = 0; i < results.length; i++) {
+            bikeStops = bikeStops.concat(results[i].data);
+            cache[agencyIds[i]] = results[i].data;
+          }
+          if (bikeStops) {
+
             var all = [];
-            cache[agencyId] = data;
-            GeoLocate.locate().then(function(pos) {
-              data.forEach(function(p) {
+            GeoLocate.locate().then(function (pos) {
+              bikeStops.forEach(function (p) {
                 all.push(GeoLocate.distanceTo(p.position));
               });
-              $q.all(all).then(function(positions){
-                data.forEach(function(d, idx) {
+              $q.all(all).then(function (positions) {
+                bikeStops.forEach(function (d, idx) {
                   d.distance = positions[idx];
                 });
-                deferred.resolve(data);
+                deferred.resolve(bikeStops);
               });
-            }, function(err) {
-              deferred.resolve(data);
+            }, function (err) {
+              deferred.resolve(bikeStops);
             });
           } else {
-            deferred.resolve(data);
+            deferred.resolve(bikeStops);
           }
-        })
-        .error(function(err) {
-          deferred.reject(err);
+        };
+
+
+        angular.forEach(agencyIds, function (value) {
+          promises.push($http.get(Config.getServerURL() + '/bikesharing/' + value, Config.getHTTPConfig()));
         });
-
-
-      return deferred.promise;
+        $q.all(promises).then(lastTask);
+        return deferred.promise;
+      }
     }
-  }
-})
+  })
 

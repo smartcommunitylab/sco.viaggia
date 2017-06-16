@@ -30,8 +30,8 @@ angular.module('viaggia.services.conf', [])
         var mapJsonConfig = null;
         var ttJsonConfig = null;
         var PARKING_METERS_RADIUS = '5';
-        var PARKING_METERS_MAX_NUMBER = 5;
-         var PARKING_METERS_AGENCY_IDS = ['tn_mob_091516'];
+        var PARKING_METERS_MAX_NUMBER = 52;
+        var PARKING_METERS_AGENCY_IDS = ['tn_mob_091516'];
         var GEOCODER_URL = 'https://os.smartcommunitylab.it/core.geocoder/spring';
         var APP_BUILD = '';
         var PLAN_TYPES = ['WALK', 'TRANSIT', 'CAR', 'BICYCLE', 'SHAREDCAR', 'SHAREDBIKE'];
@@ -274,6 +274,9 @@ angular.module('viaggia.services.conf', [])
                     zoom: mapJsonConfig['zoom_map']
                 };
             },
+            getZoomParkingMeter: function() {
+                return 17;
+            },
             getPlanPolicy: function () {
                 return mapJsonConfig['plan_policy'];
             },
@@ -357,6 +360,12 @@ angular.module('viaggia.services.conf', [])
             },
             getExtraurbanAgencies: function () {
                 return mapJsonConfig["extraurban_agencies"];
+            },
+            getParkingAgencyIds: function () {
+                return mapJsonConfig["parkings_agency_ids"];
+            },
+            getBikeSharingAgencyIds: function () {
+                return mapJsonConfig["bikesharing_agency_ids"];
             },
             getLang: function () {
                 //            var browserLanguage = '';
