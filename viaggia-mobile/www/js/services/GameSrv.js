@@ -15,7 +15,7 @@ angular.module('viaggia.services.game', [])
                 "to":1497354006,
                 "means":{
                 "bike":2500,
-                "walk":21200,
+                "walk":1200,
                 "public":8200,
                 "car":2700,
                 "date":'13/06/2017'

@@ -1,38 +1,45 @@
 <ion-view>
     <ion-nav-title>
-            {{title}}
+        {{title}}
     </ion-nav-title>
-    <ion-content has-bouncing="true" scroll="true" has-header="true">
+    <ion-content class="game-ranking" has-bouncing="false" scroll="false">
         <div class="filter item-accordion" ng-if="!!filter.options">
             <ion-item class="item-accordion-header item-icon-right" ng-click="filter.toggle()">
-            <div ng-if="!filter.open">{{filter.selected}}</div>
+                <div ng-if="!filter.open">{{filter.selected}}</div>
                 <i class="icon ion-arrow-down-b" ng-class="{'open': filter.open}"></i>
             </ion-item>
             <div class="item-accordion-content" ng-show="filter.open">
                 <ion-list>
                     <ion-item ng-repeat="option in filter.options" ng-click="filter.filterBy(option)">
-                       <div ng-class="{ 'becomeblue' : filter.selected==option}">{{option}}</div>
+                        <div ng-class="{ 'becomeblue' : filter.selected==option}">{{option}}</div>
                     </ion-item>
                 </ion-list>
             </div>
         </div>
-        <ion-list>
-        <div class="chart" ng-repeat="day in stats">
-            <H5 class="H5stats">{{day.means.date}}</H5>
+        <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="statisticScroll">
+            <ion-list>
+                <div class="chart" ng-repeat="day in stats">
+                    <H5 class="H5stats">{{day.means.date}}</H5>
 
-            <div  ng-if="day.means.walk>0" class="walkbgcolor statsfloat" style="width:{{265*day.means.walk/maxStat}}px;"><i class="icon ic_foot"></i></div>
-            <div  ng-if="day.means.walk>0" class="statstext" id="walkcolor"> {{day.means.walk/1000}} km </div> <div id="statsdiv"></div>
+                    <div ng-if="day.means.walk>0" class="walkbgcolor statsfloat" style="{{getStyle(day.means.walk)}}" ><i class="icon ic_foot"></i></div>
+                    <div ng-if="day.means.walk>0" class="statstext" id="walkcolor"> {{day.means.walk/1000}} km </div>
+                    <div id="statsdiv"></div>
 
-            <div  ng-if="day.means.public>0" class="publicbgcolor statsfloat" style="width:{{265*day.means.public/maxStat}}px;"><i class="icon ic_urban-bus"></i><i class="icon ic_train"></i></div>
-            <div  ng-if="day.means.public>0" class="statstext" id="publiccolor"> {{day.means.public/1000}} km </div> <div id="statsdiv"></div>
+                    <div ng-if="day.means.public>0" class="publicbgcolor statsfloat" style="{{getStyle(day.means.public)}}"><i class="icon ic_urban-bus"></i><i class="icon ic_train"></i></div>
+                    <div ng-if="day.means.public>0" class="statstext" id="publiccolor"> {{day.means.public/1000}} km </div>
+                    <div id="statsdiv"></div>
 
-            <div  ng-if="day.means.bike>0" class="bikebgcolor statsfloat" style="width:{{265*day.means.bike/maxStat}}px;"><i class="icon ic_bike"></i></div>
-            <div  ng-if="day.means.bike>0" class="statstext" id="bikecolor"> {{day.means.bike/1000}} km </div> <div id="statsdiv"></div>
+                    <div ng-if="day.means.bike>0" class="bikebgcolor statsfloat" style="{{getStyle(day.means.bike)}}" ><i class="icon ic_bike"></i></div>
+                    <div ng-if="day.means.bike>0" class="statstext" id="bikecolor"> {{day.means.bike/1000}} km </div>
+                    <div id="statsdiv"></div>
 
-            <div  ng-if="day.means.car>0" class="carbgcolor statsfloat" style="width:{{265*day.means.car/maxStat}}px;"><i class="icon ion-android-car"></i></div>
-            <div  ng-if="day.means.car>0" class="statstext" id="carcolor"> {{day.means.car/1000}} km </div> <div id="statsdiv"></div>
-        </div>
-        <ion-infinite-scroll ng-if="maybeMore" on-infinite="loadMore()"></ion-infinite-scroll>
-        </ion-list>
+                    <div ng-if="day.means.car>0" class="carbgcolor statsfloat" style="{{getStyle(day.means.car)}}"><i class="icon ion-android-car"></i></div>
+                    <div ng-if="day.means.car>0" class="statstext" id="carcolor"> {{day.means.car/1000}} km </div>
+                    <div id="statsdiv"></div>
+
+                </div>
+                <ion-infinite-scroll ng-if="maybeMore" on-infinite="loadMore()"></ion-infinite-scroll>
+            </ion-list>
+        </ion-scroll>
     </ion-content>
 </ion-view>
