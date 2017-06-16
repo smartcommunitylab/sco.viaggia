@@ -212,7 +212,7 @@ angular.module('viaggia.controllers.taxi', [])
                 //                $scope.showStreetName = false;
                 //                === === =
                 $scope.loading = false;
-                $scope.taxiCompanies = null;
+                //$scope.taxiCompanies = null;
             });
             //                });
         }, function () {
