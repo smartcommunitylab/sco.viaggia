@@ -3,7 +3,7 @@ angular.module('viaggia.services.pois', [])
 /**
  * A SERVICE TO WORK WITH PARKING DATA FROM SERVER
  */
-.factory('poiService', function ($http, $q, $filter, Config) {
+.factory('poiService', function ($http, $q, $filter, Config, GeoLocate) {
   var svc = {};
   var objects = null;
 
@@ -22,7 +22,26 @@ angular.module('viaggia.services.pois', [])
         deferred.resolve([]);
       } else {
         objects = data.data.features;
-        deferred.resolve(objects);
+        objects.forEach(function(o){
+          o.geometry.coordinates.reverse();
+          if (!o.properties.image) {
+            o.properties.image = 'img/poi_default.jpg';
+          }
+        });
+        var all = [];
+        GeoLocate.locate().then(function (pos) {
+          objects.forEach(function (p) {
+            all.push(GeoLocate.distanceTo(p.geometry.coordinates));
+          });
+          $q.all(all).then(function (positions) {
+            objects.forEach(function (d, idx) {
+              d.distance = positions[idx];
+            });
+            deferred.resolve(objects);
+          });
+        }, function (err) {
+          deferred.resolve(objects);
+        });
       }
     }, function(err) {
       deferred.reject(err);
