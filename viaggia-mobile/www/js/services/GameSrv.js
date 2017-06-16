@@ -6,6 +6,79 @@ angular.module('viaggia.services.game', [])
 	var localStatus = null;
 	var localRanking = null;
 
+    gameService.getStatistics = function(how, from, to ) {
+        var deferred = $q.defer();
+
+        var returnValue = {
+            "stats":[
+            {   "from":1497312000 ,
+                "to":1497354006,
+                "means":{
+                "bike":2500,
+                "walk":21200,
+                "public":8200,
+                "car":2700,
+                "date":'13/06/2017'
+                }
+                },
+            {   "from":1497312000 ,
+                "to":1497354006,
+                "means":{
+                "bike":0,
+                "walk":5000,
+                "public":8000,
+                "car":0,
+                "date":'12/06/2017'
+                }
+            },
+            {   "from":1497225600,
+                "to":1497268800,
+                "means":{
+                "bike":4000,
+                "walk":2000,
+                "public":7000,
+                "car":2200,
+                "date":'11/06/2017'
+                }
+            },
+            {   "from":1497225600,
+                "to":1497268800,
+                "means":{
+                "bike":0,
+                "walk":700,
+                "public":0,
+                "car":7500,
+                "date":'10/06/2017'
+                }
+            },
+            {   "from":1497225600,
+                "to":1497268800,
+                "means":{
+                "bike":4300,
+                "walk":3000,
+                "public":4700,
+                "car":7500,
+                "date":'10/06/2017'
+                }
+            },
+            {   "from":1497225600,
+                "to":1497268800,
+                "means":{
+                "bike":0,
+                "walk":1400,
+                "public":13000,
+                "car":0,
+                "date":'10/06/2017'
+                }
+            }
+            ]
+        }
+        userService.getValidToken().then(
+			function (token) {
+                deferred.resolve(returnValue);
+            });
+        return deferred.promise;
+    }
 	/* get remote status */
 	gameService.getStatus = function () {
 		var deferred = $q.defer();

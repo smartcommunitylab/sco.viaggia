@@ -2088,6 +2088,10 @@ Play&Go
     transform: rotate(-180deg);
 }
 
+.becomeblue {
+    color: #4EB0E6
+}
+
 .item-accordion .item-accordion-header i::before {
     font-size: 0.5em;
 }
@@ -2119,6 +2123,7 @@ Play&Go
     color: #fff;
     padding: 8px 16px;
     margin: 0;
+    text-align:  center
 }
 
 .filter.item-accordion .item.reset {
@@ -2153,6 +2158,70 @@ Play&Go
 .tracking-dashboard {
     margin: 0px 0px;
     border-bottom: 2px solid #60b35c;
+}
+
+.chart div {
+  font: 10px sans-serif;
+  text-align: right;
+  border-radius: 15px;
+  padding: 3px;
+  padding-right: 5px;
+  margin: 3px;
+  color: white;
+}
+
+.statstext div {
+    color:black;
+    text-align: right;
+    float: right
+}
+
+#statsdiv {
+   clear:both;
+    padding: 0px;
+    height: 0px;
+    margin: 0px
+}
+.statsfloat {
+    float: left
+}
+
+#walkcolor {
+    color: #60b35c
+}
+
+#bikecolor {
+    color: #922d67
+}
+
+#publiccolor {
+    color: #ea8817
+}
+
+#carcolor {
+    color: #01579b
+}
+
+.walkbgcolor {
+    background-color: #60b35c
+}
+
+.bikebgcolor {
+    background-color: #922d67
+}
+
+.publicbgcolor {
+    background-color: #ea8817
+}
+
+.carbgcolor {
+    background-color: #01579b
+}
+
+.H5stats{
+    margin-left: 5px;
+    margin-bottom: 1px;
+    text-align:left
 }
 
 .tracking-dashboard h4 {
