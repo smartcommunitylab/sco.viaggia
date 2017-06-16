@@ -1593,6 +1593,10 @@ margin-right: 10px;
   margin-bottom: 0 !important;
 }
 
+.poi-list .item {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important; 
+}
 
 .poi-list button {
   text-align: left;
@@ -1600,9 +1604,10 @@ margin-right: 10px;
   background-color: #fff;
   border: 1px solid #d2d2d2;
   min-height: 70px;
-  margin: 5px 0px;
-  padding: 0px;
+  margin: 5px 0px !important;
+  padding: 0px !important;
   text-transform: none;
+  height: initial;
 }
 
 .poi-list button img {
@@ -1652,4 +1657,32 @@ margin-right: 10px;
 .poi .row.web h4 a {
   text-decoration: none;
   color: #000;
+}
+
+.poi-row {
+  min-height: 70px;
+  position: relative;
+}
+.poi-row img {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+
+.poi-row > .col {
+  padding: 0 0 0 70px;  
+}
+
+.poi-row > .col h2 {
+  white-space: normal;
+  font-size: 14px;
+}
+
+.poi-row .footer, .poi-row .footer .col {
+  padding: 0;
+  line-height: 16px;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #666;
 }
