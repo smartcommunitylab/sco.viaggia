@@ -54,25 +54,85 @@ angular.module('viaggia.services.game', [])
             {   "from":1497225600,
                 "to":1497268800,
                 "means":{
-                "bike":4300,
-                "walk":3000,
+                "bike":7800,
+                "walk":3300,
                 "public":4700,
-                "car":7500,
-                "date":'10/06/2017'
+                "car":4500,
+                "date":'09/06/2017'
                 }
             },
             {   "from":1497225600,
                 "to":1497268800,
                 "means":{
                 "bike":0,
-                "walk":1400,
-                "public":13000,
+                "walk":2300,
+                "public":12000,
                 "car":0,
-                "date":'10/06/2017'
+                "date":'08/06/2017'
+                }
+            },
+            {   "from":1497312000 ,
+                "to":1497354006,
+                "means":{
+                "bike":1600,
+                "walk":1200,
+                "public":8200,
+                "car":2700,
+                "date":'07/06/2017'
+                }
+                },
+            {   "from":1497312000 ,
+                "to":1497354006,
+                "means":{
+                "bike":0,
+                "walk":5000,
+                "public":8000,
+                "car":0,
+                "date":'06/06/2017'
+                }
+            },
+            {   "from":1497225600,
+                "to":1497268800,
+                "means":{
+                "bike":8000,
+                "walk":2000,
+                "public":7000,
+                "car":2200,
+                "date":'05/06/2017'
+                }
+            },
+            {   "from":1497225600,
+                "to":1497268800,
+                "means":{
+                "bike":0,
+                "walk":1800,
+                "public":0,
+                "car":11500,
+                "date":'04/06/2017'
+                }
+            },
+            {   "from":1497225600,
+                "to":1497268800,
+                "means":{
+                "bike":3400,
+                "walk":2000,
+                "public":7100,
+                "car":6000,
+                "date":'03/06/2017'
+                }
+            },
+            {   "from":1497225600,
+                "to":1497268800,
+                "means":{
+                "bike":0,
+                "walk":4700,
+                "public":9500,
+                "car":0,
+                "date":'02/06/2017'
                 }
             }
             ]
-        }
+    }
         userService.getValidToken().then(
 			function (token) {
                 deferred.resolve(returnValue);

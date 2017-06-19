@@ -4,11 +4,12 @@ angular.module('viaggia.controllers.game', [])
         $scope.currentUser = null;
         $scope.status = null;
         $scope.ranking = null;
+        $scope.statistics = null
         $scope.prize = null;
         $scope.noStatus = false;
         $scope.rankingFilterOptions = ['now', 'last', 'global'];
         $scope.rankingPerPage = 50;
-        $scope.statsPerPage = 7
+        $scope.statsPerPage = 6;
 
         Config.loading();
         GameSrv.getLocalStatus().then(
@@ -158,6 +159,7 @@ angular.module('viaggia.controllers.game', [])
     .controller('StatisticsCtrl', function ($scope, $ionicScrollDelegate, $window, $timeout, GameSrv) {
         $scope.title = "Game statistics"
         $scope.stats = null;
+        $scope.statistics = []
         $scope.maxStat = 0;
         $scope.filter = {
             open: false,
@@ -182,8 +184,11 @@ angular.module('viaggia.controllers.game', [])
 
         $scope.filter.options = ['Daily', 'Weekly'];
         $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
+        $scope.filter.filter = function (selection){
+        console.log(selection);
+        }
         $scope.getStyle= function(stat) {
-            return "width:"+(265*stat/$scope.maxStat)+"px;"
+            return "width:"+(85*stat/$scope.maxStat)+"%"
         }
         var generateRankingStyle = function () {
             // header 44, tabs 49, filter 44, listheader 44, my ranking 48
@@ -223,26 +228,32 @@ angular.module('viaggia.controllers.game', [])
             $scope.maxStat = tmpMax;
         }
 
-        GameSrv.getStatistics(0, 0, 0).then(function (statistics) {
+          GameSrv.getStatistics($scope.filter.selected, 0, 0).then(function (statistics) {
             console.log(JSON.stringify(statistics));
             $scope.stats = statistics.stats;
             $scope.calculateMaxStats($scope.stats);
 
-
-            //     $scope.loadMore = function () {
-            //    if (!getStatistics) {
-            //         getStatistics = true;
-            //         var start = 0;
-            //         var end = start + $scope.statsPerPage;
-            //         GameSrv.getStatistics($scope.filter.selected, start, end).then(
-            //             function (statistics) {
-            //                 console.log(JSON.stringify(statistics));
-            //             }
-
-        generateRankingStyle();
-
+            $scope.statistics = statistics['stats'];
         });
-    })
+              $scope.loadMore = function () {
+                if (!getStatistics) {
+                    getStatistics = true;
+                     var start = $scope.statistics != null ? $scope.statistics.length : 0;
+                     var end = start + $scope.statsPerPage;
+                     GameSrv.getStatistics($scope.filter.selected, start, end).then(
+                         function (statistics) {
+                          $scope.statistics = $scope.statistics.concat(statistics['stats']);
+                             if (statistics['stats'].length < $scope.statsPerPage) {
+                            $scope.maybeMore = false;
+                            }
+                         }
+                        );
+                }
+              };
+
+            generateRankingStyle();
+        })
+
     .controller('DiaryCtrl', function ($scope) {
         $scope.title = "Game diary"
     })
