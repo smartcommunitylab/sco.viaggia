@@ -18,7 +18,7 @@
         </div>
         <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="statisticScroll">
             <ion-list>
-                <div class="chart" ng-repeat="day in stats">
+                <div class="chart" ng-repeat="day in stats track by $index">
                     <H5 class="H5stats">{{day.means.date}}</H5>
 
                     <div ng-if="day.means.walk>0" class="walkbgcolor statsfloat" style="{{getStyle(day.means.walk)}}" ><i class="icon ic_foot"></i></div>

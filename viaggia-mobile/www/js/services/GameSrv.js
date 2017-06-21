@@ -5,11 +5,7 @@ angular.module('viaggia.services.game', [])
 
 	var localStatus = null;
 	var localRanking = null;
-
-    gameService.getStatistics = function(how, from, to ) {
-        var deferred = $q.defer();
-
-        var returnValue = {
+    var returnValue = {
             "stats":[
             {   "from":1497312000 ,
                 "to":1497354006,
@@ -130,12 +126,137 @@ angular.module('viaggia.services.game', [])
                 "car":0,
                 "date":'02/06/2017'
                 }
-            }
+            },
+            {   "from":1497312000 ,
+                "to":1497354006,
+                "means":{
+                "bike":0,
+                "walk":7400,
+                "public":4500,
+                "car":0,
+                "date":'01/06/2017'
+                }
+            },
+            {   "from":1497225600,
+                "to":1497268800,
+                "means":{
+                "bike":2200,
+                "walk":3300,
+                "public":4000,
+                "car":1300,
+                "date":'31/05/2017'
+                }
+            },
+            {   "from":1497225600,
+                "to":1497268800,
+                "means":{
+                "bike":0,
+                "walk":2400,
+                "public":0,
+                "car":4800,
+                "date":'30/05/2017'
+                }
+            },
+            {   "from":1497225600,
+                "to":1497268800,
+                "means":{
+                "bike":9100,
+                "walk":2000,
+                "public":3800,
+                "car":5400,
+                "date":'29/05/2017'
+                }
+            },
+            {   "from":1497225600,
+                "to":1497268800,
+                "means":{
+                "bike":0,
+                "walk":4200,
+                "public":8800,
+                "car":0,
+                "date":'28/05/2017'
+                }
+            },
+                {   "from":1497312000 ,
+                "to":1497354006,
+                "means":{
+                "bike":1000,
+                "walk":2000,
+                "public":3000,
+                "car":0,
+                "date":'27/05/2017'
+                }
+                },
+            {   "from":1497312000 ,
+                "to":1497354006,
+                "means":{
+                "bike":2000,
+                "walk":1700,
+                "public":0,
+                "car":1000,
+                "date":'26/05/2017'
+                }
+            },
+            {   "from":1497225600,
+                "to":1497268800,
+                "means":{
+                "bike":7400,
+                "walk":0,
+                "public":15000,
+                "car":0,
+                "date":'25/05/2017'
+                }
+            },
+            {   "from":1497225600,
+                "to":1497268800,
+                "means":{
+                "bike":0,
+                "walk":700,
+                "public":0,
+                "car":7500,
+                "date":'24/05/2017'
+                }
+            },
+            {   "from":1497225600,
+                "to":1497268800,
+                "means":{
+                "bike":6700,
+                "walk":4200,
+                "public":0,
+                "car":2700,
+                "date":'23/05/2017'
+                }
+            },
+            {   "from":1497225600,
+                "to":1497268800,
+                "means":{
+                "bike":0,
+                "walk":17800,
+                "public":0,
+                "car":3600,
+                "date":'22/05/2017'
+                }
+            },
             ]
     }
+    gameService.getStatistics = function(how, from, to ) {
+        var deferred = $q.defer();
+        var returnValuee = [];
         userService.getValidToken().then(
 			function (token) {
-                deferred.resolve(returnValue);
+
+                if (returnValue.stats.length > to) {
+                    for (var i = from; i < to; i++) {
+                        returnValuee.push(returnValue.stats[i]);
+                    }
+                } else {
+                    for (var i = from; i < returnValue.stats.length; i++) {
+                          returnValuee.push(returnValue.stats[i]);
+                    }
+                }
+
+                deferred.resolve(returnValuee);
+               // deferred.resolve(returnValue);
             });
         return deferred.promise;
     }
