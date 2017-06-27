@@ -280,6 +280,9 @@ angular.module('viaggia.services.conf', [])
             getPlanPolicy: function () {
                 return mapJsonConfig['plan_policy'];
             },
+            getDefaultPlanPolicy: function () {
+                return mapJsonConfig['default_plan_policy'];
+            },
             getGeocoderURL: function () {
                 return GEOCODER_URL;
             },
