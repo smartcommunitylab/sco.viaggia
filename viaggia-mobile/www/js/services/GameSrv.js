@@ -7,8 +7,8 @@ angular.module('viaggia.services.game', [])
 	var localRanking = null;
     var returnValue = {
             "stats":[
-            {   "from":1497312000 ,
-                "to":1497354006,
+            {   "from":1497312000000 ,
+                "to":1497398399000,
                 "means":{
                 "bike":2500,
                 "walk":1200,
@@ -17,8 +17,8 @@ angular.module('viaggia.services.game', [])
                 "date":'13/06/2017'
                 }
                 },
-            {   "from":1497312000 ,
-                "to":1497354006,
+            {   "from":1497225600000 ,
+                "to":1497311999000,
                 "means":{
                 "bike":0,
                 "walk":5000,
@@ -27,8 +27,8 @@ angular.module('viaggia.services.game', [])
                 "date":'12/06/2017'
                 }
             },
-            {   "from":1497225600,
-                "to":1497268800,
+            {   "from":1497139200000,
+                "to":1497225599000,
                 "means":{
                 "bike":4000,
                 "walk":2000,
@@ -37,8 +37,8 @@ angular.module('viaggia.services.game', [])
                 "date":'11/06/2017'
                 }
             },
-            {   "from":1497225600,
-                "to":1497268800,
+            {   "from":1497052800000,
+                "to":1497139199000,
                 "means":{
                 "bike":0,
                 "walk":700,
@@ -47,8 +47,8 @@ angular.module('viaggia.services.game', [])
                 "date":'10/06/2017'
                 }
             },
-            {   "from":1497225600,
-                "to":1497268800,
+            {   "from":1496966400000,
+                "to":1497052799000,
                 "means":{
                 "bike":7800,
                 "walk":3300,
@@ -57,8 +57,8 @@ angular.module('viaggia.services.game', [])
                 "date":'09/06/2017'
                 }
             },
-            {   "from":1497225600,
-                "to":1497268800,
+            {   "from":1496880000000,
+                "to":1496966399000,
                 "means":{
                 "bike":0,
                 "walk":2300,
@@ -67,8 +67,8 @@ angular.module('viaggia.services.game', [])
                 "date":'08/06/2017'
                 }
             },
-            {   "from":1497312000 ,
-                "to":1497354006,
+            {   "from":1496793600000 ,
+                "to":1496879999000,
                 "means":{
                 "bike":1600,
                 "walk":1200,
@@ -77,8 +77,8 @@ angular.module('viaggia.services.game', [])
                 "date":'07/06/2017'
                 }
                 },
-            {   "from":1497312000 ,
-                "to":1497354006,
+            {   "from":1496707200000 ,
+                "to":1496793599000,
                 "means":{
                 "bike":0,
                 "walk":5000,
@@ -87,8 +87,8 @@ angular.module('viaggia.services.game', [])
                 "date":'06/06/2017'
                 }
             },
-            {   "from":1497225600,
-                "to":1497268800,
+            {   "from":1496620800000,
+                "to":1496707199000,
                 "means":{
                 "bike":8000,
                 "walk":2000,
@@ -97,8 +97,8 @@ angular.module('viaggia.services.game', [])
                 "date":'05/06/2017'
                 }
             },
-            {   "from":1497225600,
-                "to":1497268800,
+            {   "from":1496534400000,
+                "to":1496620799000,
                 "means":{
                 "bike":0,
                 "walk":1800,
@@ -107,8 +107,8 @@ angular.module('viaggia.services.game', [])
                 "date":'04/06/2017'
                 }
             },
-            {   "from":1497225600,
-                "to":1497268800,
+            {   "from":1496448000000,
+                "to":1496534399000,
                 "means":{
                 "bike":3400,
                 "walk":2000,
@@ -117,8 +117,8 @@ angular.module('viaggia.services.game', [])
                 "date":'03/06/2017'
                 }
             },
-            {   "from":1497225600,
-                "to":1497268800,
+            {   "from":1496361600000,
+                "to":1496447999000,
                 "means":{
                 "bike":0,
                 "walk":4700,
@@ -127,8 +127,8 @@ angular.module('viaggia.services.game', [])
                 "date":'02/06/2017'
                 }
             },
-            {   "from":1497312000 ,
-                "to":1497354006,
+            {   "from":1496275200000 ,
+                "to":1496361599000,
                 "means":{
                 "bike":0,
                 "walk":7400,
@@ -137,8 +137,8 @@ angular.module('viaggia.services.game', [])
                 "date":'01/06/2017'
                 }
             },
-            {   "from":1497225600,
-                "to":1497268800,
+            {   "from":1496188800000,
+                "to":1496275199000,
                 "means":{
                 "bike":2200,
                 "walk":3300,
@@ -147,8 +147,8 @@ angular.module('viaggia.services.game', [])
                 "date":'31/05/2017'
                 }
             },
-            {   "from":1497225600,
-                "to":1497268800,
+            {   "from":1496102400000,
+                "to":1496188799000,
                 "means":{
                 "bike":0,
                 "walk":2400,
@@ -157,8 +157,8 @@ angular.module('viaggia.services.game', [])
                 "date":'30/05/2017'
                 }
             },
-            {   "from":1497225600,
-                "to":1497268800,
+            {   "from":1496016000000,
+                "to":1496102399000,
                 "means":{
                 "bike":9100,
                 "walk":2000,
@@ -167,8 +167,8 @@ angular.module('viaggia.services.game', [])
                 "date":'29/05/2017'
                 }
             },
-            {   "from":1497225600,
-                "to":1497268800,
+            {   "from":1495929600000,
+                "to":1496015999000,
                 "means":{
                 "bike":0,
                 "walk":4200,
@@ -177,8 +177,8 @@ angular.module('viaggia.services.game', [])
                 "date":'28/05/2017'
                 }
             },
-                {   "from":1497312000 ,
-                "to":1497354006,
+            {   "from":1495843200000 ,
+                "to":1495929599000,
                 "means":{
                 "bike":1000,
                 "walk":2000,
@@ -187,8 +187,8 @@ angular.module('viaggia.services.game', [])
                 "date":'27/05/2017'
                 }
                 },
-            {   "from":1497312000 ,
-                "to":1497354006,
+            {   "from":1495756800000 ,
+                "to":1495843199000,
                 "means":{
                 "bike":2000,
                 "walk":1700,
@@ -197,8 +197,8 @@ angular.module('viaggia.services.game', [])
                 "date":'26/05/2017'
                 }
             },
-            {   "from":1497225600,
-                "to":1497268800,
+            {   "from":1495670400000,
+                "to":1495756799000,
                 "means":{
                 "bike":7400,
                 "walk":0,
@@ -207,8 +207,8 @@ angular.module('viaggia.services.game', [])
                 "date":'25/05/2017'
                 }
             },
-            {   "from":1497225600,
-                "to":1497268800,
+            {   "from":1495584000000,
+                "to":1495670399000,
                 "means":{
                 "bike":0,
                 "walk":700,
@@ -217,8 +217,8 @@ angular.module('viaggia.services.game', [])
                 "date":'24/05/2017'
                 }
             },
-            {   "from":1497225600,
-                "to":1497268800,
+            {   "from":1495497600000,
+                "to":1495583999000,
                 "means":{
                 "bike":6700,
                 "walk":4200,
@@ -227,8 +227,8 @@ angular.module('viaggia.services.game', [])
                 "date":'23/05/2017'
                 }
             },
-            {   "from":1497225600,
-                "to":1497268800,
+            {   "from":1495411200000,
+                "to":1495497599000,
                 "means":{
                 "bike":0,
                 "walk":17800,
@@ -256,7 +256,7 @@ angular.module('viaggia.services.game', [])
                 }
 
                 deferred.resolve(returnValuee);
-               // deferred.resolve(returnValue);
+//                deferred.reject();
             });
         return deferred.promise;
     }

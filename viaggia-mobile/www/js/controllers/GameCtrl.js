@@ -155,7 +155,7 @@ angular.module('viaggia.controllers.game', [])
         $scope.init();
 
     })
-    .controller('StatisticsCtrl', function ($scope, $ionicScrollDelegate, $window, $timeout, GameSrv) {
+    .controller('StatisticsCtrl', function ($scope, $ionicScrollDelegate, $window, $filter,$timeout,Toast, Config,GameSrv, $ionicLoading, $timeout) {
         $scope.title = "Game statistics"
         $scope.stats = [];
         //$scope.statistics = []
@@ -163,6 +163,9 @@ angular.module('viaggia.controllers.game', [])
         $scope.maybeMore = true;
         var getStatistics = false;
         $scope.statsPerPage =5;
+        $scope.singleStatStatus = true;
+        $scope.status = null;
+        $scope.noStatus = false;
 
         $scope.filter = {
             open: false,
@@ -185,10 +188,23 @@ angular.module('viaggia.controllers.game', [])
             selected: null,
         };
 
-        $scope.filter.options = ['Daily', 'Weekly'];
+        $scope.filter.options = ['Daily', 'Weekly', 'Monthly', 'Total'];
         $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
         $scope.filter.filter = function (selection){
-        console.log(selection);
+            $scope.showLoading = function() {
+                $ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                showDelay: 0
+                });
+            };
+            $scope.showLoading()
+            $scope.maybeMore = true;
+            $scope.singleStatStatus = true;
+            $scope.stats=[];
+            $ionicScrollDelegate.$getByHandle('statisticScroll').scrollTop();
+            Config.loading();
         }
         $scope.getStyle= function(stat) {
             return "width:"+(83*stat/$scope.maxStat)+"%"
@@ -200,7 +216,6 @@ angular.module('viaggia.controllers.game', [])
             };
             $ionicScrollDelegate.$getByHandle('statisticScroll').resize();
         };
-
 
         $window.onresize = function (event) {
             // Timeout required for our purpose
@@ -231,30 +246,56 @@ angular.module('viaggia.controllers.game', [])
             $scope.maxStat = tmpMax;
         }
 
+         GameSrv.getLocalStatus().then(
+            function (status) {
+                $scope.status = status;
+                $scope.noStatus = false;
+                    },
+            function (err) {
+                $scope.noStatus = true;
+                Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+            })
+        //).finally(Config.loaded);
+
             $scope.loadMore = function () {
                 if (!getStatistics) {
                     getStatistics = true;
-                     var start = $scope.stats != null ? $scope.stats.length : 0;
-                     var end = start + $scope.statsPerPage;
+                        var start = $scope.stats != null ? $scope.stats.length : 0;
+                        var end = start + $scope.statsPerPage;
                      GameSrv.getStatistics($scope.filter.selected, start, end).then(
                          function (statistics) {
                          $scope.stats = $scope.stats.concat(statistics);
-                              $scope.calculateMaxStats($scope.stats);
+                            $scope.calculateMaxStats($scope.stats);
                           if (statistics.length < $scope.statsPerPage) {
                             $scope.maybeMore = false;
                             }
                             $scope.$broadcast('scroll.infiniteScrollComplete');
+                            $scope.singleStatStatus = true;
+                            Config.loaded();
                             getStatistics = false;
+                            },
+                         function (err) {
+                            $scope.maybeMore = true;
+                            Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                            $scope.$broadcast('scroll.infiniteScrollComplete');
+                            getStatistics = false;
+                            $scope.singleStatStatus = false;
                             }
                         );
                 }
               };
         $scope.init = function () {
           GameSrv.getStatistics($scope.filter.selected, 0, $scope.statsPerPage).then(function (statistics) {
-            console.log(JSON.stringify(statistics));
+            $scope.singleStatStatus = true;
             $scope.stats = statistics;
             $scope.calculateMaxStats($scope.stats);
-        });
+        }, function(err){
+                $scope.stats = [];
+                Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+                getStatistics = false;
+                $scope.singleStatStatus = false;
+           });
             generateRankingStyle();
         }
         $scope.init();
@@ -305,12 +346,8 @@ angular.module('viaggia.controllers.game', [])
                     $scope.ranking = ranking['classificationList'];
                     $scope.$broadcast('scroll.infiniteScrollComplete');
                     Config.loaded();
-                },
-                function (err) {
-                    $scope.singleRankStatus = false;
-                    console.log(err);
-                    Config.loaded();
                 }
+
             );
         };
 
