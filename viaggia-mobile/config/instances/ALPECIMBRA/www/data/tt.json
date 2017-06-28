@@ -482,18 +482,7 @@
             "transportType" : "BUS",
             "icon": "ic_train",
             "elements": [
-                {
-                    "agencyId": "7",
-                    "color": "#EB8919",
-                    "routes": [
-                        {
-                            "routeId": "FG_R_A",
-                            "routeSymId": "FG_R_A",
-                            "title": "FOLGARIA TRENINO",
-                            "color": "#EB8919"
-                        }
-                    ]
-                },
+              
                  {
                     "agencyId": "17",
                     "color": "#EB8919",
@@ -548,6 +537,18 @@
                         }
                     ]
                 },
+                  {
+                    "agencyId": "7",
+                    "color": "#EB8919",
+                    "routes": [
+                        {
+                            "routeId": "FG_R_A",
+                            "routeSymId": "FG_R_A",
+                            "title": "TRENINO FOLGARIA-COSTA-SANTUARIO",
+                            "color": "#EB8919"
+                        }
+                    ]
+                },
                 {
                     "agencyId": "9",
                     "color": "#EB8919",
@@ -555,13 +556,7 @@
                         {
                             "routeId": "LV",
                             "routeSymId": "LV",
-                            "title": "Forte Belvedere - Lago di Lavarone",
-                            "color": "#EB8919"
-                        },
-                        {
-                            "routeId": "LV",
-                            "routeSymId": "LV",
-                            "title": "Forte Belvedere - Lago di Lavarone",
+                            "title": "LINEA VERDE: LAVARONE-LAGO E FRAZIONI",
                             "color": "#EB8919"
                         }
                     ]
@@ -571,15 +566,15 @@
                     "color": "#EB8919",
                     "routes": [
                         {
-                            "routeId": "LV_TRENTINO",
-                            "routeSymId": "LV_TRENTINO",
-                            "title": "LINEA BLU (ANDATA)",
+                            "routeId": "LB_A",
+                            "routeSymId": "LB_A",
+                            "title": "LINEA BLUE: GUARDIA-SERRADA-FOLGARIA-PASSO (ANDATA)",
                             "color": "#EB8919"
                         },
                         {
-                            "routeId": "LV_TRENTINO",
-                            "routeSymId": "LV_TRENTINO",
-                            "title": "LINEA BLU (RITORNO)",
+                            "routeId": "LB_R",
+                            "routeSymId": "LB_R",
+                            "title": "LINEA BLUE: PASSO-FOLGARIA-SERRADA-GUARDIA (RITORNO)",
                             "color": "#EB8919"
                         }
                     ]
@@ -589,15 +584,15 @@
                     "color": "#EB8919",
                     "routes": [
                         {
-                            "routeId": "LV_TRENTINO",
-                            "routeSymId": "LV_TRENTINO",
-                            "title": "LINEA ROSSA (ANDATA)",
+                            "routeId": "LR_A",
+                            "routeSymId": "LR_A",
+                            "title": "LINEA ROSSA: SERRADA-FOLGARIA-COSTA-CARBONARE-LAVARONE (ANDATA)",
                             "color": "#EB8919"
                         },
                          {
-                            "routeId": "LV_TRENTINO",
-                            "routeSymId": "LV_TRENTINO",
-                            "title": "LINEA ROSSA (RITORNO)",
+                            "routeId": "LR_R",
+                            "routeSymId": "LR_R",
+                            "title": "LINEAR ROSSA: LAVARONE-CARBONARE-COSA-FOLGARIA-SERRADA (RITORNO)",
                             "color": "#EB8919"
                         }
                     ]
