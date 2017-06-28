@@ -1,0 +1,33 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "MART",
+        "address": "Corso bettini",
+        "title": {
+          "en": "MART",
+          "it": "MART" 
+        },
+        "abstract" :{
+          "en": "MART abstract",
+          "it": "MART abstract" 
+        },
+        "description" :{
+          "en": "MART description",
+          "it": "MART description" 
+        },
+        "web" : "http://www.mart.trento.it",
+        "image" : "http://www.archimagazine.com/abomartnuova3_max.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.043609,
+          45.893761
+        ]
+      }
+    }
+  ]
+}

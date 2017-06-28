@@ -4,9 +4,9 @@
     "senderID": "453601816446",
     "appversion": "1.0.0",
     "appname": "Viaggia Alpe Cimbra",
-    "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
-    "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
-    "newsRSS": "https://tn.smartcommunitylab.it/core.mobility/announcements/rss/alpecimbra",
+    "serverURL": "https://dev.smartcommunitylab.it/core.mobility",
+    "messagingServerURL": "https://dev.smartcommunitylab.it/core.communicator",
+    "newsRSS": "https://dev.smartcommunitylab.it/core.mobility/announcements/rss/alpecimbra",
     "POIURL": "https://tn.smartcommunitylab.it/webdata/poi_alpecimbra.json",
     "QuestURL": "http://www.google.it",
     "contact_link" : "mailto:viaggiaalpecimbra@smartcommunitylab.it?subject=ViaggiaAlpeCimbra:%20segnalazione%20problema",
@@ -43,12 +43,6 @@
                 "color": "#3BBACF"
             },
             {
-                "state": "/app/ttlist/local",
-                "label": "menu_real_time_transport_local",
-                "icon": "ic_urban-bus",
-                "color": "#EB8919"
-            },
-            {
                 "state": "/app/ttlist/extraurbano",
                 "label": "menu_real_time_bus_extraurban",
                 "icon": "ic_extraurban-bus",
@@ -59,6 +53,12 @@
                 "label": "menu_real_time_train",
                 "icon": "ic_train",
                 "color": "#cd251c"
+            },
+            {
+                "state": "/app/ttlist/local",
+                "label": "menu_real_time_transport_local",
+                "icon": "ic_urban-bus",
+                "color": "#EB8919"
             },
             {
                 "state": "/app/pois",

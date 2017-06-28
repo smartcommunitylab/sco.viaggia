@@ -414,7 +414,7 @@ angular.module('viaggia', [
       menu_real_time_train: 'Treni',
       menu_real_time_bike: 'Biciclette condivise',
       menu_real_time_park: 'Parcheggi',
-      menu_taxi: 'Noleggio con conducente',
+      menu_taxi: 'Taxi',
       menu_credits: "Credits",
       menu_quest: "Questionario",
       menu_pois: "Punti di interesse",
@@ -574,10 +574,9 @@ angular.module('viaggia', [
       plan_preferences_fastest: 'Itinerario piu veloce',
       plan_preferences_leastChanges: 'Con meno cambi',
       plan_preferences_leastWalking: 'Minimo tragitto a piedi',
-      lbl_taxi_station: 'Stazione NCC',
+      lbl_taxi_station: 'Stazione Taxi',
       taxi_label_your_position: 'La tua posizione attuale, rilevata dal dispositivo, è: ',
-      taxi_label_check_it: 'Verificala prima di comunicarla all\'operatore.',
-      taxi_label_price: 'La tariffa viene di volta in volta concordata tra operatore e cliente.',
+      taxi_label_check_it: 'Verificala prima di comunicarla al taxi.',
       taxi_label_no_accuracy: 'Non è stato possibile determinare la tua posizione con sufficiente accuratezza per permetterti di comunicarla al tassista. Prova ad accendere un sistema di localizzazione sul tuo dispositivo (GPS, WiFi, ...).',
       error_select_type_accessibility_feedback: 'Per visualizzare un percorso accessibile è necessario selezionare i mezzi pubblici o a piedi',
       not_acc_label: 'Questa linea non è accessibile',
@@ -601,9 +600,7 @@ angular.module('viaggia', [
       lbl_distance: 'Distanza:',
       lbl_parking_meter_payment_card: 'moneta e carte',
       lbl_parking_meter_payment_cash: 'moneta',
-      lbl_parking_meter_payment: 'Metodo di pagamento: ',
-      home_guest_card:'Servizi Guest Card'
-
+      lbl_parking_meter_payment: 'Metodo di pagamento: '
     });
 
 
@@ -625,7 +622,7 @@ angular.module('viaggia', [
       menu_real_time_train: 'Trains',
       menu_real_time_bike: 'Shared bikes',
       menu_real_time_park: 'Parking lots',
-      menu_taxi: 'Rent with driver',
+      menu_taxi: 'Taxi',
       menu_credits: "Credits",
       menu_quest: "Survey",
       menu_pois: "Points of Interest",
@@ -785,10 +782,9 @@ angular.module('viaggia', [
       plan_preferences_fastest: 'Fastest',
       plan_preferences_leastChanges: 'Least changes',
       plan_preferences_leastWalking: 'Least walking',
-      lbl_taxi_station: 'Rent With Driver Station',
+      lbl_taxi_station: 'Taxi Station',
       taxi_label_your_position: 'You current position, as detected by the device, is:',
       taxi_label_check_it: 'Check it before communicating it to the taxi driver.',
-      taxi_label_price: 'The fare must be agreed with the operator.',
       taxi_label_no_accuracy: 'It has not been possible to determine with sufficient accuracy your position to let you communicate it to the taxi driver. Try to switch on a tracking system on your device (GPS, WiFi, ...)',
       error_select_type_accessibility_feedback: 'In order to get an accessible route, you must select public transport or foot',
       not_acc_label: 'This line is not accessible',
@@ -812,8 +808,8 @@ angular.module('viaggia', [
       lbl_distance: 'Distance:',
       lbl_parking_meter_payment_card: 'cash and card',
       lbl_parking_meter_payment_cash: 'cash',
-      lbl_parking_meter_payment: 'Payment methods: ',
-      home_guest_card: 'Guest Card Services'
+      lbl_parking_meter_payment: 'Payment methods: '
+
 
     });
 

@@ -494,10 +494,46 @@
                         }
                     ]
                 },
-                {
-                    "agencyId": "8",
+                 {
+                    "agencyId": "17",
                     "color": "#EB8919",
                     "routes": [
+                        {
+                            "routeId": "198_17_0",
+                            "routeSymId": "315A",
+                            "title": "ROVERETO-TERRAGNOLO-SERRADA-FOLGARIA (ANDATA)",
+                            "color": "#EB8919"
+                        },
+                        {
+                            "routeId": "198_17_1",
+                            "routeSymId": "315R",
+                            "title": "FOLGARIA-SERRADA-TERRAGNOLO-ROVERETO (RITORNO)",
+                            "color": "#EB8919"
+                        },
+                        {
+                            "routeId": "205_17_0",
+                            "routeSymId": "321A",
+                            "title": "TRENTO-CALLIANO-FOLGARIA-LAVARONE (ANDATA)",
+                            "color": "#EB8919"
+                        },
+                        {
+                            "routeId": "205_17_1",
+                            "routeSymId": "321R",
+                            "title": "LAVARONE-FOLGARIA-CALLIANO-TRENTO (RITORNO)",
+                            "color": "#EB8919"
+                        },
+                        {
+                            "routeId": "186_17_0",
+                            "routeSymId": "303A",
+                            "title": "TRENTO-V.VATTARO-CARBONARE-LAVARONE-LUSERNA (ANDATA)",
+                            "color": "#EB8919"
+                        },
+                        {
+                            "routeId": "186_17_1",
+                            "routeSymId": "303R",
+                            "title": "LUSERNA-LAVARONE-CARBONARE-V.VATTARO-TRENT (RITORNO)",
+                            "color": "#EB8919"
+                        },
                         {
                             "routeId": "100A",
                             "routeSymId": "100A",
@@ -517,9 +553,51 @@
                     "color": "#EB8919",
                     "routes": [
                         {
+                            "routeId": "LV",
+                            "routeSymId": "LV",
+                            "title": "Forte Belvedere - Lago di Lavarone",
+                            "color": "#EB8919"
+                        },
+                        {
+                            "routeId": "LV",
+                            "routeSymId": "LV",
+                            "title": "Forte Belvedere - Lago di Lavarone",
+                            "color": "#EB8919"
+                        }
+                    ]
+                },
+                {
+                    "agencyId": "11",
+                    "color": "#EB8919",
+                    "routes": [
+                        {
                             "routeId": "LV_TRENTINO",
                             "routeSymId": "LV_TRENTINO",
-                            "title": "Forte Belvedere - Lago di Lavarone",
+                            "title": "LINEA BLU (ANDATA)",
+                            "color": "#EB8919"
+                        },
+                        {
+                            "routeId": "LV_TRENTINO",
+                            "routeSymId": "LV_TRENTINO",
+                            "title": "LINEA BLU (RITORNO)",
+                            "color": "#EB8919"
+                        }
+                    ]
+                },
+                {
+                    "agencyId": "13",
+                    "color": "#EB8919",
+                    "routes": [
+                        {
+                            "routeId": "LV_TRENTINO",
+                            "routeSymId": "LV_TRENTINO",
+                            "title": "LINEA ROSSA (ANDATA)",
+                            "color": "#EB8919"
+                        },
+                         {
+                            "routeId": "LV_TRENTINO",
+                            "routeSymId": "LV_TRENTINO",
+                            "title": "LINEA ROSSA (RITORNO)",
                             "color": "#EB8919"
                         }
                     ]
