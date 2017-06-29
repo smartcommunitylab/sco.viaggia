@@ -19,6 +19,8 @@ Controller that manages the news from the feeds URL, download them and store
     $scope.news = entries;
     $ionicLoading.hide();
   }, function (err) {
+    //tmp
+    $scope.news = [];
     $ionicLoading.hide();
     Toast.show($filter('translate')('toast_error_server_template'), "short", "bottom");
   });
@@ -32,6 +34,8 @@ Controller that manages the news from the feeds URL, download them and store
       $scope.news = entries;
       $scope.$broadcast('scroll.refreshComplete');
     }, function (err) {
+      //tmp
+      $scope.news = [];
       $scope.$broadcast('scroll.refreshComplete');
       Toast.show($filter('translate')('toast_error_server_template'), "short", "bottom");
     });

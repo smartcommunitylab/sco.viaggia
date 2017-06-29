@@ -81,7 +81,7 @@
       ],
         "infomenu": [
             {
-                "state": "/app/ttlist/urbano",
+                "state": "/app/ttlist/local",
                 "label": "menu_real_time_transport_local",
                 "icon": "ic_urban-bus"
             },

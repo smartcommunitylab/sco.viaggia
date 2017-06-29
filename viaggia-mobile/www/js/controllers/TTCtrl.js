@@ -614,7 +614,9 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     if (!$scope.accesibilityKnow) {
         $scope.flagAccessibility = false;
     }
-    var MAX_MARKERS = 20;
+    //for viaggia trento
+    //var MAX_MARKERS = 20;
+    var MAX_MARKERS = 100;
     $scope.$on('leafletDirectiveMap.ttMap.moveend', function (event) {
         $scope.filterMarkers();
     });

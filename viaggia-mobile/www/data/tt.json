@@ -93,7 +93,7 @@
         },
         "extraurbano": {
             "view": "list",
-            "label": "menu_real_time_bus_suburban",
+            "label": "menu_real_time_bus_extraurban",
             "hasMap": true,
             "markerIcon": "ic_extraurbanBus",
             "transportType" : "BUSSUBURBAN",
@@ -478,9 +478,9 @@
             "view": "list",
             "label": "menu_real_time_transport_local",
             "hasMap": true,
-            "markerIcon": "ic_train",
+            "markerIcon": "ic_urbanBus",
             "transportType" : "BUS",
-            "icon": "ic_train",
+            "icon": "ic_urban-bus",
             "elements": [
               
                  {
@@ -520,19 +520,7 @@
                         {
                             "routeId": "186_17_1",
                             "routeSymId": "303R",
-                            "title": "LUSERNA-LAVARONE-CARBONARE-V.VATTARO-TRENT (RITORNO)",
-                            "color": "#EB8919"
-                        },
-                        {
-                            "routeId": "100A",
-                            "routeSymId": "100A",
-                            "title": "VICENZA‐ASIAGO‐MONTEROVERE-LAVARONE‐LUSERNA (ANDATA)",
-                            "color": "#EB8919"
-                        },
-                        {
-                            "routeId": "100R",
-                            "routeSymId": "100R",
-                            "title": "LUSERNA-LAVARONE-MONTEROVERE-ASIAGO-VICENZA (RITORNO)",
+                            "title": "LUSERNA-LAVARONE-CARBONARE-V.VATTARO-TRENTO (RITORNO)",
                             "color": "#EB8919"
                         }
                     ]
@@ -545,6 +533,25 @@
                             "routeId": "FG_R_A",
                             "routeSymId": "FG_R_A",
                             "title": "TRENINO FOLGARIA-COSTA-SANTUARIO",
+                            "color": "#EB8919"
+                        }
+                    ]
+                },
+                
+                  {
+                    "agencyId": "8",
+                    "color": "#EB8919",
+                    "routes": [
+                        {
+                            "routeId": "100A",
+                            "routeSymId": "100A",
+                            "title": "VICENZA‐ASIAGO‐MONTEROVERE-LAVARONE‐LUSERNA (ANDATA)",
+                            "color": "#EB8919"
+                        },
+                        {
+                            "routeId": "100R",
+                            "routeSymId": "100R",
+                            "title": "LUSERNA-LAVARONE-MONTEROVERE-ASIAGO-VICENZA (RITORNO)",
                             "color": "#EB8919"
                         }
                     ]
@@ -568,13 +575,13 @@
                         {
                             "routeId": "LB_A",
                             "routeSymId": "LB_A",
-                            "title": "LINEA BLUE: GUARDIA-SERRADA-FOLGARIA-PASSO (ANDATA)",
+                            "title": "LINEA BLU: GUARDIA-SERRADA-FOLGARIA-PASSO (ANDATA)",
                             "color": "#EB8919"
                         },
                         {
                             "routeId": "LB_R",
                             "routeSymId": "LB_R",
-                            "title": "LINEA BLUE: PASSO-FOLGARIA-SERRADA-GUARDIA (RITORNO)",
+                            "title": "LINEA BLU: PASSO-FOLGARIA-SERRADA-GUARDIA (RITORNO)",
                             "color": "#EB8919"
                         }
                     ]
@@ -592,7 +599,7 @@
                          {
                             "routeId": "LR_R",
                             "routeSymId": "LR_R",
-                            "title": "LINEAR ROSSA: LAVARONE-CARBONARE-COSA-FOLGARIA-SERRADA (RITORNO)",
+                            "title": "LINEA ROSSA: LAVARONE-CARBONARE-COSTA-FOLGARIA-SERRADA (RITORNO)",
                             "color": "#EB8919"
                         }
                     ]
