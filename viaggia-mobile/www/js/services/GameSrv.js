@@ -5,255 +5,252 @@ angular.module('viaggia.services.game', [])
 
 	var localStatus = null;
 	var localRanking = null;
+
     var returnValue = {
-            "stats":[
-            {   "from":1497312000000 ,
-                "to":1497398399000,
-                "means":{
-                "bike":2500,
-                "walk":1200,
-                "public":8200,
-                "car":2700,
-                "date":'13/06/2017'
-                }
-                },
-            {   "from":1497225600000 ,
-                "to":1497311999000,
-                "means":{
-                "bike":0,
-                "walk":5000,
-                "public":8000,
-                "car":0,
-                "date":'12/06/2017'
-                }
+    "firstBefore": 1475186400000,
+    "firstAfter": 1478214000000,
+    "stats": [
+        {
+            "from": 1475272800000,
+            "to": 1475359199000,
+            "data": {
+                "free tracking": 1,
+                "walk": 0.01113068647287049
+            }
+        },
+        {
+            "from": 1475532000000,
+            "to": 1475618399000,
+            "data": {
+                "free tracking": 2,
+                "walk": 0.13049454731428348
+            }
+        },
+        {
+            "from": 1475704800000,
+            "to": 1475791199000,
+            "data": {
+                "free tracking": 1,
+                "planned": 2,
+                "transit": 17.95396647921341,
+                "walk": 1.8251372116081936
+            }
+        },
+        {
+            "from": 1476136800000,
+            "to": 1476223199000,
+            "data": {
+                "free tracking": 2,
+                "walk": 0.08257453364882839
+            }
+        },
+        {
+            "from": 1476309600000,
+            "to": 1476395999000,
+            "data": {
+                "bike": 0.04427607554555679,
+                "free tracking": 2,
+                "walk": 0.03888304501602912
+            }
+        },
+        {
+            "from": 1476396000000,
+            "to": 1476482399000,
+            "data": {
+                "planned": 1,
+                "transit": 8.976983239606545,
+                "walk": 0.8652789999999999
+            }
+        },
+        {
+            "from": 1477260000000,
+            "to": 1477346399000,
+            "data": {
+                "bike": 0.9439528951907973,
+                "free tracking": 1
+            }
+        },
+        {
+            "from": 1477692000000,
+            "to": 1477778399000,
+            "data": {
+                "bike": 4.324641387105223,
+                "free tracking": 2
+            }
+        },
+        {
+            "from": 1477868400000,
+            "to": 1477954799000,
+            "data": {
+                "bike": 1.0606265297022681,
+                "free tracking": 1
+            }
+        }
+    ]
+}
+
+ var ArrMax = {
+    "userId": "24122",
+    "updateTime": 1498552227657,
+    "stats": {
+        "total": {
+            "date max bike": {
+                "from": 978303600000,
+                "to": 1498514400000
             },
-            {   "from":1497139200000,
-                "to":1497225599000,
-                "means":{
-                "bike":4000,
-                "walk":2000,
-                "public":7000,
-                "car":2200,
-                "date":'11/06/2017'
-                }
+            "date max free tracking": {
+                "from": 978303600000,
+                "to": 1498514400000
             },
-            {   "from":1497052800000,
-                "to":1497139199000,
-                "means":{
-                "bike":0,
-                "walk":700,
-                "public":0,
-                "car":7500,
-                "date":'10/06/2017'
-                }
+            "date max planned": {
+                "from": 978303600000,
+                "to": 1498514400000
             },
-            {   "from":1496966400000,
-                "to":1497052799000,
-                "means":{
-                "bike":7800,
-                "walk":3300,
-                "public":4700,
-                "car":4500,
-                "date":'09/06/2017'
-                }
+            "date max transit": {
+                "from": 978303600000,
+                "to": 1498514400000
             },
-            {   "from":1496880000000,
-                "to":1496966399000,
-                "means":{
-                "bike":0,
-                "walk":2300,
-                "public":12000,
-                "car":0,
-                "date":'08/06/2017'
-                }
+            "date max walk": {
+                "from": 978303600000,
+                "to": 1498514400000
             },
-            {   "from":1496793600000 ,
-                "to":1496879999000,
-                "means":{
-                "bike":1600,
-                "walk":1200,
-                "public":8200,
-                "car":2700,
-                "date":'07/06/2017'
-                }
-                },
-            {   "from":1496707200000 ,
-                "to":1496793599000,
-                "means":{
-                "bike":0,
-                "walk":5000,
-                "public":8000,
-                "car":0,
-                "date":'06/06/2017'
-                }
+            "maxbike": 6.649041845265036,
+            "maxfree tracking": 26,
+            "maxplanned": 8,
+            "maxtransit": 108.7630345280771,
+            "maxwalk": 7.646344053298546
+        },
+        "day": {
+            "date max bike": {
+                "from": 1477692000000,
+                "to": 1477692000000
             },
-            {   "from":1496620800000,
-                "to":1496707199000,
-                "means":{
-                "bike":8000,
-                "walk":2000,
-                "public":7000,
-                "car":2200,
-                "date":'05/06/2017'
-                }
+            "date max free tracking": {
+                "from": 1475100000000,
+                "to": 1475100000000
             },
-            {   "from":1496534400000,
-                "to":1496620799000,
-                "means":{
-                "bike":0,
-                "walk":1800,
-                "public":0,
-                "car":11500,
-                "date":'04/06/2017'
-                }
+            "date max planned": {
+                "from": 1475704800000,
+                "to": 1475704800000
             },
-            {   "from":1496448000000,
-                "to":1496534399000,
-                "means":{
-                "bike":3400,
-                "walk":2000,
-                "public":7100,
-                "car":6000,
-                "date":'03/06/2017'
-                }
+            "date max transit": {
+                "from": 1478214000000,
+                "to": 1478214000000
             },
-            {   "from":1496361600000,
-                "to":1496447999000,
-                "means":{
-                "bike":0,
-                "walk":4700,
-                "public":9500,
-                "car":0,
-                "date":'02/06/2017'
-                }
+            "date max walk": {
+                "from": 1475704800000,
+                "to": 1475704800000
             },
-            {   "from":1496275200000 ,
-                "to":1496361599000,
-                "means":{
-                "bike":0,
-                "walk":7400,
-                "public":4500,
-                "car":0,
-                "date":'01/06/2017'
-                }
+            "maxbike": 4.324641387105223,
+            "maxfree tracking": 3,
+            "maxplanned": 2,
+            "maxtransit": 21.292706110014688,
+            "maxwalk": 1.8251372116081936
+        },
+        "month": {
+            "date max bike": {
+                "from": 1475272800000,
+                "to": 1477868400000
             },
-            {   "from":1496188800000,
-                "to":1496275199000,
-                "means":{
-                "bike":2200,
-                "walk":3300,
-                "public":4000,
-                "car":1300,
-                "date":'31/05/2017'
-                }
+            "date max free tracking": {
+                "from": 1472680800000,
+                "to": 1475186400000
             },
-            {   "from":1496102400000,
-                "to":1496188799000,
-                "means":{
-                "bike":0,
-                "walk":2400,
-                "public":0,
-                "car":4800,
-                "date":'30/05/2017'
-                }
+            "date max planned": {
+                "from": 1477954800000,
+                "to": 1480460400000
             },
-            {   "from":1496016000000,
-                "to":1496102399000,
-                "means":{
-                "bike":9100,
-                "walk":2000,
-                "public":3800,
-                "car":5400,
-                "date":'29/05/2017'
-                }
+            "date max transit": {
+                "from": 1477954800000,
+                "to": 1480460400000
             },
-            {   "from":1495929600000,
-                "to":1496015999000,
-                "means":{
-                "bike":0,
-                "walk":4200,
-                "public":8800,
-                "car":0,
-                "date":'28/05/2017'
-                }
+            "date max walk": {
+                "from": 1477954800000,
+                "to": 1480460400000
             },
-            {   "from":1495843200000 ,
-                "to":1495929599000,
-                "means":{
-                "bike":1000,
-                "walk":2000,
-                "public":3000,
-                "car":0,
-                "date":'27/05/2017'
-                }
-                },
-            {   "from":1495756800000 ,
-                "to":1495843199000,
-                "means":{
-                "bike":2000,
-                "walk":1700,
-                "public":0,
-                "car":1000,
-                "date":'26/05/2017'
-                }
+            "maxbike": 6.373496887543846,
+            "maxfree tracking": 12,
+            "maxplanned": 5,
+            "maxtransit": 81.83208480925715,
+            "maxwalk": 3.824537
+        },
+        "week": {
+            "date max bike": {
+                "from": 1477260000000,
+                "to": 1477778400000
             },
-            {   "from":1495670400000,
-                "to":1495756799000,
-                "means":{
-                "bike":7400,
-                "walk":0,
-                "public":15000,
-                "car":0,
-                "date":'25/05/2017'
-                }
+            "date max free tracking": {
+                "from": 1474840800000,
+                "to": 1475359200000
             },
-            {   "from":1495584000000,
-                "to":1495670399000,
-                "means":{
-                "bike":0,
-                "walk":700,
-                "public":0,
-                "car":7500,
-                "date":'24/05/2017'
-                }
+            "date max planned": {
+                "from": 1479682800000,
+                "to": 1480201200000
             },
-            {   "from":1495497600000,
-                "to":1495583999000,
-                "means":{
-                "bike":6700,
-                "walk":4200,
-                "public":0,
-                "car":2700,
-                "date":'23/05/2017'
-                }
+            "date max transit": {
+                "from": 1479682800000,
+                "to": 1480201200000
             },
-            {   "from":1495411200000,
-                "to":1495497599000,
-                "means":{
-                "bike":0,
-                "walk":17800,
-                "public":0,
-                "car":3600,
-                "date":'22/05/2017'
-                }
+            "date max walk": {
+                "from": 1475445600000,
+                "to": 1475964000000
             },
-            ]
+            "maxbike": 5.268594282296021,
+            "maxfree tracking": 9,
+            "maxplanned": 2,
+            "maxtransit": 30.26968934962123,
+            "maxwalk": 1.955631758922477
+        }
     }
+}
+
+ gameService.getMaxStat = function(type){
+      var deferred = $q.defer();
+     var MaxStats = []
+      userService.getValidToken().then(
+			function (token) {
+                if (type == "Daily") {
+                    MaxStats.push(ArrMax.stats.day)
+                     //MaxStats = ArrMax.stats.day
+                }
+                if (type == "Weekly") {
+                    MaxStats.push(ArrMax.stats.week)
+                }
+                if (type == "Monthly") {
+                    MaxStats.push(ArrMax.stats.month)
+                }
+                if (type == "Total") {
+                    MaxStats.push(ArrMax.stats.total)
+                }
+                deferred.resolve(MaxStats);
+            });
+     return deferred.promise;
+ }
+
     gameService.getStatistics = function(how, from, to ) {
         var deferred = $q.defer();
-        var returnValuee = [];
+        var returnValuee = {
+            "firstBefore": 1475186400000,
+            "firstAfter": 1478214000000,
+            "stats":[]
+        };
         userService.getValidToken().then(
 			function (token) {
+//                    for (var i = 0; i < returnValue.stats.length; i++) {
+                       for (var i = returnValue.stats.length -1; i > 0; i--) {
+                        if (returnValue.stats[i].from > from && returnValue.stats[i].to < to)
+                            returnValuee.stats.push(returnValue.stats[i]);
+                    }
 
-                if (returnValue.stats.length > to) {
-                    for (var i = from; i < to; i++) {
-                        returnValuee.push(returnValue.stats[i]);
-                    }
-                } else {
-                    for (var i = from; i < returnValue.stats.length; i++) {
-                          returnValuee.push(returnValue.stats[i]);
-                    }
-                }
+//                if (returnValue.stats.length > to) {
+//                    for (var i = from; i < to; i++) {
+//                        returnValuee.stats.push(returnValue.stats[i]);
+//                    }
+//                } else {
+//                    for (var i = from; i < returnValue.stats.length; i++) {
+//                           returnValuee.stats.push(returnValue.stats[i]);
+//                    }
+//                }
 
                 deferred.resolve(returnValuee);
 //                deferred.reject();
