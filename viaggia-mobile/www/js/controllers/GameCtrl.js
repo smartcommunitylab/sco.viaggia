@@ -156,7 +156,6 @@ angular.module('viaggia.controllers.game', [])
 
     })
     .controller('StatisticsCtrl', function ($scope, $ionicScrollDelegate, $window, $filter,$timeout,Toast, Config,GameSrv, $ionicLoading, $timeout) {
-        $scope.title = "Game statistics"
         $scope.stats = [];
         //$scope.statistics = []
         //$scope.maxStat = 0;
@@ -351,7 +350,31 @@ angular.module('viaggia.controllers.game', [])
         })
 
     .controller('DiaryCtrl', function ($scope) {
-        $scope.title = "Game diary"
+        $scope.filter = {
+            open: false,
+            toggle: function () {
+                this.open = !this.open;
+                $ionicScrollDelegate.resize();
+            },
+            filterBy: function (selection) {
+                if (this.selected !== selection) {
+                    this.selected = selection;
+                    this.filter(this.selected);
+                }
+                this.toggle();
+            },
+            update: function () {
+                this.filter(this.selected);
+            },
+            filter: function (selection) { },
+            options: [],
+            selected: null,
+        };
+
+        $scope.filter.options = ['badge', 'challenge', 'trip', 'ranking', 'allnotifications'];
+        $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
+        $scope.filter.filter = function (selection){
+        }
     })
     .controller('RankingsCtrl', function ($scope, $ionicScrollDelegate, $window, $timeout, Config, GameSrv, Toast, $filter, $ionicPosition) {
         $scope.maybeMore = true;

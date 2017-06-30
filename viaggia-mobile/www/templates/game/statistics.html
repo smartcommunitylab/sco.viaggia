@@ -1,17 +1,17 @@
 <ion-view>
     <ion-nav-title>
-        {{title}}
+        {{'statistics_title' | translate}}
     </ion-nav-title>
     <ion-content class="game-ranking" has-bouncing="false" scroll="false">
         <div class="filter item-accordion" ng-if="!!filter.options">
             <ion-item class="item-accordion-header item-icon-right" ng-click="filter.toggle()">
-                <div ng-if="!filter.open">{{filter.selected}}</div>
+                <div ng-if="!filter.open">{{!!filter.selected ? ('game_tab_statistics_filter_' + filter.selected) : '' | translate}}</div>
                 <i class="icon ion-arrow-down-b" ng-class="{'open': filter.open}"></i>
             </ion-item>
             <div class="item-accordion-content" ng-show="filter.open">
                 <ion-list>
                     <ion-item ng-repeat="option in filter.options" ng-click="filter.filterBy(option)">
-                        <div ng-class="{ 'becomeblue' : filter.selected==option}">{{option}}</div>
+                        <div ng-class="{ 'becomeblue' : filter.selected==option}">{{'game_tab_statistics_filter_' + option | translate}}</div>
                     </ion-item>
                 </ion-list>
             </div>
