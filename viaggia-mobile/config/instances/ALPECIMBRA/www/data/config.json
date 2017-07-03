@@ -2,11 +2,11 @@
     "appid": "alpecimbra",
     "messagingAppId": "mobility.alpecimbra",
     "senderID": "453601816446",
-    "appversion": "1.0.0",
+    "appversion": "1.0.1",
     "appname": "Viaggia Alpe Cimbra",
-    "serverURL": "https://dev.smartcommunitylab.it/core.mobility",
-    "messagingServerURL": "https://dev.smartcommunitylab.it/core.communicator",
-    "newsRSS": "https://dev.smartcommunitylab.it/core.mobility/announcements/rss/alpecimbra",
+    "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
+    "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
+    "newsRSS": "https://tn.smartcommunitylab.it/core.mobility/announcements/rss/alpecimbra",
     "POIURL": "https://tn.smartcommunitylab.it/webdata/poi_alpecimbra.json",
     "QuestURL": "http://www.google.it",
     "contact_link" : "mailto:viaggiaalpecimbra@smartcommunitylab.it?subject=ViaggiaAlpeCimbra:%20segnalazione%20problema",
@@ -74,7 +74,7 @@
             }, 
             {
                 "state": "/app/taxi",
-                "label": "menu_taxi",
+                "label": "menu_ncc",
                 "icon": "ic_taxi",
                 "color": "#f8cf20"
             }

@@ -490,37 +490,37 @@
                         {
                             "routeId": "198_17_0",
                             "routeSymId": "315A",
-                            "title": "ROVERETO-TERRAGNOLO-SERRADA-FOLGARIA (ANDATA)",
+                            "title": "315 - ROVERETO-TERRAGNOLO-SERRADA-FOLGARIA (ANDATA)",
                             "color": "#EB8919"
                         },
                         {
                             "routeId": "198_17_1",
                             "routeSymId": "315R",
-                            "title": "FOLGARIA-SERRADA-TERRAGNOLO-ROVERETO (RITORNO)",
+                            "title": "315 - FOLGARIA-SERRADA-TERRAGNOLO-ROVERETO (RITORNO)",
                             "color": "#EB8919"
                         },
                         {
-                            "routeId": "205_17_0",
-                            "routeSymId": "321A",
-                            "title": "TRENTO-CALLIANO-FOLGARIA-LAVARONE (ANDATA)",
+                            "routeId": "196_17_0",
+                            "routeSymId": "306A",
+                            "title": "306 - ROVERETO-CALLIANO-FOLGARIA-LAVARONE (ANDATA)",
                             "color": "#EB8919"
                         },
                         {
-                            "routeId": "205_17_1",
-                            "routeSymId": "321R",
-                            "title": "LAVARONE-FOLGARIA-CALLIANO-TRENTO (RITORNO)",
+                            "routeId": "196_17_1",
+                            "routeSymId": "306R",
+                            "title": "306 - LAVARONE-FOLGARIA-CALLIANO-ROVERETO (RITORNO)",
                             "color": "#EB8919"
                         },
                         {
                             "routeId": "186_17_0",
                             "routeSymId": "303A",
-                            "title": "TRENTO-V.VATTARO-CARBONARE-LAVARONE-LUSERNA (ANDATA)",
+                            "title": "303 - TRENTO-V.VATTARO-CARBONARE-LAVARONE-LUSERNA (ANDATA)",
                             "color": "#EB8919"
                         },
                         {
                             "routeId": "186_17_1",
                             "routeSymId": "303R",
-                            "title": "LUSERNA-LAVARONE-CARBONARE-V.VATTARO-TRENTO (RITORNO)",
+                            "title": "303 - LUSERNA-LAVARONE-CARBONARE-V.VATTARO-TRENTO (RITORNO)",
                             "color": "#EB8919"
                         }
                     ]
@@ -532,7 +532,7 @@
                         {
                             "routeId": "FG_R_A",
                             "routeSymId": "FG_R_A",
-                            "title": "TRENINO FOLGARIA-COSTA-SANTUARIO",
+                            "title": "TRENINO - FOLGARIA-COSTA-SANTUARIO",
                             "color": "#EB8919"
                         }
                     ]
@@ -563,7 +563,7 @@
                         {
                             "routeId": "LV",
                             "routeSymId": "LV",
-                            "title": "LINEA VERDE: LAVARONE-LAGO E FRAZIONI",
+                            "title": "LINEA VERDE - LAVARONE-LAGO E FRAZIONI",
                             "color": "#EB8919"
                         }
                     ]
@@ -575,13 +575,13 @@
                         {
                             "routeId": "LB_A",
                             "routeSymId": "LB_A",
-                            "title": "LINEA BLU: GUARDIA-SERRADA-FOLGARIA-PASSO (ANDATA)",
+                            "title": "LINEA BLU - GUARDIA-SERRADA-FOLGARIA-PASSO (ANDATA)",
                             "color": "#EB8919"
                         },
                         {
                             "routeId": "LB_R",
                             "routeSymId": "LB_R",
-                            "title": "LINEA BLU: PASSO-FOLGARIA-SERRADA-GUARDIA (RITORNO)",
+                            "title": "LINEA BLU - PASSO-FOLGARIA-SERRADA-GUARDIA (RITORNO)",
                             "color": "#EB8919"
                         }
                     ]
@@ -593,13 +593,13 @@
                         {
                             "routeId": "LR_A",
                             "routeSymId": "LR_A",
-                            "title": "LINEA ROSSA: SERRADA-FOLGARIA-COSTA-CARBONARE-LAVARONE (ANDATA)",
+                            "title": "LINEA ROSSA - SERRADA-FOLGARIA-COSTA-CARBONARE-LAVARONE (ANDATA)",
                             "color": "#EB8919"
                         },
                          {
                             "routeId": "LR_R",
                             "routeSymId": "LR_R",
-                            "title": "LINEA ROSSA: LAVARONE-CARBONARE-COSTA-FOLGARIA-SERRADA (RITORNO)",
+                            "title": "LINEA ROSSA - LAVARONE-CARBONARE-COSTA-FOLGARIA-SERRADA (RITORNO)",
                             "color": "#EB8919"
                         }
                     ]

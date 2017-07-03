@@ -5,25 +5,12 @@
     <ion-content has-header="true" padding="true">
         <ion-refresher on-refresh="load()">
         </ion-refresher>
-        <!--        <div ng-init="locateMe()" ng-if="showStreetName">-->
         <div>
             <div class="user-position" ng-if="showStreetName">
 
-                <!--
-<div class="user-position-warning">
-    Attenzione! L'indirizzo mostrato potrebe non essere corretto.
-</div>
--->
                 <div class="user-position-your-position"> {{'taxi_label_your_position'|translate}}</div>
                 <div class="user-position-your-position"> <b>{{userPosition.name}}</b></div>
                 <div class="user-position-your-position"> {{'taxi_label_check_it'|translate}}</div>
-
-<!--
-<<<<<<< HEAD </div>
-    <div class="user-position" ng-if="!showStreetName">
-        <div class="user-position-your-position"> {{'taxi_label_no_accuracy'|translate}}</div>
-        ======= >>>>>>> 13-6-2016_accessibility
--->
             </div>
             <div class="user-position" ng-if="!showStreetName">
 
