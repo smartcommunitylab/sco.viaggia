@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.tripdetails', [])
 
-.controller('TripDetailsCtrl', function ($scope, $rootScope, $stateParams, $ionicModal, $window, $filter, $ionicPopup, planService, mapService, Config, Toast, trackService, $filter, $ionicHistory, $state, $ionicLoading, $location, bookmarkService, Utils, GameSrv) {
+.controller('TripDetailsCtrl', function ($scope, $rootScope, $stateParams, $ionicModal, $window, $filter, $ionicPopup, storageService,planService, mapService, Config, Toast, trackService, $filter, $ionicHistory, $state, $ionicLoading, $location, bookmarkService, Utils, GameSrv) {
     $scope.title = $filter('translate')('journey_detail');
     //$scope.empty_rec = Config.getDaysRec();
     //    document.addEventListener("resume", function () {
@@ -371,12 +371,24 @@ angular.module('viaggia.controllers.tripdetails', [])
      *  TRACKING PROPERTIES. TODO: SIMPLIFY AND MOVE TO THE SERVICE, PASS CALLBACK TO START
      *****************************************************/
     var startTrack = function () {
-        trackService.start($scope.tripId, $scope.trip, refreshTripDetail)
+        if (!$scope.tripId) {
+            $scope.tripId = new Date().getTime()+"_planned_"+storageService.getUser().userId;
+            trackService.startTemporary($scope.tripId, $scope.trip, refreshTripDetail)
             .then(function () {
                 $scope.modifiable = false;
             }, function (errorCode) {
                 trackService.geolocationPopup();
             }).finally(Config.loaded);
+        }
+        else {
+         trackService.start($scope.tripId, $scope.trip, refreshTripDetail)
+            .then(function () {
+                $scope.modifiable = false;
+            }, function (errorCode) {
+                trackService.geolocationPopup();
+            }).finally(Config.loaded);
+        }
+        
     }
     $scope.trackStart = function () {
             if (!$scope.notTrackable()) {

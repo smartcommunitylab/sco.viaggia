@@ -102,7 +102,13 @@
                                 <i class="icon ic_recurring recurrent_icon_detail" ng-if="isRecurrent()"></i>
                                 <span class="recurrnce_day_string" ng-repeat="day in recurrentDays">{{day.name|translate}}</span>
                             </div>
-                            <button ng-if="editMode" class="button button-viaggia-header button-block" ng-click="saveTrip()">{{'journey_details_save' | translate}} </button>
+                            <div  ng-if="editMode">
+                                <div ng-class="{'fog': notTrackable()}" ng-click="startOrShowPopupIfNotThisJourney()">
+                                    <button class="button button-start button-block" ng-show="!isTracking()">{{'labl_start_tracking'|translate}} </button>
+                                </div>
+                                <!--<button class="button button-start button-block" ng-click="startTrip()">{{'journey_details_save' | translate}} </button>-->
+                                <button class="button button-viaggia-header button-block" ng-click="saveTrip()">{{'journey_details_save' | translate}} </button>
+                            </div>
                             <div class="popup-buttons" ng-if="!editMode">
                                 <button ng-class="{'fog': isTracking()}" class="button button-cancel" ng-click="deleteTrip()">{{'journey_details_delete' | translate}} </button>
                                 <button ng-class="{'fog': isTracking()}" class="button button-default" ng-click="modifyTrip()">{{'journey_details_modify' | translate}} </button>
