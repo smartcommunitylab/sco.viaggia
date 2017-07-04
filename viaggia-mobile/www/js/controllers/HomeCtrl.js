@@ -195,13 +195,11 @@ angular.module('viaggia.controllers.home', [])
         trackService.computeInfo().then(function (data) {
             Config.loaded();
             trackService.stop();
-            if (Math.floor(data.points > 0)) {
+            if (Math.floor(data.dist > Config.getMinimumDistance())) {
                 if (data.valid) {
                     $ionicPopup.confirm({
                         title: $filter('translate')("pop_up_points_title"),
-                        template: $filter('translate')("pop_up_points_template", {
-                            points: data.points
-                        }),
+                        template: $filter('translate')("pop_up_points_template"),
                         buttons: [
                             {
                                 text: $filter('translate')("btn_close"),
@@ -219,9 +217,7 @@ angular.module('viaggia.controllers.home', [])
                 } else {
                     $ionicPopup.alert({
                         title: $filter('translate')("pop_up_invalid_tracking_title"),
-                        template: $filter('translate')("pop_up_invalid_tracking_template", {
-                            points: data.points
-                        }),
+                        template: $filter('translate')("pop_up_invalid_tracking_template"),
                         okText: $filter('translate')("btn_close"),
                         okType: 'button-cancel'
                     });

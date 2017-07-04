@@ -94,7 +94,7 @@ angular.module('viaggia.services.tracking', [])
             var url="";
             if (transportType){
                 url = (Config.getServerURL() + '/gamification/freetracking/' + transportType + '/' + tripId);
-            } else if (!trip.tripId.indexOf("temporary")!=-1)
+            } else if (!tripId.indexOf("temporary")!=-1)
             {
                 url=(Config.getServerURL() + '/gamification/journey/' + tripId)
             }
@@ -290,7 +290,6 @@ angular.module('viaggia.services.tracking', [])
         trackService.computeInfo = function () {
             var trackId = localStorage.getItem(Config.getAppId() + '_tripId');
             var deferred = $q.defer();
-            //          var testMap = {};
             bgGeo.getLocations(function (locations, taskId) {
                 bgGeo.finish(taskId);
                 var tripLocs = [];
@@ -298,12 +297,6 @@ angular.module('viaggia.services.tracking', [])
                     if (l.extras && trackId == l.extras.idTrip) {
                         tripLocs.push(l);
                     }
-                    //              if (l.extras) {
-                    //                if(testMap[l.extras.idTrip] == null) {
-                    //                  testMap[l.extras.idTrip] = 0;
-                    //                }
-                    //                testMap[l.extras.idTrip] = testMap[l.extras.idTrip] + 1;
-                    //              }
                 });
 
                 var realTripLocs = [];
@@ -327,12 +320,10 @@ angular.module('viaggia.services.tracking', [])
                     return la.timestamp - lb.timestamp;
                 });
 
-                //            alert('found '+ JSON.stringify(testMap));
-
                 var data = {
                     dist: 0,
                     transport: localStorage.getItem(Config.getAppId() + '_trackedTransport'),
-                    points: 0,
+                    // points: 0,
                     valid: true
                 };
 
@@ -345,14 +336,14 @@ angular.module('viaggia.services.tracking', [])
                     var time = Math.abs(transLocs[i].timestamp - transLocs[i - 1].timestamp);
                     if (time > 0) {
                         var speed = iv * 1000 * 1000 / time;
-                        if (checkMaxSpeed(data.transport, speed)) {
-                            maxSpeedCount = 0;
-                        } else {
-                            maxSpeedCount++;
-                            if (maxSpeedCount > 3) {
-                                data.valid = false;
-                            }
-                        }
+                        // if (checkMaxSpeed(data.transport, speed)) {
+                        //     maxSpeedCount = 0;
+                        // } else {
+                        //     maxSpeedCount++;
+                        //     if (maxSpeedCount > 3) {
+                        //         data.valid = false;
+                        //     }
+                        // }
                         maxSpeed = Math.max(maxSpeed, speed);
                     }
                     dist += iv;
@@ -363,15 +354,15 @@ angular.module('viaggia.services.tracking', [])
                     data.end = tripLocs[tripLocs.length - 1].timestamp;
                     data.avgSpeed = data.dist / (data.end - data.start) * 1000; // in m/s
                     data.maxSpeed = maxSpeed; // in m/s
-                    if (data.transport == 'walk') {
-                        data.points = data.dist > 250 ? Math.round(Math.min(53, data.dist / 1000 * 10 * 1.5)) : 0;
-                        data.valid = data.valid && (data.avgSpeed * 3.6) < 15; // avg (max) speed should be less than 15 (20) km/h (consider running)
-                    } else if (data.transport == 'bike') {
-                        data.points = Math.round(Math.min(53, data.dist / 1000 * 5 * 1.5));
-                        data.valid = data.valid && (data.avgSpeed * 3.6) < 27; // avg (max) speed should be less than 15 (65) km/h
-                    } else {
-                        data.points = localStorage.getItem(Config.getAppId() + '_expectedPoints');
-                    }
+                    // if (data.transport == 'walk') {
+                    //     data.points = data.dist > 250 ? Math.round(Math.min(53, data.dist / 1000 * 10 * 1.5)) : 0;
+                    //     data.valid = data.valid && (data.avgSpeed * 3.6) < 15; // avg (max) speed should be less than 15 (20) km/h (consider running)
+                    // } else if (data.transport == 'bike') {
+                    //     data.points = Math.round(Math.min(53, data.dist / 1000 * 5 * 1.5));
+                    //     data.valid = data.valid && (data.avgSpeed * 3.6) < 27; // avg (max) speed should be less than 15 (65) km/h
+                    // } else {
+                    //     data.points = localStorage.getItem(Config.getAppId() + '_expectedPoints');
+                    // }
                 }
                 deferred.resolve(data);
             }, function (error) {

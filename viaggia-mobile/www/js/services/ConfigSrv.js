@@ -26,7 +26,7 @@ angular.module('viaggia.services.conf', [])
         var HTTP_CONFIG = {
             timeout: 5000
         };
-
+        var TRACKING_MINIMUM_DISTANCE = 250;
         var mapJsonConfig = null;
         var ttJsonConfig = null;
         var PARKING_METERS_RADIUS = '5';
@@ -257,6 +257,9 @@ angular.module('viaggia.services.conf', [])
             },
             getMetroparcoServerURL: function () {
                 return mapJsonConfig['metroparco'];
+            },
+            getMinimumDistance: function() {
+                return TRACKING_MINIMUM_DISTANCE;
             },
             getParkingMetersRadius: function () {
                 return PARKING_METERS_RADIUS;
