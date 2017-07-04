@@ -1062,8 +1062,13 @@ angular.module('viaggia', [
       lbl_distance: 'Distanza:',
       lbl_parking_meter_payment_card: 'moneta e carte',
       lbl_parking_meter_payment_cash: 'moneta',
-      lbl_parking_meter_payment: 'Metodo di pagamento: '
-
+      lbl_parking_meter_payment: 'Metodo di pagamento: ',
+      msg_won_badge: ' Hai guadagnato un nuovo badge "{{badgename}}"',
+      msg_new_friend: 'Un tuo amico si è iscritto al gioco!',
+      msg_new_challenge: 'Ti è stata assegnata una nuova sfida "{{challengename}}"',
+      msg_won_challenge: 'Hai vinto la sfida "{{challengename}}"',
+      msg_pub_ranking: 'Pubblicata la classifica dei vincitori di questa settimana',
+      msg_trip: 'Viaggio ',
     });
 
     $translateProvider.translations('en', {
@@ -1458,7 +1463,13 @@ angular.module('viaggia', [
       lbl_distance: 'Distance:',
       lbl_parking_meter_payment_card: 'cash and card',
       lbl_parking_meter_payment_cash: 'cash',
-      lbl_parking_meter_payment: 'Payment methods: '
+      lbl_parking_meter_payment: 'Payment methods: ',
+      msg_won_badge: ' You have earned a new badge {{badgename}}',
+      msg_new_friend: 'A friend of yours has joined the game!',
+      msg_new_challenge: 'You have been given a new challenge "{{challengename}}"',
+      msg_won_challenge: 'You have won the challenge "{{challengename}}"',
+      msg_pub_ranking: 'Publicated rankings of this week',
+      msg_trip: ' trip',
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);
