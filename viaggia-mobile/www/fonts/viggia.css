@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'viaggia';
-  src:  url('viaggia.eot?hxzrar');
-  src:  url('viaggia.eot?hxzrar#iefix') format('embedded-opentype'),
-    url('viaggia.ttf?hxzrar') format('truetype'),
-    url('viaggia.woff?hxzrar') format('woff'),
-    url('viaggia.svg?hxzrar#viaggia') format('svg');
+  src:  url('viaggia.eot?9tw0qv');
+  src:  url('viaggia.eot?9tw0qv#iefix') format('embedded-opentype'),
+    url('viaggia.ttf?9tw0qv') format('truetype'),
+    url('viaggia.woff?9tw0qv') format('woff'),
+    url('viaggia.svg?9tw0qv#viaggia') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,42 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ic_game_diary:before {
+  content: "\e947";
+}
+.ic_game_points:before {
+  content: "\e948";
+}
+.ic_game_statistic:before {
+  content: "\e949";
+}
+.ic_game_rules:before {
+  content: "\e94a";
+}
+.ic_game_challenge:before {
+  content: "\e94b";
+}
+.ic_game_tutorial:before {
+  content: "\e94c";
+}
+.ic_game_badge:before {
+  content: "\e94d";
+}
+.ic_game_challenge_assign:before {
+  content: "\e94e";
+}
+.ic_game_multimodal_trip:before {
+  content: "\e94f";
+}
+.ic_game_classification:before {
+  content: "\e950";
+}
+.ic_game_friend:before {
+  content: "\e951";
+}
+.ic_POI:before {
+  content: "\e946";
+}
 .ic_parcometro:before {
   content: "\e945";
 }
@@ -234,4 +270,3 @@
 .ic_localization:before {
   content: "\e921";
 }
-
