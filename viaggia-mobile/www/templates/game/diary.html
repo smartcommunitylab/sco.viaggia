@@ -2,7 +2,7 @@
      <ion-nav-title>
             {{'diary_title' | translate}}
     </ion-nav-title>
-     <ion-content class="game-ranking" has-bouncing="false" scroll="false">
+     <ion-content class="game-ranking" has-bouncing="false" scroll="false"  has-header="true">
         <div class="filter item-accordion" ng-if="!!filter.options">
             <ion-item class="item-accordion-header item-icon-right" ng-click="filter.toggle()">
                 <div ng-if="!filter.open">{{!!filter.selected ? ('game_tab_diary_filter_' + filter.selected) : '' | translate}}</div>
@@ -16,52 +16,88 @@
                 </ion-list>
             </div>
         </div>
-<!--
-         <div class="line-background-for-list" style="height: 75px">
-            <img src="img/ic_point.png">
-         </div>
--->
-        <div class="list" style="margin-top: 5px">
-            <div class="qa-message-list" id="wallmessages">
-    				<div class="message-item" id="m16">
-                        <span style="tetx-align: left"> Today </span>
-						<div class="message-inner"  style="margin-top: 10px; border: 2px solid #4caf50">
-							<div class="qa-message-content">
-								A
-							</div>
+         <div class="list"  style="margin-top: 25px">
+            <div>
+                <div class="message-item">
+				    <div class="timeline-line">
+                    </div>
+                    <div class="timeline-dot"> <H5 class="timeline-day"> Today </H5>
+                    </div>
+                    <div class="message-inner"  style="border: 2px solid #4caf50">
+				        <div class="timeline-arrow" style="border-right-color: #4caf50">
                         </div>
-                        <div class="message-inner" style="margin-top: 10px; border: 2px solid #cd251c">
-							<div class="qa-message-content">
-								AAA
-							</div>
+                        <div class="row" style="padding: 0px">
+                            <i class="col-center timeline-col icon ic_foot" style="background-color: #60b35c;"></i>
+				            <div  class="col" style="text-align: left; padding: 0px; padding-left: 5px">
+                                Viaggio a piedi
+                                <br>
+                                ore 14.30
+				            </div>
                         </div>
                     </div>
+                    <div class="message-inner" style="border: 2px solid #cd251c">
+                        <div class="timeline-arrow" style="border-right-color: #cd251c">
+				        </div>
+                        <div class="row" style="padding: 0px">
+                            <i class="col-center timeline-col icon ic_train" style="background-color: #cd251c;"></i>
+				            <div  class="col" style="text-align: left; padding: 0px; padding-left: 5px">
+                                Viaggio in treno
+                                <br>
+                                ore 14.30
+				            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+			 <div>
+                <div class="message-item">
+                    <div class="timeline-line">
+                    </div>
+                    <div class="timeline-dot"> <H5 class="timeline-day"> Yesterday </H5>
+                    </div>
+				    <div class="message-inner"; style="border: 2px solid #3cbacf">
+				        <div class="timeline-arrow" style="border-right-color: #3cbacf">
+				        </div>
+                        <div class="row" style="padding: 0px">
+                            <i class="col-center timeline-col icon ion-person-add" style="background-color: #3cbacf;"></i>
+				            <div  class="col" style="text-align: left; padding: 0px; padding-left: 5px">
+                                 Un tuo amico si è iscritto al gioco!
+				            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-			<div class="qa-message-list" id="wallmessages">
-    				<div class="message-item" id="m16">
-						<div class="message-inner"; style="margin-top: 10px; border: 2px solid #3cbacf">
-							<div class="qa-message-content">
-								B
+            <div>
+                <div class="message-item">
+                    <div class="timeline-line">
+                    </div>
+                    <div class="timeline-dot"> <H5 class="timeline-day"> 03/07/2017</H5>
+                    </div>
+				    <div class="message-inner" style="border: 2px solid #2975a7">
+				        <div class="timeline-arrow" style="border-right-color: #2975a7">
+				        </div>
+                        <div class="row" style="padding: 0px">
+                            <i class="col-center icon ic_train" style="background-color: #2975a7; color: white; width: 7.25%; height: 40px; border-radius: 50px 0px 0px 50px; line-height: 1.5; font-size: 24px"></i>
+                            <i class="col-center icon ic_foot" style="background-color: #2975a7; color: white; width: 7.5%; height: 40px; border-radius: 0px 50px 50px 0px; line-height: 1.5; font-size: 24px"></i>
+				            <div  class="col" style="text-align: left; padding: 0px; padding-left: 5px">
+                                Viaggio multimodale
                                 <br>
-                                C
-                                <br>
-                                D
-                                <br>
-                                E
-							</div>
+                                ore 14.30
+				            </div>
                         </div>
                     </div>
-            </div>
-            <div class="qa-message-list" id="wallmessages">
-    				<div class="message-item" id="m16">
-						<div class="message-inner" style="margin-top: 10px; border: 2px solid #2975a7">
-							<div class="qa-message-content">
-								F
-							</div>
+                    <div class="message-inner" style="border: 2px solid #4caf50">
+				        <div  class="timeline-arrow" style="border-right-color: #4caf50">
+                        </div>
+                        <div class="row" style="padding: 0px">
+                            <i class="col-center timeline-col icon ion-leaf" style="background-color: #60b35c;"></i>
+				            <div  class="col" style="text-align: left; padding: 0px; padding-left: 5px">
+                                 Hai guadagnato un nuovo badge "Nome Badge"
+				            </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </ion-content>
-
 </ion-view>

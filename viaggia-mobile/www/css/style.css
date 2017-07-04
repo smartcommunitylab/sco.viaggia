@@ -933,63 +933,71 @@ ion-header-bar .title {
 .message-item {
 margin-bottom: 25px;
 margin-left: 40px;
-margin-right: 5px;
+margin-right: 0px;
 position: relative;
 }
 .message-item .message-inner {
 background: #fff;
 border: 1px solid #ddd;
-border-radius: 3px;
-padding: 10px;
+border-radius: 35px 3px 3px 35px;
+padding: 0px;
 position: relative;
+left: -15px;
+margin-top: 10px;
 }
-.message-item .message-inner:before {
+.timeline-arrow {
 border-right: 10px solid #ddd;
 border-style: solid;
-border-width: 10px;
+border-width: 17px;
 color: rgba(0,0,0,0);
 content: "";
-display: block;
-height: 0;
+height: 22px;
 position: absolute;
-left: -20px;
-top: 6px;
-width: 0;
+left: -29px;
+top: 2.8px;
+width: 0px;
 }
-.message-item .message-inner:after {
-border-right: 10px solid #fff;
-border-style: solid;
-border-width: 10px;
-color: rgba(0,0,0,0);
-content: "";
-display: block;
-height: 0;
+.timeline-col{
+color: white;
+width: 14.5%;
+height: 40px;
+border-radius: 50px;
+line-height: 1.25;
+font-size: 30px;
+}
+.timeline-text{
+color: black;
 position: absolute;
-left: -18px;
-top: 6px;
-width: 0;
+top: 0px;
+left: 0px;
+padding-left: 5px;
 }
-.message-item:before {
+.timeline-day{
+position: absolute !important;
+left: 20px;
+top: -4px;
+margin-top: 0px;
+margin-bottom: 3px;
+}
+.timeline-line{
 background: #868686;
 border-radius: 2px;
 bottom: -30px;
-
 content: "";
-height: 160%;
+height: 210%;
 left: -30px;
 position: absolute;
 width: 3px;
 }
-.message-item:after {
+.timeline-dot {
 background: #fff;
 border: 2px solid #868686;
 border-radius: 50%;
-
 content: "";
 height: 15px;
 left: -36px;
 position: absolute;
-top: 10px;
+top: -20px;
 width: 15px;
 }
 
