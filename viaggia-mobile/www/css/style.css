@@ -962,8 +962,13 @@ color: white;
 width: 14.5%;
 height: 40px;
 border-radius: 50px;
-line-height: 1.25;
+line-height: 1.25 !important;
 font-size: 30px;
+}
+.timeline-msg{
+text-align: left;
+padding: 0px;
+padding-left: 5px;
 }
 .timeline-text{
 color: black;
@@ -999,6 +1004,11 @@ left: -36px;
 position: absolute;
 top: -20px;
 width: 15px;
+}
+
+.gamemenu-col{
+text-align: left;
+padding-left: 30px;
 }
 
 .green-bottom {
