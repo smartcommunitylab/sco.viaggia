@@ -460,7 +460,7 @@ angular.module('viaggia', [
 
       .state('app.parking', {
         //                cache: false,
-        url: "/parking/:agencyId",
+        url: "/parking?agencyId",
         views: {
           'menuContent': {
             templateUrl: "templates/parking.html",
@@ -491,7 +491,7 @@ angular.module('viaggia', [
       })
       .state('app.bikesharing', {
         //                cache: false,
-        url: "/bikesharing/:agencyId",
+        url: "/bikesharing?agencyId",
         views: {
           'menuContent': {
             templateUrl: "templates/bikesharing.html",

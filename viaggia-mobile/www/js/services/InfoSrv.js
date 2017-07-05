@@ -44,8 +44,9 @@ angular.module('viaggia.services.info', [])
       getParkings: function (agencyIds) {
         var deferred = $q.defer();
         var promises = [];
-
+        var responses = -1;
         function lastTask(results) {
+          responses++;
           // console.log(results);
           // defer.resolve();
           var parkings = [];
@@ -66,6 +67,7 @@ angular.module('viaggia.services.info', [])
               $q.all(all).then(function (positions) {
                 parkings.forEach(function (d, idx) {
                   d.distance = positions[idx];
+                  d.agencyId = agencyIds[responses];
                 });
                 deferred.resolve(parkings);
               });
@@ -145,7 +147,9 @@ angular.module('viaggia.services.info', [])
       getStations: function (agencyIds) {
         var deferred = $q.defer();
         var promises = [];
+         var responses = -1
         function lastTask(results) {
+          responses++;
           var bikeStops = [];
           for (var i = 0; i < results.length; i++) {
             bikeStops = bikeStops.concat(results[i].data);
@@ -161,6 +165,7 @@ angular.module('viaggia.services.info', [])
               $q.all(all).then(function (positions) {
                 bikeStops.forEach(function (d, idx) {
                   d.distance = positions[idx];
+                  d.agencyId=agencyIds[responses];
                 });
                 deferred.resolve(bikeStops);
               });
