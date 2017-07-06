@@ -349,7 +349,12 @@ angular.module('viaggia.controllers.game', [])
 
         })
 
-    .controller('DiaryCtrl', function ($scope) {
+    .controller('DiaryCtrl', function ($scope, GameSrv, $ionicScrollDelegate,) {
+        $scope.singleDiaryStatus = true;
+        $scope.messages = [];
+        var getDiary = false;
+
+
         $scope.filter = {
             open: false,
             toggle: function () {
@@ -375,7 +380,17 @@ angular.module('viaggia.controllers.game', [])
         $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
         $scope.filter.filter = function (selection){
         }
+
+        $scope.init = function () {
+            var x = new Date().getTime() - 2592000000;
+            GameSrv.getDiary($scope.filter.selected,  x, new Date().getTime()).then(function (notifications) {
+            $scope.singleDiaryStatus = true;
+            $scope.messages = notifications;
+           });
+        }
+        $scope.init();
     })
+
     .controller('RankingsCtrl', function ($scope, $ionicScrollDelegate, $window, $timeout, Config, GameSrv, Toast, $filter, $ionicPosition) {
         $scope.maybeMore = true;
         $scope.currentUser = {};
