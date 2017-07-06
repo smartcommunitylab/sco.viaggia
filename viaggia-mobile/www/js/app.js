@@ -449,7 +449,7 @@ angular.module('viaggia', [
 
       .state('app.tt', {
         cache: false,
-        url: "/tt/:ref/:agencyId/:groupId/:routeId",
+        url: "/tt/:ref/:agencyId/:groupId/:routeId/:routeSymId",
         views: {
           'menuContent': {
             templateUrl: "templates/table1.html",

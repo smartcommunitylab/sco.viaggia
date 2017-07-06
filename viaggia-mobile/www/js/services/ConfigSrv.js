@@ -455,7 +455,7 @@ angular.module('viaggia.services.conf', [])
                 if (!!ref) {
                     res = res.elements[ref];
                 }
-                if (!!agencyId) {
+                if (!!agencyId && res.elements) {
                     for (var i = 0; i < res.elements.length; i++) {
                         if (res.elements[i].agencyId == agencyId) {
                             res = res.elements[i];
@@ -479,7 +479,7 @@ angular.module('viaggia.services.conf', [])
                     var groupIds = groupId.split(',');
                     res = searchRec(res, groupIds, 0);
                 }
-                if (!!routeId) {
+                if (!!routeId && res.routes) {
                     for (var i = 0; i < res.routes.length; i++) {
                         if (res.routes[i].routeId == routeId) {
                             res = res.routes[i];
