@@ -1068,7 +1068,11 @@ angular.module('viaggia', [
       msg_new_challenge: 'Ti è stata assegnata una nuova sfida "{{challengename}}"',
       msg_won_challenge: 'Hai vinto la sfida "{{challengename}}"',
       msg_pub_ranking: 'Pubblicata la classifica dei vincitori di questa settimana',
-      msg_trip: 'Viaggio ',
+      msg_trip_walk: 'Viaggio a piedi finito. Ore {{time}}',
+      msg_trip_bike: 'Viaggio in bici finito. Ore {{time}}',
+      msg_trip_bus: 'Viaggio in autobus finito. Ore {{time}}',
+      msg_trip_train: 'Viaggio in treno finito. Ore {{time}}',
+      msg_trip_multimodal: 'Viaggio multimodale finito. Ore {{time}}',
     });
 
     $translateProvider.translations('en', {
@@ -1464,12 +1468,16 @@ angular.module('viaggia', [
       lbl_parking_meter_payment_card: 'cash and card',
       lbl_parking_meter_payment_cash: 'cash',
       lbl_parking_meter_payment: 'Payment methods: ',
-      msg_won_badge: ' You have earned a new badge {{badgename}}',
+      msg_won_badge: ' You have earned a new badge "{{badgename}}"',
       msg_new_friend: 'A friend of yours has joined the game!',
-      msg_new_challenge: 'You have been given a new challenge "{{challengename}}"',
+      msg_new_challenge: 'You have been assigned a new challenge "{{challengename}}"',
       msg_won_challenge: 'You have won the challenge "{{challengename}}"',
       msg_pub_ranking: 'Publicated rankings of this week',
-      msg_trip: ' trip',
+      msg_trip_walk: 'Walking trip. At {{time}}',
+      msg_trip_bike: 'Bike trip. At {{time}}',
+      msg_trip_bus: 'Bus trip. At {{time}}',
+      msg_trip_train: 'Train trip. At {{time}}',
+      msg_trip_multimodal: 'Multimodal trip. At {{time}}',
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

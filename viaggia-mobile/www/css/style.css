@@ -948,27 +948,29 @@ margin-top: 10px;
 .timeline-arrow {
 border-right: 10px solid #ddd;
 border-style: solid;
-border-width: 17px;
+border-width: 20px;
 color: rgba(0,0,0,0);
 content: "";
 height: 22px;
 position: absolute;
-left: -29px;
-top: 2.8px;
+left: -33px;
+top: 3.7px;
 width: 0px;
 }
 .timeline-col{
 color: white;
-width: 14.5%;
-height: 40px;
+width: 17.029%;
+height: 47px;
 border-radius: 50px;
-line-height: 1.25 !important;
+line-height: 1.5 !important;
 font-size: 30px;
 }
 .timeline-msg{
 text-align: left;
 padding: 0px;
 padding-left: 5px;
+padding-bottom: 3px !important;
+padding-top: 3px !important;
 }
 .timeline-text{
 color: black;

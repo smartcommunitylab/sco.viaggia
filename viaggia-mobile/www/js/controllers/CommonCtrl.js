@@ -186,6 +186,15 @@ angular.module('viaggia.controllers.common', [])
 		return returnDays;
 	};
 
+    $scope.getNotificationTypes = function () {
+        var returnNotificationsTypes = [];
+		var notifTypes = Config.getNotifTypes()
+		for (var k = 0; k < notifTypes.length; k++) {
+            returnNotificationsTypes.push(notifTypes[k]);
+		}
+        return returnNotificationsTypes;
+    };
+
 	$scope.openModal = function () {
 		$scope.modal.show();
 	};
