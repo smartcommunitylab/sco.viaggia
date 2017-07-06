@@ -8,7 +8,7 @@
     "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
     "newsRSS": "https://tn.smartcommunitylab.it/core.mobility/announcements/rss/alpecimbra",
     "POIURL": "https://tn.smartcommunitylab.it/webdata/poi_alpecimbra.json",
-    "QuestURL": "http://www.google.it",
+    "QuestURL": null,
     "contact_link" : "mailto:viaggiaalpecimbra@smartcommunitylab.it?subject=ViaggiaAlpeCimbra:%20segnalazione%20problema",
     "smartcheck_options": [
         1,

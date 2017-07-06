@@ -94,7 +94,7 @@
         "extraurbano": {
             "view": "list",
             "label": "menu_real_time_bus_extraurban",
-            "hasMap": true,
+            "hasMap": false,
             "markerIcon": "ic_extraurbanBus",
             "transportType" : "BUSSUBURBAN",
             "icon": "ic_extraurban-bus",
@@ -482,49 +482,6 @@
             "transportType" : "BUS",
             "icon": "ic_urban-bus",
             "elements": [
-              
-                 {
-                    "agencyId": "17",
-                    "color": "#EB8919",
-                    "routes": [
-                        {
-                            "routeId": "198_17_0",
-                            "routeSymId": "315A",
-                            "title": "315 - ROVERETO-TERRAGNOLO-SERRADA-FOLGARIA (ANDATA)",
-                            "color": "#EB8919"
-                        },
-                        {
-                            "routeId": "198_17_1",
-                            "routeSymId": "315R",
-                            "title": "315 - FOLGARIA-SERRADA-TERRAGNOLO-ROVERETO (RITORNO)",
-                            "color": "#EB8919"
-                        },
-                        {
-                            "routeId": "196_17_0",
-                            "routeSymId": "306A",
-                            "title": "306 - ROVERETO-CALLIANO-FOLGARIA-LAVARONE (ANDATA)",
-                            "color": "#EB8919"
-                        },
-                        {
-                            "routeId": "196_17_1",
-                            "routeSymId": "306R",
-                            "title": "306 - LAVARONE-FOLGARIA-CALLIANO-ROVERETO (RITORNO)",
-                            "color": "#EB8919"
-                        },
-                        {
-                            "routeId": "186_17_0",
-                            "routeSymId": "303A",
-                            "title": "303 - TRENTO-V.VATTARO-CARBONARE-LAVARONE-LUSERNA (ANDATA)",
-                            "color": "#EB8919"
-                        },
-                        {
-                            "routeId": "186_17_1",
-                            "routeSymId": "303R",
-                            "title": "303 - LUSERNA-LAVARONE-CARBONARE-V.VATTARO-TRENTO (RITORNO)",
-                            "color": "#EB8919"
-                        }
-                    ]
-                },
                   {
                     "agencyId": "7",
                     "color": "#EB8919",
@@ -537,21 +494,14 @@
                         }
                     ]
                 },
-                
                   {
-                    "agencyId": "8",
+                    "agencyId": "14",
                     "color": "#EB8919",
                     "routes": [
                         {
-                            "routeId": "100A",
-                            "routeSymId": "100A",
-                            "title": "VICENZA‐ASIAGO‐MONTEROVERE-LAVARONE‐LUSERNA (ANDATA)",
-                            "color": "#EB8919"
-                        },
-                        {
-                            "routeId": "100R",
-                            "routeSymId": "100R",
-                            "title": "LUSERNA-LAVARONE-MONTEROVERE-ASIAGO-VICENZA (RITORNO)",
+                            "routeId": "LV_TRENINO",
+                            "routeSymId": "LV_TRENINO",
+                            "title": "TRENINO - LAGO DI LAVARONE-FORTE BELVEDERE",
                             "color": "#EB8919"
                         }
                     ]
@@ -603,7 +553,69 @@
                             "color": "#EB8919"
                         }
                     ]
+                },
+                
+                  {
+                    "agencyId": "8",
+                    "color": "#EB8919",
+                    "routes": [
+                        {
+                            "routeId": "100A",
+                            "routeSymId": "100A",
+                            "title": "100 - VICENZA‐ASIAGO‐MONTEROVERE-LAVARONE‐LUSERNA (ANDATA)",
+                            "color": "#EB8919"
+                        },
+                        {
+                            "routeId": "100R",
+                            "routeSymId": "100R",
+                            "title": "100 - LUSERNA-LAVARONE-MONTEROVERE-ASIAGO-VICENZA (RITORNO)",
+                            "color": "#EB8919"
+                        }
+                    ]
+                },              
+                 {
+                    "agencyId": "17",
+                    "color": "#EB8919",
+                    "routes": [
+                        {
+                            "routeId": "198_17_0",
+                            "routeSymId": "315A",
+                            "title": "315 - ROVERETO-TERRAGNOLO-SERRADA-FOLGARIA (ANDATA)",
+                            "color": "#EB8919"
+                        },
+                        {
+                            "routeId": "198_17_1",
+                            "routeSymId": "315R",
+                            "title": "315 - FOLGARIA-SERRADA-TERRAGNOLO-ROVERETO (RITORNO)",
+                            "color": "#EB8919"
+                        },
+                        {
+                            "routeId": "196_17_0",
+                            "routeSymId": "306A",
+                            "title": "306 - ROVERETO-CALLIANO-FOLGARIA-LAVARONE (ANDATA)",
+                            "color": "#EB8919"
+                        },
+                        {
+                            "routeId": "196_17_1",
+                            "routeSymId": "306R",
+                            "title": "306 - LAVARONE-FOLGARIA-CALLIANO-ROVERETO (RITORNO)",
+                            "color": "#EB8919"
+                        },
+                        {
+                            "routeId": "186_17_0",
+                            "routeSymId": "303A",
+                            "title": "303 - TRENTO-V.VATTARO-CARBONARE-LAVARONE-LUSERNA (ANDATA)",
+                            "color": "#EB8919"
+                        },
+                        {
+                            "routeId": "186_17_1",
+                            "routeSymId": "303R",
+                            "title": "303 - LUSERNA-LAVARONE-CARBONARE-V.VATTARO-TRENTO (RITORNO)",
+                            "color": "#EB8919"
+                        }
+                    ]
                 }
+
               ]          
         }
     }
