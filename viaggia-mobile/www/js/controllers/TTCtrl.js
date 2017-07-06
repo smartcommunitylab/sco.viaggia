@@ -19,7 +19,8 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                 ref: e.ref,
                 agencyId: e.agencyId,
                 groupId: groupId,
-                routeId: e.route.routeId
+                routeId: e.route.routeId,
+                routeSymId:e.route.routeSymId
             });
             // group with single route: go to table
         } else if (e.group.routes != null && e.group.routes.length == 1) {
@@ -27,7 +28,8 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                 ref: e.ref,
                 agencyId: e.agencyId,
                 groupId: e.group.label,
-                routeId: e.group.routes[0].routeId
+                routeId: e.group.routes[0].routeId,
+                routeSymId:e.group.routes[0].routeSymId
             });
             // group with multiple elements: go to group
         } else {
@@ -178,7 +180,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
     // load timetable data
     $scope.getTT = function (date) {
         Config.loading();
-        ttService.getTT($stateParams.agencyId, $scope.route.routeSymId, date).then(
+        ttService.getTT($stateParams.agencyId, $stateParams.routeSymId, date).then(
             function (data) {
                 if ($scope.tt && data.delays && data.delays.length > 0) {
                     $scope.tt.delays = data.delays;

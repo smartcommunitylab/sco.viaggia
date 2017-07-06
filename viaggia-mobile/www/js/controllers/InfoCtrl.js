@@ -188,9 +188,9 @@ angular.module('viaggia.controllers.info', [])
 
         $scope.bookmark = function() {
             var ref = Config.getTTData($stateParams.ref);
-            var path = $stateParams.id ? $location.path() : ($location.path() + '/' + $scope.selected.id);
+            var path = $stateParams.id ? $location.path() : ($location.path() + '/' + $scope.selected.agencyId+'/'+$scope.selected.id);
             bookmarkService.toggleBookmark(path, $scope.selected.name, 'PARKING', {
-                agencyId: $scope.agencyId,
+                agencyId: $scope.selected.agencyId,
                 parkingId: $scope.selected.id
             }).then(function(style) {
                 $scope.bookmarkStyle = style;
@@ -891,9 +891,9 @@ angular.module('viaggia.controllers.info', [])
 
         $scope.bookmark = function() {
             var ref = Config.getTTData($stateParams.ref);
-            var path = $stateParams.id ? $location.path() : ($location.path() + '/' + $scope.selected.id);
+            var path = $stateParams.id ? $location.path() : ($location.path() + '/' + $scope.selected.agencyId+'/' + $scope.selected.id);
             bookmarkService.toggleBookmark(path, $scope.selected.name, 'BIKESHARING', {
-                agencyId: $scope.agencyId,
+                agencyId: $scope.selected.agencyId,
                 parkingId: $scope.selected.id
             }).then(function(style) {
                 $scope.bookmarkStyle = style;

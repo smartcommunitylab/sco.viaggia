@@ -33,7 +33,6 @@
                             "color": "#cd251c",
                             "showTrips": true,
                             "wheelChairBoarding": 0
-
                         },
                         {
                             "routeId": "BV_R1_R",
@@ -42,10 +41,9 @@
                             "color": "#cd251c",
                             "showTrips": true,
                             "wheelChairBoarding": 0
-
                         }
-          ]
-        },
+                    ]
+                },
                 {
                     "agencyId": "6",
                     "color": "#cd251c",
@@ -66,8 +64,8 @@
                             "showTrips": true,
                             "wheelChairBoarding": 0
                         }
-          ]
-        },
+                    ]
+                },
                 {
                     "agencyId": "10",
                     "color": "#cd251c",
@@ -86,19 +84,22 @@
                             "title": "Malé - Trento",
                             "wheelChairBoarding": 0
                         }
-          ]
-        }
-      ]
+                    ]
+                }
+            ]
         },
         "urbano": {
-            "view": "grid",
+            "view": "list",
             "label": "menu_real_time_bus_urban",
             "hasMap": true,
             "markerIcon": "ic_urbanBus",
             "icon": "ic_urban-bus",
             "transportType": "BUS",
-            "elements": [
+            "groups": [
                 {
+                    "view": "grid",
+                    "color": "#b8b8b4",
+                    "label": "Trento",
                     "agencyId": "12",
                     "hasMap": true,
                     "groups": [
@@ -113,8 +114,8 @@
                                     "label": "A",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "B",
                             "color": "#717780",
@@ -126,8 +127,8 @@
                                     "label": "B",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "C",
                             "color": "#000000",
@@ -146,8 +147,8 @@
                                     "label": "C",
                                     "wheelChairBoarding": 2
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "NP",
                             "color": "#7f8080",
@@ -159,8 +160,8 @@
                                     "label": "NP",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "1",
                             "color": "#1a3f6f",
@@ -179,8 +180,8 @@
                                     "label": "1",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "2",
                             "color": "#d4592c",
@@ -192,8 +193,8 @@
                                     "label": "2",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "3",
                             "color": "#bf2c26",
@@ -212,8 +213,8 @@
                                     "label": "3",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "4",
                             "color": "#0977b7",
@@ -232,8 +233,8 @@
                                     "label": "4",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "5",
                             "color": "#f8ad1e",
@@ -252,8 +253,8 @@
                                     "label": "5",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "6",
                             "color": "#6eae46",
@@ -272,8 +273,8 @@
                                     "label": "6",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "7",
                             "color": "#179585",
@@ -292,8 +293,8 @@
                                     "label": "7",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "8",
                             "color": "#543428",
@@ -312,8 +313,8 @@
                                     "label": "8",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "9",
                             "color": "#894d2d",
@@ -332,8 +333,8 @@
                                     "label": "9",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "10",
                             "color": "#125547",
@@ -352,8 +353,8 @@
                                     "label": "10",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "11",
                             "color": "#572f75",
@@ -372,8 +373,8 @@
                                     "label": "11",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "12",
                             "color": "#922840",
@@ -392,8 +393,8 @@
                                     "label": "12",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "13",
                             "color": "#b55f8e",
@@ -412,8 +413,8 @@
                                     "label": "13",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "14",
                             "color": "#db8fac",
@@ -432,8 +433,8 @@
                                     "label": "14",
                                     "wheelChairBoarding": 2
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "15",
                             "color": "#81bb46",
@@ -452,8 +453,8 @@
                                     "label": "15",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "16",
                             "color": "#262e5f",
@@ -472,8 +473,8 @@
                                     "label": "16",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "17",
                             "color": "#2993c4",
@@ -492,8 +493,8 @@
                                     "label": "17",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "Funivia",
                             "color": "#016a6a",
@@ -513,11 +514,158 @@
                                     "label": "Sardagna - Trento",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            }
-          ]
-        }
-      ]
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "view": "grid",
+                    "color": "#b8b8b4",
+                    "label": "Rovereto",
+                    "agencyId": "16",
+                    "hasMap": true,
+                    "groups": [
+                        {
+                            "label": "1",
+                            "color": "#174072",
+                            "routes": [
+                                {
+                                    "routeId": "01A_Rov",
+                                    "routeSymId": "01A",
+                                    "title": "Corso Bettini-Ospedale-Lizzana-Marco",
+                                    "label": "1"
+                                },
+                                {
+                                    "routeId": "01R_Rov",
+                                    "routeSymId": "01R",
+                                    "title": "Marco-Lizzana-Corso Bettini-Pomarolo",
+                                    "label": "1"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "2",
+                            "color": "#D65A2E",
+                            "routes": [
+                                {
+                                    "routeId": "02A_Rov",
+                                    "routeSymId": "02A",
+                                    "title": "Costa-Corso Rosmini-S.Giorgio",
+                                    "label": "2"
+                                },
+                                {
+                                    "routeId": "02R_Rov",
+                                    "routeSymId": "02R",
+                                    "title": "S.Giorgio-Corso Rosmini-Costa",
+                                    "label": "2"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "3",
+                            "color": "#C02927",
+                            "routes": [
+                                {
+                                    "routeId": "03A_Rov",
+                                    "routeSymId": "03A",
+                                    "title": "Pedersano-Nogaredo-Rosmini-Lenzima",
+                                    "label": "3"
+                                },
+                                {
+                                    "routeId": "03R_Rov",
+                                    "routeSymId": "03R",
+                                    "title": "Lenzima-Rosmini-Nogaredo-Pedersano",
+                                    "label": "3"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "4",
+                            "color": "#0976B7",
+                            "routes": [
+                                {
+                                    "routeId": "04A_Rov",
+                                    "routeSymId": "04A",
+                                    "title": "Noarna-S.Ilario-Isera-Villa Lagarina",
+                                    "label": "4"
+                                },
+                                {
+                                    "routeId": "04R_Rov",
+                                    "routeSymId": "04R",
+                                    "title": "Villa Lagarina-Isera-S.Ilario-Noarna",
+                                    "label": "4"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "5",
+                            "color": "#E8C01C",
+                            "routes": [
+                                {
+                                    "routeId": "05A_Rov",
+                                    "routeSymId": "05R",
+                                    "title": "Mori-Villa Lagarina-Pomarolo-Nomi",
+                                    "label": "5"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "6",
+                            "color": "#6EB046",
+                            "routes": [
+                                {
+                                    "routeId": "06A_Rov",
+                                    "routeSymId": "06A",
+                                    "title": "Nomi-Pomarolo/Volano-Rosmini-Mori",
+                                    "label": "6"
+                                },
+                                {
+                                    "routeId": "06R_Rov",
+                                    "routeSymId": "06R",
+                                    "title": "Mori-Rosmini-Calliano-Nomi",
+                                    "label": "6"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "7",
+                            "color": "#1B9887",
+                            "routes": [
+                                {
+                                    "routeId": "07A_Rov",
+                                    "routeSymId": "07A",
+                                    "title": "Noriglio-Rosmini-Campana Dei Caduti",
+                                    "label": "7"
+                                },
+                                {
+                                    "routeId": "07R_Rov",
+                                    "routeSymId": "07R",
+                                    "title": "Campana Dei Caduti-Rosmini-Noriglio",
+                                    "label": "7"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "A",
+                            "color": "#B9BAB5",
+                            "routes": [
+                                {
+                                    "routeId": "AA_Rov",
+                                    "routeSymId": "AA",
+                                    "title": "Brione-S.Giorgio-Lizzana-Ossario",
+                                    "label": "A"
+                                },
+                                {
+                                    "routeId": "AR_Rov",
+                                    "routeSymId": "AR",
+                                    "title": "Ossario-Ospedale-Rosmini-Brione",
+                                    "label": "A"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     }
 }

@@ -449,7 +449,7 @@ angular.module('viaggia', [
 
       .state('app.tt', {
         cache: false,
-        url: "/tt/:ref/:agencyId/:groupId/:routeId",
+        url: "/tt/:ref/:agencyId/:groupId/:routeId/:routeSymId",
         views: {
           'menuContent': {
             templateUrl: "templates/table1.html",
@@ -460,7 +460,7 @@ angular.module('viaggia', [
 
       .state('app.parking', {
         //                cache: false,
-        url: "/parking/:agencyId",
+        url: "/parking?agencyId",
         views: {
           'menuContent': {
             templateUrl: "templates/parking.html",
@@ -491,7 +491,7 @@ angular.module('viaggia', [
       })
       .state('app.bikesharing', {
         //                cache: false,
-        url: "/bikesharing/:agencyId",
+        url: "/bikesharing?agencyId",
         views: {
           'menuContent': {
             templateUrl: "templates/bikesharing.html",
