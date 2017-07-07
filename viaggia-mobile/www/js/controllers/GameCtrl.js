@@ -351,7 +351,7 @@ angular.module('viaggia.controllers.game', [])
 
     })
 
-    .controller('DiaryCtrl', function ($scope, GameSrv, $ionicScrollDelegate,) {
+    .controller('DiaryCtrl', function ($scope, GameSrv, $ionicScrollDelegate, DiaryDbSrv) {
         $scope.singleDiaryStatus = true;
         $scope.messages = [];
         var getDiary = false;
@@ -384,12 +384,17 @@ angular.module('viaggia.controllers.game', [])
         }
 
         $scope.init = function () {
-            DiaryDbSrv.dbSetup();
-            var x = new Date().getTime() - 2592000000;
-            GameSrv.getDiary($scope.filter.selected,  x, new Date().getTime()).then(function (notifications) {
-            $scope.singleDiaryStatus = true;
-            $scope.messages = notifications;
-           });
+            DiaryDbSrv.dbSetup().then(function () {
+                var x = new Date().getTime() - 2592000000;
+                //GameSrv.getDiary($scope.filter.selected,  x, new Date().getTime()).then(function (notifications) {
+                DiaryDbSrv.readEvents("BADGE", 1455800361943, 1476269822849).then(function (notifications) {
+                    $scope.singleDiaryStatus = true;
+                    $scope.messages = notifications;
+                    $scope.days=[];
+                    $scope.days[0]=$scope.messages;
+                });
+            })
+
         }
         $scope.init();
     })

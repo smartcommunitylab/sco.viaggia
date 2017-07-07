@@ -1,6 +1,6 @@
 angular.module('viaggia.services.diaryDb', [])
 
-    .factory('DiaryDbSrv', function ($q, $http, Config, userService) {
+    .factory('DiaryDbSrv', function ($q, $http, Config, userService, GameSrv) {
         var diaryDbService = {};
         var DIARY_SYNC_TIME = "_diary_synch_time";
         var db = null;
@@ -273,12 +273,28 @@ angular.module('viaggia.services.diaryDb', [])
 
         }
         // add event to the diary
-        diaryDbService.addEvent = function (event) {
-
+        diaryDbService.addEvent = function (event, type) {
+            //insert the single event into diary using array form
+            insertData([event]);
         }
         // read events of specific type "from" to "to"
         diaryDbService.readEvents = function (type, from, to) {
-
+            var deferred = $q.defer();
+            //convert type to multiple types for the query
+            db.transaction(function (tx) {
+                tx.executeSql('SELECT *  FROM Events WHERE type = ? AND timestamp >= ? AND timestamp <= ?', [type, from, to], function (tx, rs) {
+                    // console.log('count ' + rs.rows.length);
+                    var returnData = [];
+                    for (let i = 0; i < rs.rows.length; i++) {
+                        returnData.push(rs.rows.item(i));
+                    }
+                    deferred.resolve(returnData);
+                }, function (tx, error) {
+                    console.log('SELECT error: ' + error.message);
+                    deferred.reject();
+                })
+            });
+            return deferred.promise;
         }
 
         return diaryDbService;
