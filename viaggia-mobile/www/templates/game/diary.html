@@ -2,7 +2,7 @@
      <ion-nav-title>
             {{'diary_title' | translate}}
     </ion-nav-title>
-     <ion-content class="game-ranking" has-bouncing="false" scroll="false"  has-header="true">
+     <ion-content class="game-ranking" has-bouncing="false" scroll="false">
         <div class="filter item-accordion" ng-if="!!filter.options">
             <ion-item class="item-accordion-header item-icon-right" ng-click="filter.toggle()">
                 <div ng-if="!filter.open">{{!!filter.selected ? ('game_tab_diary_filter_' + filter.selected) : '' | translate}}</div>

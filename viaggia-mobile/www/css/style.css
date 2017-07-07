@@ -2135,7 +2135,7 @@ Play&Go
     font-size: xx-small;
 }
 
-.tt-table #table-col div {
+.tt-table #table-col f {
     width: 20px;
     display: inline-block;
     margin-right: 5px;

@@ -204,8 +204,29 @@ angular.module('viaggia.services.game', [])
     }
 }
 
+
+
+ gameService.getDiary = function(type, from, to ) {
+     var deferred = $q.defer();
+     $http.get('data/messages.json').success(function (messages) {
+     var returnValue = messages;
+     var returnNotifications = [];
+     userService.getValidToken().then(
+			function (token) {
+                       for (var i = returnValue.length -1; i > 0; i--) {
+                        if (returnValue[i].timestamp > from && returnValue[i].timestamp < to)
+                            returnNotifications.push(returnValue[i]);
+                    }
+                deferred.resolve(returnNotifications);
+            });
+    });
+     return deferred.promise;
+ }
+
+
+
  gameService.getMaxStat = function(type){
-      var deferred = $q.defer();
+     var deferred = $q.defer();
      var MaxStats = []
       userService.getValidToken().then(
 			function (token) {
