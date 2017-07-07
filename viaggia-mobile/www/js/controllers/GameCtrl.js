@@ -4,7 +4,7 @@ angular.module('viaggia.controllers.game', [])
         $scope.currentUser = null;
         $scope.status = null;
         $scope.ranking = null;
-       // $scope.statistics = null
+        // $scope.statistics = null
         $scope.prize = null;
         $scope.noStatus = false;
         $scope.rankingFilterOptions = ['now', 'last', 'global'];
@@ -155,13 +155,13 @@ angular.module('viaggia.controllers.game', [])
         $scope.init();
 
     })
-    .controller('StatisticsCtrl', function ($scope, $ionicScrollDelegate, $window, $filter,$timeout,Toast, Config,GameSrv, $ionicLoading, $timeout) {
+    .controller('StatisticsCtrl', function ($scope, $ionicScrollDelegate, $window, $filter, $timeout, Toast, Config, GameSrv, $ionicLoading, $timeout) {
         $scope.stats = [];
         //$scope.statistics = []
         //$scope.maxStat = 0;
         $scope.maybeMore = true;
         var getStatistics = false;
-        $scope.statsPerPage =5;
+        $scope.statsPerPage = 5;
         $scope.singleStatStatus = true;
         $scope.status = null;
         $scope.noStatus = false;
@@ -190,20 +190,20 @@ angular.module('viaggia.controllers.game', [])
 
         $scope.filter.options = ['Daily', 'Weekly', 'Monthly', 'Total'];
         $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
-        $scope.filter.filter = function (selection){
-            $scope.showLoading = function() {
+        $scope.filter.filter = function (selection) {
+            $scope.showLoading = function () {
                 $ionicLoading.show({
-                content: 'Loading',
-                animation: 'fade-in',
-                showBackdrop: true,
-                showDelay: 0
+                    content: 'Loading',
+                    animation: 'fade-in',
+                    showBackdrop: true,
+                    showDelay: 0
                 });
             };
             $scope.showLoading()
             $scope.calculateMaxStats()
             $scope.maybeMore = true;
             $scope.singleStatStatus = true;
-            $scope.stats=[];
+            $scope.stats = [];
             $ionicScrollDelegate.$getByHandle('statisticScroll').scrollTop();
             $scope.init()
             Config.loaded();
@@ -227,16 +227,17 @@ angular.module('viaggia.controllers.game', [])
             }, 200);
         };
         $scope.calculateMaxStats = function (stats) {
-            GameSrv.getMaxStat($scope.filter.selected).then(function (MaxStats){
-            $scope.maxStat = MaxStats
-            })}
+            GameSrv.getMaxStat($scope.filter.selected).then(function (MaxStats) {
+                $scope.maxStat = MaxStats
+            })
+        }
 
-       $scope.getStyle= function(stat, veichle) {
-           $scope.previousStat = null;
-           var maxvalues= {
-                maxDailywalk : 10,
-                maxDailybike : 20,
-                maxDailytransit : 50,
+        $scope.getStyle = function (stat, veichle) {
+            $scope.previousStat = null;
+            var maxvalues = {
+                maxDailywalk: 10,
+                maxDailybike: 20,
+                maxDailytransit: 50,
                 maxDailycar: 50,
                 maxWeeklywalk: 70,
                 maxWeeklybike: 140,
@@ -250,69 +251,70 @@ angular.module('viaggia.controllers.game', [])
                 maxTotalbike: 1680,
                 maxTotaltransit: 3600,
                 maxTotalcar: 3600,
-           }
+            }
 
-        if((83*stat)/$scope.maxStat[0]["max"+veichle]<8.8 && veichle == 'transit'){
-            return "width:"+(8.8)+"%"
-        } else if((83*stat)/$scope.maxStat[0]["max"+veichle]<4.5) {
-            return "width:"+(4.5)+"%"
-        } else if ($scope.maxStat[0]["max"+veichle] < maxvalues["max"+$scope.filter.selected+veichle]) {
-            return "width:"+((83*stat)/$scope.maxStat[0]["max"+veichle])+"%"
-        } else {
-            return "width:"+(83)+"%"
-        }}
+            if ((83 * stat) / $scope.maxStat[0]["max" + veichle] < 8.8 && veichle == 'transit') {
+                return "width:" + (8.8) + "%"
+            } else if ((83 * stat) / $scope.maxStat[0]["max" + veichle] < 4.5) {
+                return "width:" + (4.5) + "%"
+            } else if ($scope.maxStat[0]["max" + veichle] < maxvalues["max" + $scope.filter.selected + veichle]) {
+                return "width:" + ((83 * stat) / $scope.maxStat[0]["max" + veichle]) + "%"
+            } else {
+                return "width:" + (83) + "%"
+            }
+        }
 
-//            if ($scope.maxStat[0]["max"+veichle] < maxvalues["max"+$scope.filter.selected+veichle]) {
-//            return "width:"+((83*stat)/$scope.maxStat[0]["max"+veichle])+"%"
-//        } else {
-//            return "width:"+(83)+"%"
-//        }}
+        //            if ($scope.maxStat[0]["max"+veichle] < maxvalues["max"+$scope.filter.selected+veichle]) {
+        //            return "width:"+((83*stat)/$scope.maxStat[0]["max"+veichle])+"%"
+        //        } else {
+        //            return "width:"+(83)+"%"
+        //        }}
 
-         GameSrv.getLocalStatus().then(
+        GameSrv.getLocalStatus().then(
             function (status) {
                 $scope.status = status;
                 $scope.noStatus = false;
-                    },
+            },
             function (err) {
                 $scope.noStatus = true;
                 Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
             })
         //).finally(Config.loaded);
 
-            $scope.loadMore = function () {
-                if (!getStatistics) {
-                    getStatistics = true;
-                    $scope.findbefore()
-                    //var x = 1475186400000 - $scope.valbefore;
-                    var temporanea = $scope.previousStat
-                        var x = temporanea - $scope.valbefore;
-                        var from = x;
-                        var to =  $scope.stats != null ? $scope.nextStat : new Date().getTime();
-                     GameSrv.getStatistics($scope.filter.selected, from, to).then(
-                         function (statistics) {
-                         $scope.stats = $scope.stats.concat(statistics.stats);
-                             temporanea = temporanea - $scope.valbefore;
-                            $scope.calculateMaxStats($scope.stats);
-                          if (statistics.stats.length < $scope.statsPerPage) {
+        $scope.loadMore = function () {
+            if (!getStatistics) {
+                getStatistics = true;
+                $scope.findbefore()
+                //var x = 1475186400000 - $scope.valbefore;
+                var temporanea = $scope.previousStat
+                var x = temporanea - $scope.valbefore;
+                var from = x;
+                var to = $scope.stats != null ? $scope.nextStat : new Date().getTime();
+                GameSrv.getStatistics($scope.filter.selected, from, to).then(
+                    function (statistics) {
+                        $scope.stats = $scope.stats.concat(statistics.stats);
+                        temporanea = temporanea - $scope.valbefore;
+                        $scope.calculateMaxStats($scope.stats);
+                        if (statistics.stats.length < $scope.statsPerPage) {
                             $scope.maybeMore = false;
-                            }
-                            $scope.$broadcast('scroll.infiniteScrollComplete');
-                            $scope.singleStatStatus = true;
-                            Config.loaded();
-                            getStatistics = false;
-                            },
-                         function (err) {
-                            $scope.maybeMore = true;
-                            Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
-                            $scope.$broadcast('scroll.infiniteScrollComplete');
-                            getStatistics = false;
-                            $scope.singleStatStatus = false;
-                            }
-                        );
-                }
-              };
-    $scope.valbefore = 0
-    $scope.findbefore = function () {
+                        }
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
+                        $scope.singleStatStatus = true;
+                        Config.loaded();
+                        getStatistics = false;
+                    },
+                    function (err) {
+                        $scope.maybeMore = true;
+                        Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
+                        getStatistics = false;
+                        $scope.singleStatStatus = false;
+                    }
+                );
+            }
+        };
+        $scope.valbefore = 0
+        $scope.findbefore = function () {
             if ($scope.filter.selected == "Daily") {
                 $scope.valbefore = 604800000
             }
@@ -329,27 +331,27 @@ angular.module('viaggia.controllers.game', [])
         $scope.init = function () {
             $scope.findbefore();
             var x = new Date().getTime() - $scope.valbefore;
-          //GameSrv.getStatistics($scope.filter.selected,  x, new Date().getTime()).then(function (statistics) {
-            GameSrv.getStatistics($scope.filter.selected,  x, new Date().getTime()).then(function (statistics) {
-            $scope.singleStatStatus = true;
-            $scope.stats = statistics.stats;
-            $scope.previousStat = statistics.firstBefore;
-            $scope.nextStat = statistics.firstAfter;
-            $scope.calculateMaxStats($scope.stats);
-        }, function(err){
+            //GameSrv.getStatistics($scope.filter.selected,  x, new Date().getTime()).then(function (statistics) {
+            GameSrv.getStatistics($scope.filter.selected, x, new Date().getTime()).then(function (statistics) {
+                $scope.singleStatStatus = true;
+                $scope.stats = statistics.stats;
+                $scope.previousStat = statistics.firstBefore;
+                $scope.nextStat = statistics.firstAfter;
+                $scope.calculateMaxStats($scope.stats);
+            }, function (err) {
                 $scope.stats = [];
                 Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
                 $scope.$broadcast('scroll.infiniteScrollComplete');
                 getStatistics = false;
                 $scope.singleStatStatus = false;
-           });
+            });
             generateRankingStyle();
         }
         $scope.init();
 
-        })
+    })
 
-    .controller('DiaryCtrl', function ($scope) {
+    .controller('DiaryCtrl', function ($scope, DiaryDbSrv) {
         $scope.filter = {
             open: false,
             toggle: function () {
@@ -373,8 +375,13 @@ angular.module('viaggia.controllers.game', [])
 
         $scope.filter.options = ['badge', 'challenge', 'trip', 'ranking', 'allnotifications'];
         $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
-        $scope.filter.filter = function (selection){
+        $scope.filter.filter = function (selection) {
         }
+        $scope.init = function () {
+            DiaryDbSrv.dbSetup();
+        }
+        $scope.init();
+
     })
     .controller('RankingsCtrl', function ($scope, $ionicScrollDelegate, $window, $timeout, Config, GameSrv, Toast, $filter, $ionicPosition) {
         $scope.maybeMore = true;
