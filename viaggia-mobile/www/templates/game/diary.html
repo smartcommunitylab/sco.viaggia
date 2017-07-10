@@ -18,22 +18,22 @@
         </div>
         <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="statisticScroll">
         <div class="list"  style="margin-top: 25px">
-            <div>
+            <div ng-repeat="notification in messages track by $index">
                 <div class="message-item">
 				    <div class="timeline-line">
                     </div>
-                    <div class="timeline-dot"> <H5 class="timeline-day"> Today </H5>
+                    <div class="timeline-dot"> <H5 class="timeline-day"> {{notification.timestamp | date:'EEEE dd/MM'}} </H5>
                     </div>
                     <div class="message-inner"  style="border: 2px solid #60b35c">
 				        <div class="timeline-arrow" style="border-right-color: #60b35c">
                         </div>
                         <div class="row" style="padding: 0px">
-                            <i class="col-center timeline-col icon ic_foot" style="background-color: #60b35c;"></i>
+                            <i class="col-center timeline-col icon ic_game_badge" style="background-color: #60b35c;"></i>
 				            <div  class="col timeline-msg">
-                                {{'msg_trip_walk' | translate: '{time: "2.30 p.m."}'}}
-				            </div>
+                                {{'msg_won_badge' | translate}} "{{notification.badge}}"				            </div>
                         </div>
                     </div>
+<!--
                     <div class="message-inner" style="border: 2px solid #cd251c">
                         <div class="timeline-arrow" style="border-right-color: #cd251c">
 				        </div>
@@ -56,8 +56,10 @@
 				            </div>
                         </div>
                     </div>
+-->
                 </div>
              </div>
+<!--
 			 <div>
                 <div class="message-item">
                     <div class="timeline-line">
@@ -88,6 +90,8 @@
                     </div>
                 </div>
             </div>
+-->
+<!--
             <div>
                 <div class="message-item">
                     <div class="timeline-line">
@@ -116,6 +120,8 @@
                     </div>
                 </div>
             </div>
+-->
+<!--
             <div>
                 <div class="message-item">
                     <div class="timeline-line">
@@ -158,6 +164,7 @@
                     </div>
                 </div>
             </div>
+-->
         </div>
         </ion-scroll>
     </ion-content>
