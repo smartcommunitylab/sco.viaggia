@@ -1,8 +1,8 @@
 <ion-view>
-     <ion-nav-title>
-            {{'diary_title' | translate}}
+    <ion-nav-title>
+        {{'diary_title' | translate}}
     </ion-nav-title>
-     <ion-content class="game-ranking" has-bouncing="false" scroll="false">
+    <ion-content class="game-ranking" has-bouncing="false" scroll="false">
         <div class="filter item-accordion" ng-if="!!filter.options">
             <ion-item class="item-accordion-header item-icon-right" ng-click="filter.toggle()">
                 <div ng-if="!filter.open">{{!!filter.selected ? ('game_tab_diary_filter_' + filter.selected) : '' | translate}}</div>
@@ -10,15 +10,39 @@
             </ion-item>
             <div class="item-accordion-content" ng-show="filter.open">
                 <ion-list>
-                    <ion-item ng-repeat="option in filter.options" ng-click="filter.filterBy(option)"  style= "padding: 2px; min-height: 30px;">
+                    <ion-item ng-repeat="option in filter.options" ng-click="filter.filterBy(option)" style="padding: 2px; min-height: 30px;">
                         <div ng-class="{ 'becomeblue' : filter.selected==option}">{{'game_tab_diary_filter_' + option | translate}}</div>
                     </ion-item>
                 </ion-list>
             </div>
         </div>
         <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="statisticScroll">
+<!--
         <div class="list"  style="margin-top: 25px">
             <div ng-repeat="notification in messages track by $index">
+-->
+            <div class="list" style="margin-top: 25px">
+                <div ng-repeat="day in days">
+                    <div class="message-item">
+                        <div class="timeline-line">
+                        </div>
+                        <div class="timeline-dot">
+                            <H5 class="timeline-day"> day.name </H5>
+                        </div>
+                        <div ng-repeat="message in day.messages" class="message-inner" style=" border: 2px solid {{getStyleColor(message)}}">
+                            <div class="timeline-arrow" style="border-right-color: {{getStyleColor(message)}}">
+                            </div>
+                            <div class="row" style="padding: 0px">
+                                <i class="col-center timeline-col icon {{getIcon(message)}}" style="background-color: {{getStyleColor(message)}}"></i>
+                                <div class="col timeline-msg">
+                                    {{getMessage(message) | translate: '{time: "2.30 p.m."}'}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div>
+>>>>>>> origin/2017-06-9_GamificationTrentino
                 <div class="message-item">
 				    <div class="timeline-line">
                     </div>
@@ -58,7 +82,7 @@
                     </div>
 -->
                 </div>
-             </div>
+<!--             </div>-->
 <!--
 			 <div>
                 <div class="message-item">
@@ -163,9 +187,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
--->
-        </div>
+            </div>-->
+<!--            </div>-->
+
         </ion-scroll>
     </ion-content>
 </ion-view>

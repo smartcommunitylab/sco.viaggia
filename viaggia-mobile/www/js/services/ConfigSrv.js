@@ -62,58 +62,7 @@ angular.module('viaggia.services.conf', [])
             return res;
         };
 
-    var NOTIFICATIONS_TYPES = {
-        END_TRIP_WALK : {
-            string: "msg_trip_walk",
-            color:"#60b35c",
-            icon:"ic_foot"
-        },
-        END_TRIP_BIKE : {
-            string: "msg_trip_bike",
-            color:"#922d67",
-            icon:"ic_bike"
-        },
-        END_TRIP_BUS : {
-            string: "msg_trip_bus",
-            color:"#ea8817",
-            icon:"ic_urban-bus"
-        },
-        END_TRIP_TRAIN : {
-            string: "msg_trip_train",
-            color:"#cd251c",
-            icon:"ic_train"
-        },
-        END_TRIP_MULTIMODAL : {
-            string: "msg_trip_multimodal",
-            color:"#2975a7",
-            icon:"ic_game_multimodal_trip"
-        },
-        NEW_BADGE : {
-            string: "msg_won_badge",
-            color:"#60b35c",
-            icon:"ic_game_badge"
-        },
-        WON_CHALLENGE : {
-            string: "msg_won_challenge",
-            color:"#60b35c",
-            icon:"ic_game_challenge"
-        },
-        NEW_CHALLENGE : {
-            string: "msg_new_challenge",
-            color:"#60b35c",
-            icon:"ic_game_challenge_assign"
-        },
-        NEW_FRIEND : {
-            string: "msg_new_friend",
-            color:"#3cbacf",
-            icon:"ic_game_friend"
-        },
-        NEW_RANKING_WEEK : {
-            string: "msg_pub_ranking",
-            color:"#3cbacf",
-            icon:"ic_game_classification"
-        },
-    }
+
 
         var COLORS_TRIP = {
             TRAIN: {

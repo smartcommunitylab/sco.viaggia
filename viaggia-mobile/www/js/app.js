@@ -92,10 +92,11 @@ angular.module('viaggia', [
   'viaggia.services.registration',
   'viaggia.services.game',
   'viaggia.services.tutorial',
+  'viaggia.services.diaryDb',
   'viaggia.filters'
 ])
 
-  .run(function ($ionicPlatform, $cordovaFile, $q, $rootScope, $translate, trackService, DataManager, Config, GeoLocate, notificationService) {
+  .run(function ($ionicPlatform, $cordovaFile, $q, $rootScope, $translate, trackService, DataManager,DiaryDbSrv, Config, GeoLocate, notificationService) {
 
     $rootScope.locationWatchID = undefined;
 
@@ -1037,7 +1038,7 @@ angular.module('viaggia', [
       "leaderboard top 3": "Leaderboard Top 3 Badge",
       "no_challenges": "Al momento non ci sono sfide attive",
       "no_challenges_old": "Nessuna sfida trovata",
-      no_statistics: "Nessuna ststistica trovata",
+      no_statistics: "Nessuna statistica trovata",
       pop_up_invalid_tracking_title: "Viaggio non valido",
       pop_up_invalid_tracking_template: "Le caratteristiche del viaggio fatto non corrispondono al mezzo di trasporto specificato. I punti non saranno assegnati.",
       pop_up_plan: "Pianifica",
