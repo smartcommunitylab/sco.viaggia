@@ -382,7 +382,15 @@ angular.module('viaggia.controllers.game', [])
         $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
         $scope.filter.filter = function (selection) {
         }
-
+        $scope.getStyleColor = function (message) {
+            return GameSrv.getStyleColor(message);
+        }
+        $scope.getIcon = function (message) {
+            return GameSrv.getIcon(message);
+        }
+        $scope.getString = function (message) {
+            return GameSrv.getString(message);
+        }
         $scope.init = function () {
             DiaryDbSrv.dbSetup().then(function () {
                 var x = new Date().getTime() - 2592000000;
@@ -390,8 +398,12 @@ angular.module('viaggia.controllers.game', [])
                 DiaryDbSrv.readEvents("BADGE", 1455800361943, 1476269822849).then(function (notifications) {
                     $scope.singleDiaryStatus = true;
                     $scope.messages = notifications;
-                    $scope.days=[];
-                    $scope.days[0]=$scope.messages;
+                    $scope.days = [{
+                        name: "today",
+                        messages: $scope.messages
+                    }];
+                    // $scope.days[0].name="Today";
+                    // $scope.days[0].messages=$scope.messages;
                 });
             })
 

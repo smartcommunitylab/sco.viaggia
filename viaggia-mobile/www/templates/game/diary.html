@@ -23,7 +23,7 @@
                         <div class="timeline-line">
                         </div>
                         <div class="timeline-dot">
-                            <H5 class="timeline-day"> day.name </H5>
+                            <H5 class="timeline-day"> {{day.name}} </H5>
                         </div>
                         <div ng-repeat="message in day.messages" class="message-inner" style=" border: 2px solid {{getStyleColor(message)}}">
                             <div class="timeline-arrow" style="border-right-color: {{getStyleColor(message)}}">
@@ -31,7 +31,7 @@
                             <div class="row" style="padding: 0px">
                                 <i class="col-center timeline-col icon {{getIcon(message)}}" style="background-color: {{getStyleColor(message)}}"></i>
                                 <div class="col timeline-msg">
-                                    {{getMessage(message) | translate: '{time: "2.30 p.m."}'}}
+                                    {{getString(message) | translate: '{time: "2.30 p.m."}'}}
                                 </div>
                             </div>
                         </div>
