@@ -155,7 +155,7 @@ angular.module('viaggia.controllers.game', [])
         $scope.init();
 
     })
-    .controller('StatisticsCtrl', function ($scope, $ionicScrollDelegate, $window, $filter, $timeout, Toast, Config, GameSrv, $ionicLoading, $timeout) {
+    .controller('StatisticsCtrl', function ($scope, $ionicScrollDelegate, $window, $filter, $timeout, Toast, Config, GameSrv, $ionicLoading) {
         $scope.stats = [];
         //$scope.statistics = []
         //$scope.maxStat = 0;
@@ -404,7 +404,6 @@ angular.module('viaggia.controllers.game', [])
             Config.loaded();
         }
 
-
             $scope.loadMore = function () {
             if (!getDiary) {
                 getDiary = true;
@@ -437,9 +436,6 @@ angular.module('viaggia.controllers.game', [])
                  });
             }
         };
-
-
-
 
         $scope.getStyleColor = function (message) {
             return GameSrv.getStyleColor(message);
@@ -527,16 +523,28 @@ angular.module('viaggia.controllers.game', [])
                 var end = start + $scope.rankingPerPage;
                 GameSrv.getRanking($scope.filter.selected, start, end).then(
                     function (ranking) {
-                        $scope.currentUser = ranking['actualUser'];
-                        $scope.ranking = $scope.ranking.concat(ranking['classificationList']);
+                        if (ranking) {
+                            $scope.currentUser = ranking['actualUser'];
+                            $scope.ranking = $scope.ranking.concat(ranking['classificationList']);
 
-                        if (ranking['classificationList'].length < $scope.rankingPerPage) {
-                            $scope.maybeMore = false;
+                            if (ranking['classificationList'].length < $scope.rankingPerPage) {
+                                $scope.maybeMore = false;
+                            }
+
+                            $scope.$broadcast('scroll.infiniteScrollComplete');
+                            getRanking = false;
+                            $scope.singleRankStatus = true;
                         }
+                        else {
+                            $scope.maybeMore = true;
+                            Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                            $scope.$broadcast('scroll.infiniteScrollComplete');
+                            getRanking = false;
+                            if ($scope.ranking.length == 0) {
+                                $scope.singleRankStatus = false;
 
-                        $scope.$broadcast('scroll.infiniteScrollComplete');
-                        getRanking = false;
-                        $scope.singleRankStatus = true;
+                            }
+                        }
                     },
                     function (err) {
                         $scope.maybeMore = true;

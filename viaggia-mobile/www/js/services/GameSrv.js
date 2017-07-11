@@ -43,20 +43,35 @@ angular.module('viaggia.services.game', [])
         //         }
         //     ]
         // }
+
+        var filter = [
+            {
+                name: 'badge',
+                db: ['BADGE']
+            },
+            {
+                name: 'challenge',
+                db: ['CHALLENGE', 'CHALLENGE_WON']
+            },
+            {
+                name: 'trip',
+                db: ['TRAVEL']
+            }
+            , {
+                name: 'ranking',
+                db: ['RECOMMENDED']
+            },
+            {
+                name: 'allnotifications',
+                db: ['BADGE', 'CHALLENGE', 'CHALLENGE_WON', 'TRAVEL', 'RECOMMENDED']
+            }]
         var NOTIFICATIONS_MAPPING = {
             BADGE: {
                 string: "msg_won_badge",
                 color: "#60b35c",
                 icon: "ic_game_badge"
-            },
-            CHALLENGE: {
-                string: "msg_won_challenge",
-                color: "#922d67",
-                icon: "ic_game_challenge"
             }
         }
-
-
         var NOTIFICATIONS_STYLES = {
             END_TRIP_WALK: {
                 string: "msg_trip_walk",
@@ -307,6 +322,7 @@ angular.module('viaggia.services.game', [])
             }
         }
 
+
          var ServerHow = {
                 "Daily": "day",
             "Weekly": "week",
@@ -320,19 +336,23 @@ angular.module('viaggia.services.game', [])
             return returnhow;
         }
 
+
         gameService.getStyleColor = function (message) {
             return NOTIFICATIONS_MAPPING[message.type].color;
         }
         gameService.getIcon = function (message) {
             return NOTIFICATIONS_MAPPING[message.type].icon;
         }
-         gameService.getString = function (message) {
+
+        gameService.getString = function (message) {
             return NOTIFICATIONS_MAPPING[message.type].string;
         }
         gameService.getNotificationTypes = function () {
             return NOTIFICATIONS_TYPES;
         }
-
+        gameService.getFilters = function () {
+            //to do
+        }
         gameService.getDiary = function (type, from, to) {
             var deferred = $q.defer();
             $http.get('data/messages.json').success(function (messages) {
@@ -375,52 +395,73 @@ angular.module('viaggia.services.game', [])
             return deferred.promise;
         }
 
-        gameService.getStatistics = function (how, from, to) {
-            var deferred = $q.defer();
-            var returnValuee = {
-                "firstBefore": 1475186400000,
-                "firstAfter": 1478214000000,
-                "stats": []
-            };
-            userService.getValidToken().then(
-//                function (token) {
-//                    for (var i = returnValue.stats.length - 1; i > 0; i--) {
-//                        if (returnValue.stats[i].from > from && returnValue.stats[i].to < to)
-//                            returnValuee.stats.push(returnValue.stats[i]);
-//                    }
-//
-//
-//                    deferred.resolve(returnValuee);
-//                    //                deferred.reject();
-//                });
-                function (token) {
-                    $http.get(Config.getGamificationURL() + '/statistics/player?granularity='+how+'&from='+from+'&to='+to,
-                              {
-                              headers:
-                              {
-                              'Authorization': 'Bearer '+token,
-                              'AppId': Config.getAppId()
-                              }
-                                })
-                        .success(function (status) {
-                            localStatus = status;
-                            deferred.resolve(localStatus);
-                        })
+        //SERVER VERSION
+        // gameService.getStatistics = function (how, from, to) {
+        //     var deferred = $q.defer();
+        //     var returnValuee = {
+        //         "firstBefore": 1475186400000,
+        //         "firstAfter": 1478214000000,
+        //         "stats": []
+        //     };
+        //     userService.getValidToken().then(
+        //         function (token) {
+        //             $http({
+        //                 method: 'GET',
+        //                 url: Config.getGamificationURL() + '/status',
+        //                 headers: {
+        //                     'Authorization': 'Bearer ' + token,
+        //                     'appId': Config.getAppId(),
+        //                 },
+        //                 timeout: Config.getHTTPConfig().timeout
+        //             })
+        //                 .success(function (stats) {
+        //                     deferred.resolve(stats);
+        //                 })
 
-                        .error(function (response) {
-                            deferred.reject(response);
-                        });
-                })
-            return deferred.promise;
-        }
+        //                 .error(function (response) {
+        //                     deferred.reject(response);
+        //                 });
+        //             deferred.resolve(returnValuee);
+        //         });
+        //     return deferred.promise;
+        // }
+
+        //local version
+         gameService.getStatistics = function (how, from, to) {
+             var deferred = $q.defer();
+             var returnValuee = {
+                 "firstBefore": 1475186400000,
+                 "firstAfter": 1478214000000,
+                 "stats": []
+             };
+             userService.getValidToken().then(
+                 function (token) {
+                     //                    for (var i = 0; i < returnValue.stats.length; i++) {
+                     for (var i = returnValue.stats.length - 1; i > 0; i--) {
+                         if (returnValue.stats[i].from > from && returnValue.stats[i].to < to)
+                             returnValuee.stats.push(returnValue.stats[i]);
+                    }
+
+                     deferred.resolve(returnValuee);
+                     //                deferred.reject();
+                 });
+             return deferred.promise;
+         }
         /* get remote status */
         gameService.getStatus = function () {
             var deferred = $q.defer();
 
             userService.getValidToken().then(
                 function (token) {
-                    $http.get(Config.getGamificationURL() + '/out/rest/status' + '?token=' + token, Config.getHTTPConfig())
-
+                    $http({
+                        method: 'GET',
+                        url: Config.getGamificationURL() + '/status',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
                         .success(function (status) {
                             localStatus = status;
                             deferred.resolve(localStatus);
@@ -489,7 +530,7 @@ angular.module('viaggia.services.game', [])
                         config.params = {};
                     }
 
-                    config.params['token'] = token;
+                   // config.params['token'] = token;
 
                     if ((!!timestamp && timestamp < 0) || (!!start && start < 0) || (!!end && end < 1) || (!!start && !!end && end <= start)) {
                         deferred.reject();
@@ -507,8 +548,17 @@ angular.module('viaggia.services.game', [])
                         config.params['end'] = end;
                     }
 
-                    $http.get(Config.getGamificationURL() + '/out/rest/classification', config)
-
+                    //$http.get(Config.getGamificationURL() + '/classification', config)
+                    $http({
+                        method: 'GET',
+                        url: Config.getGamificationURL() + '/classification',
+                        params:config.params,
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
                         .success(function (ranking) {
                             localRanking = ranking;
                             deferred.resolve(localRanking);

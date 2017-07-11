@@ -6,9 +6,8 @@ angular.module('viaggia.services.registration', [])
     registrationService.register = function (user) {
         var deferred = $q.defer();
         userService.getValidToken().then(function (validToken) {
-            var urlReg = Config.getGamificationURL() + "/out/rest/register?"+
+            var urlReg = Config.getGamificationURL() + "/register?"+
                 "nickname=" + user.nickname +
-                "&token=" + validToken +
                 "&email="+user.mail +
                 "&language=" + Config.getLang();
             $http({
@@ -16,8 +15,10 @@ angular.module('viaggia.services.registration', [])
                 url: urlReg,
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
+                    'Content-Type': 'application/json',
+                     'Authorization': 'Bearer ' + validToken,
+                    'appId': Config.getAppId()
+                                },
                 data: {
                     "age_range": user.age_range,
                     "use_transport": user.use_transport,
