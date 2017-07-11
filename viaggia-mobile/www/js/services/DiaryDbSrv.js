@@ -208,7 +208,7 @@ angular.module('viaggia.services.diaryDb', [])
 
         // }
 
-        //overwrite 
+        //overwrite
         var updateSynchTimestamp = function () {
             localStorage.setItem(Config.getAppId() + DIARY_SYNC_TIME, new Date().getTime());
         }

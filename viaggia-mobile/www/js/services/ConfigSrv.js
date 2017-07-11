@@ -62,7 +62,7 @@ angular.module('viaggia.services.conf', [])
             return res;
         };
 
-    
+
 
         var COLORS_TRIP = {
             TRAIN: {

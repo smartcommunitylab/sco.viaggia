@@ -43,7 +43,8 @@ angular.module('viaggia.services.game', [])
         //         }
         //     ]
         // }
-        var filter = [
+
+        var dbFilter = [
             {
                 name: 'badge',
                 db: ['BADGE']
@@ -324,9 +325,31 @@ angular.module('viaggia.services.game', [])
             var event = JSON.parse(message.event);
             if (event.travelType == 'PLANNED')
                 return 'TRAVEL_MULTIMODAL'
-                if (event.travelType == 'FREETRACKING')
-                return 'TRAVEL_'+event.travelModes[0].toUpperCase()
+            if (event.travelType == 'FREETRACKING')
+                return 'TRAVEL_' + event.travelModes[0].toUpperCase()
         }
+
+
+        var ServerHow = {
+            "Daily": "day",
+            "Weekly": "week",
+            "Monthly": "month",
+            "Total": "total",
+        }
+
+        gameService.getServerHow = function (how) {
+            var filter = how;
+            var returnhow = ServerHow[filter];
+            return returnhow;
+        }
+        gameService.getDbType = function (type) {
+            for (let i = 0; i < dbFilter.length; i++) {
+                if (type == dbFilter[i].name)
+                    return dbFilter[i].db[0];
+            }
+            return [];
+        }
+
         gameService.getStyleColor = function (message) {
             if (message.type == 'TRAVEL') {
                 message.type = getTravelType(message)
@@ -339,6 +362,7 @@ angular.module('viaggia.services.game', [])
             }
             return NOTIFICATIONS_STYLES[message.type].icon;
         }
+
         gameService.getString = function (message) {
             if (message.type == 'TRAVEL') {
                 message.type = getTravelType(message)
@@ -392,6 +416,7 @@ angular.module('viaggia.services.game', [])
                 });
             return deferred.promise;
         }
+
         //SERVER VERSION
         // gameService.getStatistics = function (how, from, to) {
         //     var deferred = $q.defer();
@@ -438,7 +463,6 @@ angular.module('viaggia.services.game', [])
                         if (returnValue.stats[i].from > from && returnValue.stats[i].to < to)
                             returnValuee.stats.push(returnValue.stats[i]);
                     }
-
                     deferred.resolve(returnValuee);
                     //                deferred.reject();
                 });
