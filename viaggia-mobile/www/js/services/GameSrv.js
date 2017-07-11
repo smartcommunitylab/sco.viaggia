@@ -50,7 +50,7 @@ angular.module('viaggia.services.game', [])
             },
             {
                 name: 'challenge',
-                db: ['CHALLENGE', 'CHALLENGE_WON']
+                db: ['CHALLENGE']
             },
             {
                 name: 'trip',
@@ -62,57 +62,57 @@ angular.module('viaggia.services.game', [])
             },
             {
                 name: 'allnotifications',
-                db: ['BADGE', 'CHALLENGE', 'CHALLENGE_WON', 'TRAVEL', 'RECOMMENDED']
+                db: []
             }]
-        var NOTIFICATIONS_MAPPING = {
-            BADGE: {
-                string: "msg_won_badge",
-                color: "#60b35c",
-                icon: "ic_game_badge"
-            }
-        }
+        // var NOTIFICATIONS_MAPPING = {
+        //     BADGE: {
+        //         string: "msg_won_badge",
+        //         color: "#60b35c",
+        //         icon: "ic_game_badge"
+        //     }
+        // }
         var NOTIFICATIONS_STYLES = {
-            END_TRIP_WALK: {
+            TRAVEL_WALK: {
                 string: "msg_trip_walk",
                 color: "#60b35c",
                 icon: "ic_foot"
             },
-            END_TRIP_BIKE: {
+            TRAVEL_BIKE: {
                 string: "msg_trip_bike",
                 color: "#922d67",
                 icon: "ic_bike"
             },
-            END_TRIP_BUS: {
+            TRAVEL_BUS: {
                 string: "msg_trip_bus",
                 color: "#ea8817",
                 icon: "ic_urban-bus"
             },
-            END_TRIP_TRAIN: {
+            TRAVEL_TRAIN: {
                 string: "msg_trip_train",
                 color: "#cd251c",
                 icon: "ic_train"
             },
-            END_TRIP_MULTIMODAL: {
+            TRAVEL_MULTIMODAL: {
                 string: "msg_trip_multimodal",
                 color: "#2975a7",
                 icon: "ic_game_multimodal_trip"
             },
-            NEW_BADGE: {
+            BADGE: {
                 string: "msg_won_badge",
                 color: "#60b35c",
                 icon: "ic_game_badge"
             },
-            WON_CHALLENGE: {
+            CHALLENGE: {
                 string: "msg_won_challenge",
                 color: "#60b35c",
                 icon: "ic_game_challenge"
             },
-            NEW_CHALLENGE: {
+            CHALLENGE_WON: {
                 string: "msg_new_challenge",
                 color: "#60b35c",
                 icon: "ic_game_challenge_assign"
             },
-            NEW_FRIEND: {
+            RECOMMENDED: {
                 string: "msg_new_friend",
                 color: "#3cbacf",
                 icon: "ic_game_friend"
@@ -320,14 +320,30 @@ angular.module('viaggia.services.game', [])
                 }
             }
         }
+        getTravelType = function (message) {
+            var event = JSON.parse(message.event);
+            if (event.travelType == 'PLANNED')
+                return 'TRAVEL_MULTIMODAL'
+                if (event.travelType == 'FREETRACKING')
+                return 'TRAVEL_'+event.travelModes[0].toUpperCase()
+        }
         gameService.getStyleColor = function (message) {
-            return NOTIFICATIONS_MAPPING[message.type].color;
+            if (message.type == 'TRAVEL') {
+                message.type = getTravelType(message)
+            }
+            return NOTIFICATIONS_STYLES[message.type].color;
         }
         gameService.getIcon = function (message) {
-            return NOTIFICATIONS_MAPPING[message.type].icon;
+            if (message.type == 'TRAVEL') {
+                message.type = getTravelType(message)
+            }
+            return NOTIFICATIONS_STYLES[message.type].icon;
         }
         gameService.getString = function (message) {
-            return NOTIFICATIONS_MAPPING[message.type].string;
+            if (message.type == 'TRAVEL') {
+                message.type = getTravelType(message)
+            }
+            return NOTIFICATIONS_STYLES[message.type].string;
         }
         gameService.getNotificationTypes = function () {
             return NOTIFICATIONS_TYPES;
@@ -408,26 +424,26 @@ angular.module('viaggia.services.game', [])
         // }
 
         //local version
-         gameService.getStatistics = function (how, from, to) {
-             var deferred = $q.defer();
-             var returnValuee = {
-                 "firstBefore": 1475186400000,
-                 "firstAfter": 1478214000000,
-                 "stats": []
-             };
-             userService.getValidToken().then(
-                 function (token) {
-                     //                    for (var i = 0; i < returnValue.stats.length; i++) {
-                     for (var i = returnValue.stats.length - 1; i > 0; i--) {
-                         if (returnValue.stats[i].from > from && returnValue.stats[i].to < to)
-                             returnValuee.stats.push(returnValue.stats[i]);
+        gameService.getStatistics = function (how, from, to) {
+            var deferred = $q.defer();
+            var returnValuee = {
+                "firstBefore": 1475186400000,
+                "firstAfter": 1478214000000,
+                "stats": []
+            };
+            userService.getValidToken().then(
+                function (token) {
+                    //                    for (var i = 0; i < returnValue.stats.length; i++) {
+                    for (var i = returnValue.stats.length - 1; i > 0; i--) {
+                        if (returnValue.stats[i].from > from && returnValue.stats[i].to < to)
+                            returnValuee.stats.push(returnValue.stats[i]);
                     }
- 
-                     deferred.resolve(returnValuee);
-                     //                deferred.reject();
-                 });
-             return deferred.promise;
-         }
+
+                    deferred.resolve(returnValuee);
+                    //                deferred.reject();
+                });
+            return deferred.promise;
+        }
         /* get remote status */
         gameService.getStatus = function () {
             var deferred = $q.defer();
@@ -511,7 +527,7 @@ angular.module('viaggia.services.game', [])
                         config.params = {};
                     }
 
-                   // config.params['token'] = token;
+                    // config.params['token'] = token;
 
                     if ((!!timestamp && timestamp < 0) || (!!start && start < 0) || (!!end && end < 1) || (!!start && !!end && end <= start)) {
                         deferred.reject();
@@ -533,7 +549,7 @@ angular.module('viaggia.services.game', [])
                     $http({
                         method: 'GET',
                         url: Config.getGamificationURL() + '/classification',
-                        params:config.params,
+                        params: config.params,
                         headers: {
                             'Authorization': 'Bearer ' + token,
                             'appId': Config.getAppId(),

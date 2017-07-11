@@ -118,6 +118,9 @@
         "type": "TRAVEL",
         "entityId": "57331ac9e4b092fc07f51249",
         "travelType": "PLANNED",
+          "travelModes": [
+            "walk"
+        ],
         "travelLength": 5.34384244162535,
         "travelEstimatedScore": 6,
         "travelValidity": "PENDING",
@@ -128,6 +131,9 @@
         "type": "TRAVEL",
         "entityId": "57cc36a4e4b0d046a69bb799",
         "travelType": "FREETRACKING",
+           "travelModes": [
+            "walk"
+        ],
         "travelLength": 2.174823507653325,
         "travelEstimatedScore": 33,
         "travelValidity": "PENDING",
