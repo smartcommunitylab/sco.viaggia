@@ -76,42 +76,52 @@ angular.module('viaggia.services.game', [])
             TRAVEL_WALK: {
                 string: "msg_trip_walk",
                 color: "#60b35c",
-                icon: "ic_foot"
+                icon: "ic_foot",
+                params: ['time']
             },
             TRAVEL_BIKE: {
                 string: "msg_trip_bike",
                 color: "#922d67",
-                icon: "ic_bike"
+                icon: "ic_bike",
+                params: ['time']
             },
             TRAVEL_BUS: {
                 string: "msg_trip_bus",
                 color: "#ea8817",
-                icon: "ic_urban-bus"
+                icon: "ic_urban-bus",
+                params: ['time']
             },
             TRAVEL_TRAIN: {
                 string: "msg_trip_train",
                 color: "#cd251c",
-                icon: "ic_train"
+                icon: "ic_train",
+                params: ['time']
             },
             TRAVEL_MULTIMODAL: {
                 string: "msg_trip_multimodal",
                 color: "#2975a7",
-                icon: "ic_game_multimodal_trip"
+                icon: "ic_game_multimodal_trip",
+                params: ['time']
             },
             BADGE: {
                 string: "msg_won_badge",
                 color: "#60b35c",
-                icon: "ic_game_badge"
+                icon: "ic_game_badge",
+                params: ['badge']
             },
             CHALLENGE: {
                 string: "msg_won_challenge",
                 color: "#60b35c",
-                icon: "ic_game_challenge"
+                icon: "ic_game_challenge",
+                params: ['challengeName', 'challengeEnd', 'challengeBonus']
+
             },
             CHALLENGE_WON: {
                 string: "msg_new_challenge",
                 color: "#60b35c",
-                icon: "ic_game_challenge_assign"
+                icon: "ic_game_challenge_assign",
+                params: ['challengeName', 'challengeBonus']
+
             },
             RECOMMENDED: {
                 string: "msg_new_friend",
@@ -328,7 +338,10 @@ angular.module('viaggia.services.game', [])
             if (event.travelType == 'FREETRACKING')
                 return 'TRAVEL_' + event.travelModes[0].toUpperCase()
         }
-
+        createParamString = function (message) {
+             var event = JSON.parse(message.event);
+        return '{'+NOTIFICATIONS_STYLES[message.type].params+':"'+event[NOTIFICATIONS_STYLES[message.type].params]+'"}'
+        }
 
         var ServerHow = {
             "Daily": "day",
@@ -369,8 +382,22 @@ angular.module('viaggia.services.game', [])
             }
             return NOTIFICATIONS_STYLES[message.type].string;
         }
+        gameService.getParams = function (message) {
+            if (message.type == 'TRAVEL') {
+                message.type = getTravelType(message)
+            }
+           
+            return createParamString(message);
+            // return '{badgename:"'+event[NOTIFICATIONS_STYLES[message.type].params]+'"}';
+            // '{time: "2.30 p.m."}'
+
+
+        }
         gameService.getNotificationTypes = function () {
-            return NOTIFICATIONS_TYPES;
+            if (message.type == 'TRAVEL') {
+                message.type = getTravelType(message)
+            }
+            return NOTIFICATIONS_STYLES[message.type].string;
         }
         gameService.getFilters = function () {
             //to do

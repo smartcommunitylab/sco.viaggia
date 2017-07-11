@@ -35,7 +35,7 @@
                             <div class="row" style="padding: 0px">
                                 <i class="col-center timeline-col icon {{getIcon(message)}}" style="background-color: {{getStyleColor(message)}}"></i>
                                 <div class="col timeline-msg">
-                                    {{getString(message) | translate: '{time: "2.30 p.m."}'}}
+                                    {{getString(message) | translate: getParams(message)}}
                                 </div>
                             </div>
                         </div>

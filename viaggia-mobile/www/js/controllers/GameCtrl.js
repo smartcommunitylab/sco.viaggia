@@ -447,6 +447,9 @@ angular.module('viaggia.controllers.game', [])
         $scope.getString = function (message) {
             return GameSrv.getString(message);
         }
+        $scope.getParams = function (message) {
+            return GameSrv.getParams(message);
+        }
         $scope.init = function () {
             DiaryDbSrv.dbSetup().then(function () {
                 var x = new Date().getTime() - 2592000000;
