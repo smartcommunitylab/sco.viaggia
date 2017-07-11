@@ -282,20 +282,34 @@ angular.module('viaggia.services.diaryDb', [])
             var deferred = $q.defer();
             //convert type to multiple types for the query
             db.transaction(function (tx) {
-                tx.executeSql('SELECT *  FROM Events WHERE type = ? AND timestamp >= ? AND timestamp <= ?', [type, from, to], function (tx, rs) {
-                    // console.log('count ' + rs.rows.length);
-                    var returnData = [];
-                    for (let i = 0; i < rs.rows.length; i++) {
-                        returnData.push(rs.rows.item(i));
-                    }
-                    deferred.resolve(returnData);
-                }, function (tx, error) {
-                    console.log('SELECT error: ' + error.message);
-                    deferred.reject();
-                })
-            });
-            return deferred.promise;
+                var query = 'SELECT *  FROM Events WHERE ';
+                var params = [];
+
+                if (type) {
+                 query = query + 'type = ? AND';
+                 params.push(type);
+                 }
+
+                query = query + ' timestamp >= ? AND timestamp <= ?';
+                params.push(from);
+                params.push(to);
+
+                
+
+        tx.executeSql(query, params, function (tx, rs) {
+            // console.log('count ' + rs.rows.length);
+            var returnData = [];
+            for (let i = 0; i < rs.rows.length; i++) {
+                returnData.push(rs.rows.item(i));
+            }
+            deferred.resolve(returnData);
+        }, function (tx, error) {
+            console.log('SELECT error: ' + error.message);
+            deferred.reject();
+        })
+    });
+return deferred.promise;
         }
 
-        return diaryDbService;
+return diaryDbService;
     })

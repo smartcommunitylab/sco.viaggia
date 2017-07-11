@@ -24,7 +24,7 @@ angular.module('viaggia.controllers.game', [])
                 );
             },
             function (err) {
-                $scope.noStatus = true;
+                $scope.noStatus = true;serverhow
                 Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
             }
         ).finally(Config.loaded);
@@ -410,7 +410,8 @@ angular.module('viaggia.controllers.game', [])
                 console.log("load done")
                 DiaryDbSrv.dbSetup().then(function () {
                 var x = new Date().getTime() - 2592000000;
-                DiaryDbSrv.readEvents("CHALLENGE", 1455800361943, 1476269822849).then(function (notifications) {
+                var filter = GameSrv.getDbType($scope.filter.selected)
+                DiaryDbSrv.readEvents(filter, 1455800361943, 1476269822849).then(function (notifications) {
                     $scope.singleDiaryStatus = true;
                     $scope.messages = notifications;
                     $scope.days = [{
@@ -450,15 +451,14 @@ angular.module('viaggia.controllers.game', [])
             DiaryDbSrv.dbSetup().then(function () {
                 var x = new Date().getTime() - 2592000000;
                 //GameSrv.getDiary($scope.filter.selected,  x, new Date().getTime()).then(function (notifications) {
-                DiaryDbSrv.readEvents("TRAVEL", 1455800361943, 1476269822849).then(function (notifications) {
+                var filter = GameSrv.getDbType($scope.filter.selected)
+                DiaryDbSrv.readEvents(filter, 1455800361943, 1476269822849).then(function (notifications) {
                     $scope.singleDiaryStatus = true;
                     $scope.messages = notifications;
                     $scope.days = [{
                         name: "today",
                         messages: $scope.messages
                     }];
-                    // $scope.days[0].name="Today";
-                    // $scope.days[0].messages=$scope.messages;
                 });
             })
 
