@@ -5,44 +5,57 @@ angular.module('viaggia.services.game', [])
 
         var localStatus = null;
         var localRanking = null;
+        // var NOTIFICATIONS_MAPPING = {
+        //     badge:
+        //     [
+        //         {
+        //             db_types: "BADGE",
+        //             style: "NEW_BADGE"
+        //         }
+        //     ]
+        //     ,
+        //     challenge: [
+        //         {
+        //             db_types: "CHALLENGE_WON",
+        //             style: "WON_CHALLENGE"
+        //         },
+        //         {
+        //             db_types: "CHALLENGE",
+        //             style: "NEW_CHALLENGE"
+        //         }
+        //     ],
+        //     trip: [
+        //         {
+        //             db_types: "BADGE",
+        //             style: "NEW_BADGE"
+        //         }
+        //     ],
+        //     ranking: [
+        //         {
+        //             db_types: "BADGE",
+        //             style: "NEW_BADGE"
+        //         }
+        //     ],
+        //     allnotifications: [
+        //         {
+        //             db_types: "BADGE",
+        //             style: "NEW_BADGE"
+        //         }
+        //     ]
+        // }
         var NOTIFICATIONS_MAPPING = {
-            badge:
-            [
-                {
-                    db_types: "BADGE",
-                    style: "NEW_BADGE"
-                }
-            ]
-            ,
-            challenge: [
-                {
-                    db_types: "CHALLENGE_WON",
-                    style: "WON_CHALLENGE"
-                },
-                {
-                    db_types: "CHALLENGE",
-                    style: "NEW_CHALLENGE"
-                }
-            ],
-            trip: [
-                {
-                    db_types: "BADGE",
-                    style: "NEW_BADGE"
-                }
-            ],
-            ranking: [
-                {
-                    db_types: "BADGE",
-                    style: "NEW_BADGE"
-                }
-            ],
-            allnotifications: [
-                {
-                    db_types: "BADGE",
-                    style: "NEW_BADGE"
-                }
-            ]
+            BADGE: {
+                string: "msg_won_badge",
+                color: "#60b35c",
+                icon: "ic_game_badge"
+            },
+            CHALLENGE: {
+                string: "msg_won_challenge",
+                color: "#922d67",
+                icon: "ic_game_challenge"
+            }
         }
+
 
         var NOTIFICATIONS_STYLES = {
             END_TRIP_WALK: {
@@ -307,6 +320,15 @@ angular.module('viaggia.services.game', [])
             return returnhow;
         }
 
+        gameService.getStyleColor = function (message) {
+            return NOTIFICATIONS_MAPPING[message.type].color;
+        }
+        gameService.getIcon = function (message) {
+            return NOTIFICATIONS_MAPPING[message.type].icon;
+        }
+         gameService.getString = function (message) {
+            return NOTIFICATIONS_MAPPING[message.type].string;
+        }
         gameService.getNotificationTypes = function () {
             return NOTIFICATIONS_TYPES;
         }

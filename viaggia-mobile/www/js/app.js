@@ -1018,7 +1018,7 @@ angular.module('viaggia', [
       game_tab_diary_filter_badge: "Badge",
       game_tab_diary_filter_challenge: "Sfide",
       game_tab_diary_filter_trip: "Viaggi",
-      game_tab_diary_filter_ranking: "Classificsa",
+      game_tab_diary_filter_ranking: "Classifica",
       game_tab_diary_filter_allnotifications: "Tutte le notifiche",
       game_tab_statistics_filter_Daily: "Giornaliero",
       game_tab_statistics_filter_Weekly: "Settimanale",

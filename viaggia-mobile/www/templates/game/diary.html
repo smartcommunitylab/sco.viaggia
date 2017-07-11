@@ -27,7 +27,7 @@
                         <div class="timeline-line">
                         </div>
                         <div class="timeline-dot">
-                            <H5 class="timeline-day"> day.name </H5>
+                            <H5 class="timeline-day"> {{day.name}} </H5>
                         </div>
                         <div ng-repeat="message in day.messages" class="message-inner" style=" border: 2px solid {{getStyleColor(message)}}">
                             <div class="timeline-arrow" style="border-right-color: {{getStyleColor(message)}}">
@@ -35,161 +35,14 @@
                             <div class="row" style="padding: 0px">
                                 <i class="col-center timeline-col icon {{getIcon(message)}}" style="background-color: {{getStyleColor(message)}}"></i>
                                 <div class="col timeline-msg">
-                                    {{getMessage(message) | translate: '{time: "2.30 p.m."}'}}
+                                    {{getString(message) | translate: '{time: "2.30 p.m."}'}}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--<div>
->>>>>>> origin/2017-06-9_GamificationTrentino
-                <div class="message-item">
-				    <div class="timeline-line">
-                    </div>
-                    <div class="timeline-dot"> <H5 class="timeline-day"> {{notification.timestamp | date:'EEEE dd/MM'}} </H5>
-                    </div>
-                    <div class="message-inner"  style="border: 2px solid #60b35c">
-				        <div class="timeline-arrow" style="border-right-color: #60b35c">
-                        </div>
-                        <div class="row" style="padding: 0px">
-                            <i class="col-center timeline-col icon ic_game_badge" style="background-color: #60b35c;"></i>
-				            <div  class="col timeline-msg">
-                                {{'msg_won_badge' | translate}} "{{notification.badge}}"				            </div>
-                        </div>
-                    </div>
-<!--
-                    <div class="message-inner" style="border: 2px solid #cd251c">
-                        <div class="timeline-arrow" style="border-right-color: #cd251c">
-				        </div>
-                        <div class="row" style="padding: 0px">
-                            <i class="col-center timeline-col icon ic_train" style="background-color: #cd251c;"></i>
-				            <div  class="col timeline-msg">
-                                {{'msg_trip_train' | translate}}
-                                <br>
-                                at 2.30 p.m.
-				            </div>
-                        </div>
-                    </div>
-                    <div class="message-inner"  style="border: 2px solid #60b35c">
-				        <div class="timeline-arrow" style="border-right-color: #60b35c">
-                        </div>
-                        <div class="row" style="padding: 0px">
-                            <i class="col-center timeline-col icon ic_game_challenge_assign" style="background-color: #60b35c;"></i>
-				            <div  class="col timeline-msg">
-                                {{'msg_new_challenge' | translate}}
-				            </div>
-                        </div>
-                    </div>
--->
-                </div>
-<!--             </div>-->
-<!--
-			 <div>
-                <div class="message-item">
-                    <div class="timeline-line">
-                    </div>
-                    <div class="timeline-dot"> <H5 class="timeline-day"> Yesterday </H5>
-                    </div>
-				    <div class="message-inner"; style="border: 2px solid #3cbacf">
-				        <div class="timeline-arrow" style="border-right-color: #3cbacf">
-				        </div>
-                        <div class="row" style="padding: 0px">
-                            <i class="col-center timeline-col icon ic_game_friend" style="background-color: #3cbacf;"></i>
-				            <div  class="col timeline-msg">
-                                {{'msg_new_friend' | translate}}
-				            </div>
-                        </div>
-                    </div>
-                    <div class="message-inner" style="border: 2px solid #2975a7">
-				        <div class="timeline-arrow" style="border-right-color: #2975a7">
-				        </div>
-                        <div class="row" style="padding: 0px">
-                            <i class="col-center timeline-col icon ic_game_multimodal_trip" style="background-color: #2975a7;"></i>
-				            <div  class="col timeline-msg">
-                                {{'msg_trip_multimodal' | translate}}
-                                <br>
-                                at 2.30 p.m.
-				            </div>
-                        </div>
-                    </div>
-                </div>
+                <ion-infinite-scroll ng-if="maybeMore" on-infinite="loadMore()"></ion-infinite-scroll>
             </div>
--->
-<!--
-            <div>
-                <div class="message-item">
-                    <div class="timeline-line">
-                    </div>
-                    <div class="timeline-dot"> <H5 class="timeline-day"> 03/06/2017</H5>
-                    </div>
-                    <div class="message-inner" style="border: 2px solid #60b35c">
-				        <div  class="timeline-arrow" style="border-right-color: #60b35c">
-                        </div>
-                        <div class="row" style="padding: 0px">
-                            <i class="col-center timeline-col icon ic_game_badge" style="background-color: #60b35c;"></i>
-				            <div  class="col timeline-msg">
-                                {{'msg_won_badge' | translate}}
-				            </div>
-                        </div>
-                    </div>
-                    <div class="message-inner"; style="border: 2px solid #3cbacf">
-				        <div class="timeline-arrow" style="border-right-color: #3cbacf">
-				        </div>
-                        <div class="row" style="padding: 0px">
-                            <i class="col-center timeline-col icon ic_game_classification" style="background-color: #3cbacf;"></i>
-				            <div  class="col timeline-msg">
-                                {{'msg_pub_ranking' | translate}}
-				            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
--->
-<!--
-            <div>
-                <div class="message-item">
-                    <div class="timeline-line">
-                    </div>
-                    <div class="timeline-dot"> <H5 class="timeline-day"> 02/06/2017</H5>
-                    </div>
-                    <div class="message-inner" style="border: 2px solid #922d67">
-				        <div  class="timeline-arrow" style="border-right-color: #922d67">
-                        </div>
-                        <div class="row" style="padding: 0px">
-                            <i class="col-center timeline-col icon ic_bike" style="background-color: #922d67;"></i>
-				            <div  class="col timeline-msg">
-                                {{'msg_trip_bike' | translate}}
-                                <br>
-                                at 2.30 p.m.
-				            </div>
-                        </div>
-                    </div>
-                    <div class="message-inner"; style="border: 2px solid #60b35c">
-				        <div class="timeline-arrow" style="border-right-color: #60b35c">
-				        </div>
-                        <div class="row" style="padding: 0px">
-                            <i class="col-center timeline-col icon ic_game_challenge" style="background-color: #60b35c;"></i>
-				            <div  class="col timeline-msg">
-                                {{'msg_won_challenge' | translate}}
-				            </div>
-                        </div>
-                    </div>
-                    <div class="message-inner" style="border: 2px solid #ea8817">
-				        <div  class="timeline-arrow" style="border-right-color: #ea8817">
-                        </div>
-                        <div class="row" style="padding: 0px">
-                            <i class="col-center timeline-col icon ic_urban-bus" style="background-color: #ea8817;"></i>
-				            <div  class="col timeline-msg">
-                                {{'msg_trip_bus' | translate}}
-                                <br>
-                                at 2.30 p.m.
-				            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-<!--            </div>-->
-
         </ion-scroll>
     </ion-content>
 </ion-view>
