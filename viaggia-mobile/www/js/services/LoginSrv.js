@@ -395,7 +395,7 @@ angular.module('viaggia.services.login', [])
         userService.validUserForGamification = function (profile) {
             var deferred = $q.defer();
             //check if user (profile.userId) is valid or not
-            var url = Config.getGamificationURL() + "/out/rest/checkuser/" + profile.userId;
+            var url = Config.getGamificationURL() + "/checkuser/" + profile.userId;
 
             $http.get(url).then(
                 function (response) {

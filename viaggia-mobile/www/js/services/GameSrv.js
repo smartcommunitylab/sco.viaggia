@@ -43,6 +43,27 @@ angular.module('viaggia.services.game', [])
         //         }
         //     ]
         // }
+        var filter = [
+            {
+                name: 'badge',
+                db: ['BADGE']
+            },
+            {
+                name: 'challenge',
+                db: ['CHALLENGE', 'CHALLENGE_WON']
+            },
+            {
+                name: 'trip',
+                db: ['TRAVEL']
+            }
+            , {
+                name: 'ranking',
+                db: ['RECOMMENDED']
+            },
+            {
+                name: 'allnotifications',
+                db: ['BADGE', 'CHALLENGE', 'CHALLENGE_WON', 'TRAVEL', 'RECOMMENDED']
+            }]
         var NOTIFICATIONS_MAPPING = {
             BADGE: {
                 string: "msg_won_badge",
@@ -305,13 +326,15 @@ angular.module('viaggia.services.game', [])
         gameService.getIcon = function (message) {
             return NOTIFICATIONS_MAPPING[message.type].icon;
         }
-         gameService.getString = function (message) {
+        gameService.getString = function (message) {
             return NOTIFICATIONS_MAPPING[message.type].string;
         }
         gameService.getNotificationTypes = function () {
             return NOTIFICATIONS_TYPES;
         }
-
+        gameService.getFilters = function () {
+            //to do
+        }
         gameService.getDiary = function (type, from, to) {
             var deferred = $q.defer();
             $http.get('data/messages.json').success(function (messages) {
@@ -353,45 +376,73 @@ angular.module('viaggia.services.game', [])
                 });
             return deferred.promise;
         }
+        //SERVER VERSION
+        // gameService.getStatistics = function (how, from, to) {
+        //     var deferred = $q.defer();
+        //     var returnValuee = {
+        //         "firstBefore": 1475186400000,
+        //         "firstAfter": 1478214000000,
+        //         "stats": []
+        //     };
+        //     userService.getValidToken().then(
+        //         function (token) {
+        //             $http({
+        //                 method: 'GET',
+        //                 url: Config.getGamificationURL() + '/status',
+        //                 headers: {
+        //                     'Authorization': 'Bearer ' + token,
+        //                     'appId': Config.getAppId(),
+        //                 },
+        //                 timeout: Config.getHTTPConfig().timeout
+        //             })
+        //                 .success(function (stats) {
+        //                     deferred.resolve(stats);
+        //                 })
 
-        gameService.getStatistics = function (how, from, to) {
-            var deferred = $q.defer();
-            var returnValuee = {
-                "firstBefore": 1475186400000,
-                "firstAfter": 1478214000000,
-                "stats": []
-            };
-            userService.getValidToken().then(
-                function (token) {
-                    //                    for (var i = 0; i < returnValue.stats.length; i++) {
-                    for (var i = returnValue.stats.length - 1; i > 0; i--) {
-                        if (returnValue.stats[i].from > from && returnValue.stats[i].to < to)
-                            returnValuee.stats.push(returnValue.stats[i]);
+        //                 .error(function (response) {
+        //                     deferred.reject(response);
+        //                 });
+        //             deferred.resolve(returnValuee);
+        //         });
+        //     return deferred.promise;
+        // }
+
+        //local version
+         gameService.getStatistics = function (how, from, to) {
+             var deferred = $q.defer();
+             var returnValuee = {
+                 "firstBefore": 1475186400000,
+                 "firstAfter": 1478214000000,
+                 "stats": []
+             };
+             userService.getValidToken().then(
+                 function (token) {
+                     //                    for (var i = 0; i < returnValue.stats.length; i++) {
+                     for (var i = returnValue.stats.length - 1; i > 0; i--) {
+                         if (returnValue.stats[i].from > from && returnValue.stats[i].to < to)
+                             returnValuee.stats.push(returnValue.stats[i]);
                     }
-
-                    //                if (returnValue.stats.length > to) {
-                    //                    for (var i = from; i < to; i++) {
-                    //                        returnValuee.stats.push(returnValue.stats[i]);
-                    //                    }
-                    //                } else {
-                    //                    for (var i = from; i < returnValue.stats.length; i++) {
-                    //                           returnValuee.stats.push(returnValue.stats[i]);
-                    //                    }
-                    //                }
-
-                    deferred.resolve(returnValuee);
-                    //                deferred.reject();
-                });
-            return deferred.promise;
-        }
+ 
+                     deferred.resolve(returnValuee);
+                     //                deferred.reject();
+                 });
+             return deferred.promise;
+         }
         /* get remote status */
         gameService.getStatus = function () {
             var deferred = $q.defer();
 
             userService.getValidToken().then(
                 function (token) {
-                    $http.get(Config.getGamificationURL() + '/out/rest/status' + '?token=' + token, Config.getHTTPConfig())
-
+                    $http({
+                        method: 'GET',
+                        url: Config.getGamificationURL() + '/status',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
                         .success(function (status) {
                             localStatus = status;
                             deferred.resolve(localStatus);
@@ -460,7 +511,7 @@ angular.module('viaggia.services.game', [])
                         config.params = {};
                     }
 
-                    config.params['token'] = token;
+                   // config.params['token'] = token;
 
                     if ((!!timestamp && timestamp < 0) || (!!start && start < 0) || (!!end && end < 1) || (!!start && !!end && end <= start)) {
                         deferred.reject();
@@ -478,8 +529,17 @@ angular.module('viaggia.services.game', [])
                         config.params['end'] = end;
                     }
 
-                    $http.get(Config.getGamificationURL() + '/out/rest/classification', config)
-
+                    //$http.get(Config.getGamificationURL() + '/classification', config)
+                    $http({
+                        method: 'GET',
+                        url: Config.getGamificationURL() + '/classification',
+                        params:config.params,
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
                         .success(function (ranking) {
                             localRanking = ranking;
                             deferred.resolve(localRanking);
