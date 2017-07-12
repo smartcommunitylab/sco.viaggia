@@ -294,7 +294,7 @@ angular.module('viaggia.controllers.login', [])
     $scope.$on('$ionicView.leave', function () {
         $ionicSideMenuDelegate.canDragContent(true);
         //$ionicLoading.hide();
-        if (window.cordova && window.cordova.plugins.screenorientation) {
+        if (window.cordova && window.cordova.plugins.screenorientation && screen.unlockOrientation) {
             screen.unlockOrientation()
         }
     });
@@ -319,7 +319,7 @@ angular.module('viaggia.controllers.login', [])
 
     $ionicPlatform.ready(function () {
         Config.init().then(function () {
-            if (window.cordova && window.cordova.plugins.screenorientation) {
+            if (window.cordova && window.cordova.plugins.screenorientation && screen.lockOrientation) {
                 screen.lockOrientation('portrait');
             }
 

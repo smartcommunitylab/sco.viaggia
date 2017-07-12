@@ -77,61 +77,70 @@ angular.module('viaggia.services.game', [])
                 string: "msg_trip_walk",
                 color: "#60b35c",
                 icon: "ic_foot",
-                params: ['time']
+                params: ['time'],
+                state: "showPlayAndGoPopup()"
             },
             TRAVEL_BIKE: {
                 string: "msg_trip_bike",
                 color: "#922d67",
                 icon: "ic_bike",
-                params: ['time']
+                params: ['time'],
+                state: "showPlayAndGoPopup()"
             },
             TRAVEL_BUS: {
                 string: "msg_trip_bus",
                 color: "#ea8817",
                 icon: "ic_urban-bus",
-                params: ['time']
+                params: ['time'],
+                state: "showPlayAndGoPopup()"
             },
             TRAVEL_TRAIN: {
                 string: "msg_trip_train",
                 color: "#cd251c",
                 icon: "ic_train",
-                params: ['time']
+                params: ['time'],
+                state: "showPlayAndGoPopup()"
             },
             TRAVEL_MULTIMODAL: {
                 string: "msg_trip_multimodal",
                 color: "#2975a7",
                 icon: "ic_game_multimodal_trip",
-                params: ['time']
+                params: ['time'],
+                state: "showPlayAndGoPopup()"
             },
             BADGE: {
                 string: "msg_won_badge",
                 color: "#60b35c",
                 icon: "ic_game_badge",
-                params: ['badge']
+                params: ['badge'],
+                state: "openGamificationBoard()"
             },
             CHALLENGE: {
                 string: "msg_won_challenge",
                 color: "#60b35c",
                 icon: "ic_game_challenge",
                 params: ['challengeName']
-
+                state: "openGamificationBoard()"
             },
             CHALLENGE_WON: {
                 string: "msg_new_challenge",
                 color: "#60b35c",
                 icon: "ic_game_challenge_assign",
                 params: ['challengeName']
+                state: "openGamificationBoard()"
 
             },
             RECOMMENDED: {
                 string: "msg_new_friend",
                 color: "#3cbacf",
-                icon: "ic_game_friend"
+                icon: "ic_game_friend",
+                state: "showPlayAndGoPopup()"
             },
             NEW_RANKING_WEEK: {
                 string: "msg_pub_ranking",
                 color: "#3cbacf",
-                icon: "ic_game_classification"
+                icon: "ic_game_classification",
+                state: "openGamificationBoard()"
             },
         }
         var returnValue = {
@@ -392,6 +401,12 @@ angular.module('viaggia.services.game', [])
                 message.type = getTravelType(message)
             }
             return NOTIFICATIONS_STYLES[message.type].string;
+        }
+        gameService.getState = function (message) {
+            if (message.type == 'TRAVEL') {
+                message.type = getTravelType(message)
+            }
+            return NOTIFICATIONS_STYLES[message.type].state;
         }
         gameService.getParams = function (message) {
             if (message.type == 'TRAVEL') {

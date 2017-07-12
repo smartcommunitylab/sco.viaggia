@@ -291,7 +291,8 @@ angular.module('viaggia.services.diaryDb', [])
                  params.push(type);
                  }
 
-                query = query + ' timestamp >= ? AND timestamp <= ? ORDER BY timestamp';
+
+                query = query + ' timestamp >= ? AND timestamp <= ? ORDER BY timestamp DESC';
                 params.push(from);
                 params.push(to);
 

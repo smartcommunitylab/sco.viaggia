@@ -26,7 +26,7 @@
                         <div class="timeline-dot">
                             <H5 class="timeline-day"> {{day.name}} </H5>
                         </div>
-                        <div ng-repeat="message in day.messages" class="message-inner" style=" border: 2px solid {{getStyleColor(message)}}">
+                        <div ng-repeat="message in day.messages"  ng-click="{{getState(message)}}" class="message-inner" style=" border: 2px solid {{getStyleColor(message)}}">
                             <div class="timeline-arrow" style="border-right-color: {{getStyleColor(message)}}">
                             </div>
                             <div class="row" style="padding: 0px">
