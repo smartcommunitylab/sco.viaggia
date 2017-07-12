@@ -16,12 +16,13 @@
                 </ion-list>
             </div>
         </div>
-        <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="statisticScroll">
+        <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="diaryScroll">
 <!--
         <div class="list"  style="margin-top: 25px">
             <div ng-repeat="notification in messages track by $index">
 -->
-            <div class="list" style="margin-top: 25px">
+<!--            <div class="list" style="margin-top: 25px">-->
+            <ion-list>
                 <div ng-repeat="day in days">
                     <div class="message-item">
                         <div class="timeline-line">
@@ -41,8 +42,8 @@
                         </div>
                     </div>
                 </div>
-                <ion-infinite-scroll ng-if="maybeMore" on-infinite="loadMore()"></ion-infinite-scroll>
-            </div>
+              <ion-infinite-scroll ng-if="maybeMore" on-infinite="loadMore()"></ion-infinite-scroll>
+            </ion-list>
         </ion-scroll>
     </ion-content>
 </ion-view>
