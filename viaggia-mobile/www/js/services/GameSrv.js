@@ -119,14 +119,14 @@ angular.module('viaggia.services.game', [])
                 string: "msg_won_challenge",
                 color: "#60b35c",
                 icon: "ic_game_challenge",
-                params: ['challengeName']
+                params: ['challengeName'],
                 state: "openGamificationBoard()"
             },
             CHALLENGE_WON: {
                 string: "msg_new_challenge",
                 color: "#60b35c",
                 icon: "ic_game_challenge_assign",
-                params: ['challengeName']
+                params: ['challengeName'],
                 state: "openGamificationBoard()"
 
             },

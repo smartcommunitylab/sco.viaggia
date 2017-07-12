@@ -401,20 +401,20 @@ angular.module('viaggia.controllers.game', [])
         }
 
         $scope.groupDays = function (notifications, $scope) {
-            $scope.days.push({name: String(notifications[0].timestamp), messages: notifications[0]})
-            for (var i = 0; i < notifications.length; i++) {
-                for (var j = 1; j < notifications.length; j++) {
-                    var time1 = notifications[i].timestamp
-                    var time2 = notifications[j].timestamp
-                    var msg1 = new Date(time1).setHours(0, 0, 0, 0);
-                    var msg2 = new Date(time2).setHours(0, 0, 0, 0);
-                        if (msg1 == msg2) {
-                            $scope.days[i].messages.push(notifications[j])
-                        } else {
-                            $scope.days.push({name: String(notifications[j].timestamp), messages: notifications[j]})
-                        }
+            $scope.days.push({ name: notifications[0].timestamp, messages: [notifications[0]] })
+            // for (var i = 0; i < notifications.length; i++) {
+            for (var j = 1; j < notifications.length; j++) {
+                var time1 = notifications[j].timestamp
+                var time2 = $scope.days[$scope.days.length - 1].name
+                var msg1 = new Date(time1).setHours(0, 0, 0, 0);
+                var msg2 = new Date(time2).setHours(0, 0, 0, 0);
+                if (msg1 == msg2) {
+                    $scope.days[$scope.days.length - 1].messages.push(notifications[j])
+                } else {
+                    $scope.days.push({ name: notifications[j].timestamp, messages: [notifications[j]] })
                 }
             }
+            // }
         }
 
 
@@ -424,52 +424,35 @@ angular.module('viaggia.controllers.game', [])
                 getDiary = true;
                 console.log("load done")
                 DiaryDbSrv.dbSetup().then(function () {
-                    // if ($scope.messages[0]) {
-                    //     var from = $scope.messages[0].timestamp - 2592000000;
-                    //     var to = $scope.messages[0].timestamp;
-                    //     var filter = GameSrv.getDbType($scope.filter.selected)
-                    //     // DiaryDbSrv.readEvents(filter, 1455800361943, 1476269822849).then(function (notifications) {
-                    //     DiaryDbSrv.readEvents(filter, from, to).then(function (notifications) {
-                    //         $scope.singleDiaryStatus = true;
-                    //         $scope.messages = $scope.messages.concat(notifications);
-                    //         $scope.days = [{
-                    //             name: "today",
-                    //             messages: $scope.messages
-                    //         }];
+                    if ($scope.messages[0]) {
+                        // var from = $scope.messages[0].timestamp - 2592000000;
+                        // var to = $scope.messages[0].timestamp;
+                        // var filter = GameSrv.getDbType($scope.filter.selected)
+                        // // DiaryDbSrv.readEvents(filter, 1455800361943, 1476269822849).then(function (notifications) {
+                        // DiaryDbSrv.readEvents(filter, from, to).then(function (notifications) {
+                        //     $scope.singleDiaryStatus = true;
+                        //     $scope.messages = $scope.messages.concat(notifications);
+                        //     $scope.days = [{
+                        //         name: "today",
+                        //         messages: $scope.messages
+                        //     }];
 
-                    //         if ($scope.messages[$scope.messages.length - 1].timestamp < 1468159804000) {
-                    //             $scope.maybeMore = false;
-                    //         }
+                        //     if ($scope.messages[$scope.messages.length - 1].timestamp < 1468159804000) {
+                        //         $scope.maybeMore = false;
+                        //     }
 
-                    var from=$scope.messages[0].timestamp-2592000000;
-                    var to=$scope.messages[0].timestamp;
-                    var filter = GameSrv.getDbType($scope.filter.selected)
-                    // DiaryDbSrv.readEvents(filter, 1455800361943, 1476269822849).then(function (notifications) {
-                    DiaryDbSrv.readEvents(filter, from, to).then(function (notifications) {
-                        $scope.singleDiaryStatus = true;
-                        $scope.groupDays(notifications, $scope)
+                        var from = $scope.messages[0].timestamp - 2592000000;
+                        var to = $scope.messages[0].timestamp;
+                        var filter = GameSrv.getDbType($scope.filter.selected)
+                        // DiaryDbSrv.readEvents(filter, 1455800361943, 1476269822849).then(function (notifications) {
+                        DiaryDbSrv.readEvents(filter, from, to).then(function (notifications) {
+                            $scope.singleDiaryStatus = true;
+                            $scope.groupDays(notifications, $scope)
 
-                        $scope.messages = notifications;
-//                        $scope.days = [{
-//                            name: "today",
-//                            messages: $scope.messages
-//                        },
-//                                      {
-//                            name: "yesterday",
-//                            messages: $scope.messages
-//                        }];
-
-                        if ($scope.messages[$scope.messages.length - 1].timestamp < 1468159804000) {
-                            $scope.maybeMore = false;
-                        }
-                        $scope.$broadcast('scroll.infiniteScrollComplete');
-                        $scope.singleDiaryStatus = true;
-                        Config.loaded();
-                        getDiary = false;
-                    },
-                        function (err) {
-                            $scope.maybeMore = true;
-                            Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                            $scope.messages = notifications;
+                            if ($scope.messages[$scope.messages.length - 1].timestamp < 1468159804000) {
+                                $scope.maybeMore = false;
+                            }
                             $scope.$broadcast('scroll.infiniteScrollComplete');
                             $scope.singleDiaryStatus = true;
                             Config.loaded();
@@ -479,14 +462,15 @@ angular.module('viaggia.controllers.game', [])
                                 $scope.maybeMore = true;
                                 Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
                                 $scope.$broadcast('scroll.infiniteScrollComplete');
+                                $scope.singleDiaryStatus = true;
+                                Config.loaded();
                                 getDiary = false;
-                                $scope.singleDiaryStatus = false;
                             });
                     } else {
                         $scope.$broadcast('scroll.infiniteScrollComplete');
-                         $scope.singleDiaryStatus = true;
-                         Config.loaded();
-                         getDiary = false;
+                        $scope.singleDiaryStatus = true;
+                        Config.loaded();
+                        getDiary = false;
                     }
                 });
 
