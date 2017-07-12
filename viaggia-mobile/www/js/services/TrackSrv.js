@@ -1,13 +1,13 @@
 angular.module('viaggia.services.tracking', [])
-    .factory('trackService', function (Config, $q, $http, $state, $timeout, $filter, storageService,userService, $ionicPlatform, $ionicPopup, $rootScope, Utils, GeoLocate) {
+    .factory('trackService', function (Config, $q, $http, $state, $timeout, $filter, storageService, userService, $ionicPlatform, $ionicPopup, $rootScope, Utils, GeoLocate) {
         //var trackingIntervalInMs = 500;
         //var accelerationDetectionIntervalInMs = 500;
         //var accelerationSensorDelay = 0;
         //var minimumAccuracyInMeter = 100;
         var trackService = {};
         var bgGeo = {};
-        var appVersion = function() {
-          return Config.getVersion();
+        var appVersion = function () {
+            return Config.getVersion();
         };
         var refreshCallback = null;
         var ACCURACY = 100;
@@ -91,12 +91,11 @@ angular.module('viaggia.services.tracking', [])
             info.trackingStatus = status;
             //add version of application
             info.appVersion = appVersion();
-            var url="";
-            if (transportType){
+            var url = "";
+            if (transportType) {
                 url = (Config.getServerURL() + '/gamification/freetracking/' + transportType + '/' + tripId);
-            } else if (!tripId.indexOf("temporary")!=-1)
-            {
-                url=(Config.getServerURL() + '/gamification/journey/' + tripId)
+            } else if (tripId.indexOf("temporary") == -1) {
+                url = (Config.getServerURL() + '/gamification/journey/' + tripId)
             }
             else {
                 url = (Config.getServerURL() + '/gamification/temporary')
@@ -108,15 +107,15 @@ angular.module('viaggia.services.tracking', [])
                 method: 'PUT',
                 url: url,
                 data: {
-                     clientId: tripId,
-                     appId:Config.getAppId(),
-                     userId:storageService.getUser().userId,
-                     data:trip
+                    clientId: tripId,
+                    appId: Config.getAppId(),
+                    userId: storageService.getUser().userId,
+                    data: trip
                 },
                 headers: {
                     'Authorization': 'Bearer ' + token,
                     'appId': Config.getAppId(),
-                    'deviceInfo':info
+                    'deviceInfo': info
                 },
                 timeout: Config.getHTTPConfig().timeout
             }).success(function () {
@@ -125,7 +124,7 @@ angular.module('viaggia.services.tracking', [])
                 console.log(err)
                 deferred.reject(false);
             });
-            return deferred;
+            return deferred.promise;;
 
         }
 
@@ -134,46 +133,46 @@ angular.module('viaggia.services.tracking', [])
          *
          */
         trackService.checkLocalization = function () {
-                var deferred = $q.defer();
-                hasLocationPermission(function (status) {
-                    if (!status) {
-                        deferred.reject(Config.getErrorGPSNoSignal());
-                        return;
-                    }
-                    //check gps and accuracy
-                    bgGeo.getCurrentPosition(function (location, taskId) {
-                        if (location.coords.accuracy > ACCURACY) {
-                            deferred.reject(Config.getErrorLowAccuracy());
-                        } else {
-                            deferred.resolve(location.coords.accuracy);
+            var deferred = $q.defer();
+            hasLocationPermission(function (status) {
+                if (!status) {
+                    deferred.reject(Config.getErrorGPSNoSignal());
+                    return;
+                }
+                //check gps and accuracy
+                bgGeo.getCurrentPosition(function (location, taskId) {
+                    if (location.coords.accuracy > ACCURACY) {
+                        deferred.reject(Config.getErrorLowAccuracy());
+                    } else {
+                        deferred.resolve(location.coords.accuracy);
 
-                        }
-                    }, function (errorCode) {
-                        console.log(errorCode);
-                        //if 0,1 -> GPS off
-                        deferred.reject(Config.getErrorGPSNoSignal());
-                        //deferred.reject(errorCode);
-                    }, {
+                    }
+                }, function (errorCode) {
+                    console.log(errorCode);
+                    //if 0,1 -> GPS off
+                    deferred.reject(Config.getErrorGPSNoSignal());
+                    //deferred.reject(errorCode);
+                }, {
                         timeout: 10, // 10 seconds timeout to fetch location
                         maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
                     });
-                });
-                return deferred.promise;
-            }
-            /**
-             * check if the specified trip is currently tracked
-             */
+            });
+            return deferred.promise;
+        }
+        /**
+         * check if the specified trip is currently tracked
+         */
         trackService.isThisTheJourney = function (tripId) {
-                if (localStorage.getItem(Config.getAppId() + '_tripId') == tripId) {
-                    return true;
-                }
-                return false;
+            if (localStorage.getItem(Config.getAppId() + '_tripId') == tripId) {
+                return true;
             }
-            /**
-             * If the specified trip tracking is available for tracking: non recurrent is available on its
-             * specified day, recurrent - on any day corresponding to the recurrency information.
-             * If already tracked for the day, then is not available
-             */
+            return false;
+        }
+        /**
+         * If the specified trip tracking is available for tracking: non recurrent is available on its
+         * specified day, recurrent - on any day corresponding to the recurrency information.
+         * If already tracked for the day, then is not available
+         */
         trackService.isAvailableForDay = function (tripId) {
             var date = new Date();
             date.setHours(0, 0, 0, 0);
@@ -245,11 +244,11 @@ angular.module('viaggia.services.tracking', [])
                 var tripId = transport + '_' + ts;
                 // default duration set to 1 month
                 trackService.start(tripId, {
-                        data: {
-                            startime: ts,
-                            endtime: ts + 2 * 24 * 60 * 60 * 1000
-                        }
-                    }, null)
+                    data: {
+                        startime: ts,
+                        endtime: ts + 2 * 24 * 60 * 60 * 1000
+                    }
+                }, null)
                     .then(function () {
                         deferred.resolve();
                     }, function (errorCode) {
@@ -267,11 +266,11 @@ angular.module('viaggia.services.tracking', [])
             if (trackService.trackingIsGoingOn() && !trackService.trackingIsFinished()) {
                 deferred.resolve();
             } else {
-                trip.tripId=tripId;
+                trip.tripId = tripId;
                 localStorage.setItem(Config.getAppId() + '_temporary', JSON.stringify(trip));
-                trackService.start(tripId,{
-                    data:trip
-                    }
+                trackService.start(tripId, {
+                    data: trip
+                }
                     , callback)
                     .then(function () {
                         deferred.resolve();
@@ -300,16 +299,16 @@ angular.module('viaggia.services.tracking', [])
                 var realTripLocs = [];
                 var prev = null;
                 if (tripLocs.length > 0) {
-                  realTripLocs.push(tripLocs[tripLocs.length - 1]);
-                  prev = tripLocs[tripLocs.length - 1].timestamp;
+                    realTripLocs.push(tripLocs[tripLocs.length - 1]);
+                    prev = tripLocs[tripLocs.length - 1].timestamp;
                 }
                 for (var i = tripLocs.length - 2; i >= 0; i--) {
-                  if (tripLocs[i].timestamp > prev) {
-                    console.log('inversion!!!!!');
-                  } else {
-                    realTripLocs.push(tripLocs[i]);
-                    prev = tripLocs[i].timestamp;
-                  }
+                    if (tripLocs[i].timestamp > prev) {
+                        console.log('inversion!!!!!');
+                    } else {
+                        realTripLocs.push(tripLocs[i]);
+                        prev = tripLocs[i].timestamp;
+                    }
                 }
 
                 tripLocs = realTripLocs;
@@ -459,33 +458,44 @@ angular.module('viaggia.services.tracking', [])
                             //                                deferred.reject(); //check if reject for good cases
                             //                                return;
                             //                            }
-                            sendServerStart(trip.data, idTrip, token, transportType, -1);
-                            location.extras = {
-                                idTrip: idTrip,
-                                start: startTimestamp,
-                                transportType: transportType
-                            }; // <-- add some arbitrary extras-data
-                            //                      // Insert it.
-                            bgGeo.insertLocation(location, function () {
-                                bgGeo.finish(taskId);
-                            });
-                            deferred.resolve();
+                            sendServerStart(trip.data, idTrip, token, transportType, -1).then(function () {
+                                location.extras = {
+                                    idTrip: idTrip,
+                                    start: startTimestamp,
+                                    transportType: transportType
+                                }; // <-- add some arbitrary extras-data
+                                //                      // Insert it.
+                                bgGeo.insertLocation(location, function () {
+                                    bgGeo.finish(taskId);
+                                });
+                                deferred.resolve();
+                            }, function (err) {
+                                //in case of temporary journey, if start doesn't arrive, stop it
+                                if (idTrip.indexOf("temporary") != -1) {
+                                    bgGeo.stop();
+                                    clean();
+                                    deferred.reject("temporary");
+                                }
+                                else {
+                                    deferred.resolve();
+                                }
+                            })
+
                         }, function (errorCode) {
                             bgGeo.stop();
-                            //sendServerStart(idTrip, token, transportType, errorCode);
                             clean();
                             deferred.reject(errorCode);
                         }, {
-                            timeout: 10, // 10 seconds timeout to fetch location
-                            maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
-                            //minimumAccuracy: ACCURACY,
-                            desiredAccuracy: ACCURACY, // Fetch a location with a minimum accuracy of ACCURACY meters.
-                            extras: {
-                                idTrip: idTrip,
-                                start: startTimestamp,
-                                transportType: transportType
-                            }
-                        });
+                                timeout: 10, // 10 seconds timeout to fetch location
+                                maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
+                                //minimumAccuracy: ACCURACY,
+                                desiredAccuracy: ACCURACY, // Fetch a location with a minimum accuracy of ACCURACY meters.
+                                extras: {
+                                    idTrip: idTrip,
+                                    start: startTimestamp,
+                                    transportType: transportType
+                                }
+                            });
                     } else {
                         deferred.resolve();
                     }
@@ -650,11 +660,11 @@ angular.module('viaggia.services.tracking', [])
 
 
         trackService.cleanTracking = function () {
-                clean();
-            }
-            /**
-             * Return type of transport used for direct tracking (if any)
-             */
+            clean();
+        }
+        /**
+         * Return type of transport used for direct tracking (if any)
+         */
         trackService.trackedTransport = function () {
             return localStorage.getItem(Config.getAppId() + '_trackedTransport');
         }
@@ -670,15 +680,15 @@ angular.module('viaggia.services.tracking', [])
          * Return true if tracking is currently goes on according to the state recorded.
          */
         trackService.trackingIsGoingOn = function () {
-                //check local storage is tracking
-                if (localStorage.getItem(Config.getAppId() + '_state') != null) {
-                    return true;
-                }
-                return false;
+            //check local storage is tracking
+            if (localStorage.getItem(Config.getAppId() + '_state') != null) {
+                return true;
             }
-            /**
-             * This callback will be executed every time a geolocation is recorded in the background.
-             */
+            return false;
+        }
+        /**
+         * This callback will be executed every time a geolocation is recorded in the background.
+         */
         var callbackFn = function () {
             console.log('[js] BackgroundGeoLocation configure callback');
         };
@@ -709,14 +719,31 @@ angular.module('viaggia.services.tracking', [])
                     {
                         text: $filter('translate')("btn_close"),
                         type: 'button-custom'
-                }
-            ]
+                    }
+                ]
             });
             alert.then(function (e) {
                 trackService.startup();
             });
         }
-
+        /**
+         * Popup to show in case no geolocation options are available
+         */
+        trackService.noStartPopup = function () {
+            var alert = $ionicPopup.alert({
+                title: $filter('translate')("pop_up_no_start_title"),
+                template: $filter('translate')("pop_up_no_start_template"),
+                buttons: [
+                    {
+                        text: $filter('translate')("btn_close"),
+                        type: 'button-custom'
+                    }
+                ]
+            });
+            alert.then(function (e) {
+                trackService.startup();
+            });
+        }
         /**
          * Popup to show in case permission has been disabled during a record of a track
          */
@@ -729,8 +756,8 @@ angular.module('viaggia.services.tracking', [])
                     {
                         text: $filter('translate')("btn_close"),
                         type: 'button-custom'
-                }
-            ]
+                    }
+                ]
             });
             alert.then(function (e) {
                 trackService.startup();
@@ -813,62 +840,62 @@ angular.module('viaggia.services.tracking', [])
                     }
                     if (cordova && cordova.plugins && cordova.plugins.notification && notifArray) {
                         switch (action) {
-                        case "create":
-                            cordova.plugins.notification.local.schedule(notifArray);
-                            //console.log(JSON.stringify(notifArray))
-                            //                            cordova.plugins.notification.local.getAll(function (notifications) {
-                            //                                console.log(JSON.stringify(notifications))
-                            //                            });
-                            cordova.plugins.notification.local.on("click", function (notification) {
-                                JSON.stringify(notification);
-                                $state.go("app.tripdetails", {
-                                    tripId: JSON.parse(notification.data).tripId
-                                })
-                            });
-                            break;
-                        case "delete":
+                            case "create":
+                                cordova.plugins.notification.local.schedule(notifArray);
+                                //console.log(JSON.stringify(notifArray))
+                                //                            cordova.plugins.notification.local.getAll(function (notifications) {
+                                //                                console.log(JSON.stringify(notifications))
+                                //                            });
+                                cordova.plugins.notification.local.on("click", function (notification) {
+                                    JSON.stringify(notification);
+                                    $state.go("app.tripdetails", {
+                                        tripId: JSON.parse(notification.data).tripId
+                                    })
+                                });
+                                break;
+                            case "delete":
 
-                            //get id from notifyarray
-                            //                                var indexNotify = [];
-                            //                                for (var i = 0; i < notifArray.length; i++) {
-                            //                                    indexNotify.push(notifArray[i].id);
-                            //
-                            //                                }
-                            //                                //erase all notifications and recreate
-                            //
-                            //                                cordova.plugins.notification.local.getAll(function (notifications) {
-                            //                                    cordova.plugins.notification.local.cancel(indexNotify, function () {
-                            //                                        cordova.plugins.notification.local.getAll(function (notifications) {
-                            //                                            console.log("done");
-                            //                                        });
-                            //
-                            //                                    });
-                            //                                });
+                                //get id from notifyarray
+                                //                                var indexNotify = [];
+                                //                                for (var i = 0; i < notifArray.length; i++) {
+                                //                                    indexNotify.push(notifArray[i].id);
+                                //
+                                //                                }
+                                //                                //erase all notifications and recreate
+                                //
+                                //                                cordova.plugins.notification.local.getAll(function (notifications) {
+                                //                                    cordova.plugins.notification.local.cancel(indexNotify, function () {
+                                //                                        cordova.plugins.notification.local.getAll(function (notifications) {
+                                //                                            console.log("done");
+                                //                                        });
+                                //
+                                //                                    });
+                                //                                });
 
-                            break;
-                        case "modify":
-                            //clear with id and add new
-                            var indexNotify = [];
-                            for (var i = 0; i < notifArray.length; i++) {
-                                indexNotify.push(notifArray[i].id);
+                                break;
+                            case "modify":
+                                //clear with id and add new
+                                var indexNotify = [];
+                                for (var i = 0; i < notifArray.length; i++) {
+                                    indexNotify.push(notifArray[i].id);
 
-                            }
-                            //                            cordova.plugins.notification.local.getAll(function (notifications) {
-                            //                                cordova.plugins.notification.local.cancel(indexNotify, function () {
-                            //                                    cordova.plugins.notification.local.getAll(function (notifications) {
-                            cordova.plugins.notification.local.schedule(notifArray);
-                            cordova.plugins.notification.local.on("click", function (notification) {
-                                JSON.stringify(notification);
-                                $state.go("app.tripdetails", {
-                                    tripId: JSON.parse(notification.data).tripId
-                                })
-                            });
-                            //                                    });
-                            //
-                            //                                });
-                            //                            });
+                                }
+                                //                            cordova.plugins.notification.local.getAll(function (notifications) {
+                                //                                cordova.plugins.notification.local.cancel(indexNotify, function () {
+                                //                                    cordova.plugins.notification.local.getAll(function (notifications) {
+                                cordova.plugins.notification.local.schedule(notifArray);
+                                cordova.plugins.notification.local.on("click", function (notification) {
+                                    JSON.stringify(notification);
+                                    $state.go("app.tripdetails", {
+                                        tripId: JSON.parse(notification.data).tripId
+                                    })
+                                });
+                                //                                    });
+                                //
+                                //                                });
+                                //                            });
 
-                            break;
+                                break;
                         }
 
                     }
@@ -1000,4 +1027,4 @@ angular.module('viaggia.services.tracking', [])
 
 
 
-;
+    ;

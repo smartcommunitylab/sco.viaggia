@@ -1,6 +1,6 @@
 angular.module('viaggia.services.game', [])
 
-    .factory('GameSrv', function ($q, $http, Config, userService) {
+    .factory('GameSrv', function ($q, $http, $filter, Config, userService) {
         var gameService = {};
 
         var localStatus = null;
@@ -113,14 +113,14 @@ angular.module('viaggia.services.game', [])
                 string: "msg_won_challenge",
                 color: "#60b35c",
                 icon: "ic_game_challenge",
-                params: ['challengeName', 'challengeEnd', 'challengeBonus']
+                params: ['challengeName']
 
             },
             CHALLENGE_WON: {
                 string: "msg_new_challenge",
                 color: "#60b35c",
                 icon: "ic_game_challenge_assign",
-                params: ['challengeName', 'challengeBonus']
+                params: ['challengeName']
 
             },
             RECOMMENDED: {
@@ -339,8 +339,19 @@ angular.module('viaggia.services.game', [])
                 return 'TRAVEL_' + event.travelModes[0].toUpperCase()
         }
         createParamString = function (message) {
-             var event = JSON.parse(message.event);
-        return '{'+NOTIFICATIONS_STYLES[message.type].params+':"'+event[NOTIFICATIONS_STYLES[message.type].params]+'"}'
+            var event = JSON.parse(message.event);
+            // var string = '{';
+            // for (let i = 0; i < NOTIFICATIONS_STYLES[message.type].params.length; i++) {
+            //     if (NOTIFICATIONS_STYLES[message.type].params[i])
+            //         string = string + NOTIFICATIONS_STYLES[message.type].params[i] + ':"' + event[NOTIFICATIONS_STYLES[message.type].params[i]]
+            //         if (NOTIFICATIONS_STYLES[message.type].params[i+1])
+            //         string=string+',';
+            // }
+            // string = string + '"}'
+            // return string;
+            if (NOTIFICATIONS_STYLES[message.type].params == 'time')
+                return '{' + NOTIFICATIONS_STYLES[message.type].params + ':"' + $filter('date')(event['timestamp'], 'dd/MM/yyyy  h:mma') + '"}'
+            else return '{' + NOTIFICATIONS_STYLES[message.type].params + ':"' + event[NOTIFICATIONS_STYLES[message.type].params] + '"}'
         }
 
         var ServerHow = {
@@ -386,7 +397,7 @@ angular.module('viaggia.services.game', [])
             if (message.type == 'TRAVEL') {
                 message.type = getTravelType(message)
             }
-           
+
             return createParamString(message);
             // return '{badgename:"'+event[NOTIFICATIONS_STYLES[message.type].params]+'"}';
             // '{time: "2.30 p.m."}'

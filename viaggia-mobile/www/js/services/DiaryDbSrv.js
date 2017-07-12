@@ -266,7 +266,8 @@ angular.module('viaggia.services.diaryDb', [])
                 if (!result) {
                     installDB().then(success, err);
                 } else {
-                    synchDB().then(success, err);
+                    deferred.resolve(true);
+                  //  synchDB().then(success, err);
                 }
             }, err);
             return deferred.promise;
@@ -290,7 +291,7 @@ angular.module('viaggia.services.diaryDb', [])
                  params.push(type);
                  }
 
-                query = query + ' timestamp >= ? AND timestamp <= ?';
+                query = query + ' timestamp >= ? AND timestamp <= ? ORDER BY timestamp';
                 params.push(from);
                 params.push(to);
 

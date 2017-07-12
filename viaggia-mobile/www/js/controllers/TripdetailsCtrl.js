@@ -372,7 +372,7 @@ angular.module('viaggia.controllers.tripdetails', [])
          *****************************************************/
         var startTrack = function () {
             if (!$scope.tripId) {
-                $scope.tripId = new Date().getTime() + "_planned_" + storageService.getUser().userId;
+                $scope.tripId = new Date().getTime() + "_temporary_" + storageService.getUser().userId;
                 trackService.startTemporary($scope.tripId, $scope.trip, refreshTripDetail)
                     .then(function () {
                         $scope.modifiable = false;
