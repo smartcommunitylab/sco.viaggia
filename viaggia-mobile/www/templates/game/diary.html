@@ -17,12 +17,8 @@
             </div>
         </div>
         <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="diaryScroll">
-<!--
-        <div class="list"  style="margin-top: 25px">
-            <div ng-repeat="notification in messages track by $index">
--->
-<!--            <div class="list" style="margin-top: 25px">-->
-            <ion-list>
+            <!--<div class="list" style="margin-top: 25px">-->
+                <ion-list>
                 <div ng-repeat="day in days">
                     <div class="message-item">
                         <div class="timeline-line">
@@ -30,19 +26,19 @@
                         <div class="timeline-dot">
                             <H5 class="timeline-day"> {{day.name}} </H5>
                         </div>
-                        <div ng-repeat="message in day.messages" class="message-inner" style=" border: 2px solid {{getStyleColor(message)}}">
+                        <div ng-repeat="message in day.messages"  ng-click="{{getState(message)}}" class="message-inner" style=" border: 2px solid {{getStyleColor(message)}}">
                             <div class="timeline-arrow" style="border-right-color: {{getStyleColor(message)}}">
                             </div>
                             <div class="row" style="padding: 0px">
                                 <i class="col-center timeline-col icon {{getIcon(message)}}" style="background-color: {{getStyleColor(message)}}"></i>
                                 <div class="col timeline-msg">
-                                    {{getString(message) | translate: '{time: "2.30 p.m."}'}}
+                                    {{getString(message) | translate: getParams(message)}}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-              <ion-infinite-scroll ng-if="maybeMore" on-infinite="loadMore()"></ion-infinite-scroll>
+                <ion-infinite-scroll ng-if="maybeMore" on-infinite="loadMore()"></ion-infinite-scroll>
             </ion-list>
         </ion-scroll>
     </ion-content>

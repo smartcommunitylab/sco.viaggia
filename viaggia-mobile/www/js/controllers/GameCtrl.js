@@ -24,7 +24,7 @@ angular.module('viaggia.controllers.game', [])
                 );
             },
             function (err) {
-                $scope.noStatus = true;serverhow
+                $scope.noStatus = true; serverhow
                 Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
             }
         ).finally(Config.loaded);
@@ -157,8 +157,6 @@ angular.module('viaggia.controllers.game', [])
     })
     .controller('StatisticsCtrl', function ($scope, $ionicScrollDelegate, $window, $filter, $timeout, Toast, Config, GameSrv, $ionicLoading) {
         $scope.stats = [];
-        //$scope.statistics = []
-        //$scope.maxStat = 0;
         $scope.maybeMore = true;
         var getStatistics = false;
         $scope.statsPerPage = 5;
@@ -211,11 +209,11 @@ angular.module('viaggia.controllers.game', [])
         }
 
 
-//        GameSrv.getServerHow($scope.filter.selected).then(
-//            function (serverhowstring){
-                $scope.serverhow = GameSrv.getServerHow($scope.filter.selected);
-//                }
-//        );
+        //        GameSrv.getServerHow($scope.filter.selected).then(
+        //            function (serverhowstring){
+        $scope.serverhow = GameSrv.getServerHow($scope.filter.selected);
+        //                }
+        //        );
 
         //
         //
@@ -294,7 +292,7 @@ angular.module('viaggia.controllers.game', [])
                 var x = temporanea - $scope.valbefore;
                 var from = x;
                 var to = $scope.stats != null ? $scope.nextStat : new Date().getTime();
-//                GameSrv.getStatistics($scope.filter.selected, from, to).then(
+                //                GameSrv.getStatistics($scope.filter.selected, from, to).then(
                 GameSrv.getStatistics($scope.serverhow, from, to).then(
                     function (statistics) {
                         $scope.stats = $scope.stats.concat(statistics.stats);
@@ -336,7 +334,7 @@ angular.module('viaggia.controllers.game', [])
         $scope.init = function () {
             $scope.findbefore();
             var x = new Date().getTime() - $scope.valbefore;
-//            GameSrv.getStatistics($scope.filter.selected,  x, new Date().getTime()).then(function (statistics) {
+            //            GameSrv.getStatistics($scope.filter.selected,  x, new Date().getTime()).then(function (statistics) {
             GameSrv.getStatistics($scope.serverhow, x, new Date().getTime()).then(function (statistics) {
                 $scope.singleStatStatus = true;
                 $scope.stats = statistics.stats;
@@ -356,13 +354,11 @@ angular.module('viaggia.controllers.game', [])
 
     })
 
-    .controller('DiaryCtrl', function ($scope, GameSrv, $ionicScrollDelegate, DiaryDbSrv,Toast, Config, $ionicLoading) {
-        $scope.maybeMore = true;
-        var getDiary = true;
-        $scope.singleDiaryStatus = true;
+    .controller('DiaryCtrl', function ($scope, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config, $ionicLoading) {
         $scope.messages = [];
-
-
+        $scope.maybeMore = true;
+        var getDiary = false;
+        $scope.singleDiaryStatus = true;
         $scope.filter = {
             open: false,
             toggle: function () {
@@ -398,43 +394,70 @@ angular.module('viaggia.controllers.game', [])
             $scope.showLoading()
             $scope.maybeMore = true;
             $scope.singleDiaryStatus = true;
-            $ionicScrollDelegate.$getByHandle('statisticScroll').scrollTop();
+            $ionicScrollDelegate.$getByHandle('diaryScroll').scrollTop();
             $scope.init()
             Config.loaded();
 
         }
 
-            $scope.loadMore = function () {
+        $scope.groupDays = function (notifications, $scope) {
+            $scope.days.push({name: String(notifications[0].timestamp), messages: notifications[0]})
+            for (var i = 0; i < notifications.length; i++) {
+                for (var j = 1; j < notifications.length; j++) {
+                    var time1 = notifications[i].timestamp
+                    var time2 = notifications[j].timestamp
+                    var msg1 = new Date(time1).setHours(0, 0, 0, 0);
+                    var msg2 = new Date(time2).setHours(0, 0, 0, 0);
+                        if (msg1 == msg2) {
+                            $scope.days[i].messages.push(notifications[j])
+                        } else {
+                            $scope.days.push({name: String(notifications[j].timestamp), messages: notifications[j]})
+                        }
+                }
+            }
+        }
+
+
+
+        $scope.loadMore = function () {
             if (!getDiary) {
                 getDiary = true;
                 console.log("load done")
                 DiaryDbSrv.dbSetup().then(function () {
-                var x = new Date().getTime() - 2592000000;
-                var filter = GameSrv.getDbType($scope.filter.selected)
-                DiaryDbSrv.readEvents(filter, 1455800361943, 1476269822849).then(function (notifications) {
-                    $scope.singleDiaryStatus = true;
-                    $scope.messages = $scope.messages.concat(notifications);
-                    $scope.days = [{
-                        name: "today",
-                        messages: $scope.messages
-                    }];
+                    var from=$scope.messages[0].timestamp-2592000000;
+                    var to=$scope.messages[0].timestamp;
+                    var filter = GameSrv.getDbType($scope.filter.selected)
+                    // DiaryDbSrv.readEvents(filter, 1455800361943, 1476269822849).then(function (notifications) {
+                    DiaryDbSrv.readEvents(filter, from, to).then(function (notifications) {
+                        $scope.singleDiaryStatus = true;
+                        $scope.groupDays(notifications, $scope)
 
-//                    if ( $scope.messages[$scope.messages.length-1].timestamp < 1468159804000) {
-//                        $scope.maybeMore = false;
-//                    }
-                    $scope.$broadcast('scroll.infiniteScrollComplete');
-                    $scope.singleDiaryStatus = true;
-                    Config.loaded();
-                    getDiary = false;
-                },
-                    function (err) {
-                    $scope.maybeMore = true;
-                    Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
-                    $scope.$broadcast('scroll.infiniteScrollComplete');
-                    getDiary = false;
-                    $scope.singleDiaryStatus = false;
-                    });
-                 });
+                        $scope.messages = notifications;
+//                        $scope.days = [{
+//                            name: "today",
+//                            messages: $scope.messages
+//                        },
+//                                      {
+//                            name: "yesterday",
+//                            messages: $scope.messages
+//                        }];
+
+                        if ($scope.messages[$scope.messages.length - 1].timestamp < 1468159804000) {
+                            $scope.maybeMore = false;
+                        }
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
+                        $scope.singleDiaryStatus = true;
+                        Config.loaded();
+                        getDiary = false;
+                    },
+                        function (err) {
+                            $scope.maybeMore = true;
+                            Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                            $scope.$broadcast('scroll.infiniteScrollComplete');
+                            getDiary = false;
+                            $scope.singleDiaryStatus = false;
+                        });
+                });
             }
         };
 
@@ -447,13 +470,22 @@ angular.module('viaggia.controllers.game', [])
         $scope.getString = function (message) {
             return GameSrv.getString(message);
         }
+        $scope.getState = function (message) {
+            return GameSrv.getState(message)
+        }
+        $scope.getParams = function (message) {
+            return GameSrv.getParams(message);
+        }
         $scope.init = function () {
             DiaryDbSrv.dbSetup().then(function () {
                 var x = new Date().getTime() - 2592000000;
                 //GameSrv.getDiary($scope.filter.selected,  x, new Date().getTime()).then(function (notifications) {
                 var filter = GameSrv.getDbType($scope.filter.selected)
-                DiaryDbSrv.readEvents(filter, 1455800361943, 1476269822849).then(function (notifications) {
+                // DiaryDbSrv.readEvents(filter, 1455800361943, 1476269822849).then(function (notifications) {
+                DiaryDbSrv.readEvents(filter, x, new Date().getTime()).then(function (notifications) {
                     $scope.singleDiaryStatus = true;
+                    $scope.days = []
+                    $scope.groupDays(notifications, $scope)
                     $scope.messages = notifications;
                     $scope.days = [{
                         name: "today",
@@ -464,6 +496,25 @@ angular.module('viaggia.controllers.game', [])
 
         }
         $scope.init();
+        /* Resize ion-scroll */
+        $scope.rankingStyle = {};
+
+        var generateRankingStyle = function () {
+            // header 44, tabs 49, filter 44, listheader 44, my ranking 48
+            $scope.rankingStyle = {
+                'height': window.innerHeight - (44 + 44) + 'px'
+            };
+            $ionicScrollDelegate.$getByHandle('rankingScroll').resize();
+        };
+
+        generateRankingStyle();
+
+        $window.onresize = function (event) {
+            // Timeout required for our purpose
+            $timeout(function () {
+                generateRankingStyle();
+            }, 200);
+        };
     })
 
     .controller('RankingsCtrl', function ($scope, $ionicScrollDelegate, $window, $timeout, Config, GameSrv, Toast, $filter, $ionicPosition) {
