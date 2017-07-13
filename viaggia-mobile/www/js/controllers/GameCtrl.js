@@ -397,7 +397,6 @@ angular.module('viaggia.controllers.game', [])
             $ionicScrollDelegate.$getByHandle('diaryScroll').scrollTop();
             $scope.init()
             Config.loaded();
-
         }
 
         $scope.groupDays = function (notifications, $scope) {
@@ -414,10 +413,7 @@ angular.module('viaggia.controllers.game', [])
                     $scope.days.push({ name: notifications[j].timestamp, messages: [notifications[j]] })
                 }
             }
-            // }
         }
-
-
 
         $scope.loadMore = function () {
             if (!getDiary) {
@@ -508,11 +504,12 @@ angular.module('viaggia.controllers.game', [])
                     $scope.days = []
                     $scope.groupDays(notifications, $scope)
                     $scope.messages = notifications;
-                    $scope.days = [{
-                        name: "today",
-                        messages: $scope.messages
-                    }];
                     getDiary = false;
+
+//                    $scope.days = [{
+//                        name: "today",
+//                        messages: $scope.messages
+//                    }];
                     $scope.$broadcast('scroll.infiniteScrollComplete');
 
                 }, function (err) {

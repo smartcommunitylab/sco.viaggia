@@ -24,10 +24,9 @@
                         <div class="timeline-line">
                         </div>
                         <div class="timeline-dot">
-                            <H5 class="timeline-day"> {{day.name}} </H5>
+                            <H5 class="timeline-day"> {{day.name| date:'dd/MM'}} </H5>
                         </div>
                         <div ng-repeat="message in day.messages" ng-click="{{getState(message)}}" class="message-inner" style=" border: 2px solid {{getStyleColor(message)}}">
-
                             <div class="row" style="padding: 0px">
                                 <div class="col-center timeline-arrow" style="border-right-color: {{getStyleColor(message)}}">
                                 </div>
@@ -35,6 +34,7 @@
                                 <div class="col timeline-msg">
                                     {{getString(message) | translate: getParams(message)}}
                                 </div>
+                            </div>
                             </div>
                         </div>
                     </div>
