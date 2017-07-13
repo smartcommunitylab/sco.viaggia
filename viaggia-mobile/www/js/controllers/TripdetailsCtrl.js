@@ -371,13 +371,14 @@ angular.module('viaggia.controllers.tripdetails', [])
          *  TRACKING PROPERTIES. TODO: SIMPLIFY AND MOVE TO THE SERVICE, PASS CALLBACK TO START
          *****************************************************/
         var startTrack = function () {
-            if (!$scope.tripId) {
+            if (!$scope.tripId || ($scope.tripId.indexOf("temporary") != -1)) {
+                //it was an existent temporary trip, refresh the id
                 $scope.tripId = new Date().getTime() + "_temporary_" + storageService.getUser().userId;
                 trackService.startTemporary($scope.tripId, $scope.trip, refreshTripDetail)
                     .then(function () {
                         $scope.modifiable = false;
                     }, function (errorCode) {
-                        trackService.geolocationPopup();
+                        trackService.noStartPopup();
                     }).finally(Config.loaded);
             }
             else {

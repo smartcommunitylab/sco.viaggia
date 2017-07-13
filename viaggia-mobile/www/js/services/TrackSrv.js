@@ -408,8 +408,11 @@ angular.module('viaggia.services.tracking', [])
                 //trackingConfigure['stopAfterElapsedMinutes'] = 1;
                 trackingConfigure['notificationTitle'] = $filter('translate')('tracking_notification_title');
                 trackingConfigure['notificationText'] = $filter('translate')('tracking_notification_text');
-                trackingConfigure['url'] += token;
-
+                // trackingConfigure['url'] += token;
+                trackingConfigure['headers'] = {  // <-- Optional HTTP headers
+                    'Authorization': 'Bearer ' + token,
+                    'appId': Config.getAppId()
+                }
                 var transportType = localStorage.getItem(Config.getAppId() + '_trackedTransport');
                 if (!transportType) transportType = null;
 
@@ -512,7 +515,11 @@ angular.module('viaggia.services.tracking', [])
 
             userService.getValidToken().then(function (token) {
                 var trackingConfigure = Config.getTrackingConfig();
-                trackingConfigure['url'] += token;
+                //trackingConfigure['url'] += token;
+                trackingConfigure['headers'] = {  // <-- Optional HTTP headers
+                    'Authorization': 'Bearer ' + token,
+                    'appId': Config.getAppId()
+                }
                 trackingConfigure['foregroundService'] = false;
                 if (!bgGeo) {
                     $rootScope.syncRunning = false;
@@ -538,6 +545,7 @@ angular.module('viaggia.services.tracking', [])
                                 device: device
                             },
                             headers: {
+                                'Authorization': 'Bearer ' + token,
                                 'appId': Config.getAppId()
                             }
                         }).then(function (response) {

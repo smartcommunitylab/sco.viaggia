@@ -492,7 +492,12 @@ angular.module('viaggia.controllers.game', [])
         $scope.getParams = function (message) {
             return GameSrv.getParams(message);
         }
+        $scope.openEventTripDetail = function (message) {
+            console.log(JSON.stringify(message));
+        }
         $scope.init = function () {
+            if (!getDiary) {
+            getDiary = true;
             DiaryDbSrv.dbSetup().then(function () {
                 var x = new Date().getTime() - 2592000000;
                 //GameSrv.getDiary($scope.filter.selected,  x, new Date().getTime()).then(function (notifications) {
@@ -507,6 +512,7 @@ angular.module('viaggia.controllers.game', [])
                         name: "today",
                         messages: $scope.messages
                     }];
+                    getDiary = false;
                     $scope.$broadcast('scroll.infiniteScrollComplete');
 
                 }, function (err) {
@@ -517,7 +523,7 @@ angular.module('viaggia.controllers.game', [])
                     $scope.singleDiaryStatus = false;
                 });
             })
-
+            }
         }
         $scope.init();
         /* Resize ion-scroll */

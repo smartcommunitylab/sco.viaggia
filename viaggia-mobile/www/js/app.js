@@ -850,6 +850,9 @@ angular.module('viaggia', [
       menu_betatesting_bug: 'Segnala un problema',
       news_empty_list: 'Non ci sono notizie in questo momento',
       news_title: 'News',
+
+      pop_up_no_start_title:"Problema di connessione",
+      pop_up_no_start_template:"Impossibile inviare il segnale di inizio viaggio. Verificare la connessione",
       popup_modify_trip_title: 'Modifica',
       popup_modify_trip_message: 'Sicuro di voler modificare il viaggio salvato?',
       plan_preferences_fastest: 'Itinerario piu veloce',
@@ -1447,6 +1450,8 @@ angular.module('viaggia', [
       pop_up_invalid_tracking_title: "Trip is not valid",
       pop_up_invalid_tracking_template: "The properties of the executed trip do not match the specified mean of transport. No points will be assigned.",
       pop_up_plan: "Plan",
+      pop_up_no_start_title:"Connection problem",
+      pop_up_no_start_template:"Impossible to send the start to the server. Check the internet connection",
       wait_synch_running: "Wait, synchronization is running",
       no_status: "Server communication error, no data available",
       toast_error_server_template: 'We had some communication problems',
@@ -1479,6 +1484,7 @@ angular.module('viaggia', [
       msg_trip_bus: 'Bus trip. At {{time}}',
       msg_trip_train: 'Train trip. At {{time}}',
       msg_trip_multimodal: 'Multimodal trip. At {{time}}',
+      
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

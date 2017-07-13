@@ -1,0 +1,121 @@
+<ion-view id="tripdetails" title="{{'journey_detail' | translate}}">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-map" ng-click="openMapTrip()"></button>
+        <button ng-if="!editMode" class="button button-icon button-clear" ng-class="bookmarkStyle" ng-click="bookmark()"></button>
+        <!--
+        <nav ng-if="tripId!=null" mfb-menu position="tr" effect="zoomin" active-icon="ion-ios-close-empty" resting-icon="ion-ios-plus-empty" toggling-method="click">
+            <a mfb-button label="{{labelModify}}" icon="ion-edit" ng-click="modifyTrip()"></a>
+            <a mfb-button label="{{labelDelete}}" icon="ion-trash-b" ng-click="deleteTrip()"></a>
+        </nav>
+-->
+
+    </ion-nav-buttons>
+    <ion-content id="content" has-header="true">
+        <div class="row">
+            <div class="col">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div>
+                            <div ng-if="!isAvailableForDay()">
+                                {{'toast_already_monitored'|translate}}
+                            </div>
+                            <div ng-if="isAvailableForDay()  && syncRunning"><b>{{'wait_synch_running' | translate}}</b></div>
+                            <div ng-if="isAvailableForDay()" ng-class="{'synch':syncRunning}">
+                                <div ng-class="{'fog': notTrackable()}" ng-click="startOrShowPopupIfNotThisJourney()">
+                                    <button class="button button-start button-block" ng-show="!isTracking()">{{'labl_start_tracking'|translate}} </button>
+                                </div>
+                                <button class="button button-stop button-block" ng-show="isTracking()" ng-click="trackStop()">{{'labl_stop_tracking'|translate}} </button>
+                            </div>
+
+                            <div class="green-head" ng-if="currentItinerary.promoted">
+                                <div class="green-thumb"><img src="img/ic_leaf.png" />
+                                </div>
+                                <div class="green-content">
+                                    <p class="green-title">{{'journey_details_sustainable' | translate}}</p>
+                                </div>
+                            </div>
+                            <div class="green-points">
+                                <img class="points-image" src="img/ribbon.png">
+                                <span class="text-muted text-center points" ng-if="currentItinerary.customData['estimatedScore']">{{currentItinerary.customData["estimatedScore"]}}</span>
+                                <span class="text-muted text-center points" ng-if="!currentItinerary.customData['estimatedScore']">0</span>
+                            </div>
+                            <!-- START -->
+                            <div class="row leg">
+                                <div class=" start-leg">
+                                    <img src="img/ic_point_outline.png">
+                                </div>
+                                <div class="margin-right-16 margin-left-16">{{toTime(currentItinerary.startime)}} </div>
+                                <div class="col inter-leg">{{requestedFrom}}</div>
+                            </div>
+                            <!-- ROW -->
+                            <div class="row leg" ng-repeat="step in currentItinerary.steps">
+                                <!--                            <div class="row leg" ng-repeat="step in currentItinerary.steps" ng-if="step.length>0">-->
+                                <div class="line-background">
+                                    <img src="img/ic_point.png">
+                                </div>
+                                <div class="margin-right-16 margin-left-16">{{toTime(step.startime)}} </div>
+                                <div class="col inter-leg">
+                                    <p ng-if="step.action">{{step.action}}<strong ng-if="step.actionDetails">{{step.actionDetails}}</strong>
+                                    </p>
+                                    <p ng-if="step.from != null">{{step.fromLabel}}<strong>{{step.from}}</strong>
+                                    </p>
+                                    <p ng-if="step.to != null">{{step.toLabel}}<strong>{{step.to}}</strong>
+                                    </p>
+                                    <!--
+                                    <p ng-if="step.parking && step.parking.cost">
+                                        <img src="img/ic_price_parking.png" />{{step.parking.cost| number:2}}
+                                    </p>
+                                    <p ng-if="step.parking && step.parking.time">
+                                        <img src="img/ic_look_for_parking.png" />{{'parking_search_time' | translate}} {{step.parking.time}}
+                                    </p>
+-->
+                                    <p ng-if="step.parking && step.parking.cost">
+                                        {{'parking_cost' | translate}}<b>{{step.parking.cost}}</b>
+                                    </p>
+                                    <p ng-if="step.parking && step.parking.time">
+                                        {{'parking_time' | translate}}<b>{{step.parking.time}}</b>
+                                    </p>
+                                </div>
+                                <div>
+                                    <div class="tt thumbnail">
+                                        <img ng-src="{{step.mean.img}}">
+                                        <div class="text-center" ng-if="step.length > 0">
+                                            <div><small>{{step.length}}km</small>
+                                            </div>
+                                        </div>
+                                        <div class="text-center" ng-if="step.cost > 0">
+                                            <div><small>{{step.cost| number:2}} &#8364;</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END -->
+                            <div class="row leg">
+                                <div class="end-leg"><img src="img/ic_point_outline.png">
+                                </div>
+                                <div class="margin-right-16 margin-left-16">{{toTime(currentItinerary.endtime)}} </div>
+                                <div class="col inter-leg">{{requestedTo}}</div>
+                            </div>
+
+                            <div class="recurrence_days">
+                                <i class="icon ic_recurring recurrent_icon_detail" ng-if="isRecurrent()"></i>
+                                <span class="recurrnce_day_string" ng-repeat="day in recurrentDays">{{day.name|translate}}</span>
+                            </div>
+                            <div  ng-if="editMode">
+                                <!--<div ng-class="{'fog': notTrackable()}" ng-click="startOrShowPopupIfNotThisJourney()">
+                                    <button class="button button-start button-block" ng-show="!isTracking()">{{'labl_start_tracking'|translate}} </button>
+                                </div>-->
+                                <button class="button button-viaggia-header button-block" ng-click="saveTrip()">{{'journey_details_save' | translate}} </button>
+                            </div>
+                            <div class="popup-buttons" ng-if="!editMode">
+                                <button ng-class="{'fog': isTracking()}" class="button button-cancel" ng-click="deleteTrip()">{{'journey_details_delete' | translate}} </button>
+                                <button ng-class="{'fog': isTracking()}" class="button button-default" ng-click="modifyTrip()">{{'journey_details_modify' | translate}} </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

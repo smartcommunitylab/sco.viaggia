@@ -5,45 +5,6 @@ angular.module('viaggia.services.game', [])
 
         var localStatus = null;
         var localRanking = null;
-        // var NOTIFICATIONS_MAPPING = {
-        //     badge:
-        //     [
-        //         {
-        //             db_types: "BADGE",
-        //             style: "NEW_BADGE"
-        //         }
-        //     ]
-        //     ,
-        //     challenge: [
-        //         {
-        //             db_types: "CHALLENGE_WON",
-        //             style: "WON_CHALLENGE"
-        //         },
-        //         {
-        //             db_types: "CHALLENGE",
-        //             style: "NEW_CHALLENGE"
-        //         }
-        //     ],
-        //     trip: [
-        //         {
-        //             db_types: "BADGE",
-        //             style: "NEW_BADGE"
-        //         }
-        //     ],
-        //     ranking: [
-        //         {
-        //             db_types: "BADGE",
-        //             style: "NEW_BADGE"
-        //         }
-        //     ],
-        //     allnotifications: [
-        //         {
-        //             db_types: "BADGE",
-        //             style: "NEW_BADGE"
-        //         }
-        //     ]
-        // }
-
         var dbFilter = [
             {
                 name: 'badge',
@@ -65,48 +26,42 @@ angular.module('viaggia.services.game', [])
                 name: 'allnotifications',
                 db: []
             }]
-        // var NOTIFICATIONS_MAPPING = {
-        //     BADGE: {
-        //         string: "msg_won_badge",
-        //         color: "#60b35c",
-        //         icon: "ic_game_badge"
-        //     }
-        // }
+
         var NOTIFICATIONS_STYLES = {
             TRAVEL_WALK: {
                 string: "msg_trip_walk",
                 color: "#60b35c",
                 icon: "ic_foot",
                 params: ['time'],
-                state: "showPlayAndGoPopup()"
+                state: "openEventTripDetail(message)"
             },
             TRAVEL_BIKE: {
                 string: "msg_trip_bike",
                 color: "#922d67",
                 icon: "ic_bike",
                 params: ['time'],
-                state: "showPlayAndGoPopup()"
+                state: "openEventTripDetail(message)"
             },
             TRAVEL_BUS: {
                 string: "msg_trip_bus",
                 color: "#ea8817",
                 icon: "ic_urban-bus",
                 params: ['time'],
-                state: "showPlayAndGoPopup()"
+                state: "openEventTripDetail(message)"
             },
             TRAVEL_TRAIN: {
                 string: "msg_trip_train",
                 color: "#cd251c",
                 icon: "ic_train",
                 params: ['time'],
-                state: "showPlayAndGoPopup()"
+                state: "openEventTripDetail(message)"
             },
             TRAVEL_MULTIMODAL: {
                 string: "msg_trip_multimodal",
                 color: "#2975a7",
                 icon: "ic_game_multimodal_trip",
                 params: ['time'],
-                state: "showPlayAndGoPopup()"
+                state: "openEventTripDetail(message)"
             },
             BADGE: {
                 string: "msg_won_badge",

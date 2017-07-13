@@ -948,13 +948,13 @@ margin-top: 10px;
 .timeline-arrow {
 border-right: 10px solid #ddd;
 border-style: solid;
-border-width: 20px;
+border-width: 15px 20px 15px 20px;
 color: rgba(0,0,0,0);
 content: "";
 height: 22px;
 position: absolute;
 left: -33px;
-top: 3.7px;
+/*top: 3.7px;*/
 width: 0px;
 }
 .timeline-col{
