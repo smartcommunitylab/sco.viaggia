@@ -17,16 +17,16 @@
             </div>
         </div>
         <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="diaryScroll">
-            <!--<div class="list" style="margin-top: 25px">-->
-                <ion-list>
-                <div ng-repeat="day in days">
-                    <div class="message-item">
-                        <div class="timeline-line">
-                        </div>
-                        <div class="timeline-dot">
-                            <H5 class="timeline-day"> {{day.name}} </H5>
-                        </div>
-                        <div ng-repeat="message in day.messages"  ng-click="{{getState(message)}}" class="message-inner" style=" border: 2px solid {{getStyleColor(message)}}">
+            <ion-list>
+                <div style="padding-top: 23px">
+                    <div ng-repeat="day in days" style="padding-top: 2px">
+                        <div class="message-item">
+                            <div class="timeline-line">
+                            </div>
+                            <div class="timeline-dot">
+                                <H5 class="timeline-day"> {{day.name | date:'dd/MM'}} </H5>
+                            </div>
+                            <div ng-repeat="message in day.messages"  ng-click="{{getState(message)}}" class="message-inner" style=" border: 2px solid {{getStyleColor(message)}}">
                             <div class="timeline-arrow" style="border-right-color: {{getStyleColor(message)}}">
                             </div>
                             <div class="row" style="padding: 0px">
@@ -34,6 +34,7 @@
                                 <div class="col timeline-msg">
                                     {{getString(message) | translate: getParams(message)}}
                                 </div>
+                            </div>
                             </div>
                         </div>
                     </div>
