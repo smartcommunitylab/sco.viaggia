@@ -354,7 +354,7 @@ angular.module('viaggia.controllers.game', [])
 
     })
 
-    .controller('DiaryCtrl', function ($scope, $timeout, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config, $ionicLoading) {
+    .controller('DiaryCtrl', function ($scope, $timeout, $state,GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config, $ionicLoading) {
         $scope.messages = [];
         $scope.maybeMore = true;
         var getDiary = false;
@@ -493,7 +493,7 @@ angular.module('viaggia.controllers.game', [])
             return GameSrv.getParams(message);
         }
         $scope.openEventTripDetail = function (message) {
-            console.log(JSON.stringify(message));
+            $state.go('app.tripDiary');
         }
         $scope.init = function () {
             if (!getDiary) {
@@ -546,7 +546,10 @@ angular.module('viaggia.controllers.game', [])
             }, 200);
         };
     })
+    .controller('TripDiaryCtrl', function ($scope, $timeout, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config, $ionicLoading) {
 
+    }
+    )
     .controller('RankingsCtrl', function ($scope, $ionicScrollDelegate, $window, $timeout, Config, GameSrv, Toast, $filter, $ionicPosition) {
         $scope.maybeMore = true;
         $scope.currentUser = {};

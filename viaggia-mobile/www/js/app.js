@@ -607,6 +607,16 @@ angular.module('viaggia', [
           }
         }
       })
+      .state('app.tripDiary', {
+        cache: false,
+        url: "/tripDiary",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/game/eventTripDetail.html",
+            controller: 'TripDiaryCtrl'
+          }
+        }
+      })
       .state('app.statistics', {
         cache: false,
         url: "/statistics",
@@ -850,7 +860,6 @@ angular.module('viaggia', [
       menu_betatesting_bug: 'Segnala un problema',
       news_empty_list: 'Non ci sono notizie in questo momento',
       news_title: 'News',
-
       pop_up_no_start_title:"Problema di connessione",
       pop_up_no_start_template:"Impossibile inviare il segnale di inizio viaggio. Verificare la connessione",
       popup_modify_trip_title: 'Modifica',
