@@ -203,7 +203,7 @@ angular.module('viaggia.controllers.game', [])
             $scope.maybeMore = true;
             $scope.singleStatStatus = true;
             $scope.stats = [];
-            $ionicScrollDelegate.$getByHandle('diaryScroll').scrollTop();
+            $ionicScrollDelegate.$getByHandle('statisticScroll').scrollTop();
             $scope.init()
             Config.loaded();
         }
