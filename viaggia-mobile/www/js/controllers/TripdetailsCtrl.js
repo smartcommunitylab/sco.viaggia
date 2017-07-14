@@ -532,7 +532,9 @@ angular.module('viaggia.controllers.tripdetails', [])
         $scope.trackStop = function () {
             $scope.showConfirm($filter('translate')("sure_delete_text"), $filter('translate')("sure_delete_title"), function () {
                 //sign the trip as already done for the day
+                var travelForDiary = GameSrv.getTravelForDiary()
                 trackService.stop();
+                GameSrv.addTravelDiary(travelForDiary);
                 $scope.modifiable = true;
                 $scope.isAvailable = false;
                 GameSrv.resetLocalStatus();

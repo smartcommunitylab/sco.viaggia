@@ -1,283 +1,289 @@
 angular.module('viaggia.controllers.home', [])
 
-.controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, userService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv) {
-    //load from localstorage the id notifications read
-    $ionicPlatform.ready(function () {
-        document.addEventListener("resume", function () {
-            notificationInit();
+    .controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, userService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv,DiaryDbSrv) {
+        //load from localstorage the id notifications read
+        $ionicPlatform.ready(function () {
+            document.addEventListener("resume", function () {
+                notificationInit();
+                Config.setWeeklySposnsor();
+
+            }, false);
             Config.setWeeklySposnsor();
 
-        }, false);
-        Config.setWeeklySposnsor();
-
-    });
-
-    //aggoiorna le notifiche
-    var notificationInit = function () {
-        //scrico le ultime di una settimana
-        if (localStorage.getItem(Config.getAppId() + '_lastUpdateTime') == null) {
-            date = new Date();
-            //date.setDate(date.getDate() - 7);
-            lastUpdateTime = date.getTime();
-        } else {
-            lastUpdateTime = localStorage.getItem(Config.getAppId() + '_lastUpdateTime');
-        }
-        notificationService.getNotifications(lastUpdateTime, 0, 10).then(function (items) { //solo le nuove
-            if (items) {
-                $rootScope.countNotification = items.length;
-                //last update time is the last time of notification
-                if (items.length > 0) {
-
-                    lastUpdateTime = items[0].updateTime + 1;
-                }
-                localStorage.setItem(Config.getAppId() + '_lastUpdateTime', lastUpdateTime);
-            }
-        }, function (err) {
-
-            $rootScope.countNotification = 0;
-
         });
-    }
-    $scope.openSponsorLink = function (link) {
-        window.open(link, '_system', 'location=yes');
-        return false;
-    }
-    var localDataInit = function () {
-        userService.getUserData();
-        planService.getTrips().then(function () {
-            //$ionicLoading.hide();
+
+        //aggoiorna le notifiche
+        var notificationInit = function () {
+            //scrico le ultime di una settimana
+            if (localStorage.getItem(Config.getAppId() + '_lastUpdateTime') == null) {
+                date = new Date();
+                //date.setDate(date.getDate() - 7);
+                lastUpdateTime = date.getTime();
+            } else {
+                lastUpdateTime = localStorage.getItem(Config.getAppId() + '_lastUpdateTime');
+            }
+            notificationService.getNotifications(lastUpdateTime, 0, 10).then(function (items) { //solo le nuove
+                if (items) {
+                    $rootScope.countNotification = items.length;
+                    //last update time is the last time of notification
+                    if (items.length > 0) {
+
+                        lastUpdateTime = items[0].updateTime + 1;
+                    }
+                    localStorage.setItem(Config.getAppId() + '_lastUpdateTime', lastUpdateTime);
+                }
+            }, function (err) {
+
+                $rootScope.countNotification = 0;
+
+            });
+        }
+        $scope.openSponsorLink = function (link) {
+            window.open(link, '_system', 'location=yes');
+            return false;
+        }
+        var localDataInit = function () {
+            userService.getUserData();
+            planService.getTrips().then(function () {
+                //$ionicLoading.hide();
+            }, function () {
+                //$ionicLoading.hide();
+            });
+        }
+        $scope.buttons = [{
+            label: $filter('translate')('menu_news'),
+            icon: 'ic_news'
+        }, {
+            label: $filter('translate')('menu_notifications'),
+            icon: 'ic_notification'
+        }];
+        var mymap = document.getElementById('map-container');
+
+        Config.init().then(function () {
+            $rootScope.title = Config.getAppName();
+            angular.extend($scope, {
+                center: {
+                    lat: Config.getMapPosition().lat,
+                    lng: Config.getMapPosition().long,
+                    zoom: Config.getMapPosition().zoom
+                },
+                events: {}
+            });
+
+            bookmarkService.getBookmarksRT().then(function (list) {
+                var homeList = [];
+                list.forEach(function (e) {
+                    if (e.home) homeList.push(e);
+                });
+                $scope.primaryLinks = homeList; //Config.getPrimaryLinks();
+            });
+            marketService.initMarketFavorites();
+            notificationInit();
+            initWatch();
+            localDataInit();
+
         }, function () {
             //$ionicLoading.hide();
         });
-    }
-    $scope.buttons = [{
-        label: $filter('translate')('menu_news'),
-        icon: 'ic_news'
-}, {
-        label: $filter('translate')('menu_notifications'),
-        icon: 'ic_notification'
-}];
-    var mymap = document.getElementById('map-container');
+        $scope.$on("$ionicView.afterEnter", function (scopes, states) {
+            $ionicLoading.hide();
 
-    Config.init().then(function () {
-        $rootScope.title = Config.getAppName();
-        angular.extend($scope, {
-            center: {
-                lat: Config.getMapPosition().lat,
-                lng: Config.getMapPosition().long,
-                zoom: Config.getMapPosition().zoom
-            },
-            events: {}
         });
-
-        bookmarkService.getBookmarksRT().then(function (list) {
-            var homeList = [];
-            list.forEach(function (e) {
-                if (e.home) homeList.push(e);
+        $scope.$on("$ionicView.enter", function (scopes, states) {
+            Config.init().then(function () {
+                if (window.BackgroundGeolocation) {
+                    DiaryDbSrv.dbSetup().then(function () {
+                        trackService.startup().then(function () {
+                            $scope.trackingIsOn = trackService.trackingIsGoingOn() && !trackService.trackingIsFinished();
+                            if ($scope.trackingIsOn && $rootScope.GPSAllow) {
+                                updateTrackingInfo();
+                            } else {
+                                //just the timer but it has to update only when it start
+                                //create popup
+                                //stop tracking and variables
+                                if ($scope.trackingIsOn && !$rootScope.GPSAllow) {
+                                    trackService.cleanTracking();
+                                    $scope.trackingIsOn = false;
+                                    trackService.geolocationDisabledPopup();
+                                }
+                            }
+                        }, function (err) {
+                            //track service startup not worked
+                        });
+                    }, function (err) {
+                        //diary db not worked
+                    });
+                };
             });
-            $scope.primaryLinks = homeList; //Config.getPrimaryLinks();
+
         });
-        marketService.initMarketFavorites();
-        notificationInit();
-        initWatch();
-        localDataInit();
 
-    }, function () {
-        //$ionicLoading.hide();
-    });
-    $scope.$on("$ionicView.afterEnter", function (scopes, states) {
-        $ionicLoading.hide();
+        var translateTransport = function (t) {
+            if (t == 'walk') return $filter('translate')('track_walk_action');
+            if (t == 'bike') return $filter('translate')('track_bike_action');
+            return $filter('translate')('track_other_action');
+        }
 
-    });
-    $scope.$on("$ionicView.enter", function (scopes, states) {
-        Config.init().then(function () {
-            if (window.BackgroundGeolocation) {
-                trackService.startup().then(function () {
-                    $scope.trackingIsOn = trackService.trackingIsGoingOn() && !trackService.trackingIsFinished();
-                    if ($scope.trackingIsOn && $rootScope.GPSAllow) {
-                        updateTrackingInfo();
-                    } else {
-                        //just the timer but it has to update only when it start
-                        //create popup
-                        //stop tracking and variables
-                        if ($scope.trackingIsOn && !$rootScope.GPSAllow) {
-                            trackService.cleanTracking();
-                            $scope.trackingIsOn = false;
-                            trackService.geolocationDisabledPopup();
-                        }
-                    }
-                }, function (err) {
-
-                });
+        function setTrackingInfo() {
+            $scope.trackingInfo = {
+                transport: translateTransport(trackService.trackedTransport()),
+                time: $filter('date')(new Date().getTime() - trackService.trackingTimeStart(), 'HH:mm:ss', '+0000')
             };
-        });
-
-    });
-
-    var translateTransport = function (t) {
-        if (t == 'walk') return $filter('translate')('track_walk_action');
-        if (t == 'bike') return $filter('translate')('track_bike_action');
-        return $filter('translate')('track_other_action');
-    }
-
-    function setTrackingInfo() {
-        $scope.trackingInfo = {
-            transport: translateTransport(trackService.trackedTransport()),
-            time: $filter('date')(new Date().getTime() - trackService.trackingTimeStart(), 'HH:mm:ss', '+0000')
         };
-    };
 
-    var updateTrackingInfo = function () {
-        setTrackingInfo();
-        $scope.trackInfoInterval = $interval(function () {
+        var updateTrackingInfo = function () {
             setTrackingInfo();
-        }, 1000);
-    }
+            $scope.trackInfoInterval = $interval(function () {
+                setTrackingInfo();
+            }, 1000);
+        }
 
-    var startTransportTrack = function (transportType) {
-        $scope.trackingIsOn = true;
-        trackService.startTransportTrack(transportType).then(function () {
-            updateTrackingInfo();
-        }, function (errorCode) {
-            $scope.trackingIsOn = false;
-            trackService.geolocationPopup();
-        }).finally(Config.loaded());
-    }
-    $scope.startTracking = function (transportType) {
-        if (!$rootScope.syncRunning) {
+        var startTransportTrack = function (transportType) {
+            $scope.trackingIsOn = true;
+            trackService.startTransportTrack(transportType).then(function () {
+                updateTrackingInfo();
+            }, function (errorCode) {
+                $scope.trackingIsOn = false;
+                trackService.geolocationPopup();
+            }).finally(Config.loaded());
+        }
+        $scope.startTracking = function (transportType) {
+            if (!$rootScope.syncRunning) {
+                Config.loading();
+                if (!trackService.trackingIsGoingOn() || trackService.trackingIsFinished()) {
+                    trackService.checkLocalization().then(function () {
+                        startTransportTrack(transportType);
+                    }, function (error) {
+                        Config.loaded();
+                        if (Config.isErrorLowAccuracy(error)) {
+                            //popup "do u wanna go on?"
+                            $ionicPopup.confirm({
+                                title: $filter('translate')("pop_up_low_accuracy_title"),
+                                template: $filter('translate')("pop_up_low_accuracy_template"),
+                                buttons: [
+                                    {
+                                        text: $filter('translate')("btn_close"),
+                                        type: 'button-cancel'
+                                    },
+                                    {
+                                        text: $filter('translate')("pop_up_low_accuracy_button_go_on"),
+                                        type: 'button-custom',
+                                        onTap: function () {
+                                            startTransportTrack(transportType);
+                                        }
+                                    }
+                                ]
+                            });
+                        } else if (Config.isErrorGPSNoSignal(error)) {
+                            //popup "impossible to track" and stop
+                            var alert = $ionicPopup.alert({
+                                title: $filter('translate')("pop_up_no_geo_title"),
+                                template: $filter('translate')("pop_up_no_geo_template"),
+                                okText: $filter('translate')("btn_close"),
+                                okType: 'button-cancel'
+                            });
+                            alert.then(function (e) {
+                                trackService.startup();
+                            });
+                        }
+                    });
+
+                }
+            }
+        }
+        $scope.stopTracking = function () {
             Config.loading();
-            if (!trackService.trackingIsGoingOn() || trackService.trackingIsFinished()) {
-                trackService.checkLocalization().then(function () {
-                    startTransportTrack(transportType);
-                }, function (error) {
-                    Config.loaded();
-                    if (Config.isErrorLowAccuracy(error)) {
-                        //popup "do u wanna go on?"
+            $scope.trackingIsOn = false;
+            if (!!$scope.trackInfoInterval) $interval.cancel($scope.trackInfoInterval);
+            $scope.trackingInfo = {};
+            trackService.computeInfo().then(function (data) {
+                Config.loaded();
+                var travelForDiary = GameSrv.getTravelForDiary()
+                trackService.stop();
+                if (Math.floor(data.dist > Config.getMinimumDistance())) {
+                    if (data.valid) {
+                        GameSrv.addTravelDiary(travelForDiary);
                         $ionicPopup.confirm({
-                            title: $filter('translate')("pop_up_low_accuracy_title"),
-                            template: $filter('translate')("pop_up_low_accuracy_template"),
+                            title: $filter('translate')("pop_up_points_title"),
+                            template: $filter('translate')("pop_up_points_template"),
                             buttons: [
                                 {
                                     text: $filter('translate')("btn_close"),
                                     type: 'button-cancel'
                                 },
                                 {
-                                    text: $filter('translate')("pop_up_low_accuracy_button_go_on"),
+                                    text: $filter('translate')("pop_up_points_btn"),
                                     type: 'button-custom',
                                     onTap: function () {
-                                        startTransportTrack(transportType);
+                                        $state.go('app.game');
                                     }
                                 }
                             ]
                         });
-                    } else if (Config.isErrorGPSNoSignal(error)) {
-                        //popup "impossible to track" and stop
-                        var alert = $ionicPopup.alert({
-                            title: $filter('translate')("pop_up_no_geo_title"),
-                            template: $filter('translate')("pop_up_no_geo_template"),
+                    } else {
+                        $ionicPopup.alert({
+                            title: $filter('translate')("pop_up_invalid_tracking_title"),
+                            template: $filter('translate')("pop_up_invalid_tracking_template"),
                             okText: $filter('translate')("btn_close"),
                             okType: 'button-cancel'
                         });
-                        alert.then(function (e) {
-                            trackService.startup();
-                        });
-                    }
-                });
 
-            }
-        }
-    }
-    $scope.stopTracking = function () {
-        Config.loading();
-        $scope.trackingIsOn = false;
-        if (!!$scope.trackInfoInterval) $interval.cancel($scope.trackInfoInterval);
-        $scope.trackingInfo = {};
-        trackService.computeInfo().then(function (data) {
-            Config.loaded();
-            trackService.stop();
-            if (Math.floor(data.dist > Config.getMinimumDistance())) {
-                if (data.valid) {
-                    $ionicPopup.confirm({
-                        title: $filter('translate')("pop_up_points_title"),
-                        template: $filter('translate')("pop_up_points_template"),
-                        buttons: [
-                            {
-                                text: $filter('translate')("btn_close"),
-                                type: 'button-cancel'
-                                },
-                            {
-                                text: $filter('translate')("pop_up_points_btn"),
-                                type: 'button-custom',
-                                onTap: function () {
-                                    $state.go('app.game');
-                                }
                     }
-                ]
-                    });
                 } else {
+                    // Toast.show($filter('translate')("no_points"), "short", "bottom");
                     $ionicPopup.alert({
-                        title: $filter('translate')("pop_up_invalid_tracking_title"),
-                        template: $filter('translate')("pop_up_invalid_tracking_template"),
+                        title: $filter('translate')("no_points_title"),
+                        template: $filter('translate')("no_points", {
+                            points: data.points
+                        }),
                         okText: $filter('translate')("btn_close"),
                         okType: 'button-cancel'
-                    });
-
+                    })
                 }
-            } else {
-                // Toast.show($filter('translate')("no_points"), "short", "bottom");
-                $ionicPopup.alert({
-                    title: $filter('translate')("no_points_title"),
-                    template: $filter('translate')("no_points", {
-                        points: data.points
-                    }),
-                    okText: $filter('translate')("btn_close"),
-                    okType: 'button-cancel'
-                })
-            }
-        }, function () {
-            Config.loaded();
-            $scope.showErrorServer();
-            trackService.stop();
-        }).finally(Config.loaded);
+            }, function () {
+                Config.loaded();
+                $scope.showErrorServer();
+                trackService.stop();
+            }).finally(Config.loaded);
 
-    }
+        }
 
-    $scope.openSavedTracks = function () {
-        planService.getTrips().then(function (trips) {
-            if (trips && !angular.equals(trips, {})) {
-                $state.go('app.mytrips');
-            } else {
-                //Toast.show($filter('translate')("no_saved_tracks_to_track"), "short", "bottom");
-                var confirmPopup = $ionicPopup.confirm({
-                    title: $filter('translate')("my_trip_empty_list"),
-                    template: $filter('translate')("no_saved_tracks_to_track"),
-                    buttons: [
-                        {
-                            text: $filter('translate')("pop_up_close"),
-                            type: 'button-cancel'
-                              },
-                        {
-                            text: $filter('translate')("pop_up_plan"),
-                            type: 'button-custom',
-                            onTap: function () {
-                                confirmPopup.close();
-                                planService.setPlanConfigure(null);
-                                $state.go('app.plan');
+        $scope.openSavedTracks = function () {
+            planService.getTrips().then(function (trips) {
+                if (trips && !angular.equals(trips, {})) {
+                    $state.go('app.mytrips');
+                } else {
+                    //Toast.show($filter('translate')("no_saved_tracks_to_track"), "short", "bottom");
+                    var confirmPopup = $ionicPopup.confirm({
+                        title: $filter('translate')("my_trip_empty_list"),
+                        template: $filter('translate')("no_saved_tracks_to_track"),
+                        buttons: [
+                            {
+                                text: $filter('translate')("pop_up_close"),
+                                type: 'button-cancel'
+                            },
+                            {
+                                text: $filter('translate')("pop_up_plan"),
+                                type: 'button-custom',
+                                onTap: function () {
+                                    confirmPopup.close();
+                                    planService.setPlanConfigure(null);
+                                    $state.go('app.plan');
+                                }
                             }
-                  }
-              ]
-                });
-            }
-        });
-    }
+                        ]
+                    });
+                }
+            });
+        }
 
-    $scope.$on('ngLastRepeat.primaryLinks', function (e) {
-        $timeout(function () {
-            ionicMaterialMotion.ripple();
-            ionicMaterialInk.displayEffect()
-        }); // No timeout delay necessary.
-    });
-    var initWatch = function () {
+        $scope.$on('ngLastRepeat.primaryLinks', function (e) {
+            $timeout(function () {
+                ionicMaterialMotion.ripple();
+                ionicMaterialInk.displayEffect()
+            }); // No timeout delay necessary.
+        });
+        var initWatch = function () {
             $scope.$watch('notificationService.notifications', function (newVal, oldVal, scope) {
                 notificationInit();
             });
@@ -318,33 +324,33 @@ angular.module('viaggia.controllers.home', [])
                 events: {}
             });
         */
-    $scope.openNotifications = function () {
-        $rootScope.countNotification = 0;
-        $state.go('app.notifications');
-    }
-    $scope.go = function (state) {
-        if (state.indexOf('(') > 0) {
-            eval('$scope.' + state);
-        } else {
-            $location.path(state);
+        $scope.openNotifications = function () {
+            $rootScope.countNotification = 0;
+            $state.go('app.notifications');
+        }
+        $scope.go = function (state) {
+            if (state.indexOf('(') > 0) {
+                eval('$scope.' + state);
+            } else {
+                $location.path(state);
+            }
+
+        }
+        $scope.goToBookmarks = function () {
+            $state.go('app.bookmarks');
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
+
+        }
+        $scope.getCountNotification = function (counter) {
+            if (counter > 9) {
+                return counter + "+";
+            }
+            return counter;
+        }
+        $scope.showTutorial = function () {
+            tutorial.showTutorial('main', 'main', 4, $scope);
         }
 
-    }
-    $scope.goToBookmarks = function () {
-        $state.go('app.bookmarks');
-        $ionicHistory.nextViewOptions({
-            disableBack: true
-        });
-
-    }
-    $scope.getCountNotification = function (counter) {
-        if (counter > 9) {
-            return counter + "+";
-        }
-        return counter;
-    }
-    $scope.showTutorial = function () {
-        tutorial.showTutorial('main', 'main', 4, $scope);
-    }
-
-})
+    })

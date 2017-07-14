@@ -1,5 +1,5 @@
 angular.module('viaggia.services.tracking', [])
-    .factory('trackService', function (Config, $q, $http, $state, $timeout, $filter, storageService, userService, $ionicPlatform, $ionicPopup, $rootScope, Utils, GeoLocate) {
+    .factory('trackService', function (Config, $q, $http, $state, $timeout, $filter, DiaryDbSrv, storageService, userService, $ionicPlatform, $ionicPopup, $rootScope, Utils, GeoLocate) {
         //var trackingIntervalInMs = 500;
         //var accelerationDetectionIntervalInMs = 500;
         //var accelerationSensorDelay = 0;
@@ -590,6 +590,7 @@ angular.module('viaggia.services.tracking', [])
             return deferred.promise;
         };
 
+
         /**
          * STOP THE TRACKER.
          * Synchronize data and stop the plugin.
@@ -597,6 +598,7 @@ angular.module('viaggia.services.tracking', [])
         trackService.stop = function () {
             var deferred = $q.defer();
             markAsDone();
+            // addTravelDiary();
             clean();
             //delete timer if pending
             $timeout.cancel(timerTrack);
@@ -611,7 +613,8 @@ angular.module('viaggia.services.tracking', [])
             return deferred.promise;
         };
 
-        //        trackService.getState = function () {};
+
+       
 
         var markAsDone = function () {
             var tripId = localStorage.getItem(Config.getAppId() + "_tripId");

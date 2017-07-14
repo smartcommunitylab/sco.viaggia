@@ -1,6 +1,6 @@
 angular.module('viaggia.services.game', [])
 
-    .factory('GameSrv', function ($q, $http, $filter, Config, userService) {
+    .factory('GameSrv', function ($q, $http, $filter, DiaryDbSrv,Config, userService) {
         var gameService = {};
 
         var localStatus = null;
@@ -369,10 +369,6 @@ angular.module('viaggia.services.game', [])
             }
 
             return createParamString(message);
-            // return '{badgename:"'+event[NOTIFICATIONS_STYLES[message.type].params]+'"}';
-            // '{time: "2.30 p.m."}'
-
-
         }
         gameService.getNotificationTypes = function () {
             if (message.type == 'TRAVEL') {
@@ -399,7 +395,57 @@ angular.module('viaggia.services.game', [])
             });
             return deferred.promise;
         }
+ var checkTravelType = function (travelId) {
+            
+             if (travelId.indexOf("walk_")!=-1 ||travelId.indexOf("bike_")!=-1||travelId.indexOf("bus_")!=-1||travelId.indexOf("train_")!=-1)
+                {
+                    return "FREETRACKING";
+            }
+                else {
+                    return "PLANNED"
+                }
+        }
+        var checkTravelModes = function (travelId) {
+            var travelModes = [];
+            if (travelId.indexOf("walk_")!=-1)
+                travelModes.push("walk")
+            if (travelId.indexOf("bike_")!=-1)
+                travelModes.push("bike")
+            if (travelId.indexOf("train_")!=-1)
+                travelModes.push("train")
+            if (travelId.indexOf("bus_")!=-1)
+                travelModes.push("bus")
+                          
 
+            return travelModes;
+        }
+        gameService.getTravelForDiary = function () {
+              var tripId = localStorage.getItem(Config.getAppId() + "_tripId");
+            var travelType = checkTravelType(tripId);
+            var travelModes = checkTravelModes(tripId);
+            return {
+                tripId:tripId,
+                travelType:travelType,
+                travelModes:travelModes
+            }
+        }
+        gameService.addTravelDiary = function (travel) {
+            //create event
+            // var tripId = localStorage.getItem(Config.getAppId() + "_tripId");
+            // var travelType = checkTravelType(tripId);
+            // var travelModes = checkTravelModes(tripId);
+            if (travel.tripId) {
+                var event = {
+                    "timestamp": new Date().getTime(),
+                    "type": "TRAVEL",
+                    "entityId": travel.tripId,
+                    "travelType": travel.travelType,
+                    "travelModes": travel.travelModes,
+                    "travelValidity": "PENDING",
+                }
+                DiaryDbSrv.addEvent(event);
+            }
+        }
 
 
         gameService.getMaxStat = function (type) {
@@ -517,8 +563,6 @@ angular.module('viaggia.services.game', [])
         /* get local status (get remote first if null) */
         gameService.getLocalStatus = function () {
             var deferred = $q.defer();
-
-            //		if (!localStatus) {
             gameService.getStatus().then(
                 function (localStatus) {
                     deferred.resolve(localStatus);
@@ -527,10 +571,6 @@ angular.module('viaggia.services.game', [])
                     deferred.reject(response);
                 }
             );
-            //		} else {
-            //			deferred.resolve(localStatus);
-            //		}
-
             return deferred.promise;
         };
 
@@ -559,8 +599,6 @@ angular.module('viaggia.services.game', [])
                         config.params = {};
                     }
 
-                    // config.params['token'] = token;
-
                     if ((!!timestamp && timestamp < 0) || (!!start && start < 0) || (!!end && end < 1) || (!!start && !!end && end <= start)) {
                         deferred.reject();
                     }
@@ -577,7 +615,6 @@ angular.module('viaggia.services.game', [])
                         config.params['end'] = end;
                     }
 
-                    //$http.get(Config.getGamificationURL() + '/classification', config)
                     $http({
                         method: 'GET',
                         url: Config.getGamificationURL() + '/classification',

@@ -1,6 +1,6 @@
 angular.module('viaggia.services.diaryDb', [])
 
-    .factory('DiaryDbSrv', function ($q, $http, Config, userService, GameSrv) {
+    .factory('DiaryDbSrv', function ($q, $http, Config, userService) {
         var diaryDbService = {};
         var DIARY_SYNC_TIME = "_diary_synch_time";
         var db = null;
@@ -43,7 +43,6 @@ angular.module('viaggia.services.diaryDb', [])
             db.transaction(function (tx) {
                 tx.executeSql('DROP TABLE IF EXISTS Events')
                 tx.executeSql('CREATE TABLE IF NOT EXISTS Events (type, timestamp, event)');
-                // tx.executeSql('CREATE TABLE IF NOT EXISTS Events (type, timestamp, values)');
             }, function (error) {
                 console.log('creation DB: ' + error.message);
                 deferred.reject();
@@ -111,11 +110,6 @@ angular.module('viaggia.services.diaryDb', [])
             if (res.rows.length > 0) {
                 rowsize = size(res.rows.item(0));
                 for (var i = 0; i < res.rows.length; i++) {
-                    //          var rowArray = [];
-                    //          var row = res.rows.item(i);
-                    //          for (var key in row) {
-                    //            rowArray.p
-                    //          }
                     var row = res.rows.item(i);
                     if (rowsize == 1) {
                         for (var k in row) data.push(row[k]);
@@ -127,7 +121,6 @@ angular.module('viaggia.services.diaryDb', [])
         };
         var openDB = function (successcallback, errorcallback) {
             var _do = function () {
-                // db.executeSql("select * from Events", [], function (res) {
                 db.executeSql("SELECT * FROM  Events LIMIT 1", [], function (res) {
                     var data = convertData(res);
                     successcallback(data);
@@ -165,15 +158,43 @@ angular.module('viaggia.services.diaryDb', [])
         }
         var getRemoteData = function (timestamp) {
             var deferred = $q.defer();
-            $http.get(getDataURL())
-                .success(function (diary) {
-                    deferred.resolve(diary);
-                })
-                .error(function (error) {
-                    console.error('ERROR SYNC STOP DATA: ' + error);
+            var deferred = $q.defer();
+
+            userService.getValidToken().then(
+                function (token) {
+                    $http({
+                        method: 'GET',
+                        url: Config.getGamificationURL() + '/diary',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
+                        .success(function (diary) {
+                            //localStatus = status;
+                            deferred.resolve(diary);
+                        })
+
+                        .error(function (response) {
+                            deferred.reject(response);
+                        });
+                },
+                function () {
                     deferred.reject();
-                });
+                }
+            );
+
             return deferred.promise;
+            // $http.get()
+            //     .success(function (diary) {
+            //         deferred.resolve(diary);
+            //     })
+            //     .error(function (error) {
+            //         console.error('ERROR SYNC STOP DATA: ' + error);
+            //         deferred.reject();
+            //     });
+            // return deferred.promise;
 
 
         }
@@ -203,12 +224,9 @@ angular.module('viaggia.services.diaryDb', [])
             return 'data/messages.json'
             // return Config.getServerURL() + '/diary/' + Config.getAppId();
         }
-        // var installDB = function () {
-        //     return process(getDataURL());
 
-        // }
 
-        //overwrite
+        //overwrite last time of sync
         var updateSynchTimestamp = function () {
             localStorage.setItem(Config.getAppId() + DIARY_SYNC_TIME, new Date().getTime());
         }
@@ -228,7 +246,6 @@ angular.module('viaggia.services.diaryDb', [])
                 }, function (err) {
                     deferred.reject();
                 });
-                //deferred.resolve(true);
             }
             //check last time of synch e get the last elements from that period
             getRemoteData(getLastTimeSynch()).then(success, err);
@@ -267,14 +284,14 @@ angular.module('viaggia.services.diaryDb', [])
                     installDB().then(success, err);
                 } else {
                     deferred.resolve(true);
-                  //  synchDB().then(success, err);
+                      synchDB().then(success, err);
                 }
             }, err);
             return deferred.promise;
 
         }
         // add event to the diary
-        diaryDbService.addEvent = function (event, type) {
+        diaryDbService.addEvent = function (event) {
             //insert the single event into diary using array form
             insertData([event]);
         }
@@ -287,31 +304,30 @@ angular.module('viaggia.services.diaryDb', [])
                 var params = [];
 
                 if (type) {
-                 query = query + 'type = ? AND';
-                 params.push(type);
-                 }
+                    query = query + 'type = ? AND';
+                    params.push(type);
+                }
 
 
                 query = query + ' timestamp >= ? AND timestamp <= ? ORDER BY timestamp DESC';
                 params.push(from);
                 params.push(to);
 
-                
 
-        tx.executeSql(query, params, function (tx, rs) {
-            // console.log('count ' + rs.rows.length);
-            var returnData = [];
-            for (let i = 0; i < rs.rows.length; i++) {
-                returnData.push(rs.rows.item(i));
-            }
-            deferred.resolve(returnData);
-        }, function (tx, error) {
-            console.log('SELECT error: ' + error.message);
-            deferred.reject();
-        })
-    });
-return deferred.promise;
+
+                tx.executeSql(query, params, function (tx, rs) {
+                    var returnData = [];
+                    for (let i = 0; i < rs.rows.length; i++) {
+                        returnData.push(rs.rows.item(i));
+                    }
+                    deferred.resolve(returnData);
+                }, function (tx, error) {
+                    console.log('SELECT error: ' + error.message);
+                    deferred.reject();
+                })
+            });
+            return deferred.promise;
         }
 
-return diaryDbService;
+        return diaryDbService;
     })
