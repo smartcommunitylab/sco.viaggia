@@ -20,10 +20,10 @@ angular.module('viaggia.services.registration', [])
                     'appId': Config.getAppId()
                                 },
                 data: {
-                    "age_range": user.age_range,
-                    "use_transport": user.use_transport,
-                    "vehicles": user.vehicles,
-                    "averagekm": user.averagekm,
+                    // "age_range": user.age_range,
+                    // "use_transport": user.use_transport,
+                    // "vehicles": user.vehicles,
+                    // "averagekm": user.averagekm,
                     "nick_recommandation": user.nick_recommandation
                 },
                 timeout: 20000

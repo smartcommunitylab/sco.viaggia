@@ -406,7 +406,7 @@ angular.module('viaggia.controllers.game', [])
             if (!getDiary) {
                 getDiary = true;
                 console.log("load done")
-                DiaryDbSrv.dbSetup().then(function () {
+                // DiaryDbSrv.dbSetup().then(function () {
                     if ($scope.messages[0]) {
                         var from = $scope.messages[0].timestamp - 2592000000;
                         var to = $scope.messages[0].timestamp;
@@ -439,7 +439,7 @@ angular.module('viaggia.controllers.game', [])
                         Config.loaded();
                         getDiary = false;
                     }
-                });
+                // });
 
             }
         };
@@ -460,12 +460,18 @@ angular.module('viaggia.controllers.game', [])
             return GameSrv.getParams(message);
         }
         $scope.openEventTripDetail = function (message) {
-            $state.go('app.tripDiary');
+            if (JSON.parse(message.event).travelValidity!='PENDING')
+            {
+                $state.go('app.tripDiary');
+            }
+            else {
+              Toast.show($filter('translate')("travel_pending_state"), "short", "bottom");
+            }
         }
         $scope.init = function () {
             if (!getDiary) {
                 getDiary = true;
-                DiaryDbSrv.dbSetup().then(function () {
+                // DiaryDbSrv.dbSetup().then(function () {
                     var x = new Date().getTime() - 2592000000;
                     var filter = GameSrv.getDbType($scope.filter.selected)
                     // DiaryDbSrv.readEvents(filter, 1455800361943, 1476269822849).then(function (notifications) {
@@ -484,15 +490,17 @@ angular.module('viaggia.controllers.game', [])
                         getDiary = false;
                         $scope.singleDiaryStatus = false;
                     });
-                })
+                // })
             }
         }
-        $scope.init();
+        DiaryDbSrv.dbSetup().then(function () {
+            $scope.init();
+        })
         /* Resize ion-scroll */
         $scope.rankingStyle = {};
 
         var generateRankingStyle = function () {
-            // header 44, tabs 49, filter 44, listheader 44, my ranking 48
+            // header 44, filter 44, 
             $scope.rankingStyle = {
                 'height': window.innerHeight - (44 + 44) + 'px'
             };
@@ -558,8 +566,6 @@ angular.module('viaggia.controllers.game', [])
 
             );
         };
-
-        //$scope.filter.filter($scope.filter.selected);
 
         /* Infinite scrolling */
         $scope.loadMore = function () {

@@ -81,53 +81,6 @@ angular.module('viaggia.controllers.registration', [])
         isChecked: false
     }
 
-//    $scope.openModal = function () {
-        //        $scope.modal.show();
-        //    };
-        //    $scope.hideExpandRulesButton = function () {
-        //        if (!$scope.expandedRules) {
-        //            return false;
-        //        }
-        //        return true;
-        //    }
-        //    $scope.hideCloseRulesButton = function () {
-        //        if ($scope.expandedRules) {
-        //            return false;
-        //        }
-        //        return true;
-        //    }
-        //    $scope.closeModal = function () {
-        //        $scope.modal.hide();
-        //    };
-        //    $scope.openRulesModal = function () {
-        //
-        //        $ionicModal.fromTemplateUrl('templates/rulesModal.html', {
-        //            scope: $scope,
-        //            animation: 'slide-in-up'
-        //        }).then(function (modal) {
-        //            $scope.modal = modal;
-        //            $scope.openModal();
-        //        });
-        //
-        //
-        //    }
-        //    $scope.scrollTo = function (id) {
-        //        $location.hash(id)
-        //        $ionicScrollDelegate.anchorScroll(true);
-        //    };
-        //    $scope.toggleRules = function () {
-        //        if ($scope.isLongRulesShown()) {
-        //            $scope.expandedRules = false;
-        //            //$scope.scrollTo("firstSeparator");
-        //        } else {
-        //            $scope.expandedRules = true;
-        //
-        //        }
-        //    };
-        //
-        //    $scope.isLongRulesShown = function () {
-        //        return $scope.expandedRules;
-        //    };
     $scope.register = function () {
         if (!$scope.read.isChecked) {
             Toast.show($filter('translate')('registration_must_accept'), "short", "bottom");
@@ -153,22 +106,22 @@ angular.module('viaggia.controllers.registration', [])
         }
     }
 
-    function createArrayOfVeicles() {
-        if ($scope.user.use_transport) {
-            for (var i = 0; i < $scope.publicTransport.length; i++) {
-                if ($scope.publicTransport[i].checked)
-                    $scope.user.vehicles.push($scope.publicTransport[i].value);
-            }
-        } else {
-            for (var i = 0; i < $scope.privateTransport.length; i++) {
-                if ($scope.privateTransport[i].checked)
-                    $scope.user.vehicles.push($scope.privateTransport[i].value);
-            }
-        }
-    }
+    // function createArrayOfVeicles() {
+    //     if ($scope.user.use_transport) {
+    //         for (var i = 0; i < $scope.publicTransport.length; i++) {
+    //             if ($scope.publicTransport[i].checked)
+    //                 $scope.user.vehicles.push($scope.publicTransport[i].value);
+    //         }
+    //     } else {
+    //         for (var i = 0; i < $scope.privateTransport.length; i++) {
+    //             if ($scope.privateTransport[i].checked)
+    //                 $scope.user.vehicles.push($scope.privateTransport[i].value);
+    //         }
+    //     }
+    // }
 
     function checkParams() {
-        createArrayOfVeicles();
+        //createArrayOfVeicles();
         if ($scope.user.nickname == '') {
             Toast.show($filter('translate')('registration_empty_nick'), "short", "bottom");
             return false;
@@ -177,18 +130,18 @@ angular.module('viaggia.controllers.registration', [])
             Toast.show($filter('translate')('registration_empty_mail'), "short", "bottom");
             return false;
         }
-        if ($scope.user.age_range == '') {
-            Toast.show($filter('translate')('registration_empty_age'), "short", "bottom");
-            return false;
-        }
-        if ($scope.user.averagekm == '' || isNaN($scope.user.averagekm)) {
-            Toast.show($filter('translate')('registration_empty_km'), "short", "bottom");
-            return false;
-        }
-        if ($scope.user.vehicles.length == 0) {
-            Toast.show($filter('translate')('registration_empty_transport'), "short", "bottom");
-            return false;
-        }
+        // if ($scope.user.age_range == '') {
+        //     Toast.show($filter('translate')('registration_empty_age'), "short", "bottom");
+        //     return false;
+        // }
+        // if ($scope.user.averagekm == '' || isNaN($scope.user.averagekm)) {
+        //     Toast.show($filter('translate')('registration_empty_km'), "short", "bottom");
+        //     return false;
+        // }
+        // if ($scope.user.vehicles.length == 0) {
+        //     Toast.show($filter('translate')('registration_empty_transport'), "short", "bottom");
+        //     return false;
+        // }
         return true;
         console.log(JSON.stringify($scope.user));
     }

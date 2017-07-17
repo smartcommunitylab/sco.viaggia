@@ -32,35 +32,35 @@ angular.module('viaggia.services.game', [])
                 string: "msg_trip_walk",
                 color: "#60b35c",
                 icon: "ic_foot",
-                params: ['time'],
+                params: ['time','travelValidity'],
                 state: "openEventTripDetail(message)"
             },
             TRAVEL_BIKE: {
                 string: "msg_trip_bike",
                 color: "#922d67",
                 icon: "ic_bike",
-                params: ['time'],
+                params: ['time','travelValidity'],
                 state: "openEventTripDetail(message)"
             },
             TRAVEL_BUS: {
                 string: "msg_trip_bus",
                 color: "#ea8817",
                 icon: "ic_urban-bus",
-                params: ['time'],
+                params: ['time','travelValidity'],
                 state: "openEventTripDetail(message)"
             },
             TRAVEL_TRAIN: {
                 string: "msg_trip_train",
                 color: "#cd251c",
                 icon: "ic_train",
-                params: ['time'],
+                params: ['time','travelValidity'],
                 state: "openEventTripDetail(message)"
             },
             TRAVEL_MULTIMODAL: {
                 string: "msg_trip_multimodal",
                 color: "#2975a7",
                 icon: "ic_game_multimodal_trip",
-                params: ['time'],
+                params: ['time','travelValidity'],
                 state: "openEventTripDetail(message)"
             },
             BADGE: {
@@ -89,12 +89,14 @@ angular.module('viaggia.services.game', [])
                 string: "msg_new_friend",
                 color: "#3cbacf",
                 icon: "ic_game_friend",
+                params: [],
                 state: "showPlayAndGoPopup()"
             },
             NEW_RANKING_WEEK: {
                 string: "msg_pub_ranking",
                 color: "#3cbacf",
                 icon: "ic_game_classification",
+                params: [],
                 state: "openGamificationBoard()"
             },
         }
@@ -304,18 +306,26 @@ angular.module('viaggia.services.game', [])
         }
         createParamString = function (message) {
             var event = JSON.parse(message.event);
-            // var string = '{';
-            // for (let i = 0; i < NOTIFICATIONS_STYLES[message.type].params.length; i++) {
-            //     if (NOTIFICATIONS_STYLES[message.type].params[i])
-            //         string = string + NOTIFICATIONS_STYLES[message.type].params[i] + ':"' + event[NOTIFICATIONS_STYLES[message.type].params[i]]
-            //         if (NOTIFICATIONS_STYLES[message.type].params[i+1])
-            //         string=string+',';
-            // }
-            // string = string + '"}'
-            // return string;
-            if (NOTIFICATIONS_STYLES[message.type].params == 'time')
-                return '{' + NOTIFICATIONS_STYLES[message.type].params + ':"' + $filter('date')(event['timestamp'], 'dd/MM/yyyy  h:mma') + '"}'
-            else return '{' + NOTIFICATIONS_STYLES[message.type].params + ':"' + event[NOTIFICATIONS_STYLES[message.type].params] + '"}'
+            var string = '{';
+            if (NOTIFICATIONS_STYLES[message.type].params){
+            for (let i = 0; i < NOTIFICATIONS_STYLES[message.type].params.length; i++) {
+                if (NOTIFICATIONS_STYLES[message.type].params[i]){
+                if (NOTIFICATIONS_STYLES[message.type].params[i] == 'time')
+                string = string + NOTIFICATIONS_STYLES[message.type].params[i] + ':"'  + $filter('date')(event['timestamp'], 'dd/MM/yyyy  h:mma')+'"'
+            else string = string + NOTIFICATIONS_STYLES[message.type].params[i] + ':"' + event[NOTIFICATIONS_STYLES[message.type].params[i]]+'"'
+                    
+                    if (NOTIFICATIONS_STYLES[message.type].params[i+1])
+                    string=string+',';
+            }
+        }
+            string = string + '}'
+            } else {
+                return '{}';
+            }
+            return string;
+            // if (NOTIFICATIONS_STYLES[message.type].params == 'time')
+            //     return '{' + NOTIFICATIONS_STYLES[message.type].params + ':"' + $filter('date')(event['timestamp'], 'dd/MM/yyyy  h:mma') + '"}'
+            // else return '{' + NOTIFICATIONS_STYLES[message.type].params + ':"' + event[NOTIFICATIONS_STYLES[message.type].params] + '"}'
         }
 
         var ServerHow = {

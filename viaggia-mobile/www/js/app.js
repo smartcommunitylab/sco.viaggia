@@ -1081,11 +1081,12 @@ angular.module('viaggia', [
       msg_new_challenge: 'Ti è stata assegnata una nuova sfida "{{challengeName}}"',
       msg_won_challenge: 'Hai vinto la sfida "{{challengeName}}"',
       msg_pub_ranking: 'Pubblicata la classifica dei vincitori di questa settimana',
-      msg_trip_walk: 'Viaggio a piedi finito. Ore {{time}}',
-      msg_trip_bike: 'Viaggio in bici finito. Ore {{time}}',
-      msg_trip_bus: 'Viaggio in autobus finito. Ore {{time}}',
-      msg_trip_train: 'Viaggio in treno finito. Ore {{time}}',
-      msg_trip_multimodal: 'Viaggio multimodale finito. Ore {{time}}',
+      msg_trip_walk: 'Viaggio a piedi finito. Ore {{time}}. {{travelValidity}}',
+      msg_trip_bike: 'Viaggio in bici finito. Ore {{time}}. {{travelValidity}}',
+      msg_trip_bus: 'Viaggio in autobus finito. Ore {{time}}. {{travelValidity}}',
+      msg_trip_train: 'Viaggio in treno finito. Ore {{time}}. {{travelValidity}}',
+      msg_trip_multimodal: 'Viaggio multimodale finito. Ore {{time}}. {{travelValidity}}',
+      travel_pending_state: 'Viaggio in attesa di validazione'
     });
 
     $translateProvider.translations('en', {
@@ -1488,11 +1489,12 @@ angular.module('viaggia', [
       msg_new_challenge: 'You have been assigned a new challenge "{{challengeName}}"',
       msg_won_challenge: 'You have won the challenge "{{challengeName}}"',
       msg_pub_ranking: 'Publicated rankings of this week',
-      msg_trip_walk: 'Walking trip. At {{time}}',
-      msg_trip_bike: 'Bike trip. At {{time}}',
-      msg_trip_bus: 'Bus trip. At {{time}}',
-      msg_trip_train: 'Train trip. At {{time}}',
-      msg_trip_multimodal: 'Multimodal trip. At {{time}}',
+      msg_trip_walk: 'Walking trip. At {{time}}. {{travelValidity}}',
+      msg_trip_bike: 'Bike trip. At {{time}}. {{travelValidity}}',
+      msg_trip_bus: 'Bus trip. At {{time}}. {{travelValidity}}',
+      msg_trip_train: 'Train trip. At {{time}}. {{travelValidity}}',
+      msg_trip_multimodal: 'Multimodal trip. At {{time}}. {{travelValidity}}',
+      travel_pending_state: 'Travel waiting validation'
       
     });
 

@@ -164,7 +164,7 @@ angular.module('viaggia.services.diaryDb', [])
                 function (token) {
                     $http({
                         method: 'GET',
-                        url: Config.getGamificationURL() + '/diary',
+                        url: Config.getServerURL() + '/diary?from='+timestamp+'&to='+new Date().getTime(),
                         headers: {
                             'Authorization': 'Bearer ' + token,
                             'appId': Config.getAppId(),
