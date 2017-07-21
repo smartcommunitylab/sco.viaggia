@@ -1,6 +1,6 @@
 angular.module('viaggia.services.game', [])
 
-    .factory('GameSrv', function ($q, $http, $filter, DiaryDbSrv,Config, userService) {
+    .factory('GameSrv', function ($q, $http, $filter, DiaryDbSrv, Config, userService) {
         var gameService = {};
 
         var localStatus = null;
@@ -32,35 +32,35 @@ angular.module('viaggia.services.game', [])
                 string: "msg_trip_walk",
                 color: "#60b35c",
                 icon: "ic_foot",
-                params: ['time','travelValidity'],
+                params: ['time', 'travelValidity'],
                 state: "openEventTripDetail(message)"
             },
             TRAVEL_BIKE: {
                 string: "msg_trip_bike",
                 color: "#922d67",
                 icon: "ic_bike",
-                params: ['time','travelValidity'],
+                params: ['time', 'travelValidity'],
                 state: "openEventTripDetail(message)"
             },
             TRAVEL_BUS: {
                 string: "msg_trip_bus",
                 color: "#ea8817",
                 icon: "ic_urban-bus",
-                params: ['time','travelValidity'],
+                params: ['time', 'travelValidity'],
                 state: "openEventTripDetail(message)"
             },
             TRAVEL_TRAIN: {
                 string: "msg_trip_train",
                 color: "#cd251c",
                 icon: "ic_train",
-                params: ['time','travelValidity'],
+                params: ['time', 'travelValidity'],
                 state: "openEventTripDetail(message)"
             },
             TRAVEL_MULTIMODAL: {
                 string: "msg_trip_multimodal",
                 color: "#2975a7",
                 icon: "ic_game_multimodal_trip",
-                params: ['time','travelValidity'],
+                params: ['time', 'travelValidity'],
                 state: "openEventTripDetail(message)"
             },
             BADGE: {
@@ -100,203 +100,9 @@ angular.module('viaggia.services.game', [])
                 state: "openGamificationBoard()"
             },
         }
-        var returnValue = {
-            "firstBefore": 1475186400000,
-            "firstAfter": 1478214000000,
-            "stats": [
-                {
-                    "from": 1475272800000,
-                    "to": 1475359199000,
-                    "data": {
-                        "free tracking": 1,
-                        "walk": 0.01113068647287049
-                    }
-                },
-                {
-                    "from": 1475532000000,
-                    "to": 1475618399000,
-                    "data": {
-                        "free tracking": 2,
-                        "walk": 0.13049454731428348
-                    }
-                },
-                {
-                    "from": 1475704800000,
-                    "to": 1475791199000,
-                    "data": {
-                        "free tracking": 1,
-                        "planned": 2,
-                        "transit": 17.95396647921341,
-                        "walk": 1.8251372116081936
-                    }
-                },
-                {
-                    "from": 1476136800000,
-                    "to": 1476223199000,
-                    "data": {
-                        "free tracking": 2,
-                        "walk": 0.08257453364882839
-                    }
-                },
-                {
-                    "from": 1476309600000,
-                    "to": 1476395999000,
-                    "data": {
-                        "bike": 0.04427607554555679,
-                        "free tracking": 2,
-                        "walk": 0.03888304501602912
-                    }
-                },
-                {
-                    "from": 1476396000000,
-                    "to": 1476482399000,
-                    "data": {
-                        "planned": 1,
-                        "transit": 8.976983239606545,
-                        "walk": 0.8652789999999999
-                    }
-                },
-                {
-                    "from": 1477260000000,
-                    "to": 1477346399000,
-                    "data": {
-                        "bike": 0.9439528951907973,
-                        "free tracking": 1
-                    }
-                },
-                {
-                    "from": 1477692000000,
-                    "to": 1477778399000,
-                    "data": {
-                        "bike": 4.324641387105223,
-                        "free tracking": 2
-                    }
-                },
-                {
-                    "from": 1477868400000,
-                    "to": 1477954799000,
-                    "data": {
-                        "bike": 1.0606265297022681,
-                        "free tracking": 1
-                    }
-                }
-            ]
-        }
 
-        var ArrMax = {
-            "userId": "24122",
-            "updateTime": 1498552227657,
-            "stats": {
-                "total": {
-                    "date max bike": {
-                        "from": 978303600000,
-                        "to": 1498514400000
-                    },
-                    "date max free tracking": {
-                        "from": 978303600000,
-                        "to": 1498514400000
-                    },
-                    "date max planned": {
-                        "from": 978303600000,
-                        "to": 1498514400000
-                    },
-                    "date max transit": {
-                        "from": 978303600000,
-                        "to": 1498514400000
-                    },
-                    "date max walk": {
-                        "from": 978303600000,
-                        "to": 1498514400000
-                    },
-                    "maxbike": 6.649041845265036,
-                    "maxfree tracking": 26,
-                    "maxplanned": 8,
-                    "maxtransit": 108.7630345280771,
-                    "maxwalk": 7.646344053298546
-                },
-                "day": {
-                    "date max bike": {
-                        "from": 1477692000000,
-                        "to": 1477692000000
-                    },
-                    "date max free tracking": {
-                        "from": 1475100000000,
-                        "to": 1475100000000
-                    },
-                    "date max planned": {
-                        "from": 1475704800000,
-                        "to": 1475704800000
-                    },
-                    "date max transit": {
-                        "from": 1478214000000,
-                        "to": 1478214000000
-                    },
-                    "date max walk": {
-                        "from": 1475704800000,
-                        "to": 1475704800000
-                    },
-                    "maxbike": 4.324641387105223,
-                    "maxfree tracking": 3,
-                    "maxplanned": 2,
-                    "maxtransit": 21.292706110014688,
-                    "maxwalk": 1.8251372116081936
-                },
-                "month": {
-                    "date max bike": {
-                        "from": 1475272800000,
-                        "to": 1477868400000
-                    },
-                    "date max free tracking": {
-                        "from": 1472680800000,
-                        "to": 1475186400000
-                    },
-                    "date max planned": {
-                        "from": 1477954800000,
-                        "to": 1480460400000
-                    },
-                    "date max transit": {
-                        "from": 1477954800000,
-                        "to": 1480460400000
-                    },
-                    "date max walk": {
-                        "from": 1477954800000,
-                        "to": 1480460400000
-                    },
-                    "maxbike": 6.373496887543846,
-                    "maxfree tracking": 12,
-                    "maxplanned": 5,
-                    "maxtransit": 81.83208480925715,
-                    "maxwalk": 3.824537
-                },
-                "week": {
-                    "date max bike": {
-                        "from": 1477260000000,
-                        "to": 1477778400000
-                    },
-                    "date max free tracking": {
-                        "from": 1474840800000,
-                        "to": 1475359200000
-                    },
-                    "date max planned": {
-                        "from": 1479682800000,
-                        "to": 1480201200000
-                    },
-                    "date max transit": {
-                        "from": 1479682800000,
-                        "to": 1480201200000
-                    },
-                    "date max walk": {
-                        "from": 1475445600000,
-                        "to": 1475964000000
-                    },
-                    "maxbike": 5.268594282296021,
-                    "maxfree tracking": 9,
-                    "maxplanned": 2,
-                    "maxtransit": 30.26968934962123,
-                    "maxwalk": 1.955631758922477
-                }
-            }
-        }
+        var ArrMax = null;
+
         getTravelType = function (message) {
             var event = JSON.parse(message.event);
             if (event.travelType == 'PLANNED')
@@ -307,25 +113,22 @@ angular.module('viaggia.services.game', [])
         createParamString = function (message) {
             var event = JSON.parse(message.event);
             var string = '{';
-            if (NOTIFICATIONS_STYLES[message.type].params){
-            for (let i = 0; i < NOTIFICATIONS_STYLES[message.type].params.length; i++) {
-                if (NOTIFICATIONS_STYLES[message.type].params[i]){
-                if (NOTIFICATIONS_STYLES[message.type].params[i] == 'time')
-                string = string + NOTIFICATIONS_STYLES[message.type].params[i] + ':"'  + $filter('date')(event['timestamp'], 'dd/MM/yyyy  h:mma')+'"'
-            else string = string + NOTIFICATIONS_STYLES[message.type].params[i] + ':"' + event[NOTIFICATIONS_STYLES[message.type].params[i]]+'"'
-                    
-                    if (NOTIFICATIONS_STYLES[message.type].params[i+1])
-                    string=string+',';
-            }
-        }
-            string = string + '}'
+            if (NOTIFICATIONS_STYLES[message.type].params) {
+                for (let i = 0; i < NOTIFICATIONS_STYLES[message.type].params.length; i++) {
+                    if (NOTIFICATIONS_STYLES[message.type].params[i]) {
+                        if (NOTIFICATIONS_STYLES[message.type].params[i] == 'time')
+                            string = string + NOTIFICATIONS_STYLES[message.type].params[i] + ':"' + $filter('date')(event['timestamp'], 'dd/MM/yyyy  h:mma') + '"'
+                        else string = string + NOTIFICATIONS_STYLES[message.type].params[i] + ':"' + event[NOTIFICATIONS_STYLES[message.type].params[i]] + '"'
+
+                        if (NOTIFICATIONS_STYLES[message.type].params[i + 1])
+                            string = string + ',';
+                    }
+                }
+                string = string + '}'
             } else {
                 return '{}';
             }
             return string;
-            // if (NOTIFICATIONS_STYLES[message.type].params == 'time')
-            //     return '{' + NOTIFICATIONS_STYLES[message.type].params + ':"' + $filter('date')(event['timestamp'], 'dd/MM/yyyy  h:mma') + '"}'
-            // else return '{' + NOTIFICATIONS_STYLES[message.type].params + ':"' + event[NOTIFICATIONS_STYLES[message.type].params] + '"}'
         }
 
         var ServerHow = {
@@ -405,50 +208,46 @@ angular.module('viaggia.services.game', [])
             });
             return deferred.promise;
         }
- var checkTravelType = function (travelId) {
-            
-             if (travelId.indexOf("walk_")!=-1 ||travelId.indexOf("bike_")!=-1||travelId.indexOf("bus_")!=-1||travelId.indexOf("train_")!=-1)
-                {
-                    return "FREETRACKING";
+        var checkTravelType = function (travelId) {
+
+            if (travelId.indexOf("walk_") != -1 || travelId.indexOf("bike_") != -1 || travelId.indexOf("bus_") != -1 || travelId.indexOf("train_") != -1) {
+                return "FREETRACKING";
             }
-                else {
-                    return "PLANNED"
-                }
+            else {
+                return "PLANNED"
+            }
         }
         var checkTravelModes = function (travelId) {
             var travelModes = [];
-            if (travelId.indexOf("walk_")!=-1)
+            if (travelId.indexOf("walk_") != -1)
                 travelModes.push("walk")
-            if (travelId.indexOf("bike_")!=-1)
+            if (travelId.indexOf("bike_") != -1)
                 travelModes.push("bike")
-            if (travelId.indexOf("train_")!=-1)
+            if (travelId.indexOf("train_") != -1)
                 travelModes.push("train")
-            if (travelId.indexOf("bus_")!=-1)
+            if (travelId.indexOf("bus_") != -1)
                 travelModes.push("bus")
-                          
+
 
             return travelModes;
         }
         gameService.getTravelForDiary = function () {
-              var tripId = localStorage.getItem(Config.getAppId() + "_tripId");
+            var tripId = localStorage.getItem(Config.getAppId() + "_tripId");
             var travelType = checkTravelType(tripId);
             var travelModes = checkTravelModes(tripId);
             return {
-                tripId:tripId,
-                travelType:travelType,
-                travelModes:travelModes
+                tripId: tripId,
+                travelType: travelType,
+                travelModes: travelModes
             }
         }
         gameService.addTravelDiary = function (travel) {
-            //create event
-            // var tripId = localStorage.getItem(Config.getAppId() + "_tripId");
-            // var travelType = checkTravelType(tripId);
-            // var travelModes = checkTravelModes(tripId);
+            //create event travel after stop with PENDING validity waiting the synch
             if (travel.tripId) {
                 var event = {
                     "timestamp": new Date().getTime(),
                     "type": "TRAVEL",
-                    "entityId": travel.tripId,
+                    "clientId": travel.tripId,
                     "travelType": travel.travelType,
                     "travelModes": travel.travelModes,
                     "travelValidity": "PENDING",
@@ -459,79 +258,79 @@ angular.module('viaggia.services.game', [])
 
 
         gameService.getMaxStat = function (type) {
+            if (ArrMax) {
+                if (type == "Daily") {
+                    return ArrMax.stats.day
+                }
+                if (type == "Weekly") {
+                    return ArrMax.stats.week
+                }
+                if (type == "Monthly") {
+                    return ArrMax.stats.month
+                }
+                if (type == "Total") {
+                    return ArrMax.stats.total
+                }
+            }
+        }
+        gameService.getRemoteMaxStat = function () {
             var deferred = $q.defer();
             var MaxStats = []
             userService.getValidToken().then(
                 function (token) {
-                    if (type == "Daily") {
-                        MaxStats.push(ArrMax.stats.day)
-                        //MaxStats = ArrMax.stats.day
-                    }
-                    if (type == "Weekly") {
-                        MaxStats.push(ArrMax.stats.week)
-                    }
-                    if (type == "Monthly") {
-                        MaxStats.push(ArrMax.stats.month)
-                    }
-                    if (type == "Total") {
-                        MaxStats.push(ArrMax.stats.total)
-                    }
-                    deferred.resolve(MaxStats);
+                    $http({
+                        method: 'GET',
+                        url: Config.getServerURL() + '/gamification/statistics/global/player',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
+                        .success(function (arrMax) {
+                            ArrMax = arrMax;
+                            deferred.resolve();
+                        })
+
+                        // })
+
+                        .error(function (response) {
+                            deferred.reject(response);
+                        });
+                    // deferred.resolve(returnValuee);
                 });
+
+            // });
             return deferred.promise;
         }
+       
 
         //SERVER VERSION
-        // gameService.getStatistics = function (how, from, to) {
-        //     var deferred = $q.defer();
-        //     var returnValuee = {
-        //         "firstBefore": 1475186400000,
-        //         "firstAfter": 1478214000000,
-        //         "stats": []
-        //     };
-        //     userService.getValidToken().then(
-        //         function (token) {
-        //             $http({
-        //                 method: 'GET',
-        //                 url: Config.getGamificationURL() + '/status',
-        //                 headers: {
-        //                     'Authorization': 'Bearer ' + token,
-        //                     'appId': Config.getAppId(),
-        //                 },
-        //                 timeout: Config.getHTTPConfig().timeout
-        //             })
-        //                 .success(function (stats) {
-        //                     deferred.resolve(stats);
-        //                 })
-
-        //                 .error(function (response) {
-        //                     deferred.reject(response);
-        //                 });
-        //             deferred.resolve(returnValuee);
-        //         });
-        //     return deferred.promise;
-        // }
-
-        //local version
         gameService.getStatistics = function (how, from, to) {
             var deferred = $q.defer();
-            var returnValuee = {
-                "firstBefore": 1475186400000,
-                "firstAfter": 1478214000000,
-                "stats": []
-            };
             userService.getValidToken().then(
                 function (token) {
-                    //                    for (var i = 0; i < returnValue.stats.length; i++) {
-                    for (var i = returnValue.stats.length - 1; i > 0; i--) {
-                        if (returnValue.stats[i].from > from && returnValue.stats[i].to < to)
-                            returnValuee.stats.push(returnValue.stats[i]);
-                    }
-                    deferred.resolve(returnValuee);
-                    //                deferred.reject();
+                    $http({
+                        method: 'GET',
+                        url: Config.getServerURL() + '/gamification/statistics/player?granularity=' + how + '&from=' + from + '&to=' + to,
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
+                        .success(function (stats) {
+                            deferred.resolve(stats);
+                        })
+
+                        .error(function (response) {
+                            deferred.reject(response);
+                        });
                 });
             return deferred.promise;
         }
+
+     
         /* get remote status */
         gameService.getStatus = function () {
             var deferred = $q.defer();

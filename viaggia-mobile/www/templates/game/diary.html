@@ -16,11 +16,11 @@
                 </ion-list>
             </div>
         </div>
-        <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="diaryScroll">
+        <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="diaryScroll" ng-if="!noDiary()">
             <!--<div class="list" style="margin-top: 25px">-->
-            <ion-list>
+            <ion-list >
                 <div style="margin-top: 25px">
-                <div ng-repeat="day in days">
+                <div ng-repeat="day in days" >
                     <div class="message-item">
                         <div class="timeline-line">
                         </div>
@@ -43,5 +43,8 @@
                 <ion-infinite-scroll ng-if="maybeMore" on-infinite="loadMore()"></ion-infinite-scroll>
             </ion-list>
         </ion-scroll>
+        <div ng-if="noDiary()">
+            <h4>{{'no_diary' | translate}}</h4>
+        </div>
     </ion-content>
 </ion-view>
