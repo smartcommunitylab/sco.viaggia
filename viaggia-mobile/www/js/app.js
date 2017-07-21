@@ -1088,7 +1088,8 @@ angular.module('viaggia', [
       msg_trip_multimodal: 'Viaggio multimodale finito. Ore {{time}}. {{travelValidity}}',
       travel_pending_state: 'Viaggio in attesa di validazione',
       no_diary:'Nessun elemento trovato nel diario',
-      statistic_total_label:"Totale"
+      no_stats:'Nessuna statistica trovata',
+      statistic_total_label:"Total"
     });
 
     $translateProvider.translations('en', {
@@ -1498,6 +1499,7 @@ angular.module('viaggia', [
       msg_trip_multimodal: 'Multimodal trip. At {{time}}. {{travelValidity}}',
       travel_pending_state: 'Travel waiting validation',
       no_diary:'No elements found in the diary',
+      no_stats:'No statistic found',
       statistic_total_label:"Total"
       
     });

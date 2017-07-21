@@ -238,6 +238,9 @@ angular.module('viaggia.services.conf', [])
                 };
                 return angular.copy(mapJsonConfig['trackingConfigure']);
             },
+            getTimeGameLimit: function () {
+                return mapJsonConfig["timeGameLimit"];
+            },
             getErrorGPSNoSignal: function () {
                 return ERROR_GPS_NO_SIGNAL;
             },
@@ -259,7 +262,7 @@ angular.module('viaggia.services.conf', [])
             getMetroparcoServerURL: function () {
                 return mapJsonConfig['metroparco'];
             },
-            getMinimumDistance: function() {
+            getMinimumDistance: function () {
                 return TRACKING_MINIMUM_DISTANCE;
             },
             getParkingMetersRadius: function () {
@@ -278,7 +281,7 @@ angular.module('viaggia.services.conf', [])
                     zoom: mapJsonConfig['zoom_map']
                 };
             },
-            getZoomParkingMeter: function() {
+            getZoomParkingMeter: function () {
                 return 17;
             },
             getPlanPolicy: function () {
