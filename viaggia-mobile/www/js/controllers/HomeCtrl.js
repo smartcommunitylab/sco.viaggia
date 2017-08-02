@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.home', [])
 
-    .controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, userService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv,DiaryDbSrv) {
+    .controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv,DiaryDbSrv) {
         //load from localstorage the id notifications read
         $ionicPlatform.ready(function () {
             document.addEventListener("resume", function () {
@@ -43,7 +43,6 @@ angular.module('viaggia.controllers.home', [])
             return false;
         }
         var localDataInit = function () {
-            userService.getUserData();
             planService.getTrips().then(function () {
                 //$ionicLoading.hide();
             }, function () {

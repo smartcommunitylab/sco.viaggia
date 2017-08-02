@@ -1,11 +1,11 @@
 angular.module('viaggia.controllers.registration', [])
 
-.controller('RegistrationCtrl', function ($scope, $state, $filter, $ionicHistory, $ionicModal, $location, $ionicScrollDelegate, Toast, Config, registrationService, storageService) {
+.controller('RegistrationCtrl', function ($scope, $state, $filter, $ionicHistory, $ionicModal, $location, $ionicScrollDelegate, Toast, Config, registrationService, LoginService) {
     $scope.expandedRules = false;
     Config.loaded();
     $scope.user = {
         nickname: '',
-        mail: storageService.getUser().mail,
+        mail: LoginService.getUserProfile().email,
         age_range: '',
         averagekm: '',
         use_transport: true,
@@ -99,8 +99,8 @@ angular.module('viaggia.controllers.registration', [])
                 }, function (errStatus) {
                     if (errStatus == '409') {
                         Toast.show($filter('translate')('nickname_inuse'), "short", "bottom");
-
                     }
+                    Config.loaded();
                 });
             }
         }

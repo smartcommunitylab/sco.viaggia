@@ -1,6 +1,6 @@
 angular.module('viaggia.services.game', [])
 
-    .factory('GameSrv', function ($q, $http, $filter, DiaryDbSrv, Config, userService) {
+    .factory('GameSrv', function ($q, $http, $filter, DiaryDbSrv, Config, LoginService) {
         var gameService = {};
 
         var localStatus = null;
@@ -197,7 +197,7 @@ angular.module('viaggia.services.game', [])
             $http.get('data/messages.json').success(function (messages) {
                 var returnValue = messages;
                 var returnNotifications = [];
-                userService.getValidToken().then(
+                LoginService.getValidAACtoken().then(
                     function (token) {
                         for (var i = returnValue.length - 1; i > 0; i--) {
                             if (returnValue[i].timestamp > from && returnValue[i].timestamp < to)
@@ -276,7 +276,7 @@ angular.module('viaggia.services.game', [])
         gameService.getRemoteMaxStat = function () {
             var deferred = $q.defer();
             var MaxStats = []
-            userService.getValidToken().then(
+            LoginService.getValidAACtoken().then(
                 function (token) {
                     $http({
                         method: 'GET',
@@ -308,7 +308,7 @@ angular.module('viaggia.services.game', [])
         //SERVER VERSION
         gameService.getStatistics = function (how, from, to) {
             var deferred = $q.defer();
-            userService.getValidToken().then(
+            LoginService.getValidAACtoken().then(
                 function (token) {
                     $http({
                         method: 'GET',
@@ -335,7 +335,7 @@ angular.module('viaggia.services.game', [])
         gameService.getStatus = function () {
             var deferred = $q.defer();
 
-            userService.getValidToken().then(
+            LoginService.getValidAACtoken().then(
                 function (token) {
                     $http({
                         method: 'GET',
@@ -387,7 +387,7 @@ angular.module('viaggia.services.game', [])
         gameService.getRanking = function (when, start, end) {
             var deferred = $q.defer();
 
-            userService.getValidToken().then(
+            LoginService.getValidAACtoken().then(
                 function (token) {
                     var timestamp = null;
 
@@ -450,6 +450,32 @@ angular.module('viaggia.services.game', [])
 
             return deferred.promise;
         };
+
+        gameService.validUserForGamification = function (profile) {
+            var deferred = $q.defer();
+            //check if user (profile.userId) is valid or not
+            var url = Config.getGamificationURL() + "/checkuser/" + profile.userId;
+    
+            $http.get(url).then(
+                function (response) {
+                    if (!response.data.registered) {
+                        deferred.resolve(false);
+    
+                    } else {
+                        localStorage.userValid = true;
+                        deferred.resolve(true);
+                    }
+                },
+                function (responseError) {
+                    deferred.reject(responseError);
+                }
+            );
+    
+            return deferred.promise;
+        }
+        gameService.validUserForGamificationLocal = function() {
+        return 'true' == localStorage.userValid;
+        }
 
         return gameService;
     });

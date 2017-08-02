@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.tripdetails', [])
 
-    .controller('TripDetailsCtrl', function ($scope, $rootScope, $stateParams, $ionicModal, $window, $filter, $ionicPopup, storageService, planService, mapService, Config, Toast, trackService, $filter, $ionicHistory, $state, $ionicLoading, $location, bookmarkService, Utils, GameSrv) {
+    .controller('TripDetailsCtrl', function ($scope, $rootScope, $stateParams, $ionicModal, $window, $filter, $ionicPopup, LoginService, planService, mapService, Config, Toast, trackService, $filter, $ionicHistory, $state, $ionicLoading, $location, bookmarkService, Utils, GameSrv) {
         $scope.title = $filter('translate')('journey_detail');
         //$scope.empty_rec = Config.getDaysRec();
         //    document.addEventListener("resume", function () {
@@ -373,7 +373,7 @@ angular.module('viaggia.controllers.tripdetails', [])
         var startTrack = function () {
             if (!$scope.tripId || ($scope.tripId.indexOf("temporary") != -1)) {
                 //it was an existent temporary trip, refresh the id
-                $scope.tripId = new Date().getTime() + "_temporary_" + storageService.getUser().userId;
+                $scope.tripId = new Date().getTime() + "_temporary_" + LoginService.getUserProfile().userId;
                 trackService.startTemporary($scope.tripId, $scope.trip, refreshTripDetail)
                     .then(function () {
                         $scope.modifiable = false;

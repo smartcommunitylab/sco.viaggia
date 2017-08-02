@@ -1,6 +1,6 @@
 angular.module('viaggia.services.diaryDb', [])
 
-    .factory('DiaryDbSrv', function ($q, $http, Config, userService) {
+    .factory('DiaryDbSrv', function ($q, $http, Config, LoginService) {
         var diaryDbService = {};
         var DIARY_SYNC_TIME = "_diary_synch_time";
         var db = null;
@@ -156,7 +156,7 @@ angular.module('viaggia.services.diaryDb', [])
             {
                 url=url+'?from=' + timestamp + '&to=' + new Date().getTime();
             }
-            userService.getValidToken().then(
+            LoginService.getValidAACtoken().then(
                 function (token) {
                     $http({
                         method: 'GET',
@@ -223,7 +223,7 @@ angular.module('viaggia.services.diaryDb', [])
                 if (value)
                 { deferred.resolve(value.timestamp); }
                 else {
-                    deferred.value(localStorage.getItem(Config.getAppId() + DIARY_SYNC_TIME));
+                    deferred.resolve(localStorage.getItem(Config.getAppId() + DIARY_SYNC_TIME));
                 }
             }, function (err) {
                 deferred.reject();

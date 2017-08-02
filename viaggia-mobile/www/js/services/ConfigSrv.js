@@ -22,8 +22,11 @@ angular.module('viaggia.services.conf', [])
         };
 
         var LOGIN_EXPIRED = 'LOGIN_EXPIRED';
-        var DISTANCE_AUTOCOMPLETE = '50';
-        var HTTP_CONFIG = {
+        var DISTANCE_AUTOCOMPLETE = '25';
+        var PARKING_METERS_RADIUS = '5';
+        var PARKING_METERS_MAX_NUMBER = 5;
+
+         var HTTP_CONFIG = {
             timeout: 5000
         };
         var TRACKING_MINIMUM_DISTANCE = 250;
@@ -32,7 +35,8 @@ angular.module('viaggia.services.conf', [])
         var PARKING_METERS_RADIUS = '5';
         var PARKING_METERS_MAX_NUMBER = 52;
         var PARKING_METERS_AGENCY_IDS = ['tn_mob_091516'];
-        var GEOCODER_URL = 'https://os.smartcommunitylab.it/core.geocoder/spring';
+        
+        var GEOCODER_URL = 'https://tn.smartcommunitylab.it/core.geocoder';
         var APP_BUILD = '';
         var PLAN_TYPES = ['WALK', 'TRANSIT', 'CAR', 'BICYCLE', 'SHAREDCAR', 'SHAREDBIKE'];
         var ERROR_GPS_NO_SIGNAL = "ERROR_GPS_NO_SIGNAL";
@@ -213,6 +217,7 @@ angular.module('viaggia.services.conf', [])
         var configDeferred = null;
 
         return {
+            //init the application with configuration and timetables from configuration's file
             init: function () {
                 if (configDeferred != null) return configDeferred.promise;
 
@@ -293,6 +298,14 @@ angular.module('viaggia.services.conf', [])
             getGeocoderURL: function () {
                 return GEOCODER_URL;
             },
+            getGeocoderConf: function () {
+                return {
+                timeout: 5000,
+                headers: {
+                    appId: undefined
+                }
+                };
+            },
             getGamificationURL: function () {
                 return mapJsonConfig['gamificationURL'];
             },
@@ -349,6 +362,9 @@ angular.module('viaggia.services.conf', [])
             getTaxiAccuracy: function () {
                 return mapJsonConfig["taxi_accuracy"];
 
+            },
+            getAccessibility: function () {
+                return mapJsonConfig['accessibility'];
             },
             getMessagingServerURL: function () {
                 return mapJsonConfig["messagingServerURL"];
@@ -529,6 +545,9 @@ angular.module('viaggia.services.conf', [])
             },
             getClientSecKey: function () {
                 return mapJsonConfig["clientSecID"];
+            },
+            getWebClientId: function () {
+                return mapJsonConfig["webclientid"];
             },
             LOGIN_EXPIRED: LOGIN_EXPIRED
         }

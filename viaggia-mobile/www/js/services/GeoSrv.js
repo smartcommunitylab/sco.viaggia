@@ -1,6 +1,6 @@
 angular.module('viaggia.services.geo', [])
 
-    .factory('GeoLocate', function ($q, $rootScope) {
+    .factory('GeoLocate', function ($q, $rootScope, $cordovaDeviceOrientation) {
         var localization = undefined;
         var positionError = null;
         if (typeof (Number.prototype.toRad) === "undefined") {
@@ -65,6 +65,7 @@ angular.module('viaggia.services.geo', [])
                             $rootScope.locationWatchID = navigator.geolocation.watchPosition(function (position) {
                                 r = [position.coords.latitude, position.coords.longitude];
                                 $rootScope.myPosition = r;
+                                $rootScope.myPositionAccuracy = position.coords.accuracy;
                                 localization.resolve(r);
                             }, function (error) {
                                 positionError = error;
@@ -85,6 +86,7 @@ angular.module('viaggia.services.geo', [])
                     $rootScope.locationWatchID = navigator.geolocation.watchPosition(function (position) {
                         r = [position.coords.latitude, position.coords.longitude];
                         $rootScope.myPosition = r;
+                        $rootScope.myPositionAccuracy = position.coords.accuracy;
                         //console.log('geolocated (web)');
                         localization.resolve(r);
                     }, function (error) {
@@ -127,7 +129,7 @@ angular.module('viaggia.services.geo', [])
                                 return defer.reject();
                             }
                         }, {
-                            timeout: 100
+                            timeout: 10*1000
                         });
                 }, false);
                 return defer.promise;

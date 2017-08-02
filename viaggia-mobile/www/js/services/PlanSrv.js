@@ -1,6 +1,6 @@
 angular.module('viaggia.services.plan', [])
 
-    .factory('planService', function ($q, $http, $filter, $rootScope, GeoLocate, Config, userService, trackService, storageService) {
+    .factory('planService', function ($q, $http, $filter, $rootScope, GeoLocate, Config, trackService, LoginService) {
 
         var planService = {};
         var position = {};
@@ -401,6 +401,7 @@ angular.module('viaggia.services.plan', [])
                 var step = {};
                 step.startime = i == 0 ? plan.startime : plan.leg[i].startime;
                 step.endtime = plan.leg[i].endtime;
+                step.alertText = planService.buildAlertText(plan.leg[i]);
                 step.mean = {};
 
                 extractDetails(step, plan.leg[i], plan.leg, i, nextFrom);
@@ -511,7 +512,7 @@ angular.module('viaggia.services.plan', [])
         planService.planJourney = function (newPlanConfigure) {
             planConfigure = newPlanConfigure;
             var deferred = $q.defer();
-            var userId = storageService.getUser().userId;
+            var userId = LoginService.getUserProfile().userId;
             var appName = Config.getAppName();
             $http({
                 method: 'POST',
@@ -576,9 +577,7 @@ angular.module('viaggia.services.plan', [])
             } else {
                 i = i.replace(/\ /g, "+");
                 var url = Config.getGeocoderURL() + "/address?latlng=" + Config.getMapPosition().lat + ", " + Config.getMapPosition().long + "&distance=" + Config.getDistanceForAutocomplete() + "&address=" + i;
-                $http.get(url, {
-                    timeout: 5000
-                }).
+                $http.get(url, Config.getGeocoderConf()).
                     success(function (data, status, headers, config) {
                         geoCoderPlaces = [];
                         //            places = data.response.docs;
@@ -659,7 +658,7 @@ angular.module('viaggia.services.plan', [])
             //        if (!newTrip) {
             //            methodTrip = 'PUT';
             //}
-            userService.getValidToken().then(function (token) {
+            LoginService.getValidAACtoken().then(function (token) {
                 $http({
                     method: methodTrip,
                     url: urlBuilt,
@@ -836,7 +835,7 @@ angular.module('viaggia.services.plan', [])
             var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
             if (!savedTrips) {
                 //try sync with server
-                userService.getValidToken().then(function (token) {
+                LoginService.getValidAACtoken().then(function (token) {
                     $http({
                         method: 'GET',
                         url: Config.getServerURL() + "/itinerary",
@@ -915,7 +914,7 @@ angular.module('viaggia.services.plan', [])
             if (!tripId) {
                 deferred.reject();
             } else {
-                userService.getValidToken().then(function (token) {
+                LoginService.getValidAACtoken().then(function (token) {
                     $http.delete(Config.getServerURL() + "/itinerary/" + tripId, {
                         headers: {
                             'Accept': 'application/json',
@@ -952,5 +951,31 @@ angular.module('viaggia.services.plan', [])
             return deferred.promise;
         }
 
+        planService.hasAlerts = function (it) {
+            var has = false;
+            if (it.leg) it.leg.forEach(function (l) {
+                has = has || planService.legHasAlerts(l)
+            });
+            return has;
+            }
+        planService.legHasAlerts = function (leg) {
+            return checkArray(leg.alertStrikeList) || checkArray(leg.alertDelayList) || checkArray(leg.alertParkingList) || checkArray(leg.alertRoadList) || checkArray(leg.alertAccidentList);
+        }
+        planService.buildAlertText = function (leg) {
+            var txt = [];
+            if (checkArray(leg.alertDelayList)) {
+                leg.alertDelayList.forEach(function (a) {
+                txt.push($filter('translate')('alert_delay', {
+                    mins: Math.ceil(a.delay / 60000)
+                }));
+                });
+            }
+            return txt;
+        }
+    
+        function checkArray(a) {
+            return a != null && a.length > 0;
+        }
+        
         return planService;
     })

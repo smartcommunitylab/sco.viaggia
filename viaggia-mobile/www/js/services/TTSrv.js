@@ -286,6 +286,7 @@ angular.module('viaggia.services.timetable', [])
                         if (data.times) data.times = data.times[0];
                         if (data.tripIds) data.tripIds = data.tripIds[0];
                         if (data.delays) data.delays = data.delays[0];
+                        data.wheelChairBoarding = toWheelChairBoarding(agency, data.stopsId);
                         deferred.notify(data);
                         deferred.resolve(data);
                     })

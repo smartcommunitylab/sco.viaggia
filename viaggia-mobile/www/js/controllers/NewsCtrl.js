@@ -5,7 +5,7 @@ angular.module('viaggia.controllers.news', [])
 
   var FEED_URL = Config.getRSSUrl();
   var APP_ID = Config.getAppId();
-
+  //get the news elements
   $ionicLoading.show();
   feedService.load(FEED_URL, APP_ID).then(function (entries) {
     entries.forEach(function (entry) {
@@ -30,7 +30,7 @@ angular.module('viaggia.controllers.news', [])
       Toast.show($filter('translate')('toast_error_server_template'), "short", "bottom");
     });
   };
-
+  //go to news details
   $scope.showNews = function (idx) {
     $state.go("app.newsitem", {
       id: idx

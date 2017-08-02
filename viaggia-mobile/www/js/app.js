@@ -56,8 +56,6 @@ angular.module('viaggia', [
   'pascalprecht.translate',
   //    'ng-walkthrough',
   'viaggia.controllers.common',
-  'viaggia.controllers.table1',
-  'viaggia.controllers.table2',
   'viaggia.controllers.timetable',
   'viaggia.controllers.markets',
   'viaggia.controllers.bookmarks',
@@ -73,7 +71,6 @@ angular.module('viaggia', [
   'viaggia.controllers.tripdetails',
   'viaggia.controllers.game',
   'viaggia.controllers.login',
-  'viaggia.controllers.login',
   'viaggia.controllers.registration',
   'viaggia.services.data',
   'viaggia.services.conf',
@@ -84,7 +81,6 @@ angular.module('viaggia', [
   'viaggia.services.info',
   'viaggia.services.taxi',
   'viaggia.services.notification',
-  'viaggia.services.login',
   'viaggia.directives',
   'viaggia.services.geo',
   'viaggia.services.bookmarks',
@@ -93,10 +89,12 @@ angular.module('viaggia', [
   'viaggia.services.game',
   'viaggia.services.tutorial',
   'viaggia.services.diaryDb',
-  'viaggia.filters'
+  'viaggia.filters',
+  'viaggia.services.profile',
+  'smartcommunitylab.services.login'
 ])
 
-  .run(function ($ionicPlatform, $cordovaFile, $q, $rootScope, $translate, trackService, DataManager,DiaryDbSrv, Config, GeoLocate, notificationService) {
+  .run(function ($ionicPlatform, $cordovaFile, $q, $rootScope, $translate, trackService, DataManager,DiaryDbSrv, Config, GeoLocate, notificationService, LoginService) {
 
     $rootScope.locationWatchID = undefined;
 
@@ -157,14 +155,23 @@ angular.module('viaggia', [
       }
       //        GeoLocate.initLocalization().then(function () {
       Config.init().then(function () {
+        LoginService.init({
+             loginType: LoginService.LOGIN_TYPE.AAC,
+             googleWebClientId: Config.getWebClientId(),
+             clientId: Config.getClientId(),
+             clientSecret: Config.getClientSecKey(),
+             aacUrl: Config.getAACURL()
+         });        
         // $rootScope.GPSAllow = true;
         //            if (window.BackgroundGeolocation) {
         //                trackService.startup();
         //            }
 
         if (ionic.Platform.isWebView()) {
+          //we are on a phone so synch the database
           DataManager.dbSetup();
         } else {
+          //we are on a website so synch only the stops
           DataManager.syncStopData();
         }
         notificationService.register();
