@@ -210,7 +210,7 @@ angular.module('viaggia.controllers.login', [])
   }
   $scope.signin = function () {
       Config.loading();
-      lLoginService.login(LoginService.PROVIDER.INTERNAL, $scope.user).then(
+      LoginService.login(LoginService.PROVIDER.INTERNAL, $scope.user).then(
           function (profile) {
             $ionicLoading.show({
                 template: $filter('translate')('user_check')

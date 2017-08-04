@@ -24,7 +24,7 @@ angular.module('viaggia.controllers.game', [])
                 );
             },
             function (err) {
-                $scope.noStatus = true; serverhow
+                $scope.noStatus = true; 
                 Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
             }
         ).finally(Config.loaded);
@@ -155,7 +155,7 @@ angular.module('viaggia.controllers.game', [])
         $scope.init();
 
     })
-    .controller('StatisticsCtrl', function ($scope, $ionicScrollDelegate, $window, $filter, $timeout, Toast, Config, GameSrv, $ionicLoading) {
+    .controller('StatisticsCtrl', function ($scope, $ionicScrollDelegate, $window, $filter, $timeout, Toast, Config, GameSrv) {
         $scope.stats = [];
         $scope.maybeMore = true;
         var getStatistics = false;
@@ -188,14 +188,6 @@ angular.module('viaggia.controllers.game', [])
         $scope.filter.options = ['Daily', 'Weekly', 'Monthly', 'Total'];
         $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
         $scope.filter.filter = function (selection) {
-            $scope.showLoading = function () {
-                $ionicLoading.show({
-                    content: 'Loading',
-                    animation: 'fade-in',
-                    showBackdrop: true,
-                    showDelay: 0
-                });
-            };
             //Config.loaded();
             $scope.calculateMaxStats()
             $scope.serverhow = GameSrv.getServerHow($scope.filter.selected);
@@ -372,7 +364,7 @@ angular.module('viaggia.controllers.game', [])
 
     })
 
-    .controller('DiaryCtrl', function ($scope, $timeout, $state,$filter, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config, $ionicLoading) {
+    .controller('DiaryCtrl', function ($scope, $timeout, $state,$filter, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
         $scope.messages = [];
         $scope.maybeMore = true;
         var getDiary = false;
@@ -401,15 +393,7 @@ angular.module('viaggia.controllers.game', [])
         $scope.filter.options = ['allnotifications', 'badge', 'challenge', 'trip', 'ranking'];
         $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
         $scope.filter.filter = function (selection) {
-            $scope.showLoading = function () {
-                $ionicLoading.show({
-                    content: 'Loading',
-                    animation: 'fade-in',
-                    showBackdrop: true,
-                    showDelay: 0
-                });
-            };
-            $scope.showLoading()
+            Config.loading();
             $scope.maybeMore = true;
             $scope.singleDiaryStatus = true;
             $ionicScrollDelegate.$getByHandle('diaryScroll').scrollTop();
@@ -435,7 +419,7 @@ angular.module('viaggia.controllers.game', [])
         }
 
         $scope.loadMore = function () {
-            if (!getDiary) {
+            if (!getDiary && $scope.maybeMore) {
                 getDiary = true;
                // console.log("load done")
                if (!$scope.from){
@@ -450,6 +434,9 @@ angular.module('viaggia.controllers.game', [])
                     // var to = $scope.messages[0].timestamp-1;
                     var filter = GameSrv.getDbType($scope.filter.selected)
                     DiaryDbSrv.readEvents(filter, $scope.from, $scope.to).then(function (notifications) {
+                        if (notifications == null || notifications.length == 0) {
+                            $scope.maybeMore = false;
+                        }
                         $scope.singleDiaryStatus = true;
                         $scope.groupDays(notifications);
                         $scope.messages = notifications;
@@ -462,7 +449,7 @@ angular.module('viaggia.controllers.game', [])
                         getDiary = false;
                     },
                         function (err) {
-                            $scope.maybeMore = true;
+                            $scope.maybeMore = false;
                             Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
                             $scope.$broadcast('scroll.infiniteScrollComplete');
                             $scope.singleDiaryStatus = true;
@@ -519,6 +506,9 @@ angular.module('viaggia.controllers.game', [])
                 var filter = GameSrv.getDbType($scope.filter.selected)
                 // DiaryDbSrv.readEvents(filter, 1455800361943, 1476269822849).then(function (notifications) {
                 DiaryDbSrv.readEvents(filter, x, new Date().getTime()).then(function (notifications) {
+                    if (notifications == null || notifications.length == 0) {
+                        $scope.maybeMore = false;
+                    }
                     $scope.singleDiaryStatus = true;
                     $scope.days = []
                     $scope.groupDays(notifications)
@@ -532,6 +522,7 @@ angular.module('viaggia.controllers.game', [])
                     $scope.$broadcast('scroll.infiniteScrollComplete');
                     getDiary = false;
                     $scope.singleDiaryStatus = false;
+                    $scope.maybeMore = false;
                     Config.loaded();
                 });
                 // })
@@ -565,7 +556,7 @@ angular.module('viaggia.controllers.game', [])
             }, 200);
         };
     })
-    .controller('TripDiaryCtrl', function ($scope, $timeout, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config, $ionicLoading) {
+    .controller('TripDiaryCtrl', function ($scope, $timeout, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
 
     }
     )
@@ -601,14 +592,20 @@ angular.module('viaggia.controllers.game', [])
 
         $scope.filter.filter = function (selection) {
             // reload using new selection
+            getRanking = true;
             $scope.maybeMore = true;
             $scope.singleRankStatus = true;
+            $scope.ranking = [];
             Config.loading();
             GameSrv.getRanking(selection, 0, $scope.rankingPerPage).then(
                 function (ranking) {
+                    getRanking = false;
                     $scope.singleRankStatus = true;
                     $scope.currentUser = ranking['actualUser'];
                     $scope.ranking = ranking['classificationList'];
+                    if (!$scope.ranking || $scope.ranking.length < $scope.rankingPerPage) {
+                        $scope.maybeMore = false;
+                    }
                     $scope.$broadcast('scroll.infiniteScrollComplete');
                     Config.loaded();
                 }
@@ -618,7 +615,7 @@ angular.module('viaggia.controllers.game', [])
 
         /* Infinite scrolling */
         $scope.loadMore = function () {
-            if (!getRanking) {
+            if (!getRanking && $scope.maybeMore) {
                 getRanking = true;
                 var start = $scope.ranking != null ? $scope.ranking.length : 0;
                 var end = start + $scope.rankingPerPage;
@@ -637,18 +634,18 @@ angular.module('viaggia.controllers.game', [])
                             $scope.singleRankStatus = true;
                         }
                         else {
-                            $scope.maybeMore = true;
+                            $scope.maybeMore = false;
                             Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
                             $scope.$broadcast('scroll.infiniteScrollComplete');
                             getRanking = false;
-                            if ($scope.ranking.length == 0) {
+                            if ($scope.ranking && $scope.ranking.length == 0) {
                                 $scope.singleRankStatus = false;
 
                             }
                         }
                     },
                     function (err) {
-                        $scope.maybeMore = true;
+                        $scope.maybeMore = false;
                         Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         getRanking = false;
@@ -666,6 +663,8 @@ angular.module('viaggia.controllers.game', [])
 
                     }
                 );
+            } else {
+                $scope.$broadcast('scroll.infiniteScrollComplete');
             }
         };
 

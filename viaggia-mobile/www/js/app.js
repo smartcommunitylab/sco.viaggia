@@ -1088,15 +1088,18 @@ angular.module('viaggia', [
       msg_new_challenge: 'Ti è stata assegnata una nuova sfida "{{challengeName}}"',
       msg_won_challenge: 'Hai vinto la sfida "{{challengeName}}"',
       msg_pub_ranking: 'Pubblicata la classifica dei vincitori di questa settimana',
-      msg_trip_walk: 'Viaggio a piedi finito. Ore {{time}}. {{travelValidity}}',
-      msg_trip_bike: 'Viaggio in bici finito. Ore {{time}}. {{travelValidity}}',
-      msg_trip_bus: 'Viaggio in autobus finito. Ore {{time}}. {{travelValidity}}',
-      msg_trip_train: 'Viaggio in treno finito. Ore {{time}}. {{travelValidity}}',
-      msg_trip_multimodal: 'Viaggio multimodale finito. Ore {{time}}. {{travelValidity}}',
+      msg_trip_walk: 'Viaggio a piedi. Ore {{time}}. {{travelValidity}}',
+      msg_trip_bike: 'Viaggio in bici. Ore {{time}}. {{travelValidity}}',
+      msg_trip_bus: 'Viaggio in autobus. Ore {{time}}. {{travelValidity}}',
+      msg_trip_train: 'Viaggio in treno. Ore {{time}}. {{travelValidity}}',
+      msg_trip_multimodal: 'Viaggio multimodale. Ore {{time}}. {{travelValidity}}',
       travel_pending_state: 'Viaggio in attesa di validazione',
       no_diary:'Nessun elemento trovato nel diario',
       no_stats:'Nessuna statistica trovata',
-      statistic_total_label:"Total"
+      statistic_total_label:"Total",
+      VALID: 'Valido',
+      INVALID: 'Non valido',
+      PENDING: 'In validazione'
     });
 
     $translateProvider.translations('en', {
@@ -1507,7 +1510,10 @@ angular.module('viaggia', [
       travel_pending_state: 'Travel waiting validation',
       no_diary:'No elements found in the diary',
       no_stats:'No statistic found',
-      statistic_total_label:"Total"
+      statistic_total_label:"Total",
+      VALID: 'Valid',
+      INVALID: 'Not valid',
+      PENDING: 'Validation in progress'
       
     });
 

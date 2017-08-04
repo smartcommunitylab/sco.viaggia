@@ -27,61 +27,62 @@ angular.module('viaggia.services.game', [])
                 db: []
             }]
 
+        var tripParams = {time: function(event){return $filter('date')(event['timestamp'], 'hh:mm')}, travelValidity: function(event){return $filter('translate')(event['travelValidity'])}};
         var NOTIFICATIONS_STYLES = {
             TRAVEL_WALK: {
                 string: "msg_trip_walk",
                 color: "#60b35c",
                 icon: "ic_foot",
-                params: ['time', 'travelValidity'],
+                params: tripParams,
                 state: "openEventTripDetail(message)"
             },
             TRAVEL_BIKE: {
                 string: "msg_trip_bike",
                 color: "#922d67",
                 icon: "ic_bike",
-                params: ['time', 'travelValidity'],
+                params: tripParams,
                 state: "openEventTripDetail(message)"
             },
             TRAVEL_BUS: {
                 string: "msg_trip_bus",
                 color: "#ea8817",
                 icon: "ic_urban-bus",
-                params: ['time', 'travelValidity'],
+                params: tripParams,
                 state: "openEventTripDetail(message)"
             },
             TRAVEL_TRAIN: {
                 string: "msg_trip_train",
                 color: "#cd251c",
                 icon: "ic_train",
-                params: ['time', 'travelValidity'],
+                params: tripParams,
                 state: "openEventTripDetail(message)"
             },
             TRAVEL_MULTIMODAL: {
                 string: "msg_trip_multimodal",
                 color: "#2975a7",
                 icon: "ic_game_multimodal_trip",
-                params: ['time', 'travelValidity'],
+                params: tripParams,
                 state: "openEventTripDetail(message)"
             },
             BADGE: {
                 string: "msg_won_badge",
                 color: "#60b35c",
                 icon: "ic_game_badge",
-                params: ['badge'],
+                params: {'badge':'badge'},
                 state: "openGamificationBoard()"
             },
             CHALLENGE: {
                 string: "msg_won_challenge",
                 color: "#60b35c",
                 icon: "ic_game_challenge",
-                params: ['challengeName'],
+                params: {'challengeName':'challengeName'},
                 state: "openGamificationBoard()"
             },
             CHALLENGE_WON: {
                 string: "msg_new_challenge",
                 color: "#60b35c",
                 icon: "ic_game_challenge_assign",
-                params: ['challengeName'],
+                params: {'challengeName':'challengeName'},
                 state: "openGamificationBoard()"
 
             },
@@ -89,14 +90,14 @@ angular.module('viaggia.services.game', [])
                 string: "msg_new_friend",
                 color: "#3cbacf",
                 icon: "ic_game_friend",
-                params: [],
+                params: {},
                 state: "showPlayAndGoPopup()"
             },
             NEW_RANKING_WEEK: {
                 string: "msg_pub_ranking",
                 color: "#3cbacf",
                 icon: "ic_game_classification",
-                params: [],
+                params: {},
                 state: "openGamificationBoard()"
             },
         }
@@ -112,19 +113,19 @@ angular.module('viaggia.services.game', [])
         }
         createParamString = function (message) {
             var event = JSON.parse(message.event);
-            var string = '{';
+            var data = {};
             if (NOTIFICATIONS_STYLES[message.type].params) {
-                for (let i = 0; i < NOTIFICATIONS_STYLES[message.type].params.length; i++) {
-                    if (NOTIFICATIONS_STYLES[message.type].params[i]) {
-                        if (NOTIFICATIONS_STYLES[message.type].params[i] == 'time')
-                            string = string + NOTIFICATIONS_STYLES[message.type].params[i] + ':"' + $filter('date')(event['timestamp'], 'dd/MM/yyyy  h:mma') + '"'
-                        else string = string + NOTIFICATIONS_STYLES[message.type].params[i] + ':"' + event[NOTIFICATIONS_STYLES[message.type].params[i]] + '"'
-
-                        if (NOTIFICATIONS_STYLES[message.type].params[i + 1])
-                            string = string + ',';
+                for (var key in NOTIFICATIONS_STYLES[message.type].params){
+                    var p = NOTIFICATIONS_STYLES[message.type].params[key];
+                    if (p) {
+                        if (typeof p === 'function') {
+                            data[key] = p(event);
+                        } else {
+                            data[key] = event[p];
+                        }
                     }
                 }
-                string = string + '}'
+                return JSON.stringify(data);
             } else {
                 return '{}';
             }
@@ -183,7 +184,7 @@ angular.module('viaggia.services.game', [])
 
             return createParamString(message);
         }
-        gameService.getNotificationTypes = function () {
+        gameService.getNotificationTypes = function (message) {
             if (message.type == 'TRAVEL') {
                 message.type = getTravelType(message)
             }
