@@ -27,7 +27,16 @@ angular.module('viaggia.services.game', [])
                 db: []
             }]
 
-        var tripParams = {time: function(event){return $filter('date')(event['timestamp'], 'hh:mm')}, travelValidity: function(event){return $filter('translate')(event['travelValidity'])}};
+        var tripParams = {
+            time:
+             function(event){
+                return $filter('date')(event['timestamp'], 'HH:mm')
+            },
+            travelValidity:
+             function(event){
+                 return $filter('translate')(event['travelValidity'])
+                }
+            };
         var NOTIFICATIONS_STYLES = {
             TRAVEL_WALK: {
                 string: "msg_trip_walk",
