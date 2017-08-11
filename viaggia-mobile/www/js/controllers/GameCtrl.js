@@ -24,7 +24,7 @@ angular.module('viaggia.controllers.game', [])
                 );
             },
             function (err) {
-                $scope.noStatus = true; 
+                $scope.noStatus = true;
                 Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
             }
         ).finally(Config.loaded);
@@ -230,7 +230,7 @@ angular.module('viaggia.controllers.game', [])
         };
         $scope.calculateMaxStats = function (stats) {
             // GameSrv.getMaxStat($scope.filter.selected).then(function (MaxStats) {
-                $scope.maxStat = GameSrv.getMaxStat($scope.filter.selected);
+            $scope.maxStat = GameSrv.getMaxStat($scope.filter.selected);
             // })
         }
 
@@ -346,7 +346,7 @@ angular.module('viaggia.controllers.game', [])
         //     generateRankingStyle();
         // }
         // $scope.init();
-                $scope.noStats = function () {
+        $scope.noStats = function () {
             if ($scope.stats.length == 0) {
                 return true
             }
@@ -364,7 +364,7 @@ angular.module('viaggia.controllers.game', [])
 
     })
 
-    .controller('DiaryCtrl', function ($scope, $timeout, $state,$filter, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
+    .controller('DiaryCtrl', function ($scope, $timeout, $state, $filter, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
         $scope.messages = [];
         $scope.maybeMore = true;
         var getDiary = false;
@@ -421,41 +421,41 @@ angular.module('viaggia.controllers.game', [])
         $scope.loadMore = function () {
             if (!getDiary && $scope.maybeMore) {
                 getDiary = true;
-               // console.log("load done")
-               if (!$scope.from){
-                   $scope.from = new Date().getTime();
-               }
-                var temporanea = ($scope.messages != null && $scope.messages.length>0) ? $scope.messages[$scope.messages.length-1].timestamp : $scope.from
+                // console.log("load done")
+                if (!$scope.from) {
+                    $scope.from = new Date().getTime();
+                }
+                var temporanea = ($scope.messages != null && $scope.messages.length > 0) ? $scope.messages[$scope.messages.length - 1].timestamp : $scope.from
                 var x = temporanea - 2592000000;
                 $scope.from = x;
-                $scope.to = ($scope.days != null) ? $scope.days[$scope.days.length-1].messages[$scope.days[$scope.days.length-1].messages.length-1].timestamp-1 : new Date().getTime();
-            // if ($scope.messages[0]) {
-                    // var from = $scope.messages[0].timestamp - 2592000000;
-                    // var to = $scope.messages[0].timestamp-1;
-                    var filter = GameSrv.getDbType($scope.filter.selected)
-                    DiaryDbSrv.readEvents(filter, $scope.from, $scope.to).then(function (notifications) {
-                        if (notifications == null || notifications.length == 0) {
-                            $scope.maybeMore = false;
-                        }
-                        $scope.singleDiaryStatus = true;
-                        $scope.groupDays(notifications);
-                        $scope.messages = notifications;
-                        if ($scope.from < Config.getTimeGameLimit()) {
-                            $scope.maybeMore = false;
-                        }
+                $scope.to = ($scope.days != null) ? $scope.days[$scope.days.length - 1].messages[$scope.days[$scope.days.length - 1].messages.length - 1].timestamp - 1 : new Date().getTime();
+                // if ($scope.messages[0]) {
+                // var from = $scope.messages[0].timestamp - 2592000000;
+                // var to = $scope.messages[0].timestamp-1;
+                var filter = GameSrv.getDbType($scope.filter.selected)
+                DiaryDbSrv.readEvents(filter, $scope.from, $scope.to).then(function (notifications) {
+                    if (notifications == null || notifications.length == 0) {
+                        $scope.maybeMore = false;
+                    }
+                    $scope.singleDiaryStatus = true;
+                    $scope.groupDays(notifications);
+                    $scope.messages = notifications;
+                    if ($scope.from < Config.getTimeGameLimit()) {
+                        $scope.maybeMore = false;
+                    }
+                    $scope.$broadcast('scroll.infiniteScrollComplete');
+                    $scope.singleDiaryStatus = true;
+                    Config.loaded();
+                    getDiary = false;
+                },
+                    function (err) {
+                        $scope.maybeMore = false;
+                        Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         $scope.singleDiaryStatus = true;
                         Config.loaded();
                         getDiary = false;
-                    },
-                        function (err) {
-                            $scope.maybeMore = false;
-                            Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
-                            $scope.$broadcast('scroll.infiniteScrollComplete');
-                            $scope.singleDiaryStatus = true;
-                            Config.loaded();
-                            getDiary = false;
-                        });
+                    });
                 // } else {
                 //     $scope.$broadcast('scroll.infiniteScrollComplete');
                 //     $scope.singleDiaryStatus = true;
@@ -491,7 +491,9 @@ angular.module('viaggia.controllers.game', [])
         }
         $scope.openEventTripDetail = function (message) {
             if (JSON.parse(message.event).travelValidity != 'PENDING') {
-                $state.go('app.tripDiary');
+                $state.go('app.tripDiary', {
+                    message: message.event
+                });
             }
             else {
                 Toast.show($filter('translate')("travel_pending_state"), "short", "bottom");
@@ -556,8 +558,87 @@ angular.module('viaggia.controllers.game', [])
             }, 200);
         };
     })
-    .controller('TripDiaryCtrl', function ($scope, $timeout, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
+    .controller('TripDiaryCtrl', function ($scope, $timeout, $stateParams, mapService, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
+        $scope.message = {};
+        $scope.trip = {};
 
+        $scope.$on('$ionicView.beforeEnter', function () {
+            mapService.refresh('mapEventTripDetail');
+        });
+
+
+        $scope.initMap = function () {
+            mapService.initMap('mapEventTripDetail').then(function () {
+                console.log('map initialized');
+            });
+        };
+        $scope.$on('$ionicView.afterEnter', function (e) {
+            // Prevent destroying of leaflet
+            $scope.initMap();
+        });
+        var fitBounds = function () {
+            var boundsArray = [];
+            for (var i = 0; i < $scope.pathMarkers.length; i++) {
+                var bound = [$scope.pathMarkers[i].lat, $scope.pathMarkers[i].lng];
+                boundsArray.push(bound);
+            }
+            if (boundsArray.length > 0) {
+                var bounds = L.latLngBounds(boundsArray);
+                mapService.getMap('eventTripMapDetail').then(function (map) {
+                    map.fitBounds(bounds);
+                });
+            }
+        }
+        $scope.tripIsValid = function (){
+            return ($scope.trip.validity=='VALID');
+        }
+        $scope.init = function () {
+            $scope.message = JSON.parse($stateParams.message);
+            $scope.paths={};
+            $scope.pathMarkers=[];
+            //get detailt of trip 
+            GameSrv.getEventTripDeatil($scope.message.entityId).then(function (trip) {
+                $scope.trip = trip;
+                if (trip.itinerary) {
+                    //visualize itinerary planned
+                    $scope.paths = mapService.getTripPolyline(trip.itinerary.data);
+                    $scope.pathMarkers = mapService.getTripPoints(trip.itinerary.data);
+                    //visualize itinerary done
+                }
+                var currentlyLine = mapService.decodePolyline(trip.geolocationPolyline);
+                $scope.paths["p1"] = {
+                    color: '#2975a7',
+                    weight: 8,
+                    latlngs: currentlyLine
+                }
+                angular.extend($scope, {
+                    center: {
+                        lat: Config.getMapPosition().lat,
+                        lng: Config.getMapPosition().long,
+                        zoom: Config.getMapPosition().zoom
+                    },
+                    markers: $scope.pathMarkers,
+                    events: {},
+                    paths: $scope.paths
+                });
+                // fit bounds
+                fitBounds();
+
+
+            });
+
+        }
+        angular.extend($scope, {
+            center: {
+                lat: Config.getMapPosition().lat,
+                lng: Config.getMapPosition().long,
+                zoom: Config.getMapPosition().zoom
+            },
+            markers: {},
+            events: {},
+            paths: {}
+        });
+        $scope.init();
     }
     )
     .controller('RankingsCtrl', function ($scope, $ionicScrollDelegate, $window, $timeout, Config, GameSrv, Toast, $filter, $ionicPosition) {

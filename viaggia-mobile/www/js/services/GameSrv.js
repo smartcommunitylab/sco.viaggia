@@ -241,6 +241,29 @@ angular.module('viaggia.services.game', [])
 
             return travelModes;
         }
+        gameService.getEventTripDeatil = function (id) {
+            var deferred = $q.defer();
+             LoginService.getValidAACtoken().then(
+                function (token) {
+                    $http({
+                        method: 'GET',
+                        url: Config.getServerURL() + '/gamification/traveldetails/'+id,
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
+                        .success(function (detail) {
+                            deferred.resolve(detail);
+                        })
+
+                        .error(function (response) {
+                            deferred.reject(response);
+                        });
+                });
+            return deferred.promise;
+        }
         gameService.getTravelForDiary = function () {
             var tripId = localStorage.getItem(Config.getAppId() + "_tripId");
             var travelType = checkTravelType(tripId);

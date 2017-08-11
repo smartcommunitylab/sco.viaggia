@@ -28,10 +28,12 @@ angular.module('viaggia.services.tutorial', [])
         // function to close tutorial
         $scope.closeTutorial = function () {
             $scope.tutorialModal.hide();
+            setTutorialState($scope.tutorialId, true);
             if (window.cordova && window.cordova.plugins.screenorientation) {
+               unlockOrientation = screen.unlockOrientation || screen.mozUnlockOrientation || screen.msUnlockOrientation || (screen.orientation && screen.orientation.unlock);
                 screen.unlockOrientation()
             }
-            setTutorialState($scope.tutorialId, true);
+            
         }
 
     }
@@ -59,7 +61,9 @@ angular.module('viaggia.services.tutorial', [])
         }
         if (doTutorial(tutorialId)) {
             if (window.cordova && window.cordova.plugins.screenorientation) {
-                screen.lockOrientation('portrait');
+                locOrientation = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation || screen.orientation.lock;
+locOrientation('portrait');
+                // screen.lockOrientation('portrait');
             }
 
             $ionicModal.fromTemplateUrl('templates/tutorial.html', {

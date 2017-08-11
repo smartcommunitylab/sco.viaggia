@@ -328,7 +328,9 @@ i {
 #modal-map-container {
     height: 100%!important;
 }
-
+#trip-event-map-container {
+    height: 50%!important;
+}
 .route-list .list {
     padding-top: 20px;
 }
@@ -2497,4 +2499,12 @@ Play&Go
  .first-time-parking-meters-popup p {
    margin-left: 10px;
    text-align: justify;
+ }
+ .not-valid-trip {
+     background-color: red;
+     color: white;
+ }
+  .valid-trip {
+     background-color: green;
+     color: white;
  }

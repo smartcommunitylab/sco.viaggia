@@ -94,7 +94,7 @@ angular.module('viaggia', [
   'smartcommunitylab.services.login'
 ])
 
-  .run(function ($ionicPlatform, $cordovaFile, $q, $rootScope, $translate, trackService, DataManager,DiaryDbSrv, Config, GeoLocate, notificationService, LoginService) {
+  .run(function ($ionicPlatform, $cordovaFile, $q, $rootScope, $translate, trackService, DataManager, DiaryDbSrv, Config, GeoLocate, notificationService, LoginService) {
 
     $rootScope.locationWatchID = undefined;
 
@@ -156,12 +156,12 @@ angular.module('viaggia', [
       //        GeoLocate.initLocalization().then(function () {
       Config.init().then(function () {
         LoginService.init({
-             loginType: LoginService.LOGIN_TYPE.AAC,
-             googleWebClientId: Config.getWebClientId(),
-             clientId: Config.getClientId(),
-             clientSecret: Config.getClientSecKey(),
-             aacUrl: Config.getAACURL()
-         });        
+          loginType: LoginService.LOGIN_TYPE.AAC,
+          googleWebClientId: Config.getWebClientId(),
+          clientId: Config.getClientId(),
+          clientSecret: Config.getClientSecKey(),
+          aacUrl: Config.getAACURL()
+        });
         // $rootScope.GPSAllow = true;
         //            if (window.BackgroundGeolocation) {
         //                trackService.startup();
@@ -389,16 +389,16 @@ angular.module('viaggia', [
         }
       })
 
-  .state('app.ttlist', {
-    cache: false,
-    url: "/ttlist/:ref",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/ttroutelist.html",
-        controller: 'TTRouteListCtrl'
-      }
-    }
-  })
+      .state('app.ttlist', {
+        cache: false,
+        url: "/ttlist/:ref",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/ttroutelist.html",
+            controller: 'TTRouteListCtrl'
+          }
+        }
+      })
       .state('app.notifications', {
         cache: true,
         url: "/notifications",
@@ -617,6 +617,9 @@ angular.module('viaggia', [
       .state('app.tripDiary', {
         cache: false,
         url: "/tripDiary",
+        params: {
+          message: null
+        },
         views: {
           'menuContent': {
             templateUrl: "templates/game/eventTripDetail.html",
@@ -867,8 +870,8 @@ angular.module('viaggia', [
       menu_betatesting_bug: 'Segnala un problema',
       news_empty_list: 'Non ci sono notizie in questo momento',
       news_title: 'News',
-      pop_up_no_start_title:"Problema di connessione",
-      pop_up_no_start_template:"Impossibile inviare il segnale di inizio viaggio. Verificare la connessione",
+      pop_up_no_start_title: "Problema di connessione",
+      pop_up_no_start_template: "Impossibile inviare il segnale di inizio viaggio. Verificare la connessione",
       popup_modify_trip_title: 'Modifica',
       popup_modify_trip_message: 'Sicuro di voler modificare il viaggio salvato?',
       plan_preferences_fastest: 'Itinerario piu veloce',
@@ -1094,12 +1097,17 @@ angular.module('viaggia', [
       msg_trip_train: 'Viaggio in treno. Ore {{time}}. {{travelValidity}}',
       msg_trip_multimodal: 'Viaggio multimodale. Ore {{time}}. {{travelValidity}}',
       travel_pending_state: 'Viaggio in attesa di validazione',
-      no_diary:'Nessun elemento trovato nel diario',
-      no_stats:'Nessuna statistica trovata',
-      statistic_total_label:"Total",
+      no_diary: 'Nessun elemento trovato nel diario',
+      no_stats: 'Nessuna statistica trovata',
+      statistic_total_label: "Total",
       VALID: 'Valido',
       INVALID: 'Non valido',
-      PENDING: 'In validazione'
+      PENDING: 'In validazione',
+      label_not_valid: 'NON VALIDO',
+      label_valid: 'VALIDO',
+      label_event_trip_detail_time: 'Ora: ',
+      label_event_trip_detail_from: 'Da: ',
+      label_event_trip_detail_to: 'A:'
     });
 
     $translateProvider.translations('en', {
@@ -1473,8 +1481,8 @@ angular.module('viaggia', [
       pop_up_invalid_tracking_title: "Trip is not valid",
       pop_up_invalid_tracking_template: "The properties of the executed trip do not match the specified mean of transport. No points will be assigned.",
       pop_up_plan: "Plan",
-      pop_up_no_start_title:"Connection problem",
-      pop_up_no_start_template:"Impossible to send the start to the server. Check the internet connection",
+      pop_up_no_start_title: "Connection problem",
+      pop_up_no_start_template: "Impossible to send the start to the server. Check the internet connection",
       wait_synch_running: "Wait, synchronization is running",
       no_status: "Server communication error, no data available",
       toast_error_server_template: 'We had some communication problems',
@@ -1508,13 +1516,18 @@ angular.module('viaggia', [
       msg_trip_train: 'Train trip. At {{time}}. {{travelValidity}}',
       msg_trip_multimodal: 'Multimodal trip. At {{time}}. {{travelValidity}}',
       travel_pending_state: 'Travel waiting validation',
-      no_diary:'No elements found in the diary',
-      no_stats:'No statistic found',
-      statistic_total_label:"Total",
+      no_diary: 'No elements found in the diary',
+      no_stats: 'No statistic found',
+      statistic_total_label: "Total",
       VALID: 'Valid',
       INVALID: 'Not valid',
-      PENDING: 'Validation in progress'
-      
+      PENDING: 'Validation in progress',
+      label_event_trip_detail_not_valid: 'NOT VALID',
+      label_event_trip_detail_valid: 'VALID',
+      label_event_trip_detail_time: 'Ora: ',
+      label_event_trip_detail_from: 'Da: ',
+      label_event_trip_detail_to: 'A:'
+
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);
