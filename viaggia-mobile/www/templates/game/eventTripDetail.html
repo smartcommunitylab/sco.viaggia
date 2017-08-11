@@ -11,9 +11,11 @@
            <div ng-if="tripIsValid()" class="valid-trip">
             {{'label_valid'|translate}}
            </div>
+           <!--time effective-->
            <div>{{'label_event_trip_detail_time'|translate }} {{trip.itinerary.data.startime | date:"dd/M/yyyy '-' HH:mm"}}</div>
-           <div>{{'label_event_trip_detail_from'|translate }} {{trip.itinerary.data.from.name}}</div>
-           <div>{{'label_event_trip_detail_to'|translate }} {{trip.itinerary.data.to.name}}</div>
+           <!--places planned-->
+           <div>{{'label_event_trip_detail_from'|translate }} {{trip.itinerary.originalFrom.name}}</div>
+           <div>{{'label_event_trip_detail_to'|translate }} {{trip.itinerary.originalTo.name}}</div>
            motivazione se non valido
            distanze per mezzo
        </div>

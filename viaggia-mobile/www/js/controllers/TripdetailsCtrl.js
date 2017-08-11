@@ -26,7 +26,9 @@ angular.module('viaggia.controllers.tripdetails', [])
 
                 $scope.bookmarkStyle = bookmarkService.getBookmarkStyle($location.path());
                 $scope.requestedFrom = trip.originalFrom.name;
+                $scope.trip.data.from.name =$scope.requestedFrom;
                 $scope.requestedTo = trip.originalTo.name;
+                $scope.trip.data.to.name =$scope.requestedTo;
                 $scope.recurrency = trip.recurrency;
                 if ($scope.isRecurrent()) {
                     $scope.recurrentDays = $scope.getRecurrentDays($scope.recurrency);
@@ -69,10 +71,14 @@ angular.module('viaggia.controllers.tripdetails', [])
             $scope.requestedFrom = planService.getName("from");
             if (!$scope.requestedFrom) {
                 $scope.requestedFrom = trip.from.name;
+            } else {
+                trip.from.name =$scope.requestedFrom;
             }
             $scope.requestedTo = planService.getName("to");
             if (!$scope.requestedTo) {
                 $scope.requestedTo = trip.to.name;
+            } else {
+                trip.to.name =$scope.requestedTo;
             }
             var editInstance = planService.getEditInstance();
             $scope.tripId = editInstance ? editInstance.clientId : null;
