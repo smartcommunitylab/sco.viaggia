@@ -997,9 +997,9 @@ angular.module('viaggia', [
       no_saved_tracks_to_track: 'Nessun viaggio salvato. Pianifica un itinerario e salvalo per iniziare a giocare!',
       play_now: 'GIOCA ORA!',
       play_now_sub: 'Inizia a tracciare un percorso',
-      track_walk: 'a piedi',
-      track_bike: 'in bici',
-      track_saved: 'pianificato',
+      track_walk: 'A piedi',
+      track_bike: 'In bici',
+      track_saved: 'Pianificati',
       play_is_on: 'GIOCO IN CORSO',
       play_is_on_for: 'Stai {{transport}} da {{time}} ore',
       stop_tracking: 'Termina viaggio',
@@ -1107,7 +1107,11 @@ angular.module('viaggia', [
       label_valid: 'VALIDO',
       label_event_trip_detail_time: 'Ora: ',
       label_event_trip_detail_from: 'Da: ',
-      label_event_trip_detail_to: 'A:'
+      label_event_trip_detail_to: 'A:',
+      label_event_trip_detail_distance_walk:'Distanza piedi: ',
+      label_event_trip_detail_distance_bike:'Distanza bici: ',
+      label_event_trip_detail_distance_bus:'Distanza bus: ',
+      label_event_trip_detail_distance_car:'Distanza auto: '
     });
 
     $translateProvider.translations('en', {
@@ -1417,15 +1421,15 @@ angular.module('viaggia', [
       no_saved_tracks_to_track: 'No saved trips found. Plan a trip and save it in order to start playing!',
       play_now: 'PLAY NOW!',
       play_now_sub: 'Start tracking a trip',
-      track_walk: 'walk',
-      track_bike: 'bike',
-      track_saved: 'planned',
+      track_walk: 'Walk',
+      track_bike: 'Bike',
+      track_saved: 'Planned',
       play_is_on: 'TRACKING IS ON',
       play_is_on_for: 'You are {{transport}} since {{time}} hours',
       stop_tracking: 'Stop tracking',
-      track_walk_action: 'walking',
-      track_bike_action: 'cycling',
-      track_other_action: 'travelling',
+      track_walk_action: 'Walking',
+      track_bike_action: 'Cycling',
+      track_other_action: 'Travelling',
       gps_disabled_title: "Permission denied",
       gps_disabled_template: "The GPS's permissions are disabled. Your stored data will be send when the permissions will be enabled",
       pop_up_no_geo_title: 'Geolocation error',
@@ -1526,7 +1530,11 @@ angular.module('viaggia', [
       label_event_trip_detail_valid: 'VALID',
       label_event_trip_detail_time: 'Ora: ',
       label_event_trip_detail_from: 'Da: ',
-      label_event_trip_detail_to: 'A:'
+      label_event_trip_detail_to: 'A:',
+      label_event_trip_detail_distance_walk:'Walk distance: ',
+      label_event_trip_detail_distance_bike:'Bike dtsance: ',
+      label_event_trip_detail_distance_bus:'Bus distance: ',
+      label_event_trip_detail_distance_car:'Car distance: '
 
     });
 

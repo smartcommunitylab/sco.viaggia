@@ -1,23 +1,26 @@
 <ion-view id="tripdetails" title="{{'journey_detail' | translate}}">
-        <ion-content id="content" has-header="true" scroll="false">
+    <ion-content id="content" has-header="true" scroll="false">
         <div id="trip-event-map-container" data-tap-disabled="true">
             <!--<leaflet event-broadcast="events" center="center" markers="markers" paths="pathLine" style="width: 100%; height: 700px;" ng-init="initMap()" id="mapEventTripDetail"></leaflet>-->
-                <leaflet center="center" paths="paths" markers="markers" defaults="defaults" height="500" id="eventTripMapDetail" ng-init="initMap()"></leaflet>
+            <leaflet center="center" paths="paths" markers="markers" defaults="defaults" height="500" id="eventTripMapDetail" ng-init="initMap()"></leaflet>
         </div>
-       <div>
-           <div ng-if="!tripIsValid()" class="not-valid-trip">
-            {{'label_not_valid'|translate}}
-           </div>
-           <div ng-if="tripIsValid()" class="valid-trip">
-            {{'label_valid'|translate}}
-           </div>
-           <!--time effective-->
-           <div>{{'label_event_trip_detail_time'|translate }} {{trip.itinerary.data.startime | date:"dd/M/yyyy '-' HH:mm"}}</div>
-           <!--places planned-->
-           <div>{{'label_event_trip_detail_from'|translate }} {{trip.itinerary.originalFrom.name}}</div>
-           <div>{{'label_event_trip_detail_to'|translate }} {{trip.itinerary.originalTo.name}}</div>
-           motivazione se non valido
-           distanze per mezzo
-       </div>
+        <div>
+            <div ng-if="!tripIsValid()" class="not-valid-trip">
+                {{'label_not_valid'|translate}}
+            </div>
+            <div ng-if="tripIsValid()" class="valid-trip">
+                {{'label_valid'|translate}}
+            </div>
+            <!--time effective-->
+            <div>{{'label_event_trip_detail_time'|translate }} {{trip.itinerary.data.startime | date:"dd/M/yyyy '-' HH:mm"}}</div>
+            <!--places planned-->
+            <div>{{'label_event_trip_detail_from'|translate }} {{trip.itinerary.originalFrom.name}}</div>
+            <div>{{'label_event_trip_detail_to'|translate }} {{trip.itinerary.originalTo.name}}</div>
+            <!-- TODO motivazione se non valido distanze per mezzo-->
+            <div ng-if="message.travelDistances.walk>0">{{'label_event_trip_detail_distance_walk'|translate }} {{message.travelDistances.walk}}</div>
+            <div ng-if="message.travelDistances.bike>0">{{'label_event_trip_detail_distance_bike'|translate }} {{message.travelDistances.bike}}</div>
+            <div ng-if="message.travelDistances.bus>0">{{'label_event_trip_detail_distance_bus'|translate }} {{message.travelDistances.bus}}</div>
+            <div ng-if="message.travelDistances.car>0">{{'label_event_trip_detail_distance_car'|translate }} {{message.travelDistances.car}}</div>
+        </div>
     </ion-content>
 </ion-view>
