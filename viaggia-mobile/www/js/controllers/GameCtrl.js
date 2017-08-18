@@ -157,7 +157,7 @@ angular.module('viaggia.controllers.game', [])
     })
     .controller('StatisticsCtrl', function ($scope, $ionicScrollDelegate, $window, $filter, $timeout, Toast, Config, GameSrv) {
         $scope.stats = [];
-        $scope.noStats=false;
+        $scope.noStats = false;
         $scope.maybeMore = true;
         var getStatistics = false;
         $scope.statsPerPage = 5;
@@ -196,7 +196,7 @@ angular.module('viaggia.controllers.game', [])
             $scope.singleStatStatus = true;
             $scope.stats = [];
             $ionicScrollDelegate.$getByHandle('statisticScroll').scrollTop();
-            $scope.noStats=false;
+            $scope.noStats = false;
             //$scope.init()
             //Config.loaded();
         }
@@ -291,9 +291,8 @@ angular.module('viaggia.controllers.game', [])
                 GameSrv.getStatistics($scope.serverhow, from, to).then(
                     function (statistics) {
                         $scope.stats = $scope.stats.concat(statistics.stats);
-                        if ($scope.stats.length==0)
-                        {
-                            $scope.noStats=true;
+                        if ($scope.stats.length == 0) {
+                            $scope.noStats = true;
                         }
                         $scope.calculateMaxStats($scope.stats);
                         $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -569,12 +568,12 @@ angular.module('viaggia.controllers.game', [])
         $scope.trip = {};
 
         $scope.$on('$ionicView.beforeEnter', function () {
-            mapService.refresh('mapEventTripDetail');
+            mapService.refresh('eventTripMapDetail');
         });
 
 
         $scope.initMap = function () {
-            mapService.initMap('mapEventTripDetail').then(function () {
+            mapService.initMap('eventTripMapDetail').then(function () {
                 console.log('map initialized');
             });
         };
@@ -595,10 +594,10 @@ angular.module('viaggia.controllers.game', [])
                 });
             }
         }
-        $scope.tripIsValid = function (){
-            return ($scope.trip.validity=='VALID');
+        $scope.tripIsValid = function () {
+            return ($scope.trip.validity == 'VALID');
         }
-                $scope.getStyle = function (stat, veichle) {
+        $scope.getStyle = function (stat, veichle) {
             $scope.previousStat = null;
             var maxvalues = {
                 maxDailywalk: 10,
@@ -619,7 +618,7 @@ angular.module('viaggia.controllers.game', [])
                 maxTotalcar: 3600,
             }
 
-            if ((83 * stat) / 20< 8.8 && veichle == 'transit') {
+            if ((83 * stat) / 20 < 8.8 && veichle == 'transit') {
                 return "width:" + (8.8) + "%"
             } else if ((83 * stat) / 20 < 4.5) {
                 return "width:" + (4.5) + "%"
@@ -629,8 +628,8 @@ angular.module('viaggia.controllers.game', [])
         }
         $scope.init = function () {
             $scope.message = JSON.parse($stateParams.message);
-            $scope.paths={};
-            $scope.pathMarkers=[];
+            $scope.paths = {};
+            $scope.pathMarkers = [];
             //get detailt of trip 
             GameSrv.getEventTripDeatil($scope.message.entityId).then(function (trip) {
                 $scope.trip = trip;
