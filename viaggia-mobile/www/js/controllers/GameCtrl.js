@@ -157,6 +157,7 @@ angular.module('viaggia.controllers.game', [])
     })
     .controller('StatisticsCtrl', function ($scope, $ionicScrollDelegate, $window, $filter, $timeout, Toast, Config, GameSrv) {
         $scope.stats = [];
+        $scope.noStats=false;
         $scope.maybeMore = true;
         var getStatistics = false;
         $scope.statsPerPage = 5;
@@ -195,6 +196,7 @@ angular.module('viaggia.controllers.game', [])
             $scope.singleStatStatus = true;
             $scope.stats = [];
             $ionicScrollDelegate.$getByHandle('statisticScroll').scrollTop();
+            $scope.noStats=false;
             //$scope.init()
             //Config.loaded();
         }
@@ -289,6 +291,10 @@ angular.module('viaggia.controllers.game', [])
                 GameSrv.getStatistics($scope.serverhow, from, to).then(
                     function (statistics) {
                         $scope.stats = $scope.stats.concat(statistics.stats);
+                        if ($scope.stats.length==0)
+                        {
+                            $scope.noStats=true;
+                        }
                         $scope.calculateMaxStats($scope.stats);
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         $scope.singleStatStatus = true;
@@ -346,13 +352,13 @@ angular.module('viaggia.controllers.game', [])
         //     generateRankingStyle();
         // }
         // $scope.init();
-        $scope.noStats = function () {
-            if ($scope.stats.length == 0) {
-                return true
-            }
-            return false
+        // $scope.noStats = function () {
+        //     if ($scope.stats.length == 0) {
+        //         return true
+        //     }
+        //     return false
 
-        }
+        // }
         $scope.dayHasStat = function (day) {
             return (day.data.walk || day.data.transit || day.data.bike || day.data.car);
         }
