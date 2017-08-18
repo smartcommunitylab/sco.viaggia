@@ -12,15 +12,35 @@
                 {{'label_valid'|translate}}
             </div>
             <!--time effective-->
-            <div>{{'label_event_trip_detail_time'|translate }} {{trip.itinerary.data.startime | date:"dd/M/yyyy '-' HH:mm"}}</div>
+            <div ng-if="trip.itinerary && trip.itinerary.data.startime ">{{'label_event_trip_detail_time'|translate }} {{trip.itinerary.data.startime | date:"dd/M/yyyy '-' HH:mm"}}</div>
             <!--places planned-->
-            <div>{{'label_event_trip_detail_from'|translate }} {{trip.itinerary.originalFrom.name}}</div>
-            <div>{{'label_event_trip_detail_to'|translate }} {{trip.itinerary.originalTo.name}}</div>
+            <div ng-if="trip.itinerary && trip.itinerary.originalFrom.name">{{'label_event_trip_detail_from'|translate }} {{trip.itinerary.originalFrom.name}}</div>
+            <div ng-if="trip.itinerary && trip.itinerary.originalTo.name">{{'label_event_trip_detail_to'|translate }} {{trip.itinerary.originalTo.name}}</div>
             <!-- TODO motivazione se non valido distanze per mezzo-->
-            <div ng-if="message.travelDistances.walk>0">{{'label_event_trip_detail_distance_walk'|translate }} {{message.travelDistances.walk}}</div>
+            <!--<div ng-if="message.travelDistances.walk>0">{{'label_event_trip_detail_distance_walk'|translate }} {{message.travelDistances.walk}}</div>
             <div ng-if="message.travelDistances.bike>0">{{'label_event_trip_detail_distance_bike'|translate }} {{message.travelDistances.bike}}</div>
             <div ng-if="message.travelDistances.bus>0">{{'label_event_trip_detail_distance_bus'|translate }} {{message.travelDistances.bus}}</div>
-            <div ng-if="message.travelDistances.car>0">{{'label_event_trip_detail_distance_car'|translate }} {{message.travelDistances.car}}</div>
+            <div ng-if="message.travelDistances.car>0">{{'label_event_trip_detail_distance_car'|translate }} {{message.travelDistances.car}}</div>-->
+            <ion-list>
+                <div class="chart">
+                    <div ng-if="message.travelDistances.walk>0" class="walkbgcolor statsfloat" style="{{getStyle(message.travelDistances.walk, 'walk')}}"><i class="icon ic_foot"></i></div>
+                    <div ng-if="message.travelDistances.walk>0" class="statstext" id="walkcolor"> {{message.travelDistances.walk | number:2}} m </div>
+                    <div id="statsdiv"></div>
+
+                    <div ng-if="message.travelDistances.bike>0" class="publicbgcolor statsfloat" style="{{getStyle(message.travelDistances.bike, 'bike')}}"><i class="icon ic_bike"></i></div>
+                    <div ng-if="message.travelDistances.bike>0" class="statstext" id="bikecolor"> {{message.travelDistances.bike| number:2}} m </div>
+                    <div id="statsdiv"></div>
+
+                    <div ng-if="message.travelDistances.bus>0" class="bikebgcolor statsfloat" style="{{getStyle(message.travelDistances.bus, 'transit')}}"><i class="icon  ic_urban-bus"></i><i class="icon ic_train"></i></div>
+                    <div ng-if="message.travelDistances.bus>0" class="statstext" id="publiccolor"> {{message.travelDistances.bus| number:2}} m </div>
+                    <div id="statsdiv"></div>
+
+                    <div ng-if="message.travelDistances.car>0" class="carbgcolor statsfloat" style="{{getStyle(message.travelDistances.car, 'car')}}"><i class="icon ic_car"></i></div>
+                    <div ng-if="message.travelDistances.car>0" class="statstext" id="carcolor"> {{message.travelDistances.car| number:2}} m </div>
+                    <div id="statsdiv"></div>
+
+                </div>
+            </ion-list>
         </div>
     </ion-content>
 </ion-view>

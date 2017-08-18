@@ -4,9 +4,12 @@
         <description>Viaggia Play&amp;Go</description>
         <author email="info@smartcommunitylab.it" href="http://www.smartcommunitylab.it/">Smart Community Lab</author>
 
+ <preference name="cordova-background-geolocation-license" value="6af31309a1796013f00927f4c396b898ac881efac6d398a165301e06e0a6a9c7" />
+     <preference name="cordova-background-geolocation-orderId" value="1" />
+<!--
   <plugin name="cordova-background-geolocation">
     <variable name="LICENSE" value="6af31309a1796013f00927f4c396b898ac881efac6d398a165301e06e0a6a9c7" />
-  </plugin>
+  </plugin>-->
         <content src="index.html" />
 
         <plugin name="cordova-plugin-whitelist" spec="1" />

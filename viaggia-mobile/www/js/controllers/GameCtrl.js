@@ -592,6 +592,35 @@ angular.module('viaggia.controllers.game', [])
         $scope.tripIsValid = function (){
             return ($scope.trip.validity=='VALID');
         }
+                $scope.getStyle = function (stat, veichle) {
+            $scope.previousStat = null;
+            var maxvalues = {
+                maxDailywalk: 10,
+                maxDailybike: 20,
+                maxDailytransit: 50,
+                maxDailycar: 50,
+                maxWeeklywalk: 70,
+                maxWeeklybike: 140,
+                maxWeeklytransit: 300,
+                maxWeeklycar: 300,
+                maxMonthlywalk: 280,
+                maxMonthlybike: 560,
+                maxMonthlytransit: 1200,
+                maxMonthlycar: 1200,
+                maxTotalwalk: 840,
+                maxTotalbike: 1680,
+                maxTotaltransit: 3600,
+                maxTotalcar: 3600,
+            }
+
+            if ((83 * stat) / 20< 8.8 && veichle == 'transit') {
+                return "width:" + (8.8) + "%"
+            } else if ((83 * stat) / 20 < 4.5) {
+                return "width:" + (4.5) + "%"
+            } else {
+                return "width:" + (83) + "%"
+            }
+        }
         $scope.init = function () {
             $scope.message = JSON.parse($stateParams.message);
             $scope.paths={};

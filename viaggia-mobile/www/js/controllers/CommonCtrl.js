@@ -40,7 +40,15 @@ angular.module('viaggia.controllers.common', [])
 		//$scope.firstOpenPopup.close();
 		$state.go('app.game');
 	};
-
+ 
+$scope.openChallengeBoard = function () {
+		//$scope.firstOpenPopup.close();
+		$state.go('app.game.challenges');
+	};
+	$scope.openBadgeBoard = function () {
+		//$scope.firstOpenPopup.close();
+		$state.go('app.game.points');
+	};
 	$scope.planFromPopup = function () {
 		$scope.closePopup();
 		$scope.newPlan();
