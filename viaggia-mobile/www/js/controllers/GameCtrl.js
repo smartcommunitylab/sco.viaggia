@@ -371,6 +371,7 @@ angular.module('viaggia.controllers.game', [])
 
     .controller('DiaryCtrl', function ($scope, $timeout, $state, $filter, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
         $scope.messages = [];
+        // $scope.days=[];
         $scope.maybeMore = true;
         var getDiary = false;
         $scope.singleDiaryStatus = true;
@@ -408,6 +409,8 @@ angular.module('viaggia.controllers.game', [])
 
         $scope.groupDays = function (notifications) {
             if (notifications[0]) {
+                if (!$scope.days)
+                { $scope.days = [] }
                 $scope.days.push({ name: notifications[0].timestamp, messages: [notifications[0]] })
                 for (var j = 1; j < notifications.length; j++) {
                     var time1 = notifications[j].timestamp
@@ -455,6 +458,9 @@ angular.module('viaggia.controllers.game', [])
                 },
                     function (err) {
                         $scope.maybeMore = false;
+                        if (!$scope.message) {
+                            $scope.days = [];
+                        }
                         Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         $scope.singleDiaryStatus = true;
@@ -473,7 +479,9 @@ angular.module('viaggia.controllers.game', [])
             }
         };
         $scope.noDiary = function () {
-            if (!$scope.days || $scope.days.length == 0) {
+            if (!$scope.days)
+            { return false }
+            else if ($scope.days.length == 0) {
                 return true
             }
             return false
@@ -524,6 +532,7 @@ angular.module('viaggia.controllers.game', [])
                     $scope.$broadcast('scroll.infiniteScrollComplete');
                     Config.loaded();
                 }, function (err) {
+                    $scope.days = null;
                     $scope.messages = [];
                     Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
                     $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -563,7 +572,7 @@ angular.module('viaggia.controllers.game', [])
             }, 200);
         };
     })
-    .controller('TripDiaryCtrl', function ($scope, $timeout, $stateParams, mapService, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
+    .controller('TripDiaryCtrl', function ($scope, $timeout, $stateParams, planService, mapService, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
         $scope.message = {};
         $scope.trip = {};
 
@@ -587,6 +596,12 @@ angular.module('viaggia.controllers.game', [])
                 var bound = [$scope.pathMarkers[i].lat, $scope.pathMarkers[i].lng];
                 boundsArray.push(bound);
             }
+            for (var i = 0; i < $scope.paths.length; i++) {
+                var bound = paths[i].getBounds();
+                boundsArray.push(bound);
+            }
+            // map.fitBounds(polyline.getBounds());
+
             if (boundsArray.length > 0) {
                 var bounds = L.latLngBounds(boundsArray);
                 mapService.getMap('eventTripMapDetail').then(function (map) {
@@ -635,12 +650,14 @@ angular.module('viaggia.controllers.game', [])
                 $scope.trip = trip;
                 if (trip.itinerary) {
                     //visualize itinerary planned
+                    planService.setPlanConfigure(planService.buildConfigureOptions(trip.itinerary));
+                    planService.process(trip.itinerary.data, trip.itinerary.originalFrom, trip.itinerary.originalTo);
                     $scope.paths = mapService.getTripPolyline(trip.itinerary.data);
                     $scope.pathMarkers = mapService.getTripPoints(trip.itinerary.data);
                     //visualize itinerary done
                 }
                 var currentlyLine = mapService.decodePolyline(trip.geolocationPolyline);
-                $scope.paths["p1"] = {
+                $scope.paths["p" + $scope.paths.length] = {
                     color: '#2975a7',
                     weight: 8,
                     latlngs: currentlyLine

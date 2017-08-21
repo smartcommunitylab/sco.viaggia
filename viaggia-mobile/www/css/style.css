@@ -2503,8 +2503,16 @@ Play&Go
  .not-valid-trip {
      background-color: red;
      color: white;
+     padding: 8px;
  }
   .valid-trip {
      background-color: green;
      color: white;
+     padding: 8px;
+ }
+ .event-trip-detail-stats {
+     padding: 8px;
+ }
+ .event-trip-detail-stats .event-trip-detail-stats-time{
+     margin-bottom: 8px;
  }

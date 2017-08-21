@@ -102,7 +102,7 @@ angular.module('viaggia.services.tracking', [])
             }
             // var url = !transportType ?
             //     (Config.getServerURL() + '/gamification/journey/' + trip.idTrip) : (Config.getServerURL() + '/gamification/freetracking/' + transportType + '/' + trip.idTrip);
-
+            console.log(JSON.stringify(trip));
             $http({
                 method: 'PUT',
                 url: url,
