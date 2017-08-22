@@ -17,36 +17,33 @@
     "shelljs": "^0.3.0"
   },
   "cordovaPlugins": [
-    "cordova-plugin-console",
-    "cordova-plugin-device",
-    "cordova-plugin-statusbar",
-    "cordova-plugin-splashscreen",
-    "cordova-plugin-inappbrowser",
-    "cordova-plugin-geolocation",
-    "cordova-plugin-globalization",
-    "ionic-plugin-keyboard",
-    "cordova-plugin-x-toast",
-    "cordova-plugin-file",
-    "cordova-plugin-network-information",
-    "cordova-sqlite-storage",
+    "cordova-plugin-console@1.0.3",
+    "cordova-plugin-device@1.1.2",
+    "cordova-plugin-statusbar@2.1.3",
+    "cordova-plugin-splashscreen@3.2.2",
+    "cordova-plugin-inappbrowser@1.4.0",
+    "cordova-plugin-geolocation@2.2.0",
+    "cordova-plugin-globalization@1.0.3",
+    "ionic-plugin-keyboard@2.2.1",
+    "cordova-plugin-x-toast@2.5.2",
+    "cordova-plugin-file@4.2.0",
+    "cordova-plugin-network-information@1.2.1",
+    "cordova-sqlite-storage@1.4.5",
     "https://github.com/samikrc/CordovaSQLite.git",
-    "cordova-plugin-whitelist",
-    "cordova-plugin-screen-orientation",
-    "phonegap-plugin-push@1.8.4",
+    "cordova-plugin-whitelist@1.2.2",
+    "cordova-plugin-screen-orientation@1.4.2",
      {
        "variables": {
-         "SENDER_ID": "453601816446",
-         "GOOGLE_APP_ID": "453601816446"
+         "SENDER_ID": "453601816446"
        },
-       "locator": "phonegap-plugin-push",
+       "locator": "phonegap-plugin-push@1.10.4",
        "id": "phonegap-plugin-push"
      },
-    "https://github.com/katzer/cordova-plugin-local-notifications",
-    "https://github.com/transistorsoft/cordova-background-geolocation.git",
-    "cordova-plugin-device-orientation",
-    "cordova-plugin-request-location-accuracy",
-    "cordova-custom-config",
-    "cordova-plugin-app-version",
+    "de.appplant.cordova.plugin.local-notification@0.8.4",
+    "cordova-plugin-device-orientation@1.0.7",
+    "cordova-plugin-request-location-accuracy@2.2.1",
+    "cordova-custom-config@3.2.0",
+    "cordova-plugin-app-version@0.1.9",
     {
       "variables": {
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.453601816446-r4itlqv8qpkqfq5q4jgketdu6f58hqbl"
@@ -59,9 +56,11 @@
         "APP_ID": "1771254186520727",
         "APP_NAME": "ViaggiaTrento PlayGo"
       },
-      "locator": "cordova-plugin-facebook4",
+      "locator": "cordova-plugin-facebook4@1.7.4",
       "id": "cordova-plugin-facebook4"
-    }  
+    }  ,
+        "https://github.com/transistorsoft/cordova-background-geolocation.git#1.7.0"
+
   ],
   "cordovaPlatforms": [
     {

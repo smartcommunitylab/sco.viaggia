@@ -53,21 +53,21 @@ angular.module('viaggia.services.diaryDb', [])
             return deferred.promise;
 
         }
-        var insertData = function (synch,data) {
+        var insertData = function (synch, data) {
             //insert array data into the table
             var deferred = $q.defer();
             var dbArray = [];
             for (let i = 0; i < data.length; i++) {
                 dbArray.push(['INSERT OR REPLACE INTO Events (id, type, timestamp,travelValidity, event)  VALUES (?,?,?,?,?)',
                     [
-                        data[i].clientId,
+                        data[i].entityId,
                         data[i].type,
                         data[i].timestamp,
                         data[i].travelValidity,
                         JSON.stringify(data[i])
                     ]
                 ]
-                );  
+                );
             }
             db.sqlBatch(dbArray, function () {
                 console.log('Populated database OK');
@@ -151,10 +151,9 @@ angular.module('viaggia.services.diaryDb', [])
         //all diary
         var getRemoteData = function (timestamp) {
             var deferred = $q.defer();
-            var url =Config.getServerURL() + '/diary'
-            if (timestamp)
-            {
-                url=url+'?from=' + timestamp + '&to=' + new Date().getTime();
+            var url = Config.getServerURL() + '/diary'
+            if (timestamp) {
+                url = url + '?from=' + timestamp + '&to=' + new Date().getTime();
             }
             LoginService.getValidAACtoken().then(
                 function (token) {
@@ -191,7 +190,7 @@ angular.module('viaggia.services.diaryDb', [])
                 //create db
                 createDB().then(function () {
                     //insert into db the notification and update timestamp
-                    insertData(false,diary).then(function () {
+                    insertData(false, diary).then(function () {
                         deferred.resolve(diary);
                     }, function (err) {
                         deferred.reject();
@@ -208,7 +207,7 @@ angular.module('viaggia.services.diaryDb', [])
         }
         //return url of diary
         var getDataURL = function () {
-             return Config.getServerURL() + '/diary/' + Config.getAppId();
+            return Config.getServerURL() + '/diary/' + Config.getAppId();
         }
 
 
@@ -219,15 +218,19 @@ angular.module('viaggia.services.diaryDb', [])
         var getLastTimeSynch = function () {
             var deferred = $q.defer();
             //check if last pending get the time of that event
-            getFirstPending().then(function (value) {
-                if (value)
-                { deferred.resolve(value.timestamp); }
-                else {
-                    deferred.resolve(localStorage.getItem(Config.getAppId() + DIARY_SYNC_TIME));
-                }
-            }, function (err) {
-                deferred.reject();
-            })
+            var now = new Date();
+            now.setDate(now.getDate() - 7);
+            deferred.resolve(now.getTime());
+            //right now I synch last week
+            // getFirstPending().then(function (value) {
+            //     if (value)
+            //     { deferred.resolve(value.timestamp); }
+            //     else {
+            //         deferred.resolve(localStorage.getItem(Config.getAppId() + DIARY_SYNC_TIME));
+            //     }
+            // }, function (err) {
+            //     deferred.reject();
+            // })
             return deferred.promise;
         }
 
@@ -273,9 +276,9 @@ angular.module('viaggia.services.diaryDb', [])
 
                 tx.executeSql(query, params, function (tx, rs) {
                     if (rs.rows.item(0))
-                    { deferred.resolve( rs.rows.item(0))}
+                    { deferred.resolve(rs.rows.item(0)) }
                     else {
-                         deferred.resolve( null);
+                        deferred.resolve(null);
                     }
                 }, function (tx, error) {
                     console.log('SELECT error: ' + error.message);
@@ -319,7 +322,7 @@ angular.module('viaggia.services.diaryDb', [])
         // add event to the diary
         diaryDbService.addEvent = function (event) {
             //insert the single event into diary using array form
-            insertData(false,[event]);
+            insertData(false, [event]);
         }
 
         // read events of specific type "from" to "to"

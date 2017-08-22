@@ -59,9 +59,9 @@ angular.module('viaggia.controllers.game', [])
         });
     })
 
-    .controller('ChallengesCtrl', function ($scope, $http, $filter, $ionicScrollDelegate, $ionicPopup, $window, $timeout) {
+    .controller('ChallengesCtrl', function ($scope, $http, $stateParams, $filter, $ionicScrollDelegate, $ionicPopup, $window, $timeout) {
         $scope.challenges = null;
-
+        $scope.param = null;
         $scope.filter = {
             open: false,
             toggle: function () {
@@ -122,7 +122,13 @@ angular.module('viaggia.controllers.game', [])
                 function () { }
             );
         };
-
+        $scope.init = function () {
+            $scope.param = $stateParams.challengeTypeParam;
+            //set filter
+            if ($scope.param) {
+                $scope.filter.selected = $scope.param;
+            }
+        }
         /* Resize ion-scroll */
         $scope.challengesStyle = {};
 
@@ -142,6 +148,8 @@ angular.module('viaggia.controllers.game', [])
                 generateChallengesStyle();
             }, 200);
         };
+
+        $scope.init();
     })
     .controller('GameMenuCtrl', function ($scope, GameSrv) {
         //$scope.title="Play&Go";
@@ -571,6 +579,12 @@ angular.module('viaggia.controllers.game', [])
                 generateRankingStyle();
             }, 200);
         };
+
+        $scope.openChallengeBoard = function (challengeType) {
+            //$scope.firstOpenPopup.close();
+            $state.go('app.game.challenges', { challengeTypeParam: challengeType });
+        };
+
     })
     .controller('TripDiaryCtrl', function ($scope, $timeout, $stateParams, planService, mapService, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
         $scope.message = {};

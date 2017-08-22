@@ -665,6 +665,9 @@ angular.module('viaggia', [
       .state('app.game.challenges', {
         cache: false,
         url: '/challenges',
+        params:{
+          challengeTypeParam:null
+        },
         views: {
           'tab-challenges': {
             templateUrl: 'templates/game/challenges.html',
