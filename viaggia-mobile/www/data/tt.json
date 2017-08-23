@@ -91,9 +91,7 @@
         "urbano": {
             "view": "list",
             "label": "menu_real_time_bus_urban",
-            "hasMap": true,
-            "markerIcon": "ic_urbanBus",
-            "icon": "ic_urban-bus",
+            "hasMap": false,
             "transportType": "BUS",
             "groups": [
                 {
@@ -101,6 +99,8 @@
                     "color": "#b8b8b4",
                     "label": "Trento",
                     "agencyId": "12",
+                    "markerIcon": "ic_urbanBus",
+                    "icon": "ic_urban-bus",
                     "hasMap": true,
                     "groups": [
                         {
@@ -523,6 +523,8 @@
                     "color": "#b8b8b4",
                     "label": "Rovereto",
                     "agencyId": "16",
+                    "markerIcon": "ic_urbanBus",
+                    "icon": "ic_urban-bus",
                     "hasMap": true,
                     "groups": [
                         {
