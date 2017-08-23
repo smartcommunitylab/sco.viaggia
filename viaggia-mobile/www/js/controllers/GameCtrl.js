@@ -173,6 +173,8 @@ angular.module('viaggia.controllers.game', [])
         $scope.status = null;
         $scope.noStatus = false;
         $scope.serverhow = null
+                    $scope.previousStat = null;
+
         $scope.filter = {
             open: false,
             toggle: function () {
@@ -245,7 +247,6 @@ angular.module('viaggia.controllers.game', [])
         }
 
         $scope.getStyle = function (stat, veichle) {
-            $scope.previousStat = null;
             var maxvalues = {
                 maxDailywalk: 10,
                 maxDailybike: 20,
@@ -315,11 +316,21 @@ angular.module('viaggia.controllers.game', [])
                         $scope.nextStat = statistics.firstAfter;
                     },
                     function (err) {
-                        $scope.maybeMore = true;
+                        $scope.maybeMore = false;
                         Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         getStatistics = false;
-                        $scope.singleStatStatus = false;
+                        $scope.singleStatStatus = true;
+                        //
+                        // $scope.maybeMore = false;
+                        // if (!$scope.message) {
+                        //     $scope.days = [];
+                        // }
+                        // Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                        // $scope.$broadcast('scroll.infiniteScrollComplete');
+                        // $scope.singleDiaryStatus = true;
+                        // Config.loaded();
+                        // getDiary = false;
                     }
                 );
             }
@@ -627,7 +638,6 @@ angular.module('viaggia.controllers.game', [])
             return ($scope.trip.validity == 'VALID');
         }
         $scope.getStyle = function (stat, veichle) {
-            $scope.previousStat = null;
             var maxvalues = {
                 maxDailywalk: 10,
                 maxDailybike: 20,

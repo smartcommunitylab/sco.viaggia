@@ -78,12 +78,15 @@ angular.module('viaggia.services.info', [])
             deferred.resolve(parkings);
           }
         };
-
+function onErrorCallBack() {
+          responses++;
+          deferred.reject()
+        }
 
         angular.forEach(agencyIds, function (value) {
           promises.push($http.get(Config.getServerURL() + '/getparkingsbyagency/' + value, Config.getHTTPConfig()));
         });
-        $q.all(promises).then(lastTask);
+        $q.all(promises).then(lastTask,onErrorCallBack);
         return deferred.promise;
       },
       getParkingMeters: function (lat, long,number) {
@@ -177,11 +180,14 @@ angular.module('viaggia.services.info', [])
           }
         };
 
-
+        function onErrorCallBack() {
+          responses++;
+          deferred.reject()
+        }
         angular.forEach(agencyIds, function (value) {
           promises.push($http.get(Config.getServerURL() + '/bikesharing/' + value, Config.getHTTPConfig()));
         });
-        $q.all(promises).then(lastTask);
+        $q.all(promises).then(lastTask,onErrorCallBack);
         return deferred.promise;
       }
     }
