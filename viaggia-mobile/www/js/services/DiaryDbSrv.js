@@ -58,9 +58,11 @@ angular.module('viaggia.services.diaryDb', [])
             var deferred = $q.defer();
             var dbArray = [];
             for (let i = 0; i < data.length; i++) {
+                // entityId = data[i].entityId ? data[i].entityId: data[i].clientId;
+
                 dbArray.push(['INSERT OR REPLACE INTO Events (id, type, timestamp,travelValidity, event)  VALUES (?,?,?,?,?)',
                     [
-                        data[i].entityId,
+                        data[i].clientId,
                         data[i].type,
                         data[i].timestamp,
                         data[i].travelValidity,
