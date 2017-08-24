@@ -814,17 +814,23 @@ angular.module('viaggia.services.plan', [])
 
             var data = $filter('date')(new Date(trip.data.startime), 'MM/dd/yyyy');
             var time = $filter('date')(new Date(trip.data.startime), 'hh:mma');
+            var from = {};
+            if (trip.originalFrom) {
+                from["name"] = trip.originalFrom.name;
+                from["lat"] = trip.originalFrom.lat;
+                from["long"] = trip.originalFrom.lon;
+            }
+            var to = {};
+            if (trip.originalTo) {
+                to["name"] = trip.originalTo.name;
+                to["lat"] = trip.originalTo.lat;
+                to["long"] = trip.originalTo.lon;
+
+            }
+
             var configure = {
-                "from": {
-                    "name": trip.originalFrom.name,
-                    "lat": trip.originalFrom.lat,
-                    "long": trip.originalFrom.lon
-                },
-                "to": {
-                    "name": trip.originalTo.name,
-                    "lat": trip.originalTo.lat,
-                    "long": trip.originalTo.lon
-                },
+                "from": from,
+                "to": to,
                 "departureTime": time,
                 "date": data,
             }
@@ -957,7 +963,7 @@ angular.module('viaggia.services.plan', [])
                 has = has || planService.legHasAlerts(l)
             });
             return has;
-            }
+        }
         planService.legHasAlerts = function (leg) {
             return checkArray(leg.alertStrikeList) || checkArray(leg.alertDelayList) || checkArray(leg.alertParkingList) || checkArray(leg.alertRoadList) || checkArray(leg.alertAccidentList);
         }
@@ -965,17 +971,17 @@ angular.module('viaggia.services.plan', [])
             var txt = [];
             if (checkArray(leg.alertDelayList)) {
                 leg.alertDelayList.forEach(function (a) {
-                txt.push($filter('translate')('alert_delay', {
-                    mins: Math.ceil(a.delay / 60000)
-                }));
+                    txt.push($filter('translate')('alert_delay', {
+                        mins: Math.ceil(a.delay / 60000)
+                    }));
                 });
             }
             return txt;
         }
-    
+
         function checkArray(a) {
             return a != null && a.length > 0;
         }
-        
+
         return planService;
     })
