@@ -96,7 +96,7 @@
             "groups": [
                 {
                     "view": "grid",
-                    "color": "#b8b8b4",
+                     "color": "#eb8919",
                     "label": "Trento",
                     "agencyId": "12",
                     "markerIcon": "ic_urbanBus",
@@ -520,7 +520,7 @@
                 },
                 {
                     "view": "grid",
-                    "color": "#b8b8b4",
+             "color": "#eb8919",
                     "label": "Rovereto",
                     "agencyId": "16",
                     "markerIcon": "ic_urbanBus",
