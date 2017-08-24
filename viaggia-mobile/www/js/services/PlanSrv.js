@@ -819,6 +819,10 @@ angular.module('viaggia.services.plan', [])
                 from["name"] = trip.originalFrom.name;
                 from["lat"] = trip.originalFrom.lat;
                 from["long"] = trip.originalFrom.lon;
+            } else {
+                from["name"] = trip.data.from.name;
+                from["lat"] = trip.data.from.lat;
+                from["long"] = trip.data.from.lon;
             }
             var to = {};
             if (trip.originalTo) {
@@ -826,6 +830,10 @@ angular.module('viaggia.services.plan', [])
                 to["lat"] = trip.originalTo.lat;
                 to["long"] = trip.originalTo.lon;
 
+            } else {
+                to["name"] = trip.data.to.name;
+                to["lat"] = trip.data.to.lat;
+                to["long"] = trip.data.to.lon;
             }
 
             var configure = {

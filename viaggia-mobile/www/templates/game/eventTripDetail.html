@@ -17,6 +17,9 @@
                 <!--places planned-->
                 <div class="event-trip-detail-stats-from" ng-if="trip.itinerary && trip.itinerary.originalFrom.name">{{'label_event_trip_detail_from'|translate }} {{trip.itinerary.originalFrom.name}}</div>
                 <div class="event-trip-detail-stats-time" ng-if="trip.itinerary && trip.itinerary.originalTo.name">{{'label_event_trip_detail_to'|translate }} {{trip.itinerary.originalTo.name}}</div>
+                 <div class="event-trip-detail-stats-from" ng-if="trip.itinerary && !trip.itinerary.originalFrom  && trip.itinerary.data.from">{{'label_event_trip_detail_from'|translate }} {{trip.itinerary.data.from.name}}</div>
+                <div class="event-trip-detail-stats-time" ng-if="trip.itinerary && !trip.itinerary.originalTo && trip.itinerary.data.to">{{'label_event_trip_detail_to'|translate }} {{trip.itinerary.data.to.name}}</div>
+               
                 <!-- TODO motivazione se non valido distanze per mezzo-->
                 <!--<div ng-if="message.travelDistances.walk>0">{{'label_event_trip_detail_distance_walk'|translate }} {{message.travelDistances.walk}}</div>
             <div ng-if="message.travelDistances.bike>0">{{'label_event_trip_detail_distance_bike'|translate }} {{message.travelDistances.bike}}</div>

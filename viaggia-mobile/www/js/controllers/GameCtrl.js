@@ -173,8 +173,25 @@ angular.module('viaggia.controllers.game', [])
         $scope.status = null;
         $scope.noStatus = false;
         $scope.serverhow = null
-                    $scope.previousStat = null;
-
+        $scope.previousStat = null;
+        $scope.maxvalues = {
+            maxDailywalk: 10000,
+            maxDailybike: 20000,
+            maxDailytransit: 50000,
+            maxDailycar: 50000,
+            maxWeeklywalk: 70000,
+            maxWeeklybike: 140000,
+            maxWeeklytransit: 300000,
+            maxWeeklycar: 300000,
+            maxMonthlywalk: 280000,
+            maxMonthlybike: 560000,
+            maxMonthlytransit: 1200000,
+            maxMonthlycar: 1200000,
+            maxTotalwalk: 840000,
+            maxTotalbike: 1680000,
+            maxTotaltransit: 3600000,
+            maxTotalcar: 3600000,
+        }
         $scope.filter = {
             open: false,
             toggle: function () {
@@ -247,30 +264,13 @@ angular.module('viaggia.controllers.game', [])
         }
 
         $scope.getStyle = function (stat, veichle) {
-            var maxvalues = {
-                maxDailywalk: 10,
-                maxDailybike: 20,
-                maxDailytransit: 50,
-                maxDailycar: 50,
-                maxWeeklywalk: 70,
-                maxWeeklybike: 140,
-                maxWeeklytransit: 300,
-                maxWeeklycar: 300,
-                maxMonthlywalk: 280,
-                maxMonthlybike: 560,
-                maxMonthlytransit: 1200,
-                maxMonthlycar: 1200,
-                maxTotalwalk: 840,
-                maxTotalbike: 1680,
-                maxTotaltransit: 3600,
-                maxTotalcar: 3600,
-            }
+
 
             if ((83 * stat) / $scope.maxStat["max " + veichle] < 8.8 && veichle == 'transit') {
                 return "width:" + (8.8) + "%"
             } else if ((83 * stat) / $scope.maxStat["max " + veichle] < 4.5) {
                 return "width:" + (4.5) + "%"
-            } else if ($scope.maxStat["max " + veichle] < maxvalues["max" + $scope.filter.selected + veichle]) {
+            } else if ($scope.maxStat["max " + veichle] < $scope.maxvalues["max" + $scope.filter.selected + veichle]) {
                 return "width:" + ((83 * stat) / $scope.maxStat["max " + veichle]) + "%"
             } else {
                 return "width:" + (83) + "%"
@@ -600,7 +600,24 @@ angular.module('viaggia.controllers.game', [])
     .controller('TripDiaryCtrl', function ($scope, $timeout, $stateParams, planService, mapService, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
         $scope.message = {};
         $scope.trip = {};
-
+        $scope.maxvalues = {
+            maxDailywalk: 10000,
+            maxDailybike: 20000,
+            maxDailytransit: 50000,
+            maxDailycar: 50000,
+            maxWeeklywalk: 70000,
+            maxWeeklybike: 140000,
+            maxWeeklytransit: 300000,
+            maxWeeklycar: 300000,
+            maxMonthlywalk: 280000,
+            maxMonthlybike: 560000,
+            maxMonthlytransit: 1200000,
+            maxMonthlycar: 1200000,
+            maxTotalwalk: 840000,
+            maxTotalbike: 1680000,
+            maxTotaltransit: 3600000,
+            maxTotalcar: 3600000,
+        }
         $scope.$on('$ionicView.beforeEnter', function () {
             mapService.refresh('eventTripMapDetail');
         });
@@ -637,30 +654,19 @@ angular.module('viaggia.controllers.game', [])
         $scope.tripIsValid = function () {
             return ($scope.trip.validity == 'VALID');
         }
-        $scope.getStyle = function (stat, veichle) {
-            var maxvalues = {
-                maxDailywalk: 10,
-                maxDailybike: 20,
-                maxDailytransit: 50,
-                maxDailycar: 50,
-                maxWeeklywalk: 70,
-                maxWeeklybike: 140,
-                maxWeeklytransit: 300,
-                maxWeeklycar: 300,
-                maxMonthlywalk: 280,
-                maxMonthlybike: 560,
-                maxMonthlytransit: 1200,
-                maxMonthlycar: 1200,
-                maxTotalwalk: 840,
-                maxTotalbike: 1680,
-                maxTotaltransit: 3600,
-                maxTotalcar: 3600,
-            }
 
-            if ((83 * stat) / 20 < 8.8 && veichle == 'transit') {
+        $scope.calculateMaxStats = function (stats) {
+            $scope.maxStat = GameSrv.getMaxStat("Daily");
+        }
+        $scope.getStyle = function (stat, veichle) {
+
+
+            if ($scope.maxStat && (83 * stat) / $scope.maxStat["max " + veichle] < 8.8 && veichle == 'transit') {
                 return "width:" + (8.8) + "%"
-            } else if ((83 * stat) / 20 < 4.5) {
+            } else if ($scope.maxStat && (83 * stat) / $scope.maxStat["max " + veichle] < 4.5) {
                 return "width:" + (4.5) + "%"
+            } else if ($scope.maxStat && $scope.maxStat["max " + veichle] < $scope.maxvalues["maxDaily" + veichle]) {
+                return "width:" + ((83 * stat) / $scope.maxStat["max " + veichle]) + "%"
             } else {
                 return "width:" + (83) + "%"
             }
@@ -674,6 +680,10 @@ angular.module('viaggia.controllers.game', [])
                 $scope.trip = trip;
                 if (trip.itinerary) {
                     //visualize itinerary planned
+                    GameSrv.getRemoteMaxStat().then(function () {
+                        $scope.calculateMaxStats();
+
+                    });
                     planService.setPlanConfigure(planService.buildConfigureOptions(trip.itinerary));
                     planService.process(trip.itinerary.data, trip.itinerary.originalFrom, trip.itinerary.originalTo);
                     $scope.paths = mapService.getTripPolyline(trip.itinerary.data);
