@@ -665,8 +665,8 @@ angular.module('viaggia', [
       .state('app.game.challenges', {
         cache: false,
         url: '/challenges',
-        params:{
-          challengeTypeParam:null
+        params: {
+          challengeTypeParam: null
         },
         views: {
           'tab-challenges': {
@@ -1112,10 +1112,11 @@ angular.module('viaggia', [
       label_event_trip_detail_time: 'Ora: ',
       label_event_trip_detail_from: 'Da: ',
       label_event_trip_detail_to: 'A:',
-      label_event_trip_detail_distance_walk:'Distanza piedi: ',
-      label_event_trip_detail_distance_bike:'Distanza bici: ',
-      label_event_trip_detail_distance_bus:'Distanza bus: ',
-      label_event_trip_detail_distance_car:'Distanza auto: '
+      label_event_trip_detail_distance_walk: 'Distanza piedi: ',
+      label_event_trip_detail_distance_bike: 'Distanza bici: ',
+      label_event_trip_detail_distance_bus: 'Distanza bus: ',
+      label_event_trip_detail_distance_car: 'Distanza auto: ',
+      not_acc_label: 'Questa linea non è accessibile',
     });
 
     $translateProvider.translations('en', {
@@ -1536,10 +1537,11 @@ angular.module('viaggia', [
       label_event_trip_detail_time: 'Ora: ',
       label_event_trip_detail_from: 'Da: ',
       label_event_trip_detail_to: 'A:',
-      label_event_trip_detail_distance_walk:'Walk distance: ',
-      label_event_trip_detail_distance_bike:'Bike dtsance: ',
-      label_event_trip_detail_distance_bus:'Bus distance: ',
-      label_event_trip_detail_distance_car:'Car distance: '
+      label_event_trip_detail_distance_walk: 'Walk distance: ',
+      label_event_trip_detail_distance_bike: 'Bike dtsance: ',
+      label_event_trip_detail_distance_bus: 'Bus distance: ',
+      label_event_trip_detail_distance_car: 'Car distance: ',
+      not_acc_label: 'This line is not accessible',
 
     });
 
