@@ -77,7 +77,7 @@ angular.module('viaggia.services.game', [])
                 string: "msg_won_badge",
                 color: "#60b35c",
                 icon: "ic_game_badge",
-                params: {'badge':'badge'},
+                params: {'badgeText':'badgeText'},
                 state: "openBadgeBoard()"
             },
             CHALLENGE: {

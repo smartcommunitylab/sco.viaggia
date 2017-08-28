@@ -39,4 +39,5 @@ cordova-android-play-services-gradle-release 0.0.2 "cordova-android-play-service
 //it fixes the problem between push plugin and google signIn incompatible libraries
 
 android version 6.1.2
-ios version 4.3.1
+ios version 4.3.1 -> Per ios bisogna mettere Viaggia PlayGo
+
