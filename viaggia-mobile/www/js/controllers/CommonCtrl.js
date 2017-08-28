@@ -75,7 +75,7 @@ angular.module('viaggia.controllers.common', [])
 			if (!!$scope.firstOpenPopup) {
 				$scope.firstOpenPopup.close();
 			}
-			var url = Config.getGamificationURL() + "/view_prizes";
+			var url = Config.getGamificationURL() + "/prizes";
 			window.open(url, "_system", "location=yes");
 		};
 
