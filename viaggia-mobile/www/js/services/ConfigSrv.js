@@ -267,6 +267,9 @@ angular.module('viaggia.services.conf', [])
             getMetroparcoServerURL: function () {
                 return mapJsonConfig['metroparco'];
             },
+            getFAQUrl: function () {
+                return mapJsonConfig['FAQUrl'];
+            },
             getMinimumDistance: function () {
                 return TRACKING_MINIMUM_DISTANCE;
             },

@@ -43,6 +43,7 @@
     "cordova-plugin-device-orientation@1.0.7",
     "cordova-plugin-request-location-accuracy@2.2.1",
     "cordova-custom-config@3.2.0",
+    "cordova plugin add cordova-android-play-services-gradle-release",
     "cordova-plugin-app-version@0.1.9",
     {
       "variables": {

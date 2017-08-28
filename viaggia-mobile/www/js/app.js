@@ -1117,6 +1117,7 @@ angular.module('viaggia', [
       label_event_trip_detail_distance_bus: 'Distanza bus: ',
       label_event_trip_detail_distance_car: 'Distanza auto: ',
       not_acc_label: 'Questa linea non è accessibile',
+      btn_faq:'FAQ'
     });
 
     $translateProvider.translations('en', {
@@ -1542,6 +1543,7 @@ angular.module('viaggia', [
       label_event_trip_detail_distance_bus: 'Bus distance: ',
       label_event_trip_detail_distance_car: 'Car distance: ',
       not_acc_label: 'This line is not accessible',
+      btn_faq:'FAQ'
 
     });
 

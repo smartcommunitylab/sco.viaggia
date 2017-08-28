@@ -54,6 +54,10 @@ angular.module('viaggia.controllers.common', [])
 			$state.go('app.mytrips');
 		};
 
+
+		$scope.openFAQ = function () {
+			$scope.openExtLink(Config.getFAQUrl());
+		}
 		$scope.openRules = function () {
 			if (!!$scope.firstOpenPopup) {
 				$scope.firstOpenPopup.close();
