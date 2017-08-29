@@ -1,5 +1,5 @@
 angular.module('viaggia.services.tracking', [])
-    .factory('trackService', function (Config, $q, $http, $state, $timeout, $filter, DiaryDbSrv, LoginService, $ionicPlatform, $ionicPopup, $rootScope, Utils, GeoLocate) {
+.factory('trackService', function (Config, $q, $http, $state, $timeout, $filter, DiaryDbSrv, LoginService, $ionicPlatform, $ionicPopup, $rootScope, Utils, GeoLocate, BT) {
         //var trackingIntervalInMs = 500;
         //var accelerationDetectionIntervalInMs = 500;
         //var accelerationSensorDelay = 0;
@@ -250,10 +250,28 @@ angular.module('viaggia.services.tracking', [])
                     }
                 }, null)
                     .then(function () {
+                        if (transport === 'bus') {
+                            BT.startScan(function(btId){
+                                bgGeo.getCurrentPosition(function (location, taskId) {
+                                    location.extras = {
+                                        idTrip: tripId,
+                                        start: ts,
+                                        transportType: transport,
+                                        btDeviceId: btId
+                                    }; // <-- add some arbitrary extras-data
+                                    //                      // Insert it.
+                                    bgGeo.insertLocation(location, function () {
+                                        bgGeo.finish(taskId);
+                                    });                                    
+                                });                                
+                            });
+                        }
                         deferred.resolve();
                     }, function (errorCode) {
                         deferred.reject(errorCode);
                     });
+                
+
             }
             return deferred.promise;
         }
@@ -1034,8 +1052,96 @@ angular.module('viaggia.services.tracking', [])
             }
         }
         return trackService;
-    })
+})
 
+.factory('BT', function($http, $q, $ionicPlatform, $timeout) {
+      $ionicPlatform.ready(function() {
+        if (!window.bluetoothSerial || ionic.Platform.isIOS()) return;
 
+        $http.get('data/bus.csv').then(function(data){
+          var lines = data.data.split('\n');
+          lines.forEach(function(line){
+            var fields = line.split(';');
+            if (fields.length == 3 && !!fields[2] && !!fields[0]) {
+              var addr = fields[2].toLowerCase();
+              addr = addr.substr(0,2)+':'+addr.substr(2,2)+':'+addr.substr(4,2)+':'+addr.substr(6,2)+':'+addr.substr(8,2)+':'+addr.substr(10,2);
+              deviceList[addr] = fields[0];
+            }
+          });
+        });
+      });
+    
+      var svc = {};
+      var deviceList = {};
+      var startScan = 0;
+  
+      // start scan until found. optional notifyCb to be called upon each new packet received
+      svc.startScan = function(cb, notifyCb){
+        if (!window.bluetoothSerial || ionic.Platform.isIOS()) return;
 
-    ;
+        startScan = new Date().getTime();
+  
+        bluetoothSerial.setDeviceDiscoveredListener(function(device) {
+          if (startScan > 0) {
+            var addr = device.address.toLowerCase();
+            // cb('testdevice');  
+            if (deviceList[addr]) {
+              //bluetoothle.stopScan();
+              startScan = 0;
+              cb(deviceList[addr]);
+            } else {
+              if (notifyCb) {
+                notifyCb(device);
+              }  
+            }
+            }
+        });
+  
+        var onComplete = function(){
+          if (new Date().getTime() - startScan < 5 * 1000 * 60) {
+            bluetoothSerial.discoverUnpaired(onComplete);
+          }
+        }
+        bluetoothSerial.discoverUnpaired(onComplete);
+  
+      // bluetoothle.startScan(function(result){
+      //     if (result.status === "scanResult") {        
+      //       var addr = result.address.toLowerCase();
+      //       if (deviceList[addr]) {
+      //         bluetoothle.stopScan();
+      //         cb(deviceList[addr]);
+      //       } else {
+      //         if (notifyCb) {
+      //           notifyCb(result);
+      //         }  
+      //       }
+      //     }  
+      //   }, function(err){
+      //     console.log('error'+err);
+      //   }, 
+      //   {
+      //     "services": [],
+      //     "allowDuplicates": false,
+      //     "scanMode": bluetoothle.SCAN_MODE_LOW_LATENCY,
+      //     "matchMode": bluetoothle.MATCH_MODE_AGGRESSIVE
+      //   }
+      // );
+  
+      // $timeout(function() {
+      //   bluetoothle.stopScan();      
+      // }, 1000 * 60 * 60 * 5); //scan for 5 mins, then stop
+    }
+    
+    svc.stopScan = function(){
+      //bluetoothle.stopScan();      
+      startScan = 0;
+    }
+  
+    svc.matches = function(address) {
+      return deviceList[address.toLowerCase()];
+    }
+  
+    return svc;
+  })
+
+;
