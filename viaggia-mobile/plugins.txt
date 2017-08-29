@@ -37,6 +37,10 @@ phonegap-plugin-push 1.10.4 "PushPlugin"
 //it manages the push notification trough GCM (news)
 cordova-android-play-services-gradle-release 0.0.2 "cordova-android-play-services-gradle-release"
 //it fixes the problem between push plugin and google signIn incompatible libraries
+cordova-plugin-bluetooth-serial 0.4.7 "Bluetooth Serial"
+// bluetooth plugin
 
 android version 6.1.2
 ios version 4.3.1
+
+for iOS it is necessary to change the app name removing '&'. Build cocoapods (pod setup).
