@@ -26,9 +26,9 @@ angular.module('viaggia.controllers.tripdetails', [])
 
                 $scope.bookmarkStyle = bookmarkService.getBookmarkStyle($location.path());
                 $scope.requestedFrom = trip.originalFrom.name;
-                $scope.trip.data.from.name =$scope.requestedFrom;
+                $scope.trip.data.from.name = $scope.requestedFrom;
                 $scope.requestedTo = trip.originalTo.name;
-                $scope.trip.data.to.name =$scope.requestedTo;
+                $scope.trip.data.to.name = $scope.requestedTo;
                 $scope.recurrency = trip.recurrency;
                 if ($scope.isRecurrent()) {
                     $scope.recurrentDays = $scope.getRecurrentDays($scope.recurrency);
@@ -72,13 +72,13 @@ angular.module('viaggia.controllers.tripdetails', [])
             if (!$scope.requestedFrom) {
                 $scope.requestedFrom = trip.from.name;
             } else {
-                trip.from.name =$scope.requestedFrom;
+                trip.from.name = $scope.requestedFrom;
             }
             $scope.requestedTo = planService.getName("to");
             if (!$scope.requestedTo) {
                 $scope.requestedTo = trip.to.name;
             } else {
-                trip.to.name =$scope.requestedTo;
+                trip.to.name = $scope.requestedTo;
             }
             var editInstance = planService.getEditInstance();
             $scope.tripId = editInstance ? editInstance.clientId : null;
@@ -539,7 +539,16 @@ angular.module('viaggia.controllers.tripdetails', [])
             $scope.showConfirm($filter('translate')("sure_delete_text"), $filter('translate')("sure_delete_title"), function () {
                 //sign the trip as already done for the day
                 var travelForDiary = GameSrv.getTravelForDiary()
-                trackService.stop();
+                trackService.stop().then(function () {
+                    //go to diary
+                    $ionicHistory.nextViewOptions({
+                        disableBack: true
+                    });
+                    $state.transitionTo('app.home').then(function () {
+                        $state.go('app.diary');
+                    })
+
+                });
                 GameSrv.addTravelDiary(travelForDiary);
                 $scope.modifiable = true;
                 $scope.isAvailable = false;

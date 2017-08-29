@@ -2521,3 +2521,10 @@ Play&Go
  .event-trip-detail-stats .event-trip-detail-stats-time{
      margin-bottom: 8px;
  }
+ .trip-point{
+     padding: 8px;
+
+ }
+ .trip-error {
+     padding: 8px;
+ }

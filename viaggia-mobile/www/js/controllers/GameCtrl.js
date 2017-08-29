@@ -638,10 +638,14 @@ angular.module('viaggia.controllers.game', [])
                 var bound = [$scope.pathMarkers[i].lat, $scope.pathMarkers[i].lng];
                 boundsArray.push(bound);
             }
-            for (var i = 0; i < $scope.paths.length; i++) {
-                var bound = paths[i].getBounds();
+            for (var key in $scope.paths) {
+                var bound =L.polyline($scope.paths[key].latlngs).getBounds();
                 boundsArray.push(bound);
             }
+            // for (var i = 0; i < $scope.paths.length; i++) {
+            //     var bound = paths[i].getBounds();
+            //     boundsArray.push(bound);
+            // }
             // map.fitBounds(polyline.getBounds());
 
             if (boundsArray.length > 0) {
@@ -658,8 +662,24 @@ angular.module('viaggia.controllers.game', [])
         $scope.calculateMaxStats = function (stats) {
             $scope.maxStat = GameSrv.getMaxStat("Daily");
         }
+        $scope.getErrorMotivation = function () {
+            $scope.errorMotivation = GameSrv.getError($scope.trip);
+        }
+        function isOnlyByCar(modes) {
+            if (modes.length == 1 && modes[0] == 'car')
+            { return true }
+            return false
+        }
+        $scope.isErrorMessagePresent = function () {
+            // if (!$scope.tripIsValid()&&($scope.message.travelEstimatedScore==0 && nn in macchina && distanza percorsa >250m: ))
+            if (!$scope.tripIsValid() || ($scope.message.travelScore == 0 && !isOnlyByCar($scope.message.travelModes) && $scope.message.travelLength > 250)) {
+                $scope.errorMessagePresent =true;
+                return true
+            }
+            $scope.errorMessagePresent=false;
+            return false
+        }
         $scope.getStyle = function (stat, veichle) {
-
 
             if ($scope.maxStat && (83 * stat) / $scope.maxStat["max " + veichle] < 8.8 && veichle == 'transit') {
                 return "width:" + (8.8) + "%"
@@ -678,6 +698,9 @@ angular.module('viaggia.controllers.game', [])
             //get detailt of trip 
             GameSrv.getEventTripDeatil($scope.message.entityId).then(function (trip) {
                 $scope.trip = trip;
+                if ($scope.isErrorMessagePresent()) {
+                    $scope.getErrorMotivation();
+                }
                 if (trip.itinerary) {
                     //visualize itinerary planned
                     GameSrv.getRemoteMaxStat().then(function () {

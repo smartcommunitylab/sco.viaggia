@@ -1117,7 +1117,14 @@ angular.module('viaggia', [
       label_event_trip_detail_distance_bus: 'Distanza bus: ',
       label_event_trip_detail_distance_car: 'Distanza auto: ',
       not_acc_label: 'Questa linea non è accessibile',
-      btn_faq:'FAQ'
+      btn_faq: 'FAQ',
+      error_trip_no_data: "Il tracciamento del viaggio non è andato a buon fine: l’assenza di dati non permette la validazione del viaggio",
+      error_trip_out_of_area: "Il viaggio non è valido poichè è stato effettuato fuori dai Comuni di Trento e Rovereto",
+      error_trip_too_short: "Il viaggio non è valido: lunghezza inferiore ai 250 metri",
+      error_trip_free_tracking_no: "Il viaggio non è valido: il viaggio tracciato non corrisponde al mezzo di trasporto dichiarato",
+      error_trip_planned_no: "Il viaggio non è valido: il percorso del viaggio tracciato non corrisponde a quello del viaggio pianificato",
+      error_valid_0: "Non sono stati assegnati punti Green Leaves a causa del superamento dei limiti giornalieri (10 Km a piedi, 30 Km in bici, 8 viaggi con trasporto pubblico al giorno)",
+      label_points: "Punti:"
     });
 
     $translateProvider.translations('en', {
@@ -1543,8 +1550,14 @@ angular.module('viaggia', [
       label_event_trip_detail_distance_bus: 'Bus distance: ',
       label_event_trip_detail_distance_car: 'Car distance: ',
       not_acc_label: 'This line is not accessible',
-      btn_faq:'FAQ'
-
+      btn_faq: 'FAQ',
+       error_trip_no_data: "Trip validation is not possible: no data has been tracked for this trip",
+      error_trip_out_of_area: "The trip is not valid since it is outside Trento and Rovereto municipalities",
+      error_trip_too_short: "The trip is not valid since it is shorter than 250 meters",
+      error_trip_free_tracking_no: "The trip is not valid: tracked mode does not correspond to declared transport mode",
+      error_trip_planned_no: "The trip is not valid: tracked itinerary does not correspond to planned itinerary",
+      error_valid_0: "No Green Leaves gained with this trips: daily limits have been reached (10 Km walking, 30 Km by bike, 8 public transport trips per day)",
+      label_points: "Punti:"
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

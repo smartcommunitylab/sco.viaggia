@@ -29,14 +29,14 @@ angular.module('viaggia.services.game', [])
 
         var tripParams = {
             time:
-             function(event){
+            function (event) {
                 return $filter('date')(event['timestamp'], 'HH:mm')
             },
             travelValidity:
-             function(event){
-                 return $filter('translate')(event['travelValidity'])
-                }
-            };
+            function (event) {
+                return $filter('translate')(event['travelValidity'])
+            }
+        };
         var NOTIFICATIONS_STYLES = {
             TRAVEL_WALK: {
                 string: "msg_trip_walk",
@@ -77,21 +77,21 @@ angular.module('viaggia.services.game', [])
                 string: "msg_won_badge",
                 color: "#60b35c",
                 icon: "ic_game_badge",
-                params: {'badgeText':'badgeText'},
+                params: { 'badgeText': 'badgeText' },
                 state: "openBadgeBoard()"
             },
             CHALLENGE: {
                 string: "msg_new_challenge",
                 color: "#60b35c",
                 icon: "ic_game_challenge_assign",
-                params: {'challengeName':'challengeName'},
+                params: { 'challengeName': 'challengeName' },
                 state: "openChallengeBoard('active')"
             },
             CHALLENGE_WON: {
                 string: "msg_won_challenge",
                 color: "#60b35c",
                 icon: "ic_game_challenge",
-                params: {'challengeName':'challengeName'},
+                params: { 'challengeName': 'challengeName' },
                 state: "openChallengeBoard('old')"
 
             },
@@ -110,7 +110,26 @@ angular.module('viaggia.services.game', [])
                 state: "openGamificationBoard()"
             },
         }
-
+        var ERROR_TRIP = {
+            NO_DATA: {
+                message: "error_trip_no_data"
+            },
+            OUT_OF_AREA: {
+                message: "error_trip_out_of_area"
+            },
+            TOO_SHORT: {
+                message: "error_trip_too_short"
+            },
+            FREE_TRACKING_NO: {
+                message: "error_trip_free_tracking_no"
+            },
+            PLANNED_NO: {
+                message: "error_trip_planned_no"
+            },
+            VALID_0: {
+                message: "error_valid_0"
+            }
+        }
         var ArrMax = null;
 
         getTravelType = function (message) {
@@ -124,7 +143,7 @@ angular.module('viaggia.services.game', [])
             var event = JSON.parse(message.event);
             var data = {};
             if (NOTIFICATIONS_STYLES[message.type].params) {
-                for (var key in NOTIFICATIONS_STYLES[message.type].params){
+                for (var key in NOTIFICATIONS_STYLES[message.type].params) {
                     var p = NOTIFICATIONS_STYLES[message.type].params[key];
                     if (p) {
                         if (typeof p === 'function') {
@@ -243,11 +262,11 @@ angular.module('viaggia.services.game', [])
         }
         gameService.getEventTripDeatil = function (id) {
             var deferred = $q.defer();
-             LoginService.getValidAACtoken().then(
+            LoginService.getValidAACtoken().then(
                 function (token) {
                     $http({
                         method: 'GET',
-                        url: Config.getServerURL() + '/gamification/traveldetails/'+id,
+                        url: Config.getServerURL() + '/gamification/traveldetails/' + id,
                         headers: {
                             'Authorization': 'Bearer ' + token,
                             'appId': Config.getAppId(),
@@ -273,6 +292,20 @@ angular.module('viaggia.services.game', [])
                 travelType: travelType,
                 travelModes: travelModes
             }
+        }
+        gameService.getError = function (trip) {
+            if (ERROR_TRIP[trip.validationResult.validationStatus.error]) {
+                return ERROR_TRIP[trip.validationResult.validationStatus.error].message
+            }
+            else if (trip.itinerary) {
+                //planned
+                return ERROR_TRIP["PLANNED_NO"].message
+            }
+            else {
+                //free
+                return ERROR_TRIP["FREE_TRACKING_NO"].message
+            }
+
         }
         gameService.addTravelDiary = function (travel) {
             //create event travel after stop with PENDING validity waiting the synch
@@ -336,7 +369,7 @@ angular.module('viaggia.services.game', [])
             // });
             return deferred.promise;
         }
-       
+
 
         //SERVER VERSION
         gameService.getStatistics = function (how, from, to) {
@@ -363,7 +396,7 @@ angular.module('viaggia.services.game', [])
             return deferred.promise;
         }
 
-     
+
         /* get remote status */
         gameService.getStatus = function () {
             var deferred = $q.defer();
@@ -488,12 +521,12 @@ angular.module('viaggia.services.game', [])
             var deferred = $q.defer();
             //check if user (profile.userId) is valid or not
             var url = Config.getGamificationURL() + "/checkuser/" + profile.userId;
-    
+
             $http.get(url).then(
                 function (response) {
                     if (!response.data.registered) {
                         deferred.resolve(false);
-    
+
                     } else {
                         localStorage.userValid = true;
                         deferred.resolve(true);
@@ -503,11 +536,11 @@ angular.module('viaggia.services.game', [])
                     deferred.reject(responseError);
                 }
             );
-    
+
             return deferred.promise;
         }
-        gameService.validUserForGamificationLocal = function() {
-        return 'true' == localStorage.userValid;
+        gameService.validUserForGamificationLocal = function () {
+            return 'true' == localStorage.userValid;
         }
 
         return gameService;
