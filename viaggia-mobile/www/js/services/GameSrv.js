@@ -19,7 +19,7 @@ angular.module('viaggia.services.game', [])
                 db: ['TRAVEL']
             }
             , {
-                name: 'ranking',
+                name: 'raccomandation',
                 db: ['RECOMMENDED']
             },
             {
@@ -99,8 +99,8 @@ angular.module('viaggia.services.game', [])
                 string: "msg_new_friend",
                 color: "#3cbacf",
                 icon: "ic_game_friend",
-                params: {},
-                state: "showPlayAndGoPopup()"
+                params: {'recommendedNickname':'recommendedNickname'},
+                state: ""
             },
             NEW_RANKING_WEEK: {
                 string: "msg_pub_ranking",

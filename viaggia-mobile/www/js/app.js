@@ -1044,7 +1044,7 @@ angular.module('viaggia', [
       game_tab_diary_filter_badge: "Badge",
       game_tab_diary_filter_challenge: "Sfide",
       game_tab_diary_filter_trip: "Viaggi",
-      game_tab_diary_filter_ranking: "Classifica",
+      game_tab_diary_filter_raccomandation: "Raccomandazioni",
       game_tab_diary_filter_allnotifications: "Tutte le notifiche",
       game_tab_statistics_filter_Daily: "Giornaliero",
       game_tab_statistics_filter_Weekly: "Settimanale",
@@ -1091,7 +1091,7 @@ angular.module('viaggia', [
       lbl_parking_meter_payment_cash: 'moneta',
       lbl_parking_meter_payment: 'Metodo di pagamento: ',
       msg_won_badge: ' Hai guadagnato un nuovo badge "{{badgeText}}"',
-      msg_new_friend: 'Un tuo amico si è iscritto al gioco!',
+      msg_new_friend: 'Il tuo amico {{recommendedNickname}} partecipa al gioco. Hai guadagnato 20 green leaves!',
       msg_new_challenge: 'Ti è stata assegnata una nuova sfida "{{challengeName}}"',
       msg_won_challenge: 'Hai vinto la sfida "{{challengeName}}"',
       msg_pub_ranking: 'Pubblicata la classifica dei vincitori di questa settimana',
@@ -1124,7 +1124,7 @@ angular.module('viaggia', [
       error_trip_free_tracking_no: "Il viaggio non è valido: il viaggio tracciato non corrisponde al mezzo di trasporto dichiarato",
       error_trip_planned_no: "Il viaggio non è valido: il percorso del viaggio tracciato non corrisponde a quello del viaggio pianificato",
       error_valid_0: "Non sono stati assegnati punti Green Leaves a causa del superamento dei limiti giornalieri (10 Km a piedi, 30 Km in bici, 8 viaggi con trasporto pubblico al giorno)",
-      label_points: "Punti:"
+      label_points: "Green Leaves guadagnate: "
     });
 
     $translateProvider.translations('en', {
@@ -1475,7 +1475,7 @@ angular.module('viaggia', [
       game_tab_diary_filter_badge: "Badge",
       game_tab_diary_filter_challenge: "Challenges",
       game_tab_diary_filter_trip: "Trips",
-      game_tab_diary_filter_ranking: "Ranking",
+      game_tab_diary_filter_raccomandation: "Raccomandation",
       game_tab_diary_filter_allnotifications: "All notifications",
       game_tab_statistics_filter_Daily: "Daily",
       game_tab_statistics_filter_Weekly: "Weekly",
@@ -1524,7 +1524,7 @@ angular.module('viaggia', [
       lbl_parking_meter_payment_cash: 'cash',
       lbl_parking_meter_payment: 'Payment methods: ',
       msg_won_badge: ' You have earned a new badge "{{badgeText}}"',
-      msg_new_friend: 'A friend of yours has joined the game!',
+      msg_new_friend: 'Your friend {{recommendedNickname}} joined the game. You earned 20 Green Leaves!',
       msg_new_challenge: 'You have been assigned a new challenge "{{challengeName}}"',
       msg_won_challenge: 'You have won the challenge "{{challengeName}}"',
       msg_pub_ranking: 'Publicated rankings of this week',
@@ -1557,7 +1557,7 @@ angular.module('viaggia', [
       error_trip_free_tracking_no: "The trip is not valid: tracked mode does not correspond to declared transport mode",
       error_trip_planned_no: "The trip is not valid: tracked itinerary does not correspond to planned itinerary",
       error_valid_0: "No Green Leaves gained with this trips: daily limits have been reached (10 Km walking, 30 Km by bike, 8 public transport trips per day)",
-      label_points: "Punti:"
+      label_points: "Earned Green Leaves: "
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

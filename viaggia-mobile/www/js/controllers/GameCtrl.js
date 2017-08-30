@@ -415,7 +415,7 @@ angular.module('viaggia.controllers.game', [])
             selected: null,
         };
 
-        $scope.filter.options = ['allnotifications', 'badge', 'challenge', 'trip', 'ranking'];
+        $scope.filter.options = ['allnotifications', 'badge', 'challenge', 'trip', 'raccomandation'];
         $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
         $scope.filter.filter = function (selection) {
             Config.loading();
@@ -642,17 +642,17 @@ angular.module('viaggia.controllers.game', [])
                 var bound =L.polyline($scope.paths[key].latlngs).getBounds();
                 boundsArray.push(bound);
             }
-            // for (var i = 0; i < $scope.paths.length; i++) {
-            //     var bound = paths[i].getBounds();
-            //     boundsArray.push(bound);
-            // }
-            // map.fitBounds(polyline.getBounds());
 
             if (boundsArray.length > 0) {
                 var bounds = L.latLngBounds(boundsArray);
                 mapService.getMap('eventTripMapDetail').then(function (map) {
                     map.fitBounds(bounds);
+                    Config.loaded();
+                },function(err){
+                    Config.loaded();
                 });
+            } else {
+                Config.loaded();
             }
         }
         $scope.tripIsValid = function () {
@@ -696,6 +696,7 @@ angular.module('viaggia.controllers.game', [])
             $scope.paths = {};
             $scope.pathMarkers = [];
             //get detailt of trip 
+            Config.loading();
             GameSrv.getEventTripDeatil($scope.message.entityId).then(function (trip) {
                 $scope.trip = trip;
                 if ($scope.isErrorMessagePresent()) {
@@ -712,6 +713,8 @@ angular.module('viaggia.controllers.game', [])
                     $scope.paths = mapService.getTripPolyline(trip.itinerary.data);
                     $scope.pathMarkers = mapService.getTripPoints(trip.itinerary.data);
                     //visualize itinerary done
+                } else {
+                    Config.loaded();
                 }
                 var currentlyLine = mapService.decodePolyline(trip.geolocationPolyline);
                 $scope.paths["p" + $scope.paths.length] = {
