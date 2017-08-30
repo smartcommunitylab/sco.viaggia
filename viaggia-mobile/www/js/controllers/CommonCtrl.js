@@ -56,7 +56,11 @@ angular.module('viaggia.controllers.common', [])
 
 
 		$scope.openFAQ = function () {
-			$scope.openExtLink(Config.getFAQUrl());
+						if (!!$scope.firstOpenPopup) {
+				$scope.firstOpenPopup.close();
+			}
+			var url = Config.getGamificationURL() + "/faq";
+			window.open(url, "_system", "location=yes");
 		}
 		$scope.openRules = function () {
 			if (!!$scope.firstOpenPopup) {

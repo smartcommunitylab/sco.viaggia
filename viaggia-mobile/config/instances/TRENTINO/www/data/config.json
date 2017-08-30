@@ -19,7 +19,6 @@
     "gamificationURL": "https://dev.smartcommunitylab.it/core.mobility/gamificationweb",
     "cliendID": "ec03a596-e41e-49cc-808c-62f39e01de0b",
     "clientSecID": "6c6829bc-6621-4273-84b8-d74d23744f04",
-    "FAQUrl":"https://dev.smartcommunitylab.it/",
     "redirectURL": "http://localhost",
     "smartcheck_options": [
         1,
