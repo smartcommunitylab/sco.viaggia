@@ -627,7 +627,8 @@ angular.module('viaggia.services.tracking', [])
                 deferred.resolve();
                 if (bgGeo) bgGeo.stop();
             });
-
+            BT.stopScan();
+                        
             return deferred.promise;
         };
 
@@ -1074,6 +1075,7 @@ angular.module('viaggia.services.tracking', [])
       var svc = {};
       var deviceList = {};
       var startScan = 0;
+      var to = null;
   
       // start scan until found. optional notifyCb to be called upon each new packet received
       svc.startScan = function(cb, notifyCb){
@@ -1081,14 +1083,23 @@ angular.module('viaggia.services.tracking', [])
 
         startScan = new Date().getTime();
   
+        var onComplete = function(){
+            if (new Date().getTime() - startScan < 5 * 1000 * 60) {
+              bluetoothSerial.discoverUnpaired(onComplete);
+            }
+        }
         bluetoothSerial.setDeviceDiscoveredListener(function(device) {
           if (startScan > 0) {
             var addr = device.address.toLowerCase();
             // cb('testdevice');  
             if (deviceList[addr]) {
-              //bluetoothle.stopScan();
               startScan = 0;
               cb(deviceList[addr]);
+              // continue listening until not closed
+              to = $timeout(function() {
+                startScan = new Date().getTime();  
+                bluetoothSerial.discoverUnpaired(onComplete);                
+              }, 1 * 1000 * 60);
             } else {
               if (notifyCb) {
                 notifyCb(device);
@@ -1097,44 +1108,16 @@ angular.module('viaggia.services.tracking', [])
             }
         });
   
-        var onComplete = function(){
-          if (new Date().getTime() - startScan < 5 * 1000 * 60) {
-            bluetoothSerial.discoverUnpaired(onComplete);
-          }
-        }
         bluetoothSerial.discoverUnpaired(onComplete);
-  
-      // bluetoothle.startScan(function(result){
-      //     if (result.status === "scanResult") {        
-      //       var addr = result.address.toLowerCase();
-      //       if (deviceList[addr]) {
-      //         bluetoothle.stopScan();
-      //         cb(deviceList[addr]);
-      //       } else {
-      //         if (notifyCb) {
-      //           notifyCb(result);
-      //         }  
-      //       }
-      //     }  
-      //   }, function(err){
-      //     console.log('error'+err);
-      //   }, 
-      //   {
-      //     "services": [],
-      //     "allowDuplicates": false,
-      //     "scanMode": bluetoothle.SCAN_MODE_LOW_LATENCY,
-      //     "matchMode": bluetoothle.MATCH_MODE_AGGRESSIVE
-      //   }
-      // );
-  
-      // $timeout(function() {
-      //   bluetoothle.stopScan();      
-      // }, 1000 * 60 * 60 * 5); //scan for 5 mins, then stop
     }
     
     svc.stopScan = function(){
       //bluetoothle.stopScan();      
       startScan = 0;
+      if (to != null) {
+          $timeout.cancel(to);
+          to = null;
+      }    
     }
   
     svc.matches = function(address) {
