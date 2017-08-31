@@ -73,6 +73,10 @@ angular.module('viaggia.controllers.login', [])
                         $ionicLoading.hide();
                         validateUserPopup();
                     }
+                    DiaryDbSrv.dbSetup().then(function () {
+                    }, function (err) {
+                        //diary db not worked
+                    });
 
                 }, function (error) {
                     Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
