@@ -85,21 +85,21 @@ angular.module('viaggia.services.game', [])
                 color: "#60b35c",
                 icon: "ic_game_challenge_assign",
                 params: { 'challengeName': 'challengeName' },
-                state: "openChallengeBoard('active')"
+                state: "openChallengeBoard(message)"
             },
             CHALLENGE_WON: {
                 string: "msg_won_challenge",
                 color: "#60b35c",
                 icon: "ic_game_challenge",
                 params: { 'challengeName': 'challengeName' },
-                state: "openChallengeBoard('old')"
+                state: "openChallengeBoard(message)"
 
             },
             RECOMMENDED: {
                 string: "msg_new_friend",
                 color: "#3cbacf",
                 icon: "ic_game_friend",
-                params: {'recommendedNickname':'recommendedNickname'},
+                params: { 'recommendedNickname': 'recommendedNickname' },
                 state: ""
             },
             NEW_RANKING_WEEK: {

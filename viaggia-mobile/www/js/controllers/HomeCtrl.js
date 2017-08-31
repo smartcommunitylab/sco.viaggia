@@ -86,35 +86,42 @@ angular.module('viaggia.controllers.home', [])
         });
         $scope.$on("$ionicView.afterEnter", function (scopes, states) {
             $ionicLoading.hide();
-
+        });
+        $scope.$on("$ionicView.beforeEnter", function (scopes, states) {
+            // $ionicLoading.show();
         });
         $scope.$on("$ionicView.enter", function (scopes, states) {
             Config.init().then(function () {
                 if (window.BackgroundGeolocation) {
-                    DiaryDbSrv.dbSetup().then(function () {
-                        trackService.startup().then(function () {
-                            $scope.trackingIsOn = trackService.trackingIsGoingOn() && !trackService.trackingIsFinished();
-                            if ($scope.trackingIsOn && $rootScope.GPSAllow) {
-                                updateTrackingInfo();
-                            } else {
-                                //just the timer but it has to update only when it start
-                                //create popup
-                                //stop tracking and variables
-                                if ($scope.trackingIsOn && !$rootScope.GPSAllow) {
-                                    trackService.cleanTracking();
-                                    $scope.trackingIsOn = false;
-                                    trackService.geolocationDisabledPopup();
-                                }
+                    trackService.startup().then(function () {
+                        $scope.trackingIsOn = trackService.trackingIsGoingOn() && !trackService.trackingIsFinished();
+                        // $ionicLoading.hide();
+
+                        if ($scope.trackingIsOn && $rootScope.GPSAllow) {
+                            updateTrackingInfo();
+                        } else {
+                            //just the timer but it has to update only when it start
+                            //create popup
+                            //stop tracking and variables
+                            if ($scope.trackingIsOn && !$rootScope.GPSAllow) {
+                                trackService.cleanTracking();
+                                $scope.trackingIsOn = false;
+                                trackService.geolocationDisabledPopup();
                             }
-                        }, function (err) {
-                            //track service startup not worked
-                        });
+                        }
+
+
                     }, function (err) {
-                        //diary db not worked
+                        //track service startup not worked.
+                        // $ionicLoading.hide();
+
                     });
+
                 };
             });
 
+        }, function (err) {
+            $scope.homeCreation = false;
         });
 
         var translateTransport = function (t) {

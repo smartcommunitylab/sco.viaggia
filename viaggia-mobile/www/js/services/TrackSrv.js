@@ -1,5 +1,5 @@
 angular.module('viaggia.services.tracking', [])
-.factory('trackService', function (Config, $q, $http, $state, $timeout, $filter, DiaryDbSrv, LoginService, $ionicPlatform, $ionicPopup, $rootScope, Utils, GeoLocate, BT) {
+    .factory('trackService', function (Config, $q, $http, $state, $timeout, $filter, DiaryDbSrv, LoginService, $ionicPlatform, $ionicPopup, $rootScope, Utils, GeoLocate, BT) {
         //var trackingIntervalInMs = 500;
         //var accelerationDetectionIntervalInMs = 500;
         //var accelerationSensorDelay = 0;
@@ -64,7 +64,9 @@ angular.module('viaggia.services.tracking', [])
          */
         trackService.startup = function () {
             var deferred = $q.defer();
+            deferred.resolve();
             GeoLocate.initLocalization().then(function () {
+
                 $rootScope.GPSAllow = true;
                 hasLocationPermission(function (status) {
                     if (status) {
@@ -72,11 +74,9 @@ angular.module('viaggia.services.tracking', [])
                         bgGeo.configure(trackingConfigure, callbackFn, failureFn);
                         init();
                     }
-                });
-                deferred.resolve();
+                });           
             }, function () {
                 $rootScope.GPSAllow = false;
-                deferred.resolve();
             });
             return deferred.promise;
         };
@@ -251,7 +251,7 @@ angular.module('viaggia.services.tracking', [])
                 }, null)
                     .then(function () {
                         if (transport === 'bus') {
-                            BT.startScan(function(btId){
+                            BT.startScan(function (btId) {
                                 bgGeo.getCurrentPosition(function (location, taskId) {
                                     location.extras = {
                                         idTrip: tripId,
@@ -262,15 +262,15 @@ angular.module('viaggia.services.tracking', [])
                                     //                      // Insert it.
                                     bgGeo.insertLocation(location, function () {
                                         bgGeo.finish(taskId);
-                                    });                                    
-                                });                                
+                                    });
+                                });
                             });
                         }
                         deferred.resolve();
                     }, function (errorCode) {
                         deferred.reject(errorCode);
                     });
-                
+
 
             }
             return deferred.promise;
@@ -628,12 +628,12 @@ angular.module('viaggia.services.tracking', [])
                 if (bgGeo) bgGeo.stop();
             });
             BT.stopScan();
-                        
+
             return deferred.promise;
         };
 
 
-       
+
 
         var markAsDone = function () {
             var tripId = localStorage.getItem(Config.getAppId() + "_tripId");
@@ -1053,78 +1053,78 @@ angular.module('viaggia.services.tracking', [])
             }
         }
         return trackService;
-})
+    })
 
-.factory('BT', function($http, $q, $ionicPlatform, $timeout) {
-      $ionicPlatform.ready(function() {
-        if (!window.bluetoothSerial || ionic.Platform.isIOS()) return;
+    .factory('BT', function ($http, $q, $ionicPlatform, $timeout) {
+        $ionicPlatform.ready(function () {
+            if (!window.bluetoothSerial || ionic.Platform.isIOS()) return;
 
-        $http.get('data/bus.csv').then(function(data){
-          var lines = data.data.split('\n');
-          lines.forEach(function(line){
-            var fields = line.split(';');
-            if (fields.length == 3 && !!fields[2] && !!fields[0]) {
-              var addr = fields[2].toLowerCase();
-              addr = addr.substr(0,2)+':'+addr.substr(2,2)+':'+addr.substr(4,2)+':'+addr.substr(6,2)+':'+addr.substr(8,2)+':'+addr.substr(10,2);
-              deviceList[addr] = fields[0];
-            }
-          });
+            $http.get('data/bus.csv').then(function (data) {
+                var lines = data.data.split('\n');
+                lines.forEach(function (line) {
+                    var fields = line.split(';');
+                    if (fields.length == 3 && !!fields[2] && !!fields[0]) {
+                        var addr = fields[2].toLowerCase();
+                        addr = addr.substr(0, 2) + ':' + addr.substr(2, 2) + ':' + addr.substr(4, 2) + ':' + addr.substr(6, 2) + ':' + addr.substr(8, 2) + ':' + addr.substr(10, 2);
+                        deviceList[addr] = fields[0];
+                    }
+                });
+            });
         });
-      });
-    
-      var svc = {};
-      var deviceList = {};
-      var startScan = 0;
-      var to = null;
-  
-      // start scan until found. optional notifyCb to be called upon each new packet received
-      svc.startScan = function(cb, notifyCb){
-        if (!window.bluetoothSerial || ionic.Platform.isIOS()) return;
 
-        startScan = new Date().getTime();
-  
-        var onComplete = function(){
-            if (new Date().getTime() - startScan < 5 * 1000 * 60) {
-              bluetoothSerial.discoverUnpaired(onComplete);
+        var svc = {};
+        var deviceList = {};
+        var startScan = 0;
+        var to = null;
+
+        // start scan until found. optional notifyCb to be called upon each new packet received
+        svc.startScan = function (cb, notifyCb) {
+            if (!window.bluetoothSerial || ionic.Platform.isIOS()) return;
+
+            startScan = new Date().getTime();
+
+            var onComplete = function () {
+                if (new Date().getTime() - startScan < 5 * 1000 * 60) {
+                    bluetoothSerial.discoverUnpaired(onComplete);
+                }
+            }
+            bluetoothSerial.setDeviceDiscoveredListener(function (device) {
+                if (startScan > 0) {
+                    var addr = device.address.toLowerCase();
+                    // cb('testdevice');  
+                    if (deviceList[addr]) {
+                        startScan = 0;
+                        cb(deviceList[addr]);
+                        // continue listening until not closed
+                        to = $timeout(function () {
+                            startScan = new Date().getTime();
+                            bluetoothSerial.discoverUnpaired(onComplete);
+                        }, 1 * 1000 * 60);
+                    } else {
+                        if (notifyCb) {
+                            notifyCb(device);
+                        }
+                    }
+                }
+            });
+
+            bluetoothSerial.discoverUnpaired(onComplete);
+        }
+
+        svc.stopScan = function () {
+            //bluetoothle.stopScan();      
+            startScan = 0;
+            if (to != null) {
+                $timeout.cancel(to);
+                to = null;
             }
         }
-        bluetoothSerial.setDeviceDiscoveredListener(function(device) {
-          if (startScan > 0) {
-            var addr = device.address.toLowerCase();
-            // cb('testdevice');  
-            if (deviceList[addr]) {
-              startScan = 0;
-              cb(deviceList[addr]);
-              // continue listening until not closed
-              to = $timeout(function() {
-                startScan = new Date().getTime();  
-                bluetoothSerial.discoverUnpaired(onComplete);                
-              }, 1 * 1000 * 60);
-            } else {
-              if (notifyCb) {
-                notifyCb(device);
-              }  
-            }
-            }
-        });
-  
-        bluetoothSerial.discoverUnpaired(onComplete);
-    }
-    
-    svc.stopScan = function(){
-      //bluetoothle.stopScan();      
-      startScan = 0;
-      if (to != null) {
-          $timeout.cancel(to);
-          to = null;
-      }    
-    }
-  
-    svc.matches = function(address) {
-      return deviceList[address.toLowerCase()];
-    }
-  
-    return svc;
-  })
 
-;
+        svc.matches = function (address) {
+            return deviceList[address.toLowerCase()];
+        }
+
+        return svc;
+    })
+
+    ;

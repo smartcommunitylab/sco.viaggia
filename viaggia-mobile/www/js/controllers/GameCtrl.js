@@ -84,8 +84,12 @@ angular.module('viaggia.controllers.game', [])
         };
 
         $scope.filter.options = ['active', 'old'];
+        var paramOptions = $stateParams.challengeEnd;
+        var now = new Date().getTime();
         $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
-
+        if (paramOptions && paramOptions < now) {
+            $scope.filter.selected=$scope.filter.options[1];
+        }
         $scope.filter.filter = function (selection) {
             if (!!$scope.status && !!$scope.status['challengeConcept'] && (selection === 'active' || selection === 'old')) {
                 if ($scope.status) {
@@ -591,9 +595,11 @@ angular.module('viaggia.controllers.game', [])
             }, 200);
         };
 
-        $scope.openChallengeBoard = function (challengeType) {
+        $scope.openChallengeBoard = function (message) {
             //$scope.firstOpenPopup.close();
-            $state.go('app.game.challenges', { challengeTypeParam: challengeType });
+            //get end
+            var end = (JSON.parse(message.event)).challengeEnd;
+            $state.go('app.game.challenges', { challengeEnd: end });
         };
 
     })
@@ -639,7 +645,7 @@ angular.module('viaggia.controllers.game', [])
                 boundsArray.push(bound);
             }
             for (var key in $scope.paths) {
-                var bound =L.polyline($scope.paths[key].latlngs).getBounds();
+                var bound = L.polyline($scope.paths[key].latlngs).getBounds();
                 boundsArray.push(bound);
             }
 
@@ -648,7 +654,7 @@ angular.module('viaggia.controllers.game', [])
                 mapService.getMap('eventTripMapDetail').then(function (map) {
                     map.fitBounds(bounds);
                     Config.loaded();
-                },function(err){
+                }, function (err) {
                     Config.loaded();
                 });
             } else {
@@ -673,10 +679,10 @@ angular.module('viaggia.controllers.game', [])
         $scope.isErrorMessagePresent = function () {
             // if (!$scope.tripIsValid()&&($scope.message.travelEstimatedScore==0 && nn in macchina && distanza percorsa >250m: ))
             if (!$scope.tripIsValid() || ($scope.message.travelScore == 0 && !isOnlyByCar($scope.message.travelModes) && $scope.message.travelLength > 250)) {
-                $scope.errorMessagePresent =true;
+                $scope.errorMessagePresent = true;
                 return true
             }
-            $scope.errorMessagePresent=false;
+            $scope.errorMessagePresent = false;
             return false
         }
         $scope.getStyle = function (stat, veichle) {

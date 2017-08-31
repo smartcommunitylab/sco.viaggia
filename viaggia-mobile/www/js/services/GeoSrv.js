@@ -109,9 +109,9 @@ angular.module('viaggia.services.geo', [])
             },
             initLocalization: function () {
                 var defer = $q.defer();
+                var tempe = new Date().getTime();
                 document.addEventListener('deviceready', function () {
                     console.log('Check geolocation permissions');
-
                     navigator.geolocation.getCurrentPosition(
                         function (position) {
                             console.log('Gelocation permitted and active');
@@ -119,8 +119,8 @@ angular.module('viaggia.services.geo', [])
                             return defer.resolve();
                         },
                         function (error) {
+
                             positionError = error;
-                            console.log('Cannot geolocate (cordova)');
                             if (error.code != 1) {
                                 console.log('Geolocation permission denied!');
                                 startLocalization();
@@ -129,7 +129,7 @@ angular.module('viaggia.services.geo', [])
                                 return defer.reject();
                             }
                         }, {
-                            timeout: 10*1000
+                            timeout: 10 * 1000
                         });
                 }, false);
                 return defer.promise;

@@ -666,7 +666,7 @@ angular.module('viaggia', [
         cache: false,
         url: '/challenges',
         params: {
-          challengeTypeParam: null
+          challengeEnd: null
         },
         views: {
           'tab-challenges': {
@@ -1475,7 +1475,7 @@ angular.module('viaggia', [
       game_tab_diary_filter_badge: "Badge",
       game_tab_diary_filter_challenge: "Challenges",
       game_tab_diary_filter_trip: "Trips",
-      game_tab_diary_filter_raccomandation: "Raccomandation",
+      game_tab_diary_filter_raccomandation: "Recommendation",
       game_tab_diary_filter_allnotifications: "All notifications",
       game_tab_statistics_filter_Daily: "Daily",
       game_tab_statistics_filter_Weekly: "Weekly",

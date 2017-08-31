@@ -2545,4 +2545,8 @@ Play&Go
 .col-info {
     text-align: right;
 line-height: 1.5 !important;
-    font-size: 30px;}
+    font-size: 30px;
+    color: #868686;
+     align-content: center!important;
+     align-items: center!important;
+    }
