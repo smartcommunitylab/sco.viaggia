@@ -18,24 +18,27 @@
         </div>
         <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="diaryScroll" ng-if="!noDiary()">
             <!--<div class="list" style="margin-top: 25px">-->
-            <ion-list >
+            <ion-list>
                 <div style="margin-top: 25px">
-                <div ng-repeat="day in days" >
-                    <div class="message-item">
-                        <div class="timeline-line">
-                        </div>
-                        <div class="timeline-dot">
-                            <H5 class="timeline-day"> {{day.name| date:'dd/MM'}} </H5>
-                        </div>
-                        <div ng-repeat="message in day.messages" ng-click="{{getState(message)}}" class="message-inner" style=" border: 2px solid {{getStyleColor(message)}}">
-                            <div class="row" style="padding: 0px">
-                                <div class="col-center timeline-arrow" style="border-right-color: {{getStyleColor(message)}}">
-                                </div>
-                                <i class="col-center timeline-col icon {{getIcon(message)}}" style="background-color: {{getStyleColor(message)}}"></i>
-                                <div class="col timeline-msg">
-                                    {{getString(message) | translate: getParams(message)}}
-                                </div>
+                    <div ng-repeat="day in days">
+                        <div class="message-item">
+                            <div class="timeline-line">
                             </div>
+                            <div class="timeline-dot">
+                                <H5 class="timeline-day"> {{day.name| date:'dd/MM'}} </H5>
+                            </div>
+                            <div ng-repeat="message in day.messages" ng-click="{{getState(message)}}" class="message-inner" style=" border: 2px solid {{getStyleColor(message)}}">
+                                <div class="row" style="padding: 0px">
+                                    <div class="col-center timeline-arrow" style="border-right-color: {{getStyleColor(message)}}">
+                                    </div>
+                                    <i class="col-center timeline-col icon {{getIcon(message)}}" style="background-color: {{getStyleColor(message)}}"></i>
+                                    <div class="col timeline-msg">
+                                        {{getString(message) | translate: getParams(message)}}
+                                    </div>
+                                    <div class="col col-10 col-info">
+                                        <a class="challenge-info"><i class="icon ion-ios-arrow-right"></i></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

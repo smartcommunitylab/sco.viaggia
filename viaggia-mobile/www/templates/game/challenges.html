@@ -22,7 +22,7 @@
         <!-- Results -->
         <ion-scroll class="padding-right padding-left challenges" ng-style="challengesStyle" delegate-handle="challengesScroll" ng-if="challenges != null && challenges.length > 0">
             <ion-list>
-                <ion-item class="challenge" ng-repeat="challenge in challenges" ng-class="{'challenge-old': !challenge.active || challenge.success, success: !!challenge.success, fail: !challenge.success}">
+                <ion-item class="challenge" ng-click="showChallengeInfo(challenge)" ng-repeat="challenge in challenges" ng-class="{'challenge-old': !challenge.active || challenge.success, success: !!challenge.success, fail: !challenge.success}">
                     <div class="challenge-desc">{{challenge.challDesc}}</div>
                     <div class="challenge-countdown" ng-if="!!challenge.active" ng-init="days = {days: challenge.daysToEnd}">
                         {{'game_tab_challenges_daysToEnd' + (challenge.daysToEnd == 1 ? '_1' : '') | translate:days}}
@@ -31,7 +31,7 @@
                         {{'game_tab_challenge_success_' + challenge.success | translate}}
                     </div>
                     <div class="challenge-status">
-                        <a class="challenge-info" href="" ng-click="showChallengeInfo(challenge)"><i class="icon ion-information-circled"></i></a>
+                        <a class="challenge-info" ><i class="icon ion-information-circled"></i></a>
                         <span class="challenge-count">
 							{{'game_tab_challenges_status' + (!challenge.active || challenge.success ? '_final' : '') | translate}}:
 							{{!!challenge.success ? challenge.challTarget : challenge.row_status}}/{{challenge.challTarget}}
