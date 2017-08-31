@@ -88,6 +88,371 @@
                 }
             ]
         },
+        "extraurbano": {
+            "view": "list",
+            "label": "menu_real_time_bus_suburban",
+            "hasMap": true,
+            "markerIcon": "ic_extraurbanBus",
+            "transportType": "BUSSUBURBAN",
+            "icon": "ic_extraurban-bus",
+            "elements": [
+                {
+                    "agencyId": "17",
+                    "hasMap": true,
+                    "groups": [
+                        {
+                            "label": "301",
+                            "title": "301 - TRENTO-BESENELLO-CALLIANO-ROVERETO",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "110_17_0",
+                                    "routeSymId": "301A",
+                                    "title": "TRENTO-BESENELLO-CALLIANO-ROVERETO",
+                                    "label": "301"
+                                },
+                                {
+                                    "routeId": "110_17_1",
+                                    "routeSymId": "301R",
+                                    "title": "ROVERETO-CALLIANO-BESENELLO-TRENTO",
+                                    "label": "301"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "302",
+                            "title": "302 - TRENTO-RAVINA-MATTARELLO-ALDENO-GARNIGA TERME",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "181_17_0",
+                                    "routeSymId": "302A",
+                                    "title": "TRENTO-RAVINA-MATTARELLO-ALDENO-GARNIGA TERME",
+                                    "label": "302"
+                                },
+                                {
+                                    "routeId": "181_17_1",
+                                    "routeSymId": "302R",
+                                    "title": "GARNIGA TERME-ALDENO-MATTARELLO-RAVINA-TRENTO",
+                                    "label": "302"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "303",
+                            "title": "303 - TRENTO-V.VATTARO-CARBONARE-LAVARONE-LUSERNA",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "186_17_0",
+                                    "routeSymId": "303A",
+                                    "title": "TRENTO-V.VATTARO-CARBONARE-LAVARONE-LUSERNA",
+                                    "label": "303"
+                                },
+                                {
+                                    "routeId": "186_17_1",
+                                    "routeSymId": "303R",
+                                    "title": "LUSERNA-LAVARONE-CARBONARE-V.VATTARO-TRENTO",
+                                    "label": "303"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "305",
+                            "title": "305 - ROVERETO-MORI-BRENTONICO-SACCONE",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "231_17_0",
+                                    "routeSymId": "305A",
+                                    "title": "ROVERETO-MORI-BRENTONICO-SACCONE",
+                                    "label": "305"
+                                },
+                                {
+                                    "routeId": "231_17_1",
+                                    "routeSymId": "305R",
+                                    "title": "SACCONE-BRENTONICO-MORI-ROVERETO",
+                                    "label": "305"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "306",
+                            "title": "306 - ROVERETO-CALLIANO-FOLGARIA-LAVARONE",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "196_17_0",
+                                    "routeSymId": "306A",
+                                    "title": "ROVERETO-CALLIANO-FOLGARIA-LAVARONE",
+                                    "label": "306"
+                                },
+                                {
+                                    "routeId": "196_17_1",
+                                    "routeSymId": "306R",
+                                    "title": "LAVARONE-FOLGARIA-CALLIANO-ROVERETO",
+                                    "label": "306"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "307",
+                            "title": "307 - ROVERETO-MORI-CHIZZOLA-CORNÈ-ALA-AVIO",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "200_17_0",
+                                    "routeSymId": "307A",
+                                    "title": "ROVERETO-MORI-CHIZZOLA-CORNÈ-ALA-AVIO",
+                                    "label": "307"
+                                },
+                                {
+                                    "routeId": "200_17_1",
+                                    "routeSymId": "307R",
+                                    "title": "AVIO-ALA-CORNÈ-CHIZZOLA-MORI-ROVERETO",
+                                    "label": "307"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "310",
+                            "title": "310 - ROVERETO-MORI-S.FELICE-RONZO CHIENIS",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "220_17_0",
+                                    "routeSymId": "310INA",
+                                    "title": "ROVERETO-MORI-S.FELICE-RONZO CHIENIS",
+                                    "label": "310"
+                                },
+                                {
+                                    "routeId": "220_17_1",
+                                    "routeSymId": "310INA",
+                                    "title": "RONZO CHIENIS-S.FELICE-MORI-ROVERETO",
+                                    "label": "310"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "311",
+                            "title": "311 - ROVERETO-VILLA-NOMI-ALDENO",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "194_17_0",
+                                    "routeSymId": "311A",
+                                    "title": "ROVERETO-VILLA-NOMI-ALDENO",
+                                    "label": "311"
+                                },
+                                {
+                                    "routeId": "194_17_1",
+                                    "routeSymId": "311R",
+                                    "title": "ALDENO-NOMI-VILLA-ROVERETO",
+                                    "label": "311"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "312",
+                            "title": "312 - ROVERETO-PARROCCHIA DI V.-PIAN DELLE FUGAZZE",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "215_17_0",
+                                    "routeSymId": "312A",
+                                    "title": "ROVERETO-PARROCCHIA DI V.-PIAN DELLE FUGAZZE",
+                                    "label": "312"
+                                },
+                                {
+                                    "routeId": "215_17_1",
+                                    "routeSymId": "312R",
+                                    "title": "PIAN DELLE FUGAZZE-PARROCCHIA DI V.-ROVERETO",
+                                    "label": "312"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "314",
+                            "title": "314 - ROVERETO-RIVA-OBRA DI VALLARSA-OMETTO",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "203_17_0",
+                                    "routeSymId": "314A",
+                                    "title": "ROVERETO-RIVA-OBRA DI VALLARSA-OMETTO",
+                                    "label": "314"
+                                },
+                                {
+                                    "routeId": "203_17_1",
+                                    "routeSymId": "314R",
+                                    "title": "OMETTO-OBRA DI VALLARSA-RIVA-ROVERETO",
+                                    "label": "314"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "315",
+                            "title": "315 - ROVERETO-TERRAGNOLO-SERRADA-FOLGARIA",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "198_17_0",
+                                    "routeSymId": "315A",
+                                    "title": "ROVERETO-TERRAGNOLO-SERRADA-FOLGARIA",
+                                    "label": "315"
+                                },
+                                {
+                                    "routeId": "198_17_1",
+                                    "routeSymId": "315R",
+                                    "title": "FOLGARIA-SERRADA-TERRAGNOLO-ROVERETO",
+                                    "label": "315"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "316",
+                            "title": "316 - ROVERETO-TRAMBILENO-VANZA-POZZACCHIO",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "190_17_0",
+                                    "routeSymId": "316AA",
+                                    "title": "ROVERETO-TRAMBILENO-VANZA-POZZACCHIO",
+                                    "label": "316"
+                                },
+                                {
+                                    "routeId": "190_17_1",
+                                    "routeSymId": "316AR",
+                                    "title": "POZZACCHIO-VANZA-TRAMBILENO-ROVERETO",
+                                    "label": "316"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "318",
+                            "title": "318 - VALLE S.FELICE-MANZANO-NOMESINO",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "235_17_0",
+                                    "routeSymId": "318INA",
+                                    "title": "VALLE S.FELICE-MANZANO-NOMESINO",
+                                    "label": "318"
+                                },
+                                {
+                                    "routeId": "235_17_1",
+                                    "routeSymId": "318INR",
+                                    "title": "NOMESINO-MANZANO-VALLE S.FELICE",
+                                    "label": "318"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "319",
+                            "title": "319 - BESAGNO-CROSANO-CORNÈ-SACCONE",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "233_17_0",
+                                    "routeSymId": "319A",
+                                    "title": "BESAGNO-CROSANO-CORNÈ-SACCONE",
+                                    "label": "319"
+                                },
+                                {
+                                    "routeId": "233_17_1",
+                                    "routeSymId": "319R",
+                                    "title": "SACCONE-CORNÈ-CROSANO BIVIO-BESAGNO",
+                                    "label": "319"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "321",
+                            "title": "321 - TRENTO-CALLIANO-FOLGARIA-LAVARONE",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "205_17_0",
+                                    "routeSymId": "321A",
+                                    "title": "TRENTO-CALLIANO-FOLGARIA-LAVARONE",
+                                    "label": "321"
+                                },
+                                {
+                                    "routeId": "205_17_1",
+                                    "routeSymId": "321R",
+                                    "title": "LAVARONE-FOLGARIA-CALLIANO-TRENTO",
+                                    "label": "321"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "332",
+                            "title": "332 - ROVERETO-MORI-RIVA-ARCO-BOLOGNANO",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "634_17_0",
+                                    "routeSymId": "332A",
+                                    "title": "ROVERETO-MORI-RIVA-ARCO-BOLOGNANO",
+                                    "label": "332"
+                                },
+                                {
+                                    "routeId": "634_17_1",
+                                    "routeSymId": "332R",
+                                    "title": "BOLOGNANO-ARCO-RIVA-MORI-ROVERETO",
+                                    "label": "332"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "334",
+                            "title": "334 - ROVERETO-ALA-SABBIONARA-AVIO-MASI-ROVERETO",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "507_17_0",
+                                    "routeSymId": "334A",
+                                    "title": "ROVERETO-ALA-SABBIONARA-AVIO-MASI-ROVERETO",
+                                    "label": "334"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "335",
+                            "title": "335 - ROVERETO-ALA-MASI D'AVIO-AVIO-ROVERETO",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "503_17_0",
+                                    "routeSymId": "335A",
+                                    "title": "ROVERETO-ALA-MASI D'AVIO-AVIO-ROVERETO",
+                                    "label": "335"
+                                }
+                            ]
+                        },
+                        {
+                            "label": "336",
+                            "title": "336 - ALA-RONCHI DI ALA-PONZOLOTTI",
+                            "color": "#fcbf0e",
+                            "routes": [
+                                {
+                                    "routeId": "580_17_0",
+                                    "routeSymId": "336AA",
+                                    "title": "ALA-RONCHI DI ALA-PONZOLOTTI",
+                                    "label": "336"
+                                },
+                                {
+                                    "routeId": "580_17_1",
+                                    "routeSymId": "336AR",
+                                    "title": "RONCHI-ALA",
+                                    "label": "336"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
         "urbano": {
             "view": "list",
             "label": "menu_real_time_bus_urban",

@@ -86,7 +86,6 @@
     "db_version": 25,
     "visualization": {
         "primaryLinks": [
-
             {
                 "state": "newPlan()",
                 "label": "menu_plan",
@@ -106,6 +105,12 @@
                 "color": "#cd251c"
             },
             {
+                "state": "/app/ttlist/extraurbano",
+                "label": "menu_real_time_bus_suburban",
+                "icon": "ic_extraurban-bus",
+                "color": "#00588e"
+            },
+            {
                 "state": "/app/parking",
                 "label": "menu_real_time_park",
                 "icon": "ic_parking-lot",
@@ -116,7 +121,7 @@
                 "label": "menu_parking_meters",
                 "icon": "ic_parcometro",
                 "color": "#FBA724"
-             },
+            },
             {
                 "state": "/app/bikesharing",
                 "label": "menu_real_time_bike",
@@ -135,6 +140,11 @@
                 "state": "/app/ttlist/urbano",
                 "label": "menu_real_time_bus_urban",
                 "icon": "ic_urban-bus"
+            },
+            {
+                "state": "/app/ttlist/extraurbano",
+                "label": "menu_real_time_bus_suburban",
+                "icon": "ic_extraurban-bus"
             },
             {
                 "state": "/app/ttlist/trains",
