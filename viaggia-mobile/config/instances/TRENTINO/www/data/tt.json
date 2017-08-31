@@ -91,7 +91,7 @@
         "extraurbano": {
             "view": "list",
             "label": "menu_real_time_bus_suburban",
-            "hasMap": true,
+            "hasMap": false,
             "markerIcon": "ic_extraurbanBus",
             "transportType": "BUSSUBURBAN",
             "icon": "ic_extraurban-bus",
