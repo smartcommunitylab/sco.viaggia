@@ -687,7 +687,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         };
 
         $scope.initMap = function () {
-            mapService.initMap('ttMap').then(function () {
+            mapService.initMap('ttMap',true).then(function () {
                 GeoLocate.locate().then(function (pos) {
                     $scope.center = {
                         lat: pos[0],

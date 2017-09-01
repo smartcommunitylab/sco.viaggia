@@ -109,7 +109,7 @@ angular.module('viaggia.controllers.taxi', [])
         $scope.modalMap.hide();
     };
     $scope.initMap = function () {
-        mapService.initMap('modalMapTaxi').then(function () {
+        mapService.initMap('modalMapTaxi',true).then(function () {
             console.log('map initialized');
         });
     };

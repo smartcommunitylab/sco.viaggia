@@ -181,42 +181,84 @@ angular.module('viaggia.services.game', [])
         }
 
         gameService.getStyleColor = function (message) {
-            if (message.type == 'TRAVEL') {
-                message.type = getTravelType(message)
+            if (message) {
+
+
+                if (!message.type) {
+                    return NOTIFICATIONS_STYLES['TRAVEL_MULTIMODAL'].color
+                }
+                if (message.type == 'TRAVEL') {
+                    message.type = getTravelType(message)
+                }
+                return NOTIFICATIONS_STYLES[message.type].color;
             }
-            return NOTIFICATIONS_STYLES[message.type].color;
         }
         gameService.getIcon = function (message) {
-            if (message.type == 'TRAVEL') {
-                message.type = getTravelType(message)
+            if (message) {
+
+
+                if (!message.type) {
+                    return NOTIFICATIONS_STYLES['TRAVEL_MULTIMODAL'].icon
+                }
+                if (message.type == 'TRAVEL') {
+                    message.type = getTravelType(message)
+                }
+                return NOTIFICATIONS_STYLES[message.type].icon;
             }
-            return NOTIFICATIONS_STYLES[message.type].icon;
         }
 
         gameService.getString = function (message) {
-            if (message.type == 'TRAVEL') {
-                message.type = getTravelType(message)
-            }
-            return NOTIFICATIONS_STYLES[message.type].string;
-        }
-        gameService.getState = function (message) {
-            if (message.type == 'TRAVEL') {
-                message.type = getTravelType(message)
-            }
-            return NOTIFICATIONS_STYLES[message.type].state;
-        }
-        gameService.getParams = function (message) {
-            if (message.type == 'TRAVEL') {
-                message.type = getTravelType(message)
-            }
+            if (message) {
 
-            return createParamString(message);
-        }
-        gameService.getNotificationTypes = function (message) {
-            if (message.type == 'TRAVEL') {
-                message.type = getTravelType(message)
+                if (!message.type) {
+                    return NOTIFICATIONS_STYLES['TRAVEL_MULTIMODAL'].string
+                }
+                if (message.type == 'TRAVEL') {
+                    message.type = getTravelType(message)
+                }
+                return NOTIFICATIONS_STYLES[message.type].string;
             }
-            return NOTIFICATIONS_STYLES[message.type].string;
+        }
+
+        gameService.getState = function (message) {
+            if (message) {
+
+                if (!message.type) {
+                    return NOTIFICATIONS_STYLES['TRAVEL_MULTIMODAL'].state
+                }
+                if (message.type == 'TRAVEL') {
+                    message.type = getTravelType(message)
+                }
+                return NOTIFICATIONS_STYLES[message.type].state;
+            }
+        }
+
+        gameService.getParams = function (message) {
+            if (message) {
+
+
+                // if (!message.type) {
+                //     return message.type
+                // }
+                if (message.type == 'TRAVEL') {
+                    message.type = getTravelType(message)
+                }
+
+                return createParamString(message);
+            }
+        }
+
+        gameService.getNotificationTypes = function (message) {
+            if (message) {
+
+                if (!message.type) {
+                    return NOTIFICATIONS_STYLES['TRAVEL_MULTIMODAL'].string
+                }
+                if (message.type == 'TRAVEL') {
+                    message.type = getTravelType(message)
+                }
+                return NOTIFICATIONS_STYLES[message.type].string;
+            }
         }
         gameService.getFilters = function () {
             //to do

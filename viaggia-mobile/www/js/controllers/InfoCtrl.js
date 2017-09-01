@@ -128,7 +128,7 @@ angular.module('viaggia.controllers.info', [])
             $scope.modalMap.hide();
         };
         $scope.initMap = function() {
-            mapService.initMap('modalMapParking').then(function() {
+            mapService.initMap('modalMapParking',true).then(function() {
                 console.log('map initialized');
             });
         };
@@ -274,7 +274,7 @@ angular.module('viaggia.controllers.info', [])
             })
         }
         $scope.initMapParkingMeter = function() {
-            mapService.initMap('modalMapParkingMeters').then(function() {
+            mapService.initMap('modalMapParkingMeters',true).then(function() {
                 console.log('map initialized');
             });
         }
@@ -831,7 +831,7 @@ angular.module('viaggia.controllers.info', [])
             $scope.modalMap.hide();
         };
         $scope.initMap = function() {
-            mapService.initMap('modalMapBike').then(function() {});
+            mapService.initMap('modalMapBike',true).then(function() {});
         };
 
         var showPopup = function(p) {

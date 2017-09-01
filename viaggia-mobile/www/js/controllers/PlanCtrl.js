@@ -458,7 +458,7 @@ angular.module('viaggia.controllers.plan', [])
     };
     // init the address selection map: show a popup when the user click on it with the address (trough Geocoder) or the coordinates of where he clicked
     $scope.initMap = function () {
-        mapService.initMap('modalMapPlan').then(function () {
+        mapService.initMap('modalMapPlan',true).then(function () {
 
             $scope.$on("leafletDirectiveMap.modalMapPlan.click", function (event, args) {
                 $ionicLoading.show();

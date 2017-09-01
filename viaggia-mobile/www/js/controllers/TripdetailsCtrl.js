@@ -354,7 +354,7 @@ angular.module('viaggia.controllers.tripdetails', [])
             //delete $scope.placesandcoordinates[favorite.name];
         }
         $scope.initMap = function () {
-            mapService.initMap('modalMapDetail').then(function () {
+            mapService.initMap('modalMapDetail',true).then(function () {
                 //add polyline
             })
         }

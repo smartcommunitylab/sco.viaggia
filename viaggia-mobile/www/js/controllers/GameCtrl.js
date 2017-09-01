@@ -630,7 +630,7 @@ angular.module('viaggia.controllers.game', [])
 
 
         $scope.initMap = function () {
-            mapService.initMap('eventTripMapDetail').then(function () {
+            mapService.initMap('eventTripMapDetail',false).then(function () {
                 console.log('map initialized');
             });
         };
@@ -712,7 +712,6 @@ angular.module('viaggia.controllers.game', [])
                     //visualize itinerary planned
                     GameSrv.getRemoteMaxStat().then(function () {
                         $scope.calculateMaxStats();
-
                     });
                     planService.setPlanConfigure(planService.buildConfigureOptions(trip.itinerary));
                     planService.process(trip.itinerary.data, trip.itinerary.originalFrom, trip.itinerary.originalTo);
@@ -722,6 +721,8 @@ angular.module('viaggia.controllers.game', [])
                 } else {
                     Config.loaded();
                 }
+
+                //add real path
                 var currentlyLine = mapService.decodePolyline(trip.geolocationPolyline);
                 $scope.paths["p" + $scope.paths.length] = {
                     color: '#2975a7',
