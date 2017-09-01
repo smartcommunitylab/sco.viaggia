@@ -11,7 +11,7 @@
             <div ng-if="tripIsValid()" class="valid-trip">
                 {{'label_valid'|translate}}
             </div>
-            <div ng-if="!errorMessagePresent" ng-if="message.travelScore" class="trip-point">
+            <div ng-if="!errorMessagePresent && message.travelScore" class="trip-point">
                 {{'label_points'|translate}}{{message.travelScore}}
             </div>
             <div ng-if="errorMessagePresent" class="trip-error">
