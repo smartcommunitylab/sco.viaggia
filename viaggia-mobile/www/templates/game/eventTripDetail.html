@@ -26,7 +26,7 @@
                 <div class="event-trip-detail-stats-from" ng-if="trip.itinerary && !trip.itinerary.originalFrom  && trip.itinerary.data.from">{{'label_event_trip_detail_from'|translate }} {{trip.itinerary.data.from.name}}</div>
                 <div class="event-trip-detail-stats-time" ng-if="trip.itinerary && !trip.itinerary.originalTo && trip.itinerary.data.to">{{'label_event_trip_detail_to'|translate }} {{trip.itinerary.data.to.name}}</div>
 
-                <ion-list class="list-stats">
+                <ion-list class="list-stats" ng-if="tripIsValid()">
                     <div class="chart">
                         <div ng-if="message.travelDistances.walk>0" class="walkbgcolor statsfloat" style="{{getStyle(message.travelDistances.walk, 'walk')}}"><i class="icon ic_foot"></i></div>
                         <div ng-if="message.travelDistances.walk>0" class="statstext" id="walkcolor"> {{message.travelDistances.walk/1000 | number:2}} km </div>
