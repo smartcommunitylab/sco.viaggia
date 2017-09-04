@@ -607,6 +607,7 @@
                                 {
                                     "routeId": "05A",
                                     "routeSymId": "05A",
+                                    "color": "#f8ad1e",
                                     "title": "Piazza Dante - P.Fiera - Povo - Oltrecastello",
                                     "label": "5",
                                     "wheelChairBoarding": 1
@@ -614,6 +615,7 @@
                                 {
                                     "routeId": "05R",
                                     "routeSymId": "05R",
+                                    "color": "#f8ad1e",
                                     "title": "Oltrecastello - Povo - P.Aquila - P. Dante",
                                     "label": "5",
                                     "wheelChairBoarding": 1
@@ -877,6 +879,46 @@
                                     "routeSymId": "FunR",
                                     "title": "Funivia Sardagna Trento",
                                     "label": "Sardagna - Trento",
+                                    "wheelChairBoarding": 1
+                                }
+                            ]
+                        },
+                        {
+                            "label": "CM",
+                            "color": "#f8ad1e",
+                            "routes": [
+                                {
+                                    "routeId": "CMA",
+                                    "routeSymId": "CMA",
+                                    "title": "Povo - Borino - Celva - Passo Cimirlo",
+                                    "label": "Povo - Borino - Celva - Passo Cimirlo",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "CMR",
+                                    "routeSymId": "CMR",
+                                    "title": "Passo Cimirlo - Celva - Borino - Povo",
+                                    "label": "Passo Cimirlo - Celva - Borino - Povo",
+                                    "wheelChairBoarding": 1
+                                }
+                            ]
+                        },
+                        {
+                            "label": "G",
+                            "color": "#572f75",
+                            "routes": [
+                                {
+                                    "routeId": "GA",
+                                    "routeSymId": "%20GA",
+                                    "title": "Gardolo - Gardolo di Mezzo e Spini",
+                                    "label": "Gardolo - Gardolo di Mezzo e Spini",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "GR",
+                                    "routeSymId": "%20GR",
+                                    "title": "Spini e Gardolo di Mezzo - Gardolo",
+                                    "label": "Spini e Gardolo di Mezzo - Gardolo",
                                     "wheelChairBoarding": 1
                                 }
                             ]
