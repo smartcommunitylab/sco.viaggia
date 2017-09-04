@@ -88,7 +88,7 @@ angular.module('viaggia.controllers.game', [])
         var now = new Date().getTime();
         $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
         if (paramOptions && paramOptions < now) {
-            $scope.filter.selected=$scope.filter.options[1];
+            $scope.filter.selected = $scope.filter.options[1];
         }
         $scope.filter.filter = function (selection) {
             if (!!$scope.status && !!$scope.status['challengeConcept'] && (selection === 'active' || selection === 'old')) {
@@ -392,7 +392,7 @@ angular.module('viaggia.controllers.game', [])
 
     })
 
-    .controller('DiaryCtrl', function ($scope, $timeout, $state, $filter, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
+    .controller('DiaryCtrl', function ($scope, $timeout, $state, $filter, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config,trackService) {
         $scope.messages = [];
         // $scope.days=[];
         $scope.maybeMore = true;
@@ -448,7 +448,12 @@ angular.module('viaggia.controllers.game', [])
                 }
             }
         }
-
+        $scope.isTracking = function (message) {
+            if (trackService.isThisTheJourney(message.id)) {
+                return true;
+            }
+            return false;
+        }
         $scope.loadMore = function () {
             if (!getDiary && $scope.maybeMore) {
                 getDiary = true;
@@ -630,7 +635,7 @@ angular.module('viaggia.controllers.game', [])
 
 
         $scope.initMap = function () {
-            mapService.initMap('eventTripMapDetail',false).then(function () {
+            mapService.initMap('eventTripMapDetail', false).then(function () {
                 console.log('map initialized');
             });
         };
