@@ -55,7 +55,7 @@ angular.module('viaggia.services.map', [])
             var deferred = $q.defer();
 
             if (cachedMap[mapId] == null) {
-                mapService.initMap(mapId,true).then(function () {
+                mapService.initMap(mapId, true).then(function () {
                     deferred.resolve(cachedMap[mapId]);
                 });
             } else {
@@ -112,7 +112,9 @@ angular.module('viaggia.services.map', [])
                                 var updatePosTimer = $interval(function () {
                                     GeoLocate.locate().then(function (e) {
                                         //console.log('change user position');
-                                        cachedMap[mapId].myPos.setLatLng([e[0], e[1]]).update();
+                                        if (cachedMap[mapId].myPos) {
+                                            cachedMap[mapId].myPos.setLatLng([e[0], e[1]]).update();
+                                        }
                                     })
                                 }, 3000);
                                 cachedMap[mapId].updatePosTimer = updatePosTimer;
