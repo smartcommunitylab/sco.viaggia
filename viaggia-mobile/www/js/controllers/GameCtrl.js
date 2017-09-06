@@ -284,13 +284,13 @@ angular.module('viaggia.controllers.game', [])
             //     stat = ($scope.message.travelDistances.transit||0) + ($scope.message.travelDistances.bus||0) + ($scope.message.travelDistances.train||0);
             //  }
             if ((83 * stat) / $scope.maxStat["max " + veichle] < 8.8 && veichle == 'transit') {
-                return "width:" + (8.8) + "%"
+                return { width: "8.8%" }
             } else if ((83 * stat) / $scope.maxStat["max " + veichle] < 4.5) {
-                return "width:" + (4.5) + "%"
+                return { width: + "4.5%" }
             } else if ($scope.maxStat["max " + veichle] < $scope.maxvalues["max" + $scope.filter.selected + veichle]) {
-                return "width:" + ((83 * stat) / $scope.maxStat["max " + veichle]) + "%"
+                return { width: "" + ((83 * stat) / $scope.maxStat["max " + veichle]) + "%" }
             } else {
-                return "width:" + (83) + "%"
+                return { width: "83%" }
             }
         }
 
@@ -668,10 +668,9 @@ angular.module('viaggia.controllers.game', [])
             return false
         }
         $scope.getStyle = function (stat, veichle) {
-            if (veichle == 'transit')
-            { 
-                stat = ($scope.message.travelDistances.transit||0) + ($scope.message.travelDistances.bus||0) + ($scope.message.travelDistances.train||0);
-             }
+            if (veichle == 'transit') {
+                stat = ($scope.message.travelDistances.transit || 0) + ($scope.message.travelDistances.bus || 0) + ($scope.message.travelDistances.train || 0);
+            }
             if ($scope.maxStat && (83 * stat) / $scope.maxStat["max " + veichle] < 8.8 && veichle == 'transit') {
                 return "width:" + (8.8) + "%"
             } else if ($scope.maxStat && (83 * stat) / $scope.maxStat["max " + veichle] < 4.5) {
