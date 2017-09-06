@@ -26,8 +26,8 @@
                         <div ng-if="day.data.walk>0" class="statstext" id="walkcolor"> {{(day.data.walk/1000) | number:1}} km </div>
                         <div id="statsdiv"></div>
 
-                        <div ng-if="day.data.transit>0" class="publicbgcolor statsfloat" style="{{getStyle(day.data.transit, 'transit')}}"><i class="icon ic_urban-bus"></i><i class="icon ic_train"></i></div>
-                        <div ng-if="day.data.transit>0" class="statstext" id="publiccolor"> {{(day.data.transit/1000) | number:1}} km </div>
+                        <div ng-if="(day.data.transit+day.data.bus+day.data.train)>0" class="publicbgcolor statsfloat" style="{{getStyle((day.data.transit+day.data.bus+day.data.train), 'transit')}}"><i class="icon ic_urban-bus"></i><i class="icon ic_train"></i></div>
+                        <div ng-if="(day.data.transit+day.data.bus+day.data.train)>0" class="statstext" id="publiccolor"> {{((day.data.transit+day.data.bus+day.data.train)/1000) | number:1}} km </div>
                         <div id="statsdiv"></div>
 
                         <div ng-if="day.data.bike>0" class="bikebgcolor statsfloat" style="{{getStyle(day.data.bike, 'bike')}}"><i class="icon ic_bike"></i></div>

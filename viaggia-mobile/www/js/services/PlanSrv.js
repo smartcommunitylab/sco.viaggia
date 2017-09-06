@@ -865,27 +865,28 @@ angular.module('viaggia.services.plan', [])
                             if (!savedTrips) {
                                 savedTrips = {};
                             }
-                            for (var i = 0; i < data.length; i++) {
-                                //var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
-                                //if (!savedTrips || !data) {
-                                //    deferred.reject();
-                                //}
+                            // planService.getTrips().then(function (trips) {
+                                for (var i = 0; i < data.length; i++) {
+                                    savedTrips[data[i].clientId] = data[i];
+                                    planService.setPlanConfigure(null);
+                                    trackService.updateNotification(data, data[i].clientId, "create");
+                                }
+                                localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
+                                deferred.resolve(data);
+                            // },function (err){
+                            //     deferred.reject();
+                            // });
+                            // for (var i = 0; i < data.length; i++) {
+                            //     savedTrips[data[i].clientId] = data[i];
+                            //     planService.setPlanConfigure(null);
+                            //     planService.getTrips().then(function (trips) {
+                            //         trackService.updateNotification(trips, data[i].clientId, "create");
+                            //         deferred.resolve(data);
 
-                                savedTrips[data[i].clientId] = data[i];
-                                //var trip = savedTrips[data.clientId].data;
-                                //delete savedTrips[tripId];
-                                //localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
-                                //deferred.resolve(true);
 
-                                planService.setPlanConfigure(null);
-                                planService.getTrips().then(function (trips) {
-                                    trackService.updateNotification(trips, data[i].clientId, "create");
-                                    deferred.resolve(data);
-
-
-                                });
-                            }
-                            localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
+                            //     });
+                            // }
+                            // localStorage.setItem(Config.getAppId() + "_savedTrips", JSON.stringify(savedTrips));
 
 
                         }).error(function (data, status, headers, config) {

@@ -155,7 +155,7 @@ angular.module('viaggia.controllers.game', [])
 
         $scope.init();
     })
-    .controller('GameMenuCtrl', function ($scope, GameSrv) {
+    .controller('GameMenuCtrl', function ($scope, $state, $ionicHistory, GameSrv) {
         //$scope.title="Play&Go";
         $scope.init = function () {
             GameSrv.getLocalStatus().then(
@@ -163,8 +163,19 @@ angular.module('viaggia.controllers.game', [])
                     $scope.title = status.playerData.nickName
                 });
         }
-
+        // if (!$ionicHistory.backView());
+        // {
+        //     //add home
+        //     console.log('empty stack');
+        // }
+        //$ionicNavBarDelegate.showBackButton(true);
         $scope.init();
+        $scope.goHome = function () {
+            $state.go('app.home');
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
+        }
 
     })
     .controller('StatisticsCtrl', function ($scope, $ionicScrollDelegate, $window, $filter, $timeout, Toast, Config, GameSrv) {
@@ -268,8 +279,10 @@ angular.module('viaggia.controllers.game', [])
         }
 
         $scope.getStyle = function (stat, veichle) {
-
-
+            // if (veichle == 'transit')
+            // { 
+            //     stat = ($scope.message.travelDistances.transit||0) + ($scope.message.travelDistances.bus||0) + ($scope.message.travelDistances.train||0);
+            //  }
             if ((83 * stat) / $scope.maxStat["max " + veichle] < 8.8 && veichle == 'transit') {
                 return "width:" + (8.8) + "%"
             } else if ((83 * stat) / $scope.maxStat["max " + veichle] < 4.5) {
@@ -325,16 +338,6 @@ angular.module('viaggia.controllers.game', [])
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         getStatistics = false;
                         $scope.singleStatStatus = true;
-                        //
-                        // $scope.maybeMore = false;
-                        // if (!$scope.message) {
-                        //     $scope.days = [];
-                        // }
-                        // Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
-                        // $scope.$broadcast('scroll.infiniteScrollComplete');
-                        // $scope.singleDiaryStatus = true;
-                        // Config.loaded();
-                        // getDiary = false;
                     }
                 );
             }
@@ -354,35 +357,9 @@ angular.module('viaggia.controllers.game', [])
                 $scope.valbefore = new Date().getTime()
             }
         }
-        // $scope.init = function () {
-        //     $scope.findbefore();
-        //     var x = new Date().getTime() - $scope.valbefore;
-        //     //            GameSrv.getStatistics($scope.filter.selected,  x, new Date().getTime()).then(function (statistics) {
-        //     GameSrv.getStatistics($scope.serverhow, x, new Date().getTime()).then(function (statistics) {
-        //         $scope.singleStatStatus = true;
-        //         $scope.stats = statistics.stats;
-        //         $scope.previousStat = statistics.firstBefore;
-        //         $scope.nextStat = statistics.firstAfter;
-        //         $scope.calculateMaxStats($scope.stats);
-        //     }, function (err) {
-        //         $scope.stats = [];
-        //         Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
-        //         $scope.$broadcast('scroll.infiniteScrollComplete');
-        //         getStatistics = false;
-        //         $scope.singleStatStatus = false;
-        //     });
-        //     generateRankingStyle();
-        // }
-        // $scope.init();
-        // $scope.noStats = function () {
-        //     if ($scope.stats.length == 0) {
-        //         return true
-        //     }
-        //     return false
 
-        // }
         $scope.dayHasStat = function (day) {
-            return (day.data.walk || day.data.transit || day.data.bike || day.data.car);
+            return (day.data.walk || day.data.transit || day.data.bike || day.data.car || day.data.bus);
         }
         GameSrv.getRemoteMaxStat().then(function () {
             $scope.findbefore();
@@ -392,7 +369,7 @@ angular.module('viaggia.controllers.game', [])
 
     })
 
-    .controller('DiaryCtrl', function ($scope, $timeout, $state, $filter, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config,trackService) {
+    .controller('DiaryCtrl', function ($scope, $timeout, $state, $filter, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config, trackService) {
         $scope.messages = [];
         // $scope.days=[];
         $scope.maybeMore = true;
@@ -691,7 +668,10 @@ angular.module('viaggia.controllers.game', [])
             return false
         }
         $scope.getStyle = function (stat, veichle) {
-
+            if (veichle == 'transit')
+            { 
+                stat = ($scope.message.travelDistances.transit||0) + ($scope.message.travelDistances.bus||0) + ($scope.message.travelDistances.train||0);
+             }
             if ($scope.maxStat && (83 * stat) / $scope.maxStat["max " + veichle] < 8.8 && veichle == 'transit') {
                 return "width:" + (8.8) + "%"
             } else if ($scope.maxStat && (83 * stat) / $scope.maxStat["max " + veichle] < 4.5) {
@@ -747,6 +727,10 @@ angular.module('viaggia.controllers.game', [])
                 // fit bounds
                 fitBounds();
 
+
+            }, function (err) {
+                Config.loaded();
+                Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
 
             });
 

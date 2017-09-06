@@ -1,10 +1,10 @@
 {
     "apptoken": "viaggiatrento",
     "appid": "trentinoplaygo",
-    "messagingAppId": "mobility.trentoplaygo",
+    "messagingAppId": "mobility.trentoplaygo.test",
     "senderID": "453601816446",
     "webclientid": "453601816446-bs9vtikvubnm4k3aa7n5vh9vdl17v893.apps.googleusercontent.com",
-    "appversion": "1.2.0",
+    "appversion": "2.0.0",
     "appname": "Viaggia Play&Go",
     "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
     "metroparco": "https://tn.smartcommunitylab.it/metroparco/data/tn",

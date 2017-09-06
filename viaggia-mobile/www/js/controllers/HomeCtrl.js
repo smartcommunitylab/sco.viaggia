@@ -97,20 +97,26 @@ angular.module('viaggia.controllers.home', [])
                         $scope.trackingIsOn = trackService.trackingIsGoingOn() && !trackService.trackingIsFinished();
                         // $ionicLoading.hide();
 
-                        if ($scope.trackingIsOn && $rootScope.GPSAllow) {
-                            updateTrackingInfo();
-                        } else {
-                            //just the timer but it has to update only when it start
-                            //create popup
-                            //stop tracking and variables
-                            if ($scope.trackingIsOn && !$rootScope.GPSAllow) {
+                        if ($scope.trackingIsOn) {
+                            if ($rootScope.GPSAllow == true) {
+                                updateTrackingInfo();
+                            } else if ($rootScope.GPSAllow == false) {
                                 trackService.cleanTracking();
                                 $scope.trackingIsOn = false;
                                 trackService.geolocationDisabledPopup();
+                            } else if ($rootScope.GPSAllow == null) {
+                                var listener = $rootScope.$watch('GPSAllow', function () {
+                                    if ($rootScope.GPSAllow == true) {
+                                        updateTrackingInfo();
+                                    } else if ($rootScope.GPSAllow == false) {
+                                        trackService.cleanTracking();
+                                        $scope.trackingIsOn = false;
+                                        trackService.geolocationDisabledPopup();
+                                        listener();
+                                    }
+                                });
                             }
                         }
-
-
                     }, function (err) {
                         //track service startup not worked.
                         // $ionicLoading.hide();

@@ -73,6 +73,13 @@ angular.module('viaggia.services.game', [])
                 params: tripParams,
                 state: "openEventTripDetail(message)"
             },
+            TRAVEL_TRANSIT: {
+                string: "msg_trip_multimodal",
+                color: "#2975a7",
+                icon: "ic_game_multimodal_trip",
+                params: tripParams,
+                state: "openEventTripDetail(message)"
+            },
             BADGE: {
                 string: "msg_won_badge",
                 color: "#60b35c",
@@ -336,16 +343,18 @@ angular.module('viaggia.services.game', [])
             }
         }
         gameService.getError = function (trip) {
-            if (ERROR_TRIP[trip.validationResult.validationStatus.error]) {
-                return ERROR_TRIP[trip.validationResult.validationStatus.error].message
-            }
-            else if (trip.itinerary) {
-                //planned
-                return ERROR_TRIP["PLANNED_NO"].message
-            }
-            else {
-                //free
-                return ERROR_TRIP["FREE_TRACKING_NO"].message
+            if (trip && trip.validationResult) {
+                if (ERROR_TRIP[trip.validationResult.validationStatus.error]) {
+                    return ERROR_TRIP[trip.validationResult.validationStatus.error].message
+                }
+                else if (trip.itinerary) {
+                    //planned
+                    return ERROR_TRIP["PLANNED_NO"].message
+                }
+                else {
+                    //free
+                    return ERROR_TRIP["FREE_TRACKING_NO"].message
+                }
             }
 
         }
@@ -365,6 +374,7 @@ angular.module('viaggia.services.game', [])
         }
 
 
+        //TODO mandare un default
         gameService.getMaxStat = function (type) {
             if (ArrMax) {
                 if (type == "Daily") {
