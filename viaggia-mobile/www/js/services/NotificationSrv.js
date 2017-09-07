@@ -30,7 +30,7 @@ angular.module('viaggia.services.notification', [])
     var push = PushNotification.init({
       android: {
         senderID: Config.getSenderID(),
-        topics: [Config.getMessagingAppId()],
+        topics: [Config.getMessagingAppId()+".android"],
         icon: "notification",
         iconColor: "gray"
       },
@@ -39,7 +39,8 @@ angular.module('viaggia.services.notification', [])
         badge: "true",
         sound: "true",
         senderID: Config.getSenderID(),
-        topics: [Config.getMessagingAppId()]
+        gcmSandnox: true,
+        topics: [Config.getMessagingAppId()+".ios"]
       },
       windows: {}
     });
