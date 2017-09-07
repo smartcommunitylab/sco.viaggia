@@ -1741,7 +1741,7 @@ margin-right: 10px;
 }
 
 .login-title {
-    padding-top: 20%;
+    padding-top: 10%;
     padding-bottom: 20px;
     color: #B1B1B1;
     font-size: 50px;
@@ -1750,6 +1750,7 @@ margin-right: 10px;
 }
 
 .login-subtitle {
+        padding-top: 15%;
     color: black;
     font-size: 25px;
     width: 100%;
