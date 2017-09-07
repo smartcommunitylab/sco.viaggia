@@ -585,7 +585,7 @@ angular.module('viaggia.controllers.game', [])
         };
 
     })
-    .controller('TripDiaryCtrl', function ($scope, $timeout, $stateParams, planService, mapService, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
+    .controller('TripDiaryCtrl', function ($scope, $filter,$timeout, $stateParams, planService, mapService, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
         $scope.message = {};
         $scope.trip = {};
         $scope.maxvalues = {
