@@ -1,10 +1,36 @@
 angular.module('viaggia.controllers.game', [])
 
+
+
+
+    //The main game Menu
+    .controller('GameMenuCtrl', function ($scope, $state, $ionicHistory, GameSrv) {
+        //$scope.title="Play&Go";
+        $scope.init = function () {
+            GameSrv.getLocalStatus().then(
+                function (status) {
+                    $scope.title = status.playerData.nickName
+                });
+        }
+        $scope.init();
+
+        //the back button is managed with this function
+        $scope.goHome = function () {
+            $state.go('app.home');
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
+        }
+
+    })
+
+    
+    //Container of the tabs, load data of the game: username, ranking, ...
     .controller('GameCtrl', function ($scope, GameSrv, Config, Toast, $timeout, $filter) {
+
         $scope.currentUser = null;
         $scope.status = null;
         $scope.ranking = null;
-        // $scope.statistics = null
         $scope.prize = null;
         $scope.noStatus = false;
         $scope.rankingFilterOptions = ['now', 'last', 'global'];
@@ -28,10 +54,10 @@ angular.module('viaggia.controllers.game', [])
                 Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
             }
         ).finally(Config.loaded);
-        //	$scope.$on('$stateChangeSuccess', function () {
-        //	});
     })
 
+
+    //loads the score tab and all the badges of the user
     .controller('PointsCtrl', function ($scope) {
         // green leaves: Green Leaves
         // bike aficionado: Bike Trip Badge
@@ -58,6 +84,10 @@ angular.module('viaggia.controllers.game', [])
             $scope.badges = badges;
         });
     })
+
+
+
+    //loads the challenges tab, manage the filter of past and new challenges
 
     .controller('ChallengesCtrl', function ($scope, $http, $stateParams, $filter, $ionicScrollDelegate, $ionicPopup, $window, $timeout) {
         $scope.challenges = null;
@@ -155,29 +185,9 @@ angular.module('viaggia.controllers.game', [])
 
         $scope.init();
     })
-    .controller('GameMenuCtrl', function ($scope, $state, $ionicHistory, GameSrv) {
-        //$scope.title="Play&Go";
-        $scope.init = function () {
-            GameSrv.getLocalStatus().then(
-                function (status) {
-                    $scope.title = status.playerData.nickName
-                });
-        }
-        // if (!$ionicHistory.backView());
-        // {
-        //     //add home
-        //     console.log('empty stack');
-        // }
-        //$ionicNavBarDelegate.showBackButton(true);
-        $scope.init();
-        $scope.goHome = function () {
-            $state.go('app.home');
-            $ionicHistory.nextViewOptions({
-                disableBack: true
-            });
-        }
 
-    })
+
+
     .controller('StatisticsCtrl', function ($scope, $ionicScrollDelegate, $window, $filter, $timeout, Toast, Config, GameSrv) {
         $scope.stats = [];
         $scope.noStats = false;
@@ -231,7 +241,6 @@ angular.module('viaggia.controllers.game', [])
         $scope.filter.options = ['Daily', 'Weekly', 'Monthly', 'Total'];
         $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
         $scope.filter.filter = function (selection) {
-            //Config.loaded();
             $scope.calculateMaxStats()
             $scope.serverhow = GameSrv.getServerHow($scope.filter.selected);
             $scope.maybeMore = true;
@@ -239,8 +248,7 @@ angular.module('viaggia.controllers.game', [])
             $scope.stats = [];
             $ionicScrollDelegate.$getByHandle('statisticScroll').scrollTop();
             $scope.noStats = false;
-            //$scope.init()
-            //Config.loaded();
+
         }
 
         $scope.getTitle = function (day) {
@@ -585,7 +593,7 @@ angular.module('viaggia.controllers.game', [])
         };
 
     })
-    .controller('TripDiaryCtrl', function ($scope, $filter,$timeout, $stateParams, planService, mapService, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
+    .controller('TripDiaryCtrl', function ($scope, $filter, $timeout, $stateParams, planService, mapService, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
         $scope.message = {};
         $scope.trip = {};
         $scope.maxvalues = {

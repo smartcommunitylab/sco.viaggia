@@ -349,8 +349,8 @@ angular.module('viaggia.services.diaryDb', [])
                 var query = 'SELECT *  FROM Events WHERE ';
                 var params = [];
                 if (type) {
-                    query = query + 'type = ? AND';
-                    params.push(type);
+                    query = query + 'type LIKE \'%'+type+'%\' AND';
+                    //params.push(type);
                 }
                 query = query + ' timestamp >= ? AND timestamp <= ? ORDER BY timestamp DESC';
                 params.push(from);

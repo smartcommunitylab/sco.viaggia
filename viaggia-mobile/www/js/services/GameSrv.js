@@ -149,7 +149,7 @@ angular.module('viaggia.services.game', [])
         createParamString = function (message) {
             var event = JSON.parse(message.event);
             var data = {};
-            if (NOTIFICATIONS_STYLES[message.type].params) {
+            if (NOTIFICATIONS_STYLES[message.type] && NOTIFICATIONS_STYLES[message.type].params) {
                 for (var key in NOTIFICATIONS_STYLES[message.type].params) {
                     var p = NOTIFICATIONS_STYLES[message.type].params[key];
                     if (p) {
