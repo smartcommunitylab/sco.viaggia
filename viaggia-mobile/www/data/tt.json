@@ -607,7 +607,6 @@
                                 {
                                     "routeId": "05A",
                                     "routeSymId": "05A",
-                                    "color": "#f8ad1e",
                                     "title": "Piazza Dante - P.Fiera - Povo - Oltrecastello",
                                     "label": "5",
                                     "wheelChairBoarding": 1
@@ -615,7 +614,6 @@
                                 {
                                     "routeId": "05R",
                                     "routeSymId": "05R",
-                                    "color": "#f8ad1e",
                                     "title": "Oltrecastello - Povo - P.Aquila - P. Dante",
                                     "label": "5",
                                     "wheelChairBoarding": 1
@@ -1007,18 +1005,6 @@
                             ]
                         },
                         {
-                            "label": "5",
-                            "color": "#E8C01C",
-                            "routes": [
-                                {
-                                    "routeId": "05A_Rov",
-                                    "routeSymId": "05R",
-                                    "title": "Mori-Villa Lagarina-Pomarolo-Nomi",
-                                    "label": "5"
-                                }
-                            ]
-                        },
-                        {
                             "label": "6",
                             "color": "#6EB046",
                             "routes": [
@@ -1054,6 +1040,24 @@
                                 }
                             ]
                         },
+                        {
+                            "label": "8",
+                            "color": "#f8ad1e",
+                            "routes": [
+                                {
+                                    "routeId": "08A_Rov",
+                                    "routeSymId": "08A",
+                                    "title": "Ospedale-Stazione FS-Isera-Villa Lag.",
+                                    "label": "8"
+                                },
+                                {
+                                    "routeId": "08R_Rov",
+                                    "routeSymId": "08R",
+                                    "title": "Villa Lagarina-Isera-P.le Orsi-Ospedale",
+                                    "label": "8"
+                                }
+                            ]
+                        }, 
                         {
                             "label": "A",
                             "color": "#B9BAB5",
