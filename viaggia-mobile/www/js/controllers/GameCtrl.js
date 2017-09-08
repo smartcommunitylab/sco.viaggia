@@ -286,7 +286,7 @@ angular.module('viaggia.controllers.game', [])
 
         $scope.getStyle = function (stat, veichle) {
             if (veichle == 'transit') {
-                $scope.maxStat["max " + veichle] = Math.max(($scope.maxStat["max bus"]||0), ($scope.maxStat["max train"]||0), ($scope.maxStat["max transit"]||0));
+                $scope.maxStat["max " + veichle] = Math.max(($scope.maxStat["max bus"] || 0), ($scope.maxStat["max train"] || 0), ($scope.maxStat["max transit"] || 0));
             }
             if ((83 * stat) / $scope.maxStat["max " + veichle] < 8.8 && veichle == 'transit') {
                 return { width: "8.8%" }
@@ -674,21 +674,21 @@ angular.module('viaggia.controllers.game', [])
         }
         $scope.getStyle = function (stat, veichle) {
             //get max of message
-            $scope.maxOfMessage = Math.max(($scope.message.travelDistances.transit || 0), ($scope.message.travelDistances.bus || 0) , ($scope.message.travelDistances.train || 0),($scope.message.travelDistances.walk || 0),($scope.message.travelDistances.car || 0))
-             if (veichle == 'transit') {
-                 stat = ($scope.message.travelDistances.transit || 0) + ($scope.message.travelDistances.bus || 0) + ($scope.message.travelDistances.train || 0);
-            //     $scope.maxStat["max " + veichle] = Math.max(($scope.maxStat["max bus"]||0), ($scope.maxStat["max train"]||0), ($scope.maxStat["max transit"]||0));
+            $scope.maxOfMessage = Math.max(($scope.message.travelDistances.transit || 0), ($scope.message.travelDistances.bus || 0), ($scope.message.travelDistances.train || 0), ($scope.message.travelDistances.walk || 0), ($scope.message.travelDistances.car || 0))
+            if (veichle == 'transit') {
+                stat = ($scope.message.travelDistances.transit || 0) + ($scope.message.travelDistances.bus || 0) + ($scope.message.travelDistances.train || 0);
+                //     $scope.maxStat["max " + veichle] = Math.max(($scope.maxStat["max bus"]||0), ($scope.maxStat["max train"]||0), ($scope.maxStat["max transit"]||0));
             }
 
             if ($scope.maxStat && (83 * stat) / $scope.maxOfMessage < 8.8 && veichle == 'transit') {
                 return "width:" + (8.8) + "%"
-             } else if ($scope.maxStat && (83 * stat) / $scope.maxOfMessage < 4.5) {
-                 return "width:" + (4.5) + "%"
-             } else if ($scope.maxStat && $scope.maxOfMessage < $scope.maxvalues["maxDaily" + veichle] && stat < $scope.maxOfMessage ) {
+            } else if ($scope.maxStat && (83 * stat) / $scope.maxOfMessage < 4.5) {
+                return "width:" + (4.5) + "%"
+            } else if ($scope.maxStat && $scope.maxOfMessage < $scope.maxvalues["maxDaily" + veichle] && stat < $scope.maxOfMessage) {
                 return "width:" + ((78 * stat) / $scope.maxOfMessage) + "%"
-             } else {
-                 return "width:" + (78) + "%"
-             }
+            } else {
+                return "width:" + (78) + "%"
+            }
         }
         $scope.init = function () {
             $scope.message = JSON.parse($stateParams.message);
@@ -795,12 +795,29 @@ angular.module('viaggia.controllers.game', [])
             Config.loading();
             GameSrv.getRanking(selection, 0, $scope.rankingPerPage).then(
                 function (ranking) {
-                    getRanking = false;
-                    $scope.singleRankStatus = true;
-                    $scope.currentUser = ranking['actualUser'];
-                    $scope.ranking = ranking['classificationList'];
-                    if (!$scope.ranking || $scope.ranking.length < $scope.rankingPerPage) {
+                    if (ranking) {
+                        getRanking = false;
+                        $scope.singleRankStatus = true;
+                        $scope.currentUser = ranking['actualUser'];
+                        $scope.ranking = ranking['classificationList'];
+                        if (!$scope.ranking || $scope.ranking.length < $scope.rankingPerPage) {
+                            $scope.maybeMore = false;
+                        }
+                    } else {
                         $scope.maybeMore = false;
+                        Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
+                        getRanking = false;
+                        if ($scope.ranking.length == 0) {
+                            $scope.singleRankStatus = false;
+
+                        }
+                        //position to the last visible so No infinite scroll
+                        if ($scope.ranking.length > 0) {
+                            var visualizedElements = Math.ceil((window.innerHeight - (44 + 49 + 44 + 44 + 48)) / 40);
+                            var lastelementPosition = $ionicPosition.position(angular.element(document.getElementById('position-' + ($scope.ranking.length - visualizedElements))));
+                            $ionicScrollDelegate.scrollTo(lastelementPosition.left, lastelementPosition.top, true);
+                        }
                     }
                     $scope.$broadcast('scroll.infiniteScrollComplete');
                     Config.loaded();
