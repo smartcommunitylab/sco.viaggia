@@ -24,7 +24,7 @@ angular.module('viaggia.controllers.game', [])
 
     })
 
-    
+
     //Container of the tabs, load data of the game: username, ranking, ...
     .controller('GameCtrl', function ($scope, GameSrv, Config, Toast, $timeout, $filter) {
 
@@ -280,22 +280,19 @@ angular.module('viaggia.controllers.game', [])
                 generateRankingStyle();
             }, 200);
         };
-        $scope.calculateMaxStats = function (stats) {
-            // GameSrv.getMaxStat($scope.filter.selected).then(function (MaxStats) {
+        $scope.calculateMaxStats = function () {
             $scope.maxStat = GameSrv.getMaxStat($scope.filter.selected);
-            // })
         }
 
         $scope.getStyle = function (stat, veichle) {
-            // if (veichle == 'transit')
-            // { 
-            //     stat = ($scope.message.travelDistances.transit||0) + ($scope.message.travelDistances.bus||0) + ($scope.message.travelDistances.train||0);
-            //  }
+            if (veichle == 'transit') {
+                $scope.maxStat["max " + veichle] = Math.max(($scope.maxStat["max bus"]||0), ($scope.maxStat["max train"]||0), ($scope.maxStat["max transit"]||0));
+            }
             if ((83 * stat) / $scope.maxStat["max " + veichle] < 8.8 && veichle == 'transit') {
                 return { width: "8.8%" }
             } else if ((83 * stat) / $scope.maxStat["max " + veichle] < 4.5) {
                 return { width: + "4.5%" }
-            } else if ($scope.maxStat["max " + veichle] < $scope.maxvalues["max" + $scope.filter.selected + veichle]) {
+            } else if ($scope.maxStat["max " + veichle] < $scope.maxvalues["max" + $scope.filter.selected + veichle] && stat < $scope.maxStat["max " + veichle]) {
                 return { width: "" + ((83 * stat) / $scope.maxStat["max " + veichle]) + "%" }
             } else {
                 return { width: "83%" }
@@ -328,7 +325,7 @@ angular.module('viaggia.controllers.game', [])
                         if ($scope.stats.length == 0) {
                             $scope.noStats = true;
                         }
-                        $scope.calculateMaxStats($scope.stats);
+                        $scope.calculateMaxStats();
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         $scope.singleStatStatus = true;
                         Config.loaded();
@@ -372,9 +369,8 @@ angular.module('viaggia.controllers.game', [])
         GameSrv.getRemoteMaxStat().then(function () {
             $scope.findbefore();
             generateRankingStyle();
-        }
-        )
-
+            // $scope.$apply();
+        })
     })
 
     .controller('DiaryCtrl', function ($scope, $timeout, $state, $filter, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config, trackService) {
@@ -596,6 +592,7 @@ angular.module('viaggia.controllers.game', [])
     .controller('TripDiaryCtrl', function ($scope, $filter, $timeout, $stateParams, planService, mapService, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
         $scope.message = {};
         $scope.trip = {};
+        $scope.maxOfMessage = 0;
         $scope.maxvalues = {
             maxDailywalk: 10000,
             maxDailybike: 20000,
@@ -676,18 +673,22 @@ angular.module('viaggia.controllers.game', [])
             return false
         }
         $scope.getStyle = function (stat, veichle) {
-            if (veichle == 'transit') {
-                stat = ($scope.message.travelDistances.transit || 0) + ($scope.message.travelDistances.bus || 0) + ($scope.message.travelDistances.train || 0);
+            //get max of message
+            $scope.maxOfMessage = Math.max(($scope.message.travelDistances.transit || 0), ($scope.message.travelDistances.bus || 0) , ($scope.message.travelDistances.train || 0),($scope.message.travelDistances.walk || 0),($scope.message.travelDistances.car || 0))
+             if (veichle == 'transit') {
+                 stat = ($scope.message.travelDistances.transit || 0) + ($scope.message.travelDistances.bus || 0) + ($scope.message.travelDistances.train || 0);
+            //     $scope.maxStat["max " + veichle] = Math.max(($scope.maxStat["max bus"]||0), ($scope.maxStat["max train"]||0), ($scope.maxStat["max transit"]||0));
             }
-            if ($scope.maxStat && (83 * stat) / $scope.maxStat["max " + veichle] < 8.8 && veichle == 'transit') {
+
+            if ($scope.maxStat && (83 * stat) / $scope.maxOfMessage < 8.8 && veichle == 'transit') {
                 return "width:" + (8.8) + "%"
-            } else if ($scope.maxStat && (83 * stat) / $scope.maxStat["max " + veichle] < 4.5) {
-                return "width:" + (4.5) + "%"
-            } else if ($scope.maxStat && $scope.maxStat["max " + veichle] < $scope.maxvalues["maxDaily" + veichle]) {
-                return "width:" + ((83 * stat) / $scope.maxStat["max " + veichle]) + "%"
-            } else {
-                return "width:" + (83) + "%"
-            }
+             } else if ($scope.maxStat && (83 * stat) / $scope.maxOfMessage < 4.5) {
+                 return "width:" + (4.5) + "%"
+             } else if ($scope.maxStat && $scope.maxOfMessage < $scope.maxvalues["maxDaily" + veichle] && stat < $scope.maxOfMessage ) {
+                return "width:" + ((78 * stat) / $scope.maxOfMessage) + "%"
+             } else {
+                 return "width:" + (78) + "%"
+             }
         }
         $scope.init = function () {
             $scope.message = JSON.parse($stateParams.message);
@@ -700,11 +701,11 @@ angular.module('viaggia.controllers.game', [])
                 if ($scope.isErrorMessagePresent()) {
                     $scope.getErrorMotivation();
                 }
+                GameSrv.getRemoteMaxStat().then(function () {
+                    $scope.calculateMaxStats();
+                });
                 if (trip.itinerary) {
                     //visualize itinerary planned
-                    GameSrv.getRemoteMaxStat().then(function () {
-                        $scope.calculateMaxStats();
-                    });
                     planService.setPlanConfigure(planService.buildConfigureOptions(trip.itinerary));
                     planService.process(trip.itinerary.data, trip.itinerary.originalFrom, trip.itinerary.originalTo);
                     $scope.paths = mapService.getTripPolyline(trip.itinerary.data);

@@ -9,8 +9,8 @@
     "TRENTINO": {
         "resource_folder": "config/instances/TRENTINO",
         "widget_id": "it.smartcommunitylab.viaggiatrento.playgo",
-        "version": "2.0.0",
-        "version_code": "71",
+        "version": "2.0.1",
+        "version_code": "72",
         "app_name": "Viaggia Play&amp;Go"
     },
     "ROVERETO": {
