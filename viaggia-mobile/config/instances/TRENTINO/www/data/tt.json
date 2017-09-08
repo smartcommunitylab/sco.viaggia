@@ -889,14 +889,14 @@
                                     "routeId": "CMA",
                                     "routeSymId": "CMA",
                                     "title": "Povo - Borino - Celva - Passo Cimirlo",
-                                    "label": "Povo - Borino - Celva - Passo Cimirlo",
+                                    "label": "CM",
                                     "wheelChairBoarding": 1
                                 },
                                 {
                                     "routeId": "CMR",
                                     "routeSymId": "CMR",
                                     "title": "Passo Cimirlo - Celva - Borino - Povo",
-                                    "label": "Passo Cimirlo - Celva - Borino - Povo",
+                                    "label": "CM",
                                     "wheelChairBoarding": 1
                                 }
                             ]
@@ -909,14 +909,14 @@
                                     "routeId": "GA",
                                     "routeSymId": "%20GA",
                                     "title": "Gardolo - Gardolo di Mezzo e Spini",
-                                    "label": "Gardolo - Gardolo di Mezzo e Spini",
+                                    "label": "G",
                                     "wheelChairBoarding": 1
                                 },
                                 {
                                     "routeId": "GR",
                                     "routeSymId": "%20GR",
                                     "title": "Spini e Gardolo di Mezzo - Gardolo",
-                                    "label": "Spini e Gardolo di Mezzo - Gardolo",
+                                    "label": "G",
                                     "wheelChairBoarding": 1
                                 }
                             ]
