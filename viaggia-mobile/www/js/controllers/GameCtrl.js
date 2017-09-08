@@ -286,7 +286,7 @@ angular.module('viaggia.controllers.game', [])
 
         $scope.getStyle = function (stat, veichle) {
             if (veichle == 'transit') {
-                $scope.maxStat["max " + veichle] = Math.max(($scope.maxStat["max bus"] || 0), ($scope.maxStat["max train"] || 0), ($scope.maxStat["max transit"] || 0));
+                $scope.maxStat["max " + veichle] = Math.max(($scope.maxStat["max bus"] || 0),($scope.maxStat["max bike"] || 0) ($scope.maxStat["max train"] || 0), ($scope.maxStat["max transit"] || 0));
             }
             if ((83 * stat) / $scope.maxStat["max " + veichle] < 8.8 && veichle == 'transit') {
                 return { width: "8.8%" }
@@ -674,7 +674,7 @@ angular.module('viaggia.controllers.game', [])
         }
         $scope.getStyle = function (stat, veichle) {
             //get max of message
-            $scope.maxOfMessage = Math.max(($scope.message.travelDistances.transit || 0), ($scope.message.travelDistances.bus || 0), ($scope.message.travelDistances.train || 0), ($scope.message.travelDistances.walk || 0), ($scope.message.travelDistances.car || 0))
+            $scope.maxOfMessage = Math.max(($scope.message.travelDistances.transit || 0),($scope.message.travelDistances.bike || 0), ($scope.message.travelDistances.bus || 0), ($scope.message.travelDistances.train || 0), ($scope.message.travelDistances.walk || 0), ($scope.message.travelDistances.car || 0))
             if (veichle == 'transit') {
                 stat = ($scope.message.travelDistances.transit || 0) + ($scope.message.travelDistances.bus || 0) + ($scope.message.travelDistances.train || 0);
                 //     $scope.maxStat["max " + veichle] = Math.max(($scope.maxStat["max bus"]||0), ($scope.maxStat["max train"]||0), ($scope.maxStat["max transit"]||0));
