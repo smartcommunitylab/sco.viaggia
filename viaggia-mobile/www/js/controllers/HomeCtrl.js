@@ -200,6 +200,8 @@ angular.module('viaggia.controllers.home', [])
                         }
                     });
 
+                } else {
+                    Config.loaded();
                 }
             }
         }
