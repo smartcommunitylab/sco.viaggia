@@ -34,9 +34,9 @@
     "cordova-plugin-screen-orientation@1.4.2",
      {
        "variables": {
-         "SENDER_ID": "453601816446"
+         "SENDER_ID": "414560938900"
        },
-       "locator": "phonegap-plugin-push@1.10.4",
+       "locator": "phonegap-plugin-push@1.10.5",
        "id": "phonegap-plugin-push"
      },
     "de.appplant.cordova.plugin.local-notification@0.8.4",

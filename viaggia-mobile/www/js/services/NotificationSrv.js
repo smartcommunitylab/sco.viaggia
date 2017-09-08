@@ -7,7 +7,7 @@ angular.module('viaggia.services.notification', [])
 .factory('notificationService', function ($q, $http, $rootScope, $ionicPlatform, Config) {
 
   var notificationService = {};
-  //var numberNotification = 10;
+  var numberNotification = 10;
   notificationService.getNotifications = function (sinceTimestamp, sincePosition, numberNotification) {
     var deferred = $q.defer();
     $http.get(Config.getMessagingServerURL() + '/app/public/notification/' + Config.getMessagingAppId() +
@@ -39,7 +39,8 @@ angular.module('viaggia.services.notification', [])
         badge: "true",
         sound: "true",
         senderID: Config.getSenderID(),
-        gcmSandnox: true,
+        gcmSandbox: true,
+        fcmSandbox: true,
         topics: [Config.getMessagingAppId()+".ios"]
       },
       windows: {}

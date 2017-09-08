@@ -33,7 +33,7 @@ de.appplant.cordova.plugin.local-notification 0.8.4 "LocalNotification"
 //it creates notification locally for warning the user of a new journey
 ionic-plugin-keyboard 2.2.1 "Keyboard"
 net.orworks.cordovaplugins.cordovasqlite 1.9.0 "CordovaSQLite"
-phonegap-plugin-push 1.10.4 "PushPlugin"
+phonegap-plugin-push 1.10.5 "PushPlugin"
 //it manages the push notification trough GCM (news)
 cordova-android-play-services-gradle-release 0.0.2 "cordova-android-play-services-gradle-release"
 //it fixes the problem between push plugin and google signIn incompatible libraries
