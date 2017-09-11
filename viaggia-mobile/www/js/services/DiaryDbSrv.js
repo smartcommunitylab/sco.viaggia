@@ -57,7 +57,7 @@ angular.module('viaggia.services.diaryDb', [])
             //insert array data into the table
             var deferred = $q.defer();
             var dbArray = [];
-            for (let i = 0; i < data.length; i++) {
+            for (var i = 0; i < data.length; i++) {
                 entityId = data[i].clientId ? data[i].clientId : data[i].entityId;
                 dbArray.push(['INSERT OR REPLACE INTO Events VALUES (?,?,?,?,?)', [
                     entityId,
@@ -357,7 +357,7 @@ angular.module('viaggia.services.diaryDb', [])
                 params.push(to);
                 tx.executeSql(query, params, function (tx, rs) {
                     var returnData = [];
-                    for (let i = 0; i < rs.rows.length; i++) {
+                    for (var i = 0; i < rs.rows.length; i++) {
                         returnData.push(rs.rows.item(i));
                     }
                     deferred.resolve(returnData);

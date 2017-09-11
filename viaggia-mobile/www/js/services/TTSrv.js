@@ -210,7 +210,7 @@ angular.module('viaggia.services.timetable', [])
                         //find the agencyId and call the right group
                         var flat = null;
                         if (flatTTData[0] && flatTTData[0].group && flatTTData[0].group.groups) {
-                            for (let i = 0; i < flatTTData.length; i++) {
+                            for (var i = 0; i < flatTTData.length; i++) {
                                 if (flatTTData[i] && flatTTData[i].group && flatTTData[i].group.groups && flatTTData[i].group.agencyId == stop.agencyId) {
                                     flat = flatTTData[i].group.groups;
                                     break;

@@ -180,7 +180,7 @@ angular.module('viaggia.services.game', [])
             return returnhow;
         }
         gameService.getDbType = function (type) {
-            for (let i = 0; i < dbFilter.length; i++) {
+            for (var i = 0; i < dbFilter.length; i++) {
                 if (type == dbFilter[i].name)
                     return dbFilter[i].db[0];
             }
