@@ -1124,7 +1124,11 @@ angular.module('viaggia', [
       error_trip_free_tracking_no: "Il viaggio non è valido: il viaggio tracciato non corrisponde al mezzo di trasporto dichiarato",
       error_trip_planned_no: "Il viaggio non è valido: il percorso del viaggio tracciato non corrisponde a quello del viaggio pianificato",
       error_valid_0: "Non sono stati assegnati punti Green Leaves a causa del superamento dei limiti giornalieri (10 Km a piedi, 30 Km in bici, 8 viaggi con trasporto pubblico al giorno)",
-      label_points: "Green Leaves guadagnate: "
+      label_points: "Green Leaves guadagnate: ",
+      pop_up_bt_title: "Bluetooth disabilitato",
+      pop_up_bt: "Per garantire una validazione corretta dei viaggi in autobus/treno è richiesta l’attivazione del Bluetooth sul dispositivo.",
+      pop_up_bt_button_enable: "Attivare"
+      
     });
 
     $translateProvider.translations('en', {
@@ -1557,7 +1561,10 @@ angular.module('viaggia', [
       error_trip_free_tracking_no: "The trip is not valid: tracked mode does not correspond to declared transport mode",
       error_trip_planned_no: "The trip is not valid: tracked itinerary does not correspond to planned itinerary",
       error_valid_0: "No Green Leaves gained with this trips: daily limits have been reached (10 Km walking, 30 Km by bike, 8 public transport trips per day)",
-      label_points: "Earned Green Leaves: "
+      label_points: "Earned Green Leaves: ",
+      pop_up_bt_title: "Bluetooth disabled",
+      pop_up_bt: "To ensure a proper validation of bus and train trips we recommend activating Bluetooth on the device.",
+      pop_up_bt_button_enable: "Activate"
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

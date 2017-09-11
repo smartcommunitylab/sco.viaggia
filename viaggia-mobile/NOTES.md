@@ -8,3 +8,6 @@ App requires background location tracking for the validation of the itineraries 
 <string>App requires background location tracking for the validation of the itineraries done by the users while participating to the Play&amp;Go game, as described in the game regulation.</string>
 <key>NSMotionUsageDescription</key>
 <string>App requires motion information for the validation of the itineraries done by the users while participating to the Play&amp;Go game, as described in the game regulation.</string>
+
+<key>NSBluetoothPeripheralUsageDescription</key>
+<string>App requires bluetooth info for bus tracking</string>

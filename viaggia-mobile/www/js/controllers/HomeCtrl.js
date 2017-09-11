@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.home', [])
 
-    .controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv, DiaryDbSrv) {
+    .controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv, DiaryDbSrv, BT) {
         //load from localstorage the id notifications read
         $ionicPlatform.ready(function () {
             document.addEventListener("resume", function () {
@@ -154,6 +154,29 @@ angular.module('viaggia.controllers.home', [])
             $scope.trackingIsOn = true;
             trackService.startTransportTrack(transportType).then(function () {
                 updateTrackingInfo();
+                if (transportType == 'bus') {
+                    BT.needBTActivated(function(result){
+                        if (result) {
+                            $ionicPopup.confirm({
+                                title: $filter('translate')("pop_up_bt_title"),
+                                template: $filter('translate')("pop_up_bt"),
+                                buttons: [
+                                    {
+                                        text: $filter('translate')("btn_close"),
+                                        type: 'button-cancel'
+                                    },
+                                    {
+                                        text: $filter('translate')("pop_up_bt_button_enable"),
+                                        type: 'button-custom',
+                                        onTap: function () {
+                                            bluetoothSerial.enable();
+                                        }
+                                    }
+                                ]
+                            });                            
+                        }
+                    });
+                }
             }, function (errorCode) {
                 $scope.trackingIsOn = false;
                 trackService.geolocationPopup();

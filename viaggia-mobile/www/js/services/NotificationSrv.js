@@ -39,8 +39,8 @@ angular.module('viaggia.services.notification', [])
         badge: "true",
         sound: "true",
         senderID: Config.getSenderID(),
-        gcmSandbox: true,
-        fcmSandbox: true,
+        // gcmSandbox: true,
+        // fcmSandbox: true,
         topics: [Config.getMessagingAppId()+".ios"]
       },
       windows: {}

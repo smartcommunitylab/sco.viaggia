@@ -1077,6 +1077,17 @@ angular.module('viaggia.services.tracking', [])
         var startScan = 0;
         var to = null;
 
+        svc.needBTActivated = function(cb) {
+            if (!window.bluetoothSerial || ionic.Platform.isIOS()) cb(false);
+            else {
+                bluetoothSerial.isEnabled(function(){
+                    cb(false);
+                }, function(){
+                    cb(true);
+                });
+            }
+        }
+
         // start scan until found. optional notifyCb to be called upon each new packet received
         svc.startScan = function (cb, notifyCb) {
             if (!window.bluetoothSerial || ionic.Platform.isIOS()) return;
@@ -1085,8 +1096,15 @@ angular.module('viaggia.services.tracking', [])
 
             var onComplete = function () {
                 if (new Date().getTime() - startScan < 5 * 1000 * 60) {
-                    bluetoothSerial.discoverUnpaired(onComplete);
+                    bluetoothSerial.discoverUnpaired(onComplete, onError);
                 }
+            }
+            var onError = function() {
+                if (startScan == 0) return;
+                // retry in 1 min
+                $timeout(function(){
+                    bluetoothSerial.discoverUnpaired(onComplete, onError);
+                },60*1000);
             }
             bluetoothSerial.setDeviceDiscoveredListener(function (device) {
                 if (startScan > 0) {
@@ -1098,7 +1116,7 @@ angular.module('viaggia.services.tracking', [])
                         // continue listening until not closed
                         to = $timeout(function () {
                             startScan = new Date().getTime();
-                            bluetoothSerial.discoverUnpaired(onComplete);
+                            bluetoothSerial.discoverUnpaired(onComplete, onError);
                         }, 1 * 1000 * 60);
                     } else {
                         if (notifyCb) {
@@ -1108,7 +1126,9 @@ angular.module('viaggia.services.tracking', [])
                 }
             });
 
-            bluetoothSerial.discoverUnpaired(onComplete);
+            bluetoothSerial.isEnabled(function(){
+                bluetoothSerial.discoverUnpaired(onComplete, onError);                
+            }, onError);
         }
 
         svc.stopScan = function () {
