@@ -956,7 +956,7 @@ content: "";
 height: 22px;
 position: absolute;
 left: -33px;
-/*top: 3.7px;*/
+top: 27%;
 width: 0px;
 }
 .platform-ios .timeline-arrow {
@@ -975,10 +975,13 @@ width: 0px;
 .timeline-col{
 color: white;
 width: 17.029%;
+min-width:  17.029%;
 height: 47px;
+min-height: 47px;
 border-radius: 50px;
 line-height: 1.5 !important;
 font-size: 30px;
+padding: 4px;
 }
 .timeline-msg{
 text-align: left;
@@ -995,6 +998,8 @@ left: 0px;
 padding-left: 5px;
 }
 .timeline-day{
+    width: auto;
+    min-width: 40px;
 position: absolute !important;
 left: 20px;
 top: -4px;
