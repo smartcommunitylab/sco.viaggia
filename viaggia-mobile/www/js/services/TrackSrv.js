@@ -64,17 +64,20 @@ angular.module('viaggia.services.tracking', [])
          */
         trackService.startup = function () {
             var deferred = $q.defer();
+            $rootScope.GPSAllow = true;
+            var trackingConfigure = Config.getTrackingConfig();
+            bgGeo.configure(trackingConfigure, callbackFn, failureFn);
+            init();
             deferred.resolve();
             GeoLocate.initLocalization().then(function () {
 
-                $rootScope.GPSAllow = true;
-                hasLocationPermission(function (status) {
-                    if (status) {
-                        var trackingConfigure = Config.getTrackingConfig();
-                        bgGeo.configure(trackingConfigure, callbackFn, failureFn);
-                        init();
-                    }
-                });           
+                // hasLocationPermission(function (status) {
+                //     if (status) {
+                //         var trackingConfigure = Config.getTrackingConfig();
+                //         bgGeo.configure(trackingConfigure, callbackFn, failureFn);
+                //         init();
+                //     }
+                // });
             }, function () {
                 $rootScope.GPSAllow = false;
             });
@@ -1077,12 +1080,12 @@ angular.module('viaggia.services.tracking', [])
         var startScan = 0;
         var to = null;
 
-        svc.needBTActivated = function(cb) {
+        svc.needBTActivated = function (cb) {
             if (!window.bluetoothSerial || ionic.Platform.isIOS()) cb(false);
             else {
-                bluetoothSerial.isEnabled(function(){
+                bluetoothSerial.isEnabled(function () {
                     cb(false);
-                }, function(){
+                }, function () {
                     cb(true);
                 });
             }
@@ -1099,12 +1102,12 @@ angular.module('viaggia.services.tracking', [])
                     bluetoothSerial.discoverUnpaired(onComplete, onError);
                 }
             }
-            var onError = function() {
+            var onError = function () {
                 if (startScan == 0) return;
                 // retry in 1 min
-                $timeout(function(){
+                $timeout(function () {
                     bluetoothSerial.discoverUnpaired(onComplete, onError);
-                },60*1000);
+                }, 60 * 1000);
             }
             bluetoothSerial.setDeviceDiscoveredListener(function (device) {
                 if (startScan > 0) {
@@ -1126,8 +1129,8 @@ angular.module('viaggia.services.tracking', [])
                 }
             });
 
-            bluetoothSerial.isEnabled(function(){
-                bluetoothSerial.discoverUnpaired(onComplete, onError);                
+            bluetoothSerial.isEnabled(function () {
+                bluetoothSerial.discoverUnpaired(onComplete, onError);
             }, onError);
         }
 

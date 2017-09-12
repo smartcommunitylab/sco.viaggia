@@ -98,13 +98,13 @@ angular.module('viaggia.controllers.home', [])
                         // $ionicLoading.hide();
 
                         if ($scope.trackingIsOn) {
-                            if ($rootScope.GPSAllow == true) {
+                            if ($rootScope.GPSAllow === true) {
                                 updateTrackingInfo();
-                            } else if ($rootScope.GPSAllow == false) {
+                            } else if ($rootScope.GPSAllow === false) {
                                 trackService.cleanTracking();
                                 $scope.trackingIsOn = false;
                                 trackService.geolocationDisabledPopup();
-                            } else if ($rootScope.GPSAllow == null) {
+                            } else if ($rootScope.GPSAllow === null) {
                                 var listener = $rootScope.$watch('GPSAllow', function () {
                                     if ($rootScope.GPSAllow == true) {
                                         updateTrackingInfo();
