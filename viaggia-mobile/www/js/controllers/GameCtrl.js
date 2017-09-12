@@ -830,7 +830,7 @@ angular.module('viaggia.controllers.game', [])
         $scope.loadMore = function () {
             if (!getRanking && $scope.maybeMore) {
                 getRanking = true;
-                var start = $scope.ranking != null ? $scope.ranking.length : 0;
+                var start = $scope.ranking != null ? $scope.ranking.length+1 : 0;
                 var end = start + $scope.rankingPerPage;
                 GameSrv.getRanking($scope.filter.selected, start, end).then(
                     function (ranking) {
