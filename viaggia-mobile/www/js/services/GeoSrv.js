@@ -122,10 +122,10 @@ angular.module('viaggia.services.geo', [])
 
                             positionError = error;
                             if (error.code != 1) {
-                                console.log('Geolocation permission denied!');
                                 startLocalization();
                                 return defer.resolve();
                             } else {
+                                console.log('Geolocation permission denied!');
                                 return defer.reject();
                             }
                         }, {

@@ -9,18 +9,18 @@ angular.module('viaggia.services.tracking', [])
         var appVersion = function () {
             return Config.getVersion();
         };
+        var GPSpopup = false;
         var refreshCallback = null;
         var ACCURACY = 100;
         var timerTrack = null;
         var hasLocationPermission = function (cb) {
-            cb($rootScope.GPSAllow);
-            //          cordova.plugins.diagnostic.isLocationAuthorized(function(state){
-            //            alert(state);
-            //            cb(state);
-            //          }, function(e) {
-            //            console.log('diagnostic error', e);
-            //            cb(false);
-            //          });
+            // cb($rootScope.GPSAllow);
+            cordova.plugins.diagnostic.isLocationAvailable(function (state) {
+                cb(state);
+            }, function (e) {
+                console.log('diagnostic error', e);
+                cb(false);
+            });
         }
 
         /**
@@ -71,13 +71,14 @@ angular.module('viaggia.services.tracking', [])
             deferred.resolve();
             GeoLocate.initLocalization().then(function () {
 
-                // hasLocationPermission(function (status) {
-                //     if (status) {
-                //         var trackingConfigure = Config.getTrackingConfig();
-                //         bgGeo.configure(trackingConfigure, callbackFn, failureFn);
-                //         init();
-                //     }
-                // });
+                hasLocationPermission(function (status) {
+                    $rootScope.GPSAllow = status;
+                    //     if (status) {
+                    //         var trackingConfigure = Config.getTrackingConfig();
+                    //         bgGeo.configure(trackingConfigure, callbackFn, failureFn);
+                    //         init();
+                    //     }
+                });
             }, function () {
                 $rootScope.GPSAllow = false;
             });
@@ -782,19 +783,24 @@ angular.module('viaggia.services.tracking', [])
          */
         trackService.geolocationDisabledPopup = function () {
             //reset the variable
-            var alert = $ionicPopup.alert({
-                title: $filter('translate')("gps_disabled_title"),
-                template: $filter('translate')("gps_disabled_template"),
-                buttons: [
-                    {
-                        text: $filter('translate')("btn_close"),
-                        type: 'button-custom'
-                    }
-                ]
-            });
-            alert.then(function (e) {
-                trackService.startup();
-            });
+            if (!GPSpopup) {
+                GPSpopup=true;
+                var alert = $ionicPopup.alert({
+                    title: $filter('translate')("gps_disabled_title"),
+                    template: $filter('translate')("gps_disabled_template"),
+                    buttons: [
+                        {
+                            text: $filter('translate')("btn_close"),
+                            type: 'button-custom'
+                        }
+                    ]
+                });
+
+                alert.then(function (e) {
+                    GPSpopup = false;
+                    trackService.startup();
+                });
+            }
         }
 
         /**

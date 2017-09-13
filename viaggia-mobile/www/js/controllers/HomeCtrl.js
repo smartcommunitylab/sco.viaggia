@@ -100,22 +100,38 @@ angular.module('viaggia.controllers.home', [])
                         if ($scope.trackingIsOn) {
                             if ($rootScope.GPSAllow === true) {
                                 updateTrackingInfo();
-                            } else if ($rootScope.GPSAllow === false) {
-                                trackService.cleanTracking();
-                                $scope.trackingIsOn = false;
-                                trackService.geolocationDisabledPopup();
-                            } else if ($rootScope.GPSAllow === null) {
+                            }
+                            //  else if ($rootScope.GPSAllow === false || $rootScope.GPSAllow === null) {
                                 var listener = $rootScope.$watch('GPSAllow', function () {
-                                    if ($rootScope.GPSAllow == true) {
-                                        updateTrackingInfo();
-                                    } else if ($rootScope.GPSAllow == false) {
+                                    // if ($rootScope.GPSAllow == true) {
+                                    //     updateTrackingInfo();
+                                    // } else
+                                     if ($rootScope.GPSAllow === false) {
                                         trackService.cleanTracking();
                                         $scope.trackingIsOn = false;
+                                        //check if it
                                         trackService.geolocationDisabledPopup();
                                         listener();
                                     }
                                 });
-                            }
+
+                            // }
+                            //  else if ($rootScope.GPSAllow === false) {
+                            //     trackService.cleanTracking();
+                            //     $scope.trackingIsOn = false;
+                            //     trackService.geolocationDisabledPopup();
+                            // } else if ($rootScope.GPSAllow === null) {
+                            //     var listener = $rootScope.$watch('GPSAllow', function () {
+                            //         if ($rootScope.GPSAllow == true) {
+                            //             updateTrackingInfo();
+                            //         } else if ($rootScope.GPSAllow == false) {
+                            //             trackService.cleanTracking();
+                            //             $scope.trackingIsOn = false;
+                            //             trackService.geolocationDisabledPopup();
+                            //             listener();
+                            //         }
+                            //     });
+                            // }
                         }
                     }, function (err) {
                         //track service startup not worked.
@@ -155,7 +171,7 @@ angular.module('viaggia.controllers.home', [])
             trackService.startTransportTrack(transportType).then(function () {
                 updateTrackingInfo();
                 if (transportType == 'bus') {
-                    BT.needBTActivated(function(result){
+                    BT.needBTActivated(function (result) {
                         if (result) {
                             $ionicPopup.confirm({
                                 title: $filter('translate')("pop_up_bt_title"),
@@ -173,7 +189,7 @@ angular.module('viaggia.controllers.home', [])
                                         }
                                     }
                                 ]
-                            });                            
+                            });
                         }
                     });
                 }
