@@ -1,18 +1,12 @@
 {
     "stopVisualization": {
+        "12": {
+            "view": "grid"
+        },
         "5": {
             "view": "list"
         },
         "6": {
-            "view": "list"
-        },
-        "7": {
-            "view": "list"
-        },
-        "8": {
-            "view": "list"
-        },
-        "9": {
             "view": "list"
         },
         "10": {
@@ -93,7 +87,7 @@
         },
         "extraurbano": {
             "view": "list",
-            "label": "menu_real_time_bus_extraurban",
+            "label": "menu_real_time_bus_suburban",
             "hasMap": true,
             "markerIcon": "ic_extraurbanBus",
             "transportType" : "BUSSUBURBAN",
@@ -305,7 +299,7 @@
             ,
                         {
                             "label": "315",
-                            "title": "315 - TRENTO-BESENELLO-CALLIANO-ROVERETO",
+                            "title": "315 - ROVERETO-TERRAGNOLO-SERRADA-FOLGARIA",
                             "color": "#fcbf0e",
                             "routes": [
                                 {
@@ -474,137 +468,206 @@
         }
       ]
         },
-        "local": {
-            "view": "list",
-            "label": "menu_real_time_transport_local",
+        "urbano": {
+            "view": "grid",
+            "label": "menu_real_time_bus_urban",
             "hasMap": true,
             "markerIcon": "ic_urbanBus",
-            "transportType" : "BUS",
             "icon": "ic_urban-bus",
+            "transportType" : "BUS",
             "elements": [
-              
-                 {
-                    "agencyId": "17",
-                    "color": "#EB8919",
-                    "routes": [
-                        {
-                            "routeId": "198_17_0",
-                            "routeSymId": "315A",
-                            "title": "315 - ROVERETO-TERRAGNOLO-SERRADA-FOLGARIA (ANDATA)",
-                            "color": "#EB8919"
-                        },
-                        {
-                            "routeId": "198_17_1",
-                            "routeSymId": "315R",
-                            "title": "315 - FOLGARIA-SERRADA-TERRAGNOLO-ROVERETO (RITORNO)",
-                            "color": "#EB8919"
-                        },
-                        {
-                            "routeId": "196_17_0",
-                            "routeSymId": "306A",
-                            "title": "306 - ROVERETO-CALLIANO-FOLGARIA-LAVARONE (ANDATA)",
-                            "color": "#EB8919"
-                        },
-                        {
-                            "routeId": "196_17_1",
-                            "routeSymId": "306R",
-                            "title": "306 - LAVARONE-FOLGARIA-CALLIANO-ROVERETO (RITORNO)",
-                            "color": "#EB8919"
-                        },
-                        {
-                            "routeId": "186_17_0",
-                            "routeSymId": "303A",
-                            "title": "303 - TRENTO-V.VATTARO-CARBONARE-LAVARONE-LUSERNA (ANDATA)",
-                            "color": "#EB8919"
-                        },
-                        {
-                            "routeId": "186_17_1",
-                            "routeSymId": "303R",
-                            "title": "303 - LUSERNA-LAVARONE-CARBONARE-V.VATTARO-TRENTO (RITORNO)",
-                            "color": "#EB8919"
-                        }
-                    ]
-                },
-                  {
-                    "agencyId": "7",
-                    "color": "#EB8919",
-                    "routes": [
-                        {
-                            "routeId": "FG_R_A",
-                            "routeSymId": "FG_R_A",
-                            "title": "TRENINO - FOLGARIA-COSTA-SANTUARIO",
-                            "color": "#EB8919"
-                        }
-                    ]
-                },
-                
-                  {
-                    "agencyId": "8",
-                    "color": "#EB8919",
-                    "routes": [
-                        {
-                            "routeId": "100A",
-                            "routeSymId": "100A",
-                            "title": "VICENZA‐ASIAGO‐MONTEROVERE-LAVARONE‐LUSERNA (ANDATA)",
-                            "color": "#EB8919"
-                        },
-                        {
-                            "routeId": "100R",
-                            "routeSymId": "100R",
-                            "title": "LUSERNA-LAVARONE-MONTEROVERE-ASIAGO-VICENZA (RITORNO)",
-                            "color": "#EB8919"
-                        }
-                    ]
-                },
                 {
-                    "agencyId": "9",
-                    "color": "#EB8919",
-                    "routes": [
+                    "agencyId": "16",
+                    "hasMap": true,
+                    "groups": [
                         {
-                            "routeId": "LV",
-                            "routeSymId": "LV",
-                            "title": "LINEA VERDE - LAVARONE-LAGO E FRAZIONI",
-                            "color": "#EB8919"
-                        }
-                    ]
-                },
-                {
-                    "agencyId": "11",
-                    "color": "#EB8919",
-                    "routes": [
+                            "label": "1",
+                            "color": "#174072",
+                            "routes": [
+                                {
+                                    "routeId": "01A_Rov",
+                                    "routeSymId": "01A",
+                                    "title": "Corso Bettini-Ospedale-Lizzana-Marco",
+                                    "label": "1",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "01R_Rov",
+                                    "routeSymId": "01R",
+                                    "title": "Marco-Lizzana-Corso Bettini-Pomarolo",
+                                    "label": "1",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
                         {
-                            "routeId": "LB_A",
-                            "routeSymId": "LB_A",
-                            "title": "LINEA BLU - GUARDIA-SERRADA-FOLGARIA-PASSO (ANDATA)",
-                            "color": "#EB8919"
-                        },
+                            "label": "2",
+                            "color": "#D65A2E",
+                            "routes": [
+                                {
+                                    "routeId": "02A_Rov",
+                                    "routeSymId": "02A",
+                                    "title": "Costa-Corso Rosmini-S.Giorgio",
+                                    "label": "2",
+                                    "wheelChairBoarding": 2
+                                },
+                                {
+                                    "routeId": "02R_Rov",
+                                    "routeSymId": "02R",
+                                    "title": "S.Giorgio-Corso Rosmini-Costa",
+                                    "label": "2",
+                                    "wheelChairBoarding": 2
+                                }
+              ]
+            },
                         {
-                            "routeId": "LB_R",
-                            "routeSymId": "LB_R",
-                            "title": "LINEA BLU - PASSO-FOLGARIA-SERRADA-GUARDIA (RITORNO)",
-                            "color": "#EB8919"
-                        }
-                    ]
-                },
-                {
-                    "agencyId": "13",
-                    "color": "#EB8919",
-                    "routes": [
+                            "label": "3",
+                            "color": "#C02927",
+                            "routes": [
+                                {
+                                    "routeId": "03A_Rov",
+                                    "routeSymId": "03A",
+                                    "title": "Pedersano-Nogaredo-Rosmini-Lenzima",
+                                    "label": "3",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "03R_Rov",
+                                    "routeSymId": "03R",
+                                    "title": "Lenzima-Rosmini-Nogaredo-Pedersano",
+                                    "label": "3",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
                         {
-                            "routeId": "LR_A",
-                            "routeSymId": "LR_A",
-                            "title": "LINEA ROSSA - SERRADA-FOLGARIA-COSTA-CARBONARE-LAVARONE (ANDATA)",
-                            "color": "#EB8919"
-                        },
-                         {
-                            "routeId": "LR_R",
-                            "routeSymId": "LR_R",
-                            "title": "LINEA ROSSA - LAVARONE-CARBONARE-COSTA-FOLGARIA-SERRADA (RITORNO)",
-                            "color": "#EB8919"
-                        }
-                    ]
-                }
-              ]          
+                            "label": "4",
+                            "color": "#0976B7",
+                            "routes": [
+                                {
+                                    "routeId": "04A_Rov",
+                                    "routeSymId": "04A",
+                                    "title": "Noarna-S.Ilario-Isera-Villa Lagarina",
+                                    "label": "4",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "04R_Rov",
+                                    "routeSymId": "04R",
+                                    "title": "Villa Lagarina-Isera-S.Ilario-Noarna",
+                                    "label": "4",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "6",
+                            "color": "#6EB046",
+                            "routes": [
+                                {
+                                    "routeId": "06A_Rov",
+                                    "routeSymId": "06A",
+                                    "title": "Nomi-Pomarolo/Volano-Rosmini-Mori",
+                                    "label": "6",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "06R_Rov",
+                                    "routeSymId": "06R",
+                                    "title": "Mori-Rosmini-Calliano-Nomi",
+                                    "label": "6",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            },
+                        {
+                            "label": "7",
+                            "color": "#1B9887",
+                            "routes": [
+                                {
+                                    "routeId": "07A_Rov",
+                                    "routeSymId": "07A",
+                                    "title": "Noriglio-Rosmini-Campana Dei Caduti",
+                                    "label": "7",
+                                    "wheelChairBoarding": 2
+                                },
+                                {
+                                    "routeId": "07R_Rov",
+                                    "routeSymId": "07R",
+                                    "title": "Campana Dei Caduti-Rosmini-Noriglio",
+                                    "label": "7",
+                                    "wheelChairBoarding": 2
+                                }
+              ]
+            },
+            {
+                "label": "8",
+                "color": "#f8ad1e",
+                "routes": [
+                    {
+                        "routeId": "08A_Rov",
+                        "routeSymId": "08A",
+                        "title": "Ospedale-Stazione FS-Isera-Villa Lag.",
+                        "label": "8",
+                        "wheelChairBoarding": 1
+                    },
+                    {
+                        "routeId": "08R_Rov",
+                        "routeSymId": "08R",
+                        "title": "Villa Lagarina-Isera-P.le Orsi-Ospedale",
+                        "label": "8",
+                        "wheelChairBoarding": 1
+                    }
+                ]
+            },
+                        {
+                            "label": "A",
+                            "color": "#B9BAB5",
+                            "routes": [
+                                {
+                                    "routeId": "AC_Rov",
+                                    "routeSymId": "AC",
+                                    "title": "Brione-Cesari-Ospedale-Podesta-Brione",
+                                    "label": "A",
+                                    "wheelChairBoarding": 1
+                                }              ]
+            },
+                        {
+                            "label": "B",
+                            "color": "#B9BAB5",
+                            "routes": [
+                                {
+                                    "routeId": "BC_Rov",
+                                    "routeSymId": "BC",
+                                    "title": "Ossario-Osp.-S.Giorgio-Osp.-Ossario",
+                                    "label": "B",
+                                    "wheelChairBoarding": 1
+                                }              ]
+            },
+                        {
+                            "label": "AB",
+                            "color": "#B9BAB5",
+                            "routes": [
+                                {
+                                    "routeId": "AA_Rov",
+                                    "routeSymId": "ABA",
+                                    "title": "Via Magazol-S.Giorgio-Cornacalda",
+                                    "label": "AB",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "AR_Rov",
+                                    "routeSymId": "ABR",
+                                    "title": "Cornacalda-Ospedale-Via Magazol",
+                                    "label": "AB",
+                                    "wheelChairBoarding": 1
+                                }
+              ]
+            }
+
+          ]
+        }
+      ]
         }
     }
 }

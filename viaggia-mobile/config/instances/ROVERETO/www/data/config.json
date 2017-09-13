@@ -3,7 +3,7 @@
     "appid": "rovereto",
     "messagingAppId": "mobility.rovereto",
     "senderID": "453601816446",
-    "appversion": "2.1.5",
+    "appversion": "2.1.6",
     "appname": "Viaggia Rovereto",
     "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
     "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
@@ -21,6 +21,7 @@
             "TRANSIT"
         ]
     },
+    "accessibility": true,
     "plan_policy": "Rovereto",
     "agencies": [5, 6, 10, 16, 17],
     "extraurban_agencies": [17],

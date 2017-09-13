@@ -33,14 +33,14 @@ angular.module('viaggia.services.notification', [])
         senderID: Config.getSenderID(),
         icon: "notification",
         iconColor: "gray",
-        topics: [Config.getMessagingAppId()]
+        topics: [Config.getMessagingAppId()+'.android']
       },
       ios: {
         alert: "true",
         badge: "true",
         sound: "true",
         senderID: Config.getSenderID(),
-        topics: [Config.getMessagingAppId()]
+        topics: [Config.getMessagingAppId()+'.ios']
       },
       windows: {}
     });

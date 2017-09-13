@@ -299,7 +299,7 @@
             ,
                         {
                             "label": "315",
-                            "title": "315 - TRENTO-BESENELLO-CALLIANO-ROVERETO",
+                            "title": "315 - ROVERETO-TERRAGNOLO-SERRADA-FOLGARIA",
                             "color": "#fcbf0e",
                             "routes": [
                                 {
@@ -488,13 +488,15 @@
                                     "routeId": "01A_Rov",
                                     "routeSymId": "01A",
                                     "title": "Corso Bettini-Ospedale-Lizzana-Marco",
-                                    "label": "1"
+                                    "label": "1",
+                                    "wheelChairBoarding": 1
                                 },
                                 {
                                     "routeId": "01R_Rov",
                                     "routeSymId": "01R",
                                     "title": "Marco-Lizzana-Corso Bettini-Pomarolo",
-                                    "label": "1"
+                                    "label": "1",
+                                    "wheelChairBoarding": 1
                                 }
               ]
             },
@@ -506,13 +508,15 @@
                                     "routeId": "02A_Rov",
                                     "routeSymId": "02A",
                                     "title": "Costa-Corso Rosmini-S.Giorgio",
-                                    "label": "2"
+                                    "label": "2",
+                                    "wheelChairBoarding": 2
                                 },
                                 {
                                     "routeId": "02R_Rov",
                                     "routeSymId": "02R",
                                     "title": "S.Giorgio-Corso Rosmini-Costa",
-                                    "label": "2"
+                                    "label": "2",
+                                    "wheelChairBoarding": 2
                                 }
               ]
             },
@@ -524,13 +528,15 @@
                                     "routeId": "03A_Rov",
                                     "routeSymId": "03A",
                                     "title": "Pedersano-Nogaredo-Rosmini-Lenzima",
-                                    "label": "3"
+                                    "label": "3",
+                                    "wheelChairBoarding": 1
                                 },
                                 {
                                     "routeId": "03R_Rov",
                                     "routeSymId": "03R",
                                     "title": "Lenzima-Rosmini-Nogaredo-Pedersano",
-                                    "label": "3"
+                                    "label": "3",
+                                    "wheelChairBoarding": 1
                                 }
               ]
             },
@@ -542,25 +548,15 @@
                                     "routeId": "04A_Rov",
                                     "routeSymId": "04A",
                                     "title": "Noarna-S.Ilario-Isera-Villa Lagarina",
-                                    "label": "4"
+                                    "label": "4",
+                                    "wheelChairBoarding": 1
                                 },
                                 {
                                     "routeId": "04R_Rov",
                                     "routeSymId": "04R",
                                     "title": "Villa Lagarina-Isera-S.Ilario-Noarna",
-                                    "label": "4"
-                                }
-              ]
-            },
-                        {
-                            "label": "5",
-                            "color": "#E8C01C",
-                            "routes": [
-                                {
-                                    "routeId": "05A_Rov",
-                                    "routeSymId": "05R",
-                                    "title": "Mori-Villa Lagarina-Pomarolo-Nomi",
-                                    "label": "5"
+                                    "label": "4",
+                                    "wheelChairBoarding": 1
                                 }
               ]
             },
@@ -572,13 +568,15 @@
                                     "routeId": "06A_Rov",
                                     "routeSymId": "06A",
                                     "title": "Nomi-Pomarolo/Volano-Rosmini-Mori",
-                                    "label": "6"
+                                    "label": "6",
+                                    "wheelChairBoarding": 1
                                 },
                                 {
                                     "routeId": "06R_Rov",
                                     "routeSymId": "06R",
                                     "title": "Mori-Rosmini-Calliano-Nomi",
-                                    "label": "6"
+                                    "label": "6",
+                                    "wheelChairBoarding": 1
                                 }
               ]
             },
@@ -590,15 +588,37 @@
                                     "routeId": "07A_Rov",
                                     "routeSymId": "07A",
                                     "title": "Noriglio-Rosmini-Campana Dei Caduti",
-                                    "label": "7"
+                                    "label": "7",
+                                    "wheelChairBoarding": 2
                                 },
                                 {
                                     "routeId": "07R_Rov",
                                     "routeSymId": "07R",
                                     "title": "Campana Dei Caduti-Rosmini-Noriglio",
-                                    "label": "7"
+                                    "label": "7",
+                                    "wheelChairBoarding": 2
                                 }
               ]
+            },
+            {
+                "label": "8",
+                "color": "#f8ad1e",
+                "routes": [
+                    {
+                        "routeId": "08A_Rov",
+                        "routeSymId": "08A",
+                        "title": "Ospedale-Stazione FS-Isera-Villa Lag.",
+                        "label": "8",
+                        "wheelChairBoarding": 1
+                    },
+                    {
+                        "routeId": "08R_Rov",
+                        "routeSymId": "08R",
+                        "title": "Villa Lagarina-Isera-P.le Orsi-Ospedale",
+                        "label": "8",
+                        "wheelChairBoarding": 1
+                    }
+                ]
             },
                         {
                             "label": "A",
@@ -608,7 +628,8 @@
                                     "routeId": "AC_Rov",
                                     "routeSymId": "AC",
                                     "title": "Brione-Cesari-Ospedale-Podesta-Brione",
-                                    "label": "A"
+                                    "label": "A",
+                                    "wheelChairBoarding": 1
                                 }              ]
             },
                         {
@@ -619,7 +640,8 @@
                                     "routeId": "BC_Rov",
                                     "routeSymId": "BC",
                                     "title": "Ossario-Osp.-S.Giorgio-Osp.-Ossario",
-                                    "label": "B"
+                                    "label": "B",
+                                    "wheelChairBoarding": 1
                                 }              ]
             },
                         {
@@ -630,13 +652,15 @@
                                     "routeId": "AA_Rov",
                                     "routeSymId": "ABA",
                                     "title": "Via Magazol-S.Giorgio-Cornacalda",
-                                    "label": "AB"
+                                    "label": "AB",
+                                    "wheelChairBoarding": 1
                                 },
                                 {
                                     "routeId": "AR_Rov",
                                     "routeSymId": "ABR",
                                     "title": "Cornacalda-Ospedale-Via Magazol",
-                                    "label": "AB"
+                                    "label": "AB",
+                                    "wheelChairBoarding": 1
                                 }
               ]
             }

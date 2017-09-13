@@ -111,7 +111,8 @@ angular.module('viaggia.controllers.common', [])
       $scope.version = Config.getVersion();
       $scope.shownGroup = JSON.parse(localStorage.getItem(Config.getAppId() + '_shownGroup')) || false;
       $scope.contactLink = Config.getContactLink();
-      $scope.taxiEnabled = (Config.getTaxiId() != 'undefined');
+      $scope.taxiEnabled = (!!Config.getTaxiId() && Config.getTaxiId() != 'undefined');
+      $rootScope.accessible = !!Config.getAccessibility() && Config.getAccessibility() != 'undefined';
     });
   })
 
