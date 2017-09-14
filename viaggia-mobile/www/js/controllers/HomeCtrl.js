@@ -102,18 +102,18 @@ angular.module('viaggia.controllers.home', [])
                                 updateTrackingInfo();
                             }
                             //  else if ($rootScope.GPSAllow === false || $rootScope.GPSAllow === null) {
-                                var listener = $rootScope.$watch('GPSAllow', function () {
-                                    // if ($rootScope.GPSAllow == true) {
-                                    //     updateTrackingInfo();
-                                    // } else
-                                     if ($rootScope.GPSAllow === false) {
-                                        trackService.cleanTracking();
-                                        $scope.trackingIsOn = false;
-                                        //check if it
-                                        trackService.geolocationDisabledPopup();
-                                        listener();
-                                    }
-                                });
+                            var listener = $rootScope.$watch('GPSAllow', function () {
+                                // if ($rootScope.GPSAllow == true) {
+                                //     updateTrackingInfo();
+                                // } else
+                                if ($rootScope.GPSAllow === false) {
+                                    trackService.cleanTracking();
+                                    $scope.trackingIsOn = false;
+                                    //check if it
+                                    trackService.geolocationDisabledPopup();
+                                    listener();
+                                }
+                            });
 
                             // }
                             //  else if ($rootScope.GPSAllow === false) {
@@ -253,7 +253,19 @@ angular.module('viaggia.controllers.home', [])
                 Config.loaded();
                 var travelForDiary = GameSrv.getTravelForDiary()
                 trackService.stop();
-                if (Math.floor(data.dist > Config.getMinimumDistance())) {
+                if (Math.floor(data.dist < Config.getMinimumDistance()) && data.transport == 'walk') {
+
+                    // Toast.show($filter('translate')("no_points"), "short", "bottom");
+                    $ionicPopup.alert({
+                        title: $filter('translate')("no_points_title"),
+                        template: $filter('translate')("no_points", {
+                            points: data.points
+                        }),
+                        okText: $filter('translate')("btn_close"),
+                        okType: 'button-cancel'
+                    })
+
+                } else {
                     if (data.valid) {
                         GameSrv.addTravelDiary(travelForDiary);
                         $ionicPopup.confirm({
@@ -282,18 +294,9 @@ angular.module('viaggia.controllers.home', [])
                         });
 
                     }
-                } else {
-                    // Toast.show($filter('translate')("no_points"), "short", "bottom");
-                    $ionicPopup.alert({
-                        title: $filter('translate')("no_points_title"),
-                        template: $filter('translate')("no_points", {
-                            points: data.points
-                        }),
-                        okText: $filter('translate')("btn_close"),
-                        okType: 'button-cancel'
-                    })
                 }
             }, function () {
+                //puo' darsi che finisca qui?
                 Config.loaded();
                 $scope.showErrorServer();
                 trackService.stop();
