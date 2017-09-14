@@ -40,6 +40,8 @@ cordova-android-play-services-gradle-release 0.0.2 "cordova-android-play-service
 cordova-plugin-bluetooth-serial 0.4.7 "Bluetooth Serial"
 // bluetooth plugin
 
+cordova.plugins.diagnostic
+//diagnostic for checking localization on or off
 android version 6.1.2
 
 ios version 4.3.1
