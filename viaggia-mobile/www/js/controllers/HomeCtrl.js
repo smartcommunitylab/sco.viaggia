@@ -101,11 +101,7 @@ angular.module('viaggia.controllers.home', [])
                             if ($rootScope.GPSAllow === true) {
                                 updateTrackingInfo();
                             }
-                            //  else if ($rootScope.GPSAllow === false || $rootScope.GPSAllow === null) {
                             var listener = $rootScope.$watch('GPSAllow', function () {
-                                // if ($rootScope.GPSAllow == true) {
-                                //     updateTrackingInfo();
-                                // } else
                                 if ($rootScope.GPSAllow === false) {
                                     trackService.cleanTracking();
                                     $scope.trackingIsOn = false;
@@ -114,24 +110,6 @@ angular.module('viaggia.controllers.home', [])
                                     listener();
                                 }
                             });
-
-                            // }
-                            //  else if ($rootScope.GPSAllow === false) {
-                            //     trackService.cleanTracking();
-                            //     $scope.trackingIsOn = false;
-                            //     trackService.geolocationDisabledPopup();
-                            // } else if ($rootScope.GPSAllow === null) {
-                            //     var listener = $rootScope.$watch('GPSAllow', function () {
-                            //         if ($rootScope.GPSAllow == true) {
-                            //             updateTrackingInfo();
-                            //         } else if ($rootScope.GPSAllow == false) {
-                            //             trackService.cleanTracking();
-                            //             $scope.trackingIsOn = false;
-                            //             trackService.geolocationDisabledPopup();
-                            //             listener();
-                            //         }
-                            //     });
-                            // }
                         }
                     }, function (err) {
                         //track service startup not worked.

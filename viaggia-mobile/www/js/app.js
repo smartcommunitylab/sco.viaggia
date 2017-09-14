@@ -103,12 +103,10 @@ angular.module('viaggia', [
       GeoLocate.locate().then(
         function (position) {
           $rootScope.myPosition = position;
-          $rootScope.GPSAllow = true;
           defer.resolve();
         },
         function () {
           console.log('Geolocation not possible');
-          $rootScope.GPSAllow = false;
           defer.reject();
         }
       );

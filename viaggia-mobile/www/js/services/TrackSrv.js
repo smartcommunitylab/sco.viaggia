@@ -15,12 +15,16 @@ angular.module('viaggia.services.tracking', [])
         var timerTrack = null;
         var hasLocationPermission = function (cb) {
             // cb($rootScope.GPSAllow);
-            cordova.plugins.diagnostic.isLocationAvailable(function (state) {
-                cb(state);
-            }, function (e) {
-                console.log('diagnostic error', e);
-                cb(false);
-            });
+            if (window.cordova.plugins.diagnostic) {
+                cordova.plugins.diagnostic.isLocationAvailable(function (state) {
+                    cb(state);
+                }, function (e) {
+                    console.log('diagnostic error', e);
+                    cb(false);
+                });
+            } else {
+                cb(true);
+            }
         }
 
         /**
