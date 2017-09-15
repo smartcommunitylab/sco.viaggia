@@ -103,7 +103,8 @@ angular.module('viaggia.services.tracking', [])
             if (transportType) {
                 url = (Config.getServerURL() + '/gamification/freetracking/' + transportType + '/' + tripId);
             } else if (tripId.indexOf("temporary") == -1) {
-                url = (Config.getServerURL() + '/gamification/journey/' + tripId)
+                url = (Config.getServerURL() + '/gamification/journey/' + tripId);
+                trip = {};
             }
             else {
                 url = (Config.getServerURL() + '/gamification/temporary')
@@ -123,7 +124,7 @@ angular.module('viaggia.services.tracking', [])
                 headers: {
                     'Authorization': 'Bearer ' + token,
                     'appId': Config.getAppId(),
-                    'deviceInfo': info
+                    'deviceInfo': JSON.stringify(info)
                 },
                 timeout: Config.getHTTPConfig().timeout
             }).success(function () {
