@@ -180,7 +180,10 @@ angular.module('viaggia.controllers.login', [])
 
         var checkValidNoNetworkAndGoHome = function (profile) {
             var locallyValid = GameSrv.validUserForGamificationLocal();
-
+            DiaryDbSrv.dbSetup().then(function () {
+            }, function (err) {
+                //diary db not worked
+            });
             if (profile != null && locallyValid) {
                 $state.go('app.home');
                 $ionicHistory.nextViewOptions({

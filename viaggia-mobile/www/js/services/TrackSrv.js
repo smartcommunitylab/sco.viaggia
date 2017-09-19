@@ -387,6 +387,8 @@ angular.module('viaggia.services.tracking', [])
                     // } else {
                     //     data.points = localStorage.getItem(Config.getAppId() + '_expectedPoints');
                     // }
+                } else {
+                    data.valid=false;
                 }
                 deferred.resolve(data);
             }, function (error) {
@@ -401,6 +403,162 @@ angular.module('viaggia.services.tracking', [])
             else return true;
         }
 
+
+
+
+        var manageStartToServer = function (trip, idTrip, transportType,startTimestamp) {
+            var deferred = $q.defer();
+            var temporary = false;
+            if (trip) {
+                if (idTrip.indexOf("temporary") != -1) {
+                    temporary = true;
+                }
+                //temporary
+                LoginService.getValidAACtoken().then(function (token) {
+                    bgGeo.getCurrentPosition(function (location, taskId) {
+                        sendServerStart(trip.data, idTrip, token, transportType, -1).then(function () {
+                            location.extras = {
+                                idTrip: idTrip,
+                                start: startTimestamp,
+                                transportType: transportType
+                            }; // <-- add some arbitrary extras-data
+                            //                      // Insert it.
+                            bgGeo.insertLocation(location, function () {
+                                bgGeo.finish(taskId);
+                            });
+                            deferred.resolve();
+                        }, function (err) {
+                            //in case of temporary journey, if start doesn't arrive, stop it
+                            if (temporary) {
+                                bgGeo.stop();
+                                clean();
+                                deferred.reject("temporary");
+                            } else {
+                                deferred.resolve();
+                            }
+                        })
+
+                    }, function (errorCode) {
+                        if (temporary) {
+                            bgGeo.stop();
+                            clean();
+                            deferred.reject(errorCode);
+                        } else {
+                            deferred.resolve();
+                        }
+                    }, {
+                            timeout: 10, // 10 seconds timeout to fetch location
+                            maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
+                            //minimumAccuracy: ACCURACY,
+                            desiredAccuracy: ACCURACY, // Fetch a location with a minimum accuracy of ACCURACY meters.
+                            extras: {
+                                idTrip: idTrip,
+                                start: startTimestamp,
+                                transportType: transportType
+                            }
+                        })
+                }, function (err) {
+                    if (temporary) {
+                        bgGeo.stop();
+                        clean();
+                        deferred.reject();
+                    } else {
+                        deferred.resolve();
+                    }
+                })
+                // , function (err) {
+                //     deferred.reject();
+                // }
+
+                // if (idTrip.indexOf("temporary") != -1) {
+                //     //temporary
+                //     LoginService.getValidAACtoken().then(function (token) {
+                //         bgGeo.getCurrentPosition(function (location, taskId) {
+                //             sendServerStart(trip.data, idTrip, token, transportType, -1).then(function () {
+                //                 location.extras = {
+                //                     idTrip: idTrip,
+                //                     start: startTimestamp,
+                //                     transportType: transportType
+                //                 }; // <-- add some arbitrary extras-data
+                //                 //                      // Insert it.
+                //                 bgGeo.insertLocation(location, function () {
+                //                     bgGeo.finish(taskId);
+                //                 });
+                //                 deferred.resolve();
+                //             }, function (err) {
+                //                 //in case of temporary journey, if start doesn't arrive, stop it
+                //                 bgGeo.stop();
+                //                 clean();
+                //                 deferred.reject("temporary");
+                //             })
+
+                //         }, function (errorCode) {
+                //             bgGeo.stop();
+                //             clean();
+                //             deferred.reject(errorCode);
+                //         }, {
+                //                 timeout: 10, // 10 seconds timeout to fetch location
+                //                 maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
+                //                 //minimumAccuracy: ACCURACY,
+                //                 desiredAccuracy: ACCURACY, // Fetch a location with a minimum accuracy of ACCURACY meters.
+                //                 extras: {
+                //                     idTrip: idTrip,
+                //                     start: startTimestamp,
+                //                     transportType: transportType
+                //                 }
+                //             })
+                //     }, function (err) {
+                //         deferred.reject();
+                //     })
+                //     // , function (err) {
+                //     //     deferred.reject();
+                //     // }
+                // } else {
+                //     //not temporary
+                //     LoginService.getValidAACtoken().then(function (token) {
+                //         bgGeo.getCurrentPosition(function (location, taskId) {
+                //             sendServerStart(trip.data, idTrip, token, transportType, -1).then(function () {
+                //                 location.extras = {
+                //                     idTrip: idTrip,
+                //                     start: startTimestamp,
+                //                     transportType: transportType
+                //                 }; // <-- add some arbitrary extras-data
+                //                 //                      // Insert it.
+                //                 bgGeo.insertLocation(location, function () {
+                //                     bgGeo.finish(taskId);
+                //                 });
+                //                 deferred.resolve();
+                //             }, function (err) {
+                //                 deferred.resolve();
+                //             })
+
+                //         }, function (errorCode) {
+                //             deferred.resolve();
+                //         }, {
+                //                 timeout: 10, // 10 seconds timeout to fetch location
+                //                 maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
+                //                 //minimumAccuracy: ACCURACY,
+                //                 desiredAccuracy: ACCURACY, // Fetch a location with a minimum accuracy of ACCURACY meters.
+                //                 extras: {
+                //                     idTrip: idTrip,
+                //                     start: startTimestamp,
+                //                     transportType: transportType
+                //                 }
+                //             });
+                //     },function (err) {
+                //         deferred.resolve();
+                //     });
+                //     // , function (err) {
+                //     //     deferred.resolve();
+                //     // }
+                // }
+
+            } else {
+                deferred.resolve();
+            }
+            return deferred.promise;
+
+        }
         /**
          * START THE TRACKER FOR THE SPECIFIED TRIP.
          * If trip object is specified, then the tracking data is updated with its properties (start/end time).
@@ -408,131 +566,83 @@ angular.module('viaggia.services.tracking', [])
          */
         trackService.start = function (idTrip, trip, callback) {
             var deferred = $q.defer();
-            JSON.stringify(trip);
-            LoginService.getValidAACtoken().then(function (token) {
-                var today = new Date();
-                refreshCallback = callback;
-                var endtimeDate = null;
-                var startTimestamp = null;
-                if (trip) {
-                    endtimeDate = new Date(getEndTime(Number(trip.data.startime), Number(trip.data.endtime), trip.recurrency));
-                    startTimestamp = new Date().getTime();
-                } else {
-                    var lastRememberedEnd = localStorage.getItem(Config.getAppId() + '_endTimestamp');
-                    endtimeDate = new Date(Number(lastRememberedEnd));
-                    startTimestamp = new Date(Number(localStorage.getItem(Config.getAppId() + '_startTimestamp'))).getTime();
+            // LoginService.getValidAACtoken().then(function (token) {
+            var today = new Date();
+            refreshCallback = callback;
+            var endtimeDate = null;
+            var startTimestamp = null;
+            if (trip) {
+                endtimeDate = new Date(getEndTime(Number(trip.data.startime), Number(trip.data.endtime), trip.recurrency));
+                startTimestamp = new Date().getTime();
+            } else {
+                var lastRememberedEnd = localStorage.getItem(Config.getAppId() + '_endTimestamp');
+                endtimeDate = new Date(Number(lastRememberedEnd));
+                startTimestamp = new Date(Number(localStorage.getItem(Config.getAppId() + '_startTimestamp'))).getTime();
+            }
+
+
+            endtime = endtimeDate.getTime() + Config.getThresholdEndTime();
+            var duration = endtime - today.getTime();
+
+            //configuro il plugin con i vari param
+            var trackingConfigure = Config.getTrackingConfig();
+
+            var minutesOfRun = duration / 60000;
+            trackingConfigure['stopAfterElapsedMinutes'] = Math.floor(minutesOfRun);
+            //trackingConfigure['stopAfterElapsedMinutes'] = 1;
+            trackingConfigure['notificationTitle'] = $filter('translate')('tracking_notification_title');
+            trackingConfigure['notificationText'] = $filter('translate')('tracking_notification_text');
+            // trackingConfigure['url'] += token;
+            // trackingConfigure['headers'] = {  // <-- Optional HTTP headers
+            //     'Authorization': 'Bearer ' + token,
+            //     'appId': Config.getAppId()
+            // }
+            var transportType = localStorage.getItem(Config.getAppId() + '_trackedTransport');
+            if (!transportType) transportType = null;
+
+            trackingConfigure['extras'] = {
+                idTrip: idTrip,
+                start: startTimestamp,
+                transportType: transportType
+            };
+            //setto le variabili in localstorage
+            if (trip) {
+                localStorage.setItem(Config.getAppId() + '_state', 'TRACKING');
+                localStorage.setItem(Config.getAppId() + '_tripId', idTrip);
+                localStorage.setItem(Config.getAppId() + '_startTimestamp', startTimestamp);
+                localStorage.setItem(Config.getAppId() + '_endTimestamp', endtime);
+                if (trip.data && trip.data.customData) {
+                    localStorage.setItem(Config.getAppId() + '_expectedPoints', trip.data.customData['estimatedScore']);
                 }
+                //taggo la prima locazione con parametro extra
+            }
 
+            if (!bgGeo) {
+                deferred.resolve();
+                return;
+            }
 
-                endtime = endtimeDate.getTime() + Config.getThresholdEndTime();
-                var duration = endtime - today.getTime();
+            bgGeo.configure(trackingConfigure, callbackFn, failureFn);
 
-                //configuro il plugin con i vari param
-                var trackingConfigure = Config.getTrackingConfig();
+            timerTrack = $timeout(function () {
+                trackService.stop();
+                if (callback) callback();
+            }, duration);
 
-                var minutesOfRun = duration / 60000;
-                trackingConfigure['stopAfterElapsedMinutes'] = Math.floor(minutesOfRun);
-                //trackingConfigure['stopAfterElapsedMinutes'] = 1;
-                trackingConfigure['notificationTitle'] = $filter('translate')('tracking_notification_title');
-                trackingConfigure['notificationText'] = $filter('translate')('tracking_notification_text');
-                // trackingConfigure['url'] += token;
-                trackingConfigure['headers'] = {  // <-- Optional HTTP headers
-                    'Authorization': 'Bearer ' + token,
-                    'appId': Config.getAppId()
-                }
-                var transportType = localStorage.getItem(Config.getAppId() + '_trackedTransport');
-                if (!transportType) transportType = null;
+            bgGeo.start(function () {
+                bgGeo.changePace(true);
 
-                trackingConfigure['extras'] = {
-                    idTrip: idTrip,
-                    start: startTimestamp,
-                    transportType: transportType
-                };
-                //setto le variabili in localstorage
-                if (trip) {
-                    localStorage.setItem(Config.getAppId() + '_state', 'TRACKING');
-                    localStorage.setItem(Config.getAppId() + '_tripId', idTrip);
-                    localStorage.setItem(Config.getAppId() + '_startTimestamp', startTimestamp);
-                    localStorage.setItem(Config.getAppId() + '_endTimestamp', endtime);
-                    if (trip.data && trip.data.customData) {
-                        localStorage.setItem(Config.getAppId() + '_expectedPoints', trip.data.customData['estimatedScore']);
-                    }
-                    //taggo la prima locazione con parametro extra
-                }
-
-                if (!bgGeo) {
+                // create a new routine here
+                //in case of temporary get token e try to send start. If ok, resolve otherwise reject
+                //in the other case send start if ok or not resolve
+                manageStartToServer(trip, idTrip, transportType,startTimestamp).then(function () {
                     deferred.resolve();
-                    return;
-                }
-
-                bgGeo.configure(trackingConfigure, callbackFn, failureFn);
-
-                timerTrack = $timeout(function () {
-                    trackService.stop();
-                    if (callback) callback();
-                }, duration);
-                //                $timeout(function () {
-                //                    trackService.stop();
-                //                    if (callback) callback();
-                //                }, 60000);
-
-
-                bgGeo.start(function () {
-                    bgGeo.changePace(true);
-                    if (trip) {
-                        bgGeo.getCurrentPosition(function (location, taskId) {
-                            //                            if (location.coords.accuracy > ACCURACY) {
-                            //                                bgGeo.finish(taskId);
-                            //                                bgGeo.stop();
-                            //                                clean();
-                            //                                deferred.reject(); //check if reject for good cases
-                            //                                return;
-                            //                            }
-                            sendServerStart(trip.data, idTrip, token, transportType, -1).then(function () {
-                                location.extras = {
-                                    idTrip: idTrip,
-                                    start: startTimestamp,
-                                    transportType: transportType
-                                }; // <-- add some arbitrary extras-data
-                                //                      // Insert it.
-                                bgGeo.insertLocation(location, function () {
-                                    bgGeo.finish(taskId);
-                                });
-                                deferred.resolve();
-                            }, function (err) {
-                                //in case of temporary journey, if start doesn't arrive, stop it
-                                if (idTrip.indexOf("temporary") != -1) {
-                                    bgGeo.stop();
-                                    clean();
-                                    deferred.reject("temporary");
-                                }
-                                else {
-                                    deferred.resolve();
-                                }
-                            })
-
-                        }, function (errorCode) {
-                            bgGeo.stop();
-                            clean();
-                            deferred.reject(errorCode);
-                        }, {
-                                timeout: 10, // 10 seconds timeout to fetch location
-                                maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
-                                //minimumAccuracy: ACCURACY,
-                                desiredAccuracy: ACCURACY, // Fetch a location with a minimum accuracy of ACCURACY meters.
-                                extras: {
-                                    idTrip: idTrip,
-                                    start: startTimestamp,
-                                    transportType: transportType
-                                }
-                            });
-                    } else {
-                        deferred.resolve();
-                    }
+                }, function (err) {
+                    deferred.reject();
                 });
 
-
             });
+            // });
             return deferred.promise;
         };
 
@@ -789,7 +899,7 @@ angular.module('viaggia.services.tracking', [])
         trackService.geolocationDisabledPopup = function () {
             //reset the variable
             if (!GPSpopup) {
-                GPSpopup=true;
+                GPSpopup = true;
                 var alert = $ionicPopup.alert({
                     title: $filter('translate')("gps_disabled_title"),
                     template: $filter('translate')("gps_disabled_template"),

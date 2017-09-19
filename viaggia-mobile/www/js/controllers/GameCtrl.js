@@ -282,18 +282,34 @@ angular.module('viaggia.controllers.game', [])
         };
         $scope.calculateMaxStats = function () {
             $scope.maxStat = GameSrv.getMaxStat($scope.filter.selected);
+            $scope.maximum = 0;
+            Object.keys($scope.maxStat).map(function (objectKey, index) {
+                if (objectKey.startsWith("max ") && $scope.maxStat[objectKey] > $scope.maximum) {
+                    $scope.maximum = $scope.maxStat[objectKey];
+                }
+            });
         }
 
         $scope.getStyle = function (stat, veichle) {
             if (veichle == 'transit') {
-                $scope.maxStat["max " + veichle] = Math.max(($scope.maxStat["max bus"] || 0),($scope.maxStat["max bike"] || 0) ($scope.maxStat["max train"] || 0), ($scope.maxStat["max transit"] || 0));
+                $scope.maxStat["max " + veichle] = Math.max(($scope.maxStat["max bus"] || 0), ($scope.maxStat["max bike"] || 0), ($scope.maxStat["max train"] || 0), ($scope.maxStat["max transit"] || 0));
             }
-            if ((83 * stat) / $scope.maxStat["max " + veichle] < 8.8 && veichle == 'transit') {
+            // if ((83 * stat) / $scope.maxStat["max " + veichle] < 8.8 && veichle == 'transit') {
+            //     return { width: "8.8%" }
+            // } else if ((83 * stat) / $scope.maxStat["max " + veichle] < 4.5) {
+            //     return { width: + "4.5%" }
+            // } else if ($scope.maxStat["max " + veichle] < $scope.maxvalues["max" + $scope.filter.selected + veichle] && stat < $scope.maxStat["max " + veichle]) {
+            //     return { width: "" + ((83 * stat) / $scope.maxStat["max " + veichle]) + "%" }
+            // } else {
+            //     return { width: "83%" }
+            // }
+
+            if ($scope.maxStat && (83 * stat) / $scope.maximum < 8.8 && veichle == 'transit') {
                 return { width: "8.8%" }
-            } else if ((83 * stat) / $scope.maxStat["max " + veichle] < 4.5) {
+            } else if ($scope.maxStat && ((83 * stat) / $scope.maximum < 4.5)) {
                 return { width: + "4.5%" }
-            } else if ($scope.maxStat["max " + veichle] < $scope.maxvalues["max" + $scope.filter.selected + veichle] && stat < $scope.maxStat["max " + veichle]) {
-                return { width: "" + ((83 * stat) / $scope.maxStat["max " + veichle]) + "%" }
+            } else if ($scope.maxStat && $scope.maximum < $scope.maxvalues["max" + $scope.filter.selected + veichle] && stat < $scope.maximum) {
+                return { width: "" + ((83 * stat) / $scope.maximum) + "%" }
             } else {
                 return { width: "83%" }
             }
@@ -322,9 +338,7 @@ angular.module('viaggia.controllers.game', [])
                 GameSrv.getStatistics($scope.serverhow, from, to).then(
                     function (statistics) {
                         $scope.stats = $scope.stats.concat(statistics.stats);
-                        if ($scope.stats.length == 0) {
-                            $scope.noStats = true;
-                        }
+
                         $scope.calculateMaxStats();
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         $scope.singleStatStatus = true;
@@ -334,6 +348,18 @@ angular.module('viaggia.controllers.game', [])
                         $scope.previousStat = statistics.firstBefore;
                         if (!$scope.previousStat) {
                             $scope.maybeMore = false;
+                            if ($scope.stats.length == 0) {
+                                $scope.noStats = true;
+                            } else {
+                                $scope.noStats = true;
+                                //even if all the stats is 0 set no stats to true
+                                for (var i = 0; i < $scope.stats.length; i++) {
+                                    if ($scope.stats[i].data.walk && $scope.stats[i].data.walk != 0 || $scope.stats[i].data.bike && $scope.stats[i].data.bike != 0 || $scope.stats[i].data.car && $scope.stats[i].data.car != 0 || $scope.stats[i].data.transit && $scope.stats[i].data.transit != 0 || $scope.stats[i].data.bus && $scope.stats[i].data.bus != 0 || $scope.stats[i].data.train && $scope.stats[i].data.train != 0) {
+                                        $scope.noStats = false;
+                                        break;
+                                    }
+                                }
+                            }
                         }
                         $scope.nextStat = statistics.firstAfter;
                     },
@@ -674,7 +700,7 @@ angular.module('viaggia.controllers.game', [])
         }
         $scope.getStyle = function (stat, veichle) {
             //get max of message
-            $scope.maxOfMessage = Math.max(($scope.message.travelDistances.transit || 0),($scope.message.travelDistances.bike || 0), ($scope.message.travelDistances.bus || 0), ($scope.message.travelDistances.train || 0), ($scope.message.travelDistances.walk || 0), ($scope.message.travelDistances.car || 0))
+            $scope.maxOfMessage = Math.max(($scope.message.travelDistances.transit || 0), ($scope.message.travelDistances.bike || 0), ($scope.message.travelDistances.bus || 0), ($scope.message.travelDistances.train || 0), ($scope.message.travelDistances.walk || 0), ($scope.message.travelDistances.car || 0))
             if (veichle == 'transit') {
                 stat = ($scope.message.travelDistances.transit || 0) + ($scope.message.travelDistances.bus || 0) + ($scope.message.travelDistances.train || 0);
                 //     $scope.maxStat["max " + veichle] = Math.max(($scope.maxStat["max bus"]||0), ($scope.maxStat["max train"]||0), ($scope.maxStat["max transit"]||0));
@@ -830,7 +856,7 @@ angular.module('viaggia.controllers.game', [])
         $scope.loadMore = function () {
             if (!getRanking && $scope.maybeMore) {
                 getRanking = true;
-                var start = $scope.ranking != null ? $scope.ranking.length+1 : 0;
+                var start = $scope.ranking != null ? $scope.ranking.length + 1 : 0;
                 var end = start + $scope.rankingPerPage;
                 GameSrv.getRanking($scope.filter.selected, start, end).then(
                     function (ranking) {
