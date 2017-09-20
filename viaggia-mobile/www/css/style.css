@@ -2331,7 +2331,8 @@ Play&Go
 .H5stats{
     margin-left: 5px;
     margin-bottom: 1px;
-    text-align:left
+    text-align:left;
+    text-transform:capitalize;
 }
 
 .tracking-dashboard h4 {

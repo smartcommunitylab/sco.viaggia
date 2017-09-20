@@ -293,17 +293,49 @@ angular.module('viaggia.services.tracking', [])
             if (trackService.trackingIsGoingOn() && !trackService.trackingIsFinished()) {
                 deferred.resolve();
             } else {
-                trip.tripId = tripId;
-                localStorage.setItem(Config.getAppId() + '_temporary', JSON.stringify(trip));
-                trackService.start(tripId, {
-                    data: trip
-                }
-                    , callback)
-                    .then(function () {
-                        deferred.resolve();
+                //check temporary flow
+                var startTimestamp = new Date().getTime();
+                LoginService.getValidAACtoken().then(function (token) {
+                    bgGeo.getCurrentPosition(function (location, taskId) {
+                        sendServerStart(trip, tripId, token, null, -1).then(function () {
+                            location.extras = {
+                                idTrip: tripId,
+                                start: startTimestamp
+                            }; // <-- add some arbitrary extras-data
+                            //                      // Insert it.
+                            bgGeo.insertLocation(location, function () {
+                                bgGeo.finish(taskId);
+                            });
+                            trip.tripId = tripId;
+                            localStorage.setItem(Config.getAppId() + '_temporary', JSON.stringify(trip));
+                            trackService.start(tripId, {
+                                data: trip
+                            }
+                                , callback,startTimestamp)
+                                .then(function () {
+                                    deferred.resolve();
+                                }, function (errorCode) {
+                                    deferred.reject(errorCode);
+                                });
+                        }, function (err) {
+                            //in case of temporary journey, if start doesn't arrive, stop it
+                            bgGeo.stop();
+                            clean();
+                            deferred.reject("temporary");
+                        })
+
                     }, function (errorCode) {
+                        bgGeo.stop();
+                        clean();
                         deferred.reject(errorCode);
-                    });
+                    }
+                    )
+                })
+
+
+
+
+
             }
             return deferred.promise;
         }
@@ -388,7 +420,7 @@ angular.module('viaggia.services.tracking', [])
                     //     data.points = localStorage.getItem(Config.getAppId() + '_expectedPoints');
                     // }
                 } else {
-                    data.valid=false;
+                    data.valid = false;
                 }
                 deferred.resolve(data);
             }, function (error) {
@@ -406,14 +438,10 @@ angular.module('viaggia.services.tracking', [])
 
 
 
-        var manageStartToServer = function (trip, idTrip, transportType,startTimestamp) {
+        var manageStartToServer = function (trip, idTrip, transportType, startTimestamp) {
             var deferred = $q.defer();
             var temporary = false;
             if (trip) {
-                if (idTrip.indexOf("temporary") != -1) {
-                    temporary = true;
-                }
-                //temporary
                 LoginService.getValidAACtoken().then(function (token) {
                     bgGeo.getCurrentPosition(function (location, taskId) {
                         sendServerStart(trip.data, idTrip, token, transportType, -1).then(function () {
@@ -429,23 +457,14 @@ angular.module('viaggia.services.tracking', [])
                             deferred.resolve();
                         }, function (err) {
                             //in case of temporary journey, if start doesn't arrive, stop it
-                            if (temporary) {
-                                bgGeo.stop();
-                                clean();
-                                deferred.reject("temporary");
-                            } else {
-                                deferred.resolve();
-                            }
+                            deferred.resolve();
+
                         })
 
                     }, function (errorCode) {
-                        if (temporary) {
-                            bgGeo.stop();
-                            clean();
-                            deferred.reject(errorCode);
-                        } else {
-                            deferred.resolve();
-                        }
+
+                        deferred.resolve();
+
                     }, {
                             timeout: 10, // 10 seconds timeout to fetch location
                             maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
@@ -458,100 +477,10 @@ angular.module('viaggia.services.tracking', [])
                             }
                         })
                 }, function (err) {
-                    if (temporary) {
-                        bgGeo.stop();
-                        clean();
-                        deferred.reject();
-                    } else {
-                        deferred.resolve();
-                    }
+
+                    deferred.resolve();
+
                 })
-                // , function (err) {
-                //     deferred.reject();
-                // }
-
-                // if (idTrip.indexOf("temporary") != -1) {
-                //     //temporary
-                //     LoginService.getValidAACtoken().then(function (token) {
-                //         bgGeo.getCurrentPosition(function (location, taskId) {
-                //             sendServerStart(trip.data, idTrip, token, transportType, -1).then(function () {
-                //                 location.extras = {
-                //                     idTrip: idTrip,
-                //                     start: startTimestamp,
-                //                     transportType: transportType
-                //                 }; // <-- add some arbitrary extras-data
-                //                 //                      // Insert it.
-                //                 bgGeo.insertLocation(location, function () {
-                //                     bgGeo.finish(taskId);
-                //                 });
-                //                 deferred.resolve();
-                //             }, function (err) {
-                //                 //in case of temporary journey, if start doesn't arrive, stop it
-                //                 bgGeo.stop();
-                //                 clean();
-                //                 deferred.reject("temporary");
-                //             })
-
-                //         }, function (errorCode) {
-                //             bgGeo.stop();
-                //             clean();
-                //             deferred.reject(errorCode);
-                //         }, {
-                //                 timeout: 10, // 10 seconds timeout to fetch location
-                //                 maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
-                //                 //minimumAccuracy: ACCURACY,
-                //                 desiredAccuracy: ACCURACY, // Fetch a location with a minimum accuracy of ACCURACY meters.
-                //                 extras: {
-                //                     idTrip: idTrip,
-                //                     start: startTimestamp,
-                //                     transportType: transportType
-                //                 }
-                //             })
-                //     }, function (err) {
-                //         deferred.reject();
-                //     })
-                //     // , function (err) {
-                //     //     deferred.reject();
-                //     // }
-                // } else {
-                //     //not temporary
-                //     LoginService.getValidAACtoken().then(function (token) {
-                //         bgGeo.getCurrentPosition(function (location, taskId) {
-                //             sendServerStart(trip.data, idTrip, token, transportType, -1).then(function () {
-                //                 location.extras = {
-                //                     idTrip: idTrip,
-                //                     start: startTimestamp,
-                //                     transportType: transportType
-                //                 }; // <-- add some arbitrary extras-data
-                //                 //                      // Insert it.
-                //                 bgGeo.insertLocation(location, function () {
-                //                     bgGeo.finish(taskId);
-                //                 });
-                //                 deferred.resolve();
-                //             }, function (err) {
-                //                 deferred.resolve();
-                //             })
-
-                //         }, function (errorCode) {
-                //             deferred.resolve();
-                //         }, {
-                //                 timeout: 10, // 10 seconds timeout to fetch location
-                //                 maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
-                //                 //minimumAccuracy: ACCURACY,
-                //                 desiredAccuracy: ACCURACY, // Fetch a location with a minimum accuracy of ACCURACY meters.
-                //                 extras: {
-                //                     idTrip: idTrip,
-                //                     start: startTimestamp,
-                //                     transportType: transportType
-                //                 }
-                //             });
-                //     },function (err) {
-                //         deferred.resolve();
-                //     });
-                //     // , function (err) {
-                //     //     deferred.resolve();
-                //     // }
-                // }
 
             } else {
                 deferred.resolve();
@@ -564,16 +493,21 @@ angular.module('viaggia.services.tracking', [])
          * If trip object is specified, then the tracking data is updated with its properties (start/end time).
          * If callback is specified, this will be executed upon end of tracking time.
          */
-        trackService.start = function (idTrip, trip, callback) {
+        trackService.start = function (idTrip, trip, callback, timestamp) {
             var deferred = $q.defer();
             // LoginService.getValidAACtoken().then(function (token) {
             var today = new Date();
             refreshCallback = callback;
             var endtimeDate = null;
             var startTimestamp = null;
+
             if (trip) {
                 endtimeDate = new Date(getEndTime(Number(trip.data.startime), Number(trip.data.endtime), trip.recurrency));
-                startTimestamp = new Date().getTime();
+                if (timestamp) {
+                    startTimestamp = timestamp;
+                } else {
+                    startTimestamp = new Date().getTime();
+                }
             } else {
                 var lastRememberedEnd = localStorage.getItem(Config.getAppId() + '_endTimestamp');
                 endtimeDate = new Date(Number(lastRememberedEnd));
@@ -632,14 +566,16 @@ angular.module('viaggia.services.tracking', [])
             bgGeo.start(function () {
                 bgGeo.changePace(true);
 
-                // create a new routine here
-                //in case of temporary get token e try to send start. If ok, resolve otherwise reject
-                //in the other case send start if ok or not resolve
-                manageStartToServer(trip, idTrip, transportType,startTimestamp).then(function () {
+                //if not temporary try to send start otherwise u already send it
+                if (idTrip.indexOf("temporary") == -1) {
+                    manageStartToServer(trip, idTrip, transportType, startTimestamp).then(function () {
+                        deferred.resolve();
+                    }, function (err) {
+                        deferred.reject();
+                    });
+                } else {
                     deferred.resolve();
-                }, function (err) {
-                    deferred.reject();
-                });
+                }
 
             });
             // });
