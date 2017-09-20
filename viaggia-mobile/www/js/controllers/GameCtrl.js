@@ -253,17 +253,17 @@ angular.module('viaggia.controllers.game', [])
 
         $scope.getTitle = function (day) {
             if ($scope.filter.selected == $scope.filter.options[0]) {
-                dateFrom =new Date(day.from);
-                return dateFrom.toLocaleString(window.navigator.language, {weekday: 'long'}) +' '+ $filter('date')(dateFrom, 'dd/MM');
+                dateFrom = new Date(day.from);
+                return dateFrom.toLocaleString(window.navigator.language, { weekday: 'long' }) + ' ' + $filter('date')(dateFrom, 'dd/MM');
             }
             if ($scope.filter.selected == $scope.filter.options[1]) {
-                                dateFrom =new Date(day.from)
-                dateTo =new Date(day.to)
+                dateFrom = new Date(day.from)
+                dateTo = new Date(day.to)
 
-                return  $filter('date')(dateFrom, 'dd/MM/yyyy') + ' - ' + $filter('date')(dateTo, 'dd/MM/yyyy');
+                return $filter('date')(dateFrom, 'dd/MM/yyyy') + ' - ' + $filter('date')(dateTo, 'dd/MM/yyyy');
             }
             if ($scope.filter.selected == $scope.filter.options[2]) {
-                return dateFrom.toLocaleString(window.navigator.language, {month: 'long'});
+                return dateFrom.toLocaleString(window.navigator.language, { month: 'long' });
             }
             if ($scope.filter.selected == $scope.filter.options[3]) {
                 return $filter('translate')('statistic_total_label');
@@ -724,6 +724,7 @@ angular.module('viaggia.controllers.game', [])
             $scope.message = JSON.parse($stateParams.message);
             $scope.paths = {};
             $scope.pathMarkers = [];
+            var currentlyLine = {};
             //get detailt of trip 
             Config.loading();
             GameSrv.getEventTripDeatil($scope.message.entityId).then(function (trip) {
@@ -746,7 +747,10 @@ angular.module('viaggia.controllers.game', [])
                 }
 
                 //add real path
-                var currentlyLine = mapService.decodePolyline(trip.geolocationPolyline);
+                if (trip.geolocationPolyline)
+                { 
+                    currentlyLine = mapService.decodePolyline(trip.geolocationPolyline);
+                 }
                 $scope.paths["p" + $scope.paths.length] = {
                     color: '#2975a7',
                     weight: 8,

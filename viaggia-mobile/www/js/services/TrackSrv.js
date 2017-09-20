@@ -330,6 +330,10 @@ angular.module('viaggia.services.tracking', [])
                         deferred.reject(errorCode);
                     }
                     )
+                },function (err) {
+
+                    deferred.reject(err);
+
                 })
 
 
