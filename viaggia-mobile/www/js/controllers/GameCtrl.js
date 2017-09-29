@@ -253,13 +253,17 @@ angular.module('viaggia.controllers.game', [])
 
         $scope.getTitle = function (day) {
             if ($scope.filter.selected == $scope.filter.options[0]) {
-                return $filter('date')(day.from, 'EEEE dd/MM');
+                dateFrom = new Date(day.from);
+                return dateFrom.toLocaleString(window.navigator.language, { weekday: 'long' }) + ' ' + $filter('date')(dateFrom, 'dd/MM');
             }
             if ($scope.filter.selected == $scope.filter.options[1]) {
-                return $filter('date')(day.from, 'EEEE dd/MM') + ' ' + $filter('date')(day.to, 'EEEE dd/MM');
+                dateFrom = new Date(day.from)
+                dateTo = new Date(day.to)
+
+                return $filter('date')(dateFrom, 'dd/MM/yyyy') + ' - ' + $filter('date')(dateTo, 'dd/MM/yyyy');
             }
             if ($scope.filter.selected == $scope.filter.options[2]) {
-                return $filter('date')(day.from, 'MMMM');
+                return dateFrom.toLocaleString(window.navigator.language, { month: 'long' });
             }
             if ($scope.filter.selected == $scope.filter.options[3]) {
                 return $filter('translate')('statistic_total_label');
@@ -304,14 +308,14 @@ angular.module('viaggia.controllers.game', [])
             //     return { width: "83%" }
             // }
 
-            if ($scope.maxStat && (83 * stat) / $scope.maximum < 8.8 && veichle == 'transit') {
-                return { width: "8.8%" }
-            } else if ($scope.maxStat && ((83 * stat) / $scope.maximum < 4.5)) {
-                return { width: + "4.5%" }
-            } else if ($scope.maxStat && $scope.maximum < $scope.maxvalues["max" + $scope.filter.selected + veichle] && stat < $scope.maximum) {
-                return { width: "" + ((83 * stat) / $scope.maximum) + "%" }
+            if ($scope.maxStat && (75 * stat) / $scope.maximum < 10 && veichle == 'transit') {
+                return { width: "10%" }
+            } else if ($scope.maxStat && ((75 * stat) / $scope.maximum < 5)) {
+                return { width: + "5%" }
+            } else if ($scope.maxStat && stat < $scope.maxvalues["max" + $scope.filter.selected + veichle] && stat < $scope.maximum) {
+                return { width: "" + ((75 * stat) / $scope.maximum) + "%" }
             } else {
-                return { width: "83%" }
+                return { width: "75%" }
             }
         }
 
@@ -720,6 +724,7 @@ angular.module('viaggia.controllers.game', [])
             $scope.message = JSON.parse($stateParams.message);
             $scope.paths = {};
             $scope.pathMarkers = [];
+            var currentlyLine = {};
             //get detailt of trip 
             Config.loading();
             GameSrv.getEventTripDeatil($scope.message.entityId).then(function (trip) {
@@ -742,7 +747,10 @@ angular.module('viaggia.controllers.game', [])
                 }
 
                 //add real path
-                var currentlyLine = mapService.decodePolyline(trip.geolocationPolyline);
+                if (trip.geolocationPolyline)
+                { 
+                    currentlyLine = mapService.decodePolyline(trip.geolocationPolyline);
+                 }
                 $scope.paths["p" + $scope.paths.length] = {
                     color: '#2975a7',
                     weight: 8,
