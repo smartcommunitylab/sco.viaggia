@@ -172,7 +172,7 @@
         "activityType": "OtherNavigation",
         "disableElasticity": false,
         "stopDetectionDelay": 0,
-        "stopTimeout": 10,
+        "stopTimeout": 15,
         "activityRecognitionInterval": 10000,
         "preventSuspend": false,
         "heartbeatInterval": 60,
