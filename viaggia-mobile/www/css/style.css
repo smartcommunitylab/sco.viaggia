@@ -953,10 +953,10 @@ border-style: solid;
 border-width: 15px 20px 15px 20px;
 color: rgba(0,0,0,0);
 content: "";
-height: 22px;
+/*height: 22px;*/
 position: absolute;
 left: -33px;
-top: 27%;
+/*top: 27%;*/
 width: 0px;
 }
 .platform-ios .timeline-arrow {
@@ -965,12 +965,12 @@ border-style: solid;
 border-width: 15px 20px 15px 20px;
 color: rgba(0,0,0,0);
 content: "";
-height: 22px;
+/*height: 22px;*/
 position: absolute;
 left: -33px;
 /*top: 3.7px;*/
 width: 0px;
-  top:27%
+  /*top:27%*/
 }
 .timeline-col{
 color: white;
