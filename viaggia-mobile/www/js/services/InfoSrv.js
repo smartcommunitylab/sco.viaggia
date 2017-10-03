@@ -76,11 +76,11 @@ angular.module('viaggia.services.info', [])
 
         return deferred.promise;
       },
-      getParkingMeters: function (lat, long) {
+      getParkingMeters: function (lat, long,number) {
         var deferred = $q.defer();
 
 
-        $http.get(Config.getMetroparcoServerURL() + '/nearparkingmeters/' + lat + '/' + long + '/' + Config.getParkingMetersRadius() + '/' + Config.getParkingMetersMaxNumber() + "?agencyIds=" + Config.getParkingMetersAgencyIds().join(", "),
+         $http.get(Config.getMetroparcoServerURL() + '/nearparkingmeters/' + lat + '/' + long + '/' + Config.getParkingMetersRadius() + '/' + number + "?agencyIds=" + Config.getParkingMetersAgencyIds().join(", "),
           Config.getHTTPConfig())
           .success(function (data) {
             if (data instanceof Array) {

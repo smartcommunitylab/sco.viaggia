@@ -28,7 +28,7 @@ angular.module('viaggia.services.conf', [])
 
     var DISTANCE_AUTOCOMPLETE = '25';
     var PARKING_METERS_RADIUS = '5';
-    var PARKING_METERS_MAX_NUMBER = 5;
+    var PARKING_METERS_MAX_NUMBER = 52;
     var HTTP_CONFIG = {
       timeout: 5000
     };
@@ -216,6 +216,9 @@ angular.module('viaggia.services.conf', [])
           zoom: mapJsonConfig['zoom_map']
         };
       },
+      getZoomParkingMeter: function () {
+        return 17;
+      },
       getPlanPolicy: function () {
         return mapJsonConfig['plan_policy'];
       },
@@ -249,14 +252,14 @@ angular.module('viaggia.services.conf', [])
           {
             label: $filter('translate')('plan_preferences_fastest'),
             value: "fastest"
-              }, {
+          }, {
             label: $filter('translate')('plan_preferences_leastChanges'),
             value: "leastChanges"
-              }, {
+          }, {
             label: $filter('translate')('plan_preferences_leastWalking'),
             value: "leastWalking"
-              }
-          ];
+          }
+        ];
       },
 
       getAppId: function () {
