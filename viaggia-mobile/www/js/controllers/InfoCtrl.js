@@ -599,8 +599,8 @@ angular.module('viaggia.controllers.info', [])
         if (paymentByCard($scope.selectedParkingMeters.parking)) {
           icon = 'img/ic_parcometro_euro-card.png'
         }
-        if ($scope.markers[$scope.selectedParkingMetersIndex]) {
-          $scope.markers[$scope.selectedParkingMetersIndex].icon = {
+        if ($scope.allMarkers[$scope.selectedParkingMetersIndex]) {
+          $scope.allMarkers[$scope.selectedParkingMetersIndex].icon = {
             iconUrl: icon,
             iconSize: [36, 50],
             iconAnchor: [18, 50],
@@ -609,10 +609,10 @@ angular.module('viaggia.controllers.info', [])
         }
       }
       //and select the new one
-      for (var i = 0; i < $scope.markers.length; i++) {
-        if (index == $scope.markers[i].index) {
+      for (var i = 0; i < $scope.allMarkers.length; i++) {
+        if (index == $scope.allMarkers[i].index) {
           $scope.selectedParkingMetersIndex = i;
-          $scope.selectedParkingMeters = $scope.markers[i];
+          $scope.selectedParkingMeters = $scope.allMarkers[i];
           break;
         }
       }
@@ -622,7 +622,7 @@ angular.module('viaggia.controllers.info', [])
       if (paymentByCard($scope.selectedParkingMeters.parking)) {
         icon = 'img/ic_parcometro_euro-card_selected.png'
       }
-      $scope.markers[$scope.selectedParkingMetersIndex].icon = {
+      $scope.allMarkers[$scope.selectedParkingMetersIndex].icon = {
         iconUrl: icon,
         iconSize: [36, 50],
         iconAnchor: [18, 50],
