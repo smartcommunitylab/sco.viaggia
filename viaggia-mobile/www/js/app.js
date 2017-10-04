@@ -1125,7 +1125,8 @@ angular.module('viaggia', [
       label_points: "Green Leaves guadagnate: ",
       pop_up_bt_title: "Bluetooth disabilitato",
       pop_up_bt: "Per garantire una validazione corretta dei viaggi in autobus/treno è richiesta l’attivazione del Bluetooth sul dispositivo.",
-      pop_up_bt_button_enable: "Attivare"
+      pop_up_bt_button_enable: "Attivare",
+      registration_wrong_chars:"Nickname non valido. Sono consentiti solo lettere e numeri"
       
     });
 
@@ -1562,7 +1563,8 @@ angular.module('viaggia', [
       label_points: "Earned Green Leaves: ",
       pop_up_bt_title: "Bluetooth disabled",
       pop_up_bt: "To ensure a proper validation of bus and train trips we recommend activating Bluetooth on the device.",
-      pop_up_bt_button_enable: "Activate"
+      pop_up_bt_button_enable: "Activate",
+      registration_wrong_chars:"Nickname not valid. Only letters or numbers are allowed"
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);
