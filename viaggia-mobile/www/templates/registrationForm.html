@@ -11,38 +11,6 @@
             <span class="input-label">{{'registration_mail' | translate}}</span>
             <input type="email" placeholder="{{'registration_mail_placeholder' | translate}}" ng-model="user.mail">
         </label>
-        <!--<label class="item item-input item-select">
-            <div class="input-label">
-                {{'registration_age' | translate}}
-            </div>
-            <select ng-model="user.age_range" ng-change="showSelectValue(mySelect)">
-                <option selected>{{'age_placeholder' | translate}}</option>
-                <option value="0-20">{{'age_option1' | translate}}</option>
-                <option value="20-40">{{'age_option2' | translate}}</option>
-                <option value="40-60">{{'age_option3' | translate}}</option>
-                <option value="60+">{{'age_option4' | translate}}</option>
-            </select>
-        </label>
-        <label class="item item-input item-stacked-label">
-            <span class="input-label">{{'registration_km' | translate}}</span>
-            <input type="text" placeholder="{{'registration_km_placeholder' | translate}}" ng-model="user.averagekm">
-        </label>
-        <div class="item item-text-wrap">{{'registration_public_transport' | translate}}</div>
-        <ion-list>
-            <ion-radio ng-repeat="item in usetransports" ng-value="item.value" ng-model="user.use_transport" ng-click="initTransport()" />{{ item.text }}
-        </ion-list>
-        <div class="item item-text-wrap">{{'registration_which_public_transport' | translate}}</div>
-
-        <ion-list ng-if="user.use_transport">
-            <ion-checkbox ng-repeat="item in publicTransport" ng-model="item.checked" ng-checked="item.checked">
-                {{ item.text }}
-            </ion-checkbox>
-        </ion-list>
-        <ion-list ng-if="!user.use_transport">
-            <ion-checkbox ng-repeat="item in privateTransport" ng-model="item.checked" ng-checked="item.checked">
-                {{ item.text }}
-            </ion-checkbox>
-        </ion-list>-->
         <label class="item item-input item-stacked-label">
             <span class="input-label">{{'registration_invite' | translate}}</span>
             <input type="text" placeholder="{{'registration_invite_placeholder' | translate}}" ng-model="user.nick_recommandation">

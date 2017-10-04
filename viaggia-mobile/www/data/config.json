@@ -174,7 +174,7 @@
         "stopDetectionDelay": 0,
         "stopTimeout": 15,
         "activityRecognitionInterval": 10000,
-        "pausesLocationUpdatesAutomatically":false,
+        "pausesLocationUpdatesAutomatically": false,
         "preventSuspend": true,
         "heartbeatInterval": 10,
         "stopOnTerminate": false,
