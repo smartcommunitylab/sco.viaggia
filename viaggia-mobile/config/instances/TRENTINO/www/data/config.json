@@ -177,6 +177,7 @@
         "pausesLocationUpdatesAutomatically": false,
         "preventSuspend": true,
         "heartbeatInterval": 10,
+        "locationTimeout": 60,
         "stopOnTerminate": false,
         "debug": false,
         "locationUpdateInterval": 5000,
