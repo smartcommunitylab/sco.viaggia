@@ -94,7 +94,7 @@ angular.module('viaggia', [
   'smartcommunitylab.services.login'
 ])
 
-  .run(function ($ionicPlatform, $cordovaFile, $q, $rootScope, $translate, trackService, DataManager, DiaryDbSrv, Config, GeoLocate, notificationService, LoginService) {
+  .run(function ($ionicPlatform,$ionicPopup, $filter, $cordovaFile, $q, $rootScope, $translate, trackService, DataManager, DiaryDbSrv, Config, GeoLocate, notificationService, LoginService) {
 
     $rootScope.locationWatchID = undefined;
 
@@ -112,36 +112,48 @@ angular.module('viaggia', [
       );
       return defer.promise;
     };
-    //    document.addEventListener("pause", function () {
-    //        console.log('app paused');
-    //        if (typeof $rootScope.locationWatchID != 'undefined') {
-    //            navigator.geolocation.clearWatch($rootScope.locationWatchID);
-    //            $rootScope.locationWatchID = undefined;
-    //            GeoLocate.reset();
-    //            console.log('geolocation reset');
-    //        }
-    //    }, false);
-    //
-    //    document.addEventListener("resume", function () {
-    //        console.log('app resumed');
-    //        GeoLocate.locate();
-    //        if (trackService.trackingIsGoingOn() && trackService.trackingIsFinished()) {
-    //            trackService.stop();
-    //        }
-    //    }, false);
 
-    /*
-    GeoLocate.locate().then(function (position) {
-      $rootScope.myPosition = position;
-      //console.log('first geolocation: ' + position);
-    }, function () {
-      console.log('CANNOT LOCATE!');
-    });
 
-    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-      console.log(toState);
-    });
-    */
+    // var localizationAlwaysAllowed = function () {
+    //   var deferred = $q.defer();
+    //   cordova.plugins.diagnostic.getLocationAuthorizationStatus(function (status) {
+    //     switch (status) {
+    //       case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
+    //         console.log("Permission not requested");
+    //         deferred.resolve(true);
+    //         break;
+    //       case cordova.plugins.diagnostic.permissionStatus.DENIED:
+    //         console.log("Permission denied");
+    //         deferred.resolve(false);
+
+    //         break;
+    //       case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+    //         console.log("Permission granted always");
+    //         deferred.resolve(true);
+
+    //         break;
+    //       case cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
+    //         console.log("Permission granted only when in use");
+    //         deferred.resolve(false);
+
+    //         break;
+    //       case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
+    //         console.log("Permission permanently denied");
+    //         deferred.resolve(false);
+
+    //         break;
+    //     }
+    //   }, function (error) {
+    //     console.error("The following error occurred: " + error);
+    //     deferred.reject();
+
+    //   });
+    //   return deferred.promise;
+    // }
+
+    // var showWarningPopUp = function () {
+    //   alert("Localization Not Always Allowed");
+    // }
 
     $ionicPlatform.ready(function () { // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -164,7 +176,32 @@ angular.module('viaggia', [
         //            if (window.BackgroundGeolocation) {
         //                trackService.startup();
         //            }
-
+        cordova.plugins.diagnostic.registerLocationStateChangeHandler(function(state){
+          if((ionic.Platform.isAndroid()&& state !== cordova.plugins.diagnostic.locationMode.LOCATION_OFF)
+              || ionic.Platform.isIOS() && ( state === cordova.plugins.diagnostic.permissionStatus.GRANTED
+          )){
+            // alert("Perfetto");
+          }
+          else {
+            $ionicPopup.show({
+              title: $filter('translate')("pop_up_always_GPS"),
+              template: $filter('translate')("pop_up_always_GPS_template"),
+              buttons: [
+                {
+                  text: $filter('translate')("btn_close"),
+                  type: 'button-cancel'
+              },
+                  {
+                      text: $filter('translate')("pop_up_always_GPS_go_on"),
+                      type: 'button-custom',
+                      onTap: function () {
+                           cordova.plugins.diagnostic.switchToLocationSettings();
+                      }
+                  }
+              ]
+          });
+          }
+      });
         if (ionic.Platform.isWebView()) {
           //we are on a phone so synch the database
           DataManager.dbSetup();
@@ -177,6 +214,12 @@ angular.module('viaggia', [
       //        }, function (err) {
       //            $rootScope.GPSAllow = false;
       //        });
+      // if (localizationAlwaysAllowed().then(function (loc) {
+      //   if (!loc) {
+      //     showWarningPopUp();
+
+      //   }
+      // })) 
       if (typeof navigator.globalization !== "undefined") {
         navigator.globalization.getPreferredLanguage(function (language) {
           $translate.use((language.value).split("-")[0]).then(function (data) {
@@ -202,10 +245,66 @@ angular.module('viaggia', [
           console.log('geolocation reset');
         }
       });
+    //   var localizationAlwaysAllowed = function () {
+    //     var deferred = $q.defer();
+    //     cordova.plugins.diagnostic.getLocationAuthorizationStatus(function (status) {
+    //         switch (status) {
+    //             case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
+    //                 console.log("Permission not requested");
+    //                 deferred.resolve(true);
+    //                 break;
+    //             case cordova.plugins.diagnostic.permissionStatus.DENIED:
+    //                 console.log("Permission denied");
+    //                 deferred.resolve(false);
 
+    //                 break;
+    //             case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+    //                 console.log("Permission granted always");
+    //                 deferred.resolve(true);
+
+    //                 break;
+    //             case cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
+    //                 console.log("Permission granted only when in use");
+    //                 deferred.resolve(false);
+
+    //                 break;
+    //             case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
+    //                 console.log("Permission permanently denied");
+    //                 deferred.resolve(false);
+
+    //                 break;
+    //         }
+    //     }, function (error) {
+    //         console.error("The following error occurred: " + error);
+    //         deferred.reject();
+
+    //     });
+    //     return deferred.promise;
+    // }
+
+    // var showWarningPopUp = function () {
+    //     //show popup and
+    //     $ionicPopup.show({
+    //         title: $filter('translate')("pop_up_always_GPS"),
+    //         template: $filter('translate')("pop_up_always_GPS_template"),
+    //         buttons: [
+    //             {
+    //                 text: $filter('translate')("pop_up_always_GPS_go_on"),
+    //                 type: 'button-custom',
+    //                 onTap: function () {
+    //                      cordova.plugins.diagnostic.switchToLocationSettings();
+    //                 }
+    //             }
+    //         ]
+    //     });
+       
+    // }
       $ionicPlatform.on('resume', function () {
         console.log('+++ RESUME +++');
-
+        // localizationAlwaysAllowed().then(function (loc){
+        //   if (!loc) {
+        //       showWarningPopUp();
+        //   }})
         geolocate().then(function () {
           if (trackService.trackingIsGoingOn() && trackService.trackingIsFinished()) {
             trackService.stop();
@@ -1125,8 +1224,12 @@ angular.module('viaggia', [
       label_points: "Green Leaves guadagnate: ",
       pop_up_bt_title: "Bluetooth disabilitato",
       pop_up_bt: "Per garantire una validazione corretta dei viaggi in autobus/treno è richiesta l’attivazione del Bluetooth sul dispositivo.",
-      pop_up_bt_button_enable: "Attivare"
-      
+      pop_up_bt_button_enable: "Attivare",
+      registration_wrong_chars: "Nickname non valido. Sono consentiti solo lettere e numeri",
+      pop_up_always_GPS:"Attenzione",
+      pop_up_always_GPS_template:"Per utilizzare l'applicazione è necessario consentire sempre l'accesso alla posizione",
+      pop_up_always_GPS_go_on:"Impostazioni"
+
     });
 
     $translateProvider.translations('en', {
@@ -1553,7 +1656,7 @@ angular.module('viaggia', [
       label_event_trip_detail_distance_car: 'Car distance: ',
       not_acc_label: 'This line is not accessible',
       btn_faq: 'FAQ',
-       error_trip_no_data: "Trip validation is not possible: no data has been tracked for this trip",
+      error_trip_no_data: "Trip validation is not possible: no data has been tracked for this trip",
       error_trip_out_of_area: "The trip is not valid since it is outside Trento and Rovereto municipalities",
       error_trip_too_short: "The trip is not valid since it is shorter than 250 meters",
       error_trip_free_tracking_no: "The trip is not valid: tracked mode does not correspond to declared transport mode",
@@ -1562,7 +1665,11 @@ angular.module('viaggia', [
       label_points: "Earned Green Leaves: ",
       pop_up_bt_title: "Bluetooth disabled",
       pop_up_bt: "To ensure a proper validation of bus and train trips we recommend activating Bluetooth on the device.",
-      pop_up_bt_button_enable: "Activate"
+      pop_up_bt_button_enable: "Activate",
+      registration_wrong_chars: "Nickname not valid. Only letters or numbers are allowed" ,
+          pop_up_always_GPS:"Warning",
+      pop_up_always_GPS_template:"In order to use the application you have to set the localization always on",
+      pop_up_always_GPS_go_on:"Setting"
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

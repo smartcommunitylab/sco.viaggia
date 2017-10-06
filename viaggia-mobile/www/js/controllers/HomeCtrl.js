@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.home', [])
 
-    .controller('HomeCtrl', function ($scope, $state, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv, DiaryDbSrv, BT) {
+    .controller('HomeCtrl', function ($scope, $state,$q, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv, DiaryDbSrv, BT) {
         //load from localstorage the id notifications read
         $ionicPlatform.ready(function () {
             document.addEventListener("resume", function () {
@@ -176,8 +176,73 @@ angular.module('viaggia.controllers.home', [])
                 trackService.geolocationPopup();
             }).finally(Config.loaded());
         }
+
+        var localizationAlwaysAllowed = function () {
+            var deferred = $q.defer();
+            cordova.plugins.diagnostic.getLocationAuthorizationStatus(function (status) {
+                switch (status) {
+                    case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
+                        console.log("Permission not requested");
+                        deferred.resolve(true);
+                        break;
+                    case cordova.plugins.diagnostic.permissionStatus.DENIED:
+                        console.log("Permission denied");
+                        deferred.resolve(false);
+
+                        break;
+                    case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+                        console.log("Permission granted always");
+                        deferred.resolve(true);
+
+                        break;
+                    case cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
+                        console.log("Permission granted only when in use");
+                        deferred.resolve(false);
+
+                        break;
+                    case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
+                        console.log("Permission permanently denied");
+                        deferred.resolve(false);
+
+                        break;
+                }
+            }, function (error) {
+                console.error("The following error occurred: " + error);
+                deferred.reject();
+
+            });
+            return deferred.promise;
+        }
+
+        var showWarningPopUp = function () {
+            //show popup and
+            $ionicPopup.confirm({
+                title: $filter('translate')("pop_up_always_GPS"),
+                template: $filter('translate')("pop_up_always_GPS_template"),
+                buttons: [
+                    {
+                        text: $filter('translate')("btn_close"),
+                        type: 'button-cancel'
+                    },
+                    {
+                        text: $filter('translate')("pop_up_always_GPS_go_on"),
+                        type: 'button-custom',
+                        onTap: function () {
+                             cordova.plugins.diagnostic.switchToLocationSettings();
+                        }
+                    }
+                ]
+            });
+           
+        }
+
         $scope.startTracking = function (transportType) {
             if (!$rootScope.syncRunning) {
+                localizationAlwaysAllowed().then(function (loc){
+                    if (!loc) {
+                        showWarningPopUp();
+                    } else {
+                
                 Config.loading();
                 if (!trackService.trackingIsGoingOn() || trackService.trackingIsFinished()) {
                     trackService.checkLocalization().then(function () {
@@ -220,6 +285,8 @@ angular.module('viaggia.controllers.home', [])
                 } else {
                     Config.loaded();
                 }
+                }
+            })
             }
         }
         $scope.stopTracking = function () {
