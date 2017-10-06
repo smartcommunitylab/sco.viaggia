@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.common', [])
 
-	.controller('AppCtrl', function ($scope, $state, $rootScope, $ionicHistory, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, Utils, tutorial) {
+	.controller('AppCtrl', function ($scope, $q,$state, $rootScope, $ionicHistory, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, Utils, tutorial) {
 		/* menu group */
 		$scope.shownGroup = false;
 		$scope.toggleGroupRealTime = function () {
@@ -138,6 +138,64 @@ angular.module('viaggia.controllers.common', [])
 			$state.go('app.plan');
 		};
 		*/
+		 $scope.localizationAlwaysAllowed = function () {
+            var deferred = $q.defer();
+            cordova.plugins.diagnostic.getLocationAuthorizationStatus(function (status) {
+                switch (status) {
+                    case cordova.plugins.diagnostic.permissionStatus.NOT_REQUESTED:
+                        console.log("Permission not requested");
+                        deferred.resolve(true);
+                        break;
+                    case cordova.plugins.diagnostic.permissionStatus.DENIED:
+                        console.log("Permission denied");
+                        deferred.resolve(false);
+
+                        break;
+                    case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+                        console.log("Permission granted always");
+                        deferred.resolve(true);
+
+                        break;
+                    case cordova.plugins.diagnostic.permissionStatus.GRANTED_WHEN_IN_USE:
+                        console.log("Permission granted only when in use");
+                        deferred.resolve(false);
+
+                        break;
+                    case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
+                        console.log("Permission permanently denied");
+                        deferred.resolve(false);
+
+                        break;
+                }
+            }, function (error) {
+                console.error("The following error occurred: " + error);
+                deferred.reject();
+
+            });
+            return deferred.promise;
+        }
+
+        $scope.showWarningPopUp = function () {
+            //show popup and
+            $ionicPopup.confirm({
+                title: $filter('translate')("pop_up_always_GPS"),
+                template: $filter('translate')("pop_up_always_GPS_template"),
+                buttons: [
+                    {
+                        text: $filter('translate')("btn_close"),
+                        type: 'button-cancel'
+                    },
+                    {
+                        text: $filter('translate')("pop_up_always_GPS_go_on"),
+                        type: 'button-custom',
+                        onTap: function () {
+                             cordova.plugins.diagnostic.switchToLocationSettings();
+                        }
+                    }
+                ]
+            });
+           
+        }
 
 		$scope.popupLoadingShow = function () {
 			$ionicLoading.show({

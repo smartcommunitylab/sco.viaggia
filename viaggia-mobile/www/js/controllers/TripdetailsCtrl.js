@@ -354,7 +354,7 @@ angular.module('viaggia.controllers.tripdetails', [])
             //delete $scope.placesandcoordinates[favorite.name];
         }
         $scope.initMap = function () {
-            mapService.initMap('modalMapDetail',true).then(function () {
+            mapService.initMap('modalMapDetail', true).then(function () {
                 //add polyline
             })
         }
@@ -531,7 +531,13 @@ angular.module('viaggia.controllers.tripdetails', [])
                 } else if (inTime != 0) {
                     $scope.showConfirm($filter('translate')("popup_start_trip_message"), $filter('translate')("popup_start_trip_title"), $scope.trackStart);
                 } else {
-                    $scope.trackStart();
+                    $scope.localizationAlwaysAllowed().then(function (loc) {
+                        if (!loc) {
+                            $scope.showWarningPopUp();
+                        } else {
+                            $scope.trackStart();
+                        }
+                    })
                 }
             }
         }
