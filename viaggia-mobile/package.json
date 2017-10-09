@@ -1,73 +1,83 @@
 {
-  "name": "viaggia-mobile",
-  "version": "1.0.0",
-  "description": "viaggia-mobile: An Ionic project",
-  "dependencies": {
-    "cordova-custom-config": "^3.2.0",
-    "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.1",
-    "gulp-minify-css": "^0.3.13",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^1.3.3",
-    "node-sass": "^4.5.3"
-  },
-  "devDependencies": {
-    "bower": "^1.3.3",
-    "gulp-util": "^2.2.14",
-    "shelljs": "^0.3.0"
-  },
-  "cordovaPlugins": [
-    "cordova-plugin-console@1.0.3",
-    "cordova-plugin-device@1.1.2",
-    "cordova-plugin-statusbar@2.1.3",
-    "cordova-plugin-splashscreen@3.2.2",
-    "cordova-plugin-inappbrowser@1.4.0",
-    "cordova-plugin-geolocation@2.2.0",
-    "cordova-plugin-globalization@1.0.3",
-    "ionic-plugin-keyboard@2.2.1",
-    "cordova-plugin-x-toast@2.5.2",
-    "cordova-plugin-file@4.2.0",
-    "cordova-plugin-network-information@1.2.1",
-    "cordova-sqlite-storage@1.4.5",
-    "https://github.com/samikrc/CordovaSQLite.git",
-    "cordova-plugin-whitelist@1.2.2",
-    "cordova-plugin-screen-orientation@1.4.2",
-     {
-       "variables": {
-         "SENDER_ID": "414560938900"
-       },
-       "locator": "phonegap-plugin-push@1.10.5",
-       "id": "phonegap-plugin-push"
-     },
-    "de.appplant.cordova.plugin.local-notification@0.8.4",
-    "cordova-plugin-device-orientation@1.0.7",
-    "cordova-plugin-request-location-accuracy@2.2.1",
-    "cordova-custom-config@3.2.0",
-    "cordova plugin add cordova-android-play-services-gradle-release",
-    "cordova-plugin-app-version@0.1.9",
-    {
-      "variables": {
-        "REVERSED_CLIENT_ID": "com.googleusercontent.apps.453601816446-r4itlqv8qpkqfq5q4jgketdu6f58hqbl"
-      },
-      "locator": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus",
-       "id": "cordova-plugin-googleplus"
+    "name": "viaggia-mobile",
+    "version": "1.0.0",
+    "description": "viaggia-mobile: An Ionic project",
+    "dependencies": {
+        "cordova-android": "^6.3.0",
+        "cordova-custom-config": "^3.2.0",
+        "cordova-ios": "^4.4.0",
+        "cordova-plugin-whitelist": "1",
+        "gulp": "^3.9.1",
+        "gulp-concat": "^2.6.1",
+        "gulp-minify-css": "^0.3.13",
+        "gulp-rename": "^1.2.2",
+        "gulp-sass": "^1.3.3",
+        "node-sass": "^4.5.3"
     },
-    {
-      "variables": {
-        "APP_ID": "1771254186520727",
-        "APP_NAME": "ViaggiaTrento PlayGo"
-      },
-      "locator": "cordova-plugin-facebook4@1.7.4",
-      "id": "cordova-plugin-facebook4"
-    }  ,
+    "devDependencies": {
+        "bower": "^1.3.3",
+        "gulp-util": "^2.2.14",
+        "shelljs": "^0.3.0"
+    },
+    "cordovaPlugins": [
+        "cordova-plugin-console@1.0.3",
+        "cordova-plugin-device@1.1.2",
+        "cordova-plugin-statusbar@2.1.3",
+        "cordova-plugin-splashscreen@3.2.2",
+        "cordova-plugin-inappbrowser@1.4.0",
+        "cordova-plugin-geolocation@2.2.0",
+        "cordova-plugin-globalization@1.0.3",
+        "ionic-plugin-keyboard@2.2.1",
+        "cordova-plugin-x-toast@2.5.2",
+        "cordova-plugin-file@4.2.0",
+        "cordova-plugin-network-information@1.2.1",
+        "cordova-sqlite-storage@1.4.5",
+        "https://github.com/samikrc/CordovaSQLite.git",
+        "cordova-plugin-whitelist@1.2.2",
+        "cordova-plugin-screen-orientation@1.4.2",
+        {
+            "variables": {
+                "SENDER_ID": "414560938900"
+            },
+            "locator": "phonegap-plugin-push@1.10.5",
+            "id": "phonegap-plugin-push"
+        },
+        "de.appplant.cordova.plugin.local-notification@0.8.4",
+        "cordova-plugin-device-orientation@1.0.7",
+        "cordova-plugin-request-location-accuracy@2.2.1",
+        "cordova-custom-config@3.2.0",
+        "cordova plugin add cordova-android-play-services-gradle-release",
+        "cordova-plugin-app-version@0.1.9",
+        {
+            "variables": {
+                "REVERSED_CLIENT_ID": "com.googleusercontent.apps.453601816446-r4itlqv8qpkqfq5q4jgketdu6f58hqbl"
+            },
+            "locator": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus",
+            "id": "cordova-plugin-googleplus"
+        },
+        {
+            "variables": {
+                "APP_ID": "1771254186520727",
+                "APP_NAME": "ViaggiaTrento PlayGo"
+            },
+            "locator": "cordova-plugin-facebook4@1.7.4",
+            "id": "cordova-plugin-facebook4"
+        },
         "https://github.com/transistorsoft/cordova-background-geolocation.git#1.7.0"
-
-  ],
-  "cordovaPlatforms": [
-    {
-      "platform": "android",
-      "version": "6.1.2",
-      "locator": "android@6.1.2"
+    ],
+    "cordovaPlatforms": [
+        {
+            "platform": "android",
+            "version": "6.1.2",
+            "locator": "android@6.1.2"
+        }
+    ],
+    "cordova": {
+        "plugins": {
+            "cordova-plugin-whitelist": {}
+        },
+        "platforms": [
+            "ios"
+        ]
     }
-  ]
 }
