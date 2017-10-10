@@ -1183,8 +1183,8 @@ angular.module('viaggia', [
       pop_up_bt_button_enable: "Attivare",
       registration_wrong_chars: "Nickname non valido. Sono consentiti solo lettere e numeri",
       pop_up_always_GPS:"Attenzione",
-      pop_up_always_GPS_template:"Per utilizzare l'applicazione è necessario consentire sempre l'accesso alla posizione",
-      pop_up_always_GPS_go_on:"Impostazioni"
+      pop_up_always_GPS_template:"Per utilizzare l'applicazione è necessario impostare 'Consenti di accedere alla posizione' su 'Sempre'",
+      pop_up_always_GPS_go_on:"Imposta"
 
     });
 
@@ -1624,7 +1624,7 @@ angular.module('viaggia', [
       pop_up_bt_button_enable: "Activate",
       registration_wrong_chars: "Nickname not valid. Only letters or numbers are allowed" ,
           pop_up_always_GPS:"Warning",
-      pop_up_always_GPS_template:"In order to use the application you have to set the localization always on",
+      pop_up_always_GPS_template:"In order to use the application you have to set 'Allow Location Access' to 'Always'",
       pop_up_always_GPS_go_on:"Setting"
     });
 

@@ -515,6 +515,15 @@ angular.module('viaggia.controllers.tripdetails', [])
         //        }
         //        return false;
         //    }
+        var warnOrTrack = function () {
+            $scope.localizationAlwaysAllowed().then(function (loc) {
+                if (!loc) {
+                    $scope.showWarningPopUp();
+                } else {
+                    $scope.trackStart();
+                }
+            })
+        }
         $scope.startOrShowPopupIfNotThisJourney = function () {
             if (!$rootScope.syncRunning) {
 
@@ -529,15 +538,11 @@ angular.module('viaggia.controllers.tripdetails', [])
                         //                Toast.show($filter('translate')('toast_after_time'), "short", "bottom");
                     }
                 } else if (inTime != 0) {
-                    $scope.showConfirm($filter('translate')("popup_start_trip_message"), $filter('translate')("popup_start_trip_title"), $scope.trackStart);
+                    $scope.showConfirm($filter('translate')("popup_start_trip_message"), $filter('translate')("popup_start_trip_title"), function(){
+                        warnOrTrack();
+                    });
                 } else {
-                    $scope.localizationAlwaysAllowed().then(function (loc) {
-                        if (!loc) {
-                            $scope.showWarningPopUp();
-                        } else {
-                            $scope.trackStart();
-                        }
-                    })
+                    warnOrTrack();
                 }
             }
         }
