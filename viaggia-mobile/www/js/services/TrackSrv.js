@@ -311,7 +311,7 @@ angular.module('viaggia.services.tracking', [])
                             trackService.start(tripId, {
                                 data: trip
                             }
-                                , callback,startTimestamp)
+                                , callback, startTimestamp)
                                 .then(function () {
                                     deferred.resolve();
                                 }, function (errorCode) {
@@ -330,7 +330,7 @@ angular.module('viaggia.services.tracking', [])
                         deferred.reject(errorCode);
                     }
                     )
-                },function (err) {
+                }, function (err) {
 
                     deferred.reject(err);
 
@@ -566,6 +566,15 @@ angular.module('viaggia.services.tracking', [])
                 trackService.stop();
                 if (callback) callback();
             }, duration);
+            window.BackgroundGeolocation.onHeartbeat(function (params) {
+                console.log('- hearbeat');
+                // You can manually insert a location if you wish.
+                bgGeo.insertLocation(location, function () {
+                    console.log('- inserted location during heartbeat');
+                });
+            }, function (response) {
+
+            })
 
             bgGeo.start(function () {
                 bgGeo.changePace(true);
@@ -582,7 +591,9 @@ angular.module('viaggia.services.tracking', [])
                 }
 
             });
-            // });
+
+
+
             return deferred.promise;
         };
 
