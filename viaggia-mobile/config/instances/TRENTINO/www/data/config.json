@@ -170,9 +170,18 @@
         "distanceFilter": 20,
         "stationaryRadius": 20,
         "activityType": "Other",
+<<<<<<< HEAD
         "disableElasticity": false,
         "stopDetectionDelay": 0,
         "stopTimeout": 0,
+=======
+        "disableElasticity": true,
+        "deferTime":2000,
+        "useSignificantChangesOnly":false,
+        "stopDetectionDelay": 7200000,
+        "disableStopDetection":true,
+        "stopTimeout": 15,
+>>>>>>> 180e8bcce93bbdccaf58ef0605349cca9479b5ac
         "activityRecognitionInterval": 10000,
         "pausesLocationUpdatesAutomatically": false,
         "preventSuspend": true,
@@ -180,7 +189,7 @@
         "locationTimeout": 60,
         "stopOnTerminate": false,
         "debug": false,
-        "locationUpdateInterval": 5000,
+         "locationUpdateInterval": 1000,
         "minimumActivityRecognitionConfidence": 80,
         "fastestLocationUpdateInterval": 1000,
         "forceReloadOnLocationChange": false,
