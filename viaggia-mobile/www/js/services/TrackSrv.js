@@ -566,11 +566,18 @@ angular.module('viaggia.services.tracking', [])
                 trackService.stop();
                 if (callback) callback();
             }, duration);
-            window.BackgroundGeolocation.onHeartbeat(function (params) {
+            bgGeo.onHeartbeat(function (params) {
                 console.log('- hearbeat');
                 // You can manually insert a location if you wish.
+                var location = params.location;
+                bgGeo.getCurrentPosition(function (location, taskId) {
+                    console.log('- current location: ', location);
+                    bgGeo.finish(taskId);
+                });
                 bgGeo.insertLocation(location, function () {
                     console.log('- inserted location during heartbeat');
+                }, function (err) {
+                    console.log(err);
                 });
             }, function (response) {
 
