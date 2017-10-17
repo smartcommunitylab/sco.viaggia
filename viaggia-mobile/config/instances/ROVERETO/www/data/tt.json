@@ -558,8 +558,21 @@
                                     "label": "4",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                        ]
+                        },
+                        {
+                            "label": "5",
+                            "color": "#E8C01C",
+                            "routes": [
+                                {
+                                    "routeId": "05A_Rov",
+                                    "routeSymId": "05R",
+                                    "title": "Mori-Villa Lagarina-Pomarolo-Nomi",
+                                    "label": "5",
+                                    "wheelChairBoarding": 1
+                                }
+                            ]
+                        },
                         {
                             "label": "6",
                             "color": "#6EB046",
