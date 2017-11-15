@@ -241,6 +241,7 @@ angular.module('viaggia.controllers.game', [])
         $scope.filter.options = ['Daily', 'Weekly', 'Monthly', 'Total'];
         $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
         $scope.filter.filter = function (selection) {
+            $scope.previousStat = null;
             $scope.calculateMaxStats()
             $scope.serverhow = GameSrv.getServerHow($scope.filter.selected);
             $scope.maybeMore = true;
@@ -252,13 +253,14 @@ angular.module('viaggia.controllers.game', [])
         }
 
         $scope.getTitle = function (day) {
+            dateFrom = new Date(day.from)
+            dateTo = new Date(day.to)
             if ($scope.filter.selected == $scope.filter.options[0]) {
-                dateFrom = new Date(day.from);
+                // dateFrom = new Date(day.from);
                 return dateFrom.toLocaleString(window.navigator.language, { weekday: 'long' }) + ' ' + $filter('date')(dateFrom, 'dd/MM');
             }
             if ($scope.filter.selected == $scope.filter.options[1]) {
-                dateFrom = new Date(day.from)
-                dateTo = new Date(day.to)
+
 
                 return $filter('date')(dateFrom, 'dd/MM/yyyy') + ' - ' + $filter('date')(dateTo, 'dd/MM/yyyy');
             }
@@ -286,12 +288,14 @@ angular.module('viaggia.controllers.game', [])
         };
         $scope.calculateMaxStats = function () {
             $scope.maxStat = GameSrv.getMaxStat($scope.filter.selected);
+            if ($scope.maxStat){
             $scope.maximum = 0;
             Object.keys($scope.maxStat).map(function (objectKey, index) {
                 if (objectKey.startsWith("max ") && $scope.maxStat[objectKey] > $scope.maximum) {
                     $scope.maximum = $scope.maxStat[objectKey];
                 }
             });
+            }
         }
 
         $scope.getStyle = function (stat, veichle) {
@@ -379,14 +383,15 @@ angular.module('viaggia.controllers.game', [])
         };
         $scope.valbefore = 0
         $scope.findbefore = function () {
+            //windows of data
             if ($scope.filter.selected == "Daily") {
-                $scope.valbefore = 604800000
+                $scope.valbefore = 604800000 //one week
             }
             if ($scope.filter.selected == "Weekly") {
-                $scope.valbefore = 2592000000
+                $scope.valbefore = 2592000000 //one month
             }
             if ($scope.filter.selected == "Monthly") {
-                $scope.valbefore = 31104000000
+                $scope.valbefore = 31104000000 //one year
             }
             if ($scope.filter.selected == "Total") {
                 $scope.valbefore = new Date().getTime()
@@ -747,10 +752,9 @@ angular.module('viaggia.controllers.game', [])
                 }
 
                 //add real path
-                if (trip.geolocationPolyline)
-                { 
+                if (trip.geolocationPolyline) {
                     currentlyLine = mapService.decodePolyline(trip.geolocationPolyline);
-                 }
+                }
                 $scope.paths["p" + $scope.paths.length] = {
                     color: '#2975a7',
                     weight: 8,
