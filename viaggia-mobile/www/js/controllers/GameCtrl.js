@@ -288,13 +288,13 @@ angular.module('viaggia.controllers.game', [])
         };
         $scope.calculateMaxStats = function () {
             $scope.maxStat = GameSrv.getMaxStat($scope.filter.selected);
-            if ($scope.maxStat){
-            $scope.maximum = 0;
-            Object.keys($scope.maxStat).map(function (objectKey, index) {
-                if (objectKey.startsWith("max ") && $scope.maxStat[objectKey] > $scope.maximum) {
-                    $scope.maximum = $scope.maxStat[objectKey];
-                }
-            });
+            if ($scope.maxStat) {
+                $scope.maximum = 0;
+                Object.keys($scope.maxStat).map(function (objectKey, index) {
+                    if (objectKey.startsWith("max ") && $scope.maxStat[objectKey] > $scope.maximum) {
+                        $scope.maximum = $scope.maxStat[objectKey];
+                    }
+                });
             }
         }
 
@@ -335,14 +335,49 @@ angular.module('viaggia.controllers.game', [])
                 Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
             })
 
+
+        var getTimeForStat = function (type) {
+            var temporanea = ($scope.stats != null && $scope.previousStat != null) ? $scope.previousStat : new Date().getTime()
+            var x = temporanea - $scope.valbefore;
+            var from = new Date(x).setHours(0, 0, 0, 0);
+            var to = ($scope.stats != null && $scope.previousStat != null) ? $scope.previousStat : new Date().getTime();
+            to = new Date(to).setHours(23, 59, 59, 999);
+            //force day from sat to friday if week
+            if ($scope.filter.selected == 'Weekly') {
+                var fromMoment = new moment(from);
+                var toMoment = new moment(to);
+                const dayINeedFrom = 6; // for Saturday                    
+                const dayINeedTo = 5; // for Saturday                    
+                if (fromMoment.isoWeekday() <= dayINeedFrom) {
+                    from = fromMoment.isoWeekday(dayINeedFrom);
+                } else {
+                    from = fromMoment.add(1, 'weeks').isoWeekday(dayINeedFrom);
+                }
+                if (toMoment.isoWeekday() <= dayINeedTo) {
+                    to = toMoment.isoWeekday(dayINeedTo);
+                } else {
+                    to = toMoment.add(1, 'weeks').isoWeekday(dayINeedTo);
+                }
+                from = from.valueOf();
+                to = to.valueOf();
+            }
+            else if ($scope.filter.selected == 'Monthly') {
+                var fromMoment = new moment(from).startOf('month');
+                var toMoment = new moment(to).endOf('month');
+                from = fromMoment.valueOf();
+                to = toMoment.valueOf();
+
+            }
+            if (type == 'from')
+                return from;
+            return to
+        }
         $scope.loadMore = function () {
             if (!getStatistics) {
                 getStatistics = true;
                 $scope.findbefore()
-                var temporanea = ($scope.stats != null && $scope.previousStat != null) ? $scope.previousStat : new Date().getTime()
-                var x = temporanea - $scope.valbefore;
-                var from = x;
-                var to = ($scope.stats != null && $scope.previousStat != null) ? $scope.previousStat : new Date().getTime();
+                from = getTimeForStat('from');
+                to = getTimeForStat('to');
                 GameSrv.getStatistics($scope.serverhow, from, to).then(
                     function (statistics) {
                         $scope.stats = $scope.stats.concat(statistics.stats);
@@ -448,8 +483,7 @@ angular.module('viaggia.controllers.game', [])
 
         $scope.groupDays = function (notifications) {
             if (notifications[0]) {
-                if (!$scope.days)
-                { $scope.days = [] }
+                if (!$scope.days) { $scope.days = [] }
                 $scope.days.push({ name: notifications[0].timestamp, messages: [notifications[0]] })
                 for (var j = 1; j < notifications.length; j++) {
                     var time1 = notifications[j].timestamp
@@ -523,8 +557,7 @@ angular.module('viaggia.controllers.game', [])
             }
         };
         $scope.noDiary = function () {
-            if (!$scope.days)
-            { return false }
+            if (!$scope.days) { return false }
             else if ($scope.days.length == 0) {
                 return true
             }
@@ -694,8 +727,7 @@ angular.module('viaggia.controllers.game', [])
             $scope.errorMotivation = GameSrv.getError($scope.trip);
         }
         function isOnlyByCar(modes) {
-            if (modes.length == 1 && modes[0] == 'car')
-            { return true }
+            if (modes.length == 1 && modes[0] == 'car') { return true }
             return false
         }
         $scope.isErrorMessagePresent = function () {
