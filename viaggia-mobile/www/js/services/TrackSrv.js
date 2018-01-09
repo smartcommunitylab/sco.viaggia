@@ -568,7 +568,7 @@ angular.module('viaggia.services.tracking', [])
             }, duration);
             bgGeo.onHeartbeat(function (params) {
                 console.log('- hearbeat');
-                // You can manually insert a location if you wish.
+                //Manually insert a location.
                 var location = params.location;
                 bgGeo.getCurrentPosition(function (location, taskId) {
                     console.log('- current location: ', location);
@@ -596,11 +596,7 @@ angular.module('viaggia.services.tracking', [])
                 } else {
                     deferred.resolve();
                 }
-
             });
-
-
-
             return deferred.promise;
         };
 
