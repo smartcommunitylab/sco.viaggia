@@ -8,19 +8,46 @@
 .popup-buttons .button,
 .trip-card .item-options
 {
-  background-color: #3bbacf !important;
+  background-color: #a9a836 !important;
 }
  
 .item-radio input:checked ~ .item-content {
-  background: #3bbacf !important;
+  background: #a9a836 !important;
 }
 
 .plan-viaggia-fromto,
 .taxi-number
 {
-  color: #3bbacf !important;
+  color: #a9a836 !important;
 }
 .button-viaggia-notselected, .button-viaggia-notselected:hover {
-  background-color: rgba(60, 186, 207, 0.5);
+  background-color: rgba(169, 168, 54, 0.5);
+}
+.header-banner {
+  width:100%;
+}
+.credits_image {
+      display: block;
+    max-width: 60px;
+    max-height: 190px;
+    width: auto;
+    height: auto;
+}
+.guest-card-row {
+      /*display: inline-flex;*/
+
+}
+.guest_card_image {
+        /*display: block;*/
+    max-width: 36px;
+    max-height: 42px;
+    width: auto;
+    height: auto;
+    display: inline-flex;
+    margin-right: 16px;
+    margin-top: 4px;
 }
 
+.button-guest-card {
+  width: 100%;
+}

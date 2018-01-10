@@ -1,16 +1,30 @@
-<ion-view title="{{'menu_taxi'|translate}}">
+<ion-view title="{{'menu_ncc'|translate}}">
     <ion-nav-buttons side="right">
         <button class="button button-icon button-fab button-viaggia-header ion-map" ng-click="showMap()"></button>
     </ion-nav-buttons>
     <ion-content has-header="true" padding="true">
         <ion-refresher on-refresh="load()">
         </ion-refresher>
+        <!--        <div ng-init="locateMe()" ng-if="showStreetName">-->
         <div>
             <div class="user-position" ng-if="showStreetName">
 
+                <!--
+<div class="user-position-warning">
+    Attenzione! L'indirizzo mostrato potrebe non essere corretto.
+</div>
+-->
                 <div class="user-position-your-position"> {{'taxi_label_your_position'|translate}}</div>
                 <div class="user-position-your-position"> <b>{{userPosition.name}}</b></div>
-                <div class="user-position-your-position"> {{'taxi_label_check_it'|translate}}</div>
+                <div class="user-position-your-position"> {{'NCC_label_check_it'|translate}}</div>
+                <div class="user-position-your-position"> {{'taxi_label_price'|translate}}</div>
+
+<!--
+<<<<<<< HEAD </div>
+    <div class="user-position" ng-if="!showStreetName">
+        <div class="user-position-your-position"> {{'taxi_label_no_accuracy'|translate}}</div>
+        ======= >>>>>>> 13-6-2016_accessibility
+-->
             </div>
             <div class="user-position" ng-if="!showStreetName">
 

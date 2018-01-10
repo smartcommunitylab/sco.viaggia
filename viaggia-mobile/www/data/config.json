@@ -1,14 +1,15 @@
 {
-    "apptoken": "viaggiarovereto",
-    "appid": "rovereto",
-    "messagingAppId": "mobility.rovereto",
+    "appid": "alpecimbra",
+    "messagingAppId": "mobility.alpecimbra",
     "senderID": "453601816446",
-    "appversion": "2.1.6",
-    "appname": "Viaggia Rovereto",
-    "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
-    "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
-    "newsRSS": "https://tn.smartcommunitylab.it/core.mobility/announcements/rss/rovereto",
-    "contact_link" : "mailto:viaggiatrento@smartcommunitylab.it?subject=ViaggiaRovereto:%20segnalazione%20problema",
+    "appversion": "1.0.1",
+    "appname": "Viaggia Alpe Cimbra",
+    "serverURL": "https://dev.smartcommunitylab.it/core.mobility",
+    "messagingServerURL": "https://dev.smartcommunitylab.it/core.communicator",
+    "newsRSS": "https://dev.smartcommunitylab.it/core.mobility/announcements/rss/alpecimbra",
+    "POIURL": "https://dev.smartcommunitylab.it/webdata/poi_alpecimbra.json",
+    "QuestURL": null,
+    "contact_link" : "mailto:viaggiaalpecimbra@smartcommunitylab.it?subject=ViaggiaAlpeCimbra:%20segnalazione%20problema",
     "smartcheck_options": [
         1,
         4,
@@ -21,19 +22,17 @@
             "TRANSIT"
         ]
     },
-    "accessibility": true,
+    "taxi_id": "TAXI_ALPECIMBRA",
+    "taxi_accuracy": 65,
     "plan_policy": "Rovereto",
-    "agencies": [5, 6, 10, 16, 17],
+    "agencies": [5, 6, 7, 8, 9, 10, 17],
     "extraurban_agencies": [17],
     "broadcast_notifications_options": [
         1,
         4
     ],
-    "center_map": [
-      45.890919,
-      11.040184
-   ],
-    "zoom_map": 15,
+    "center_map": [45.928159, 11.219151],
+    "zoom_map": 12,
     "db_version": 25,
     "visualization": {
         "primaryLinks": [
@@ -44,10 +43,10 @@
                 "color": "#3BBACF"
             },
             {
-                "state": "/app/ttlist/urbano",
-                "label": "menu_real_time_bus_urban",
-                "icon": "ic_urban-bus",
-                "color": "#EB8919"
+                "state": "/app/ttlist/extraurbano",
+                "label": "menu_real_time_bus_extraurban",
+                "icon": "ic_extraurban-bus",
+                "color": "#00588e"
             },
             {
                 "state": "/app/ttlist/trains",
@@ -56,33 +55,39 @@
                 "color": "#cd251c"
             },
             {
-                "state": "/app/ttlist/extraurbano",
-                "label": "menu_real_time_bus_suburban",
-                "icon": "ic_extraurban-bus",
-                "color": "#00588e"
+                "state": "/app/ttlist/local",
+                "label": "menu_real_time_transport_local",
+                "icon": "ic_urban-bus",
+                "color": "#EB8919"
             },
             {
-                "state": "/app/parking/COMUNE_DI_ROVERETO",
+                "state": "/app/pois",
+                "label": "menu_pois",
+                "icon": "ion-ios-location",
+                "color": "#a9a836"
+            }, 
+            {
+                "state": "/app/parking/ALPECIMBRA",
                 "label": "menu_real_time_park",
                 "icon": "ic_parking-lot",
                 "color": "#164286"
-            },
+            }, 
             {
-                "state": "/app/bikesharing/rovereto",
-                "label": "menu_real_time_bike",
-                "icon": "ic_bike",
-                "color": "#922d66"
+                "state": "/app/taxi",
+                "label": "menu_ncc",
+                "icon": "ic_taxi",
+                "color": "#f8cf20"
             }
       ],
         "infomenu": [
             {
-                "state": "/app/ttlist/urbano",
-                "label": "menu_real_time_bus_urban",
+                "state": "/app/ttlist/local",
+                "label": "menu_real_time_transport_local",
                 "icon": "ic_urban-bus"
             },
             {
                 "state": "/app/ttlist/extraurbano",
-                "label": "menu_real_time_bus_suburban",
+                "label": "menu_real_time_bus_extraurban",
                 "icon": "ic_extraurban-bus"
             },
             {
@@ -91,12 +96,7 @@
                 "icon": "ic_train"
             },
             {
-                "state": "/app/bikesharing/rovereto",
-                "label": "menu_real_time_bike",
-                "icon": "ic_bike"
-            },
-            {
-                "state": "/app/parking/COMUNE_DI_ROVERETO",
+                "state": "/app/parking/ALPECIMBRA",
                 "label": "menu_real_time_park",
                 "icon": "ic_parking-lot"
             }
