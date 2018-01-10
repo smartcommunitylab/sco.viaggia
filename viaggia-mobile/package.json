@@ -5,6 +5,7 @@
   "dependencies": {
     "cordova": "^8.0.0",
     "cordova-android": "^6.4.0",
+    "cordova-android-play-services-gradle-release": "^1.1.4",
     "cordova-background-geolocation": "git+https://github.com/transistorsoft/cordova-background-geolocation.git#2.9.1",
     "cordova-custom-config": "^3.2.0",
     "cordova-ios": "^4.4.0",
@@ -60,6 +61,7 @@
     "cordova-plugin-file@4.2.0",
     "cordova-plugin-network-information@1.2.1",
     "cordova-sqlite-storage@1.4.5",
+    "cordova.plugins.diagnostic",
     "https://github.com/samikrc/CordovaSQLite.git",
     "cordova-plugin-whitelist@1.2.2",
     "cordova-plugin-screen-orientation@1.4.2",
@@ -74,7 +76,7 @@
     "cordova-plugin-device-orientation@1.0.7",
     "cordova-plugin-request-location-accuracy@2.2.1",
     "cordova-custom-config@3.2.0",
-    "cordova plugin add cordova-android-play-services-gradle-release",
+    "cordova-android-play-services-gradle-release",
     "cordova-plugin-app-version@0.1.9",
     {
       "variables": {
@@ -91,7 +93,13 @@
       "locator": "cordova-plugin-facebook4@1.7.4",
       "id": "cordova-plugin-facebook4"
     },
-    "https://github.com/transistorsoft/cordova-background-geolocation.git#2.9.1"
+    {
+      "variables": {
+        "LICENSE": "6af31309a1796013f00927f4c396b898ac881efac6d398a165301e06e0a6a9c7"
+      },
+      "locator": "https://github.com/transistorsoft/cordova-background-geolocation.git#2.9.1",
+      "id": "cordova-background-geolocation"
+    }
   ],
   "cordovaPlatforms": [
     {
@@ -128,9 +136,19 @@
         "APP_ID": "1771254186520727",
         "APP_NAME": "ViaggiaTrento PlayGo"
       },
-      "cordova-background-geolocation": {},
       "cordova-plugin-geolocation": {},
-      "cordova.plugins.diagnostic": {}
+      "cordova.plugins.diagnostic": {},
+      "cordova-android-play-services-gradle-release": {},
+      "cordova-background-geolocation": {
+        "LICENSE": "6af31309a1796013f00927f4c396b898ac881efac6d398a165301e06e0a6a9c7",
+        "REVERSED_CLIENT_ID": "6af31309a1796013f00927f4c396b898ac881efac6d398a165301e06e0a6a9c7",
+        "GOOGLE_API_VERSION": "11.6.0",
+        "APPCOMPAT_VERSION": "27.0.0",
+        "LOCATION_ALWAYS_AND_WHEN_IN_USE_USAGE_DESCRIPTION": "Always use is required for background location tracking",
+        "LOCATION_ALWAYS_USAGE_DESCRIPTION": "Background location-tracking is required",
+        "LOCATION_WHEN_IN_USE_USAGE_DESCRIPTION": "Background location-tracking is required",
+        "MOTION_USAGE_DESCRIPTION": "Using the accelerometer increases battery-efficiency by intelligently toggling location-tracking only when the device is detected to be moving"
+      }
     },
     "platforms": [
       "ios",
