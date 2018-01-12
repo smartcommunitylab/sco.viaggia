@@ -520,7 +520,14 @@ angular.module('viaggia.controllers.tripdetails', [])
                 if (!loc) {
                     $scope.showWarningPopUp();
                 } else {
-                    $scope.trackStart();
+                    $scope.isBatterySaveMode().then(function (saveMode) {
+                        if (saveMode) {
+                            $scope.showSaveBatteryPopUp($scope.trackStart);
+                        }
+                        else {
+                            $scope.trackStart();
+                        }
+                    })
                 }
             })
         }
@@ -538,7 +545,7 @@ angular.module('viaggia.controllers.tripdetails', [])
                         //                Toast.show($filter('translate')('toast_after_time'), "short", "bottom");
                     }
                 } else if (inTime != 0) {
-                    $scope.showConfirm($filter('translate')("popup_start_trip_message"), $filter('translate')("popup_start_trip_title"), function(){
+                    $scope.showConfirm($filter('translate')("popup_start_trip_message"), $filter('translate')("popup_start_trip_title"), function () {
                         warnOrTrack();
                     });
                 } else {

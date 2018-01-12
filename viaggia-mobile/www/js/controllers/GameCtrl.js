@@ -700,8 +700,10 @@ angular.module('viaggia.controllers.game', [])
                 boundsArray.push(bound);
             }
             for (var key in $scope.paths) {
-                var bound = L.polyline($scope.paths[key].latlngs).getBounds();
-                boundsArray.push(bound);
+                if ($scope.paths[key].latlngs) {
+                    var bound = L.polyline($scope.paths[key].latlngs).getBounds();
+                    boundsArray.push(bound);
+                }
             }
 
             if (boundsArray.length > 0) {

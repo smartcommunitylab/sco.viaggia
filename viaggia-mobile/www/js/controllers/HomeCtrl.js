@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.home', [])
 
-    .controller('HomeCtrl', function ($scope, $state,$q, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv, DiaryDbSrv, BT) {
+    .controller('HomeCtrl', function ($scope, $state, $q, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv, DiaryDbSrv, BT) {
         //load from localstorage the id notifications read
         $ionicPlatform.ready(function () {
             document.addEventListener("resume", function () {
@@ -177,59 +177,69 @@ angular.module('viaggia.controllers.home', [])
             }).finally(Config.loaded());
         }
 
-       
 
+
+        $scope.track= function (transportType) {
+            Config.loading();
+            if (!trackService.trackingIsGoingOn() || trackService.trackingIsFinished()) {
+                trackService.checkLocalization().then(function () {
+                    startTransportTrack(transportType);
+                }, function (error) {
+                    Config.loaded();
+                    if (Config.isErrorLowAccuracy(error)) {
+                        //popup "do u wanna go on?"
+                        $ionicPopup.confirm({
+                            title: $filter('translate')("pop_up_low_accuracy_title"),
+                            template: $filter('translate')("pop_up_low_accuracy_template"),
+                            buttons: [
+                                {
+                                    text: $filter('translate')("btn_close"),
+                                    type: 'button-cancel'
+                                },
+                                {
+                                    text: $filter('translate')("pop_up_low_accuracy_button_go_on"),
+                                    type: 'button-custom',
+                                    onTap: function () {
+                                        startTransportTrack(transportType);
+                                    }
+                                }
+                            ]
+                        });
+                    } else if (Config.isErrorGPSNoSignal(error)) {
+                        //popup "impossible to track" and stop
+                        var alert = $ionicPopup.alert({
+                            title: $filter('translate')("pop_up_no_geo_title"),
+                            template: $filter('translate')("pop_up_no_geo_template"),
+                            okText: $filter('translate')("btn_close"),
+                            okType: 'button-cancel'
+                        });
+                        alert.then(function (e) {
+                            trackService.startup();
+                        });
+                    }
+                });
+
+            } else {
+                Config.loaded();
+            }
+        }
         $scope.startTracking = function (transportType) {
             if (!$rootScope.syncRunning) {
-                $scope.localizationAlwaysAllowed().then(function (loc){
+                $scope.localizationAlwaysAllowed().then(function (loc) {
                     if (!loc) {
                         $scope.showWarningPopUp();
                     } else {
-                
-                Config.loading();
-                if (!trackService.trackingIsGoingOn() || trackService.trackingIsFinished()) {
-                    trackService.checkLocalization().then(function () {
-                        startTransportTrack(transportType);
-                    }, function (error) {
-                        Config.loaded();
-                        if (Config.isErrorLowAccuracy(error)) {
-                            //popup "do u wanna go on?"
-                            $ionicPopup.confirm({
-                                title: $filter('translate')("pop_up_low_accuracy_title"),
-                                template: $filter('translate')("pop_up_low_accuracy_template"),
-                                buttons: [
-                                    {
-                                        text: $filter('translate')("btn_close"),
-                                        type: 'button-cancel'
-                                    },
-                                    {
-                                        text: $filter('translate')("pop_up_low_accuracy_button_go_on"),
-                                        type: 'button-custom',
-                                        onTap: function () {
-                                            startTransportTrack(transportType);
-                                        }
-                                    }
-                                ]
-                            });
-                        } else if (Config.isErrorGPSNoSignal(error)) {
-                            //popup "impossible to track" and stop
-                            var alert = $ionicPopup.alert({
-                                title: $filter('translate')("pop_up_no_geo_title"),
-                                template: $filter('translate')("pop_up_no_geo_template"),
-                                okText: $filter('translate')("btn_close"),
-                                okType: 'button-cancel'
-                            });
-                            alert.then(function (e) {
-                                trackService.startup();
-                            });
-                        }
-                    });
-
-                } else {
-                    Config.loaded();
-                }
-                }
-            })
+                        // else {
+                        $scope.isBatterySaveMode().then(function (saveMode) {
+                            if (saveMode) {
+                                $scope.showSaveBatteryPopUp($scope.track,transportType);
+                            }
+                            else {
+                               $scope.track(transportType);
+                            }
+                        })
+                    }
+                })
             }
         }
         $scope.stopTracking = function () {
