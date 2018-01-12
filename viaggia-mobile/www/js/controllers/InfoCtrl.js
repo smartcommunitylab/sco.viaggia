@@ -334,7 +334,16 @@ angular.module('viaggia.controllers.info', [])
                         text: $filter('translate')('btn_yes'),
                         type: 'button-close',
                         onTap: function (e) {
-                            cordova.plugins.diagnostic.switchToLocationSettings();
+                            if (device.platform=="iOS"){
+                                cordova.plugins.diagnostic.switchToSettings();
+                            }
+                            else {
+                                if (device.platform=="iOS"){
+                                    cordova.plugins.diagnostic.switchToSettings();
+                                }
+                                else {
+                                cordova.plugins.diagnostic.switchToLocationSettings();
+                                }                            }
                         }
                     }
 
