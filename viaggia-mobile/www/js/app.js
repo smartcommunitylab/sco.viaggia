@@ -1186,8 +1186,7 @@ angular.module('viaggia', [
       pop_up_always_GPS_template:"Per utilizzare l'applicazione è necessario impostare 'Consenti di accedere alla posizione' su 'Sempre'",
       pop_up_always_GPS_go_on:"Imposta",
       pop_up_battery_save:"Risparmio energetico attivo",
-      pop_up_battery_save_template:"Abbiamo bisogno del segnale GPS più preciso possibile. Puoi tracciare comunque il viaggio ma l'accuratezza della tua posizione potrebbe non essere sufficiente a convalidarlo"
-
+      pop_up_battery_save_template:"La modalità \"Risparmio energetico\" potrebbe influire negativamente sulla precisione con cui viene tracciato il viaggio che potrebbe quindi risultare non valido. Per un tracciato preciso, disattivare la modalità \"Risparmio energetico\""
     });
 
     $translateProvider.translations('en', {
@@ -1628,9 +1627,9 @@ angular.module('viaggia', [
           pop_up_always_GPS:"Warning",
       pop_up_always_GPS_template:"In order to use the application you have to set 'Allow Location Access' to 'Always'",
       pop_up_always_GPS_go_on:"Setting",
-      pop_up_battery_save:"Battery Saver Active",
-      pop_up_battery_save_template:"We need the most accurate GPS tracking. You can track your journey but the low accuracy of your position could invalidate it"
-    });
+      pop_up_battery_save:"Battery Saver Mode Active",
+      pop_up_battery_save_template:"Battery Saver Mode may cause inaccurate tracking and the journey could be not valid. In order to improve tracking precision, turn off \"Battery Saver Mode\""
+       });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);
     $translateProvider.fallbackLanguage(DEFAULT_LANG);
