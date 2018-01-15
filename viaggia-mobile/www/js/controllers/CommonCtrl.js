@@ -224,8 +224,12 @@ angular.module('viaggia.controllers.common', [])
             text: $filter('translate')("pop_up_always_GPS_go_on"),
             type: 'button-custom',
             onTap: function () {
-              cordova.plugins.diagnostic.switchToLocationSettings();
+              if (device.platform=="iOS"){
+                cordova.plugins.diagnostic.switchToSettings();
             }
+            else {
+            cordova.plugins.diagnostic.switchToLocationSettings();
+            }            }
           }
         ]
       });
