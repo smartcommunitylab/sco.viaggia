@@ -319,15 +319,20 @@ angular.module('viaggia.services.tracking', [])
                                 });
                         }, function (err) {
                             //in case of temporary journey, if start doesn't arrive, stop it
-                            bgGeo.stop();
-                            clean();
-                            deferred.reject("temporary");
+                            bgGeo.stop( function(){
+                                clean()
+                                deferred.reject("temporary");
+                            });
+                           
+                            
                         })
 
                     }, function (errorCode) {
-                        bgGeo.stop();
-                        clean();
-                        deferred.reject(errorCode);
+                        bgGeo.stop(function(){
+                            clean()
+                            deferred.reject(errorCode);
+                        });
+                        
                     }
                     )
                 }, function (err) {
