@@ -167,7 +167,7 @@
     "thresholdStartTime": 1200000,
     "trackingConfigure": {
         "desiredAccuracy": 0,
-        "distanceFilter": 0,
+        "distanceFilter": 20,
         "stationaryRadius": 20,
         "activityType": "Other",
         "disableElasticity": true,
