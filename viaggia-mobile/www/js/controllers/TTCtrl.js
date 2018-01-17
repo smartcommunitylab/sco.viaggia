@@ -479,13 +479,11 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                             headStr[1] += str;
                             // table data
                         } else {
-                            if (data.times[col - 1] && data.times[col - 1][row - $scope.header_row_number]) {
                                 var str = data.times[col - 1][row - $scope.header_row_number];
                                 rowContent.push(str);
                                 if (!str) str = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
                                 dataStr += '&nbsp;&nbsp;' + str + '&nbsp;&nbsp;';
                                 if (col == data.tripIds.length) dataStr += '<br/>';
-                            }
                         }
                     }
                     rows.push(rowContent);
