@@ -525,15 +525,10 @@
                         {
                             "routeId": "LB_A",
                             "routeSymId": "LB_A",
-                            "title": "LINEA BLU - GUARDIA-SERRADA-FOLGARIA-PASSO (ANDATA)",
-                            "color": "#EB8919"
-                        },
-                        {
-                            "routeId": "LB_R",
-                            "routeSymId": "LB_R",
-                            "title": "LINEA BLU - PASSO-FOLGARIA-SERRADA-GUARDIA (RITORNO)",
+                            "title": "SKIBUS LINEA BLU - FOLGARIA-PASSO COE-FOLGARIA",
                             "color": "#EB8919"
                         }
+
                     ]
                 },
                 {
@@ -543,13 +538,13 @@
                         {
                             "routeId": "LR_A",
                             "routeSymId": "LR_A",
-                            "title": "LINEA ROSSA - SERRADA-FOLGARIA-COSTA-CARBONARE-LAVARONE (ANDATA)",
+                            "title": "SKIBUS LINEA ROSSA - LAVARONE-PASSO COE (ANDATA)",
                             "color": "#EB8919"
                         },
                          {
                             "routeId": "LR_R",
                             "routeSymId": "LR_R",
-                            "title": "LINEA ROSSA - LAVARONE-CARBONARE-COSTA-FOLGARIA-SERRADA (RITORNO)",
+                            "title": "SKIBUS LINEA ROSSA - PASSO COE-LAVARONE (RITORNO)",
                             "color": "#EB8919"
                         }
                     ]
