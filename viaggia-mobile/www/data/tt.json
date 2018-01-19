@@ -489,31 +489,13 @@
                         {
                             "routeId": "FG_R_A",
                             "routeSymId": "FG_R_A",
-                            "title": "TRENINO - FOLGARIA-COSTA-SANTUARIO",
+                            "title": "TRENINO - FOLGARIA-COSTA (ANDATA)",
                             "color": "#EB8919"
-                        }
-                    ]
-                },
-                  {
-                    "agencyId": "14",
-                    "color": "#EB8919",
-                    "routes": [
+                        },
                         {
-                            "routeId": "LV_TRENINO",
-                            "routeSymId": "LV_TRENINO",
-                            "title": "TRENINO - LAGO DI LAVARONE-FORTE BELVEDERE",
-                            "color": "#EB8919"
-                        }
-                    ]
-                },
-                {
-                    "agencyId": "9",
-                    "color": "#EB8919",
-                    "routes": [
-                        {
-                            "routeId": "LV",
-                            "routeSymId": "LV",
-                            "title": "LINEA VERDE - LAVARONE-LAGO E FRAZIONI",
+                            "routeId": "FG_R_R",
+                            "routeSymId": "FG_R_R",
+                            "title": "TRENINO - COSTA-FOLGARIA (RITORNO)",
                             "color": "#EB8919"
                         }
                     ]
