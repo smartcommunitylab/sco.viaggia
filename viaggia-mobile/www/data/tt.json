@@ -537,15 +537,9 @@
                     "color": "#EB8919",
                     "routes": [
                         {
-                            "routeId": "100A",
-                            "routeSymId": "100A",
-                            "title": "100 - VICENZA‐ASIAGO‐MONTEROVERE-LAVARONE‐LUSERNA (ANDATA)",
-                            "color": "#EB8919"
-                        },
-                        {
-                            "routeId": "100R",
-                            "routeSymId": "100R",
-                            "title": "100 - LUSERNA-LAVARONE-MONTEROVERE-ASIAGO-VICENZA (RITORNO)",
+                            "routeId": "SVT100",
+                            "routeSymId": "SVT100",
+                            "title": "100 - VICENZA‐ASIAGO‐MONTEROVERE-LAVARONE‐LUSERNA",
                             "color": "#EB8919"
                         }
                     ]
