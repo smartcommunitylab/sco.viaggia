@@ -1057,7 +1057,7 @@
                                     "label": "8"
                                 }
                             ]
-                        }, 
+                        },
                         {
                             "label": "A",
                             "color": "#B9BAB5",
@@ -1099,10 +1099,97 @@
                                     "label": "AB"
                                 }
                             ]
+                        },
+                        {
+                            "label": "N1",
+                            "color": "#000000",
+                            "routes": [
+                                {
+                                    "routeId": "N1A_Rov",
+                                    "routeSymId": "N1A",
+                                    "title": "C.so Bettini-Lizzana-Marco-Mori",
+                                    "label": "N1",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "N1R_Rov",
+                                    "routeSymId": "N1R",
+                                    "title": "Mori-Marco-C.so Bettin",
+                                    "label": "N1",
+                                    "wheelChairBoarding": 1
+                                }
+                            ]
+                        },
+                        {
+                            "label": "N2",
+                            "color": "#000000",
+                            "routes": [
+                                {
+                                    "routeId": "N2A_Rov",
+                                    "routeSymId": "N2A",
+                                    "title": "Costa-Corso Rosmini",
+                                    "label": "N2",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "N1R_Rov",
+                                    "routeSymId": "N1R",
+                                    "title": "P.le orsi-C.so Rosmini-Costa",
+                                    "label": "N2",
+                                    "wheelChairBoarding": 1
+                                }
+                            ]
+                        },
+                        {
+                            "label": "N3",
+                            "color": "#000000",
+                            "routes": [
+                                {
+                                    "routeId": "N3A_Rov",
+                                    "routeSymId": "N3A",
+                                    "title": "Castellano-Stazione FS",
+                                    "label": "N3",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "N3R_Rov",
+                                    "routeSymId": "N3R",
+                                    "title": "P.le Orsi-Volano-Castellano",
+                                    "label": "N3",
+                                    "wheelChairBoarding": 1
+                                }
+                            ]
+                        },
+                        {
+                            "label": "N5",
+                            "color": "#000000",
+                            "routes": [
+                                {
+                                    "routeId": "N5R_Rov",
+                                    "routeSymId": "N5R",
+                                    "title": "C.so Bettini-Isera-Nomi",
+                                    "label": "N5",
+                                    "wheelChairBoarding": 1
+                                }
+                            ]
+                        },
+                        {
+                            "label": "N6",
+                            "color": "#000000",
+                            "routes": [
+                                {
+                                    "routeId": "N6A_Rov",
+                                    "routeSymId": "N6A",
+                                    "title": "Nomi-Besenello-Stazione FS",
+                                    "label": "N6",
+                                    "wheelChairBoarding": 1
+                                }
+                            ]
                         }
                     ]
                 }
-            ]
+                    ]
+                
         }
     }
 }
