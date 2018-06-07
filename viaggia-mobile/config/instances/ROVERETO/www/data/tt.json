@@ -22,7 +22,7 @@
             "label": "menu_real_time_train",
             "hasMap": true,
             "markerIcon": "ic_train",
-            "transportType" : "TRAIN",
+            "transportType": "TRAIN",
             "icon": "ic_train",
             "elements": [
                 {
@@ -43,8 +43,8 @@
                             "color": "#cd251c",
                             "showTrips": true
                         }
-          ]
-        },
+                    ]
+                },
                 {
                     "agencyId": "6",
                     "color": "#cd251c",
@@ -63,8 +63,8 @@
                             "color": "#cd251c",
                             "showTrips": true
                         }
-          ]
-        },
+                    ]
+                },
                 {
                     "agencyId": "10",
                     "color": "#cd251c",
@@ -81,16 +81,16 @@
                             "color": "#cd251c",
                             "title": "Malé - Trento"
                         }
-          ]
-        }
-      ]
+                    ]
+                }
+            ]
         },
         "extraurbano": {
             "view": "list",
             "label": "menu_real_time_bus_suburban",
             "hasMap": true,
             "markerIcon": "ic_extraurbanBus",
-            "transportType" : "BUSSUBURBAN",
+            "transportType": "BUSSUBURBAN",
             "icon": "ic_extraurban-bus",
             "elements": [
                 {
@@ -114,9 +114,8 @@
                                     "title": "ROVERETO-CALLIANO-BESENELLO-TRENTO",
                                     "label": "301"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "302",
                             "title": "302 - TRENTO-RAVINA-MATTARELLO-ALDENO-GARNIGA TERME",
@@ -134,9 +133,8 @@
                                     "title": "GARNIGA TERME-ALDENO-MATTARELLO-RAVINA-TRENTO",
                                     "label": "302"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "303",
                             "title": "303 - TRENTO-V.VATTARO-CARBONARE-LAVARONE-LUSERNA",
@@ -154,9 +152,8 @@
                                     "title": "LUSERNA-LAVARONE-CARBONARE-V.VATTARO-TRENTO",
                                     "label": "303"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "305",
                             "title": "305 - ROVERETO-MORI-BRENTONICO-SACCONE",
@@ -174,9 +171,8 @@
                                     "title": "SACCONE-BRENTONICO-MORI-ROVERETO",
                                     "label": "305"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "306",
                             "title": "306 - ROVERETO-CALLIANO-FOLGARIA-LAVARONE",
@@ -194,9 +190,8 @@
                                     "title": "LAVARONE-FOLGARIA-CALLIANO-ROVERETO",
                                     "label": "306"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "307",
                             "title": "307 - ROVERETO-MORI-CHIZZOLA-CORNÈ-ALA-AVIO",
@@ -214,9 +209,8 @@
                                     "title": "AVIO-ALA-CORNÈ-CHIZZOLA-MORI-ROVERETO",
                                     "label": "307"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "310",
                             "title": "310 - ROVERETO-MORI-S.FELICE-RONZO CHIENIS",
@@ -234,9 +228,8 @@
                                     "title": "RONZO CHIENIS-S.FELICE-MORI-ROVERETO",
                                     "label": "310"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "311",
                             "title": "311 - ROVERETO-VILLA-NOMI-ALDENO",
@@ -254,9 +247,8 @@
                                     "title": "ALDENO-NOMI-VILLA-ROVERETO",
                                     "label": "311"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "312",
                             "title": "312 - ROVERETO-PARROCCHIA DI V.-PIAN DELLE FUGAZZE",
@@ -274,9 +266,8 @@
                                     "title": "PIAN DELLE FUGAZZE-PARROCCHIA DI V.-ROVERETO",
                                     "label": "312"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "314",
                             "title": "314 - ROVERETO-RIVA-OBRA DI VALLARSA-OMETTO",
@@ -294,9 +285,8 @@
                                     "title": "OMETTO-OBRA DI VALLARSA-RIVA-ROVERETO",
                                     "label": "314"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "315",
                             "title": "315 - ROVERETO-TERRAGNOLO-SERRADA-FOLGARIA",
@@ -314,9 +304,8 @@
                                     "title": "FOLGARIA-SERRADA-TERRAGNOLO-ROVERETO",
                                     "label": "315"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "316",
                             "title": "316 - ROVERETO-TRAMBILENO-VANZA-POZZACCHIO",
@@ -334,9 +323,8 @@
                                     "title": "POZZACCHIO-VANZA-TRAMBILENO-ROVERETO",
                                     "label": "316"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "318",
                             "title": "318 - VALLE S.FELICE-MANZANO-NOMESINO",
@@ -354,9 +342,8 @@
                                     "title": "NOMESINO-MANZANO-VALLE S.FELICE",
                                     "label": "318"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "319",
                             "title": "319 - BESAGNO-CROSANO-CORNÈ-SACCONE",
@@ -374,9 +361,8 @@
                                     "title": "SACCONE-CORNÈ-CROSANO BIVIO-BESAGNO",
                                     "label": "319"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "321",
                             "title": "321 - TRENTO-CALLIANO-FOLGARIA-LAVARONE",
@@ -394,9 +380,8 @@
                                     "title": "LAVARONE-FOLGARIA-CALLIANO-TRENTO",
                                     "label": "321"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "332",
                             "title": "332 - ROVERETO-MORI-RIVA-ARCO-BOLOGNANO",
@@ -414,9 +399,8 @@
                                     "title": "BOLOGNANO-ARCO-RIVA-MORI-ROVERETO",
                                     "label": "332"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "334",
                             "title": "334 - ROVERETO-ALA-SABBIONARA-AVIO-MASI-ROVERETO",
@@ -428,9 +412,8 @@
                                     "title": "ROVERETO-ALA-SABBIONARA-AVIO-MASI-ROVERETO",
                                     "label": "334"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "335",
                             "title": "335 - ROVERETO-ALA-MASI D'AVIO-AVIO-ROVERETO",
@@ -442,9 +425,8 @@
                                     "title": "ROVERETO-ALA-MASI D'AVIO-AVIO-ROVERETO",
                                     "label": "335"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "336",
                             "title": "336 - ALA-RONCHI DI ALA-PONZOLOTTI",
@@ -462,11 +444,11 @@
                                     "title": "RONCHI-ALA",
                                     "label": "336"
                                 }
-              ]
-            }
-          ]
-        }
-      ]
+                            ]
+                        }
+                    ]
+                }
+            ]
         },
         "urbano": {
             "view": "grid",
@@ -474,7 +456,7 @@
             "hasMap": true,
             "markerIcon": "ic_urbanBus",
             "icon": "ic_urban-bus",
-            "transportType" : "BUS",
+            "transportType": "BUS",
             "elements": [
                 {
                     "agencyId": "16",
@@ -498,8 +480,8 @@
                                     "label": "1",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "2",
                             "color": "#D65A2E",
@@ -518,8 +500,8 @@
                                     "label": "2",
                                     "wheelChairBoarding": 2
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "3",
                             "color": "#C02927",
@@ -538,8 +520,8 @@
                                     "label": "3",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "4",
                             "color": "#0976B7",
@@ -558,7 +540,7 @@
                                     "label": "4",
                                     "wheelChairBoarding": 1
                                 }
-                        ]
+                            ]
                         },
                         {
                             "label": "5",
@@ -591,8 +573,8 @@
                                     "label": "6",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "7",
                             "color": "#1B9887",
@@ -611,28 +593,28 @@
                                     "label": "7",
                                     "wheelChairBoarding": 2
                                 }
-              ]
-            },
-            {
-                "label": "8",
-                "color": "#f8ad1e",
-                "routes": [
-                    {
-                        "routeId": "08A_Rov",
-                        "routeSymId": "08A",
-                        "title": "Ospedale-Stazione FS-Isera-Villa Lag.",
-                        "label": "8",
-                        "wheelChairBoarding": 1
-                    },
-                    {
-                        "routeId": "08R_Rov",
-                        "routeSymId": "08R",
-                        "title": "Villa Lagarina-Isera-P.le Orsi-Ospedale",
-                        "label": "8",
-                        "wheelChairBoarding": 1
-                    }
-                ]
-            },
+                            ]
+                        },
+                        {
+                            "label": "8",
+                            "color": "#f8ad1e",
+                            "routes": [
+                                {
+                                    "routeId": "08A_Rov",
+                                    "routeSymId": "08A",
+                                    "title": "Ospedale-Stazione FS-Isera-Villa Lag.",
+                                    "label": "8",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "08R_Rov",
+                                    "routeSymId": "08R",
+                                    "title": "Villa Lagarina-Isera-P.le Orsi-Ospedale",
+                                    "label": "8",
+                                    "wheelChairBoarding": 1
+                                }
+                            ]
+                        },
                         {
                             "label": "A",
                             "color": "#B9BAB5",
@@ -643,8 +625,9 @@
                                     "title": "Brione-Cesari-Ospedale-Podesta-Brione",
                                     "label": "A",
                                     "wheelChairBoarding": 1
-                                }              ]
-            },
+                                }
+                            ]
+                        },
                         {
                             "label": "B",
                             "color": "#B9BAB5",
@@ -655,9 +638,9 @@
                                     "title": "Ossario-Osp.-S.Giorgio-Osp.-Ossario",
                                     "label": "B",
                                     "wheelChairBoarding": 1
-                                }              ]
-            },
-                        {
+                                }
+                            ]
+                        },{
                             "label": "AB",
                             "color": "#B9BAB5",
                             "routes": [
@@ -675,12 +658,93 @@
                                     "label": "AB",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            }
-
-          ]
-        }
-      ]
+                            ]
+                        },
+                        {
+                            "label": "N1",
+                            "color": "#000000",
+                            "routes": [
+                                {
+                                    "routeId": "N1A_Rov",
+                                    "routeSymId": "N1A",
+                                    "title": "C.so Bettini-Lizzana-Marco-Mori",
+                                    "label": "N1",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "N1R_Rov",
+                                    "routeSymId": "N1R",
+                                    "title": "Mori-Marco-C.so Bettin",
+                                    "label": "N1",
+                                    "wheelChairBoarding": 1
+                                }
+                            ]
+                        },{
+                            "label": "N2",
+                            "color": "#000000",
+                            "routes": [
+                                {
+                                    "routeId": "N2A_Rov",
+                                    "routeSymId": "N2A",
+                                    "title": "Costa-Corso Rosmini",
+                                    "label": "N2",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "N1R_Rov",
+                                    "routeSymId": "N1R",
+                                    "title": "P.le orsi-C.so Rosmini-Costa",
+                                    "label": "N2",
+                                    "wheelChairBoarding": 1
+                                }
+                            ]
+                        },{
+                            "label": "N3",
+                            "color": "#000000",
+                            "routes": [
+                                {
+                                    "routeId": "N3A_Rov",
+                                    "routeSymId": "N3A",
+                                    "title": "Castellano-Stazione FS",
+                                    "label": "N3",
+                                    "wheelChairBoarding": 1
+                                },
+                                {
+                                    "routeId": "N3R_Rov",
+                                    "routeSymId": "N3R",
+                                    "title": "P.le Orsi-Volano-Castellano",
+                                    "label": "N3",
+                                    "wheelChairBoarding": 1
+                                }
+                            ]
+                        },{
+                            "label": "N5",
+                            "color": "#000000",
+                            "routes": [
+                                {
+                                    "routeId": "N5R_Rov",
+                                    "routeSymId": "N5R",
+                                    "title": "C.so Bettini-Isera-Nomi",
+                                    "label": "N5",
+                                    "wheelChairBoarding": 1
+                                }
+                            ]
+                        },{
+                            "label": "N6",
+                            "color": "#000000",
+                            "routes": [
+                                {
+                                    "routeId": "N6A_Rov",
+                                    "routeSymId": "N6A",
+                                    "title": "Nomi-Besenello-Stazione FS",
+                                    "label": "N6",
+                                    "wheelChairBoarding": 1
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     }
 }
