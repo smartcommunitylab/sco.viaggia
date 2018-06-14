@@ -70,6 +70,7 @@ angular.module('viaggia', [
   'viaggia.controllers.planlist',
   'viaggia.controllers.tripdetails',
   'viaggia.controllers.game',
+  'viaggia.controllers.mapTracking',
   'viaggia.controllers.login',
   'viaggia.controllers.registration',
   'viaggia.services.data',
@@ -113,8 +114,33 @@ angular.module('viaggia', [
       return defer.promise;
     };
 
+    var initAppUpdate = function () {
+      document.addEventListener('chcp_updateIsReadyToInstall', onUpdateReady, false);
+      document.addEventListener('chcp_nothingToUpdate', nothingToUpdate, false);
+      document.addEventListener('chcp_updateInstalled', hideLoad, false);
+      document.addEventListener('chcp_updateInstallFailed', hideLoad, false);
+    }
+
+    // chcp_updateIsReadyToInstall Event Handler
+    var onUpdateReady = function () {
+      console.log('Update is ready for installation');
+      //loading
+      $ionicLoading.show();
+    }
+    // chcp_updateIsReadyToInstall Event Handler
+    var nothingToUpdate = function () {
+      console.log('Nothing to update');
+    }
+    var hideLoad = function () {
+      console.log('hide loading');
+      $ionicLoading.hide();
+    }
     $ionicPlatform.ready(function () { // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
+
+      initAppUpdate();
+
+
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       }
@@ -142,7 +168,7 @@ angular.module('viaggia', [
           }
           else {
             var popup = document.getElementsByClassName("popup-container");
-            if (popup.length==0) {
+            if (popup.length == 0) {
               $ionicPopup.show({
                 title: $filter('translate')("pop_up_always_GPS"),
                 template: $filter('translate')("pop_up_always_GPS_template"),
@@ -155,16 +181,18 @@ angular.module('viaggia', [
                     text: $filter('translate')("pop_up_always_GPS_go_on"),
                     type: 'button-custom',
                     onTap: function () {
-                      if (device.platform=="iOS"){
+                      if (device.platform == "iOS") {
                         cordova.plugins.diagnostic.switchToSettings();
+                      }
+                      else {
+                        if (device.platform == "iOS") {
+                          cordova.plugins.diagnostic.switchToSettings();
+                        }
+                        else {
+                          cordova.plugins.diagnostic.switchToLocationSettings();
+                        }
+                      }
                     }
-                    else {
-                      if (device.platform=="iOS"){
-                        cordova.plugins.diagnostic.switchToSettings();
-                    }
-                    else {
-                    cordova.plugins.diagnostic.switchToLocationSettings();
-                    }                    }                    }
                   }
                 ]
               });
@@ -746,6 +774,16 @@ angular.module('viaggia', [
             controller: 'RankingsCtrl'
           }
         }
+      })
+      .state('app.mapTracking', {
+        cache: false,
+        url: '/mapTracking',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/game/mapTrack.html',
+            controller: 'MapTrackingCtrl'
+          }
+        }
       });
 
     // if none of the above states are matched, use this as the fallback
@@ -1190,11 +1228,11 @@ angular.module('viaggia', [
       pop_up_bt: "Per garantire una validazione corretta dei viaggi in autobus/treno è richiesta l’attivazione del Bluetooth sul dispositivo.",
       pop_up_bt_button_enable: "Attivare",
       registration_wrong_chars: "Nickname non valido. Sono consentiti solo lettere e numeri",
-      pop_up_always_GPS:"Attenzione",
-      pop_up_always_GPS_template:"Per utilizzare l'applicazione è necessario impostare 'Consenti di accedere alla posizione' su 'Sempre'",
-      pop_up_always_GPS_go_on:"Imposta",
-      pop_up_battery_save:"Risparmio energetico attivo",
-      pop_up_battery_save_template:"La modalità \"Risparmio energetico\" potrebbe influire negativamente sulla precisione con cui viene tracciato il viaggio che potrebbe quindi risultare non valido. Per un tracciato preciso, disattivare la modalità \"Risparmio energetico\""
+      pop_up_always_GPS: "Attenzione",
+      pop_up_always_GPS_template: "Per utilizzare l'applicazione è necessario impostare 'Consenti di accedere alla posizione' su 'Sempre'",
+      pop_up_always_GPS_go_on: "Imposta",
+      pop_up_battery_save: "Risparmio energetico attivo",
+      pop_up_battery_save_template: "La modalità \"Risparmio energetico\" potrebbe influire negativamente sulla precisione con cui viene tracciato il viaggio che potrebbe quindi risultare non valido. Per un tracciato preciso, disattivare la modalità \"Risparmio energetico\""
     });
 
     $translateProvider.translations('en', {
@@ -1631,13 +1669,13 @@ angular.module('viaggia', [
       pop_up_bt_title: "Bluetooth disabled",
       pop_up_bt: "To ensure a proper validation of bus and train trips we recommend activating Bluetooth on the device.",
       pop_up_bt_button_enable: "Activate",
-      registration_wrong_chars: "Nickname not valid. Only letters or numbers are allowed" ,
-          pop_up_always_GPS:"Warning",
-      pop_up_always_GPS_template:"In order to use the application you have to set 'Allow Location Access' to 'Always'",
-      pop_up_always_GPS_go_on:"Setting",
-      pop_up_battery_save:"Battery Saver Mode Active",
-      pop_up_battery_save_template:"Battery Saver Mode may cause inaccurate tracking and the journey could be not valid. In order to improve tracking precision, turn off \"Battery Saver Mode\""
-       });
+      registration_wrong_chars: "Nickname not valid. Only letters or numbers are allowed",
+      pop_up_always_GPS: "Warning",
+      pop_up_always_GPS_template: "In order to use the application you have to set 'Allow Location Access' to 'Always'",
+      pop_up_always_GPS_go_on: "Setting",
+      pop_up_battery_save: "Battery Saver Mode Active",
+      pop_up_battery_save_template: "Battery Saver Mode may cause inaccurate tracking and the journey could be not valid. In order to improve tracking precision, turn off \"Battery Saver Mode\""
+    });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);
     $translateProvider.fallbackLanguage(DEFAULT_LANG);

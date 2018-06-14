@@ -223,6 +223,11 @@ angular.module('viaggia.controllers.home', [])
                 Config.loaded();
             }
         }
+        $scope.trackAndMap  = function (transportType) {
+            $scope.startTracking(transportType);
+            $state.go('app.mapTracking');
+
+        }
         $scope.startTracking = function (transportType) {
             if (!$rootScope.syncRunning) {
                 $scope.localizationAlwaysAllowed().then(function (loc) {

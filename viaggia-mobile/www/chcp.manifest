@@ -1,0 +1,1194 @@
+[
+  {
+    "file": "css/ng-cells.css",
+    "hash": "0a53be0320067a24ea4856e4854ed880"
+  },
+  {
+    "file": "css/style.css",
+    "hash": "6174874d125b6269e99ca53d9b5eb747"
+  },
+  {
+    "file": "data/bus.csv",
+    "hash": "3a87317221af8c48a3553ea1c2cf9f24"
+  },
+  {
+    "file": "data/config.json",
+    "hash": "557cda440dec86aa5a1bea7020f67096"
+  },
+  {
+    "file": "data/game/ranking.json",
+    "hash": "66539f7e718eeb989372e1edc398ec52"
+  },
+  {
+    "file": "data/game/status.json",
+    "hash": "89211a8cd5e4efc32d6da8ff6dfe0716"
+  },
+  {
+    "file": "data/messages.json",
+    "hash": "fb6633255f4cabbe0f30645d9a6eab27"
+  },
+  {
+    "file": "data/notifications.json",
+    "hash": "7238623e98c854aca0063e208d9e9630"
+  },
+  {
+    "file": "data/routesdb.zip",
+    "hash": "1221f34181a33cdb20a53e85c16c2b1a"
+  },
+  {
+    "file": "data/tt.json",
+    "hash": "f023b87667615f629214e9c6c732ae1d"
+  },
+  {
+    "file": "data/tt.json.full.json",
+    "hash": "31a3ff73525147ebb8fd4e364850d085"
+  },
+  {
+    "file": "fonts/Roboto_Mono/LICENSE.txt",
+    "hash": "d273d63619c9aeaf15cdaf76422c4f87"
+  },
+  {
+    "file": "fonts/Roboto_Mono/RobotoMono-Regular.ttf",
+    "hash": "a48ac41620cd818c5020d0f4302489ff"
+  },
+  {
+    "file": "fonts/RobotoDraft-Bold.woff",
+    "hash": "c885e9942e52c7711ad0271a82f394bb"
+  },
+  {
+    "file": "fonts/RobotoDraft-Italic.woff",
+    "hash": "c544b218dbd69ce12ce6c6f79c0ea5c6"
+  },
+  {
+    "file": "fonts/RobotoDraft-Medium.woff",
+    "hash": "245a9c4cf90821ecd551a983399da1fa"
+  },
+  {
+    "file": "fonts/RobotoDraft.woff",
+    "hash": "3404d7b64957502197fc22a011c549c0"
+  },
+  {
+    "file": "fonts/style.css~",
+    "hash": "8245afce4c83685e4bf16d95a6612403"
+  },
+  {
+    "file": "fonts/viaggia.css",
+    "hash": "bb5e8df15b10293b1e55e10c37d1f41a"
+  },
+  {
+    "file": "fonts/viaggia.css~",
+    "hash": "2fb430033f9dba51ee8866dc48c775af"
+  },
+  {
+    "file": "fonts/viaggia.eot",
+    "hash": "74cfb0357f0d707d6289f3b18469174e"
+  },
+  {
+    "file": "fonts/viaggia.svg",
+    "hash": "0327ad9355f349a0ff71f4e1763cbc01"
+  },
+  {
+    "file": "fonts/viaggia.ttf",
+    "hash": "e9614483fc2a63d2e4731d477058bebd"
+  },
+  {
+    "file": "fonts/viaggia.woff",
+    "hash": "aab51b37b1d778922daa4a2a148e5392"
+  },
+  {
+    "file": "frame_en.html",
+    "hash": "5e03ff276903b78ba4fa2bd97614d5fc"
+  },
+  {
+    "file": "frame.html",
+    "hash": "2f0de06ae26b7f245dc7067f735cc465"
+  },
+  {
+    "file": "img/background_login.jpg",
+    "hash": "f5a9408b68e7bf093b1339d9f2db4e53"
+  },
+  {
+    "file": "img/bookmarks/empty_home_img.png",
+    "hash": "0db208a870366010555d0eccefef07d2"
+  },
+  {
+    "file": "img/bookmarks/step_1_en.png",
+    "hash": "d6d23954ea66bcd6bc362f6824f2af41"
+  },
+  {
+    "file": "img/bookmarks/step_1_it.png",
+    "hash": "f8c0a5446e664cd3ba4a1edbb1516f6d"
+  },
+  {
+    "file": "img/bookmarks/step_2_en.png",
+    "hash": "3883c9e5e10facb7abdbc4bbe17cc339"
+  },
+  {
+    "file": "img/bookmarks/step_2_it.png",
+    "hash": "f4f9b9bda18f7b28ff34229fc4eeb0db"
+  },
+  {
+    "file": "img/compassCalibration.png",
+    "hash": "7c7e5e857aa34caafaeb2a4151a94f37"
+  },
+  {
+    "file": "img/credits/caire.png",
+    "hash": "d7699bf8508e2c8f6de47102b4c099fb"
+  },
+  {
+    "file": "img/credits/comune_rv.png",
+    "hash": "c06adfa54779125c54f39b129b4733e8"
+  },
+  {
+    "file": "img/credits/comune_tn.png",
+    "hash": "60adf97cc4c6a9eabfff0bc380b4a7b1"
+  },
+  {
+    "file": "img/credits/fbk.png",
+    "hash": "f2146d3a1623037b0e149cae271f193a"
+  },
+  {
+    "file": "img/credits/logo_rovereto.png",
+    "hash": "ebf6738ec06e576d7f1660a7190c8267"
+  },
+  {
+    "file": "img/credits/logo-sco-fbk.png",
+    "hash": "e636a7cfddd98f529b7f37188a651708"
+  },
+  {
+    "file": "img/credits/small_eit.png",
+    "hash": "f4dd187d82063a9f7d4c17b30fc285f5"
+  },
+  {
+    "file": "img/credits/streetlife.png",
+    "hash": "d2c97973ad2c7a47e5490e3d6c9385fd"
+  },
+  {
+    "file": "img/game/cup_0.png",
+    "hash": "241fece1dcb9397335f4ab4c2b3db6e0"
+  },
+  {
+    "file": "img/game/cup_10.png",
+    "hash": "378a3033f3ff5e642d48f765d80e65fe"
+  },
+  {
+    "file": "img/game/greenleaves.png",
+    "hash": "7372e7b08882d61e52e366382f5bd05c"
+  },
+  {
+    "file": "img/ic_arrival.png",
+    "hash": "e4ed6b3aa8b5586538f67932dd9cb53a"
+  },
+  {
+    "file": "img/ic_bike.png",
+    "hash": "3a4a9e425727b342c78f11d48b5374c3"
+  },
+  {
+    "file": "img/ic_car.png",
+    "hash": "0e598f91f896cfa688057c4371aff53f"
+  },
+  {
+    "file": "img/ic_compass.png",
+    "hash": "8bf0c2279e8c1b8bad76ab1145695a9f"
+  },
+  {
+    "file": "img/ic_extraurbanBus.png",
+    "hash": "4916171db1961e78f7bead0a9fee602a"
+  },
+  {
+    "file": "img/ic_funivia.png",
+    "hash": "1d7a9bf117beab1e71bc56650f978035"
+  },
+  {
+    "file": "img/ic_leaf.png",
+    "hash": "60cf70bd907899f65bfba5400a4a745e"
+  },
+  {
+    "file": "img/ic_look_for_parking.png",
+    "hash": "88644f919a9bf5a8a929f44c8ebd6e84"
+  },
+  {
+    "file": "img/ic_mt_bicycle.png",
+    "hash": "6ca96ff267c8d954f084f089363e9f3f"
+  },
+  {
+    "file": "img/ic_mt_bus.png",
+    "hash": "e2bb03d1826f90c5fc715c69031ea272"
+  },
+  {
+    "file": "img/ic_mt_car.png",
+    "hash": "7285d8ab81c2d23c7b79478e7431a6e8"
+  },
+  {
+    "file": "img/ic_mt_extraurbano.png",
+    "hash": "700b50a0577abbaaf8159dba5780b556"
+  },
+  {
+    "file": "img/ic_mt_foot.png",
+    "hash": "1ce9efdadf0a411c36df6227e4f3584d"
+  },
+  {
+    "file": "img/ic_mt_funivia.png",
+    "hash": "696a0a6a71e5629f8ad084977c7b1716"
+  },
+  {
+    "file": "img/ic_mt_parking.png",
+    "hash": "004521888cdc2eb6349a4705f57bf001"
+  },
+  {
+    "file": "img/ic_mt_train.png",
+    "hash": "11eea5c1c2b3fe0712843c9228c711cf"
+  },
+  {
+    "file": "img/ic_notif.png",
+    "hash": "599b05acaaedbb7263cf6b34c97da62d"
+  },
+  {
+    "file": "img/ic_parcometro_euro-card_selected.png",
+    "hash": "57fdc3de826955892c773b406b4b61c7"
+  },
+  {
+    "file": "img/ic_parcometro_euro-card.png",
+    "hash": "ef08f05a5258c6598e4e546a51d1a197"
+  },
+  {
+    "file": "img/ic_parcometro_selected.png",
+    "hash": "1534dcf1160362be547cf1d6cecac3ca"
+  },
+  {
+    "file": "img/ic_parcometro.png",
+    "hash": "3cbcef5a07f8d82e5dfad7dd55a4a07c"
+  },
+  {
+    "file": "img/ic_park_walk.png",
+    "hash": "3b9b9b04ec7e77074f6d54fa44df48a0"
+  },
+  {
+    "file": "img/ic_parkingLot.png",
+    "hash": "b4d381675d53a79885191bf2ba8a9ea5"
+  },
+  {
+    "file": "img/ic_point_line_list.png",
+    "hash": "a919d3a37aa41f54b0e28102627ee7fe"
+  },
+  {
+    "file": "img/ic_point_line.png",
+    "hash": "69c4ee3717060c92ea063cb80ee03aa0"
+  },
+  {
+    "file": "img/ic_point_outline.png",
+    "hash": "6af057f31def3a0fe96c42cb47715302"
+  },
+  {
+    "file": "img/ic_point.png",
+    "hash": "c43cfc737534c0c2eb9ee06760339a39"
+  },
+  {
+    "file": "img/ic_price_parking.png",
+    "hash": "664362537ba7754f548c7473cb6774bf"
+  },
+  {
+    "file": "img/ic_taxi.png",
+    "hash": "5a383f0099e82b8c45f5bdeb51cafd59"
+  },
+  {
+    "file": "img/ic_train.png",
+    "hash": "136391c5fbb1dda1ecb1cd2b2f3fd0e3"
+  },
+  {
+    "file": "img/ic_urbanBus_no_acc.png",
+    "hash": "b92e1a0f0d26523a9a20f0165c555c45"
+  },
+  {
+    "file": "img/ic_urbanBus.png",
+    "hash": "64946448c2f5668b729cd1bafa515604"
+  },
+  {
+    "file": "img/ic_user.png",
+    "hash": "11474e739bd52e58830f5d38d409beb2"
+  },
+  {
+    "file": "img/ic_walk.png",
+    "hash": "64c3fd16e0ef291a9b7c08a09fe11af9"
+  },
+  {
+    "file": "img/img_login.png",
+    "hash": "4fdf331307807a47a19a3f7c9b31ba76"
+  },
+  {
+    "file": "img/ionic.png",
+    "hash": "251ebf03b1c7889cf36cbcbcce8f689e"
+  },
+  {
+    "file": "img/main/step_1_en.png",
+    "hash": "83e611df01ca4f6c201df9e0aa41f4d0"
+  },
+  {
+    "file": "img/main/step_1_it.png",
+    "hash": "116a1113aa533b4d10ac5920ad060937"
+  },
+  {
+    "file": "img/main/step_2_en.png",
+    "hash": "c077d03dfaad779638942051cf7d7127"
+  },
+  {
+    "file": "img/main/step_2_it.png",
+    "hash": "21851b83d32ec50dd83ba2501e7e8ba6"
+  },
+  {
+    "file": "img/main/step_3_en.png",
+    "hash": "5bf7ad4bf75a66f2cef9d1b52e44423b"
+  },
+  {
+    "file": "img/main/step_3_it.png",
+    "hash": "382e30efe1b89cc085b19ce199d6b48c"
+  },
+  {
+    "file": "img/main/step_4_en.png",
+    "hash": "33b76e35963492335895d0af428fd57d"
+  },
+  {
+    "file": "img/main/step_4_it.png",
+    "hash": "e583283807d334a75c787c0381d30a0b"
+  },
+  {
+    "file": "img/markets/ic_nataleDeiPopoli.png",
+    "hash": "8da695953454c97b802649e8e32efe2a"
+  },
+  {
+    "file": "img/ribbon.png",
+    "hash": "04f09d186bd1645944f852afbb201db3"
+  },
+  {
+    "file": "index_en.html",
+    "hash": "2a214636ce9e8e755f332cf9bf941812"
+  },
+  {
+    "file": "index.html",
+    "hash": "ce47291a538b1b6fd5c877145fb50066"
+  },
+  {
+    "file": "js/app.js",
+    "hash": "49a467b6adc0f0c0eeb26cf496e8421d"
+  },
+  {
+    "file": "js/controllers/BookmarksCtrl.js",
+    "hash": "f60c25bc56c7fe959afeaafa186d4018"
+  },
+  {
+    "file": "js/controllers/CommonCtrl.js",
+    "hash": "44edf5439e684d4b5694844aa5de0128"
+  },
+  {
+    "file": "js/controllers/GameCtrl.js",
+    "hash": "493ff42edd6030810061d7a4df72d34e"
+  },
+  {
+    "file": "js/controllers/HomeCtrl.js",
+    "hash": "abb39e018b37aee292c6829d34cc431a"
+  },
+  {
+    "file": "js/controllers/InfoCtrl.js",
+    "hash": "603584d84ed83a509454fd19e4debdf5"
+  },
+  {
+    "file": "js/controllers/LoginController.js",
+    "hash": "daeb515b6e0e2115e2ef5ad656fbfc2a"
+  },
+  {
+    "file": "js/controllers/MarketsCtrl.js",
+    "hash": "9f229f0ab2dca18fe357122c976a2590"
+  },
+  {
+    "file": "js/controllers/MonitoringCtrl.js",
+    "hash": "2b4a999c2087952d56152aa741cbb44b"
+  },
+  {
+    "file": "js/controllers/MyTripsCtrl.js",
+    "hash": "f7ce7d8a42df72b4b70e0499d729a14c"
+  },
+  {
+    "file": "js/controllers/NewsCtrl.js",
+    "hash": "6857feead561456218ac50ca41d4e540"
+  },
+  {
+    "file": "js/controllers/NotificationsCtrl.js",
+    "hash": "c69315e00f0b42573011cb3f6ae57b8e"
+  },
+  {
+    "file": "js/controllers/PlanCtrl.js",
+    "hash": "e08b954fcbfa0c81d99e9fcf28598f6a"
+  },
+  {
+    "file": "js/controllers/PlanlistCtrl.js",
+    "hash": "61fe6e373c6da3ef3e47fc77ab78580b"
+  },
+  {
+    "file": "js/controllers/RegistrationController.js",
+    "hash": "02cd2de5504808a8bdb2d73dc99fc828"
+  },
+  {
+    "file": "js/controllers/Table1Ctrl.js",
+    "hash": "e93f9b83cda5b58a148ad1f221ec39b0"
+  },
+  {
+    "file": "js/controllers/Table2Ctrl.js",
+    "hash": "5337f7128381bbc63f3d3e52223b7caf"
+  },
+  {
+    "file": "js/controllers/TaxiCtrl.js",
+    "hash": "987dc22a0de5168dad52baa5d36cbe43"
+  },
+  {
+    "file": "js/controllers/TripdetailsCtrl.js",
+    "hash": "3c0706c2e6543776ea952406123e4f03"
+  },
+  {
+    "file": "js/controllers/TTCtrl.alt",
+    "hash": "4c608756f7d38584ad14c6bb0d80f584"
+  },
+  {
+    "file": "js/controllers/TTCtrl.js",
+    "hash": "224243e6cb4d5e3c10d0a1708f1634f8"
+  },
+  {
+    "file": "js/directives/Directives.js",
+    "hash": "9a40c866d42ca94219b5ef8dbf57157e"
+  },
+  {
+    "file": "js/directives/mfb-directive.js",
+    "hash": "4cfeea18cca13c45f54a33acc41a5eb7"
+  },
+  {
+    "file": "js/ext.js",
+    "hash": "46aa2b02ab62c8ec06e0b26e448a89aa"
+  },
+  {
+    "file": "js/filters.js",
+    "hash": "52f17f03f667f7075355f1dbe4361b93"
+  },
+  {
+    "file": "js/services/BookmarkSrv.js",
+    "hash": "ee9f9a66b784caf6aa0ff7623fd37d97"
+  },
+  {
+    "file": "js/services/ConfigSrv.js",
+    "hash": "b7589976a4bfbbd72580a90abc262196"
+  },
+  {
+    "file": "js/services/DataSrv.js",
+    "hash": "aa2af999286e51ebe0326abe2b25c185"
+  },
+  {
+    "file": "js/services/DiaryDbSrv.js",
+    "hash": "3f3ed2352a5c61ad834c078a4d8a5fa8"
+  },
+  {
+    "file": "js/services/GameSrv.js",
+    "hash": "edb5726fb3ae6d38925ce3e5875da305"
+  },
+  {
+    "file": "js/services/GeoSrv.js",
+    "hash": "6f117b9195f3ce3426a6c7fcd6c1bf40"
+  },
+  {
+    "file": "js/services/InfoSrv.js",
+    "hash": "a249b4e1e6bb02044dbf9e6c07de1e49"
+  },
+  {
+    "file": "js/services/LoginService.js",
+    "hash": "7569e74ba253da4e634d0673559a9e8d"
+  },
+  {
+    "file": "js/services/MapSrv.js",
+    "hash": "00e0ffc4dc45f9ed52bf2070a8cd2da0"
+  },
+  {
+    "file": "js/services/MarketsSrv.js",
+    "hash": "c3cea4c34d815b02d8c4a6a41fd9a6d6"
+  },
+  {
+    "file": "js/services/NotificationSrv.js",
+    "hash": "cdd72dd3b85f6be5a0e118a652ed43bf"
+  },
+  {
+    "file": "js/services/PlanSrv.js",
+    "hash": "85fecf563a2879f74fcb1bf0e47b539e"
+  },
+  {
+    "file": "js/services/ProfileSrv.js",
+    "hash": "dfad552a90dcb06187d646a7c70c7df9"
+  },
+  {
+    "file": "js/services/RegistrationSrv.js",
+    "hash": "7bd170a21a0b8c998ef70a4c008843b1"
+  },
+  {
+    "file": "js/services/TaxiSrv.js",
+    "hash": "a30b5c2f1dd9573592f4bf4a6ae7675b"
+  },
+  {
+    "file": "js/services/TrackSrv.js",
+    "hash": "bc8a7d81a03642abcb1c44a2b17bd943"
+  },
+  {
+    "file": "js/services/TTSrv.js",
+    "hash": "3a4f50bf4fc378e790f7c90a69a9c12a"
+  },
+  {
+    "file": "js/services/TutorialSrv.js",
+    "hash": "a50f60f09cb7776033e6c47596670b82"
+  },
+  {
+    "file": "lib/angular-animate/angular-animate.min.js",
+    "hash": "abf4748a7ef6bb5b610ecb5ab749afae"
+  },
+  {
+    "file": "lib/angular-leaflet-directive/angular-leaflet-directive.min.js",
+    "hash": "324d37398d8af55990964869bf16faa1"
+  },
+  {
+    "file": "lib/angular-sanitize/angular-sanitize.min.js",
+    "hash": "bacfe60d661bf26faa119cebc50c6518"
+  },
+  {
+    "file": "lib/angular-simple-logger/angular-simple-logger.js",
+    "hash": "11da70ab1b261c6bd141a2e6aca37410"
+  },
+  {
+    "file": "lib/angular-translate/angular-translate.min.js",
+    "hash": "c5ebd01305e9d551a30a1590b8842ab8"
+  },
+  {
+    "file": "lib/angular-ui-router/angular-ui-router.min.js",
+    "hash": "a7e4b1ac540e125642766cd3c147ee1b"
+  },
+  {
+    "file": "lib/angular/angular.min.js",
+    "hash": "d2342622316f832ef1333c74e41354ca"
+  },
+  {
+    "file": "lib/ionic-datepicker/ionic-datepicker.bundle.min.js",
+    "hash": "3096cc6c78e3621ee65c13746942517f"
+  },
+  {
+    "file": "lib/ionic-material/ionic.material.min.css",
+    "hash": "eeb41e543b2d524743542cbf2863c086"
+  },
+  {
+    "file": "lib/ionic-material/ionic.material.min.js",
+    "hash": "6a043424bcbae9ad79c3d4c50f326872"
+  },
+  {
+    "file": "lib/ionic-timepicker/ionic-timepicker.bundle.min.js",
+    "hash": "715a5f445fbd2f99893efc03712fd3b2"
+  },
+  {
+    "file": "lib/ionic/bower.json",
+    "hash": "542625f5df378f67ade11757ad288bf3"
+  },
+  {
+    "file": "lib/ionic/css/ionic.css",
+    "hash": "bcef5306be0721a5e082c29574da4c15"
+  },
+  {
+    "file": "lib/ionic/css/ionic.min.css",
+    "hash": "ac5223d594faef325a7ae54a5414e99d"
+  },
+  {
+    "file": "lib/ionic/fonts/ionicons.eot",
+    "hash": "2c2ae068be3b089e0a5b59abb1831550"
+  },
+  {
+    "file": "lib/ionic/fonts/ionicons.svg",
+    "hash": "201c16cd3e8227301559745f4b8bf25b"
+  },
+  {
+    "file": "lib/ionic/fonts/ionicons.ttf",
+    "hash": "24712f6c47821394fba7942fbb52c3b2"
+  },
+  {
+    "file": "lib/ionic/fonts/ionicons.woff",
+    "hash": "05acfdb568b3df49ad31355b19495d4a"
+  },
+  {
+    "file": "lib/ionic/js/ionic-angular.js",
+    "hash": "953200210ecff162d1f6a113adbb2d4b"
+  },
+  {
+    "file": "lib/ionic/js/ionic-angular.min.js",
+    "hash": "305317883fb58c783823ce6f90a89af5"
+  },
+  {
+    "file": "lib/ionic/js/ionic.bundle.js",
+    "hash": "065d7b882514ae0a8126bb5ee9444eb8"
+  },
+  {
+    "file": "lib/ionic/js/ionic.bundle.min.js",
+    "hash": "de7a9c436a0c9c3abcc77b03dd6ad801"
+  },
+  {
+    "file": "lib/ionic/js/ionic.js",
+    "hash": "eb8b8cf905caf37edc557a6c9f783eeb"
+  },
+  {
+    "file": "lib/ionic/js/ionic.min.js",
+    "hash": "c2b965907f38367bd5b6259bc21e3b21"
+  },
+  {
+    "file": "lib/ionic/README.md",
+    "hash": "1bde1ceac2c2b0a1e1f45e1a9c99e94b"
+  },
+  {
+    "file": "lib/ionic/scss/_action-sheet.scss",
+    "hash": "d0c6449f31db02323aa6e7f56ef55e67"
+  },
+  {
+    "file": "lib/ionic/scss/_animations.scss",
+    "hash": "5596f74cb1ee03f9faf453ad4ee11807"
+  },
+  {
+    "file": "lib/ionic/scss/_backdrop.scss",
+    "hash": "7ff048e091b39f6615db62ee136ef040"
+  },
+  {
+    "file": "lib/ionic/scss/_badge.scss",
+    "hash": "c7b1b0e3049754fc22b45730e6c560fa"
+  },
+  {
+    "file": "lib/ionic/scss/_bar.scss",
+    "hash": "6e815d4d3afc1a97139aad2f94163515"
+  },
+  {
+    "file": "lib/ionic/scss/_button-bar.scss",
+    "hash": "b7ebe3065a06a3838c17a3e4f744068e"
+  },
+  {
+    "file": "lib/ionic/scss/_button.scss",
+    "hash": "78ec8db7cd9d771f011dcff61e8f81fd"
+  },
+  {
+    "file": "lib/ionic/scss/_checkbox.scss",
+    "hash": "c34feb3460dbc588de2c921812891567"
+  },
+  {
+    "file": "lib/ionic/scss/_form.scss",
+    "hash": "5ce548e83a854962c7f1f9d123047fd7"
+  },
+  {
+    "file": "lib/ionic/scss/_grid.scss",
+    "hash": "e04a80ec87a6a67f65e93d94eb76f32d"
+  },
+  {
+    "file": "lib/ionic/scss/_items.scss",
+    "hash": "e4c46d2f4ba12769d254cc066cd27989"
+  },
+  {
+    "file": "lib/ionic/scss/_list.scss",
+    "hash": "0ab8daf57764aac25bf68aa0b0e6c776"
+  },
+  {
+    "file": "lib/ionic/scss/_loaders.scss",
+    "hash": "94ce5c70431f9418dcfbfe635c5b9ba9"
+  },
+  {
+    "file": "lib/ionic/scss/_loading.scss",
+    "hash": "9f23e266d43a432bbf07a8677d1d1592"
+  },
+  {
+    "file": "lib/ionic/scss/_menu.scss",
+    "hash": "75661cd0566dcb4b93245390c0af215b"
+  },
+  {
+    "file": "lib/ionic/scss/_mixins.scss",
+    "hash": "5b97c405b5849d080b81ddbd3a0b30e3"
+  },
+  {
+    "file": "lib/ionic/scss/_modal.scss",
+    "hash": "38e8624ef28a495e7a01341915516bd1"
+  },
+  {
+    "file": "lib/ionic/scss/_platform.scss",
+    "hash": "db73214ac171e89a966c24d5320fe096"
+  },
+  {
+    "file": "lib/ionic/scss/_popover.scss",
+    "hash": "cfdbb6c6b1a87f04c068484392066b55"
+  },
+  {
+    "file": "lib/ionic/scss/_popup.scss",
+    "hash": "988126e645408f1e5a270934520c20ac"
+  },
+  {
+    "file": "lib/ionic/scss/_progress.scss",
+    "hash": "19a19537d8e9483db7bde8a7febd43f6"
+  },
+  {
+    "file": "lib/ionic/scss/_radio.scss",
+    "hash": "eb4b88433f2db4a905b957676eb7afef"
+  },
+  {
+    "file": "lib/ionic/scss/_range.scss",
+    "hash": "e3164511c46a6af06ecf9ea3c0956a29"
+  },
+  {
+    "file": "lib/ionic/scss/_refresher.scss",
+    "hash": "a45314eb301b977b3506a3f8e0fbc29f"
+  },
+  {
+    "file": "lib/ionic/scss/_reset.scss",
+    "hash": "319f0fb2d58da7fc89222752c5e527a4"
+  },
+  {
+    "file": "lib/ionic/scss/_scaffolding.scss",
+    "hash": "cf9e931591f63ebdf619372d94efd843"
+  },
+  {
+    "file": "lib/ionic/scss/_select.scss",
+    "hash": "7b40e394e01f33ebc89fcfc89f826410"
+  },
+  {
+    "file": "lib/ionic/scss/_slide-box.scss",
+    "hash": "f65800f27eb1f9520851e32f71a9b07b"
+  },
+  {
+    "file": "lib/ionic/scss/_spinner.scss",
+    "hash": "472ae7eb35a68c22078b1d56b10f35be"
+  },
+  {
+    "file": "lib/ionic/scss/_split-pane.scss",
+    "hash": "7d9c2d8d024e96ffa04db424e9467ebb"
+  },
+  {
+    "file": "lib/ionic/scss/_tabs.scss",
+    "hash": "591a8ae143d4f2c4be7217bc208dae69"
+  },
+  {
+    "file": "lib/ionic/scss/_toggle.scss",
+    "hash": "09146009f139820a34375ec3dc70c5a0"
+  },
+  {
+    "file": "lib/ionic/scss/_transitions.scss",
+    "hash": "c060678db2049bbca8833bf769d65dd1"
+  },
+  {
+    "file": "lib/ionic/scss/_type.scss",
+    "hash": "178ef3eca86f77f818db20587d194045"
+  },
+  {
+    "file": "lib/ionic/scss/_util.scss",
+    "hash": "9fbec68fcd983d0493f2256335f22572"
+  },
+  {
+    "file": "lib/ionic/scss/_variables.scss",
+    "hash": "f66614f030533890aa438e3483d46b04"
+  },
+  {
+    "file": "lib/ionic/scss/ionic.scss",
+    "hash": "983a7f27e5e19b920b0b17a033c71b39"
+  },
+  {
+    "file": "lib/ionic/scss/ionicons/_ionicons-animation.scss",
+    "hash": "9a42a67adf70760201ffe1b2ae5dc1c3"
+  },
+  {
+    "file": "lib/ionic/scss/ionicons/_ionicons-font.scss",
+    "hash": "9a1734051fa60f52fdbdd74001b0f0e0"
+  },
+  {
+    "file": "lib/ionic/scss/ionicons/_ionicons-icons.scss",
+    "hash": "f8da6b7d864740bf9b836246b5403928"
+  },
+  {
+    "file": "lib/ionic/scss/ionicons/_ionicons-variables.scss",
+    "hash": "1396036b27c4b230ebcbd57202a00a7d"
+  },
+  {
+    "file": "lib/ionic/scss/ionicons/ionicons.scss",
+    "hash": "37204d759a9eb7bfc074034fd1bf95fb"
+  },
+  {
+    "file": "lib/jszip-utils/jszip-utils.min.js",
+    "hash": "0608ff0ca6b939ae7263f0b219b0e4f2"
+  },
+  {
+    "file": "lib/jszip/jszip.min.js",
+    "hash": "5c57bf53827ad2dc9d9d2ed198eaa643"
+  },
+  {
+    "file": "lib/leaflet/images/layers-2x.png",
+    "hash": "324b4fcaf164735c627269504b7bc28e"
+  },
+  {
+    "file": "lib/leaflet/images/layers.png",
+    "hash": "7cb0d2482ecadc1b80eb0abe457371b6"
+  },
+  {
+    "file": "lib/leaflet/images/marker-icon-2x.png",
+    "hash": "1c824216f354218b04b25a57e0f7ab1f"
+  },
+  {
+    "file": "lib/leaflet/images/marker-icon.png",
+    "hash": "87f6ca46ac356e81dc438589630ae107"
+  },
+  {
+    "file": "lib/leaflet/images/marker-shadow.png",
+    "hash": "e7bd5e4b8dbbc3dfbe3ed88c098bc61e"
+  },
+  {
+    "file": "lib/leaflet/layers-2x.png",
+    "hash": "324b4fcaf164735c627269504b7bc28e"
+  },
+  {
+    "file": "lib/leaflet/layers.png",
+    "hash": "7cb0d2482ecadc1b80eb0abe457371b6"
+  },
+  {
+    "file": "lib/leaflet/leaflet-src.js",
+    "hash": "66c127b72bdf0980b3c35d72fcd37a5e"
+  },
+  {
+    "file": "lib/leaflet/leaflet.css",
+    "hash": "e84b0b64a0dce38ad53107db1258e98a"
+  },
+  {
+    "file": "lib/leaflet/leaflet.js",
+    "hash": "d4914be5173dde24cf72260063c47424"
+  },
+  {
+    "file": "lib/leaflet/marker-icon-2x.png",
+    "hash": "1c824216f354218b04b25a57e0f7ab1f"
+  },
+  {
+    "file": "lib/leaflet/marker-icon.png",
+    "hash": "87f6ca46ac356e81dc438589630ae107"
+  },
+  {
+    "file": "lib/leaflet/marker-shadow.png",
+    "hash": "e7bd5e4b8dbbc3dfbe3ed88c098bc61e"
+  },
+  {
+    "file": "lib/MapPolyline.js",
+    "hash": "a79c1a2cf139801b8cf7e0af56f84d86"
+  },
+  {
+    "file": "lib/moment/moment.min.js",
+    "hash": "2ca656d29bd6f1ab8c812b1cf2d3d295"
+  },
+  {
+    "file": "lib/ng-cells/ng-cells.min.js",
+    "hash": "065fc017d4d371768a7f31148e3a62ec"
+  },
+  {
+    "file": "lib/ng-material-floating-button/mfb.css",
+    "hash": "8e8d21da4111d5d5e3d6a279efc08710"
+  },
+  {
+    "file": "lib/ng-scrollable/ng-scrollable.min.css",
+    "hash": "bcd4a33ed817eac6916882a5c8dd94f0"
+  },
+  {
+    "file": "lib/ng-scrollable/ng-scrollable.min.js",
+    "hash": "44282e7b68ed82b109ff6a7f2e330611"
+  },
+  {
+    "file": "lib/ngCordova/ng-cordova.min.js",
+    "hash": "5ddfc4ea91af3f8d507c5bb8586dc3c1"
+  },
+  {
+    "file": "lib/waves/waves.min.css",
+    "hash": "479f53e6c221764ebdbb1b3c6863a20c"
+  },
+  {
+    "file": "lib/waves/waves.min.js",
+    "hash": "e36e619aa3433aa0527c376dff375652"
+  },
+  {
+    "file": "lib/x2js/bower.json",
+    "hash": "76503e86cecfc2c771aaad07a05264cc"
+  },
+  {
+    "file": "lib/x2js/README.md",
+    "hash": "995ff14479b2913706c8db3accd361f3"
+  },
+  {
+    "file": "lib/x2js/xml2json.js",
+    "hash": "914d0d1a3c4de14f511e98c2f5d8f5f9"
+  },
+  {
+    "file": "lib/x2js/xml2json.min.js",
+    "hash": "ec489f013788dbb1fcdf624745707767"
+  },
+  {
+    "file": "templates/bikesharing.html",
+    "hash": "ef44609c38788b6a4058ccbfa5183f7a"
+  },
+  {
+    "file": "templates/bikesharingPopup.html",
+    "hash": "bb24db154335675f92c65209267c74bc"
+  },
+  {
+    "file": "templates/bm/bikesharing.html",
+    "hash": "78fd82d57fca34aed542df0eebcc8770"
+  },
+  {
+    "file": "templates/bm/default.html",
+    "hash": "b38c93ca55efbdd5cc0cc2a3b6642896"
+  },
+  {
+    "file": "templates/bm/line.html",
+    "hash": "f7e2b3eda1d587d0f47e7b42fe08509f"
+  },
+  {
+    "file": "templates/bm/parking.html",
+    "hash": "e0b644ae27f9ad628f8da6ec2da35159"
+  },
+  {
+    "file": "templates/bm/stop.html",
+    "hash": "f7e2b3eda1d587d0f47e7b42fe08509f"
+  },
+  {
+    "file": "templates/bm/trip.html",
+    "hash": "33647a68cd41cad4a6a48654c34163c7"
+  },
+  {
+    "file": "templates/bookmarks.html",
+    "hash": "56f0913ab73a14f66cef113670e1f57a"
+  },
+  {
+    "file": "templates/bookmarkstutorial.html",
+    "hash": "9938e8e17a5633ea3eefe15813b7727d"
+  },
+  {
+    "file": "templates/calibrationPopup.html",
+    "hash": "631ebb1e0f569a5c7c34712ed2fcd5c0"
+  },
+  {
+    "file": "templates/credits.html",
+    "hash": "7e8e5c4a3406de65c8c5925e11773ec1"
+  },
+  {
+    "file": "templates/emptyHomepage.html",
+    "hash": "f5a7506dc4aefb5a10b9d6edbf89e2e6"
+  },
+  {
+    "file": "templates/favoritesModal.html",
+    "hash": "a9f66515ba019c0c5a6059995825eb90"
+  },
+  {
+    "file": "templates/firstTimeParkingMeterPopup.html",
+    "hash": "757be6331aba15bd6b3b1be24f8b305f"
+  },
+  {
+    "file": "templates/game/challenges.html",
+    "hash": "e6ac1e8ec24dc9b6ef3afa8ac8e1c4fa"
+  },
+  {
+    "file": "templates/game/diary.html",
+    "hash": "0bfa76e12b8782c40d1325ab3cd26d36"
+  },
+  {
+    "file": "templates/game/eventTripDetail.html",
+    "hash": "c0234d99a702d3d3979d912a9282874a"
+  },
+  {
+    "file": "templates/game/game.html",
+    "hash": "b640402c7574ebee239dc87824f148f4"
+  },
+  {
+    "file": "templates/game/gamemenu.html",
+    "hash": "191f7cf65084185d0f44ff0bfbee02ba"
+  },
+  {
+    "file": "templates/game/points.html",
+    "hash": "5f81cbf7d664129873424ed2f655f40d"
+  },
+  {
+    "file": "templates/game/rankings.html",
+    "hash": "53100a1a9f72383e43761ea0fb4f2319"
+  },
+  {
+    "file": "templates/game/rules_en.html",
+    "hash": "ea89531798c33f4f77514a52a671a5f7"
+  },
+  {
+    "file": "templates/game/rules_it.html",
+    "hash": "bf30e01c03688b746db936c069f5495d"
+  },
+  {
+    "file": "templates/game/statistics.html",
+    "hash": "6a00dc89e375c1f5114d0366f85edb64"
+  },
+  {
+    "file": "templates/home.html",
+    "hash": "f64753a1286ae9995160a2f299a31177"
+  },
+  {
+    "file": "templates/info.html",
+    "hash": "6fd42161a2b689956043d35b5d2b40bd"
+  },
+  {
+    "file": "templates/login.html",
+    "hash": "aa9ce597dfccdf403e1330c432cc12a8"
+  },
+  {
+    "file": "templates/mapModalBike.html",
+    "hash": "989cd154cc92c1493738b194685969a8"
+  },
+  {
+    "file": "templates/mapModalDetail.html",
+    "hash": "ed0cdf3d59dec4660a3f8b809d21e958"
+  },
+  {
+    "file": "templates/mapModalParking.html",
+    "hash": "6acd2a5f3b2948772c6546493c81d300"
+  },
+  {
+    "file": "templates/mapModalPlan.html",
+    "hash": "efeb9b8665120f8600bcca2481d8eb4b"
+  },
+  {
+    "file": "templates/mapModalTaxi.html",
+    "hash": "b5ae66500e84debba6241a0baf18d0f9"
+  },
+  {
+    "file": "templates/mapParkingMeters.html",
+    "hash": "1e9ab8b8f915b645edb917b524f84ec4"
+  },
+  {
+    "file": "templates/markets.html",
+    "hash": "a7f536e04a685ed4d94cd5ef99a29fbe"
+  },
+  {
+    "file": "templates/menu.html",
+    "hash": "d358210f2ea24d3611c94f6949ad8ebf"
+  },
+  {
+    "file": "templates/monitoring.html",
+    "hash": "5c3879c818bc49bb58fdd1535e0f3e32"
+  },
+  {
+    "file": "templates/mytrips.html",
+    "hash": "eaa6dbe98a23e3e6c2f7ff74cf63b5d9"
+  },
+  {
+    "file": "templates/news.html",
+    "hash": "5e362d6688d511fbf60ea9f92fa8d089"
+  },
+  {
+    "file": "templates/newsitem.html",
+    "hash": "5b615abe8129b4851ff49fae7ad1eb1d"
+  },
+  {
+    "file": "templates/noGpsPopup.html",
+    "hash": "7561b38c325846667aa9a1aec4704251"
+  },
+  {
+    "file": "templates/notification.html",
+    "hash": "724e83d3a83c8fd8d6ee75bef5c2c542"
+  },
+  {
+    "file": "templates/notifications.html",
+    "hash": "12b748673aaccdd4f5a5e1a588e019b5"
+  },
+  {
+    "file": "templates/parking.html",
+    "hash": "20649f063bf81c9fa4c950ecf5ad44d1"
+  },
+  {
+    "file": "templates/parkingMeterPopup.html",
+    "hash": "aa8e57ff792ddf9b0678408122658828"
+  },
+  {
+    "file": "templates/parkingPopup.html",
+    "hash": "69042e2158952b1a277cda2e36fb38e2"
+  },
+  {
+    "file": "templates/plan.html",
+    "hash": "dc34f4ca7f9e35efc38e32a4f97f876c"
+  },
+  {
+    "file": "templates/planlist.html",
+    "hash": "f9e2300947616bcc392367b3d1849571"
+  },
+  {
+    "file": "templates/planMapModal.html",
+    "hash": "5e9fc6a6e8a0e2c5521b867c9eeb92b8"
+  },
+  {
+    "file": "templates/planMapPopup.html",
+    "hash": "18d017246ae3429e0594d9aa9e79d0f3"
+  },
+  {
+    "file": "templates/popup-savetrip.html",
+    "hash": "4a65f49886bdb1115f058061109b9f53"
+  },
+  {
+    "file": "templates/registrationForm.html",
+    "hash": "96c5b44279e52e8c024613671ee5f8d5"
+  },
+  {
+    "file": "templates/rulesModal.html",
+    "hash": "7001acdde77ba2b8f4fb81c064a922f2"
+  },
+  {
+    "file": "templates/signup.html",
+    "hash": "687d1bc75e4c42fd40ab333d28001be2"
+  },
+  {
+    "file": "templates/signupsuccess.html",
+    "hash": "31829ca37b3aeb6afc0ab7c666324c97"
+  },
+  {
+    "file": "templates/stopPopup.html",
+    "hash": "f680ae2ba906c3cd53674249007ecdd6"
+  },
+  {
+    "file": "templates/table1.html",
+    "hash": "7ae6fec14de47828651026098340b30b"
+  },
+  {
+    "file": "templates/table2.html",
+    "hash": "b794ad68f11343f722ef6c1a9c2e92af"
+  },
+  {
+    "file": "templates/table3.html",
+    "hash": "51312cf0e9be801f0c454edab8f8e9a5"
+  },
+  {
+    "file": "templates/taxi.html",
+    "hash": "0cd3ed6554fe0e471f31e8357bd106fb"
+  },
+  {
+    "file": "templates/taxiPopup.html",
+    "hash": "9c2287148d520f9d0c566cee6912c8da"
+  },
+  {
+    "file": "templates/tripdetails.html",
+    "hash": "d5c0666b21eb135742a7ec99c166a2d3"
+  },
+  {
+    "file": "templates/ttmap.html",
+    "hash": "aee7b54de4f993c3bb6651b94765e3cc"
+  },
+  {
+    "file": "templates/ttroutelist.html",
+    "hash": "c6e1085a9a83bb8dfd1f222f80092df2"
+  },
+  {
+    "file": "templates/ttstop.html",
+    "hash": "ca821e38d15257ada47ad13be9b3418f"
+  },
+  {
+    "file": "templates/tutorial.html",
+    "hash": "9938e8e17a5633ea3eefe15813b7727d"
+  },
+  {
+    "file": "templates/validateUserPopup.html",
+    "hash": "a756cc030b84cc7c38f97f13d42e54a9"
+  },
+  {
+    "file": "templates/welcomePopup.html",
+    "hash": "9ffcdbb4320533cda1d81d739e866bcc"
+  }
+]

@@ -75,24 +75,6 @@ angular.module('viaggia.services.map', [])
         //init map with tile server provider and show my position
         mapService.initMap = function (mapId, showMyPosition) {
             var deferred = $q.defer();
-
-            //        leafletData.getMap(mapId).then(function (map) {
-            //                cachedMap[mapId] = map;
-            //                L.tileLayer('http://otile{s}.mqcdn.com/tiles/1.0.0/{type}/{z}/{x}/{y}.{ext}', {
-            //                    type: 'map',
-            //                    ext: 'jpg',
-            //                    attribution: '',
-            //                    subdomains: '1234',
-            //                    maxZoom: 18
-            //                }).addTo(map);
-            //                $ionicPlatform.ready(function () {
-            //                    GeoLocate.locate().then(function (e) {
-            //                        var myPos = L.marker(L.latLng(e[0], e[1])).addTo(map);
-            //                        cachedMap[mapId].myPos = myPos;
-            //                    });
-            //                });
-            //                deferred.resolve(map);
-            //            },
             leafletData.getMap(mapId).then(function (map) {
                 cachedMap[mapId] = map;
 
@@ -103,9 +85,16 @@ angular.module('viaggia.services.map', [])
                 }).addTo(map);
                 $ionicPlatform.ready(function () {
                     if (showMyPosition) {
+                        //add my position
                         GeoLocate.locate().then(function (e) {
-                            var myPos = L.marker(L.latLng(e[0], e[1])).addTo(map);
-                            cachedMap[mapId].myPos = myPos;
+                            map.eachLayer(function (l) {
+                                if (l instanceof L.Marker)
+                                    console.log("marker presente")
+                            });
+                            if (!cachedMap[mapId].myPos) {
+                                var myPos = L.marker(L.latLng(e[0], e[1])).addTo(map);
+                                cachedMap[mapId].myPos = myPos;
+                            }
                             //update my position every 3 second
                             if (!cachedMap[mapId].updatePosTimer) {
                                 // timer = false;

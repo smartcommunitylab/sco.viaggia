@@ -8,7 +8,9 @@
 			<span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{countNotification}}</span>
 		</button>
 		-->
-        <button ng-click="openNotifications()" class="button button-icon button-home ic_notification"><span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span></button>
+        <button ng-click="openNotifications()" class="button button-icon button-home ic_notification">
+            <span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span>
+        </button>
     </ion-nav-buttons>
 
     <ion-content ng-class="{'empty_bookmarks': primaryLinks.length == 0}" ng-init="showTutorial()">
@@ -34,8 +36,11 @@
             <div ng-if="trackingIsOn">
                 <div class="row">
                     <div class="col text-center">
-                        <h4><i class="icon ion-leaf"></i>{{'play_is_on' | translate}}</h4>
-                        <div ng-if="trackingInfo.transport"><b>{{'play_is_on_for' | translate: trackingInfo}}</b></div>
+                        <h4>
+                            <i class="icon ion-leaf"></i>{{'play_is_on' | translate}}</h4>
+                        <div ng-if="trackingInfo.transport">
+                            <b>{{'play_is_on_for' | translate: trackingInfo}}</b>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -47,26 +52,41 @@
             <div ng-if="!trackingIsOn">
                 <div class="row">
                     <div class="col text-center">
-                        <h4><i class="icon ion-leaf"></i>{{'play_now' | translate}}</h4>
-                        <div ng-if="!syncRunning"><b>{{'play_now_sub' | translate}}</b></div>
-                        <div ng-if="syncRunning"><b>{{'wait_synch_running' | translate}}</b></div>
+                        <h4>
+                            <i class="icon ion-leaf"></i>{{'play_now' | translate}}</h4>
+                        <div ng-if="!syncRunning">
+                            <b>{{'play_now_sub' | translate}}</b>
+                        </div>
+                        <div ng-if="syncRunning">
+                            <b>{{'wait_synch_running' | translate}}</b>
+                        </div>
                     </div>
                 </div>
 
                 <div class="row" ng-class="{'synch':syncRunning}">
-                   <div class="col">
-                        <a ng-click="startTracking('walk')">
-                            <div class="tracking-ds-button"><i class="icon ic_foot"></i><span>{{'track_walk' | translate}}</span></div>
+                    <div class="col">
+                        <!-- <a ng-click="startTracking('walk')"> -->
+                        <a ng-click="trackAndMap('walk')">
+                            <div class="tracking-ds-button">
+                                <i class="icon ic_foot"></i>
+                                <span>{{'track_walk' | translate}}</span>
+                            </div>
                         </a>
                     </div>
                     <div class="col">
                         <a ng-click="startTracking('bike')">
-                            <div class="tracking-ds-button"><i class="icon ic_bike"></i><span>{{'track_bike' | translate}}</span></div>
+                            <div class="tracking-ds-button">
+                                <i class="icon ic_bike"></i>
+                                <span>{{'track_bike' | translate}}</span>
+                            </div>
                         </a>
                     </div>
                     <div class="col">
                         <a ng-click="startTracking('bus')">
-                            <div class="tracking-ds-button"><i class="icon ic_urban-bus"></i><span>{{'menu_real_time_bus' | translate}}</span></div>
+                            <div class="tracking-ds-button">
+                                <i class="icon ic_urban-bus"></i>
+                                <span>{{'menu_real_time_bus' | translate}}</span>
+                            </div>
                         </a>
                     </div>
                 </div>
@@ -75,28 +95,37 @@
                 <div class="row" ng-class="{'synch':syncRunning}">
                     <div class="col">
                         <a ng-click="startTracking('train')">
-                            <div class="tracking-ds-button"><i class="icon ic_train"></i><span>{{'menu_real_time_train' | translate}}</span></div>
+                            <div class="tracking-ds-button">
+                                <i class="icon ic_train"></i>
+                                <span>{{'menu_real_time_train' | translate}}</span>
+                            </div>
                         </a>
                     </div>
                     <div class="col">
                         <a ng-click="openSavedTracks()">
-                            <div class="tracking-ds-button"><i class="icon ic_folder"></i><span>{{'track_saved' | translate}}</span></div>
+                            <div class="tracking-ds-button">
+                                <i class="icon ic_folder"></i>
+                                <span>{{'track_saved' | translate}}</span>
+                            </div>
                         </a>
                     </div>
                     <div class="col">
                         <a ng-click="openPlan()">
-                            <div class="tracking-ds-button"><i class="icon ic_search"></i><span>{{'plan_home' | translate}}</span></div>
+                            <div class="tracking-ds-button">
+                                <i class="icon ic_search"></i>
+                                <span>{{'plan_home' | translate}}</span>
+                            </div>
                         </a>
                     </div>
                 </div>
 
             </div>
             <ion-list class="home-list">
-               <button class="button button-block" ng-click="showPlayAndGoPopup()">
+                <button class="button button-block" ng-click="showPlayAndGoPopup()">
                     <div class="row">
                         <i class="col-center icon ion-leaf" style="color: #60b35c"></i>
                         <div class="col col-center">
-                            <span >PLAY&GO</span>
+                            <span>PLAY&GO</span>
                         </div>
                     </div>
                 </button>
@@ -104,7 +133,7 @@
         </div>
 
 
-<!--
+        <!--
         <div ng-if="primaryLinks.length==0">
 
             <ng-include src="'templates/emptyHomepage.html'"></ng-include>

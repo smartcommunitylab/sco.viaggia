@@ -4,10 +4,10 @@
   "description": "viaggia-mobile: An Ionic project",
   "dependencies": {
     "cordova": "^8.0.0",
-    "cordova-android": "^6.4.0",
     "cordova-android-play-services-gradle-release": "^1.1.4",
     "cordova-background-geolocation": "git+https://github.com/transistorsoft/cordova-background-geolocation.git#2.9.1",
     "cordova-custom-config": "^3.2.0",
+    "cordova-hot-code-push-plugin": "^1.5.3",
     "cordova-ios": "^4.4.0",
     "cordova-plugin-app-event": "^1.2.1",
     "cordova-plugin-app-version": "^0.1.9",
@@ -30,7 +30,7 @@
     "cordova-plugin-whitelist": "^1.2.2",
     "cordova-plugin-x-toast": "^2.5.2",
     "cordova-sqlite-storage": "^1.4.5",
-    "cordova.plugins.diagnostic": "^3.9.0",
+    "cordova.plugins.diagnostic": "^3.9.2",
     "de.appplant.cordova.plugin.local-notification": "^0.8.4",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
@@ -148,7 +148,8 @@
         "LOCATION_ALWAYS_USAGE_DESCRIPTION": "Background location-tracking is required",
         "LOCATION_WHEN_IN_USE_USAGE_DESCRIPTION": "Background location-tracking is required",
         "MOTION_USAGE_DESCRIPTION": "Using the accelerometer increases battery-efficiency by intelligently toggling location-tracking only when the device is detected to be moving"
-      }
+      },
+      "cordova-hot-code-push-plugin": {}
     },
     "platforms": [
       "ios",

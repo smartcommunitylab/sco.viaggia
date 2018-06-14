@@ -2558,3 +2558,17 @@ line-height: 1.5 !important;
      align-content: center!important;
      align-items: center!important;
     }
+.center-on-me {
+position: fixed;
+top: 150px;
+left: 10px;
+width: 30px;
+height: 30px;
+}
+.button-map {
+    padding: 0px;
+}
+.modes-buttons {
+    position: fixed;
+    bottom: 50px;
+}
