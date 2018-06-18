@@ -31,15 +31,17 @@
                                 class="message-inner" style=" border: 2px solid {{getStyleColor(message)}}">
                                 <div class="row row-center" style="padding: 0px">
                                     <!--<div class="arrow">-->
-                                        <div class=" timeline-arrow" style="border-right-color: {{getStyleColor(message)}}">
-                                        </div>
-                                        <i class=" timeline-col icon {{getIcon(message)}}" style="background-color: {{getStyleColor(message)}}"></i>
+                                    <div class=" timeline-arrow" style="border-right-color: {{getStyleColor(message)}}">
+                                    </div>
+                                    <i class=" timeline-col icon {{getIcon(message)}}" style="background-color: {{getStyleColor(message)}}"></i>
                                     <!--</div>-->
                                     <div class=" timeline-msg">
                                         {{getString(message) | translate: getParams(message)}}
                                     </div>
                                     <div class="col col-10 col-info">
-                                        <a class="challenge-info"><i class="icon ion-ios-arrow-right"></i></a>
+                                        <a class="challenge-info">
+                                            <i class="icon ion-ios-arrow-right"></i>
+                                        </a>
                                     </div>
 
                                 </div>

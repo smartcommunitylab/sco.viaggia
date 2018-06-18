@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.mapTracking', [])
 
-    .controller('MapTrackingCtrl', function ($scope, $rootScope, leafletData, mapService, Config) {
+    .controller('MapTrackingCtrl', function ($scope, $state, $rootScope, trackService, $ionicHistory, mapService, Config) {
         $scope.pathLine = {
             p1: {
                 color: 'red',
@@ -17,9 +17,16 @@ angular.module('viaggia.controllers.mapTracking', [])
                 //add polyline
             })
         }
-        // BackgroundGeolocation.getLocations(function(locations) {
-        //     console.log("locations: ", locations);
-        //   });
+        $scope.stopTracking = function () {
+            trackService.stop();
+            $ionicHistory.goBack();
+        }
+        $scope.goHome = function () {
+            $state.go('app.home');
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
+        }
         $scope.centerOnMe = function () {
 
 
@@ -28,20 +35,12 @@ angular.module('viaggia.controllers.mapTracking', [])
                 lng: $rootScope.myPosition[1],
                 zoom: $scope.center.zoom
             }
-              
+
         }
         function onLocation(location) {
             console.log('- location: ', location);
             // add to map
             $scope.pathLine.p1.latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude })
-            // $scope.center = {
-            //     lat: location.coords.latitude,
-            //     lng: location.coords.longitude,
-            //     zoom: $scope.center.zoom
-            // }
-            // leafletData.getMap('trackingMap').then(function (map) {
-            //     mapService.addMyPosition(map);
-            // });
         }
         function onLocationError(error) {
             console.log('- location error: ', error);

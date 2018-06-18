@@ -35,7 +35,9 @@ angular.module('viaggia.controllers.common', [])
     $scope.openCredits = function () {
       $scope.creditsModal.show();
     };
-
+    $scope.goBackView = function() {
+      $ionicHistory.goBack();
+    }
     $scope.openGamificationBoard = function () {
       //$scope.firstOpenPopup.close();
       $state.go('app.game');

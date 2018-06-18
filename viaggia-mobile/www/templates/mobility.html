@@ -1,0 +1,16 @@
+<ion-view id="mobility" title="{{'mobility_title'|translate}}">
+    <ion-content id="content" has-header="true">
+        <ion-list class="home-list" ng-if="primaryLinks.length>0">
+            <ion-item ng-repeat="m in primaryLinks" ng-last-repeat="primaryLinks" ng-click="go(m.state)">
+                <button class="button button-block">
+                    <div class="row">
+                        <i class="col-center icon" ng-class="m.icon" style="{{'color: ' + m.color}}"></i>
+                        <div class="col col-center">
+                            <ng-include src="getBookmarkItemTemplate(m.type)"></ng-include>
+                        </div>
+                    </div>
+                </button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

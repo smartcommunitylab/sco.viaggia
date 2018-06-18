@@ -179,7 +179,7 @@ angular.module('viaggia.controllers.home', [])
 
 
 
-        $scope.track= function (transportType) {
+        $scope.track = function (transportType) {
             Config.loading();
             if (!trackService.trackingIsGoingOn() || trackService.trackingIsFinished()) {
                 trackService.checkLocalization().then(function () {
@@ -223,7 +223,7 @@ angular.module('viaggia.controllers.home', [])
                 Config.loaded();
             }
         }
-        $scope.trackAndMap  = function (transportType) {
+        $scope.trackAndMap = function (transportType) {
             $scope.startTracking(transportType);
             $state.go('app.mapTracking');
 
@@ -237,10 +237,10 @@ angular.module('viaggia.controllers.home', [])
                         // else {
                         $scope.isBatterySaveMode().then(function (saveMode) {
                             if (saveMode) {
-                                $scope.showSaveBatteryPopUp($scope.track,transportType);
+                                $scope.showSaveBatteryPopUp($scope.track, transportType);
                             }
                             else {
-                               $scope.track(transportType);
+                                $scope.track(transportType);
                             }
                         })
                     }
@@ -387,6 +387,9 @@ angular.module('viaggia.controllers.home', [])
             $rootScope.countNotification = 0;
             $state.go('app.notifications');
         }
+        $scope.openProfile = function () {
+            $state.go('app.profile');
+        }
         $scope.go = function (state) {
             if (state.indexOf('(') > 0) {
                 eval('$scope.' + state);
@@ -412,4 +415,52 @@ angular.module('viaggia.controllers.home', [])
             tutorial.showTutorial('main', 'main', 4, $scope);
         }
 
+
+    }
+    )
+    .controller('HomeContainerCtrl', function ($scope,GameSrv, Config,Toast,$filter) {
+
+
+        $scope.currentUser = null;
+        $scope.currentUser = null;
+    
+        $scope.noStatus = false;
+
+        Config.loading();
+        GameSrv.getLocalStatus().then(
+            function (status) {
+                $scope.status = status;
+                $scope.currentUser = status.playerData.nickName;
+            },
+            function (err) {
+                $scope.noStatus = true;
+                Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+            }
+        ).finally(Config.loaded);
+
+    })
+    .controller('MobilityCtrl', function ($scope, $state, $ionicHistory, $location, bookmarkService) {
+
+        bookmarkService.getBookmarksRT().then(function (list) {
+            var homeList = [];
+            list.forEach(function (e) {
+                if (e.home) homeList.push(e);
+            });
+            $scope.primaryLinks = homeList; //Config.getPrimaryLinks();
+        });
+        $scope.go = function (state) {
+            if (state.indexOf('(') > 0) {
+                eval('$scope.' + state);
+            } else {
+                $location.path(state);
+            }
+
+        }
+        $scope.goToBookmarks = function () {
+            $state.go('app.bookmarks');
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
+
+        }
     })

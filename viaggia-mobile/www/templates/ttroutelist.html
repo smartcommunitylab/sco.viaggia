@@ -1,4 +1,9 @@
 <ion-view title="{{title}}">
+    <!-- <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goBackView()">
+            <i class="ion-android-arrow-back" style="font-size:30px;"></i>
+        </button>
+    </ion-nav-buttons> -->
     <ion-nav-buttons side="right">
         <button class="button button-icon button-fab button-viaggia-header ion-map" ng-click="showMap()" ng-if="hasMap"></button>
     </ion-nav-buttons>
@@ -13,7 +18,9 @@
                 <div class="col text-center" ng-repeat="elem in row" ng-click="selectElement(elem)">
                     <div class="route-grid-element" ng-if="elem.label" style="{{elem.color ? ('background-color: '+elem.color) : 'color:#000;border: 4px solid #000; text-shadow: none;'}}">
                         <span ng-if="!elem.gridCode">{{elem.label}}</span>
-                        <span ng-if="elem.gridCode"><i class="icon" ng-class="elem.gridCode"></i></span>
+                        <span ng-if="elem.gridCode">
+                            <i class="icon" ng-class="elem.gridCode"></i>
+                        </span>
                     </div>
                 </div>
             </div>

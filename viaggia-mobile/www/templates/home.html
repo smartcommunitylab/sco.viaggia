@@ -1,24 +1,34 @@
 <ion-view>
     <ion-nav-title>
-        {{title}}
+        Play&Go {{currentUser}}
     </ion-nav-title>
     <ion-nav-buttons side="right">
-        <!--
-		<button ng-click="openNotifications()" class="button button-icon button-home ic_notification">
-			<span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{countNotification}}</span>
-		</button>
-		-->
-        <button ng-click="openNotifications()" class="button button-icon button-home ic_notification">
-            <span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span>
-        </button>
+        <!-- <button ng-click="openNotifications()" class="button button-icon button-home ic_notification">
+                    <span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span>
+                </button> -->
+        <!-- <button ng-click="openNotifications()" class="button button-icon button-home ion-android-compass">
+                        <span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span>
+                    </button> -->
+        <button class=" button-icon button-home icon ion-person" ng-click="openProfile();"></button>
+
     </ion-nav-buttons>
 
     <ion-content ng-class="{'empty_bookmarks': primaryLinks.length == 0}" ng-init="showTutorial()">
-        <!--
-        <div id="map-container" data-tap-disabled="true">
-            <leaflet event-broadcast="events" center="center" markers="markers" paths="pathLine" style="width: 100%; height: 320px;" ng-init="initMap()"  id="homeMap"></leaflet>
+        <div class="user-state">
+            <div class="row">
+                <div class="col home-level">
+                    Livello
+                </div>
+                <div class="col home-points">
+                    {{status['pointConcept'][0]['score']}} {{'green_leaves_points' | translate}}
+                </div>
+            </div>
+            <div class="row">
+                <div id="progressbar">
+                    <div></div>
+                </div>
+            </div>
         </div>
-		-->
         <div class="sponsor_banner" ng-if="weekly_sponsor!=null">
             <div class="row">
                 <div class=" col col-center sponsor_text">
@@ -74,7 +84,7 @@
                         </a>
                     </div>
                     <div class="col">
-                        <a ng-click="startTracking('bike')">
+                        <a ng-click="trackAndMap('bike')">
                             <div class="tracking-ds-button">
                                 <i class="icon ic_bike"></i>
                                 <span>{{'track_bike' | translate}}</span>
@@ -82,45 +92,26 @@
                         </a>
                     </div>
                     <div class="col">
-                        <a ng-click="startTracking('bus')">
+                        <a ng-click="trackAndMap('bus')">
                             <div class="tracking-ds-button">
                                 <i class="icon ic_urban-bus"></i>
                                 <span>{{'menu_real_time_bus' | translate}}</span>
                             </div>
                         </a>
                     </div>
-                </div>
-
-
-                <div class="row" ng-class="{'synch':syncRunning}">
                     <div class="col">
-                        <a ng-click="startTracking('train')">
+                        <a ng-click="trackAndMap('train')">
                             <div class="tracking-ds-button">
                                 <i class="icon ic_train"></i>
                                 <span>{{'menu_real_time_train' | translate}}</span>
                             </div>
                         </a>
                     </div>
-                    <div class="col">
-                        <a ng-click="openSavedTracks()">
-                            <div class="tracking-ds-button">
-                                <i class="icon ic_folder"></i>
-                                <span>{{'track_saved' | translate}}</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a ng-click="openPlan()">
-                            <div class="tracking-ds-button">
-                                <i class="icon ic_search"></i>
-                                <span>{{'plan_home' | translate}}</span>
-                            </div>
-                        </a>
-                    </div>
                 </div>
 
+
             </div>
-            <ion-list class="home-list">
+            <!-- <ion-list class="home-list">
                 <button class="button button-block" ng-click="showPlayAndGoPopup()">
                     <div class="row">
                         <i class="col-center icon ion-leaf" style="color: #60b35c"></i>
@@ -129,7 +120,7 @@
                         </div>
                     </div>
                 </button>
-            </ion-list>
+            </ion-list> -->
         </div>
 
 
@@ -140,9 +131,13 @@
 
         </div>
 -->
+        <div>
+            Parte centrale con challenges
+        </div>
 
 
-        <ion-list class="home-list" ng-if="primaryLinks.length>0">
+
+        <!-- <ion-list class="home-list" ng-if="primaryLinks.length>0">
             <ion-item ng-repeat="m in primaryLinks" ng-last-repeat="primaryLinks" ng-click="go(m.state)">
                 <button class="button button-block">
                     <div class="row">
@@ -153,6 +148,30 @@
                     </div>
                 </button>
             </ion-item>
-        </ion-list>
+        </ion-list> -->
     </ion-content>
+    <!-- <div class="footer-bar">
+            <div class="row">
+                <div class="col">
+                    <button class="footer-button">
+                        <i class="icon ion-ios-home"></i><span>{{'home_footerbar_home' | translate}}</span> 
+                    </button>
+                </div>
+                <div class="col">
+                    <button class="footer-button">
+                        <i class="icon ion-ios-home"></i><span>{{'home_footerbar_diary' | translate}}</span> 
+                    </button>
+                </div>
+                <div class="col">
+                    <button class="footer-button">
+                        <i class="icon ion-ios-home"></i> <span>{{'home_footerbar_leaderboards' | translate}}</span>
+                    </button>
+                </div>
+                <div class="col">
+                    <button class="footer-button">
+                        <i class="icon ion-ios-home"></i> <span>{{'home_footerbar_real' | translate}}</span>
+                    </button>
+                </div>
+            </div>
+        </div> -->
 </ion-view>

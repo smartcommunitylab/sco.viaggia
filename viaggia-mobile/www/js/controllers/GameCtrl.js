@@ -833,6 +833,7 @@ angular.module('viaggia.controllers.game', [])
         $scope.currentUser = {};
         $scope.ranking = [];
         $scope.singleRankStatus = true;
+        $scope.rankingFilterOptions = ['now', 'last', 'global'];
         var getRanking = false;
         $scope.filter = {
             open: false,

@@ -73,6 +73,7 @@ angular.module('viaggia', [
   'viaggia.controllers.mapTracking',
   'viaggia.controllers.login',
   'viaggia.controllers.registration',
+  'viaggia.controllers.profile',
   'viaggia.services.data',
   'viaggia.services.conf',
   'viaggia.services.map',
@@ -95,7 +96,7 @@ angular.module('viaggia', [
   'smartcommunitylab.services.login'
 ])
 
-  .run(function ($ionicPlatform, $ionicPopup, $filter, $cordovaFile, $q, $rootScope, $translate, trackService, DataManager, DiaryDbSrv, Config, GeoLocate, notificationService, LoginService) {
+  .run(function ($ionicPlatform, $location, $ionicPopup, $filter, $ionicHistory, $state, $cordovaFile, $q, $rootScope, $translate, trackService, DataManager, DiaryDbSrv, Config, GeoLocate, notificationService, LoginService) {
 
     $rootScope.locationWatchID = undefined;
 
@@ -139,7 +140,6 @@ angular.module('viaggia', [
       // for form inputs)
 
       initAppUpdate();
-
 
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -291,6 +291,24 @@ angular.module('viaggia', [
       //     });
 
       // }
+
+      $ionicPlatform.registerBackButtonAction(function () {
+        if ($state.current.name === "app.home.leaderboards" ||$state.current.name === "app.home.diary"  || $state.current.name === "app.home.mobility" ) {
+          $ionicHistory.nextViewOptions({
+            disableBack: true,
+            historyRoot: true
+          });
+          $state.go('app.home.home');
+        }
+        else if ($state.current.name === "app.home.hometrack") {
+          navigator.app.exitApp();
+        }
+        else {
+          
+            $ionicHistory.goBack();
+            //navigator.app.goBack();
+        }
+        }, 100);
       $ionicPlatform.on('resume', function () {
         console.log('+++ RESUME +++');
         // localizationAlwaysAllowed().then(function (loc){
@@ -310,6 +328,7 @@ angular.module('viaggia', [
 
   .config(function ($stateProvider, $compileProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider) {
     $ionicConfigProvider.views.swipeBackEnabled(false);
+    $ionicConfigProvider.tabs.position('bottom');
 
     $stateProvider.state('app', {
       url: "/app",
@@ -340,17 +359,75 @@ angular.module('viaggia', [
         }
       })
 
+      // .state('app.home', {
+      //   cache: false,
+      //   url: "/home",
+      //   views: {
+      //     'menuContent': {
+      //       templateUrl: "templates/home.html",
+      //       controller: 'HomeCtrl'
+      //     }
+      //   }
+      // })
       .state('app.home', {
         cache: false,
         url: "/home",
         views: {
           'menuContent': {
-            templateUrl: "templates/home.html",
+            templateUrl: "templates/homeContainer.html",
+            controller: 'HomeContainerCtrl'
+          }
+        }
+      })
+
+      // Each tab has its own nav history stack:
+
+      .state('app.home.home', {
+        cache: false,
+        url: '/hometrack',
+        views: {
+          'tab-home': {
+            templateUrl: 'templates/home.html',
             controller: 'HomeCtrl'
           }
         }
       })
 
+      .state('app.home.diary', {
+        cache: false,
+        url: '/diary',
+        params: {
+          challengeEnd: null
+        },
+        views: {
+          'tab-diary': {
+            templateUrl: "templates/game/diary.html",
+            controller: 'DiaryCtrl'
+          }
+        }
+      })
+
+      .state('app.home.leaderboards', {
+        cache: false,
+        url: '/leaderboards',
+        views: {
+          'tab-leaderboards': {
+            templateUrl: 'templates/game/rankings.html',
+            controller: 'RankingsCtrl'
+          }
+        }
+      })
+
+      .state('app.home.mobility', {
+        cache: false,
+        url: '/mobility',
+        views: {
+          'tab-mobility': {
+            templateUrl: "templates/mobility.html",
+            controller: 'MobilityCtrl'
+          }
+        }
+      })
       .state('app.plan', {
         cache: false,
         url: "/plan",
@@ -444,7 +521,16 @@ angular.module('viaggia', [
           }
         }
       })
-
+      .state('app.profile', {
+        cache: false,
+        url: "/profile",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/game/profile.html",
+            controller: 'ProfileCtrl'
+          }
+        }
+      })
       .state('app.newsitem', {
         cache: false,
         url: "/newsitem/:id",
@@ -1232,7 +1318,13 @@ angular.module('viaggia', [
       pop_up_always_GPS_template: "Per utilizzare l'applicazione è necessario impostare 'Consenti di accedere alla posizione' su 'Sempre'",
       pop_up_always_GPS_go_on: "Imposta",
       pop_up_battery_save: "Risparmio energetico attivo",
-      pop_up_battery_save_template: "La modalità \"Risparmio energetico\" potrebbe influire negativamente sulla precisione con cui viene tracciato il viaggio che potrebbe quindi risultare non valido. Per un tracciato preciso, disattivare la modalità \"Risparmio energetico\""
+      pop_up_battery_save_template: "La modalità \"Risparmio energetico\" potrebbe influire negativamente sulla precisione con cui viene tracciato il viaggio che potrebbe quindi risultare non valido. Per un tracciato preciso, disattivare la modalità \"Risparmio energetico\"",
+      home_footerbar_home: "HOME",
+      home_footerbar_diary: "DIARIO",
+      home_footerbar_leaderboards: "CLASSIFICA",
+      home_footerbar_real: "MOBILITA`",
+      mobility_title: "Mobilita`",
+      profile_title: "Profilo"
     });
 
     $translateProvider.translations('en', {
@@ -1674,7 +1766,13 @@ angular.module('viaggia', [
       pop_up_always_GPS_template: "In order to use the application you have to set 'Allow Location Access' to 'Always'",
       pop_up_always_GPS_go_on: "Setting",
       pop_up_battery_save: "Battery Saver Mode Active",
-      pop_up_battery_save_template: "Battery Saver Mode may cause inaccurate tracking and the journey could be not valid. In order to improve tracking precision, turn off \"Battery Saver Mode\""
+      pop_up_battery_save_template: "Battery Saver Mode may cause inaccurate tracking and the journey could be not valid. In order to improve tracking precision, turn off \"Battery Saver Mode\"",
+      home_footerbar_home: "HOME",
+      home_footerbar_diary: "DIARY",
+      home_footerbar_leaderboards: "LEADERBOARD",
+      home_footerbar_real: "PUBLIC TRANSPORT`",
+      mobility_title: "Mobility",
+      profile_title: "Profile"
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

@@ -1,4 +1,9 @@
 <ion-view id="tripdetails" title="{{'journey_detail' | translate}}">
+    <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goBackView()">
+            <i class="ion-android-arrow-back" style="font-size:30px;"></i>
+        </button>
+    </ion-nav-buttons>
     <ion-content id="content" has-header="true" scroll="false">
         <div id="trip-event-map-container" data-tap-disabled="true">
             <!--<leaflet event-broadcast="events" center="center" markers="markers" paths="pathLine" style="width: 100%; height: 700px;" ng-init="initMap()" id="mapEventTripDetail"></leaflet>-->
@@ -31,21 +36,31 @@
 
                 <ion-list class="list-stats" ng-if="tripIsValid()">
                     <div class="chart">
-                        <div ng-if="message.travelDistances.walk>0" class="walkbgcolor statsfloat" style="{{getStyle(message.travelDistances.walk, 'walk')}}"><i class="icon ic_foot"></i></div>
+                        <div ng-if="message.travelDistances.walk>0" class="walkbgcolor statsfloat" style="{{getStyle(message.travelDistances.walk, 'walk')}}">
+                            <i class="icon ic_foot"></i>
+                        </div>
                         <div ng-if="message.travelDistances.walk>0" class="statstext" id="walkcolor"> {{message.travelDistances.walk/1000 | number:2}} km </div>
                         <div id="statsdiv"></div>
 
-                        <div ng-if="message.travelDistances.bike>0" class="bikebgcolor statsfloat" style="{{getStyle(message.travelDistances.bike, 'bike')}}"><i class="icon ic_bike"></i></div>
+                        <div ng-if="message.travelDistances.bike>0" class="bikebgcolor statsfloat" style="{{getStyle(message.travelDistances.bike, 'bike')}}">
+                            <i class="icon ic_bike"></i>
+                        </div>
                         <div ng-if="message.travelDistances.bike>0" class="statstext" id="bikecolor"> {{message.travelDistances.bike/1000| number:2}} km </div>
                         <div id="statsdiv"></div>
 
                         <div ng-if="(message.travelDistances.transit+message.travelDistances.bus+message.travelDistances.train)>0" class="publicbgcolor statsfloat"
-                            style="{{getStyle(message.travelDistances.transit, 'transit')}}"><i class="icon  ic_urban-bus"></i><i class="icon ic_train"></i></div>
+                            style="{{getStyle(message.travelDistances.transit, 'transit')}}">
+                            <i class="icon  ic_urban-bus"></i>
+                            <i class="icon ic_train"></i>
+                        </div>
                         <div ng-if="(message.travelDistances.transit+message.travelDistances.bus+message.travelDistances.train)>0" class="statstext"
-                            id="publiccolor"> {{(message.travelDistances.transit+message.travelDistances.bus+message.travelDistances.train)/1000| number:2}} km </div>
+                            id="publiccolor"> {{(message.travelDistances.transit+message.travelDistances.bus+message.travelDistances.train)/1000|
+                            number:2}} km </div>
                         <div id="statsdiv"></div>
 
-                        <div ng-if="message.travelDistances.car>0" class="carbgcolor statsfloat" style="{{getStyle(message.travelDistances.car, 'car')}}"><i class="icon ic_car"></i></div>
+                        <div ng-if="message.travelDistances.car>0" class="carbgcolor statsfloat" style="{{getStyle(message.travelDistances.car, 'car')}}">
+                            <i class="icon ic_car"></i>
+                        </div>
                         <div ng-if="message.travelDistances.car>0" class="statstext" id="carcolor"> {{message.travelDistances.car/1000| number:2}} km </div>
                         <div id="statsdiv"></div>
                     </div>
