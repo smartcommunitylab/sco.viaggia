@@ -1,6 +1,16 @@
 angular.module('viaggia.controllers.home', [])
 
     .controller('HomeCtrl', function ($scope, $state, $q, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv, DiaryDbSrv, BT) {
+       
+        $scope.challenges = [];
+        $scope.buttons = [{
+            label: $filter('translate')('menu_news'),
+            icon: 'ic_news'
+        }, {
+            label: $filter('translate')('menu_notifications'),
+            icon: 'ic_notification'
+        }];
+        
         //load from localstorage the id notifications read
         $ionicPlatform.ready(function () {
             document.addEventListener("resume", function () {
@@ -49,25 +59,28 @@ angular.module('viaggia.controllers.home', [])
                 //$ionicLoading.hide();
             });
         }
-        $scope.buttons = [{
-            label: $filter('translate')('menu_news'),
-            icon: 'ic_news'
-        }, {
-            label: $filter('translate')('menu_notifications'),
-            icon: 'ic_notification'
-        }];
-        var mymap = document.getElementById('map-container');
+        var setChallenges = function() {
+            if (!!$scope.status && !!$scope.status['challengeConcept']) {
+                if ($scope.status) {
+                    $scope.challenges = $scope.status['challengeConcept']['activeChallengeData'];
+                    if (!$scope.challenges) $scope.challenges = [];
+                } else {
+                    $scope.challenges = null;
+                }
+            }
+        }
+        // var mymap = document.getElementById('map-container');
 
         Config.init().then(function () {
             $rootScope.title = Config.getAppName();
-            angular.extend($scope, {
-                center: {
-                    lat: Config.getMapPosition().lat,
-                    lng: Config.getMapPosition().long,
-                    zoom: Config.getMapPosition().zoom
-                },
-                events: {}
-            });
+            // angular.extend($scope, {
+            //     center: {
+            //         lat: Config.getMapPosition().lat,
+            //         lng: Config.getMapPosition().long,
+            //         zoom: Config.getMapPosition().zoom
+            //     },
+            //     events: {}
+            // });
 
             bookmarkService.getBookmarksRT().then(function (list) {
                 var homeList = [];
@@ -80,6 +93,7 @@ angular.module('viaggia.controllers.home', [])
             notificationInit();
             initWatch();
             localDataInit();
+            setChallenges();
 
         }, function () {
             //$ionicLoading.hide();
@@ -423,7 +437,6 @@ angular.module('viaggia.controllers.home', [])
 
         $scope.currentUser = null;
         $scope.currentUser = null;
-    
         $scope.noStatus = false;
 
         Config.loading();

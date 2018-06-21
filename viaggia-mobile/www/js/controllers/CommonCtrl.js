@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.common', [])
 
-  .controller('AppCtrl', function ($scope, $q, $state, $rootScope, $ionicHistory, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, Utils, tutorial) {
+  .controller('AppCtrl', function ($scope, $q, $state, $rootScope, trackService, $ionicHistory, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, Utils, tutorial) {
     /* menu group */
     $scope.shownGroup = false;
     $scope.toggleGroupRealTime = function () {
@@ -14,6 +14,21 @@ angular.module('viaggia.controllers.common', [])
 
     $scope.isGroupRealTimeShown = function () {
       return $scope.shownGroup === true;
+    };
+
+    // playGo group
+    $scope.shownPlayGroup = false;
+    $scope.toggleGroupPlayGo = function () {
+      if ($scope.isGroupPlayGoShown()) {
+        $scope.shownPlayGroup = false;
+      } else {
+        $scope.shownPlayGroup = true;
+      }
+      localStorage.setItem(Config.getAppId() + '_shownPlayGroup', $scope.shownPlayGroup);
+    };
+
+    $scope.isGroupPlayGoShown = function () {
+      return $scope.shownPlayGroup === true;
     };
     $scope.isAccessibilitySet = function () {
       return Config.getAccessibility();
@@ -35,9 +50,31 @@ angular.module('viaggia.controllers.common', [])
     $scope.openCredits = function () {
       $scope.creditsModal.show();
     };
-    $scope.goBackView = function() {
+    $scope.goBackView = function () {
       $ionicHistory.goBack();
     }
+    $scope.buttonMapNeed = function () {
+      //if tracking is going on and I'm not in the map page show it
+      if ($state.current.name != "app.mapTracking" && $state.current.name != "app.login" && trackService.trackingIsGoingOn() && !trackService.trackingIsFinished())
+        return true;
+      return false
+    }
+    $scope.goToMap = function () {
+      $state.go('app.mapTracking');
+      $ionicHistory.nextViewOptions({
+        disableBack: true,
+        historyRoot: false
+      });
+
+    }
+    $scope.goHome = function () {
+      $state.go('app.home.home');
+      $ionicHistory.nextViewOptions({
+        disableBack: true,
+        historyRoot: true
+      });
+    }
+
     $scope.openGamificationBoard = function () {
       //$scope.firstOpenPopup.close();
       $state.go('app.game');
@@ -143,15 +180,15 @@ angular.module('viaggia.controllers.common', [])
 
     $scope.isBatterySaveMode = function () {
       var deferred = $q.defer();
-      BackgroundGeolocation.isPowerSaveMode(function(isPowerSaveMode) {
-        if (isPowerSaveMode){
+      BackgroundGeolocation.isPowerSaveMode(function (isPowerSaveMode) {
+        if (isPowerSaveMode) {
           deferred.resolve(true);
-        }        
+        }
         else {
           deferred.resolve(false);
         }
-       
-      }, function (err){
+
+      }, function (err) {
         deferred.reject(err);
       });
       return deferred.promise;
@@ -193,7 +230,7 @@ angular.module('viaggia.controllers.common', [])
       });
       return deferred.promise;
     }
-    $scope.showSaveBatteryPopUp = function (goOn,transportType) {
+    $scope.showSaveBatteryPopUp = function (goOn, transportType) {
       $ionicPopup.confirm({
         title: $filter('translate')("pop_up_battery_save"),
         template: $filter('translate')("pop_up_battery_save_template"),
@@ -202,11 +239,12 @@ angular.module('viaggia.controllers.common', [])
             text: $filter('translate')("btn_close"),
             type: 'button-cancel'
           },
-          {text: $filter('translate')("btn_start_tracking"),
-          type: 'button-ok',
-          onTap: function () {
-            goOn(transportType);
-          }
+          {
+            text: $filter('translate')("btn_start_tracking"),
+            type: 'button-ok',
+            onTap: function () {
+              goOn(transportType);
+            }
           }
         ]
       });
@@ -226,12 +264,13 @@ angular.module('viaggia.controllers.common', [])
             text: $filter('translate')("pop_up_always_GPS_go_on"),
             type: 'button-custom',
             onTap: function () {
-              if (device.platform=="iOS"){
+              if (device.platform == "iOS") {
                 cordova.plugins.diagnostic.switchToSettings();
+              }
+              else {
+                cordova.plugins.diagnostic.switchToLocationSettings();
+              }
             }
-            else {
-            cordova.plugins.diagnostic.switchToLocationSettings();
-            }            }
           }
         ]
       });
@@ -366,6 +405,7 @@ angular.module('viaggia.controllers.common', [])
 
     Config.init().then(function () {
       $scope.infomenu = Config.getInfoMenu();
+      $scope.playmenu = Config.getPlayMenu();
       $scope.version = Config.getVersion();
       $scope.shownGroup = JSON.parse(localStorage.getItem(Config.getAppId() + '_shownGroup')) || false;
       $scope.contactLink = Config.getContactLink();

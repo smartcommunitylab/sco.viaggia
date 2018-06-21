@@ -1,4 +1,9 @@
 <ion-view title="{{'menu_taxi'|translate}}">
+    <!-- <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goBackView()">
+            <i class="ion-android-arrow-back" style="font-size:30px;"></i>
+        </button>
+    </ion-nav-buttons> -->
     <ion-nav-buttons side="right">
         <button class="button button-icon button-fab button-viaggia-header ion-map" ng-click="showMap()"></button>
     </ion-nav-buttons>
@@ -14,7 +19,9 @@
 </div>
 -->
                 <div class="user-position-your-position"> {{'taxi_label_your_position'|translate}}</div>
-                <div class="user-position-your-position"> <b>{{userPosition.name}}</b></div>
+                <div class="user-position-your-position">
+                    <b>{{userPosition.name}}</b>
+                </div>
                 <div class="user-position-your-position"> {{'taxi_label_check_it'|translate}}</div>
 
             </div>
@@ -29,12 +36,14 @@
                     <div class="taxi-name ">{{t.name}}</div>
                     <ion-list>
                         <ion-item ng-repeat="phone in t.phone ">
-                            <i class="icon voice-menu ion-ios-telephone taxi-icon " style="margin-right: 20px; "></i><a href="tel:{{phone}} " class="taxi-number ">{{phone}}</a>
+                            <i class="icon voice-menu ion-ios-telephone taxi-icon " style="margin-right: 20px; "></i>
+                            <a href="tel:{{phone}} " class="taxi-number ">{{phone}}</a>
                         </ion-item>
                     </ion-list>
                     <ion-list>
                         <ion-item ng-repeat="sms in t.sms ">
-                            <i class="icon voice-menu ion-android-chat taxi-icon " style="margin-right: 20px; "></i><a href="sms:{{sms}} " class="taxi-number ">{{sms}}</a>
+                            <i class="icon voice-menu ion-android-chat taxi-icon " style="margin-right: 20px; "></i>
+                            <a href="sms:{{sms}} " class="taxi-number ">{{sms}}</a>
                         </ion-item>
                     </ion-list>
                 </div>

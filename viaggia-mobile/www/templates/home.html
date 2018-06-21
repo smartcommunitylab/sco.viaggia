@@ -111,67 +111,32 @@
 
 
             </div>
-            <!-- <ion-list class="home-list">
-                <button class="button button-block" ng-click="showPlayAndGoPopup()">
-                    <div class="row">
-                        <i class="col-center icon ion-leaf" style="color: #60b35c"></i>
-                        <div class="col col-center">
-                            <span>PLAY&GO</span>
-                        </div>
-                    </div>
-                </button>
-            </ion-list> -->
-        </div>
-
-
-        <!--
-        <div ng-if="primaryLinks.length==0">
-
-            <ng-include src="'templates/emptyHomepage.html'"></ng-include>
 
         </div>
--->
-        <div>
-            Parte centrale con challenges
-        </div>
 
 
-
-        <!-- <ion-list class="home-list" ng-if="primaryLinks.length>0">
-            <ion-item ng-repeat="m in primaryLinks" ng-last-repeat="primaryLinks" ng-click="go(m.state)">
-                <button class="button button-block">
-                    <div class="row">
-                        <i class="col-center icon" ng-class="m.icon" style="{{'color: ' + m.color}}"></i>
-                        <div class="col col-center">
-                            <ng-include src="getBookmarkItemTemplate(m.type)"></ng-include>
-                        </div>
-                    </div>
-                </button>
-            </ion-item>
-        </ion-list> -->
-    </ion-content>
-    <!-- <div class="footer-bar">
+        <div class="home-challenges">
             <div class="row">
-                <div class="col">
-                    <button class="footer-button">
-                        <i class="icon ion-ios-home"></i><span>{{'home_footerbar_home' | translate}}</span> 
-                    </button>
+                <div class="col home-your-challenges">
+                    {{'home_your_challenges'|translate}}
                 </div>
-                <div class="col">
-                    <button class="footer-button">
-                        <i class="icon ion-ios-home"></i><span>{{'home_footerbar_diary' | translate}}</span> 
-                    </button>
-                </div>
-                <div class="col">
-                    <button class="footer-button">
-                        <i class="icon ion-ios-home"></i> <span>{{'home_footerbar_leaderboards' | translate}}</span>
-                    </button>
-                </div>
-                <div class="col">
-                    <button class="footer-button">
-                        <i class="icon ion-ios-home"></i> <span>{{'home_footerbar_real' | translate}}</span>
-                    </button>
+                <div class="col home-add-challenges ">
+                    <button class="button icon ion-plus-round" ng-click="addChallenge()"></button>
                 </div>
             </div>
-        </div> -->
+            <div ng-if="challenges.length>0">
+                <div ng-repeat="challenge in challenges">
+                    challenge detail
+                </div>
+            </div>
+            <div class="home-no-challenge" ng-if="challenges.length==0">
+                {{'home_no_challenges'|translate}}
+            </div>
+
+        </div>
+
+
+
+    </ion-content>
+
 </ion-view>

@@ -160,6 +160,33 @@
                 "state": "/app/parking",
                 "label": "menu_real_time_park",
                 "icon": "ic_parking-lot"
+            },
+            {
+                "state": "/app/taxi",
+                "label": "menu_taxi",
+                "icon": "ic_taxi"
+            }
+        ],
+        "playmenu": [
+            {
+                "state": "openRules()",
+                "label": "btn_rules",
+                "icon": "ic_game_rules"
+            },
+            {
+                "state": "openFAQ()",
+                "label": "btn_faq",
+                "icon": "ion-help"
+            },
+            {
+                "state": "openPrizes()",
+                "label": "registration_prizes",
+                "icon": "ic_game_challenge"
+            },
+            {
+                "state": "forceTutorial()",
+                "label": "tutorial",
+                "icon": "ic_game_tutorial"
             }
         ]
     },
@@ -179,7 +206,7 @@
         "heartbeatInterval": 10,
         "stopOnTerminate": false,
         "debug": false,
-         "locationUpdateInterval": 1000,
+        "locationUpdateInterval": 1000,
         "minimumActivityRecognitionConfidence": 80,
         "fastestLocationUpdateInterval": 1000,
         "forceReloadOnLocationChange": false,

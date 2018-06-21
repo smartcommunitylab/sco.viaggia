@@ -92,7 +92,7 @@ angular.module('viaggia.services.tracking', [])
         /**
          * send to server the information about tracking start: tripId, transport type (in case of direct tracking), status of geolocalization, and device information
          */
-        var sendServerStart = function (trip, tripId, token, transportType, status) {
+        var sendServerStart = function (trip, tripId, multimodalId, token, transportType, status) {
             var deferred = $q.defer();
 
             var info = angular.copy(ionic.Platform.device());
@@ -101,7 +101,7 @@ angular.module('viaggia.services.tracking', [])
             info.appVersion = appVersion();
             var url = "";
             if (transportType) {
-                url = (Config.getServerURL() + '/gamification/freetracking/' + transportType + '/' + tripId);
+                url = (Config.getServerURL() + '/gamification/freetracking/' + transportType + '/' + tripId + '/' + multimodalId);
             } else if (tripId.indexOf("temporary") == -1) {
                 url = (Config.getServerURL() + '/gamification/journey/' + tripId);
                 trip = {};
@@ -251,8 +251,13 @@ angular.module('viaggia.services.tracking', [])
                 localStorage.setItem(Config.getAppId() + '_trackedTransport', transport);
                 var ts = new Date().getTime();
                 var tripId = transport + '_' + ts;
+                //if same group multimodal is present, otherwise create a new multimodalid
+                var multimodalId = localStorage.getItem(Config.getAppId() + '_multimodalId');
+                if (!multimodalId) {
+                    multimodalId = 'multimodal_' + ts;
+                }
                 // default duration set to 1 month
-                trackService.start(tripId, {
+                trackService.start(tripId, multimodalId, {
                     data: {
                         startime: ts,
                         endtime: ts + 2 * 24 * 60 * 60 * 1000
@@ -264,6 +269,7 @@ angular.module('viaggia.services.tracking', [])
                                 bgGeo.getCurrentPosition(function (location, taskId) {
                                     location.extras = {
                                         idTrip: tripId,
+                                        multimodalId: multimodalId,
                                         start: ts,
                                         transportType: transport,
                                         btDeviceId: btId
@@ -297,7 +303,7 @@ angular.module('viaggia.services.tracking', [])
                 var startTimestamp = new Date().getTime();
                 LoginService.getValidAACtoken().then(function (token) {
                     bgGeo.getCurrentPosition(function (location, taskId) {
-                        sendServerStart(trip, tripId, token, null, -1).then(function () {
+                        sendServerStart(trip, tripId, null, token, null, -1).then(function () {
                             location.extras = {
                                 idTrip: tripId,
                                 start: startTimestamp
@@ -308,7 +314,7 @@ angular.module('viaggia.services.tracking', [])
                             });
                             trip.tripId = tripId;
                             localStorage.setItem(Config.getAppId() + '_temporary', JSON.stringify(trip));
-                            trackService.start(tripId, {
+                            trackService.start(tripId, null, {
                                 data: trip
                             }
                                 , callback, startTimestamp)
@@ -319,20 +325,20 @@ angular.module('viaggia.services.tracking', [])
                                 });
                         }, function (err) {
                             //in case of temporary journey, if start doesn't arrive, stop it
-                            bgGeo.stop( function(){
+                            bgGeo.stop(function () {
                                 clean()
                                 deferred.reject("temporary");
                             });
-                           
-                            
+
+
                         })
 
                     }, function (errorCode) {
-                        bgGeo.stop(function(){
+                        bgGeo.stop(function () {
                             clean()
                             deferred.reject(errorCode);
                         });
-                        
+
                     }
                     )
                 }, function (err) {
@@ -447,15 +453,16 @@ angular.module('viaggia.services.tracking', [])
 
 
 
-        var manageStartToServer = function (trip, idTrip, transportType, startTimestamp) {
+        var manageStartToServer = function (trip, idTrip, multimodalId, transportType, startTimestamp) {
             var deferred = $q.defer();
             var temporary = false;
             if (trip) {
                 LoginService.getValidAACtoken().then(function (token) {
                     bgGeo.getCurrentPosition(function (location, taskId) {
-                        sendServerStart(trip.data, idTrip, token, transportType, -1).then(function () {
+                        sendServerStart(trip.data, idTrip, multimodalId, token, transportType, -1).then(function () {
                             location.extras = {
                                 idTrip: idTrip,
+                                multimodalId: multimodalId,
                                 start: startTimestamp,
                                 transportType: transportType
                             }; // <-- add some arbitrary extras-data
@@ -481,6 +488,7 @@ angular.module('viaggia.services.tracking', [])
                             desiredAccuracy: ACCURACY, // Fetch a location with a minimum accuracy of ACCURACY meters.
                             extras: {
                                 idTrip: idTrip,
+                                multimodalId: multimodalId,
                                 start: startTimestamp,
                                 transportType: transportType
                             }
@@ -502,7 +510,7 @@ angular.module('viaggia.services.tracking', [])
          * If trip object is specified, then the tracking data is updated with its properties (start/end time).
          * If callback is specified, this will be executed upon end of tracking time.
          */
-        trackService.start = function (idTrip, trip, callback, timestamp) {
+        trackService.start = function (idTrip, multimodalId, trip, callback, timestamp) {
             var deferred = $q.defer();
             // LoginService.getValidAACtoken().then(function (token) {
             var today = new Date();
@@ -545,6 +553,7 @@ angular.module('viaggia.services.tracking', [])
 
             trackingConfigure['extras'] = {
                 idTrip: idTrip,
+                multimodalId: multimodalId,
                 start: startTimestamp,
                 transportType: transportType
             };
@@ -552,6 +561,7 @@ angular.module('viaggia.services.tracking', [])
             if (trip) {
                 localStorage.setItem(Config.getAppId() + '_state', 'TRACKING');
                 localStorage.setItem(Config.getAppId() + '_tripId', idTrip);
+                localStorage.setItem(Config.getAppId() + '_multimodalId', multimodalId);
                 localStorage.setItem(Config.getAppId() + '_startTimestamp', startTimestamp);
                 localStorage.setItem(Config.getAppId() + '_endTimestamp', endtime);
                 if (trip.data && trip.data.customData) {
@@ -593,7 +603,7 @@ angular.module('viaggia.services.tracking', [])
 
                 //if not temporary try to send start otherwise u already send it
                 if (idTrip.indexOf("temporary") == -1) {
-                    manageStartToServer(trip, idTrip, transportType, startTimestamp).then(function () {
+                    manageStartToServer(trip, idTrip, multimodalId, transportType, startTimestamp).then(function () {
                         deferred.resolve();
                     }, function (err) {
                         deferred.reject();
@@ -710,7 +720,26 @@ angular.module('viaggia.services.tracking', [])
             return deferred.promise;
         };
 
-
+        /**
+         * STOP THE TRACKER WITHOUTH SYNCH.
+         * Used for changing on the fly .
+         */
+        trackService.stopNoSynch = function () {
+            var deferred = $q.defer();
+            markAsDone();
+            cleanPartially();
+            //delete timer if pending
+            $timeout.cancel(timerTrack);
+            if (bgGeo) {
+                bgGeo.stop(function(){
+                    deferred.resolve();
+                }, function() {
+                    deferred.reject();
+                });
+            }
+            BT.stopScan();
+            return deferred.promise;
+        };
 
 
         var markAsDone = function () {
@@ -730,7 +759,7 @@ angular.module('viaggia.services.tracking', [])
             //choose if go on with tracking
             //or manage the stop and sync the data
             if (trackService.trackingIsGoingOn() && !trackService.trackingIsFinished()) {
-                trackService.start(localStorage.getItem(Config.getAppId() + '_tripId'));
+                trackService.start(localStorage.getItem(Config.getAppId() + '_tripId'), localStorage.getItem(Config.getAppId() + '_multimodalId'));
             } else {
                 //preserve strange state when user delete memory and tracking service start again
                 trackService.stop();
@@ -759,13 +788,22 @@ angular.module('viaggia.services.tracking', [])
             //clean local storage data from localstorage
             localStorage.removeItem(Config.getAppId() + '_state');
             localStorage.removeItem(Config.getAppId() + '_tripId');
+            localStorage.removeItem(Config.getAppId() + '_multimodalId');
             localStorage.removeItem(Config.getAppId() + '_startTimestamp');
             localStorage.removeItem(Config.getAppId() + '_endTimestamp');
             localStorage.removeItem(Config.getAppId() + '_trackedTransport');
             localStorage.removeItem(Config.getAppId() + '_expectedPoints');
         };
 
-
+        var cleanPartially = function () {
+            //leave multimodal
+            localStorage.removeItem(Config.getAppId() + '_state');
+            localStorage.removeItem(Config.getAppId() + '_tripId');
+            localStorage.removeItem(Config.getAppId() + '_startTimestamp');
+            localStorage.removeItem(Config.getAppId() + '_endTimestamp');
+            localStorage.removeItem(Config.getAppId() + '_trackedTransport');
+            localStorage.removeItem(Config.getAppId() + '_expectedPoints');
+        };
 
         trackService.cleanTracking = function () {
             clean();

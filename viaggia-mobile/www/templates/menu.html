@@ -1,6 +1,12 @@
+<!-- <div class="tracking button icon ion-map"ng-click="goToMap()" ng-if="buttonMapNeed();">
+</div> -->
+<!-- <div class="container"> -->
+	<button class="pulse-button  icon ion-map" ng-click="goToMap()" ng-if="buttonMapNeed();"></button>
+<!-- </div> -->
 <ion-side-menus enable-menu-with-back-views="false">
 	<ion-side-menu-content drag-menu-content="false" edge-drag-threshold="true">
-		<ion-nav-bar class="bar-positive-100" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}" align-title="left">
+		<ion-nav-bar class="bar-positive-100" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}"
+		 align-title="left">
 			<ion-nav-back-button class="no-text">
 			</ion-nav-back-button>
 			<ion-nav-buttons side="left">
@@ -12,7 +18,7 @@
 		<ion-nav-view name="menuContent"></ion-nav-view>
 	</ion-side-menu-content>
 
-	<ion-side-menu side="left" >
+	<ion-side-menu side="left">
 		<ion-content class="leftmenu">
 			<ion-list>
 				<div class="fs-header"></div>
@@ -31,7 +37,20 @@
 						<i class="icon" ng-class="isGroupRealTimeShown() ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i>
 					</ion-item>
 					<div>
-						<ion-item class="item-icon-left item-accordion  menu-rt" ng-repeat="m in infomenu" ng-show="isGroupRealTimeShown()" nav-clear menu-close item-icon-left ng-href="#{{m.state}}">
+						<ion-item class="item-icon-left item-accordion  menu-rt" ng-repeat="m in infomenu" ng-show="isGroupRealTimeShown()" nav-clear
+						 menu-close item-icon-left ng-href="#{{m.state}}">
+							<i class="icon" ng-class="m.icon"></i>{{m.label | translate}}
+						</ion-item>
+					</div>
+				</div>
+				<div>
+					<ion-item class="item item-icon-left item-icon-right menu-main" ng-click="toggleGroupPlayGo()" ng-class="{active: isGroupPlayGoShown()}">
+						<i class="icon ic_real-time-info"></i> {{'menu_gamification' | translate}}
+						<i class="icon" ng-class="isGroupPlayGoShown() ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i>
+					</ion-item>
+					<div>
+						<ion-item class="item-icon-left item-accordion  menu-rt" ng-repeat="m in playmenu" ng-show="isGroupPlayGoShown()" nav-clear
+						 menu-close item-icon-left ng-click="{{m.state}}">
 							<i class="icon" ng-class="m.icon"></i>{{m.label | translate}}
 						</ion-item>
 					</div>
@@ -41,9 +60,9 @@
                     <i class="icon ic_monitoring"></i>{{'menu_monitoring' | translate}}
                 </ion-item>
 				-->
-				<ion-item nav-clear menu-close href="#/app/taxi" class="menu-main item-icon-left" ng-if="taxiEnabled">
+				<!-- <ion-item nav-clear menu-close href="#/app/taxi" class="menu-main item-icon-left" ng-if="taxiEnabled">
 					<i class="icon ic_taxi"></i>{{'menu_taxi' | translate}}
-				</ion-item>
+				</ion-item> -->
 				<ion-item nav-clear menu-close href="#/app/news" class="menu-main item-icon-left">
 					<i class="icon ic_news"></i>{{'menu_news' | translate}}
 				</ion-item>
@@ -66,9 +85,10 @@
 				<ion-item nav-clear menu-close href="{{contactLink}}" class="item-icon-left menu-main ">
 					<i class="icon ic_segnala_problemi"></i>{{'menu_betatesting_bug' | translate}}
 				</ion-item>
-				<ion-item nav-clear menu-close ng-click="showPlayAndGoPopup()" class="item-icon-left menu-game">
+				<!-- <ion-item nav-clear menu-close ng-click="showPlayAndGoPopup()" class="item-icon-left menu-game">
 					<i class="icon ion-leaf"></i>{{'menu_gamification' | translate}}
-				</ion-item>
+				</ion-item> -->
+
 				<ion-item nav-clear menu-close ng-click="openCredits()" class="menu-last item-icon-left">
 					<i class="icon ic_info"></i>{{'menu_credits' | translate}}
 				</ion-item>

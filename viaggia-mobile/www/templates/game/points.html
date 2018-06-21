@@ -1,4 +1,9 @@
 <ion-view title="{{'home_gamification' | translate}} {{currentUser.nickName}}">
+    <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goHome()">
+            <i class="ion-android-arrow-back" style="font-size:30px;"></i>
+        </button>
+    </ion-nav-buttons>
     <ion-nav-buttons side="right">
         <button ng-click="openRules()" class="button icon button-icon button-clear ion-information-circled"></button>
     </ion-nav-buttons>

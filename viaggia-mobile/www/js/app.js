@@ -428,6 +428,46 @@ angular.module('viaggia', [
           }
         }
       })
+      .state('app.profile', {
+        cache: false,
+        url: "/profile",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/game/profile.html",
+            controller: 'ProfileCtrl'
+          }
+        }
+      })
+      .state('app.profile.points', {
+        cache: false,
+        url: "/points",
+        views: {
+          'tab-points': {
+            templateUrl: 'templates/game/points.html',
+            controller: 'PointsCtrl'
+          }
+        }
+      })
+      .state('app.profile.challenges', {
+        cache: false,
+        url: "/challenges",
+        views: {
+          'tab-challenges': {
+            templateUrl: 'templates/game/challenges.html',
+            controller: 'ChallengesCtrl'
+          }
+        }
+      })
+      .state('app.profile.statistics', {
+        cache: false,
+        url: "/statistics",
+        views: {
+          'tab-statistics': {
+            templateUrl: "templates/game/statistics.html",
+            controller: 'StatisticsCtrl'
+          }
+        }
+      })
       .state('app.plan', {
         cache: false,
         url: "/plan",
@@ -521,16 +561,7 @@ angular.module('viaggia', [
           }
         }
       })
-      .state('app.profile', {
-        cache: false,
-        url: "/profile",
-        views: {
-          'menuContent': {
-            templateUrl: "templates/game/profile.html",
-            controller: 'ProfileCtrl'
-          }
-        }
-      })
+     
       .state('app.newsitem', {
         cache: false,
         url: "/newsitem/:id",
@@ -1324,7 +1355,17 @@ angular.module('viaggia', [
       home_footerbar_leaderboards: "CLASSIFICA",
       home_footerbar_real: "MOBILITA`",
       mobility_title: "Mobilita`",
-      profile_title: "Profilo"
+      profile_title: "Profilo",
+      home_your_challenges:"Le tue sfide",
+      home_no_challenges:"Nessuna sfida attiva",
+      profile_footerbar_points:"Punteggio",
+      profile_footerbar_challenges:"Sfide",
+      profile_footerbar_statistics:"Statistiche",
+      pop_up_change_free_track_title:"Tracciamento libero",
+      pop_up_change_free_track_template:"Sei sicuro di voler cambiare il mezzo di trasporto con cui stai tracciando?",
+      pop_up_change_free_track_go_on:"Continua"
+
+
     });
 
     $translateProvider.translations('en', {
@@ -1772,7 +1813,15 @@ angular.module('viaggia', [
       home_footerbar_leaderboards: "LEADERBOARD",
       home_footerbar_real: "PUBLIC TRANSPORT`",
       mobility_title: "Mobility",
-      profile_title: "Profile"
+      profile_title: "Profile",
+      home_your_challenges:"Your challenges",
+      home_no_challenges:"No active challenges",
+      profile_footerbar_points:"Points",
+      profile_footerbar_challenges:"Challenges",
+      profile_footerbar_statistics:"Statistics",
+      pop_up_change_free_track_title:"Free tracking",
+      pop_up_change_free_track_template:"Do you want to change the tracking means?",
+      pop_up_change_free_track_go_on:"Confirm"
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

@@ -1,16 +1,15 @@
-<ion-view>
-    <ion-nav-title>
-        {{'profile_title' | translate}}
-    </ion-nav-title>
-    <ion-nav-buttons side="left">
-        <button class="button button-clear" ng-click="goBackView()">
-            <i class="ion-android-arrow-back" style="font-size:30px;"></i>
-        </button>
-    </ion-nav-buttons>
-    <ion-content scroll="false">
-        <div id="modal-map-container" data-tap-disabled="true">
-            profilo utente
 
-        </div>
-    </ion-content>
-</ion-view>
+<ion-tabs class="tabs-icon-top">
+        <ion-tab title="{{'profile_footerbar_points' | translate}}" icon-on="ion-leaf"  icon-off="ion-leaf"  ui-sref="app.profile.points">
+            <ion-nav-view name="tab-points"></ion-nav-view>
+        </ion-tab>
+    
+        <ion-tab title="{{'profile_footerbar_challenges' | translate}}" icon-on="ic_game_challenge" icon-off="ic_game_challenge"  ui-sref="app.profile.challenges">
+            <ion-nav-view name="tab-challenges"></ion-nav-view>
+        </ion-tab>
+    
+        <ion-tab title="{{'profile_footerbar_statistics' | translate}}" icon-on="ic_game_statistic" icon-off="ic_game_statistic" 
+            ui-sref="app.profile.statistics">
+            <ion-nav-view name="tab-statistics"></ion-nav-view>
+        </ion-tab>
+</ion-tabs>

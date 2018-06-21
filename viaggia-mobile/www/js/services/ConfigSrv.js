@@ -421,6 +421,9 @@ angular.module('viaggia.services.conf', [])
             getInfoMenu: function () {
                 return mapJsonConfig.visualization.infomenu;
             },
+            getPlayMenu: function () {
+                return mapJsonConfig.visualization.playmenu;
+            },
             getPrimaryLinks: function () {
                 return mapJsonConfig.visualization.primaryLinks;
             },

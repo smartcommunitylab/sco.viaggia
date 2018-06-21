@@ -15,10 +15,10 @@
                 <button class="button button-map icon ion-android-locate"></button>
             </div>
             <div class="modes-buttons">
-                <button class="button button-map icon ic_foot"></button>
-                <button class="button button-map icon ic_bike"></button>
-                <button class="button button-map icon ic_urban-bus"></button>
-                <button class="button button-map icon ic_train"></button>
+                <button class="button button-map icon ic_foot" ng-class="{'actual-track':actualTracking('walk')}" ng-click="changeTracking('walk')"></button>
+                <button class="button button-map icon ic_bike" ng-class="{'actual-track':actualTracking('bike')}" ng-click="changeTracking('bike')"></button>
+                <button class="button button-map icon ic_urban-bus" ng-class="{'actual-track':actualTracking('bus')}" ng-click="changeTracking('bus')"></button>
+                <button class="button button-map icon ic_train" ng-class="{'actual-track':actualTracking('train')}" ng-click="changeTracking('train')"></button>
             </div>
             <button class="button button-stop-map" ng-click="stopTracking()">STOP</button>
 
