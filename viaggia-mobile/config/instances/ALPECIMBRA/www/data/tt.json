@@ -489,13 +489,19 @@
                         {
                             "routeId": "FG_R_A",
                             "routeSymId": "FG_R_A",
-                            "title": "TRENINO - FOLGARIA-COSTA (ANDATA)",
+                            "title": "TRENINO - FOLGARIA-COSTA",
                             "color": "#EB8919"
-                        },
+                        }
+                    ]
+                },
+                {
+                    "agencyId": "9",
+                    "color": "#EB8919",
+                    "routes": [
                         {
-                            "routeId": "FG_R_R",
-                            "routeSymId": "FG_R_R",
-                            "title": "TRENINO - COSTA-FOLGARIA (RITORNO)",
+                            "routeId": "LV_A",
+                            "routeSymId": "LV_A",
+                            "title": "LINEA VERDE - LAVARONE-LAGO E FRAZIONI",
                             "color": "#EB8919"
                         }
                     ]
@@ -507,7 +513,13 @@
                         {
                             "routeId": "LB_A",
                             "routeSymId": "LB_A",
-                            "title": "SKIBUS LINEA BLU - FOLGARIA-PASSO COE-FOLGARIA",
+                            "title": "LINEA BLU - GUARDIA-SERRADA-FOLGARIA-PASSO COE",
+                            "color": "#EB8919"
+                        },
+                        {
+                            "routeId": "LB_R",
+                            "routeSymId": "LB_R",
+                            "title": "LINEA BLU - PASSO COE-FOLGARIA-SERRADA-GUARDIA",
                             "color": "#EB8919"
                         }
 
@@ -518,15 +530,15 @@
                     "color": "#EB8919",
                     "routes": [
                         {
-                            "routeId": "LR_A",
-                            "routeSymId": "LR_A",
-                            "title": "SKIBUS LINEA ROSSA - LAVARONE-PASSO COE (ANDATA)",
+                            "routeId": "LR_A_SL",
+                            "routeSymId": "LR_A_SL",
+                            "title": "LINEA ROSSA - SERRADA-FOLGARIA-COSTA-CARBONARE-LAVARONE",
                             "color": "#EB8919"
                         },
                          {
-                            "routeId": "LR_R",
-                            "routeSymId": "LR_R",
-                            "title": "SKIBUS LINEA ROSSA - PASSO COE-LAVARONE (RITORNO)",
+                            "routeId": "LR_R_SL",
+                            "routeSymId": "LR_R_SL",
+                            "title": "LINEA ROSSA - LAVARONE-CARBONARE-COSA-FOLGARIA-SERRADA",
                             "color": "#EB8919"
                         }
                     ]
