@@ -60,9 +60,69 @@ angular.module('viaggia.controllers.mapTracking', [])
         }
 
         $scope.stopTracking = function () {
+            // Config.loading();
+            // $scope.trackingIsOn = false;
+            // if (!!$scope.trackInfoInterval) $interval.cancel($scope.trackInfoInterval);
+            // $scope.trackingInfo = {};
+            // trackService.computeInfo().then(function (data) {
+            //     Config.loaded();
+            //     var travelForDiary = GameSrv.getTravelForDiary()
+            //     trackService.stop();
+            //     $ionicHistory.goBack();
+            //     if (Math.floor(data.dist < Config.getMinimumDistance()) && data.transport == 'walk') {
+
+            //         // Toast.show($filter('translate')("no_points"), "short", "bottom");
+            //         $ionicPopup.alert({
+            //             title: $filter('translate')("no_points_title"),
+            //             template: $filter('translate')("no_points", {
+            //                 points: data.points
+            //             }),
+            //             okText: $filter('translate')("btn_close"),
+            //             okType: 'button-cancel'
+            //         })
+
+            //     } else {
+            //         if (data.valid) {
+            //             GameSrv.addTravelDiary(travelForDiary);
+            //             $ionicPopup.confirm({
+            //                 title: $filter('translate')("pop_up_points_title"),
+            //                 template: $filter('translate')("pop_up_points_template"),
+            //                 buttons: [
+            //                     {
+            //                         text: $filter('translate')("btn_close"),
+            //                         type: 'button-cancel'
+            //                     },
+            //                     {
+            //                         text: $filter('translate')("pop_up_points_btn"),
+            //                         type: 'button-custom',
+            //                         onTap: function () {
+            //                             $state.go('app.diary');
+            //                         }
+            //                     }
+            //                 ]
+            //             });
+            //         } else {
+            //             $ionicPopup.alert({
+            //                 title: $filter('translate')("pop_up_invalid_tracking_title"),
+            //                 template: $filter('translate')("pop_up_invalid_tracking_template"),
+            //                 okText: $filter('translate')("btn_close"),
+            //                 okType: 'button-cancel'
+            //             });
+
+            //         }
+            //     }
+            // }, function () {
+            //     //puo' darsi che finisca qui?
+            //     Config.loaded();
+            //     $scope.showErrorServer();
+            //     trackService.stop();
+            //     $ionicHistory.goBack();
+
+            // }).finally(Config.loaded);
             trackService.stop();
-            //clean also multimodal if present
             $ionicHistory.goBack();
+
+            //clean also multimodal if present
         }
         $scope.goHome = function () {
             $state.go('app.home');
@@ -102,16 +162,16 @@ angular.module('viaggia.controllers.mapTracking', [])
         }
 
         $scope.actualTracking = function (type) {
-            //TODO actually return true only if type is walk
             var tripId = localStorage.getItem(Config.getAppId() + '_tripId');
             if (tripId && tripId.startsWith(type))
                 return true;
             return false;
         }
         $scope.getActualTracking = function () {
-            //TODO actually return true only if type is walk
             var tripId = localStorage.getItem(Config.getAppId() + '_tripId');
-            return tripId.substring(0, tripId.indexOf('_'));
+            if (tripId)
+                return tripId.substring(0, tripId.indexOf('_'));
+            else return null;
         }
         $scope.centerOnMe = function () {
 
@@ -121,12 +181,14 @@ angular.module('viaggia.controllers.mapTracking', [])
                     lng: $rootScope.myPosition[1],
                     zoom: $scope.center.zoom
                 }
-
         }
+        
         function onLocation(location) {
             console.log('- location: ', location);
             // add to map
-            $scope.pathLine[$scope.getActualTracking()].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
+            var actualTrack = $scope.getActualTracking();
+            if (actualTrack)
+                $scope.pathLine[actualTrack].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
         }
         function onLocationError(error) {
             console.log('- location error: ', error);
