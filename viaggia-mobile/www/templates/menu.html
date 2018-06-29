@@ -1,16 +1,17 @@
-<!-- <div class="tracking button icon ion-map"ng-click="goToMap()" ng-if="buttonMapNeed();">
-</div> -->
-<!-- <div class="container"> -->
-	<button class="pulse-button  icon ion-map" ng-click="goToMap()" ng-if="buttonMapNeed();"></button>
-<!-- </div> -->
+<button class="pulse-button  icon ion-map" ng-click="goToMap()" ng-if="buttonMapNeed();">
+</button>
 <ion-side-menus enable-menu-with-back-views="false">
 	<ion-side-menu-content drag-menu-content="false" edge-drag-threshold="true">
 		<ion-nav-bar class="bar-positive-100" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}"
 		 align-title="left">
-			<ion-nav-back-button class="no-text">
-			</ion-nav-back-button>
+			<!-- <ion-nav-back-button class="no-text">
+			</ion-nav-back-button> -->
+
 			<ion-nav-buttons side="left">
-				<button class="button button-icon button-clear" menu-toggle="left">
+				<button class="button button-clear" ng-if="!isHomePages();" ng-click="goBackView()">
+					<i class="ion-android-arrow-back" style="font-size:30px;"></i>
+				</button>
+				<button class="button button-icon button-clear" ng-if="isHomePages();" menu-toggle="left">
 					<i class="icon ion-navicon"></i>
 				</button>
 			</ion-nav-buttons>

@@ -293,7 +293,7 @@ angular.module('viaggia', [
       // }
 
       $ionicPlatform.registerBackButtonAction(function () {
-        if ($state.current.name === "app.home.leaderboards" ||$state.current.name === "app.home.diary"  || $state.current.name === "app.home.mobility" ) {
+        if ($state.current.name === "app.home.leaderboards" || $state.current.name === "app.home.diary" || $state.current.name === "app.home.mobility") {
           $ionicHistory.nextViewOptions({
             disableBack: true,
             historyRoot: true
@@ -304,11 +304,11 @@ angular.module('viaggia', [
           navigator.app.exitApp();
         }
         else {
-          
-            $ionicHistory.goBack();
-            //navigator.app.goBack();
+
+          $ionicHistory.goBack();
+          //navigator.app.goBack();
         }
-        }, 100);
+      }, 100);
       $ionicPlatform.on('resume', function () {
         console.log('+++ RESUME +++');
         // localizationAlwaysAllowed().then(function (loc){
@@ -468,6 +468,19 @@ angular.module('viaggia', [
           }
         }
       })
+      .state('app.profileOthers', {
+        cache: false,
+        url: "/profile",
+        params: {
+          profileId: null
+        },
+        views: {
+          'menuContent': {
+            templateUrl: "templates/game/profileOthers.html",
+            controller: 'ProfileOthersCtrl'
+          }
+        }
+      })
       .state('app.plan', {
         cache: false,
         url: "/plan",
@@ -561,7 +574,7 @@ angular.module('viaggia', [
           }
         }
       })
-     
+
       .state('app.newsitem', {
         cache: false,
         url: "/newsitem/:id",
@@ -1356,14 +1369,20 @@ angular.module('viaggia', [
       home_footerbar_real: "MOBILITA`",
       mobility_title: "Mobilita`",
       profile_title: "Profilo",
-      home_your_challenges:"Le tue sfide",
-      home_no_challenges:"Nessuna sfida attiva",
-      profile_footerbar_points:"Punteggio",
-      profile_footerbar_challenges:"Sfide",
-      profile_footerbar_statistics:"Statistiche",
-      pop_up_change_free_track_title:"Tracciamento libero",
-      pop_up_change_free_track_template:"Sei sicuro di voler cambiare il mezzo di trasporto con cui stai tracciando?",
-      pop_up_change_free_track_go_on:"Continua"
+      home_your_challenges: "Le tue sfide",
+      home_no_challenges: "Nessuna sfida attiva",
+      profile_footerbar_points: "Punteggio",
+      profile_footerbar_challenges: "Sfide",
+      profile_footerbar_statistics: "Statistiche",
+      pop_up_change_free_track_title: "Tracciamento libero",
+      pop_up_change_free_track_template: "Sei sicuro di voler cambiare il mezzo di trasporto con cui stai tracciando?",
+      pop_up_change_free_track_go_on: "Continua",
+      user_level_label: "Livello",
+      user_points_label: "Punti Green Leaves",
+      user_stat_walk_label: "Km a piedi",
+      user_stat_bike_label: "Km in bici",
+      user_stat_bus_label: "Km in autobus",
+      user_stat_train_label: "Km in treno"
 
 
     });
@@ -1814,14 +1833,20 @@ angular.module('viaggia', [
       home_footerbar_real: "PUBLIC TRANSPORT`",
       mobility_title: "Mobility",
       profile_title: "Profile",
-      home_your_challenges:"Your challenges",
-      home_no_challenges:"No active challenges",
-      profile_footerbar_points:"Points",
-      profile_footerbar_challenges:"Challenges",
-      profile_footerbar_statistics:"Statistics",
-      pop_up_change_free_track_title:"Free tracking",
-      pop_up_change_free_track_template:"Do you want to change the tracking means?",
-      pop_up_change_free_track_go_on:"Confirm"
+      home_your_challenges: "Your challenges",
+      home_no_challenges: "No active challenges",
+      profile_footerbar_points: "Points",
+      profile_footerbar_challenges: "Challenges",
+      profile_footerbar_statistics: "Statistics",
+      pop_up_change_free_track_title: "Free tracking",
+      pop_up_change_free_track_template: "Do you want to change the tracking means?",
+      pop_up_change_free_track_go_on: "Confirm",
+      user_level_label: "Level",
+      user_points_label: "Green Leaves Points",
+      user_stat_walk_label: "Km by foot",
+      user_stat_bike_label: "Km by bike",
+      user_stat_bus_label: "Km by bus",
+      user_stat_train_label: "Km by train"
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

@@ -1,24 +1,49 @@
 angular.module('viaggia.controllers.mapTracking', [])
 
-    .controller('MapTrackingCtrl', function ($scope, $state, $filter, $rootScope, $ionicPopup, trackService, $ionicHistory, mapService, Config) {
+    .controller('MapTrackingCtrl', function ($scope, $state, $interval, $filter, $rootScope, $ionicPopup, trackService, $ionicHistory, mapService, Config) {
+        $scope.progressPercent = {
+            walk: 0,
+            bike: 0,
+            bus: 0,
+            train: 0
+        };
+        $scope.progressCounter = {
+            walk: 0,
+            bike: 0,
+            bus: 0,
+            train: 0
+        };
+        $scope.maxvalues = {
+            maxDailywalk: 10000,
+            maxDailybike: 20000,
+            maxDailybus: 50000,
+            maxDailytrain: 50000
+        }
         $scope.pathLine = {
             walk: {
                 color: 'red',
+                type: 'polyline',
                 weight: 8,
                 latlngs: []
             },
             bike: {
                 color: 'yellow',
+                type: 'polyline',
+
                 weight: 8,
                 latlngs: []
             },
             train: {
                 color: 'blue',
+                type: 'polyline',
+
                 weight: 8,
                 latlngs: []
             },
             bus: {
                 color: 'green',
+                type: 'polyline',
+
                 weight: 8,
                 latlngs: []
             }
@@ -27,6 +52,24 @@ angular.module('viaggia.controllers.mapTracking', [])
             $scope.initMap();
         });
 
+        function setTrackingInfo() {
+            if (localStorage.getItem(Config.getAppId() + '_startTimestamp'))
+                $scope.trackingInfo = {
+                    time: $filter('date')(new Date().getTime() - trackService.trackingTimeStart(), 'HH:mm:ss', '+0000')
+                };
+            else {
+                $scope.trackingInfo = {
+                    time: ""
+                };
+            }
+        };
+
+        var updateTrackingInfo = function () {
+            setTrackingInfo();
+            $scope.trackInfoInterval = $interval(function () {
+                setTrackingInfo();
+            }, 1000);
+        }
         $scope.initMap = function () {
             mapService.initMap('trackingMap', true).then(function () {
                 if ($rootScope.myPosition) {
@@ -40,16 +83,20 @@ angular.module('viaggia.controllers.mapTracking', [])
                 $scope.initPath();
                 var actualMultimodal = localStorage.getItem(Config.getAppId() + '_multimodalId');
                 BackgroundGeolocation.getLocations(function (locations) {
+                    // locations.sort(function (a, b) { return (a.timestamp > b.timestamp) ? 1 : ((b.timestamp > a.timestamp) ? -1 : 0); });
                     locations.forEach(location => {
 
                         //check if stored are equal to current multimodal
                         if (location.extras.multimodalId === actualMultimodal)
-                            $scope.pathLine[location.extras.transportType].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
-                    });
+                            // $scope.pathLine[location.extras.transportType].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
+                            $scope.pathLine['walk'].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
+                    })
+                    updateTrackingInfo();
+                    updateBar(location);
                     // console.log("locations: ", locations);
-                });
+                    BackgroundGeolocation.on('location', onLocation, onLocationError);
 
-
+                }, BackgroundGeolocation.on('location', onLocation, onLocationError));
             })
         }
         $scope.initPath = function () {
@@ -60,67 +107,8 @@ angular.module('viaggia.controllers.mapTracking', [])
         }
 
         $scope.stopTracking = function () {
-            // Config.loading();
-            // $scope.trackingIsOn = false;
-            // if (!!$scope.trackInfoInterval) $interval.cancel($scope.trackInfoInterval);
-            // $scope.trackingInfo = {};
-            // trackService.computeInfo().then(function (data) {
-            //     Config.loaded();
-            //     var travelForDiary = GameSrv.getTravelForDiary()
-            //     trackService.stop();
-            //     $ionicHistory.goBack();
-            //     if (Math.floor(data.dist < Config.getMinimumDistance()) && data.transport == 'walk') {
-
-            //         // Toast.show($filter('translate')("no_points"), "short", "bottom");
-            //         $ionicPopup.alert({
-            //             title: $filter('translate')("no_points_title"),
-            //             template: $filter('translate')("no_points", {
-            //                 points: data.points
-            //             }),
-            //             okText: $filter('translate')("btn_close"),
-            //             okType: 'button-cancel'
-            //         })
-
-            //     } else {
-            //         if (data.valid) {
-            //             GameSrv.addTravelDiary(travelForDiary);
-            //             $ionicPopup.confirm({
-            //                 title: $filter('translate')("pop_up_points_title"),
-            //                 template: $filter('translate')("pop_up_points_template"),
-            //                 buttons: [
-            //                     {
-            //                         text: $filter('translate')("btn_close"),
-            //                         type: 'button-cancel'
-            //                     },
-            //                     {
-            //                         text: $filter('translate')("pop_up_points_btn"),
-            //                         type: 'button-custom',
-            //                         onTap: function () {
-            //                             $state.go('app.diary');
-            //                         }
-            //                     }
-            //                 ]
-            //             });
-            //         } else {
-            //             $ionicPopup.alert({
-            //                 title: $filter('translate')("pop_up_invalid_tracking_title"),
-            //                 template: $filter('translate')("pop_up_invalid_tracking_template"),
-            //                 okText: $filter('translate')("btn_close"),
-            //                 okType: 'button-cancel'
-            //             });
-
-            //         }
-            //     }
-            // }, function () {
-            //     //puo' darsi che finisca qui?
-            //     Config.loaded();
-            //     $scope.showErrorServer();
-            //     trackService.stop();
-            //     $ionicHistory.goBack();
-
-            // }).finally(Config.loaded);
             trackService.stop();
-            $ionicHistory.goBack();
+            $scope.goHome();
 
             //clean also multimodal if present
         }
@@ -130,6 +118,20 @@ angular.module('viaggia.controllers.mapTracking', [])
                 disableBack: true
             });
         }
+        $scope.shownGroupTrack = false;
+        $scope.toggleGroupTrack = function () {
+            if ($scope.isGroupTrackShown()) {
+                $scope.shownGroupTrack = false;
+            } else {
+                $scope.shownGroupTrack = true;
+            }
+        };
+
+        $scope.isGroupTrackShown = function () {
+            return $scope.shownGroupTrack === true;
+        };
+
+
 
         $scope.changeTracking = function (type) {
             //se type e' uguale al tipo attuale non cambiare
@@ -182,19 +184,34 @@ angular.module('viaggia.controllers.mapTracking', [])
                     zoom: $scope.center.zoom
                 }
         }
-        
+        function updateBar(location) {
+            //TODO best calculation over max 
+            if (location.extras) {
+                $scope.progressCounter[location.extras.transportType]++;
+                $scope.progressPercent.walk = ($scope.progressCounter.walk * 20 / $scope.maxvalues.maxDailywalk) * 100;
+                $scope.progressPercent.bike = ($scope.progressCounter.bike * 20 / $scope.maxvalues.maxDailybike) * 100;
+                $scope.progressPercent.bus = ($scope.progressCounter.bus * 20 / $scope.maxvalues.maxDailybus) * 100;
+                $scope.progressPercent.train = ($scope.progressCounter.train * 20 / $scope.maxvalues.maxDailytrain) * 100;
+            }
+
+        }
         function onLocation(location) {
-            console.log('- location: ', location);
-            // add to map
-            var actualTrack = $scope.getActualTracking();
-            if (actualTrack)
-                $scope.pathLine[actualTrack].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
+            // console.log('- location: ', location);
+            // // add to map
+            // var actualTrack = $scope.getActualTracking();
+            // if (actualTrack)
+            //     $scope.pathLine[actualTrack].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
+
+            // update the only path and update the bars on the
+            if ($scope.pathLine['walk'].latlngs.length == 0 || ($scope.pathLine['walk'].latlngs[$scope.pathLine['walk'].latlngs.length - 1].lat != location.coords.latitude && $scope.pathLine['walk'].latlngs[$scope.pathLine['walk'].latlngs.length - 1].lng != location.coords.longitude)) {
+                $scope.pathLine['walk'].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
+                updateBar(location);
+            }
         }
         function onLocationError(error) {
             console.log('- location error: ', error);
         }
         // Add a location listener
-        BackgroundGeolocation.on('location', onLocation, onLocationError);
         // $scope.pathLine = mapService.getTripPolyline(trip.data);
         // $scope.pathMarkers = mapService.getTripPoints(trip.data);
 

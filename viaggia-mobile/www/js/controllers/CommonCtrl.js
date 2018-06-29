@@ -1,6 +1,8 @@
 angular.module('viaggia.controllers.common', [])
 
   .controller('AppCtrl', function ($scope, $q, $state, $rootScope, trackService, $ionicHistory, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, Utils, tutorial) {
+
+
     /* menu group */
     $scope.shownGroup = false;
     $scope.toggleGroupRealTime = function () {
@@ -26,7 +28,14 @@ angular.module('viaggia.controllers.common', [])
       }
       localStorage.setItem(Config.getAppId() + '_shownPlayGroup', $scope.shownPlayGroup);
     };
-
+    $scope.openProfileOthers = function (profile) {
+      $state.go('app.profileOthers', {
+        profileId: profile.playerId
+      });
+    }
+    $scope.openProfile = function () {
+      $state.go('app.profile');
+    }
     $scope.isGroupPlayGoShown = function () {
       return $scope.shownPlayGroup === true;
     };
@@ -51,13 +60,27 @@ angular.module('viaggia.controllers.common', [])
       $scope.creditsModal.show();
     };
     $scope.goBackView = function () {
-      $ionicHistory.goBack();
+      var backView = $ionicHistory.backView();
+      if (backView) {
+        $ionicHistory.goBack();
+      } else {
+        $state.go('app.home.home');
+        $ionicHistory.nextViewOptions({
+          disableBack: true,
+          historyRoot: true
+        });
+      }
     }
     $scope.buttonMapNeed = function () {
       //if tracking is going on and I'm not in the map page show it
       if ($state.current.name != "app.mapTracking" && $state.current.name != "app.login" && trackService.trackingIsGoingOn() && !trackService.trackingIsFinished())
         return true;
       return false
+    }
+    $scope.isHomePages = function () {
+      if ($state.current.name === "app.home.home" || $state.current.name === "app.home.leaderboards" || $state.current.name === "app.home.diary" || $state.current.name === "app.home.mobility")
+        return true;
+      return false;
     }
     $scope.goToMap = function () {
       $state.go('app.mapTracking');

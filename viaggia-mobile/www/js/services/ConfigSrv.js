@@ -26,7 +26,7 @@ angular.module('viaggia.services.conf', [])
         var PARKING_METERS_RADIUS = '5';
         var PARKING_METERS_MAX_NUMBER = 5;
 
-         var HTTP_CONFIG = {
+        var HTTP_CONFIG = {
             timeout: 5000
         };
         var TRACKING_MINIMUM_DISTANCE = 250;
@@ -35,7 +35,7 @@ angular.module('viaggia.services.conf', [])
         var PARKING_METERS_RADIUS = '5';
         var PARKING_METERS_MAX_NUMBER = 52;
         var PARKING_METERS_AGENCY_IDS = ['tn_mob_091516'];
-        
+
         var GEOCODER_URL = 'https://tn.smartcommunitylab.it/core.geocoder';
         var APP_BUILD = '';
         var PLAN_TYPES = ['WALK', 'TRANSIT', 'CAR', 'BICYCLE', 'SHAREDCAR', 'SHAREDBIKE'];
@@ -215,7 +215,7 @@ angular.module('viaggia.services.conf', [])
         }
 
         var configDeferred = null;
-
+        var badgeTypes = ['green leaves', 'bike aficionado', 'sustainable life', 'public transport aficionado', 'bike sharing pioneer', 'park and ride pioneer', 'recommendations', 'leaderboard top 3'];
         return {
             //init the application with configuration and timetables from configuration's file
             init: function () {
@@ -233,6 +233,9 @@ angular.module('viaggia.services.conf', [])
                     });
                 });
                 return configDeferred.promise;
+            },
+            getBadgeTypes: function () {
+                return badgeTypes;
             },
             getHTTPConfig: function () {
                 return angular.copy(HTTP_CONFIG);
@@ -300,10 +303,10 @@ angular.module('viaggia.services.conf', [])
             },
             getGeocoderConf: function () {
                 return {
-                timeout: 5000,
-                headers: {
-                    appId: undefined
-                }
+                    timeout: 5000,
+                    headers: {
+                        appId: undefined
+                    }
                 };
             },
             getGamificationURL: function () {

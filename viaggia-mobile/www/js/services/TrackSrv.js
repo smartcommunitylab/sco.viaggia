@@ -101,7 +101,7 @@ angular.module('viaggia.services.tracking', [])
             info.appVersion = appVersion();
             var url = "";
             if (transportType) {
-                url = (Config.getServerURL() + '/gamification/freetracking/' + transportType + '/' + tripId + '/' + multimodalId);
+                url = (Config.getServerURL() + '/gamification/freetracking/' + transportType + '/' + tripId);
             } else if (tripId.indexOf("temporary") == -1) {
                 url = (Config.getServerURL() + '/gamification/journey/' + tripId);
                 trip = {};
@@ -562,7 +562,10 @@ angular.module('viaggia.services.tracking', [])
                 localStorage.setItem(Config.getAppId() + '_state', 'TRACKING');
                 localStorage.setItem(Config.getAppId() + '_tripId', idTrip);
                 localStorage.setItem(Config.getAppId() + '_multimodalId', multimodalId);
-                localStorage.setItem(Config.getAppId() + '_startTimestamp', startTimestamp);
+                //se c'e' gia' e' multimodal e non lo sovrascrivo
+                if (!localStorage.getItem(Config.getAppId() + '_startTimestamp')) {
+                    localStorage.setItem(Config.getAppId() + '_startTimestamp', startTimestamp);
+                }
                 localStorage.setItem(Config.getAppId() + '_endTimestamp', endtime);
                 if (trip.data && trip.data.customData) {
                     localStorage.setItem(Config.getAppId() + '_expectedPoints', trip.data.customData['estimatedScore']);
@@ -731,9 +734,9 @@ angular.module('viaggia.services.tracking', [])
             //delete timer if pending
             $timeout.cancel(timerTrack);
             if (bgGeo) {
-                bgGeo.stop(function(){
+                bgGeo.stop(function () {
                     deferred.resolve();
-                }, function() {
+                }, function () {
                     deferred.reject();
                 });
             }
@@ -799,7 +802,6 @@ angular.module('viaggia.services.tracking', [])
             //leave multimodal
             localStorage.removeItem(Config.getAppId() + '_state');
             localStorage.removeItem(Config.getAppId() + '_tripId');
-            localStorage.removeItem(Config.getAppId() + '_startTimestamp');
             localStorage.removeItem(Config.getAppId() + '_endTimestamp');
             localStorage.removeItem(Config.getAppId() + '_trackedTransport');
             localStorage.removeItem(Config.getAppId() + '_expectedPoints');

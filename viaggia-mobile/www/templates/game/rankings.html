@@ -1,5 +1,14 @@
 <ion-view title="{{'home_gamification' | translate}} {{currentUser.nickName}}">
+    <ion-nav-buttons side="right">
+        <!-- <button ng-click="openNotifications()" class="button button-icon button-home ic_notification">
+                            <span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span>
+                        </button> -->
+        <!-- <button ng-click="openNotifications()" class="button button-icon button-home ion-android-compass">
+                                <span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span>
+                            </button> -->
+        <button class=" button-icon button-home icon ion-person" ng-click="openProfile();"></button>
 
+    </ion-nav-buttons>
     <ion-content class="game-ranking" has-bouncing="false" scroll="false">
         <!-- Filter -->
         <div class="filter item-accordion" ng-if="!!filter.options">
@@ -37,7 +46,7 @@
 
             <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="rankingScroll">
                 <ion-list>
-                    <div ng-repeat="rankingUser in ranking" ng-class="{'pos-even': ($index % 2 == 0)}">
+                    <div ng-repeat="rankingUser in ranking" ng-class="{'pos-even': ($index % 2 == 0)}" on-tap="openProfileOthers(rankingUser)">
                         <div class="row" id="position-{{$index}}">
                             <div class="col col-25">{{rankingUser.position}}</div>
                             <div class="col col-50">{{rankingUser.nickName}}</div>

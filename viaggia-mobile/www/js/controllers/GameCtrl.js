@@ -58,7 +58,7 @@ angular.module('viaggia.controllers.game', [])
 
 
     //loads the score tab and all the badges of the user
-    .controller('PointsCtrl', function ($scope) {
+    .controller('PointsCtrl', function ($scope, Config) {
         // green leaves: Green Leaves
         // bike aficionado: Bike Trip Badge
         // sustainable life: Zero Impact Badge
@@ -68,7 +68,7 @@ angular.module('viaggia.controllers.game', [])
         // leaderboard top 3: Leaderboard Top 3 Badge
 
         $scope.badges = null;
-        $scope.badgeTypes = ['green leaves', 'bike aficionado', 'sustainable life', 'public transport aficionado', 'bike sharing pioneer', 'park and ride pioneer', 'recommendations', 'leaderboard top 3'];
+         $scope.badgeTypes = Config.getBadgeTypes();
 
         $scope.$watch('status.badgeCollectionConcept', function (newBadges, oldBadges) {
             var badges = {};
@@ -828,7 +828,7 @@ angular.module('viaggia.controllers.game', [])
         $scope.init();
     }
     )
-    .controller('RankingsCtrl', function ($scope, $ionicScrollDelegate, $window, $timeout, Config, GameSrv, Toast, $filter, $ionicPosition) {
+    .controller('RankingsCtrl', function ($scope,  $state,$ionicScrollDelegate, $window, $timeout, Config, GameSrv, Toast, $filter, $ionicPosition) {
         $scope.maybeMore = true;
         $scope.currentUser = {};
         $scope.ranking = [];
@@ -897,6 +897,7 @@ angular.module('viaggia.controllers.game', [])
                 }
 
             );
+
         };
 
         /* Infinite scrolling */

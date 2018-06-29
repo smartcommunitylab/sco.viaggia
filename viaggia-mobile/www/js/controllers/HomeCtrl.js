@@ -1,7 +1,7 @@
 angular.module('viaggia.controllers.home', [])
 
     .controller('HomeCtrl', function ($scope, $state, $q, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv, DiaryDbSrv, BT) {
-       
+
         $scope.challenges = [];
         $scope.buttons = [{
             label: $filter('translate')('menu_news'),
@@ -10,7 +10,7 @@ angular.module('viaggia.controllers.home', [])
             label: $filter('translate')('menu_notifications'),
             icon: 'ic_notification'
         }];
-        
+
         //load from localstorage the id notifications read
         $ionicPlatform.ready(function () {
             document.addEventListener("resume", function () {
@@ -59,7 +59,7 @@ angular.module('viaggia.controllers.home', [])
                 //$ionicLoading.hide();
             });
         }
-        var setChallenges = function() {
+        var setChallenges = function () {
             if (!!$scope.status && !!$scope.status['challengeConcept']) {
                 if ($scope.status) {
                     $scope.challenges = $scope.status['challengeConcept']['activeChallengeData'];
@@ -270,48 +270,50 @@ angular.module('viaggia.controllers.home', [])
                 Config.loaded();
                 var travelForDiary = GameSrv.getTravelForDiary()
                 trackService.stop();
-                if (Math.floor(data.dist < Config.getMinimumDistance()) && data.transport == 'walk') {
+                //Removed controls for minimum distance
 
-                    // Toast.show($filter('translate')("no_points"), "short", "bottom");
+                // if (Math.floor(data.dist < Config.getMinimumDistance()) && data.transport == 'walk') {
+
+                // Toast.show($filter('translate')("no_points"), "short", "bottom");
+                // $ionicPopup.alert({
+                //     title: $filter('translate')("no_points_title"),
+                //     template: $filter('translate')("no_points", {
+                //         points: data.points
+                //     }),
+                //     okText: $filter('translate')("btn_close"),
+                //     okType: 'button-cancel'
+                // })
+
+                // } else {
+                if (data.valid) {
+                    GameSrv.addTravelDiary(travelForDiary);
+                    $ionicPopup.confirm({
+                        title: $filter('translate')("pop_up_points_title"),
+                        template: $filter('translate')("pop_up_points_template"),
+                        buttons: [
+                            {
+                                text: $filter('translate')("btn_close"),
+                                type: 'button-cancel'
+                            },
+                            {
+                                text: $filter('translate')("pop_up_points_btn"),
+                                type: 'button-custom',
+                                onTap: function () {
+                                    $state.go('app.diary');
+                                }
+                            }
+                        ]
+                    });
+                } else {
                     $ionicPopup.alert({
-                        title: $filter('translate')("no_points_title"),
-                        template: $filter('translate')("no_points", {
-                            points: data.points
-                        }),
+                        title: $filter('translate')("pop_up_invalid_tracking_title"),
+                        template: $filter('translate')("pop_up_invalid_tracking_template"),
                         okText: $filter('translate')("btn_close"),
                         okType: 'button-cancel'
-                    })
+                    });
 
-                } else {
-                    if (data.valid) {
-                        GameSrv.addTravelDiary(travelForDiary);
-                        $ionicPopup.confirm({
-                            title: $filter('translate')("pop_up_points_title"),
-                            template: $filter('translate')("pop_up_points_template"),
-                            buttons: [
-                                {
-                                    text: $filter('translate')("btn_close"),
-                                    type: 'button-cancel'
-                                },
-                                {
-                                    text: $filter('translate')("pop_up_points_btn"),
-                                    type: 'button-custom',
-                                    onTap: function () {
-                                        $state.go('app.diary');
-                                    }
-                                }
-                            ]
-                        });
-                    } else {
-                        $ionicPopup.alert({
-                            title: $filter('translate')("pop_up_invalid_tracking_title"),
-                            template: $filter('translate')("pop_up_invalid_tracking_template"),
-                            okText: $filter('translate')("btn_close"),
-                            okType: 'button-cancel'
-                        });
-
-                    }
                 }
+                // }
             }, function () {
                 //puo' darsi che finisca qui?
                 Config.loaded();
@@ -401,9 +403,7 @@ angular.module('viaggia.controllers.home', [])
             $rootScope.countNotification = 0;
             $state.go('app.notifications');
         }
-        $scope.openProfile = function () {
-            $state.go('app.profile');
-        }
+
         $scope.go = function (state) {
             if (state.indexOf('(') > 0) {
                 eval('$scope.' + state);
@@ -432,7 +432,7 @@ angular.module('viaggia.controllers.home', [])
 
     }
     )
-    .controller('HomeContainerCtrl', function ($scope,GameSrv, Config,Toast,$filter) {
+    .controller('HomeContainerCtrl', function ($scope, GameSrv, Config, Toast, $filter) {
 
 
         $scope.currentUser = null;

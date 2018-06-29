@@ -29,13 +29,13 @@ angular.module('viaggia.services.game', [])
 
         var tripParams = {
             time:
-            function (event) {
-                return $filter('date')(event['timestamp'], 'HH:mm')
-            },
+                function (event) {
+                    return $filter('date')(event['timestamp'], 'HH:mm')
+                },
             travelValidity:
-            function (event) {
-                return $filter('translate')(event['travelValidity'])
-            }
+                function (event) {
+                    return $filter('translate')(event['travelValidity'])
+                }
         };
         var NOTIFICATIONS_STYLES = {
             TRAVEL_WALK: {
@@ -594,6 +594,29 @@ angular.module('viaggia.services.game', [])
         gameService.validUserForGamificationLocal = function () {
             return 'true' == localStorage.userValid;
         }
-
+        gameService.getProfileOther = function (profileId) {
+            var deferred = $q.defer();
+            //check if user (profile.userId) is valid or not
+            LoginService.getValidAACtoken().then(
+                function (token) {
+                    $http({
+                        method: 'GET',
+                        url: Config.getGamificationURL() + "/status/other/" + profileId,
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    }).then(
+                        function (response) {
+                            deferred.resolve(response.data);
+                        },
+                        function (responseError) {
+                            deferred.reject(responseError);
+                        }
+                    );
+                })
+            return deferred.promise;
+        }
         return gameService;
     });
