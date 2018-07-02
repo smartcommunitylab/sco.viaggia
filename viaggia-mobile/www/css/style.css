@@ -2740,6 +2740,10 @@ text-align: center;
   .group-track{
 
 }
+.menu-separator{
+    border: 1px solid #fff;
+    width: 100%;
+}
   @-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}

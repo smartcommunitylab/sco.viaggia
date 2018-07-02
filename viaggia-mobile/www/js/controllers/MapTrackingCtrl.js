@@ -89,7 +89,8 @@ angular.module('viaggia.controllers.mapTracking', [])
                         //check if stored are equal to current multimodal
                         if (location.extras.multimodalId === actualMultimodal)
                             // $scope.pathLine[location.extras.transportType].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
-                            $scope.pathLine['walk'].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
+                            if ($scope.pathLine['walk'].latlngs.length < 100)
+                                $scope.pathLine['walk'].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
                     })
                     updateTrackingInfo();
                     updateBar(location);

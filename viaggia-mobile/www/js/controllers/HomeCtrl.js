@@ -432,18 +432,21 @@ angular.module('viaggia.controllers.home', [])
 
     }
     )
-    .controller('HomeContainerCtrl', function ($scope, GameSrv, Config, Toast, $filter) {
+    .controller('HomeContainerCtrl', function ($scope,$rootScope, profileService, GameSrv, Config, Toast, $filter) {
 
 
-        $scope.currentUser = null;
-        $scope.currentUser = null;
+        $rootScope.currentUser = null;
+        $rootScope.currentUser = null;
         $scope.noStatus = false;
 
         Config.loading();
         GameSrv.getLocalStatus().then(
             function (status) {
                 $scope.status = status;
-                $scope.currentUser = status.playerData.nickName;
+                $rootScope.currentUser = status.playerData;
+                profileService.getProfileImage(status.playerData.playerId).then(function(urlImg){
+                    $rootScope.urlImg=urlImg;
+                })
             },
             function (err) {
                 $scope.noStatus = true;

@@ -26,9 +26,9 @@ angular.module('viaggia.controllers.game', [])
 
 
     //Container of the tabs, load data of the game: username, ranking, ...
-    .controller('GameCtrl', function ($scope, GameSrv, Config, Toast, $timeout, $filter) {
+    .controller('GameCtrl', function ($scope, $rootScope, GameSrv, Config, Toast, $timeout, $filter) {
 
-        $scope.currentUser = null;
+        $rootScope.currentUser = null;
         $scope.status = null;
         $scope.ranking = null;
         $scope.prize = null;
@@ -42,7 +42,7 @@ angular.module('viaggia.controllers.game', [])
                 $scope.status = status;
                 GameSrv.getRanking($scope.rankingFilterOptions[0], 0, $scope.rankingPerPage).then(
                     function (ranking) {
-                        $scope.currentUser = ranking['actualUser'];
+                        $rootScope.currentUser = ranking['actualUser'];
                         $scope.ranking = ranking['classificationList'];
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         $scope.noStatus = false;
@@ -58,7 +58,7 @@ angular.module('viaggia.controllers.game', [])
 
 
     //loads the score tab and all the badges of the user
-    .controller('PointsCtrl', function ($scope, Config) {
+    .controller('PointsCtrl', function ($scope, Config, LoginService, $http) {
         // green leaves: Green Leaves
         // bike aficionado: Bike Trip Badge
         // sustainable life: Zero Impact Badge
@@ -68,8 +68,24 @@ angular.module('viaggia.controllers.game', [])
         // leaderboard top 3: Leaderboard Top 3 Badge
 
         $scope.badges = null;
-         $scope.badgeTypes = Config.getBadgeTypes();
+        $scope.badgeTypes = Config.getBadgeTypes();
+        $scope.uploadFile = function (files) {
+            var fd = new FormData();
+            //Take the first selected file
+            fd.append("file", files[0]);
+            LoginService.getValidAACtoken().then(
+                function (token) {
+                    $http.post(Config.getServerURL() + '/gamificationweb/player/avatar', fd, {
+                        withCredentials: true,
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        transformRequest: angular.identity
+                    }).success(function () { console.log("ok") }).error(function () { console.log(" ..damn!... ") })
+                });
 
+        };
         $scope.$watch('status.badgeCollectionConcept', function (newBadges, oldBadges) {
             var badges = {};
             if (!!$scope.status) {
@@ -828,9 +844,9 @@ angular.module('viaggia.controllers.game', [])
         $scope.init();
     }
     )
-    .controller('RankingsCtrl', function ($scope,  $state,$ionicScrollDelegate, $window, $timeout, Config, GameSrv, Toast, $filter, $ionicPosition) {
+    .controller('RankingsCtrl', function ($scope, $rootScope, $state, $ionicScrollDelegate, $window, $timeout, Config, GameSrv, Toast, $filter, $ionicPosition) {
         $scope.maybeMore = true;
-        $scope.currentUser = {};
+        $rootScope.currentUser = {};
         $scope.ranking = [];
         $scope.singleRankStatus = true;
         $scope.rankingFilterOptions = ['now', 'last', 'global'];
@@ -871,7 +887,7 @@ angular.module('viaggia.controllers.game', [])
                     if (ranking) {
                         getRanking = false;
                         $scope.singleRankStatus = true;
-                        $scope.currentUser = ranking['actualUser'];
+                        $rootScope.currentUser = ranking['actualUser'];
                         $scope.ranking = ranking['classificationList'];
                         if (!$scope.ranking || $scope.ranking.length < $scope.rankingPerPage) {
                             $scope.maybeMore = false;
@@ -909,7 +925,7 @@ angular.module('viaggia.controllers.game', [])
                 GameSrv.getRanking($scope.filter.selected, start, end).then(
                     function (ranking) {
                         if (ranking) {
-                            $scope.currentUser = ranking['actualUser'];
+                            $rootScope.currentUser = ranking['actualUser'];
                             $scope.ranking = $scope.ranking.concat(ranking['classificationList']);
 
                             if (ranking['classificationList'].length < $scope.rankingPerPage) {
