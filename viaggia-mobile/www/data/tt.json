@@ -28,7 +28,7 @@
             "label": "menu_real_time_train",
             "hasMap": true,
             "markerIcon": "ic_train",
-            "transportType" : "TRAIN",
+            "transportType": "TRAIN",
             "icon": "ic_train",
             "elements": [
                 {
@@ -49,8 +49,8 @@
                             "color": "#cd251c",
                             "showTrips": true
                         }
-          ]
-        },
+                    ]
+                },
                 {
                     "agencyId": "6",
                     "color": "#cd251c",
@@ -69,8 +69,8 @@
                             "color": "#cd251c",
                             "showTrips": true
                         }
-          ]
-        },
+                    ]
+                },
                 {
                     "agencyId": "10",
                     "color": "#cd251c",
@@ -87,16 +87,16 @@
                             "color": "#cd251c",
                             "title": "Malé - Trento"
                         }
-          ]
-        }
-      ]
+                    ]
+                }
+            ]
         },
         "extraurbano": {
             "view": "list",
             "label": "menu_real_time_bus_extraurban",
             "hasMap": false,
             "markerIcon": "ic_extraurbanBus",
-            "transportType" : "BUSSUBURBAN",
+            "transportType": "BUSSUBURBAN",
             "icon": "ic_extraurban-bus",
             "elements": [
                 {
@@ -120,9 +120,8 @@
                                     "title": "ROVERETO-CALLIANO-BESENELLO-TRENTO",
                                     "label": "301"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "302",
                             "title": "302 - TRENTO-RAVINA-MATTARELLO-ALDENO-GARNIGA TERME",
@@ -140,9 +139,8 @@
                                     "title": "GARNIGA TERME-ALDENO-MATTARELLO-RAVINA-TRENTO",
                                     "label": "302"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "303",
                             "title": "303 - TRENTO-V.VATTARO-CARBONARE-LAVARONE-LUSERNA",
@@ -160,9 +158,8 @@
                                     "title": "LUSERNA-LAVARONE-CARBONARE-V.VATTARO-TRENTO",
                                     "label": "303"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "305",
                             "title": "305 - ROVERETO-MORI-BRENTONICO-SACCONE",
@@ -180,9 +177,8 @@
                                     "title": "SACCONE-BRENTONICO-MORI-ROVERETO",
                                     "label": "305"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "306",
                             "title": "306 - ROVERETO-CALLIANO-FOLGARIA-LAVARONE",
@@ -200,9 +196,8 @@
                                     "title": "LAVARONE-FOLGARIA-CALLIANO-ROVERETO",
                                     "label": "306"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "307",
                             "title": "307 - ROVERETO-MORI-CHIZZOLA-CORNÈ-ALA-AVIO",
@@ -220,9 +215,8 @@
                                     "title": "AVIO-ALA-CORNÈ-CHIZZOLA-MORI-ROVERETO",
                                     "label": "307"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "310",
                             "title": "310 - ROVERETO-MORI-S.FELICE-RONZO CHIENIS",
@@ -240,9 +234,8 @@
                                     "title": "RONZO CHIENIS-S.FELICE-MORI-ROVERETO",
                                     "label": "310"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "311",
                             "title": "311 - ROVERETO-VILLA-NOMI-ALDENO",
@@ -260,9 +253,8 @@
                                     "title": "ALDENO-NOMI-VILLA-ROVERETO",
                                     "label": "311"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "312",
                             "title": "312 - ROVERETO-PARROCCHIA DI V.-PIAN DELLE FUGAZZE",
@@ -280,9 +272,8 @@
                                     "title": "PIAN DELLE FUGAZZE-PARROCCHIA DI V.-ROVERETO",
                                     "label": "312"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "314",
                             "title": "314 - ROVERETO-RIVA-OBRA DI VALLARSA-OMETTO",
@@ -300,9 +291,8 @@
                                     "title": "OMETTO-OBRA DI VALLARSA-RIVA-ROVERETO",
                                     "label": "314"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "315",
                             "title": "315 - TRENTO-BESENELLO-CALLIANO-ROVERETO",
@@ -320,9 +310,8 @@
                                     "title": "FOLGARIA-SERRADA-TERRAGNOLO-ROVERETO",
                                     "label": "315"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "316",
                             "title": "316 - ROVERETO-TRAMBILENO-VANZA-POZZACCHIO",
@@ -340,9 +329,8 @@
                                     "title": "POZZACCHIO-VANZA-TRAMBILENO-ROVERETO",
                                     "label": "316"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "318",
                             "title": "318 - VALLE S.FELICE-MANZANO-NOMESINO",
@@ -360,9 +348,8 @@
                                     "title": "NOMESINO-MANZANO-VALLE S.FELICE",
                                     "label": "318"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "319",
                             "title": "319 - BESAGNO-CROSANO-CORNÈ-SACCONE",
@@ -380,9 +367,8 @@
                                     "title": "SACCONE-CORNÈ-CROSANO BIVIO-BESAGNO",
                                     "label": "319"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "321",
                             "title": "321 - TRENTO-CALLIANO-FOLGARIA-LAVARONE",
@@ -400,9 +386,8 @@
                                     "title": "LAVARONE-FOLGARIA-CALLIANO-TRENTO",
                                     "label": "321"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "332",
                             "title": "332 - ROVERETO-MORI-RIVA-ARCO-BOLOGNANO",
@@ -420,9 +405,8 @@
                                     "title": "BOLOGNANO-ARCO-RIVA-MORI-ROVERETO",
                                     "label": "332"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "334",
                             "title": "334 - ROVERETO-ALA-SABBIONARA-AVIO-MASI-ROVERETO",
@@ -434,9 +418,8 @@
                                     "title": "ROVERETO-ALA-SABBIONARA-AVIO-MASI-ROVERETO",
                                     "label": "334"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "335",
                             "title": "335 - ROVERETO-ALA-MASI D'AVIO-AVIO-ROVERETO",
@@ -448,9 +431,8 @@
                                     "title": "ROVERETO-ALA-MASI D'AVIO-AVIO-ROVERETO",
                                     "label": "335"
                                 }
-              ]
-            }
-            ,
+                            ]
+                        },
                         {
                             "label": "336",
                             "title": "336 - ALA-RONCHI DI ALA-PONZOLOTTI",
@@ -468,21 +450,21 @@
                                     "title": "RONCHI-ALA",
                                     "label": "336"
                                 }
-              ]
-            }
-          ]
-        }
-      ]
+                            ]
+                        }
+                    ]
+                }
+            ]
         },
         "local": {
             "view": "list",
             "label": "menu_real_time_transport_local",
             "hasMap": true,
             "markerIcon": "ic_urbanBus",
-            "transportType" : "BUS",
+            "transportType": "BUS",
             "icon": "ic_urban-bus",
             "elements": [
-                  {
+                {
                     "agencyId": "7",
                     "color": "#EB8919",
                     "routes": [
@@ -534,7 +516,6 @@
                             "title": "LINEA BLU - PASSO COE-FOLGARIA-SERRADA-GUARDIA",
                             "color": "#EB8919"
                         }
-
                     ]
                 },
                 {
@@ -547,7 +528,7 @@
                             "title": "LINEA ROSSA - SERRADA-FOLGARIA-COSTA-CARBONARE-LAVARONE",
                             "color": "#EB8919"
                         },
-                         {
+                        {
                             "routeId": "LR_R_SL",
                             "routeSymId": "LR_R_SL",
                             "title": "LINEA ROSSA - LAVARONE-CARBONARE-COSA-FOLGARIA-SERRADA",
@@ -555,8 +536,7 @@
                         }
                     ]
                 },
-
-                  {
+                {
                     "agencyId": "8",
                     "color": "#EB8919",
                     "routes": [
@@ -567,8 +547,8 @@
                             "color": "#EB8919"
                         }
                     ]
-                },              
-                 {
+                },
+                {
                     "agencyId": "17",
                     "color": "#EB8919",
                     "routes": [
@@ -610,8 +590,7 @@
                         }
                     ]
                 }
-
-              ]          
+            ]
         }
     }
 }

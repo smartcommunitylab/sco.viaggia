@@ -83,7 +83,7 @@ angular.module('viaggia.controllers.common', [])
         ]
       });
     }
-    
+
     $scope.isExpired = function () {
       //check in config if expirationDate is > of today
       //        var expirationDateString = Config.getExpirationDate();
@@ -159,6 +159,13 @@ angular.module('viaggia.controllers.common', [])
       $scope.contactLink = Config.getContactLink();
       $scope.taxiEnabled = (!!Config.getTaxiId() && Config.getTaxiId() != 'undefined');
       $rootScope.accessible = !!Config.getAccessibility() && Config.getAccessibility() != 'undefined';
+      if (Config.getExpirationDate()) {
+        if (!$scope.isExpired()) {
+          $scope.showNotExpiredPopup(Config.getExpirationDate());
+        } else {
+          $scope.showExpiredPopup();
+        }
+      }
     });
   })
 
