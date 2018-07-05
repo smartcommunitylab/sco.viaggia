@@ -606,7 +606,11 @@ angular.module('viaggia', [
       lbl_parking_meter_payment_card: 'moneta e carte',
       lbl_parking_meter_payment_cash: 'moneta',
       lbl_parking_meter_payment: 'Metodo di pagamento: ',
-      home_guest_card:'Servizi Guest Card'
+      home_guest_card:'Servizi Guest Card',
+      pop_up_expired_title: 'Versione scaduta',
+      pop_up__expired_template: 'Ci scusiamo ma non è più possibile utilizzare questa versione dell\'applicazione in quanto il periodo di prova è terminata',
+      pop_up_not_expired_title: 'Versione di prova',
+      pop_up_not_expired_template: 'Questa  è una versione di prova e terminerà il '
 
     });
 
@@ -819,7 +823,11 @@ angular.module('viaggia', [
       lbl_parking_meter_payment_card: 'cash and card',
       lbl_parking_meter_payment_cash: 'cash',
       lbl_parking_meter_payment: 'Payment methods: ',
-      home_guest_card: 'Guest Card Services'
+      home_guest_card: 'Guest Card Services',
+      pop_up_expired_title: 'Version expired',
+      pop_up__expired_template: 'The actual version of the app has expired',
+      pop_up_not_expired_title: 'Trial version',
+      pop_up_not_expired_template: 'The actual version of the app end on '
 
     });
 

@@ -393,6 +393,10 @@ angular.module('viaggia.services.conf', [])
         if (!ttJsonConfig || !ttJsonConfig.stopVisualization || !ttJsonConfig.stopVisualization[agencyId]) return {};
         return ttJsonConfig.stopVisualization[agencyId];
       },
-      isDarkColor: isDarkColor
+      isDarkColor: isDarkColor,
+      getExpirationDate: function () {
+        return mapJsonConfig["expirationDate"];
+
+    }
     }
   })
