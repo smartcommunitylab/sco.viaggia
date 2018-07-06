@@ -533,6 +533,18 @@
                             "routeSymId": "LR_R_SL",
                             "title": "LINEA ROSSA - LAVARONE-CARBONARE-COSA-FOLGARIA-SERRADA",
                             "color": "#EB8919"
+                        },
+                        {
+                            "routeId": "LR_A_PL",
+                            "routeSymId": "LR_A_PL",
+                            "title": "LINEA ROSSA - PASSO COE-FOLGARIA-COSTA-CARBONARE-LAVARONE",
+                            "color": "#EB8919"
+                        },
+                        {
+                            "routeId": "LR_R_PL",
+                            "routeSymId": "LR_R_PL",
+                            "title": "LINEA ROSSA - LAVARONE-CARBONARE-COSA-FOLGARIA-PASSO COE",
+                            "color": "#EB8919"
                         }
                     ]
                 },
