@@ -18,11 +18,12 @@
 		</div>-->
         <div ng-if="!!status">
             <a class="item item-avatar" href="#">
-                <img ng-if="!status.img" src="img/game/generic_user.png">
-                <img ng-if="status.img" src="status.img">
-                <h2>{{'user_level_label'|translate}}:{{status.level}}</h2>
+                <!-- <img ng-if="!profileImg" src="img/game/generic_user.png"> -->
+                <!-- <img id="photo"> -->
+                <img ng-if="profileImg" ng-src="{{profileImg}}" ng-click="changeProfile()">
+                <h1>{{'user_level_label'|translate}}:{{status.playerData.level}}</h1>
             </a>
-            <input type="file" name="file" onchange="angular.element(this).scope().uploadFile(this.files)"/>
+            <input type="file" style="display: none" name="file" id="inputImg" onchange="angular.element(this).scope().uploadFile(this.files)"/>
 
             <p></p>
             <div class="row game-mypoints">

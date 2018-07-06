@@ -2744,6 +2744,12 @@ text-align: center;
     border: 1px solid #fff;
     width: 100%;
 }
+.img-profile{
+    float: left;
+}
+.img-profile>img{
+    height: 100px;
+}
   @-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}

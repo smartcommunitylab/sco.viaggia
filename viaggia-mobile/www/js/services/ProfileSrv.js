@@ -60,27 +60,26 @@ angular.module('viaggia.services.profile', [])
       return deferred.promise;
     }
 
-    profileService.setProfileImage = function (multipartImage) {
+    profileService.setProfileImage = function (files) {
       var deferred = $q.defer();
+      var fd = new FormData();
+      //Take the first selected file
+      fd.append("data", files[0]);
       LoginService.getValidAACtoken().then(
         function (token) {
-          $http({
-            method: 'POST',
-            url: Config.getServerURL() + '/gamificationweb/player/avatar/' + profileId,
+          $http.post(Config.getServerURL() + '/gamificationweb/player/avatar', fd, {
+            withCredentials: true,
             headers: {
+              'Content-Type': undefined,
               'Authorization': 'Bearer ' + token,
               'appId': Config.getAppId(),
             },
-            data: multipartImage,
-            timeout: Config.getHTTPConfig().timeout
+            transformRequest: angular.identity
+          }).success(function () {
+            deferred.resolve();
+          }).error(function (error) {
+            deferred.reject(error);
           })
-            .success(function (detail) {
-              deferred.resolve(detail);
-            })
-
-            .error(function (response) {
-              deferred.reject(response);
-            });
         });
       return deferred.promise;
     }

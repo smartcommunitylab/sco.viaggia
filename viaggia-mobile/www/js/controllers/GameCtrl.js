@@ -58,7 +58,7 @@ angular.module('viaggia.controllers.game', [])
 
 
     //loads the score tab and all the badges of the user
-    .controller('PointsCtrl', function ($scope, Config, LoginService, $http) {
+    .controller('PointsCtrl', function ($scope, Config, profileService, LoginService, $http) {
         // green leaves: Green Leaves
         // bike aficionado: Bike Trip Badge
         // sustainable life: Zero Impact Badge
@@ -69,21 +69,56 @@ angular.module('viaggia.controllers.game', [])
 
         $scope.badges = null;
         $scope.badgeTypes = Config.getBadgeTypes();
+        $scope.profileImg = null;
+        $scope.tmpUrl = 'https://dev.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/'
+        $scope.getImage = function () {
+            if ($scope.$parent.$parent.$parent.status)
+                profileService.getProfileImage($scope.$parent.$parent.$parent.status.playerData.playerId).then(function (image) {
+                    // var file = new Blob([ image ], {
+                    //     type : 'image/jpeg'
+                    // });
+                    // var fileURL = URL.createObjectURL(file);
+                    // $scope.profileImg = fileURL;
+
+                    // var img = document.getElementById( "#photo" );
+                    // img.src = fileURL;
+                    $scope.profileImg = $scope.tmpUrl + $scope.$parent.$parent.$parent.status.playerData.playerId;
+                }, function (error) {
+                    $scope.profileImg = 'img/game/generic_user.png';
+                })
+        }
+
+        $scope.changeProfile = function () {
+            document.getElementById('inputImg').click()
+        }
         $scope.uploadFile = function (files) {
-            var fd = new FormData();
-            //Take the first selected file
-            fd.append("file", files[0]);
-            LoginService.getValidAACtoken().then(
-                function (token) {
-                    $http.post(Config.getServerURL() + '/gamificationweb/player/avatar', fd, {
-                        withCredentials: true,
-                        headers: {
-                            'Authorization': 'Bearer ' + token,
-                            'appId': Config.getAppId(),
-                        },
-                        transformRequest: angular.identity
-                    }).success(function () { console.log("ok") }).error(function () { console.log(" ..damn!... ") })
-                });
+            // var fd = new FormData();
+            // //Take the first selected file
+            // fd.append("data", files[0]);
+            // LoginService.getValidAACtoken().then(
+            //     function (token) {
+            //         $http.post(Config.getServerURL() + '/gamificationweb/player/avatar', fd, {
+            //             withCredentials: true,
+            //             headers: {
+            //                 'Content-Type': undefined,
+            //                 'Authorization': 'Bearer ' + token,
+            //                 'appId': Config.getAppId(),
+            //             },
+            //             transformRequest: angular.identity
+            //         }).success(function () { console.log("ok") }).error(function () { console.log(" ..damn!... ") })
+            //     });
+            profileService.setProfileImage(files).then(function () {
+                console.log("ok");
+                $scope.getImage();
+            }, function (error) {
+                if (error == 413)
+                    console.log("Payload too large");
+                return;
+                if (error == 415)
+                    console.log("Unsupported media type");
+                return;
+                console.log("network error");
+            })
 
         };
         $scope.$watch('status.badgeCollectionConcept', function (newBadges, oldBadges) {
@@ -98,6 +133,9 @@ angular.module('viaggia.controllers.game', [])
                 });
             }
             $scope.badges = badges;
+        });
+        $scope.$watch('$parent.$parent.$parent.status', function (newBadges, oldBadges) {
+            $scope.getImage();
         });
     })
 
