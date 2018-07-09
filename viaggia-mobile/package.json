@@ -52,7 +52,9 @@
       "cordova-plugin-compat": {},
       "cordova-android-support-gradle-release": {
         "ANDROID_SUPPORT_VERSION": "27.+"
-      }
+      },
+      "cordova-plugin-device": {},
+      "cordova-sqlite-storage": {}
     },
     "platforms": [
       "android"
