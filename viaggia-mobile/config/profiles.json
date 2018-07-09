@@ -2,8 +2,8 @@
     "ALPECIMBRA": {
         "resource_folder": "config/instances/ALPECIMBRA",
         "widget_id": "it.smartcommunitylab.viaggiaalpecimbra",
-        "version": "1.0.2",
-        "version_code": "6",
+        "version": "1.0.3",
+        "version_code": "7",
         "app_name": "Viaggia Alpe Cimbra"
     },
     "TRENTO": {
