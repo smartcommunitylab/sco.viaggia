@@ -2750,6 +2750,15 @@ text-align: center;
 .img-profile>img{
     height: 100px;
 }
+
+.user-menu {
+
+}
+.user-menu-name{
+    color: #fff;
+    font-size: 26px;
+    margin: 8px;
+}
   @-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}

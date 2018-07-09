@@ -1382,7 +1382,10 @@ angular.module('viaggia', [
       user_stat_walk_label: "Km a piedi",
       user_stat_bike_label: "Km in bici",
       user_stat_bus_label: "Km in autobus",
-      user_stat_train_label: "Km in treno"
+      user_stat_train_label: "Km in treno",
+      change_image_template: "Sei sicuro di voler cambiare l'immagine di profilo?",
+      change_image_title:"Immagine profilo",
+      change_image_confirm:"Cambia"
 
 
     });
@@ -1846,7 +1849,10 @@ angular.module('viaggia', [
       user_stat_walk_label: "Km by foot",
       user_stat_bike_label: "Km by bike",
       user_stat_bus_label: "Km by bus",
-      user_stat_train_label: "Km by train"
+      user_stat_train_label: "Km by train",
+      change_image_template: "Do you want to change the image profile?",
+      change_image_title:"Image Profile",
+      change_image_confirm:"Change"
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

@@ -58,7 +58,7 @@ angular.module('viaggia.controllers.game', [])
 
 
     //loads the score tab and all the badges of the user
-    .controller('PointsCtrl', function ($scope, Config, profileService, LoginService, $http) {
+    .controller('PointsCtrl', function ($scope, $rootScope, Config, profileService,$ionicPopup,$filter) {
         // green leaves: Green Leaves
         // bike aficionado: Bike Trip Badge
         // sustainable life: Zero Impact Badge
@@ -69,7 +69,7 @@ angular.module('viaggia.controllers.game', [])
 
         $scope.badges = null;
         $scope.badgeTypes = Config.getBadgeTypes();
-        $scope.profileImg = null;
+        // $rootScope.profileImg = null;
         $scope.tmpUrl = 'https://dev.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/'
         $scope.getImage = function () {
             if ($scope.$parent.$parent.$parent.status)
@@ -82,31 +82,33 @@ angular.module('viaggia.controllers.game', [])
 
                     // var img = document.getElementById( "#photo" );
                     // img.src = fileURL;
-                    $scope.profileImg = $scope.tmpUrl + $scope.$parent.$parent.$parent.status.playerData.playerId;
+                    $rootScope.profileImg = $scope.tmpUrl + $scope.$parent.$parent.$parent.status.playerData.playerId+ '?' + new Date().getTime();
+                    // $scope.refreshProfileImage();
                 }, function (error) {
-                    $scope.profileImg = 'img/game/generic_user.png';
+                    $rootScope.profileImg = 'img/game/generic_user.png'+ '?' + new Date().getTime();;
                 })
         }
 
         $scope.changeProfile = function () {
-            document.getElementById('inputImg').click()
+            $ionicPopup.confirm({
+                title: $filter('translate')("change_image_title"),
+                template: $filter('translate')("change_image_template"),
+                buttons: [
+                    {
+                        text: $filter('translate')("btn_close"),
+                        type: 'button-cancel'
+                    },
+                    {
+                        text: $filter('translate')("change_image_confirm"),
+                        type: 'button-custom',
+                        onTap: function () {
+                            document.getElementById('inputImg').click()
+                        }
+                    }
+                ]
+            });
         }
         $scope.uploadFile = function (files) {
-            // var fd = new FormData();
-            // //Take the first selected file
-            // fd.append("data", files[0]);
-            // LoginService.getValidAACtoken().then(
-            //     function (token) {
-            //         $http.post(Config.getServerURL() + '/gamificationweb/player/avatar', fd, {
-            //             withCredentials: true,
-            //             headers: {
-            //                 'Content-Type': undefined,
-            //                 'Authorization': 'Bearer ' + token,
-            //                 'appId': Config.getAppId(),
-            //             },
-            //             transformRequest: angular.identity
-            //         }).success(function () { console.log("ok") }).error(function () { console.log(" ..damn!... ") })
-            //     });
             profileService.setProfileImage(files).then(function () {
                 console.log("ok");
                 $scope.getImage();

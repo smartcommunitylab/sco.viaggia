@@ -438,21 +438,40 @@ angular.module('viaggia.controllers.home', [])
         $rootScope.currentUser = null;
         $rootScope.currentUser = null;
         $scope.noStatus = false;
-
+        $rootScope.profileImg = null;
+        $scope.tmpUrl = 'https://dev.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/'
         Config.loading();
         GameSrv.getLocalStatus().then(
             function (status) {
                 $scope.status = status;
                 $rootScope.currentUser = status.playerData;
-                profileService.getProfileImage(status.playerData.playerId).then(function(urlImg){
-                    $rootScope.urlImg=urlImg;
-                })
+                $scope.getImage();
+
+                // profileService.getProfileImage(status.playerData.playerId).then(function(urlImg){
+                //     $rootScope.urlImg=urlImg;
+                // })
             },
             function (err) {
                 $scope.noStatus = true;
                 Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
             }
         ).finally(Config.loaded);
+        $scope.getImage = function () {
+            if ($scope.status)
+                profileService.getProfileImage($scope.status.playerData.playerId).then(function (image) {
+                    // var file = new Blob([ image ], {
+                    //     type : 'image/jpeg'
+                    // });
+                    // var fileURL = URL.createObjectURL(file);
+                    // $scope.profileImg = fileURL;
+
+                    // var img = document.getElementById( "#photo" );
+                    // img.src = fileURL;
+                    $rootScope.profileImg = $scope.tmpUrl + $scope.status.playerData.playerId+ '?' + new Date().getTime();
+                }, function (error) {
+                    $rootScope.profileImg = 'img/game/generic_user.png'+ '?' + new Date().getTime();
+                })
+        }
 
     })
     .controller('MobilityCtrl', function ($scope, $state, $ionicHistory, $location, bookmarkService) {
