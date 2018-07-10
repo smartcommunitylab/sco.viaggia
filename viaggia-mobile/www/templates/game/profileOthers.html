@@ -9,8 +9,8 @@
         <a class="item item-avatar" href="#">
             <img ng-if="!user.img" src="img/game/generic_user.png">
             <img ng-if="user.img" src="user.img">
-            <h2>{{'user_level_label'|translate}}:{{user.level}}</h2>
-            <p>{{'green_leaves_points' | translate}}:{{user.greenLeaves}}</p>
+            <h1>{{'user_level_label'|translate}}:{{{user.level}}</h1>
+
         </a>
         <p></p>
         <div  class="chart" ng-if="user.statistics">
