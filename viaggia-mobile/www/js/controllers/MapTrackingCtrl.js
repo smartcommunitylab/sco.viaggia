@@ -48,6 +48,7 @@ angular.module('viaggia.controllers.mapTracking', [])
                 latlngs: []
             }
         };
+        $scope.loadingMapData = false;
         $scope.$on('$ionicView.afterEnter', function (e) {
             $scope.initMap();
         });
@@ -71,6 +72,7 @@ angular.module('viaggia.controllers.mapTracking', [])
             }, 1000);
         }
         $scope.initMap = function () {
+            $scope.loadingMapData = true;
             mapService.initMap('trackingMap', true).then(function () {
                 if ($rootScope.myPosition) {
                     $scope.center = {
@@ -80,24 +82,26 @@ angular.module('viaggia.controllers.mapTracking', [])
                     }
                 }
                 //add all the previous points on the map
-                $scope.initPath();
                 var actualMultimodal = localStorage.getItem(Config.getAppId() + '_multimodalId');
                 BackgroundGeolocation.getLocations(function (locations) {
+                    $scope.initPath();
                     // locations.sort(function (a, b) { return (a.timestamp > b.timestamp) ? 1 : ((b.timestamp > a.timestamp) ? -1 : 0); });
                     locations.forEach(location => {
-
                         //check if stored are equal to current multimodal
                         if (location.extras.multimodalId === actualMultimodal)
                             // $scope.pathLine[location.extras.transportType].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
-                            if ($scope.pathLine['walk'].latlngs.length < 100)
                                 $scope.pathLine['walk'].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
                     })
                     updateTrackingInfo();
                     updateBar(location);
                     // console.log("locations: ", locations);
+                    $scope.loadingMapData = false;
                     BackgroundGeolocation.on('location', onLocation, onLocationError);
 
-                }, BackgroundGeolocation.on('location', onLocation, onLocationError));
+                }, function () {
+                    $scope.loadingMapData = false;
+                    BackgroundGeolocation.on('location', onLocation, onLocationError)
+                });
             })
         }
         $scope.initPath = function () {
@@ -204,7 +208,7 @@ angular.module('viaggia.controllers.mapTracking', [])
             //     $scope.pathLine[actualTrack].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
 
             // update the only path and update the bars on the
-            if ($scope.pathLine['walk'].latlngs.length == 0 || ($scope.pathLine['walk'].latlngs[$scope.pathLine['walk'].latlngs.length - 1].lat != location.coords.latitude && $scope.pathLine['walk'].latlngs[$scope.pathLine['walk'].latlngs.length - 1].lng != location.coords.longitude)) {
+            if (!$scope.loadingMapData && ($scope.pathLine['walk'].latlngs.length == 0 || ($scope.pathLine['walk'].latlngs[$scope.pathLine['walk'].latlngs.length - 1].lat != location.coords.latitude && $scope.pathLine['walk'].latlngs[$scope.pathLine['walk'].latlngs.length - 1].lng != location.coords.longitude))) {
                 $scope.pathLine['walk'].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
                 updateBar(location);
             }
