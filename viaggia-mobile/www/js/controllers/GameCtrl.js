@@ -109,7 +109,7 @@ angular.module('viaggia.controllers.game', [])
             });
         }
         $scope.uploadFile = function (files) {
-            profileService.setProfileImage(files).then(function () {
+            profileService.setProfileImage(files[0]).then(function () {
                 console.log("ok");
                 $scope.getImage();
             }, function (error) {

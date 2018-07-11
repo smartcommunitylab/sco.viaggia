@@ -60,11 +60,11 @@ angular.module('viaggia.services.profile', [])
       return deferred.promise;
     }
 
-    profileService.setProfileImage = function (files) {
+    profileService.setProfileImage = function (file) {
       var deferred = $q.defer();
       var fd = new FormData();
       //Take the first selected file
-      fd.append("data", files[0]);
+      fd.append("data", file);
       LoginService.getValidAACtoken().then(
         function (token) {
           $http.post(Config.getServerURL() + '/gamificationweb/player/avatar', fd, {

@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.registration', [])
 
-    .controller('RegistrationCtrl', function ($scope, $state, $filter, $ionicHistory, $ionicModal, $location, $ionicScrollDelegate, Toast, Config, registrationService, LoginService) {
+    .controller('RegistrationCtrl', function ($scope, $state, profileService, $ionicPopup, $filter, $ionicHistory, Toast, Config, registrationService, LoginService) {
         $scope.expandedRules = false;
         Config.loaded();
         $scope.user = {
@@ -73,6 +73,44 @@ angular.module('viaggia.controllers.registration', [])
 
             ];
         }
+        $scope.profileImg = 'img/game/generic_user.png' + '?' + new Date().getTime();
+
+        $scope.changeProfile = function () {
+            $ionicPopup.confirm({
+                title: $filter('translate')("change_image_title"),
+                template: $filter('translate')("change_image_template"),
+                buttons: [
+                    {
+                        text: $filter('translate')("btn_close"),
+                        type: 'button-cancel'
+                    },
+                    {
+                        text: $filter('translate')("change_image_confirm"),
+                        type: 'button-custom',
+                        onTap: function () {
+                            document.getElementById('inputImg').click()
+                        }
+                    }
+                ]
+            });
+        }
+
+        $scope.image_source = 'img/game/generic_user.png' + '?' + new Date().getTime();
+        $scope.setFile = function (element) {
+            $scope.currentFile = element.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function (event) {
+                $scope.image_source = event.target.result
+                $scope.$apply()
+
+            }
+            // when the file is read it triggers the onload event above.
+            reader.readAsDataURL(element.files[0]);
+        }
+        $scope.changeProfile = function () {
+            document.getElementById('inputImg').click()
+        }
         $scope.initTransport = function () {
             initPrivateTransport();
             initPublicTransport();
@@ -88,14 +126,17 @@ angular.module('viaggia.controllers.registration', [])
             } else {
                 if (checkParams()) {
                     Config.loading();
-                    registrationService.register($scope.user).then(function () {
-                        Config.loaded();
-                        $ionicHistory.nextViewOptions({
-                            disableBack: true,
-                            historyRoot: true
-                        });
-                        $state.go('app.home');
 
+                    registrationService.register($scope.user).then(function () {
+                        profileService.setProfileImage($scope.currentFile).then(function () {
+                            console.log("uploaded");
+                            Config.loaded();
+                            $ionicHistory.nextViewOptions({
+                                disableBack: true,
+                                historyRoot: true
+                            });
+                            $state.go('app.home');
+                        })
                     }, function (errStatus) {
                         if (errStatus == '409') {
                             Toast.show($filter('translate')('nickname_inuse'), "short", "bottom");
@@ -107,11 +148,11 @@ angular.module('viaggia.controllers.registration', [])
         }
 
 
- function charsAllowed (nickname){
-     var pattern=/^[a-zA-Z0-9]*$/;
-     return pattern.test(nickname);
+        function charsAllowed(nickname) {
+            var pattern = /^[a-zA-Z0-9]*$/;
+            return pattern.test(nickname);
 
- }
+        }
         function checkParams() {
             //createArrayOfVeicles();
             if ($scope.user.nickname == '') {

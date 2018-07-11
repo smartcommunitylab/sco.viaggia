@@ -2750,7 +2750,15 @@ text-align: center;
 .img-profile>img{
     height: 100px;
 }
+.registration-image{
+    width: 100px;
+}
 
+.registration-profile-text {
+    display: flex!important;
+    align-content: center!important;
+    align-items: center!important;
+}
 .user-menu {
 
 }

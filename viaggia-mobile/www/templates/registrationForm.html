@@ -2,7 +2,15 @@
     <ion-content id="content" has-header="true">
         <!--<div class="row space-from-top">-->
         <!--<div class="item item-text-wrap">{{'registration_answer' | translate}}</div>-->
-
+        <div class="row">
+            <div class="col registration-profile-text">
+                <p>{{'registration_profile_image' | translate}}</p>
+            </div>
+            <div class="col">
+                <img class="registration-image" ng-src="{{image_source}}" ng-click="changeProfile()">
+                <input type="file" id="inputImg" class="ng-hide" onchange="angular.element(this).scope().setFile(this)" accept="image/*">
+            </div>
+        </div>
         <label class="item item-input item-stacked-label">
             <span class="input-label">{{'registration_nick' | translate}}</span>
             <input type="text" placeholder="{{'registration_nick_placeholder' | translate}}" ng-model="user.nickname">
@@ -17,13 +25,21 @@
         </label>
         <div class="rules_list">
             <ul class="list-welcome">
-                <li><a href="#" ng-click="openRulesModal()">{{'registration_link_rule' | translate}}</a></li>
-                <li><a href="#" onclick="window.open('https://tn.smartcommunitylab.it/core.mobility/gamificationweb/privacy', '_system', 'location=yes'); return false;">{{'registration_privacy' | translate}}</a></li>
-                <li><a href="#" onclick="window.open('https://tn.smartcommunitylab.it/core.mobility/gamificationweb/prizes', '_system', 'location=yes'); return false;">{{'registration_prizes' | translate}}</a></li>
+                <li>
+                    <a href="#" ng-click="openRulesModal()">{{'registration_link_rule' | translate}}</a>
+                </li>
+                <li>
+                    <a href="#" onclick="window.open('https://tn.smartcommunitylab.it/core.mobility/gamificationweb/privacy', '_system', 'location=yes'); return false;">{{'registration_privacy' | translate}}</a>
+                </li>
+                <li>
+                    <a href="#" onclick="window.open('https://tn.smartcommunitylab.it/core.mobility/gamificationweb/prizes', '_system', 'location=yes'); return false;">{{'registration_prizes' | translate}}</a>
+                </li>
             </ul>
 
         </div>
-        <ion-checkbox ng-model="read.isChecked" class="tac-check"><b>{{'registration_read' | translate}}</b></ion-checkbox>
+        <ion-checkbox ng-model="read.isChecked" class="tac-check">
+            <b>{{'registration_read' | translate}}</b>
+        </ion-checkbox>
 
         <button class="button button-viaggia-header button-block" ng-click="register()">
             {{'login_register'|translate}}

@@ -1385,9 +1385,8 @@ angular.module('viaggia', [
       user_stat_train_label: "Km in treno",
       change_image_template: "Sei sicuro di voler cambiare l'immagine di profilo?",
       change_image_title:"Immagine profilo",
-      change_image_confirm:"Cambia"
-
-
+      change_image_confirm:"Cambia",
+      change_image_title:"Immagine di profilo"
     });
 
     $translateProvider.translations('en', {
@@ -1852,7 +1851,8 @@ angular.module('viaggia', [
       user_stat_train_label: "Km by train",
       change_image_template: "Do you want to change the image profile?",
       change_image_title:"Image Profile",
-      change_image_confirm:"Change"
+      change_image_confirm:"Change",
+      registration_profile_image:"Image Profile"
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

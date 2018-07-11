@@ -18,8 +18,6 @@
 		</div>-->
         <div ng-if="!!status">
             <a class="item item-avatar" href="#">
-                <!-- <img ng-if="!profileImg" src="img/game/generic_user.png"> -->
-                <!-- <img id="photo"> -->
                 <img ng-if="profileImg" ng-src="{{profileImg}}" ng-click="changeProfile()">
                 <h1>{{'user_level_label'|translate}}:{{status.playerData.level}}</h1>
             </a>
