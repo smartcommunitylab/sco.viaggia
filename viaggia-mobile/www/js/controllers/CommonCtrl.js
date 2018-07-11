@@ -5,6 +5,25 @@ angular.module('viaggia.controllers.common', [])
 
     /* menu group */
     $scope.shownGroup = false;
+    $scope.progressCounter = {
+      walk: 0,
+      bike: 0,
+      bus: 0,
+      train: 0
+    };
+
+    $scope.maxvalues = {
+      maxDailywalk: 10000,
+      maxDailybike: 20000,
+      maxDailybus: 50000,
+      maxDailytrain: 50000
+    }
+        $scope.progressPercent = {
+            walk: 0,
+            bike: 0,
+            bus: 0,
+            train: 0
+        };
     $scope.toggleGroupRealTime = function () {
       if ($scope.isGroupRealTimeShown()) {
         $scope.shownGroup = false;
@@ -200,7 +219,30 @@ angular.module('viaggia.controllers.common', [])
 			$state.go('app.plan');
 		};
     */
+    $scope.actualTracking = function (type) {
+      var tripId = localStorage.getItem(Config.getAppId() + '_tripId');
+      if (tripId && tripId.startsWith(type))
+        return true;
+      return false;
+    }
+    $scope.getActualTracking = function () {
+      var tripId = localStorage.getItem(Config.getAppId() + '_tripId');
+      if (tripId)
+        return tripId.substring(0, tripId.indexOf('_'));
+      else return null;
+    }
 
+    $scope.updateBar = function (location) {
+      //TODO best calculation over max 
+      if (location.extras) {
+        $scope.progressCounter[location.extras.transportType]++;
+        $scope.progressPercent.walk = ($scope.progressCounter.walk * 20 / $scope.maxvalues.maxDailywalk) * 100;
+        $scope.progressPercent.bike = ($scope.progressCounter.bike * 20 / $scope.maxvalues.maxDailybike) * 100;
+        $scope.progressPercent.bus = ($scope.progressCounter.bus * 20 / $scope.maxvalues.maxDailybus) * 100;
+        $scope.progressPercent.train = ($scope.progressCounter.train * 20 / $scope.maxvalues.maxDailytrain) * 100;
+      }
+
+    }
     $scope.isBatterySaveMode = function () {
       var deferred = $q.defer();
       BackgroundGeolocation.isPowerSaveMode(function (isPowerSaveMode) {

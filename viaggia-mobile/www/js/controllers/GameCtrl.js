@@ -58,7 +58,7 @@ angular.module('viaggia.controllers.game', [])
 
 
     //loads the score tab and all the badges of the user
-    .controller('PointsCtrl', function ($scope, $rootScope, Config, profileService,$ionicPopup,$filter) {
+    .controller('PointsCtrl', function ($scope, $rootScope, Config, profileService, $ionicPopup, $filter) {
         // green leaves: Green Leaves
         // bike aficionado: Bike Trip Badge
         // sustainable life: Zero Impact Badge
@@ -82,10 +82,10 @@ angular.module('viaggia.controllers.game', [])
 
                     // var img = document.getElementById( "#photo" );
                     // img.src = fileURL;
-                    $rootScope.profileImg = $scope.tmpUrl + $scope.$parent.$parent.$parent.status.playerData.playerId+ '?' + new Date().getTime();
+                    $rootScope.profileImg = $scope.tmpUrl + $scope.$parent.$parent.$parent.status.playerData.playerId + '?' + new Date().getTime();
                     // $scope.refreshProfileImage();
                 }, function (error) {
-                    $rootScope.profileImg = 'img/game/generic_user.png'+ '?' + new Date().getTime();;
+                    $rootScope.profileImg = 'img/game/generic_user.png' + '?' + new Date().getTime();;
                 })
         }
 
@@ -537,19 +537,65 @@ angular.module('viaggia.controllers.game', [])
             Config.loaded();
         }
 
+        $scope.manageOneEntry = function (notification, multimodal) {
+            var time1 = notification.timestamp
+            var time2 = $scope.days[$scope.days.length - 1].name
+            var msg1 = new Date(time1).setHours(0, 0, 0, 0);
+            var msg2 = new Date(time2).setHours(0, 0, 0, 0);
+            if (multimodal) {
+                notification = {
+                    event: JSON.stringify(notification),
+                    id: notification.clientId,
+                    timestamp: notification.timestamp,
+                    travelValidity: notification.travelValidity,
+                    type: notification.type,
+                    multimodal: true
+                }
+            }
+            if (msg1 == msg2) {
+                $scope.days[$scope.days.length - 1].messages.push(notification)
+            } else {
+                $scope.days.push({ name: notification.timestamp, messages: [notification] })
+            }
+        }
         $scope.groupDays = function (notifications) {
             if (notifications[0]) {
-                if (!$scope.days) { $scope.days = [] }
-                $scope.days.push({ name: notifications[0].timestamp, messages: [notifications[0]] })
+                if (!$scope.days) {
+                    $scope.days = []
+                }
+                var event = JSON.parse(notifications[0].event);
+                if (notifications[0].type == 'TRAVEL' && event.children && event.children.length > 1) {
+                    $scope.days.push(
+                        {
+                            name: notifications[0].timestamp,
+                            messages: []
+                        })
+                    event.children.sort(function (a, b) {
+                        return b.timestamp - a.timestamp;
+                    });
+                    for (var childrenIndex = 0; childrenIndex < event.children.length; childrenIndex++) {
+                        $scope.manageOneEntry(event.children[childrenIndex], true)
+                    }
+                } else {
+                    $scope.days.push(
+                        {
+                            name: notifications[0].timestamp,
+                            messages: [notifications[0]]
+                        })
+                }
                 for (var j = 1; j < notifications.length; j++) {
-                    var time1 = notifications[j].timestamp
-                    var time2 = $scope.days[$scope.days.length - 1].name
-                    var msg1 = new Date(time1).setHours(0, 0, 0, 0);
-                    var msg2 = new Date(time2).setHours(0, 0, 0, 0);
-                    if (msg1 == msg2) {
-                        $scope.days[$scope.days.length - 1].messages.push(notifications[j])
-                    } else {
-                        $scope.days.push({ name: notifications[j].timestamp, messages: [notifications[j]] })
+                    event = JSON.parse(notifications[j].event);
+                    if (notifications[j].type == 'TRAVEL' && event.children && event.children.length > 1) {
+                        //oder from newest to oldest
+                        event.children.sort(function (a, b) {
+                            return b.timestamp - a.timestamp;
+                        });
+                        for (var childrenIndex = 0; childrenIndex < event.children.length; childrenIndex++) {
+                            $scope.manageOneEntry(event.children[childrenIndex], true)
+                        }
+                    }
+                    else {
+                        $scope.manageOneEntry(notifications[j], false)
                     }
                 }
             }
@@ -571,6 +617,7 @@ angular.module('viaggia.controllers.game', [])
                 var x = temporanea - 2592000000;
                 $scope.from = x;
                 $scope.to = ($scope.days != null) ? $scope.days[$scope.days.length - 1].messages[$scope.days[$scope.days.length - 1].messages.length - 1].timestamp - 1 : new Date().getTime();
+                //bisogna aggiornare scope.to all'ultimo messaggio `
                 // if ($scope.messages[0]) {
                 // var from = $scope.messages[0].timestamp - 2592000000;
                 // var to = $scope.messages[0].timestamp-1;

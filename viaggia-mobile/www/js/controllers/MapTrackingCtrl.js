@@ -1,24 +1,8 @@
 angular.module('viaggia.controllers.mapTracking', [])
 
     .controller('MapTrackingCtrl', function ($scope, $state, $interval, $filter, $rootScope, $ionicPopup, trackService, $ionicHistory, mapService, Config) {
-        $scope.progressPercent = {
-            walk: 0,
-            bike: 0,
-            bus: 0,
-            train: 0
-        };
-        $scope.progressCounter = {
-            walk: 0,
-            bike: 0,
-            bus: 0,
-            train: 0
-        };
-        $scope.maxvalues = {
-            maxDailywalk: 10000,
-            maxDailybike: 20000,
-            maxDailybus: 50000,
-            maxDailytrain: 50000
-        }
+
+
         $scope.pathLine = {
             walk: {
                 color: 'red',
@@ -90,10 +74,10 @@ angular.module('viaggia.controllers.mapTracking', [])
                         //check if stored are equal to current multimodal
                         if (location.extras.multimodalId === actualMultimodal)
                             // $scope.pathLine[location.extras.transportType].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
-                                $scope.pathLine['walk'].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
+                            $scope.pathLine['walk'].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
                     })
                     updateTrackingInfo();
-                    updateBar(location);
+                    $scope.updateBar(location);
                     // console.log("locations: ", locations);
                     $scope.loadingMapData = false;
                     BackgroundGeolocation.on('location', onLocation, onLocationError);
@@ -168,18 +152,8 @@ angular.module('viaggia.controllers.mapTracking', [])
             }
         }
 
-        $scope.actualTracking = function (type) {
-            var tripId = localStorage.getItem(Config.getAppId() + '_tripId');
-            if (tripId && tripId.startsWith(type))
-                return true;
-            return false;
-        }
-        $scope.getActualTracking = function () {
-            var tripId = localStorage.getItem(Config.getAppId() + '_tripId');
-            if (tripId)
-                return tripId.substring(0, tripId.indexOf('_'));
-            else return null;
-        }
+
+
         $scope.centerOnMe = function () {
 
             if ($rootScope.myPosition && $scope.center.zoom)
@@ -189,17 +163,7 @@ angular.module('viaggia.controllers.mapTracking', [])
                     zoom: $scope.center.zoom
                 }
         }
-        function updateBar(location) {
-            //TODO best calculation over max 
-            if (location.extras) {
-                $scope.progressCounter[location.extras.transportType]++;
-                $scope.progressPercent.walk = ($scope.progressCounter.walk * 20 / $scope.maxvalues.maxDailywalk) * 100;
-                $scope.progressPercent.bike = ($scope.progressCounter.bike * 20 / $scope.maxvalues.maxDailybike) * 100;
-                $scope.progressPercent.bus = ($scope.progressCounter.bus * 20 / $scope.maxvalues.maxDailybus) * 100;
-                $scope.progressPercent.train = ($scope.progressCounter.train * 20 / $scope.maxvalues.maxDailytrain) * 100;
-            }
 
-        }
         function onLocation(location) {
             // console.log('- location: ', location);
             // // add to map
@@ -210,7 +174,7 @@ angular.module('viaggia.controllers.mapTracking', [])
             // update the only path and update the bars on the
             if (!$scope.loadingMapData && ($scope.pathLine['walk'].latlngs.length == 0 || ($scope.pathLine['walk'].latlngs[$scope.pathLine['walk'].latlngs.length - 1].lat != location.coords.latitude && $scope.pathLine['walk'].latlngs[$scope.pathLine['walk'].latlngs.length - 1].lng != location.coords.longitude))) {
                 $scope.pathLine['walk'].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
-                updateBar(location);
+                $scope.updateBar(location);
             }
         }
         function onLocationError(error) {

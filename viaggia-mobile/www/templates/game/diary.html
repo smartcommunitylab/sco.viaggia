@@ -48,6 +48,9 @@
                                     <div class=" timeline-msg">
                                         {{getString(message) | translate: getParams(message)}}
                                     </div>
+                                    <div ng-if="message.multimodal">
+                                        multimodal
+                                    </div>
                                     <div class="col col-10 col-info">
                                         <a class="challenge-info">
                                             <i class="icon ion-ios-arrow-right"></i>
