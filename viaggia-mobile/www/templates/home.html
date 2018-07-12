@@ -17,7 +17,7 @@
         <div class="user-state">
             <div class="row">
                 <div class="col home-level">
-                    Livello
+                    {{'user_level_label' | translate}} {{status.playerData.level}}
                 </div>
                 <div class="col home-points">
                     {{status['pointConcept'][0]['score']}} {{'green_leaves_points' | translate}}

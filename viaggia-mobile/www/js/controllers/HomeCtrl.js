@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.home', [])
 
-    .controller('HomeCtrl', function ($scope, $state, $q, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv, DiaryDbSrv, BT) {
+    .controller('HomeCtrl', function ($scope, $state, $q, profileService, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv, DiaryDbSrv, BT) {
 
         $scope.challenges = [];
         $scope.buttons = [{
@@ -59,6 +59,14 @@ angular.module('viaggia.controllers.home', [])
                 //$ionicLoading.hide();
             });
         }
+
+        $scope.$watch(function () {
+            return profileService.status;
+        }, function (newVal, oldVal, scope) {
+            $scope.status = profileService.getProfileStatus();
+            setChallenges();
+        });
+
         var setChallenges = function () {
             if (!!$scope.status && !!$scope.status['challengeConcept']) {
                 if ($scope.status) {
@@ -432,10 +440,9 @@ angular.module('viaggia.controllers.home', [])
 
     }
     )
-    .controller('HomeContainerCtrl', function ($scope,$rootScope, profileService, GameSrv, Config, Toast, $filter) {
+    .controller('HomeContainerCtrl', function ($scope, $rootScope, profileService, GameSrv, Config, Toast, $filter) {
 
 
-        $rootScope.currentUser = null;
         $rootScope.currentUser = null;
         $scope.noStatus = false;
         $rootScope.profileImg = null;
@@ -444,6 +451,7 @@ angular.module('viaggia.controllers.home', [])
         GameSrv.getLocalStatus().then(
             function (status) {
                 $scope.status = status;
+                profileService.setProfileStatus(status);
                 $rootScope.currentUser = status.playerData;
                 $scope.getImage();
 
@@ -467,9 +475,9 @@ angular.module('viaggia.controllers.home', [])
 
                     // var img = document.getElementById( "#photo" );
                     // img.src = fileURL;
-                    $rootScope.profileImg = $scope.tmpUrl + $scope.status.playerData.playerId+ '?' + new Date().getTime();
+                    $rootScope.profileImg = $scope.tmpUrl + $scope.status.playerData.playerId + '?' + new Date().getTime();
                 }, function (error) {
-                    $rootScope.profileImg = 'img/game/generic_user.png'+ '?' + new Date().getTime();
+                    $rootScope.profileImg = 'img/game/generic_user.png' + '?' + new Date().getTime();
                 })
         }
 

@@ -11,7 +11,7 @@ angular.module('viaggia.services.profile', [])
     var PROFILE_TABLE_SIZE = "_table_size";
     var PROFILE_TABLE_BIG_SIZE = "table_big_size";
     var PROFILE_TABLE_LITTLE_SIZE = "table_little_size";
-
+    var status = {};
     profileService.setTableBigSize = function () {
       profileService.setTableSize(PROFILE_TABLE_BIG_SIZE);
     }
@@ -59,7 +59,13 @@ angular.module('viaggia.services.profile', [])
         });
       return deferred.promise;
     }
+    profileService.setProfileStatus = function (status) {
+      this.status = status;
 
+    }
+    profileService.getProfileStatus = function () {
+      return this.status;
+    }
     profileService.setProfileImage = function (file) {
       var deferred = $q.defer();
       var fd = new FormData();
