@@ -19,7 +19,7 @@
         <div ng-if="!!status">
             <a class="item item-avatar" href="#">
                 <img ng-if="profileImg" ng-src="{{profileImg}}" ng-click="changeProfile()">
-                <h1>{{'user_level_label'|translate}}:{{status.playerData.level}}</h1>
+                <h1 style="margin-top: 0px;">{{'user_level_label'|translate}}:{{status.playerData.level}}</h1>
             </a>
             <input type="file" style="display: none" name="file" id="inputImg" onchange="angular.element(this).scope().uploadFile(this.files)"/>
 
