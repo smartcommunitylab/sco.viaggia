@@ -27,7 +27,7 @@
 					<img ng-src="{{urlImg}}">
 					<h2>{{currentUser.nickName}}</h2>
 				</a> -->
-				<a class="item item-avatar user-menu-name" nav-clear menu-close ng-click="openProfile();" >
+				<a class="item item-avatar user-menu-name" nav-clear menu-close ng-click="openProfile();">
 					<img ng-if="profileImg" ng-src="{{profileImg}}" ng-click="openProfile()">
 					<div class="user-menu-name">{{currentUser.nickName}}</div>
 				</a>
@@ -49,6 +49,18 @@
 				<ion-item nav-clear menu-close ng-click="goHome()" class="menu-main item-icon-left">
 					<i class="icon ic_home"></i>{{'menu_home' | translate}}
 				</ion-item>
+				<div>
+					<ion-item class="item item-icon-left item-icon-right menu-main" ng-click="toggleGroupRealTime()" ng-class="{active: isGroupRealTimeShown()}">
+						<i class="icon ic_real-time-info"></i> {{'menu_info_transports' | translate}}
+						<i class="icon" ng-class="isGroupRealTimeShown() ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i>
+					</ion-item>
+					<div>
+						<ion-item class="item-icon-left item-accordion  menu-rt" ng-repeat="m in infomenu" ng-show="isGroupRealTimeShown()" nav-clear
+						 menu-close item-icon-left ng-href="#{{m.state}}">
+							<i class="icon" ng-class="m.icon"></i>{{m.label | translate}}
+						</ion-item>
+					</div>
+				</div>
 				<ion-item nav-clear menu-close ng-click="openPrizes()" class="menu-main item-icon-left">
 					<i class="icon ic_game_challenge"></i>{{'registration_prizes' | translate}}
 				</ion-item>

@@ -242,6 +242,9 @@ angular.module('viaggia.controllers.game', [])
         $scope.init();
     })
 
+    .controller('BlacklistCtrl', function ($scope) {
+        
+    })
 
 
     .controller('StatisticsCtrl', function ($scope, $ionicScrollDelegate, $window, $filter, $timeout, Toast, Config, GameSrv) {

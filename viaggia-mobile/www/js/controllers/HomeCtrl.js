@@ -64,6 +64,7 @@ angular.module('viaggia.controllers.home', [])
             return profileService.status;
         }, function (newVal, oldVal, scope) {
             $scope.status = profileService.getProfileStatus();
+            setUserProgress();
             setChallenges();
         });
 
@@ -76,6 +77,9 @@ angular.module('viaggia.controllers.home', [])
                     $scope.challenges = null;
                 }
             }
+        }
+        var setUserProgress = function() {
+            $scope.userProgress = 80;
         }
         // var mymap = document.getElementById('map-container');
 

@@ -1,18 +1,18 @@
-
 <ion-tabs class="tabs-icon-top">
-    <ion-tab title="{{'home_footerbar_home' | translate}}" icon-on="ion-ios-home"  icon-off="ion-ios-home"  ui-sref="app.home.home">
+    <ion-tab icon-on="ion-ios-home" icon-off="ion-ios-home" ui-sref="app.home.home">
         <ion-nav-view name="tab-home"></ion-nav-view>
     </ion-tab>
-
-    <ion-tab title="{{'home_footerbar_diary' | translate}}" icon-on="ion-ios-book" icon-off="ion-ios-book"  ui-sref="app.home.diary">
+    <ion-tab icon-on="ic_game_challenge" icon-off="ic_game_challenge" ui-sref="app.home.challenges">
+        <ion-nav-view name="tab-challenges"></ion-nav-view>
+    </ion-tab>
+    <ion-tab icon-on="ion-ios-book" icon-off="ion-ios-book" ui-sref="app.home.diary">
         <ion-nav-view name="tab-diary"></ion-nav-view>
     </ion-tab>
 
-    <ion-tab title="{{'home_footerbar_leaderboards' | translate}}" icon-on="ion-ios-people" icon-off="ion-ios-people" 
-        ui-sref="app.home.leaderboards">
+    <ion-tab icon-on="ion-ios-people" icon-off="ion-ios-people" ui-sref="app.home.leaderboards">
         <ion-nav-view name="tab-leaderboards"></ion-nav-view>
     </ion-tab>
-    <ion-tab title="{{'home_footerbar_real' | translate}}" icon-on="ion-ios-clock" icon-off="ion-ios-clock" ui-sref="app.home.mobility">
+    <ion-tab icon-on="ion-ios-clock" icon-off="ion-ios-clock" ui-sref="app.home.mobility">
         <ion-nav-view name="tab-mobility"></ion-nav-view>
     </ion-tab>
 </ion-tabs>

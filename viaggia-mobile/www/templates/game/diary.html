@@ -38,7 +38,7 @@
                                 <H5 class="timeline-day"> {{day.name| date:'dd/MM'}} </H5>
                             </div>
                             <div ng-if="message && message.type && !isTracking(message)" ng-repeat="message in day.messages" ng-click="{{getState(message)}}"
-                                class="message-inner" style=" border: 2px solid {{getStyleColor(message)}}">
+                                class="message-inner" >
                                 <div class="row row-center" style="padding: 0px">
                                     <!--<div class="arrow">-->
                                     <div class=" timeline-arrow" style="border-right-color: {{getStyleColor(message)}}">

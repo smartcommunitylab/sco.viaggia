@@ -1,18 +1,10 @@
 <ion-view>
-    <ion-nav-title>
+    <ion-nav-title class="home-title">
         Play&Go {{currentUser.nickName}}
     </ion-nav-title>
     <ion-nav-buttons side="right">
-        <!-- <button ng-click="openNotifications()" class="button button-icon button-home ic_notification">
-                    <span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span>
-                </button> -->
-        <!-- <button ng-click="openNotifications()" class="button button-icon button-home ion-android-compass">
-                        <span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span>
-                    </button> -->
         <button class=" button-icon button-home icon ion-person" ng-click="openProfile();"></button>
-
     </ion-nav-buttons>
-
     <ion-content ng-class="{'empty_bookmarks': primaryLinks.length == 0}" ng-init="showTutorial()">
         <div class="user-state">
             <div class="row">
@@ -24,8 +16,11 @@
                 </div>
             </div>
             <div class="row">
-                <div id="progressbar">
+                <!-- <div id="progressbar">
                     <div></div>
+                </div> -->
+                <div class="container-level">
+                    <div class="progress-bar-level" style="width: {{userProgress}}%;"># green leaves to the next level</div>
                 </div>
             </div>
         </div>
@@ -59,7 +54,7 @@
                     </div>
                 </div>
                 <div>
-                    <div class="group-track" >
+                    <div class="group-track">
                         <div class="progress-bar-track">
                             <i class="icon ic_foot" ng-class="{'actual-track':actualTracking('walk')}"></i>
                             <div class="container-stat" ng-class="{'actual-container-stat':actualTracking('walk')}">
@@ -106,7 +101,7 @@
                         <a ng-click="trackAndMap('walk')">
                             <div class="tracking-ds-button">
                                 <i class="icon ic_foot"></i>
-                                <span>{{'track_walk' | translate}}</span>
+                                <!-- <span>{{'track_walk' | translate}}</span> -->
                             </div>
                         </a>
                     </div>
@@ -114,7 +109,7 @@
                         <a ng-click="trackAndMap('bike')">
                             <div class="tracking-ds-button">
                                 <i class="icon ic_bike"></i>
-                                <span>{{'track_bike' | translate}}</span>
+                                <!-- <span>{{'track_bike' | translate}}</span> -->
                             </div>
                         </a>
                     </div>
@@ -122,7 +117,7 @@
                         <a ng-click="trackAndMap('bus')">
                             <div class="tracking-ds-button">
                                 <i class="icon ic_urban-bus"></i>
-                                <span>{{'menu_real_time_bus' | translate}}</span>
+                                <!-- <span>{{'menu_real_time_bus' | translate}}</span> -->
                             </div>
                         </a>
                     </div>
@@ -130,7 +125,7 @@
                         <a ng-click="trackAndMap('train')">
                             <div class="tracking-ds-button">
                                 <i class="icon ic_train"></i>
-                                <span>{{'menu_real_time_train' | translate}}</span>
+                                <!-- <span>{{'menu_real_time_train' | translate}}</span> -->
                             </div>
                         </a>
                     </div>

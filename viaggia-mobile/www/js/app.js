@@ -417,7 +417,16 @@ angular.module('viaggia', [
           }
         }
       })
-
+      .state('app.home.challenges', {
+        cache: false,
+        url: "/challenges",
+        views: {
+          'tab-challenges': {
+            templateUrl: 'templates/game/challenges.html',
+            controller: 'ChallengesCtrl'
+          }
+        }
+      })
       .state('app.home.mobility', {
         cache: false,
         url: '/mobility',
@@ -448,13 +457,14 @@ angular.module('viaggia', [
           }
         }
       })
-      .state('app.profile.challenges', {
+
+      .state('app.profile.blacklist', {
         cache: false,
-        url: "/challenges",
+        url: "/blacklist",
         views: {
-          'tab-challenges': {
-            templateUrl: 'templates/game/challenges.html',
-            controller: 'ChallengesCtrl'
+          'tab-blacklist': {
+            templateUrl: "templates/game/blacklist.html",
+            controller: 'BlacklistCtrl'
           }
         }
       })
@@ -881,19 +891,19 @@ angular.module('viaggia', [
         }
       })
 
-      .state('app.game.challenges', {
-        cache: false,
-        url: '/challenges',
-        params: {
-          challengeEnd: null
-        },
-        views: {
-          'tab-challenges': {
-            templateUrl: 'templates/game/challenges.html',
-            controller: 'ChallengesCtrl'
-          }
-        }
-      })
+      // .state('app.game.challenges', {
+      //   cache: false,
+      //   url: '/challenges',
+      //   params: {
+      //     challengeEnd: null
+      //   },
+      //   views: {
+      //     'tab-challenges': {
+      //       templateUrl: 'templates/game/challenges.html',
+      //       controller: 'ChallengesCtrl'
+      //     }
+      //   }
+      // })
 
       .state('app.game.rankings', {
         cache: false,
@@ -1386,7 +1396,8 @@ angular.module('viaggia', [
       change_image_template: "Sei sicuro di voler cambiare l'immagine di profilo?",
       change_image_title:"Immagine profilo",
       change_image_confirm:"Cambia",
-      change_image_title:"Immagine di profilo"
+      change_image_title:"Immagine di profilo",
+      menu_info_transports:"Mobilita"
     });
 
     $translateProvider.translations('en', {
@@ -1852,7 +1863,8 @@ angular.module('viaggia', [
       change_image_template: "Do you want to change the image profile?",
       change_image_title:"Image Profile",
       change_image_confirm:"Change",
-      registration_profile_image:"Image Profile"
+      registration_profile_image:"Image Profile",
+      menu_info_transports:"Mobility"
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

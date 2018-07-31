@@ -940,7 +940,7 @@ position: relative;
 }
 .message-item .message-inner {
 background: #fff;
-border: 1px solid #ddd;
+/* border: 1px solid #ddd; */
 border-radius: 35px 3px 3px 35px;
 padding: 0px;
 position: relative;
@@ -1970,7 +1970,8 @@ Play&Go
 }
 
 .game-badge {
-    width: 90px;
+    width: 50px;
+    height: 50px;
 }
 
 .game-badge-s {
@@ -1999,7 +2000,7 @@ Play&Go
 }
 
 .game-points .game-mypoints .col:first-child {
-    text-align: right;
+    text-align: left;
 }
 
 .game-points .game-mypoints .col:last-child {
@@ -2348,7 +2349,7 @@ Play&Go
 
 .tracking-dashboard .tracking-ds-button {
     background-color: #4caf4f;
-    border-radius: 4px;
+    border-radius: 16px;
     padding: 4px;
     color: #fff;
     text-align: center;
@@ -2767,6 +2768,41 @@ text-align: center;
     font-size: 26px;
     margin: 8px;
 }
+.home-title{
+    left: 48px!important;
+    position: fixed;
+}
+.container-level{
+    width: 80%;
+    background: lightgrey;
+    display: inline-block;
+    height: 20px;
+    border-radius: 100px;
+    margin: 20px auto;
+
+}
+.progress-bar-level {
+    background: grey;
+	border-radius:100px;
+    height:20px;
+    display: inline-block;
+  }
+  .img-container{
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+  }
+  .img-container>img {
+      width: 100%;
+  }
+  .img-container>a{
+    position: absolute;
+    top: 90px;
+    right: 20px;
+  }  
+  
+  
+  
   @-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}

@@ -119,6 +119,6 @@
     <engine name="ios" spec="^4.4.0" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
     <plugin name="cordova-custom-config" spec="^3.2.0" />
-    <engine name="android" spec="~6.4.0" />
     <plugin name="cordova-hot-code-push-plugin" spec="^1.5.3" />
+    <engine name="android" spec="~6.4.0" />
 </widget>
