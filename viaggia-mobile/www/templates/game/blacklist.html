@@ -1,13 +1,25 @@
-<ion-view>
+<ion-view title="{{'home_gamification' | translate}} {{currentUser.nickName}}">
     <ion-nav-buttons side="left">
         <button class="button button-clear" ng-click="goHome()">
             <i class="ion-android-arrow-back" style="font-size:30px;"></i>
         </button>
     </ion-nav-buttons>
-    <ion-nav-title>
-        {{'blacklist_title' | translate}}
-    </ion-nav-title>
+
     <ion-content>
-        
+            <div ng-if="!!status && !noBlack">
+                    <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="blacklistScroll">
+                        <ion-list>
+
+                            <ion-infinite-scroll ng-if="maybeMore" on-infinite="loadMore()"></ion-infinite-scroll>
+                        </ion-list>
+                    </ion-scroll>
+                </div>
+                <div ng-if="noBlack">
+                    <h4 class="label">{{'no_blacklist' | translate}}</h4>
+                </div>
+
+                <div ng-if="blacklist == null ">
+                    <h4>{{'no_blacklist' | translate}}</h4>
+                </div>
     </ion-content>
 </ion-view>

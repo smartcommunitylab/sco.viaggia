@@ -35,6 +35,10 @@ angular.module('viaggia.services.game', [])
             travelValidity:
                 function (event) {
                     return $filter('translate')(event['travelValidity'])
+                },
+            points:
+                function (event) {
+                    return event['travelScore']
                 }
         };
         var NOTIFICATIONS_STYLES = {
@@ -447,8 +451,30 @@ angular.module('viaggia.services.game', [])
                 });
             return deferred.promise;
         }
+        gameService.getBlacklist = function (how, from, to) {
+            var deferred = $q.defer();
+            LoginService.getValidAACtoken().then(
+                function (token) {
+                    $http({
+                        method: 'GET',
+                        url: Config.getServerURL() + '/gamification/blacklist?from=' + from + '&to=' + to,
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
+                        .success(function (stats) {
+                            deferred.resolve(stats);
+                        })
 
-
+                        .error(function (response) {
+                            deferred.reject(response);
+                        });
+                });
+            return deferred.promise;
+        }
+        
         /* get remote status */
         gameService.getStatus = function () {
             var deferred = $q.defer();

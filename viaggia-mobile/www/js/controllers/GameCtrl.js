@@ -242,8 +242,65 @@ angular.module('viaggia.controllers.game', [])
         $scope.init();
     })
 
-    .controller('BlacklistCtrl', function ($scope) {
-        
+    .controller('BlacklistCtrl', function ($scope, $ionicScrollDelegate, $window, $filter, $timeout, Toast, Config, GameSrv) {
+        $scope.blacklist = [];
+        $scope.noBlack = false;
+        $scope.maybeMore = true;
+        var getBlacklist = false;
+        $scope.status = null;
+        $scope.noStatus = false;
+        $scope.from = 0
+        $scope.to =10;
+
+
+        var generateRankingStyle = function () {
+            $scope.rankingStyle = {
+                'height': window.innerHeight - (44 + 44) + 'px'
+            };
+            $ionicScrollDelegate.$getByHandle('statisticScroll').resize();
+        };
+
+        $window.onresize = function (event) {
+            // Timeout required for our purpose
+            $timeout(function () {
+                generateRankingStyle();
+            }, 200);
+        };
+    
+        GameSrv.getLocalStatus().then(
+            function (status) {
+                $scope.status = status;
+                $scope.noStatus = false;
+            },
+            function (err) {
+                $scope.noStatus = true;
+                Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+            })
+
+
+
+        $scope.loadMore = function () {
+            if (!getBlacklist) {
+                getBlacklist = true;
+                //TODO manage from and to
+                GameSrv.getBlacklist($scope.from, $scope.to).then(
+                    function (blacklist) {
+                        $scope.blacklist = $scope.blacklist.concat(blacklist.stats);
+
+                        $scope.calculateMaxStats();
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
+                        Config.loaded();
+                        getBlacklist = false;
+                    },
+                    function (err) {
+                        $scope.maybeMore = false;
+                        Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
+                        getBlacklist = false;
+                    }
+                );
+            }
+        };
     })
 
 

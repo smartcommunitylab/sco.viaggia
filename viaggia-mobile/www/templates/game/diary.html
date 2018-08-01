@@ -37,19 +37,20 @@
                             <div class="timeline-dot">
                                 <H5 class="timeline-day"> {{day.name| date:'dd/MM'}} </H5>
                             </div>
+                            <div style="height: 8px"></div>
+
                             <div ng-if="message && message.type && !isTracking(message)" ng-repeat="message in day.messages" ng-click="{{getState(message)}}"
-                                class="message-inner" >
-                                <div class="row row-center" style="padding: 0px">
-                                    <!--<div class="arrow">-->
-                                    <div class=" timeline-arrow" style="border-right-color: {{getStyleColor(message)}}">
+                                class="message-inner">
+                                <div style="height: 8px" ng-if="message.multimodal"></div>
+
+                                <div class="row row-center" style="padding: 4px 0px">
+                                    <div class="timeline-multimodal-dot " ng-if="message.multimodal">
+                                        <H5 class="timeline-multimodal"> multimodal </H5>
                                     </div>
+                                    <!-- <div class=" timeline-arrow" style="border-right-color: {{getStyleColor(message)}}">
+                                    </div> -->
                                     <i class=" timeline-col icon {{getIcon(message)}}" style="background-color: {{getStyleColor(message)}}"></i>
-                                    <!--</div>-->
-                                    <div class=" timeline-msg">
-                                        {{getString(message) | translate: getParams(message)}}
-                                    </div>
-                                    <div ng-if="message.multimodal">
-                                        multimodal
+                                    <div class=" timeline-msg" ng-bind-html="getString(message) | translate: getParams(message)">
                                     </div>
                                     <div class="col col-10 col-info">
                                         <a class="challenge-info">
