@@ -250,8 +250,8 @@ angular.module('viaggia.controllers.game', [])
         $scope.status = null;
         $scope.noStatus = false;
         $scope.from = 0
-        $scope.to =10;
-
+        $scope.to = 10;
+        $scope.rankingPerPage = 50;
 
         var generateRankingStyle = function () {
             $scope.rankingStyle = {
@@ -266,7 +266,7 @@ angular.module('viaggia.controllers.game', [])
                 generateRankingStyle();
             }, 200);
         };
-    
+
         GameSrv.getLocalStatus().then(
             function (status) {
                 $scope.status = status;
@@ -278,21 +278,36 @@ angular.module('viaggia.controllers.game', [])
             })
 
 
+        $scope.removeFromBlacklist = function (id) {
+            Config.loading();
+            GameSrv.removeFromBlacklist(id).then(function () {
+                //removed
+                Config.loaded();
+            }, function (err) {
+                //not removed
+                Config.loaded();
+            }
+            )
 
+        }
         $scope.loadMore = function () {
             if (!getBlacklist) {
                 getBlacklist = true;
+                Config.loading();
                 //TODO manage from and to
                 GameSrv.getBlacklist($scope.from, $scope.to).then(
                     function (blacklist) {
-                        $scope.blacklist = $scope.blacklist.concat(blacklist.stats);
-
-                        $scope.calculateMaxStats();
+                        Config.loaded();
+                        $scope.blacklist = $scope.blacklist.concat(blacklist);
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                         Config.loaded();
                         getBlacklist = false;
+                        if (blacklist.length < $scope.rankingPerPage) {
+                            $scope.maybeMore = false;
+                        }
                     },
                     function (err) {
+                        Config.loaded();
                         $scope.maybeMore = false;
                         Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
                         $scope.$broadcast('scroll.infiniteScrollComplete');

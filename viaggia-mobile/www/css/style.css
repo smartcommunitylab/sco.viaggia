@@ -2820,9 +2820,6 @@ text-align: center;
     background: lightgreen !important;
   }
 
-  .group-track{
-
-}
 .menu-separator{
     border: 1px solid #fff;
     width: 100%;
@@ -2833,6 +2830,15 @@ text-align: center;
 .img-profile>img{
     height: 100px;
 }
+.img-profile-little{
+    float: left;
+}
+.img-profile-little>img{
+    height: 40px;
+}
+.blacklist-name{
+    padding-left: 20px;
+}
 .registration-image{
     width: 100px;
 }
@@ -2842,9 +2848,7 @@ text-align: center;
     align-content: center!important;
     align-items: center!important;
 }
-.user-menu {
 
-}
 .user-menu-name{
     color: #fff;
     font-size: 26px;

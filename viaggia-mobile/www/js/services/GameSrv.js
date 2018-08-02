@@ -451,30 +451,49 @@ angular.module('viaggia.services.game', [])
                 });
             return deferred.promise;
         }
+        gameService.removeFromBlacklist = function (id) {
+            var deferred = $q.defer();
+            deferred.resolve();
+            return deferred.promise;
+        }
         gameService.getBlacklist = function (how, from, to) {
             var deferred = $q.defer();
             LoginService.getValidAACtoken().then(
                 function (token) {
-                    $http({
-                        method: 'GET',
-                        url: Config.getServerURL() + '/gamification/blacklist?from=' + from + '&to=' + to,
-                        headers: {
-                            'Authorization': 'Bearer ' + token,
-                            'appId': Config.getAppId(),
-                        },
-                        timeout: Config.getHTTPConfig().timeout
-                    })
-                        .success(function (stats) {
-                            deferred.resolve(stats);
-                        })
+                    //TODO
+                    deferred.resolve([{
+                        id: 0,
+                        nome: 'Tizio'
+                    }, {
+                        id: 1,
+                        nome: 'Caio'
+                    }, {
+                        id: 2,
+                        nome: 'Sempronio'
+                    }, {
+                        id: 3,
+                        nome: 'Marco'
+                    }]);
+                    // $http({
+                    //     method: 'GET',
+                    //     url: Config.getServerURL() + '/gamification/blacklist?from=' + from + '&to=' + to,
+                    //     headers: {
+                    //         'Authorization': 'Bearer ' + token,
+                    //         'appId': Config.getAppId(),
+                    //     },
+                    //     timeout: Config.getHTTPConfig().timeout
+                    // })
+                    //     .success(function (stats) {
+                    //         deferred.resolve(stats);
+                    //     })
 
-                        .error(function (response) {
-                            deferred.reject(response);
-                        });
+                    //     .error(function (response) {
+                    //         deferred.reject(response);
+                    //     });
                 });
             return deferred.promise;
         }
-        
+
         /* get remote status */
         gameService.getStatus = function () {
             var deferred = $q.defer();
