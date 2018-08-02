@@ -1,5 +1,5 @@
 <ion-view id="news" title="{{'news_title' | translate}}">
-  <ion-content id="content" has-header="true">
+  <ion-content id="content" has-header="true" ng-class="{'margin-for-trackingbar':buttonMapNeed()}">
     <ion-refresher on-refresh="doRefresh()">
     </ion-refresher>
     <!--    notification list-->

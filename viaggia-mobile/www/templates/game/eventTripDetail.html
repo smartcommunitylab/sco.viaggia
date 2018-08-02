@@ -4,7 +4,7 @@
             <i class="ion-android-arrow-back" style="font-size:30px;"></i>
         </button>
     </ion-nav-buttons> -->
-    <ion-content id="content" has-header="true" scroll="false">
+    <ion-content id="content" has-header="true" scroll="false" ng-class="{'margin-for-trackingbar':buttonMapNeed()}">
         <div id="trip-event-map-container" data-tap-disabled="true">
             <!--<leaflet event-broadcast="events" center="center" markers="markers" paths="pathLine" style="width: 100%; height: 700px;" ng-init="initMap()" id="mapEventTripDetail"></leaflet>-->
             <leaflet center="center" paths="paths" markers="markers" defaults="defaults" height="500" id="eventTripMapDetail" ng-init="initMap()"></leaflet>

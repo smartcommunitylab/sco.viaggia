@@ -7,7 +7,7 @@
     <ion-nav-title>
         {{'statistics_title' | translate}}
     </ion-nav-title>
-    <ion-content class="game-ranking" has-bouncing="false" scroll="false">
+    <ion-content class="game-ranking" has-bouncing="false" scroll="false" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
         <div class="filter item-accordion" ng-if="!!filter.options">
             <ion-item class="item-accordion-header item-icon-right" ng-click="filter.toggle()">
                 <div ng-if="!filter.open">{{!!filter.selected ? ('game_tab_statistics_filter_' + filter.selected) : '' | translate}}</div>

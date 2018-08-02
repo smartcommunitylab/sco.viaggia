@@ -1,5 +1,15 @@
-<button class="pulse-button  icon ion-map" ng-click="goToMap()" ng-if="buttonMapNeed();">
-</button>
+<!-- <button class="pulse-button icon ion-map" ng-click="goToMap()" ng-if="buttonMapNeed();">
+</button> -->
+<div  ng-if="notHomeAndMap()">
+	<div class="app-track-buttons">
+		<button class="button button-map icon ion-map"  ng-click="goToMap()"></button>
+		<button class="button button-map icon ic_foot" ng-class="{'actual-track':actualTracking('walk')}" ng-click="changeTracking('walk')"></button>
+		<button class="button button-map icon ic_bike" ng-class="{'actual-track':actualTracking('bike')}" ng-click="changeTracking('bike')"></button>
+		<button class="button button-map icon ic_urban-bus" ng-class="{'actual-track':actualTracking('bus')}" ng-click="changeTracking('bus')"></button>
+		<button class="button button-map icon ic_train" ng-class="{'actual-track':actualTracking('train')}" ng-click="changeTracking('train')"></button>
+	</div>
+	<button class="button app-track-stop-map" ng-click="stopTracking()">STOP</button>
+</div>
 <ion-side-menus enable-menu-with-back-views="false">
 	<ion-side-menu-content drag-menu-content="false" edge-drag-threshold="true">
 		<ion-nav-bar class="bar-positive-100" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-right': hasHeaderFabRight}"

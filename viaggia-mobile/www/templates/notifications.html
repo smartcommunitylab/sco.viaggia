@@ -1,6 +1,6 @@
 <ion-view id="notifications" title="{{'notifications_title' | translate}}">
     <ion-content id="content" has-header="true">
-        <ion-refresher on-refresh="doRefresh()">
+        <ion-refresher on-refresh="doRefresh()" ng-class="{'margin-for-trackingbar':buttonMapNeed()}">
         </ion-refresher>
         <!--    notification list-->
         <div ng-show="emptylist" class="text-center">

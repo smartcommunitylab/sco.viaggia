@@ -1,5 +1,5 @@
 <ion-view id="mytrips" title="{{'my_trip_title'|translate}}">
-    <ion-content id="content" has-header="true">
+    <ion-content id="content" has-header="true" ng-class="{'margin-for-trackingbar':buttonMapNeed()}">
         <div ng-hide="savedTrips.length>0" class="text-center">
             <h4>{{'my_trip_empty_list'|translate}}</h4>
         </div>

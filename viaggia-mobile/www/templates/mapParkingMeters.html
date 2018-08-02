@@ -13,7 +13,7 @@
 -->
     <button class="button button-icon button-clear ion-android-compass" ng-if="isAndroid" ng-click="openCalibrationPopup()"></button>
   </ion-nav-buttons>
-  <ion-content scroll="false">
+  <ion-content scroll="false" ng-class="{'margin-for-trackingbar':buttonMapNeed()}">
     <div id="modal-map-container" data-tap-disabled="true">
       <div ng-if="compassPresent" class="compass">
         <!--                <canvas id="arrow" width="110" height="100"></canvas>-->

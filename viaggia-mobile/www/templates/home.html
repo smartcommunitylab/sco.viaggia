@@ -48,12 +48,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col text-center">
                         <button class="button button-stop" ng-click="stopTracking()">{{'stop_tracking' | translate}}</button>
                     </div>
+                </div> -->
+                <div class="row">
+                    <div class="home-track-container">
+                        <div class="home-track-buttons">
+                            <button class="button button-map icon ion-map" ng-click="goToMap()"></button>
+                            <button class="button button-map icon ic_foot" ng-class="{'actual-track':actualTracking('walk')}" ng-click="changeTracking('walk')"></button>
+                            <button class="button button-map icon ic_bike" ng-class="{'actual-track':actualTracking('bike')}" ng-click="changeTracking('bike')"></button>
+                            <button class="button button-map icon ic_urban-bus" ng-class="{'actual-track':actualTracking('bus')}" ng-click="changeTracking('bus')"></button>
+                            <button class="button button-map icon ic_train" ng-class="{'actual-track':actualTracking('train')}" ng-click="changeTracking('train')"></button>
+                        </div>
+                        <button class="button home-track-stop-map" ng-click="stopTracking()">STOP</button>
+                    </div>
                 </div>
-                <div>
+                <!-- <div>
                     <div class="group-track">
                         <div class="progress-bar-track">
                             <i class="icon ic_foot" ng-class="{'actual-track':actualTracking('walk')}"></i>
@@ -80,13 +92,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div ng-if="!trackingIsOn">
                 <div class="row">
                     <div class="col text-center">
                         <h4>
-                            <i class="icon ion-leaf"></i>{{'play_now' | translate}}</h4>
+                            <i class="icon ion-leaf"></i><span class="home-label-dashboard">{{'play_now' | translate}}</span>
+                        </h4>
                         <div ng-if="!syncRunning">
                             <b>{{'play_now_sub' | translate}}</b>
                         </div>

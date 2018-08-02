@@ -9,7 +9,7 @@
         <button class=" button-icon button-home icon ion-person" ng-click="openProfile();"></button>
 
     </ion-nav-buttons>
-    <ion-content id="content" has-header="true">
+    <ion-content id="content" has-header="true" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
         <ion-list class="home-list" ng-if="primaryLinks.length>0">
             <ion-item ng-repeat="m in primaryLinks" ng-last-repeat="primaryLinks" ng-click="go(m.state)">
                 <button class="button button-block">

@@ -3,7 +3,7 @@
     {{'news_title'|translate}}
   </ion-nav-title>
 
-  <ion-content class="home-news contatto" has-bouncing="false">
+  <ion-content class="home-news contatto" has-bouncing="false" ng-class="{'margin-for-trackingbar':buttonMapNeed()}">
     <div class="news-block padding">
       <div ng-if="!!newsItem.image">
         <img class="news-image" ng-src="{{newsItem.image}}" />

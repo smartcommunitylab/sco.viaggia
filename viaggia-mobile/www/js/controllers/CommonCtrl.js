@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.common', [])
 
-  .controller('AppCtrl', function ($scope, $q, $state, $rootScope, trackService, $ionicHistory, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, Utils, tutorial) {
+  .controller('AppCtrl', function ($scope, $q, $state, GameSrv, $rootScope, trackService, $ionicHistory, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, Utils, tutorial) {
 
 
     /* menu group */
@@ -18,12 +18,12 @@ angular.module('viaggia.controllers.common', [])
       maxDailybus: 50000,
       maxDailytrain: 50000
     }
-        $scope.progressPercent = {
-            walk: 0,
-            bike: 0,
-            bus: 0,
-            train: 0
-        };
+    $scope.progressPercent = {
+      walk: 0,
+      bike: 0,
+      bus: 0,
+      train: 0
+    };
     $scope.toggleGroupRealTime = function () {
       if ($scope.isGroupRealTimeShown()) {
         $scope.shownGroup = false;
@@ -107,7 +107,11 @@ angular.module('viaggia.controllers.common', [])
         disableBack: true,
         historyRoot: false
       });
-
+    }
+    $scope.notHomeAndMap = function () {
+      if ($state.current.name != "app.mapTracking" && $state.current.name != "app.login" && $state.current.name != "app.home.home" && trackService.trackingIsGoingOn() && !trackService.trackingIsFinished())
+        return true;
+      return false
     }
     $scope.goHome = function () {
       $state.go('app.home.home');
@@ -116,7 +120,96 @@ angular.module('viaggia.controllers.common', [])
         historyRoot: true
       });
     }
+    $scope.changeTracking = function (type) {
+      //se type e' uguale al tipo attuale non cambiare
+      if (!$scope.actualTracking(type) && trackService.trackingIsGoingOn()) {
+        //show popup if u want change the tracking mean
+        $ionicPopup.show({
+          title: $filter('translate')("pop_up_change_free_track_title"),
+          template: $filter('translate')("pop_up_change_free_track_template"),
+          buttons: [
+            {
+              text: $filter('translate')("btn_close"),
+              type: 'button-cancel'
+            },
+            {
+              text: $filter('translate')("pop_up_change_free_track_go_on"),
+              type: 'button-custom',
+              onTap: function () {
+                //close track and start another one
+                trackService.stopNoSynch().then(function () {
+                  trackService.startTransportTrack(type).then(function () {
+                  });
+                }, function () {
+                  Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
+                });
+              }
+            }]
+        })
 
+      }
+    }
+    $scope.stopTracking = function () {
+      Config.loading();
+      $scope.trackingIsOn = false;
+      if (!!$scope.trackInfoInterval) $interval.cancel($scope.trackInfoInterval);
+      $scope.trackingInfo = {};
+      trackService.computeInfo().then(function (data) {
+          Config.loaded();
+          var travelForDiary = GameSrv.getTravelForDiary()
+          trackService.stop();
+          //Removed controls for minimum distance
+
+          // if (Math.floor(data.dist < Config.getMinimumDistance()) && data.transport == 'walk') {
+
+          // Toast.show($filter('translate')("no_points"), "short", "bottom");
+          // $ionicPopup.alert({
+          //     title: $filter('translate')("no_points_title"),
+          //     template: $filter('translate')("no_points", {
+          //         points: data.points
+          //     }),
+          //     okText: $filter('translate')("btn_close"),
+          //     okType: 'button-cancel'
+          // })
+
+          // } else {
+          if (data.valid) {
+              GameSrv.addTravelDiary(travelForDiary);
+              $ionicPopup.confirm({
+                  title: $filter('translate')("pop_up_points_title"),
+                  template: $filter('translate')("pop_up_points_template"),
+                  buttons: [
+                      {
+                          text: $filter('translate')("btn_close"),
+                          type: 'button-cancel'
+                      },
+                      {
+                          text: $filter('translate')("pop_up_points_btn"),
+                          type: 'button-custom',
+                          onTap: function () {
+                              $state.go('app.home.diary');
+                          }
+                      }
+                  ]
+              });
+          } else {
+              $ionicPopup.alert({
+                  title: $filter('translate')("pop_up_invalid_tracking_title"),
+                  template: $filter('translate')("pop_up_invalid_tracking_template"),
+                  okText: $filter('translate')("btn_close"),
+                  okType: 'button-cancel'
+              });
+
+          }
+          // }
+      }, function () {
+          //puo' darsi che finisca qui?
+          Config.loaded();
+          $scope.showErrorServer();
+          trackService.stop();
+      }).finally(Config.loaded);
+
+  }
     $scope.openGamificationBoard = function () {
       //$scope.firstOpenPopup.close();
       $state.go('app.game');
@@ -200,11 +293,11 @@ angular.module('viaggia.controllers.common', [])
     }
 
     $scope.openDiary = function () {
-      $state.go('app.diary');
+      $state.go('app.home.diary');
     };
 
     $scope.openStatistics = function () {
-      $state.go('app.statistics')
+      $state.go('app.profile.statistics')
     };
 
     $scope.newPlan = function () {

@@ -122,35 +122,6 @@ angular.module('viaggia.controllers.mapTracking', [])
 
 
 
-        $scope.changeTracking = function (type) {
-            //se type e' uguale al tipo attuale non cambiare
-            if (!$scope.actualTracking(type) && trackService.trackingIsGoingOn()) {
-                //show popup if u want change the tracking mean
-                $ionicPopup.show({
-                    title: $filter('translate')("pop_up_change_free_track_title"),
-                    template: $filter('translate')("pop_up_change_free_track_template"),
-                    buttons: [
-                        {
-                            text: $filter('translate')("btn_close"),
-                            type: 'button-cancel'
-                        },
-                        {
-                            text: $filter('translate')("pop_up_change_free_track_go_on"),
-                            type: 'button-custom',
-                            onTap: function () {
-                                //close track and start another one
-                                trackService.stopNoSynch().then(function () {
-                                    trackService.startTransportTrack(type).then(function () {
-                                    });
-                                }, function () {
-                                    Toast.show($filter('translate')('pop_up_error_server_template'), "short", "bottom");
-                                });
-                            }
-                        }]
-                })
-
-            }
-        }
 
 
 

@@ -2289,7 +2289,10 @@ Play&Go
 
 .tracking-dashboard {
     margin: 0px 0px;
-    border-bottom: 2px solid #60b35c;
+    /* border-bottom: 2px solid #60b35c; */
+    background-color: rgb(33, 150, 243);
+    color: white;
+    padding-bottom: 25px;
 }
 
 .chart div {
@@ -2581,29 +2584,86 @@ line-height: 1.5 !important;
     }
 .center-on-me {
 position: fixed;
-bottom: 150px;
+top: 200px;
 left: 10px;
 width: 30px;
 height: 30px;
 }
 .button-map {
     padding: 0px;
+    border-radius: 4px;
     border-radius: 35px;
+    box-shadow: none;
+    height: 20px!important;
+    width: 20px!important;
+    font-size: 22px;
 }
 .modes-buttons {
     position: fixed;
     bottom: 10px;
-    left: 10px;
+    /* left: 10px; */
+    background-color: rgb(248, 248, 248);
+    border-radius: 0px 35px 35px 0px;
+    padding: 5px;
 }
 .button-stop-map{
     position: fixed;
     bottom: 10px;
-    right: 10px;
+    right: 0px;
     background-color: #c1272d;
     color: #fff;
-    border-radius: 35px;
+    border-radius: 35px 0px 0px 35px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 57px;
 }
 
+.app-track-buttons {
+    position: fixed;
+    bottom: 50px;
+    /* left: 10px; */
+    background-color: rgb(248, 248, 248);
+    border-radius: 0px 35px 35px 0px;
+    padding: 5px;
+    z-index: 999;
+}
+.app-track-stop-map{
+    position: fixed;
+    bottom: 50px;
+    right: 0px;
+    background-color: #c1272d;
+    color: #fff;
+    border-radius: 35px 0px 0px 35px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 57px;
+    z-index: 999;
+}
+.home-track-container {
+    height: 50px;
+    position: relative;
+    width: 100%;;
+}
+.home-track-buttons {
+    background-color: rgb(248, 248, 248);
+    border-radius: 0px 35px 35px 0px;
+    padding: 5px;
+    z-index: 999;
+    margin-left: -10px;
+    display: inline-block;
+}
+.home-track-stop-map{
+    background-color: #c1272d;
+    color: #fff;
+    border-radius: 35px 0px 0px 35px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    height: 57px;
+    z-index: 999;
+    margin-right: -10px;
+    right: 0px;
+    position: absolute;
+}
 .footer-bar {
     position: fixed;
     bottom: 10px;
@@ -2662,6 +2722,9 @@ text-align: center;
     margin: auto;
     text-align: center;
 }
+.home-label-dashboard{ 
+    color: white;
+}
 .home-your-challenges {
     margin: 20px;
     font-size: 24px;
@@ -2674,8 +2737,7 @@ text-align: center;
     float: right;
 }
 .actual-track{
-    background-color: orange;
-    color: white;
+    color: rgb(33, 150, 243);
 }
 .home-no-challenge{
     text-align: center;
@@ -2820,8 +2882,12 @@ text-align: center;
     top: 90px;
     right: 20px;
   }  
-  
-  
+  .margin-for-trackingbar-tab{
+      margin-bottom: 80px;
+  }
+  .margin-for-trackingbar{
+    margin-bottom: 120px;
+}
   
   @-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}

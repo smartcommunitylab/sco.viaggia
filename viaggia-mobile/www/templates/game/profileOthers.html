@@ -5,7 +5,7 @@
         </button>
     </ion-nav-buttons>
 
-    <ion-content class="padding-right padding-left game-points">
+    <ion-content class="padding-right padding-left game-points" ng-class="{'margin-for-trackingbar':buttonMapNeed()}">
         <a class="item item-avatar" href="#">
             <img ng-if="!user.img" src="img/game/generic_user.png">
             <img ng-if="user.img" src="user.img">

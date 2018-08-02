@@ -12,7 +12,7 @@
         <button ng-if="selected != null" class="button button-icon button-clear" ng-click="bookmark()"></button>
         <button class="button button-icon button-fab button-viaggia-header ion-map" ng-click="showMap()"></button>
     </ion-nav-buttons>
-    <ion-content has-header="true" padding="true">
+    <ion-content has-header="true" padding="true" ng-class="{'margin-for-trackingbar':buttonMapNeed()}">
         <ion-refresher on-refresh="load()">
         </ion-refresher>
         <ion-list class="list">

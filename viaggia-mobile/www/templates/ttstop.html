@@ -3,7 +3,7 @@
     <ion-nav-buttons side="right">
         <button class="button button-icon button-clear" ng-class="bookmarkStyle" ng-click="bookmark()"></button>
     </ion-nav-buttons>
-    <ion-content>
+    <ion-content ng-class="{'margin-for-trackingbar':buttonMapNeed()}">
         <div>
             <div class="stop-line" ng-repeat="(routeId, route) in stopData.data">
                 <div ng-if="route.routeObject" class="stop-line-title" style="background-color: {{route.color}}; color: {{textColor(route.color)}}">

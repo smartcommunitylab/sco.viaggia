@@ -12,7 +12,7 @@
         <button class=" button-icon button-home icon ion-person" ng-click="openProfile();"></button>
 
     </ion-nav-buttons>
-    <ion-content class="game-ranking" has-bouncing="false" scroll="false">
+    <ion-content class="game-ranking" has-bouncing="false" scroll="false" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
         <div class="filter item-accordion" ng-if="!!filter.options">
             <ion-item class="item-accordion-header item-icon-right" ng-click="filter.toggle()">
                 <div ng-if="!filter.open">{{!!filter.selected ? ('game_tab_diary_filter_' + filter.selected) : '' | translate}}</div>

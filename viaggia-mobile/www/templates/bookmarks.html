@@ -3,7 +3,7 @@
         <button class="button button-icon button-clear ion-help" ng-click="forceTutorial()"></button>
         <button class="button button-icon button-clear ion-drag" ng-click="toggleReorder()"></button>
     </ion-nav-buttons>
-    <ion-content id="content" has-header="true" ng-init="showTutorial()">
+    <ion-content id="content" has-header="true" ng-init="showTutorial()" ng-class="{'margin-for-trackingbar':buttonMapNeed()}">
 
         <ion-list class="bookmark-list" can-swipe="true" show-reorder="showReorder">
             <!--            <ion-item id="focusHere" class="item-icon-left" ng-class="{'bookmark-margin':!showReorder}" item="item" ng-repeat="m in bookmarks track by $index" ng-last-repeat="bookmarks" ng-click="go(m.state)">-->
