@@ -480,14 +480,43 @@ angular.module('viaggia', [
       })
       .state('app.profileOthers', {
         cache: false,
-        url: "/profile",
+        url: "/other",
         params: {
           profileId: null
         },
         views: {
           'menuContent': {
-            templateUrl: "templates/game/profileOthers.html",
+            templateUrl: "templates/game/profileOthersContainer.html",
+            controller: 'ProfileOthersContainerCtrl'
+          }
+        }
+      }).state('app.profileOthers.points', {
+        cache: false,
+        url: "/other-points",
+        views: {
+          'tab-other-points': {
+            templateUrl: 'templates/game/profileOthers.html',
             controller: 'ProfileOthersCtrl'
+          }
+        }
+      })
+      .state('app.profileOthers.challenges', {
+        cache: false,
+        url: "/other-challenges",
+        views: {
+          'tab-other-challenges': {
+            templateUrl: "templates/game/profileOthersChallenges.html",
+            controller: 'ProfileOthersChallengesCtrl'
+          }
+        }
+      })
+      .state('app.profileOthers.statistics', {
+        cache: false,
+        url: "/other-stat",
+        views: {
+          'tab-other-stat': {
+            templateUrl: "templates/game/profileOthersStatistics.html",
+            controller: 'ProfileOthersStatisticsCtrl'
           }
         }
       })

@@ -107,3 +107,9 @@ angular.module('viaggia.controllers.profile', [])
             }
         }
     })
+    .controller('ProfileOthersContainerCtrl', function ($scope) {
+    })
+    .controller('ProfileOthersChallengesCtrl', function ($scope) {
+    })
+    .controller('ProfileOthersStatisticsCtrl', function ($scope) {
+    })

@@ -93,6 +93,18 @@
                 "color": "#3BBACF"
             },
             {
+                "state": "/app/bookmarks",
+                "label": "menu_bookmarks",
+                "icon": "ic_bookmark",
+                "color": "#3BBACF"
+            },
+            {
+                "state": "/app/mytrips",
+                "label": "menu_mytrip",
+                "icon": "ic_folder",
+                "color": "#3BBACF"
+            },
+            {
                 "state": "/app/ttlist/urbano",
                 "label": "menu_real_time_bus_urban",
                 "icon": "ic_urban-bus",
