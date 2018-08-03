@@ -155,61 +155,66 @@ angular.module('viaggia.controllers.common', [])
       if (!!$scope.trackInfoInterval) $interval.cancel($scope.trackInfoInterval);
       $scope.trackingInfo = {};
       trackService.computeInfo().then(function (data) {
-          Config.loaded();
-          var travelForDiary = GameSrv.getTravelForDiary()
-          trackService.stop();
-          //Removed controls for minimum distance
+        Config.loaded();
+        var travelForDiary = GameSrv.getTravelForDiary()
+        trackService.stop();
+        //Removed controls for minimum distance
 
-          // if (Math.floor(data.dist < Config.getMinimumDistance()) && data.transport == 'walk') {
+        // if (Math.floor(data.dist < Config.getMinimumDistance()) && data.transport == 'walk') {
 
-          // Toast.show($filter('translate')("no_points"), "short", "bottom");
-          // $ionicPopup.alert({
-          //     title: $filter('translate')("no_points_title"),
-          //     template: $filter('translate')("no_points", {
-          //         points: data.points
-          //     }),
-          //     okText: $filter('translate')("btn_close"),
-          //     okType: 'button-cancel'
-          // })
+        // Toast.show($filter('translate')("no_points"), "short", "bottom");
+        // $ionicPopup.alert({
+        //     title: $filter('translate')("no_points_title"),
+        //     template: $filter('translate')("no_points", {
+        //         points: data.points
+        //     }),
+        //     okText: $filter('translate')("btn_close"),
+        //     okType: 'button-cancel'
+        // })
 
-          // } else {
-          if (data.valid) {
-              GameSrv.addTravelDiary(travelForDiary);
-              $ionicPopup.confirm({
-                  title: $filter('translate')("pop_up_points_title"),
-                  template: $filter('translate')("pop_up_points_template"),
-                  buttons: [
-                      {
-                          text: $filter('translate')("btn_close"),
-                          type: 'button-cancel'
-                      },
-                      {
-                          text: $filter('translate')("pop_up_points_btn"),
-                          type: 'button-custom',
-                          onTap: function () {
-                              $state.go('app.home.diary');
-                          }
-                      }
-                  ]
-              });
-          } else {
-              $ionicPopup.alert({
-                  title: $filter('translate')("pop_up_invalid_tracking_title"),
-                  template: $filter('translate')("pop_up_invalid_tracking_template"),
-                  okText: $filter('translate')("btn_close"),
-                  okType: 'button-cancel'
-              });
+        // } else {
+        if (data.valid) {
+          GameSrv.addTravelDiary(travelForDiary);
+          $ionicPopup.confirm({
+            title: $filter('translate')("pop_up_points_title"),
+            template: $filter('translate')("pop_up_points_template"),
+            buttons: [
+              {
+                text: $filter('translate')("btn_close"),
+                type: 'button-cancel',
+                onTap: function () {
+                  if ($state.current.name != "app.home.home") {
+                    $state.go('app.home.home');
+                  }
+                }
+              },
+              {
+                text: $filter('translate')("pop_up_points_btn"),
+                type: 'button-custom',
+                onTap: function () {
+                  $state.go('app.home.diary');
+                }
+              }
+            ]
+          });
+        } else {
+          $ionicPopup.alert({
+            title: $filter('translate')("pop_up_invalid_tracking_title"),
+            template: $filter('translate')("pop_up_invalid_tracking_template"),
+            okText: $filter('translate')("btn_close"),
+            okType: 'button-cancel'
+          });
 
-          }
-          // }
+        }
+        // }
       }, function () {
-          //puo' darsi che finisca qui?
-          Config.loaded();
-          $scope.showErrorServer();
-          trackService.stop();
+        //puo' darsi che finisca qui?
+        Config.loaded();
+        $scope.showErrorServer();
+        trackService.stop();
       }).finally(Config.loaded);
 
-  }
+    }
     $scope.openGamificationBoard = function () {
       //$scope.firstOpenPopup.close();
       $state.go('app.game');

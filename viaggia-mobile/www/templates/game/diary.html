@@ -39,14 +39,17 @@
                             </div>
                             <div style="height: 8px"></div>
 
-                            <div ng-if="message && message.type && !isTracking(message)" ng-repeat="message in day.messages" ng-click="{{getState(message)}}"
+                            <div ng-if="message && message.type && !isTracking(message)" ng-repeat="message in day.messages track by $index" ng-click="{{getState(message)}}"
                                 class="message-inner">
-                                <div style="height: 8px" ng-if="message.multimodal"></div>
+                                <div style="height: 8px" ng-if="message.multimodal && message.first" ></div>
 
                                 <div class="row row-center" style="padding: 4px 0px">
-                                    <div class="timeline-multimodal-dot " ng-if="message.multimodal">
-                                        <H5 class="timeline-multimodal"> multimodal </H5>
+                                    <div class="timeline-multimodal-dot " ng-if="message.multimodal && message.first">
+                                        <H5 class="timeline-multimodal"> {{'diary_multimodal'| translate}} </H5>
                                     </div>
+                                    <div class="timeline-multimodal-dot " ng-if="!message.multimodal">
+                                            <H5 class="timeline-multimodal"> {{'diary_single'| translate}} </H5>
+                                        </div>
                                     <!-- <div class=" timeline-arrow" style="border-right-color: {{getStyleColor(message)}}">
                                     </div> -->
                                     <i class=" timeline-col icon {{getIcon(message)}}" style="background-color: {{getStyleColor(message)}}"></i>

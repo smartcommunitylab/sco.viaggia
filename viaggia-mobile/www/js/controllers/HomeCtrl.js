@@ -254,6 +254,11 @@ angular.module('viaggia.controllers.home', [])
             $state.go('app.mapTracking');
 
         }
+        $scope.stopTrackingHome = function () {
+            $scope.trackingIsOn = false;
+            $scope.stopTracking();
+        }
+
         $scope.startTracking = function (transportType) {
             if (!$rootScope.syncRunning) {
                 $scope.localizationAlwaysAllowed().then(function (loc) {

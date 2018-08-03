@@ -59,6 +59,10 @@
 				<ion-item nav-clear menu-close ng-click="goHome()" class="menu-main item-icon-left">
 					<i class="icon ic_home"></i>{{'menu_home' | translate}}
 				</ion-item>
+
+                <ion-item nav-clear menu-close href="#/app/bookmarks" class="menu-main item-icon-left">
+                    <i class="icon ic_bookmark"></i>{{'menu_bookmarks' | translate}}
+                </ion-item>
 				<div>
 					<ion-item class="item item-icon-left item-icon-right menu-main" ng-click="toggleGroupRealTime()" ng-class="{active: isGroupRealTimeShown()}">
 						<i class="icon ic_real-time-info"></i> {{'menu_info_transports' | translate}}

@@ -1426,7 +1426,8 @@ angular.module('viaggia', [
       change_image_title:"Immagine profilo",
       change_image_confirm:"Cambia",
       change_image_title:"Immagine di profilo",
-      menu_info_transports:"Mobilita"
+      menu_info_transports:"Mobilita",
+      diary_multimodal:"Multimodale"
     });
 
     $translateProvider.translations('en', {
@@ -1893,7 +1894,8 @@ angular.module('viaggia', [
       change_image_title:"Image Profile",
       change_image_confirm:"Change",
       registration_profile_image:"Image Profile",
-      menu_info_transports:"Mobility"
+      menu_info_transports:"Mobility",
+      diary_multimodal:"Multimodal"
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);
