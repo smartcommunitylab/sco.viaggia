@@ -5,8 +5,8 @@
         </button>
     </ion-nav-buttons>
 
-    <ion-content class="padding-right padding-left game-points" ng-class="{'margin-for-trackingbar':buttonMapNeed()}">
-        <a class="item item-avatar" href="#">
+    <ion-content class="padding-right padding-left game-points" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
+        <!-- <a class="item item-avatar" href="#">
             <img ng-if="!user.img" src="img/game/generic_user.png">
             <img ng-if="user.img" src="user.img">
             <h1>{{'user_level_label'|translate}}:{{user.level}}</h1>
@@ -36,14 +36,40 @@
                 </div>
                 <div ng-if="user.statistics.car>0" class="statstext" id="carcolor"> {{(user.statistics.car/1000) | number:1}} km </div>
                 <div id="statsdiv"></div>
-            <!-- <p ng-if="user.statistics.walk">{{'user_stat_walk_label'|translate}}:{{user.statistics.walk | number:0}}</p>
-            <p ng-if="user.statistics.bike">{{'user_stat_bike_label'|translate}}:{{user.statistics.bike| number:0}}</p>
-            <p ng-if="user.statistics.bus">{{'user_stat_bus_label'|translate}}:{{user.statistics.bus| number:0}}</p>
-            <p ng-if="user.statistics.train">{{'user_stat_train_label'|translate}}:{{user.statistics.train| number:0}}</p> -->
-        </div>
-        <!-- <p>{{user.badges}}</p> -->
-
+        </div> -->
         <div ng-if="!!user">
+                <div class="img-container">
+                    <img ng-if="!user.img" src="img/game/generic_user.png">
+                    <img ng-if="user.img" src="user.img">
+                </div>
+    
+                <p></p>
+                <div class="row ">
+                    <div class="col col-33 col-center">
+                        <h2 style="margin-top: 0px;">{{'user_level_label'|translate}}:</h2>
+                    </div>
+                    <div class="col col-66 col-center">
+                        <h2>
+                            {{user.level}}</h2>
+                    </div>
+                    <!-- </div> -->
+                </div>
+                <div class="row game-mypoints">
+                    <div class="col col-33 col-center">
+                        <img class="game-badge" src="img/game/greenleaves.png" />
+                    </div>
+                    <!-- <div class="col col-67 col-center"> -->
+                    <div class="col col-66 col-center">
+                        <div class="description">
+                            <h2 class="points">{{user.greenLeaves}} {{'green_leaves_points' | translate}}</h2>
+                            <!-- <h5 class="label">{{'green_leaves_points' | translate}}</h5> -->
+                        </div>
+                    </div>
+                    <!-- </div> -->
+                </div>
+    
+            </div>
+        <!-- <div ng-if="!!user">
             <div class="row game-mypoints">
                 <div class="col col-33 col-center">
                     <img class="game-badge" src="img/game/greenleaves.png" />
@@ -54,7 +80,7 @@
                         <h5 class="label">{{'green_leaves_points' | translate}}</h5>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div ng-repeat="badgeType in badgeTypes" ng-if="badges[badgeType].length > 0">
                 <!-- badgeEarned -->

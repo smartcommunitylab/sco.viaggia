@@ -5,7 +5,60 @@
         </button>
     </ion-nav-buttons>
 
-    <ion-content class="padding-right padding-left game-points" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
-        Statistics others
-     </ion-content>
+    <ion-content class="game-ranking" has-bouncing="false" scroll="false" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
+            <div class="filter item-accordion" ng-if="!!filter.options">
+                <ion-item class="item-accordion-header item-icon-right" ng-click="filter.toggle()">
+                    <div ng-if="!filter.open">{{!!filter.selected ? ('game_tab_statistics_filter_' + filter.selected) : '' | translate}}</div>
+                    <i class="icon ion-arrow-down-b" ng-class="{'open': filter.open}"></i>
+                </ion-item>
+                <div class="item-accordion-content" ng-show="filter.open">
+                    <ion-list>
+                        <ion-item ng-repeat="option in filter.options" ng-click="filter.filterBy(option)">
+                            <div ng-class="{ 'becomeblue' : filter.selected==option}">{{'game_tab_statistics_filter_' + option | translate}}</div>
+                        </ion-item>
+                    </ion-list>
+                </div>
+            </div>
+    
+            <div ng-if="!!status && !singleRankStatus && !noStats">
+                <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="statisticScroll">
+                    <ion-list>
+                        <div class="chart" ng-repeat="day in stats | orderBy : '-from' track by $index" ng-if="dayHasStat(day)">
+                            <H5 class="H5stats">{{getTitle(day)}}</H5>
+                            <div ng-if="day.data.walk>0" class="walkbgcolor statsfloat" ng-style="{{getStyle(day.data.walk, 'walk')}}">
+                                <i class="icon ic_foot"></i>
+                            </div>
+                            <div ng-if="day.data.walk>0" class="statstext" id="walkcolor"> {{(day.data.walk/1000) | number:1}} km </div>
+                            <div id="statsdiv"></div>
+                            <div ng-if="(day.data.transit+day.data.bus+day.data.train)>0" class="publicbgcolor statsfloat" ng-style="{{getStyle((day.data.transit+day.data.bus+day.data.train), 'transit')}}">
+                                <i class="icon ic_urban-bus"></i>
+                                <i class="icon ic_train"></i>
+                            </div>
+                            <div ng-if="(day.data.transit+day.data.bus+day.data.train)>0" class="statstext" id="publiccolor"> {{((day.data.transit+day.data.bus+day.data.train)/1000) | number:1}} km </div>
+                            <div id="statsdiv"></div>
+                            <div ng-if="day.data.bike>0" class="bikebgcolor statsfloat" ng-style="{{getStyle(day.data.bike, 'bike')}}">
+                                <i class="icon ic_bike"></i>
+                            </div>
+                            <div ng-if="day.data.bike>0" class="statstext" id="bikecolor"> {{(day.data.bike/1000) | number:1}} km </div>
+                            <div id="statsdiv"></div>
+                            <div ng-if="day.data.car>0" class="carbgcolor statsfloat" ng-style="{{getStyle(day.data.car, 'car')}}">
+                                <i class="icon ic_car"></i>
+                            </div>
+                            <div ng-if="day.data.car>0" class="statstext" id="carcolor"> {{(day.data.car/1000) | number:1}} km </div>
+                            <div id="statsdiv"></div>
+                        </div>
+                        <ion-infinite-scroll ng-if="maybeMore" on-infinite="loadMore()"></ion-infinite-scroll>
+                    </ion-list>
+                </ion-scroll>
+            </div>
+            <div ng-if="noStats">
+                <h4 class="label">{{'no_stats' | translate}}</h4>
+            </div>
+            <div ng-if="status && singleRankStatus">
+                <h4 class="label">{{'pop_up_error_server_template' | translate}}</h4>
+            </div>
+            <div ng-if="stats == null ">
+                <h4>{{'no_statistics' | translate}}</h4>
+            </div>
+        </ion-content>
 </ion-view>
