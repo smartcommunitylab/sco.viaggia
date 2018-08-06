@@ -1408,8 +1408,8 @@ angular.module('viaggia', [
       home_footerbar_real: "MOBILITA`",
       mobility_title: "Mobilita`",
       profile_title: "Profilo",
-      home_your_challenges: "Le tue sfide",
-      home_no_challenges: "Nessuna sfida attiva",
+      home_your_challenges: "Sfide in corso",
+      home_no_challenges: "Nessuna sfida in corso",
       profile_footerbar_points: "Punteggio",
       profile_footerbar_challenges: "Sfide",
       profile_footerbar_statistics: "Statistiche",
@@ -1423,12 +1423,16 @@ angular.module('viaggia', [
       user_stat_bus_label: "Km in autobus",
       user_stat_train_label: "Km in treno",
       change_image_template: "Sei sicuro di voler cambiare l'immagine di profilo?",
-      change_image_title:"Immagine profilo",
-      change_image_confirm:"Cambia",
-      change_image_title:"Immagine di profilo",
-      menu_info_transports:"Mobilita",
-      diary_multimodal:"Multimodale",
-      diary_single:"Viaggio singolo"
+      change_image_title: "Immagine profilo",
+      change_image_confirm: "Cambia",
+      change_image_title: "Immagine di profilo",
+      menu_info_transports: "Mobilita",
+      diary_multimodal: "Multimodale",
+      diary_single: "Viaggio singolo",
+      challenge_future: "Da Programmare",
+      challenge_past: "Passate",
+      warning_unlock_challenge: "Sblocca una nuova tipologia di sfida che potrai utilizzare nella prossima scelta!"
+
     });
 
     $translateProvider.translations('en', {
@@ -1877,7 +1881,7 @@ angular.module('viaggia', [
       home_footerbar_real: "PUBLIC TRANSPORT`",
       mobility_title: "Mobility",
       profile_title: "Profile",
-      home_your_challenges: "Your challenges",
+      home_your_challenges: "Active challenges",
       home_no_challenges: "No active challenges",
       profile_footerbar_points: "Points",
       profile_footerbar_challenges: "Challenges",
@@ -1892,12 +1896,15 @@ angular.module('viaggia', [
       user_stat_bus_label: "Km by bus",
       user_stat_train_label: "Km by train",
       change_image_template: "Do you want to change the image profile?",
-      change_image_title:"Image Profile",
-      change_image_confirm:"Change",
-      registration_profile_image:"Image Profile",
-      menu_info_transports:"Mobility",
-      diary_multimodal:"Multimodal",
-      diary_single:"Single journey"
+      change_image_title: "Image Profile",
+      change_image_confirm: "Change",
+      registration_profile_image: "Image Profile",
+      menu_info_transports: "Mobility",
+      diary_multimodal: "Multimodal",
+      diary_single: "Single journey",
+      challenge_future: "To program",
+      challenge_past: "Past",
+      warning_unlock_challenge: "Sblocca una nuova tipologia di sfida che potrai utilizzare nella prossima scelta!"
 
     });
 

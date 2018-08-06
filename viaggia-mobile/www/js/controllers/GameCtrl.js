@@ -145,52 +145,27 @@ angular.module('viaggia.controllers.game', [])
 
     //loads the challenges tab, manage the filter of past and new challenges
 
-    .controller('ChallengesCtrl', function ($scope, $http, $stateParams, $filter, $ionicScrollDelegate, $ionicPopup, $window, $timeout) {
+    .controller('ChallengesCtrl', function ($scope, $stateParams, $filter, $ionicScrollDelegate, $ionicPopup, profileService, $window, $timeout, GameSrv) {
         $scope.challenges = null;
         $scope.param = null;
-        $scope.filter = {
-            open: false,
-            toggle: function () {
-                this.open = !this.open;
-                $ionicScrollDelegate.resize();
-            },
-            filterBy: function (selection) {
-                if (this.selected !== selection) {
-                    this.selected = selection;
-                    this.filter(this.selected);
-                }
-                this.toggle();
-            },
-            update: function () {
-                this.filter(this.selected);
-            },
-            filter: function (selection) { },
-            options: [],
-            selected: null
-        };
-
-        $scope.filter.options = ['active', 'old'];
+        $scope.tabs = ['unlock', 'future', 'past'];
+        $scope.actualTab = $scope.tabs[0];
+        $scope.challenge = [];
+        $scope.typeOfChallenges = [];
         var paramOptions = $stateParams.challengeEnd;
         var now = new Date().getTime();
-        $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
         if (paramOptions && paramOptions < now) {
             $scope.filter.selected = $scope.filter.options[1];
         }
-        $scope.filter.filter = function (selection) {
-            if (!!$scope.status && !!$scope.status['challengeConcept'] && (selection === 'active' || selection === 'old')) {
-                if ($scope.status) {
-                    $scope.challenges = $scope.status['challengeConcept'][selection + 'ChallengeData'];
-                    if (!$scope.challenges) $scope.challenges = [];
-                } else {
-                    $scope.challenges = null;
-                }
+
+        $scope.openTab = function (tab) {
+            if ($scope.activeTab == 'unlock') {
+                $scope.actualTab = tab;
             }
-        };
-
-        $scope.$watch('status.challengeConcept', function (newChallenges, oldChallenges) {
-            $scope.filter.update();
-        });
-
+        }
+        $scope.activeTab = function (tab) {
+            return (tab == $scope.actualTab);
+        }
         $scope.showChallengeInfo = function (challenge) {
             // FIXME temporarly not null
             if (!challenge) {
@@ -213,11 +188,37 @@ angular.module('viaggia.controllers.game', [])
             );
         };
         $scope.init = function () {
-            $scope.param = $stateParams.challengeTypeParam;
-            //set filter
-            if ($scope.param) {
-                $scope.filter.selected = $scope.param;
-            }
+            $scope.getTypes();
+            $scope.getActual();
+        }
+        $scope.getTypes = function () {
+            GameSrv.getTypesChallenges(profileService.status).then(function (types) {
+                $scope.typeOfChallenges = types;
+            }, function (err) {
+
+            });
+
+        }
+        $scope.getActual = function () {
+        }
+        $scope.readMore = function (type) {
+            $ionicPopup.show({
+                title: $filter('translate')("challenge_popup_title"),
+                template: $filter('translate')("challenge_popup_template"),
+                buttons: [
+                    {
+                        text: $filter('translate')("btn_close"),
+                        type: 'button-cancel'
+                    },
+                    {
+                        text: $filter('translate')("challenge_unlock"),
+                        type: 'button-custom',
+                        onTap: function () {
+                            unlockChallenge(type);
+                        }
+                    }
+                ]
+            });
         }
         /* Resize ion-scroll */
         $scope.challengesStyle = {};
@@ -240,6 +241,8 @@ angular.module('viaggia.controllers.game', [])
         };
 
         $scope.init();
+
+
     })
 
     .controller('BlacklistCtrl', function ($scope, $ionicScrollDelegate, $window, $filter, $timeout, Toast, Config, GameSrv) {
@@ -319,7 +322,7 @@ angular.module('viaggia.controllers.game', [])
     })
 
 
-    
+
 
     .controller('DiaryCtrl', function ($scope, $timeout, $state, $filter, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config, trackService) {
         $scope.messages = [];
@@ -372,7 +375,7 @@ angular.module('viaggia.controllers.game', [])
                     travelValidity: notification.travelValidity,
                     type: notification.type,
                     multimodal: true,
-                    multimodalId:notification.multimodalId
+                    multimodalId: notification.multimodalId
                 }
             }
             //se stesso giorno lo metto in coda al blocco altrimenti creo un nuovo giorno
@@ -382,8 +385,8 @@ angular.module('viaggia.controllers.game', [])
                 $scope.days.push({ name: notification.timestamp, messages: [notification] })
             }
             //se viaggio multimodale e il primo di un nuovo blocco setto parametro first a true in modo da visualizzare la stringa nel diario
-            if (multimodal && $scope.days[$scope.days.length - 1].messages && ($scope.days[$scope.days.length - 1].messages.length==1 || ($scope.days[$scope.days.length - 1].messages[$scope.days[$scope.days.length - 1].messages.length-1].multimodalId != $scope.days[$scope.days.length - 1].messages[$scope.days[$scope.days.length - 1].messages.length-2].multimodalId) )){
-                $scope.days[$scope.days.length - 1].messages[$scope.days[$scope.days.length - 1].messages.length-1]["first"]=true;
+            if (multimodal && $scope.days[$scope.days.length - 1].messages && ($scope.days[$scope.days.length - 1].messages.length == 1 || ($scope.days[$scope.days.length - 1].messages[$scope.days[$scope.days.length - 1].messages.length - 1].multimodalId != $scope.days[$scope.days.length - 1].messages[$scope.days[$scope.days.length - 1].messages.length - 2].multimodalId))) {
+                $scope.days[$scope.days.length - 1].messages[$scope.days[$scope.days.length - 1].messages.length - 1]["first"] = true;
             }
         }
         $scope.groupDays = function (notifications) {

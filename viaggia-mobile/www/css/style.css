@@ -2113,7 +2113,25 @@ Play&Go
 .game-challenges .challenge.challenge-old .challenge-status .challenge-count {
     float: none;
 }
-
+.type-challenge {
+    height: 100px;;
+}
+.button-challenge-enable{
+position: absolute;
+right: 0px;
+bottom: 0px;
+}
+.challenge-long-desc {
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    width: 160px; 
+    height: 20px;
+    line-height: 20px;
+    white-space: nowrap;
+}
+.challenge-read-more{
+    color: #4EB0E6;
+}
 .game-ranking {
     text-align: center;
 }
@@ -2269,6 +2287,16 @@ Play&Go
     margin: 0;
     text-align:  center
 }
+
+.challenge-tabs {
+    background-color: #2975A7;
+    border: none;
+    color: #fff;
+    padding: 8px 16px;
+    margin: 0;
+    text-align:  center
+}
+
 
 .filter.item-accordion .item.reset {
     color: #2975A7;
@@ -2745,6 +2773,7 @@ text-align: center;
     font-size: 24px;
     line-height: 40px;
     font-weight: bold;
+    text-align: center;
 }
 .home-add-challenges {
     margin: 20px;
