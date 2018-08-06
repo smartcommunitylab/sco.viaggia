@@ -1031,7 +1031,7 @@ z-index: 9;
 }
 .timeline-multimodal-dot {
 background: #000;
-border: 2px solid #868686;
+border: 2px solid #000;
 border-radius: 50%;
 content: "";
 height: 15px;
@@ -1041,6 +1041,18 @@ top: -10px;
 width: 15px;
 z-index: 9;
 }
+.timeline-not-multimodal-dot {
+    background: #000;
+    border: 2px solid #000;
+    border-radius: 50%;
+    content: "";
+    height: 15px;
+    left: -20px;
+    position: absolute;
+    /* top: -10px; */
+    width: 15px;
+    z-index: 9;
+    }
 .timeline-multimodal{
 width: auto;
  min-width: 40px;
