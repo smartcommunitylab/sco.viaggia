@@ -919,7 +919,19 @@ angular.module('viaggia', [
           }
         }
       })
-
+      .state('app.configureChallenge', {
+        cache: false,
+        url: "/configure",
+        params: {
+          challenge: null
+        },
+        views: {
+          'menuContent': {
+            templateUrl: "templates/game/configureChallenge.html",
+            controller: 'ConfigureChallengeCtrl'
+          }
+        }
+      })
       // .state('app.game.challenges', {
       //   cache: false,
       //   url: '/challenges',
@@ -1431,8 +1443,31 @@ angular.module('viaggia', [
       diary_single: "Viaggio singolo",
       challenge_future: "Da Programmare",
       challenge_past: "Passate",
-      warning_unlock_challenge: "Sblocca una nuova tipologia di sfida che potrai utilizzare nella prossima scelta!"
-
+      warning_unlock_challenge: "Sblocca una nuova tipologia di sfida che potrai utilizzare nella prossima scelta!",
+      warning_choose_challenge: "Programma la sfida che vuoi affrontare la prossima settimana; ricordati che la scadenza è venerdì e in caso di mancata scelta il sistema te ne affiderà una sfida di base!",
+      read_more: "altro",
+      challenge_popup_title: "Sblocca sfida",
+      challenge_popup_template_comp_time: "Confermando sbloccherai la tipologia di sfida competitiva a tempo e potrai sfidare altri giocatori",
+      challenge_popup_template_comp_perf: "Confermando sbloccherai la tipologia di sfida competitiva a performance e potrai sfidare altri giocatori",
+      challenge_popup_template_coop: "Confermando sbloccherai la tipologia di sfida cooperativa e potrai sfidare altri giocatori",
+      btn_got_it: "Ho capito",
+      btn_challenge_accept: "Accetto",
+      btn_challenge_reject: "Rifiuto",
+      btn_challenge_choose: "Scegli chi sfidare",
+      lbl_challenge_configure_type:"Come preferisci affrontare la sfida?",
+      lbl_challenge_configure_opponent:"Scegli il tuo avversario",
+      home_configure_challenge:"Configura la sfida",
+      lbl_challenge_choose_from_list:"Seleziona da lista",
+      ph_challenge_nick:"Cerca per nickname",
+      lbl_challenge_calculate:"Calcola obiettivo",
+      lbl_chall_choose_player_blacklist:"Giocatori non disponibili",
+      title_select_player:"Seleziona il tuo avversario",
+      button_select_player_done:"Fatto",
+      lbl_challenge_request:"Invia richiesta di sfida",
+      lbl_challenge_target:"Obiettivo: ",
+      lbl_challenge_leaves_player:"Green Leaves per te: ",
+      lbl_challenge_leaves_opponent:"Green leaves per ",
+      toast_error_configure:"Parametri inseriti non corretti"
     });
 
     $translateProvider.translations('en', {
@@ -1904,7 +1939,30 @@ angular.module('viaggia', [
       diary_single: "Single journey",
       challenge_future: "To program",
       challenge_past: "Past",
-      warning_unlock_challenge: "Sblocca una nuova tipologia di sfida che potrai utilizzare nella prossima scelta!"
+      warning_unlock_challenge: "Sblocca una nuova tipologia di sfida che potrai utilizzare nella prossima scelta!",
+      read_more: "read more",
+      challenge_popup_title: "Sblocca sfida",
+      challenge_popup_template_comp_time: "Confermando sbloccherai la tipologia di sfida competitiva a tempo e potrai sfidare altri giocatori",
+      challenge_popup_template_comp_perf: "Confermando sbloccherai la tipologia di sfida competitiva a performance e potrai sfidare altri giocatori",
+      challenge_popup_template_coop: "Confermando sbloccherai la tipologia di sfida cooperativa e potrai sfidare altri giocatori",
+      btn_got_it: "I got it",
+      btn_challenge_accept: "Accept",
+      btn_challenge_reject: "Reject",
+      btn_challenge_choose: "Choose your opponent ",
+      lbl_challenge_configure_type:"Come preferisci affrontare la sfida?",
+      lbl_challenge_configure_opponent:"Scegli il tuo avversario",
+      home_configure_challenge:"Configura la sfida",
+      lbl_challenge_choose_from_list:"Seleziona da lista",
+      ph_challenge_nick:"Insert nickname",
+      lbl_challenge_calculate:"Calculate target",
+      lbl_chall_choose_player_blacklist:"Giocatori non disponibili",
+      title_select_player:"Seleziona il tuo avversario",
+      button_select_player_done:"Done",
+      lbl_challenge_request:"Invia richiesta di sfida",
+      lbl_challenge_target:"Obiettivo: ",
+      lbl_challenge_leaves_player:"Green Leaves per te: ",
+      lbl_challenge_leaves_opponent:"Green leaves per  ",
+      toast_error_configure:"Parametri inseriti non corretti"
 
     });
 

@@ -145,23 +145,31 @@ angular.module('viaggia.controllers.game', [])
 
     //loads the challenges tab, manage the filter of past and new challenges
 
-    .controller('ChallengesCtrl', function ($scope, $stateParams, $filter, $ionicScrollDelegate, $ionicPopup, profileService, $window, $timeout, GameSrv) {
+    .controller('ChallengesCtrl', function ($scope, $state, $stateParams, $ionicModal, $filter, $ionicScrollDelegate, $ionicPopup, profileService, $window, $timeout, GameSrv) {
         $scope.challenges = null;
         $scope.param = null;
         $scope.tabs = ['unlock', 'future', 'past'];
         $scope.actualTab = $scope.tabs[0];
         $scope.challenge = [];
         $scope.typeOfChallenges = [];
+        $scope.language = null;
+        $scope.iconChall = {
+            comp_time:'ion-ios-body',
+            comp_perf:'ion-ios-people',
+            coop:'ion-android-person-add',
+            
+        }
         var paramOptions = $stateParams.challengeEnd;
         var now = new Date().getTime();
+
         if (paramOptions && paramOptions < now) {
             $scope.filter.selected = $scope.filter.options[1];
         }
 
         $scope.openTab = function (tab) {
-            if ($scope.activeTab == 'unlock') {
-                $scope.actualTab = tab;
-            }
+            // if ($scope.activeTab == 'unlock') {
+            $scope.actualTab = tab;
+            // }
         }
         $scope.activeTab = function (tab) {
             return (tab == $scope.actualTab);
@@ -188,30 +196,149 @@ angular.module('viaggia.controllers.game', [])
             );
         };
         $scope.init = function () {
-            $scope.getTypes();
-            $scope.getActual();
+            navigator.globalization.getPreferredLanguage(
+                function (result) {
+                    $scope.language = result.value.substring(0, 2);
+                    $scope.getTypes();
+                    $scope.getActual();
+                    $scope.getPast();
+                }, function (err) {
+
+                });
+
         }
         $scope.getTypes = function () {
             GameSrv.getTypesChallenges(profileService.status).then(function (types) {
-                $scope.typeOfChallenges = types;
+                $scope.typeOfChallenges = [];
+                for (var i = 0; i < types.length; i++) {
+                    $scope.typeOfChallenges.push({
+                        id: types[i].id,
+                        type: types[i].type,
+                        short: types[i]["short_" + $scope.language],
+                        long: types[i]["long_" + $scope.language],
+                        state: types[i].state
+                    });
+                }
             }, function (err) {
-
+                //TODO
             });
 
         }
+        var buildChallenges = function (available, invites) {
+            $scope.challenges = [];
+            for (var i = 0; i < available.length; i++) {
+                $scope.challenges.push({
+                    type: "racc",
+                    short: available[i]["short_" + $scope.language],
+                    long: available[i]["long_" + $scope.language]
+                });
+            }
+            var types = [];
+            for (var i = 0; i < $scope.typeOfChallenges.length; i++) {
+                var item = {
+                    type: "unlock",
+                    state: $scope.typeOfChallenges[i].state,
+                    short: available[i]["short_" + $scope.language],
+                    long: available[i]["long_" + $scope.language]
+                }
+                if ($scope.typeOfChallenges[i].state == 1) {
+                    //unlocked
+                    types.push(item);
+                } else {
+                    //locked
+                    types.unshift(item);
+                }
+            }
+            $scope.challenges = $scope.challenges.concat(types);
+            for (var i = 0; i < invites.length; i++) {
+                $scope.challenges.push({
+                    type: "invite",
+                    short: available[i]["short_" + $scope.language],
+                    long: available[i]["long_" + $scope.language]
+                });
+            }
+        }
+        $scope.showWarning = function (type) {
+            if (localStorage.getItem('warning_hide_' + type))
+                return false;
+            return true;
+        }
+        $scope.hideWarning = function (type) {
+            localStorage.setItem('warning_hide_' + type, true)
+        }
+        $scope.acceptChallenge = function (challenge) {
+            //TODO
+            GameSrv.acceptChallenge(challenge).then(function () {
+                //clean list
+                $scope.challenges = [challenge];
+            })
+        }
+        $scope.rejectChallenge = function (challenge) {
+            //TODO
+            GameSrv.rejectChallenge(challenge).then(function () {
+                //remove it
+
+            })
+        }
+        $scope.configureChallenge = function (challenge) {
+            //TODO
+            $state.go('app.configureChallenge', { challenge: challenge })
+        }
+
+
         $scope.getActual = function () {
+            //TODO
+            var available = []
+            var invites = []
+            GameSrv.getAvailableChallenges(profileService.status).then(function (challenges) {
+                available = challenges
+                GameSrv.getInvitesChallenges(profileService.status).then(function (challenges) {
+                    invites = challenges
+                    buildChallenges(available, invites);
+
+                });
+            }, function (err) {
+                $scope.challenges = null;
+            });
+
+        }
+        $scope.getPast = function () {
+            //TODO
+        }
+        var unlockChallenge = function (type) {
+            GameSrv.unlockChallenge(type).then(function () {
+                //TODO
+            });
         }
         $scope.readMore = function (type) {
             $ionicPopup.show({
                 title: $filter('translate')("challenge_popup_title"),
-                template: $filter('translate')("challenge_popup_template"),
+                template: type["long"],
+                buttons: [
+                    {
+                        text: $filter('translate')("btn_close"),
+                        type: 'button-cancel'
+                    }
+                ]
+            });
+        }
+        $scope.getIconType = function(type) {
+            return $scope.iconChall[type.type];
+        }
+        $scope.getIconChallenge = function(challenge) {
+            return $scope.iconChall[challenge.type];
+        }
+        $scope.unlock = function (type) {
+            $ionicPopup.show({
+                title: $filter('translate')("challenge_popup_title"),
+                template: $filter('translate')("challenge_popup_template_" + type.type),
                 buttons: [
                     {
                         text: $filter('translate')("btn_close"),
                         type: 'button-cancel'
                     },
                     {
-                        text: $filter('translate')("challenge_unlock"),
+                        text: $filter('translate')("btn_conferma"),
                         type: 'button-custom',
                         onTap: function () {
                             unlockChallenge(type);
@@ -244,7 +371,121 @@ angular.module('viaggia.controllers.game', [])
 
 
     })
+    .controller('ConfigureChallengeCtrl', function ($scope, $state, $filter, $ionicModal, Toast, GameSrv) {
+        $scope.players = [];
+        $scope.blacklistplayers = [];
+        howPlayer = 0; fromPlayer = 0; toPlayer = 0;
+        howBlack = 0; fromBlack = 0; toBlack = 0;
+        $scope.why = false;
+        $scope.playerChoice = null;
+        $scope.challenge = {};
+        $scope.isChallengeMean = function (mean) {
+            return (mean == $scope.challenge.mean);
+        }
+        $scope.setChallengeMean = function (mean) {
+            $scope.challenge.mean = mean;
+        }
+        $scope.confirmPlayer = function () {
+            console.log($scope.challenge.player);
+            //TODO update list
+            // $scope.challenge.player = $scope.playerChoice;
+            $scope.closeList();
+        }
+        $scope.selectPlayer = function (player) {
+            $scope.challenge.player = player;
+        }
+        $scope.chooseFromList = function () {
+            //TODO
+            //open modal for choosing the player
+            $ionicModal.fromTemplateUrl('templates/game/choosePlayerChallengeModal.html', {
+                scope: $scope,
+                animation: 'slide-in-up'
+            }).then(function (modal) {
+                $scope.modal = modal;
+                $scope.modal.show();
+            });
+        }
+        $scope.closeList = function () {
+            $scope.modal.hide();
+        }
+        $scope.getPlayers = function () {
+            //TODO
+            GameSrv.getPlayersForChallenge(howPlayer, fromPlayer, toPlayer).then(function (players) {
+                $scope.players = players;
+            }, function (error) {
 
+            });
+            GameSrv.getBlacklist(howBlack, fromBlack, toBlack).then(function (players) {
+                $scope.blacklistplayers = players;
+            }, function (error) {
+
+            });
+        }
+        $scope.showWhy = function () {
+            $scope.why = !$scope.why;
+        }
+        $scope.calculateTarget = function () {
+            //TODO
+            if (parametersCorrect()) {
+
+                GameSrv.calculateTarget($scope.challenge).then(function (target) {
+                    $scope.challenge.target = target;
+                }, function (error) {
+
+                });
+            } else {
+                Toast.show($filter('translate')("toast_error_configure"), "short", "bottom");
+
+            }
+        }
+        var parametersCorrect = function () {
+            //check if there is type and opponent
+            if (!$scope.challenge.player)
+                return false
+            if (!$scope.challenge.mean)
+                return false
+            return true;
+        }
+        $scope.requestChallenge = function () {
+            //TODO
+            GameSrv.requestChallenge($scope.challenge).then(function () {
+                //send it and go back to list
+                $state.go('app.home.challenges')
+            }, function (error) {
+
+            });
+
+        }
+        $scope.removePlayer = function () {
+            //TODO
+            $scope.challenge.player = null;
+        }
+        $scope.playerName = null;
+        var getNames = function (players) {
+            return players.map(function (player) {
+                return player.nome;
+            })
+        }
+        var createMapNames = function (players) {
+            return players.reduce(function (map, obj) {
+                map[obj.nome] = obj;
+                return map;
+            });
+        }
+        $scope.typeName = function (typedthings) {
+            console.log("typeName");
+            GameSrv.getPlayersForChallenge(howPlayer, fromPlayer, toPlayer, typedthings).then(function (players) {
+                $scope.playersName = getNames(players);
+                $scope.mapName = createMapNames(players);
+            }, function (err) {
+
+            });
+        }
+        $scope.changeStringName = function (suggestion) {
+            console.log($scope.mapName[suggestion]);
+            $scope.selectPlayer($scope.mapName[suggestion]);
+        };
+    })
     .controller('BlacklistCtrl', function ($scope, $ionicScrollDelegate, $window, $filter, $timeout, Toast, Config, GameSrv) {
         $scope.blacklist = [];
         $scope.noBlack = false;

@@ -2047,6 +2047,8 @@ Play&Go
 .game-challenges .challenge {
     border: 1px solid #000;
     margin-top: 16px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+
 }
 
 .game-challenges .challenge {
@@ -2936,7 +2938,85 @@ text-align: center;
   .margin-for-trackingbar{
     margin-bottom: 120px;
 }
+ .warning_out {
+    visibility: hidden;
+    opacity: 0;
   
+    transition: visibility 0s linear 0.33s, opacity 0.33s 
+ } 
+ .button-challenge-enable {
+    color: #4EB0E6 !important;
+ }
+ .configure-challenge-button {
+    border-radius: 12px;
+    height: 80px;
+}
+.configure-list-button {
+    border-radius: 16px;
+    padding: 4px;
+    text-align: center;
+    width: 100%;
+    margin: auto;
+}
+.lab-challenge-conf{
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+}
+.input-challenge-search {
+    border-bottom: 1px solid!important;
+    width: 100%;
+}
+
+.button-challenge-search{
+    text-align: center;
+    font-size: 20px;
+}
+.button-challenge-remove {
+    text-align: center;
+    font-size: 20px; 
+    color: red;
+}
+.chall-selected {
+    color: white;
+    background-color: #007cc2;
+}
+.chall-player-separator{
+    border-top: 1px solid;
+}
+.chall-player-blacklist {
+}
+.blacklisted-player {
+    color: lightslategray;
+}
+.done-button {
+    text-align: center;
+    background-color: transparent;
+    color: white;
+    box-shadow: none!important;;
+    max-width: none!important;
+    width: 100%!important;
+}
+.challenge-img {
+    height: 50px;
+}
+.challenge-img>img{
+    width: 50px;
+}
+.challenge-img-row {
+    line-height: 50px;
+}
+.suggestion {
+    font-size: 16px;
+    padding: 6px;
+    border: 1px solid grey;
+    width: 100%;
+}
+.icon-chall {
+    height: 100px;
+    line-height: 100px;
+    font-size: 50px;
+}
   @-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}

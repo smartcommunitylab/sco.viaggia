@@ -183,7 +183,7 @@ angular.module('viaggia.controllers.common', [])
                 text: $filter('translate')("btn_close"),
                 type: 'button-cancel',
                 onTap: function () {
-                  if ($state.current.name != "app.home.home") {
+                  if ($state.current.name == "app.app.mapTracking") {
                     $state.go('app.home.home');
                   }
                 }
