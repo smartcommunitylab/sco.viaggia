@@ -3,7 +3,7 @@
         Play&Go {{currentUser.nickName}}
     </ion-nav-title>
     <ion-nav-buttons side="right">
-        <button class=" button-icon button-home icon ion-person" ng-click="openProfile();"></button>
+        <button class=" button-icon button-home icon  ion-android-person" ng-click="openProfile();"></button>
     </ion-nav-buttons>
     <ion-content ng-class="{'empty_bookmarks': primaryLinks.length == 0}" ng-init="showTutorial()">
         <div class="user-state">
@@ -98,7 +98,8 @@
                 <div class="row">
                     <div class="col text-center">
                         <h4>
-                            <i class="icon ion-leaf"></i><span class="home-label-dashboard">{{'play_now' | translate}}</span>
+                            <i class="icon ion-leaf"></i>
+                            <span class="home-label-dashboard">{{'play_now' | translate}}</span>
                         </h4>
                         <div ng-if="!syncRunning">
                             <b>{{'play_now_sub' | translate}}</b>
@@ -158,7 +159,15 @@
             </div>
             <div ng-if="challenges.length>0">
                 <div ng-repeat="challenge in challenges">
-                    challenge detail
+                    <div ng-if="challenge.type=='comp_time'">
+                        competitiva tempo
+                    </div>
+                    <div ng-if="challenge.type=='comp_perf'">
+                        competitiva performance
+                    </div>
+                    <div ng-if="challenge.type=='coop'">
+                        cooperativa
+                    </div>
                 </div>
             </div>
             <div class="home-no-challenge" ng-if="challenges.length==0">

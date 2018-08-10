@@ -65,6 +65,61 @@ angular.module('viaggia.controllers.home', [])
         }, function (newVal, oldVal, scope) {
             $scope.status = profileService.getProfileStatus();
             setUserProgress();
+            //TODO fake challenge
+            $scope.status.challengeConcept.activeChallengeData = [
+                {
+                    "challId": "start_survey-1624ea3d21e-63568495",
+                    "challDesc": "Fill out the start survey and gain a bonus of 100 green leaves points.",
+                    "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
+                    "challTarget": 1,
+                    "status": 0,
+                    "row_status": 0.0,
+                    "type": "survey",
+                    "active": false,
+                    "success": false,
+                    "startDate": 1521737781790,
+                    "endDate": 1522947381790,
+                    "daysToEnd": 0,
+                    "bonus": 100,
+                    "challCompletedDate": 0,
+                    "type":"comp_time"
+                },
+                {
+                    "challId": "start_survey-1624ea3d21e-63568495",
+                    "challDesc": "Fill out the start survey and gain a bonus of 100 green leaves points.",
+                    "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
+                    "challTarget": 1,
+                    "status": 0,
+                    "row_status": 0.0,
+                    "type": "survey",
+                    "active": false,
+                    "success": false,
+                    "startDate": 1521737781790,
+                    "endDate": 1522947381790,
+                    "daysToEnd": 0,
+                    "bonus": 100,
+                    "challCompletedDate": 0,
+                    "type":"comp_perf"
+                },
+                {
+                    "challId": "start_survey-1624ea3d21e-63568495",
+                    "challDesc": "Fill out the start survey and gain a bonus of 100 green leaves points.",
+                    "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
+                    "challTarget": 1,
+                    "status": 0,
+                    "row_status": 0.0,
+                    "type": "survey",
+                    "active": false,
+                    "success": false,
+                    "startDate": 1521737781790,
+                    "endDate": 1522947381790,
+                    "daysToEnd": 0,
+                    "bonus": 100,
+                    "challCompletedDate": 0,
+                    "type":"coop"
+                },
+
+            ]
             setChallenges();
         });
 
@@ -78,7 +133,7 @@ angular.module('viaggia.controllers.home', [])
                 }
             }
         }
-        var setUserProgress = function() {
+        var setUserProgress = function () {
             $scope.userProgress = 80;
         }
         // var mymap = document.getElementById('map-container');
@@ -278,7 +333,7 @@ angular.module('viaggia.controllers.home', [])
                 })
             }
         }
-    
+
 
         $scope.openSavedTracks = function () {
             planService.getTrips().then(function (trips) {

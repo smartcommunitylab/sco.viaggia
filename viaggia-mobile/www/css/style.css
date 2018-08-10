@@ -2131,9 +2131,13 @@ bottom: 0px;
     line-height: 20px;
     white-space: nowrap;
 }
-.challenge-read-more{
+.button-active {
     color: #4EB0E6;
+
 }
+/* .challenge-read-more{
+    color: #4EB0E6;
+} */
 .game-ranking {
     text-align: center;
 }

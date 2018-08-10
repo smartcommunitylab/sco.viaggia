@@ -1467,7 +1467,10 @@ angular.module('viaggia', [
       lbl_challenge_target:"Obiettivo: ",
       lbl_challenge_leaves_player:"Green Leaves per te: ",
       lbl_challenge_leaves_opponent:"Green leaves per ",
-      toast_error_configure:"Parametri inseriti non corretti"
+      toast_error_configure:"Parametri inseriti non corretti",
+      btn_challenge_reject_sent:"annulla invito",
+      lbl_sent_from:"Inviato da ",
+      lbl_sent_to:"Inviato a "
     });
 
     $translateProvider.translations('en', {
@@ -1962,8 +1965,10 @@ angular.module('viaggia', [
       lbl_challenge_target:"Obiettivo: ",
       lbl_challenge_leaves_player:"Green Leaves per te: ",
       lbl_challenge_leaves_opponent:"Green leaves per  ",
-      toast_error_configure:"Parametri inseriti non corretti"
-
+      toast_error_configure:"Parametri inseriti non corretti",
+      btn_challenge_reject_sent:"annulla invito",
+      lbl_sent_from:"Inviato da ",
+      lbl_sent_to:"Inviato a "
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

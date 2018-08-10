@@ -97,7 +97,7 @@ angular.module('viaggia.controllers.common', [])
       return false
     }
     $scope.isHomePages = function () {
-      if ($state.current.name === "app.home.home" || $state.current.name === "app.home.leaderboards" || $state.current.name === "app.home.diary" || $state.current.name === "app.home.mobility")
+      if ($state.current.name === "app.home.home" || $state.current.name === "app.home.leaderboards" ||$state.current.name === "app.home.challenges" || $state.current.name === "app.home.diary" || $state.current.name === "app.home.mobility")
         return true;
       return false;
     }
