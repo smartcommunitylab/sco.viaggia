@@ -1,0 +1,32 @@
+<div>
+    {{'challenge_cooperative'|translate}}
+    <div class="row">
+        <div class="col col-10 icon-chall-home">
+            <i class="icon ic_ch_coop"></i>
+        </div>
+        <div class="col col-80">
+            {{challenge.challDesc}}
+        </div>
+        <div class="col col-10" ng-click="expand($index)">
+            <i class="icon" ng-class="isExpanded($index) ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i>
+        </div>
+    </div>
+    <div class="row" ng-if="isExpanded($index)">
+        <div class="col">
+            {{challenge.challDesc}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-10 icon-chall-home">
+            <i class="icon ion-android-person"></i>
+        </div>
+        <div class="col col-80 container-level">
+                <div class="progress-bar-level" style="width: 39%;"></div>
+                <div class="progress-bar-level" style="width: 19%;"></div>
+                <div class="progress-bar-level" style="width: 39%;"></div>
+            </div>
+        <div class="col col-10 icon-chall-home">
+            <i class="icon ion-android-person"></i>
+        </div>
+    </div>
+</div>

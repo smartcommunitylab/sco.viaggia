@@ -681,6 +681,13 @@ angular.module('viaggia.services.game', [])
             return deferred.promise;
         }
 
+        gameService.addToBlacklist = function (id) {
+            //TODO
+            var deferred = $q.defer();
+            deferred.resolve();
+            return deferred.promise;
+        }
+
         gameService.getBlacklist = function (how, from, to) {
             var deferred = $q.defer();
             LoginService.getValidAACtoken().then(

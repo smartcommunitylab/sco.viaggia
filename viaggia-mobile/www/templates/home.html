@@ -150,7 +150,6 @@
 
         </div>
 
-
         <div class="home-challenges">
             <div class="row">
                 <div class="col home-your-challenges">
@@ -158,24 +157,18 @@
                 </div>
             </div>
             <div ng-if="challenges.length>0">
-                <div ng-repeat="challenge in challenges">
-                    <div ng-if="challenge.type=='comp_time'">
-                        competitiva tempo
-                    </div>
-                    <div ng-if="challenge.type=='comp_perf'">
-                        competitiva performance
-                    </div>
-                    <div ng-if="challenge.type=='coop'">
-                        cooperativa
-                    </div>
+                <div ng-repeat="challenge in challenges track by $index">
+                    <ng-include src="getChallengeTemplate(challenge)"></ng-include>
                 </div>
             </div>
             <div class="home-no-challenge" ng-if="challenges.length==0">
                 {{'home_no_challenges'|translate}}
             </div>
-
+            <div class="row">
+                <button class="button button-block button-positive" ui-sref="app.home.challenges>
+                    {{'home_nex_challenge'|translate}} </button>
+            </div>
         </div>
-
 
 
     </ion-content>

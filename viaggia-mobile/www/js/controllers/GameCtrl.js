@@ -329,6 +329,14 @@ angular.module('viaggia.controllers.game', [])
         }
         $scope.getPast = function () {
             //TODO
+            if (!!$scope.status && !!$scope.status['challengeConcept']) {
+                if ($scope.status) {
+                    $scope.pastChallenges = $scope.status['challengeConcept']['oldChallengeData'];
+                    if (!$scope.pastChallenges) $scope.challenges = [];
+                } else {
+                    $scope.pastChallenges = null;
+                }
+            }
         }
         var unlockChallenge = function (type) {
             GameSrv.unlockChallenge(type).then(function () {
@@ -551,6 +559,7 @@ angular.module('viaggia.controllers.game', [])
 
         $scope.removeFromBlacklist = function (id) {
             Config.loading();
+            //TODO
             GameSrv.removeFromBlacklist(id).then(function () {
                 //removed
                 Config.loaded();

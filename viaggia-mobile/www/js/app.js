@@ -1426,7 +1426,7 @@ angular.module('viaggia', [
       profile_footerbar_challenges: "Sfide",
       profile_footerbar_statistics: "Statistiche",
       pop_up_change_free_track_title: "Tracciamento libero",
-      pop_up_change_free_track_template: "Sei sicuro di voler cambiare il mezzo di trasporto con cui stai tracciando?",
+      pop_up_change_free_track_template: "Ai fini della validazione e assegnazione dei punti ogni cambio mezzo comporta una singola validazione anche se utilizzato all'interno dello stesso tracciamento",
       pop_up_change_free_track_go_on: "Continua",
       user_level_label: "Livello",
       user_points_label: "Punti Green Leaves",
@@ -1470,7 +1470,11 @@ angular.module('viaggia', [
       toast_error_configure:"Parametri inseriti non corretti",
       btn_challenge_reject_sent:"annulla invito",
       lbl_sent_from:"Inviato da ",
-      lbl_sent_to:"Inviato a "
+      lbl_sent_to:"Inviato a ",
+      challenge_comp_time:"Sfida di coppia competitiva a tempo",
+      challenge_cooperative:"Sfida di coppia cooperativa",
+      challenge_comp_perf:"Sfida di coppia competitiva a performance",
+      challenge_single_player:"Sfida singola"
     });
 
     $translateProvider.translations('en', {
@@ -1925,7 +1929,7 @@ angular.module('viaggia', [
       profile_footerbar_challenges: "Challenges",
       profile_footerbar_statistics: "Statistics",
       pop_up_change_free_track_title: "Free tracking",
-      pop_up_change_free_track_template: "Do you want to change the tracking means?",
+      pop_up_change_free_track_template: "Ai fini della validazione e assegnazione dei punti ogni cambio mezzo comporta una singola validazione anche se utilizzato all'interno dello stesso tracciamento",
       pop_up_change_free_track_go_on: "Confirm",
       user_level_label: "Level",
       user_points_label: "Green Leaves Points",
@@ -1968,7 +1972,11 @@ angular.module('viaggia', [
       toast_error_configure:"Parametri inseriti non corretti",
       btn_challenge_reject_sent:"annulla invito",
       lbl_sent_from:"Inviato da ",
-      lbl_sent_to:"Inviato a "
+      lbl_sent_to:"Inviato a ",
+      challenge_comp_time:"Sfida di coppia competitiva a tempo",
+      challenge_cooperative:"Sfida di coppia cooperativa",
+      challenge_comp_perf:"Sfida di coppia competitiva a performance",
+      challenge_single_player:"Sfida singola"
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);
