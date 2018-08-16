@@ -288,6 +288,8 @@ angular.module('viaggia.controllers.profile', [])
     })
     .controller('ProfileOthersContainerCtrl', function ($scope, $filter, $stateParams, Config, GameSrv, $ionicScrollDelegate, Toast) {
         Config.loading();
+        //TODO
+        $scope.blacklisted = true;
         $scope.profileId = $stateParams.profileId
         $scope.user = null;
         $scope.badges = null;
@@ -403,6 +405,31 @@ angular.module('viaggia.controllers.profile', [])
                 return { width: "75%" }
             }
         }
+        $scope.removeFromBlacklist = function () {
+            //TODO
+            Config.loading();
+            GameSrv.removeFromBlacklist($scope.user.id).then(function () {
+                //removed
+                $scope.blacklisted = false;
+                Config.loaded();
+            }, function (err) {
+                //not removed
+                Config.loaded();
+            });
+        }
+        $scope.addToBlacklist = function () {
+            //TODO
+            Config.loading();
+            GameSrv.addToBlacklist($scope.user.id).then(function () {
+                //removed
+                $scope.blacklisted = true;
+                Config.loaded();
+            }, function (err) {
+                //not removed
+                Config.loaded();
+            });
+        }
+
     })
     .controller('ProfileOthersChallengesCtrl', function ($scope) {
     })
