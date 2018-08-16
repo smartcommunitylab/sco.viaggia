@@ -178,6 +178,11 @@
                 "icon": "ic_parking-lot"
             },
             {
+                "state": "/app/parkingMeters",
+                "label": "menu_parking_meters",
+                "icon": "ic_parcometro"
+            },
+            {
                 "state": "/app/taxi",
                 "label": "menu_taxi",
                 "icon": "ic_taxi"
