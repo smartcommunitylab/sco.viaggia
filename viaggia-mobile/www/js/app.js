@@ -1321,6 +1321,7 @@ angular.module('viaggia', [
       game_tab_ranking_listheader_position: "Posizione",
       game_tab_ranking_listheader_player: "Giocatore",
       game_tab_ranking_listheader_points: "Punti",
+      game_tab_ranking_listheader_level:"Livello",
       game_tab_diary_filter_badge: "Badge",
       game_tab_diary_filter_challenge: "Sfide",
       game_tab_diary_filter_trip: "Viaggi",
@@ -1474,7 +1475,8 @@ angular.module('viaggia', [
       challenge_comp_time:"Sfida di coppia competitiva a tempo",
       challenge_cooperative:"Sfida di coppia cooperativa",
       challenge_comp_perf:"Sfida di coppia competitiva a performance",
-      challenge_single_player:"Sfida singola"
+      challenge_single_player:"Sfida singola",
+      home_next_challenge:"Programma la prossima sfida"
     });
 
     $translateProvider.translations('en', {
@@ -1822,6 +1824,7 @@ angular.module('viaggia', [
       game_tab_ranking_listheader_position: "Position",
       game_tab_ranking_listheader_player: "Player",
       game_tab_ranking_listheader_points: "Points",
+      game_tab_ranking_listheader_level:"Level",
       game_tab_diary_filter_badge: "Badge",
       game_tab_diary_filter_challenge: "Challenges",
       game_tab_diary_filter_trip: "Trips",
@@ -1976,7 +1979,8 @@ angular.module('viaggia', [
       challenge_comp_time:"Sfida di coppia competitiva a tempo",
       challenge_cooperative:"Sfida di coppia cooperativa",
       challenge_comp_perf:"Sfida di coppia competitiva a performance",
-      challenge_single_player:"Sfida singola"
+      challenge_single_player:"Sfida singola",
+      home_next_challenge:"Programma la prossima sfida"
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

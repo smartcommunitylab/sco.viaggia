@@ -2915,7 +2915,11 @@ text-align: center;
     height: 20px;
     border-radius: 100px;
     margin: 20px auto;
+    font-size: 0; /*used for removing space with inline-block*/ 
 
+}
+.cooperative-container{
+    padding: 0px;
 }
 .progress-bar-level {
     background: grey;
@@ -3023,6 +3027,12 @@ text-align: center;
 }
 .icon-chall-home{
     font-size: 24px;
+    line-height: 60px;
+}
+.challenge-title {
+    font-weight: bold;
+    text-decoration: underline;
+    margin: 4px 8px;
 }
   @-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}

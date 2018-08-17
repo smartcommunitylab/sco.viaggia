@@ -101,6 +101,23 @@ angular.module('viaggia.controllers.home', [])
                         "daysToEnd": 0,
                         "bonus": 100,
                         "challCompletedDate": 0,
+                        "type": "single"
+                    },
+                    {
+                        "challId": "start_survey-1624ea3d21e-63568495",
+                        "challDesc": "Fill out the start survey and gain a bonus of 100 green leaves points.",
+                        "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
+                        "challTarget": 1,
+                        "status": 0,
+                        "row_status": 0.0,
+                        "type": "survey",
+                        "active": false,
+                        "success": false,
+                        "startDate": 1521737781790,
+                        "endDate": 1522947381790,
+                        "daysToEnd": 0,
+                        "bonus": 100,
+                        "challCompletedDate": 0,
                         "type": "comp_perf"
                     },
                     {
@@ -560,6 +577,18 @@ angular.module('viaggia.controllers.home', [])
         }
         $scope.isExpanded = function (index) {
             return $scope.expansion[index]
+        }
+        $scope.getWidthUser = function (challenge) {
+            //TODO
+            return "width:30%"
+        }
+        $scope.getWidthOther = function (challenge) {
+            //TODO
+            return "width:40%"
+        }
+        $scope.getWidthSeparator = function (challenge) {
+            //TODO
+            return "width:30%;background:transparent;"
         }
     }
 

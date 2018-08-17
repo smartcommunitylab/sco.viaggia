@@ -1,5 +1,5 @@
 <div>
-    <div class="row">
+    <div class="challenge-title">
         {{'challenge_comp_time'|translate}}
     </div>
     <div class="row">
@@ -23,7 +23,7 @@
             <i class="icon ion-android-person"></i>
         </div>
         <div class="container-level">
-            <div class="progress-bar-level" style="width: {{userProgress}}%;"># green leaves to the next level</div>
+            <div class="progress-bar-level" style="{{getWidthUser(challenge)}}"></div>
         </div>
     </div>
     <div class="row">
@@ -31,7 +31,7 @@
                 <i class="icon ion-android-person"></i>
         </div>
         <div class="container-level">
-            <div class="progress-bar-level" style="width: {{userProgress}}%;"># green leaves to the next level</div>
+            <div class="progress-bar-level" style="{{getWidthOther(challenge)}}"></div>
         </div>
     </div>
 </div>

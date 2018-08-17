@@ -1,5 +1,5 @@
 <div>
-    {{'challenge_comp_perf'|translate}}
+    <div class="challenge-title">{{'challenge_comp_perf'|translate}}</div>
     <div class="row">
         <div class="col col-10 icon-chall-home">
             <i class="icon ic_ch_perf"></i>
@@ -17,19 +17,19 @@
         </div>
     </div>
     <div class="row">
-            <div class="col col-10 icon-chall-home">
-                <i class="icon ion-android-person"></i>
-            </div>
-            <div class="container-level">
-                <div class="progress-bar-level" style="width: {{userProgress}}%;"># green leaves to the next level</div>
-            </div>
+        <div class="col col-10 icon-chall-home">
+            <i class="icon ion-android-person"></i>
         </div>
-        <div class="row">
-            <div class="col col-10 icon-chall-home">
-                    <i class="icon ion-android-person"></i>
-            </div>
-            <div class="container-level">
-                <div class="progress-bar-level" style="width: {{userProgress}}%;"># green leaves to the next level</div>
-            </div>
+        <div class="container-level">
+            <div class="progress-bar-level" style="{{getWidthUser(challenge)}}"></div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col col-10 icon-chall-home">
+            <i class="icon ion-android-person"></i>
+        </div>
+        <div class="container-level">
+            <div class="progress-bar-level" style="{{getWidthOther(challenge)}}"></div>
+        </div>
+    </div>
 </div>

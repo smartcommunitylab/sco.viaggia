@@ -31,15 +31,17 @@
                     <div>Lorem ipsum sic dolor amet</div>
                 </div>
                 <div class="row">
+                    <div class="col col-25">{{'game_tab_ranking_listheader_player' | translate}}</div>
                     <div class="col col-25">{{'game_tab_ranking_listheader_position' | translate}}</div>
-                    <div class="col col-50">{{'game_tab_ranking_listheader_player' | translate}}</div>
+                    <div class="col col-25">{{'game_tab_ranking_listheader_level' | translate}}</div>
                     <div class="col col-25">{{'game_tab_ranking_listheader_points' | translate}}</div>
                 </div>
             </div>
             <div class="my-ranking">
                 <div class="row">
+                    <div class="col col-25">{{currentUser.nickName}}</div>
                     <div class="col col-25">{{currentUser.position}}</div>
-                    <div class="col col-50">{{currentUser.nickName}}</div>
+                    <div class="col col-25">{{currentUser.level}}</div>
                     <div class="col col-25">{{currentUser.score}}</div>
                 </div>
             </div>
@@ -48,8 +50,9 @@
                 <ion-list>
                     <div ng-repeat="rankingUser in ranking" ng-class="{'pos-even': ($index % 2 == 0)}" on-tap="openProfileOthers(rankingUser)">
                         <div class="row" id="position-{{$index}}">
+                            <div class="col col-25"><div ><img style="height: 50px;"src="img/game/generic_user.png"></div><p>{{rankingUser.nickName}}</p></div>
                             <div class="col col-25">{{rankingUser.position}}</div>
-                            <div class="col col-50">{{rankingUser.nickName}}</div>
+                            <div class="col col-25">{{rankingUser.level}}</div>
                             <div class="col col-25">{{rankingUser.score}}</div>
                         </div>
                     </div>
