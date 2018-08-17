@@ -555,10 +555,10 @@ angular.module('viaggia.services.game', [])
                     //TODO
                     deferred.resolve([{
                         id: 0,
-                        idSender:0,
-                        nicknameSender:"pippo",
-                        idReceiver:0,
-                        nickname:"pippo",
+                        idSender: 0,
+                        nicknameSender: "pippo",
+                        idReceiver: 0,
+                        nickname: "pippo",
                         type: "coop",
                         short_it: 'Sfida competitiva a tempo',
                         short_eng: 'Sfida competitiva a tempo',
@@ -566,10 +566,10 @@ angular.module('viaggia.services.game', [])
                         long_en: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque sapien nulla. Cras in libero vehicula, dapibus sem ac, facilisis tortor. Cras sed fringilla libero, eu euismod mi. Integer non mi dapibus nunc convallis tempor. Morbi eget risus luctus, dapibus orci nec, vulputate diam. Pellentesque molestie nibh at sapien iaculis ultrices. Fusce quis libero sed turpis scelerisque semper. Morbi suscipit nisl nunc, a blandit elit egestas non. Vivamus posuere sem id pellentesque fringilla. Proin sit amet ante id elit vestibulum vehicula eget ut risus. Maecenas vulputate ipsum in ligula dapibus ultricies. ',
                     }, {
                         id: 1,
-                        idSender:0,
-                        nicknameSender:"pippo",
-                        idReceiver:0,
-                        nickname:"pippo",
+                        idSender: 0,
+                        nicknameSender: "pippo",
+                        idReceiver: 0,
+                        nickname: "pippo",
                         type: "comp_perf",
                         short_it: 'Sfida competitiva performance',
                         short_eng: 'Sfida competitiva performance',
@@ -577,11 +577,11 @@ angular.module('viaggia.services.game', [])
                         long_en: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque sapien nulla. Cras in libero vehicula, dapibus sem ac, facilisis tortor. Cras sed fringilla libero, eu euismod mi. Integer non mi dapibus nunc convallis tempor. Morbi eget risus luctus, dapibus orci nec, vulputate diam. Pellentesque molestie nibh at sapien iaculis ultrices. Fusce quis libero sed turpis scelerisque semper. Morbi suscipit nisl nunc, a blandit elit egestas non. Vivamus posuere sem id pellentesque fringilla. Proin sit amet ante id elit vestibulum vehicula eget ut risus. Maecenas vulputate ipsum in ligula dapibus ultricies. ',
                     }, {
                         id: 2,
-                        idUser:0,
-                        idSender:0,
-                        nicknameSender:"pippo",
-                        idReceiver:0,
-                        nickname:"pippo",
+                        idUser: 0,
+                        idSender: 0,
+                        nicknameSender: "pippo",
+                        idReceiver: 0,
+                        nickname: "pippo",
                         type: "comp_time",
                         short_it: 'Sfida cooperativa',
                         short_eng: 'Sfida cooperativa',
@@ -614,10 +614,10 @@ angular.module('viaggia.services.game', [])
                     //TODO
                     deferred.resolve({
                         id: 0,
-                        idSender:0,
-                        nicknameSender:"pippo",
-                        idReceiver:0,
-                        nickName:"pippo",
+                        idSender: 0,
+                        nicknameSender: "pippo",
+                        idReceiver: 0,
+                        nickName: "pippo",
                         type: "coop",
                         short_it: 'Sfida competitiva a tempo',
                         short_eng: 'Sfida competitiva a tempo',
@@ -687,7 +687,12 @@ angular.module('viaggia.services.game', [])
             deferred.resolve();
             return deferred.promise;
         }
-
+        gameService.acceptChallenge = function () {
+            //TODO
+            var deferred = $q.defer();
+            deferred.resolve();
+            return deferred.promise;
+        }
         gameService.getBlacklist = function (how, from, to) {
             var deferred = $q.defer();
             LoginService.getValidAACtoken().then(
@@ -725,7 +730,7 @@ angular.module('viaggia.services.game', [])
                 });
             return deferred.promise;
         }
-        gameService.getPlayersForChallenge = function (how, from, to,typedthings) {
+        gameService.getPlayersForChallenge = function (how, from, to, typedthings) {
             var deferred = $q.defer();
             LoginService.getValidAACtoken().then(
                 function (token) {

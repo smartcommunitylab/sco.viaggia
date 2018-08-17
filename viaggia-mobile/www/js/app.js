@@ -1476,7 +1476,10 @@ angular.module('viaggia', [
       challenge_cooperative:"Sfida di coppia cooperativa",
       challenge_comp_perf:"Sfida di coppia competitiva a performance",
       challenge_single_player:"Sfida singola",
-      home_next_challenge:"Programma la prossima sfida"
+      home_next_challenge:"Programma la prossima sfida",
+      challenge_accept_popup_title:"Conferma la sfida",
+      challenge_accept_popup_template:"Confermando la sfida verranno eliminate automaticamente le altre opzioni",
+      lbl_challenge_unlock_next:"Raggiungi il prossimo livello per sbloccare la sfida"
     });
 
     $translateProvider.translations('en', {
@@ -1980,7 +1983,10 @@ angular.module('viaggia', [
       challenge_cooperative:"Sfida di coppia cooperativa",
       challenge_comp_perf:"Sfida di coppia competitiva a performance",
       challenge_single_player:"Sfida singola",
-      home_next_challenge:"Programma la prossima sfida"
+      home_next_challenge:"Programma la prossima sfida",
+      challenge_accept_popup_title:"Conferma la sfida",
+      challenge_accept_popup_template:"Confermando la sfida verranno eliminate automaticamente le altre opzioni",
+      lbl_challenge_unlock_next:"Raggiungi il prossimo livello per sbloccare la sfida"
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

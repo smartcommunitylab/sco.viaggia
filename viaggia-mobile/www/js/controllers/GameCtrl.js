@@ -287,10 +287,29 @@ angular.module('viaggia.controllers.game', [])
         }
         $scope.acceptChallenge = function (challenge) {
             //TODO
-            GameSrv.acceptChallenge(challenge).then(function () {
-                //clean list
-                $scope.challenges = [challenge];
-            })
+            //confirm popup
+            $ionicPopup.show({
+                title: $filter('translate')("challenge_accept_popup_title"),
+                template: $filter('translate')("challenge_accept_popup_template"),
+                buttons: [
+                    {
+                        text: $filter('translate')("btn_close"),
+                        type: 'button-cancel'
+                    },
+                    {
+                        text: $filter('translate')("btn_conferma"),
+                        type: 'button-custom',
+                        onTap: function () {
+                            GameSrv.acceptChallenge(challenge).then(function () {
+                                //clean list and keep the only one
+                                $scope.challenges = [challenge];
+                            })
+                        }
+                    }
+
+                ]
+            });
+
         }
         $scope.rejectChallenge = function (challenge) {
             //TODO
