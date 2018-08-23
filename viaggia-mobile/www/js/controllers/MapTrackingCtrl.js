@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.mapTracking', [])
 
-    .controller('MapTrackingCtrl', function ($scope, $state, $interval, $filter, $rootScope, $ionicPopup, trackService, $ionicHistory, mapService, Config) {
+    .controller('MapTrackingCtrl', function ($scope, $state, $interval, $filter, $rootScope, trackService, $ionicHistory, mapService, Config) {
 
 
         $scope.pathLine = {
@@ -70,12 +70,14 @@ angular.module('viaggia.controllers.mapTracking', [])
                 BackgroundGeolocation.getLocations(function (locations) {
                     $scope.initPath();
                     // locations.sort(function (a, b) { return (a.timestamp > b.timestamp) ? 1 : ((b.timestamp > a.timestamp) ? -1 : 0); });
-                    locations.forEach(location => {
+                    for (var i = 0; i < locations.length; i++) {
+                        var location = locations[i];
+                        // locations.forEach(location => {
                         //check if stored are equal to current multimodal
                         if (location.extras.multimodalId === actualMultimodal)
                             // $scope.pathLine[location.extras.transportType].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
                             $scope.pathLine['walk'].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
-                    })
+                    }
                     updateTrackingInfo();
                     $scope.updateBar(location);
                     // console.log("locations: ", locations);
@@ -146,6 +148,7 @@ angular.module('viaggia.controllers.mapTracking', [])
             if (!$scope.loadingMapData && ($scope.pathLine['walk'].latlngs.length == 0 || ($scope.pathLine['walk'].latlngs[$scope.pathLine['walk'].latlngs.length - 1].lat != location.coords.latitude && $scope.pathLine['walk'].latlngs[$scope.pathLine['walk'].latlngs.length - 1].lng != location.coords.longitude))) {
                 $scope.pathLine['walk'].latlngs.push({ lat: location.coords.latitude, lng: location.coords.longitude });
                 $scope.updateBar(location);
+                mapService.refresh('trackingMap');
             }
         }
         function onLocationError(error) {
