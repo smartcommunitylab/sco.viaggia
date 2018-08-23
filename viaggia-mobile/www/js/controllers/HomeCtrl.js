@@ -65,6 +65,7 @@ angular.module('viaggia.controllers.home', [])
             return profileService.status;
         }, function (newVal, oldVal, scope) {
             $scope.status = profileService.getProfileStatus();
+            setUserLevel();
             setUserProgress();
             //TODO fake challenge
             if ($scope.status && $scope.status.challengeConcept)
@@ -249,7 +250,17 @@ angular.module('viaggia.controllers.home', [])
             }
         }
         var setUserProgress = function () {
-            $scope.userProgress = 80;
+            $scope.userProgress = 0;
+            if ($scope.status && $scope.status.levels && $scope.status.levels.length > 0 && $scope.status.levels[0]) {
+                var total = $scope.status.levels[0].endLevelScore - $scope.status.levels[0].startLevelScore
+                var mypos = total - $scope.status.levels[0].toNextLevel;
+                $scope.userProgress = (mypos * 100) / total;
+            }
+        }
+        var setUserLevel = function () {
+            $scope.level = "";
+            if ($scope.status && $scope.status.levels && $scope.status.levels.length > 0 && $scope.status.levels[0].levelValue)
+                $scope.level = $scope.status.levels[0].levelValue;
         }
         // var mymap = document.getElementById('map-container');
         $scope.getChallengeTemplate = function (challenge) {
@@ -437,6 +448,7 @@ angular.module('viaggia.controllers.home', [])
             }
         }
         $scope.trackAndMap = function (transportType) {
+            //init multimodal id used for db 
             $scope.startTracking(transportType);
             $state.go('app.mapTracking');
 
@@ -580,11 +592,15 @@ angular.module('viaggia.controllers.home', [])
         }
         $scope.getWidthUser = function (challenge) {
             //TODO
-            return "width:30%"
+            if (challenge.type == 'coop')
+                return "width:30%;background:blue;"
+            return "width:60%;background:blue;"
         }
         $scope.getWidthOther = function (challenge) {
             //TODO
-            return "width:40%"
+            if (challenge.type == 'coop')
+                return "width:40%;background:red;"
+            return "width:40%;background:red;"
         }
         $scope.getWidthSeparator = function (challenge) {
             //TODO
@@ -599,7 +615,7 @@ angular.module('viaggia.controllers.home', [])
         $rootScope.currentUser = null;
         $scope.noStatus = false;
         $rootScope.profileImg = null;
-        $scope.tmpUrl = 'https://dev.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/'
+        $scope.tmpUrl = 'https://dev.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/' + Config.getAppId() + '/'
         Config.loading();
         GameSrv.getLocalStatus().then(
             function (status) {

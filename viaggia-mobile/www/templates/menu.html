@@ -1,12 +1,14 @@
 <!-- <button class="pulse-button icon ion-map" ng-click="goToMap()" ng-if="buttonMapNeed();">
 </button> -->
-<div  ng-if="notHomeAndMap()">
+<div ng-if="notHomeAndMap()">
 	<div class="app-track-buttons">
-		<button class="button button-map icon ion-map"  ng-click="goToMap()"></button>
-		<button class="button button-map icon ic_foot" ng-class="{'actual-track':actualTracking('walk')}" ng-click="changeTracking('walk')"></button>
-		<button class="button button-map icon ic_bike" ng-class="{'actual-track':actualTracking('bike')}" ng-click="changeTracking('bike')"></button>
-		<button class="button button-map icon ic_urban-bus" ng-class="{'actual-track':actualTracking('bus')}" ng-click="changeTracking('bus')"></button>
-		<button class="button button-map icon ic_train" ng-class="{'actual-track':actualTracking('train')}" ng-click="changeTracking('train')"></button>
+		<button class="button button-map icon ion-map" ng-click="goToMap()"></button>
+		<div ng-if="trackingMultimodal()">
+			<button class="button button-map icon ic_foot" ng-class="{'actual-track':actualTracking('walk')}" ng-click="changeTracking('walk')"></button>
+			<button class="button button-map icon ic_bike" ng-class="{'actual-track':actualTracking('bike')}" ng-click="changeTracking('bike')"></button>
+			<button class="button button-map icon ic_urban-bus" ng-class="{'actual-track':actualTracking('bus')}" ng-click="changeTracking('bus')"></button>
+			<button class="button button-map icon ic_train" ng-class="{'actual-track':actualTracking('train')}" ng-click="changeTracking('train')"></button>
+		</div>
 	</div>
 	<button class="button app-track-stop-map" ng-click="stopTracking()">STOP</button>
 </div>
@@ -60,9 +62,9 @@
 					<i class="icon ic_home"></i>{{'menu_home' | translate}}
 				</ion-item>
 
-                <ion-item nav-clear menu-close href="#/app/bookmarks" class="menu-main item-icon-left">
-                    <i class="icon ic_bookmark"></i>{{'menu_bookmarks' | translate}}
-                </ion-item>
+				<ion-item nav-clear menu-close href="#/app/bookmarks" class="menu-main item-icon-left">
+					<i class="icon ic_bookmark"></i>{{'menu_bookmarks' | translate}}
+				</ion-item>
 				<div>
 					<ion-item class="item item-icon-left item-icon-right menu-main" ng-click="toggleGroupRealTime()" ng-class="{active: isGroupRealTimeShown()}">
 						<i class="icon ic_mobility"></i> {{'menu_info_transports' | translate}}

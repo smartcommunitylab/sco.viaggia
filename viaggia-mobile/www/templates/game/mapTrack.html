@@ -14,9 +14,9 @@
                     <i class="icon ic_real-time-info"></i>
                     <b>{{trackingInfo.time}}</b>
 
-                    <i class="icon" ng-class="isGroupTrackShown() ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i>
+                    <i class="icon" ng-if="trackingMultimodal()" ng-class="isGroupTrackShown() ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i>
                 </ion-item>
-                <div class="group-track" ng-show="isGroupTrackShown()">
+                <div class="group-track" ng-show="isGroupTrackShown()" ng-if="trackingMultimodal()">
                     <div class="progress-bar-track">
                         <i class="icon ic_foot" ng-class="{'actual-track':actualTracking('walk')}"></i>
                         <div class="container-stat" ng-class="{'actual-container-stat':actualTracking('walk')}">
@@ -45,10 +45,10 @@
             </div>
             <leaflet event-broadcast="events" center="center" markers="markers" paths="pathLine" style="width: 100%; height: 700px;"
                 ng-init="initMap()" id="trackingMap"></leaflet>
-            <div class="center-on-me" ng-click="centerOnMe()"  ng-class="{'center-expanded': isGroupTrackShown()}">
+            <div class="center-on-me" ng-click="centerOnMe()"  ng-class="{'center-expanded': isGroupTrackShown() && trackingMultimodal()}">
                 <button class="button button-map icon ion-android-locate"></button>
             </div>
-            <div class="modes-buttons">
+            <div class="modes-buttons" ng-if="trackingMultimodal()">
                 <button class="button button-map icon ic_foot" ng-class="{'actual-track':actualTracking('walk')}" ng-click="changeTracking('walk')"></button>
                 <button class="button button-map icon ic_bike" ng-class="{'actual-track':actualTracking('bike')}" ng-click="changeTracking('bike')"></button>
                 <button class="button button-map icon ic_urban-bus" ng-class="{'actual-track':actualTracking('bus')}" ng-click="changeTracking('bus')"></button>

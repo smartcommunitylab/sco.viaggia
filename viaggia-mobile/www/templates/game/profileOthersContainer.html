@@ -1,12 +1,235 @@
-<ion-tabs class="tabs-icon-top">
-    <ion-tab icon-on="ic_score" icon-off="ic_score" ui-sref="app.profileOthers.points">
-        <ion-nav-view name="tab-other-points"></ion-nav-view>
-    </ion-tab>
+<ion-view title="{{user.nickname}}">
+    <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="goBackView()">
+            <i class="ion-android-arrow-back" style="font-size:30px;"></i>
+        </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button ng-if="blacklisted" class="button button-clear" ng-click="removeFromBlacklist()">
+            <i class="ic_blacklist_off"></i>
+        </button>
+        <button ng-if="!blacklisted" class="button button-clear" ng-click="addToBlacklist()">
+            <i class="ic_blacklist_on"></i>
+        </button>
+    </ion-nav-buttons>
+    <ion-tabs class="tabs-icon-top">
+        <ion-tab icon-on="ic_score" icon-off="ic_score">
+            <!-- <ion-view title="{{user.nickname}}"> -->
+            <!-- <ion-nav-buttons side="left">
+                        <button class="button button-clear" ng-click="goBackView()">
+                            <i class="ion-android-arrow-back" style="font-size:30px;"></i>
+                        </button>
+                    </ion-nav-buttons>
+                    <ion-nav-buttons side="right">
+                        <button ng-if="blacklisted" class="button button-clear" ng-click="removeFromBlacklist()">
+                            <i class="ic_blacklist_off"></i>
+                        </button>
+                        <button ng-if="!blacklisted" class="button button-clear" ng-click="addToBlacklist()">
+                            <i class="ic_blacklist_on"></i>
+                        </button>
+                    </ion-nav-buttons> -->
 
-    <ion-tab icon-on="ic_game_statistic" icon-off="ic_game_statistic" ui-sref="app.profileOthers.statistics">
-        <ion-nav-view name="tab-other-stat"></ion-nav-view>
-    </ion-tab>
-    <ion-tab icon-on="ic_game_challenge" icon-off="ic_game_challenge" ui-sref="app.profileOthers.challenges">
-        <ion-nav-view name="tab-other-challenges"></ion-nav-view>
-    </ion-tab>
-</ion-tabs>
+            <ion-content class="padding-right padding-left game-points tab-others" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
+                <!-- <a class="item item-avatar" href="#">
+                            <img ng-if="!user.img" src="img/game/generic_user.png">
+                            <img ng-if="user.img" src="user.img">
+                            <h1>{{'user_level_label'|translate}}:{{user.level}}</h1>
+                
+                        </a>
+                        <p></p>
+                        <div  class="chart" ng-if="user.statistics">
+                                <H5 class="H5stats">{{getTitle(day)}}</H5>
+                                <div ng-if="user.statistics.walk>0" class="walkbgcolor statsfloat" ng-style="{{getStyle(user.statistics.walk, 'walk')}}">
+                                    <i class="icon ic_foot"></i>
+                                </div>
+                                <div ng-if="user.statistics.walk>0" class="statstext" id="walkcolor"> {{(user.statistics.walk/1000) | number:1}} km </div>
+                                <div id="statsdiv"></div>
+                                <div ng-if="(user.statistics.transit+user.statistics.bus+user.statistics.train)>0" class="publicbgcolor statsfloat" ng-style="{{getStyle((user.statistics.transit+user.statistics.bus+user.statistics.train), 'transit')}}">
+                                    <i class="icon ic_urban-bus"></i>
+                                    <i class="icon ic_train"></i>
+                                </div>
+                                <div ng-if="(user.statistics.transit+user.statistics.bus+user.statistics.train)>0" class="statstext" id="publiccolor"> {{((user.statistics.transit+user.statistics.bus+user.statistics.train)/1000) | number:1}} km </div>
+                                <div id="statsdiv"></div>
+                                <div ng-if="user.statistics.bike>0" class="bikebgcolor statsfloat" ng-style="{{getStyle(user.statistics.bike, 'bike')}}">
+                                    <i class="icon ic_bike"></i>
+                                </div>
+                                <div ng-if="user.statistics.bike>0" class="statstext" id="bikecolor"> {{(user.statistics.bike/1000) | number:1}} km </div>
+                                <div id="statsdiv"></div>
+                                <div ng-if="user.statistics.car>0" class="carbgcolor statsfloat" ng-style="{{getStyle(user.statistics.car, 'car')}}">
+                                    <i class="icon ic_car"></i>
+                                </div>
+                                <div ng-if="user.statistics.car>0" class="statstext" id="carcolor"> {{(user.statistics.car/1000) | number:1}} km </div>
+                                <div id="statsdiv"></div>
+                        </div> -->
+                <div ng-if="!!user">
+                    <div class="img-container">
+                        <img ng-src="{{getUserImg(user.playerId)}}">
+                    </div>
+
+                    <p></p>
+                    <div class="row ">
+                        <div class="col col-33 col-center">
+                            <h2 style="margin-top: 0px;">{{'user_level_label'|translate}}:</h2>
+                        </div>
+                        <div class="col col-66 col-center">
+                            <h2>
+                                {{user.level}}</h2>
+                        </div>
+                        <!-- </div> -->
+                    </div>
+                    <div class="row game-mypoints">
+                        <div class="col col-33 col-center">
+                            <img class="game-badge" src="img/game/greenleaves.png" />
+                        </div>
+                        <!-- <div class="col col-67 col-center"> -->
+                        <div class="col col-66 col-center">
+                            <div class="description">
+                                <h2 class="points">{{user.greenLeaves}} {{'green_leaves_points' | translate}}</h2>
+                                <!-- <h5 class="label">{{'green_leaves_points' | translate}}</h5> -->
+                            </div>
+                        </div>
+                        <!-- </div> -->
+                    </div>
+
+                    <!-- <div ng-if="!!user">
+                            <div class="row game-mypoints">
+                                <div class="col col-33 col-center">
+                                    <img class="game-badge" src="img/game/greenleaves.png" />
+                                </div>
+                                <div class="col col-67 col-center">
+                                    <div class="description">
+                                        <h1 class="points">{{user.greenLeaves}}</h1>
+                                        <h5 class="label">{{'green_leaves_points' | translate}}</h5>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                    <div ng-repeat="badgeType in badgeTypes" ng-if="badges[badgeType].length > 0">
+                        <!-- badgeEarned -->
+                        <h4 class="title">{{badgeType | translate}}</h4>
+                        <ul class="badges">
+                            <li ng-repeat="badge in badges[badgeType]">
+                                <img class="game-badge-s" ng-src="{{badge.url}}" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div ng-if="!user">
+                    <h4 class="label">{{'no_status' | translate}}</h4>
+                </div>
+            </ion-content>
+            <!-- </ion-view> -->
+        </ion-tab>
+
+        <ion-tab icon-on="ic_game_statistic" icon-off="ic_game_statistic">
+            <!-- <ion-view title="{{user.nickname}}"> -->
+            <!-- <ion-nav-buttons side="left">
+                        <button class="button button-clear" ng-click="goBackView()">
+                            <i class="ion-android-arrow-back" style="font-size:30px;"></i>
+                        </button>
+                    </ion-nav-buttons> -->
+
+            <ion-content class="game-ranking tab-others" has-bouncing="false" scroll="false" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
+                <div class="filter item-accordion" ng-if="!!filter.options">
+                    <ion-item class="item-accordion-header item-icon-right" ng-click="filter.toggle()">
+                        <div ng-if="!filter.open">{{!!filter.selected ? ('game_tab_statistics_filter_' + filter.selected) : '' | translate}}</div>
+                        <i class="icon ion-arrow-down-b" ng-class="{'open': filter.open}"></i>
+                    </ion-item>
+                    <div class="item-accordion-content" ng-show="filter.open">
+                        <ion-list>
+                            <ion-item ng-repeat="option in filter.options" ng-click="filter.filterBy(option)">
+                                <div ng-class="{ 'becomeblue' : filter.selected==option}">{{'game_tab_statistics_filter_' + option | translate}}</div>
+                            </ion-item>
+                        </ion-list>
+                    </div>
+                </div>
+
+                <div ng-if="!!user && !singleRankStatus && !noStats">
+                    <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="statisticScroll">
+                        <ion-list>
+                            <div class="chart">
+                                <H5 class="H5stats">{{getTitle(day)}}</H5>
+                                <div ng-if="stats[filter.selected].walk>0" class="walkbgcolor statsfloat" ng-style="{{getStyle(stats[filter.selected].walk, 'walk')}}">
+                                    <i class="icon ic_foot"></i>
+                                </div>
+                                <div ng-if="stats[filter.selected].walk>0" class="statstext" id="walkcolor"> {{(stats[filter.selected].walk/1000) | number:1}} km </div>
+                                <div id="statsdiv"></div>
+                                <div ng-if="(stats[filter.selected].transit+stats[filter.selected].bus+stats[filter.selected].train)>0" class="publicbgcolor statsfloat"
+                                    ng-style="{{getStyle((stats[filter.selected].transit+stats[filter.selected].bus+stats[filter.selected].train), 'transit')}}">
+                                    <i class="icon ic_urban-bus"></i>
+                                    <i class="icon ic_train"></i>
+                                </div>
+                                <div ng-if="(stats[filter.selected].transit+stats[filter.selected].bus+stats[filter.selected].train)>0" class="statstext"
+                                    id="publiccolor"> {{((stats[filter.selected].transit+stats[filter.selected].bus+stats[filter.selected].train)/1000)
+                                    | number:1}} km </div>
+                                <div id="statsdiv"></div>
+                                <div ng-if="stats[filter.selected].bike>0" class="bikebgcolor statsfloat" ng-style="{{getStyle(stats[filter.selected].bike, 'bike')}}">
+                                    <i class="icon ic_bike"></i>
+                                </div>
+                                <div ng-if="stats[filter.selected].bike>0" class="statstext" id="bikecolor"> {{(stats[filter.selected].bike/1000) | number:1}} km </div>
+                                <div id="statsdiv"></div>
+                                <div ng-if="stats[filter.selected].car>0" class="carbgcolor statsfloat" ng-style="{{getStyle(stats[filter.selected].car, 'car')}}">
+                                    <i class="icon ic_car"></i>
+                                </div>
+                                <div ng-if="stats[filter.selected].car>0" class="statstext" id="carcolor"> {{(stats[filter.selected].car/1000) | number:1}} km </div>
+                                <div id="statsdiv"></div>
+                            </div>
+                        </ion-list>
+                    </ion-scroll>
+                </div>
+                <div ng-if="noStats">
+                    <h4 class="label">{{'no_stats' | translate}}</h4>
+                </div>
+                <div ng-if="status && singleRankStatus">
+                    <h4 class="label">{{'pop_up_error_server_template' | translate}}</h4>
+                </div>
+                <div ng-if="stats == null ">
+                    <h4>{{'no_statistics' | translate}}</h4>
+                </div>
+            </ion-content>
+            <!-- </ion-view>   -->
+        </ion-tab>
+        <ion-tab icon-on="ic_game_challenge" icon-off="ic_game_challenge">
+            <!-- <ion-view title="{{user.nickname}}"> -->
+            <!-- <ion-nav-buttons side="left">
+            <button class="button button-clear" ng-click="goBackView()">
+                <i class="ion-android-arrow-back" style="font-size:30px;"></i>
+            </button>
+        </ion-nav-buttons> -->
+
+            <ion-content class="game-challenges tab-others" has-bouncing="false" scroll="false" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
+                <!-- Results -->
+                <ion-scroll class="padding-right padding-left challenges" ng-style="challengesStyle" delegate-handle="challengesScroll" ng-if="challenges != null && challenges.length > 0">
+                    <ion-list>
+                        <ion-item class="challenge" ng-click="showChallengeInfo(challenge)" ng-repeat="challenge in challenges" ng-class="{'challenge-old': !challenge.active || challenge.success, success: !!challenge.success, fail: !challenge.success}">
+                            <div class="challenge-desc">{{challenge.challDesc}}</div>
+                            <div class="challenge-countdown" ng-if="!!challenge.active" ng-init="days = {days: challenge.daysToEnd}">
+                                {{'game_tab_challenges_daysToEnd' + (challenge.daysToEnd == 1 ? '_1' : '') | translate:days}}
+                            </div>
+                            <div class="challenge-result" ng-if="!challenge.active || challenge.success">
+                                {{'game_tab_challenge_success_' + challenge.success | translate}}
+                            </div>
+                            <div class="challenge-status">
+                                <span class="challenge-count">
+                                    {{'game_tab_challenges_status' + (!challenge.active || challenge.success ? '_final' : '') | translate}}: {{!!challenge.success
+                                    ? challenge.challTarget : challenge.row_status}}/{{challenge.challTarget}}
+                                </span>
+                            </div>
+                            <a class="challenge-info">
+                                <i class="icon ion-information-circled"></i>
+                            </a>
+                        </ion-item>
+                    </ion-list>
+                </ion-scroll>
+
+                <div ng-if="challenges != null && challenges.length == 0" class="text-center padding">
+                    <h4>{{'no_challenges' | translate}}</h4>
+                </div>
+                <div class="padding-right padding-left game-points" ng-if="!challenges">
+                    <h4 class="label">{{'no_status' | translate}}</h4>
+                </div>
+            </ion-content>
+            <!-- </ion-view>  -->
+        </ion-tab>
+    </ion-tabs>
+</ion-view>

@@ -128,15 +128,17 @@ angular.module('viaggia.controllers.registration', [])
                     Config.loading();
 
                     registrationService.register($scope.user).then(function () {
-                        profileService.setProfileImage($scope.currentFile).then(function () {
-                            console.log("uploaded");
-                            Config.loaded();
-                            $ionicHistory.nextViewOptions({
-                                disableBack: true,
-                                historyRoot: true
-                            });
-                            $state.go('app.home');
-                        })
+                        $state.go('app.home');
+
+                        // profileService.setProfileImage($scope.currentFile).then(function () {
+                        //     console.log("uploaded");
+                        //     Config.loaded();
+                        //     $ionicHistory.nextViewOptions({
+                        //         disableBack: true,
+                        //         historyRoot: true
+                        //     });
+                        //     $state.go('app.home');
+                        // })
                     }, function (errStatus) {
                         if (errStatus == '409') {
                             Toast.show($filter('translate')('nickname_inuse'), "short", "bottom");

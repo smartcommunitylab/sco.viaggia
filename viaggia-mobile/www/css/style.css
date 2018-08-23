@@ -945,7 +945,7 @@ border-radius: 35px;
 padding: 0px;
 position: relative;
 left: -15px;
-margin-top: 10px;
+margin-top: 20px;
 }
 .platform-android .timeline-arrow {
 border-right: 10px solid #ddd;
@@ -1025,7 +1025,7 @@ content: "";
 height: 15px;
 left: -36px;
 position: absolute;
-top: -20px;
+top: -10px;
 width: 15px;
 z-index: 9;
 }
@@ -1058,7 +1058,7 @@ width: auto;
  min-width: 40px;
 position: absolute !important;
 left: 20px;
-top: -4px;
+top: -8px;
 margin-top: 0px;
 margin-bottom: 3px;
 }
@@ -2065,7 +2065,7 @@ Play&Go
 }
 
 .game-challenges .challenge div:not(:first-child) {
-    margin-top: 8px;
+    /* margin-top: 8px; */
 }
 
 .game-challenges .challenge .challenge-status {
@@ -2116,12 +2116,38 @@ Play&Go
     float: none;
 }
 .type-challenge {
-    height: 100px;;
+    height: 100px;
+    -webkit-transition: display 2s; /* For Safari 3.1 to 6.0 */
+    transition: display 2s;
 }
+/* .type-challenge-hide {
+    display:none;
+    overflow:hidden;
+    height:0;
+    line-height:0;
+    border:0;
+    margin:0;
+} */
+.type-challenge.ng-enter, .type-challenge.ng-leave {
+    /* transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s; */
+    -webkit-animation: fadeOutLeft 1s;
+    animation: fadeOutLeft 1s;
+  }
+  
+  .type-challenge.ng-enter,
+  .type-challenge.ng-leave.ng-leave-active {
+    opacity:0;
+  }
+  
+  .type-challenge.ng-leave,
+  .type-challenge.ng-enter.ng-enter-active {
+    opacity:1;
+  }
+
 .button-challenge-enable{
-position: absolute;
-right: 0px;
-bottom: 0px;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
 }
 .challenge-long-desc {
     text-overflow: ellipsis;
@@ -2654,6 +2680,7 @@ height: 30px;
     background-color: rgb(248, 248, 248);
     border-radius: 0px 35px 35px 0px;
     padding: 5px;
+    display: flex;
 }
 .button-stop-map{
     position: fixed;
@@ -2666,11 +2693,20 @@ height: 30px;
     padding-bottom: 5px;
     height: 57px;
 }
-
+.col-60 {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 60%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 60%;
+    -ms-flex: 0 0 60%;
+    flex: 0 0 60%;
+    max-width: 60%;
+}
 .app-track-buttons {
     position: fixed;
     bottom: 50px;
     /* left: 10px; */
+    display: inline-flex;
     background-color: rgb(248, 248, 248);
     border-radius: 0px 35px 35px 0px;
     padding: 5px;
@@ -2699,7 +2735,7 @@ height: 30px;
     padding: 5px;
     z-index: 999;
     margin-left: -10px;
-    display: inline-block;
+    display: inline-flex;
 }
 .home-track-stop-map{
     background-color: #c1272d;
@@ -2921,6 +2957,9 @@ text-align: center;
 .cooperative-container{
     padding: 0px;
 }
+.competitive-container{
+    padding: 0px;
+}
 .progress-bar-level {
     background: grey;
 	border-radius:100px;
@@ -2934,6 +2973,12 @@ text-align: center;
   }
   .img-container>img {
       width: 100%;
+      position: absolute;
+      margin: auto;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
   }
   .img-container>a{
     position: absolute;
@@ -2942,6 +2987,9 @@ text-align: center;
   }  
   .margin-for-trackingbar-tab{
       margin-bottom: 80px;
+  }
+  .tab-others{
+      top:44px;
   }
   .margin-for-trackingbar{
     margin-bottom: 120px;

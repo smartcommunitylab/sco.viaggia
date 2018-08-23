@@ -70,7 +70,7 @@ angular.module('viaggia.controllers.game', [])
         $scope.badges = null;
         $scope.badgeTypes = Config.getBadgeTypes();
         // $rootScope.profileImg = null;
-        $scope.tmpUrl = 'https://dev.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/'
+        $scope.tmpUrl = 'https://dev.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/'+Config.getAppId()+'/'
         $scope.getImage = function () {
             if ($scope.$parent.$parent.$parent.status)
                 profileService.getProfileImage($scope.$parent.$parent.$parent.status.playerData.playerId).then(function (image) {
@@ -1065,6 +1065,8 @@ angular.module('viaggia.controllers.game', [])
         $scope.singleRankStatus = true;
         $scope.rankingFilterOptions = ['now', 'last', 'global'];
         var getRanking = false;
+        $scope.rankingPerPage = 50;
+
         $scope.filter = {
             open: false,
             toggle: function () {
@@ -1129,7 +1131,9 @@ angular.module('viaggia.controllers.game', [])
             );
 
         };
-
+        $scope.getUserImg = function (id) {
+            return Config.getServerURL() + '/gamificationweb/player/avatar/' +Config.getAppId()+'/'+ id
+        }
         /* Infinite scrolling */
         $scope.loadMore = function () {
             if (!getRanking && $scope.maybeMore) {

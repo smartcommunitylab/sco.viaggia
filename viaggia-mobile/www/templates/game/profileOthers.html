@@ -45,10 +45,9 @@
                 <div ng-if="user.statistics.car>0" class="statstext" id="carcolor"> {{(user.statistics.car/1000) | number:1}} km </div>
                 <div id="statsdiv"></div>
         </div> -->
-        <div ng-if="!!user">
+        <div ng-if="!!user">      
                 <div class="img-container">
-                    <img ng-if="!user.img" src="img/game/generic_user.png">
-                    <img ng-if="user.img" src="user.img">
+                    <img ng-src="{{getUserImg(user.playerId)}}">
                 </div>
     
                 <p></p>
@@ -76,7 +75,6 @@
                     <!-- </div> -->
                 </div>
     
-            </div>
         <!-- <div ng-if="!!user">
             <div class="row game-mypoints">
                 <div class="col col-33 col-center">

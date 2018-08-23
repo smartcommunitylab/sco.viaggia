@@ -9,7 +9,7 @@
         <div class="user-state">
             <div class="row">
                 <div class="col home-level">
-                    {{'user_level_label' | translate}} {{status.playerData.level}}
+                    {{'user_level_label' | translate}} {{level}}
                 </div>
                 <div class="col home-points">
                     {{status['pointConcept'][0]['score']}} {{'green_leaves_points' | translate}}
@@ -57,10 +57,12 @@
                     <div class="home-track-container">
                         <div class="home-track-buttons">
                             <button class="button button-map icon ion-map" ng-click="goToMap()"></button>
-                            <button class="button button-map icon ic_foot" ng-class="{'actual-track':actualTracking('walk')}" ng-click="changeTracking('walk')"></button>
-                            <button class="button button-map icon ic_bike" ng-class="{'actual-track':actualTracking('bike')}" ng-click="changeTracking('bike')"></button>
-                            <button class="button button-map icon ic_urban-bus" ng-class="{'actual-track':actualTracking('bus')}" ng-click="changeTracking('bus')"></button>
-                            <button class="button button-map icon ic_train" ng-class="{'actual-track':actualTracking('train')}" ng-click="changeTracking('train')"></button>
+                            <div ng-if="trackingMultimodal()">
+                                <button class="button button-map icon ic_foot" ng-class="{'actual-track':actualTracking('walk')}" ng-click="changeTracking('walk')"></button>
+                                <button class="button button-map icon ic_bike" ng-class="{'actual-track':actualTracking('bike')}" ng-click="changeTracking('bike')"></button>
+                                <button class="button button-map icon ic_urban-bus" ng-class="{'actual-track':actualTracking('bus')}" ng-click="changeTracking('bus')"></button>
+                                <button class="button button-map icon ic_train" ng-class="{'actual-track':actualTracking('train')}" ng-click="changeTracking('train')"></button>
+                            </div>
                         </div>
                         <button class="button home-track-stop-map" ng-click="stopTrackingHome()">STOP</button>
                     </div>

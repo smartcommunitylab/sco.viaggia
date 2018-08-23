@@ -255,6 +255,8 @@ angular.module('viaggia.services.tracking', [])
                 var multimodalId = localStorage.getItem(Config.getAppId() + '_multimodalId');
                 if (!multimodalId) {
                     multimodalId = 'multimodal_' + ts;
+                    //set id for db
+                    localStorage.setItem(Config.getAppId() + '_dbId',tripId);
                 }
                 // default duration set to 1 month
                 trackService.start(tripId, multimodalId, {
@@ -746,6 +748,7 @@ angular.module('viaggia.services.tracking', [])
 
 
         var markAsDone = function () {
+           
             var tripId = localStorage.getItem(Config.getAppId() + "_tripId");
             var date = new Date();
             date.setHours(0, 0, 0, 0);
@@ -791,6 +794,7 @@ angular.module('viaggia.services.tracking', [])
             //clean local storage data from localstorage
             localStorage.removeItem(Config.getAppId() + '_state');
             localStorage.removeItem(Config.getAppId() + '_tripId');
+            localStorage.removeItem(Config.getAppId() + '_dbId');
             localStorage.removeItem(Config.getAppId() + '_multimodalId');
             localStorage.removeItem(Config.getAppId() + '_startTimestamp');
             localStorage.removeItem(Config.getAppId() + '_endTimestamp');

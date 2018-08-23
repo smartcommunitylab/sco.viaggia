@@ -8,11 +8,16 @@ angular.module('viaggia.controllers.profile', [])
         $scope.noStatus = false;
         $scope.rankingFilterOptions = ['now', 'last', 'global'];
         $scope.rankingPerPage = 50;
-
+        var setUserLevel = function () {
+            $scope.level = "";
+            if ($scope.status && $scope.status.levels && $scope.status.levels.length > 0 && $scope.status.levels[0].levelValue)
+                $scope.level = $scope.status.levels[0].levelValue;
+        }
         Config.loading();
         GameSrv.getLocalStatus().then(
             function (status) {
                 $scope.status = status;
+                setUserLevel();
                 GameSrv.getRanking($scope.rankingFilterOptions[0], 0, $scope.rankingPerPage).then(
                     function (ranking) {
                         $rootScope.currentUser = ranking['actualUser'];
@@ -293,6 +298,7 @@ angular.module('viaggia.controllers.profile', [])
         $scope.profileId = $stateParams.profileId
         $scope.user = null;
         $scope.badges = null;
+        $scope.stats = {}
         $scope.badgeTypes = Config.getBadgeTypes();
         $scope.maxStat = GameSrv.getMaxStat("Total");
         $scope.maxvalues = {
@@ -334,15 +340,19 @@ angular.module('viaggia.controllers.profile', [])
             selected: null,
         };
 
-        $scope.filter.options = ['Monthly', 'Total'];
+        $scope.getUserImg = function (id) {
+            return Config.getServerURL() + '/gamificationweb/player/avatar/' + Config.getAppId() + '/' + $scope.profileId;
+        }
+
+        $scope.filter.options = ['Total', 'Monthly'];
         $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
         $scope.filter.filter = function (selection) {
             $scope.previousStat = null;
+            //TODO calculate max of other
             $scope.calculateMaxStats()
             $scope.serverhow = GameSrv.getServerHow($scope.filter.selected);
             $scope.maybeMore = true;
             $scope.singleStatStatus = true;
-            $scope.stats = [];
             $ionicScrollDelegate.$getByHandle('statisticScroll').scrollTop();
             $scope.noStats = false;
 
@@ -380,9 +390,13 @@ angular.module('viaggia.controllers.profile', [])
                 updateBadges();
 
                 //TODO real challenges and stiatistics
+
+                $scope.challenges = $scope.user.wonChallenges;
                 // {"playerData":{"gameId":"596e1b00e4b0004279fc0736","level":"n00b","nickName":"Try","playerId":"140"},"pointConcept":[{"name":"green leaves","score":15,"periodType":"daily","start":1501106400000,"periodDuration":86400000,"periodIdentifier":"daily","instances":[{"score":15,"start":1522188000000,"end":1522274400000}]},{"name":"green leaves","score":15,"periodType":"weekly","start":1501106400000,"periodDuration":604800000,"periodIdentifier":"weekly","instances":[{"score":15,"start":1521673200000,"end":1522274400000}]}],"badgeCollectionConcept":[{"name":"public transport aficionado","badgeEarned":[]},{"name":"sustainable life","badgeEarned":[]},{"name":"recommendations","badgeEarned":[]},{"name":"leaderboard top 3","badgeEarned":[{"name":"1st_of_the_week","url":"https://dev.smartcommunitylab.it/core.mobility/img/mail/leaderboard/leaderboard1.png"}]},{"name":"bike aficionado","badgeEarned":[]},{"name":"park and ride pioneer","badgeEarned":[]},{"name":"bike sharing pioneer","badgeEarned":[]},{"name":"green leaves","badgeEarned":[]}],"challengeConcept":{"activeChallengeData":[],"oldChallengeData":[{"challId":"start_survey-1624ea3d21e-63568495","challDesc":"Fill out the start survey and gain a bonus of 100 green leaves points.","challCompleteDesc":"To win this challenge, complete the initial game questionnaire that you can access <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.","challTarget":1,"status":0,"row_status":0.0,"type":"survey","active":false,"success":false,"startDate":1521737781790,"endDate":1522947381790,"daysToEnd":0,"bonus":100,"challCompletedDate":0},{"challId":"'initial_challenge_1624ea3d24c-63568495","challDesc":"Do at least 1 trip zero impact and you will get a bonus of 50 green leaves points.","challCompleteDesc":"Impact zero itineraries are those including only bike, bike sharing, and walking mode.","challTarget":1,"status":0,"row_status":0.0,"type":"absoluteIncrement","active":false,"success":false,"startDate":1521737781836,"endDate":1522947381836,"daysToEnd":0,"bonus":50,"challCompletedDate":0}]}}
                 // TODO statistics
                 // {"firstBefore":null,"firstAfter":null,"stats":[{"from":1416783600000,"to":1533592799000,"data":{"bus":3998.6265751776673}}]}
+                $scope.stats['Total'] = $scope.user.statistics;
+                $scope.stats['Monthly'] = $scope.user.lastMonthStatistics;
 
             },
             function (err) {

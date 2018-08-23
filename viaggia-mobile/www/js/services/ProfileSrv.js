@@ -42,7 +42,7 @@ angular.module('viaggia.services.profile', [])
         function (token) {
           $http({
             method: 'GET',
-            url: Config.getServerURL() + '/gamificationweb/player/avatar/' + profileId,
+            url: Config.getServerURL() + '/gamificationweb/player/avatar/'+Config.getAppId()+'/'+profileId,
             headers: {
               'Authorization': 'Bearer ' + token,
               'appId': Config.getAppId(),
