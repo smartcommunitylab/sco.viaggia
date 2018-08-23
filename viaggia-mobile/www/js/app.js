@@ -1953,6 +1953,7 @@ angular.module('viaggia', [
       challenge_future: "To program",
       challenge_past: "Past",
       warning_unlock_challenge: "Sblocca una nuova tipologia di sfida che potrai utilizzare nella prossima scelta!",
+      warning_choose_challenge: "Programma la sfida che vuoi affrontare la prossima settimana; ricordati che la scadenza è venerdì e in caso di mancata scelta il sistema te ne affiderà una sfida di base!",
       read_more: "read more",
       challenge_popup_title: "Sblocca sfida",
       challenge_popup_template_comp_time: "Confermando sbloccherai la tipologia di sfida competitiva a tempo e potrai sfidare altri giocatori",
