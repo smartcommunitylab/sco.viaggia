@@ -338,13 +338,19 @@ angular.module('viaggia.services.game', [])
         }
         gameService.getTravelForDiary = function () {
             var tripId = localStorage.getItem(Config.getAppId() + "_tripId");
-            var travelType = checkTravelType(tripId);
-            var travelModes = checkTravelModes(tripId);
-            return {
-                tripId: tripId,
-                travelType: travelType,
-                travelModes: travelModes
+            //if multimodal use dbid
+            if (localStorage.getItem(Config.getAppId() + "_dbId")) {
+                tripId = localStorage.getItem(Config.getAppId() + "_dbId");
             }
+            if (tripId) {
+                var travelType = checkTravelType(tripId);
+                var travelModes = checkTravelModes(tripId);
+                return {
+                    tripId: tripId,
+                    travelType: travelType,
+                    travelModes: travelModes
+                }
+            } else return null
         }
         gameService.getError = function (trip) {
             if (trip && trip.validationResult) {

@@ -97,7 +97,7 @@ angular.module('viaggia.controllers.common', [])
       return false
     }
     $scope.isHomePages = function () {
-      if ($state.current.name === "app.home.home" || $state.current.name === "app.home.leaderboards" ||$state.current.name === "app.home.challenges" || $state.current.name === "app.home.diary" || $state.current.name === "app.home.mobility")
+      if ($state.current.name === "app.home.home" || $state.current.name === "app.home.leaderboards" || $state.current.name === "app.home.challenges" || $state.current.name === "app.home.diary" || $state.current.name === "app.home.mobility")
         return true;
       return false;
     }
@@ -112,6 +112,9 @@ angular.module('viaggia.controllers.common', [])
       if ($state.current.name != "app.mapTracking" && $state.current.name != "app.login" && $state.current.name != "app.home.home" && trackService.trackingIsGoingOn() && !trackService.trackingIsFinished())
         return true;
       return false
+    }
+    $scope.trackingMultimodal = function () {
+      return (localStorage.getItem(Config.getAppId() + '_multimodalId') != "null");
     }
     $scope.goHome = function () {
       $state.go('app.home.home');
@@ -173,7 +176,7 @@ angular.module('viaggia.controllers.common', [])
         // })
 
         // } else {
-        if (data.valid) {
+        if (data.valid && travelForDiary) {
           GameSrv.addTravelDiary(travelForDiary);
           $ionicPopup.confirm({
             title: $filter('translate')("pop_up_points_title"),
@@ -183,7 +186,7 @@ angular.module('viaggia.controllers.common', [])
                 text: $filter('translate')("btn_close"),
                 type: 'button-cancel',
                 onTap: function () {
-                  if ($state.current.name == "app.app.mapTracking") {
+                  if ($state.current.name == "app.mapTracking") {
                     $state.go('app.home.home');
                   }
                 }
@@ -332,7 +335,7 @@ angular.module('viaggia.controllers.common', [])
 
     $scope.updateBar = function (location) {
       //TODO best calculation over max 
-      if (location.extras) {
+      if (location && location.extras) {
         $scope.progressCounter[location.extras.transportType]++;
         $scope.progressPercent.walk = ($scope.progressCounter.walk * 20 / $scope.maxvalues.maxDailywalk) * 100;
         $scope.progressPercent.bike = ($scope.progressCounter.bike * 20 / $scope.maxvalues.maxDailybike) * 100;
