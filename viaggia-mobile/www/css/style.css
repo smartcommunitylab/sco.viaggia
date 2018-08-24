@@ -3082,6 +3082,15 @@ text-align: center;
     text-decoration: underline;
     margin: 4px 8px;
 }
+
+#homeTabs .tabs>a>i  {
+    height: 100%;
+    margin: 4px auto;
+}
+#profileTabs  .tabs>a>i  {
+    height: 100%;
+    margin: 4px auto;
+}
   @-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}

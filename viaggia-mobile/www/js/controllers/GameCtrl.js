@@ -303,6 +303,7 @@ angular.module('viaggia.controllers.game', [])
                             GameSrv.acceptChallenge(challenge).then(function () {
                                 //clean list and keep the only one
                                 $scope.challenges = [challenge];
+                                $ionicScrollDelegate.resize();
                             })
                         }
                     }
