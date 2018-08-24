@@ -70,7 +70,7 @@ angular.module('viaggia.controllers.game', [])
         $scope.badges = null;
         $scope.badgeTypes = Config.getBadgeTypes();
         // $rootScope.profileImg = null;
-        $scope.tmpUrl = 'https://dev.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/'+Config.getAppId()+'/'
+        $scope.tmpUrl = 'https://dev.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/' + Config.getAppId() + '/'
         $scope.getImage = function () {
             if ($scope.$parent.$parent.$parent.status)
                 profileService.getProfileImage($scope.$parent.$parent.$parent.status.playerData.playerId).then(function (image) {
@@ -109,6 +109,7 @@ angular.module('viaggia.controllers.game', [])
             });
         }
         $scope.uploadFile = function (files) {
+            Config.loading();
             profileService.setProfileImage(files[0]).then(function () {
                 console.log("ok");
                 $scope.getImage();
@@ -120,7 +121,7 @@ angular.module('viaggia.controllers.game', [])
                     console.log("Unsupported media type");
                 return;
                 console.log("network error");
-            })
+            }).finally(Config.loaded)
 
         };
         $scope.$watch('status.badgeCollectionConcept', function (newBadges, oldBadges) {
@@ -145,7 +146,7 @@ angular.module('viaggia.controllers.game', [])
 
     //loads the challenges tab, manage the filter of past and new challenges
 
-    .controller('ChallengesCtrl', function ($scope, $state, $stateParams, $ionicModal, $filter, $ionicScrollDelegate, $ionicPopup, profileService, $window, $timeout, GameSrv) {
+    .controller('ChallengesCtrl', function ($scope, $state, $stateParams, Config, $filter, $ionicScrollDelegate, $ionicPopup, profileService, $window, $timeout, GameSrv) {
         $scope.challenges = null;
         $scope.param = null;
         $scope.tabs = ['unlock', 'future', 'past'];
@@ -211,6 +212,7 @@ angular.module('viaggia.controllers.game', [])
 
         }
         $scope.getTypes = function () {
+            Config.loading();
             GameSrv.getTypesChallenges(profileService.status).then(function (types) {
                 $scope.typeOfChallenges = [];
                 for (var i = 0; i < types.length; i++) {
@@ -224,7 +226,7 @@ angular.module('viaggia.controllers.game', [])
                 }
             }, function (err) {
                 //TODO
-            });
+            }).finally(Config.loaded);
 
         }
         var buildChallenges = function (available, invites, sent) {
@@ -283,7 +285,7 @@ angular.module('viaggia.controllers.game', [])
             return true;
         }
         $scope.hideWarning = function (type) {
-            localStorage.setItem('warning_hide_' + type, true)
+            localStorage.setItem('warning_hide_' + type, true);
         }
         $scope.acceptChallenge = function (challenge) {
             //TODO
@@ -300,11 +302,14 @@ angular.module('viaggia.controllers.game', [])
                         text: $filter('translate')("btn_conferma"),
                         type: 'button-custom',
                         onTap: function () {
+                            Config.loading();
                             GameSrv.acceptChallenge(challenge).then(function () {
                                 //clean list and keep the only one
                                 $scope.challenges = [challenge];
                                 $ionicScrollDelegate.resize();
-                            })
+                            }, function (err) {
+
+                            }).finally(Config.loaded);
                         }
                     }
 
@@ -314,10 +319,13 @@ angular.module('viaggia.controllers.game', [])
         }
         $scope.rejectChallenge = function (challenge) {
             //TODO
+            Config.loading();
             GameSrv.rejectChallenge(challenge).then(function () {
                 //remove it
 
-            })
+            }, function (err) {
+
+            }).finally(Config.loaded);
         }
         $scope.configureChallenge = function (challenge) {
             //TODO
@@ -330,6 +338,7 @@ angular.module('viaggia.controllers.game', [])
             var available = []
             var invites = []
             var sent = {}
+            Config.loading();
             GameSrv.getAvailableChallenges(profileService.status).then(function (challenges) {
                 available = challenges
                 GameSrv.getSentInviteChallenges(profileService.status).then(function (challenge) {
@@ -344,7 +353,7 @@ angular.module('viaggia.controllers.game', [])
                 }), function (err) {
                     $scope.challenges = null;
                 }
-            });
+            }).finally(Config.loaded);;
 
         }
         $scope.getPast = function () {
@@ -359,9 +368,12 @@ angular.module('viaggia.controllers.game', [])
             }
         }
         var unlockChallenge = function (type) {
+            Config.loading();
             GameSrv.unlockChallenge(type).then(function () {
                 //TODO
-            });
+            }, function (err) {
+
+            }).finally(Config.loaded);;
         }
         $scope.readMore = function (type) {
             $ionicPopup.show({
@@ -465,11 +477,12 @@ angular.module('viaggia.controllers.game', [])
         }
         $scope.getPlayers = function () {
             //TODO
+            Config.loading();
             GameSrv.getPlayersForChallenge(howPlayer, fromPlayer, toPlayer).then(function (players) {
                 $scope.players = players;
             }, function (error) {
 
-            });
+            }).finally(Config.loaded);;
             GameSrv.getBlacklist(howBlack, fromBlack, toBlack).then(function (players) {
                 $scope.blacklistplayers = players;
             }, function (error) {
@@ -482,12 +495,12 @@ angular.module('viaggia.controllers.game', [])
         $scope.calculateTarget = function () {
             //TODO
             if (parametersCorrect()) {
-
+                Config.loading();
                 GameSrv.calculateTarget($scope.challenge).then(function (target) {
                     $scope.challenge.target = target;
                 }, function (error) {
 
-                });
+                }).finally(Config.loaded);;
             } else {
                 Toast.show($filter('translate')("toast_error_configure"), "short", "bottom");
 
@@ -503,17 +516,19 @@ angular.module('viaggia.controllers.game', [])
         }
         $scope.requestChallenge = function () {
             //TODO
+            Config.loading();
             GameSrv.requestChallenge($scope.challenge).then(function () {
                 //send it and go back to list
                 $state.go('app.home.challenges')
             }, function (error) {
 
-            });
+            }).finally(Config.loaded);
 
         }
         $scope.removePlayer = function () {
             //TODO
             $scope.challenge.player = null;
+
         }
         $scope.playerName = null;
         var getNames = function (players) {
@@ -528,7 +543,6 @@ angular.module('viaggia.controllers.game', [])
             });
         }
         $scope.typeName = function (typedthings) {
-            console.log("typeName");
             GameSrv.getPlayersForChallenge(howPlayer, fromPlayer, toPlayer, typedthings).then(function (players) {
                 $scope.playersName = getNames(players);
                 $scope.mapName = createMapNames(players);
@@ -1133,7 +1147,7 @@ angular.module('viaggia.controllers.game', [])
 
         };
         $scope.getUserImg = function (id) {
-            return Config.getServerURL() + '/gamificationweb/player/avatar/' +Config.getAppId()+'/'+ id
+            return Config.getServerURL() + '/gamificationweb/player/avatar/' + Config.getAppId() + '/' + id
         }
         /* Infinite scrolling */
         $scope.loadMore = function () {

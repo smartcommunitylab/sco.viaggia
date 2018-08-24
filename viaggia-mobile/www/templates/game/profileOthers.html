@@ -97,6 +97,9 @@
                     </li>
                 </ul>
             </div>
+            <div ng-if="user['badgeCollectionConcept'].length==0">
+                    <h4 class="label">{{'no_badges' | translate}}</h4>
+                </div>
         </div>
         <div ng-if="!user">
             <h4 class="label">{{'no_status' | translate}}</h4>
