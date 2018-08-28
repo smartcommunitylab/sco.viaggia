@@ -2221,7 +2221,7 @@ Play&Go
 .tabs .tab-item {
     background-color: #2975a7!important;
     max-width: none;
-    color: #FFFFFF;
+    color: #4EB0E6;
     font-weight: bold;
     font-size: 0.9em;
     opacity: 1;
@@ -2231,8 +2231,8 @@ Play&Go
 .tabs .tab-item.tab-item-active,
 .tabs .tab-item.active,
 .tabs .tab-item.activated {
-    color: #4EB0E6;
-    border: 0 solid #4EB0E6;
+    color: white;
+    border: 0 solid white;
 }
 
 .tabs-top.tabs-striped .tabs {
@@ -3031,6 +3031,31 @@ text-align: center;
 .single-user {
     background: #2681A4;
 }
+
+.perf-user-color {
+    color: #FF9D33;
+}
+.perf-other-color {
+    color: #B65F00;
+} 
+.coop-user-color {
+    color: #FF0033;
+}
+.coop-other-color {
+    color: #B62000;
+} 
+.time-user-color {
+    color: #25BC5D;
+}
+.time-other-color {
+    color: #008431;
+} 
+.single-user-color {
+    color: #2681A4;
+}
+.single-other-color {
+    color: #000;
+}
   .img-container{
       height: 200px;
       overflow: hidden;
@@ -3137,6 +3162,8 @@ text-align: center;
     height: 100px;
     line-height: 100px;
     font-size: 50px;
+    display: table-cell;
+    vertical-align: middle;
 }
 .icon-chall-home{
     font-size: 24px;
@@ -3157,6 +3184,21 @@ text-align: center;
 #profileTabs  .tabs>a>i  {
     height: 100%;
     margin: 4px auto;
+}
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
+.no-padding {
+    padding: 0px;
+}
+.padding-10 {
+    padding: 10px;
+}
+.no-margin {
+    margin: 0px;
 }
   @-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}

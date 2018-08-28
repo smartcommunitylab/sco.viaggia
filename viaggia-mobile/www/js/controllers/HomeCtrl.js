@@ -607,6 +607,17 @@ angular.module('viaggia.controllers.home', [])
             //TODO
             return "width:30%;background:transparent;"
         }
+        $scope.getValueUser = function (challenge) {
+            //TODO
+
+            return "15 "+$filter('translate')('user_points_label');
+        }
+        $scope.getValueOther = function (challenge) {
+            //TODO
+            return "5 "+$filter('translate')('user_points_label');
+
+
+        }
     }
 
     )

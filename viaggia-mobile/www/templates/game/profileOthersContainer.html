@@ -71,7 +71,7 @@
                     <div class="item-accordion-content" ng-show="filter.open">
                         <ion-list>
                             <ion-item ng-repeat="option in filter.options" ng-click="filter.filterBy(option)">
-                                <div ng-class="{ 'becomeblue' : filter.selected==option}">{{'game_tab_statistics_filter_' + option | translate}}</div>
+                                <div ng-class="{ 'becomeblue' : filter.selected!=option}">{{'game_tab_statistics_filter_' + option | translate}}</div>
                             </ion-item>
                         </ion-list>
                     </div>

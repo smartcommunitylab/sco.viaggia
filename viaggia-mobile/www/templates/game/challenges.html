@@ -1,15 +1,15 @@
 <ion-view title="{{'home_gamification' | translate}} {{currentUser.nickName}}">
     <ion-nav-buttons side="right">
-            <img class="bar-profile-img" ng-if="profileImg" ng-src="{{profileImg}}" ng-click="openProfile()">
+        <img class="bar-profile-img" ng-if="profileImg" ng-src="{{profileImg}}" ng-click="openProfile()">
     </ion-nav-buttons>
 
     <ion-content class="game-challenges" has-bouncing="false" scroll="false" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
         <!-- tabs -->
         <div class="filter">
             <div class="challenge-tabs row">
-                <div class="col challenge-tab" ng-click="openTab('future')" ng-class="{'becomeblue':activeTab('future')}">{{'challenge_future' | translate}}</h4>
+                <div class="col challenge-tab" ng-click="openTab('future')" ng-class="{'becomeblue':!activeTab('future')}">{{'challenge_future' | translate}}</h4>
                 </div>
-                <div class="col challenge-tab" ng-click="openTab('past')" ng-class="{'becomeblue':activeTab('past')}">{{'challenge_past' | translate}}</h4>
+                <div class="col challenge-tab" ng-click="openTab('past')" ng-class="{'becomeblue':!activeTab('past')}">{{'challenge_past' | translate}}</h4>
                 </div>
             </div>
         </div>
@@ -22,24 +22,19 @@
                         <h4 class="label">{{'warning_unlock_challenge' | translate}}</h4>
                         <button class="button button-clear button-challenge-enable" ng-click="hideWarning('unlock')"> {{'btn_got_it' | translate}}</button>
                     </ion-item>
-                    <ion-item class="challenge" ng-repeat="type in typeOfChallenges" ng-if="type.state==0">
-                        <div class="row">
-                            <div class="col col-20">
-                                <a class="icon-chall icon {{getIconType(type)}}"></a>
+                    <ion-item class="challenge no-padding" ng-repeat="type in typeOfChallenges" ng-if="type.state==0">
+                        <div class="row no-padding">
+                            <div class="col col-20 {{getColorType(type)}} padding-10 ">
+                                <a class="icon-chall icon {{getIconType(type)}} "></a>
                             </div>
-                            <div class="col col-60">
+                            <div class="col col-60 padding-10 ">
                                 <div>{{type.short}}</div>
                                 <div class="row">
                                     <p class="col challenge-long-desc">{{type.long}}</p>
                                     <div class="col button-active" ng-click="readMore(type)">{{'read_more' | translate}}</div>
                                 </div>
                             </div>
-                            <!-- <div class="col">
-                                <button class="button button-clear button-challenge-enable" ng-click="unlock(type)">
-                                    <i class="icon ion-locked"></i>
-                                </button>
-                            </div> -->
-                            <div class="col col-20">
+                            <div class="col col-20 padding-10 ">
                                 <a class="icon-chall icon ic_game_lock button-active" ng-click="unlock(type)"></a>
                             </div>
                         </div>
@@ -56,21 +51,21 @@
                     <button class="button button-clear button-challenge-enable" ng-click="hideWarning('future')"> {{'btn_got_it' | translate}}</button>
                 </ion-item>
                 <ion-list>
-                    <ion-item class="challenge" ng-repeat="challenge in challenges">
+                    <ion-item class="challenge no-padding" ng-repeat="challenge in challenges">
                         <div ng-if="challenge.group=='racc'">
-                            <div class="row">
-                                <div class="col col-20">
+                            <div class="row no-padding">
+                                <div class="col col-20 {{getColorChallenge(challenge)}} padding-10">
                                     <a class="icon-chall  icon {{getIconChallenge(challenge)}}"></a>
                                 </div>
-                                <div class="col">
+                                <div class="col padding-10 ">
                                     <div>
                                         <p>{{challenge.short}}</p>
                                         <p class="challenge-long-desc">{{challenge.long}}</p>
                                     </div>
                                     <div class="row">
-                                            <div class="col button-active" ng-click="readMore(challenge)">{{'read_more' | translate}}</div>
-                                            <div class="col button-active text-right" ng-click="acceptChallenge(challenge)"> {{'btn_challenge_accept' | translate | uppercase}}</div>
-                                            <!-- <div class="col">
+                                        <div class="col button-active" ng-click="readMore(challenge)">{{'read_more' | translate}}</div>
+                                        <div class="col button-active text-right" ng-click="acceptChallenge(challenge)"> {{'btn_challenge_accept' | translate | uppercase}}</div>
+                                        <!-- <div class="col">
                                             <button class="button button-clear button-challenge-enable" ng-click="acceptChallenge(challenge)"> {{'btn_challenge_accept' | translate}}</button>
                                         </div> -->
                                     </div>
@@ -78,15 +73,21 @@
                             </div>
                         </div>
                         <div ng-if="challenge.group=='unlock'">
-                            <div class="row">
-                                <div class="col col-20">
+                            <div class="row no-padding">
+                                <div class="col col-20 {{getColorChallenge(challenge)}} padding-10">
                                     <a class="icon-chall  icon {{getIconChallenge(challenge)}}" ng-class="{'fog':challenge.state == 1}"></a>
                                 </div>
-                                <div class="col">
+                                <div class="col  padding-10">
                                     <div ng-class="{'fog':challenge.state == 1}">{{challenge.short}}</div>
-                                    <div class="row" ng-if="challenge.state != 1">
-                                        <div class="col challenge-long-desc">{{challenge.long}}</div>
-                                        <div class="col button-active" ng-click="readMore(challenge)">{{'read_more' | translate}}</div>
+                                    <div ng-if="challenge.state != 1">
+                                        <div class="row">
+                                            <div class="col challenge-long-desc">{{challenge.long}}</div>
+                                            <!-- <div class="col button-active" ng-click="readMore(challenge)">{{'read_more' | translate}}</div> -->
+                                        </div>
+                                        <div class="row">
+                                            <!-- <div class="col challenge-long-desc">{{challenge.long}}</div> -->
+                                            <div class="col button-active" ng-click="readMore(challenge)">{{'read_more' | translate}}</div>
+                                        </div>
                                     </div>
                                     <div class="row" ng-if="challenge.state == 1">
                                         <div class="col ">{{'lbl_challenge_unlock_next' | translate}}</div>
@@ -101,11 +102,11 @@
                             </div>
                         </div>
                         <div ng-if="challenge.group=='invite'">
-                            <div class="row">
-                                <div class="col col-20">
+                            <div class="row ">
+                                <div class="col col-20 {{getColorChallenge(challenge)}} padding-10">
                                     <a class="icon-chall icon {{getIconChallenge(challenge)}}"></a>
                                 </div>
-                                <div class="col">
+                                <div class="col  padding-10">
                                     <div>{{challenge.short}}</div>
                                     <div class="row">
                                         <!-- <div class="col challenge-long-desc">{{challenge.long}}</div> -->
@@ -117,8 +118,8 @@
                                         <div class="col button-active" ng-click="readMore(challenge)">{{'read_more' | translate}}</div>
                                     </div>
                                     <div ng-if="challenge.received">
-                                            <button class="col button button-clear button-challenge-enable" ng-click="rejectChallenge(challenge)"> {{'btn_challenge_reject' | translate}}</button>
-                                            <button class="button button-clear button-challenge-enable" ng-click="acceptChallenge(challenge)"> {{'btn_challenge_accept' | translate}}</button>
+                                        <button class="col button button-clear button-challenge-enable" ng-click="rejectChallenge(challenge)"> {{'btn_challenge_reject' | translate}}</button>
+                                        <button class="button button-clear button-challenge-enable" ng-click="acceptChallenge(challenge)"> {{'btn_challenge_accept' | translate}}</button>
                                     </div>
                                     <div ng-if="!challenge.received">
                                         <button class="col button button-clear button-challenge-enable" ng-click="rejectChallenge(challenge)"> {{'btn_challenge_reject_sent' | translate}}</button>

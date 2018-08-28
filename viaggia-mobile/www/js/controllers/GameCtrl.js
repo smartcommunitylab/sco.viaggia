@@ -163,6 +163,15 @@ angular.module('viaggia.controllers.game', [])
             sent_comp_perf: 'ic_ch_perf_invitation',
             sent_comp_time: 'ic_ch_tempo_inv'
         }
+        $scope.colorChall = {
+            comp_time: 'time-user time-other-color',
+            comp_perf: 'perf-user perf-other-color',
+            coop: 'coop-user coop-other-color',
+            single: 'single-user single-other-color',
+            sent_coop:'coop-other-color',
+            sent_comp_perf: 'perf-other-color',
+            sent_comp_time: ' time-other-color'
+        }
         var paramOptions = $stateParams.challengeEnd;
         var now = new Date().getTime();
 
@@ -390,10 +399,19 @@ angular.module('viaggia.controllers.game', [])
         $scope.getIconType = function (type) {
             return $scope.iconChall[type.type];
         }
+        $scope.getColorType = function (type) {
+            return $scope.colorChall[type.type];
+        }
         $scope.getIconChallenge = function (challenge) {
             if (challenge.group == 'invite')
                 return $scope.iconChall['sent_' + challenge.type];
             return $scope.iconChall[challenge.type];
+        }
+
+        $scope.getColorChallenge = function (challenge) {
+            if (challenge.group == 'invite')
+                return $scope.colorChall['sent_' + challenge.type];
+            return $scope.colorChall[challenge.type];
         }
         $scope.unlock = function (type) {
             $ionicPopup.show({
