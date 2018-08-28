@@ -1480,7 +1480,8 @@ angular.module('viaggia', [
       home_next_challenge:"Programma la prossima sfida",
       challenge_accept_popup_title:"Conferma la sfida",
       challenge_accept_popup_template:"Confermando la sfida verranno eliminate automaticamente le altre opzioni",
-      lbl_challenge_unlock_next:"Raggiungi il prossimo livello per sbloccare la sfida"
+      lbl_challenge_unlock_next:"Raggiungi il prossimo livello per sbloccare la sfida",
+      user_next_level_label:" al prossimo livello"
     });
 
     $translateProvider.translations('en', {
@@ -1989,7 +1990,8 @@ angular.module('viaggia', [
       home_next_challenge:"Programma la prossima sfida",
       challenge_accept_popup_title:"Conferma la sfida",
       challenge_accept_popup_template:"Confermando la sfida verranno eliminate automaticamente le altre opzioni",
-      lbl_challenge_unlock_next:"Raggiungi il prossimo livello per sbloccare la sfida"
+      lbl_challenge_unlock_next:"Raggiungi il prossimo livello per sbloccare la sfida",
+      user_next_level_label:" al prossimo livello"
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

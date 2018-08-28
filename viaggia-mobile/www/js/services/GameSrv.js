@@ -44,63 +44,74 @@ angular.module('viaggia.services.game', [])
         var NOTIFICATIONS_STYLES = {
             TRAVEL_WALK: {
                 string: "msg_trip_walk",
-                color: "#60b35c",
+                color: "#25BC5D",
+                iconColor:"#008431",
                 icon: "ic_foot",
                 params: tripParams,
                 state: "openEventTripDetail(message)"
             },
             TRAVEL_BIKE: {
                 string: "msg_trip_bike",
-                color: "#922d67",
+                color: "#B44395",
+                iconColor:"#6C024F",
                 icon: "ic_bike",
                 params: tripParams,
                 state: "openEventTripDetail(message)"
             },
             TRAVEL_BUS: {
                 string: "msg_trip_bus",
-                color: "#ea8817",
+                color: "#FF9D33",
+                iconColor:"#B65F00",
                 icon: "ic_urban-bus",
                 params: tripParams,
                 state: "openEventTripDetail(message)"
             },
             TRAVEL_TRAIN: {
                 string: "msg_trip_train",
-                color: "#cd251c",
+                color: "#FF9D33",
+                iconColor:"#B65F00",
                 icon: "ic_train",
                 params: tripParams,
                 state: "openEventTripDetail(message)"
             },
             TRAVEL_MULTIMODAL: {
                 string: "msg_trip_multimodal",
-                color: "#2975a7",
+                color: "#2681A4",
+                iconColor:"#055472",
                 icon: "ic_game_multimodal_trip",
                 params: tripParams,
                 state: "openEventTripDetail(message)"
             },
             TRAVEL_TRANSIT: {
                 string: "msg_trip_multimodal",
-                color: "#2975a7",
+                color: "#FF9D33",
+                iconColor:"#B65F00",
                 icon: "ic_game_multimodal_trip",
                 params: tripParams,
                 state: "openEventTripDetail(message)"
             },
             BADGE: {
                 string: "msg_won_badge",
-                color: "#60b35c",
+                color: "#25BC5D",
+                iconColor:"#008431",
                 icon: "ic_game_badge",
                 params: { 'badgeText': 'badgeText' },
                 state: "openBadgeBoard()"
             },
             CHALLENGE: {
                 string: "msg_new_challenge",
-                color: "#60b35c",
+                color: "#FF0033",
+                iconColor:"#B62000",
+
                 icon: "ic_game_challenge_assign",
                 params: { 'challengeName': 'challengeName' },
                 state: "openChallengeBoard(message)"
             },
             CHALLENGE_WON: {
                 string: "msg_won_challenge",
-                color: "#60b35c",
+                color: "#FF0033",
+                iconColor:"#B62000",
+
                 icon: "ic_game_challenge",
                 params: { 'challengeName': 'challengeName' },
                 state: "openChallengeBoard(message)"
@@ -108,14 +119,16 @@ angular.module('viaggia.services.game', [])
             },
             RECOMMENDED: {
                 string: "msg_new_friend",
-                color: "#3cbacf",
+                color: "#2681A4",
+                iconColor:"#055472",
                 icon: "ic_game_friend",
                 params: { 'recommendedNickname': 'recommendedNickname' },
                 state: ""
             },
             NEW_RANKING_WEEK: {
                 string: "msg_pub_ranking",
-                color: "#3cbacf",
+                color: "#2681A4",
+                iconColor:"#055472",
                 icon: "ic_game_classification",
                 params: {},
                 state: "openGamificationBoard()"
@@ -202,6 +215,19 @@ angular.module('viaggia.services.game', [])
                     message.type = getTravelType(message)
                 }
                 return NOTIFICATIONS_STYLES[message.type].color;
+            }
+        }
+        gameService.getIconColor = function (message) {
+            if (message) {
+
+
+                if (!message.type) {
+                    return NOTIFICATIONS_STYLES['TRAVEL_MULTIMODAL'].iconColor
+                }
+                if (message.type == 'TRAVEL') {
+                    message.type = getTravelType(message)
+                }
+                return NOTIFICATIONS_STYLES[message.type].iconColor;
             }
         }
         gameService.getIcon = function (message) {

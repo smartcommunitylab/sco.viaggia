@@ -3,7 +3,7 @@
         Play&Go {{currentUser.nickName}}
     </ion-nav-title>
     <ion-nav-buttons side="right">
-        <button class=" button-icon button-home icon  ion-android-person" ng-click="openProfile();"></button>
+            <img class="bar-profile-img" ng-if="profileImg" ng-src="{{profileImg}}" ng-click="openProfile()">
     </ion-nav-buttons>
     <ion-content ng-class="{'empty_bookmarks': primaryLinks.length == 0}" ng-init="showTutorial()">
         <div class="user-state">
@@ -16,9 +16,11 @@
                 </div>
             </div>
             <div class="row">
-                <!-- <div id="progressbar">
-                    <div></div>
-                </div> -->
+                <div class="col home-level">
+                    {{toNextLevel}} {{'user_next_level_label' | translate}}
+                </div>
+            </div>
+            <div class="row">
                 <div class="container-level">
                     <div class="progress-bar-level" style="width: {{userProgress}}%;"># green leaves to the next level</div>
                 </div>
@@ -154,25 +156,24 @@
 
         <div class="home-challenges">
             <div class="row">
+                <button class="button button-block button-positive" ui-sref="app.home.challenges">
+                    {{'home_next_challenge'|translate}} </button>
+            </div>
+            <div class="row">
                 <div class="col home-your-challenges">
-                    {{'home_your_challenges'|translate}}
+                    <h4>
+                        {{'home_your_challenges'|translate|uppercase}}
+                    </h4>
                 </div>
             </div>
             <div ng-if="challenges.length>0">
-                <div ng-repeat="challenge in challenges track by $index">
+                <div class="challenge-block" ng-repeat="challenge in challenges track by $index">
                     <ng-include src="getChallengeTemplate(challenge)"></ng-include>
                 </div>
             </div>
             <div class="home-no-challenge" ng-if="challenges.length==0">
                 {{'home_no_challenges'|translate}}
             </div>
-            <div class="row">
-                <button class="button button-block button-positive" ui-sref="app.home.challenges">
-                    {{'home_next_challenge'|translate}} </button>
-            </div>
         </div>
-
-
     </ion-content>
-
 </ion-view>

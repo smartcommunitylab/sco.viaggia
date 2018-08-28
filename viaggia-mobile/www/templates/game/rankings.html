@@ -1,13 +1,6 @@
 <ion-view title="{{'home_gamification' | translate}} {{currentUser.nickName}}">
     <ion-nav-buttons side="right">
-        <!-- <button ng-click="openNotifications()" class="button button-icon button-home ic_notification">
-                            <span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span>
-                        </button> -->
-        <!-- <button ng-click="openNotifications()" class="button button-icon button-home ion-android-compass">
-                                <span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span>
-                            </button> -->
-        <button class=" button-icon button-home icon ion-android-person" ng-click="openProfile();"></button>
-
+            <img class="bar-profile-img" ng-if="profileImg" ng-src="{{profileImg}}" ng-click="openProfile()">
     </ion-nav-buttons>
     <ion-content class="game-ranking" has-bouncing="false" scroll="false" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
         <!-- Filter -->
@@ -50,7 +43,7 @@
                 <ion-list>
                     <div ng-repeat="rankingUser in ranking" ng-class="{'pos-even': ($index % 2 == 0)}" on-tap="openProfileOthers(rankingUser)">
                         <div class="row" id="position-{{$index}}">
-                            <div class="col col-50"><div ><img style="height: 50px;" ng-src="{{getUserImg(rankingUser.playerId)}}"></div><p>{{rankingUser.nickName}}</p></div>
+                            <div class="col col-50"><div ><img  class="profile-img" ng-src="{{getUserImg(rankingUser.playerId)}}"></div><p>{{rankingUser.nickName}}</p></div>
                             <div class="col col-25">{{rankingUser.position}}</div>
                             <!-- <div class="col col-25">{{rankingUser.level}}</div> -->
                             <div class="col col-25">{{rankingUser.score}}</div>

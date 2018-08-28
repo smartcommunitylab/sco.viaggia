@@ -938,14 +938,19 @@ margin-left: 40px;
 margin-right: 0px;
 position: relative;
 }
+.tabs-striped .tab-item.tab-item-active, .tabs-striped .tab-item.active, .tabs-striped .tab-item.activated {
+    margin-top:0px;
+}
 .message-item .message-inner {
-background: #ddd;
-/* border: 1px solid #ddd; */
-border-radius: 35px;
-padding: 0px;
-position: relative;
-left: -15px;
-margin-top: 20px;
+    /* background: #ddd; */
+    /* border: 1px solid #ddd; */
+    border-radius: 35px 35px 0px 35px;
+    padding: 0px;
+    position: relative;
+    left: -15px;
+    margin-top: 20px;
+    border-style: solid;
+    border-width: 0px 0px 3px 0px;
 }
 .platform-android .timeline-arrow {
 border-right: 10px solid #ddd;
@@ -2648,11 +2653,11 @@ Play&Go
  }
 .col-info {
     text-align: right;
-line-height: 1.5 !important;
-    font-size: 30px;
-    color: #868686;
-     align-content: center!important;
-     align-items: center!important;
+    line-height: 1.5 !important;
+    font-size: 24px;
+    color: black;
+    align-content: center!important;
+    align-items: center!important;
     }
 .center-on-me {
 position: fixed;
@@ -2811,11 +2816,40 @@ text-align: center;
     color: white;
 }
 .home-your-challenges {
-    margin: 20px;
-    font-size: 24px;
     line-height: 40px;
     font-weight: bold;
     text-align: center;
+}
+.bar-profile-img{
+    border-radius: 50%;
+    left: 16px;
+    max-height: 40px;
+    max-width: 40px; 
+    margin: 4px 8px;
+    object-fit: cover;
+}
+.profile-img{
+    border-radius: 50%;
+    left: 16px;
+    height: 40px;
+    width: 40px; 
+    margin: 4px 8px;
+    object-fit: cover;
+}
+.challenge-profile-img {
+    border-radius: 50%;
+    left: 16px;
+    height: 30px;
+    width: 30px; 
+    /* margin: 4px 8px; */
+    object-fit: cover;
+}
+.diary-line {
+    padding: 0px;
+}
+
+.multimodal-message{
+    margin-top: 30px;
 }
 .home-add-challenges {
     margin: 20px;
@@ -2867,6 +2901,7 @@ text-align: center;
     -ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
     animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
   }
+
   .pulse-button:hover 
   {
     -webkit-animation: none;-moz-animation: none;-ms-animation: none;animation: none;
@@ -2946,26 +2981,56 @@ text-align: center;
 }
 .container-level{
     width: 80%;
-    background: lightgrey;
+    background: white;
     display: inline-block;
     height: 20px;
-    border-radius: 100px;
     margin: 20px auto;
     font-size: 0; /*used for removing space with inline-block*/ 
 
 }
-.cooperative-container{
-    padding: 0px;
-}
 .competitive-container{
     padding: 0px;
+    width: 80%;
+    background: lightgray;
+    display: inline-block;
+    height: 20px;
+    margin: 10px auto;
+    font-size: 0; /*used for removing space with inline-block*/ 
+
 }
 .progress-bar-level {
-    background: grey;
-	border-radius:100px;
-    height:20px;
+    background: #2975a7;
+    margin: 2px;
+    height: 16px;
     display: inline-block;
-  }
+}
+.challenge-bar-level {
+    background: #2975a7;
+    /* margin: 2px; */
+    height: 20px;
+    display: inline-block;
+}
+.perf-user {
+    background: #FF9D33;
+}
+.perf-other {
+    background: #B65F00;
+} 
+.coop-user {
+    background: #FF0033;
+}
+.coop-other {
+    background: #B62000;
+} 
+.time-user {
+    background: #25BC5D;
+}
+.time-other {
+    background: #008431;
+} 
+.single-user {
+    background: #2681A4;
+}
   .img-container{
       height: 200px;
       overflow: hidden;
@@ -3075,14 +3140,16 @@ text-align: center;
 }
 .icon-chall-home{
     font-size: 24px;
-    line-height: 60px;
+    /* line-height: 60px; */
 }
 .challenge-title {
     font-weight: bold;
     text-decoration: underline;
     margin: 4px 8px;
 }
-
+.challenge-block {
+    margin: 0px 0px 8px 8px;
+}
 #homeTabs .tabs>a>i  {
     height: 100%;
     margin: 4px auto;

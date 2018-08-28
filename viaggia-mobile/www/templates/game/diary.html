@@ -3,14 +3,7 @@
         {{'diary_title' | translate}}
     </ion-nav-title>
     <ion-nav-buttons side="right">
-        <!-- <button ng-click="openNotifications()" class="button button-icon button-home ic_notification">
-                        <span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span>
-                    </button> -->
-        <!-- <button ng-click="openNotifications()" class="button button-icon button-home ion-android-compass">
-                            <span class="badge badge-assertive header-badge" ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span>
-                        </button> -->
-        <button class=" button-icon button-home icon ion-android-person" ng-click="openProfile();"></button>
-
+            <img class="bar-profile-img" ng-if="profileImg" ng-src="{{profileImg}}" ng-click="openProfile()">
     </ion-nav-buttons>
     <ion-content class="game-ranking" has-bouncing="false" scroll="false" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
         <div class="filter item-accordion" ng-if="!!filter.options">
@@ -27,7 +20,6 @@
             </div>
         </div>
         <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="diaryScroll" ng-if="!noDiary()">
-            <!--<div class="list" style="margin-top: 25px">-->
             <ion-list>
                 <div style="margin-top: 25px">
                     <div ng-repeat="day in days">
@@ -40,19 +32,16 @@
                             <div style="height: 8px"></div>
 
                             <div ng-if="message && message.type && !isTracking(message)" ng-repeat="message in day.messages track by $index" ng-click="{{getState(message)}}"
-                                class="message-inner">
-                                <div style="height: 8px" ng-if="message.multimodal && message.first" ></div>
+                                class="message-inner" ng-class="{'multimodal-message':message.multimodal}" style="border-color: {{getStyleColor(message)}}">
+                                <!-- <div style="height: 8px" ng-if="message.multimodal && message.first" ></div> -->
 
-                                <div class="row row-center" style="padding: 4px 0px">
+                                <div class="row row-center diary-line" >
                                     <div class="timeline-multimodal-dot " ng-if="message.multimodal && message.first">
                                         <H5 class="timeline-multimodal"> {{'diary_multimodal'| translate}} </H5>
                                     </div>
                                     <div class="timeline-not-multimodal-dot " ng-if="!message.multimodal">
-                                            <!-- <H5 class="timeline-multimodal"> {{'diary_single'| translate}} </H5> -->
                                         </div>
-                                    <!-- <div class=" timeline-arrow" style="border-right-color: {{getStyleColor(message)}}">
-                                    </div> -->
-                                    <i class=" timeline-col icon {{getIcon(message)}}" style="background-color: {{getStyleColor(message)}}"></i>
+                                    <i class=" timeline-col icon {{getIcon(message)}}" style="background-color: {{getStyleColor(message)}}; color:{{getIconColor(message)}}"></i>
                                     <div class=" timeline-msg" ng-bind-html="getString(message) | translate: getParams(message)">
                                     </div>
                                     <div class="col col-10 col-info">

@@ -252,7 +252,8 @@ angular.module('viaggia.controllers.home', [])
         var setUserProgress = function () {
             $scope.userProgress = 0;
             if ($scope.status && $scope.status.levels && $scope.status.levels.length > 0 && $scope.status.levels[0]) {
-                var total = $scope.status.levels[0].endLevelScore - $scope.status.levels[0].startLevelScore
+                var total = $scope.status.levels[0].endLevelScore - $scope.status.levels[0].startLevelScore;
+                $scope.toNextLevel = $scope.status.levels[0].toNextLevel;
                 var mypos = total - $scope.status.levels[0].toNextLevel;
                 $scope.userProgress = (mypos * 100) / total;
             }
@@ -593,14 +594,14 @@ angular.module('viaggia.controllers.home', [])
         $scope.getWidthUser = function (challenge) {
             //TODO
             if (challenge.type == 'coop')
-                return "width:30%;background:blue;"
-            return "width:60%;background:blue;"
+                return "width:30%;"
+            return "width:60%;"
         }
         $scope.getWidthOther = function (challenge) {
             //TODO
             if (challenge.type == 'coop')
-                return "width:40%;background:red;"
-            return "width:40%;background:red;"
+                return "width:40%;;"
+            return "width:40%;"
         }
         $scope.getWidthSeparator = function (challenge) {
             //TODO

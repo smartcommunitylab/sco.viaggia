@@ -1,5 +1,5 @@
 <div>
-    <div class="challenge-title">{{'challenge_comp_perf'|translate}}</div>
+    <!-- <div class="challenge-title">{{'challenge_comp_perf'|translate}}</div> -->
     <div class="row">
         <div class="col col-10 icon-chall-home">
             <i class="icon ic_ch_perf"></i>
@@ -18,11 +18,11 @@
     </div>
     <div class="row">
         <div class="col col-10 icon-chall-home">
-            <i class="icon ion-android-person"></i>
+            <img class="challenge-profile-img" ng-if="profileImg" ng-src="{{profileImg}}" >
         </div>
-        <div class="col col-80 container-level competitive-container">
-            <div class="progress-bar-level" style="{{getWidthUser(challenge)}}"></div>
-            <div class="progress-bar-level" style="{{getWidthOther(challenge)}}"></div>
+        <div class="col col-80 competitive-container">
+            <div class="challenge-bar-level perf-user" style="{{getWidthUser(challenge)}}"></div>
+            <div class="challenge-bar-level perf-other" style="{{getWidthOther(challenge)}}"></div>
         </div>
         <div class="col col-10 icon-chall-home">
             <i class="icon ion-android-person"></i>

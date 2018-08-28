@@ -812,6 +812,9 @@ angular.module('viaggia.controllers.game', [])
         $scope.getStyleColor = function (message) {
             return GameSrv.getStyleColor(message);
         }
+        $scope.getIconColor= function (message) {
+            return GameSrv.getIconColor(message);
+        }
         $scope.getIcon = function (message) {
             return GameSrv.getIcon(message);
         }
