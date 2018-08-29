@@ -2050,14 +2050,14 @@ Play&Go
 }
 
 .game-challenges .challenge {
-    border: 1px solid #000;
+    border: 1px solid #eee;
     margin-top: 16px;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
 
 }
 
 .game-challenges .challenge {
-    border: 1px solid #000;
+    border: 1px solid #eee;
     margin-top: 16px;
 }
 
@@ -3017,7 +3017,7 @@ text-align: center;
     background: #B65F00;
 } 
 .coop-user {
-    background: #FF0033;
+    background: #e54d2d;
 }
 .coop-other {
     background: #B62000;
@@ -3039,7 +3039,7 @@ text-align: center;
     color: #B65F00;
 } 
 .coop-user-color {
-    color: #FF0033;
+    color: #e54d2d;
 }
 .coop-other-color {
     color: #B62000;
@@ -3054,7 +3054,7 @@ text-align: center;
     color: #2681A4;
 }
 .single-other-color {
-    color: #000;
+    color: #055472;
 }
   .img-container{
       height: 200px;

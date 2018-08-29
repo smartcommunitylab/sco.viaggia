@@ -100,7 +100,7 @@ angular.module('viaggia.services.game', [])
             },
             CHALLENGE: {
                 string: "msg_new_challenge",
-                color: "#FF0033",
+                color: "#e54d2d",
                 iconColor:"#B62000",
 
                 icon: "ic_game_challenge_assign",
@@ -109,7 +109,7 @@ angular.module('viaggia.services.game', [])
             },
             CHALLENGE_WON: {
                 string: "msg_won_challenge",
-                color: "#FF0033",
+                color: "#e54d2d",
                 iconColor:"#B62000",
 
                 icon: "ic_game_challenge",
