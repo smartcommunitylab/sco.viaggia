@@ -1036,7 +1036,7 @@ z-index: 9;
 }
 .timeline-multimodal-dot {
 background: #000;
-border: 2px solid #000;
+/* border: 2px solid #000; */
 border-radius: 50%;
 content: "";
 height: 15px;
@@ -1048,7 +1048,7 @@ z-index: 9;
 }
 .timeline-not-multimodal-dot {
     background: #000;
-    border: 2px solid #000;
+    /* border: 2px solid #000; */
     border-radius: 50%;
     content: "";
     height: 15px;
@@ -2849,7 +2849,7 @@ text-align: center;
 }
 
 .multimodal-message{
-    margin-top: 30px;
+    margin-top: 30px!important;
 }
 .home-add-challenges {
     margin: 20px;

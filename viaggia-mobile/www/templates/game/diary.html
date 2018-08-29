@@ -36,10 +36,10 @@
                                 <!-- <div style="height: 8px" ng-if="message.multimodal && message.first" ></div> -->
 
                                 <div class="row row-center diary-line" >
-                                    <div class="timeline-multimodal-dot " ng-if="message.multimodal && message.first">
+                                    <div class="timeline-multimodal-dot " style="background: {{getStyleColor(message)}};" ng-if="message.multimodal && message.first">
                                         <H5 class="timeline-multimodal"> {{'diary_multimodal'| translate}} </H5>
                                     </div>
-                                    <div class="timeline-not-multimodal-dot " ng-if="!message.multimodal">
+                                    <div class="timeline-not-multimodal-dot "  style="background: {{getStyleColor(message)}};"  ng-if="!message.multimodal">
                                         </div>
                                     <i class=" timeline-col icon {{getIcon(message)}}" style="background-color: {{getStyleColor(message)}}; color:{{getIconColor(message)}}"></i>
                                     <div class=" timeline-msg" ng-bind-html="getString(message) | translate: getParams(message)">
