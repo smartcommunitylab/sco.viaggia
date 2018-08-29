@@ -919,7 +919,7 @@ angular.module('viaggia.controllers.game', [])
             //$scope.firstOpenPopup.close();
             //get end
             var end = (JSON.parse(message.event)).challengeEnd;
-            $state.go('app.game.challenges', { challengeEnd: end });
+            $state.go('app.home.challenges', { challengeEnd: end });
         };
 
     })
