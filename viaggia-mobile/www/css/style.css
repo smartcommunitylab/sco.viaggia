@@ -2095,15 +2095,16 @@ Play&Go
 .game-challenges .challenge.challenge-old {
     background-repeat: no-repeat;
     background-position: bottom right;
+    border-left: solid 16px #2975a7;
 }
 
-.game-challenges .challenge.challenge-old.success {
+/* .game-challenges .challenge.challenge-old.success {
     background-image: url('../img/game/cup_10.png');
 }
 
 .game-challenges .challenge.challenge-old.fail {
     background-image: url('../img/game/cup_0.png');
-}
+} */
 
 .game-challenges .challenge.challenge-old.success .challenge-result {
     color: #6AB64D;
@@ -2162,8 +2163,19 @@ Play&Go
     line-height: 20px;
     white-space: nowrap;
 }
+.challenge-win {
+    font-size: 48px;
+}
+.challenge-string-result {
+    font-weight: bold;
+}
 .button-active {
     color: #4EB0E6;
+
+}
+.button-block-active {
+    background-color: #4EB0E6;
+    color: white;
 
 }
 /* .challenge-read-more{
@@ -2366,8 +2378,8 @@ Play&Go
 
 .tracking-dashboard {
     margin: 0px 0px;
-    /* border-bottom: 2px solid #60b35c; */
-    background-color: rgb(33, 150, 243);
+    border-top: 1px solid white;
+    background-color: #2975a7 !important;
     color: white;
     padding-bottom: 25px;
 }
@@ -2448,7 +2460,7 @@ Play&Go
 }
 
 .tracking-dashboard .tracking-ds-button {
-    background-color: #4caf4f;
+    background-color: #4EB0E6;
     border-radius: 16px;
     padding: 4px;
     color: #fff;
@@ -2816,9 +2828,13 @@ text-align: center;
     color: white;
 }
 .home-your-challenges {
+    color: white!important;
+    background-color: #2975a7 !important;
     line-height: 40px;
     font-weight: bold;
     text-align: center;
+    margin: 0px -6px;
+    padding: 0px;
 }
 .bar-profile-img{
     border-radius: 50%;
@@ -3200,6 +3216,16 @@ text-align: center;
 .no-margin {
     margin: 0px;
 }
+.text-center {
+    text-align: center;
+}
+.ellipsis-multiline {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+}
+
   @-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}

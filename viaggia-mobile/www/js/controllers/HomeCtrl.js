@@ -282,6 +282,8 @@ angular.module('viaggia.controllers.home', [])
                     return 'templates/game/challengeTemplates/default.html';
             }
         }
+
+    
         Config.init().then(function () {
             $rootScope.title = Config.getAppName();
             // angular.extend($scope, {
@@ -309,198 +311,86 @@ angular.module('viaggia.controllers.home', [])
         }, function () {
             //$ionicLoading.hide();
         });
-        $scope.$on("$ionicView.afterEnter", function (scopes, states) {
-            $ionicLoading.hide();
-        });
-        $scope.$on("$ionicView.beforeEnter", function (scopes, states) {
-            // $ionicLoading.show();
-        });
-        $scope.$on("$ionicView.enter", function (scopes, states) {
-            Config.init().then(function () {
-                if (window.BackgroundGeolocation) {
-                    trackService.startup().then(function () {
-                        $scope.trackingIsOn = trackService.trackingIsGoingOn() && !trackService.trackingIsFinished();
-                        // $ionicLoading.hide();
+$scope.$on("$ionicView.afterEnter", function (scopes, states) {
+    $ionicLoading.hide();
+});
+$scope.$on("$ionicView.beforeEnter", function (scopes, states) {
+    // $ionicLoading.show();
+});
+$scope.$on("$ionicView.enter", function (scopes, states) {
+    Config.init().then(function () {
+        if (window.BackgroundGeolocation) {
+            trackService.startup().then(function () {
+                $scope.trackingIsOn = trackService.trackingIsGoingOn() && !trackService.trackingIsFinished();
+                // $ionicLoading.hide();
 
-                        if ($scope.trackingIsOn) {
-                            if ($rootScope.GPSAllow === true) {
-                                updateTrackingInfo();
-                            }
-                            var listener = $rootScope.$watch('GPSAllow', function () {
-                                if ($rootScope.GPSAllow === false) {
-                                    trackService.cleanTracking();
-                                    $scope.trackingIsOn = false;
-                                    //check if it
-                                    trackService.geolocationDisabledPopup();
-                                    listener();
-                                }
-                            });
-                        }
-                    }, function (err) {
-                        //track service startup not worked.
-                        // $ionicLoading.hide();
-
-                    });
-
-                };
-            });
-
-        }, function (err) {
-            $scope.homeCreation = false;
-        });
-
-        var translateTransport = function (t) {
-            if (t == 'walk') return $filter('translate')('track_walk_action');
-            if (t == 'bike') return $filter('translate')('track_bike_action');
-            return $filter('translate')('track_other_action');
-        }
-
-        function setTrackingInfo() {
-            $scope.trackingInfo = {
-                transport: translateTransport(trackService.trackedTransport()),
-                time: $filter('date')(new Date().getTime() - trackService.trackingTimeStart(), 'HH:mm:ss', '+0000')
-            };
-        };
-
-        var updateTrackingInfo = function () {
-            setTrackingInfo();
-            $scope.trackInfoInterval = $interval(function () {
-                setTrackingInfo();
-            }, 1000);
-        }
-
-        var startTransportTrack = function (transportType) {
-            $scope.trackingIsOn = true;
-            trackService.startTransportTrack(transportType).then(function () {
-                updateTrackingInfo();
-                if (transportType == 'bus') {
-                    BT.needBTActivated(function (result) {
-                        if (result) {
-                            $ionicPopup.confirm({
-                                title: $filter('translate')("pop_up_bt_title"),
-                                template: $filter('translate')("pop_up_bt"),
-                                buttons: [
-                                    {
-                                        text: $filter('translate')("btn_close"),
-                                        type: 'button-cancel'
-                                    },
-                                    {
-                                        text: $filter('translate')("pop_up_bt_button_enable"),
-                                        type: 'button-custom',
-                                        onTap: function () {
-                                            bluetoothSerial.enable();
-                                        }
-                                    }
-                                ]
-                            });
+                if ($scope.trackingIsOn) {
+                    if ($rootScope.GPSAllow === true) {
+                        updateTrackingInfo();
+                    }
+                    var listener = $rootScope.$watch('GPSAllow', function () {
+                        if ($rootScope.GPSAllow === false) {
+                            trackService.cleanTracking();
+                            $scope.trackingIsOn = false;
+                            //check if it
+                            trackService.geolocationDisabledPopup();
+                            listener();
                         }
                     });
                 }
-            }, function (errorCode) {
-                $scope.trackingIsOn = false;
-                trackService.geolocationPopup();
-            }).finally(Config.loaded());
-        }
+            }, function (err) {
+                //track service startup not worked.
+                // $ionicLoading.hide();
 
+            });
 
+        };
+    });
 
-        $scope.track = function (transportType) {
-            Config.loading();
-            if (!trackService.trackingIsGoingOn() || trackService.trackingIsFinished()) {
-                trackService.checkLocalization().then(function () {
-                    startTransportTrack(transportType);
-                }, function (error) {
-                    Config.loaded();
-                    if (Config.isErrorLowAccuracy(error)) {
-                        //popup "do u wanna go on?"
-                        $ionicPopup.confirm({
-                            title: $filter('translate')("pop_up_low_accuracy_title"),
-                            template: $filter('translate')("pop_up_low_accuracy_template"),
-                            buttons: [
-                                {
-                                    text: $filter('translate')("btn_close"),
-                                    type: 'button-cancel'
-                                },
-                                {
-                                    text: $filter('translate')("pop_up_low_accuracy_button_go_on"),
-                                    type: 'button-custom',
-                                    onTap: function () {
-                                        startTransportTrack(transportType);
-                                    }
-                                }
-                            ]
-                        });
-                    } else if (Config.isErrorGPSNoSignal(error)) {
-                        //popup "impossible to track" and stop
-                        var alert = $ionicPopup.alert({
-                            title: $filter('translate')("pop_up_no_geo_title"),
-                            template: $filter('translate')("pop_up_no_geo_template"),
-                            okText: $filter('translate')("btn_close"),
-                            okType: 'button-cancel'
-                        });
-                        alert.then(function (e) {
-                            trackService.startup();
-                        });
-                    }
-                });
+}, function (err) {
+    $scope.homeCreation = false;
+});
 
-            } else {
-                Config.loaded();
-            }
-        }
-        $scope.trackAndMap = function (transportType) {
-            //init multimodal id used for db 
-            $scope.startTracking(transportType);
-            $state.go('app.mapTracking');
+var translateTransport = function (t) {
+    if (t == 'walk') return $filter('translate')('track_walk_action');
+    if (t == 'bike') return $filter('translate')('track_bike_action');
+    return $filter('translate')('track_other_action');
+}
 
-        }
-        $scope.stopTrackingHome = function () {
-            $scope.trackingIsOn = false;
-            $scope.stopTracking();
-        }
+function setTrackingInfo() {
+    $scope.trackingInfo = {
+        transport: translateTransport(trackService.trackedTransport()),
+        time: $filter('date')(new Date().getTime() - trackService.trackingTimeStart(), 'HH:mm:ss', '+0000')
+    };
+};
 
-        $scope.startTracking = function (transportType) {
-            if (!$rootScope.syncRunning) {
-                $scope.localizationAlwaysAllowed().then(function (loc) {
-                    if (!loc) {
-                        $scope.showWarningPopUp();
-                    } else {
-                        // else {
-                        $scope.isBatterySaveMode().then(function (saveMode) {
-                            if (saveMode) {
-                                $scope.showSaveBatteryPopUp($scope.track, transportType);
-                            }
-                            else {
-                                $scope.track(transportType);
-                            }
-                        })
-                    }
-                })
-            }
-        }
+var updateTrackingInfo = function () {
+    setTrackingInfo();
+    $scope.trackInfoInterval = $interval(function () {
+        setTrackingInfo();
+    }, 1000);
+}
 
-
-        $scope.openSavedTracks = function () {
-            planService.getTrips().then(function (trips) {
-                if (trips && !angular.equals(trips, {})) {
-                    $state.go('app.mytrips');
-                } else {
-                    //Toast.show($filter('translate')("no_saved_tracks_to_track"), "short", "bottom");
-                    var confirmPopup = $ionicPopup.confirm({
-                        title: $filter('translate')("my_trip_empty_list"),
-                        template: $filter('translate')("no_saved_tracks_to_track"),
+var startTransportTrack = function (transportType) {
+    $scope.trackingIsOn = true;
+    trackService.startTransportTrack(transportType).then(function () {
+        updateTrackingInfo();
+        if (transportType == 'bus') {
+            BT.needBTActivated(function (result) {
+                if (result) {
+                    $ionicPopup.confirm({
+                        title: $filter('translate')("pop_up_bt_title"),
+                        template: $filter('translate')("pop_up_bt"),
                         buttons: [
                             {
-                                text: $filter('translate')("pop_up_close"),
+                                text: $filter('translate')("btn_close"),
                                 type: 'button-cancel'
                             },
                             {
-                                text: $filter('translate')("pop_up_plan"),
+                                text: $filter('translate')("pop_up_bt_button_enable"),
                                 type: 'button-custom',
                                 onTap: function () {
-                                    confirmPopup.close();
-                                    planService.setPlanConfigure(null);
-                                    $state.go('app.plan');
+                                    bluetoothSerial.enable();
                                 }
                             }
                         ]
@@ -508,161 +398,269 @@ angular.module('viaggia.controllers.home', [])
                 }
             });
         }
+    }, function (errorCode) {
+        $scope.trackingIsOn = false;
+        trackService.geolocationPopup();
+    }).finally(Config.loaded());
+}
 
-        $scope.$on('ngLastRepeat.primaryLinks', function (e) {
-            $timeout(function () {
-                ionicMaterialMotion.ripple();
-                ionicMaterialInk.displayEffect()
-            }); // No timeout delay necessary.
-        });
-        var initWatch = function () {
-            $scope.$watch('notificationService.notifications', function (newVal, oldVal, scope) {
-                notificationInit();
-            });
-        }
-        /* DISABLED MAP
-            $scope.initMap = function () {
-                mapService.initMap('homeMap').then(function (map) {
 
-                    if (mymap != null) {
-                        mapService.resizeElementHeight(mymap, 'homeMap');
-                        mapService.refresh('homeMap');
-                    }
-                    Config.init().then(function () {
-                      mapService.centerOnMe('homeMap', Config.getMapPosition().zoom);
-                    });
+
+$scope.track = function (transportType) {
+    Config.loading();
+    if (!trackService.trackingIsGoingOn() || trackService.trackingIsFinished()) {
+        trackService.checkLocalization().then(function () {
+            startTransportTrack(transportType);
+        }, function (error) {
+            Config.loaded();
+            if (Config.isErrorLowAccuracy(error)) {
+                //popup "do u wanna go on?"
+                $ionicPopup.confirm({
+                    title: $filter('translate')("pop_up_low_accuracy_title"),
+                    template: $filter('translate')("pop_up_low_accuracy_template"),
+                    buttons: [
+                        {
+                            text: $filter('translate')("btn_close"),
+                            type: 'button-cancel'
+                        },
+                        {
+                            text: $filter('translate')("pop_up_low_accuracy_button_go_on"),
+                            type: 'button-custom',
+                            onTap: function () {
+                                startTransportTrack(transportType);
+                            }
+                        }
+                    ]
+                });
+            } else if (Config.isErrorGPSNoSignal(error)) {
+                //popup "impossible to track" and stop
+                var alert = $ionicPopup.alert({
+                    title: $filter('translate')("pop_up_no_geo_title"),
+                    template: $filter('translate')("pop_up_no_geo_template"),
+                    okText: $filter('translate')("btn_close"),
+                    okType: 'button-cancel'
+                });
+                alert.then(function (e) {
+                    trackService.startup();
                 });
             }
-            window.onresize = function () {
-                if (mymap != null) {
-                    mapService.resizeElementHeight(mymap, 'homeMap');
-                    mapService.refresh('homeMap');
-                }
-            }
+        });
 
+    } else {
+        Config.loaded();
+    }
+}
+$scope.trackAndMap = function (transportType) {
+    //init multimodal id used for db 
+    $scope.startTracking(transportType);
+    $state.go('app.mapTracking');
 
-            $scope.$on('$ionicView.beforeEnter', function(){
-              mapService.resizeElementHeight(mymap, 'homeMap');
-              mapService.refresh('homeMap');
-            });
+}
+$scope.stopTrackingHome = function () {
+    $scope.trackingIsOn = false;
+    $scope.stopTracking();
+}
 
-            //just for init
-            angular.extend($scope, {
-                center: {
-                    lat: 0,
-                    lng: 0,
-                    zoom: 8
-                },
-                events: {}
-            });
-        */
-        $scope.openNotifications = function () {
-            $rootScope.countNotification = 0;
-            $state.go('app.notifications');
-        }
-
-        $scope.go = function (state) {
-            if (state.indexOf('(') > 0) {
-                eval('$scope.' + state);
+$scope.startTracking = function (transportType) {
+    if (!$rootScope.syncRunning) {
+        $scope.localizationAlwaysAllowed().then(function (loc) {
+            if (!loc) {
+                $scope.showWarningPopUp();
             } else {
-                $location.path(state);
+                // else {
+                $scope.isBatterySaveMode().then(function (saveMode) {
+                    if (saveMode) {
+                        $scope.showSaveBatteryPopUp($scope.track, transportType);
+                    }
+                    else {
+                        $scope.track(transportType);
+                    }
+                })
             }
+        })
+    }
+}
 
-        }
-        $scope.goToBookmarks = function () {
-            $state.go('app.bookmarks');
-            $ionicHistory.nextViewOptions({
-                disableBack: true
+
+$scope.openSavedTracks = function () {
+    planService.getTrips().then(function (trips) {
+        if (trips && !angular.equals(trips, {})) {
+            $state.go('app.mytrips');
+        } else {
+            //Toast.show($filter('translate')("no_saved_tracks_to_track"), "short", "bottom");
+            var confirmPopup = $ionicPopup.confirm({
+                title: $filter('translate')("my_trip_empty_list"),
+                template: $filter('translate')("no_saved_tracks_to_track"),
+                buttons: [
+                    {
+                        text: $filter('translate')("pop_up_close"),
+                        type: 'button-cancel'
+                    },
+                    {
+                        text: $filter('translate')("pop_up_plan"),
+                        type: 'button-custom',
+                        onTap: function () {
+                            confirmPopup.close();
+                            planService.setPlanConfigure(null);
+                            $state.go('app.plan');
+                        }
+                    }
+                ]
             });
-
         }
-        $scope.getCountNotification = function (counter) {
-            if (counter > 9) {
-                return counter + "+";
+    });
+}
+
+$scope.$on('ngLastRepeat.primaryLinks', function (e) {
+    $timeout(function () {
+        ionicMaterialMotion.ripple();
+        ionicMaterialInk.displayEffect()
+    }); // No timeout delay necessary.
+});
+var initWatch = function () {
+    $scope.$watch('notificationService.notifications', function (newVal, oldVal, scope) {
+        notificationInit();
+    });
+}
+/* DISABLED MAP
+    $scope.initMap = function () {
+        mapService.initMap('homeMap').then(function (map) {
+
+            if (mymap != null) {
+                mapService.resizeElementHeight(mymap, 'homeMap');
+                mapService.refresh('homeMap');
             }
-            return counter;
-        }
-        $scope.showTutorial = function () {
-            tutorial.showTutorial('main', 'main', 4, $scope);
-        }
-        $scope.expand = function (index) {
-            $scope.expansion[index] = !$scope.expansion[index];
-        }
-        $scope.isExpanded = function (index) {
-            return $scope.expansion[index]
-        }
-        $scope.getWidthUser = function (challenge) {
-            //TODO
-            if (challenge.type == 'coop')
-                return "width:30%;"
-            return "width:60%;"
-        }
-        $scope.getWidthOther = function (challenge) {
-            //TODO
-            if (challenge.type == 'coop')
-                return "width:40%;;"
-            return "width:40%;"
-        }
-        $scope.getWidthSeparator = function (challenge) {
-            //TODO
-            return "width:30%;background:transparent;"
-        }
-        $scope.getValueUser = function (challenge) {
-            //TODO
-
-            return "15 "+$filter('translate')('user_points_label');
-        }
-        $scope.getValueOther = function (challenge) {
-            //TODO
-            return "5 "+$filter('translate')('user_points_label');
-
-
+            Config.init().then(function () {
+              mapService.centerOnMe('homeMap', Config.getMapPosition().zoom);
+            });
+        });
+    }
+    window.onresize = function () {
+        if (mymap != null) {
+            mapService.resizeElementHeight(mymap, 'homeMap');
+            mapService.refresh('homeMap');
         }
     }
 
-    )
+
+    $scope.$on('$ionicView.beforeEnter', function(){
+      mapService.resizeElementHeight(mymap, 'homeMap');
+      mapService.refresh('homeMap');
+    });
+
+    //just for init
+    angular.extend($scope, {
+        center: {
+            lat: 0,
+            lng: 0,
+            zoom: 8
+        },
+        events: {}
+    });
+*/
+$scope.openNotifications = function () {
+    $rootScope.countNotification = 0;
+    $state.go('app.notifications');
+}
+
+$scope.go = function (state) {
+    if (state.indexOf('(') > 0) {
+        eval('$scope.' + state);
+    } else {
+        $location.path(state);
+    }
+
+}
+$scope.goToBookmarks = function () {
+    $state.go('app.bookmarks');
+    $ionicHistory.nextViewOptions({
+        disableBack: true
+    });
+
+}
+$scope.getCountNotification = function (counter) {
+    if (counter > 9) {
+        return counter + "+";
+    }
+    return counter;
+}
+$scope.showTutorial = function () {
+    tutorial.showTutorial('main', 'main', 4, $scope);
+}
+$scope.expand = function (index) {
+    $scope.expansion[index] = !$scope.expansion[index];
+}
+$scope.isExpanded = function (index) {
+    return $scope.expansion[index]
+}
+$scope.getWidthUser = function (challenge) {
+    //TODO
+    if (challenge.type == 'coop')
+        return "width:30%;"
+    return "width:60%;"
+}
+$scope.getWidthOther = function (challenge) {
+    //TODO
+    if (challenge.type == 'coop')
+        return "width:40%;;"
+    return "width:40%;"
+}
+$scope.getWidthSeparator = function (challenge) {
+    //TODO
+    return "width:30%;background:transparent;"
+}
+$scope.getValueUser = function (challenge) {
+    //TODO
+
+    return "15 " + $filter('translate')('user_points_label');
+}
+$scope.getValueOther = function (challenge) {
+    //TODO
+    return "5 " + $filter('translate')('user_points_label');
+    }
+})
     .controller('HomeContainerCtrl', function ($scope, $rootScope, profileService, GameSrv, Config, Toast, $filter) {
 
 
-        $rootScope.currentUser = null;
-        $scope.noStatus = false;
-        $rootScope.profileImg = null;
-        $scope.tmpUrl = 'https://dev.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/' + Config.getAppId() + '/'
-        Config.loading();
-        GameSrv.getLocalStatus().then(
-            function (status) {
-                $scope.status = status;
-                profileService.setProfileStatus(status);
-                $rootScope.currentUser = status.playerData;
-                $scope.getImage();
+    $rootScope.currentUser = null;
+    $scope.noStatus = false;
+    $rootScope.profileImg = null;
+    $scope.tmpUrl = 'https://dev.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/' + Config.getAppId() + '/'
+    Config.loading();
+    GameSrv.getLocalStatus().then(
+        function (status) {
+            $scope.status = status;
+            profileService.setProfileStatus(status);
+            $rootScope.currentUser = status.playerData;
+            $scope.getImage();
 
-                // profileService.getProfileImage(status.playerData.playerId).then(function(urlImg){
-                //     $rootScope.urlImg=urlImg;
-                // })
-            },
-            function (err) {
-                $scope.noStatus = true;
-                Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
-            }
-        ).finally(Config.loaded);
-        $scope.getImage = function () {
-            if ($scope.status)
-                profileService.getProfileImage($scope.status.playerData.playerId).then(function (image) {
-                    // var file = new Blob([ image ], {
-                    //     type : 'image/jpeg'
-                    // });
-                    // var fileURL = URL.createObjectURL(file);
-                    // $scope.profileImg = fileURL;
-
-                    // var img = document.getElementById( "#photo" );
-                    // img.src = fileURL;
-                    $rootScope.profileImg = $scope.tmpUrl + $scope.status.playerData.playerId + '?' + new Date().getTime();
-                }, function (error) {
-                    $rootScope.profileImg = 'img/game/generic_user.png' + '?' + new Date().getTime();
-                })
+            // profileService.getProfileImage(status.playerData.playerId).then(function(urlImg){
+            //     $rootScope.urlImg=urlImg;
+            // })
+        },
+        function (err) {
+            $scope.noStatus = true;
+            Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
         }
+    ).finally(Config.loaded);
+    $scope.getImage = function () {
+        if ($scope.status)
+            profileService.getProfileImage($scope.status.playerData.playerId).then(function (image) {
+                // var file = new Blob([ image ], {
+                //     type : 'image/jpeg'
+                // });
+                // var fileURL = URL.createObjectURL(file);
+                // $scope.profileImg = fileURL;
 
-    })
+                // var img = document.getElementById( "#photo" );
+                // img.src = fileURL;
+                $rootScope.profileImg = $scope.tmpUrl + $scope.status.playerData.playerId + '?' + new Date().getTime();
+            }, function (error) {
+                $rootScope.profileImg = 'img/game/generic_user.png' + '?' + new Date().getTime();
+            })
+    }
+
+})
     .controller('MobilityCtrl', function ($scope, $state, $ionicHistory, $location, bookmarkService) {
 
         bookmarkService.getBookmarksRT().then(function (list) {

@@ -168,9 +168,16 @@ angular.module('viaggia.controllers.game', [])
             comp_perf: 'perf-user perf-other-color',
             coop: 'coop-user coop-other-color',
             single: 'single-user single-other-color',
-            sent_coop:'coop-other-color',
+            sent_coop: 'coop-other-color',
             sent_comp_perf: 'perf-other-color',
             sent_comp_time: ' time-other-color'
+        }
+
+        $scope.color = {
+            comp_time: '#25BC5D;',
+            comp_perf: '#FF9D33;',
+            coop: '#e54d2d;',
+            racc: '#2681A4;',
         }
         var paramOptions = $stateParams.challengeEnd;
         var now = new Date().getTime();
@@ -365,11 +372,75 @@ angular.module('viaggia.controllers.game', [])
             }).finally(Config.loaded);;
 
         }
+        $scope.getChallengeBarTemplate = function (challenge) {
+            switch (challenge.type) {
+                case 'comp_time': {
+                    return 'templates/game/challengeTemplates/competitiveTimeBar.html';
+                    break;
+                }
+                case 'comp_perf': {
+                    return 'templates/game/challengeTemplates/competitivePerformanceBar.html';
+                    break;
+                }
+                case 'coop': {
+                    return 'templates/game/challengeTemplates/cooperativeBar.html';
+                    break;
+                }
+                default:
+                    return 'templates/game/challengeTemplates/defaultBar.html';
+            }
+        }
+        $scope.getWidthUser = function (challenge) {
+            //TODO
+            if (challenge.type == 'coop')
+                return "width:30%;"
+            return "width:60%;"
+        }
+        $scope.getWidthOther = function (challenge) {
+            //TODO
+            if (challenge.type == 'coop')
+                return "width:40%;;"
+            return "width:40%;"
+        }
+        $scope.getWidthSeparator = function (challenge) {
+            //TODO
+            return "width:30%;background:transparent;"
+        }
+        $scope.getValueUser = function (challenge) {
+            //TODO
+
+            return "15 " + $filter('translate')('user_points_label');
+        }
+        $scope.getValueOther = function (challenge) {
+            //TODO
+            return "5 " + $filter('translate')('user_points_label');
+        }
         $scope.getPast = function () {
             //TODO
+            $scope.pastChallenges = [];
             if (!!$scope.status && !!$scope.status['challengeConcept']) {
                 if ($scope.status) {
-                    $scope.pastChallenges = $scope.status['challengeConcept']['oldChallengeData'];
+                    //$scope.pastChallenges = $scope.status['challengeConcept']['oldChallengeData'];
+                    GameSrv.getPastChallenges(profileService.status).then(function (pastChallenges) {
+                        if (!pastChallenges)
+                            $scope.pastChallenges = [];
+                        else {
+                            for (var i = 0; i < pastChallenges.length; i++) {
+                                $scope.pastChallenges.push({
+                                    group: "racc",
+                                    type: pastChallenges[i].type,
+                                    short: pastChallenges[i]["short_" + $scope.language],
+                                    long: pastChallenges[i]["long_" + $scope.language],
+                                    idOpponent: pastChallenges[i].idOpponent,
+                                    nicknameOpponent: pastChallenges[i].nicknameOpponent,
+                                    dataFinished: pastChallenges[i].dataFinished,
+                                    target: pastChallenges[i].target,
+                                    win: pastChallenges[i].win,
+                                    value: pastChallenges[i].value
+                                });
+                            }
+                        }
+                    });
                     if (!$scope.pastChallenges) $scope.challenges = [];
                 } else {
                     $scope.pastChallenges = null;
@@ -412,6 +483,13 @@ angular.module('viaggia.controllers.game', [])
             if (challenge.group == 'invite')
                 return $scope.colorChall['sent_' + challenge.type];
             return $scope.colorChall[challenge.type];
+        }
+        $scope.getBorderColor = function(challenge) {
+            return "border-left: solid 16px "+ $scope.color[challenge.type];
+        }
+        $scope.getColorCup = function (challenge) {
+            return "color:"+$scope.color[challenge.type];
+
         }
         $scope.unlock = function (type) {
             $ionicPopup.show({
@@ -830,7 +908,7 @@ angular.module('viaggia.controllers.game', [])
         $scope.getStyleColor = function (message) {
             return GameSrv.getStyleColor(message);
         }
-        $scope.getIconColor= function (message) {
+        $scope.getIconColor = function (message) {
             return GameSrv.getIconColor(message);
         }
         $scope.getIcon = function (message) {

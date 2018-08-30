@@ -156,14 +156,14 @@
 
         <div class="home-challenges">
             <div class="row">
-                <button class="button button-block button-positive" ui-sref="app.home.challenges">
+                <button class="button button-block button-block-active" ui-sref="app.home.challenges">
                     {{'home_next_challenge'|translate}} </button>
             </div>
             <div class="row">
                 <div class="col home-your-challenges">
-                    <h4>
+                    <span>
                         {{'home_your_challenges'|translate|uppercase}}
-                    </h4>
+                    </span>
                 </div>
             </div>
             <div ng-if="challenges.length>0">

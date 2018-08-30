@@ -388,7 +388,7 @@ angular.module('viaggia.controllers.tripdetails', [])
                     }).finally(Config.loaded);
             }
             else {
-                trackService.start($scope.tripId, $scope.trip, refreshTripDetail)
+                trackService.start($scope.tripId, localStorage.getItem(Config.getAppId() + '_multimodalId'), $scope.trip, refreshTripDetail)
                     .then(function () {
                         $scope.modifiable = false;
                     }, function (errorCode) {
