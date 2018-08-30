@@ -154,31 +154,7 @@ angular.module('viaggia.controllers.game', [])
         $scope.challenge = [];
         $scope.typeOfChallenges = [];
         $scope.language = null;
-        $scope.iconChall = {
-            comp_time: 'ic_ch_tempo',
-            comp_perf: 'ic_ch_perf',
-            coop: 'ic_ch_coop',
-            single: 'ic_ch_single',
-            sent_coop: 'ic_ch_coop_invitation',
-            sent_comp_perf: 'ic_ch_perf_invitation',
-            sent_comp_time: 'ic_ch_tempo_inv'
-        }
-        $scope.colorChall = {
-            comp_time: 'time-user time-other-color',
-            comp_perf: 'perf-user perf-other-color',
-            coop: 'coop-user coop-other-color',
-            single: 'single-user single-other-color',
-            sent_coop: 'coop-other-color',
-            sent_comp_perf: 'perf-other-color',
-            sent_comp_time: ' time-other-color'
-        }
 
-        $scope.color = {
-            comp_time: '#25BC5D;',
-            comp_perf: '#FF9D33;',
-            coop: '#e54d2d;',
-            racc: '#2681A4;',
-        }
         var paramOptions = $stateParams.challengeEnd;
         var now = new Date().getTime();
 
@@ -468,28 +444,24 @@ angular.module('viaggia.controllers.game', [])
             });
         }
         $scope.getIconType = function (type) {
-            return $scope.iconChall[type.type];
+            return GameSrv.getIconType(type);
         }
         $scope.getColorType = function (type) {
-            return $scope.colorChall[type.type];
+            return GameSrv.getColorType(type);
         }
         $scope.getIconChallenge = function (challenge) {
-            if (challenge.group == 'invite')
-                return $scope.iconChall['sent_' + challenge.type];
-            return $scope.iconChall[challenge.type];
+            return GameSrv.getIconChallenge(challenge);
         }
+
 
         $scope.getColorChallenge = function (challenge) {
-            if (challenge.group == 'invite')
-                return $scope.colorChall['sent_' + challenge.type];
-            return $scope.colorChall[challenge.type];
+            return GameSrv.getColorChallenge(challenge);
         }
-        $scope.getBorderColor = function(challenge) {
-            return "border-left: solid 16px "+ $scope.color[challenge.type];
+        $scope.getBorderColor = function (challenge) {
+            return GameSrv.getBorderColor(challenge);
         }
         $scope.getColorCup = function (challenge) {
-            return "color:"+$scope.color[challenge.type];
-
+            return GameSrv.getColorCup(challenge);
         }
         $scope.unlock = function (type) {
             $ionicPopup.show({

@@ -155,7 +155,31 @@ angular.module('viaggia.services.game', [])
             }
         }
         var ArrMax = null;
+        var iconChall = {
+            comp_time: 'ic_ch_tempo',
+            comp_perf: 'ic_ch_perf',
+            coop: 'ic_ch_coop',
+            single: 'ic_ch_single',
+            sent_coop: 'ic_ch_coop_invitation',
+            sent_comp_perf: 'ic_ch_perf_invitation',
+            sent_comp_time: 'ic_ch_tempo_inv'
+        }
+        var colorChall = {
+            comp_time: 'time-user time-other-color',
+            comp_perf: 'perf-user perf-other-color',
+            coop: 'coop-user coop-other-color',
+            single: 'single-user single-other-color',
+            sent_coop: 'coop-other-color',
+            sent_comp_perf: 'perf-other-color',
+            sent_comp_time: ' time-other-color'
+        }
 
+        var color = {
+            comp_time: '#25BC5D;',
+            comp_perf: '#FF9D33;',
+            coop: '#e54d2d;',
+            racc: '#2681A4;',
+        }
         getTravelType = function (message) {
             var event = JSON.parse(message.event);
             if (event.travelType == 'PLANNED')
@@ -499,7 +523,7 @@ angular.module('viaggia.services.game', [])
                         idOpponent: 0,
                         nicknameOpponent: "ciccio",
                         dataFinished: 1517529600000,
-                        target:100,
+                        target: 100,
                         win: 0,
                         value: {
                             unit: "km",  //km or greenleaves or whatever
@@ -517,7 +541,7 @@ angular.module('viaggia.services.game', [])
                         idOpponent: 0,
                         nicknameOpponent: "tizio",
                         dataFinished: 1517529600000,
-                        target:null,
+                        target: null,
                         win: 1,
                         value: {
                             unit: "km",  //km or greenleaves or whatever
@@ -534,7 +558,7 @@ angular.module('viaggia.services.game', [])
                         idOpponent: 0,
                         nicknameOpponent: "ciccio",
                         dataFinished: 1517529600000,
-                        target:200,
+                        target: 200,
                         win: 0,
                         value: {
                             unit: "km",  //km or greenleaves or whatever
@@ -551,7 +575,7 @@ angular.module('viaggia.services.game', [])
                         idOpponent: 0,
                         nicknameOpponent: "ciccio",
                         dataFinished: 1517529600000,
-                        target:200,
+                        target: 200,
                         win: 0,
                         value: {
                             unit: "km",  //km or greenleaves or whatever
@@ -566,7 +590,7 @@ angular.module('viaggia.services.game', [])
                         long_it: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque sapien nulla. Cras in libero vehicula, dapibus sem ac, facilisis tortor. Cras sed fringilla libero, eu euismod mi. Integer non mi dapibus nunc convallis tempor. Morbi eget risus luctus, dapibus orci nec, vulputate diam. Pellentesque molestie nibh at sapien iaculis ultrices. Fusce quis libero sed turpis scelerisque semper. Morbi suscipit nisl nunc, a blandit elit egestas non. Vivamus posuere sem id pellentesque fringilla. Proin sit amet ante id elit vestibulum vehicula eget ut risus. Maecenas vulputate ipsum in ligula dapibus ultricies. ',
                         long_en: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque sapien nulla. Cras in libero vehicula, dapibus sem ac, facilisis tortor. Cras sed fringilla libero, eu euismod mi. Integer non mi dapibus nunc convallis tempor. Morbi eget risus luctus, dapibus orci nec, vulputate diam. Pellentesque molestie nibh at sapien iaculis ultrices. Fusce quis libero sed turpis scelerisque semper. Morbi suscipit nisl nunc, a blandit elit egestas non. Vivamus posuere sem id pellentesque fringilla. Proin sit amet ante id elit vestibulum vehicula eget ut risus. Maecenas vulputate ipsum in ligula dapibus ultricies. ',
                         dataFinished: 1517529600000,
-                        target:50,
+                        target: 50,
                         win: 1,
                         value: {
                             unit: "km",  //km or greenleaves or whatever
@@ -582,7 +606,7 @@ angular.module('viaggia.services.game', [])
                         idOpponent: 0,
                         nicknameOpponent: "ciccio",
                         dataFinished: 1517529600000,
-                        target:80,
+                        target: 80,
 
                         win: 1,
                         value: {
@@ -946,6 +970,32 @@ angular.module('viaggia.services.game', [])
                     //     });
                 });
             return deferred.promise;
+        }
+
+        //Style functionalities for challenges
+
+        gameService.getIconType = function (type) {
+            return iconChall[type.type];
+        }
+        gameService.getColorType = function (type) {
+            return colorChall[type.type];
+        }
+        gameService.getIconChallenge = function (challenge) {
+            if (challenge.group == 'invite')
+                return iconChall['sent_' + challenge.type];
+            return iconChall[challenge.type];
+        }
+
+        gameService.getColorChallenge = function (challenge) {
+            if (challenge.group == 'invite')
+                return colorChall['sent_' + challenge.type];
+            return colorChall[challenge.type];
+        }
+        gameService.getBorderColor = function (challenge) {
+            return "border-left: solid 16px " + color[challenge.type];
+        }
+        gameService.getColorCup = function (challenge) {
+            return "color:" + color[challenge.type];
         }
         /* get remote status */
         gameService.getStatus = function () {
