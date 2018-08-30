@@ -2465,12 +2465,17 @@ Play&Go
     padding: 4px;
     color: #fff;
     text-align: center;
-    max-width: 88px;
+    width: 88px;
+    height: 88px;
     margin: auto;
 }
 
 .tracking-dashboard .tracking-ds-button i {
     font-size: 48px;
+    font-size: 60px;
+    padding: 8px;
+    margin: auto;
+    display: table;
 }
 
 .tracking-dashboard .tracking-ds-button span {

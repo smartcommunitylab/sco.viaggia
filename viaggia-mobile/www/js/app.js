@@ -1288,7 +1288,7 @@ angular.module('viaggia', [
       play_is_on_for: 'Stai {{transport}} da {{time}} ore',
       stop_tracking: 'Termina viaggio',
       track_walk_action: 'camminando',
-      track_bike_action: 'ciclando',
+      track_bike_action: 'pedalando',
       track_other_action: 'viaggiando',
       game_tab_challenges_filter_active: "Attive",
       game_tab_challenges_filter_old: "Passate",
