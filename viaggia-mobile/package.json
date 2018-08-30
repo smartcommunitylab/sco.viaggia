@@ -21,6 +21,7 @@
     "cordova-plugin-globalization": "^1.0.3",
     "cordova-plugin-googleplus": "git+https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git",
     "cordova-plugin-inappbrowser": "^1.4.0",
+    "cordova-hot-code-push-plugin": "^1.5.3",
     "cordova-plugin-network-information": "^1.2.1",
     "cordova-plugin-request-location-accuracy": "^2.2.1",
     "cordova-plugin-screen-orientation": "^1.4.2",
@@ -147,7 +148,8 @@
         "LOCATION_ALWAYS_USAGE_DESCRIPTION": "Background location-tracking is required",
         "LOCATION_WHEN_IN_USE_USAGE_DESCRIPTION": "Background location-tracking is required",
         "MOTION_USAGE_DESCRIPTION": "Using the accelerometer increases battery-efficiency by intelligently toggling location-tracking only when the device is detected to be moving"
-      }
+      },
+      "cordova-hot-code-push-plugin": {}
     },
     "platforms": [
       "ios",
