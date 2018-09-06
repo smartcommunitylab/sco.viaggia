@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'viaggia';
-  src:  url('viaggia.eot?apjxo3');
-  src:  url('viaggia.eot?apjxo3#iefix') format('embedded-opentype'),
-    url('viaggia.ttf?apjxo3') format('truetype'),
-    url('viaggia.woff?apjxo3') format('woff'),
-    url('viaggia.svg?apjxo3#viaggia') format('svg');
+  src:  url('viaggia.eot?8rwagu');
+  src:  url('viaggia.eot?8rwagu#iefix') format('embedded-opentype'),
+    url('viaggia.ttf?8rwagu') format('truetype'),
+    url('viaggia.woff?8rwagu') format('woff'),
+    url('viaggia.svg?8rwagu#viaggia') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,32 +24,53 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ic_extraurban-bus:before {
+  content: "\e901";
+}
+.ic_urban-bus:before {
+  content: "\e902";
+}
+.ic_bike:before {
+  content: "\e903";
+}
+.ic_game_multimodal_trip:before {
+  content: "\e904";
+}
+.ic_train:before {
+  content: "\e91c";
+}
+.ic_foot:before {
+  content: "\e94e";
+}
+.ic_blacklist_off:before {
+  content: "\e94f";
+}
+.ic_blacklist_on:before {
+  content: "\e952";
+}
+.ic_ch_coop:before {
+  content: "\e953";
+}
+.ic_ch_perf:before {
+  content: "\e955";
+}
+.ic_ch_single:before {
+  content: "\e957";
+}
+.ic_game_challenge_assign:before {
+  content: "\e958";
+}
 .ic_ch_tempo_inv:before {
   content: "\e959";
 }
 .ic_score:before {
   content: "\e950";
 }
-.ic_blacklist_off:before {
-  content: "\e952";
-}
-.ic_blacklist_on:before {
-  content: "\e953";
-}
 .ic_ch_coop_invitation:before {
   content: "\e954";
 }
-.ic_ch_coop:before {
-  content: "\e955";
-}
 .ic_ch_perf_invitation:before {
   content: "\e956";
-}
-.ic_ch_perf:before {
-  content: "\e957";
-}
-.ic_ch_single:before {
-  content: "\e958";
 }
 .ic_ch_tempo:before {
   content: "\e95d";
@@ -89,12 +110,6 @@
 }
 .ic_game_badge:before {
   content: "\e94d";
-}
-.ic_game_challenge_assign:before {
-  content: "\e94e";
-}
-.ic_game_multimodal_trip:before {
-  content: "\e94f";
 }
 .ic_game_friend:before {
   content: "\e951";
@@ -213,18 +228,6 @@
 .ic_monitoring:before {
   content: "\e900";
 }
-.ic_bike:before {
-  content: "\e901";
-}
-.ic_urban-bus:before {
-  content: "\e902";
-}
-.ic_train:before {
-  content: "\e903";
-}
-.ic_extraurban-bus:before {
-  content: "\e904";
-}
 .ic_real-time-info:before {
   content: "\e905";
 }
@@ -293,9 +296,6 @@
 }
 .ic_more:before {
   content: "\e91b";
-}
-.ic_foot:before {
-  content: "\e91c";
 }
 .ic_car-sharing:before {
   content: "\e91d";

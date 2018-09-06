@@ -3,16 +3,18 @@
         Play&Go {{currentUser.nickName}}
     </ion-nav-title>
     <ion-nav-buttons side="right">
-            <img class="bar-profile-img" ng-if="profileImg" ng-src="{{profileImg}}" ng-click="openProfile()">
+        <img class="bar-profile-img" ng-if="profileImg" ng-src="{{profileImg}}" ng-click="openProfile()">
     </ion-nav-buttons>
     <ion-content ng-class="{'empty_bookmarks': primaryLinks.length == 0}" ng-init="showTutorial()">
-        <div class="user-state">
+        <div class="user-state card">
             <div class="row">
-                <div class="col home-level">
-                    {{'user_level_label' | translate}} {{level}}
+                <div class="col home-level text-right">
+                    <h4>{{'user_level_label' | translate}} {{level}}</h4>
                 </div>
-                <div class="col home-points">
-                    {{status['pointConcept'][0]['score']}} {{'green_leaves_points' | translate}}
+                <div class="col home-points text-left">
+                    <h4>{{status['pointConcept'][0]['score']}}
+                        <i class="icon ion-leaf"></i>
+                    </h4>
                 </div>
             </div>
             <div class="row">
@@ -39,7 +41,7 @@
             </div>
         </div>
 
-        <div class="tracking-dashboard">
+        <div class="tracking-dashboard card">
             <div ng-if="trackingIsOn">
                 <div class="row">
                     <div class="col text-center">

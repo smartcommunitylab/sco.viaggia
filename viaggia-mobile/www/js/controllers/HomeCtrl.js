@@ -69,164 +69,164 @@ angular.module('viaggia.controllers.home', [])
             setUserProgress();
             //TODO fake challenge
             if ($scope.status && $scope.status.challengeConcept)
-                $scope.status.challengeConcept.activeChallengeData = [
-                    {
-                        "challId": "start_survey-1624ea3d21e-63568495",
-                        "challDesc": "Fill out the start survey and gain a bonus of 100 green leaves points.",
-                        "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
-                        "challTarget": 1,
-                        "status": 0,
-                        "row_status": 0.0,
-                        "type": "survey",
-                        "active": false,
-                        "success": false,
-                        "startDate": 1521737781790,
-                        "endDate": 1522947381790,
-                        "daysToEnd": 0,
-                        "bonus": 100,
-                        "challCompletedDate": 0,
-                        "type": "comp_time"
-                    },
-                    {
-                        "challId": "start_survey-1624ea3d21e-63568495",
-                        "challDesc": "Fill out the start survey and gain a bonus of 100 green leaves points.",
-                        "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
-                        "challTarget": 1,
-                        "status": 0,
-                        "row_status": 0.0,
-                        "type": "survey",
-                        "active": false,
-                        "success": false,
-                        "startDate": 1521737781790,
-                        "endDate": 1522947381790,
-                        "daysToEnd": 0,
-                        "bonus": 100,
-                        "challCompletedDate": 0,
-                        "type": "single"
-                    },
-                    {
-                        "challId": "start_survey-1624ea3d21e-63568495",
-                        "challDesc": "Fill out the start survey and gain a bonus of 100 green leaves points.",
-                        "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
-                        "challTarget": 1,
-                        "status": 0,
-                        "row_status": 0.0,
-                        "type": "survey",
-                        "active": false,
-                        "success": false,
-                        "startDate": 1521737781790,
-                        "endDate": 1522947381790,
-                        "daysToEnd": 0,
-                        "bonus": 100,
-                        "challCompletedDate": 0,
-                        "type": "comp_perf"
-                    },
-                    {
-                        "challId": "start_survey-1624ea3d21e-63568495",
-                        "challDesc": "Fill out the start survey and gain a bonus of 100 green leaves points.",
-                        "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
-                        "challTarget": 1,
-                        "status": 0,
-                        "row_status": 0.0,
-                        "type": "survey",
-                        "active": false,
-                        "success": false,
-                        "startDate": 1521737781790,
-                        "endDate": 1522947381790,
-                        "daysToEnd": 0,
-                        "bonus": 100,
-                        "challCompletedDate": 0,
-                        "type": "coop"
-                    },
+            //     $scope.status.challengeConcept.activeChallengeData = [
+            //         {
+            //             "challId": "start_survey-1624ea3d21e-63568495",
+            //             "challDesc": "Fill out the start survey and gain a bonus of 100 green leaves points.",
+            //             "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
+            //             "challTarget": 1,
+            //             "status": 0,
+            //             "row_status": 0.0,
+            //             "type": "survey",
+            //             "active": false,
+            //             "success": false,
+            //             "startDate": 1521737781790,
+            //             "endDate": 1522947381790,
+            //             "daysToEnd": 0,
+            //             "bonus": 100,
+            //             "challCompletedDate": 0,
+            //             "type": "comp_time"
+            //         },
+            //         {
+            //             "challId": "start_survey-1624ea3d21e-63568495",
+            //             "challDesc": "Fill out the start survey and gain a bonus of 100 green leaves points.",
+            //             "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
+            //             "challTarget": 1,
+            //             "status": 0,
+            //             "row_status": 0.0,
+            //             "type": "survey",
+            //             "active": false,
+            //             "success": false,
+            //             "startDate": 1521737781790,
+            //             "endDate": 1522947381790,
+            //             "daysToEnd": 0,
+            //             "bonus": 100,
+            //             "challCompletedDate": 0,
+            //             "type": "single"
+            //         },
+            //         {
+            //             "challId": "start_survey-1624ea3d21e-63568495",
+            //             "challDesc": "Fill out the start survey and gain a bonus of 100 green leaves points.",
+            //             "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
+            //             "challTarget": 1,
+            //             "status": 0,
+            //             "row_status": 0.0,
+            //             "type": "survey",
+            //             "active": false,
+            //             "success": false,
+            //             "startDate": 1521737781790,
+            //             "endDate": 1522947381790,
+            //             "daysToEnd": 0,
+            //             "bonus": 100,
+            //             "challCompletedDate": 0,
+            //             "type": "comp_perf"
+            //         },
+            //         {
+            //             "challId": "start_survey-1624ea3d21e-63568495",
+            //             "challDesc": "Fill out the start survey and gain a bonus of 100 green leaves points.",
+            //             "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
+            //             "challTarget": 1,
+            //             "status": 0,
+            //             "row_status": 0.0,
+            //             "type": "survey",
+            //             "active": false,
+            //             "success": false,
+            //             "startDate": 1521737781790,
+            //             "endDate": 1522947381790,
+            //             "daysToEnd": 0,
+            //             "bonus": 100,
+            //             "challCompletedDate": 0,
+            //             "type": "coop"
+            //         },
 
-                ]
-            $scope.status.challengeConcept.oldChallengeData = [
-                {
-                    "challId": "260004cf-d6d7-4b30-8fb7-9107d77e72f9",
-                    "challDesc": "Fai almeno 1 viaggio in autobus e avrai un bonus di 50 punti Green Leaves",
-                    "challCompleteDesc": "Per vincere la sfida vale il numero di itinerari che utilizzano il trasporto pubblico pianificati con ViaggiaRovereto Play&Go e compiuti durante la validita' della sfida.",
-                    "challTarget": 1,
-                    "status": 0,
-                    "row_status": 0,
-                    "type": "TRIPNUMBER",
-                    "active": false,
-                    "success": false,
-                    "startDate": 1460671201175,
-                    "endDate": 1460930401175,
-                    "daysToEnd": 0
-                },
-                {
-                    "challId": "6b37c81c-30ae-4563-bf69-e9620ca52b52",
-                    "challDesc": "Raccomanda la App ad almeno 2 utenti e guadagni 50 punti Green Leaves",
-                    "challCompleteDesc": "Per vincere la sfida, almeno 2 tuoi amici si devono registrare al gioco indicando il tuo nickname nell'apposito campo durante la registrazione.",
-                    "challTarget": 2,
-                    "status": 50,
-                    "row_status": 1,
-                    "type": "RECOMMENDATION",
-                    "active": false,
-                    "success": false,
-                    "startDate": 1461189601815,
-                    "endDate": 1461276001815,
-                    "daysToEnd": 0
-                },
-                {
-                    "challId": "76a2256f-da36-4d7d-957a-86399c091d52",
-                    "challDesc": "Ottieni almeno 1 badge nella Badge Collection green leaves e vinci un bonus di 30 punti Green Leaves",
-                    "challCompleteDesc": "I badge della collezione green leaves vengono assegnati al raggiungimento di 50, 100, 200, 400, 800, 1500, 2500, 5000, 10000 e 20000 punti.",
-                    "challTarget": 1,
-                    "status": 0,
-                    "row_status": 0,
-                    "type": "NEXTBADGE",
-                    "active": false,
-                    "success": false,
-                    "startDate": 1461362401208,
-                    "endDate": 1461621601208,
-                    "daysToEnd": 0
-                },
-                {
-                    "challId": "f936c43c-e73d-421f-abc1-92b561fbbbe7",
-                    "challDesc": "Fai almeno 1 viaggio in bici e avrai un bonus di 30 punti Green Leaves",
-                    "challCompleteDesc": "Per vincere la sfida effettua almeno un viaggio utilizzando la bici nel corso del periodo di validita' della sfida.",
-                    "challTarget": 1,
-                    "status": 0,
-                    "row_status": 0,
-                    "type": "TRIPNUMBER",
-                    "active": false,
-                    "success": false,
-                    "startDate": 1461362401506,
-                    "endDate": 1461621601506,
-                    "daysToEnd": 0
-                },
-                {
-                    "challId": "124254ca-5f83-4081-8c06-f20d757fd7f4",
-                    "challDesc": "Raccomanda la App ad almeno 1 utente e guadagni 50 punti Green Leaves",
-                    "challCompleteDesc": "Per vincere la sfida, almeno 1 tuo amico si deve registrare al gioco indicando il tuo nickname nell'apposito campo durante la registrazione.",
-                    "challTarget": 1,
-                    "status": 100,
-                    "row_status": 4,
-                    "type": "RECOMMENDATION",
-                    "active": false,
-                    "success": true,
-                    "startDate": 1460671201950,
-                    "endDate": 1460930401950,
-                    "daysToEnd": 0
-                },
-                {
-                    "challId": "656f644b-a272-45e1-91d8-afd9af72a927",
-                    "challDesc": "Fai almeno 1 viaggio a impatto zero e avrai un bonus di 20 punti Green Leaves",
-                    "challCompleteDesc": "Gli itinerari a impatto zero sono quelli che comprendono solo tratte in bici, bike sharing o a piedi.",
-                    "challTarget": 1,
-                    "status": 0,
-                    "row_status": 0,
-                    "type": "ZEROIMPACT",
-                    "active": false,
-                    "success": false,
-                    "startDate": 1461189601431,
-                    "endDate": 1461276001431,
-                    "daysToEnd": 0
-                }
+            //     ]
+            // $scope.status.challengeConcept.oldChallengeData = [
+            //     {
+            //         "challId": "260004cf-d6d7-4b30-8fb7-9107d77e72f9",
+            //         "challDesc": "Fai almeno 1 viaggio in autobus e avrai un bonus di 50 punti Green Leaves",
+            //         "challCompleteDesc": "Per vincere la sfida vale il numero di itinerari che utilizzano il trasporto pubblico pianificati con ViaggiaRovereto Play&Go e compiuti durante la validita' della sfida.",
+            //         "challTarget": 1,
+            //         "status": 0,
+            //         "row_status": 0,
+            //         "type": "TRIPNUMBER",
+            //         "active": false,
+            //         "success": false,
+            //         "startDate": 1460671201175,
+            //         "endDate": 1460930401175,
+            //         "daysToEnd": 0
+            //     },
+            //     {
+            //         "challId": "6b37c81c-30ae-4563-bf69-e9620ca52b52",
+            //         "challDesc": "Raccomanda la App ad almeno 2 utenti e guadagni 50 punti Green Leaves",
+            //         "challCompleteDesc": "Per vincere la sfida, almeno 2 tuoi amici si devono registrare al gioco indicando il tuo nickname nell'apposito campo durante la registrazione.",
+            //         "challTarget": 2,
+            //         "status": 50,
+            //         "row_status": 1,
+            //         "type": "RECOMMENDATION",
+            //         "active": false,
+            //         "success": false,
+            //         "startDate": 1461189601815,
+            //         "endDate": 1461276001815,
+            //         "daysToEnd": 0
+            //     },
+            //     {
+            //         "challId": "76a2256f-da36-4d7d-957a-86399c091d52",
+            //         "challDesc": "Ottieni almeno 1 badge nella Badge Collection green leaves e vinci un bonus di 30 punti Green Leaves",
+            //         "challCompleteDesc": "I badge della collezione green leaves vengono assegnati al raggiungimento di 50, 100, 200, 400, 800, 1500, 2500, 5000, 10000 e 20000 punti.",
+            //         "challTarget": 1,
+            //         "status": 0,
+            //         "row_status": 0,
+            //         "type": "NEXTBADGE",
+            //         "active": false,
+            //         "success": false,
+            //         "startDate": 1461362401208,
+            //         "endDate": 1461621601208,
+            //         "daysToEnd": 0
+            //     },
+            //     {
+            //         "challId": "f936c43c-e73d-421f-abc1-92b561fbbbe7",
+            //         "challDesc": "Fai almeno 1 viaggio in bici e avrai un bonus di 30 punti Green Leaves",
+            //         "challCompleteDesc": "Per vincere la sfida effettua almeno un viaggio utilizzando la bici nel corso del periodo di validita' della sfida.",
+            //         "challTarget": 1,
+            //         "status": 0,
+            //         "row_status": 0,
+            //         "type": "TRIPNUMBER",
+            //         "active": false,
+            //         "success": false,
+            //         "startDate": 1461362401506,
+            //         "endDate": 1461621601506,
+            //         "daysToEnd": 0
+            //     },
+            //     {
+            //         "challId": "124254ca-5f83-4081-8c06-f20d757fd7f4",
+            //         "challDesc": "Raccomanda la App ad almeno 1 utente e guadagni 50 punti Green Leaves",
+            //         "challCompleteDesc": "Per vincere la sfida, almeno 1 tuo amico si deve registrare al gioco indicando il tuo nickname nell'apposito campo durante la registrazione.",
+            //         "challTarget": 1,
+            //         "status": 100,
+            //         "row_status": 4,
+            //         "type": "RECOMMENDATION",
+            //         "active": false,
+            //         "success": true,
+            //         "startDate": 1460671201950,
+            //         "endDate": 1460930401950,
+            //         "daysToEnd": 0
+            //     },
+            //     {
+            //         "challId": "656f644b-a272-45e1-91d8-afd9af72a927",
+            //         "challDesc": "Fai almeno 1 viaggio a impatto zero e avrai un bonus di 20 punti Green Leaves",
+            //         "challCompleteDesc": "Gli itinerari a impatto zero sono quelli che comprendono solo tratte in bici, bike sharing o a piedi.",
+            //         "challTarget": 1,
+            //         "status": 0,
+            //         "row_status": 0,
+            //         "type": "ZEROIMPACT",
+            //         "active": false,
+            //         "success": false,
+            //         "startDate": 1461189601431,
+            //         "endDate": 1461276001431,
+            //         "daysToEnd": 0
+            //     }
 
-            ]
+            // ]
             setChallenges();
         });
         var initExpansion = function () {
@@ -595,9 +595,11 @@ $scope.isExpanded = function (index) {
 }
 $scope.getWidthUser = function (challenge) {
     //TODO
-    if (challenge.type == 'coop')
-        return "width:30%;"
-    return "width:60%;"
+    // if (challenge.type == 'coop')
+    //     return "width:30%;"
+    // return "width:60%;"
+    return "width:" + challenge.status + "%;"
+
 }
 $scope.getWidthOther = function (challenge) {
     //TODO
@@ -607,12 +609,14 @@ $scope.getWidthOther = function (challenge) {
 }
 $scope.getWidthSeparator = function (challenge) {
     //TODO
+    
     return "width:30%;background:transparent;"
 }
 $scope.getValueUser = function (challenge) {
     //TODO
-
-    return "15 " + $filter('translate')('user_points_label');
+    // usa status ma verifica challTarget
+    // return challenge.status + $filter('translate')('user_points_label');
+    return $filter('translate')('user_chall_status')+challenge.status+"%";
 }
 $scope.getValueOther = function (challenge) {
     //TODO

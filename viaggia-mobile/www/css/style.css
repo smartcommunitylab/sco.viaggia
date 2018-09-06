@@ -2377,7 +2377,7 @@ Play&Go
 }
 
 .tracking-dashboard {
-    margin: 0px 0px;
+    /* margin: 0px 0px; */
     border-top: 1px solid white;
     background-color: #2975a7 !important;
     color: white;
@@ -2796,8 +2796,8 @@ height: 30px;
     display: block;
 }
 .user-state{
-    background-color: #2975a7 !important;
-    color: #fff;
+    /* background-color: #2975a7 !important;
+    color: #fff; */
 
 }
 #progressbar {
@@ -2827,8 +2827,11 @@ text-align: center;
 }
 .home-points {
     margin: auto;
-    text-align: center;
 }
+.home-points i{
+color: #4caf4f;
+}
+
 .home-label-dashboard{ 
     color: white;
 }
@@ -3002,10 +3005,10 @@ text-align: center;
 }
 .container-level{
     width: 80%;
-    background: white;
+    background: lightgray;
     display: inline-block;
     height: 20px;
-    margin: 20px auto;
+    margin: 0px auto 4px auto;
     font-size: 0; /*used for removing space with inline-block*/ 
 
 }
@@ -3223,6 +3226,12 @@ text-align: center;
 }
 .text-center {
     text-align: center;
+}
+.text-left {
+    text-align: left;
+}
+.text-right {
+    text-align: right;
 }
 .ellipsis-multiline {
     overflow: hidden;

@@ -150,7 +150,8 @@ angular.module('viaggia.controllers.game', [])
         $scope.challenges = null;
         $scope.param = null;
         $scope.tabs = ['unlock', 'future', 'past'];
-        $scope.actualTab = $scope.tabs[0];
+        $scope.actualTab = "";
+
         $scope.challenge = [];
         $scope.typeOfChallenges = [];
         $scope.language = null;
@@ -158,6 +159,11 @@ angular.module('viaggia.controllers.game', [])
         var paramOptions = $stateParams.challengeEnd;
         var now = new Date().getTime();
 
+        if (profileService.status && profileService.status.inventory & profileService.status.challengeActivationActions) {
+            $scope.tabs[0];
+        } else {
+            $scope.tabs[1];
+        };
         if (paramOptions && paramOptions < now) {
             $scope.filter.selected = $scope.filter.options[1];
         }

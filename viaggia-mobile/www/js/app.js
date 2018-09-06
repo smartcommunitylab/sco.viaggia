@@ -1481,11 +1481,12 @@ angular.module('viaggia', [
       challenge_accept_popup_title:"Conferma la sfida",
       challenge_accept_popup_template:"Confermando la sfida verranno eliminate automaticamente le altre opzioni",
       lbl_challenge_unlock_next:"Raggiungi il prossimo livello per sbloccare la sfida",
-      user_next_level_label:" al prossimo livello",
+      user_next_level_label:" green points al prossimo livello",
       at_clock:" alle ",
       at_day:" ha vinto il giorno ",
       you_win:"Hai vinto il ",
-      you_lose:"Hai perso. "
+      you_lose:"Hai perso. ",
+      user_chall_status:"Stato completamento sfida:  "
     });
 
     $translateProvider.translations('en', {
@@ -1995,11 +1996,12 @@ angular.module('viaggia', [
       challenge_accept_popup_title:"Conferma la sfida",
       challenge_accept_popup_template:"Confermando la sfida verranno eliminate automaticamente le altre opzioni",
       lbl_challenge_unlock_next:"Raggiungi il prossimo livello per sbloccare la sfida",
-      user_next_level_label:" al prossimo livello",
+      user_next_level_label:" green points al prossimo livello",
       at_clock:" at ",
       at_day:" won ",
       you_win:"Hai vinto il ",
-      you_lose:"You lost "
+      you_lose:"You lost ",
+      user_chall_status:"Stato completamento sfida:  "
 
 
     });
