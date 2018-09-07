@@ -146,10 +146,10 @@ angular.module('viaggia.controllers.game', [])
 
     //loads the challenges tab, manage the filter of past and new challenges
 
-    .controller('ChallengesCtrl', function ($scope, $state, $stateParams, Config, $filter, $ionicScrollDelegate, $ionicPopup, profileService, $window, $timeout, GameSrv) {
+    .controller('ChallengesCtrl', function ($scope, $state, $stateParams,LoginService, Config, $filter, $ionicScrollDelegate, $ionicPopup, profileService, $window, $timeout, GameSrv) {
         $scope.challenges = null;
         $scope.param = null;
-        $scope.tabs = ['unlock', 'future', 'past'];
+        $scope.tabs = ['future', 'past', 'unlock'];
         $scope.actualTab = "";
 
         $scope.challenge = [];
@@ -159,11 +159,12 @@ angular.module('viaggia.controllers.game', [])
         var paramOptions = $stateParams.challengeEnd;
         var now = new Date().getTime();
 
-        if (profileService.status && profileService.status.inventory & profileService.status.challengeActivationActions) {
-            $scope.tabs[0];
-        } else {
-            $scope.tabs[1];
-        };
+        $scope.actualTab = $scope.tabs[0];
+        // if (profileService.status && profileService.status.inventory & profileService.status.challengeActivationActions) {
+        //     $scope.actualTab=$scope.tabs[0];
+        // } else {
+        //     $scope.actualTab=$scope.tabs[1];
+        // };
         if (paramOptions && paramOptions < now) {
             $scope.filter.selected = $scope.filter.options[1];
         }
@@ -211,15 +212,15 @@ angular.module('viaggia.controllers.game', [])
         }
         $scope.getTypes = function () {
             Config.loading();
-            GameSrv.getTypesChallenges(profileService.status).then(function (types) {
+            GameSrv.getTypesChallenges(LoginService.getUserProfile().userId).then(function (types) {
                 $scope.typeOfChallenges = [];
                 for (var i = 0; i < types.length; i++) {
                     $scope.typeOfChallenges.push({
-                        id: types[i].id,
-                        type: types[i].type,
-                        short: types[i]["short_" + $scope.language],
-                        long: types[i]["long_" + $scope.language],
-                        state: types[i].state
+                        // id: types[i].id,
+                        type: types[i].modelName,
+                        short: "blabla",
+                        long: "blabla long",
+                        state: (types[i].state=='AVAILABLE')?1:0
                     });
                 }
             }, function (err) {
@@ -227,55 +228,81 @@ angular.module('viaggia.controllers.game', [])
             }).finally(Config.loaded);
 
         }
+
+        //         active: true
+        // bonus: 100
+        // challCompleteDesc: "Per vincere la sfida compila il questionario di inizio gioco che visualizzi al seguente <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/it/start/pODID3MU8yqqcTRAV4BFZs4LoppFCi4GSSItZJV2QRA' target='_system'>indirizzo</a>."
+        // challCompletedDate: 0
+        // challDesc: "Compila il questionario iniziale e guadagna 100 punti green leaves."
+        // challId: "proposed_1"
+        // challTarget: 1
+        // daysToEnd: 13
+        // endDate: 1537368802444
+        // row_status: 0
+        // startDate: 1536159202444
+        // status: 0
+        // success: false
+        // type: "survey"
+        var convertChall = function (chall, type) {
+            var challConverted = {}
+            switch (type) {
+                case "racc": {
+                    challConverted.group = type;
+                    challConverted.type = type;
+                    challConverted.short = chall.challDesc;
+                    challConverted.long = chall.challCompleteDesc;
+                }
+            }
+            return challConverted;
+        }
         var buildChallenges = function (available, invites, sent) {
             $scope.challenges = [];
+            //available from raccomandation system
             for (var i = 0; i < available.length; i++) {
-                $scope.challenges.push({
-                    group: "racc",
-                    type: available[i].type,
-                    short: available[i]["short_" + $scope.language],
-                    long: available[i]["long_" + $scope.language]
-                });
+                $scope.challenges.push(convertChall(available[i],"racc"));
             }
-            var types = [];
-            for (var i = 0; i < $scope.typeOfChallenges.length; i++) {
-                var item = {
-                    group: "unlock",
-                    type: $scope.typeOfChallenges[i].type,
-                    state: $scope.typeOfChallenges[i].state,
-                    short: $scope.typeOfChallenges[i]["short"],
-                    long: $scope.typeOfChallenges[i]["long"]
-                }
-                if ($scope.typeOfChallenges[i].state == 1) {
-                    //unlocked
-                    types.push(item);
-                } else {
-                    //locked
-                    types.unshift(item);
-                }
-            }
-            $scope.challenges = $scope.challenges.concat(types);
-            for (var i = 0; i < invites.length; i++) {
-                $scope.challenges.push({
-                    group: "invite",
-                    type: invites[i].type,
-                    received: true,
-                    nickName: invites[i].nicknameSender,
-                    short: invites[i]["short_" + $scope.language],
-                    long: invites[i]["long_" + $scope.language]
-                });
-            }
+            // var types = [];
+            // for (var i = 0; i < $scope.typeOfChallenges.length; i++) {
+            //     var item = {
+            //         group: "unlock",
+            //         type: $scope.typeOfChallenges[i].type,
+            //         state: $scope.typeOfChallenges[i].state,
+            //         short: $scope.typeOfChallenges[i]["short"],
+            //         long: $scope.typeOfChallenges[i]["long"]
+            //     }
+            //     if ($scope.typeOfChallenges[i].state == 1) {
+            //         //unlocked
+            //         types.push(item);
+            //     } else {
+            //         //locked
+            //         types.unshift(item);
+            //     }
+            // }
+            // $scope.challenges = $scope.challenges.concat(types);
+
+
+            //invites from other players
+            // for (var i = 0; i < invites.length; i++) {
+            //     $scope.challenges.push({
+            //         group: "invite",
+            //         type: invites[i].type,
+            //         received: true,
+            //         nickName: invites[i].nicknameSender,
+            //         short: invites[i]["short_" + $scope.language],
+            //         long: invites[i]["long_" + $scope.language]
+            //     });
+            // }
             //concateno l'invito se presente
-            if (sent) {
-                $scope.challenges.push({
-                    group: "invite",
-                    type: sent.type,
-                    received: false,
-                    nickName: sent.nickName,
-                    short: sent["short_" + $scope.language],
-                    long: sent["long_" + $scope.language]
-                })
-            }
+            // if (sent) {
+            //     $scope.challenges.push({
+            //         group: "invite",
+            //         type: sent.type,
+            //         received: false,
+            //         nickName: sent.nickName,
+            //         short: sent["short_" + $scope.language],
+            //         long: sent["long_" + $scope.language]
+            //     })
+            // }
         }
         $scope.showWarning = function (type) {
             if (localStorage.getItem('warning_hide_' + type))
@@ -351,7 +378,7 @@ angular.module('viaggia.controllers.game', [])
                 }), function (err) {
                     $scope.challenges = null;
                 }
-            }).finally(Config.loaded);;
+            }).finally(Config.loaded);
 
         }
         $scope.getChallengeBarTemplate = function (challenge) {

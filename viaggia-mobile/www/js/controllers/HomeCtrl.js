@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.home', [])
 
-    .controller('HomeCtrl', function ($scope, $state, $q, profileService, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv, DiaryDbSrv, BT) {
+    .controller('HomeCtrl', function ($scope, $state, GameSrv, profileService, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv, DiaryDbSrv, BT) {
 
         $scope.challenges = [];
         $scope.expansion = [];
@@ -235,19 +235,22 @@ angular.module('viaggia.controllers.home', [])
             }
         }
         var setChallenges = function () {
-            if (!!$scope.status && !!$scope.status['challengeConcept']) {
-                if ($scope.status) {
-                    $scope.challenges = $scope.status['challengeConcept']['activeChallengeData'];
-                    if (!$scope.challenges) {
-                        $scope.challenges = [];
+            // get the updated active challenges
+            GameSrv.getActiveChallenges(profileService.status).then(function(challenges){
+                // if (!!$scope.status && !!$scope.status['challengeConcept']&& !!$scope.status['challengeConcept']['challengeData']) {
+                    if (challenges) {
+                        $scope.challenges = challenges;
+                        if (!$scope.challenges) {
+                            $scope.challenges = [];
+                        }
+                        else {
+                            initExpansion();
+                        }
+                    } else {
+                        $scope.challenges = null;
                     }
-                    else {
-                        initExpansion();
-                    }
-                } else {
-                    $scope.challenges = null;
-                }
-            }
+            });
+
         }
         var setUserProgress = function () {
             $scope.userProgress = 0;

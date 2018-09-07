@@ -2163,6 +2163,9 @@ Play&Go
     line-height: 20px;
     white-space: nowrap;
 }
+.challenge-short-desc {
+    white-space: unset!important;
+}
 .challenge-win {
     font-size: 48px;
 }

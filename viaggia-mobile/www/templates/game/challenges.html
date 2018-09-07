@@ -11,6 +11,8 @@
                 </div>
                 <div class="col challenge-tab" ng-click="openTab('past')" ng-class="{'becomeblue':!activeTab('past')}">{{'challenge_past' | translate}}</h4>
                 </div>
+                <div class="col challenge-tab" ng-click="openTab('unlock')" ng-class="{'becomeblue':!activeTab('unlock')}">{{'challenge_unlock' | translate}}</h4>
+                </div>
             </div>
         </div>
 
@@ -22,20 +24,23 @@
                         <h4 class="label">{{'warning_unlock_challenge' | translate}}</h4>
                         <button class="button button-clear button-challenge-enable" ng-click="hideWarning('unlock')"> {{'btn_got_it' | translate}}</button>
                     </ion-item>
-                    <ion-item class="challenge no-padding" ng-repeat="type in typeOfChallenges" ng-if="type.state==0">
+                    <ion-item class="challenge no-padding" ng-repeat="type in typeOfChallenges" >
                         <div class="row no-padding">
                             <div class="col col-20 {{getColorType(type)}} padding-10 ">
                                 <a class="icon-chall icon {{getIconType(type)}} "></a>
                             </div>
                             <div class="col col-60 padding-10 ">
-                                <div>{{type.short}}</div>
+                                <div class="short-desc">{{type.short}}</div>
                                 <div class="row">
                                     <p class="col challenge-long-desc">{{type.long}}</p>
                                     <div class="col button-active" ng-click="readMore(type)">{{'read_more' | translate}}</div>
                                 </div>
                             </div>
-                            <div class="col col-20 padding-10 ">
+                            <div class="col col-20 padding-10 " ng-if="type.state==0">
                                 <a class="icon-chall icon ic_game_lock button-active" ng-click="unlock(type)"></a>
+                            </div>
+                            <div class="col col-20 padding-10 " ng-if="type.state!=0">
+                                <a class="icon-chall icon ic_unlock button-active" ></a>
                             </div>
                         </div>
                     </ion-item>
@@ -59,7 +64,7 @@
                                 </div>
                                 <div class="col padding-10 ">
                                     <div>
-                                        <p>{{challenge.short}}</p>
+                                        <p class="challenge-short-desc">{{challenge.short}}</p>
                                         <p class="challenge-long-desc">{{challenge.long}}</p>
                                     </div>
                                     <div class="row">
@@ -131,7 +136,7 @@
                 </ion-list>
             </ion-scroll>
             <div ng-if="challenges != null && challenges.length == 0" class="text-center padding">
-                <h4>{{filter.selected == 'old' ? 'no_challenges_old' : 'no_challenges' | translate}}</h4>
+                <h4>{{ 'no_challenges' | translate}}</h4>
             </div>
             <div class="padding-right padding-left game-points" ng-if="!challenges">
                 <h4 class="label">{{'no_status' | translate}}</h4>
@@ -141,7 +146,7 @@
         <!-- past -->
         <div ng-if="actualTab=='past'">
             <div ng-if="pastChallenges != null && pastChallenges.length == 0" class="text-center padding">
-                <h4>{{filter.selected == 'old' ? 'no_challenges_old' : 'no_challenges' | translate}}</h4>
+                <h4>{{ 'no_challenges_old' | translate}}</h4>
             </div>
             <div class="padding-right padding-left game-points" ng-if="!challenges">
                 <h4 class="label">{{'no_status' | translate}}</h4>
@@ -155,10 +160,10 @@
                                     <span class="ellipsis-multiline">{{challenge.long}}</span>
                                 </div>
                                 <div class="challenge-string-result">
-                                    <p ng-if="challenge.win"> {{'you_win'| translate}} {{challenge.dataFinished| date:'dd-mm-yy'}}{{'at_clock'|
-                                        translate}} {{challenge.dataFinished| date:'HH:mm'}}</p>
-                                    <p ng-if="!challenge.win">{{'you_lose'| translate}}{{challenge.nicknameOpponent}}{{'at_day'| translate}} {{challenge.dataFinished| date:'dd-mm-yy'}}{{'at_clock'|
-                                        translate}} {{challenge.dataFinished| date:'HH:mm'}}</p>
+                                    <p ng-if="challenge.win"> {{'you_win'| translate}} {{challenge.dataFinished| date:'dd-mm-yy'}}{{'at_clock'| translate}}
+                                        {{challenge.dataFinished| date:'HH:mm'}}</p>
+                                    <p ng-if="!challenge.win">{{'you_lose'| translate}}{{challenge.nicknameOpponent}}{{'at_day'| translate}} {{challenge.dataFinished|
+                                        date:'dd-mm-yy'}}{{'at_clock'| translate}} {{challenge.dataFinished| date:'HH:mm'}}</p>
                                 </div>
                                 <!-- <p class="challenge-long-desc"></p> -->
                             </div>

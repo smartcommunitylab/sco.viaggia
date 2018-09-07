@@ -1,0 +1,301 @@
+Node version: v6.11.0
+
+Cordova version: 7.1.0
+
+Config.xml file: 
+
+<?xml version='1.0' encoding='utf-8'?>
+<widget android-versionCode="80" id="it.smartcommunitylab.viaggiatrento.playgo" version="2.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Viaggia Play&amp;Go</name>
+    <description>Viaggia Play&amp;Go</description>
+    <author email="info@smartcommunitylab.it" href="http://www.smartcommunitylab.it/">Smart Community Lab</author>
+    <plugin name="cordova-background-geolocation">
+        <variable name="LICENSE" value="6af31309a1796013f00927f4c396b898ac881efac6d398a165301e06e0a6a9c7" />
+        <variable name="GOOGLE_API_VERSION" value="11.6.0" />
+        <variable name="APPCOMPAT_VERSION" value="27.0.0" />
+        <variable name="LOCATION_ALWAYS_AND_WHEN_IN_USE_USAGE_DESCRIPTION" value="Always use is required for background location tracking" />
+        <variable name="LOCATION_ALWAYS_USAGE_DESCRIPTION" value="Background location-tracking is required" />
+        <variable name="LOCATION_WHEN_IN_USE_USAGE_DESCRIPTION" value="Background location-tracking is required" />
+        <variable name="MOTION_USAGE_DESCRIPTION" value="Using the accelerometer increases battery-efficiency by intelligently toggling location-tracking only when the device is detected to be moving" />
+    </plugin>
+    <content src="index.html" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <allow-navigation href="*" />
+    <allow-intent href="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <access origin="*" />
+    <access launch-external="yes" origin="sms:*" />
+    <access launch-external="yes" origin="tel:*" />
+    <access launch-external="yes" origin="mailto:*" />
+    <access launch-external="yes" origin="geo:*" />
+    <preference name="webviewbounce" value="false" />
+    <preference name="UIWebViewBounce" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="auto-hide-splash-screen" value="false" />
+    <preference name="BackupWebStorage" value="none" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="android-minSdkVersion" value="16" />
+    <preference name="android-targetSdkVersion" value="26" />
+    <preference name="FadeSplashScreen" value="false" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
+    <feature name="StatusBar">
+        <param name="ios-package" onload="true" value="CDVStatusBar" />
+    </feature>
+    <platform name="android">
+        <icon density="ldpi" src="config/instances/TRENTINO/resources/android/icon/drawable-ldpi-icon.png" />
+        <icon density="mdpi" src="config/instances/TRENTINO/resources/android/icon/drawable-mdpi-icon.png" />
+        <icon density="hdpi" src="config/instances/TRENTINO/resources/android/icon/drawable-hdpi-icon.png" />
+        <icon density="xhdpi" src="config/instances/TRENTINO/resources/android/icon/drawable-xhdpi-icon.png" />
+        <icon density="xxhdpi" src="config/instances/TRENTINO/resources/android/icon/drawable-xxhdpi-icon.png" />
+        <icon density="xxxhdpi" src="config/instances/TRENTINO/resources/android/icon/drawable-xxxhdpi-icon.png" />
+        <splash density="land-ldpi" src="config/instances/TRENTINO/resources/android/splash/drawable-land-ldpi-screen.png" />
+        <splash density="land-mdpi" src="config/instances/TRENTINO/resources/android/splash/drawable-land-mdpi-screen.png" />
+        <splash density="land-hdpi" src="config/instances/TRENTINO/resources/android/splash/drawable-land-hdpi-screen.png" />
+        <splash density="land-xhdpi" src="config/instances/TRENTINO/resources/android/splash/drawable-land-xhdpi-screen.png" />
+        <splash density="land-xxhdpi" src="config/instances/TRENTINO/resources/android/splash/drawable-land-xxhdpi-screen.png" />
+        <splash density="land-xxxhdpi" src="config/instances/TRENTINO/resources/android/splash/drawable-land-xxxhdpi-screen.png" />
+        <splash density="port-ldpi" src="config/instances/TRENTINO/resources/android/splash/drawable-port-ldpi-screen.png" />
+        <splash density="port-mdpi" src="config/instances/TRENTINO/resources/android/splash/drawable-port-mdpi-screen.png" />
+        <splash density="port-hdpi" src="config/instances/TRENTINO/resources/android/splash/drawable-port-hdpi-screen.png" />
+        <splash density="port-xhdpi" src="config/instances/TRENTINO/resources/android/splash/drawable-port-xhdpi-screen.png" />
+        <splash density="port-xxhdpi" src="config/instances/TRENTINO/resources/android/splash/drawable-port-xxhdpi-screen.png" />
+        <splash density="port-xxxhdpi" src="config/instances/TRENTINO/resources/android/splash/drawable-port-xxxhdpi-screen.png" />
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+        </config-file>
+        <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
+        <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
+        <icon density="hdpi" src="resources/android/icon/drawable-hdpi-icon.png" />
+        <icon density="xhdpi" src="resources/android/icon/drawable-xhdpi-icon.png" />
+        <icon density="xxhdpi" src="resources/android/icon/drawable-xxhdpi-icon.png" />
+        <icon density="xxxhdpi" src="resources/android/icon/drawable-xxxhdpi-icon.png" />
+        <splash density="land-ldpi" src="resources/android/splash/drawable-land-ldpi-screen.png" />
+        <splash density="land-mdpi" src="resources/android/splash/drawable-land-mdpi-screen.png" />
+        <splash density="land-hdpi" src="resources/android/splash/drawable-land-hdpi-screen.png" />
+        <splash density="land-xhdpi" src="resources/android/splash/drawable-land-xhdpi-screen.png" />
+        <splash density="land-xxhdpi" src="resources/android/splash/drawable-land-xxhdpi-screen.png" />
+        <splash density="land-xxxhdpi" src="resources/android/splash/drawable-land-xxxhdpi-screen.png" />
+        <splash density="port-ldpi" src="resources/android/splash/drawable-port-ldpi-screen.png" />
+        <splash density="port-mdpi" src="resources/android/splash/drawable-port-mdpi-screen.png" />
+        <splash density="port-hdpi" src="resources/android/splash/drawable-port-hdpi-screen.png" />
+        <splash density="port-xhdpi" src="resources/android/splash/drawable-port-xhdpi-screen.png" />
+        <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
+        <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
+    </platform>
+    <platform name="ios">
+        <icon height="57" src="config/instances/TRENTINO/resources/ios/icon/icon.png" width="57" />
+        <icon height="114" src="config/instances/TRENTINO/resources/ios/icon/icon@2x.png" width="114" />
+        <icon height="40" src="config/instances/TRENTINO/resources/ios/icon/icon-40.png" width="40" />
+        <icon height="80" src="config/instances/TRENTINO/resources/ios/icon/icon-40@2x.png" width="80" />
+        <icon height="50" src="config/instances/TRENTINO/resources/ios/icon/icon-50.png" width="50" />
+        <icon height="100" src="config/instances/TRENTINO/resources/ios/icon/icon-50@2x.png" width="100" />
+        <icon height="60" src="config/instances/TRENTINO/resources/ios/icon/icon-60.png" width="60" />
+        <icon height="120" src="config/instances/TRENTINO/resources/ios/icon/icon-60@2x.png" width="120" />
+        <icon height="180" src="config/instances/TRENTINO/resources/ios/icon/icon-60@3x.png" width="180" />
+        <icon height="72" src="config/instances/TRENTINO/resources/ios/icon/icon-72.png" width="72" />
+        <icon height="144" src="config/instances/TRENTINO/resources/ios/icon/icon-72@2x.png" width="144" />
+        <icon height="76" src="config/instances/TRENTINO/resources/ios/icon/icon-76.png" width="76" />
+        <icon height="152" src="config/instances/TRENTINO/resources/ios/icon/icon-76@2x.png" width="152" />
+        <icon height="29" src="config/instances/TRENTINO/resources/ios/icon/icon-small.png" width="29" />
+        <icon height="58" src="config/instances/TRENTINO/resources/ios/icon/icon-small@2x.png" width="58" />
+        <icon height="87" src="config/instances/TRENTINO/resources/ios/icon/icon-small@3x.png" width="87" />
+        <splash height="1136" src="config/instances/TRENTINO/resources/ios/splash/Default-568h@2x~iphone.png" width="640" />
+        <splash height="1334" src="config/instances/TRENTINO/resources/ios/splash/Default-667h.png" width="750" />
+        <splash height="2208" src="config/instances/TRENTINO/resources/ios/splash/Default-736h.png" width="1242" />
+        <splash height="1242" src="config/instances/TRENTINO/resources/ios/splash/Default-Landscape-736h.png" width="2208" />
+        <splash height="1536" src="config/instances/TRENTINO/resources/ios/splash/Default-Landscape@2x~ipad.png" width="2048" />
+        <splash height="768" src="config/instances/TRENTINO/resources/ios/splash/Default-Landscape~ipad.png" width="1024" />
+        <splash height="2048" src="config/instances/TRENTINO/resources/ios/splash/Default-Portrait@2x~ipad.png" width="1536" />
+        <splash height="1024" src="config/instances/TRENTINO/resources/ios/splash/Default-Portrait~ipad.png" width="768" />
+        <splash height="960" src="config/instances/TRENTINO/resources/ios/splash/Default@2x~iphone.png" width="640" />
+        <splash height="480" src="config/instances/TRENTINO/resources/ios/splash/Default~iphone.png" width="320" />
+    </platform>
+    <icon src="config/instances/TRENTINO/resources/android/icon/drawable-xhdpi-icon.png" />
+    <chcp>
+        <config-file url="http://192.168.43.207/public_folder/playAndGo/www/chcp.json" />
+        <native-interface version="5" />
+    </chcp>
+    <engine name="ios" spec="^4.4.0" />
+    <preference name="SplashShowOnlyFirstTime" value="false" />
+    <engine name="android" spec="~6.4.0" />
+</widget>
+
+
+Plugins: 
+
+cordova-android-play-services-gradle-release,cordova-android-support-gradle-release,cordova-background-geolocation,cordova-custom-config,cordova-plugin-app-event,cordova-plugin-app-version,cordova-plugin-background-fetch,cordova-plugin-cocoalumberjack,cordova-plugin-compat,cordova-plugin-console,cordova-plugin-device,cordova-plugin-device-orientation,cordova-plugin-facebook4,cordova-plugin-file,cordova-plugin-geolocation,cordova-plugin-globalization,cordova-plugin-googleplus,cordova-plugin-inappbrowser,cordova-plugin-network-information,cordova-plugin-request-location-accuracy,cordova-plugin-screen-orientation,cordova-plugin-splashscreen,cordova-plugin-statusbar,cordova-plugin-whitelist,cordova-plugin-x-toast,cordova-sqlite-storage,cordova.plugins.diagnostic,de.appplant.cordova.plugin.local-notification,ionic-plugin-keyboard,phonegap-plugin-push
+
+Android platform:
+
+*************************************************************************
+The "android" command is deprecated.
+For manual SDK, AVD, and project management, please use Android Studio.
+For command-line tools, use tools/bin/sdkmanager and tools/bin/avdmanager
+*************************************************************************
+Running /home/chin8/Documents/work/programming/android/android-sdk-linux/tools/bin/avdmanager list target
+
+Available Android targets:
+----------
+id: 1 or "Google Inc.:Google APIs:10"
+     Name: Google APIs
+     Type: Add-On
+     Vendor: Google Inc.
+     Revision: 2
+     Description: Google APIs, Android 10, rev 2
+     Based on Android 2.3.3 (API level 10)
+     Libraries:
+      * com.android.future.usb.accessory (usb.jar)
+          API for USB Accessories
+      * com.google.android.maps (maps.jar)
+          API for Google Maps
+----------
+id: 2 or "android-10"
+     Name: Android API 10
+     Type: Platform
+     API level: 10
+     Revision: 2
+----------
+id: 3 or "Google Inc.:Google APIs:16"
+     Name: Google APIs
+     Type: Add-On
+     Vendor: Google Inc.
+     Revision: 4
+     Description: Google APIs, Android 16, rev 4
+     Based on Android 4.1 (API level 16)
+     Libraries:
+      * com.google.android.media.effects (effects.jar)
+          Collection of video effects
+      * com.android.future.usb.accessory (usb.jar)
+          API for USB Accessories
+      * com.google.android.maps (maps.jar)
+          API for Google Maps
+----------
+id: 4 or "android-16"
+     Name: Android API 16
+     Type: Platform
+     API level: 16
+     Revision: 5
+----------
+id: 5 or "Google Inc.:Google APIs:19"
+     Name: Google APIs
+     Type: Add-On
+     Vendor: Google Inc.
+     Revision: 20
+     Description: Google APIs, Android 19, rev 20
+     Based on Android 4.4 (API level 19)
+     Libraries:
+      * com.google.android.media.effects (effects.jar)
+          Collection of video effects
+      * com.android.future.usb.accessory (usb.jar)
+          API for USB Accessories
+      * com.google.android.maps (maps.jar)
+          API for Google Maps
+----------
+id: 6 or "android-19"
+     Name: Android API 19
+     Type: Platform
+     API level: 19
+     Revision: 4
+----------
+id: 7 or "Google Inc.:Google APIs:21"
+     Name: Google APIs
+     Type: Add-On
+     Vendor: Google Inc.
+     Revision: 1
+     Description: Google APIs, Android 21
+     Based on Android 5.0 (API level 21)
+     Libraries:
+      * com.google.android.media.effects (effects.jar)
+          Collection of video effects
+      * com.android.future.usb.accessory (usb.jar)
+          API for USB Accessories
+      * com.google.android.maps (maps.jar)
+          API for Google Maps
+----------
+id: 8 or "android-21"
+     Name: Android API 21
+     Type: Platform
+     API level: 21
+     Revision: 2
+----------
+id: 9 or "Google Inc.:Google APIs:22"
+     Name: Google APIs
+     Type: Add-On
+     Vendor: Google Inc.
+     Revision: 1
+     Description: Google APIs, Android 22
+     Based on Android 5.1 (API level 22)
+     Libraries:
+      * com.google.android.media.effects (effects.jar)
+          Collection of video effects
+      * com.android.future.usb.accessory (usb.jar)
+          API for USB Accessories
+      * com.google.android.maps (maps.jar)
+          API for Google Maps
+----------
+id: 10 or "android-22"
+     Name: Android API 22
+     Type: Platform
+     API level: 22
+     Revision: 2
+----------
+id: 11 or "Google Inc.:Google APIs:23"
+     Name: Google APIs
+     Type: Add-On
+     Vendor: Google Inc.
+     Revision: 1
+     Description: Google APIs, Android 23
+     Based on Android 6.0 (API level 23)
+     Libraries:
+      * com.google.android.media.effects (effects.jar)
+          Collection of video effects
+      * com.android.future.usb.accessory (usb.jar)
+          API for USB Accessories
+      * com.google.android.maps (maps.jar)
+          API for Google Maps
+----------
+id: 12 or "android-23"
+     Name: Android API 23
+     Type: Platform
+     API level: 23
+     Revision: 3
+----------
+id: 13 or "android-24"
+     Name: Android API 24
+     Type: Platform
+     API level: 24
+     Revision: 2
+----------
+id: 14 or "android-25"
+     Name: Android API 25
+     Type: Platform
+     API level: 25
+     Revision: 3
+----------
+id: 15 or "android-26"
+     Name: Android API 26
+     Type: Platform
+     API level: 26
+     Revision: 2
+----------
+id: 16 or "android-27"
+     Name: Android API 27
+     Type: Platform
+     API level: 27
+     Revision: 1
+----------
+id: 17 or "android-28"
+     Name: Android API 28
+     Type: Platform
+     API level: 28
+     Revision: 6
+
+Error retrieving iOS platform information: Error: xcodebuild: Command failed with exit code ENOENT
+
