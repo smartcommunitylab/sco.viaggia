@@ -1,3 +1,38 @@
+var app = {
+
+  // Application Constructor
+  initialize: function() {
+    this.bindEvents();
+  },
+
+  // Bind any events that are required.
+  // Usually you should subscribe on 'deviceready' event to know, when you can start calling cordova modules
+  bindEvents: function() {
+    document.addEventListener('deviceready', this.onDeviceReady, false);
+    document.addEventListener('onUpdateReady', this.onUpdateReady, false);
+    document.addEventListener('nothingToUpdate', this.nothingToUpdate, false);
+    document.addEventListener('hideLoad', this.hideLoad, false);
+  },
+
+  // deviceready Event Handler
+  onDeviceReady: function() {
+    console.log('Device is ready for work');
+  },
+  onUpdateReady: function() {
+    console.log('Update is ready for installation');
+    //loading
+  },
+  // chcp_updateIsReadyToInstall Event Handler
+  nothingToUpdate: function() {
+    console.log('Nothing to update');
+  },
+  hideLoad: function() {
+    console.log('hide loading');
+  }
+};
+
+app.initialize();
+
 angular.module('ngIOS9UIWebViewPatch', ['ng']).config(['$provide', function ($provide) {
   'use strict';
 
@@ -138,7 +173,26 @@ angular.module('viaggia', [
     }
     $ionicPlatform.ready(function () { // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
-
+      document.addEventListener('chcp_updateLoadFailed',function() {console.log('chcp_updateLoadFailed')});
+      document.addEventListener('chcp_updateInstallFailed',function() {console.log('chcp_updateInstallFailed')});
+      document.addEventListener('chcp_assetsInstallationError',function() {console.log('chcp_assetsInstallationError')});
+      document.addEventListener('chcp_updateIsReadyToInstall', onUpdateReady, false);
+      document.addEventListener('chcp_nothingToUpdate', nothingToUpdate, false);
+      document.addEventListener('chcp_updateInstalled', hideLoad, false);
+      document.addEventListener('chcp_updateInstallFailed', hideLoad, false);
+      function onUpdateReady() {
+        console.log('Update is ready for installation');
+        //loading
+        $ionicLoading.show();
+      }
+      // chcp_updateIsReadyToInstall Event Handler
+      function nothingToUpdate() {
+        console.log('Nothing to update');
+      }
+      function hideLoad() {
+        console.log('hide loading');
+        $ionicLoading.hide();
+      }
       initAppUpdate();
 
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {

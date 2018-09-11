@@ -3,6 +3,5 @@
   "ios_identifier": "it.smartcommunitylab.viaggiatrento.playgo",
   "android_identifier": "it.smartcommunitylab.viaggiatrento.playgo",
   "update": "start",
-  "content_url": "https://dev.smartcommunitylab.it/cordova",
-  "release": "2018.09.11-16.15.38"
+  "content_url": "https://dev.smartcommunitylab.it/cordova"
 }

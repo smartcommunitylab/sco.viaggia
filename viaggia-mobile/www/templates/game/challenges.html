@@ -157,19 +157,19 @@
                         <div class="row">
                             <div class="col col-80">
                                 <div>{{challenge.short|uppercase}}.
-                                    <span class="ellipsis-multiline">{{challenge.long}}</span>
+                                    <span class="ellipsis-multiline" ng-bind-html="challenge.long"></span>
                                 </div>
                                 <div class="challenge-string-result">
-                                    <p ng-if="challenge.win"> {{'you_win'| translate}} {{challenge.dataFinished| date:'dd-mm-yy'}}{{'at_clock'| translate}}
+                                    <p ng-if="challenge.success"> {{'you_win'| translate}} {{challenge.dataFinished| date:'dd-mm-yy'}}{{'at_clock'| translate}}
                                         {{challenge.dataFinished| date:'HH:mm'}}</p>
-                                    <p ng-if="!challenge.win">{{'you_lose'| translate}}{{challenge.nicknameOpponent}}{{'at_day'| translate}} {{challenge.dataFinished|
+                                    <p ng-if="!challenge.success">{{'you_lose'| translate}}<span ng-if="challenge.nicknameOpponent">{{challenge.nicknameOpponent}}</span>{{'at_day'| translate}} {{challenge.dataFinished|
                                         date:'dd-mm-yy'}}{{'at_clock'| translate}} {{challenge.dataFinished| date:'HH:mm'}}</p>
                                 </div>
                                 <!-- <p class="challenge-long-desc"></p> -->
                             </div>
                             <div class="col col-20">
                                 <!-- coppa  -->
-                                <p ng-if="challenge.win">
+                                <p ng-if="challenge.success">
                                     <a class="icon ic_game_challenge challenge-win" style="{{getColorCup(challenge)}}"></a>
                                 </p>
                             </div>

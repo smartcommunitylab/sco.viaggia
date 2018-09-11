@@ -4,63 +4,50 @@
             <i class="ion-android-arrow-back" style="font-size:30px;"></i>
         </button>
     </ion-nav-buttons>
-    <!-- <ion-nav-buttons side="right">
-        <button ng-click="openRules()" class="button icon button-icon button-clear ion-information-circled"></button>
-    </ion-nav-buttons> -->
-
     <ion-content class="padding-right padding-left game-points" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
-        <!--<div class="game-mypoints">
-			<img class="game-badge" src="http://placehold.it/150x150" />
-			<div class="description">
-				<h1 class="title">1234</h1>
-				<h4 class="subtitle">Punti Green Leaves</h4>
-			</div>
-		</div>-->
         <div ng-if="!!status">
             <div class="img-container">
-                <img ng-if="profileImg" ng-src="{{profileImg}}" >
+                <img ng-if="profileImg" ng-src="{{profileImg}}">
                 <a class="button-icon icon ion-camera" ng-click="changeProfile()"></a>
 
             </div>
-            <!-- <h1 style="margin-top: 0px;">{{'user_level_label'|translate}}:{{status.playerData.level}}</h1> -->
             <input type="file" style="display: none" name="file" id="inputImg" onchange="angular.element(this).scope().uploadFile(this.files)"
             />
 
             <p></p>
-            <div class="row ">
-                <div class="col col-33 col-center">
-                    <h2 style="margin-top: 0px;">{{'user_level_label'|translate}}:</h2>
-                </div>
-                <div class="col col-66 col-center">
-                    <h2>
-                        {{level}}</h2>
-                </div>
-                <!-- </div> -->
-            </div>
-            <div class="row game-mypoints">
-                <div class="col col-33 col-center">
-                    <img class="game-badge" src="img/game/greenleaves.png" />
-                </div>
-                <!-- <div class="col col-67 col-center"> -->
-                <div class="col col-66 col-center">
-                    <div class="description">
-                        <h2 class="points">{{status['pointConcept'][0]['score']}} {{'green_leaves_points' | translate}}</h2>
-                        <!-- <h5 class="label">{{'green_leaves_points' | translate}}</h5> -->
+            <div class="user-state card">
+                <div class="row">
+                    <div class="col col-10" style="position: relative;">
+                        <img class="img-level" src="img/ic_level.png">
+                    </div>
+                    <div class="col home-level text-left">
+                        <h4>{{'user_level_label' | translate}} {{level}}</h4>
                     </div>
                 </div>
-                <!-- </div> -->
+                <div class="row">
+                    <div class="col col-10 home-points text-center">
+                        <i class="icon ion-leaf"></i>
+                    </div>
+                    <div class="col home-points text-left">
+                        <h4>
+                            {{status['pointConcept'][0]['score']}} {{'green_leaves_points'|translate}}
+                        </h4>
+                    </div>
+                </div>
+
             </div>
-
         </div>
-
-        <div ng-repeat="badgeType in badgeTypes" ng-if="badges[badgeType].length > 0">
-            <!--badgeEarned-->
-            <h4 class="title">{{badgeType | translate}}</h4>
-            <ul class="badges">
-                <li ng-repeat="badge in badges[badgeType]">
-                    <img class="game-badge-s" ng-src="{{badge.url}}" />
-                </li>
-            </ul>
+        </div>
+        <div class="badge-container">
+            <div ng-repeat="badgeType in badgeTypes" ng-if="badges[badgeType].length > 0">
+                <!--badgeEarned-->
+                <h4 class="title">{{badgeType | translate}}</h4>
+                <ul class="badges">
+                    <li ng-repeat="badge in badges[badgeType]">
+                        <img class="game-badge-s" ng-src="{{badge.url}}" />
+                    </li>
+                </ul>
+            </div>
         </div>
         </div>
         <div ng-if="!status">

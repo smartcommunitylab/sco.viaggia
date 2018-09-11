@@ -98,7 +98,6 @@
         </platform>
         <icon src="*resource_folder*/resources/android/icon/drawable-xhdpi-icon.png" />
             <chcp>
-        <config-file url="http://192.168.43.207/public_folder/playAndGo/www/chcp.json" />
-        <native-interface version="5" />
+        <config-file url="https://dev.smartcommunitylab.it/cordova/chcp.json" />
     </chcp>
     </widget>

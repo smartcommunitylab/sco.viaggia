@@ -14,92 +14,65 @@
     </ion-nav-buttons>
 
     <ion-content class="padding-right padding-left game-points" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
-        <!-- <a class="item item-avatar" href="#">
-            <img ng-if="!user.img" src="img/game/generic_user.png">
-            <img ng-if="user.img" src="user.img">
-            <h1>{{'user_level_label'|translate}}:{{user.level}}</h1>
+        <div ng-if="!!user">
+            <div class="img-container">
+                <img ng-if="profileImg" ng-src="{{getUserImg(user.playerId)}}">
 
-        </a>
-        <p></p>
-        <div  class="chart" ng-if="user.statistics">
-                <H5 class="H5stats">{{getTitle(day)}}</H5>
-                <div ng-if="user.statistics.walk>0" class="walkbgcolor statsfloat" ng-style="{{getStyle(user.statistics.walk, 'walk')}}">
-                    <i class="icon ic_foot"></i>
-                </div>
-                <div ng-if="user.statistics.walk>0" class="statstext" id="walkcolor"> {{(user.statistics.walk/1000) | number:1}} km </div>
-                <div id="statsdiv"></div>
-                <div ng-if="(user.statistics.transit+user.statistics.bus+user.statistics.train)>0" class="publicbgcolor statsfloat" ng-style="{{getStyle((user.statistics.transit+user.statistics.bus+user.statistics.train), 'transit')}}">
-                    <i class="icon ic_urban-bus"></i>
-                    <i class="icon ic_train"></i>
-                </div>
-                <div ng-if="(user.statistics.transit+user.statistics.bus+user.statistics.train)>0" class="statstext" id="publiccolor"> {{((user.statistics.transit+user.statistics.bus+user.statistics.train)/1000) | number:1}} km </div>
-                <div id="statsdiv"></div>
-                <div ng-if="user.statistics.bike>0" class="bikebgcolor statsfloat" ng-style="{{getStyle(user.statistics.bike, 'bike')}}">
-                    <i class="icon ic_bike"></i>
-                </div>
-                <div ng-if="user.statistics.bike>0" class="statstext" id="bikecolor"> {{(user.statistics.bike/1000) | number:1}} km </div>
-                <div id="statsdiv"></div>
-                <div ng-if="user.statistics.car>0" class="carbgcolor statsfloat" ng-style="{{getStyle(user.statistics.car, 'car')}}">
-                    <i class="icon ic_car"></i>
-                </div>
-                <div ng-if="user.statistics.car>0" class="statstext" id="carcolor"> {{(user.statistics.car/1000) | number:1}} km </div>
-                <div id="statsdiv"></div>
-        </div> -->
-        <div ng-if="!!user">      
-                <div class="img-container">
-                    <img ng-src="{{getUserImg(user.playerId)}}">
-                </div>
-    
-                <p></p>
-                <div class="row ">
-                    <div class="col col-33 col-center">
-                        <h2 style="margin-top: 0px;">{{'user_level_label'|translate}}:</h2>
+            </div>
+            <p></p>
+            <div class="user-state card">
+                <div class="row">
+                    <div class="col home-level text-left">
+                        <h4>{{'user_level_label' | translate}} {{user.level}}</h4>
                     </div>
-                    <div class="col col-66 col-center">
-                        <h2>
-                            {{user.level}}</h2>
-                    </div>
-                    <!-- </div> -->
                 </div>
-                <div class="row game-mypoints">
-                    <div class="col col-33 col-center">
-                        <img class="game-badge" src="img/game/greenleaves.png" />
+                <div class="row">
+                    <div class="col home-points text-left">
+                        <h4>
+                            <i class="icon ion-leaf"></i>
+                            {{user.greenLeaves}} {{'green_leaves_points'|translate}}
+                        </h4>
                     </div>
-                    <!-- <div class="col col-67 col-center"> -->
-                    <div class="col col-66 col-center">
-                        <div class="description">
-                            <h2 class="points">{{user.greenLeaves}} {{'green_leaves_points' | translate}}</h2>
-                            <!-- <h5 class="label">{{'green_leaves_points' | translate}}</h5> -->
-                        </div>
-                    </div>
-                    <!-- </div> -->
                 </div>
-    
-        <!-- <div ng-if="!!user">
+            </div>
+            <!-- <div class="img-container">
+                <img ng-src="{{getUserImg(user.playerId)}}">
+            </div>
+
+            <p></p>
+            <div class="row ">
+                <div class="col col-33 col-center">
+                    <h2 style="margin-top: 0px;">{{'user_level_label'|translate}}:</h2>
+                </div>
+                <div class="col col-66 col-center">
+                    <h2>
+                        {{user.level}}</h2>
+                </div>
+            </div>
             <div class="row game-mypoints">
                 <div class="col col-33 col-center">
                     <img class="game-badge" src="img/game/greenleaves.png" />
                 </div>
-                <div class="col col-67 col-center">
+                <div class="col col-66 col-center">
                     <div class="description">
-                        <h1 class="points">{{user.greenLeaves}}</h1>
-                        <h5 class="label">{{'green_leaves_points' | translate}}</h5>
+                        <h2 class="points">{{user.greenLeaves}} {{'green_leaves_points' | translate}}</h2>
                     </div>
                 </div>
             </div> -->
+            <div class="badge-container">
 
-            <div ng-repeat="badgeType in badgeTypes" ng-if="badges[badgeType].length > 0">
-                <!-- badgeEarned -->
-                <h4 class="title">{{badgeType | translate}}</h4>
-                <ul class="badges">
-                    <li ng-repeat="badge in badges[badgeType]">
-                        <img class="game-badge-s" ng-src="{{badge.url}}" />
-                    </li>
-                </ul>
+                <div ng-repeat="badgeType in badgeTypes" ng-if="badges[badgeType].length > 0">
+                    <h4 class="title">{{badgeType | translate}}</h4>
+                    <ul class="badges">
+                        <li ng-repeat="badge in badges[badgeType]">
+                            <img class="game-badge-s" ng-src="{{badge.url}}" />
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div ng-if="user['badgeCollectionConcept'].length==0">
-                    <h4 class="label">{{'no_badges' | translate}}</h4>
-                </div>
+                <h4 class="label">{{'no_badges' | translate}}</h4>
+            </div>
         </div>
         <div ng-if="!user">
             <h4 class="label">{{'no_status' | translate}}</h4>

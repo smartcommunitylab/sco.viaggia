@@ -8,7 +8,9 @@
     <ion-content ng-class="{'empty_bookmarks': primaryLinks.length == 0}" ng-init="showTutorial()">
         <div class="user-state card">
             <div class="row">
-                <div class="col home-level text-right">
+                <div class="col col-10">
+                </div>
+                <div class="col col-33 home-level text-left">
                     <h4>{{'user_level_label' | translate}} {{level}}</h4>
                 </div>
                 <div class="col home-points text-left">
@@ -17,14 +19,28 @@
                     </h4>
                 </div>
             </div>
-            <div class="row">
-                <div class="col home-level">
+            <!-- <div class="row">
+                <div class="col col-10">
+                </div>
+                <div class="col home-level text-left">
                     {{toNextLevel}} {{'user_next_level_label' | translate}}
                 </div>
-            </div>
+            </div> -->
             <div class="row">
-                <div class="container-level">
-                    <div class="progress-bar-level" style="width: {{userProgress}}%;"># green leaves to the next level</div>
+                <div class="col col-10" style="position: relative;">
+                    <img class="img-level" src="img/ic_level.png">
+                </div>
+                <div class="col-90">
+                    <div class="row">
+                        <div class="col home-level text-left">
+                            {{toNextLevel}} {{'user_next_level_label' | translate}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col container-level">
+                            <div class="progress-bar-level" style="width: {{userProgress}}%;"># green leaves to the next level</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -157,8 +173,8 @@
         </div>
 
         <div class="home-challenges">
-            <div class="row">
-                <button class="button button-block button-block-active" ui-sref="app.home.challenges">
+            <div class="row" ng-if="buttonEnabled">
+                <button class="button button-block button-block-active button-next-challenge" ui-sref="app.home.challenges">
                     {{'home_next_challenge'|translate}} </button>
             </div>
             <div class="row">

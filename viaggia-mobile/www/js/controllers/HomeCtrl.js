@@ -234,6 +234,18 @@ angular.module('viaggia.controllers.home', [])
                 $scope.expansion[i] = false;
             }
         }
+        var setChooseButton = function () {
+            //get day of the week and check if it is between friday and tuesday
+            var nowDay = moment().format('E');
+
+            var dayEnabled = Config.getDaysOfGameOptions();
+            if (dayEnabled[nowDay-1]){
+                $scope.buttonEnabled = true;
+                return
+            }
+            $scope.buttonEnabled = false;
+
+        }
         var setChallenges = function () {
             // get the updated active challenges
             GameSrv.getActiveChallenges(profileService.status).then(function(challenges){
@@ -310,7 +322,7 @@ angular.module('viaggia.controllers.home', [])
             initWatch();
             localDataInit();
             setChallenges();
-
+            setChooseButton();
         }, function () {
             //$ionicLoading.hide();
         });

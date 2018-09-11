@@ -438,14 +438,12 @@ angular.module('viaggia.controllers.game', [])
                                 $scope.pastChallenges.push({
                                     group: "racc",
                                     type: pastChallenges[i].type,
-                                    short: pastChallenges[i]["short_" + $scope.language],
-                                    long: pastChallenges[i]["long_" + $scope.language],
-                                    idOpponent: pastChallenges[i].idOpponent,
-                                    nicknameOpponent: pastChallenges[i].nicknameOpponent,
-                                    dataFinished: pastChallenges[i].dataFinished,
-                                    target: pastChallenges[i].target,
-                                    win: pastChallenges[i].win,
-                                    value: pastChallenges[i].value
+                                    short: pastChallenges[i].challDesc,
+                                    long: pastChallenges[i].challCompleteDesc,
+                                    idOpponent: pastChallenges[i].idOpponent?pastChallenges[i].idOpponent:null,
+                                    nicknameOpponent: pastChallenges[i].nicknameOpponent?pastChallenges[i].nicknameOpponent:null,
+                                    dataFinished: pastChallenges[i].endDate,
+                                    success: pastChallenges[i].success
                                 });
                             }
                         }

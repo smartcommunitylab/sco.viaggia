@@ -2016,9 +2016,11 @@ Play&Go
 }
 
 .game-points {
-    text-align: center;
+    /* text-align: center; */
 }
-
+.badge-container{
+    margin: 16px 8px;
+}
 .game-points .title {
     /*    margin-top: 24px;*/
 }
@@ -2779,7 +2781,15 @@ height: 30px;
     bottom: 10px;
     width: 100%;
 }
-
+.img-level {
+    box-shadow: none!important;
+    width: 30px;
+    margin: auto;
+    position: absolute!important;
+    top: 30%;
+    left: 50%;
+    margin: -15% 0 0 -25%;
+}
 .footer-bar .footer-button {
     background-color: #2975a7;
     border-radius: 4px;
@@ -2801,6 +2811,7 @@ height: 30px;
 .user-state{
     /* background-color: #2975a7 !important;
     color: #fff; */
+    margin: 0px;
 
 }
 #progressbar {
@@ -2844,7 +2855,7 @@ color: #4caf4f;
     line-height: 40px;
     font-weight: bold;
     text-align: center;
-    margin: 0px -6px;
+    margin: 16px 3px 3px -6px;
     padding: 0px;
 }
 .bar-profile-img{
@@ -3013,6 +3024,7 @@ color: #4caf4f;
     height: 20px;
     margin: 0px auto 4px auto;
     font-size: 0; /*used for removing space with inline-block*/ 
+    padding: 0px;
 
 }
 .competitive-container{
@@ -3087,6 +3099,7 @@ color: #4caf4f;
       height: 200px;
       overflow: hidden;
       position: relative;
+      margin: 0px -16px;
   }
   .img-container>img {
       width: 100%;
@@ -3204,9 +3217,12 @@ color: #4caf4f;
 .challenge-block {
     margin: 0px 0px 8px 8px;
 }
-#homeTabs .tabs>a>i  {
-    height: 100%;
-    margin: 4px auto;
+.button-next-challenge{
+    margin: 3px;
+}
+.tabs>a>i  {
+    height: 100%!important;
+    margin: 6px auto!important;
 }
 #profileTabs  .tabs>a>i  {
     height: 100%;
@@ -3235,6 +3251,15 @@ color: #4caf4f;
 }
 .text-right {
     text-align: right;
+}
+.col-40 {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 40%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 40%;
+    -ms-flex: 0 0 40%;
+    flex: 0 0 40%;
+    max-width: 40%;
 }
 .ellipsis-multiline {
     overflow: hidden;
