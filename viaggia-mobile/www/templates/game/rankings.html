@@ -45,11 +45,11 @@
                 <ion-list>
                     <div ng-repeat="rankingUser in ranking" ng-class="{'pos-even': ($index % 2 == 0)}" on-tap="openProfileOthers(rankingUser)">
                         <div class="row" id="position-{{$index}}">
-                                <div class="col col-20">{{rankingUser.position}}</div>
+                                <div class="col col-20 text-ranking">{{rankingUser.position}}</div>
 
                             <div class="col col-40"><div ><img  class="profile-img" ng-src="{{getUserImg(rankingUser.playerId)}}"></div><p>{{rankingUser.nickName}}</p></div>
                             <!-- <div class="col col-25">{{rankingUser.level}}</div> -->
-                            <div class="col col-40">{{rankingUser.score}}</div>
+                            <div class="col col-40 text-ranking">{{rankingUser.score}}</div>
                         </div>
                     </div>
                 </ion-list>

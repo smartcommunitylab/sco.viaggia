@@ -2189,7 +2189,10 @@ Play&Go
 .game-ranking {
     text-align: center;
 }
-
+.text-ranking{
+line-height: 64px;
+    flex: none;
+}
 .game-ranking .listheader {
     font-weight: bold;
     height: 44px;
@@ -2811,7 +2814,7 @@ height: 30px;
 .user-state{
     /* background-color: #2975a7 !important;
     color: #fff; */
-    margin: 0px;
+    /* margin: 0px; */
 
 }
 #progressbar {

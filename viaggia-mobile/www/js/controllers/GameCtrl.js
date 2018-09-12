@@ -59,13 +59,6 @@ angular.module('viaggia.controllers.game', [])
 
     //loads the score tab and all the badges of the user
     .controller('PointsCtrl', function ($scope, $rootScope, Config, profileService, $ionicPopup, $filter) {
-        // green leaves: Green Leaves
-        // bike aficionado: Bike Trip Badge
-        // sustainable life: Zero Impact Badge
-        // public transport aficionado: Public Transport Badge
-        // park and ride pioneer: Park And Ride Badge
-        // recommendations: User Recommendation Badge
-        // leaderboard top 3: Leaderboard Top 3 Badge
 
         $scope.badges = null;
         $scope.badgeTypes = Config.getBadgeTypes();
@@ -146,7 +139,7 @@ angular.module('viaggia.controllers.game', [])
 
     //loads the challenges tab, manage the filter of past and new challenges
 
-    .controller('ChallengesCtrl', function ($scope, $state, $stateParams,LoginService, Config, $filter, $ionicScrollDelegate, $ionicPopup, profileService, $window, $timeout, GameSrv) {
+    .controller('ChallengesCtrl', function ($scope, $state, $stateParams, LoginService, Config, $filter, $ionicScrollDelegate, $ionicPopup, profileService, $window, $timeout, GameSrv) {
         $scope.challenges = null;
         $scope.param = null;
         $scope.tabs = ['future', 'past', 'unlock'];
@@ -220,7 +213,7 @@ angular.module('viaggia.controllers.game', [])
                         type: types[i].modelName,
                         short: "blabla",
                         long: "blabla long",
-                        state: (types[i].state=='AVAILABLE')?1:0
+                        state: (types[i].state == 'AVAILABLE') ? 1 : 0
                     });
                 }
             }, function (err) {
@@ -229,24 +222,14 @@ angular.module('viaggia.controllers.game', [])
 
         }
 
-        //         active: true
-        // bonus: 100
-        // challCompleteDesc: "Per vincere la sfida compila il questionario di inizio gioco che visualizzi al seguente <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/it/start/pODID3MU8yqqcTRAV4BFZs4LoppFCi4GSSItZJV2QRA' target='_system'>indirizzo</a>."
-        // challCompletedDate: 0
-        // challDesc: "Compila il questionario iniziale e guadagna 100 punti green leaves."
-        // challId: "proposed_1"
-        // challTarget: 1
-        // daysToEnd: 13
-        // endDate: 1537368802444
-        // row_status: 0
-        // startDate: 1536159202444
-        // status: 0
-        // success: false
-        // type: "survey"
         var convertChall = function (chall, type) {
             var challConverted = {}
             switch (type) {
                 case "racc": {
+                    challConverted.challId = chall.challId;
+                    challConverted.startDate = chall.startDate;
+                    challConverted.endDate = chall.endDate;
+                    challConverted.bonus = chall.bonus;
                     challConverted.group = type;
                     challConverted.type = type;
                     challConverted.short = chall.challDesc;
@@ -258,8 +241,10 @@ angular.module('viaggia.controllers.game', [])
         var buildChallenges = function (available, invites, sent) {
             $scope.challenges = [];
             //available from raccomandation system
-            for (var i = 0; i < available.length; i++) {
-                $scope.challenges.push(convertChall(available[i],"racc"));
+            if (available) {
+                for (var i = 0; i < available.length; i++) {
+                    $scope.challenges.push(convertChall(available[i], "racc"));
+                }
             }
             // var types = [];
             // for (var i = 0; i < $scope.typeOfChallenges.length; i++) {
@@ -333,7 +318,7 @@ angular.module('viaggia.controllers.game', [])
                                 $scope.challenges = [challenge];
                                 $ionicScrollDelegate.resize();
                             }, function (err) {
-
+                                //TODO err
                             }).finally(Config.loaded);
                         }
                     }
@@ -401,9 +386,7 @@ angular.module('viaggia.controllers.game', [])
         }
         $scope.getWidthUser = function (challenge) {
             //TODO
-            if (challenge.type == 'coop')
-                return "width:30%;"
-            return "width:60%;"
+            return "width:" + challenge.status + "%;"
         }
         $scope.getWidthOther = function (challenge) {
             //TODO
@@ -417,8 +400,7 @@ angular.module('viaggia.controllers.game', [])
         }
         $scope.getValueUser = function (challenge) {
             //TODO
-
-            return "15 " + $filter('translate')('user_points_label');
+            return $filter('translate')('user_chall_status') + challenge.status + "%";
         }
         $scope.getValueOther = function (challenge) {
             //TODO
@@ -440,8 +422,9 @@ angular.module('viaggia.controllers.game', [])
                                     type: pastChallenges[i].type,
                                     short: pastChallenges[i].challDesc,
                                     long: pastChallenges[i].challCompleteDesc,
-                                    idOpponent: pastChallenges[i].idOpponent?pastChallenges[i].idOpponent:null,
-                                    nicknameOpponent: pastChallenges[i].nicknameOpponent?pastChallenges[i].nicknameOpponent:null,
+                                    status: pastChallenges[i].status,
+                                    idOpponent: pastChallenges[i].idOpponent ? pastChallenges[i].idOpponent : null,
+                                    nicknameOpponent: pastChallenges[i].nicknameOpponent ? pastChallenges[i].nicknameOpponent : null,
                                     dataFinished: pastChallenges[i].endDate,
                                     success: pastChallenges[i].success
                                 });

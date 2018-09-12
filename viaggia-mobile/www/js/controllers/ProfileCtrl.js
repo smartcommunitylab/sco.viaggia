@@ -382,9 +382,13 @@ angular.module('viaggia.controllers.profile', [])
                 });
             }
         }
+        $scope.getBorderColor = function (challenge) {
+            return GameSrv.getBorderColor(challenge);
+        }
         GameSrv.getRemoteMaxStat().then(function () {
             $scope.calculateMaxStats();
         })
+
         GameSrv.getProfileOther($scope.profileId).then(
             function (profile) {
                 $scope.user = profile

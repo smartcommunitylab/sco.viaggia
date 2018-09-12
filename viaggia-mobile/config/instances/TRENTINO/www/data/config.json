@@ -20,7 +20,6 @@
     "cliendID": "ec03a596-e41e-49cc-808c-62f39e01de0b",
     "clientSecID": "6c6829bc-6621-4273-84b8-d74d23744f04",
     "redirectURL": "http://localhost",
-    "daysOfGameOptions": [true,true,false,false,false,true,true],
     "smartcheck_options": [
         1,
         4,
