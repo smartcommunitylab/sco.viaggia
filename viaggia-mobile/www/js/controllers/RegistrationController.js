@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.registration', [])
 
-    .controller('RegistrationCtrl', function ($scope, $state, profileService, $ionicPopup, $filter, $ionicHistory, Toast, Config, registrationService, LoginService) {
+    .controller('RegistrationCtrl', function ($scope, $state, profileService, notificationService, $ionicPopup, $filter, $ionicHistory, Toast, Config, registrationService, LoginService) {
         $scope.expandedRules = false;
         Config.loaded();
         $scope.user = {
@@ -128,6 +128,7 @@ angular.module('viaggia.controllers.registration', [])
                     Config.loading();
 
                     registrationService.register($scope.user).then(function () {
+                        notificationService.registerUser();
                         $state.go('app.home');
 
                         // profileService.setProfileImage($scope.currentFile).then(function () {

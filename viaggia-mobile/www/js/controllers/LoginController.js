@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.login', [])
 
-    .controller('LoginCtrl', function ($scope, $ionicSideMenuDelegate, DiaryDbSrv, $ionicLoading, $ionicPlatform, $state, $ionicHistory, $ionicPopup, $timeout, $filter, LoginService, GameSrv, Config, Toast) {
+    .controller('LoginCtrl', function ($scope, $ionicSideMenuDelegate, DiaryDbSrv, $ionicLoading, $ionicPlatform, $state, $ionicHistory, $ionicPopup, $timeout, $filter, LoginService, GameSrv, Config, Toast, notificationService) {
         $ionicSideMenuDelegate.canDragContent(false);
 
 
@@ -8,6 +8,8 @@ angular.module('viaggia.controllers.login', [])
             email: '',
             password: ''
         };
+
+
 
         // This method is executed when the user press the "Sign in with Google" button
         $scope.googleSignIn = function () {
@@ -26,6 +28,8 @@ angular.module('viaggia.controllers.login', [])
                     //$ionicLoading.hide();
 
                     if (valid) {
+                        //reg push notification, not blocking
+                        notificationService.registerUser();
                         //go on to home page
                         $state.go('app.home');
                         $ionicHistory.nextViewOptions({
@@ -62,6 +66,8 @@ angular.module('viaggia.controllers.login', [])
                         $ionicLoading.show({
                             template: $filter('translate')('user_check')
                         });
+                        //reg push notification, not blocking
+                        notificationService.registerUser();
                         //go on to home page
                         $state.go('app.home');
                         $ionicHistory.nextViewOptions({
@@ -102,6 +108,8 @@ angular.module('viaggia.controllers.login', [])
                     //$ionicLoading.hide();
 
                     if (valid) {
+                        //reg push notification, not blocking
+                        notificationService.registerUser();
                         //go on to home page
                         $state.go('app.home');
                         $ionicHistory.nextViewOptions({
@@ -185,6 +193,8 @@ angular.module('viaggia.controllers.login', [])
                 //diary db not worked
             });
             if (profile != null && locallyValid) {
+                //reg push notification, not blocking
+                notificationService.registerUser();
                 $state.go('app.home');
                 $ionicHistory.nextViewOptions({
                     disableBack: true,
@@ -233,6 +243,8 @@ angular.module('viaggia.controllers.login', [])
                     GameSrv.validUserForGamification(profile).then(function (valid) {
                         //$ionicLoading.hide();
                         if (valid) {
+                            //reg push notification, not blocking
+                            notificationService.registerUser();
                             //go on to home page
                             $state.go('app.home');
                             $ionicHistory.nextViewOptions({

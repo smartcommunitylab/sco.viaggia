@@ -237,7 +237,7 @@ angular.module('viaggia.controllers.home', [])
         var setChooseButton = function () {
             //if proposed is not empty enable
             GameSrv.getProposedChallenges(profileService.status).then(function (challenges) {
-                if (challenges && challenges.length>0) {
+                if (challenges && challenges.length) {
                     $scope.buttonEnabled = true;
 
                 } else {

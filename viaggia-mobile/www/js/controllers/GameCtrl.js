@@ -235,11 +235,26 @@ angular.module('viaggia.controllers.game', [])
                     challConverted.short = chall.challDesc;
                     challConverted.long = chall.challCompleteDesc;
                 }
+                case "futu": {
+                    challConverted.challId = chall.challId;
+                    challConverted.startDate = chall.startDate;
+                    challConverted.endDate = chall.endDate;
+                    challConverted.bonus = chall.bonus;
+                    challConverted.group = type;
+                    challConverted.type = type;
+                    challConverted.short = chall.challDesc;
+                    challConverted.long = chall.challCompleteDesc;
+                }
             }
             return challConverted;
         }
-        var buildChallenges = function (available, invites, sent) {
+        var buildChallenges = function (future, available, invites, sent) {
             $scope.challenges = [];
+            if (future) {
+                for (var i = 0; i < future.length; i++) {
+                    $scope.challenges.push(convertChall(future[i], "futu"));
+                }
+            }
             //available from raccomandation system
             if (available) {
                 for (var i = 0; i < available.length; i++) {
@@ -345,26 +360,34 @@ angular.module('viaggia.controllers.game', [])
 
         $scope.getActual = function () {
             //TODO
+            var future = []
             var available = []
             var invites = []
             var sent = {}
             Config.loading();
-            GameSrv.getAvailableChallenges(profileService.status).then(function (challenges) {
-                available = challenges
-                GameSrv.getSentInviteChallenges(profileService.status).then(function (challenge) {
-                    sent = challenge;
-                    GameSrv.getInvitesChallenges(profileService.status).then(function (challenges) {
-                        invites = challenges;
-                        buildChallenges(available, invites, sent);
+            GameSrv.getFutureChallenges(profileService.status).then(function (challenges) {
+                future = challenges
 
-                    });
-                }, function (err) {
-                    $scope.challenges = null;
-                }), function (err) {
-                    $scope.challenges = null;
-                }
-            }).finally(Config.loaded);
+                GameSrv.getAvailableChallenges(profileService.status).then(function (challenges) {
+                    available = challenges;
 
+                    GameSrv.getSentInviteChallenges(profileService.status).then(function (challenge) {
+                        sent = challenge;
+                        GameSrv.getInvitesChallenges(profileService.status).then(function (challenges) {
+                            invites = challenges;
+                            buildChallenges(future, available, invites, sent);
+
+                        });
+                    }), function (err) {
+                        $scope.challenges = null;
+                    }, function (err) {
+                        $scope.challenges = null;
+                    }, function (err) {
+                        $scope.challenges = null;
+                    }
+                }).finally(Config.loaded);
+
+            })
         }
         $scope.getChallengeBarTemplate = function (challenge) {
             switch (challenge.type) {

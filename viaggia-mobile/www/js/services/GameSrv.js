@@ -160,6 +160,7 @@ angular.module('viaggia.services.game', [])
             comp_perf: 'ic_ch_perf',
             coop: 'ic_ch_coop',
             racc: 'ic_ch_single',
+            futu: 'ic_ch_single',
             sent_coop: 'ic_ch_coop_invitation',
             sent_comp_perf: 'ic_ch_perf_invitation',
             sent_comp_time: 'ic_ch_tempo_inv'
@@ -169,6 +170,7 @@ angular.module('viaggia.services.game', [])
             comp_perf: 'perf-user perf-other-color',
             coop: 'coop-user coop-other-color',
             racc: 'single-user single-other-color',
+            futu: 'single-user single-other-color',
             sent_coop: 'coop-other-color',
             sent_comp_perf: 'perf-other-color',
             sent_comp_time: ' time-other-color'
@@ -179,6 +181,7 @@ angular.module('viaggia.services.game', [])
             comp_perf: '#FF9D33;',
             coop: '#e54d2d;',
             racc: '#2681A4;',
+            futu: '#2681A4;',
         }
         getTravelType = function (message) {
             var event = JSON.parse(message.event);
@@ -719,6 +722,19 @@ angular.module('viaggia.services.game', [])
                 });
             return deferred.promise;
         }
+        gameService.getFutureChallenges = function (profile) {
+            var deferred = $q.defer();
+            LoginService.getValidAACtoken().then(
+                function (token) {
+                    gameService.getChallenge(token, 'FUTURE').then(function (challenges) {
+                        deferred.resolve(challenges);
+                    }, function (err) {
+                        deferred.reject();
+                    })
+                });
+            return deferred.promise;
+        }
+
         gameService.getAvailableChallenges = function (profile) {
             var deferred = $q.defer();
             LoginService.getValidAACtoken().then(

@@ -39,8 +39,10 @@
 					<img ng-src="{{urlImg}}">
 					<h2>{{currentUser.nickName}}</h2>
 				</a> -->
-				<a class="item item-avatar user-menu-name" nav-clear menu-close ng-click="openProfile();">
-					<img ng-if="profileImg" ng-src="{{profileImg}}" ng-click="openProfile()">
+				<a class="item user-menu-name" nav-clear menu-close ng-click="openProfile();">
+					<div class="profile-container">
+						<img class="bar-profile-img" ng-if="profileImg" ng-src="{{profileImg}}" ng-click="openProfile()">
+					</div>
 					<div class="user-menu-name">{{currentUser.nickName}}</div>
 				</a>
 				<!-- <ion-item nav-clear menu-close ng-click="openProfile();" class="menu-main item-icon-left">

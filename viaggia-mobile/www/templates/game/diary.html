@@ -3,7 +3,9 @@
         {{'diary_title' | translate}}
     </ion-nav-title>
     <ion-nav-buttons side="right">
+        <div class="profile-container">
             <img class="bar-profile-img" ng-if="profileImg" ng-src="{{profileImg}}" ng-click="openProfile()">
+        </div>
     </ion-nav-buttons>
     <ion-content class="game-ranking" has-bouncing="false" scroll="false" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
         <div class="filter item-accordion" ng-if="!!filter.options">
@@ -35,12 +37,12 @@
                                 class="message-inner" ng-class="{'multimodal-message':message.multimodal}" style="border-color: {{getStyleColor(message)}}">
                                 <!-- <div style="height: 8px" ng-if="message.multimodal && message.first" ></div> -->
 
-                                <div class="row row-center diary-line" >
+                                <div class="row row-center diary-line">
                                     <div class="timeline-multimodal-dot " style="background: {{getStyleColor(message)}};" ng-if="message.multimodal && message.first">
                                         <H5 class="timeline-multimodal"> {{'diary_multimodal'| translate}} </H5>
                                     </div>
-                                    <div class="timeline-not-multimodal-dot "  style="background: {{getStyleColor(message)}};"  ng-if="!message.multimodal">
-                                        </div>
+                                    <div class="timeline-not-multimodal-dot " style="background: {{getStyleColor(message)}};" ng-if="!message.multimodal">
+                                    </div>
                                     <i class=" timeline-col icon {{getIcon(message)}}" style="background-color: {{getStyleColor(message)}}; color:{{getIconColor(message)}}"></i>
                                     <div class=" timeline-msg" ng-bind-html="getString(message) | translate: getParams(message)">
                                     </div>

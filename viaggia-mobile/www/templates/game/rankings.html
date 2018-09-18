@@ -1,6 +1,8 @@
 <ion-view title="{{'home_gamification' | translate}} {{currentUser.nickName}}">
     <ion-nav-buttons side="right">
+        <div class="profile-container">
             <img class="bar-profile-img" ng-if="profileImg" ng-src="{{profileImg}}" ng-click="openProfile()">
+        </div>
     </ion-nav-buttons>
     <ion-content class="game-ranking" has-bouncing="false" scroll="false" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
         <!-- Filter -->
@@ -24,7 +26,7 @@
                     <div>Lorem ipsum sic dolor amet</div>
                 </div>
                 <div class="row">
-                        <div class="col col-20">{{'game_tab_ranking_listheader_position' | translate}}</div>
+                    <div class="col col-20">{{'game_tab_ranking_listheader_position' | translate}}</div>
 
                     <div class="col col-40">{{'game_tab_ranking_listheader_player' | translate}}</div>
                     <!-- <div class="col col-25">{{'game_tab_ranking_listheader_level' | translate}}</div> -->
@@ -33,7 +35,7 @@
             </div>
             <div class="my-ranking">
                 <div class="row">
-                        <div class="col col-20">{{currentUser.position}}</div>
+                    <div class="col col-20">{{currentUser.position}}</div>
 
                     <div class="col col-40">{{currentUser.nickName}}</div>
                     <!-- <div class="col col-25">{{currentUser.level}}</div> -->
@@ -45,9 +47,14 @@
                 <ion-list>
                     <div ng-repeat="rankingUser in ranking" ng-class="{'pos-even': ($index % 2 == 0)}" on-tap="openProfileOthers(rankingUser)">
                         <div class="row" id="position-{{$index}}">
-                                <div class="col col-20 text-ranking">{{rankingUser.position}}</div>
+                            <div class="col col-20 text-ranking">{{rankingUser.position}}</div>
 
-                            <div class="col col-40"><div ><img  class="profile-img" ng-src="{{getUserImg(rankingUser.playerId)}}"></div><p>{{rankingUser.nickName}}</p></div>
+                            <div class="col col-40">
+                                <div>
+                                    <img class="profile-img" ng-src="{{getUserImg(rankingUser.playerId)}}">
+                                </div>
+                                <p>{{rankingUser.nickName}}</p>
+                            </div>
                             <!-- <div class="col col-25">{{rankingUser.level}}</div> -->
                             <div class="col col-40 text-ranking">{{rankingUser.score}}</div>
                         </div>
