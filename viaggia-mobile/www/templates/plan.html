@@ -58,12 +58,13 @@
       <button class="button button-raised button-plan-type icon ic_bike" ng-class="{'button-viaggia-selected ': isSwitched('BICYCLE'),'button-viaggia-notselected': !isSwitched('BICYCLE')}" ng-click="switch('BICYCLE')"></button>
     </div>
 
-    <!--<div class="row">
+    <div class="row">
 
       <button class="button button-raised button-plan-type icon ic_car-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDCAR'),'button-viaggia-notselected': !isSwitched('SHAREDCAR')}" ng-click="switch('SHAREDCAR')"></button>
       <button class="button button-raised button-plan-type icon ic_bike-sharing" ng-class="{'button-viaggia-selected ': isSwitched('SHAREDBIKE'),'button-viaggia-notselected': !isSwitched('SHAREDBIKE')}" ng-click="switch('SHAREDBIKE')"></button>
-      <button class="button button-raised button-plan-type icon ic_ac" ng-class="{'button-viaggia-selected ': isSwitchedAcc(),'button-viaggia-notselected': !isSwitchedAcc()}" ng-click="switchAcc()"></button>
-    </div>-->
+      <button ng-if="accessible" class="button button-raised button-plan-type icon ic_ac" ng-class="{'button-viaggia-selected ': isSwitchedAcc(),'button-viaggia-notselected': !isSwitchedAcc()}" ng-click="switchAcc()"></button>
+      <!--            <span class="button-plan-type"></span>-->
+    </div>
     <!--
         <div class="row">
             <div class="text-center">

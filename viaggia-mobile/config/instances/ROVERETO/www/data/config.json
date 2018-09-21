@@ -3,7 +3,7 @@
     "appid": "rovereto",
     "messagingAppId": "mobility.rovereto",
     "senderID": "453601816446",
-    "appversion": "2.1.8",
+    "appversion": "2.1.9",
     "appname": "Viaggia Rovereto",
     "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
     "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",

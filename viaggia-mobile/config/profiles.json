@@ -16,8 +16,8 @@
     "ROVERETO": {
         "resource_folder": "config/instances/ROVERETO",
         "widget_id": "eu.trentorise.smartcampus.viaggiarovereto",
-        "version": "2.1.8",
-        "version_code": "43",
+        "version": "2.1.9",
+        "version_code": "44",
         "app_name": "Viaggia Rovereto"
     },
     "BOLOGNA": {
