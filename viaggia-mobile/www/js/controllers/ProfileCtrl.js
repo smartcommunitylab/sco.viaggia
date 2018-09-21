@@ -342,7 +342,7 @@ angular.module('viaggia.controllers.profile', [])
         };
 
         $scope.getUserImg = function (id) {
-            return Config.getServerURL() + '/gamificationweb/player/avatar/' + Config.getAppId() + '/' + $scope.profileId;
+            return Config.getServerURL() + '/gamificationweb/player/avatar/' + Config.getAppId() + '/' + $scope.profileId+'/big';
         }
 
         $scope.filter.options = ['Total', 'Monthly'];

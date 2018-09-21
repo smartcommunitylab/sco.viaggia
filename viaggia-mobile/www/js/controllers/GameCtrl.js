@@ -75,10 +75,10 @@ angular.module('viaggia.controllers.game', [])
 
                     // var img = document.getElementById( "#photo" );
                     // img.src = fileURL;
-                    $rootScope.profileImg = $scope.tmpUrl + $scope.$parent.$parent.$parent.status.playerData.playerId + '?' + new Date().getTime();
+                    $rootScope.profileImg = $scope.tmpUrl + $scope.$parent.$parent.$parent.status.playerData.playerId + '/big?' + new Date().getTime();
                     // $scope.refreshProfileImage();
                 }, function (error) {
-                    $rootScope.profileImg = 'img/game/generic_user.png' + '?' + new Date().getTime();;
+                    $rootScope.profileImg = 'img/game/generic_user.png' + '/big?' + new Date().getTime();
                 })
         }
 

@@ -2865,11 +2865,12 @@ color: #4caf4f;
     padding: 0px;
 }
 .bar-profile-img{
+     /* border-radius: 50%; */
 position: absolute;
-left: 50%;
-top: 50%;
-height: 90px;
-width: auto;
+left: 25%;
+    top: 30%;
+    height: auto;
+    width: 100%;
 -webkit-transform: translate(-50%,-50%);
     margin: 4px 8px;
     /* object-fit: cover; */
@@ -2889,7 +2890,7 @@ width: auto;
     width: 30px;
     height: 30px;
     overflow: hidden;
-    border-radius: 25px;
+    border-radius: 50%;
     display: table-cell;
 }
 .challenge-profile-img {
