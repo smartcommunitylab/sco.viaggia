@@ -9,9 +9,9 @@
         <!-- tabs -->
         <div class="filter">
             <div class="challenge-tabs row">
-                <div class="col challenge-tab" ng-click="openTab('future')" ng-class="{'becomeblue':!activeTab('future')}">{{'challenge_future' | translate}}</h4>
-                </div>
                 <div class="col challenge-tab" ng-click="openTab('past')" ng-class="{'becomeblue':!activeTab('past')}">{{'challenge_past' | translate}}</h4>
+                </div>
+                <div class="col challenge-tab" ng-click="openTab('future')" ng-class="{'becomeblue':!activeTab('future')}">{{'challenge_future' | translate}}</h4>
                 </div>
                 <!-- <div class="col challenge-tab" ng-click="openTab('unlock')" ng-class="{'becomeblue':!activeTab('unlock')}">{{'challenge_unlock' | translate}}</h4>
                 </div> -->
@@ -189,11 +189,12 @@
                                     <span class="ellipsis-multiline" compile="challenge.long"></span>
                                 </div>
                                 <div class="challenge-string-result">
-                                    <p ng-if="challenge.success"> {{'you_win'| translate}} {{challenge.dataFinished| date:'dd-mm-yy'}}{{'at_clock'| translate}}
-                                        {{challenge.dataFinished| date:'HH:mm'}}</p>
-                                    <p ng-if="!challenge.success">{{'you_lose'| translate}}
-                                        <span ng-if="challenge.nicknameOpponent">{{challenge.nicknameOpponent}}</span>{{'at_day'| translate}} {{challenge.dataFinished|
-                                        date:'dd-mm-yy'}}{{'at_clock'| translate}} {{challenge.dataFinished| date:'HH:mm'}}</p>
+                                    <span ng-if="challenge.success"> {{'you_win'| translate}} {{challenge.dataFinished| date:'dd-MM-yy'}}{{'at_clock'| translate}}
+                                        {{challenge.dataFinished| date:'HH:mm'}}</span>
+                                    <span ng-if="!challenge.success">{{'you_lose'| translate}}
+                                        <span ng-if="challenge.nicknameOpponent">.{{challenge.nicknameOpponent}}{{'at_day_opponent'| translate}}</span>
+                                        <span ng-if="challenge.nicknameOpponent==null">{{'at_day'| translate}}</span> {{challenge.dataFinished| date:'dd-MM-yy'}}{{'at_clock'|
+                                        translate}} {{challenge.dataFinished| date:'HH:mm'}}</span>
                                 </div>
                             </div>
                             <div class="col col-20">

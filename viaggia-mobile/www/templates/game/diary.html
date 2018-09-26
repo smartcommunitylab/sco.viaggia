@@ -46,7 +46,7 @@
                                     <i class=" timeline-col icon {{getIcon(message)}}" style="background-color: {{getStyleColor(message)}}; color:{{getIconColor(message)}}"></i>
                                     <div class=" timeline-msg" ng-bind-html="getString(message) | translate: getParams(message)">
                                     </div>
-                                    <div class="col col-10 col-info">
+                                    <div class="col col-10 col-info" ng-if="getState(message)">
                                         <a class="challenge-info">
                                             <i class="icon ion-ios-arrow-right"></i>
                                         </a>

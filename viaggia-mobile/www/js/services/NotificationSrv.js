@@ -4,11 +4,11 @@ angular.module('viaggia.services.notification', [])
   //
   //A Service to work with notifications with server
   //
-  .factory('notificationService', function ($q, $http, $rootScope, LoginService,$ionicPlatform, Config) {
+  .factory('notificationService', function ($q, $http, $rootScope, LoginService, $ionicPlatform, Config) {
 
     var notificationService = {};
     var numberNotification = 10;
-    var registrationId=null;
+    var registrationId = null;
     notificationService.getNotifications = function (sinceTimestamp, sincePosition, numberNotification) {
       var deferred = $q.defer();
       $http.get(Config.getMessagingServerURL() + '/app/public/notification/' + Config.getMessagingAppId() +
@@ -30,30 +30,51 @@ angular.module('viaggia.services.notification', [])
       var deferred = $q.defer();
       LoginService.getValidAACtoken().then(
         function (token) {
-      $http({
-        method: 'POST',
-        url: Config.getMessagingServerURL() + '/register/user/' + Config.getMessagingAppId(),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token
+          $http({
+            method: 'DELETE',
+            url: Config.getMessagingServerURL() + '/unregister/user/' + Config.getMessagingAppId(),
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + token
+            },
+            data: {
+              "appName": Config.getMessagingAppId(),
+              "registrationId": registrationId,
+              "platform": ionic.Platform.isAndroid() ? "android" : "ios"
+            },
+            timeout: 5000
+          }).success(function (data) {
+            $http({
+              method: 'POST',
+              url: Config.getMessagingServerURL() + '/register/user/' + Config.getMessagingAppId(),
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
 
-        },
-        data: {
-          "appName": Config.getMessagingAppId(),
-          "registrationId": registrationId,
-          "platform": ionic.Platform.isAndroid() ? "android" : "ios"
-        },
-        timeout: 5000
-      }).success(function (data) {
-        deferred.resolve(data.notifications);
-      })
-        .error(function (err) {
-          deferred.reject(err);
+              },
+              data: {
+                "appName": Config.getMessagingAppId(),
+                "registrationId": registrationId,
+                "platform": ionic.Platform.isAndroid() ? "android" : "ios"
+              },
+              timeout: 5000
+            }).success(function (data) {
+              deferred.resolve(data.notifications);
+            })
+              .error(function (err) {
+                deferred.reject(err);
 
-        })},
+              })
+          })
+            .error(function (err) {
+              deferred.reject(err);
+
+            })
+        },
         function () {
-            deferred.reject();
+          deferred.reject();
         });
       return deferred.promise;
     }

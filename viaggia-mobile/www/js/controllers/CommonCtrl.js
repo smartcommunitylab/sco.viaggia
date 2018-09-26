@@ -220,11 +220,11 @@ angular.module('viaggia.controllers.common', [])
     }
     $scope.openGamificationBoard = function () {
       //$scope.firstOpenPopup.close();
-      $state.go('app.game');
+      $state.go('app.home.leaderboards');
     };
     $scope.openBadgeBoard = function () {
       //$scope.firstOpenPopup.close();
-      $state.go('app.game.points');
+      $state.go('app.profile.points');
     };
     $scope.planFromPopup = function () {
       $scope.closePopup();

@@ -142,7 +142,7 @@ angular.module('viaggia.controllers.game', [])
     .controller('ChallengesCtrl', function ($scope, $state, $stateParams, LoginService, Config, $filter, $ionicScrollDelegate, $ionicPopup, profileService, $window, $timeout, GameSrv) {
         $scope.challenges = null;
         $scope.param = null;
-        $scope.tabs = ['future', 'past', 'unlock'];
+        $scope.tabs = ['past', 'future', 'unlock'];
         $scope.actualTab = "";
 
         $scope.challenge = [];
@@ -159,7 +159,7 @@ angular.module('viaggia.controllers.game', [])
         //     $scope.actualTab=$scope.tabs[1];
         // };
         if (paramOptions && paramOptions < now) {
-            $scope.filter.selected = $scope.filter.options[1];
+            // $scope.filter.selected = $scope.filter.options[1];
         }
 
         $scope.openTab = function (tab) {
@@ -448,7 +448,7 @@ angular.module('viaggia.controllers.game', [])
                                     status: pastChallenges[i].status,
                                     idOpponent: pastChallenges[i].idOpponent ? pastChallenges[i].idOpponent : null,
                                     nicknameOpponent: pastChallenges[i].nicknameOpponent ? pastChallenges[i].nicknameOpponent : null,
-                                    dataFinished: pastChallenges[i].endDate,
+                                    dataFinished: pastChallenges[i].success ? pastChallenges[i].challCompletedDate : pastChallenges[i].endDate,
                                     success: pastChallenges[i].success
                                 });
                             }
@@ -1006,6 +1006,10 @@ angular.module('viaggia.controllers.game', [])
             //$scope.firstOpenPopup.close();
             //get end
             var end = (JSON.parse(message.event)).challengeEnd;
+            var now = new Date().getTime();
+            if (end > now) {
+                $state.go('app.home.home');
+            }
             $state.go('app.home.challenges', { challengeEnd: end });
         };
 

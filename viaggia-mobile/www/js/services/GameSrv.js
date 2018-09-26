@@ -117,6 +117,15 @@ angular.module('viaggia.services.game', [])
                 state: "openChallengeBoard(message)"
 
             },
+            NEW_LEVEL: {
+                string: "msg_new_level",
+                color: "#e54d2d",
+                iconColor: "#B62000",
+                icon: "ion-android-star",
+                params: { 'levelName': 'levelName' },
+                state: "openBadgeBoard()"
+
+            },
             RECOMMENDED: {
                 string: "msg_new_friend",
                 color: "#2681A4",

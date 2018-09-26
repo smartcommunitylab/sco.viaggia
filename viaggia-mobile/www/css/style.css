@@ -2482,8 +2482,7 @@ overflow: hidden;
 }
 
 .tracking-dashboard .tracking-ds-button i {
-    font-size: 48px;
-    font-size: 60px;
+    font-size: 56px;
     padding: 8px;
     margin: auto;
     display: table;
@@ -2702,9 +2701,10 @@ height: 30px;
     border-radius: 4px;
     border-radius: 35px;
     box-shadow: none;
-    height: 20px!important;
-    width: 20px!important;
+    /* height: 20px!important;
+    width: 20px!important; */
     font-size: 22px;
+    min-width: 44px;
 }
 .modes-buttons {
     position: fixed;

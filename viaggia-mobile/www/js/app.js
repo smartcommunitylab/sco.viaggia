@@ -474,6 +474,9 @@ angular.module('viaggia', [
       .state('app.home.challenges', {
         cache: false,
         url: "/challenges",
+        params: {
+              challengeEnd: null
+            },
         views: {
           'tab-challenges': {
             templateUrl: 'templates/game/challenges.html',
@@ -1436,6 +1439,7 @@ angular.module('viaggia', [
       msg_trip_bus: 'Ore {{time}}.<br> {{travelValidity}}, {{points}} punti.',
       msg_trip_train: 'Ore {{time}}.<br> {{travelValidity}}, {{points}} punti.',
       msg_trip_multimodal: 'Ore {{time}}.<br> {{travelValidity}}, {{points}} punti.',
+      msg_new_level:'Hai raggiunto il livello {{levelName}}',
       travel_pending_state: 'Viaggio in attesa di validazione',
       no_diary: 'Nessun elemento trovato nel diario',
       no_stats: 'Nessuna statistica trovata',
@@ -1538,9 +1542,10 @@ angular.module('viaggia', [
       lbl_challenge_unlock_next: "Raggiungi il prossimo livello per sbloccare la sfida",
       user_next_level_label: " Green Leaves al prossimo livello",
       at_clock: " alle ",
-      at_day: " ha vinto il giorno ",
+      at_day_opponent: " ha vinto il giorno ",
+      at_day: "il giorno ",
       you_win: "Hai vinto il ",
-      you_lose: "Hai perso. ",
+      you_lose: "Hai perso ",
       user_chall_status: "Stato completamento sfida:  "
     });
 
@@ -1955,6 +1960,7 @@ angular.module('viaggia', [
       msg_trip_bus: 'At {{time}}.<br> {{travelValidity}}, {{points}} points.',
       msg_trip_train: 'At {{time}}.<br> {{travelValidity}}, {{points}} points.',
       msg_trip_multimodal: 'At {{time}}.<br> {{travelValidity}}, {{points}} points.',
+      msg_new_level:'You reached the {{levelName}} level',
       travel_pending_state: 'Travel in validation',
       no_diary: 'No diary available',
       no_stats: 'No data found',
@@ -2057,7 +2063,8 @@ angular.module('viaggia', [
       lbl_challenge_unlock_next: "Reach the next level to unlock the challenge",
       user_next_level_label: " Green Leaves to next level",
       at_clock: " at ",
-      at_day: " won on ",
+      at_day_opponent: " won on ",
+      at_day: " on ",
       you_win: "You won on ",
       you_lose: "You lost ",
       user_chall_status: "Challenge completion status:  "

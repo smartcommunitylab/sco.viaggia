@@ -129,7 +129,9 @@
                         <ion-item class="challenge" ng-repeat="challenge in challenges" style="{{getBorderColor(challenge)}}">
                             <div class="row">
                                 <div class="col col-80">
-                                    <div>{{challenge}}
+                                        <div>{{challenge.date | date :'dd MM yy'}}
+                                            </div>
+                                    <div>{{challenge.text}}
                                     </div>
                                     <!-- <div class="challenge-string-result">
                                         <p ng-if="challenge.success"> {{'you_win'| translate}} {{challenge.dataFinished| date:'dd-mm-yy'}}{{'at_clock'|

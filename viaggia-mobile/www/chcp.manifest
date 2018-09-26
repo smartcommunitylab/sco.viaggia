@@ -9,7 +9,7 @@
   },
   {
     "file": "css/style.css",
-    "hash": "28d4284148389b3b500d4c091cb085ff"
+    "hash": "df3fafd78b5d01f6be1e5b5db220fa7e"
   },
   {
     "file": "data/bus.csv",
@@ -41,7 +41,7 @@
   },
   {
     "file": "data/tt.json",
-    "hash": "f023b87667615f629214e9c6c732ae1d"
+    "hash": "ae893a21f4e91b28b606d1f40dbd9211"
   },
   {
     "file": "data/tt.json.full.json",
@@ -153,7 +153,7 @@
   },
   {
     "file": "img/credits/logo_rovereto.png",
-    "hash": "ebf6738ec06e576d7f1660a7190c8267"
+    "hash": "a9b38a00216980ea71e094b3f3b0ca0c"
   },
   {
     "file": "img/credits/logo-sco-fbk.png",
@@ -381,7 +381,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "94dd58d7660e21e184aa461ab2d62a1f"
+    "hash": "7d5cf24d3b8162e35fb10e7f0bd189d1"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -393,7 +393,7 @@
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "2da9d48769c01951c308de3d7fb62cf0"
+    "hash": "4da729a834a8f4cfe0ce342b6b6fbe26"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
@@ -441,7 +441,7 @@
   },
   {
     "file": "js/controllers/ProfileCtrl.js",
-    "hash": "f2f84fb04370d9b38e63bf9112c2eb3b"
+    "hash": "71d683c9ee629b86007f0ac5a96ab395"
   },
   {
     "file": "js/controllers/RegistrationController.js",
@@ -1005,7 +1005,7 @@
   },
   {
     "file": "templates/game/challenges.html",
-    "hash": "12edee93cdc1c2f13563444624bd6549"
+    "hash": "615875ed29733704a797d3a0b8328e0f"
   },
   {
     "file": "templates/game/challengeTemplates/competitivePerformance.html",
@@ -1049,7 +1049,7 @@
   },
   {
     "file": "templates/game/diary.html",
-    "hash": "2716424512d192b47d3ba8b4c5438c3f"
+    "hash": "9d6923ee20693a928d981bdbaf850ef4"
   },
   {
     "file": "templates/game/eventTripDetail.html",
@@ -1085,7 +1085,7 @@
   },
   {
     "file": "templates/game/profileOthersContainer.html",
-    "hash": "17c975f31ae640094208e87d7b4403b7"
+    "hash": "a4073991ec2b23ed03e44d1d1cba20a5"
   },
   {
     "file": "templates/game/profileOthersStatistics.html",
@@ -1093,7 +1093,7 @@
   },
   {
     "file": "templates/game/rankings.html",
-    "hash": "52482f2ebcacc6f7d12df6274b311a96"
+    "hash": "5a2a39e7fcf4f68b9ae731646a9705df"
   },
   {
     "file": "templates/game/rules_en.html",
@@ -1109,11 +1109,11 @@
   },
   {
     "file": "templates/home.html",
-    "hash": "9364e0e1306a291459b359402b539923"
+    "hash": "e01958ade5ec83256ea51c9426a5c645"
   },
   {
     "file": "templates/homeContainer.html",
-    "hash": "234ac01064bfabca9fe009f48f30f890"
+    "hash": "c084a0939080bf2e0c4aca2a871edfb3"
   },
   {
     "file": "templates/login.html",
@@ -1149,11 +1149,11 @@
   },
   {
     "file": "templates/menu.html",
-    "hash": "b4c8c22310e3498a8dd355e38386d337"
+    "hash": "1db1d982f892cb4e2515e282a903d95d"
   },
   {
     "file": "templates/mobility.html",
-    "hash": "b71c5e1844e9637d090203b511166b5c"
+    "hash": "9090562b1e9ddf9ff592d70ed09beb73"
   },
   {
     "file": "templates/mytrips.html",
