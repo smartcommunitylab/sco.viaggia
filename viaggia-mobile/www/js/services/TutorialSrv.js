@@ -31,7 +31,7 @@ angular.module('viaggia.services.tutorial', [])
             setTutorialState($scope.tutorialId, true);
             if (window.cordova && window.cordova.plugins.screenorientation) {
                unlockOrientation = screen.unlockOrientation || screen.mozUnlockOrientation || screen.msUnlockOrientation || (screen.orientation && screen.orientation.unlock);
-                screen.unlockOrientation()
+               unlockOrientation();
             }
             
         }
