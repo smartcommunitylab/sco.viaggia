@@ -1,6 +1,6 @@
 angular.module('viaggia.services.data', [])
 
-.factory('DataManager', function ($http, $q, $cordovaSQLite, $cordovaFile, Config) {
+.factory('DataManager', function ($http, $q, $cordovaFile, Config) {
     var LOCAL_DATA_URL = 'data/routesdb.zip';
     var dataURL = LOCAL_DATA_URL;
     var completeData = null;
