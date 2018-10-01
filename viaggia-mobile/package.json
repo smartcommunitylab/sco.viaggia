@@ -136,7 +136,8 @@
       "cordova-plugin-statusbar": {},
       "ionic-plugin-keyboard": {},
       "cordova-plugin-background-fetch": {},
-      "cordova-hot-code-push-plugin": {}
+      "cordova-hot-code-push-plugin": {},
+      "cordova-plugin-globalization": {}
     },
     "platforms": [
       "android"
