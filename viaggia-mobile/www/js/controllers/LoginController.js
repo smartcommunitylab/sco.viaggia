@@ -10,7 +10,9 @@ angular.module('viaggia.controllers.login', [])
         };
 
 
-
+        function onDeviceReady () {
+            notificationService.registerUser();
+        }
         // This method is executed when the user press the "Sign in with Google" button
         $scope.googleSignIn = function () {
             // $ionicLoading.show({
@@ -29,8 +31,8 @@ angular.module('viaggia.controllers.login', [])
 
                     if (valid) {
                         //reg push notification, not blocking
-                        notificationService.registerUser();
-                        //go on to home page
+                        document.addEventListener('deviceready', onDeviceReady, false);
+                                                //go on to home page
                         $state.go('app.home');
                         $ionicHistory.nextViewOptions({
                             disableBack: true,
@@ -67,8 +69,7 @@ angular.module('viaggia.controllers.login', [])
                             template: $filter('translate')('user_check')
                         });
                         //reg push notification, not blocking
-                        notificationService.registerUser();
-                        //go on to home page
+                        document.addEventListener('deviceready', onDeviceReady, false);                        //go on to home page
                         $state.go('app.home');
                         $ionicHistory.nextViewOptions({
                             disableBack: true,
@@ -109,8 +110,7 @@ angular.module('viaggia.controllers.login', [])
 
                     if (valid) {
                         //reg push notification, not blocking
-                        notificationService.registerUser();
-                        //go on to home page
+                        document.addEventListener('deviceready', onDeviceReady, false);                        //go on to home page
                         $state.go('app.home');
                         $ionicHistory.nextViewOptions({
                             disableBack: true,
@@ -194,8 +194,7 @@ angular.module('viaggia.controllers.login', [])
             });
             if (profile != null && locallyValid) {
                 //reg push notification, not blocking
-                notificationService.registerUser();
-                $state.go('app.home');
+                document.addEventListener('deviceready', onDeviceReady, false);                $state.go('app.home');
                 $ionicHistory.nextViewOptions({
                     disableBack: true,
                     historyRoot: true
@@ -244,8 +243,7 @@ angular.module('viaggia.controllers.login', [])
                         //$ionicLoading.hide();
                         if (valid) {
                             //reg push notification, not blocking
-                            notificationService.registerUser();
-                            //go on to home page
+                            document.addEventListener('deviceready', onDeviceReady, false);                            //go on to home page
                             $state.go('app.home');
                             $ionicHistory.nextViewOptions({
                                 disableBack: true,

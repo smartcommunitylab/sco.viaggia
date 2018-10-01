@@ -9,7 +9,7 @@
   },
   {
     "file": "css/style.css",
-    "hash": "df3fafd78b5d01f6be1e5b5db220fa7e"
+    "hash": "395c2eb9fb6816001067161d5c1e2e09"
   },
   {
     "file": "data/bus.csv",
@@ -72,16 +72,8 @@
     "hash": "3404d7b64957502197fc22a011c549c0"
   },
   {
-    "file": "fonts/style.css~",
-    "hash": "8245afce4c83685e4bf16d95a6612403"
-  },
-  {
     "file": "fonts/viaggia.css",
     "hash": "905fd736c3f54c2df4599daf78f53af9"
-  },
-  {
-    "file": "fonts/viaggia.css~",
-    "hash": "2fb430033f9dba51ee8866dc48c775af"
   },
   {
     "file": "fonts/viaggia.eot",
@@ -153,7 +145,7 @@
   },
   {
     "file": "img/credits/logo_rovereto.png",
-    "hash": "a9b38a00216980ea71e094b3f3b0ca0c"
+    "hash": "ebf6738ec06e576d7f1660a7190c8267"
   },
   {
     "file": "img/credits/logo-sco-fbk.png",
@@ -381,7 +373,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "7d5cf24d3b8162e35fb10e7f0bd189d1"
+    "hash": "f21f2452d5cc951f336f7579763f8c38"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -389,15 +381,15 @@
   },
   {
     "file": "js/controllers/CommonCtrl.js",
-    "hash": "bf5cdec456c46262c13b0ab7307b9154"
+    "hash": "b401a8b5f21d8ca5e3acc5f84a368778"
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "4da729a834a8f4cfe0ce342b6b6fbe26"
+    "hash": "3278ccc9297bacadb7437b59f012318c"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
-    "hash": "ba00764b52f271738dab09d8eb8d5fc7"
+    "hash": "9789fc4bde99aa995844149a39c1e41e"
   },
   {
     "file": "js/controllers/InfoCtrl.js",
@@ -405,7 +397,7 @@
   },
   {
     "file": "js/controllers/LoginController.js",
-    "hash": "fc63f36bf340f67bda05d75d0e5f67ba"
+    "hash": "0e54788bfbb63b9a66149b65c121e622"
   },
   {
     "file": "js/controllers/MapTrackingCtrl.js",
@@ -497,7 +489,7 @@
   },
   {
     "file": "js/services/DataSrv.js",
-    "hash": "aa2af999286e51ebe0326abe2b25c185"
+    "hash": "48e8bd652b55dcf7409aab5f197f946b"
   },
   {
     "file": "js/services/DiaryDbSrv.js",
@@ -505,7 +497,7 @@
   },
   {
     "file": "js/services/GameSrv.js",
-    "hash": "2d50f5cf624cf1c6cf36ee10c6c52819"
+    "hash": "31b1d73d21b8233acf6e2960c20e00e6"
   },
   {
     "file": "js/services/GeoSrv.js",
@@ -529,7 +521,7 @@
   },
   {
     "file": "js/services/NotificationSrv.js",
-    "hash": "22d4c84d1048107c95fae6495c0ef1b9"
+    "hash": "b6ee06c922dbd02118fe72b3ae6ba8e7"
   },
   {
     "file": "js/services/PlanSrv.js",
@@ -557,7 +549,7 @@
   },
   {
     "file": "js/services/TutorialSrv.js",
-    "hash": "a50f60f09cb7776033e6c47596670b82"
+    "hash": "a6a9fee0b600f61cca55b514d6bcfd6d"
   },
   {
     "file": "lib/angular-animate/angular-animate.min.js",
@@ -1005,7 +997,7 @@
   },
   {
     "file": "templates/game/challenges.html",
-    "hash": "615875ed29733704a797d3a0b8328e0f"
+    "hash": "00a09a15161124f5ef3a9b6a10973fbd"
   },
   {
     "file": "templates/game/challengeTemplates/competitivePerformance.html",
@@ -1049,7 +1041,7 @@
   },
   {
     "file": "templates/game/diary.html",
-    "hash": "9d6923ee20693a928d981bdbaf850ef4"
+    "hash": "62db2a235db9770da50d6be5cacdbef1"
   },
   {
     "file": "templates/game/eventTripDetail.html",
@@ -1109,7 +1101,7 @@
   },
   {
     "file": "templates/home.html",
-    "hash": "e01958ade5ec83256ea51c9426a5c645"
+    "hash": "7060d6c06a90a4458ed20e65f6c3a026"
   },
   {
     "file": "templates/homeContainer.html",
