@@ -119,9 +119,9 @@ angular.module('viaggia.services.game', [])
             },
             NEW_LEVEL: {
                 string: "msg_new_level",
-                color: "#e54d2d",
-                iconColor: "#B62000",
-                icon: "ion-android-star",
+                color: "#3cbacf",
+                iconColor: "#2b9bad",
+                icon: "ic_level",
                 params: { 'levelName': 'levelName' },
                 state: "openBadgeBoard()"
 
@@ -1102,7 +1102,7 @@ angular.module('viaggia.services.game', [])
             return "border-left: solid 16px #2681A4;";
         }
         gameService.getColorCup = function (challenge) {
-            return "color:" + color[challenge.type];
+            return "color:" + color[challenge.group];
         }
         /* get remote status */
         gameService.getStatus = function () {
