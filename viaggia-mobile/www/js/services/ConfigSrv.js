@@ -381,7 +381,7 @@ angular.module('viaggia.services.conf', [])
             getAppAgencies: function () {
                 return mapJsonConfig["agencies"];
             },
-            getRSSUrl: function () {Z
+            getRSSUrl: function () {
                 return mapJsonConfig["newsRSS"];
             },
             getVersion: function () {
