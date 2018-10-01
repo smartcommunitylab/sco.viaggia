@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'viaggia';
-  src:  url('viaggia.eot?8rwagu');
-  src:  url('viaggia.eot?8rwagu#iefix') format('embedded-opentype'),
-    url('viaggia.ttf?8rwagu') format('truetype'),
-    url('viaggia.woff?8rwagu') format('woff'),
-    url('viaggia.svg?8rwagu#viaggia') format('svg');
+  src:  url('viaggia.eot?suqwak');
+  src:  url('viaggia.eot?suqwak#iefix') format('embedded-opentype'),
+    url('viaggia.ttf?suqwak') format('truetype'),
+    url('viaggia.woff?suqwak') format('woff'),
+    url('viaggia.svg?suqwak#viaggia') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,14 +24,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ic_bike:before {
+  content: "\e903";
+}
+.ic_level:before {
+  content: "\e95a";
+}
 .ic_extraurban-bus:before {
   content: "\e901";
 }
 .ic_urban-bus:before {
   content: "\e902";
-}
-.ic_bike:before {
-  content: "\e903";
 }
 .ic_game_multimodal_trip:before {
   content: "\e904";
