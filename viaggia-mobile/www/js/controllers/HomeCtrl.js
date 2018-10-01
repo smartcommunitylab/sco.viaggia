@@ -260,7 +260,7 @@ angular.module('viaggia.controllers.home', [])
                         initExpansion();
                     }
                 } else {
-                    $scope.challenges = null;
+                    $scope.challenges = [];
                 }
             });
 
