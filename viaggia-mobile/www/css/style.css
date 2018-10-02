@@ -1687,3 +1687,6 @@ margin-right: 10px;
   text-overflow: ellipsis;
   color: #666;
 }
+ion-modal-view{
+  height: 100vh;
+}
