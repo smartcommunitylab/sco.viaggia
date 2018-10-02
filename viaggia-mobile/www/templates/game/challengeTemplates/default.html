@@ -21,6 +21,15 @@
     <div class="row">
             <div class="col-10">
             </div>
+            <div class="col-80" ng-init="days = {days: challenge.daysToEnd}">
+                <div class="float-left"><b>{{'game_tab_challenges_daysToEnd'+ (challenge.daysToEnd == 1 ? '_1' : '') | translate:days}}</b></div>
+            </div>
+            <div class="col-10">
+            </div>
+        </div>
+    <div class="row">
+            <div class="col-10">
+            </div>
             <div class="col-80">
                 <div class="float-left single-user-color">{{getValueUser(challenge)}}</div>
             </div>

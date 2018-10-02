@@ -97,8 +97,6 @@
         <config-file url="https://dev.smartcommunitylab.it/cordova/chcp.json" />
     </chcp>
     <engine name="android" />
-<<<<<<< HEAD
-=======
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
     <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
     <plugin name="cordova-plugin-request-location-accuracy" spec="^2.2.3" />
@@ -108,5 +106,5 @@
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-background-fetch" spec="^5.1.1" />
     <plugin name="cordova-hot-code-push-plugin" spec="~1.5.3" />
->>>>>>> 0c90149cada35964f16c71ca468a2a35bd7a3ec5
+    <plugin name="cordova-plugin-globalization" spec="~1.11.0" />
 </widget>

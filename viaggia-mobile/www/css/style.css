@@ -2789,7 +2789,7 @@ height: 30px;
 }
 .img-level {
     box-shadow: none!important;
-    width: 30px;
+    width: 25px;
     margin: auto;
     position: absolute!important;
     top: 30%;
@@ -2819,6 +2819,11 @@ height: 30px;
     color: #fff; */
     /* margin: 0px; */
 
+}
+
+.home-user-state .row{
+margin: 0px!important;
+padding: 0px!important;
 }
 #progressbar {
     background-color: white;
@@ -2866,7 +2871,7 @@ color: #4caf4f;
 }
 .bar-profile-img{
      /* border-radius: 50%; */
-position: absolute;
+position: absolute!important;
 left: 25%;
     top: 30%;
     height: auto;
@@ -3271,6 +3276,21 @@ left: 25%;
 }
 .text-right {
     text-align: right;
+}
+.vertical-center {
+    position: relative;
+}
+.vertical-center>div{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+.vertical-center .profile-container{
+    height: 40px!important;
+    width: 40px!important;
 }
 .col-40 {
     -webkit-box-flex: 0;

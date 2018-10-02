@@ -390,22 +390,7 @@ angular.module('viaggia.controllers.game', [])
             })
         }
         $scope.getChallengeBarTemplate = function (challenge) {
-            switch (challenge.type) {
-                case 'comp_time': {
-                    return 'templates/game/challengeTemplates/competitiveTimeBar.html';
-                    break;
-                }
-                case 'comp_perf': {
-                    return 'templates/game/challengeTemplates/competitivePerformanceBar.html';
-                    break;
-                }
-                case 'coop': {
-                    return 'templates/game/challengeTemplates/cooperativeBar.html';
-                    break;
-                }
-                default:
-                    return 'templates/game/challengeTemplates/defaultBar.html';
-            }
+            return GameSrv.getChallengeBarTemplate(challenge);
         }
         $scope.getWidthUser = function (challenge) {
             //TODO

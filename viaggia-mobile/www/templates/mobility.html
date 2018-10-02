@@ -1,8 +1,10 @@
 <ion-view id="mobility" title="{{'mobility_title'|translate}}">
     <ion-nav-buttons side="right">
-        <div class="profile-container">
+            <button ng-click="openNotifications()" class="button button-icon button-home ic_notification"><span class="badge badge-assertive header-badge"
+                ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span></button>
+        <!-- <div class="profile-container">
             <img class="bar-profile-img" ng-if="profileImg" ng-src="{{profileImg}}" ng-click="openProfile()">
-        </div>
+        </div> -->
     </ion-nav-buttons>
     <ion-content id="content" has-header="true" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
         <ion-list class="home-list" ng-if="primaryLinks.length>0">

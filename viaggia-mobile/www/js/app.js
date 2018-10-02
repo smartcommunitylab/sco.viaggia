@@ -1433,7 +1433,7 @@ angular.module('viaggia', [
       msg_won_badge: ' Hai guadagnato un nuovo badge "{{badgeText}}"',
       msg_new_friend: 'Il tuo amico {{recommendedNickname}} partecipa al gioco. Hai guadagnato 20 green leaves!',
       msg_new_challenge: 'Ti è stata assegnata una nuova sfida "{{challengeName}}"',
-      msg_won_challenge: 'Hai vinto la sfida "{{challengeName}}"',
+      msg_won_challenge: 'HAI VINTO la sfida "{{challengeName}}"',
       msg_pub_ranking: 'Pubblicata la classifica dei vincitori di questa settimana',
       msg_trip_walk: 'Ore {{time}}.<br> {{travelValidity}}, {{points}} punti.',
       msg_trip_bike: 'Ore {{time}}.<br> {{travelValidity}}, {{points}} punti.',
@@ -1545,9 +1545,10 @@ angular.module('viaggia', [
       at_clock: " alle ",
       at_day_opponent: " ha vinto il giorno ",
       at_day: "il giorno ",
-      you_win: "Hai vinto il ",
-      you_lose: "Hai perso ",
-      user_chall_status: "Stato completamento sfida:  "
+      you_win: "HAI VINTO il ",
+      you_lose: "HAI PERSO ",
+      user_chall_status: "Stato completamento sfida:  ",
+      challenge_days_to_end: 'Hai ancora {{challenge.daysToEnd}} giorni per completare la sfida.'
     });
 
     $translateProvider.translations('en', {
@@ -1955,7 +1956,7 @@ angular.module('viaggia', [
       msg_won_badge: ' You earned a new badge "{{badgeText}}"',
       msg_new_friend: 'Your friend {{recommendedNickname}} joined the game. You earned 20 Green Leaves!',
       msg_new_challenge: 'You have been assigned a new challenge "{{challengeName}}"',
-      msg_won_challenge: 'You won the challenge "{{challengeName}}"',
+      msg_won_challenge: 'YOU WON the challenge "{{challengeName}}"',
       msg_pub_ranking: 'This week\'s winners ranking is now available',
       msg_trip_walk: 'At {{time}}.<br> {{travelValidity}}, {{points}} points.',
       msg_trip_bike: 'At {{time}}.<br> {{travelValidity}}, {{points}} points.',
@@ -2067,9 +2068,11 @@ angular.module('viaggia', [
       at_clock: " at ",
       at_day_opponent: " won on ",
       at_day: " on ",
-      you_win: "You won on ",
-      you_lose: "You lost ",
-      user_chall_status: "Challenge completion status:  "
+      you_win: "YOU WON on ",
+      you_lose: "YOU LOST ",
+      user_chall_status: "Challenge completion status:  ",
+      challenge_days_to_end: 'You still have {{challenge.daysToEnd}} days to complete the challenge.'
+
     });
 
     $translateProvider.preferredLanguage(DEFAULT_LANG);

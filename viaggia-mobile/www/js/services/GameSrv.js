@@ -1104,6 +1104,25 @@ angular.module('viaggia.services.game', [])
         gameService.getColorCup = function (challenge) {
             return "color:" + color[challenge.group];
         }
+
+        gameService.getChallengeBarTemplate = function (challenge) {
+            switch (challenge.type) {
+                case 'comp_time': {
+                    return 'templates/game/challengeTemplates/competitiveTimeBar.html';
+                    break;
+                }
+                case 'comp_perf': {
+                    return 'templates/game/challengeTemplates/competitivePerformanceBar.html';
+                    break;
+                }
+                case 'coop': {
+                    return 'templates/game/challengeTemplates/cooperativeBar.html';
+                    break;
+                }
+                default:
+                    return 'templates/game/challengeTemplates/defaultBar.html';
+            }
+        }
         /* get remote status */
         gameService.getStatus = function () {
             var deferred = $q.defer();

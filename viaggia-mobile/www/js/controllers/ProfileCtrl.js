@@ -342,9 +342,25 @@ angular.module('viaggia.controllers.profile', [])
         };
 
         $scope.getUserImg = function (id) {
-            return Config.getServerURL() + '/gamificationweb/player/avatar/' + Config.getAppId() + '/' + $scope.profileId+'/big';
+            return Config.getServerURL() + '/gamificationweb/player/avatar/' + Config.getAppId() + '/' + $scope.profileId + '/big';
+        }
+        $scope.getChallengeBarTemplate = function(challenge){
+            //TODO for the other challenges
+            //right now status is always 100% and 'racc'
+            challenge.status = 100;
+            challenge.status = 100;
+            return GameSrv.getChallengeBarTemplate(challenge);
         }
 
+
+        $scope.getWidthUser = function (challenge) {
+            //TODO
+            return "width:" + challenge.status + "%;"
+        }
+        $scope.getValueUser = function (challenge) {
+            //TODO
+            return $filter('translate')('user_chall_status') + challenge.status + "%";
+        }
         $scope.filter.options = ['Total', 'Monthly'];
         $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
         $scope.filter.filter = function (selection) {

@@ -3,44 +3,58 @@
         Play&Go {{currentUser.nickName}}
     </ion-nav-title>
     <ion-nav-buttons side="right">
-        <div class="profile-container">
+        <button ng-click="openNotifications()" class="button button-icon button-home ic_notification"><span class="badge badge-assertive header-badge"
+                ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span></button>
+
+        <!-- <div class="profile-container">
             <img class="bar-profile-img" ng-if="profileImg" ng-src="{{profileImg}}" ng-click="openProfile()">
-        </div>
+        </div> -->
     </ion-nav-buttons>
     <ion-content ng-class="{'empty_bookmarks': primaryLinks.length == 0}" ng-init="showTutorial()">
-        <div class="user-state card">
+        <div class="user-state home-user-state card" ng-click="openProfile()">
             <div class="row">
-                <div class="col col-10">
+                <div class="col col-20 vertical-center">
+                    <div class="profile-container">
+                        <img class="bar-profile-img" ng-if="profileImg" ng-src="{{profileImg}}">
+                    </div>
                 </div>
-                <div class="col col-33 home-level text-left">
-                    <h4>{{'user_level_label' | translate}} {{level}}</h4>
-                </div>
-                <div class="col home-points text-left">
-                    <h4>{{status['pointConcept'][0]['score']}}
-                        <i class="icon ion-leaf"></i>
-                    </h4>
-                </div>
-            </div>
-            <!-- <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col col-10" style="position: relative;">
+                            <img class="img-level" src="img/ic_level.png">
+
+                        </div>
+                        <div class="col col-50 home-level text-left">
+                            <h4>{{'user_level_label' | translate}} {{level}}</h4>
+                        </div>
+                        <div class="col home-points text-left">
+                            <h4>{{status['pointConcept'][0]['score']}}
+                                <i class="icon ion-leaf"></i>
+                            </h4>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
                 <div class="col col-10">
                 </div>
                 <div class="col home-level text-left">
                     {{toNextLevel}} {{'user_next_level_label' | translate}}
                 </div>
             </div> -->
-            <div class="row">
-                <div class="col col-10" style="position: relative;">
-                    <img class="img-level" src="img/ic_level.png">
-                </div>
-                <div class="col-90">
                     <div class="row">
-                        <div class="col home-level text-left">
-                            {{toNextLevel}} {{'user_next_level_label' | translate}}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col container-level">
-                            <div class="progress-bar-level" style="width: {{userProgress}}%;"># green leaves to the next level</div>
+
+                        <div class="col">
+                            <div class="row">
+                                <div class="col home-level text-left">
+                                    {{toNextLevel}} {{'user_next_level_label' | translate}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col container-level">
+                                    <div class="progress-bar-level" style="width: {{userProgress}}%;"># green leaves to
+                                        the
+                                        next level</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -80,10 +94,14 @@
                         <div class="home-track-buttons">
                             <button class="button button-map icon ion-map" ng-click="goToMap()"></button>
                             <div ng-if="trackingMultimodal()">
-                                <button class="button button-map icon ic_foot" ng-class="{'actual-track':actualTracking('walk')}" ng-click="changeTracking('walk')"></button>
-                                <button class="button button-map icon ic_bike" ng-class="{'actual-track':actualTracking('bike')}" ng-click="changeTracking('bike')"></button>
-                                <button class="button button-map icon ic_urban-bus" ng-class="{'actual-track':actualTracking('bus')}" ng-click="changeTracking('bus')"></button>
-                                <button class="button button-map icon ic_train" style="padding-right: 1rem;" ng-class="{'actual-track':actualTracking('train')}" ng-click="changeTracking('train')"></button>
+                                <button class="button button-map icon ic_foot" ng-class="{'actual-track':actualTracking('walk')}"
+                                    ng-click="changeTracking('walk')"></button>
+                                <button class="button button-map icon ic_bike" ng-class="{'actual-track':actualTracking('bike')}"
+                                    ng-click="changeTracking('bike')"></button>
+                                <button class="button button-map icon ic_urban-bus" ng-class="{'actual-track':actualTracking('bus')}"
+                                    ng-click="changeTracking('bus')"></button>
+                                <button class="button button-map icon ic_train" style="padding-right: 1rem;" ng-class="{'actual-track':actualTracking('train')}"
+                                    ng-click="changeTracking('train')"></button>
                             </div>
                         </div>
                         <button class="button home-track-stop-map" ng-click="stopTrackingHome()">STOP</button>
