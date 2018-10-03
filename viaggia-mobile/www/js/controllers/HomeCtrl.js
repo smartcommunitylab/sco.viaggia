@@ -601,7 +601,7 @@ angular.module('viaggia.controllers.home', [])
             return counter;
         }
         $scope.showTutorial = function () {
-            tutorial.showTutorial('main', 'main', 4, $scope);
+            tutorial.showTutorial('main', 'main', 5, $scope);
         }
         $scope.expand = function (index) {
             $scope.expansion[index] = !$scope.expansion[index];

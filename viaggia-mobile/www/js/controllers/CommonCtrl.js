@@ -269,7 +269,7 @@ angular.module('viaggia.controllers.common', [])
       if (!!$scope.firstOpenPopup) {
         $scope.firstOpenPopup.close();
       }
-      tutorial.showTutorial('main', 'main', 4, $scope, true);
+      tutorial.showTutorial('main', 'main', 5, $scope, true);
     }
 
     $scope.closePopup = function () {
