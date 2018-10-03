@@ -1548,7 +1548,9 @@ angular.module('viaggia', [
       you_win: "HAI VINTO il ",
       you_lose: "HAI PERSO ",
       user_chall_status: "Stato completamento sfida:  ",
-      challenge_days_to_end: 'Hai ancora {{challenge.daysToEnd}} giorni per completare la sfida.'
+      challenge_days_to_end: 'Hai ancora {{challenge.daysToEnd}} giorni per completare la sfida.',
+      payload_large:"Immagine troppo grande",
+      payload_unsupported:"Immagine non sopportata"
     });
 
     $translateProvider.translations('en', {
@@ -2071,7 +2073,9 @@ angular.module('viaggia', [
       you_win: "YOU WON on ",
       you_lose: "YOU LOST ",
       user_chall_status: "Challenge completion status:  ",
-      challenge_days_to_end: 'You still have {{challenge.daysToEnd}} days to complete the challenge.'
+      challenge_days_to_end: 'You still have {{challenge.daysToEnd}} days to complete the challenge.',
+      payload_large:"Payload too large",
+      payload_unsupported:"Unsupported media type"
 
     });
 

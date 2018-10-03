@@ -126,26 +126,35 @@ angular.module('viaggia.controllers.registration', [])
             } else {
                 if (checkParams()) {
                     Config.loading();
-
                     registrationService.register($scope.user).then(function () {
-                        notificationService.registerUser();
-                        $state.go('app.home');
+                        profileService.setProfileImage($scope.currentFile).then(function () {
+                            notificationService.registerUser();
+                            $state.go('app.home');
+                        }, function (error) {
+                            if (error == 413) {
+                                Toast.show($filter('translate')('payload_large'), "short", "bottom");
+                                $state.go('app.home');
+                                console.log("Payload too large");
+                                return;
+                            }
+                            if (error == 415) {
+                                Toast.show($filter('translate')('payload_unsupported'), "short", "bottom");
+                                $state.go('app.home');
+                                console.log("Unsupported media type");
+                                return;
+                            }
+                            console.log("network error");
+                        }).finally(Config.loaded)
 
-                        // profileService.setProfileImage($scope.currentFile).then(function () {
-                        //     console.log("uploaded");
-                        //     Config.loaded();
-                        //     $ionicHistory.nextViewOptions({
-                        //         disableBack: true,
-                        //         historyRoot: true
-                        //     });
-                        //     $state.go('app.home');
-                        // })
+
                     }, function (errStatus) {
                         if (errStatus == '409') {
                             Toast.show($filter('translate')('nickname_inuse'), "short", "bottom");
                         }
                         Config.loaded();
                     });
+
+
                 }
             }
         }
