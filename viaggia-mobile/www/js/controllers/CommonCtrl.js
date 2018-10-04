@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.common', [])
 
-  .controller('AppCtrl', function ($scope, $q, $state, GameSrv, $rootScope, trackService, $ionicHistory, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, Utils, tutorial) {
+  .controller('AppCtrl', function ($scope, $rootScope, $q, $state, GameSrv, $cordovaCamera, profileService,trackService, $ionicHistory, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, Utils, tutorial) {
 
 
     /* menu group */
@@ -583,6 +583,88 @@ angular.module('viaggia.controllers.common', [])
       //      Config.setInfoMenuParams(m.data);
       //      $state.go(m.state);
     };
+    $scope.chooseAndUploadPhoto = function() {
+       //get the picture from library
+       var options = {
+        quality: 90,
+        destinationType: navigator.camera.DestinationType.FILE_URI,
+        sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+        allowEdit: true, // here it allow to edit pic.
+        targetWidth: 600, //what widht you want after capaturing
+        targetHeight: 600
+    };
+
+    $cordovaCamera.getPicture(options).then(function (imageData) {
+        $scope.imgURI = imageData;
+        window.localStorage.setItem('image', ($scope.imgURI));
+        let options = {
+            quality: 75,
+            widthRatio: 1,
+            heightRatio: 1,
+            targetWidth: 600,
+            targetHeight: 600
+        };
+        //crop the picture in a square size
+        plugins.crop.promise($scope.imgURI, options)
+            .then(function success(newPath) {
+                var getFileBlob = function (url, cb) {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", url);
+                    xhr.responseType = "blob";
+                    xhr.addEventListener('load', function() {
+                        cb(xhr.response);
+                    });
+                    xhr.send();
+            };
+            
+            var blobToFile = function (blob, name) {
+                    blob.lastModifiedDate = new Date();
+                    blob.name = name;
+                    return blob;
+            };
+            
+            var getFileObject = function(filePathOrUrl, cb) {
+                   getFileBlob(filePathOrUrl, function (blob) {
+                      cb(blobToFile(blob, 'test.jpg'));
+                   });
+            };
+            //send the file
+            getFileObject(newPath, function (fileObject) {
+                 $scope.uploadFileImage(fileObject)
+            });
+
+            })
+            .catch(function fail(err) {
+
+            })
+    }, function (err) {
+        // An error occured. Show a message to the user
+    });
+    }
+    var changePrifileImage = function () {
+      if (profileService.getProfileStatus())
+          profileService.getProfileImage(profileService.getProfileStatus().playerData.playerId).then(function (image) {
+              $rootScope.profileImg = profileService.getAvatarUrl() + profileService.getProfileStatus().playerData.playerId + '/big?' + new Date().getTime();
+              // $scope.refreshProfileImage();
+          }, function (error) {
+              $rootScope.profileImg = 'img/game/generic_user.png' + '/big?' + new Date().getTime();
+          })
+  }
+    $scope.uploadFileImage = function (files) {
+      Config.loading();
+      profileService.setProfileImage(files).then(function () {
+          console.log("ok");
+          changePrifileImage();
+      }, function (error) {
+          if (error == 413)
+              console.log("Payload too large");
+          return;
+          if (error == 415)
+              console.log("Unsupported media type");
+          return;
+          console.log("network error");
+      }).finally(Config.loaded)
+  };
   })
 
   .factory('Toast', function ($rootScope, $timeout, $ionicPopup, $cordovaToast) {

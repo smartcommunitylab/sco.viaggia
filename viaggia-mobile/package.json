@@ -137,7 +137,9 @@
       "ionic-plugin-keyboard": {},
       "cordova-plugin-background-fetch": {},
       "cordova-hot-code-push-plugin": {},
-      "cordova-plugin-globalization": {}
+      "cordova-plugin-globalization": {},
+      "cordova-plugin-crop": {},
+      "cordova-plugin-camera": {}
     },
     "platforms": [
       "android"

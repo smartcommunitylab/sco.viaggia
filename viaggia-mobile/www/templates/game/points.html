@@ -6,16 +6,17 @@
     </ion-nav-buttons>
     <ion-content class="padding-right padding-left game-points" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
         <div ng-if="!!status">
-            <div class="img-container">
-                <img ng-if="profileImg" ng-src="{{profileImg}}">
-                <a class="button-icon icon ion-camera" ng-click="changeProfile()"></a>
-
-            </div>
-            <input type="file" style="display: none" name="file" id="inputImg" onchange="angular.element(this).scope().uploadFile(this.files)"
-            />
 
             <p></p>
             <div class="user-state card">
+                <div class="row">
+                    <div class="col">
+                        <img class="profile-image-round" ng-if="profileImg" ng-src="{{profileImg}}">
+                        <div class="change-profile">
+                            <a class="button-icon icon ion-camera" ng-click="changeProfile()"></a>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col col-10" style="position: relative;">
                         <img class="img-level" src="img/ic_level.png">

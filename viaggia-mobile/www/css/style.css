@@ -2879,6 +2879,7 @@ left: 25%;
 -webkit-transform: translate(-50%,-50%);
     margin: 4px 8px;
     /* object-fit: cover; */
+    border-radius: 50%;
     
 }
 .profile-img{
@@ -2894,8 +2895,8 @@ left: 25%;
     position: relative;
     width: 30px;
     height: 30px;
-    overflow: hidden;
-    border-radius: 50%;
+    /* overflow: hidden;
+    border-radius: 50%; */
     display: table-cell;
 }
 .challenge-profile-img {
@@ -3308,6 +3309,21 @@ left: 25%;
     -webkit-box-orient: vertical;  
 }
 
+.profile-image-round{
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+    max-width: 100px!important;
+    max-height: 1000px!important;
+    margin: auto;
+}
+.change-profile {
+    position: absolute;
+    left: 0;
+    top: 43%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
   @-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
   @-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}

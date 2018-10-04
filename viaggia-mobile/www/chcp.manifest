@@ -9,7 +9,7 @@
   },
   {
     "file": "css/style.css",
-    "hash": "395c2eb9fb6816001067161d5c1e2e09"
+    "hash": "8d0c1303056429893b969b3ab0904e4d"
   },
   {
     "file": "data/bus.csv",
@@ -73,23 +73,23 @@
   },
   {
     "file": "fonts/viaggia.css",
-    "hash": "905fd736c3f54c2df4599daf78f53af9"
+    "hash": "812e321344410eccdff218202f7c4915"
   },
   {
     "file": "fonts/viaggia.eot",
-    "hash": "0b8855653aeb03ecaf8263203c8b8fd4"
+    "hash": "3ead867aa62089f6a84500267e941b12"
   },
   {
     "file": "fonts/viaggia.svg",
-    "hash": "e8169e15cdec33d070caf89b782fdbbf"
+    "hash": "7a88713d227ab905264dec4557e1d70d"
   },
   {
     "file": "fonts/viaggia.ttf",
-    "hash": "f63f64f2faf08a0fdaca3fb9458af203"
+    "hash": "6d79390ef49b131f356295fa1c3b69f4"
   },
   {
     "file": "fonts/viaggia.woff",
-    "hash": "50cafb567054a5617895078d52077d83"
+    "hash": "9ac8f83b73964942d234b2336bd80e42"
   },
   {
     "file": "frame_en.html",
@@ -325,35 +325,43 @@
   },
   {
     "file": "img/main/step_1_en.png",
-    "hash": "83e611df01ca4f6c201df9e0aa41f4d0"
+    "hash": "e7bf425cdc2a54030993c5b33ad00bda"
   },
   {
     "file": "img/main/step_1_it.png",
-    "hash": "116a1113aa533b4d10ac5920ad060937"
+    "hash": "54c6d9840ce915d4d42c1c41501aee68"
   },
   {
     "file": "img/main/step_2_en.png",
-    "hash": "c077d03dfaad779638942051cf7d7127"
+    "hash": "1773dfa1ab7a3312f0cb4b40e2f3108e"
   },
   {
     "file": "img/main/step_2_it.png",
-    "hash": "21851b83d32ec50dd83ba2501e7e8ba6"
+    "hash": "cf2ec9b27d660173fa1e5419162a5625"
   },
   {
     "file": "img/main/step_3_en.png",
-    "hash": "5bf7ad4bf75a66f2cef9d1b52e44423b"
+    "hash": "81b08268c4cab9cfe61cd052fdda3163"
   },
   {
     "file": "img/main/step_3_it.png",
-    "hash": "382e30efe1b89cc085b19ce199d6b48c"
+    "hash": "5bc5f479032e86dd5ec6c729f026ec8f"
   },
   {
     "file": "img/main/step_4_en.png",
-    "hash": "33b76e35963492335895d0af428fd57d"
+    "hash": "3a29b00b4975562e1afffa55b4bb56ce"
   },
   {
     "file": "img/main/step_4_it.png",
-    "hash": "e583283807d334a75c787c0381d30a0b"
+    "hash": "4df84d03ed94bfb42613e6ec1679c198"
+  },
+  {
+    "file": "img/main/step_5_en.png",
+    "hash": "5ec0c057d43892487ba90a1ae79db2d1"
+  },
+  {
+    "file": "img/main/step_5_it.png",
+    "hash": "ebb5cd6ae5776424ca78e642cd3a0a00"
   },
   {
     "file": "img/markets/ic_nataleDeiPopoli.png",
@@ -373,7 +381,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "f21f2452d5cc951f336f7579763f8c38"
+    "hash": "bfcd820adfed074f897b8380551632ec"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -381,15 +389,15 @@
   },
   {
     "file": "js/controllers/CommonCtrl.js",
-    "hash": "b401a8b5f21d8ca5e3acc5f84a368778"
+    "hash": "10d956f80a323196c1d61e9c8181fbfa"
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "3278ccc9297bacadb7437b59f012318c"
+    "hash": "fe547b7c1b16faf5b3c35af6d0a36ad6"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
-    "hash": "9789fc4bde99aa995844149a39c1e41e"
+    "hash": "4d17aa941fc508906cfe3caa08f41d33"
   },
   {
     "file": "js/controllers/InfoCtrl.js",
@@ -433,11 +441,11 @@
   },
   {
     "file": "js/controllers/ProfileCtrl.js",
-    "hash": "71d683c9ee629b86007f0ac5a96ab395"
+    "hash": "48079028e479a245e9ede36576538ff6"
   },
   {
     "file": "js/controllers/RegistrationController.js",
-    "hash": "8450ccfe64d6bc26a12e57d1de51da15"
+    "hash": "e5b19cdf567c5646465621801b1c0718"
   },
   {
     "file": "js/controllers/Table1Ctrl.js",
@@ -485,7 +493,7 @@
   },
   {
     "file": "js/services/ConfigSrv.js",
-    "hash": "cf29b473926d033a68458cd91db39708"
+    "hash": "803d48cebb749f29e960c94237cbf0a0"
   },
   {
     "file": "js/services/DataSrv.js",
@@ -497,7 +505,7 @@
   },
   {
     "file": "js/services/GameSrv.js",
-    "hash": "31b1d73d21b8233acf6e2960c20e00e6"
+    "hash": "4ba68585a7f207a27bec25a4b0bb9846"
   },
   {
     "file": "js/services/GeoSrv.js",
@@ -521,7 +529,7 @@
   },
   {
     "file": "js/services/NotificationSrv.js",
-    "hash": "b6ee06c922dbd02118fe72b3ae6ba8e7"
+    "hash": "bf2119be1b1aca8622b20136dd31cd4e"
   },
   {
     "file": "js/services/PlanSrv.js",
@@ -997,7 +1005,7 @@
   },
   {
     "file": "templates/game/challenges.html",
-    "hash": "00a09a15161124f5ef3a9b6a10973fbd"
+    "hash": "a29f018b4bccc8466c02ccbfd92e6768"
   },
   {
     "file": "templates/game/challengeTemplates/competitivePerformance.html",
@@ -1025,7 +1033,7 @@
   },
   {
     "file": "templates/game/challengeTemplates/default.html",
-    "hash": "d744773ad1b943d88331764c8b19a5da"
+    "hash": "be10c272a3dde98e08167c1d05a348a1"
   },
   {
     "file": "templates/game/challengeTemplates/defaultBar.html",
@@ -1041,7 +1049,7 @@
   },
   {
     "file": "templates/game/diary.html",
-    "hash": "62db2a235db9770da50d6be5cacdbef1"
+    "hash": "e86fa32eb20cf2bb3beb2c445cfc6f4b"
   },
   {
     "file": "templates/game/eventTripDetail.html",
@@ -1077,7 +1085,7 @@
   },
   {
     "file": "templates/game/profileOthersContainer.html",
-    "hash": "a4073991ec2b23ed03e44d1d1cba20a5"
+    "hash": "dcffc458df55b770e973d4ace4ffc7f9"
   },
   {
     "file": "templates/game/profileOthersStatistics.html",
@@ -1085,15 +1093,15 @@
   },
   {
     "file": "templates/game/rankings.html",
-    "hash": "5a2a39e7fcf4f68b9ae731646a9705df"
+    "hash": "6db3412d654a6a08b0a35da6fc3b4f53"
   },
   {
     "file": "templates/game/rules_en.html",
-    "hash": "ea89531798c33f4f77514a52a671a5f7"
+    "hash": "2bc2d7fca5037b7d2afd0a137391f69c"
   },
   {
     "file": "templates/game/rules_it.html",
-    "hash": "bf30e01c03688b746db936c069f5495d"
+    "hash": "4b6a3c1f0d67fb4142a2d2af8e95323c"
   },
   {
     "file": "templates/game/statistics.html",
@@ -1101,7 +1109,7 @@
   },
   {
     "file": "templates/home.html",
-    "hash": "7060d6c06a90a4458ed20e65f6c3a026"
+    "hash": "e7133cad5f8e6f34263d180a233cb7c4"
   },
   {
     "file": "templates/homeContainer.html",
@@ -1141,11 +1149,11 @@
   },
   {
     "file": "templates/menu.html",
-    "hash": "1db1d982f892cb4e2515e282a903d95d"
+    "hash": "ac8bf74ba1b4f222d5695c017b010409"
   },
   {
     "file": "templates/mobility.html",
-    "hash": "9090562b1e9ddf9ff592d70ed09beb73"
+    "hash": "107f7f723a66f3569ffef9a14e4fc447"
   },
   {
     "file": "templates/mytrips.html",

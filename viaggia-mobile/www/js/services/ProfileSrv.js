@@ -11,6 +11,7 @@ angular.module('viaggia.services.profile', [])
     var PROFILE_TABLE_SIZE = "_table_size";
     var PROFILE_TABLE_BIG_SIZE = "table_big_size";
     var PROFILE_TABLE_LITTLE_SIZE = "table_little_size";
+
     var status = {};
     profileService.setTableBigSize = function () {
       profileService.setTableSize(PROFILE_TABLE_BIG_SIZE);
@@ -30,12 +31,16 @@ angular.module('viaggia.services.profile', [])
     profileService.getTableSize = function () {
       return localStorage.getItem(Config.getAppId() + PROFILE_TABLE_SIZE);
     };
+    profileService.getAvatarUrl = function () {
+      return 'https://dev.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/' + Config.getAppId() + '/';
+    };
     profileService.setAccessibility = function (acc) {
       localStorage.setItem(Config.getAppId() + PROFILE_ACC, acc);
     };
     profileService.getAccessibility = function () {
       return JSON.parse(localStorage.getItem(Config.getAppId() + PROFILE_ACC));
     };
+
     profileService.getProfileImage = function (profileId) {
       var deferred = $q.defer();
       LoginService.getValidAACtoken().then(

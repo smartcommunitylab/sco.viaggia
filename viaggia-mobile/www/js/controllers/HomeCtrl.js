@@ -653,10 +653,6 @@ angular.module('viaggia.controllers.home', [])
                 profileService.setProfileStatus(status);
                 $rootScope.currentUser = status.playerData;
                 $scope.getImage();
-
-                // profileService.getProfileImage(status.playerData.playerId).then(function(urlImg){
-                //     $rootScope.urlImg=urlImg;
-                // })
             },
             function (err) {
                 $scope.noStatus = true;
@@ -666,14 +662,6 @@ angular.module('viaggia.controllers.home', [])
         $scope.getImage = function () {
             if ($scope.status)
                 profileService.getProfileImage($scope.status.playerData.playerId).then(function (image) {
-                    // var file = new Blob([ image ], {
-                    //     type : 'image/jpeg'
-                    // });
-                    // var fileURL = URL.createObjectURL(file);
-                    // $scope.profileImg = fileURL;
-
-                    // var img = document.getElementById( "#photo" );
-                    // img.src = fileURL;
                     $rootScope.profileImg = $scope.tmpUrl + $scope.status.playerData.playerId + '?' + new Date().getTime();
                 }, function (error) {
                     $rootScope.profileImg = 'img/game/generic_user.png' + '?' + new Date().getTime();

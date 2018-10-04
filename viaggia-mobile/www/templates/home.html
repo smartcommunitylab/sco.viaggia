@@ -33,13 +33,6 @@
                             </h4>
                         </div>
                     </div>
-                    <!-- <div class="row">
-                <div class="col col-10">
-                </div>
-                <div class="col home-level text-left">
-                    {{toNextLevel}} {{'user_next_level_label' | translate}}
-                </div>
-            </div> -->
                     <div class="row">
 
                         <div class="col">
@@ -84,11 +77,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="row">
-                    <div class="col text-center">
-                        <button class="button button-stop" ng-click="stopTracking()">{{'stop_tracking' | translate}}</button>
-                    </div>
-                </div> -->
                 <div class="row">
                     <div class="home-track-container">
                         <div class="home-track-buttons">
@@ -107,34 +95,7 @@
                         <button class="button home-track-stop-map" ng-click="stopTrackingHome()">STOP</button>
                     </div>
                 </div>
-                <!-- <div>
-                    <div class="group-track">
-                        <div class="progress-bar-track">
-                            <i class="icon ic_foot" ng-class="{'actual-track':actualTracking('walk')}"></i>
-                            <div class="container-stat" ng-class="{'actual-container-stat':actualTracking('walk')}">
-                                <div class="progress-bar-mean" ng-class="{'actual-track-bar':actualTracking('walk')}" style="width: {{progressPercent.walk}}%;"></div>
-                            </div>
-                        </div>
-                        <div class="progress-bar-track">
-                            <i class="icon ic_bike" ng-class="{'actual-track':actualTracking('bike')}"></i>
-                            <div class="container-stat" ng-class="{'actual-container-stat':actualTracking('bike')}">
-                                <div class="progress-bar-mean" ng-class="{'actual-track-bar':actualTracking('bike')}" style="width: {{progressPercent.bike}}%;"></div>
-                            </div>
-                        </div>
-                        <div class="progress-bar-track">
-                            <i class="icon ic_urban-bus" ng-class="{'actual-track':actualTracking('bus')}"></i>
-                            <div class="container-stat" ng-class="{'actual-container-stat':actualTracking('bus')}">
-                                <div class="progress-bar-mean" ng-class="{'actual-track-bar':actualTracking('bus')}" style="width: {{progressPercent.bus}}%;"></div>
-                            </div>
-                        </div>
-                        <div class="progress-bar-track">
-                            <i class="icon ic_train" ng-class="{'actual-track':actualTracking('train')}"></i>
-                            <div class="container-stat" ng-class="{'actual-container-stat':actualTracking('train')}">
-                                <div class="progress-bar-mean" ng-class="{'actual-track-bar':actualTracking('train')}" style="width: {{progressPercent.train}}%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+
             </div>
             <div ng-if="!trackingIsOn">
                 <div class="row">

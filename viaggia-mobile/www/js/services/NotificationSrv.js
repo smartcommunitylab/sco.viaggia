@@ -4,7 +4,7 @@ angular.module('viaggia.services.notification', [])
   //
   //A Service to work with notifications with server
   //
-  .factory('notificationService', function ($q, $http, $rootScope, LoginService, $ionicPlatform, Config) {
+  .factory('notificationService', function ($q, $http, $ionicPopup, LoginService, $filter, Config) {
 
     var notificationService = {};
     var numberNotification = 10;
@@ -29,7 +29,7 @@ angular.module('viaggia.services.notification', [])
 
     //register user to user notification
     notificationService.registerUser = function () {
-        var deferred = $q.defer();
+      var deferred = $q.defer();
 
       window.FirebasePlugin.getToken(function (token) {
         // save this server-side and use it to push notifications to this device
@@ -98,12 +98,21 @@ angular.module('viaggia.services.notification', [])
       // Get notified when the user opens a notification
       window.FirebasePlugin.onNotificationOpen(function (notification) {
         console.log(JSON.stringify(notification));
-        alert("The notification is open!");
+        $ionicPopup.show({
+          title: notification.title,
+          template: notification.description,
+          buttons: [
+            {
+              text: $filter('translate')("btn_close"),
+              type: 'button-cancel'
+            }
+          ]
+        });
       }, function (error) {
         console.error(error);
       });
-     
-        return deferred.promise;
+
+      return deferred.promise;
     }
     // Register to GCM
     notificationService.register = function () {

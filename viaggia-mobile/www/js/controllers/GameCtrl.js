@@ -63,24 +63,7 @@ angular.module('viaggia.controllers.game', [])
         $scope.badges = null;
         $scope.badgeTypes = Config.getBadgeTypes();
         // $rootScope.profileImg = null;
-        $scope.tmpUrl = 'https://dev.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/' + Config.getAppId() + '/'
-        $scope.getImage = function () {
-            if ($scope.$parent.$parent.$parent.status)
-                profileService.getProfileImage($scope.$parent.$parent.$parent.status.playerData.playerId).then(function (image) {
-                    // var file = new Blob([ image ], {
-                    //     type : 'image/jpeg'
-                    // });
-                    // var fileURL = URL.createObjectURL(file);
-                    // $scope.profileImg = fileURL;
 
-                    // var img = document.getElementById( "#photo" );
-                    // img.src = fileURL;
-                    $rootScope.profileImg = $scope.tmpUrl + $scope.$parent.$parent.$parent.status.playerData.playerId + '/big?' + new Date().getTime();
-                    // $scope.refreshProfileImage();
-                }, function (error) {
-                    $rootScope.profileImg = 'img/game/generic_user.png' + '/big?' + new Date().getTime();
-                })
-        }
 
         $scope.changeProfile = function () {
             $ionicPopup.confirm({
@@ -95,28 +78,28 @@ angular.module('viaggia.controllers.game', [])
                         text: $filter('translate')("change_image_confirm"),
                         type: 'button-custom',
                         onTap: function () {
-                            document.getElementById('inputImg').click()
+                            $scope.choosePhoto();
+
+                            // document.getElementById('inputImg').click()
                         }
                     }
                 ]
             });
         }
-        $scope.uploadFile = function (files) {
-            Config.loading();
-            profileService.setProfileImage(files[0]).then(function () {
-                console.log("ok");
-                $scope.getImage();
-            }, function (error) {
-                if (error == 413)
-                    console.log("Payload too large");
-                return;
-                if (error == 415)
-                    console.log("Unsupported media type");
-                return;
-                console.log("network error");
-            }).finally(Config.loaded)
+        $scope.choosePhoto = function () {
+            $scope.chooseAndUploadPhoto();
+        }
 
-        };
+        $scope.getImage = function () {
+            if ($scope.$parent.$parent.$parent.status)
+                profileService.getProfileImage($scope.$parent.$parent.$parent.status.playerData.playerId).then(function (image) {
+                    $rootScope.profileImg = profileService.getAvatarUrl()+ $scope.$parent.$parent.$parent.status.playerData.playerId + '/big?' + new Date().getTime();
+                    // $scope.refreshProfileImage();
+                }, function (error) {
+                    $rootScope.profileImg = 'img/game/generic_user.png' + '/big?' + new Date().getTime();
+                })
+        }
+
         $scope.$watch('status.badgeCollectionConcept', function (newBadges, oldBadges) {
             var badges = {};
             if (!!$scope.status) {
@@ -130,7 +113,7 @@ angular.module('viaggia.controllers.game', [])
             }
             $scope.badges = badges;
         });
-        $scope.$watch('$parent.$parent.$parent.status', function (newBadges, oldBadges) {
+        $scope.$watch('$rootScope.profileImg', function (newBadges, oldBadges) {
             $scope.getImage();
         });
     })
@@ -330,6 +313,7 @@ angular.module('viaggia.controllers.game', [])
                             Config.loading();
                             GameSrv.acceptChallenge(challenge).then(function () {
                                 //clean list and keep the only one
+                                challenge.group = 'futu';
                                 $scope.challenges = [challenge];
                                 $ionicScrollDelegate.resize();
                             }, function (err) {
