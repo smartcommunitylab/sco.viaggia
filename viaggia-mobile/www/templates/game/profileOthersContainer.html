@@ -16,13 +16,29 @@
         <ion-tab icon-on="ic_score" icon-off="ic_score">
             <ion-content class="padding-right padding-left game-points tab-others" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
                 <div ng-if="!!user">
-                    <div class="img-container">
-                        <img ng-if="profileImg" ng-src="{{getUserImg(user.playerId)}}">
-
-                    </div>
                     <p></p>
-                    <div class="user-state card">
+                    <div class="user-state card no-shadow">
                         <div class="row">
+                            <div class="col">
+                                <img class="profile-image-round" ng-if="profileImg" ng-src="{{getUserImg(user.playerId)}}">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="profile-level">
+                                <img class="no-shadow" src="img/ic_level.png">
+                                <h4>{{'user_level_label' | translate}}{{user.level}}</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="profile-level">
+                                <i class="icon ion-leaf"></i>
+                                <h4>
+                                    {{user.greenLeaves}} {{'green_leaves_points'|translate}}
+                                </h4>
+                            </div>
+                        </div>
+                        <!-- <div class="row">
                             <div class="col col-10" style="position: relative;">
                                 <img class="img-level" src="img/ic_level.png">
                             </div>
@@ -37,7 +53,7 @@
                                     {{user.greenLeaves}} {{'green_leaves_points'|translate}}
                                 </h4>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="badge-container">
 
@@ -65,13 +81,15 @@
             <ion-content class="game-ranking tab-others" has-bouncing="false" scroll="false" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
                 <div class="filter item-accordion" ng-if="!!filter.options">
                     <ion-item class="item-accordion-header item-icon-right" ng-click="filter.toggle()">
-                        <div ng-if="!filter.open">{{!!filter.selected ? ('game_tab_statistics_filter_' + filter.selected) : '' | translate}}</div>
+                        <div ng-if="!filter.open">{{!!filter.selected ? ('game_tab_statistics_filter_' +
+                            filter.selected) : '' | translate}}</div>
                         <i class="icon ion-arrow-down-b" ng-class="{'open': filter.open}"></i>
                     </ion-item>
                     <div class="item-accordion-content" ng-show="filter.open">
                         <ion-list>
                             <ion-item ng-repeat="option in filter.options" ng-click="filter.filterBy(option)">
-                                <div ng-class="{ 'becomeblue' : filter.selected!=option}">{{'game_tab_statistics_filter_' + option | translate}}</div>
+                                <div ng-class="{ 'becomeblue' : filter.selected!=option}">{{'game_tab_statistics_filter_'
+                                    + option | translate}}</div>
                             </ion-item>
                         </ion-list>
                     </div>
@@ -84,26 +102,30 @@
                                 <div ng-if="stats[filter.selected].walk>0" class="walkbgcolor statsfloat" ng-style="{{getStyle(stats[filter.selected].walk, 'walk')}}">
                                     <i class="icon ic_foot"></i>
                                 </div>
-                                <div ng-if="stats[filter.selected].walk>0" class="statstext" id="walkcolor"> {{(stats[filter.selected].walk/1000) | number:1}} km </div>
+                                <div ng-if="stats[filter.selected].walk>0" class="statstext" id="walkcolor">
+                                    {{(stats[filter.selected].walk/1000) | number:1}} km </div>
                                 <div id="statsdiv"></div>
-                                <div ng-if="(stats[filter.selected].transit+stats[filter.selected].bus+stats[filter.selected].train)>0" class="publicbgcolor statsfloat"
-                                    ng-style="{{getStyle((stats[filter.selected].transit+stats[filter.selected].bus+stats[filter.selected].train), 'transit')}}">
+                                <div ng-if="(stats[filter.selected].transit+stats[filter.selected].bus+stats[filter.selected].train)>0"
+                                    class="publicbgcolor statsfloat" ng-style="{{getStyle((stats[filter.selected].transit+stats[filter.selected].bus+stats[filter.selected].train), 'transit')}}">
                                     <i class="icon ic_urban-bus"></i>
                                     <i class="icon ic_train"></i>
                                 </div>
-                                <div ng-if="(stats[filter.selected].transit+stats[filter.selected].bus+stats[filter.selected].train)>0" class="statstext"
-                                    id="publiccolor"> {{((stats[filter.selected].transit+stats[filter.selected].bus+stats[filter.selected].train)/1000)
+                                <div ng-if="(stats[filter.selected].transit+stats[filter.selected].bus+stats[filter.selected].train)>0"
+                                    class="statstext" id="publiccolor">
+                                    {{((stats[filter.selected].transit+stats[filter.selected].bus+stats[filter.selected].train)/1000)
                                     | number:1}} km </div>
                                 <div id="statsdiv"></div>
                                 <div ng-if="stats[filter.selected].bike>0" class="bikebgcolor statsfloat" ng-style="{{getStyle(stats[filter.selected].bike, 'bike')}}">
                                     <i class="icon ic_bike"></i>
                                 </div>
-                                <div ng-if="stats[filter.selected].bike>0" class="statstext" id="bikecolor"> {{(stats[filter.selected].bike/1000) | number:1}} km </div>
+                                <div ng-if="stats[filter.selected].bike>0" class="statstext" id="bikecolor">
+                                    {{(stats[filter.selected].bike/1000) | number:1}} km </div>
                                 <div id="statsdiv"></div>
                                 <div ng-if="stats[filter.selected].car>0" class="carbgcolor statsfloat" ng-style="{{getStyle(stats[filter.selected].car, 'car')}}">
                                     <i class="icon ic_car"></i>
                                 </div>
-                                <div ng-if="stats[filter.selected].car>0" class="statstext" id="carcolor"> {{(stats[filter.selected].car/1000) | number:1}} km </div>
+                                <div ng-if="stats[filter.selected].car>0" class="statstext" id="carcolor">
+                                    {{(stats[filter.selected].car/1000) | number:1}} km </div>
                                 <div id="statsdiv"></div>
                             </div>
                         </ion-list>
@@ -124,13 +146,14 @@
         <ion-tab icon-on="ic_game_challenge" icon-off="ic_game_challenge">
             <ion-content class="game-challenges tab-others" has-bouncing="false" scroll="false" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
                 <!-- Results -->
-                <ion-scroll class="padding-right padding-left challenges" ng-style="challengesStyle" delegate-handle="challengesScroll" ng-if="challenges != null && challenges.length > 0">
+                <ion-scroll class="padding-right padding-left challenges" ng-style="challengesStyle" delegate-handle="challengesScroll"
+                    ng-if="challenges != null && challenges.length > 0">
                     <ion-list>
                         <ion-item class="challenge" ng-repeat="challenge in challenges" style="{{getBorderColor(challenge)}}">
                             <div class="row">
                                 <div class="col col-80">
-                                        <div>{{challenge.date | date :'dd/MM/yy'}}
-                                            </div>
+                                    <div>{{challenge.date | date :'dd/MM/yy'}}
+                                    </div>
                                     <div>{{challenge.text}}
                                     </div>
                                     <!-- <div class="challenge-string-result">

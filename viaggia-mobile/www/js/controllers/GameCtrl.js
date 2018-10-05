@@ -87,7 +87,7 @@ angular.module('viaggia.controllers.game', [])
             });
         }
         $scope.choosePhoto = function () {
-            $scope.chooseAndUploadPhoto();
+            $scope.chooseAndUploadPhoto($scope.uploadFileImage);
         }
 
         $scope.getImage = function () {

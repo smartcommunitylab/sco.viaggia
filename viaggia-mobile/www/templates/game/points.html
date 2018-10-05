@@ -8,7 +8,7 @@
         <div ng-if="!!status">
 
             <p></p>
-            <div class="user-state card">
+            <div class="user-state card no-shadow">
                 <div class="row">
                     <div class="col">
                         <img class="profile-image-round" ng-if="profileImg" ng-src="{{profileImg}}">
@@ -18,14 +18,28 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col col-10" style="position: relative;">
+                    <div class="profile-level">
+                        <img class="no-shadow" src="img/ic_level.png">
+                        <h4>{{'user_level_label' | translate}} {{level}}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="profile-level">
+                        <i class="icon ion-leaf"></i>
+                        <h4>
+                            {{status['pointConcept'][0]['score']}} {{'green_leaves_points'|translate}}
+                        </h4>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col col col-50" style="position: relative;">
                         <img class="img-level" src="img/ic_level.png">
                     </div>
                     <div class="col home-level text-left">
                         <h4>{{'user_level_label' | translate}} {{level}}</h4>
                     </div>
-                </div>
-                <div class="row">
+                </div> -->
+                <!-- <div class="row">
                     <div class="col col-10 home-points text-center">
                         <i class="icon ion-leaf"></i>
                     </div>
@@ -34,7 +48,7 @@
                             {{status['pointConcept'][0]['score']}} {{'green_leaves_points'|translate}}
                         </h4>
                     </div>
-                </div>
+                </div> -->
 
             </div>
         </div>

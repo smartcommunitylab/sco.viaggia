@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.registration', [])
 
-    .controller('RegistrationCtrl', function ($scope, $state, profileService, notificationService, $ionicPopup, $filter, $ionicHistory, Toast, Config, registrationService, LoginService) {
+    .controller('RegistrationCtrl', function ($scope, $state, $cordovaCamera, profileService, notificationService, $ionicPopup, $filter, $ionicHistory, Toast, Config, registrationService, LoginService) {
         $scope.expandedRules = false;
         Config.loaded();
         $scope.user = {
@@ -97,7 +97,7 @@ angular.module('viaggia.controllers.registration', [])
 
         $scope.image_source = 'img/game/generic_user.png' + '?' + new Date().getTime();
         $scope.setFile = function (element) {
-            $scope.currentFile = element.files[0];
+            $scope.currentFile = element;
             var reader = new FileReader();
 
             reader.onload = function (event) {
@@ -106,11 +106,9 @@ angular.module('viaggia.controllers.registration', [])
 
             }
             // when the file is read it triggers the onload event above.
-            reader.readAsDataURL(element.files[0]);
+            reader.readAsDataURL(element);
         }
-        $scope.changeProfile = function () {
-            document.getElementById('inputImg').click()
-        }
+
         $scope.initTransport = function () {
             initPrivateTransport();
             initPublicTransport();
@@ -118,7 +116,9 @@ angular.module('viaggia.controllers.registration', [])
         $scope.read = {
             isChecked: false
         }
-
+        $scope.changepicture = function () {
+            $scope.chooseAndUploadPhoto($scope.setFile)
+        }
         $scope.register = function () {
             if (!$scope.read.isChecked) {
                 Toast.show($filter('translate')('registration_must_accept'), "short", "bottom");

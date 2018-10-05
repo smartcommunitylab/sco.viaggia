@@ -15,24 +15,28 @@
 
     <ion-content class="padding-right padding-left game-points" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
         <div ng-if="!!user">
-            <div class="img-container">
+            <!-- <div class="img-container">
                 <img ng-if="profileImg" ng-src="{{getUserImg(user.playerId)}}">
 
-            </div>
+            </div> -->
             <p></p>
-            <div class="user-state card">
+            <div class="user-state card no-shadow">
                 <div class="row">
-                    <div class="col col-10" style="position: relative;">
-                        <img class="img-level" src="img/ic_level.png">
+                    <div class="col">
+                        <img class="profile-image-round" ng-if="profileImg" ng-src="{{getUserImg(user.playerId)}}">
                     </div>
-                    <div class="col home-level text-left">
-                        <h4>{{'user_level_label' | translate}} {{user.level}}</h4>
+                </div>
+
+                <div class="row">
+                    <div class="profile-level">
+                        <img class="no-shadow" src="img/ic_level.png">
+                        <h4>{{'user_level_label' | translate}}{{user.level}}</h4>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col home-points text-left">
+                    <div class="profile-level">
+                        <i class="icon ion-leaf"></i>
                         <h4>
-                            <i class="icon ion-leaf"></i>
                             {{user.greenLeaves}} {{'green_leaves_points'|translate}}
                         </h4>
                     </div>

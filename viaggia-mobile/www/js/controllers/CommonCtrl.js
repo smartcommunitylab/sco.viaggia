@@ -583,64 +583,128 @@ angular.module('viaggia.controllers.common', [])
       //      Config.setInfoMenuParams(m.data);
       //      $state.go(m.state);
     };
-    $scope.chooseAndUploadPhoto = function() {
-       //get the picture from library
-       var options = {
-        quality: 90,
-        destinationType: navigator.camera.DestinationType.FILE_URI,
-        sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
-        allowEdit: true, // here it allow to edit pic.
-        targetWidth: 600, //what widht you want after capaturing
-        targetHeight: 600
-    };
 
-    $cordovaCamera.getPicture(options).then(function (imageData) {
-        $scope.imgURI = imageData;
-        window.localStorage.setItem('image', ($scope.imgURI));
-        let options = {
-            quality: 75,
-            widthRatio: 1,
-            heightRatio: 1,
-            targetWidth: 600,
-            targetHeight: 600
-        };
-        //crop the picture in a square size
-        plugins.crop.promise($scope.imgURI, options)
-            .then(function success(newPath) {
-                var getFileBlob = function (url, cb) {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("GET", url);
-                    xhr.responseType = "blob";
-                    xhr.addEventListener('load', function() {
-                        cb(xhr.response);
-                    });
-                    xhr.send();
-            };
+    
+    // $scope.chooseAndUploadPhoto = function() {
+    //    //get the picture from library
+    //   var options = {
+    //     quality: 90,
+    //     destinationType: navigator.camera.DestinationType.FILE_URI,
+    //     sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+    //     allowEdit: true, // here it allow to edit pic.
+    //     targetWidth: 600, //what widht you want after capaturing
+    //     targetHeight: 600
+    // };
+
+    // $cordovaCamera.getPicture(options).then(function (imageData) {
+    //     $scope.imgURI = imageData;
+    //     window.localStorage.setItem('image', ($scope.imgURI));
+    //     let options = {
+    //         quality: 75,
+    //         widthRatio: 1,
+    //         heightRatio: 1,
+    //         targetWidth: 600,
+    //         targetHeight: 600
+    //     };
+    //     //crop the picture in a square size
+    //     plugins.crop.promise($scope.imgURI, options)
+    //         .then(function success(newPath) {
+    //             var getFileBlob = function (url, cb) {
+    //                 var xhr = new XMLHttpRequest();
+    //                 xhr.open("GET", url);
+    //                 xhr.responseType = "blob";
+    //                 xhr.addEventListener('load', function() {
+    //                     cb(xhr.response);
+    //                 });
+    //                 xhr.send();
+    //         };
             
-            var blobToFile = function (blob, name) {
-                    blob.lastModifiedDate = new Date();
-                    blob.name = name;
-                    return blob;
-            };
+    //         var blobToFile = function (blob, name) {
+    //                 blob.lastModifiedDate = new Date();
+    //                 blob.name = name;
+    //                 return blob;
+    //         };
             
-            var getFileObject = function(filePathOrUrl, cb) {
-                   getFileBlob(filePathOrUrl, function (blob) {
-                      cb(blobToFile(blob, 'test.jpg'));
-                   });
-            };
-            //send the file
-            getFileObject(newPath, function (fileObject) {
-                 $scope.uploadFileImage(fileObject)
-            });
+    //         var getFileObject = function(filePathOrUrl, cb) {
+    //                getFileBlob(filePathOrUrl, function (blob) {
+    //                   cb(blobToFile(blob, 'test.jpg'));
+    //                });
+    //         };
+    //         //send the file
+    //         getFileObject(newPath, function (fileObject) {
+    //              $scope.uploadFileImage(fileObject)
+    //         });
 
-            })
-            .catch(function fail(err) {
+    //         })
+    //         .catch(function fail(err) {
 
-            })
-    }, function (err) {
-        // An error occured. Show a message to the user
-    });
-    }
+    //         })
+    // }, function (err) {
+    //     // An error occured. Show a message to the user
+    // });
+    // }
+
+    $scope.chooseAndUploadPhoto = function (callback) {
+      Config.loading();
+      //get the picture from library
+      var options = {
+          quality: 90,
+          destinationType: navigator.camera.DestinationType.FILE_URI,
+          sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+          allowEdit: true, // here it allow to edit pic.
+          targetWidth: 600, //what widht you want after capaturing
+          targetHeight: 600
+      };
+
+      $cordovaCamera.getPicture(options).then(function (imageData) {
+          $scope.imgURI = imageData;
+          window.localStorage.setItem('image', ($scope.imgURI));
+          let options = {
+              quality: 75,
+              widthRatio: 1,
+              heightRatio: 1,
+              targetWidth: 600,
+              targetHeight: 600
+          };
+          //crop the picture in a square size
+          plugins.crop.promise($scope.imgURI, options)
+              .then(function success(newPath) {
+                Config.loaded();
+                  var getFileBlob = function (url, cb) {
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("GET", url);
+                      xhr.responseType = "blob";
+                      xhr.addEventListener('load', function () {
+                          cb(xhr.response);
+                      });
+                      xhr.send();
+                  };
+
+                  var blobToFile = function (blob, name) {
+                      blob.lastModifiedDate = new Date();
+                      blob.name = name;
+                      return blob;
+                  };
+
+                  var getFileObject = function (filePathOrUrl, cb) {
+                      getFileBlob(filePathOrUrl, function (blob) {
+                          cb(blobToFile(blob, 'test.jpg'));
+                      });
+                  };
+                  //send the file
+                  getFileObject(newPath, function (fileObject) {
+                      callback(fileObject)
+                  });
+
+              })
+              .catch(function fail(err) {
+                Config.loaded();
+              })
+      }, function (err) {
+          // An error occured. Show a message to the user
+          Config.loaded();
+      });
+  }
     var changePrifileImage = function () {
       if (profileService.getProfileStatus())
           profileService.getProfileImage(profileService.getProfileStatus().playerData.playerId).then(function (image) {
