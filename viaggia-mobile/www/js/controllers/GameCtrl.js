@@ -93,7 +93,7 @@ angular.module('viaggia.controllers.game', [])
         $scope.getImage = function () {
             if ($scope.$parent.$parent.$parent.status)
                 profileService.getProfileImage($scope.$parent.$parent.$parent.status.playerData.playerId).then(function (image) {
-                    $rootScope.profileImg = profileService.getAvatarUrl()+ $scope.$parent.$parent.$parent.status.playerData.playerId + '/big?' + new Date().getTime();
+                    $rootScope.profileImg = profileService.getAvatarUrl() + $scope.$parent.$parent.$parent.status.playerData.playerId + '/big?' + new Date().getTime();
                     // $scope.refreshProfileImage();
                 }, function (error) {
                     $rootScope.profileImg = 'img/game/generic_user.png' + '/big?' + new Date().getTime();
@@ -752,6 +752,12 @@ angular.module('viaggia.controllers.game', [])
             var time2 = $scope.days[$scope.days.length - 1].name
             var msg1 = new Date(time1).setHours(0, 0, 0, 0);
             var msg2 = new Date(time2).setHours(0, 0, 0, 0);
+            if (notification.travelValidity == 'PENDING') {
+                notification.travelValidity = 'VALID';
+                var event = JSON.parse(notification.event);
+                event.travelValidity='VALID';
+                notification.event = JSON.stringify(event);
+            }
             if (multimodal) {
                 notification = {
                     event: JSON.stringify(notification),
@@ -781,6 +787,7 @@ angular.module('viaggia.controllers.game', [])
                 }
                 var event = JSON.parse(notifications[0].event);
                 if (notifications[0].type == 'TRAVEL' && event.children && event.children.length > 1) {
+
                     $scope.days.push(
                         {
                             name: notifications[0].timestamp,
@@ -902,14 +909,14 @@ angular.module('viaggia.controllers.game', [])
             return GameSrv.getParams(message);
         }
         $scope.openEventTripDetail = function (message) {
-            if (JSON.parse(message.event).travelValidity != 'PENDING') {
-                $state.go('app.tripDiary', {
-                    message: message.event
-                });
-            }
-            else {
-                Toast.show($filter('translate')("travel_pending_state"), "short", "bottom");
-            }
+            // if (JSON.parse(message.event).travelValidity != 'PENDING') {
+            $state.go('app.tripDiary', {
+                message: message.event
+            });
+            // }
+            // else {
+            //     Toast.show($filter('translate')("travel_pending_state"), "short", "bottom");
+            // }
         }
         $scope.init = function () {
             if (!getDiary) {
@@ -1045,7 +1052,7 @@ angular.module('viaggia.controllers.game', [])
             }
         }
         $scope.tripIsValid = function () {
-            return ($scope.trip.validity == 'VALID');
+            return ($scope.trip.validity != 'INVALID');
         }
 
         $scope.calculateMaxStats = function (stats) {
