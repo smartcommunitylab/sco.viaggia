@@ -2,6 +2,7 @@ angular.module('viaggia.controllers.registration', [])
 
     .controller('RegistrationCtrl', function ($scope, $state, $cordovaCamera, profileService, notificationService, $ionicPopup, $filter, $ionicHistory, Toast, Config, registrationService, LoginService) {
         $scope.expandedRules = false;
+        $scope.currentFile = null;
         Config.loaded();
         $scope.user = {
             nickname: '',
@@ -127,24 +128,29 @@ angular.module('viaggia.controllers.registration', [])
                 if (checkParams()) {
                     Config.loading();
                     registrationService.register($scope.user).then(function () {
-                        profileService.setProfileImage($scope.currentFile).then(function () {
+                        if ($scope.currentFile) {
+                            profileService.setProfileImage($scope.currentFile).then(function () {
+                                notificationService.registerUser();
+                                $state.go('app.home');
+                            }, function (error) {
+                                if (error == 413) {
+                                    Toast.show($filter('translate')('payload_large'), "short", "bottom");
+                                    $state.go('app.home');
+                                    console.log("Payload too large");
+                                    return;
+                                }
+                                if (error == 415) {
+                                    Toast.show($filter('translate')('payload_unsupported'), "short", "bottom");
+                                    $state.go('app.home');
+                                    console.log("Unsupported media type");
+                                    return;
+                                }
+                                console.log("network error");
+                            }).finally(Config.loaded)
+                        } else {
                             notificationService.registerUser();
                             $state.go('app.home');
-                        }, function (error) {
-                            if (error == 413) {
-                                Toast.show($filter('translate')('payload_large'), "short", "bottom");
-                                $state.go('app.home');
-                                console.log("Payload too large");
-                                return;
-                            }
-                            if (error == 415) {
-                                Toast.show($filter('translate')('payload_unsupported'), "short", "bottom");
-                                $state.go('app.home');
-                                console.log("Unsupported media type");
-                                return;
-                            }
-                            console.log("network error");
-                        }).finally(Config.loaded)
+                        }
 
 
                     }, function (errStatus) {

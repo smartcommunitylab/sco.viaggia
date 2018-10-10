@@ -650,7 +650,7 @@ angular.module('viaggia.controllers.home', [])
         $scope.noStatus = false;
         $rootScope.profileImg = null;
         $scope.tmpUrl = 'https://dev.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/' + Config.getAppId() + '/'
-        Config.loading();
+        // Config.loading();
         GameSrv.getLocalStatus().then(
             function (status) {
                 $scope.status = status;
@@ -664,7 +664,7 @@ angular.module('viaggia.controllers.home', [])
             }
         ).finally(function () {
             $scope.getImage();
-            Config.loaded
+            // Config.loaded
         });
         $scope.getImage = function () {
             if ($scope.status)
