@@ -421,6 +421,8 @@ angular.module('viaggia.controllers.home', [])
             }, function (errorCode) {
                 $scope.trackingIsOn = false;
                 trackService.geolocationPopup();
+                //go back
+               // $ionicHistory.goBack();
             }).finally(Config.loaded());
         }
 
@@ -462,6 +464,8 @@ angular.module('viaggia.controllers.home', [])
                         });
                         alert.then(function (e) {
                             trackService.startup();
+                            //$ionicHistory.goBack();
+                            //$scope.stopTrackingHome();
                         });
                     }
                 });

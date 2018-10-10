@@ -381,7 +381,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "e32072214e60b6fcfe2e902e6cc130e7"
+    "hash": "34d68df0e728c7d64d9a8b4e78ad6a5b"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -397,7 +397,7 @@
   },
   {
     "file": "js/controllers/HomeCtrl.js",
-    "hash": "68f5a12a7572b3215cbd6f9f4a883d7b"
+    "hash": "606f8ab9740fa96552d3645fcd159703"
   },
   {
     "file": "js/controllers/InfoCtrl.js",
@@ -445,7 +445,7 @@
   },
   {
     "file": "js/controllers/RegistrationController.js",
-    "hash": "5479e9cdeb93cdc8162dadc5f582b231"
+    "hash": "38c1cc967b03997d15826585ba7295e9"
   },
   {
     "file": "js/controllers/Table1Ctrl.js",
@@ -529,7 +529,7 @@
   },
   {
     "file": "js/services/NotificationSrv.js",
-    "hash": "74f44673d8fc9e158a99784a75dcbd7c"
+    "hash": "c2de3b43bcf7e485c9f02d28d54949bb"
   },
   {
     "file": "js/services/PlanSrv.js",
