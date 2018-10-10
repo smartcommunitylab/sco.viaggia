@@ -755,7 +755,7 @@ angular.module('viaggia.controllers.game', [])
             if (notification.travelValidity == 'PENDING') {
                 notification.travelValidity = 'VALID';
                 var event = JSON.parse(notification.event);
-                event.travelValidity='VALID';
+                event.travelValidity = 'VALID';
                 notification.event = JSON.stringify(event);
             }
             if (multimodal) {
@@ -800,6 +800,12 @@ angular.module('viaggia.controllers.game', [])
                         $scope.manageOneEntry(event.children[childrenIndex], true)
                     }
                 } else {
+                    if (notifications[0].travelValidity == 'PENDING') {
+                        notifications[0].travelValidity = 'VALID';
+                        var event = JSON.parse(notifications[0].event);
+                        event.travelValidity = 'VALID';
+                        notifications[0].event = JSON.stringify(event);
+                    }
                     $scope.days.push(
                         {
                             name: notifications[0].timestamp,
@@ -986,7 +992,9 @@ angular.module('viaggia.controllers.game', [])
             if (end > now) {
                 $state.go('app.home.home');
             }
-            $state.go('app.home.challenges', { challengeEnd: end });
+            else {
+                $state.go('app.home.challenges', { challengeEnd: end });
+            }
         };
 
     })
