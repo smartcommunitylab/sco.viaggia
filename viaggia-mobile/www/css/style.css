@@ -1644,7 +1644,7 @@ margin-right: 10px;
 
 .control-tutorial {
     position: absolute;
-    bottom: 10px;
+    bottom: 0px;
     width: 100%;
 }
 
@@ -2895,8 +2895,8 @@ left: 25%;
 .profile-container {
     margin:6px;
     position: relative;
-    width: 30px;
-    height: 30px;
+    width: 60px;
+    height: 60px;
     /* overflow: hidden;
     border-radius: 50%; */
     display: table-cell;

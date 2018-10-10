@@ -97,6 +97,4 @@
     <chcp>
         <config-file url="https://dev.smartcommunitylab.it/cordova/chcp.json" />
     </chcp>
-    <plugin name="cordova-plugin-crop" spec="https://github.com/obeza/cordova-plugin-crop-with-ratio" />
-    <plugin name="cordova-plugin-camera" spec="~4.0.3" />
 </widget>

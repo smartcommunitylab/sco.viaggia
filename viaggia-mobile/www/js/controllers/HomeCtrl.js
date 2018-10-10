@@ -22,7 +22,10 @@ angular.module('viaggia.controllers.home', [])
             Config.setWeeklySposnsor();
 
         });
+        updateStatus = function () {
+            GameSrv.updateStatus();
 
+        }
         //aggoiorna le notifiche
         var notificationInit = function () {
             //scrico le ultime di una settimana
@@ -61,7 +64,7 @@ angular.module('viaggia.controllers.home', [])
             });
         }
 
-        $scope.$watch(function () {
+        $rootScope.$watch(function () {
             return profileService.status;
         }, function (newVal, oldVal, scope) {
             $scope.status = profileService.getProfileStatus();
@@ -324,6 +327,7 @@ angular.module('viaggia.controllers.home', [])
             localDataInit();
             setChallenges();
             setChooseButton();
+            updateStatus();
         }, function () {
             //$ionicLoading.hide();
         });
@@ -652,13 +656,16 @@ angular.module('viaggia.controllers.home', [])
                 $scope.status = status;
                 profileService.setProfileStatus(status);
                 $rootScope.currentUser = status.playerData;
-                $scope.getImage();
+
             },
             function (err) {
                 $scope.noStatus = true;
                 Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
             }
-        ).finally(Config.loaded);
+        ).finally(function () {
+            $scope.getImage();
+            Config.loaded
+        });
         $scope.getImage = function () {
             if ($scope.status)
                 profileService.getProfileImage($scope.status.playerData.playerId).then(function (image) {

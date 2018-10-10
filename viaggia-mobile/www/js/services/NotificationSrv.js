@@ -4,11 +4,42 @@ angular.module('viaggia.services.notification', [])
   //
   //A Service to work with notifications with server
   //
-  .factory('notificationService', function ($q, $http, $ionicPopup, LoginService, $filter, Config) {
+  .factory('notificationService', function ($q, $http, $state, $ionicPopup, LoginService, $filter, Config) {
 
     var notificationService = {};
     var numberNotification = 10;
     var registrationId = null;
+    var typeOfChallenges = {
+      "level": {
+        state: 'app.home.home',
+        params: null
+      },
+      "program_challenge": {
+        state: 'app.home.challenges',
+        params: null
+
+      },
+      "new_challenge": {
+        state: 'app.home.home',
+        params: null
+
+      },
+      "new_invite": {
+        state: 'app.home.challenges',
+        params: { id: '' }
+
+      },
+      "reply_invite": {
+        state: 'app.home.challenges',
+        params: { id: '' }
+
+      },
+      "unlock_type": {
+        state: 'app.home.challenges',
+        params: { type: 'unlock' }
+
+      }
+    }
     notificationService.getNotifications = function (sinceTimestamp, sincePosition, numberNotification) {
       var deferred = $q.defer();
       $http.get(Config.getMessagingServerURL() + '/app/public/notification/' + Config.getMessagingAppId() +
@@ -30,20 +61,36 @@ angular.module('viaggia.services.notification', [])
     //register user to user notification
     notificationService.registerUser = function () {
       var deferred = $q.defer();
-
+      window.FirebasePlugin.grantPermission(); 
       window.FirebasePlugin.getToken(function (token) {
         // save this server-side and use it to push notifications to this device
         console.log(token);
         registrationId = token;
         LoginService.getValidAACtoken().then(
           function (tokenLogin) {
+            // $http({
+            //   method: 'DELETE',
+            //   url: Config.getMessagingServerURL() + '/unregister/user/' + Config.getMessagingAppId(),
+            //   headers: {
+            //     'Accept': 'application/json',
+            //     'Content-Type': 'application/json',
+            //     'Authorization': 'Bearer ' + tokenLogin
+            //   },
+            //   data: {
+            //     "appName": Config.getMessagingAppId(),
+            //     "registrationId": registrationId,
+            //     "platform": ionic.Platform.isAndroid() ? "android" : "ios"
+            //   },
+            //   timeout: 5000
+            // }).success(function (data) {
             $http({
-              method: 'DELETE',
-              url: Config.getMessagingServerURL() + '/unregister/user/' + Config.getMessagingAppId(),
+              method: 'POST',
+              url: Config.getMessagingServerURL() + '/register/user/' + Config.getMessagingAppId(),
               headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + tokenLogin
+
               },
               data: {
                 "appName": Config.getMessagingAppId(),
@@ -52,33 +99,17 @@ angular.module('viaggia.services.notification', [])
               },
               timeout: 5000
             }).success(function (data) {
-              $http({
-                method: 'POST',
-                url: Config.getMessagingServerURL() + '/register/user/' + Config.getMessagingAppId(),
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + tokenLogin
-
-                },
-                data: {
-                  "appName": Config.getMessagingAppId(),
-                  "registrationId": registrationId,
-                  "platform": ionic.Platform.isAndroid() ? "android" : "ios"
-                },
-                timeout: 5000
-              }).success(function (data) {
-                deferred.resolve(data.notifications);
-              })
-                .error(function (err) {
-                  deferred.reject(err);
-
-                })
+              deferred.resolve(data.notifications);
             })
               .error(function (err) {
                 deferred.reject(err);
 
               })
+            // })
+            //   .error(function (err) {
+            //     deferred.reject(err);
+
+            //   })
           },
           function () {
             deferred.reject();
@@ -104,7 +135,12 @@ angular.module('viaggia.services.notification', [])
           buttons: [
             {
               text: $filter('translate')("btn_close"),
-              type: 'button-cancel'
+              type: 'button-custom',
+              onTap: function () {
+                if (notification["content.type"] && typeOfChallenges[notification["content.type"]]) {
+                  $state.go(typeOfChallenges[notification["content.type"]].state, typeOfChallenges[notification["content.type"]].params)
+                }
+              }
             }
           ]
         });

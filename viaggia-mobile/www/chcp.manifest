@@ -9,7 +9,7 @@
   },
   {
     "file": "css/style.css",
-    "hash": "8d0c1303056429893b969b3ab0904e4d"
+    "hash": "9947706c0c4cbd49f25467e8d2b75190"
   },
   {
     "file": "data/bus.csv",
@@ -17,7 +17,7 @@
   },
   {
     "file": "data/config.json",
-    "hash": "59d1a45908183b6de0023b7d2c0441e9"
+    "hash": "c9cbb64609fe77ec5f96893a143de2a5"
   },
   {
     "file": "data/game/ranking.json",
@@ -325,43 +325,43 @@
   },
   {
     "file": "img/main/step_1_en.png",
-    "hash": "e7bf425cdc2a54030993c5b33ad00bda"
+    "hash": "bdac2f6a95039f2b3700f7b8ae3f28f8"
   },
   {
     "file": "img/main/step_1_it.png",
-    "hash": "54c6d9840ce915d4d42c1c41501aee68"
+    "hash": "b066f1aa62f47a21dae6616382df0ba7"
   },
   {
     "file": "img/main/step_2_en.png",
-    "hash": "1773dfa1ab7a3312f0cb4b40e2f3108e"
+    "hash": "765d674010719c0c8c49614926a8c095"
   },
   {
     "file": "img/main/step_2_it.png",
-    "hash": "cf2ec9b27d660173fa1e5419162a5625"
+    "hash": "2a94948f2dcf8d3845b36f578ff2acce"
   },
   {
     "file": "img/main/step_3_en.png",
-    "hash": "81b08268c4cab9cfe61cd052fdda3163"
+    "hash": "ee2d444d6c1fe5aa5ebc2c55ab2f3fb8"
   },
   {
     "file": "img/main/step_3_it.png",
-    "hash": "5bc5f479032e86dd5ec6c729f026ec8f"
+    "hash": "b68d9eb5866e5f6f5b339f55114bb377"
   },
   {
     "file": "img/main/step_4_en.png",
-    "hash": "3a29b00b4975562e1afffa55b4bb56ce"
+    "hash": "68b5a127e492ad9924d6bfd38f1fab35"
   },
   {
     "file": "img/main/step_4_it.png",
-    "hash": "4df84d03ed94bfb42613e6ec1679c198"
+    "hash": "c91cf1b3e93ea19f3c8940924e474135"
   },
   {
     "file": "img/main/step_5_en.png",
-    "hash": "5ec0c057d43892487ba90a1ae79db2d1"
+    "hash": "efb315fa34cf19f877195a28c5295fd3"
   },
   {
     "file": "img/main/step_5_it.png",
-    "hash": "ebb5cd6ae5776424ca78e642cd3a0a00"
+    "hash": "2d7100b3702046e8eb2d3ff6d33819ee"
   },
   {
     "file": "img/markets/ic_nataleDeiPopoli.png",
@@ -381,7 +381,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "bfcd820adfed074f897b8380551632ec"
+    "hash": "e32072214e60b6fcfe2e902e6cc130e7"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -389,15 +389,15 @@
   },
   {
     "file": "js/controllers/CommonCtrl.js",
-    "hash": "10d956f80a323196c1d61e9c8181fbfa"
+    "hash": "07aa48e88a1a068715d09c9b06a41d28"
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "fe547b7c1b16faf5b3c35af6d0a36ad6"
+    "hash": "76f9f981744393dbe776a8a97395fab4"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
-    "hash": "4d17aa941fc508906cfe3caa08f41d33"
+    "hash": "68f5a12a7572b3215cbd6f9f4a883d7b"
   },
   {
     "file": "js/controllers/InfoCtrl.js",
@@ -445,7 +445,7 @@
   },
   {
     "file": "js/controllers/RegistrationController.js",
-    "hash": "e5b19cdf567c5646465621801b1c0718"
+    "hash": "5479e9cdeb93cdc8162dadc5f582b231"
   },
   {
     "file": "js/controllers/Table1Ctrl.js",
@@ -505,7 +505,7 @@
   },
   {
     "file": "js/services/GameSrv.js",
-    "hash": "4ba68585a7f207a27bec25a4b0bb9846"
+    "hash": "71610d97095122458dd78754c135177f"
   },
   {
     "file": "js/services/GeoSrv.js",
@@ -529,7 +529,7 @@
   },
   {
     "file": "js/services/NotificationSrv.js",
-    "hash": "bf2119be1b1aca8622b20136dd31cd4e"
+    "hash": "74f44673d8fc9e158a99784a75dcbd7c"
   },
   {
     "file": "js/services/PlanSrv.js",
@@ -537,7 +537,7 @@
   },
   {
     "file": "js/services/ProfileSrv.js",
-    "hash": "26d230c82949bef271b045aa1c414422"
+    "hash": "ffe67c459fc5a283b7414069469569a0"
   },
   {
     "file": "js/services/RegistrationSrv.js",
@@ -1069,7 +1069,7 @@
   },
   {
     "file": "templates/game/points.html",
-    "hash": "56af21d2f787418c40707cdc6b79d979"
+    "hash": "148ce12a3e02927bb4e5130d291d505f"
   },
   {
     "file": "templates/game/profile.html",
@@ -1077,7 +1077,7 @@
   },
   {
     "file": "templates/game/profileOthers.html",
-    "hash": "0e41e978806cbaba7cc660fa22c7a8c1"
+    "hash": "ed6fdb213b436d5a517ac5fc9dabbe6b"
   },
   {
     "file": "templates/game/profileOthersChallenges.html",
@@ -1085,7 +1085,7 @@
   },
   {
     "file": "templates/game/profileOthersContainer.html",
-    "hash": "dcffc458df55b770e973d4ace4ffc7f9"
+    "hash": "a84d2e2d2a99c76a92f5e72e41fc5305"
   },
   {
     "file": "templates/game/profileOthersStatistics.html",
@@ -1097,7 +1097,7 @@
   },
   {
     "file": "templates/game/rules_en.html",
-    "hash": "2bc2d7fca5037b7d2afd0a137391f69c"
+    "hash": "dbd38cd8dae8eaced361d444154dc247"
   },
   {
     "file": "templates/game/rules_it.html",
@@ -1109,7 +1109,7 @@
   },
   {
     "file": "templates/home.html",
-    "hash": "e7133cad5f8e6f34263d180a233cb7c4"
+    "hash": "748bb6e9e7d8a5bb79469f304db84a19"
   },
   {
     "file": "templates/homeContainer.html",
@@ -1149,7 +1149,7 @@
   },
   {
     "file": "templates/menu.html",
-    "hash": "ac8bf74ba1b4f222d5695c017b010409"
+    "hash": "a8587cf3c36afa5dd73d0024afa500f7"
   },
   {
     "file": "templates/mobility.html",
@@ -1213,7 +1213,7 @@
   },
   {
     "file": "templates/registrationForm.html",
-    "hash": "f1e6ecc085274181dabc4cc9ca78674f"
+    "hash": "520b1f772e24d5c7c087c3965d20ee94"
   },
   {
     "file": "templates/rulesModal.html",
