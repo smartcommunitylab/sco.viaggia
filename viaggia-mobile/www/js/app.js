@@ -13,7 +13,7 @@ var app = {
     document.addEventListener('nothingToUpdate', this.nothingToUpdate, false);
     document.addEventListener('hideLoad', this.hideLoad, false);
   },
-
+ 
   // deviceready Event Handler
   onDeviceReady: function () {
     console.log('Device is ready for work');
@@ -210,6 +210,7 @@ angular.module('viaggia', [
           clientSecret: Config.getClientSecKey(),
           aacUrl: Config.getAACURL()
         });
+
         // $rootScope.GPSAllow = true;
         //            if (window.BackgroundGeolocation) {
         //                trackService.startup();

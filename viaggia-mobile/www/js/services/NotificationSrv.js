@@ -30,28 +30,14 @@ angular.module('viaggia.services.notification', [])
     //register user to user notification
     notificationService.registerUser = function () {
       var deferred = $q.defer();
-
+      //get permission for background notifications
+      window.FirebasePlugin.grantPermission();
       window.FirebasePlugin.getToken(function (token) {
         // save this server-side and use it to push notifications to this device
         console.log(token);
         registrationId = token;
         LoginService.getValidAACtoken().then(
           function (tokenLogin) {
-            $http({
-              method: 'DELETE',
-              url: Config.getMessagingServerURL() + '/unregister/user/' + Config.getMessagingAppId(),
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + tokenLogin
-              },
-              data: {
-                "appName": Config.getMessagingAppId(),
-                "registrationId": registrationId,
-                "platform": ionic.Platform.isAndroid() ? "android" : "ios"
-              },
-              timeout: 5000
-            }).success(function (data) {
               $http({
                 method: 'POST',
                 url: Config.getMessagingServerURL() + '/register/user/' + Config.getMessagingAppId(),
@@ -74,11 +60,6 @@ angular.module('viaggia.services.notification', [])
                   deferred.reject(err);
 
                 })
-            })
-              .error(function (err) {
-                deferred.reject(err);
-
-              })
           },
           function () {
             deferred.reject();
