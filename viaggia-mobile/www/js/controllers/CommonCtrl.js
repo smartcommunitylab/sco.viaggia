@@ -218,6 +218,11 @@ angular.module('viaggia.controllers.common', [])
       }).finally(Config.loaded);
 
     }
+
+    $scope.openNotifications = function () {
+      $rootScope.countNotification = 0;
+      $state.go('app.notifications');
+  }
     $scope.openGamificationBoard = function () {
       //$scope.firstOpenPopup.close();
       $state.go('app.home.leaderboards');

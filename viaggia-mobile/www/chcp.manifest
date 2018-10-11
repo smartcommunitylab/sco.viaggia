@@ -9,11 +9,11 @@
   },
   {
     "file": "css/style.css",
-    "hash": "9947706c0c4cbd49f25467e8d2b75190"
+    "hash": "3356beaed4edf80359b2bee01400adfb"
   },
   {
     "file": "data/bus.csv",
-    "hash": "3a87317221af8c48a3553ea1c2cf9f24"
+    "hash": "47b05c7b6e6f965a41c00e255963a9e1"
   },
   {
     "file": "data/config.json",
@@ -381,7 +381,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "34d68df0e728c7d64d9a8b4e78ad6a5b"
+    "hash": "1fba6615e6ca836271f0864411b3076e"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -389,15 +389,15 @@
   },
   {
     "file": "js/controllers/CommonCtrl.js",
-    "hash": "07aa48e88a1a068715d09c9b06a41d28"
+    "hash": "c0975884a1783ccd8e5fcf6c0c377ff0"
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "76f9f981744393dbe776a8a97395fab4"
+    "hash": "8eb8a7e0153c69d472f9403138d2d2b6"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
-    "hash": "606f8ab9740fa96552d3645fcd159703"
+    "hash": "1aec3cb1e7d14cb9313edb145ec70e70"
   },
   {
     "file": "js/controllers/InfoCtrl.js",
@@ -549,7 +549,7 @@
   },
   {
     "file": "js/services/TrackSrv.js",
-    "hash": "fb6a4b35910092a51ae0b2d0bd7f4403"
+    "hash": "5f16234ca26e0c5906cb7bfeb4eb3946"
   },
   {
     "file": "js/services/TTSrv.js",
@@ -1005,7 +1005,7 @@
   },
   {
     "file": "templates/game/challenges.html",
-    "hash": "a29f018b4bccc8466c02ccbfd92e6768"
+    "hash": "fefef7fec2d605f41c14d78b23a380df"
   },
   {
     "file": "templates/game/challengeTemplates/competitivePerformance.html",
@@ -1033,7 +1033,7 @@
   },
   {
     "file": "templates/game/challengeTemplates/default.html",
-    "hash": "be10c272a3dde98e08167c1d05a348a1"
+    "hash": "d143f54db344c23e2ed7df08186b17cb"
   },
   {
     "file": "templates/game/challengeTemplates/defaultBar.html",
@@ -1069,7 +1069,7 @@
   },
   {
     "file": "templates/game/points.html",
-    "hash": "148ce12a3e02927bb4e5130d291d505f"
+    "hash": "84d35171f0eb237c24d358d840298a46"
   },
   {
     "file": "templates/game/profile.html",
@@ -1077,7 +1077,7 @@
   },
   {
     "file": "templates/game/profileOthers.html",
-    "hash": "ed6fdb213b436d5a517ac5fc9dabbe6b"
+    "hash": "b3379841c8ad0b3020391604efa15261"
   },
   {
     "file": "templates/game/profileOthersChallenges.html",
@@ -1085,7 +1085,7 @@
   },
   {
     "file": "templates/game/profileOthersContainer.html",
-    "hash": "a84d2e2d2a99c76a92f5e72e41fc5305"
+    "hash": "f756b60a0bf07fe83b42598ad03f91c4"
   },
   {
     "file": "templates/game/profileOthersStatistics.html",
@@ -1097,11 +1097,11 @@
   },
   {
     "file": "templates/game/rules_en.html",
-    "hash": "dbd38cd8dae8eaced361d444154dc247"
+    "hash": "02891857c0d962ca5ca308b801af40ef"
   },
   {
     "file": "templates/game/rules_it.html",
-    "hash": "4b6a3c1f0d67fb4142a2d2af8e95323c"
+    "hash": "5d21c90b1c54f09a25a96775a751a2b3"
   },
   {
     "file": "templates/game/statistics.html",
@@ -1109,7 +1109,7 @@
   },
   {
     "file": "templates/home.html",
-    "hash": "748bb6e9e7d8a5bb79469f304db84a19"
+    "hash": "6a3c7edee4e82c76634344f58abb01d7"
   },
   {
     "file": "templates/homeContainer.html",
@@ -1149,7 +1149,7 @@
   },
   {
     "file": "templates/menu.html",
-    "hash": "a8587cf3c36afa5dd73d0024afa500f7"
+    "hash": "5ce0ed3f0704218b4e51d55d1e296294"
   },
   {
     "file": "templates/mobility.html",

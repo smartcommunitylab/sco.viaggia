@@ -169,9 +169,9 @@
             <div ng-if="challenges != null && challenges.length == 0" class="text-center padding">
                 <h4>{{ 'no_challenges' | translate}}</h4>
             </div>
-            <div class="padding-right padding-left game-points" ng-if="!challenges">
+            <!-- <div class="padding-right padding-left game-points" ng-if="!challenges">
                 <h4 class="label">{{'no_status' | translate}}</h4>
-            </div>
+            </div> -->
         </div>
 
         <!-- past -->
@@ -179,9 +179,9 @@
             <div ng-if="pastChallenges != null && pastChallenges.length == 0" class="text-center padding">
                 <h4>{{ 'no_challenges_old' | translate}}</h4>
             </div>
-            <div class="padding-right padding-left game-points" ng-if="!challenges">
+            <!-- <div class="padding-right padding-left game-points" ng-if="!challenges">
                 <h4 class="label">{{'no_status' | translate}}</h4>
-            </div>
+            </div> -->
             <ion-scroll class="padding-right padding-left challenges" ng-style="challengesStyle" delegate-handle="challengesScroll" ng-if="pastChallenges != null && pastChallenges.length > 0">
                 <ion-list>
                     <ion-item class="challenge" ng-repeat="challenge in pastChallenges" style="{{getBorderColor(challenge)}}" ng-class="{'challenge-old': !challenge.active || challenge.success, success: !!challenge.success, fail: !challenge.success}">
