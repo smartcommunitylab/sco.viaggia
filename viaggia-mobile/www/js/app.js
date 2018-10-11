@@ -210,7 +210,7 @@ angular.module('viaggia', [
           clientSecret: Config.getClientSecKey(),
           aacUrl: Config.getAACURL()
         });
-
+        console.log("ciao fabio");
         // $rootScope.GPSAllow = true;
         //            if (window.BackgroundGeolocation) {
         //                trackService.startup();

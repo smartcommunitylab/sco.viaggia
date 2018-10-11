@@ -381,7 +381,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "1fba6615e6ca836271f0864411b3076e"
+    "hash": "7142f0495b9008642afbd3512da38f08"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -985,7 +985,7 @@
   },
   {
     "file": "templates/credits.html",
-    "hash": "fc5ff7212580d423dbe1f70f5159a766"
+    "hash": "7e8e5c4a3406de65c8c5925e11773ec1"
   },
   {
     "file": "templates/emptyHomepage.html",
