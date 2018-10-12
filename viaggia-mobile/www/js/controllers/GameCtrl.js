@@ -127,6 +127,7 @@ angular.module('viaggia.controllers.game', [])
         $scope.param = null;
         $scope.tabs = ['past', 'future', 'unlock'];
         $scope.actualTab = "";
+        $scope.expansion = [];
 
         $scope.challenge = [];
         $scope.typeOfChallenges = [];
@@ -174,6 +175,14 @@ angular.module('viaggia.controllers.game', [])
                 function () { }
             );
         };
+
+        $scope.expand = function (index) {
+            $scope.expansion[index] = !$scope.expansion[index];
+        }
+        $scope.isExpanded = function (index) {
+            return $scope.expansion[index]
+        }
+
         $scope.init = function () {
             navigator.globalization.getPreferredLanguage(
                 function (result) {

@@ -103,10 +103,10 @@ angular.module('viaggia.controllers.common', [])
     }
     $scope.goToMap = function () {
       $state.go('app.mapTracking');
-      $ionicHistory.nextViewOptions({
-        disableBack: true,
-        historyRoot: false
-      });
+      // $ionicHistory.nextViewOptions({
+      //   disableBack: true,
+      //   historyRoot: false
+      //});
     }
     $scope.notHomeAndMap = function () {
       if ($state.current.name != "app.mapTracking" && $state.current.name != "app.login" && $state.current.name != "app.home.home" && trackService.trackingIsGoingOn() && !trackService.trackingIsFinished())

@@ -381,7 +381,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "7142f0495b9008642afbd3512da38f08"
+    "hash": "0fa5083432b3c670876b977407fc3582"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -389,11 +389,11 @@
   },
   {
     "file": "js/controllers/CommonCtrl.js",
-    "hash": "c0975884a1783ccd8e5fcf6c0c377ff0"
+    "hash": "e250164285a5fb4059ee6cdab91a314d"
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "8eb8a7e0153c69d472f9403138d2d2b6"
+    "hash": "9e49d326a0cade61046a0d26aeb9c633"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
@@ -1005,7 +1005,7 @@
   },
   {
     "file": "templates/game/challenges.html",
-    "hash": "fefef7fec2d605f41c14d78b23a380df"
+    "hash": "630aecb8bb99536f46cba4c2e3588ab3"
   },
   {
     "file": "templates/game/challengeTemplates/competitivePerformance.html",
@@ -1065,7 +1065,7 @@
   },
   {
     "file": "templates/game/mapTrack.html",
-    "hash": "7717b49e604e95c698fda81c0ecae5b9"
+    "hash": "6f9cc751a0c7569186e8e9b310102d6d"
   },
   {
     "file": "templates/game/points.html",
@@ -1149,7 +1149,7 @@
   },
   {
     "file": "templates/menu.html",
-    "hash": "5ce0ed3f0704218b4e51d55d1e296294"
+    "hash": "735ad2cd7e74054dbc76b07c2ff1c4a3"
   },
   {
     "file": "templates/mobility.html",
