@@ -1,5 +1,5 @@
 angular.module('viaggia.services.tracking', [])
-    .factory('trackService', function (Config, $q, $http, $state, $timeout, $filter, DiaryDbSrv, LoginService, $ionicPlatform, $ionicPopup, $rootScope, Utils, GeoLocate, BT) {
+    .factory('trackService', function (Config, $q, $http, $state, $timeout, $filter, $ionicHistory, LoginService, $ionicPlatform, $ionicPopup, $rootScope, Utils, GeoLocate, BT) {
         //var trackingIntervalInMs = 500;
         //var accelerationDetectionIntervalInMs = 500;
         //var accelerationSensorDelay = 0;
@@ -256,7 +256,7 @@ angular.module('viaggia.services.tracking', [])
                 if (!multimodalId) {
                     multimodalId = 'multimodal_' + ts;
                     //set id for db
-                    localStorage.setItem(Config.getAppId() + '_dbId',tripId);
+                    localStorage.setItem(Config.getAppId() + '_dbId', tripId);
                 }
                 // default duration set to 1 month
                 trackService.start(tripId, multimodalId, {
@@ -748,7 +748,7 @@ angular.module('viaggia.services.tracking', [])
 
 
         var markAsDone = function () {
-           
+
             var tripId = localStorage.getItem(Config.getAppId() + "_tripId");
             var date = new Date();
             date.setHours(0, 0, 0, 0);
@@ -876,6 +876,14 @@ angular.module('viaggia.services.tracking', [])
             });
             alert.then(function (e) {
                 trackService.startup();
+                //if I'm visualizing the map, go to home page
+                if ($state.current.name === 'app.mapTracking')
+                {
+                    $ionicHistory.nextViewOptions({
+                        disableBack: true
+                      });
+                      $state.go('app.home.home');
+                }
             });
         }
         /**
@@ -917,6 +925,8 @@ angular.module('viaggia.services.tracking', [])
                 alert.then(function (e) {
                     GPSpopup = false;
                     trackService.startup();
+                    $ionicHistory.goBack();
+
                 });
             }
         }

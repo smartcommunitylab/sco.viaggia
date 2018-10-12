@@ -11,21 +11,22 @@ angular.module('viaggia.controllers.home', [])
             label: $filter('translate')('menu_notifications'),
             icon: 'ic_notification'
         }];
+        updateStatus = function () {
+            GameSrv.updateStatus();
 
+        }
         //load from localstorage the id notifications read
         $ionicPlatform.ready(function () {
             document.addEventListener("resume", function () {
                 notificationInit();
+                updateStatus();
                 Config.setWeeklySposnsor();
 
             }, false);
             Config.setWeeklySposnsor();
 
         });
-        updateStatus = function () {
-            GameSrv.updateStatus();
 
-        }
         //aggoiorna le notifiche
         var notificationInit = function () {
             //scrico le ultime di una settimana
@@ -464,6 +465,13 @@ angular.module('viaggia.controllers.home', [])
                         });
                         alert.then(function (e) {
                             trackService.startup();
+                            if ($state.current.name === 'app.mapTracking')
+                            {
+                                $ionicHistory.nextViewOptions({
+                                    disableBack: true
+                                  });
+                                  $state.go('app.home.home');
+                            }
                             //$ionicHistory.goBack();
                             //$scope.stopTrackingHome();
                         });
@@ -545,6 +553,10 @@ angular.module('viaggia.controllers.home', [])
             $scope.$watch('notificationService.notifications', function (newVal, oldVal, scope) {
                 notificationInit();
             });
+        //     $ionicPlatform.on('resume', function(){
+        //        //updatestatus if I come from anotherwebsite
+        //   });
+
         }
         /* DISABLED MAP
             $scope.initMap = function () {
@@ -582,10 +594,7 @@ angular.module('viaggia.controllers.home', [])
                 events: {}
             });
         */
-        $scope.openNotifications = function () {
-            $rootScope.countNotification = 0;
-            $state.go('app.notifications');
-        }
+  
 
         $scope.go = function (state) {
             if (state.indexOf('(') > 0) {
