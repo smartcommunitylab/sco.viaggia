@@ -210,7 +210,6 @@ angular.module('viaggia', [
           clientSecret: Config.getClientSecKey(),
           aacUrl: Config.getAACURL()
         });
-        console.log("ciao fabio");
         // $rootScope.GPSAllow = true;
         //            if (window.BackgroundGeolocation) {
         //                trackService.startup();
@@ -805,7 +804,7 @@ angular.module('viaggia', [
       })
       .state('app.parkingMeters', {
         url: "/parkingMeters",
-        cache: false,
+        // cache: false,
         views: {
           'menuContent': {
             templateUrl: "templates/mapParkingMeters.html",

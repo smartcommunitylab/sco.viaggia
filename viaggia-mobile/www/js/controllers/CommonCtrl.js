@@ -218,7 +218,12 @@ angular.module('viaggia.controllers.common', [])
       }).finally(Config.loaded);
 
     }
-
+    $scope.goPath = function (path) {
+      $location.path(path);
+  };
+    $scope.openNews = function () {
+      $state.go('app.news');
+    }
     $scope.openNotifications = function () {
       $rootScope.countNotification = 0;
       $state.go('app.notifications');

@@ -74,7 +74,7 @@
 					</ion-item>
 					<div>
 						<ion-item class="item-icon-left item-accordion  menu-rt" ng-repeat="m in infomenu" ng-show="isGroupRealTimeShown()" nav-clear
-						 menu-close item-icon-left ng-href="#{{m.state}}">
+						 menu-close item-icon-left ng-click="goPath(m.state)">
 							<i class="icon" ng-class="m.icon"></i>{{m.label | translate}}
 						</ion-item>
 					</div>
@@ -85,7 +85,7 @@
 				<ion-item nav-clear menu-close ng-click="openRules()" class="menu-main item-icon-left">
 					<i class="icon ic_game_rules"></i>{{'menu_rules' | translate}}
 				</ion-item>
-				<ion-item nav-clear menu-close ui-sref="app.news" class="menu-main item-icon-left">
+				<ion-item nav-clear menu-close ng-click="openNews()" class="menu-main item-icon-left">
 					<i class="icon ic_news"></i>{{'menu_news' | translate}}
 				</ion-item>
 				<ion-item nav-clear menu-close href="{{contactLink}}" class="item-icon-left menu-main ">
