@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>414560938900-ims1hvapjvv7ehud12a5qd08tfh3m0iv.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.414560938900-ims1hvapjvv7ehud12a5qd08tfh3m0iv</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAlKU8N6CFYW8tymKrJFCHJWghxh2M03yc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>414560938900</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>it.smartcommunitylab.viaggiatrento.playgo</string>
+	<key>PROJECT_ID</key>
+	<string>viaggia-playgo</string>
+	<key>STORAGE_BUCKET</key>
+	<string>viaggia-playgo.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:414560938900:ios:9e750a461995c927</string>
+	<key>DATABASE_URL</key>
+	<string>https://viaggia-playgo.firebaseio.com</string>
+</dict>
+</plist>
