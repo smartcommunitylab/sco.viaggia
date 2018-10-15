@@ -1,0 +1,6 @@
+{
+    "config_ios" : {
+      "NSMotionUsageDescription": "L’applicazione necessita di accedere alla motion detection (rilevazione di movimento) per minimizzare il consumo di batteria ed attivare la geo-localizzazione solo al bisogno.",
+      "NSLocationWhenInUseUsageDescription": "L’applicazione necessita di accedere alle informazioni relative alla tua posizione per poter tracciare, validare e premiare i tuoi spostamenti sostenibili."
+    }
+  }
