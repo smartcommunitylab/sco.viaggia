@@ -381,7 +381,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "0fa5083432b3c670876b977407fc3582"
+    "hash": "619092718fa0094eccfe1717977fa2c2"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -393,7 +393,7 @@
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "9e49d326a0cade61046a0d26aeb9c633"
+    "hash": "9f1dd737ba85c9abae1b34fcc4b755b8"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
