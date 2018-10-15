@@ -161,7 +161,7 @@ angular.module('viaggia', [
     var onUpdateReady = function () {
       console.log('Update is ready for installation');
       //loading
-      $ionicLoading.show();
+      // $ionicLoading.show();
     }
     // chcp_updateIsReadyToInstall Event Handler
     var nothingToUpdate = function () {

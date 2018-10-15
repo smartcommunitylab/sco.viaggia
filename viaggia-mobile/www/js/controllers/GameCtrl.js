@@ -763,9 +763,11 @@ angular.module('viaggia.controllers.game', [])
             var msg2 = new Date(time2).setHours(0, 0, 0, 0);
             if (notification.travelValidity == 'PENDING') {
                 notification.travelValidity = 'VALID';
-                var event = JSON.parse(notification.event);
-                event.travelValidity = 'VALID';
-                notification.event = JSON.stringify(event);
+                if (notification.event) {
+                    var event = JSON.parse(notification.event);
+                    event.travelValidity = 'VALID';
+                    notification.event = JSON.stringify(event);
+                }
             }
             if (multimodal) {
                 notification = {
@@ -811,9 +813,11 @@ angular.module('viaggia.controllers.game', [])
                 } else {
                     if (notifications[0].travelValidity == 'PENDING') {
                         notifications[0].travelValidity = 'VALID';
-                        var event = JSON.parse(notifications[0].event);
-                        event.travelValidity = 'VALID';
-                        notifications[0].event = JSON.stringify(event);
+                        if (notifications[0].event) {
+                            var event = JSON.parse(notifications[0].event);
+                            event.travelValidity = 'VALID';
+                            notifications[0].event = JSON.stringify(event);
+                        }
                     }
                     $scope.days.push(
                         {
