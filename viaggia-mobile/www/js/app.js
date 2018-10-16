@@ -199,6 +199,7 @@ angular.module('viaggia', [
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       }
       if (window.StatusBar) {
+        StatusBar.overlaysWebView(false);            
         StatusBar.styleDefault();
       }
       //        GeoLocate.initLocalization().then(function () {
