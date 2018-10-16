@@ -2389,12 +2389,18 @@ overflow: hidden;
 
 .tracking-dashboard {
     /* margin: 0px 0px; */
-    border-top: 1px solid white;
-    background-color: #2975a7 !important;
+    border-top: 1px solid white !important;
+    background-color: #2975a7;
     color: white;
     padding-bottom: 25px;
 }
-
+.tracking-dashboard-on {
+    border-top: 1px solid white !important;
+    background-color: #4caf4f;
+}
+/* .tracking-dashboard div.col{
+    color: white;
+} */
 .chart div {
   font: 14px sans-serif;
   text-align: right;
@@ -2463,6 +2469,8 @@ overflow: hidden;
 .tracking-dashboard h4 {
     margin-bottom: 0px;
     margin-top: 0px;
+    color: white;
+
 }
 
 .tracking-dashboard h4 i {
@@ -2704,17 +2712,21 @@ height: 30px;
     box-shadow: none;
     /* height: 20px!important;
     width: 20px!important; */
-    font-size: 22px;
+    font-size: 30px!important;
     min-width: 44px;
 }
 .modes-buttons {
     position: fixed;
     bottom: 10px;
     /* left: 10px; */
-    background-color: rgb(248, 248, 248);
+    background-color: #2975a7 !important;
     border-radius: 0px 35px 35px 0px;
     padding: 5px;
     display: flex;
+}
+.modes-buttons .button-map {
+    background-color: #2975a7 !important;
+    color: white;
 }
 .button-stop-map{
     position: fixed;
@@ -2767,13 +2779,18 @@ height: 30px;
     width: 100%;;
 }
 .home-track-buttons {
-    background-color: rgb(248, 248, 248);
+    background-color:#2975a7 !important;
     border-radius: 0px 35px 35px 0px;
     padding: 5px;
     z-index: 999;
     margin-left: -10px;
     display: inline-flex;
 }
+.home-track-buttons .button-map{
+    background-color: #2975a7 !important;
+    color: white;
+}
+
 .home-track-stop-map{
     padding: 0vw 5vw;
     background-color: #c1272d;
@@ -2925,7 +2942,7 @@ left: 25%;
     float: right;
 }
 .actual-track{
-    color: rgb(33, 150, 243);
+    color: rgb(33, 150, 243)!important;
 }
 .home-no-challenge{
     text-align: center;
