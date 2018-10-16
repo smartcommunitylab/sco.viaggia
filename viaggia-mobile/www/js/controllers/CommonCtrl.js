@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.common', [])
 
-  .controller('AppCtrl', function ($scope, $rootScope, $q, $state, GameSrv, $cordovaCamera, profileService,trackService, $ionicHistory, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, Utils, tutorial) {
+  .controller('AppCtrl', function ($scope, $rootScope, $q, $state, GameSrv, $cordovaCamera, profileService, trackService, $ionicHistory, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, Utils, tutorial) {
 
 
     /* menu group */
@@ -201,15 +201,29 @@ angular.module('viaggia.controllers.common', [])
             ]
           });
         } else {
-          $ionicPopup.alert({
+          $ionicPopup.confirm({
             title: $filter('translate')("pop_up_invalid_tracking_title"),
             template: $filter('translate')("pop_up_invalid_tracking_template"),
-            okText: $filter('translate')("btn_close"),
-            okType: 'button-cancel'
-          });
+            buttons: [
+              {
+                text: $filter('translate')("btn_close"),
+                type: 'button-cancel',
+                onTap: function () {
+                  $state.go('app.home.home');
+                }
+              }
+            ]
+            // $ionicPopup.alert({
+            //   title: $filter('translate')("pop_up_invalid_tracking_title"),
+            //   template: $filter('translate')("pop_up_invalid_tracking_template"),
+            //   okText: $filter('translate')("btn_close"),
+            //   okType: 'button-cancel',
 
+            // });
+
+            //}
+          })
         }
-        // }
       }, function () {
         //puo' darsi che finisca qui?
         Config.loaded();
@@ -220,14 +234,14 @@ angular.module('viaggia.controllers.common', [])
     }
     $scope.goPath = function (path) {
       $location.path(path);
-  };
+    };
     $scope.openNews = function () {
       $state.go('app.news');
     }
     $scope.openNotifications = function () {
       $rootScope.countNotification = 0;
       $state.go('app.notifications');
-  }
+    }
     $scope.openGamificationBoard = function () {
       //$scope.firstOpenPopup.close();
       $state.go('app.home.leaderboards');
@@ -594,7 +608,7 @@ angular.module('viaggia.controllers.common', [])
       //      $state.go(m.state);
     };
 
-    
+
     // $scope.chooseAndUploadPhoto = function() {
     //    //get the picture from library
     //   var options = {
@@ -628,13 +642,13 @@ angular.module('viaggia.controllers.common', [])
     //                 });
     //                 xhr.send();
     //         };
-            
+
     //         var blobToFile = function (blob, name) {
     //                 blob.lastModifiedDate = new Date();
     //                 blob.name = name;
     //                 return blob;
     //         };
-            
+
     //         var getFileObject = function(filePathOrUrl, cb) {
     //                getFileBlob(filePathOrUrl, function (blob) {
     //                   cb(blobToFile(blob, 'test.jpg'));
@@ -658,87 +672,87 @@ angular.module('viaggia.controllers.common', [])
       Config.loading();
       //get the picture from library
       var options = {
-          quality: 90,
-          destinationType: navigator.camera.DestinationType.FILE_URI,
-          sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
-          allowEdit: true, // here it allow to edit pic.
-          targetWidth: 600, //what widht you want after capaturing
-          targetHeight: 600
+        quality: 90,
+        destinationType: navigator.camera.DestinationType.FILE_URI,
+        sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+        allowEdit: true, // here it allow to edit pic.
+        targetWidth: 600, //what widht you want after capaturing
+        targetHeight: 600
       };
 
       $cordovaCamera.getPicture(options).then(function (imageData) {
-          $scope.imgURI = imageData;
-          window.localStorage.setItem('image', ($scope.imgURI));
-          let options = {
-              quality: 75,
-              widthRatio: 1,
-              heightRatio: 1,
-              targetWidth: 600,
-              targetHeight: 600
-          };
-          //crop the picture in a square size
-          plugins.crop.promise($scope.imgURI, options)
-              .then(function success(newPath) {
-                Config.loaded();
-                  var getFileBlob = function (url, cb) {
-                      var xhr = new XMLHttpRequest();
-                      xhr.open("GET", url);
-                      xhr.responseType = "blob";
-                      xhr.addEventListener('load', function () {
-                          cb(xhr.response);
-                      });
-                      xhr.send();
-                  };
+        $scope.imgURI = imageData;
+        window.localStorage.setItem('image', ($scope.imgURI));
+        let options = {
+          quality: 75,
+          widthRatio: 1,
+          heightRatio: 1,
+          targetWidth: 600,
+          targetHeight: 600
+        };
+        //crop the picture in a square size
+        plugins.crop.promise($scope.imgURI, options)
+          .then(function success(newPath) {
+            Config.loaded();
+            var getFileBlob = function (url, cb) {
+              var xhr = new XMLHttpRequest();
+              xhr.open("GET", url);
+              xhr.responseType = "blob";
+              xhr.addEventListener('load', function () {
+                cb(xhr.response);
+              });
+              xhr.send();
+            };
 
-                  var blobToFile = function (blob, name) {
-                      blob.lastModifiedDate = new Date();
-                      blob.name = name;
-                      return blob;
-                  };
+            var blobToFile = function (blob, name) {
+              blob.lastModifiedDate = new Date();
+              blob.name = name;
+              return blob;
+            };
 
-                  var getFileObject = function (filePathOrUrl, cb) {
-                      getFileBlob(filePathOrUrl, function (blob) {
-                          cb(blobToFile(blob, 'test.jpg'));
-                      });
-                  };
-                  //send the file
-                  getFileObject(newPath, function (fileObject) {
-                      callback(fileObject)
-                  });
+            var getFileObject = function (filePathOrUrl, cb) {
+              getFileBlob(filePathOrUrl, function (blob) {
+                cb(blobToFile(blob, 'test.jpg'));
+              });
+            };
+            //send the file
+            getFileObject(newPath, function (fileObject) {
+              callback(fileObject)
+            });
 
-              })
-              .catch(function fail(err) {
-                Config.loaded();
-              })
+          })
+          .catch(function fail(err) {
+            Config.loaded();
+          })
       }, function (err) {
-          // An error occured. Show a message to the user
-          Config.loaded();
+        // An error occured. Show a message to the user
+        Config.loaded();
       });
-  }
+    }
     var changePrifileImage = function () {
       if (profileService.getProfileStatus())
-          profileService.getProfileImage(profileService.getProfileStatus().playerData.playerId).then(function (image) {
-              $rootScope.profileImg = profileService.getAvatarUrl() + profileService.getProfileStatus().playerData.playerId + '/big?' + new Date().getTime();
-              // $scope.refreshProfileImage();
-          }, function (error) {
-              $rootScope.profileImg = 'img/game/generic_user.png' + '/big?' + new Date().getTime();
-          })
-  }
+        profileService.getProfileImage(profileService.getProfileStatus().playerData.playerId).then(function (image) {
+          $rootScope.profileImg = profileService.getAvatarUrl() + profileService.getProfileStatus().playerData.playerId + '/big?' + new Date().getTime();
+          // $scope.refreshProfileImage();
+        }, function (error) {
+          $rootScope.profileImg = 'img/game/generic_user.png' + '/big?' + new Date().getTime();
+        })
+    }
     $scope.uploadFileImage = function (files) {
       Config.loading();
       profileService.setProfileImage(files).then(function () {
-          console.log("ok");
-          changePrifileImage();
+        console.log("ok");
+        changePrifileImage();
       }, function (error) {
-          if (error == 413)
-              console.log("Payload too large");
-          return;
-          if (error == 415)
-              console.log("Unsupported media type");
-          return;
-          console.log("network error");
+        if (error == 413)
+          console.log("Payload too large");
+        return;
+        if (error == 415)
+          console.log("Unsupported media type");
+        return;
+        console.log("network error");
       }).finally(Config.loaded)
-  };
+    };
   })
 
   .factory('Toast', function ($rootScope, $timeout, $ionicPopup, $cordovaToast) {
