@@ -9,7 +9,7 @@
   },
   {
     "file": "css/style.css",
-    "hash": "3356beaed4edf80359b2bee01400adfb"
+    "hash": "db3bb66e1bb9b822aba88193ac066a2e"
   },
   {
     "file": "data/bus.csv",
@@ -1109,7 +1109,7 @@
   },
   {
     "file": "templates/home.html",
-    "hash": "6a3c7edee4e82c76634344f58abb01d7"
+    "hash": "dbbe8dbd20d2e981f11a73bff3b448a1"
   },
   {
     "file": "templates/homeContainer.html",
