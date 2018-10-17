@@ -381,7 +381,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "61276d45a54511c826df54c7af657136"
+    "hash": "25ba47dd37392df4bbc97662cd440211"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -393,11 +393,11 @@
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "9f1dd737ba85c9abae1b34fcc4b755b8"
+    "hash": "947084761cbd8047bd5b81e2f004d2bd"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
-    "hash": "1aec3cb1e7d14cb9313edb145ec70e70"
+    "hash": "51e0f6f446caf612ff1dcb1f410e89e3"
   },
   {
     "file": "js/controllers/InfoCtrl.js",
@@ -985,7 +985,7 @@
   },
   {
     "file": "templates/credits.html",
-    "hash": "805a6905cc7c9aa69f24f505751f3de5"
+    "hash": "7e8e5c4a3406de65c8c5925e11773ec1"
   },
   {
     "file": "templates/emptyHomepage.html",
@@ -1109,7 +1109,7 @@
   },
   {
     "file": "templates/home.html",
-    "hash": "dbbe8dbd20d2e981f11a73bff3b448a1"
+    "hash": "7fe09a9c508c587bbdd44d74eb3bb655"
   },
   {
     "file": "templates/homeContainer.html",

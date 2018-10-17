@@ -142,8 +142,8 @@ angular.module('viaggia.controllers.game', [])
         // } else {
         //     $scope.actualTab=$scope.tabs[1];
         // };
-        if (paramOptions && paramOptions < now) {
-            // $scope.filter.selected = $scope.filter.options[1];
+        if (paramOptions && paramOptions > now) {
+            $scope.actualTab = $scope.tabs[1];
         }
 
         $scope.openTab = function (tab) {

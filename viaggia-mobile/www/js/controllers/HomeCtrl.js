@@ -64,7 +64,10 @@ angular.module('viaggia.controllers.home', [])
                 //$ionicLoading.hide();
             });
         }
-
+        $scope.programChallenge = function () {
+            var date = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
+            $state.go("app.home.challenges",{challengeEnd: date})
+        }
         $rootScope.$watch(function () {
             return profileService.status;
         }, function (newVal, oldVal, scope) {

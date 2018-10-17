@@ -155,7 +155,7 @@
 
         <div class="home-challenges">
             <div class="row" ng-if="buttonEnabled">
-                <button class="button button-block button-block-active button-next-challenge" ui-sref="app.home.challenges">
+                <button class="button button-block button-block-active button-next-challenge" ng-click="programChallenge()">
                     {{'home_next_challenge'|translate}} </button>
             </div>
             <div class="row">
