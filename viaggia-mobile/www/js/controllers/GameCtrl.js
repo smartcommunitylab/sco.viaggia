@@ -448,7 +448,7 @@ angular.module('viaggia.controllers.game', [])
         }
         $scope.readMore = function (type) {
             $ionicPopup.show({
-                title: $filter('translate')("challenge_popup_title"),
+                title: $filter('translate')("challenge_detail_popup_title"),
                 template: type["long"],
                 buttons: [
                     {
