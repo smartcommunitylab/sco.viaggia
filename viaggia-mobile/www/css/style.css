@@ -3276,6 +3276,9 @@ left: 25%;
     height: 100%;
     margin: 4px auto;
 }
+#profileTabs ion-scroll {
+    height: 86vh;
+}
 .float-left {
     float: left;
 }
