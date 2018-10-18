@@ -9,7 +9,7 @@ angular.module('viaggia.services.tutorial', [])
         $scope.tutorialIndex = 1;
         $scope.tutorialSteps = total;
         $scope.tutorialDone = false;
-        $scope.tutorialLang = $translate.use();
+        $scope.tutorialLang = ($translate.use()!='it'||'en')? 'en':$translate.use();
         $scope.tutorialFolder = folder;
         $scope.tutorialId = tutorialId;
 
