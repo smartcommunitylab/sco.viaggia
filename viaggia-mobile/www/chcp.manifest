@@ -9,7 +9,7 @@
   },
   {
     "file": "css/style.css",
-    "hash": "db3bb66e1bb9b822aba88193ac066a2e"
+    "hash": "023cf9f173eb007b92d59504b476fd0f"
   },
   {
     "file": "data/bus.csv",
@@ -132,6 +132,10 @@
     "hash": "d7699bf8508e2c8f6de47102b4c099fb"
   },
   {
+    "file": "img/credits/climate_kic.png",
+    "hash": "191429f06f00c8ca455ff0816bd9d3e4"
+  },
+  {
     "file": "img/credits/comune_rv.png",
     "hash": "c06adfa54779125c54f39b129b4733e8"
   },
@@ -154,6 +158,10 @@
   {
     "file": "img/credits/small_eit.png",
     "hash": "f4dd187d82063a9f7d4c17b30fc285f5"
+  },
+  {
+    "file": "img/credits/smash.png",
+    "hash": "6eac5c3fcb834b0a6cffa4ed4ab0069b"
   },
   {
     "file": "img/credits/streetlife.png",
@@ -349,15 +357,15 @@
   },
   {
     "file": "img/main/step_4_en.png",
-    "hash": "68b5a127e492ad9924d6bfd38f1fab35"
+    "hash": "96655be66e310503734c38e2d5960431"
   },
   {
     "file": "img/main/step_4_it.png",
-    "hash": "c91cf1b3e93ea19f3c8940924e474135"
+    "hash": "7bb6c0d5491b0c17e4a77749ba884220"
   },
   {
     "file": "img/main/step_5_en.png",
-    "hash": "efb315fa34cf19f877195a28c5295fd3"
+    "hash": "df3d3bc3784dedea325da121cc726482"
   },
   {
     "file": "img/main/step_5_it.png",
@@ -373,7 +381,7 @@
   },
   {
     "file": "index_en.html",
-    "hash": "2a214636ce9e8e755f332cf9bf941812"
+    "hash": "11839612658f8211a945c83997a34866"
   },
   {
     "file": "index.html",
@@ -381,7 +389,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "25ba47dd37392df4bbc97662cd440211"
+    "hash": "d1e4a5856da75dc0797e4dcfb33722d6"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -393,7 +401,7 @@
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "947084761cbd8047bd5b81e2f004d2bd"
+    "hash": "dab9ea4c0b03bf6ec96a840631746a85"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
@@ -557,7 +565,7 @@
   },
   {
     "file": "js/services/TutorialSrv.js",
-    "hash": "a6a9fee0b600f61cca55b514d6bcfd6d"
+    "hash": "68708cf40e2185c9cbc8c8125843a990"
   },
   {
     "file": "lib/angular-animate/angular-animate.min.js",
@@ -985,7 +993,7 @@
   },
   {
     "file": "templates/credits.html",
-    "hash": "7e8e5c4a3406de65c8c5925e11773ec1"
+    "hash": "dddbe1b1ee77c8cbbceb47a1cfcf4fb9"
   },
   {
     "file": "templates/emptyHomepage.html",
