@@ -10,6 +10,7 @@
     "cordova-plugin-app-version": "^0.1.9",
     "cordova-plugin-background-fetch": "^5.1.1",
     "cordova-plugin-bluetooth-serial": "^0.4.7",
+    "cordova-plugin-cocoalumberjack": "0.0.4",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-console": "^1.1.0",
     "cordova-plugin-device": "^2.0.2",
@@ -25,7 +26,6 @@
     "cordova-plugin-request-location-accuracy": "^2.2.3",
     "cordova-plugin-screen-orientation": "^3.0.1",
     "cordova-plugin-splashscreen": "^5.0.2",
-    "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "1",
     "cordova-plugin-x-toast": "^2.7.0",
     "cordova-sqlite-storage": "^2.4.0",
@@ -118,7 +118,11 @@
       "cordova-background-geolocation": {
         "LICENSE": "6af31309a1796013f00927f4c396b898ac881efac6d398a165301e06e0a6a9c7",
         "GOOGLE_API_VERSION": "11.6.0",
-        "APPCOMPAT_VERSION": "27.0.0"
+        "APPCOMPAT_VERSION": "27.0.0",
+        "LOCATION_ALWAYS_AND_WHEN_IN_USE_USAGE_DESCRIPTION": "Always use is required for background location tracking",
+        "LOCATION_ALWAYS_USAGE_DESCRIPTION": "Background location-tracking is required",
+        "LOCATION_WHEN_IN_USE_USAGE_DESCRIPTION": "Background location-tracking is required",
+        "MOTION_USAGE_DESCRIPTION": "Using the accelerometer increases battery-efficiency by intelligently toggling location-tracking only when the device is detected to be moving"
       },
       "cordova-plugin-firebase": {},
       "de.appplant.cordova.plugin.local-notification": {},
@@ -133,13 +137,12 @@
       "cordova-plugin-network-information": {},
       "cordova-plugin-request-location-accuracy": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-statusbar": {},
       "ionic-plugin-keyboard": {},
       "cordova-plugin-background-fetch": {},
-      "cordova-hot-code-push-plugin": {},
       "cordova-plugin-globalization": {},
+      "cordova-plugin-camera": {},
       "cordova-plugin-crop": {},
-      "cordova-plugin-camera": {}
+      "cordova-hot-code-push-plugin": {}
     },
     "platforms": [
       "android"

@@ -98,4 +98,5 @@
     <chcp>
         <config-file url="https://dev.smartcommunitylab.it/cordova/chcp.json" />
     </chcp>
+    <plugin name="cordova-hot-code-push-plugin" spec="~1.5.3" />
 </widget>

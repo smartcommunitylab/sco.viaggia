@@ -127,35 +127,42 @@ angular.module('viaggia.controllers.registration', [])
             } else {
                 if (checkParams()) {
                     Config.loading();
-                    registrationService.register($scope.user).then(function () {
-                        if ($scope.currentFile) {
-                            profileService.setProfileImage($scope.currentFile).then(function () {
+                    registrationService.register($scope.user).then(function (success) {
+                        if (success) {
+                            if ($scope.currentFile) {
+                                profileService.setProfileImage($scope.currentFile).then(function () {
+                                    notificationService.registerUser();
+                                    $state.go('app.home');
+                                }, function (error) {
+                                    if (error == 413) {
+                                        Toast.show($filter('translate')('payload_large'), "short", "bottom");
+                                        $state.go('app.home');
+                                        console.log("Payload too large");
+                                        return;
+                                    }
+                                    if (error == 415) {
+                                        Toast.show($filter('translate')('payload_unsupported'), "short", "bottom");
+                                        $state.go('app.home');
+                                        console.log("Unsupported media type");
+                                        return;
+                                    }
+                                    console.log("network error");
+                                }).finally(Config.loaded)
+                            } else {
                                 notificationService.registerUser();
                                 $state.go('app.home');
-                            }, function (error) {
-                                if (error == 413) {
-                                    Toast.show($filter('translate')('payload_large'), "short", "bottom");
-                                    $state.go('app.home');
-                                    console.log("Payload too large");
-                                    return;
-                                }
-                                if (error == 415) {
-                                    Toast.show($filter('translate')('payload_unsupported'), "short", "bottom");
-                                    $state.go('app.home');
-                                    console.log("Unsupported media type");
-                                    return;
-                                }
-                                console.log("network error");
-                            }).finally(Config.loaded)
+                            }
                         } else {
-                            notificationService.registerUser();
-                            $state.go('app.home');
-                        }
+                            Toast.show($filter('translate')('toast_error_server_template'), "short", "bottom");
 
+                        }
 
                     }, function (errStatus) {
                         if (errStatus == '409') {
                             Toast.show($filter('translate')('nickname_inuse'), "short", "bottom");
+                        } else {
+                            Toast.show($filter('translate')('toast_error_server_template'), "short", "bottom");
+
                         }
                         Config.loaded();
                     });
