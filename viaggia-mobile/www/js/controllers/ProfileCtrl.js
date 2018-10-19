@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.profile', [])
 
-    .controller('ProfileCtrl', function ($scope, $rootScope, Config, GameSrv, Toast) {
+    .controller('ProfileCtrl', function ($scope, $rootScope, $filter, Config, GameSrv, Toast) {
         $rootScope.currentUser = null;
         $scope.status = null;
         $scope.ranking = null;
