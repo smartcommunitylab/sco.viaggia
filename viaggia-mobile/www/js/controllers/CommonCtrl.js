@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.common', [])
 
-  .controller('AppCtrl', function ($scope, $rootScope, $q, $state, GameSrv, $cordovaCamera, profileService, trackService, $ionicHistory, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, Utils, tutorial) {
+  .controller('AppCtrl', function ($scope, $rootScope, $q, $state,$ionicSideMenuDelegate, GameSrv, $cordovaCamera, profileService, trackService, $ionicHistory, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, Utils, tutorial) {
 
 
     /* menu group */
@@ -115,6 +115,9 @@ angular.module('viaggia.controllers.common', [])
     }
     $scope.trackingMultimodal = function () {
       return (localStorage.getItem(Config.getAppId() + '_multimodalId') != "null");
+    }
+    $scope.menuIsOpen = function () {
+      return $ionicSideMenuDelegate.isOpen();
     }
     $scope.goHome = function () {
       $state.go('app.home.home');
