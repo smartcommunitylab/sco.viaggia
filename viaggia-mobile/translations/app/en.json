@@ -1,6 +1,8 @@
 {
     "config_ios" : {
       "NSMotionUsageDescription": "This app requires motion detection access to minimize battery consumption by accessing to your location information only when moving.",
-      "NSLocationWhenInUseUsageDescription": "This app requires access to your location to track, validate and reward your trips. "
+      "NSLocationWhenInUseUsageDescription": "This app requires access to your location to track, validate and reward your trips. ",
+      "NSLocationAlwaysAndWhenInUseUsageDescription":"When tracking a trip, this app requires constant access to your location in order to track your position, even when the screen is off or the app is in the background.",
+      "NSLocationAlwaysUsageDescription":"When tracking a trip, this app requires constant access to your location in order to track your position, even when the screen is off or the app is in the background."
     }
   }
