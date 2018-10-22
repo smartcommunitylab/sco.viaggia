@@ -9,11 +9,11 @@
   },
   {
     "file": "css/style.css",
-    "hash": "023cf9f173eb007b92d59504b476fd0f"
+    "hash": "5cbf71f92113a063980e85dde15f6c2d"
   },
   {
     "file": "data/bus.csv",
-    "hash": "47b05c7b6e6f965a41c00e255963a9e1"
+    "hash": "eab95e0f4628d1e5eb78268c31d37adb"
   },
   {
     "file": "data/config.json",
@@ -397,7 +397,7 @@
   },
   {
     "file": "js/controllers/CommonCtrl.js",
-    "hash": "81baf0995d09743d6896b777aaed9951"
+    "hash": "4a0019b59bde3cd92a5640c79eb15024"
   },
   {
     "file": "js/controllers/GameCtrl.js",
@@ -449,11 +449,11 @@
   },
   {
     "file": "js/controllers/ProfileCtrl.js",
-    "hash": "48079028e479a245e9ede36576538ff6"
+    "hash": "9b1ebe945ea4e2ca4de272b7d088a2ab"
   },
   {
     "file": "js/controllers/RegistrationController.js",
-    "hash": "38c1cc967b03997d15826585ba7295e9"
+    "hash": "a56a24bd70d2bfe07cc7562d30cd0aa2"
   },
   {
     "file": "js/controllers/Table1Ctrl.js",
@@ -1157,7 +1157,7 @@
   },
   {
     "file": "templates/menu.html",
-    "hash": "735ad2cd7e74054dbc76b07c2ff1c4a3"
+    "hash": "f54b45bf76a1f17029e358daded0ecc3"
   },
   {
     "file": "templates/mobility.html",

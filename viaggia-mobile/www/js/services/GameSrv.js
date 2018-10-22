@@ -1259,8 +1259,11 @@ angular.module('viaggia.services.game', [])
             var deferred = $q.defer();
             //check if user (profile.userId) is valid or not
             var url = Config.getGamificationURL() + "/checkuser/" + profile.userId;
-
-            $http.get(url).then(
+            $http({
+                method: 'GET',
+                url: url,
+                timeout: Config.getHTTPConfig().timeout
+            }).then(
                 function (response) {
                     if (!response.data.registered) {
                         deferred.resolve(false);

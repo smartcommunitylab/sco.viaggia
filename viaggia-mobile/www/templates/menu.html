@@ -1,7 +1,7 @@
 <!-- <button class="pulse-button icon ion-map" ng-click="goToMap()" ng-if="buttonMapNeed();">
 </button> -->
 <div ng-if="notHomeAndMap()">
-	<div class="app-track-buttons">
+	<div class="app-track-buttons"  ng-class="{'menu-expanded': menuIsOpen()}" >
 		<button class="button button-map icon ion-map" ng-click="goToMap()"></button>
 		<div ng-if="trackingMultimodal()">
 			<button class="button button-map icon ic_foot" ng-class="{'actual-track':actualTracking('walk')}" ng-click="changeTracking('walk')"></button>
@@ -10,7 +10,7 @@
 			<button class="button button-map icon ic_train" ng-class="{'actual-track':actualTracking('train')}" ng-click="changeTracking('train')"></button>
 		</div>
 	</div>
-	<button class="button app-track-stop-map" ng-click="stopTracking()">STOP</button>
+	<button  class="button app-track-stop-map" ng-click="stopTracking()" ng-class="{'menu-expanded': menuIsOpen()}">STOP</button>
 </div>
 <ion-side-menus enable-menu-with-back-views="false">
 	<ion-side-menu-content drag-menu-content="false" edge-drag-threshold="true">
