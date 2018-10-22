@@ -416,9 +416,9 @@ i {
     padding-left: 59px !important;
     line-height: 22px;
     /*
-    padding-top: 8px;
-    padding-bottom: 8px;
-*/
+     padding-top: 8px;
+     padding-bottom: 8px;
+     */
 }
 
 .menu-left {
@@ -453,7 +453,7 @@ i {
 .parking-card .row,
 .parking-card .col {
     /*    padding: 0px;
-    */
+     */
 }
 
 .parking-card.selected {
@@ -509,206 +509,206 @@ i {
 }
 
 .parking-popup .popup {
-  width: 80%;
-  max-width: 400px;
+    width: 80%;
+    max-width: 400px;
 }
 
 .parking-popup .popup-title {
-  text-align: left;
-  text-transform: uppercase;
+    text-align: left;
+    text-transform: uppercase;
 }
 
 .parking-popup .popup-head {
-  display: none;
+    display: none;
 }
 
 .parking-popup .button-close {
-  background-color: gray!important;
+    background-color: gray!important;
 }
 
 .parking-popup .popup-buttons button {
-  white-space: normal;
-  padding: 0px;
-  color: #fff !important;
-  margin-right: 4px;
+    white-space: normal;
+    padding: 0px;
+    color: #fff !important;
+    margin-right: 4px;
 }
 
 .parking-popup .map-stop-title {
-  text-transform: uppercase;
-  font-size: 20px;
-  color: #2975a7;
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #2975a7;
 }
 
 .parking-popup .popup-icon {
-  font-size: 30px;
-  margin-right: 8px;
-  margin-bottom: 8px;
+    font-size: 30px;
+    margin-right: 8px;
+    margin-bottom: 8px;
 }
 
 .parking-popup .map-stop-name {
-  text-align: center;
-  font-weight: bold;
-  font-size: 18px;
-  margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 20px;
 }
 
 .parking-popup .map-stop-hline {
-  width: 100%;
-  height: 1px;
-  border-bottom: 3px solid #2975a7;
+    width: 100%;
+    height: 1px;
+    border-bottom: 3px solid #2975a7;
 }
 
 .parking-popup .map-stop-nocourses {
-  text-align: center;
+    text-align: center;
 }
 
 .parking-meter-popup .popup {
-  width: 80%;
-  max-width: 400px;
-  font-weight: normal;
+    width: 80%;
+    max-width: 400px;
+    font-weight: normal;
 }
 
 .parking-meter-popup .popup-title {
-  text-align: left;
-  text-transform: uppercase;
+    text-align: left;
+    text-transform: uppercase;
 }
 
 .parking-meter-popup .popup-head {
-  display: none;
+    display: none;
 }
 
 .parking-meter-popup .button-close {
-  background-color: gray !important;
+    background-color: gray !important;
 }
 
 .parking-meter-popup .popup-buttons button {
-  white-space: normal;
-  padding: 0px;
-  color: #fff !important;
-  margin-right: 4px;
+    white-space: normal;
+    padding: 0px;
+    color: #fff !important;
+    margin-right: 4px;
 }
 
 .parking-meter-popup .map-stop-title {
-  text-transform: uppercase;
-  font-size: 20px;
-  color: #2975a7;
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #2975a7;
 }
 
 .parking-meter-popup .popup-icon {
-  font-size: 30px;
-  margin-right: 8px;
-  margin-bottom: 8px;
+    font-size: 30px;
+    margin-right: 8px;
+    margin-bottom: 8px;
 }
 
 .parking-meter-popup .map-stop-name {
-  text-align: left;
-  font-size: 16px;
-  margin-top: 20px;
+    text-align: left;
+    font-size: 16px;
+    margin-top: 20px;
 }
 
 .parking-meter-popup .map-stop-hour {
-  text-align: left;
-  font-size: 16px;
+    text-align: left;
+    font-size: 16px;
 }
 
 .parking-meter-popup .fromtotime {
-/*  max-width: 40%;*/
-  display: inline-block
+    /*  max-width: 40%;*/
+    display: inline-block
 }
 
 .parking-meter-popup .fromtodays {
-/*  max-width: 60%;*/
-  display: inline-block
+    /*  max-width: 60%;*/
+    display: inline-block
 }
 
 .parking-meter-popup .map-stop-detail {
-  text-align: left;
-  font-size: 18px;
-  margin-top: 20px;
+    text-align: left;
+    font-size: 18px;
+    margin-top: 20px;
 }
 
 .parking-meter-popup .map-stop-hline {
-  width: 100%;
-  height: 1px;
-  border-bottom: 3px solid #2975a7;
+    width: 100%;
+    height: 1px;
+    border-bottom: 3px solid #2975a7;
 }
 
 .parking-meter-popup .map-stop-nocourses {
-  text-align: center;
+    text-align: center;
 }
 
 .img-calibration {
-  width: 100%;
+    width: 100%;
 }
 
 .first-time-parking-meters-popup .popup {
-  width: 80%;
-  max-width: 400px;
+    width: 80%;
+    max-width: 400px;
 }
 
 .first-time-parking-meters-popup .popup-title {
-  text-align: left;
-  text-transform: uppercase;
+    text-align: left;
+    text-transform: uppercase;
 }
 
 .first-time-parking-meters-popup .popup-head {
-  display: none;
+    display: none;
 }
 
 .first-time-parking-meters-popup .button-close {
-  /*  background-color: gray!important;*/
+    /*  background-color: gray!important;*/
 }
 
 
 .first-time-parking-meters-popup .popup-buttons button {
-  white-space: normal;
-  padding: 0px;
-  color: #fff !important;
-  margin-right: 4px;
+    white-space: normal;
+    padding: 0px;
+    color: #fff !important;
+    margin-right: 4px;
 }
 
 .first-time-parking-meters-popup .map-stop-title {
-  text-transform: uppercase;
-  font-size: 20px;
-  color: #2975a7;
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #2975a7;
 }
 
 .first-time-parking-meters-popup .popup-icon {
-  font-size: 30px;
-  margin-right: 8px;
-  margin-bottom: 8px;
-  color: #2975a7;
+    font-size: 30px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    color: #2975a7;
 }
 
 .first-time-parking-meters-popup .map-stop-name {
-  text-align: center;
-  font-weight: bold;
-  font-size: 18px;
-  margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 20px;
 }
 
 .first-time-parking-meters-popup .map-stop-hline {
-  width: 100%;
-  height: 1px;
-  border-bottom: 3px solid #2975a7;
+    width: 100%;
+    height: 1px;
+    border-bottom: 3px solid #2975a7;
 }
 
 .first-time-parking-meters-popup .map-stop-nocourses {
-  text-align: center;
+    text-align: center;
 }
 
 .first-time-parking-meters-popup p {
-  margin-left: 10px;
-  text-align: justify;
+    margin-left: 10px;
+    text-align: justify;
 }
 
 .parking-card-footer .slots-text span {
-  text-align: center;
-  width: 100%;
+    text-align: center;
+    width: 100%;
 }
 
 ion-header-bar .title {
-  color: #fff !important;
+    color: #fff !important;
 }
 
 ion-header-bar .title {
@@ -722,16 +722,16 @@ ion-header-bar .title {
 
 
 /*
-.bar .title {
-  margin-right: 10px !important;
-  margin-left: 0px !important;
-  left: 40px !important;
-  padding-left: 10px;
-}
-.bar .title-long {
-  margin-left: -10px;
-}
-*/
+ .bar .title {
+ margin-right: 10px !important;
+ margin-left: 0px !important;
+ left: 40px !important;
+ padding-left: 10px;
+ }
+ .bar .title-long {
+ margin-left: -10px;
+ }
+ */
 
 .title-short {
     position: absolute;
@@ -933,10 +933,10 @@ ion-header-bar .title {
 }
 
 .message-item {
-margin-bottom: 25px;
-margin-left: 40px;
-margin-right: 0px;
-position: relative;
+    margin-bottom: 25px;
+    margin-left: 40px;
+    margin-right: 0px;
+    position: relative;
 }
 .tabs-striped .tab-item.tab-item-active, .tabs-striped .tab-item.active, .tabs-striped .tab-item.activated {
     margin-top:0px;
@@ -953,98 +953,98 @@ position: relative;
     border-width: 0px 0px 3px 0px;
 }
 .platform-android .timeline-arrow {
-border-right: 10px solid #ddd;
-border-style: solid;
-border-width: 15px 20px 15px 20px;
-color: rgba(0,0,0,0);
-content: "";
-/*height: 22px;*/
-position: absolute;
-left: -33px;
-/*top: 27%;*/
-width: 0px;
+    border-right: 10px solid #ddd;
+    border-style: solid;
+    border-width: 15px 20px 15px 20px;
+    color: rgba(0,0,0,0);
+    content: "";
+    /*height: 22px;*/
+    position: absolute;
+    left: -33px;
+    /*top: 27%;*/
+    width: 0px;
 }
 .platform-ios .timeline-arrow {
-border-right: 10px solid #ddd;
-border-style: solid;
-border-width: 15px 20px 15px 20px;
-color: rgba(0,0,0,0);
-content: "";
-/*height: 22px;*/
-position: absolute;
-left: -33px;
-/*top: 3.7px;*/
-width: 0px;
-  /*top:27%*/
+    border-right: 10px solid #ddd;
+    border-style: solid;
+    border-width: 15px 20px 15px 20px;
+    color: rgba(0,0,0,0);
+    content: "";
+    /*height: 22px;*/
+    position: absolute;
+    left: -33px;
+    /*top: 3.7px;*/
+    width: 0px;
+    /*top:27%*/
 }
 .timeline-col{
-color: white;
-width: 47px;
-min-width:  47px;
-height: 47px;
-min-height: 47px;
-border-radius: 50px;
-line-height: 1.5 !important;
-font-size: 30px;
-padding: 2px;
+    color: white;
+    width: 47px;
+    min-width:  47px;
+    height: 47px;
+    min-height: 47px;
+    border-radius: 50px;
+    line-height: 1.5 !important;
+    font-size: 30px;
+    padding: 2px;
 }
 .timeline-msg{
-text-align: left;
-padding: 0px;
-padding-left: 5px;
-padding-bottom: 3px !important;
-padding-top: 3px !important;
-width: 100%;
+    text-align: left;
+    padding: 0px;
+    padding-left: 5px;
+    padding-bottom: 3px !important;
+    padding-top: 3px !important;
+    width: 100%;
 }
 .timeline-text{
-color: black;
-position: absolute;
-top: 0px;
-left: 0px;
-padding-left: 5px;
+    color: black;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    padding-left: 5px;
 }
 .timeline-day{
     width: auto;
     min-width: 40px;
-position: absolute !important;
-left: 20px;
-top: -4px;
-margin-top: 0px;
-margin-bottom: 3px;
+    position: absolute !important;
+    left: 20px;
+    top: -4px;
+    margin-top: 0px;
+    margin-bottom: 3px;
 }
 .timeline-line{
-background: #868686;
-border-radius: 2px;
-bottom: -30px;
-content: "";
-height: 210%;
-left: -30px;
-position: absolute;
-width: 3px;
+    background: #868686;
+    border-radius: 2px;
+    bottom: -30px;
+    content: "";
+    height: 210%;
+    left: -30px;
+    position: absolute;
+    width: 3px;
 }
 .timeline-dot {
-background: #fff;
-border: 2px solid #868686;
-border-radius: 50%;
-content: "";
-height: 15px;
-left: -36px;
-position: absolute;
-top: -10px;
-width: 15px;
-z-index: 9;
+    background: #fff;
+    border: 2px solid #868686;
+    border-radius: 50%;
+    content: "";
+    height: 15px;
+    left: -36px;
+    position: absolute;
+    top: -10px;
+    width: 15px;
+    z-index: 9;
 }
 .timeline-multimodal-dot {
-background: #000;
-/* border: 2px solid #000; */
-border-radius: 50%;
-content: "";
-height: 15px;
-left: -20px;
-position: absolute;
-top: -10px;
-width: 15px;
-z-index: 9;
+    background: #000;
+    /* border: 2px solid #000; */
+    border-radius: 50%;
+    content: "";
+    height: 15px;
+    left: -20px;
+    position: absolute;
+    top: -10px;
+    width: 15px;
+    z-index: 9;
 }
 .timeline-not-multimodal-dot {
     background: #000;
@@ -1057,19 +1057,19 @@ z-index: 9;
     /* top: -10px; */
     width: 15px;
     z-index: 9;
-    }
+}
 .timeline-multimodal{
-width: auto;
- min-width: 40px;
-position: absolute !important;
-left: 20px;
-top: -8px;
-margin-top: 0px;
-margin-bottom: 3px;
+    width: auto;
+    min-width: 40px;
+    position: absolute !important;
+    left: 20px;
+    top: -8px;
+    margin-top: 0px;
+    margin-bottom: 3px;
 }
 .gamemenu-col{
-text-align: left;
-padding-left: 30px;
+    text-align: left;
+    padding-left: 30px;
 }
 
 .green-bottom {
@@ -1229,7 +1229,7 @@ padding-left: 30px;
     overflow: hidden;
     text-overflow: ellipsis;
     padding-right: 5px;
-    /*	padding-left: 5px;*/
+    /*    padding-left: 5px;*/
 }
 
 #table-corner {
@@ -1492,55 +1492,55 @@ padding-left: 30px;
     white-space: normal;
 }
 .compass {
-  position: absolute;
-  z-index: 999;
-  background-color: white;
-  right: 0px;
-  bottom: 0px;
-  width: 100px;
-  height: 100px;
-  margin: 0px 10px 60px 0px;
-  box-shadow: 5px 5px 20px #575757;
-  border-radius: 70px;
+    position: absolute;
+    z-index: 999;
+    background-color: white;
+    right: 0px;
+    bottom: 0px;
+    width: 100px;
+    height: 100px;
+    margin: 0px 10px 60px 0px;
+    box-shadow: 5px 5px 20px #575757;
+    border-radius: 70px;
 }
 
 .distance {
-  position: absolute;
-  bottom: 20px;
-  z-index: 999;
-  background-color: white;
-  width: 100%;
-  height: 30px;
-  font-size: 18px;
-  line-height: 30px;
-  text-align: center;
-  font-weight: bold;
+    position: absolute;
+    bottom: 20px;
+    z-index: 999;
+    background-color: white;
+    width: 100%;
+    height: 30px;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+    font-weight: bold;
 }
 
 #arrow {
-  width: 100px;
-  height: 100px;
-  /*
-  margin-left: 5px;
-margin-right: 10px;
-*/
+    width: 100px;
+    height: 100px;
+    /*
+     margin-left: 5px;
+     margin-right: 10px;
+     */
 }
 
 #arrow img {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 #distance {
-  width: 110px;
-  height: 50px;
-  margin-left: 10px;
-  margin-right: 10px;
+    width: 110px;
+    height: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .distance-label {
-  color: #2b78bd;
+    color: #2b78bd;
 }
 .bm-item-label {
     line-height: normal;
@@ -1569,7 +1569,7 @@ margin-right: 10px;
     color: white !important;
     box-shadow: none !important;
     /*padding-top: 10px!important;
-	padding-left: 10px!important;*/
+     padding-left: 10px!important;*/
 }
 
 .acc_button {
@@ -1611,9 +1611,9 @@ margin-right: 10px;
     /*    display: block !inspect;*/
     position: absolute !important;
     /*
-    top: -32px !important;
-    padding: 2px 12px 2px 3px;
-*/
+     top: -32px !important;
+     padding: 2px 12px 2px 3px;
+     */
 }
 
 .home_notification {
@@ -1793,7 +1793,7 @@ margin-right: 10px;
 }
 
 .login-subtitle {
-        padding-top: 15%;
+    padding-top: 15%;
     color: black;
     font-size: 25px;
     width: 100%;
@@ -1966,7 +1966,7 @@ margin-right: 10px;
     color: #2975a7;
     margin-right: 4px;
     /*    margin-left: 4px;
-    */
+     */
     font-size: 20px;
 }
 
@@ -1998,8 +1998,8 @@ margin-right: 10px;
 
 
 /*******
-Play&Go
-*******/
+ Play&Go
+ *******/
 
 .menu-game {
     color: #fff !important;
@@ -2055,7 +2055,7 @@ Play&Go
     border: 1px solid #eee;
     margin-top: 16px;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
-
+    
 }
 
 .game-challenges .challenge {
@@ -2101,12 +2101,12 @@ Play&Go
 }
 
 /* .game-challenges .challenge.challenge-old.success {
-    background-image: url('../img/game/cup_10.png');
-}
-
-.game-challenges .challenge.challenge-old.fail {
-    background-image: url('../img/game/cup_0.png');
-} */
+ background-image: url('../img/game/cup_10.png');
+ }
+ 
+ .game-challenges .challenge.challenge-old.fail {
+ background-image: url('../img/game/cup_0.png');
+ } */
 
 .game-challenges .challenge.challenge-old.success .challenge-result {
     color: #6AB64D;
@@ -2129,28 +2129,28 @@ Play&Go
     transition: display 2s;
 }
 /* .type-challenge-hide {
-    display:none;
-    overflow:hidden;
-    height:0;
-    line-height:0;
-    border:0;
-    margin:0;
-} */
+ display:none;
+ overflow:hidden;
+ height:0;
+ line-height:0;
+ border:0;
+ margin:0;
+ } */
 .type-challenge.ng-enter, .type-challenge.ng-leave {
     /* transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s; */
     -webkit-animation: fadeOutLeft 1s;
     animation: fadeOutLeft 1s;
-  }
-  
-  .type-challenge.ng-enter,
-  .type-challenge.ng-leave.ng-leave-active {
+}
+
+.type-challenge.ng-enter,
+.type-challenge.ng-leave.ng-leave-active {
     opacity:0;
-  }
-  
-  .type-challenge.ng-leave,
-  .type-challenge.ng-enter.ng-enter-active {
+}
+
+.type-challenge.ng-leave,
+.type-challenge.ng-enter.ng-enter-active {
     opacity:1;
-  }
+}
 
 .button-challenge-enable{
     position: absolute;
@@ -2159,8 +2159,8 @@ Play&Go
 }
 .challenge-long-desc {
     text-overflow: ellipsis;
-    overflow: hidden; 
-    width: 160px; 
+    overflow: hidden;
+    width: 160px;
     height: 20px;
     line-height: 20px;
     white-space: nowrap;
@@ -2176,21 +2176,21 @@ Play&Go
 }
 .button-active {
     color: #4EB0E6;
-
+    
 }
 .button-block-active {
     background-color: #4EB0E6;
     color: white;
-
+    
 }
 /* .challenge-read-more{
-    color: #4EB0E6;
-} */
+ color: #4EB0E6;
+ } */
 .game-ranking {
     text-align: center;
 }
 .text-ranking{
-line-height: 64px;
+    line-height: 64px;
     flex: none;
 }
 .game-ranking .listheader {
@@ -2227,8 +2227,8 @@ line-height: 64px;
     margin-top: 40px;
 }
 .game-ranking .col{
-white-space: nowrap;
-overflow: hidden;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .tt-table-acc {
     left: 0px !important;
@@ -2399,16 +2399,16 @@ overflow: hidden;
     background-color: #4caf4f;
 }
 /* .tracking-dashboard div.col{
-    color: white;
-} */
+ color: white;
+ } */
 .chart div {
-  font: 14px sans-serif;
-  text-align: right;
-  border-radius: 15px;
-  padding: 3px;
-  padding-right: 5px;
-  margin: 3px;
-  color: white;
+    font: 14px sans-serif;
+    text-align: right;
+    border-radius: 15px;
+    padding: 3px;
+    padding-right: 5px;
+    margin: 3px;
+    color: white;
 }
 
 .statstext div {
@@ -2418,7 +2418,7 @@ overflow: hidden;
 }
 
 #statsdiv {
-   clear:both;
+    clear:both;
     padding: 0px;
     height: 0px;
     margin: 0px
@@ -2470,7 +2470,7 @@ overflow: hidden;
     margin-bottom: 0px;
     margin-top: 0px;
     color: white;
-
+    
 }
 
 .tracking-dashboard h4 i {
@@ -2485,7 +2485,7 @@ overflow: hidden;
     color: #fff;
     text-align: center;
     /* width: 88px;
-    height: 88px; */
+     height: 88px; */
     margin: auto;
 }
 
@@ -2545,147 +2545,147 @@ overflow: hidden;
 
 
 .parking-meter-popup .popup {
-   width: 80%;
-   max-width: 400px;
-   font-weight: normal;
- }
- .parking-meter-popup .popup-title {
-   text-align: left;
-   text-transform: uppercase;
- }
- .parking-meter-popup .popup-head {
-   display: none;
- }
- .parking-meter-popup .button-close {
-   background-color: gray!important;
- }
- .parking-meter-popup .popup-buttons button:not(.button-close) {
-   background-color: #3bbacf !important;
- }
- .parking-meter-popup .popup-buttons button {
-   white-space: normal;
-   padding: 0px;
-   color: #fff !important;
-   margin-right: 4px;
- }
- .parking-meter-popup .map-stop-title {
-   text-transform: uppercase;
-   font-size: 20px;
-   color: #2975a7;
- }
- .parking-meter-popup .popup-icon {
-   font-size: 30px;
-   margin-right: 8px;
-   margin-bottom: 8px;
- }
- .parking-meter-popup .map-stop-name {
-   text-align: left;
-   font-size: 16px;
-   margin-top: 20px;
- }
- .parking-meter-popup .map-stop-hour {
-   text-align: left;
-   font-size: 16px;
- }
- .parking-meter-popup .fromtotime {
- /*  max-width: 40%;*/
-   display: inline-block
- }
- .parking-meter-popup .fromtodays {
- /*  max-width: 60%;*/
-   display: inline-block
- }
- .parking-meter-popup .map-stop-detail {
-   text-align: left;
-   font-size: 18px;
-   margin-top: 20px;
- }
- .parking-meter-popup .map-stop-hline {
-   width: 100%;
-   height: 1px;
-   border-bottom: 3px solid #2975a7;
- }
- .parking-meter-popup .map-stop-nocourses {
-   text-align: center;
- }
- .img-calibration {
-   width: 100%;
- }
- .first-time-parking-meters-popup .popup {
-   width: 80%;
-   max-width: 400px;
- }
- .first-time-parking-meters-popup .popup-title {
-   text-align: left;
-   text-transform: uppercase;
- }
- .first-time-parking-meters-popup .popup-head {
-   display: none;
- }
- .first-time-parking-meters-popup .button-close {
-   /*  background-color: gray!important;*/
- }
- .first-time-parking-meters-popup .popup-buttons button:not(.button-close) {
-   background-color: #3bbacf !important;
- }
- .first-time-parking-meters-popup .popup-buttons button {
-   white-space: normal;
-   padding: 0px;
-   color: #fff !important;
-   margin-right: 4px;
- }
- .first-time-parking-meters-popup .map-stop-title {
-   text-transform: uppercase;
-   font-size: 20px;
-   color: #2975a7;
- }
- .first-time-parking-meters-popup .popup-icon {
-   font-size: 30px;
-   margin-right: 8px;
-   margin-bottom: 8px;
-   color: #2975a7;
- }
- .first-time-parking-meters-popup .map-stop-name {
-   text-align: center;
-   font-weight: bold;
-   font-size: 18px;
-   margin-top: 20px;
- }
- .first-time-parking-meters-popup .map-stop-hline {
-   width: 100%;
-   height: 1px;
-   border-bottom: 3px solid #2975a7;
- }
- .first-time-parking-meters-popup .map-stop-nocourses {
-   text-align: center;
- }
- .first-time-parking-meters-popup p {
-   margin-left: 10px;
-   text-align: justify;
- }
- .not-valid-trip {
-     background-color: red;
-     color: white;
-     padding: 8px;
- }
-  .valid-trip {
-     background-color: green;
-     color: white;
-     padding: 8px;
- }
- .event-trip-detail-stats {
-     padding: 8px;
- }
- .event-trip-detail-stats .event-trip-detail-stats-time{
-     margin-bottom: 8px;
- }
- .trip-point{
-     padding: 8px;
-
- }
- .trip-error {
-     padding: 8px;
- }
+    width: 80%;
+    max-width: 400px;
+    font-weight: normal;
+}
+.parking-meter-popup .popup-title {
+    text-align: left;
+    text-transform: uppercase;
+}
+.parking-meter-popup .popup-head {
+    display: none;
+}
+.parking-meter-popup .button-close {
+    background-color: gray!important;
+}
+.parking-meter-popup .popup-buttons button:not(.button-close) {
+    background-color: #3bbacf !important;
+}
+.parking-meter-popup .popup-buttons button {
+    white-space: normal;
+    padding: 0px;
+    color: #fff !important;
+    margin-right: 4px;
+}
+.parking-meter-popup .map-stop-title {
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #2975a7;
+}
+.parking-meter-popup .popup-icon {
+    font-size: 30px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+.parking-meter-popup .map-stop-name {
+    text-align: left;
+    font-size: 16px;
+    margin-top: 20px;
+}
+.parking-meter-popup .map-stop-hour {
+    text-align: left;
+    font-size: 16px;
+}
+.parking-meter-popup .fromtotime {
+    /*  max-width: 40%;*/
+    display: inline-block
+}
+.parking-meter-popup .fromtodays {
+    /*  max-width: 60%;*/
+    display: inline-block
+}
+.parking-meter-popup .map-stop-detail {
+    text-align: left;
+    font-size: 18px;
+    margin-top: 20px;
+}
+.parking-meter-popup .map-stop-hline {
+    width: 100%;
+    height: 1px;
+    border-bottom: 3px solid #2975a7;
+}
+.parking-meter-popup .map-stop-nocourses {
+    text-align: center;
+}
+.img-calibration {
+    width: 100%;
+}
+.first-time-parking-meters-popup .popup {
+    width: 80%;
+    max-width: 400px;
+}
+.first-time-parking-meters-popup .popup-title {
+    text-align: left;
+    text-transform: uppercase;
+}
+.first-time-parking-meters-popup .popup-head {
+    display: none;
+}
+.first-time-parking-meters-popup .button-close {
+    /*  background-color: gray!important;*/
+}
+.first-time-parking-meters-popup .popup-buttons button:not(.button-close) {
+    background-color: #3bbacf !important;
+}
+.first-time-parking-meters-popup .popup-buttons button {
+    white-space: normal;
+    padding: 0px;
+    color: #fff !important;
+    margin-right: 4px;
+}
+.first-time-parking-meters-popup .map-stop-title {
+    text-transform: uppercase;
+    font-size: 20px;
+    color: #2975a7;
+}
+.first-time-parking-meters-popup .popup-icon {
+    font-size: 30px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    color: #2975a7;
+}
+.first-time-parking-meters-popup .map-stop-name {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 20px;
+}
+.first-time-parking-meters-popup .map-stop-hline {
+    width: 100%;
+    height: 1px;
+    border-bottom: 3px solid #2975a7;
+}
+.first-time-parking-meters-popup .map-stop-nocourses {
+    text-align: center;
+}
+.first-time-parking-meters-popup p {
+    margin-left: 10px;
+    text-align: justify;
+}
+.not-valid-trip {
+    background-color: red;
+    color: white;
+    padding: 8px;
+}
+.valid-trip {
+    background-color: green;
+    color: white;
+    padding: 8px;
+}
+.event-trip-detail-stats {
+    padding: 8px;
+}
+.event-trip-detail-stats .event-trip-detail-stats-time{
+    margin-bottom: 8px;
+}
+.trip-point{
+    padding: 8px;
+    
+}
+.trip-error {
+    padding: 8px;
+}
 .col-info {
     text-align: right;
     line-height: 1.5 !important;
@@ -2693,13 +2693,13 @@ overflow: hidden;
     color: black;
     align-content: center!important;
     align-items: center!important;
-    }
+}
 .center-on-me {
-position: fixed;
-top: 200px;
-left: 10px;
-width: 30px;
-height: 30px;
+    position: fixed;
+    top: 200px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
 }
 .center-expanded{
     top: 400px;
@@ -2711,7 +2711,7 @@ height: 30px;
     border-radius: 35px;
     box-shadow: none;
     /* height: 20px!important;
-    width: 20px!important; */
+     width: 20px!important; */
     font-size: 30px!important;
     min-width: 44px;
 }
@@ -2838,14 +2838,14 @@ height: 30px;
 }
 .user-state{
     /* background-color: #2975a7 !important;
-    color: #fff; */
+     color: #fff; */
     /* margin: 0px; */
-
+    
 }
 
 .home-user-state .row{
-margin: 0px!important;
-padding: 0px!important;
+    margin: 0px!important;
+    padding: 0px!important;
 }
 #progressbar {
     background-color: white;
@@ -2869,17 +2869,17 @@ padding: 0px!important;
     border: solid 2px;
 }
 .home-level {
-margin: auto;
-text-align: center;
+    margin: auto;
+    text-align: center;
 }
 .home-points {
     margin: auto;
 }
 .home-points i{
-color: #4caf4f;
+    color: #4caf4f;
 }
 
-.home-label-dashboard{ 
+.home-label-dashboard{
     color: white;
 }
 .home-your-challenges {
@@ -2892,13 +2892,13 @@ color: #4caf4f;
     padding: 0px;
 }
 .bar-profile-img{
-     /* border-radius: 50%; */
-position: absolute!important;
-left: 25%;
+    /* border-radius: 50%; */
+    position: absolute!important;
+    left: 25%;
     top: 30%;
     height: auto;
     width: 100%;
--webkit-transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
     margin: 4px 8px;
     /* object-fit: cover; */
     border-radius: 50%;
@@ -2908,7 +2908,7 @@ left: 25%;
     border-radius: 50%;
     left: 16px;
     height: 40px;
-    width: 40px; 
+    width: 40px;
     margin: 4px 8px;
     object-fit: cover;
 }
@@ -2918,14 +2918,14 @@ left: 25%;
     width: 60px;
     height: 60px;
     /* overflow: hidden;
-    border-radius: 50%; */
+     border-radius: 50%; */
     display: table-cell;
 }
 .challenge-profile-img {
     border-radius: 50%;
     left: 16px;
     height: 30px;
-    width: 30px; 
+    width: 30px;
     /* margin: 4px 8px; */
     object-fit: cover;
 }
@@ -2962,9 +2962,9 @@ left: 25%;
     width: 200px;
     height: 100%;
     margin: 0 auto 0;
-  }
-  
-  .pulse-button {
+}
+
+.pulse-button {
     z-index: 999;
     position: fixed;
     bottom:  50px;
@@ -2985,46 +2985,46 @@ left: 25%;
     -moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
     -ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
     animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
-  }
+}
 
-  .pulse-button:hover 
-  {
+.pulse-button:hover
+{
     -webkit-animation: none;-moz-animation: none;-ms-animation: none;animation: none;
-  }
-  
-  .progress-bar-track{
+}
+
+.progress-bar-track{
     display: inline-block;
-     margin: 4px;
-     width: 100%;
-  }
-  .progress-bar-track>i{    
+    margin: 4px;
+    width: 100%;
+}
+.progress-bar-track>i{
     line-height: 40px;
     font-size: 30px;
     margin: 8px;
-  }
-  .progress-bar-track>progress{
+}
+.progress-bar-track>progress{
     margin: 8px;
-  }
-  .progress-bar-mean {
+}
+.progress-bar-mean {
     background: grey;
-	border-radius:100px;
+    border-radius:100px;
     height:20px;
     display: inline-block;
-  }
-  .actual-track-bar{
-      background: green;
-  }
-  .container-stat{
-      width: 80%;
-      background: lightgrey;
-      display: inline-block;
-      height: 20px;
-      border-radius: 100px;
-
-  }
-  .actual-container-stat{
+}
+.actual-track-bar{
+    background: green;
+}
+.container-stat{
+    width: 80%;
+    background: lightgrey;
+    display: inline-block;
+    height: 20px;
+    border-radius: 100px;
+    
+}
+.actual-container-stat{
     background: lightgreen !important;
-  }
+}
 
 .menu-separator{
     border: 1px solid #fff;
@@ -3071,9 +3071,9 @@ left: 25%;
     display: inline-block;
     height: 20px;
     margin: 0px auto 4px auto;
-    font-size: 0; /*used for removing space with inline-block*/ 
+    font-size: 0; /*used for removing space with inline-block*/
     padding: 0px;
-
+    
 }
 .competitive-container{
     padding: 0px;
@@ -3082,8 +3082,8 @@ left: 25%;
     display: inline-block;
     height: 20px;
     margin: 10px auto;
-    font-size: 0; /*used for removing space with inline-block*/ 
-
+    font-size: 0; /*used for removing space with inline-block*/
+    
 }
 .progress-bar-level {
     background: #2975a7;
@@ -3102,19 +3102,19 @@ left: 25%;
 }
 .perf-other {
     background: #B65F00;
-} 
+}
 .coop-user {
     background: #e54d2d;
 }
 .coop-other {
     background: #B62000;
-} 
+}
 .time-user {
     background: #25BC5D;
 }
 .time-other {
     background: #008431;
-} 
+}
 .single-user {
     background: #2681A4;
 }
@@ -3124,64 +3124,64 @@ left: 25%;
 }
 .perf-other-color {
     color: #B65F00;
-} 
+}
 .coop-user-color {
     color: #e54d2d;
 }
 .coop-other-color {
     color: #B62000;
-} 
+}
 .time-user-color {
     color: #25BC5D;
 }
 .time-other-color {
     color: #008431;
-} 
+}
 .single-user-color {
     color: #2681A4;
 }
 .single-other-color {
     color: #055472;
 }
-  .img-container{
-      height: 200px;
-      overflow: hidden;
-      position: relative;
-      margin: 0px -16px;
-  }
-  .img-container>img {
-      width: 100%;
-      position: absolute;
-      margin: auto;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-  }
-  .img-container>a{
+.img-container{
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    margin: 0px -16px;
+}
+.img-container>img {
+    width: 100%;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.img-container>a{
     position: absolute;
     top: 90px;
     right: 20px;
-  }  
-  .margin-for-trackingbar-tab{
-      margin-bottom: 80px;
-  }
-  .tab-others{
-      top:44px;
-  }
-  .margin-for-trackingbar{
+}
+.margin-for-trackingbar-tab{
+    margin-bottom: 80px;
+}
+.tab-others{
+    top:44px;
+}
+.margin-for-trackingbar{
     margin-bottom: 120px;
 }
- .warning_out {
+.warning_out {
     visibility: hidden;
     opacity: 0;
-  
-    transition: visibility 0s linear 0.33s, opacity 0.33s 
- } 
- .button-challenge-enable {
+    
+    transition: visibility 0s linear 0.33s, opacity 0.33s
+}
+.button-challenge-enable {
     color: #4EB0E6 !important;
- }
- .configure-challenge-button {
+}
+.configure-challenge-button {
     border-radius: 12px;
     height: 80px;
 }
@@ -3208,7 +3208,7 @@ left: 25%;
 }
 .button-challenge-remove {
     text-align: center;
-    font-size: 20px; 
+    font-size: 20px;
     color: red;
 }
 .chall-selected {
@@ -3337,7 +3337,7 @@ left: 25%;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;  
+    -webkit-box-orient: vertical;
 }
 
 .profile-image-round{
@@ -3376,9 +3376,28 @@ left: 25%;
     transform: translate(-50%, -50%);
 }
 .menu-expanded {
-    transform: translate3d(275px, 0px, 0px); 
+    transform: translate3d(275px, 0px, 0px);
 }
-  @-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
-  @-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
-  @-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
-  @keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+.platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) {
+    height: 44px; }
+    .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader).item-input-inset .item-input-wrapper {
+      margin-top: 19px !important; }
+    .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > * {
+      margin-top: 0px; }
+  .platform-ios.platform-cordova:not(.fullscreen) .tabs-top > .tabs, .platform-ios.platform-cordova:not(.fullscreen) .tabs.tabs-top {
+    top: 44px; }
+  .platform-ios.platform-cordova:not(.fullscreen) .has-header, .platform-ios.platform-cordova:not(.fullscreen) .bar-subheader {
+    top: 44px; }
+  .platform-ios.platform-cordova:not(.fullscreen) .has-subheader {
+    top: 108px; }
+  .platform-ios.platform-cordova:not(.fullscreen) .has-tabs-top {
+    top: 113px; }
+  .platform-ios.platform-cordova:not(.fullscreen) .has-header.has-subheader.has-tabs-top {
+    top: 157px; }
+  .platform-ios.platform-cordova.status-bar-hide {
+    margin-bottom: 20px; }
+
+@-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+@-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+@-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
+@keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
