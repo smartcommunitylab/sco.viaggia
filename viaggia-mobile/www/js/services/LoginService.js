@@ -226,7 +226,8 @@ angular.module('smartcommunitylab.services.login', [])
 			},
 			headers: {
 				'Accept': 'application/json',
-			}
+			},
+			timeout: 10000
 		}).then(
 			function (response) {
 				if (!!response.data.access_token) {
@@ -251,7 +252,8 @@ angular.module('smartcommunitylab.services.login', [])
 			$http.get(settings.aacUrl + AAC.BASIC_PROFILE_URI, {
 				headers: {
 					'Authorization': 'Bearer ' + tokenInfo.access_token
-				}
+				},
+                timeout: 10000
 			}).then(
 				function (response) {
 					deferred.resolve(response.data);
@@ -269,7 +271,8 @@ angular.module('smartcommunitylab.services.login', [])
 			$http.get(settings.aacUrl + AAC.ACCOUNT_PROFILE_URI, {
 				headers: {
 					'Authorization': 'Bearer ' + tokenInfo.access_token
-				}
+				},
+                timeout: 10000
 			}).then(
 				function (response) {
 					deferred.resolve(response.data);

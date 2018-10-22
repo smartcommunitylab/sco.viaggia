@@ -197,21 +197,22 @@ angular.module('viaggia.controllers.game', [])
         }
         $scope.getTypes = function () {
             Config.loading();
-            GameSrv.getTypesChallenges(LoginService.getUserProfile().userId).then(function (types) {
-                $scope.typeOfChallenges = [];
-                for (var i = 0; i < types.length; i++) {
-                    $scope.typeOfChallenges.push({
-                        // id: types[i].id,
-                        type: types[i].modelName,
-                        short: "blabla",
-                        long: "blabla long",
-                        state: (types[i].state == 'AVAILABLE') ? 1 : 0
-                    });
-                }
-            }, function (err) {
-                //TODO
-            }).finally(Config.loaded);
-
+            if (LoginService.getUserProfile()) {
+                GameSrv.getTypesChallenges(LoginService.getUserProfile().userId).then(function (types) {
+                    $scope.typeOfChallenges = [];
+                    for (var i = 0; i < types.length; i++) {
+                        $scope.typeOfChallenges.push({
+                            // id: types[i].id,
+                            type: types[i].modelName,
+                            short: "blabla",
+                            long: "blabla long",
+                            state: (types[i].state == 'AVAILABLE') ? 1 : 0
+                        });
+                    }
+                }, function (err) {
+                    //TODO
+                }).finally(Config.loaded);
+            }
         }
 
         var convertChall = function (chall, type) {
