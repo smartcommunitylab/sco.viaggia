@@ -9,7 +9,7 @@
   },
   {
     "file": "css/style.css",
-    "hash": "5cbf71f92113a063980e85dde15f6c2d"
+    "hash": "be8834c0a4730bf60e3c2490096a5bc8"
   },
   {
     "file": "data/bus.csv",
@@ -17,7 +17,7 @@
   },
   {
     "file": "data/config.json",
-    "hash": "ba0069bb4b0b89d99d075b51bf2d67ac"
+    "hash": "37cbd6c3f4f9b3631616fec36a5a47c2"
   },
   {
     "file": "data/game/ranking.json",
@@ -389,7 +389,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "d1e4a5856da75dc0797e4dcfb33722d6"
+    "hash": "fa1cd62198195bdd85fb9b0d3a1931a8"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
