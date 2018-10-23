@@ -65,6 +65,7 @@
         <config-file parent="/*" target="AndroidManifest.xml">
             <uses-feature android:name="android.hardware.location.gps" android:required="false" />
         </config-file>
+        <preference name="android-manifest/application/@android:allowBackup" value="false" />
     </platform>
     <platform name="ios">
         <icon height="57" src="*resource_folder*/resources/ios/icon/icon.png" width="57" />
