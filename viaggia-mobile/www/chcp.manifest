@@ -17,7 +17,7 @@
   },
   {
     "file": "data/config.json",
-    "hash": "c9cbb64609fe77ec5f96893a143de2a5"
+    "hash": "ba0069bb4b0b89d99d075b51bf2d67ac"
   },
   {
     "file": "data/game/ranking.json",
@@ -25,7 +25,7 @@
   },
   {
     "file": "data/game/status.json",
-    "hash": "89211a8cd5e4efc32d6da8ff6dfe0716"
+    "hash": "97fc40607e597597f28d91545904ce52"
   },
   {
     "file": "data/messages.json",
@@ -405,7 +405,7 @@
   },
   {
     "file": "js/controllers/HomeCtrl.js",
-    "hash": "51e0f6f446caf612ff1dcb1f410e89e3"
+    "hash": "8b5874a033e952c87c810b26cefa7391"
   },
   {
     "file": "js/controllers/InfoCtrl.js",
@@ -545,7 +545,7 @@
   },
   {
     "file": "js/services/ProfileSrv.js",
-    "hash": "ffe67c459fc5a283b7414069469569a0"
+    "hash": "b871c576d354d4ceed87d9ebb98b46f4"
   },
   {
     "file": "js/services/RegistrationSrv.js",
@@ -553,7 +553,7 @@
   },
   {
     "file": "js/services/TaxiSrv.js",
-    "hash": "a30b5c2f1dd9573592f4bf4a6ae7675b"
+    "hash": "4cdb8f5b383a4e92d8700f0f002f2b20"
   },
   {
     "file": "js/services/TrackSrv.js",
