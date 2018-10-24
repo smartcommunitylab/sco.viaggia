@@ -1,6 +1,6 @@
 angular.module('viaggia.services.game', [])
 
-    .factory('GameSrv', function ($q, $http,$rootScope, $filter, DiaryDbSrv, Config, LoginService, profileService) {
+    .factory('GameSrv', function ($q, $http, $rootScope, $filter, DiaryDbSrv, Config, LoginService, profileService) {
         var gameService = {};
 
         var localStatus = null;
@@ -1175,7 +1175,7 @@ angular.module('viaggia.services.game', [])
             return deferred.promise;
         };
         //update  status with new date, otherwise keep the old one
-        
+
         gameService.updateStatus = function () {
             gameService.getLocalStatus().then(
                 function (status) {
@@ -1238,13 +1238,11 @@ angular.module('viaggia.services.game', [])
                         },
                         timeout: Config.getHTTPConfig().timeout
                     })
-                        .success(function (ranking) {
-                            localRanking = ranking;
+                        .then(function (ranking) {
+                            localRanking = ranking.data;
                             deferred.resolve(localRanking);
-                        })
-
-                        .error(function (response) {
-                            deferred.reject(response);
+                        }, function (response) {
+                            deferred.reject();
                         });
                 },
                 function () {

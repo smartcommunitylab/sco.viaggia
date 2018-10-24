@@ -4,7 +4,6 @@
   "description": "viaggia-mobile: An Ionic project",
   "dependencies": {
     "cordova": "^8.1.1",
-    "cordova-background-geolocation": "git+https://github.com/transistorsoft/cordova-background-geolocation.git#2.9.1",
     "cordova-custom-config": "^5.0.2",
     "cordova-plugin-app-event": "^1.2.1",
     "cordova-plugin-app-version": "^0.1.9",
@@ -115,15 +114,6 @@
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-x-toast": {},
       "cordova-plugin-dialogs": {},
-      "cordova-background-geolocation": {
-        "LICENSE": "6af31309a1796013f00927f4c396b898ac881efac6d398a165301e06e0a6a9c7",
-        "GOOGLE_API_VERSION": "11.6.0",
-        "APPCOMPAT_VERSION": "27.0.0",
-        "LOCATION_ALWAYS_AND_WHEN_IN_USE_USAGE_DESCRIPTION": "Always use is required for background location tracking",
-        "LOCATION_ALWAYS_USAGE_DESCRIPTION": "Background location-tracking is required",
-        "LOCATION_WHEN_IN_USE_USAGE_DESCRIPTION": "Background location-tracking is required",
-        "MOTION_USAGE_DESCRIPTION": "Using the accelerometer increases battery-efficiency by intelligently toggling location-tracking only when the device is detected to be moving"
-      },
       "cordova-plugin-firebase": {},
       "de.appplant.cordova.plugin.local-notification": {},
       "cordova-custom-config": {},
@@ -142,7 +132,12 @@
       "cordova-plugin-globalization": {},
       "cordova-plugin-camera": {},
       "cordova-plugin-crop": {},
-      "cordova-hot-code-push-plugin": {}
+      "cordova-hot-code-push-plugin": {},
+      "cordova-background-geolocation": {
+        "LICENSE": "6af31309a1796013f00927f4c396b898ac881efac6d398a165301e06e0a6a9c7",
+        "GOOGLE_API_VERSION": "11.6.0",
+        "APPCOMPAT_VERSION": "27.0.0"
+      }
     },
     "platforms": [
       "android"

@@ -1238,7 +1238,7 @@ angular.module('viaggia.controllers.game', [])
                             $scope.maybeMore = false;
                         }
                         if ($scope.ranking && $scope.ranking.length == 0) {
-                        $scope.rank = false;
+                            $scope.rank = false;
                         } else {
                             $scope.rank = true;
                         }
@@ -1260,17 +1260,22 @@ angular.module('viaggia.controllers.game', [])
                     }
                     $scope.$broadcast('scroll.infiniteScrollComplete');
                     Config.loaded();
+                }, function (err) {
+                    Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                    $scope.rank = false;
+                    $scope.singleRankStatus = true;
+                    Config.loaded();
                 }
+            )
 
-            );
 
         };
         $scope.getUserImg = function (id) {
             return Config.getServerURL() + '/gamificationweb/player/avatar/' + Config.getAppId() + '/' + id
         }
 
-        $scope.reloadRank = function() {
-            $scope.maybeMore=true; 
+        $scope.reloadRank = function () {
+            $scope.maybeMore = true;
             $scope.loadMore()
         }
         /* Infinite scrolling */

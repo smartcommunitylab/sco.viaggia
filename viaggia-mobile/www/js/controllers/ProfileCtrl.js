@@ -296,7 +296,7 @@ angular.module('viaggia.controllers.profile', [])
         //TODO
         $scope.blacklisted = true;
         $scope.profileId = $stateParams.profileId
-        $scope.user = null;
+        $scope.user = {};
         $scope.badges = null;
         $scope.stats = {}
         $scope.challenges = {} ;
@@ -424,6 +424,7 @@ angular.module('viaggia.controllers.profile', [])
             },
             function (err) {
                 Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                $scope.user = null;
             }
         ).finally(Config.loaded);
 
