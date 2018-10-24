@@ -21,11 +21,10 @@
                 </ion-list>
             </div>
         </div>
-        <div ng-if="!!status && singleRankStatus">
+        <div ng-if="!!status && singleRankStatus && rank">
             <div class="listheader" ng-class="{hasprize: (filter.selected === 'now' && !!prize)}">
                 <div class="prize" ng-if="filter.selected === 'now' && !!prize">
                     <div>{{'game_tab_ranking_listheader_price' | translate}}</div>
-                    <div>Lorem ipsum sic dolor amet</div>
                 </div>
                 <div class="row">
                     <div class="col col-20">{{'game_tab_ranking_listheader_position' | translate}}</div>
@@ -65,13 +64,16 @@
                 <ion-infinite-scroll ng-if="ranking" on-infinite="loadMore()"></ion-infinite-scroll>
             </ion-scroll>
         </div>
+        <div ng-if="!rank">
+            <h4 class="label">{{'no_ranking' | translate}}</h4>
+        </div>
         <div ng-if="!status">
             <h4 class="label">{{'no_status' | translate}}</h4>
         </div>
         <div ng-if="status && !singleRankStatus">
             <h4 class="label">{{'pop_up_error_server_template' | translate}}</h4>
 
-            <button ng-click="loadMore()" class="button button-viaggia reload-rank">{{'ranking_reload' | translate}}</button>
+            <button ng-click="reloadRank()" class="button button-viaggia reload-rank">{{'ranking_reload' | translate}}</button>
         </div>
     </ion-content>
 </ion-view>

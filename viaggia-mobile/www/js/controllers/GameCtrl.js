@@ -409,8 +409,7 @@ angular.module('viaggia.controllers.game', [])
             return "5 " + $filter('translate')('user_points_label');
         }
         $scope.getPast = function () {
-            //TODO
-            $scope.pastChallenges = [];
+            $scope.pastChallenges = null;
             if (!!$scope.status && !!$scope.status['challengeConcept']) {
                 if ($scope.status) {
                     //$scope.pastChallenges = $scope.status['challengeConcept']['oldChallengeData'];
@@ -432,6 +431,9 @@ angular.module('viaggia.controllers.game', [])
                                 });
                             }
                         }
+                    }, function (err) {
+                        $scope.challenges = [];
+                        Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
                     });
                     if (!$scope.pastChallenges) $scope.challenges = [];
                 } else {
@@ -1188,6 +1190,7 @@ angular.module('viaggia.controllers.game', [])
         $rootScope.currentUser = {};
         $scope.ranking = [];
         $scope.singleRankStatus = true;
+        $scope.rank = true;
         $scope.rankingFilterOptions = ['now', 'last', 'global'];
         var getRanking = false;
         $scope.rankingPerPage = 50;
@@ -1218,6 +1221,7 @@ angular.module('viaggia.controllers.game', [])
 
         $scope.filter.filter = function (selection) {
             // reload using new selection
+            $scope.rank = true;
             getRanking = true;
             $scope.maybeMore = true;
             $scope.singleRankStatus = true;
@@ -1232,6 +1236,11 @@ angular.module('viaggia.controllers.game', [])
                         $scope.ranking = ranking['classificationList'];
                         if (!$scope.ranking || $scope.ranking.length < $scope.rankingPerPage) {
                             $scope.maybeMore = false;
+                        }
+                        if ($scope.ranking && $scope.ranking.length == 0) {
+                        $scope.rank = false;
+                        } else {
+                            $scope.rank = true;
                         }
                     } else {
                         $scope.maybeMore = false;
@@ -1258,6 +1267,11 @@ angular.module('viaggia.controllers.game', [])
         };
         $scope.getUserImg = function (id) {
             return Config.getServerURL() + '/gamificationweb/player/avatar/' + Config.getAppId() + '/' + id
+        }
+
+        $scope.reloadRank = function() {
+            $scope.maybeMore=true; 
+            $scope.loadMore()
         }
         /* Infinite scrolling */
         $scope.loadMore = function () {

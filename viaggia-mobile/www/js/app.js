@@ -13,7 +13,7 @@ var app = {
     document.addEventListener('nothingToUpdate', this.nothingToUpdate, false);
     document.addEventListener('hideLoad', this.hideLoad, false);
   },
- 
+
   // deviceready Event Handler
   onDeviceReady: function () {
     console.log('Device is ready for work');
@@ -449,7 +449,7 @@ angular.module('viaggia', [
       })
 
       .state('app.home.diary', {
-        cache: false,
+        cache: true,
         url: '/diary',
         params: {
           challengeEnd: null
@@ -476,8 +476,8 @@ angular.module('viaggia', [
         cache: false,
         url: "/challenges",
         params: {
-              challengeEnd: null
-            },
+          challengeEnd: null
+        },
         views: {
           'tab-challenges': {
             templateUrl: 'templates/game/challenges.html',
@@ -990,20 +990,6 @@ angular.module('viaggia', [
           }
         }
       })
-      // .state('app.game.challenges', {
-      //   cache: false,
-      //   url: '/challenges',
-      //   params: {
-      //     challengeEnd: null
-      //   },
-      //   views: {
-      //     'tab-challenges': {
-      //       templateUrl: 'templates/game/challenges.html',
-      //       controller: 'ChallengesCtrl'
-      //     }
-      //   }
-      // })
-
       .state('app.game.rankings', {
         cache: false,
         url: '/rankings',
@@ -1156,7 +1142,7 @@ angular.module('viaggia', [
       credits_participation: 'Con la partecipazione di:',
       credits_info: 'Per informazioni:',
       credits_licenses_button: 'VEDI LICENZE',
-      credits_paid:"Finanziato da :",
+      credits_paid: "Finanziato da :",
       favorites_title_list: 'Indirizzi preferiti',
       plan_title: 'Pianifica viaggio',
       plan_home: 'Pianifica',
@@ -1406,6 +1392,7 @@ angular.module('viaggia', [
       "no_challenges": "Al momento non ci sono sfide",
       "no_badges": "Al momento non ci sono badges",
       "no_challenges_old": "Nessuna sfida trovata",
+      no_ranking:"Nessuna classifica trovata",
       no_statistics: "Nessuna statistica trovata",
       pop_up_invalid_tracking_title: "Viaggio non valido",
       pop_up_invalid_tracking_template: "Le caratteristiche del viaggio fatto non corrispondono al mezzo di trasporto specificato. I punti non saranno assegnati.",
@@ -1442,7 +1429,7 @@ angular.module('viaggia', [
       msg_trip_bus: 'Ore {{time}}.<br> {{travelValidity}}, {{points}} punti.',
       msg_trip_train: 'Ore {{time}}.<br> {{travelValidity}}, {{points}} punti.',
       msg_trip_multimodal: 'Ore {{time}}.<br> {{travelValidity}}, {{points}} punti.',
-      msg_new_level:'Hai raggiunto il livello {{levelName}}',
+      msg_new_level: 'Hai raggiunto il livello {{levelName}}',
       travel_pending_state: 'Viaggio in attesa di validazione',
       no_diary: 'Nessun elemento trovato nel diario',
       no_stats: 'Nessuna statistica trovata',
@@ -1512,7 +1499,7 @@ angular.module('viaggia', [
       warning_choose_challenge: "Programma la sfida per la prossima settimana. Se non avrai scelto una sfida, alle 12.00 di venerdì il sistema ti assegnerà in automatico una sfida individuale",
       read_more: "altro",
       challenge_popup_title: "Sblocca sfida",
-      challenge_detail_popup_title:"Dettaglio sfida",
+      challenge_detail_popup_title: "Dettaglio sfida",
       challenge_popup_template_comp_time: "Confermando sbloccherai la tipologia di sfida competitiva a tempo e potrai sfidare altri giocatori",
       challenge_popup_template_comp_perf: "Confermando sbloccherai la tipologia di sfida competitiva a performance e potrai sfidare altri giocatori",
       challenge_popup_template_coop: "Confermando sbloccherai la tipologia di sfida cooperativa e potrai sfidare altri giocatori",
@@ -1553,8 +1540,8 @@ angular.module('viaggia', [
       you_lose: "HAI PERSO ",
       user_chall_status: "Stato completamento sfida:  ",
       challenge_days_to_end: 'Hai ancora {{challenge.daysToEnd}} giorni per completare la sfida.',
-      payload_large:"Immagine troppo grande",
-      payload_unsupported:"Immagine non sopportata"
+      payload_large: "Immagine troppo grande",
+      payload_unsupported: "Immagine non sopportata"
     });
 
     $translateProvider.translations('en', {
@@ -1684,7 +1671,7 @@ angular.module('viaggia', [
       credits_participation: 'With participation of:',
       credits_info: 'Further information:',
       credits_licenses_button: 'READ LICENSES',
-      credits_paid:"Supported by:",
+      credits_paid: "Supported by:",
       favorites_title_list: 'Favorite places',
       plan_title: 'Plan journey',
       plan_home: 'Plan',
@@ -1935,6 +1922,7 @@ angular.module('viaggia', [
       "no_badges": "No badges at the moment",
       "no_challenges_old": "No challenges found",
       "no_statistics": "No data found",
+      no_ranking:"No ranking found",
       pop_up_invalid_tracking_title: "The trip is not valid",
       pop_up_invalid_tracking_template: "Trip details are not compatible with the type of transport chosen to track the trip. No Green Leaves Points will be awarded for this trip.",
       pop_up_plan: "Plan",
@@ -1970,7 +1958,7 @@ angular.module('viaggia', [
       msg_trip_bus: 'At {{time}}.<br> {{travelValidity}}, {{points}} points.',
       msg_trip_train: 'At {{time}}.<br> {{travelValidity}}, {{points}} points.',
       msg_trip_multimodal: 'At {{time}}.<br> {{travelValidity}}, {{points}} points.',
-      msg_new_level:'You reached the {{levelName}} level',
+      msg_new_level: 'You reached the {{levelName}} level',
       travel_pending_state: 'Travel in validation',
       no_diary: 'No diary available',
       no_stats: 'No data found',
@@ -2039,7 +2027,7 @@ angular.module('viaggia', [
       warning_choose_challenge: "Plan next week's challenge. If you don't choose a challenge before Friday at 12.00 the system will automatically assign a single-player challenge",
       read_more: "read more",
       challenge_popup_title: "Unlock challenge",
-      challenge_detail_popup_title:"Challenge detail",
+      challenge_detail_popup_title: "Challenge detail",
       challenge_popup_template_comp_time: "Confirm to unlock competitive \"time based\" challenge and challenge other palyers.",
       challenge_popup_template_comp_perf: "Confirm to unlock competitive \"performance based\" challenge and challenge other palyers.",
       challenge_popup_template_coop: "Confirm to unlock collaborative challenge and challenge other palyers.",
@@ -2080,8 +2068,8 @@ angular.module('viaggia', [
       you_lose: "YOU LOST ",
       user_chall_status: "Challenge completion status:  ",
       challenge_days_to_end: 'You still have {{challenge.daysToEnd}} days to complete the challenge.',
-      payload_large:"Payload too large",
-      payload_unsupported:"Unsupported media type"
+      payload_large: "Payload too large",
+      payload_unsupported: "Unsupported media type"
 
     });
 

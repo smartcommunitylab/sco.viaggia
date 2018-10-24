@@ -299,6 +299,7 @@ angular.module('viaggia.controllers.profile', [])
         $scope.user = null;
         $scope.badges = null;
         $scope.stats = {}
+        $scope.challenges = {} ;
         $scope.noStats = false;
         $scope.badgeTypes = Config.getBadgeTypes();
         $scope.maxStat = GameSrv.getMaxStat("Total");
