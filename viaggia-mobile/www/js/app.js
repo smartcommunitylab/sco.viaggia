@@ -199,7 +199,7 @@ angular.module('viaggia', [
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       }
       if (window.StatusBar) {
-        //StatusBar.overlaysWebView(false);            
+        StatusBar.overlaysWebView(true);            
         StatusBar.styleDefault();
       }
       //        GeoLocate.initLocalization().then(function () {
@@ -476,7 +476,8 @@ angular.module('viaggia', [
         cache: false,
         url: "/challenges",
         params: {
-          challengeEnd: null
+          challengeEnd: null,
+          challengeStart:null
         },
         views: {
           'tab-challenges': {

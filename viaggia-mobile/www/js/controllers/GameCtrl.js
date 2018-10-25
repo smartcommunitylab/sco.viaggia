@@ -133,7 +133,8 @@ angular.module('viaggia.controllers.game', [])
         $scope.typeOfChallenges = [];
         $scope.language = null;
 
-        var paramOptions = $stateParams.challengeEnd;
+        var paramEnd = $stateParams.challengeEnd;
+        var paramStart = $stateParams.challengeStart;
         var now = new Date().getTime();
 
         $scope.actualTab = $scope.tabs[0];
@@ -142,7 +143,7 @@ angular.module('viaggia.controllers.game', [])
         // } else {
         //     $scope.actualTab=$scope.tabs[1];
         // };
-        if (paramOptions && paramOptions > now) {
+        if (paramEnd && paramEnd > now && paramStart > now) {
             $scope.actualTab = $scope.tabs[1];
         }
 
@@ -417,6 +418,7 @@ angular.module('viaggia.controllers.game', [])
                         if (!pastChallenges)
                             $scope.pastChallenges = [];
                         else {
+                            $scope.pastChallenges = [];
                             for (var i = 0; i < pastChallenges.length; i++) {
                                 $scope.pastChallenges.push({
                                     group: "racc",
@@ -1004,12 +1006,12 @@ angular.module('viaggia.controllers.game', [])
             //$scope.firstOpenPopup.close();
             //get end
             var end = (JSON.parse(message.event)).challengeEnd;
+            var start = (JSON.parse(message.event)).challengeStart;
             var now = new Date().getTime();
-            if (end > now) {
+            if (end > now && start < now) {
                 $state.go('app.home.home');
-            }
-            else {
-                $state.go('app.home.challenges', { challengeEnd: end });
+            } else {
+                $state.go('app.home.challenges', { challengeEnd: end, challengeStart: start });
             }
         };
 
