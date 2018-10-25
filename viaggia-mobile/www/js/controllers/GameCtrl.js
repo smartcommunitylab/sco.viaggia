@@ -122,7 +122,7 @@ angular.module('viaggia.controllers.game', [])
 
     //loads the challenges tab, manage the filter of past and new challenges
 
-    .controller('ChallengesCtrl', function ($scope, $state, $stateParams, LoginService, Config, $filter, $ionicScrollDelegate, $ionicPopup, profileService, $window, $timeout, GameSrv) {
+    .controller('ChallengesCtrl', function ($scope, $state, $stateParams, Toast, LoginService, Config, $filter, $ionicScrollDelegate, $ionicPopup, profileService, $window, $timeout, GameSrv) {
         $scope.challenges = null;
         $scope.param = null;
         $scope.tabs = ['past', 'future', 'unlock'];
@@ -194,7 +194,10 @@ angular.module('viaggia.controllers.game', [])
                         },
                         function (err) {
                             $scope.noStatus = true;
+                            $scope.actualTab = $scope.tabs[0];
                             Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                            $scope.challenges = [];
+                            $scope.pastChallenges = [];
                         })
 
                 }, function (err) {
@@ -380,11 +383,17 @@ angular.module('viaggia.controllers.game', [])
 
                         });
                     }), function (err) {
-                        $scope.challenges = null;
+                        $scope.challenges = [];
+                        Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+
                     }, function (err) {
-                        $scope.challenges = null;
+                        $scope.challenges = [];
+                        Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+
                     }, function (err) {
-                        $scope.challenges = null;
+                        $scope.challenges = [];
+                        Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+
                     }
                 }).finally(Config.loaded);
 
@@ -441,6 +450,7 @@ angular.module('viaggia.controllers.game', [])
                         }
                     }, function (err) {
                         $scope.challenges = [];
+                        $scope.pastChallenges = [];
                         Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
                     });
                     if (!$scope.pastChallenges) $scope.challenges = [];
