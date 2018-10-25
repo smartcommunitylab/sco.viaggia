@@ -137,15 +137,7 @@ angular.module('viaggia.controllers.game', [])
         var paramStart = $stateParams.challengeStart;
         var now = new Date().getTime();
 
-        $scope.actualTab = $scope.tabs[0];
-        // if (profileService.status && profileService.status.inventory & profileService.status.challengeActivationActions) {
-        //     $scope.actualTab=$scope.tabs[0];
-        // } else {
-        //     $scope.actualTab=$scope.tabs[1];
-        // };
-        if (paramEnd && paramEnd > now && paramStart > now) {
-            $scope.actualTab = $scope.tabs[1];
-        }
+
 
         $scope.openTab = function (tab) {
             // if ($scope.activeTab == 'unlock') {
@@ -188,9 +180,23 @@ angular.module('viaggia.controllers.game', [])
             navigator.globalization.getPreferredLanguage(
                 function (result) {
                     $scope.language = result.value.substring(0, 2);
-                    $scope.getTypes();
-                    $scope.getActual();
-                    $scope.getPast();
+                    GameSrv.getLocalStatus().then(
+                        function (status) {
+                            $scope.status = status;
+                            $scope.noStatus = false;
+                            $scope.actualTab = $scope.tabs[0];
+                            if (paramEnd && paramEnd > now && paramStart > now) {
+                                $scope.actualTab = $scope.tabs[1];
+                            }
+                            $scope.getTypes();
+                            $scope.getActual();
+                            $scope.getPast();
+                        },
+                        function (err) {
+                            $scope.noStatus = true;
+                            Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                        })
+
                 }, function (err) {
 
                 });

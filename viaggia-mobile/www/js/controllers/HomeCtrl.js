@@ -2,7 +2,7 @@ angular.module('viaggia.controllers.home', [])
 
     .controller('HomeCtrl', function ($scope, $state, GameSrv, profileService, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv, DiaryDbSrv, BT) {
 
-        $scope.challenges = [];
+        $scope.challenges = null;
         $scope.expansion = [];
         $scope.buttons = [{
             label: $filter('translate')('menu_news'),
@@ -80,7 +80,7 @@ angular.module('viaggia.controllers.home', [])
                 //         {
                 //             "challId": "start_survey-1624ea3d21e-63568495",
                 //             "challDesc": "Fill out the start survey and gain a bonus of 100 green leaves points.",
-                //             "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://tn.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
+                //             "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
                 //             "challTarget": 1,
                 //             "status": 0,
                 //             "row_status": 0.0,
@@ -97,7 +97,7 @@ angular.module('viaggia.controllers.home', [])
                 //         {
                 //             "challId": "start_survey-1624ea3d21e-63568495",
                 //             "challDesc": "Fill out the start survey and gain a bonus of 100 green leaves points.",
-                //             "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://tn.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
+                //             "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
                 //             "challTarget": 1,
                 //             "status": 0,
                 //             "row_status": 0.0,
@@ -114,7 +114,7 @@ angular.module('viaggia.controllers.home', [])
                 //         {
                 //             "challId": "start_survey-1624ea3d21e-63568495",
                 //             "challDesc": "Fill out the start survey and gain a bonus of 100 green leaves points.",
-                //             "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://tn.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
+                //             "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
                 //             "challTarget": 1,
                 //             "status": 0,
                 //             "row_status": 0.0,
@@ -131,7 +131,7 @@ angular.module('viaggia.controllers.home', [])
                 //         {
                 //             "challId": "start_survey-1624ea3d21e-63568495",
                 //             "challDesc": "Fill out the start survey and gain a bonus of 100 green leaves points.",
-                //             "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://tn.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
+                //             "challCompleteDesc": "To win this challenge, complete the initial game questionnaire that you can access <a href='https://dev.smartcommunitylab.it/core.mobility/gamificationweb/survey/en/start/CnbSEzji02s7UKrI1flpV5KpBNtWiONw4T0ElIODy1g' target='_system'>here</a>.",
                 //             "challTarget": 1,
                 //             "status": 0,
                 //             "row_status": 0.0,
