@@ -3378,24 +3378,6 @@ ion-header-bar .title {
 .menu-expanded {
     transform: translate3d(275px, 0px, 0px);
 }
-.platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) {
-    height: 44px; }
-    .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader).item-input-inset .item-input-wrapper {
-      margin-top: 19px !important; }
-    .platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > * {
-      margin-top: 0px; }
-  .platform-ios.platform-cordova:not(.fullscreen) .tabs-top > .tabs, .platform-ios.platform-cordova:not(.fullscreen) .tabs.tabs-top {
-    top: 44px; }
-  .platform-ios.platform-cordova:not(.fullscreen) .has-header, .platform-ios.platform-cordova:not(.fullscreen) .bar-subheader {
-    top: 44px; }
-  .platform-ios.platform-cordova:not(.fullscreen) .has-subheader {
-    top: 108px; }
-  .platform-ios.platform-cordova:not(.fullscreen) .has-tabs-top {
-    top: 113px; }
-  .platform-ios.platform-cordova:not(.fullscreen) .has-header.has-subheader.has-tabs-top {
-    top: 157px; }
-  .platform-ios.platform-cordova.status-bar-hide {
-    margin-bottom: 20px; }
 
 @-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
 @-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
