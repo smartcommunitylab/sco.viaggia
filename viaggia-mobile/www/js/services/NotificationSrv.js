@@ -61,6 +61,11 @@ angular.module('viaggia.services.notification', [])
     //register user to user notification
     notificationService.registerUser = function () {
       var deferred = $q.defer();
+      if (ionic.Platform.isAndroid()) {
+        window.FirebasePlugin.subscribe(Config.getMessagingAppId() + ".android");
+      } else {
+        window.FirebasePlugin.subscribe(Config.getMessagingAppId() + ".ios");
+      }
       //get permission for background notifications
       window.FirebasePlugin.grantPermission();
       window.FirebasePlugin.getToken(function (token) {
@@ -69,28 +74,28 @@ angular.module('viaggia.services.notification', [])
         registrationId = token;
         LoginService.getValidAACtoken().then(
           function (tokenLogin) {
-              $http({
-                method: 'POST',
-                url: Config.getMessagingServerURL() + '/register/user/' + Config.getMessagingAppId(),
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer ' + tokenLogin
+            $http({
+              method: 'POST',
+              url: Config.getMessagingServerURL() + '/register/user/' + Config.getMessagingAppId(),
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + tokenLogin
 
-                },
-                data: {
-                  "appName": Config.getMessagingAppId(),
-                  "registrationId": registrationId,
-                  "platform": ionic.Platform.isAndroid() ? "android" : "ios"
-                },
-                timeout: 5000
-              }).success(function (data) {
-                deferred.resolve(data.notifications);
+              },
+              data: {
+                "appName": Config.getMessagingAppId(),
+                "registrationId": registrationId,
+                "platform": ionic.Platform.isAndroid() ? "android" : "ios"
+              },
+              timeout: 5000
+            }).success(function (data) {
+              deferred.resolve(data.notifications);
+            })
+              .error(function (err) {
+                deferred.reject(err);
+
               })
-                .error(function (err) {
-                  deferred.reject(err);
-
-                })
           },
           function () {
             deferred.reject();

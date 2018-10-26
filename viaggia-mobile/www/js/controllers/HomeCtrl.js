@@ -269,6 +269,10 @@ angular.module('viaggia.controllers.home', [])
                 } else {
                     $scope.challenges = [];
                 }
+            }, function (error) {
+                $scope.challenges = [];
+                Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+
             });
 
         }

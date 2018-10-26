@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "414560938900",
+    "firebase_url": "https://viaggia-playgo.firebaseio.com",
+    "project_id": "viaggia-playgo",
+    "storage_bucket": "viaggia-playgo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:414560938900:android:9e750a461995c927",
+        "android_client_info": {
+          "package_name": "it.smartcommunitylab.viaggiatrento.playgo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "414560938900-6ussgfa9a6nsvav99lqtia0kk24gtkah.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyaH-vq3cQdhBug4_NoFCIgaSbPBIxkq0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
