@@ -405,7 +405,7 @@
   },
   {
     "file": "js/controllers/HomeCtrl.js",
-    "hash": "7712dc536546fe6c737a6b6d7608bca0"
+    "hash": "21c7243fe989bdf75922ba23bb1efd6b"
   },
   {
     "file": "js/controllers/InfoCtrl.js",
@@ -537,7 +537,7 @@
   },
   {
     "file": "js/services/NotificationSrv.js",
-    "hash": "c2de3b43bcf7e485c9f02d28d54949bb"
+    "hash": "83cbe328053f54322e47ad7c39198848"
   },
   {
     "file": "js/services/PlanSrv.js",
