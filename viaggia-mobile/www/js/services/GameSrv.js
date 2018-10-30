@@ -165,9 +165,9 @@ angular.module('viaggia.services.game', [])
         }
         var ArrMax = null;
         var iconChall = {
-            comp_time: 'ic_ch_tempo',
-            comp_perf: 'ic_ch_perf',
-            coop: 'ic_ch_coop',
+            groupCompetitiveTime: 'ic_ch_tempo',
+            groupCompetitivePerformance: 'ic_ch_perf',
+            groupCooperative: 'ic_ch_coop',
             racc: 'ic_ch_single',
             futu: 'ic_ch_single',
             sent_coop: 'ic_ch_coop_invitation',
@@ -175,9 +175,9 @@ angular.module('viaggia.services.game', [])
             sent_comp_time: 'ic_ch_tempo_inv'
         }
         var colorChall = {
-            comp_time: 'time-user time-other-color',
-            comp_perf: 'perf-user perf-other-color',
-            coop: 'coop-user coop-other-color',
+            groupCompetitiveTime: 'time-user time-other-color',
+            groupCompetitivePerformance: 'perf-user perf-other-color',
+            cogroupCooperativeop: 'coop-user coop-other-color',
             racc: 'single-user single-other-color',
             futu: 'single-user single-other-color',
             sent_coop: 'coop-other-color',
@@ -186,9 +186,9 @@ angular.module('viaggia.services.game', [])
         }
 
         var color = {
-            comp_time: '#25BC5D;',
-            comp_perf: '#FF9D33;',
-            coop: '#e54d2d;',
+            groupCompetitiveTime: '#25BC5D;',
+            groupCompetitivePerformance: '#FF9D33;',
+            groupCooperative: '#e54d2d;',
             racc: '#2681A4;',
             futu: '#2681A4;',
         }
@@ -1107,15 +1107,15 @@ angular.module('viaggia.services.game', [])
 
         gameService.getChallengeBarTemplate = function (challenge) {
             switch (challenge.type) {
-                case 'comp_time': {
+                case 'groupCompetitiveTime': {
                     return 'templates/game/challengeTemplates/competitiveTimeBar.html';
                     break;
                 }
-                case 'comp_perf': {
+                case 'groupCompetitivePerformance': {
                     return 'templates/game/challengeTemplates/competitivePerformanceBar.html';
                     break;
                 }
-                case 'coop': {
+                case 'groupCooperative': {
                     return 'templates/game/challengeTemplates/cooperativeBar.html';
                     break;
                 }

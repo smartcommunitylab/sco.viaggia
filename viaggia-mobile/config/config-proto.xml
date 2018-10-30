@@ -101,6 +101,6 @@
         </platform>
         <icon src="*resource_folder*/resources/android/icon/drawable-xhdpi-icon.png" />
             <chcp>
-        <config-file url="https://tn.smartcommunitylab.it/cordova/chcp.json" />
+        <config-file url="https://dev.smartcommunitylab.it/cordova/chcp.json" />
     </chcp>
     </widget>

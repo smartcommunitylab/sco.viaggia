@@ -32,7 +32,7 @@ angular.module('viaggia.services.profile', [])
       return localStorage.getItem(Config.getAppId() + PROFILE_TABLE_SIZE);
     };
     profileService.getAvatarUrl = function () {
-      return 'https://tn.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/' + Config.getAppId() + '/';
+      return 'https://dev.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/' + Config.getAppId() + '/';
     };
     profileService.setAccessibility = function (acc) {
       localStorage.setItem(Config.getAppId() + PROFILE_ACC, acc);

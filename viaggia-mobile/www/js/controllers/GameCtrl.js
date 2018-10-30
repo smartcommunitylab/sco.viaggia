@@ -403,26 +403,23 @@ angular.module('viaggia.controllers.game', [])
             return GameSrv.getChallengeBarTemplate(challenge);
         }
         $scope.getWidthUser = function (challenge) {
-            //TODO
             return "width:" + challenge.status + "%;"
         }
         $scope.getWidthOther = function (challenge) {
             //TODO
             if (challenge.type == 'coop')
-                return "width:40%;;"
-            return "width:40%;"
+                return "width:" + challenge.otherAttendeeData.status + "%;"
+            return "width:" + challenge.otherAttendeeData.status + "%;"
         }
         $scope.getWidthSeparator = function (challenge) {
             //TODO
             return "width:30%;background:transparent;"
         }
         $scope.getValueUser = function (challenge) {
-            //TODO
-            return $filter('translate')('user_chall_status') + challenge.status + "%";
+            return challenge.row_status + " " + $filter('translate')('user_points_label');
         }
         $scope.getValueOther = function (challenge) {
-            //TODO
-            return "5 " + $filter('translate')('user_points_label');
+            return challenge.otherAttendeeData.row_status + " " + $filter('translate')('user_points_label');
         }
         $scope.getPast = function () {
             $scope.pastChallenges = null;

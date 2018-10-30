@@ -17,7 +17,7 @@
   },
   {
     "file": "data/config.json",
-    "hash": "646d979bd2490d18731e22d26eca5f28"
+    "hash": "453adc63727e72b3481df937371bbca7"
   },
   {
     "file": "data/game/ranking.json",
@@ -25,7 +25,7 @@
   },
   {
     "file": "data/game/status.json",
-    "hash": "97fc40607e597597f28d91545904ce52"
+    "hash": "89211a8cd5e4efc32d6da8ff6dfe0716"
   },
   {
     "file": "data/messages.json",
@@ -401,11 +401,11 @@
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "51db07f21a93908a9b536e2e159893ba"
+    "hash": "2af4bffd18ef9620b9a9732b096939e0"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
-    "hash": "21c7243fe989bdf75922ba23bb1efd6b"
+    "hash": "2888bbcbbec07ad3ce6421fea6673403"
   },
   {
     "file": "js/controllers/InfoCtrl.js",
@@ -501,7 +501,7 @@
   },
   {
     "file": "js/services/ConfigSrv.js",
-    "hash": "803d48cebb749f29e960c94237cbf0a0"
+    "hash": "28ae02e5156d0af31263a5bcfa6cabc1"
   },
   {
     "file": "js/services/DataSrv.js",
@@ -513,7 +513,7 @@
   },
   {
     "file": "js/services/GameSrv.js",
-    "hash": "6e9e411ff10a72d6c4010c12a6547bce"
+    "hash": "137d67e2958e5df4504630193d01d910"
   },
   {
     "file": "js/services/GeoSrv.js",
@@ -545,7 +545,7 @@
   },
   {
     "file": "js/services/ProfileSrv.js",
-    "hash": "b871c576d354d4ceed87d9ebb98b46f4"
+    "hash": "ffe67c459fc5a283b7414069469569a0"
   },
   {
     "file": "js/services/RegistrationSrv.js",
@@ -553,7 +553,7 @@
   },
   {
     "file": "js/services/TaxiSrv.js",
-    "hash": "4cdb8f5b383a4e92d8700f0f002f2b20"
+    "hash": "a30b5c2f1dd9573592f4bf4a6ae7675b"
   },
   {
     "file": "js/services/TrackSrv.js",
@@ -1017,7 +1017,7 @@
   },
   {
     "file": "templates/game/challengeTemplates/competitivePerformance.html",
-    "hash": "752db3b4914a143e1fdfaa0beaf285f9"
+    "hash": "4950dd1741d468b5775aacf44a36a76f"
   },
   {
     "file": "templates/game/challengeTemplates/competitivePerformanceBar.html",
@@ -1105,11 +1105,11 @@
   },
   {
     "file": "templates/game/rules_en.html",
-    "hash": "02891857c0d962ca5ca308b801af40ef"
+    "hash": "a0ea59bd6bd1eb81a966d14f7896ae02"
   },
   {
     "file": "templates/game/rules_it.html",
-    "hash": "5d21c90b1c54f09a25a96775a751a2b3"
+    "hash": "92f99d8ef27e3e00d9f035cbfca66857"
   },
   {
     "file": "templates/game/statistics.html",
@@ -1221,7 +1221,7 @@
   },
   {
     "file": "templates/registrationForm.html",
-    "hash": "520b1f772e24d5c7c087c3965d20ee94"
+    "hash": "76026b55312b48ed7329c0c98badf900"
   },
   {
     "file": "templates/rulesModal.html",

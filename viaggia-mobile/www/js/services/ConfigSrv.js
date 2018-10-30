@@ -36,7 +36,7 @@ angular.module('viaggia.services.conf', [])
         var PARKING_METERS_MAX_NUMBER = 52;
         var PARKING_METERS_AGENCY_IDS = ['tn_mob_091516'];
 
-        var GEOCODER_URL = 'https://tn.smartcommunitylab.it/core.geocoder';
+        var GEOCODER_URL = 'https://dev.smartcommunitylab.it/core.geocoder';
         var APP_BUILD = '';
         var PLAN_TYPES = ['WALK', 'TRANSIT', 'CAR', 'BICYCLE', 'SHAREDCAR', 'SHAREDBIKE'];
         var ERROR_GPS_NO_SIGNAL = "ERROR_GPS_NO_SIGNAL";
