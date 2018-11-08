@@ -16,15 +16,15 @@
 			"badgeEarned": [
 				{
 					"name": "3_recommendations",
-					"url": "https://dev.smartcommunitylab.it/gamificationweb/img/recommendation/inviteFriends3.svg"
+					"url": "https://tn.smartcommunitylab.it/gamificationweb/img/recommendation/inviteFriends3.svg"
 				},
 				{
 					"name": "5_recommendations",
-					"url": "https://dev.smartcommunitylab.it/gamificationweb/img/recommendation/inviteFriends5.svg"
+					"url": "https://tn.smartcommunitylab.it/gamificationweb/img/recommendation/inviteFriends5.svg"
         		},
 				{
 					"name": "10_recommendations",
-					"url": "https://dev.smartcommunitylab.it/gamificationweb/img/recommendation/inviteFriends10.svg"
+					"url": "https://tn.smartcommunitylab.it/gamificationweb/img/recommendation/inviteFriends10.svg"
 				}
       		]
     	},
@@ -49,19 +49,19 @@
 			"badgeEarned": [
 				{
 					"name": "50_point_green",
-					"url": "https://dev.smartcommunitylab.it/gamificationweb/img/green/greenLeaves50.svg"
+					"url": "https://tn.smartcommunitylab.it/gamificationweb/img/green/greenLeaves50.svg"
 				},
 				{
 					"name": "100_point_green",
-					"url": "https://dev.smartcommunitylab.it/gamificationweb/img/green/greenLeaves100.svg"
+					"url": "https://tn.smartcommunitylab.it/gamificationweb/img/green/greenLeaves100.svg"
         		},
 				{
 					"name": "200_point_green",
-					"url": "https://dev.smartcommunitylab.it/gamificationweb/img/green/greenLeaves200.svg"
+					"url": "https://tn.smartcommunitylab.it/gamificationweb/img/green/greenLeaves200.svg"
         		},
 				{
 					"name": "400_point_green",
-					"url": "https://dev.smartcommunitylab.it/gamificationweb/img/green/greenLeaves400.svg"
+					"url": "https://tn.smartcommunitylab.it/gamificationweb/img/green/greenLeaves400.svg"
         		}
       		]
     	},
