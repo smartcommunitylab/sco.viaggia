@@ -170,19 +170,19 @@ angular.module('viaggia.services.game', [])
             groupCooperative: 'ic_ch_coop',
             racc: 'ic_ch_single',
             futu: 'ic_ch_single',
-            sent_coop: 'ic_ch_coop_invitation',
-            sent_comp_perf: 'ic_ch_perf_invitation',
-            sent_comp_time: 'ic_ch_tempo_inv'
+            sent_groupCooperative: 'ic_ch_coop_invitation',
+            sent_groupCompetitivePerformance: 'ic_ch_perf_invitation',
+            sent_groupCompetitiveTime: 'ic_ch_tempo_inv'
         }
         var colorChall = {
             groupCompetitiveTime: 'time-user time-other-color',
             groupCompetitivePerformance: 'perf-user perf-other-color',
-            cogroupCooperativeop: 'coop-user coop-other-color',
+            groupCooperative: 'coop-user coop-other-color',
             racc: 'single-user single-other-color',
             futu: 'single-user single-other-color',
-            sent_coop: 'coop-other-color',
-            sent_comp_perf: 'perf-other-color',
-            sent_comp_time: ' time-other-color'
+            sent_groupCooperative: 'coop-other-color',
+            sent_groupCompetitivePerformance: 'perf-other-color',
+            sent_groupCompetitiveTime: ' time-other-color'
         }
 
         var color = {
@@ -191,6 +191,12 @@ angular.module('viaggia.services.game', [])
             groupCooperative: '#e54d2d;',
             racc: '#2681A4;',
             futu: '#2681A4;',
+        }
+        var type_challenges = {
+            groupCompetitivePerformance: "groupCompetitivePerformance",
+            groupCompetitiveTime: "groupCompetitiveTime",
+            groupCooperative: "groupCooperative",
+
         }
         getTravelType = function (message) {
             var event = JSON.parse(message.event);
@@ -678,31 +684,6 @@ angular.module('viaggia.services.game', [])
                         .error(function (response) {
                             deferred.reject(response);
                         });
-                    // deferred.resolve([{
-                    //     id: 0,
-                    //     type: "comp_time",
-                    //     short_it: 'Sfida competitiva a tempo',
-                    //     short_en: 'Sfida competitiva a tempo',
-                    //     long_it: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque sapien nulla. Cras in libero vehicula, dapibus sem ac, facilisis tortor. Cras sed fringilla libero, eu euismod mi. Integer non mi dapibus nunc convallis tempor. Morbi eget risus luctus, dapibus orci nec, vulputate diam. Pellentesque molestie nibh at sapien iaculis ultrices. Fusce quis libero sed turpis scelerisque semper. Morbi suscipit nisl nunc, a blandit elit egestas non. Vivamus posuere sem id pellentesque fringilla. Proin sit amet ante id elit vestibulum vehicula eget ut risus. Maecenas vulputate ipsum in ligula dapibus ultricies. ',
-                    //     long_en: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque sapien nulla. Cras in libero vehicula, dapibus sem ac, facilisis tortor. Cras sed fringilla libero, eu euismod mi. Integer non mi dapibus nunc convallis tempor. Morbi eget risus luctus, dapibus orci nec, vulputate diam. Pellentesque molestie nibh at sapien iaculis ultrices. Fusce quis libero sed turpis scelerisque semper. Morbi suscipit nisl nunc, a blandit elit egestas non. Vivamus posuere sem id pellentesque fringilla. Proin sit amet ante id elit vestibulum vehicula eget ut risus. Maecenas vulputate ipsum in ligula dapibus ultricies. ',
-                    //     state: 0
-                    // }, {
-                    //     id: 1,
-                    //     type: "comp_perf",
-                    //     short_it: 'Sfida competitiva performance',
-                    //     short_en: 'Sfida competitiva performance',
-                    //     long_it: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque sapien nulla. Cras in libero vehicula, dapibus sem ac, facilisis tortor. Cras sed fringilla libero, eu euismod mi. Integer non mi dapibus nunc convallis tempor. Morbi eget risus luctus, dapibus orci nec, vulputate diam. Pellentesque molestie nibh at sapien iaculis ultrices. Fusce quis libero sed turpis scelerisque semper. Morbi suscipit nisl nunc, a blandit elit egestas non. Vivamus posuere sem id pellentesque fringilla. Proin sit amet ante id elit vestibulum vehicula eget ut risus. Maecenas vulputate ipsum in ligula dapibus ultricies. ',
-                    //     long_en: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque sapien nulla. Cras in libero vehicula, dapibus sem ac, facilisis tortor. Cras sed fringilla libero, eu euismod mi. Integer non mi dapibus nunc convallis tempor. Morbi eget risus luctus, dapibus orci nec, vulputate diam. Pellentesque molestie nibh at sapien iaculis ultrices. Fusce quis libero sed turpis scelerisque semper. Morbi suscipit nisl nunc, a blandit elit egestas non. Vivamus posuere sem id pellentesque fringilla. Proin sit amet ante id elit vestibulum vehicula eget ut risus. Maecenas vulputate ipsum in ligula dapibus ultricies. ',
-                    //     state: 1
-                    // }, {
-                    //     id: 2,
-                    //     type: "coop",
-                    //     short_it: 'Sfida cooperativa',
-                    //     short_en: 'Sfida cooperativa',
-                    //     long_it: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque sapien nulla. Cras in libero vehicula, dapibus sem ac, facilisis tortor. Cras sed fringilla libero, eu euismod mi. Integer non mi dapibus nunc convallis tempor. Morbi eget risus luctus, dapibus orci nec, vulputate diam. Pellentesque molestie nibh at sapien iaculis ultrices. Fusce quis libero sed turpis scelerisque semper. Morbi suscipit nisl nunc, a blandit elit egestas non. Vivamus posuere sem id pellentesque fringilla. Proin sit amet ante id elit vestibulum vehicula eget ut risus. Maecenas vulputate ipsum in ligula dapibus ultricies. ',
-                    //     long_en: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque sapien nulla. Cras in libero vehicula, dapibus sem ac, facilisis tortor. Cras sed fringilla libero, eu euismod mi. Integer non mi dapibus nunc convallis tempor. Morbi eget risus luctus, dapibus orci nec, vulputate diam. Pellentesque molestie nibh at sapien iaculis ultrices. Fusce quis libero sed turpis scelerisque semper. Morbi suscipit nisl nunc, a blandit elit egestas non. Vivamus posuere sem id pellentesque fringilla. Proin sit amet ante id elit vestibulum vehicula eget ut risus. Maecenas vulputate ipsum in ligula dapibus ultricies. ',
-                    //     state: 0
-                    // }]);
                 });
             return deferred.promise;
         }
@@ -744,42 +725,6 @@ angular.module('viaggia.services.game', [])
             return deferred.promise;
         }
 
-        gameService.getAvailableChallenges = function (profile) {
-            var deferred = $q.defer();
-            LoginService.getValidAACtoken().then(
-                function (token) {
-                    //TODO
-                    gameService.getChallenge(token, 'PROPOSED').then(function (challenges) {
-                        deferred.resolve(challenges);
-                    }, function (err) {
-                        deferred.reject();
-                    })
-                    // deferred.resolve([{
-                    //     id: 0,
-                    //     type: "single",
-                    //     short_it: 'Sfida competitiva a tempo',
-                    //     short_en: 'Sfida competitiva a tempo',
-                    //     long_it: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque sapien nulla. Cras in libero vehicula, dapibus sem ac, facilisis tortor. Cras sed fringilla libero, eu euismod mi. Integer non mi dapibus nunc convallis tempor. Morbi eget risus luctus, dapibus orci nec, vulputate diam. Pellentesque molestie nibh at sapien iaculis ultrices. Fusce quis libero sed turpis scelerisque semper. Morbi suscipit nisl nunc, a blandit elit egestas non. Vivamus posuere sem id pellentesque fringilla. Proin sit amet ante id elit vestibulum vehicula eget ut risus. Maecenas vulputate ipsum in ligula dapibus ultricies. ',
-                    //     long_en: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque sapien nulla. Cras in libero vehicula, dapibus sem ac, facilisis tortor. Cras sed fringilla libero, eu euismod mi. Integer non mi dapibus nunc convallis tempor. Morbi eget risus luctus, dapibus orci nec, vulputate diam. Pellentesque molestie nibh at sapien iaculis ultrices. Fusce quis libero sed turpis scelerisque semper. Morbi suscipit nisl nunc, a blandit elit egestas non. Vivamus posuere sem id pellentesque fringilla. Proin sit amet ante id elit vestibulum vehicula eget ut risus. Maecenas vulputate ipsum in ligula dapibus ultricies. ',
-                    // }, {
-                    //     id: 1,
-                    //     type: "comp_perf",
-                    //     short_it: 'Sfida competitiva performance',
-                    //     short_en: 'Sfida competitiva performance',
-                    //     long_it: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque sapien nulla. Cras in libero vehicula, dapibus sem ac, facilisis tortor. Cras sed fringilla libero, eu euismod mi. Integer non mi dapibus nunc convallis tempor. Morbi eget risus luctus, dapibus orci nec, vulputate diam. Pellentesque molestie nibh at sapien iaculis ultrices. Fusce quis libero sed turpis scelerisque semper. Morbi suscipit nisl nunc, a blandit elit egestas non. Vivamus posuere sem id pellentesque fringilla. Proin sit amet ante id elit vestibulum vehicula eget ut risus. Maecenas vulputate ipsum in ligula dapibus ultricies. ',
-                    //     long_en: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque sapien nulla. Cras in libero vehicula, dapibus sem ac, facilisis tortor. Cras sed fringilla libero, eu euismod mi. Integer non mi dapibus nunc convallis tempor. Morbi eget risus luctus, dapibus orci nec, vulputate diam. Pellentesque molestie nibh at sapien iaculis ultrices. Fusce quis libero sed turpis scelerisque semper. Morbi suscipit nisl nunc, a blandit elit egestas non. Vivamus posuere sem id pellentesque fringilla. Proin sit amet ante id elit vestibulum vehicula eget ut risus. Maecenas vulputate ipsum in ligula dapibus ultricies. ',
-                    // }, {
-                    //     id: 2,
-                    //     type: "coop",
-                    //     short_it: 'Sfida cooperativa',
-                    //     short_en: 'Sfida cooperativa',
-                    //     long_it: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque sapien nulla. Cras in libero vehicula, dapibus sem ac, facilisis tortor. Cras sed fringilla libero, eu euismod mi. Integer non mi dapibus nunc convallis tempor. Morbi eget risus luctus, dapibus orci nec, vulputate diam. Pellentesque molestie nibh at sapien iaculis ultrices. Fusce quis libero sed turpis scelerisque semper. Morbi suscipit nisl nunc, a blandit elit egestas non. Vivamus posuere sem id pellentesque fringilla. Proin sit amet ante id elit vestibulum vehicula eget ut risus. Maecenas vulputate ipsum in ligula dapibus ultricies. ',
-                    //     long_en: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pellentesque sapien nulla. Cras in libero vehicula, dapibus sem ac, facilisis tortor. Cras sed fringilla libero, eu euismod mi. Integer non mi dapibus nunc convallis tempor. Morbi eget risus luctus, dapibus orci nec, vulputate diam. Pellentesque molestie nibh at sapien iaculis ultrices. Fusce quis libero sed turpis scelerisque semper. Morbi suscipit nisl nunc, a blandit elit egestas non. Vivamus posuere sem id pellentesque fringilla. Proin sit amet ante id elit vestibulum vehicula eget ut risus. Maecenas vulputate ipsum in ligula dapibus ultricies. ',
-                    // }]);
-
-                });
-            return deferred.promise;
-        }
 
         gameService.getInvitesChallenges = function (profile) {
             var deferred = $q.defer();
@@ -878,31 +823,7 @@ angular.module('viaggia.services.game', [])
                 });
             return deferred.promise;
         }
-        gameService.removeSentInviteChallenges = function (profile) {
-            var deferred = $q.defer();
-            LoginService.getValidAACtoken().then(
-                function (token) {
-                    //TODO
-                    deferred.resolve();
-                    // $http({
-                    //     method: 'GET',
-                    //     url: Config.getServerURL() + '/gamification/blacklist?from=' + from + '&to=' + to,
-                    //     headers: {
-                    //         'Authorization': 'Bearer ' + token,
-                    //         'appId': Config.getAppId(),
-                    //     },
-                    //     timeout: Config.getHTTPConfig().timeout
-                    // })
-                    //     .success(function (stats) {
-                    //         deferred.resolve(stats);
-                    //     })
 
-                    //     .error(function (response) {
-                    //         deferred.reject(response);
-                    //     });
-                });
-            return deferred.promise;
-        }
         gameService.unlockChallenge = function (type) {
             //TODO
             var deferred = $q.defer();
@@ -923,14 +844,58 @@ angular.module('viaggia.services.game', [])
             return deferred.promise;
         }
         gameService.acceptChallenge = function (challenge) {
-            //TODO
             var deferred = $q.defer();
             LoginService.getValidAACtoken().then(
                 function (token) {
-                    //TODO
                     $http({
-                        method: 'PUT',
-                        url: Config.getServerURL() + '/gamificationweb/challenge/choose/' + challenge.challId,
+                        method: 'POST',
+                        url: Config.getServerURL() + '/gamificationweb/invitation/status/' + challenge.challId + '/accept',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
+                        .success(function () {
+                            deferred.resolve();
+                        })
+
+                        .error(function (err) {
+                            deferred.reject(err);
+                        });
+                });
+            return deferred.promise;
+        }
+        gameService.rejectChallenge = function (challenge) {
+            var deferred = $q.defer();
+            LoginService.getValidAACtoken().then(
+                function (token) {
+                    $http({
+                        method: 'POST',
+                        url: Config.getServerURL() + '/gamificationweb/invitation/status/' + challenge.challId + '/refuse',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
+                        .success(function () {
+                            deferred.resolve();
+                        })
+
+                        .error(function (err) {
+                            deferred.reject(err);
+                        });
+                });
+            return deferred.promise;
+        }
+        gameService.cancelChallenge = function (challenge) {
+            var deferred = $q.defer();
+            LoginService.getValidAACtoken().then(
+                function (token) {
+                    $http({
+                        method: 'POST',
+                        url: Config.getServerURL() + '/gamificationweb/invitation/status/' + challenge.challId + '/cancel',
                         headers: {
                             'Authorization': 'Bearer ' + token,
                             'appId': Config.getAppId(),
@@ -1104,18 +1069,21 @@ angular.module('viaggia.services.game', [])
         gameService.getColorCup = function (challenge) {
             return "color:" + color[challenge.group];
         }
+        gameService.getTypeChallenge = function () {
+            return type_challenges;
+        }
 
         gameService.getChallengeBarTemplate = function (challenge) {
             switch (challenge.type) {
-                case 'groupCompetitiveTime': {
+                case type_challenges['groupCompetitiveTime']: {
                     return 'templates/game/challengeTemplates/competitiveTimeBar.html';
                     break;
                 }
-                case 'groupCompetitivePerformance': {
+                case type_challenges['groupCompetitivePerformance']: {
                     return 'templates/game/challengeTemplates/competitivePerformanceBar.html';
                     break;
                 }
-                case 'groupCooperative': {
+                case type_challenges['groupCooperative']: {
                     return 'templates/game/challengeTemplates/cooperativeBar.html';
                     break;
                 }

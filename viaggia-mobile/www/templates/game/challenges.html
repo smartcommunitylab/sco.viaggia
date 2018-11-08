@@ -17,8 +17,8 @@
                 <div class="col challenge-tab" ng-click="openTab('future')" ng-class="{'becomeblue':!activeTab('future')}">{{'challenge_future'
                     | translate}}</h4>
                 </div>
-                <!-- <div class="col challenge-tab" ng-click="openTab('unlock')" ng-class="{'becomeblue':!activeTab('unlock')}">{{'challenge_unlock' | translate}}</h4>
-                </div> -->
+                <div class="col challenge-tab" ng-click="openTab('unlock')" ng-class="{'becomeblue':!activeTab('unlock')}">{{'challenge_unlock' | translate}}</h4>
+                </div>
             </div>
         </div>
 
@@ -160,7 +160,7 @@
                                         <div class="col challenge-sent">
                                             <span ng-if="challenge.received">{{'lbl_sent_from' | translate}}</span>
                                             <span ng-if="!challenge.received"> {{'lbl_sent_to' | translate}}</span>
-                                            <b>{{challenge.nickName}}</b>
+                                            <b>{{challenge.nickname}}</b>
                                         </div>
                                         <div class="col button-active" ng-click="readMore(challenge)">{{'read_more' |
                                             translate}}</div>
@@ -172,7 +172,7 @@
                                             {{'btn_challenge_accept' | translate}}</button>
                                     </div>
                                     <div ng-if="!challenge.received">
-                                        <button class="col button button-clear button-challenge-enable" ng-click="rejectChallenge(challenge)">
+                                        <button class="col button button-clear button-challenge-enable" ng-click="cancelChallenge(challenge)">
                                             {{'btn_challenge_reject_sent' | translate}}</button>
                                     </div>
                                 </div>

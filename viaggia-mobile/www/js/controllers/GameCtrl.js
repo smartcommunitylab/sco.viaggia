@@ -248,63 +248,50 @@ angular.module('viaggia.controllers.game', [])
                     challConverted.short = chall.challDesc;
                     challConverted.long = chall.challCompleteDesc;
                 }
+                case "invite": {
+                    //TODO
+                    challConverted.challId = chall.challId;
+                    challConverted.startDate = chall.startDate;
+                    challConverted.endDate = chall.endDate;
+                    challConverted.bonus = chall.bonus;
+                    challConverted.group = type;
+                    challConverted.type = chall.type;
+                    challConverted.short = chall.challDesc;
+                    challConverted.long = chall.challCompleteDesc;
+                    challConverted.received = $scope.status ? (chall.proposerId!=$scope.status.playerData.playerId) :false
+                    challConverted.nickname = chall.otherAttendeeData ?  chall.otherAttendeeData.nickname : ""
+                }
             }
             return challConverted;
         }
-        var buildChallenges = function (future, available, invites, sent) {
+        var buildChallenges = function (future, proposed) {
             $scope.challenges = [];
             if (future) {
                 for (var i = 0; i < future.length; i++) {
                     $scope.challenges.push(convertChall(future[i], "futu"));
                 }
             }
-            //available from raccomandation system
-            if (available) {
-                for (var i = 0; i < available.length; i++) {
-                    $scope.challenges.push(convertChall(available[i], "racc"));
+            //proposed from raccomandation system
+            if (proposed) {
+                for (var i = 0; i < proposed.length; i++) {
+                    //TODO check if invitation or not
+                    if (proposed[i].otherAttendeeData) {
+                        $scope.challenges.push(convertChall(proposed[i], "invite"));
+                    }
+                    else {
+                        $scope.challenges.push(convertChall(proposed[i], "racc"));
+                    }
                 }
             }
-            // var types = [];
-            // for (var i = 0; i < $scope.typeOfChallenges.length; i++) {
-            //     var item = {
-            //         group: "unlock",
-            //         type: $scope.typeOfChallenges[i].type,
-            //         state: $scope.typeOfChallenges[i].state,
-            //         short: $scope.typeOfChallenges[i]["short"],
-            //         long: $scope.typeOfChallenges[i]["long"]
-            //     }
-            //     if ($scope.typeOfChallenges[i].state == 1) {
-            //         //unlocked
-            //         types.push(item);
-            //     } else {
-            //         //locked
-            //         types.unshift(item);
+            // if (invites) {
+            //     for (var i = 0; i < invites.length; i++) {
+            //         $scope.challenges.push(convertChall(invites[i], "invite"));
             //     }
             // }
-            // $scope.challenges = $scope.challenges.concat(types);
-
-
-            //invites from other players
-            // for (var i = 0; i < invites.length; i++) {
-            //     $scope.challenges.push({
-            //         group: "invite",
-            //         type: invites[i].type,
-            //         received: true,
-            //         nickName: invites[i].nicknameSender,
-            //         short: invites[i]["short_" + $scope.language],
-            //         long: invites[i]["long_" + $scope.language]
-            //     });
-            // }
-            //concateno l'invito se presente
             // if (sent) {
-            //     $scope.challenges.push({
-            //         group: "invite",
-            //         type: sent.type,
-            //         received: false,
-            //         nickName: sent.nickName,
-            //         short: sent["short_" + $scope.language],
-            //         long: sent["long_" + $scope.language]
-            //     })
+            //     for (var i = 0; i < sent.length; i++) {
+            //         $scope.challenges.push(convertChall(sent[i], "invite"));
+            //     }
             // }
         }
         $scope.showWarning = function (type) {
@@ -315,8 +302,11 @@ angular.module('viaggia.controllers.game', [])
         $scope.hideWarning = function (type) {
             localStorage.setItem('warning_hide_' + type, true);
         }
+        var reloadList = function () {
+            $scope.getActual();
+            $scope.getPast();
+        }
         $scope.acceptChallenge = function (challenge) {
-            //TODO
             //confirm popup
             $ionicPopup.show({
                 title: $filter('translate')("challenge_accept_popup_title"),
@@ -333,9 +323,10 @@ angular.module('viaggia.controllers.game', [])
                             Config.loading();
                             GameSrv.acceptChallenge(challenge).then(function () {
                                 //clean list and keep the only one
-                                challenge.group = 'futu';
-                                $scope.challenges = [challenge];
-                                $ionicScrollDelegate.resize();
+                                // challenge.group = 'futu';
+                                // $scope.challenges = [challenge];
+                                // $ionicScrollDelegate.resize();
+                                reloadList();
                             }, function (err) {
                                 //TODO err
                             }).finally(Config.loaded);
@@ -347,10 +338,18 @@ angular.module('viaggia.controllers.game', [])
 
         }
         $scope.rejectChallenge = function (challenge) {
-            //TODO
             Config.loading();
             GameSrv.rejectChallenge(challenge).then(function () {
-                //remove it
+               reloadList();
+
+            }, function (err) {
+
+            }).finally(Config.loaded);
+        }
+        $scope.cancelChallenge = function (challenge) {
+            Config.loading();
+            GameSrv.cancelChallenge(challenge).then(function () {
+                reloadList();
 
             }, function (err) {
 
@@ -372,29 +371,30 @@ angular.module('viaggia.controllers.game', [])
             GameSrv.getFutureChallenges(profileService.status).then(function (challenges) {
                 future = challenges
 
-                GameSrv.getAvailableChallenges(profileService.status).then(function (challenges) {
+                GameSrv.getProposedChallenges(profileService.status).then(function (challenges) {
                     available = challenges;
+                    buildChallenges(future, available);
 
-                    GameSrv.getSentInviteChallenges(profileService.status).then(function (challenge) {
-                        sent = challenge;
-                        GameSrv.getInvitesChallenges(profileService.status).then(function (challenges) {
-                            invites = challenges;
-                            buildChallenges(future, available, invites, sent);
+                    //GameSrv.getSentInviteChallenges(profileService.status).then(function (challenge) {
+                    //    sent = challenge;
+                    // GameSrv.getInvitesChallenges(profileService.status).then(function (challenges) {
+                    //     invites = challenges;
+                    //     buildChallenges(future, available, invites, sent);
 
-                        });
-                    }), function (err) {
-                        $scope.challenges = [];
-                        Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                    // });
+                    // }), function (err) {
+                    //    $scope.challenges = [];
+                    //    Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
 
-                    }, function (err) {
-                        $scope.challenges = [];
-                        Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                }, function (err) {
+                    $scope.challenges = [];
+                    Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
 
-                    }, function (err) {
-                        $scope.challenges = [];
-                        Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                }, function (err) {
+                    $scope.challenges = [];
+                    Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
 
-                    }
+                    // }
                 }).finally(Config.loaded);
 
             })
@@ -406,11 +406,11 @@ angular.module('viaggia.controllers.game', [])
             return "width:" + challenge.status + "%;"
         }
         $scope.getWidthOther = function (challenge) {
-            //TODO
-            if (challenge.type == 'coop')
+            if (challenge.otherAttendeeData)
                 return "width:" + challenge.otherAttendeeData.status + "%;"
-            return "width:" + challenge.otherAttendeeData.status + "%;"
+            return "width: 1%;"
         }
+
         $scope.getWidthSeparator = function (challenge) {
             //TODO
             return "width:30%;background:transparent;"
@@ -419,7 +419,9 @@ angular.module('viaggia.controllers.game', [])
             return challenge.row_status + " " + $filter('translate')('user_points_label');
         }
         $scope.getValueOther = function (challenge) {
-            return challenge.otherAttendeeData.row_status + " " + $filter('translate')('user_points_label');
+            if (challenge.otherAttendeeData)
+                return challenge.otherAttendeeData.row_status + " " + $filter('translate')('user_points_label');
+            return "";
         }
         $scope.getPast = function () {
             $scope.pastChallenges = null;
@@ -437,14 +439,36 @@ angular.module('viaggia.controllers.game', [])
                                     type: pastChallenges[i].type,
                                     short: pastChallenges[i].challDesc,
                                     long: pastChallenges[i].challCompleteDesc,
+                                    row_status: pastChallenges[i].row_status,
                                     status: pastChallenges[i].status,
-                                    idOpponent: pastChallenges[i].idOpponent ? pastChallenges[i].idOpponent : null,
-                                    nicknameOpponent: pastChallenges[i].nicknameOpponent ? pastChallenges[i].nicknameOpponent : null,
+                                    otherAttendeeData: pastChallenges[i].otherAttendeeData,
+                                    // idOpponent: pastChallenges[i].idOpponent ? pastChallenges[i].idOpponent : null,
+                                    // nicknameOpponent: pastChallenges[i].nicknameOpponent ? pastChallenges[i].nicknameOpponent : null,
                                     dataFinished: pastChallenges[i].success ? pastChallenges[i].challCompletedDate : pastChallenges[i].endDate,
                                     success: pastChallenges[i].success
                                 });
                             }
                         }
+                        //                         active: false
+                        // bonus: 0
+                        // challCompleteDesc: ""
+                        // challCompletedDate: 1541376000000
+                        // challDesc: ""
+                        // challId: "groupPerformance_1"
+                        // challTarget: 1
+                        // daysToEnd: 0
+                        // endDate: 1541376000000
+                        // otherAttendeeData:
+                        // nickname: "annamelie"
+                        // playerId: "101"
+                        // row_status: 75
+                        // status: 75
+                        // __proto__: Object
+                        // row_status: 25
+                        // startDate: 1540771200000
+                        // status: 25
+                        // success: true
+                        // type: "groupCompetitivePerformance"
                     }, function (err) {
                         $scope.challenges = [];
                         $scope.pastChallenges = [];
@@ -485,8 +509,6 @@ angular.module('viaggia.controllers.game', [])
         $scope.getIconChallenge = function (challenge) {
             return GameSrv.getIconChallenge(challenge);
         }
-
-
         $scope.getColorChallenge = function (challenge) {
             return GameSrv.getColorChallenge(challenge);
         }
@@ -1285,9 +1307,6 @@ angular.module('viaggia.controllers.game', [])
 
 
         };
-        $scope.getUserImg = function (id) {
-            return Config.getServerURL() + '/gamificationweb/player/avatar/' + Config.getAppId() + '/' + id
-        }
 
         $scope.reloadRank = function () {
             $scope.maybeMore = true;

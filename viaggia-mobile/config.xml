@@ -3,17 +3,7 @@
     <name>Viaggia Play&amp;Go</name>
     <description>Viaggia Play&amp;Go</description>
     <author email="info@smartcommunitylab.it" href="http://www.smartcommunitylab.it/">Smart Community Lab</author>
-    <plugin name="cordova-background-geolocation">
-        <variable name="LICENSE" value="6af31309a1796013f00927f4c396b898ac881efac6d398a165301e06e0a6a9c7" />
-        <variable name="GOOGLE_API_VERSION" value="11.6.0" />
-        <variable name="APPCOMPAT_VERSION" value="27.0.0" />
-        <variable name="LOCATION_ALWAYS_AND_WHEN_IN_USE_USAGE_DESCRIPTION" value="Always use is required for background location tracking" />
-        <variable name="LOCATION_ALWAYS_USAGE_DESCRIPTION" value="Background location-tracking is required" />
-        <variable name="LOCATION_WHEN_IN_USE_USAGE_DESCRIPTION" value="Background location-tracking is required" />
-        <variable name="MOTION_USAGE_DESCRIPTION" value="Using the accelerometer increases battery-efficiency by intelligently toggling location-tracking only when the device is detected to be moving" />
-    </plugin>
     <content src="index.html" />
-    <plugin name="cordova-plugin-whitelist" spec="1" />
     <allow-navigation href="*" />
     <allow-intent href="*" />
     <allow-intent href="http://*/*" />
@@ -97,7 +87,51 @@
     </platform>
     <icon src="config/instances/TRENTINO/resources/android/icon/drawable-xhdpi-icon.png" />
     <chcp>
-        <config-file url="https://tn.smartcommunitylab.it/cordova/chcp.json" />
+        <config-file url="https://dev.smartcommunitylab.it/cordova/chcp.json" />
     </chcp>
-    <engine name="android" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova.plugins.diagnostic" spec="^4.0.10" />
+    <plugin name="cordova-plugin-screen-orientation" spec="^3.0.1" />
+    <plugin name="cordova-sqlite-storage" spec="^2.4.0" />
+    <plugin name="cordova-plugin-file" spec="^6.0.1" />
+    <plugin name="cordova-plugin-facebook4" spec="^1.7.4">
+        <variable name="APP_ID" value="1771254186520727" />
+        <variable name="APP_NAME" value="ViaggiaTrento" />
+    </plugin>
+    <plugin name="cordova-plugin-device" spec="^2.0.2" />
+    <plugin name="cordova-plugin-googleplus" spec="^5.1.1">
+        <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.453601816446-r4itlqv8qpkqfq5q4jgketdu6f58hqbl" />
+    </plugin>
+    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
+    <plugin name="cordova-plugin-x-toast" spec="^2.7.0" />
+    <plugin name="cordova-plugin-dialogs" spec="^2.0.1" />
+    <plugin name="cordova-plugin-firebase" spec="^2.0.2" />
+    <plugin name="de.appplant.cordova.plugin.local-notification" spec="^0.8.5" />
+    <plugin name="cordova-custom-config" spec="^5.0.2" />
+    <plugin name="cordova-plugin-app-event" spec="^1.2.1" />
+    <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
+    <plugin name="cordova-plugin-compat" spec="^1.2.0" />
+    <plugin name="cordova-plugin-console" spec="^1.1.0" />
+    <plugin name="cordova-plugin-device-orientation" spec="^2.0.1" />
+    <plugin name="cordova-plugin-bluetooth-serial" spec="^0.4.7" />
+    <plugin name="cordova-plugin-geolocation" spec="^4.0.1" />
+    <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
+    <plugin name="cordova-plugin-request-location-accuracy" spec="^2.2.3" />
+    <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
+    <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+    <plugin name="cordova-plugin-background-fetch" spec="^5.1.1" />
+    <plugin name="cordova-plugin-globalization" />
+    <plugin name="cordova-plugin-camera" />
+    <plugin name="cordova-plugin-crop" />
+    <plugin name="cordova-hot-code-push-plugin" />
+    <plugin name="cordova-background-geolocation">
+        <variable name="LICENSE" value="6af31309a1796013f00927f4c396b898ac881efac6d398a165301e06e0a6a9c7" />
+        <variable name="GOOGLE_API_VERSION" value="11.6.0" />
+        <variable name="APPCOMPAT_VERSION" value="27.0.0" />
+        <variable name="LOCATION_ALWAYS_AND_WHEN_IN_USE_USAGE_DESCRIPTION" value="Always use is required for background location tracking" />
+        <variable name="LOCATION_ALWAYS_USAGE_DESCRIPTION" value="Background location-tracking is required" />
+        <variable name="LOCATION_WHEN_IN_USE_USAGE_DESCRIPTION" value="Background location-tracking is required" />
+        <variable name="MOTION_USAGE_DESCRIPTION" value="Using the accelerometer increases battery-efficiency by intelligently toggling location-tracking only when the device is detected to be moving" />
+    </plugin>
+    <engine name="android" spec="~6.4.0" />
 </widget>

@@ -741,6 +741,12 @@ angular.module('viaggia.controllers.common', [])
           $rootScope.profileImg = 'img/game/generic_user.png' + '/big?' + new Date().getTime();
         })
     }
+    $scope.getUserImgBig = function (id) {
+      return Config.getServerURL() + '/gamificationweb/player/avatar/' + Config.getAppId() + '/' + id+ '/big';
+  }
+  $scope.getUserImg = function (id) {
+    return Config.getServerURL() + '/gamificationweb/player/avatar/' + Config.getAppId() + '/' + id
+}
     $scope.uploadFileImage = function (files) {
       Config.loading();
       profileService.setProfileImage(files).then(function () {

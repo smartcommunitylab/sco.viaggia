@@ -342,9 +342,7 @@ angular.module('viaggia.controllers.profile', [])
             selected: null,
         };
 
-        $scope.getUserImg = function (id) {
-            return Config.getServerURL() + '/gamificationweb/player/avatar/' + Config.getAppId() + '/' + $scope.profileId + '/big';
-        }
+
         $scope.getChallengeBarTemplate = function(challenge){
             //TODO for the other challenges
             //right now status is always 100% and 'racc'
