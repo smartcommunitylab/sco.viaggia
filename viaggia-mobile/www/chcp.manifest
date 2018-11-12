@@ -9,7 +9,7 @@
   },
   {
     "file": "css/style.css",
-    "hash": "68db3bff0528cb788d447294b8f6ae0a"
+    "hash": "6fff59b029a9191bc990a316849911ee"
   },
   {
     "file": "data/bus.csv",
@@ -17,7 +17,7 @@
   },
   {
     "file": "data/config.json",
-    "hash": "453adc63727e72b3481df937371bbca7"
+    "hash": "e4a2ba20400da536d9199da448f4d9d3"
   },
   {
     "file": "data/game/ranking.json",
@@ -389,7 +389,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "4992087a37c40d280741512de14ca459"
+    "hash": "d83d21e073788cef3049cf2f6be03d75"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -397,15 +397,15 @@
   },
   {
     "file": "js/controllers/CommonCtrl.js",
-    "hash": "4a0019b59bde3cd92a5640c79eb15024"
+    "hash": "f966fb31d04add55b55db2ff814ea8f2"
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "2af4bffd18ef9620b9a9732b096939e0"
+    "hash": "aa4e80ffb8d0be84f535a4d81e8e113d"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
-    "hash": "2888bbcbbec07ad3ce6421fea6673403"
+    "hash": "3df36500c1bbb4c9f1ebf909d360bdb6"
   },
   {
     "file": "js/controllers/InfoCtrl.js",
@@ -449,7 +449,7 @@
   },
   {
     "file": "js/controllers/ProfileCtrl.js",
-    "hash": "e24d7890644f19422e29c57c1f25550b"
+    "hash": "98d3774c451395d88b461626f5291538"
   },
   {
     "file": "js/controllers/RegistrationController.js",
@@ -501,7 +501,7 @@
   },
   {
     "file": "js/services/ConfigSrv.js",
-    "hash": "28ae02e5156d0af31263a5bcfa6cabc1"
+    "hash": "803d48cebb749f29e960c94237cbf0a0"
   },
   {
     "file": "js/services/DataSrv.js",
@@ -513,7 +513,7 @@
   },
   {
     "file": "js/services/GameSrv.js",
-    "hash": "137d67e2958e5df4504630193d01d910"
+    "hash": "38da3f5349ed719e42ea7ab8d6e4133e"
   },
   {
     "file": "js/services/GeoSrv.js",
@@ -1013,15 +1013,15 @@
   },
   {
     "file": "templates/game/challenges.html",
-    "hash": "630aecb8bb99536f46cba4c2e3588ab3"
+    "hash": "c25b9039dc5953c34c3eb23df15535ce"
   },
   {
     "file": "templates/game/challengeTemplates/competitivePerformance.html",
-    "hash": "4950dd1741d468b5775aacf44a36a76f"
+    "hash": "fbe6f64f834db6a86e2fe191616b14ab"
   },
   {
     "file": "templates/game/challengeTemplates/competitivePerformanceBar.html",
-    "hash": "bd99c154f8377d4a298133bba305b3e6"
+    "hash": "429a20bf2cd979d6c9078c091b23028c"
   },
   {
     "file": "templates/game/challengeTemplates/competitiveTime.html",
@@ -1085,7 +1085,7 @@
   },
   {
     "file": "templates/game/profileOthers.html",
-    "hash": "b3379841c8ad0b3020391604efa15261"
+    "hash": "fa6f498d4986f6050f9d3c8fe19acb5d"
   },
   {
     "file": "templates/game/profileOthersChallenges.html",
@@ -1093,7 +1093,7 @@
   },
   {
     "file": "templates/game/profileOthersContainer.html",
-    "hash": "1362651ef1d8ddbac137384ba37c0545"
+    "hash": "606feb1d66409dca6e86251bb155e322"
   },
   {
     "file": "templates/game/profileOthersStatistics.html",
