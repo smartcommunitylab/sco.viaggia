@@ -17,7 +17,8 @@
                 <div class="col challenge-tab" ng-click="openTab('future')" ng-class="{'becomeblue':!activeTab('future')}">{{'challenge_future'
                     | translate}}</h4>
                 </div>
-                <div class="col challenge-tab" ng-click="openTab('unlock')" ng-class="{'becomeblue':!activeTab('unlock')}">{{'challenge_unlock' | translate}}</h4>
+                <div class="col challenge-tab" ng-click="openTab('unlock')" ng-class="{'becomeblue':!activeTab('unlock')}">{{'challenge_unlock'
+                    | translate}}</h4>
                 </div>
             </div>
         </div>
@@ -33,21 +34,21 @@
                     </ion-item>
                     <ion-item class="challenge no-padding" ng-repeat="type in typeOfChallenges">
                         <div class="row no-padding">
-                            <div class="col col-20 {{getColorType(type)}} padding-10 ">
+                            <div class="col col-20 {{getColorType(type)}} padding-10 " ng-class="{'fog': lockedType(type)}">
                                 <a class="icon-chall icon {{getIconType(type)}} "></a>
                             </div>
                             <div class="col col-60 padding-10 ">
-                                <div class="short-desc">{{type.short}}</div>
-                                <div class="row">
-                                    <p class="col challenge-long-desc">{{type.long}}</p>
+                                <div class="short-desc" ng-class="{'fog': lockedType(type)}">{{type.short|translate}}</div>
+                                <div class="row" ng-class="{'fog': lockedType(type)}">
+                                    <p class="col challenge-long-desc">{{type.long|translate}}</p>
                                     <div class="col button-active" ng-click="readMore(type)">{{'read_more' |
                                         translate}}</div>
                                 </div>
                             </div>
-                            <div class="col col-20 padding-10 " ng-if="type.state==0">
+                            <div class="col col-20 padding-10 " ng-if="type.state!='ACTIVE'" ng-class="{'fog': lockedType(type)}">
                                 <a class="icon-chall icon ic_game_lock button-active" ng-click="unlock(type)"></a>
                             </div>
-                            <div class="col col-20 padding-10 " ng-if="type.state!=0">
+                            <div class="col col-20 padding-10 " ng-if="type.state== 'ACTIVE'">
                                 <a class="icon-chall icon ic_unlock button-active"></a>
                             </div>
                         </div>
@@ -55,6 +56,36 @@
                 </ion-list>
             </ion-scroll>
         </div>
+        <!-- <div ng-if="challenge.group=='unlock'">
+                            <div class="row no-padding">
+                                <div class="col col-20 {{getColorChallenge(challenge)}} padding-10" ng-class="{'fog':challenge.state == 'LOCKED'}">
+                                    <a class="icon-chall  icon {{getIconChallenge(challenge)}}"></a>
+                                </div>
+                                <div class="col  padding-10">
+                                    <div ng-class="{'fog':challenge.state == 'LOCKED'}">{{challenge.short}}</div>
+                                    <div ng-if="challenge.state != 1">
+                                        <div class="row">
+                                            <div class="col challenge-long-desc">{{challenge.long}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col button-active" ng-click="readMore(challenge)">{{'read_more'
+                                                | translate}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-if="challenge.state == 'LOCKED'">
+                                        <div class="col ">{{'lbl_challenge_unlock_next' | translate}}</div>
+                                    </div>
+                                    <button class="button button-clear button-challenge-enable" style="color:black!important;"
+                                        ng-if="challenge.state == 'AVAILABLE'">
+                                        <i class="icon ion-locked"></i>
+                                    </button>
+                                    <button class="button button-clear button-challenge-enable" ng-if="challenge.state == 'ACTIVE'"
+                                        ng-click="configureChallenge(challenge)">
+                                        {{'btn_challenge_choose' | translate}}</button>
+
+                                </div>
+                            </div>
+                        </div> -->
         <!-- future and proposed-->
 
         <div ng-if="actualTab=='future'">
@@ -116,6 +147,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div ng-if="challenge.group=='unlock'">
                             <div class="row no-padding">
                                 <div class="col col-20 {{getColorChallenge(challenge)}} padding-10" ng-class="{'fog':challenge.state == 1}">
@@ -224,8 +256,8 @@
                                 </div>
                             </div>
                             <div class="col col-10" style="line-height: 15vh;" ng-click="expand($index)">
-                                    <i class="icon" ng-class="isExpanded($index) ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i>
-                                </div>
+                                <i class="icon" ng-class="isExpanded($index) ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i>
+                            </div>
                             <div class="col col-20">
                                 <!-- coppa  -->
                                 <p ng-if="challenge.success">

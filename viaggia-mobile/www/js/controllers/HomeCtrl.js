@@ -70,7 +70,7 @@ angular.module('viaggia.controllers.home', [])
             var date = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
             $state.go("app.home.challenges", { challengeEnd: date })
         }
-        $rootScope.$watch(function () {
+        $scope.watch = $rootScope.$watch(function () {
             return profileService.status;
         }, function (newVal, oldVal, scope) {
             $scope.status = profileService.getProfileStatus();
@@ -79,6 +79,9 @@ angular.module('viaggia.controllers.home', [])
             if ($scope.status && $scope.status.challengeConcept)
                 setChallenges();
         });
+        $scope.$on("$destroy", function(){
+            $scope.watch();
+        })
         var initExpansion = function () {
             for (var i = 0; i < $scope.challenges.length; i++) {
                 $scope.expansion[i] = false;
@@ -497,11 +500,9 @@ angular.module('viaggia.controllers.home', [])
                 return challenge.otherAttendeeData.row_status + " " + $filter('translate')('user_points_label');
             return "";
         }
-        
+
     })
     .controller('HomeContainerCtrl', function ($scope, $rootScope, profileService, GameSrv, Config, Toast, $filter) {
-
-
         $rootScope.currentUser = null;
         $scope.noStatus = false;
         $rootScope.profileImg = null;
@@ -512,7 +513,9 @@ angular.module('viaggia.controllers.home', [])
                 $scope.status = status;
                 profileService.setProfileStatus(status);
                 $rootScope.currentUser = status.playerData;
-
+                if (!localStorage.getItem(Config.getAppId() + '_timestampImg')) {
+                    localStorage.setItem(Config.getAppId() + '_timestampImg', new Date().getTime());
+                }
             },
             function (err) {
                 $scope.noStatus = true;
@@ -525,9 +528,9 @@ angular.module('viaggia.controllers.home', [])
         $scope.getImage = function () {
             if ($scope.status)
                 profileService.getProfileImage($scope.status.playerData.playerId).then(function (image) {
-                    $rootScope.profileImg = $scope.tmpUrl + $scope.status.playerData.playerId + '?' + new Date().getTime();
+                    $rootScope.profileImg = $scope.tmpUrl + $scope.status.playerData.playerId + '?' + (localStorage.getItem(Config.getAppId() + '_timestampImg'));
                 }, function (error) {
-                    $rootScope.profileImg = 'img/game/generic_user.png' + '?' + new Date().getTime();
+                    $rootScope.profileImg = 'img/game/generic_user.png' + '?' + (localStorage.getItem(Config.getAppId() + '_timestampImg'));
                 })
         }
 

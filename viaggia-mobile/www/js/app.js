@@ -1542,7 +1542,14 @@ angular.module('viaggia', [
       user_chall_status: "Stato completamento sfida:  ",
       challenge_days_to_end: 'Hai ancora {{challenge.daysToEnd}} giorni per completare la sfida.',
       payload_large: "Immagine troppo grande",
-      payload_unsupported: "Immagine non sopportata"
+      payload_unsupported: "Immagine non sopportata",
+      toast_type_unlocked: "Tipologia di sfida sbloccata!",
+      groupCompetitivePerformance_desc_short:"Chi la dura la vince",
+      groupCompetitivePerformance_desc_long:"Sfida un altro giocatore su un obiettivo a scelta. Chi, al termine della settimana avrà ottenuto un risultato migliore vince.",
+      groupCompetitiveTime_desc_short:"Vinca il più veloce",
+      groupCompetitiveTime_desc_long:"Sfida un altro giocatore in una gara a tempo. Vince chi raggiunge per primo l'obiettivo.",
+      groupCooperative_desc_short:"L'unione fa la forza",
+      groupCooperative_desc_long:"Invita un altro utente a giocare con te su un obiettivo comune. Vincerete se, al termine della settimana, la somma dei vostri risultati raggiungerà l'obiettivo.",
     });
 
     $translateProvider.translations('en', {
@@ -2070,7 +2077,15 @@ angular.module('viaggia', [
       user_chall_status: "Challenge completion status:  ",
       challenge_days_to_end: 'You still have {{challenge.daysToEnd}} days to complete the challenge.',
       payload_large: "Payload too large",
-      payload_unsupported: "Unsupported media type"
+      payload_unsupported: "Unsupported media type",
+      toast_type_unlocked: "Type of challenge unlocked!",
+      groupCompetitivePerformance_desc_short:" Who endures wins",
+      groupCompetitivePerformance_desc_long:"Choose the goal and challenge another player. At the end of the week, the one giving the best performance will be the winner.",
+      groupCompetitiveTime_desc_short:" May the fastest win",
+      groupCompetitiveTime_desc_long:" Challenge another player in a speed competition. The one that reaches the goal first wins.",
+      groupCooperative_desc_short:"Unity is strength",
+      groupCooperative_desc_long:"Invite another user to play with you on a common goal. To win, the sum of what you do individually during the week has to be at least equal to the target of the challenge.",
+   
 
     });
 

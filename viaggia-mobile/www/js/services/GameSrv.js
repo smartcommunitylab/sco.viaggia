@@ -193,9 +193,21 @@ angular.module('viaggia.services.game', [])
             futu: '#2681A4;',
         }
         var type_challenges = {
-            groupCompetitivePerformance: "groupCompetitivePerformance",
-            groupCompetitiveTime: "groupCompetitiveTime",
-            groupCooperative: "groupCooperative",
+            groupCompetitivePerformance: {
+                id:"groupCompetitivePerformance",
+                short:"groupCompetitivePerformance_desc_short",
+                long:"groupCompetitivePerformance_desc_long"
+            },
+            groupCompetitiveTime: {
+                id:"groupCompetitiveTime",
+                short:"groupCompetitiveTime_desc_short",
+                long:"groupCompetitiveTime_desc_long"
+            },
+            groupCooperative: {
+                id:"groupCooperative",
+                short:"groupCooperative_desc_short",
+                long:"groupCooperative_desc_long"
+            },
 
         }
         getTravelType = function (message) {
@@ -663,7 +675,10 @@ angular.module('viaggia.services.game', [])
                 });
             return deferred.promise;
         }
-        gameService.getTypesChallenges = function (userId) {
+        gameService.getTypesChallenges = function () {
+            return type_challenges;
+        }
+        gameService.getAvailableChallenges = function (userId) {
             var deferred = $q.defer();
             LoginService.getValidAACtoken().then(
                 function (token) {
@@ -825,9 +840,26 @@ angular.module('viaggia.services.game', [])
         }
 
         gameService.unlockChallenge = function (type) {
-            //TODO
             var deferred = $q.defer();
-            deferred.resolve();
+            LoginService.getValidAACtoken().then(
+                function (token) {
+                    $http({
+                        method: 'PUT',
+                        url: Config.getServerURL() + '/gamificationweb/challenge/unlock/'+type,
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
+                        .success(function () {
+                            deferred.resolve();
+                        })
+
+                        .error(function (err) {
+                            deferred.reject(err);
+                        });
+                });
             return deferred.promise;
         }
         gameService.removeFromBlacklist = function (id) {
@@ -1075,15 +1107,15 @@ angular.module('viaggia.services.game', [])
 
         gameService.getChallengeBarTemplate = function (challenge) {
             switch (challenge.type) {
-                case type_challenges['groupCompetitiveTime']: {
+                case type_challenges['groupCompetitiveTime'].id: {
                     return 'templates/game/challengeTemplates/competitiveTimeBar.html';
                     break;
                 }
-                case type_challenges['groupCompetitivePerformance']: {
+                case type_challenges['groupCompetitivePerformance'].id: {
                     return 'templates/game/challengeTemplates/competitivePerformanceBar.html';
                     break;
                 }
-                case type_challenges['groupCooperative']: {
+                case type_challenges['groupCooperative'].id: {
                     return 'templates/game/challengeTemplates/cooperativeBar.html';
                     break;
                 }

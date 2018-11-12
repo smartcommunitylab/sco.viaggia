@@ -1,6 +1,6 @@
 angular.module('viaggia.controllers.common', [])
 
-  .controller('AppCtrl', function ($scope, $rootScope, $q, $state,$ionicSideMenuDelegate, GameSrv, $cordovaCamera, profileService, trackService, $ionicHistory, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, Utils, tutorial) {
+  .controller('AppCtrl', function ($scope, $rootScope, $q, $state, $ionicSideMenuDelegate, GameSrv, $cordovaCamera, profileService, trackService, $ionicHistory, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, Utils, tutorial) {
 
 
     /* menu group */
@@ -735,22 +735,22 @@ angular.module('viaggia.controllers.common', [])
     var changePrifileImage = function () {
       if (profileService.getProfileStatus())
         profileService.getProfileImage(profileService.getProfileStatus().playerData.playerId).then(function (image) {
-          $rootScope.profileImg = profileService.getAvatarUrl() + profileService.getProfileStatus().playerData.playerId + '/big?' + new Date().getTime();
+          $rootScope.profileImg = profileService.getAvatarUrl() + profileService.getProfileStatus().playerData.playerId + '/big?' + (localStorage.getItem(Config.getAppId() + '_timestampImg'));
           // $scope.refreshProfileImage();
         }, function (error) {
-          $rootScope.profileImg = 'img/game/generic_user.png' + '/big?' + new Date().getTime();
+          $rootScope.profileImg = 'img/game/generic_user.png' + '/big?' + (localStorage.getItem(Config.getAppId() + '_timestampImg'));
         })
     }
     $scope.getUserImgBig = function (id) {
-      return Config.getServerURL() + '/gamificationweb/player/avatar/' + Config.getAppId() + '/' + id+ '/big';
-  }
-  $scope.getUserImg = function (id) {
-    return Config.getServerURL() + '/gamificationweb/player/avatar/' + Config.getAppId() + '/' + id
-}
+      return Config.getServerURL() + '/gamificationweb/player/avatar/' + Config.getAppId() + '/' + id + '/big';
+    }
+    $scope.getUserImg = function (id) {
+      return Config.getServerURL() + '/gamificationweb/player/avatar/' + Config.getAppId() + '/' + id
+    }
     $scope.uploadFileImage = function (files) {
       Config.loading();
       profileService.setProfileImage(files).then(function () {
-        console.log("ok");
+        localStorage.setItem(Config.getAppId() + '_timestampImg', new Date().getTime());
         changePrifileImage();
       }, function (error) {
         if (error == 413)
