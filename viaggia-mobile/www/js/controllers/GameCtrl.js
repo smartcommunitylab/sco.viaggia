@@ -89,14 +89,13 @@ angular.module('viaggia.controllers.game', [])
         $scope.choosePhoto = function () {
             $scope.chooseAndUploadPhoto($scope.uploadFileImage);
         }
-
         $scope.getImage = function () {
             if ($scope.$parent.$parent.$parent.status)
                 profileService.getProfileImage($scope.$parent.$parent.$parent.status.playerData.playerId).then(function (image) {
-                    $rootScope.profileImg = profileService.getAvatarUrl() + $scope.$parent.$parent.$parent.status.playerData.playerId + '/big?' + new Date().getTime();
+                    $rootScope.profileImg = profileService.getAvatarUrl() + $scope.$parent.$parent.$parent.status.playerData.playerId + '/big?' + (localStorage.getItem(Config.getAppId() + '_timestampImg'));
                     // $scope.refreshProfileImage();
                 }, function (error) {
-                    $rootScope.profileImg = 'img/game/generic_user.png' + '/big?' + new Date().getTime();
+                    $rootScope.profileImg = 'img/game/generic_user.png' + '/big?' + (localStorage.getItem(Config.getAppId() + '_timestampImg'));
                 })
         }
 
