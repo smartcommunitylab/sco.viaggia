@@ -2,7 +2,7 @@ angular.module('viaggia.services.game', [])
 
     .factory('GameSrv', function ($q, $http, $rootScope, $filter, DiaryDbSrv, Config, LoginService, profileService) {
         var gameService = {};
-
+        var blacklist = [];
         var localStatus = null;
         var localRanking = null;
         var dbFilter = [
@@ -194,22 +194,23 @@ angular.module('viaggia.services.game', [])
         }
         var type_challenges = {
             groupCompetitivePerformance: {
-                id:"groupCompetitivePerformance",
-                short:"groupCompetitivePerformance_desc_short",
-                long:"groupCompetitivePerformance_desc_long"
+                id: "groupCompetitivePerformance",
+                short: "groupCompetitivePerformance_desc_short",
+                long: "groupCompetitivePerformance_desc_long"
             },
             groupCompetitiveTime: {
-                id:"groupCompetitiveTime",
-                short:"groupCompetitiveTime_desc_short",
-                long:"groupCompetitiveTime_desc_long"
+                id: "groupCompetitiveTime",
+                short: "groupCompetitiveTime_desc_short",
+                long: "groupCompetitiveTime_desc_long"
             },
             groupCooperative: {
-                id:"groupCooperative",
-                short:"groupCooperative_desc_short",
-                long:"groupCooperative_desc_long"
+                id: "groupCooperative",
+                short: "groupCooperative_desc_short",
+                long: "groupCooperative_desc_long"
             },
 
         }
+
         getTravelType = function (message) {
             var event = JSON.parse(message.event);
             if (event.travelType == 'PLANNED')
@@ -845,7 +846,7 @@ angular.module('viaggia.services.game', [])
                 function (token) {
                     $http({
                         method: 'PUT',
-                        url: Config.getServerURL() + '/gamificationweb/challenge/unlock/'+type,
+                        url: Config.getServerURL() + '/gamificationweb/challenge/unlock/' + type,
                         headers: {
                             'Authorization': 'Bearer ' + token,
                             'appId': Config.getAppId(),
@@ -862,18 +863,92 @@ angular.module('viaggia.services.game', [])
                 });
             return deferred.promise;
         }
-        gameService.removeFromBlacklist = function (id) {
-            //TODO
+        var convertToMap = function (serverBlacklist) {
+            blacklist=[];
+            for (var i=0;i<serverBlacklist.length;i++){
+                blacklist[serverBlacklist[i].id]=serverBlacklist[i].nickname;
+            }
+        }
+        gameService.getBlacklist = function () {
             var deferred = $q.defer();
-            deferred.resolve();
+            LoginService.getValidAACtoken().then(
+                function (token) {
+                    $http({
+                        method: 'GET',
+                        url: Config.getServerURL() + '/gamificationweb/blacklist',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
+                        .success(function (serverBlacklist) {
+                            convertToMap (serverBlacklist);
+                            deferred.resolve(blacklist);
+                        })
+
+                        .error(function (err) {
+                            deferred.reject(err);
+                        });
+                });
+            return deferred.promise;
+
+        }
+        gameService.removeFromBlacklist = function (id) {
+            var deferred = $q.defer();
+            LoginService.getValidAACtoken().then(
+                function (token) {
+                    $http({
+                        method: 'DELETE',
+                        url: Config.getServerURL() + '/gamificationweb/blacklist/' + id,
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
+                        .success(function () {
+                            //remove to local blacklist
+                            delete blacklist[id];
+                            deferred.resolve();
+                        })
+
+                        .error(function (err) {
+                            deferred.reject(err);
+                        });
+                });
             return deferred.promise;
         }
 
-        gameService.addToBlacklist = function (id) {
-            //TODO
+        gameService.addToBlacklist = function (id,user) {
             var deferred = $q.defer();
-            deferred.resolve();
-            return deferred.promise;
+            LoginService.getValidAACtoken().then(
+                function (token) {
+                    $http({
+                        method: 'POST',
+                        url: Config.getServerURL() + '/gamificationweb/blacklist/' + id,
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
+                        .success(function () {
+                            //add to local blacklist
+                            blacklist[id]=user.nickname;
+                            deferred.resolve();
+                        })
+
+                        .error(function (err) {
+                            deferred.reject(err);
+                        });
+                }); return deferred.promise;
+        }
+        gameService.blacklisted = function (id) {
+            //check if id is in blacklist
+            if (blacklist[id])
+                return true
+            return false;
         }
         gameService.acceptChallenge = function (challenge) {
             var deferred = $q.defer();
@@ -944,43 +1019,7 @@ angular.module('viaggia.services.game', [])
                 });
             return deferred.promise;
         }
-        gameService.getBlacklist = function (how, from, to) {
-            var deferred = $q.defer();
-            LoginService.getValidAACtoken().then(
-                function (token) {
-                    //TODO
-                    deferred.resolve([{
-                        id: 0,
-                        nome: 'Tizio'
-                    }, {
-                        id: 1,
-                        nome: 'Caio'
-                    }, {
-                        id: 2,
-                        nome: 'Sempronio'
-                    }, {
-                        id: 3,
-                        nome: 'Marco'
-                    }]);
-                    // $http({
-                    //     method: 'GET',
-                    //     url: Config.getServerURL() + '/gamification/blacklist?from=' + from + '&to=' + to,
-                    //     headers: {
-                    //         'Authorization': 'Bearer ' + token,
-                    //         'appId': Config.getAppId(),
-                    //     },
-                    //     timeout: Config.getHTTPConfig().timeout
-                    // })
-                    //     .success(function (stats) {
-                    //         deferred.resolve(stats);
-                    //     })
 
-                    //     .error(function (response) {
-                    //         deferred.reject(response);
-                    //     });
-                });
-            return deferred.promise;
-        }
         gameService.getPlayersForChallenge = function (how, from, to, typedthings) {
             var deferred = $q.defer();
             LoginService.getValidAACtoken().then(

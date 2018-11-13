@@ -293,9 +293,8 @@ angular.module('viaggia.controllers.profile', [])
     })
     .controller('ProfileOthersContainerCtrl', function ($scope, $filter, $stateParams, Config, GameSrv, $ionicScrollDelegate, Toast) {
         Config.loading();
-        //TODO
-        $scope.blacklisted = true;
         $scope.profileId = $stateParams.profileId
+        $scope.blacklisted = GameSrv.blacklisted($scope.profileId );
         $scope.user = {};
         $scope.badges = null;
         $scope.stats = {}
@@ -409,7 +408,6 @@ angular.module('viaggia.controllers.profile', [])
                 $scope.user = profile
                 updateBadges();
 
-                //TODO real challenges and stiatistics
 
                 $scope.challenges = $scope.user.wonChallenges;
                 if (Object.keys($scope.user.statistics).length != 0 && $scope.user.statistics.constructor === Object) {
@@ -442,9 +440,8 @@ angular.module('viaggia.controllers.profile', [])
             }
         }
         $scope.removeFromBlacklist = function () {
-            //TODO
             Config.loading();
-            GameSrv.removeFromBlacklist($scope.user.id).then(function () {
+            GameSrv.removeFromBlacklist($scope.profileId).then(function () {
                 //removed
                 $scope.blacklisted = false;
                 Config.loaded();
@@ -454,9 +451,8 @@ angular.module('viaggia.controllers.profile', [])
             });
         }
         $scope.addToBlacklist = function () {
-            //TODO
             Config.loading();
-            GameSrv.addToBlacklist($scope.user.id).then(function () {
+            GameSrv.addToBlacklist($scope.profileId,$scope.user).then(function () {
                 //removed
                 $scope.blacklisted = true;
                 Config.loaded();

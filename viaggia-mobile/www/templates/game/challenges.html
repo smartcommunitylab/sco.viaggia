@@ -154,10 +154,10 @@
                                     <a class="icon-chall  icon {{getIconChallenge(challenge)}}"></a>
                                 </div>
                                 <div class="col  padding-10">
-                                    <div ng-class="{'fog':challenge.state == 1}">{{challenge.short}}</div>
+                                    <div ng-class="{'fog':challenge.state == 1}">{{challenge.short|translate}}</div>
                                     <div ng-if="challenge.state != 1">
                                         <div class="row">
-                                            <div class="col challenge-long-desc">{{challenge.long}}</div>
+                                            <div class="col challenge-long-desc">{{challenge.long|translate}}</div>
                                             <!-- <div class="col button-active" ng-click="readMore(challenge)">{{'read_more' | translate}}</div> -->
                                         </div>
                                         <div class="row">

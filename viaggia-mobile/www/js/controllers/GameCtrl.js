@@ -270,7 +270,6 @@ angular.module('viaggia.controllers.game', [])
                     challConverted.long = chall.challCompleteDesc;
                 }
                 case "invite": {
-                    //TODO
                     challConverted.challId = chall.challId;
                     challConverted.startDate = chall.startDate;
                     challConverted.endDate = chall.endDate;
@@ -286,7 +285,6 @@ angular.module('viaggia.controllers.game', [])
             return challConverted;
         }
         var buildChallenges = function (future, proposed) {
-            proposed=[];
             $scope.challenges = [];
             if (future) {
                 for (var i = 0; i < future.length; i++) {
@@ -308,9 +306,10 @@ angular.module('viaggia.controllers.game', [])
                     if ($scope.typeOfChallenges[i] && $scope.typeOfChallenges[i].state == "ACTIVE") {
                         $scope.challenges.push({
                             group: 'unlock',
-                            type: 'unlock',
-                            short: 'blablashort',
-                            long: 'blablalong'
+                            type: $scope.typeOfChallenges[i].type,
+                            short: $scope.typeOfChallenges[i].short,
+                            long: $scope.typeOfChallenges[i].long,
+                            state: 'ACTIVE'
                         });
                     }
                 }

@@ -66,6 +66,9 @@ angular.module('viaggia.controllers.home', [])
                 //$ionicLoading.hide();
             });
         }
+        var getBlacklist = function () {
+            GameSrv.getBlacklist(); 
+        }
         $scope.programChallenge = function () {
             var date = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
             $state.go("app.home.challenges", { challengeEnd: date })
@@ -139,15 +142,15 @@ angular.module('viaggia.controllers.home', [])
         // var mymap = document.getElementById('map-container');
         $scope.getChallengeTemplate = function (challenge) {
             switch (challenge.type) {
-                case typeofChallenges['groupCompetitiveTime']: {
+                case typeofChallenges['groupCompetitiveTime'].id: {
                     return 'templates/game/challengeTemplates/competitiveTime.html';
                     break;
                 }
-                case typeofChallenges['groupCompetitivePerformance']: {
+                case typeofChallenges['groupCompetitivePerformance'].id: {
                     return 'templates/game/challengeTemplates/competitivePerformance.html';
                     break;
                 }
-                case typeofChallenges['groupCooperative']: {
+                case typeofChallenges['groupCooperative'].id: {
                     return 'templates/game/challengeTemplates/cooperative.html';
                     break;
                 }
@@ -182,6 +185,7 @@ angular.module('viaggia.controllers.home', [])
             setChallenges();
             setChooseButton();
             updateStatus();
+            getBlacklist();
         }, function () {
             //$ionicLoading.hide();
         });
