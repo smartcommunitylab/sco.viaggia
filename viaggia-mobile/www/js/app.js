@@ -982,7 +982,7 @@ angular.module('viaggia', [
         cache: false,
         url: "/configure",
         params: {
-          challenge: null
+          challenge: null,
         },
         views: {
           'menuContent': {
@@ -1550,6 +1550,14 @@ angular.module('viaggia', [
       groupCompetitiveTime_desc_long:"Sfida un altro giocatore in una gara a tempo. Vince chi raggiunge per primo l'obiettivo.",
       groupCooperative_desc_short:"L'unione fa la forza",
       groupCooperative_desc_long:"Invita un altro utente a giocare con te su un obiettivo comune. Vincerete se, al termine della settimana, la somma dei vostri risultati raggiungerà l'obiettivo.",
+      Walk_Km:" Km",
+      Bike_Km:" Km",
+      Green_Leaves:"Green Leaves",
+      lbl_chall_blacklist:"I giocatori elencati di seguito non possono essere invitati ad una sfida di coppia perche' li hai inseriti nella tua blacklist. Se vuoi provare a sfidare uno di questi utenti devi prima rimuoverlo dalla backlist.",
+      lbl_insert_nickname:"Inserisci il nickname del giocatore",
+      lbl_challenge_percentage:"Percentuale:",
+      lbl_challenge_threshold:"Threshold:"
+      
     });
 
     $translateProvider.translations('en', {
@@ -2085,6 +2093,13 @@ angular.module('viaggia', [
       groupCompetitiveTime_desc_long:" Challenge another player in a speed competition. The one that reaches the goal first wins.",
       groupCooperative_desc_short:"Unity is strength",
       groupCooperative_desc_long:"Invite another user to play with you on a common goal. To win, the sum of what you do individually during the week has to be at least equal to the target of the challenge.",
+      Walk_Km:" Km",
+      Bike_Km:" Km",
+      Green_Leaves:"Green Leaves",
+      lbl_chall_blacklist:"The players listed in the following section cannot be invited to a challenge because you added them to your blacklist. If you want to try to challenge one of these users you have to remove him/her from your blacklist first.",
+      lbl_insert_nickname:"Insert the player's nickname",
+      lbl_challenge_percentage:"Percentage:",
+      lbl_challenge_threshold:"Threshold:"
    
 
     });

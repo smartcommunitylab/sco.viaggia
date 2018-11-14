@@ -5,7 +5,7 @@
         </button>
     </ion-nav-buttons>
 
-    <ion-content ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
+    <ion-content ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}" ng-init="loadMore()">
         <div ng-if="!!status && !noBlack">
             <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="blacklistScroll">
                 <ion-list>
@@ -15,7 +15,7 @@
                                 <img class="profile-img-little" src='img/game/generic_user.png'>
                             </div>
                             <div class="col col-80 blacklist-name">
-                                <span>{{item.nome}}</span>
+                                <span>{{item.nickname}}</span>
                             </div>
                             <div class="col col-10">
                                 <a class="button-icon icon ion-close-circled" ng-click="removeFromBlacklist(item.id)"></a>
@@ -23,7 +23,7 @@
                         </div>
                     </ion-item>
 
-                    <ion-infinite-scroll ng-if="maybeMore" on-infinite="loadMore()"></ion-infinite-scroll>
+                    <!-- <ion-infinite-scroll ng-if="maybeMore" on-infinite="loadMore()"></ion-infinite-scroll> -->
                 </ion-list>
             </ion-scroll>
         </div>

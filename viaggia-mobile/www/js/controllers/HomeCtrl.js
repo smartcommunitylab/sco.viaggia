@@ -66,8 +66,8 @@ angular.module('viaggia.controllers.home', [])
                 //$ionicLoading.hide();
             });
         }
-        var getBlacklist = function () {
-            GameSrv.getBlacklist(); 
+        var getBlacklistMap = function () {
+            GameSrv.getBlacklistMap();
         }
         $scope.programChallenge = function () {
             var date = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
@@ -82,7 +82,7 @@ angular.module('viaggia.controllers.home', [])
             if ($scope.status && $scope.status.challengeConcept)
                 setChallenges();
         });
-        $scope.$on("$destroy", function(){
+        $scope.$on("$destroy", function () {
             $scope.watch();
         })
         var initExpansion = function () {
@@ -185,7 +185,7 @@ angular.module('viaggia.controllers.home', [])
             setChallenges();
             setChooseButton();
             updateStatus();
-            getBlacklist();
+            getBlacklistMap();
         }, function () {
             //$ionicLoading.hide();
         });
@@ -495,13 +495,18 @@ angular.module('viaggia.controllers.home', [])
 
             return "width:30%;background:transparent;"
         }
-
+        var getChallengeByUnit = function (challenge) {
+            return GameSrv.getChallengeByUnit(challenge.unit)
+        }
         $scope.getValueUser = function (challenge) {
-            return challenge.row_status + " " + $filter('translate')('user_points_label');
+            var labelChallenge = getChallengeByUnit(challenge);
+            return challenge.row_status + " " + $filter('translate')(labelChallenge);
         }
         $scope.getValueOther = function (challenge) {
-            if (challenge.otherAttendeeData)
-                return challenge.otherAttendeeData.row_status + " " + $filter('translate')('user_points_label');
+            if (challenge.otherAttendeeData) {
+                var labelChallenge = getChallengeByUnit(challenge);
+                return challenge.otherAttendeeData.row_status + " " + $filter('translate')(labelChallenge);
+            }
             return "";
         }
 

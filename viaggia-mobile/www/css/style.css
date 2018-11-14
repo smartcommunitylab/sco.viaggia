@@ -3236,6 +3236,7 @@ ion-header-bar .title {
 }
 .challenge-img>img{
     width: 50px;
+    height: 50px;
 }
 .challenge-img-row {
     line-height: 50px;

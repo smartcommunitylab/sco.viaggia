@@ -210,6 +210,17 @@ angular.module('viaggia.services.game', [])
             },
 
         }
+        var meansChall = {
+            foot: "Walk_Km",
+            bike: "Bike_Km",
+            leaf: "green leaf"
+        }
+        var challengeUnit = {
+            "Walk_Km": "Walk_Km",
+            "green leaves": "Green_Leaves",
+            "Bike_Km": "Bike_Km"
+
+        }
 
         getTravelType = function (message) {
             var event = JSON.parse(message.event);
@@ -864,9 +875,9 @@ angular.module('viaggia.services.game', [])
             return deferred.promise;
         }
         var convertToMap = function (serverBlacklist) {
-            blacklist=[];
-            for (var i=0;i<serverBlacklist.length;i++){
-                blacklist[serverBlacklist[i].id]=serverBlacklist[i].nickname;
+            blacklist = [];
+            for (var i = 0; i < serverBlacklist.length; i++) {
+                blacklist[serverBlacklist[i].id] = serverBlacklist[i].nickname;
             }
         }
         gameService.getBlacklist = function () {
@@ -883,7 +894,31 @@ angular.module('viaggia.services.game', [])
                         timeout: Config.getHTTPConfig().timeout
                     })
                         .success(function (serverBlacklist) {
-                            convertToMap (serverBlacklist);
+                            deferred.resolve(serverBlacklist);
+                        })
+
+                        .error(function (err) {
+                            deferred.reject(err);
+                        });
+                });
+            return deferred.promise;
+
+        }
+        gameService.getBlacklistMap = function () {
+            var deferred = $q.defer();
+            LoginService.getValidAACtoken().then(
+                function (token) {
+                    $http({
+                        method: 'GET',
+                        url: Config.getServerURL() + '/gamificationweb/blacklist',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
+                        .success(function (serverBlacklist) {
+                            convertToMap(serverBlacklist);
                             deferred.resolve(blacklist);
                         })
 
@@ -920,7 +955,7 @@ angular.module('viaggia.services.game', [])
             return deferred.promise;
         }
 
-        gameService.addToBlacklist = function (id,user) {
+        gameService.addToBlacklist = function (id, user) {
             var deferred = $q.defer();
             LoginService.getValidAACtoken().then(
                 function (token) {
@@ -935,7 +970,7 @@ angular.module('viaggia.services.game', [])
                     })
                         .success(function () {
                             //add to local blacklist
-                            blacklist[id]=user.nickname;
+                            blacklist[id] = user.nickname;
                             deferred.resolve();
                         })
 
@@ -1019,41 +1054,77 @@ angular.module('viaggia.services.game', [])
                 });
             return deferred.promise;
         }
-
-        gameService.getPlayersForChallenge = function (how, from, to, typedthings) {
+        gameService.getRewards = function () {
             var deferred = $q.defer();
             LoginService.getValidAACtoken().then(
                 function (token) {
-                    //TODO
-                    deferred.resolve([{
-                        id: 0,
-                        nome: 'Tizio'
-                    }, {
-                        id: 1,
-                        nome: 'Caio'
-                    }, {
-                        id: 2,
-                        nome: 'Sempronio'
-                    }, {
-                        id: 3,
-                        nome: 'Marco'
-                    }]);
-                    // $http({
-                    //     method: 'GET',
-                    //     url: Config.getServerURL() + '/gamification/blacklist?from=' + from + '&to=' + to,
-                    //     headers: {
-                    //         'Authorization': 'Bearer ' + token,
-                    //         'appId': Config.getAppId(),
-                    //     },
-                    //     timeout: Config.getHTTPConfig().timeout
-                    // })
-                    //     .success(function (stats) {
-                    //         deferred.resolve(stats);
-                    //     })
+                    $http({
+                        method: 'GET',
+                        url: Config.getServerURL() + '/gamificationweb/challenges/rewards',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
+                        .success(function (rewards) {
+                            deferred.resolve(rewards);
+                        })
 
-                    //     .error(function (response) {
-                    //         deferred.reject(response);
-                    //     });
+                        .error(function (response) {
+                            deferred.reject(response);
+                        });
+                });
+            return deferred.promise;
+        }
+        gameService.getRewards = function () {
+            var deferred = $q.defer();
+            LoginService.getValidAACtoken().then(
+                function (token) {
+                    $http({
+                        method: 'GET',
+                        url: Config.getServerURL() + '/gamificationweb/challenges/rewards',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
+                        .success(function (rewards) {
+                            deferred.resolve(rewards);
+                        })
+
+                        .error(function (response) {
+                            deferred.reject(response);
+                        });
+                });
+            return deferred.promise;
+        }
+        gameService.getChallengeByUnit = function (unit) {
+            if (challengeUnit[unit])
+                return challengeUnit[unit];
+            return ""
+        }
+        gameService.getPlayersForChallenge = function () {
+            var deferred = $q.defer();
+            LoginService.getValidAACtoken().then(
+                function (token) {
+                    $http({
+                        method: 'GET',
+                        url: Config.getServerURL() + '/gamificationweb/challengables',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
+                        .success(function (stats) {
+                            deferred.resolve(stats);
+                        })
+
+                        .error(function (response) {
+                            deferred.reject(response);
+                        });
                 });
             return deferred.promise;
         }
@@ -1067,47 +1138,36 @@ angular.module('viaggia.services.game', [])
                         leavesPlayer: 100,
                         leavesOpponent: 100,
                     });
-                    // $http({
-                    //     method: 'GET',
-                    //     url: Config.getServerURL() + '/gamification/blacklist?from=' + from + '&to=' + to,
-                    //     headers: {
-                    //         'Authorization': 'Bearer ' + token,
-                    //         'appId': Config.getAppId(),
-                    //     },
-                    //     timeout: Config.getHTTPConfig().timeout
-                    // })
-                    //     .success(function (stats) {
-                    //         deferred.resolve(stats);
-                    //     })
-
-                    //     .error(function (response) {
-                    //         deferred.reject(response);
-                    //     });
                 });
             return deferred.promise;
         }
         gameService.requestChallenge = function (challenge) {
             var deferred = $q.defer();
+            var dataChallenge = {
+                attendeeId: challenge.player.id,
+                challengeModelName: challenge.type,
+                challengePointConcept: meansChall[challenge.mean]
+            }
             LoginService.getValidAACtoken().then(
                 function (token) {
-                    //TODO
                     deferred.resolve();
-                    // $http({
-                    //     method: 'GET',
-                    //     url: Config.getServerURL() + '/gamification/blacklist?from=' + from + '&to=' + to,
-                    //     headers: {
-                    //         'Authorization': 'Bearer ' + token,
-                    //         'appId': Config.getAppId(),
-                    //     },
-                    //     timeout: Config.getHTTPConfig().timeout
-                    // })
-                    //     .success(function (stats) {
-                    //         deferred.resolve(stats);
-                    //     })
+                    $http({
+                        method: 'POST',
+                        url: Config.getServerURL() + '/gamificationweb/invitation',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        data: dataChallenge,
+                        timeout: Config.getHTTPConfig().timeout
+                    })
+                        .success(function (stats) {
+                            deferred.resolve(stats);
+                        })
 
-                    //     .error(function (response) {
-                    //         deferred.reject(response);
-                    //     });
+                        .error(function (response) {
+                            deferred.reject(response);
+                        });
                 });
             return deferred.promise;
         }
@@ -1143,7 +1203,24 @@ angular.module('viaggia.services.game', [])
         gameService.getTypeChallenge = function () {
             return type_challenges;
         }
-
+        gameService.getConfigureTemplate = function (challenge) {
+            switch (challenge.type) {
+                case type_challenges['groupCompetitiveTime'].id: {
+                    return 'templates/game/challengeConfigureTemplate/groupTime.html';
+                    break;
+                }
+                case type_challenges['groupCompetitivePerformance'].id: {
+                    return 'templates/game/challengeConfigureTemplate/groupPerformance.html';
+                    break;
+                }
+                case type_challenges['groupCooperative'].id: {
+                    return 'templates/game/challengeConfigureTemplate/groupCoop.html';
+                    break;
+                }
+                default:
+                    return 'templates/game/challengeConfigureTemplate/default.html';
+            }
+        }
         gameService.getChallengeBarTemplate = function (challenge) {
             switch (challenge.type) {
                 case type_challenges['groupCompetitiveTime'].id: {
@@ -1193,7 +1270,17 @@ angular.module('viaggia.services.game', [])
 
             return deferred.promise;
         };
+        updateVariables = function (status) {
+            if (status.challengeConcept && status.challengeConcept.challengeData && status.challengeConcept.challengeData.PROPOSED) {
+                for (var i = 0; i < status.challengeConcept.challengeData.PROPOSED.length; i++) {
+                    if (status.challengeConcept.challengeData.PROPOSED[i].proposerId == status.playerData.playerId) {
+                        return $rootScope.canPropose = false
+                    }
+                }
+            }
+            return $rootScope.canPropose = true
 
+        }
         /* get local status (get remote first if null) */
         gameService.resetLocalStatus = function () {
             localStatus = null;
@@ -1205,6 +1292,9 @@ angular.module('viaggia.services.game', [])
             var deferred = $q.defer();
             gameService.getStatus().then(
                 function (localStatus) {
+                    profileService.setProfileStatus(localStatus);
+                    $rootScope.currentUser = status.playerData;
+                    updateVariables(localStatus);
                     deferred.resolve(localStatus);
                 },
                 function (response) {
@@ -1218,9 +1308,8 @@ angular.module('viaggia.services.game', [])
         gameService.updateStatus = function () {
             gameService.getLocalStatus().then(
                 function (status) {
-                    profileService.setProfileStatus(status);
-                    $rootScope.currentUser = status.playerData;
 
+                    updateVariables(status);
                 },
                 function (err) {
                 }

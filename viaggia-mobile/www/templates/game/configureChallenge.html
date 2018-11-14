@@ -1,4 +1,4 @@
-<ion-view title="{{'home_configure_challenge' | translate}} {{currentUser.nickName}}">
+<ion-view title="{{'home_configure_challenge' | translate}} {{currentUser.nickName}}" ng-init="initConf()">
 
     <ion-content>
         <div class="row">
@@ -6,13 +6,16 @@
         </div>
         <div class="row">
             <div class="col">
-                <button class="button configure-challenge-button icon ic_foot" ng-class="{'chall-selected':isChallengeMean('foot')}" ng-click="setChallengeMean('foot')"></button>
+                <button class="button configure-challenge-button icon ic_foot" ng-class="{'chall-selected':isChallengeMean('foot')}"
+                    ng-click="setChallengeMean('foot')"></button>
             </div>
             <div class="col">
-                <button class="button configure-challenge-button icon ic_bike" ng-class="{'chall-selected':isChallengeMean('bike')}" ng-click="setChallengeMean('bike')"></button>
+                <button class="button configure-challenge-button icon ic_bike" ng-class="{'chall-selected':isChallengeMean('bike')}"
+                    ng-click="setChallengeMean('bike')"></button>
             </div>
             <div class="col">
-                <button class="button configure-challenge-button icon ion-leaf" ng-class="{'chall-selected':isChallengeMean('leaf')}" ng-click="setChallengeMean('leaf')"></button>
+                <button class="button configure-challenge-button icon ion-leaf" ng-class="{'chall-selected':isChallengeMean('leaf')}"
+                    ng-click="setChallengeMean('leaf')"></button>
             </div>
         </div>
         <div class="row">
@@ -24,27 +27,28 @@
                     <span>{{'lbl_challenge_choose_from_list'|translate}}</span>
             </div>
         </div>
-        <div class="row" ng-if="!challenge.player.nome">
+        <div class="row" ng-if="!challenge.player.nickname">
             <div class="col col-80">
-                <playerautocomplete on-clear="clearFrom" ng-model="playerName" attr-placeholder="{{'plan_insert_from_address' | translate}}"
-                    click-activation="false" data="playersName" on-type="typeName" placeholder="{{'plan_from' | translate}}"
+                <playerautocomplete on-clear="clearFrom" ng-model="playerName" attr-placeholder="{{'lbl_insert_nickname' | translate}}"
+                    click-activation="false" data="playersName" on-type="typeName" 
                     on-select="changeStringName" ng-blur="setNameParam">
-                    </playerautocomplete>
-                    <!-- <input class="input-challenge-search" type="text" placeholder="{{'ph_challenge_nick'|translate}}"> -->
+                </playerautocomplete>
+                <!-- <input class="input-challenge-search" type="text" placeholder="{{'ph_challenge_nick'|translate}}"> -->
             </div>
             <div class="col button-challenge-search">
                 <a class="icon ion-search"></a>
             </div>
         </div>
-        <div class="row challenge-img-row" ng-if="challenge.player.nome">
+        <div class="row challenge-img-row" ng-if="challenge.player.nickname">
             <div class="col col-60">
                 <div class="img-container challenge-img">
-                    <img ng-if="!user.img" src="img/game/generic_user.png">
-                    <img ng-if="user.img" src="challenge.player.img">
+                    <!-- <img ng-if="!user.img" src="img/game/generic_user.png">
+                    <img ng-if="user.img" src="challenge.player.img"> -->
+                    <img class="challenge-profile-img" ng-src="{{getUserImg(challenge.player.id)}}">
                 </div>
             </div>
             <div class="col col-60">
-                {{challenge.player.nome}}
+                {{challenge.player.nickname}}
             </div>
             <div class="col button-challenge-remove" ng-click="removePlayer()">
                 <a class="icon ion-android-cancel"></a>
@@ -56,9 +60,11 @@
                     <span>{{'lbl_challenge_calculate'|translate}}</span>
             </div>
         </div>
-        <div ng-if="challenge.target ">
+        <div ng-if="challenge.target">
             <div class="card">
-                <div class="row" ng-if="challenge.target.target">
+                    <ng-include src="getConfigureTemplate(challenge)" style="width: 100%"></ng-include>
+
+                <!-- <div class="row" ng-if="challenge.target.target">
                     <div class="col col-80">{{'lbl_challenge_target'|translate |uppercase}}</div>
                     <div class="col col-20">
                         <b>{{challenge.target.target}}</b>
@@ -71,7 +77,8 @@
                     </div>
                 </div>
                 <div class="row" ng-if="challenge.target.leavesOpponent">
-                    <div class="col col-80">{{'lbl_challenge_leaves_opponent'| translate |uppercase}}{{challenge.player.nome}}:</div>
+                    <div class="col col-80">{{'lbl_challenge_leaves_opponent'| translate
+                        |uppercase}}{{challenge.player.nome}}:</div>
                     <div class="col col-20">
                         <b>{{challenge.target.leavesOpponent}}</b>
                     </div>
@@ -81,7 +88,7 @@
                     <div class="col col-20">
                         <b>{{challenge.target.leavesBoth}}</b>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="row">
                 <div class="col">

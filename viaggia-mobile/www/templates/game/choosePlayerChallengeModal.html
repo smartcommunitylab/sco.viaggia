@@ -1,4 +1,4 @@
-<ion-modal-view ng-init="getPlayers()">
+<ion-modal-view >
     <ion-header-bar align-title="left" class="bar-positive-100">
         <div class="buttons" ng-click="closeList()">
             <i class="icon close-modal" ng-class="{'ion-android-arrow-back': platform.isAndroid(), 'ion-ios-arrow-back': !platform.isAndroid()}"></i>
@@ -9,10 +9,11 @@
                 <!-- <i class="icon close-modal" ng-class="{'ion-android-arrow-back': platform.isAndroid(), 'ion-ios-arrow-back': !platform.isAndroid()}"></i> -->
          </div>
     </ion-header-bar>
-    <ion-content scroll="false">
+    <ion-content>
         <ion-list>
             <ion-radio ng-model="playerId" ng-value="player.id" ng-repeat="player in players" ng-click="selectPlayer(player)">
-                {{player.nome}}
+                <img class="challenge-profile-img" ng-src="{{getUserImg(player.id)}}">
+                <span>{{player.nickname}}</span>
             </ion-radio>
             <div class="chall-player-separator">
 
@@ -27,11 +28,11 @@
             </div>
             <div class="row" ng-if="why">
                 <div>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget.
+                        {{'lbl_chall_blacklist'|translate}}
                 </div>
             </div>
             <ion-item ng-repeat="player in blacklistplayers">
-                <span class="blacklisted-player">{{player.nome}}</span>
+                <span class="blacklisted-player">{{player.nickname}}</span>
             </ion-item>
         </ion-list>
     </ion-content>

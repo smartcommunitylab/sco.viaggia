@@ -150,30 +150,30 @@
 
                         <div ng-if="challenge.group=='unlock'">
                             <div class="row no-padding">
-                                <div class="col col-20 {{getColorChallenge(challenge)}} padding-10" ng-class="{'fog':challenge.state == 1}">
+                                <div class="col col-20 {{getColorChallenge(challenge)}} padding-10" ng-class="{'fog':challenge.state == 1 || !canPropose}">
                                     <a class="icon-chall  icon {{getIconChallenge(challenge)}}"></a>
                                 </div>
                                 <div class="col  padding-10">
-                                    <div ng-class="{'fog':challenge.state == 1}">{{challenge.short|translate}}</div>
+                                    <div ng-class="{'fog':challenge.state == 1 || !canPropose}">{{challenge.short|translate}}</div>
                                     <div ng-if="challenge.state != 1">
                                         <div class="row">
-                                            <div class="col challenge-long-desc">{{challenge.long|translate}}</div>
+                                            <div class="col challenge-long-desc" ng-class="{'fog':!canPropose}">{{challenge.long|translate}}</div>
                                             <!-- <div class="col button-active" ng-click="readMore(challenge)">{{'read_more' | translate}}</div> -->
                                         </div>
                                         <div class="row">
                                             <!-- <div class="col challenge-long-desc">{{challenge.long}}</div> -->
-                                            <div class="col button-active" ng-click="readMore(challenge)">{{'read_more'
+                                            <div class="col button-active"  ng-class="{'fog':!canPropose}" ng-click="readMore(challenge)">{{'read_more'
                                                 | translate}}</div>
                                         </div>
                                     </div>
-                                    <div class="row" ng-if="challenge.state == 1">
+                                    <div class="row" ng-if="challenge.state == 1 ">
                                         <div class="col ">{{'lbl_challenge_unlock_next' | translate}}</div>
                                     </div>
                                     <button class="button button-clear button-challenge-enable" style="color:black!important;"
                                         ng-if="challenge.state == 1">
                                         <i class="icon ion-locked"></i>
                                     </button>
-                                    <button class="button button-clear button-challenge-enable" ng-if="challenge.state != 1"
+                                    <button class="button button-clear button-challenge-enable" ng-if="challenge.state != 1 &&  canPropose"
                                         ng-click="configureChallenge(challenge)">
                                         {{'btn_challenge_choose' | translate}}</button>
 
