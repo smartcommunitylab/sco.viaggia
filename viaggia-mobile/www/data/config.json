@@ -226,7 +226,7 @@
     "thresholdStartTime": 1200000,
     "trackingConfigure": {
         "desiredAccuracy": 0,
-        "distanceFilter": 20,
+        "distanceFilter": 0,
         "stationaryRadius": 20,
         "activityType": "Other",
         "disableElasticity": true,
@@ -253,6 +253,5 @@
         "batchSync": true,
         "autoSync": false,
         "notificationColor": "gray",
-        "notificationIcon": "drawable/notification"
     }
 }
