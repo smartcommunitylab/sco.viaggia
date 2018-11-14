@@ -9,7 +9,7 @@
   },
   {
     "file": "css/style.css",
-    "hash": "6fff59b029a9191bc990a316849911ee"
+    "hash": "9c18439b9b267d782a7146e4b2858be3"
   },
   {
     "file": "data/bus.csv",
@@ -389,7 +389,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "d83d21e073788cef3049cf2f6be03d75"
+    "hash": "bbe096ecbf45306846df12ac83abb47a"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -401,11 +401,11 @@
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "a3ff2c6ed11ae662e90b49e11aace6f7"
+    "hash": "8f0fb84cb387c477d8f282c25713c6b4"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
-    "hash": "bb80bcab55bb144d58e6440ae508bee3"
+    "hash": "55efb48c0bac3f1ed110ab9e17477b25"
   },
   {
     "file": "js/controllers/InfoCtrl.js",
@@ -513,7 +513,7 @@
   },
   {
     "file": "js/services/GameSrv.js",
-    "hash": "bdc0ab393cb241a097fba7c63dc28240"
+    "hash": "220d8886eaf13166ad8bb7bdcbedcfb1"
   },
   {
     "file": "js/services/GeoSrv.js",
@@ -1009,11 +1009,27 @@
   },
   {
     "file": "templates/game/blacklist.html",
-    "hash": "f67d12271db14e7c4f56188824fee9d9"
+    "hash": "5411365744d98e1791a6c11a945ff478"
+  },
+  {
+    "file": "templates/game/challengeConfigureTemplate/default.html",
+    "hash": "48b70a015192f460dfa144907c4c3687"
+  },
+  {
+    "file": "templates/game/challengeConfigureTemplate/groupCoop.html",
+    "hash": "c1608365ad624b85356e9d30f6650232"
+  },
+  {
+    "file": "templates/game/challengeConfigureTemplate/groupPerformance.html",
+    "hash": "79fdb514f63e320c560ede0d7e1f01ba"
+  },
+  {
+    "file": "templates/game/challengeConfigureTemplate/groupTime.html",
+    "hash": "48b70a015192f460dfa144907c4c3687"
   },
   {
     "file": "templates/game/challenges.html",
-    "hash": "f1055d66bb4d4d5331d041606b98f846"
+    "hash": "253c4e42b9a6852487f5d65806eb792f"
   },
   {
     "file": "templates/game/challengeTemplates/competitivePerformance.html",
@@ -1049,11 +1065,11 @@
   },
   {
     "file": "templates/game/choosePlayerChallengeModal.html",
-    "hash": "e814075c7755e439cbc27e9a2d6507ba"
+    "hash": "8e2a16d4be5ef7ef87a4f437641db80b"
   },
   {
     "file": "templates/game/configureChallenge.html",
-    "hash": "a14737136d0bcd60dd819493f9c55fee"
+    "hash": "9028f923cda229d96cbc352b7af62d0a"
   },
   {
     "file": "templates/game/diary.html",
