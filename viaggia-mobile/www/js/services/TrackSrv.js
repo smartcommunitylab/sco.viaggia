@@ -542,14 +542,8 @@ angular.module('viaggia.services.tracking', [])
 
             var minutesOfRun = duration / 60000;
             trackingConfigure['stopAfterElapsedMinutes'] = Math.floor(minutesOfRun);
-            //trackingConfigure['stopAfterElapsedMinutes'] = 1;
             trackingConfigure['notificationTitle'] = $filter('translate')('tracking_notification_title');
             trackingConfigure['notificationText'] = $filter('translate')('tracking_notification_text');
-            // trackingConfigure['url'] += token;
-            // trackingConfigure['headers'] = {  // <-- Optional HTTP headers
-            //     'Authorization': 'Bearer ' + token,
-            //     'appId': Config.getAppId()
-            // }
             var transportType = localStorage.getItem(Config.getAppId() + '_trackedTransport');
             if (!transportType) transportType = null;
 
@@ -586,22 +580,22 @@ angular.module('viaggia.services.tracking', [])
                 trackService.stop();
                 if (callback) callback();
             }, duration);
-            bgGeo.onHeartbeat(function (params) {
-                console.log('- hearbeat');
-                //Manually insert a location.
-                var location = params.location;
-                bgGeo.getCurrentPosition(function (location, taskId) {
-                    console.log('- current location: ', location);
-                    bgGeo.finish(taskId);
-                });
-                bgGeo.insertLocation(location, function () {
-                    console.log('- inserted location during heartbeat');
-                }, function (err) {
-                    console.log(err);
-                });
-            }, function (response) {
+            // bgGeo.onHeartbeat(function (params) {
+            //     console.log('- hearbeat');
+            //     //Manually insert a location.
+            //     var location = params.location;
+            //     bgGeo.getCurrentPosition(function (location, taskId) {
+            //         console.log('- current location: ', location);
+            //         bgGeo.finish(taskId);
+            //     });
+            //     bgGeo.insertLocation(location, function () {
+            //         console.log('- inserted location during heartbeat');
+            //     }, function (err) {
+            //         console.log(err);
+            //     });
+            // }, function (response) {
 
-            })
+            // })
 
             bgGeo.start(function () {
                 bgGeo.changePace(true);
@@ -683,15 +677,6 @@ angular.module('viaggia.services.tracking', [])
                         $rootScope.syncRunning = false;
                         deferred.resolve(false);
                     });
-                    //                    bgGeo.sync(function (locations, taskId) {
-                    //                        console.log('synced locations: ', locations);
-                    //                        // Be sure to call finish(taskId) in order to signal the end of the background-thread.
-                    //                        bgGeo.finish(taskId);
-                    //                        deferred.resolve(true);
-                    //                    }, function (errorMessage) {
-                    //                        console.log('Sync FAILURE: ' + errorMessage);
-                    //                        deferred.resolve(false);
-                    //                    });
                 });
             }, function () {
                 // no token obtained

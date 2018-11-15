@@ -714,7 +714,9 @@ angular.module('viaggia.controllers.game', [])
         $scope.typeName = function (typedthings) {
             // GameSrv.getPlayersForChallenge(typedthings).then(function (players) {
             // filtering by typed things
-            var players = $scope.players.filter(element => element.nickname.includes(typedthings))
+            var players = $scope.players.filter(function (element) {
+                return element.nickname.includes(typedthings)
+            })
             $scope.playersName = getNames(players);
             $scope.mapName = createMapNames(players);
             // }, function (err) {
@@ -1298,6 +1300,10 @@ angular.module('viaggia.controllers.game', [])
         var getRanking = false;
         $scope.rankingPerPage = 50;
 
+        GameSrv.getLocalStatus().then(
+            function (status) {
+                $scope.status = status;
+            });
         $scope.filter = {
             open: false,
             toggle: function () {
