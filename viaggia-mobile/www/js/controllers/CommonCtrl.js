@@ -686,7 +686,7 @@ angular.module('viaggia.controllers.common', [])
       $cordovaCamera.getPicture(options).then(function (imageData) {
         $scope.imgURI = imageData;
         window.localStorage.setItem('image', ($scope.imgURI));
-        let options = {
+        var options = {
           quality: 75,
           widthRatio: 1,
           heightRatio: 1,
