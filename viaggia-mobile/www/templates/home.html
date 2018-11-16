@@ -28,7 +28,7 @@
                             <h4>{{level}}</h4>
                         </div>
                         <div class="col home-points text-left">
-                            <h4>{{status['pointConcept'][0]['score']}}
+                            <h4>{{status['pointConcept'][0]['score']|number:0}}
                                 <i class="icon ion-leaf"></i>
                             </h4>
                         </div>
@@ -38,7 +38,7 @@
                         <div class="col">
                             <div class="row">
                                 <div class="col home-level text-left">
-                                    {{toNextLevel}} {{'user_next_level_label' | translate}}
+                                    {{toNextLevel|number:0}} {{'user_next_level_label' | translate}}
                                 </div>
                             </div>
                             <div class="row">

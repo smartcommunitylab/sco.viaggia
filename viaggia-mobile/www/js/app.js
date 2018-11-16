@@ -473,7 +473,7 @@ angular.module('viaggia', [
         }
       })
       .state('app.home.challenges', {
-        cache: false,
+        cache: true,
         url: "/challenges",
         params: {
           challengeEnd: null,

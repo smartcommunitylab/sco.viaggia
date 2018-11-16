@@ -1293,7 +1293,7 @@ angular.module('viaggia.services.game', [])
             gameService.getStatus().then(
                 function (localStatus) {
                     profileService.setProfileStatus(localStatus);
-                    $rootScope.currentUser = status.playerData;
+                    $rootScope.currentUser = localStatus.playerData;
                     updateVariables(localStatus);
                     deferred.resolve(localStatus);
                 },
