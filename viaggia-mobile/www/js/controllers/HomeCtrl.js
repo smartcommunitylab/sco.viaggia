@@ -2,6 +2,7 @@ angular.module('viaggia.controllers.home', [])
 
     .controller('HomeCtrl', function ($scope, $state, GameSrv, profileService, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv, DiaryDbSrv, BT) {
 
+
         $scope.challenges = null;
         $scope.expansion = [];
         $scope.buttons = [{
@@ -160,41 +161,38 @@ angular.module('viaggia.controllers.home', [])
         }
 
 
-        Config.init().then(function () {
-            $rootScope.title = Config.getAppName();
-            // angular.extend($scope, {
-            //     center: {
-            //         lat: Config.getMapPosition().lat,
-            //         lng: Config.getMapPosition().long,
-            //         zoom: Config.getMapPosition().zoom
-            //     },
-            //     events: {}
-            // });
-
-            bookmarkService.getBookmarksRT().then(function (list) {
-                var homeList = [];
-                list.forEach(function (e) {
-                    if (e.home) homeList.push(e);
-                });
-                $scope.primaryLinks = homeList; //Config.getPrimaryLinks();
-            });
-            marketService.initMarketFavorites();
-            notificationInit();
-            initWatch();
-            localDataInit();
-            setChallenges();
-            setChooseButton();
-            updateStatus();
-            getBlacklistMap();
-        }, function () {
-            //$ionicLoading.hide();
-        });
         $scope.$on("$ionicView.afterEnter", function (scopes, states) {
             $ionicLoading.hide();
+            //check timer if passed x time
+            var date = new Date();
+            if (!localStorage.getItem(Config.getAppId() + "_homeRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_homeRefresh"))+Config.getCacheRefresh() < new Date().getTime() ) {
+                Config.init().then(function () {
+                    $rootScope.title = Config.getAppName();
+                    bookmarkService.getBookmarksRT().then(function (list) {
+                        var homeList = [];
+                        list.forEach(function (e) {
+                            if (e.home) homeList.push(e);
+                        });
+                        $scope.primaryLinks = homeList; //Config.getPrimaryLinks();
+                    });
+                    marketService.initMarketFavorites();
+                    notificationInit();
+                    initWatch();
+                    localDataInit();
+                    setChallenges();
+                    setChooseButton();
+                    updateStatus();
+                    getBlacklistMap();
+                    localStorage.setItem(Config.getAppId() + "_homeRefresh", new Date().getTime());
+                }, function () {
+                    //$ionicLoading.hide();
+                });
+            }
         });
-        $scope.$on("$ionicView.beforeEnter", function (scopes, states) {
-            // $ionicLoading.show();
-        });
+        // $scope.$on("$ionicView.beforeEnter", function (scopes, states) {
+
+
+        // });
         $scope.$on("$ionicView.enter", function (scopes, states) {
             Config.init().then(function () {
                 if (window.BackgroundGeolocation) {

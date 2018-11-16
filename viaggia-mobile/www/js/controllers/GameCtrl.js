@@ -1077,14 +1077,7 @@ angular.module('viaggia.controllers.game', [])
                 // })
             }
         }
-        Config.loading();
-        DiaryDbSrv.dbSetup().then(function () {
-            $scope.init();
-            Config.loaded();
-        }, function (err) {
-            Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
-            Config.loaded();
-        })
+
         /* Resize ion-scroll */
         $scope.rankingStyle = {};
 
@@ -1096,7 +1089,6 @@ angular.module('viaggia.controllers.game', [])
             $ionicScrollDelegate.$getByHandle('rankingScroll').resize();
         };
 
-        generateRankingStyle();
 
         $window.onresize = function (event) {
             // Timeout required for our purpose
@@ -1117,6 +1109,25 @@ angular.module('viaggia.controllers.game', [])
                 $state.go('app.home.challenges', { challengeEnd: end, challengeStart: start });
             }
         };
+
+
+        $scope.$on("$ionicView.afterEnter", function (scopes, states) {
+            //check timer if passed x time
+            var date = new Date();
+            if (!localStorage.getItem(Config.getAppId() + "_diaryRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_diaryRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
+                Config.loading();
+                DiaryDbSrv.dbSetup().then(function () {
+                    $scope.init();
+                    Config.loaded();
+                }, function (err) {
+                    Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                    Config.loaded();
+                })
+                generateRankingStyle();
+                localStorage.setItem(Config.getAppId() + "_diaryRefresh", new Date().getTime());
+
+            }
+        });
 
     })
     .controller('TripDiaryCtrl', function ($scope, $filter, $stateParams, planService, mapService, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
@@ -1450,7 +1461,6 @@ angular.module('viaggia.controllers.game', [])
             $ionicScrollDelegate.$getByHandle('rankingScroll').resize();
         };
 
-        generateRankingStyle();
 
         $window.onresize = function (event) {
             // Timeout required for our purpose
@@ -1458,4 +1468,15 @@ angular.module('viaggia.controllers.game', [])
                 generateRankingStyle();
             }, 200);
         };
+
+
+        $scope.$on("$ionicView.afterEnter", function (scopes, states) {
+            //check timer if passed x time
+            var date = new Date();
+            if (!localStorage.getItem(Config.getAppId() + "_rankingRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_rankingRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
+                generateRankingStyle();
+                localStorage.setItem(Config.getAppId() + "_rankingRefresh", new Date().getTime());
+
+            }
+        });
     });
