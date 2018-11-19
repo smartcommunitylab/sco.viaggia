@@ -165,7 +165,7 @@ angular.module('viaggia.controllers.home', [])
             $ionicLoading.hide();
             //check timer if passed x time
             var date = new Date();
-            if (!localStorage.getItem(Config.getAppId() + "_homeRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_homeRefresh"))+Config.getCacheRefresh() < new Date().getTime() ) {
+            if (!localStorage.getItem(Config.getAppId() + "_homeRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_homeRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
                 Config.init().then(function () {
                     $rootScope.title = Config.getAppName();
                     bookmarkService.getBookmarksRT().then(function (list) {
@@ -189,10 +189,6 @@ angular.module('viaggia.controllers.home', [])
                 });
             }
         });
-        // $scope.$on("$ionicView.beforeEnter", function (scopes, states) {
-
-
-        // });
         $scope.$on("$ionicView.enter", function (scopes, states) {
             Config.init().then(function () {
                 if (window.BackgroundGeolocation) {
@@ -513,25 +509,7 @@ angular.module('viaggia.controllers.home', [])
         $rootScope.currentUser = null;
         $scope.noStatus = false;
         $rootScope.profileImg = null;
-        $scope.tmpUrl = 'https://dev.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/' + Config.getAppId() + '/'
-        // Config.loading();
-        GameSrv.getLocalStatus().then(
-            function (status) {
-                $scope.status = status;
-                profileService.setProfileStatus(status);
-                $rootScope.currentUser = status.playerData;
-                if (!localStorage.getItem(Config.getAppId() + '_timestampImg')) {
-                    localStorage.setItem(Config.getAppId() + '_timestampImg', new Date().getTime());
-                }
-            },
-            function (err) {
-                $scope.noStatus = true;
-                Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
-            }
-        ).finally(function () {
-            $scope.getImage();
-            // Config.loaded
-        });
+        $scope.tmpUrl = 'https://tn.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/' + Config.getAppId() + '/'
         $scope.getImage = function () {
             if ($scope.status)
                 profileService.getProfileImage($scope.status.playerData.playerId).then(function (image) {
@@ -540,6 +518,34 @@ angular.module('viaggia.controllers.home', [])
                     $rootScope.profileImg = 'img/game/generic_user.png' + '?' + (localStorage.getItem(Config.getAppId() + '_timestampImg'));
                 })
         }
+
+        $scope.$on("$ionicView.afterEnter", function (scopes, states) {
+            //check timer if passed x time
+            var date = new Date();
+            if (!localStorage.getItem(Config.getAppId() + "_homeContainerRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_homeContainerRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
+                // Config.loading();
+                GameSrv.getLocalStatus().then(
+                    function (status) {
+                        $scope.status = status;
+                        profileService.setProfileStatus(status);
+                        $rootScope.currentUser = status.playerData;
+                        if (!localStorage.getItem(Config.getAppId() + '_timestampImg')) {
+                            localStorage.setItem(Config.getAppId() + '_timestampImg', new Date().getTime());
+                        }
+                    },
+                    function (err) {
+                        $scope.noStatus = true;
+                        Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                    }
+                ).finally(function () {
+                    $scope.getImage();
+                    // Config.loaded
+                });
+                localStorage.setItem(Config.getAppId() + "_homeContainerRefresh", new Date().getTime());
+
+
+            }
+        });
 
     })
     .controller('MobilityCtrl', function ($scope, $state, $ionicHistory, $location, bookmarkService) {

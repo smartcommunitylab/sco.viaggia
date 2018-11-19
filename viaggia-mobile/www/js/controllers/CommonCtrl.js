@@ -1,9 +1,8 @@
 angular.module('viaggia.controllers.common', [])
 
-  .controller('AppCtrl', function ($scope, $rootScope, $q, $locale, $state, $ionicSideMenuDelegate, GameSrv, $cordovaCamera, profileService, trackService, $ionicHistory, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, Utils, tutorial) {
+  .controller('AppCtrl', function ($scope, $rootScope,$locale, $q, $state,$ionicSideMenuDelegate, GameSrv, $cordovaCamera, profileService, trackService, $ionicHistory, $location, $timeout, $ionicScrollDelegate, $ionicPopup, $ionicModal, $filter, $ionicLoading, DataManager, Config, planService, Utils, tutorial) {
 
     $locale.NUMBER_FORMATS.GROUP_SEP = '';
-
     /* menu group */
     $scope.shownGroup = false;
     $scope.progressCounter = {

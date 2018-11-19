@@ -425,7 +425,7 @@ angular.module('viaggia', [
       //   }
       // })
       .state('app.home', {
-        cache: false,
+        cache: true,
         url: "/home",
         views: {
           'menuContent': {
@@ -487,7 +487,7 @@ angular.module('viaggia', [
         }
       })
       .state('app.home.mobility', {
-        cache: false,
+        cache: true,
         url: '/mobility',
         views: {
           'tab-mobility': {
@@ -992,7 +992,7 @@ angular.module('viaggia', [
         }
       })
       .state('app.game.rankings', {
-        cache: false,
+        cache: true,
         url: '/rankings',
         views: {
           'tab-rankings': {

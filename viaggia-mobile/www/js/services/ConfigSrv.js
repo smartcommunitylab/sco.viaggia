@@ -20,7 +20,7 @@ angular.module('viaggia.services.conf', [])
             if (isDarkColor(color)) return '#fff';
             return '#000';
         };
-
+        var CACHE_REFRESH = 60000;
         var LOGIN_EXPIRED = 'LOGIN_EXPIRED';
         var DISTANCE_AUTOCOMPLETE = '25';
         var PARKING_METERS_RADIUS = '5';
@@ -234,6 +234,9 @@ angular.module('viaggia.services.conf', [])
                     });
                 });
                 return configDeferred.promise;
+            },
+            getCacheRefresh: function() {
+                return CACHE_REFRESH;
             },
             getBadgeTypes: function () {
                 return badgeTypes;

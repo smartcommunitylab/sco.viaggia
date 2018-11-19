@@ -582,7 +582,6 @@ angular.module('viaggia.controllers.game', [])
             $ionicScrollDelegate.$getByHandle('challengesScroll').resize();
         };
 
-
         $window.onresize = function (event) {
             // Timeout required for our purpose
             $timeout(function () {
@@ -590,7 +589,7 @@ angular.module('viaggia.controllers.game', [])
             }, 200);
         };
 
-        
+
         $scope.$on("$ionicView.afterEnter", function (scopes, states) {
             //check timer if passed x time
             var date = new Date();
@@ -598,10 +597,8 @@ angular.module('viaggia.controllers.game', [])
                 $scope.init();
                 generateChallengesStyle();
                 localStorage.setItem(Config.getAppId() + "_challengesRefresh", new Date().getTime());
-
             }
         });
-
     })
     .controller('ConfigureChallengeCtrl', function ($scope, $state, $stateParams, $filter, $ionicModal, Toast, GameSrv, Config) {
         $scope.players = [];
@@ -1114,6 +1111,22 @@ angular.module('viaggia.controllers.game', [])
                 $state.go('app.home.challenges', { challengeEnd: end, challengeStart: start });
             }
         };
+        $scope.$on("$ionicView.afterEnter", function (scopes, states) {
+            //check timer if passed x time
+            var date = new Date();
+            if (!localStorage.getItem(Config.getAppId() + "_diaryRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_diaryRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
+                Config.loading();
+                DiaryDbSrv.dbSetup().then(function () {
+                    $scope.init();
+                    Config.loaded();
+                }, function (err) {
+                    Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                    Config.loaded();
+                })
+                generateRankingStyle();
+                localStorage.setItem(Config.getAppId() + "_diaryRefresh", new Date().getTime());
+            }
+        });
 
 
         $scope.$on("$ionicView.afterEnter", function (scopes, states) {
@@ -1453,6 +1466,7 @@ angular.module('viaggia.controllers.game', [])
                 );
             } else {
                 $scope.$broadcast('scroll.infiniteScrollComplete');
+
             }
         };
 
@@ -1469,7 +1483,6 @@ angular.module('viaggia.controllers.game', [])
 
 
         $window.onresize = function (event) {
-            // Timeout required for our purpose
             $timeout(function () {
                 generateRankingStyle();
             }, 200);
