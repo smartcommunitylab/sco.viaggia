@@ -425,7 +425,7 @@ angular.module('viaggia', [
       //   }
       // })
       .state('app.home', {
-        cache: true,
+        cache: false,
         url: "/home",
         views: {
           'menuContent': {

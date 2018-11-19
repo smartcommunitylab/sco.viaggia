@@ -518,34 +518,50 @@ angular.module('viaggia.controllers.home', [])
                     $rootScope.profileImg = 'img/game/generic_user.png' + '?' + (localStorage.getItem(Config.getAppId() + '_timestampImg'));
                 })
         }
-
-        $scope.$on("$ionicView.afterEnter", function (scopes, states) {
-            //check timer if passed x time
-            var date = new Date();
-            if (!localStorage.getItem(Config.getAppId() + "_homeContainerRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_homeContainerRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
-                // Config.loading();
-                GameSrv.getLocalStatus().then(
-                    function (status) {
-                        $scope.status = status;
-                        profileService.setProfileStatus(status);
-                        $rootScope.currentUser = status.playerData;
-                        if (!localStorage.getItem(Config.getAppId() + '_timestampImg')) {
-                            localStorage.setItem(Config.getAppId() + '_timestampImg', new Date().getTime());
-                        }
-                    },
-                    function (err) {
-                        $scope.noStatus = true;
-                        Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
-                    }
-                ).finally(function () {
-                    $scope.getImage();
-                    // Config.loaded
-                });
-                localStorage.setItem(Config.getAppId() + "_homeContainerRefresh", new Date().getTime());
-
-
+        GameSrv.getLocalStatus().then(
+            function (status) {
+                $scope.status = status;
+                profileService.setProfileStatus(status);
+                $rootScope.currentUser = status.playerData;
+                if (!localStorage.getItem(Config.getAppId() + '_timestampImg')) {
+                    localStorage.setItem(Config.getAppId() + '_timestampImg', new Date().getTime());
+                }
+            },
+            function (err) {
+                $scope.noStatus = true;
+                Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
             }
+        ).finally(function () {
+            $scope.getImage();
+            // Config.loaded
         });
+        // $scope.$on("$ionicView.afterEnter", function (scopes, states) {
+        //     //check timer if passed x time
+        //     var date = new Date();
+        //     if (!localStorage.getItem(Config.getAppId() + "_homeContainerRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_homeContainerRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
+        //         // Config.loading();
+        //         GameSrv.getLocalStatus().then(
+        //             function (status) {
+        //                 $scope.status = status;
+        //                 profileService.setProfileStatus(status);
+        //                 $rootScope.currentUser = status.playerData;
+        //                 if (!localStorage.getItem(Config.getAppId() + '_timestampImg')) {
+        //                     localStorage.setItem(Config.getAppId() + '_timestampImg', new Date().getTime());
+        //                 }
+        //             },
+        //             function (err) {
+        //                 $scope.noStatus = true;
+        //                 Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+        //             }
+        //         ).finally(function () {
+        //             $scope.getImage();
+        //             // Config.loaded
+        //         });
+        //         localStorage.setItem(Config.getAppId() + "_homeContainerRefresh", new Date().getTime());
+
+
+        //     }
+        // });
 
     })
     .controller('MobilityCtrl', function ($scope, $state, $ionicHistory, $location, bookmarkService) {
