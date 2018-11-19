@@ -120,7 +120,7 @@ angular.module('viaggia.controllers.profile', [])
 
         $scope.serverhow = GameSrv.getServerHow($scope.filter.selected);
         var generateRankingStyle = function () {
-            $scope.rankingStyle = {
+            $scope.profileStyle = {
                 'height': window.innerHeight - (44 + 44) + 'px'
             };
             $ionicScrollDelegate.$getByHandle('statisticScroll').resize();

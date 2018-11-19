@@ -595,10 +595,16 @@ angular.module('viaggia.controllers.game', [])
         $scope.$on("$ionicView.afterEnter", function (scopes, states) {
             //check timer if passed x time
             var date = new Date();
+            $scope.challengesStyle = {
+                'height': window.innerHeight - (44 + 49 + 44) + 'px'
+            };
             if (!localStorage.getItem(Config.getAppId() + "_challengesRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_challengesRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
                 $scope.init();
                 generateChallengesStyle();
                 localStorage.setItem(Config.getAppId() + "_challengesRefresh", new Date().getTime());
+            }
+            if (!$scope.pastChallenges){
+                $scope.init();
             }
         });
     })
@@ -1116,6 +1122,9 @@ angular.module('viaggia.controllers.game', [])
         $scope.$on("$ionicView.afterEnter", function (scopes, states) {
             //check timer if passed x time
             var date = new Date();
+            $scope.rankingStyle = {
+                'height': window.innerHeight - (44 + 44) + 'px'
+            };
             if (!localStorage.getItem(Config.getAppId() + "_diaryRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_diaryRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
                 Config.loading();
                 DiaryDbSrv.dbSetup().then(function () {
@@ -1131,23 +1140,23 @@ angular.module('viaggia.controllers.game', [])
         });
 
 
-        $scope.$on("$ionicView.afterEnter", function (scopes, states) {
-            //check timer if passed x time
-            var date = new Date();
-            if (!localStorage.getItem(Config.getAppId() + "_diaryRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_diaryRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
-                Config.loading();
-                DiaryDbSrv.dbSetup().then(function () {
-                    $scope.init();
-                    Config.loaded();
-                }, function (err) {
-                    Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
-                    Config.loaded();
-                })
-                generateRankingStyle();
-                localStorage.setItem(Config.getAppId() + "_diaryRefresh", new Date().getTime());
+        // $scope.$on("$ionicView.afterEnter", function (scopes, states) {
+        //     //check timer if passed x time
+        //     var date = new Date();
+        //     if (!localStorage.getItem(Config.getAppId() + "_diaryRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_diaryRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
+        //         Config.loading();
+        //         DiaryDbSrv.dbSetup().then(function () {
+        //             $scope.init();
+        //             Config.loaded();
+        //         }, function (err) {
+        //             Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+        //             Config.loaded();
+        //         })
+        //         generateRankingStyle();
+        //         localStorage.setItem(Config.getAppId() + "_diaryRefresh", new Date().getTime());
 
-            }
-        });
+        //     }
+        // });
 
     })
     .controller('TripDiaryCtrl', function ($scope, $filter, $stateParams, planService, mapService, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
