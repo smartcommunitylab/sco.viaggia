@@ -389,7 +389,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "94015740c66a02482589829b56c6a992"
+    "hash": "8dd0b6b6156e530913559acaa2d16bf5"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -401,11 +401,11 @@
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "3a3b02f04e5125a530de79f914716586"
+    "hash": "cf8e6b9b8b7e3b0ed77cae7319b58d0c"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
-    "hash": "e5502e43e0381e66fbde2dcfec213126"
+    "hash": "7d918af1202a61157df127879aa4bc02"
   },
   {
     "file": "js/controllers/InfoCtrl.js",
