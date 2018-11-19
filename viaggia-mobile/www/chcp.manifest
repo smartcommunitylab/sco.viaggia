@@ -401,7 +401,7 @@
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "cf8e6b9b8b7e3b0ed77cae7319b58d0c"
+    "hash": "cc961534f84dc0f2513754f3764b532d"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
@@ -449,7 +449,7 @@
   },
   {
     "file": "js/controllers/ProfileCtrl.js",
-    "hash": "41f3c4a519c33fdf421a7056391f9302"
+    "hash": "257f25a61b90f87f851b2fae7df5194d"
   },
   {
     "file": "js/controllers/RegistrationController.js",
@@ -1109,11 +1109,11 @@
   },
   {
     "file": "templates/game/profileOthersContainer.html",
-    "hash": "6b66de5298a312c32b5857d25a1e6f81"
+    "hash": "ce7c7f2d047539dc411df69903e841d1"
   },
   {
     "file": "templates/game/profileOthersStatistics.html",
-    "hash": "baadbad02d52db31a64f8bf5bdc15024"
+    "hash": "aaa6347021e62257c069d1c37897999d"
   },
   {
     "file": "templates/game/rankings.html",
