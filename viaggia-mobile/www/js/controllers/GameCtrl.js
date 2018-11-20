@@ -969,7 +969,6 @@ angular.module('viaggia.controllers.game', [])
         $scope.loadMore = function () {
             if (!getDiary && $scope.maybeMore) {
                 getDiary = true;
-                // console.log("load done")
                 if (!$scope.from) {
                     $scope.from = new Date().getTime();
                 }
@@ -978,9 +977,6 @@ angular.module('viaggia.controllers.game', [])
                 $scope.from = x;
                 $scope.to = ($scope.days != null) ? $scope.days[$scope.days.length - 1].messages[$scope.days[$scope.days.length - 1].messages.length - 1].timestamp - 1 : new Date().getTime();
                 //bisogna aggiornare scope.to all'ultimo messaggio `
-                // if ($scope.messages[0]) {
-                // var from = $scope.messages[0].timestamp - 2592000000;
-                // var to = $scope.messages[0].timestamp-1;
                 var filter = GameSrv.getDbType($scope.filter.selected)
                 DiaryDbSrv.readEvents(filter, $scope.from, $scope.to).then(function (notifications) {
                     if (notifications == null || notifications.length == 0) {
@@ -1008,14 +1004,6 @@ angular.module('viaggia.controllers.game', [])
                         Config.loaded();
                         getDiary = false;
                     });
-                // } else {
-                //     $scope.$broadcast('scroll.infiniteScrollComplete');
-                //     $scope.singleDiaryStatus = true;
-                //     Config.loaded();
-                //     getDiary = false;
-                //     $scope.maybeMore = false;
-                // }
-                // });
 
             }
         };
@@ -1046,23 +1034,16 @@ angular.module('viaggia.controllers.game', [])
             return GameSrv.getParams(message);
         }
         $scope.openEventTripDetail = function (message) {
-            // if (JSON.parse(message.event).travelValidity != 'PENDING') {
             $state.go('app.tripDiary', {
                 message: message.event
             });
-            // }
-            // else {
-            //     Toast.show($filter('translate')("travel_pending_state"), "short", "bottom");
-            // }
         }
         $scope.init = function () {
             if (!getDiary) {
                 Config.loading();
                 getDiary = true;
-                // DiaryDbSrv.dbSetup().then(function () {
                 var x = new Date().getTime() - 2592000000;
                 var filter = GameSrv.getDbType($scope.filter.selected)
-                // DiaryDbSrv.readEvents(filter, 1455800361943, 1476269822849).then(function (notifications) {
                 DiaryDbSrv.readEvents(filter, x, new Date().getTime()).then(function (notifications) {
                     if (notifications == null || notifications.length == 0) {
                         $scope.maybeMore = false;
@@ -1084,7 +1065,6 @@ angular.module('viaggia.controllers.game', [])
                     $scope.maybeMore = false;
                     Config.loaded();
                 });
-                // })
             }
         }
 
@@ -1138,25 +1118,6 @@ angular.module('viaggia.controllers.game', [])
                 localStorage.setItem(Config.getAppId() + "_diaryRefresh", new Date().getTime());
             }
         });
-
-
-        // $scope.$on("$ionicView.afterEnter", function (scopes, states) {
-        //     //check timer if passed x time
-        //     var date = new Date();
-        //     if (!localStorage.getItem(Config.getAppId() + "_diaryRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_diaryRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
-        //         Config.loading();
-        //         DiaryDbSrv.dbSetup().then(function () {
-        //             $scope.init();
-        //             Config.loaded();
-        //         }, function (err) {
-        //             Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
-        //             Config.loaded();
-        //         })
-        //         generateRankingStyle();
-        //         localStorage.setItem(Config.getAppId() + "_diaryRefresh", new Date().getTime());
-
-        //     }
-        // });
 
     })
     .controller('TripDiaryCtrl', function ($scope, $filter, $stateParams, planService, mapService, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {

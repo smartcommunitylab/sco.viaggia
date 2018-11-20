@@ -677,8 +677,11 @@ angular.module('viaggia.services.tracking', [])
                         $rootScope.syncRunning = false;
                         deferred.resolve(false);
                     });
+                }, function (error) {
+                    $rootScope.syncRunning = false;
+                    deferred.resolve(false);
                 });
-            }, function () {
+            }, function (error) {
                 // no token obtained
                 $rootScope.syncRunning = false;
                 deferred.resolve(false);
