@@ -88,7 +88,7 @@ angular.module('viaggia.services.notification', [])
                 "registrationId": registrationId,
                 "platform": ionic.Platform.isAndroid() ? "android" : "ios"
               },
-              timeout: 5000
+              timeout: 10000
             }).success(function (data) {
               deferred.resolve(data.notifications);
             })

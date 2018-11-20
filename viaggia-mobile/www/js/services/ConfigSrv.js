@@ -27,7 +27,7 @@ angular.module('viaggia.services.conf', [])
         var PARKING_METERS_MAX_NUMBER = 5;
 
         var HTTP_CONFIG = {
-            timeout: 5000
+            timeout: 10000
         };
         var TRACKING_MINIMUM_DISTANCE = 250;
         var mapJsonConfig = null;
@@ -303,7 +303,7 @@ angular.module('viaggia.services.conf', [])
             },
             getGeocoderConf: function () {
                 return {
-                    timeout: 5000,
+                    timeout: 10000,
                     headers: {
                         appId: undefined
                     }

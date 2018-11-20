@@ -669,7 +669,7 @@ angular.module('viaggia.services.plan', [])
 
                     },
                     data: databuilt,
-                    timeout: 5000
+                    timeout: 10000
                 }).
                     success(function (data) {
                         var savedTrips = JSON.parse(localStorage.getItem(Config.getAppId() + "_savedTrips"));
@@ -859,7 +859,7 @@ angular.module('viaggia.services.plan', [])
                             'Authorization': 'Bearer ' + token
 
                         },
-                        timeout: 5000
+                        timeout: 10000
                     }).
                         success(function (data) {
                             if (!savedTrips) {
@@ -937,7 +937,7 @@ angular.module('viaggia.services.plan', [])
                             'Authorization': 'Bearer ' + token
 
                         },
-                        timeout: 5000
+                        timeout: 10000
                     }).
                         success(function (data) {
                             localDelete(tripId, deferred);
