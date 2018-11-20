@@ -143,6 +143,13 @@ angular.module('viaggia.services.game', [])
                 state: "openGamificationBoard()"
             },
         }
+
+        var challengeUnit = {
+            "Walk_Km": "Walk_Km",
+            "green leaves": "Green_Leaves",
+            "Bike_Km": "Bike_Km"
+
+        }
         var ERROR_TRIP = {
             NO_DATA: {
                 message: "error_trip_no_data"
@@ -984,6 +991,11 @@ angular.module('viaggia.services.game', [])
                 });
             return deferred.promise;
         }
+        gameService.getChallengeByUnit = function (unit) {
+            if (challengeUnit[unit])
+                return challengeUnit[unit];
+            return ""
+        }
         gameService.getPlayersForChallenge = function (how, from, to, typedthings) {
             var deferred = $q.defer();
             LoginService.getValidAACtoken().then(
@@ -1166,6 +1178,7 @@ angular.module('viaggia.services.game', [])
             var deferred = $q.defer();
             gameService.getStatus().then(
                 function (localStatus) {
+                    $rootScope.currentUser = localStatus.playerData;
                     deferred.resolve(localStatus);
                 },
                 function (response) {

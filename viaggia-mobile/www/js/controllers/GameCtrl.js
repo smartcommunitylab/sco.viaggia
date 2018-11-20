@@ -192,11 +192,13 @@ angular.module('viaggia.controllers.game', [])
                             $scope.getPast();
                         },
                         function (err) {
-                            $scope.noStatus = true;
-                            $scope.actualTab = $scope.tabs[0];
-                            Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
-                            $scope.challenges = [];
-                            $scope.pastChallenges = [];
+                            if (!$scope.challenges) {
+                                $scope.noStatus = true;
+                                $scope.actualTab = $scope.tabs[0];
+                                Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                                $scope.challenges = [];
+                                $scope.pastChallenges = [];
+                            }
                         })
 
                 }, function (err) {
@@ -414,11 +416,17 @@ angular.module('viaggia.controllers.game', [])
             //TODO
             return "width:30%;background:transparent;"
         }
+        var getChallengeByUnit = function (challenge) {
+            return GameSrv.getChallengeByUnit(challenge.unit)
+        }
+
         $scope.getValueUser = function (challenge) {
-            return challenge.row_status + " " + $filter('translate')('user_points_label');
+            var labelChallenge = getChallengeByUnit(challenge);
+            return $filter('number')(challenge.row_status, 0) + " " + $filter('translate')(labelChallenge);
         }
         $scope.getValueOther = function (challenge) {
-            return challenge.otherAttendeeData.row_status + " " + $filter('translate')('user_points_label');
+            var labelChallenge = getChallengeByUnit(challenge);
+            return $filter('number')(challenge.otherAttendeeData.row_status, 0) + " " + $filter('translate')(labelChallenge);
         }
         $scope.getPast = function () {
             $scope.pastChallenges = null;
@@ -436,6 +444,7 @@ angular.module('viaggia.controllers.game', [])
                                     type: pastChallenges[i].type,
                                     short: pastChallenges[i].challDesc,
                                     long: pastChallenges[i].challCompleteDesc,
+                                    row_status: $filter('number')(pastChallenges[i].row_status, 0),
                                     status: pastChallenges[i].status,
                                     idOpponent: pastChallenges[i].idOpponent ? pastChallenges[i].idOpponent : null,
                                     nicknameOpponent: pastChallenges[i].nicknameOpponent ? pastChallenges[i].nicknameOpponent : null,
@@ -525,8 +534,6 @@ angular.module('viaggia.controllers.game', [])
             $ionicScrollDelegate.$getByHandle('challengesScroll').resize();
         };
 
-        generateChallengesStyle();
-
         $window.onresize = function (event) {
             // Timeout required for our purpose
             $timeout(function () {
@@ -534,9 +541,16 @@ angular.module('viaggia.controllers.game', [])
             }, 200);
         };
 
-        $scope.init();
 
-
+        $scope.$on("$ionicView.afterEnter", function (scopes, states) {
+            //check timer if passed x time
+            var date = new Date();
+            if (!localStorage.getItem(Config.getAppId() + "_challengesRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_challengesRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
+                $scope.init();
+                generateChallengesStyle();
+                localStorage.setItem(Config.getAppId() + "_challengesRefresh", new Date().getTime());
+            }
+        });
     })
     .controller('ConfigureChallengeCtrl', function ($scope, $state, $filter, $ionicModal, Toast, GameSrv) {
         $scope.players = [];
@@ -1006,7 +1020,6 @@ angular.module('viaggia.controllers.game', [])
         };
 
         generateRankingStyle();
-
         $window.onresize = function (event) {
             // Timeout required for our purpose
             $timeout(function () {
@@ -1026,6 +1039,7 @@ angular.module('viaggia.controllers.game', [])
                 $state.go('app.home.challenges', { challengeEnd: end, challengeStart: start });
             }
         };
+
 
     })
     .controller('TripDiaryCtrl', function ($scope, $filter, $timeout, $stateParams, planService, mapService, GameSrv, $window, $ionicScrollDelegate, DiaryDbSrv, Toast, Config) {
@@ -1201,7 +1215,7 @@ angular.module('viaggia.controllers.game', [])
     )
     .controller('RankingsCtrl', function ($scope, $rootScope, $state, $ionicScrollDelegate, $window, $timeout, Config, GameSrv, Toast, $filter, $ionicPosition) {
         $scope.maybeMore = true;
-        $rootScope.currentUser = {};
+        $scope.currentUser = {};
         $scope.ranking = [];
         $scope.singleRankStatus = true;
         $scope.rank = true;
@@ -1209,6 +1223,10 @@ angular.module('viaggia.controllers.game', [])
         var getRanking = false;
         $scope.rankingPerPage = 50;
 
+        GameSrv.getLocalStatus().then(
+            function (status) {
+                $scope.status = status;
+            });
         $scope.filter = {
             open: false,
             toggle: function () {
@@ -1246,7 +1264,7 @@ angular.module('viaggia.controllers.game', [])
                     if (ranking) {
                         getRanking = false;
                         $scope.singleRankStatus = true;
-                        $rootScope.currentUser = ranking['actualUser'];
+                        $scope.currentUser = ranking['actualUser'];
                         $scope.ranking = ranking['classificationList'];
                         if (!$scope.ranking || $scope.ranking.length < $scope.rankingPerPage) {
                             $scope.maybeMore = false;
@@ -1284,9 +1302,6 @@ angular.module('viaggia.controllers.game', [])
 
 
         };
-        $scope.getUserImg = function (id) {
-            return Config.getServerURL() + '/gamificationweb/player/avatar/' + Config.getAppId() + '/' + id
-        }
 
         $scope.reloadRank = function () {
             $scope.maybeMore = true;
@@ -1300,8 +1315,11 @@ angular.module('viaggia.controllers.game', [])
                 var end = start + $scope.rankingPerPage;
                 GameSrv.getRanking($scope.filter.selected, start, end).then(
                     function (ranking) {
+                        if (start == 0) {
+                            $scope.ranking = [];
+                        }
                         if (ranking) {
-                            $rootScope.currentUser = ranking['actualUser'];
+                            $scope.currentUser = ranking['actualUser'];
                             $scope.ranking = $scope.ranking.concat(ranking['classificationList']);
 
                             if (ranking['classificationList'].length < $scope.rankingPerPage) {
@@ -1324,26 +1342,28 @@ angular.module('viaggia.controllers.game', [])
                         }
                     },
                     function (err) {
-                        $scope.maybeMore = false;
-                        Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
-                        $scope.$broadcast('scroll.infiniteScrollComplete');
-                        getRanking = false;
-                        if ($scope.ranking.length == 0) {
-                            $scope.singleRankStatus = false;
-
-                        }
-                        //position to the last visible so No infinite scroll
-                        if ($scope.ranking.length > 0) {
-                            var visualizedElements = Math.ceil((window.innerHeight - (44 + 49 + 44 + 44 + 48)) / 40);
-                            var lastelementPosition = $ionicPosition.position(angular.element(document.getElementById('position-' + ($scope.ranking.length - visualizedElements))));
-                            $ionicScrollDelegate.scrollTo(lastelementPosition.left, lastelementPosition.top, true);
-                        }
+                        if (!$scope.ranking || $scope.ranking.length == 0) {
+                            $scope.maybeMore = false;
+                            Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+                            $scope.$broadcast('scroll.infiniteScrollComplete');
+                            getRanking = false;
+                            if ($scope.ranking.length == 0) {
+                                $scope.singleRankStatus = false;
+                             }
+                            //position to the last visible so No infinite scroll
+                            if ($scope.ranking.length > 0) {
+                                var visualizedElements = Math.ceil((window.innerHeight - (44 + 49 + 44 + 44 + 48)) / 40);
+                                var lastelementPosition = $ionicPosition.position(angular.element(document.getElementById('position-' + ($scope.ranking.length - visualizedElements))));
+                                $ionicScrollDelegate.scrollTo(lastelementPosition.left, lastelementPosition.top, true);
+                            }
+                         }
 
 
                     }
                 );
             } else {
                 $scope.$broadcast('scroll.infiniteScrollComplete');
+
             }
         };
 
@@ -1358,12 +1378,26 @@ angular.module('viaggia.controllers.game', [])
             $ionicScrollDelegate.$getByHandle('rankingScroll').resize();
         };
 
-        generateRankingStyle();
 
         $window.onresize = function (event) {
-            // Timeout required for our purpose
             $timeout(function () {
                 generateRankingStyle();
             }, 200);
         };
+
+        $scope.$on("$ionicView.beforeEnter", function (scopes, states) {
+            $ionicScrollDelegate.$getByHandle('rankingScroll').resize();
+        });
+        $scope.$on("$ionicView.afterEnter", function (scopes, states) {
+            //check timer if passed x time
+            var date = new Date();
+            $scope.rankingStyle = {
+                'height': window.innerHeight - (44 + 49 + 44 + 44 + 48) + 'px'
+            };            if (!localStorage.getItem(Config.getAppId() + "_rankingRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_rankingRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
+                generateRankingStyle();
+                $scope.reloadRank();
+                localStorage.setItem(Config.getAppId() + "_rankingRefresh", new Date().getTime());
+
+            }
+        });
     });

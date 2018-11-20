@@ -61,7 +61,7 @@
                         </div>
                     </div>
                 </ion-list>
-                <ion-infinite-scroll ng-if="ranking" on-infinite="loadMore()"></ion-infinite-scroll>
+                <ion-infinite-scroll ng-if="maybeMore" on-infinite="loadMore()"></ion-infinite-scroll>
             </ion-scroll>
         </div>
         <div ng-if="!rank">

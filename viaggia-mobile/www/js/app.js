@@ -438,7 +438,7 @@ angular.module('viaggia', [
       // Each tab has its own nav history stack:
 
       .state('app.home.home', {
-        cache: false,
+        cache: true,
         url: '/hometrack',
         views: {
           'tab-home': {
@@ -449,7 +449,7 @@ angular.module('viaggia', [
       })
 
       .state('app.home.diary', {
-        cache: true,
+        cache: false,
         url: '/diary',
         params: {
           challengeEnd: null
@@ -463,7 +463,7 @@ angular.module('viaggia', [
       })
 
       .state('app.home.leaderboards', {
-        cache: false,
+        cache: true,
         url: '/leaderboards',
         views: {
           'tab-leaderboards': {
@@ -473,7 +473,7 @@ angular.module('viaggia', [
         }
       })
       .state('app.home.challenges', {
-        cache: false,
+        cache: true,
         url: "/challenges",
         params: {
           challengeEnd: null,
@@ -487,7 +487,7 @@ angular.module('viaggia', [
         }
       })
       .state('app.home.mobility', {
-        cache: false,
+        cache: true,
         url: '/mobility',
         views: {
           'tab-mobility': {
@@ -992,7 +992,7 @@ angular.module('viaggia', [
         }
       })
       .state('app.game.rankings', {
-        cache: false,
+        cache: true,
         url: '/rankings',
         views: {
           'tab-rankings': {
