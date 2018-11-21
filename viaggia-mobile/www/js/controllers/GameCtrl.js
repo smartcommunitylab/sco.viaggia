@@ -199,6 +199,8 @@ angular.module('viaggia.controllers.game', [])
                                 $scope.challenges = [];
                                 $scope.pastChallenges = [];
                             }
+                            localStorage.removeItem(Config.getAppId() + "_challengesRefresh");
+
                         })
 
                 }, function (err) {
@@ -546,9 +548,9 @@ angular.module('viaggia.controllers.game', [])
             //check timer if passed x time
             var date = new Date();
             if (!localStorage.getItem(Config.getAppId() + "_challengesRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_challengesRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
+                localStorage.setItem(Config.getAppId() + "_challengesRefresh", new Date().getTime());
                 $scope.init();
                 generateChallengesStyle();
-                localStorage.setItem(Config.getAppId() + "_challengesRefresh", new Date().getTime());
             }
         });
     })
@@ -1297,6 +1299,8 @@ angular.module('viaggia.controllers.game', [])
                     $scope.rank = false;
                     $scope.singleRankStatus = true;
                     Config.loaded();
+                    localStorage.removeItem(Config.getAppId() + "_rankingRefresh");
+
                 }
             )
 
@@ -1349,14 +1353,14 @@ angular.module('viaggia.controllers.game', [])
                             getRanking = false;
                             if ($scope.ranking.length == 0) {
                                 $scope.singleRankStatus = false;
-                             }
+                            }
                             //position to the last visible so No infinite scroll
                             if ($scope.ranking.length > 0) {
                                 var visualizedElements = Math.ceil((window.innerHeight - (44 + 49 + 44 + 44 + 48)) / 40);
                                 var lastelementPosition = $ionicPosition.position(angular.element(document.getElementById('position-' + ($scope.ranking.length - visualizedElements))));
                                 $ionicScrollDelegate.scrollTo(lastelementPosition.left, lastelementPosition.top, true);
                             }
-                         }
+                        }
 
 
                     }
@@ -1393,10 +1397,10 @@ angular.module('viaggia.controllers.game', [])
             var date = new Date();
             $scope.rankingStyle = {
                 'height': window.innerHeight - (44 + 49 + 44 + 44 + 48) + 'px'
-            };            if (!localStorage.getItem(Config.getAppId() + "_rankingRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_rankingRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
+            }; if (!localStorage.getItem(Config.getAppId() + "_rankingRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_rankingRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
+                localStorage.setItem(Config.getAppId() + "_rankingRefresh", new Date().getTime());
                 generateRankingStyle();
                 $scope.reloadRank();
-                localStorage.setItem(Config.getAppId() + "_rankingRefresh", new Date().getTime());
 
             }
         });
