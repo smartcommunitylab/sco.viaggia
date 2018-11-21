@@ -1195,13 +1195,17 @@ angular.module('viaggia.services.game', [])
         gameService.getIconChallenge = function (challenge) {
             if (challenge.group == 'invite')
                 return iconChall['sent_' + challenge.type];
-            return iconChall[challenge.type];
+            if (iconChall[challenge.type])
+                return iconChall[challenge.type]
+            return iconChall["racc"];
         }
 
         gameService.getColorChallenge = function (challenge) {
             if (challenge.group == 'invite')
                 return colorChall['sent_' + challenge.type];
-            return colorChall[challenge.type];
+            if (colorChall[challenge.type])
+                return colorChall[challenge.type]
+            return colorChall["racc"];
         }
         gameService.getBorderColor = function (challenge) {
             if (challenge.type) {
