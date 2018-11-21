@@ -198,9 +198,8 @@ angular.module('viaggia.controllers.game', [])
                                 Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
                                 $scope.challenges = [];
                                 $scope.pastChallenges = [];
+                                localStorage.removeItem(Config.getAppId() + "_challengesRefresh");
                             }
-                            localStorage.removeItem(Config.getAppId() + "_challengesRefresh");
-
                         })
 
                 }, function (err) {
@@ -547,10 +546,11 @@ angular.module('viaggia.controllers.game', [])
         $scope.$on("$ionicView.afterEnter", function (scopes, states) {
             //check timer if passed x time
             var date = new Date();
-            if (!localStorage.getItem(Config.getAppId() + "_challengesRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_challengesRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
-                localStorage.setItem(Config.getAppId() + "_challengesRefresh", new Date().getTime());
+            
+            if (!localStorage.getItem(Config.getAppId() + "_challengesRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_challengesRefresh")) + Config.getCacheRefresh() < new Date().getTime()|| !$scope.status) {
                 $scope.init();
                 generateChallengesStyle();
+                localStorage.setItem(Config.getAppId() + "_challengesRefresh", new Date().getTime());
             }
         });
     })
