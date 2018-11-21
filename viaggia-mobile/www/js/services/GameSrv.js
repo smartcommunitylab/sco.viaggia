@@ -1043,7 +1043,7 @@ angular.module('viaggia.services.game', [])
                 return challengeUnit[unit];
             return ""
         }
-        gameService.getPlayersForChallenge = function (how, from, to, typedthings) {
+        gameService.cancelChallenge = function (challenge) {
             var deferred = $q.defer();
             LoginService.getValidAACtoken().then(
                 function (token) {
