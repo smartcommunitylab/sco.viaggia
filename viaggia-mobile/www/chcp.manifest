@@ -401,7 +401,7 @@
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "cc961534f84dc0f2513754f3764b532d"
+    "hash": "fb9a6b5d7e34ad0206a6142c6e20bbe6"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
@@ -513,7 +513,7 @@
   },
   {
     "file": "js/services/GameSrv.js",
-    "hash": "bfae618ef40579fa6b3e6eaedd302035"
+    "hash": "cad9fb50567ec40bef7b5b73e8f3847b"
   },
   {
     "file": "js/services/GeoSrv.js",
@@ -557,7 +557,7 @@
   },
   {
     "file": "js/services/TrackSrv.js",
-    "hash": "2dcddd8a985cce2d174903155dcffa77"
+    "hash": "8b7ff8cb4a382b1b69cf57066c9b43f0"
   },
   {
     "file": "js/services/TTSrv.js",

@@ -1044,7 +1044,11 @@ angular.module('viaggia.services.game', [])
                 return challengeUnit[unit];
             return ""
         }
+<<<<<<< HEAD
         gameService.cancelChallenge = function (how, from, to, typedthings) {
+=======
+        gameService.cancelChallenge = function (challenge) {
+>>>>>>> 66305b283b96521534b112b355bebab6c7500e86
             var deferred = $q.defer();
             LoginService.getValidAACtoken().then(
                 function (token) {
