@@ -149,7 +149,10 @@ angular.module('viaggia.services.tracking', [])
                     return;
                 }
                 //check gps and accuracy
-                bgGeo.getCurrentPosition(function (location, taskId) {
+                bgGeo.getCurrentPosition({
+                    timeout: 10, // 10 seconds timeout to fetch location
+                    maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
+                }, function (location, taskId) {
                     if (location.coords.accuracy > ACCURACY) {
                         deferred.reject(Config.getErrorLowAccuracy());
                     } else {
@@ -161,10 +164,7 @@ angular.module('viaggia.services.tracking', [])
                     //if 0,1 -> GPS off
                     deferred.reject(Config.getErrorGPSNoSignal());
                     //deferred.reject(errorCode);
-                }, {
-                        timeout: 10, // 10 seconds timeout to fetch location
-                        maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
-                    });
+                });
             });
             return deferred.promise;
         }
@@ -268,7 +268,7 @@ angular.module('viaggia.services.tracking', [])
                     .then(function () {
                         if (transport === 'bus') {
                             BT.startScan(function (btId) {
-                                bgGeo.getCurrentPosition(function (location, taskId) {
+                                bgGeo.getCurrentPosition({}, function (location, taskId) {
                                     location.extras = {
                                         idTrip: tripId,
                                         multimodalId: multimodalId,
@@ -304,7 +304,7 @@ angular.module('viaggia.services.tracking', [])
                 //check temporary flow
                 var startTimestamp = new Date().getTime();
                 LoginService.getValidAACtoken().then(function (token) {
-                    bgGeo.getCurrentPosition(function (location, taskId) {
+                    bgGeo.getCurrentPosition({}, function (location, taskId) {
                         sendServerStart(trip, tripId, null, token, null, -1).then(function () {
                             location.extras = {
                                 idTrip: tripId,
@@ -460,7 +460,18 @@ angular.module('viaggia.services.tracking', [])
             var temporary = false;
             if (trip) {
                 LoginService.getValidAACtoken().then(function (token) {
-                    bgGeo.getCurrentPosition(function (location, taskId) {
+                    bgGeo.getCurrentPosition({
+                        timeout: 10, // 10 seconds timeout to fetch location
+                        maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
+                        //minimumAccuracy: ACCURACY,
+                        desiredAccuracy: ACCURACY, // Fetch a location with a minimum accuracy of ACCURACY meters.
+                        extras: {
+                            idTrip: idTrip,
+                            multimodalId: multimodalId,
+                            start: startTimestamp,
+                            transportType: transportType
+                        }
+                    }, function (location, taskId) {
                         sendServerStart(trip.data, idTrip, multimodalId, token, transportType, -1).then(function () {
                             location.extras = {
                                 idTrip: idTrip,
@@ -483,18 +494,7 @@ angular.module('viaggia.services.tracking', [])
 
                         deferred.resolve();
 
-                    }, {
-                            timeout: 10, // 10 seconds timeout to fetch location
-                            maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
-                            //minimumAccuracy: ACCURACY,
-                            desiredAccuracy: ACCURACY, // Fetch a location with a minimum accuracy of ACCURACY meters.
-                            extras: {
-                                idTrip: idTrip,
-                                multimodalId: multimodalId,
-                                start: startTimestamp,
-                                transportType: transportType
-                            }
-                        })
+                    })
                 }, function (err) {
 
                     deferred.resolve();
@@ -865,12 +865,11 @@ angular.module('viaggia.services.tracking', [])
             alert.then(function (e) {
                 trackService.startup();
                 //if I'm visualizing the map, go to home page
-                if ($state.current.name === 'app.mapTracking')
-                {
+                if ($state.current.name === 'app.mapTracking') {
                     $ionicHistory.nextViewOptions({
                         disableBack: true
-                      });
-                      $state.go('app.home.home');
+                    });
+                    $state.go('app.home.home');
                 }
             });
         }

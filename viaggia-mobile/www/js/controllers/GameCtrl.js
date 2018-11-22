@@ -191,7 +191,7 @@ angular.module('viaggia.controllers.game', [])
                             $scope.status = status;
                             $scope.noStatus = false;
                             $scope.actualTab = $scope.tabs[0];
-                            if (paramEnd && paramEnd > now && paramStart > now) {
+                            if ((paramEnd && paramEnd > now && paramStart > now)|| (paramEnd && !paramStart)) {
                                 $scope.actualTab = $scope.tabs[1];
                             }
                             $scope.getTypes();
@@ -387,7 +387,6 @@ angular.module('viaggia.controllers.game', [])
             GameSrv.cancelChallenge(challenge).then(function () {
                 $rootScope.canPropose = true;
                 reloadList();
-
             }, function (err) {
 
             }).finally(Config.loaded);
