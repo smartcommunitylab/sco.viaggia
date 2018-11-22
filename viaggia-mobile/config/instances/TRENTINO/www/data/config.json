@@ -230,7 +230,7 @@
         "stationaryRadius": 20,
         "activityType": "Other",
         "disableElasticity": true,
-        "disableStopDetection":true,
+        "disableStopDetection": true,
         "stopDetectionDelay": 0,
         "stopTimeout": 0,
         "activityRecognitionInterval": 10000,
@@ -254,6 +254,7 @@
         "batchSync": true,
         "autoSync": false,
         "notificationColor": "gray",
-        "notificationIcon": "drawable/notification"
+        "notificationSmallIcon": "drawable/notification",
+        "notificationLargeIcon": "drawable/notification"
     }
 }

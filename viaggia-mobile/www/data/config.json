@@ -254,6 +254,7 @@
         "batchSync": true,
         "autoSync": false,
         "notificationColor": "gray",
-        "notificationIcon": "drawable/notification"
+        "notificationSmallIcon": "drawable/notification",
+        "notificationLargeIcon": "drawable/notification"
     }
 }
