@@ -17,7 +17,7 @@
   },
   {
     "file": "data/config.json",
-    "hash": "9b43004877ad329f0b3e5f367bb8bc29"
+    "hash": "2039ad6628ea832650fdf9c68e1affaf"
   },
   {
     "file": "data/game/ranking.json",
@@ -405,7 +405,7 @@
   },
   {
     "file": "js/controllers/HomeCtrl.js",
-    "hash": "de708d02ccf5aaca0907cea1fb52eaa9"
+    "hash": "ac5ee0410e6d63a2e630a48018d1b547"
   },
   {
     "file": "js/controllers/InfoCtrl.js",
@@ -557,7 +557,7 @@
   },
   {
     "file": "js/services/TrackSrv.js",
-    "hash": "5f16234ca26e0c5906cb7bfeb4eb3946"
+    "hash": "c1076c4c0169f1ab352f7d2d2832d882"
   },
   {
     "file": "js/services/TTSrv.js",
