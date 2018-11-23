@@ -136,7 +136,15 @@ angular.module('viaggia.services.tracking', [])
             return deferred.promise;;
 
         }
-
+        var launchGeoConfiguration = function (options, successFn, failFn) {
+            var isAndroid = ionic.Platform.isAndroid();
+            var currentPlatformVersion = ionic.Platform.version();
+            var returnObj = {};
+            if (isAndroid && currentPlatformVersion < 4.4) {
+                bgGeo.getCurrentPosition(successFn, failFn, options)
+            }
+            bgGeo.getCurrentPosition(options, successFn, failFn)
+        }
         /*
          *check if GPS signal is present and accurated
          *
@@ -149,21 +157,22 @@ angular.module('viaggia.services.tracking', [])
                     return;
                 }
                 //check gps and accuracy
-                bgGeo.getCurrentPosition(function (location, taskId) {
-                    if (location.coords.accuracy > ACCURACY) {
-                        deferred.reject(Config.getErrorLowAccuracy());
-                    } else {
-                        deferred.resolve(location.coords.accuracy);
+                launchGeoConfiguration({
+                    timeout: 10, // 10 seconds timeout to fetch location
+                    maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
+                },
+                    function (location, taskId) {
+                        if (location.coords.accuracy > ACCURACY) {
+                            deferred.reject(Config.getErrorLowAccuracy());
+                        } else {
+                            deferred.resolve(location.coords.accuracy);
 
-                    }
-                }, function (errorCode) {
-                    console.log(errorCode);
-                    //if 0,1 -> GPS off
-                    deferred.reject(Config.getErrorGPSNoSignal());
-                    //deferred.reject(errorCode);
-                }, {
-                        timeout: 10, // 10 seconds timeout to fetch location
-                        maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
+                        }
+                    }, function (errorCode) {
+                        console.log(errorCode);
+                        //if 0,1 -> GPS off
+                        deferred.reject(Config.getErrorGPSNoSignal());
+                        //deferred.reject(errorCode);
                     });
             });
             return deferred.promise;
@@ -268,7 +277,7 @@ angular.module('viaggia.services.tracking', [])
                     .then(function () {
                         if (transport === 'bus') {
                             BT.startScan(function (btId) {
-                                bgGeo.getCurrentPosition(function (location, taskId) {
+                                launchGeoConfiguration({}, function (location, taskId) {
                                     location.extras = {
                                         idTrip: tripId,
                                         multimodalId: multimodalId,
@@ -304,44 +313,45 @@ angular.module('viaggia.services.tracking', [])
                 //check temporary flow
                 var startTimestamp = new Date().getTime();
                 LoginService.getValidAACtoken().then(function (token) {
-                    bgGeo.getCurrentPosition(function (location, taskId) {
-                        sendServerStart(trip, tripId, null, token, null, -1).then(function () {
-                            location.extras = {
-                                idTrip: tripId,
-                                start: startTimestamp
-                            }; // <-- add some arbitrary extras-data
-                            //                      // Insert it.
-                            bgGeo.insertLocation(location, function () {
-                                bgGeo.finish(taskId);
-                            });
-                            trip.tripId = tripId;
-                            localStorage.setItem(Config.getAppId() + '_temporary', JSON.stringify(trip));
-                            trackService.start(tripId, null, {
-                                data: trip
-                            }
-                                , callback, startTimestamp)
-                                .then(function () {
-                                    deferred.resolve();
-                                }, function (errorCode) {
-                                    deferred.reject(errorCode);
+                    launchGeoConfiguration({},
+                        function (location, taskId) {
+                            sendServerStart(trip, tripId, null, token, null, -1).then(function () {
+                                location.extras = {
+                                    idTrip: tripId,
+                                    start: startTimestamp
+                                }; // <-- add some arbitrary extras-data
+                                //                      // Insert it.
+                                bgGeo.insertLocation(location, function () {
+                                    bgGeo.finish(taskId);
                                 });
-                        }, function (err) {
-                            //in case of temporary journey, if start doesn't arrive, stop it
+                                trip.tripId = tripId;
+                                localStorage.setItem(Config.getAppId() + '_temporary', JSON.stringify(trip));
+                                trackService.start(tripId, null, {
+                                    data: trip
+                                }
+                                    , callback, startTimestamp)
+                                    .then(function () {
+                                        deferred.resolve();
+                                    }, function (errorCode) {
+                                        deferred.reject(errorCode);
+                                    });
+                            }, function (err) {
+                                //in case of temporary journey, if start doesn't arrive, stop it
+                                bgGeo.stop(function () {
+                                    clean()
+                                    deferred.reject("temporary");
+                                });
+
+
+                            })
+
+                        }, function (errorCode) {
                             bgGeo.stop(function () {
                                 clean()
-                                deferred.reject("temporary");
+                                deferred.reject(errorCode);
                             });
 
-
-                        })
-
-                    }, function (errorCode) {
-                        bgGeo.stop(function () {
-                            clean()
-                            deferred.reject(errorCode);
-                        });
-
-                    }
+                        }
                     )
                 }, function (err) {
 
@@ -460,40 +470,42 @@ angular.module('viaggia.services.tracking', [])
             var temporary = false;
             if (trip) {
                 LoginService.getValidAACtoken().then(function (token) {
-                    bgGeo.getCurrentPosition(function (location, taskId) {
-                        sendServerStart(trip.data, idTrip, multimodalId, token, transportType, -1).then(function () {
-                            location.extras = {
-                                idTrip: idTrip,
-                                multimodalId: multimodalId,
-                                start: startTimestamp,
-                                transportType: transportType
-                            }; // <-- add some arbitrary extras-data
-                            //                      // Insert it.
-                            bgGeo.insertLocation(location, function () {
-                                bgGeo.finish(taskId);
-                            });
+                    launchGeoConfiguration({
+                        timeout: 10, // 10 seconds timeout to fetch location
+                        maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
+                        //minimumAccuracy: ACCURACY,
+                        desiredAccuracy: ACCURACY, // Fetch a location with a minimum accuracy of ACCURACY meters.
+                        extras: {
+                            idTrip: idTrip,
+                            multimodalId: multimodalId,
+                            start: startTimestamp,
+                            transportType: transportType
+                        }
+                    }
+
+                        , function (location, taskId) {
+                            sendServerStart(trip.data, idTrip, multimodalId, token, transportType, -1).then(function () {
+                                location.extras = {
+                                    idTrip: idTrip,
+                                    multimodalId: multimodalId,
+                                    start: startTimestamp,
+                                    transportType: transportType
+                                }; // <-- add some arbitrary extras-data
+                                //                      // Insert it.
+                                bgGeo.insertLocation(location, function () {
+                                    bgGeo.finish(taskId);
+                                });
+                                deferred.resolve();
+                            }, function (err) {
+                                //in case of temporary journey, if start doesn't arrive, stop it
+                                deferred.resolve();
+
+                            })
+
+                        }, function (errorCode) {
+
                             deferred.resolve();
-                        }, function (err) {
-                            //in case of temporary journey, if start doesn't arrive, stop it
-                            deferred.resolve();
 
-                        })
-
-                    }, function (errorCode) {
-
-                        deferred.resolve();
-
-                    }, {
-                            timeout: 10, // 10 seconds timeout to fetch location
-                            maximumAge: 50000, // Accept the last-known-location if not older than 50 secs.
-                            //minimumAccuracy: ACCURACY,
-                            desiredAccuracy: ACCURACY, // Fetch a location with a minimum accuracy of ACCURACY meters.
-                            extras: {
-                                idTrip: idTrip,
-                                multimodalId: multimodalId,
-                                start: startTimestamp,
-                                transportType: transportType
-                            }
                         })
                 }, function (err) {
 
@@ -590,7 +602,7 @@ angular.module('viaggia.services.tracking', [])
                 console.log('- hearbeat');
                 //Manually insert a location.
                 var location = params.location;
-                bgGeo.getCurrentPosition(function (location, taskId) {
+                launchGeoConfiguration({}, function (location, taskId) {
                     console.log('- current location: ', location);
                     bgGeo.finish(taskId);
                 });
@@ -877,12 +889,11 @@ angular.module('viaggia.services.tracking', [])
             alert.then(function (e) {
                 trackService.startup();
                 //if I'm visualizing the map, go to home page
-                if ($state.current.name === 'app.mapTracking')
-                {
+                if ($state.current.name === 'app.mapTracking') {
                     $ionicHistory.nextViewOptions({
                         disableBack: true
-                      });
-                      $state.go('app.home.home');
+                    });
+                    $state.go('app.home.home');
                 }
             });
         }

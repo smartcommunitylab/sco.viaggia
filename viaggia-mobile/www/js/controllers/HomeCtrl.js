@@ -174,7 +174,6 @@ angular.module('viaggia.controllers.home', [])
                     marketService.initMarketFavorites();
                     notificationInit();
                     initWatch();
-                    localDataInit();
                     setChallenges();
                     setChooseButton();
                     updateStatus();
@@ -186,6 +185,7 @@ angular.module('viaggia.controllers.home', [])
         });
         $scope.$on("$ionicView.enter", function (scopes, states) {
             Config.init().then(function () {
+                localDataInit();
                 if (window.BackgroundGeolocation) {
                     trackService.startup().then(function () {
                         $scope.trackingIsOn = trackService.trackingIsGoingOn() && !trackService.trackingIsFinished();

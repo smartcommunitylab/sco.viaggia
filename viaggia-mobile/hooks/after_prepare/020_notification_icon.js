@@ -16,25 +16,25 @@
 
 var filestocopy = [
     {
-        "resources/notification.png": "platforms/android/res/drawable-hdpi/notification.png"
+        "resources/notification.png": "platforms/android/app/src/main/res/drawable-hdpi/notification.png"
 	},
     {
-        "resources/notification.png": "platforms/android/res/drawable-ldpi/notification.png"
+        "resources/notification.png": "platforms/android/app/src/main/res/drawable-ldpi/notification.png"
 	},
     {
-        "resources/notification.png": "platforms/android/res/drawable-mdpi/notification.png"
+        "resources/notification.png": "platforms/android/app/src/main/res/drawable-mdpi/notification.png"
 	},
     {
-        "resources/notification.png": "platforms/android/res/drawable-xhdpi/notification.png"
+        "resources/notification.png": "platforms/android/app/src/main/res/drawable-xhdpi/notification.png"
 	},
     {
-        "resources/notification.png": "platforms/android/res/drawable-xxhdpi/notification.png"
+        "resources/notification.png": "platforms/android/app/src/main/res/drawable-xxhdpi/notification.png"
 	},
     {
-        "resources/notification.png": "platforms/android/res/drawable-xxxhdpi/notification.png"
+        "resources/notification.png": "platforms/android/app/src/main/res/drawable-xxxhdpi/notification.png"
 	},
     {
-        "resources/notification.png": "platforms/android/res/drawable/notification.png"
+        "resources/notification.png": "platforms/android/app/src/main/res/drawable/notification.png"
 	}
 ];
 
