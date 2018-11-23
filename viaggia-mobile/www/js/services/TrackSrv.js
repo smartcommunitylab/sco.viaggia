@@ -458,7 +458,7 @@ angular.module('viaggia.services.tracking', [])
             var isAndroid = ionic.Platform.isAndroid();
             var currentPlatformVersion = ionic.Platform.version();
             var returnObj = {};
-            if (isAndroid && currentPlatformVersion < 4.4) {
+            if (isAndroid && currentPlatformVersion < 4.4 || !bgGeo.reset) {
                 bgGeo.getCurrentPosition(successFn, failFn, options)
             }
             bgGeo.getCurrentPosition(options, successFn, failFn)
