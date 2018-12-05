@@ -454,13 +454,12 @@ angular.module('viaggia.controllers.game', [])
                 return "width: 100%;";
             return "width:" + (challenge.otherAttendeeData.status * 100) / challenge.status + "%;"
         }
-
         $scope.getWidthUser = function (challenge) {
-            return "width:" + challenge.status + "%;"
+            return "width:" + ((challenge.status>100)?100:challenge.status )+ "%;"
         }
         $scope.getWidthOther = function (challenge) {
             if (challenge.otherAttendeeData)
-                return "width:" + challenge.otherAttendeeData.status + "%;"
+                return "width:" +((challenge.otherAttendeeData.status>100)?100:challenge.otherAttendeeData.status )+ "%;"
             return "width: 1%;"
         }
         $scope.getWidthSeparator = function (challenge) {
