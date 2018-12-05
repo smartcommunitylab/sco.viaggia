@@ -2929,6 +2929,9 @@ ion-header-bar .title {
     /* margin: 4px 8px; */
     object-fit: cover;
 }
+.challenge-profile-text {
+    margin-left: 24px;
+}
 .diary-line {
     padding: 0px;
 }
@@ -3108,6 +3111,7 @@ ion-header-bar .title {
 }
 .coop-other {
     background: #B62000;
+    float: right;
 }
 .time-user {
     background: #25BC5D;
@@ -3185,12 +3189,18 @@ ion-header-bar .title {
     border-radius: 12px;
     height: 80px;
 }
+
+.configure-challenge-button:before {
+    font-size: 34px!important;
+}
 .configure-list-button {
-    border-radius: 16px;
+    border-radius: 4px;
     padding: 4px;
     text-align: center;
     width: 100%;
     margin: auto;
+    color: white;
+    background-color: #4EB0E6;
 }
 .lab-challenge-conf{
     width: 100%;
@@ -3213,7 +3223,11 @@ ion-header-bar .title {
 }
 .chall-selected {
     color: white;
-    background-color: #007cc2;
+    background-color: #4EB0E6;
+}
+.chall-not-selected {
+    color:  #4EB0E6;
+    background-color:white;
 }
 .chall-player-separator{
     border-top: 1px solid;
@@ -3267,6 +3281,10 @@ ion-header-bar .title {
     margin: 0px 0px 8px 8px;
 }
 .button-next-challenge{
+    margin: 3px;
+}
+.button-unlock-challenge{
+    background-color: #4caf4f;
     margin: 3px;
 }
 .tabs>a>i  {
@@ -3388,7 +3406,18 @@ ion-header-bar .title {
 .menu-expanded {
     transform: translate3d(275px, 0px, 0px);
 }
+ .user-choose-chall .item-content {
+    display: flex;
+    align-items:center;
+ }
 
+ .row-center {
+    display: flex;
+    align-items: center;
+ }
+ .row-margin {
+     margin-top:8px!important;
+ }
 @-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
 @-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
 @-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}

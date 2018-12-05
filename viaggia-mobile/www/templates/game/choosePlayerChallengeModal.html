@@ -11,14 +11,14 @@
     </ion-header-bar>
     <ion-content>
         <ion-list>
-            <ion-radio ng-model="playerId" ng-value="player.id" ng-repeat="player in players" ng-click="selectPlayer(player)">
+            <ion-radio class="user-choose-chall" ng-model="playerId" ng-value="player.id" ng-repeat="player in players" ng-click="selectPlayer(player)">
                 <img class="challenge-profile-img" ng-src="{{getUserImg(player.id)}}">
-                <span>{{player.nickname}}</span>
+                <span class="challenge-profile-text">{{player.nickname}}</span>
             </ion-radio>
-            <div class="chall-player-separator">
+            <!-- <div class="chall-player-separator">
 
-            </div>
-            <div class="row">
+            </div> -->
+            <!-- <div class="row">
                 <div class="col col-80 chall-player-blacklist">
                     {{'lbl_chall_choose_player_blacklist'|translate}}
                 </div>
@@ -33,7 +33,7 @@
             </div>
             <ion-item ng-repeat="player in blacklistplayers">
                 <span class="blacklisted-player">{{player.nickname}}</span>
-            </ion-item>
+            </ion-item> -->
         </ion-list>
     </ion-content>
 </ion-modal-view>

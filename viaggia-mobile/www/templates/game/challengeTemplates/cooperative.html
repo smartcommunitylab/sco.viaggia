@@ -15,7 +15,7 @@
         <div class="col col-10">
         </div>
         <div class="col col-90">
-            <div compile="{{challenge.challCompleteDesc}}"></div>
+            <div compile="challenge.challCompleteDesc"></div>
         </div>
     </div>
     <div class="row">
@@ -38,7 +38,7 @@
             <div class="challenge-bar-level coop-other" style="{{getWidthOther(challenge)}}"></div>
         </div>
         <div class="col col-10 icon-chall-home">
-            <i class="icon ion-android-person"></i>
+            <img class="challenge-profile-img" ng-src="{{getUserImg(challenge.otherAttendeeData.playerId)}}">
         </div>
     </div>
 </div>

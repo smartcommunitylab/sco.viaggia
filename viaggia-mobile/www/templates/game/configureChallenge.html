@@ -6,32 +6,35 @@
         </div>
         <div class="row">
             <div class="col">
-                <button class="button configure-challenge-button icon ic_foot" ng-class="{'chall-selected':isChallengeMean('foot')}"
+                <button class="button configure-challenge-button icon ic_foot" ng-class="{'chall-selected':isChallengeMean('foot'), 'chall-not-selected':!isChallengeMean('foot') }"
                     ng-click="setChallengeMean('foot')"></button>
             </div>
             <div class="col">
-                <button class="button configure-challenge-button icon ic_bike" ng-class="{'chall-selected':isChallengeMean('bike')}"
+                <button class="button configure-challenge-button icon ic_bike" ng-class="{'chall-selected':isChallengeMean('bike'),'chall-not-selected':!isChallengeMean('bike')}"
                     ng-click="setChallengeMean('bike')"></button>
             </div>
             <div class="col">
-                <button class="button configure-challenge-button icon ion-leaf" ng-class="{'chall-selected':isChallengeMean('leaf')}"
+                <button class="button configure-challenge-button icon ion-leaf" ng-class="{'chall-selected':isChallengeMean('leaf'),'chall-not-selected':!isChallengeMean('leaf')}"
                     ng-click="setChallengeMean('leaf')"></button>
             </div>
         </div>
         <div class="row">
             <div class="col lab-challenge-conf">{{'lbl_challenge_configure_opponent'|translate}}</div>
         </div>
-        <div class="row">
-            <div class="col">
+        <div class="row row-center">
+            <div class="col col-80">
                 <button class="button button-block configure-list-button" ng-click="chooseFromList()">
                     <span>{{'lbl_challenge_choose_from_list'|translate}}</span>
             </div>
+            <div class="col col-20">
+                <a class="button-icon icon ion-ios-information-outline" ng-click="showWhy()"></a>
+            </div>
+
         </div>
         <div class="row" ng-if="!challenge.player.nickname">
             <div class="col col-80">
-                <playerautocomplete on-clear="clearFrom" ng-model="playerName" attr-placeholder="{{'lbl_insert_nickname' | translate}}"
-                    click-activation="false" data="playersName" on-type="typeName" 
-                    on-select="changeStringName" ng-blur="setNameParam">
+                <playerautocomplete on-clear="clearFrom" getUserImg="getUserImg" player="player" ng-model="playerName" attr-placeholder="{{'lbl_insert_nickname' | translate}}"
+                    click-activation="false" data="playersName" on-type="typeName" on-select="changeStringName" ng-blur="setNameParam">
                 </playerautocomplete>
                 <!-- <input class="input-challenge-search" type="text" placeholder="{{'ph_challenge_nick'|translate}}"> -->
             </div>
@@ -40,14 +43,12 @@
             </div>
         </div>
         <div class="row challenge-img-row" ng-if="challenge.player.nickname">
-            <div class="col col-60">
+            <div class="col col-40">
                 <div class="img-container challenge-img">
-                    <!-- <img ng-if="!user.img" src="img/game/generic_user.png">
-                    <img ng-if="user.img" src="challenge.player.img"> -->
                     <img class="challenge-profile-img" ng-src="{{getUserImg(challenge.player.id)}}">
                 </div>
             </div>
-            <div class="col col-60">
+            <div class="col col-40">
                 {{challenge.player.nickname}}
             </div>
             <div class="col button-challenge-remove" ng-click="removePlayer()">
@@ -56,43 +57,17 @@
         </div>
         <div class="row">
             <div class="col">
-                <button class="button button-block" ng-click="calculateTarget()">
+                <button class="button button-block configure-list-button" ng-click="calculateTarget()">
                     <span>{{'lbl_challenge_calculate'|translate}}</span>
             </div>
         </div>
         <div ng-if="challenge.target">
             <div class="card">
-                    <ng-include src="getConfigureTemplate(challenge)" style="width: 100%"></ng-include>
-
-                <!-- <div class="row" ng-if="challenge.target.target">
-                    <div class="col col-80">{{'lbl_challenge_target'|translate |uppercase}}</div>
-                    <div class="col col-20">
-                        <b>{{challenge.target.target}}</b>
-                    </div>
-                </div>
-                <div class="row" ng-if="challenge.target.leavesPlayer">
-                    <div class="col col-80">{{'lbl_challenge_leaves_player'|translate|uppercase}}</div>
-                    <div class="col col-20">
-                        <b>{{challenge.target.leavesPlayer}}</b>
-                    </div>
-                </div>
-                <div class="row" ng-if="challenge.target.leavesOpponent">
-                    <div class="col col-80">{{'lbl_challenge_leaves_opponent'| translate
-                        |uppercase}}{{challenge.player.nome}}:</div>
-                    <div class="col col-20">
-                        <b>{{challenge.target.leavesOpponent}}</b>
-                    </div>
-                </div>
-                <div class="row" ng-if="challenge.target.leavesBoth">
-                    <div class="col col-80">{{'lbl_challenge_leaves_both'| translate |uppercase}}</div>
-                    <div class="col col-20">
-                        <b>{{challenge.target.leavesBoth}}</b>
-                    </div>
-                </div> -->
+                <ng-include src="getConfigureTemplate(challenge)" style="width: 100%"></ng-include>
             </div>
             <div class="row">
                 <div class="col">
-                    <button class="button button-block" ng-click="requestChallenge()">
+                    <button class="button button-block configure-list-button" ng-click="requestChallenge()">
                         <span>{{'lbl_challenge_request'|translate}}</span>
                 </div>
             </div>

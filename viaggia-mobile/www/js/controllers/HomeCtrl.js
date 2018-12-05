@@ -74,6 +74,9 @@ angular.module('viaggia.controllers.home', [])
             var date = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
             $state.go("app.home.challenges", { challengeEnd: date })
         }
+        $scope.unlockChallenge = function() {
+            $state.go("app.home.challenges", { future: true })
+        }
         $scope.watch = $rootScope.$watch(function () {
             return profileService.status;
         }, function (newVal, oldVal, scope) {
@@ -95,14 +98,22 @@ angular.module('viaggia.controllers.home', [])
             //if proposed is not empty enable
             GameSrv.getProposedChallenges(profileService.status).then(function (challenges) {
                 if (challenges && challenges.length) {
-                    $scope.buttonEnabled = true;
+                    $scope.buttonProposedEnabled = true;
 
                 } else {
-                    $scope.buttonEnabled = false;
+                    $scope.buttonProposedEnabled = false;
                 }
             }, function (err) {
-                $scope.buttonEnabled = false;
+                $scope.buttonProposedEnabled = false;
             });
+
+            //check inventory
+            if ($scope.status && $scope.status.inventory && $scope.status.inventory.challengeActivationActions > 0) {
+                $scope.buttonUnlockEnabled = true
+            }
+            else {
+                $scope.buttonUnlockEnabled = false;
+            }
         }
         var setChallenges = function () {
             // get the updated active challenges
@@ -485,9 +496,7 @@ angular.module('viaggia.controllers.home', [])
             return "width: 1%;"
         }
         $scope.getWidthSeparator = function (challenge) {
-            //TODO
-
-            return "width:30%;background:transparent;"
+            return "width:"+(100-challenge.otherAttendeeData.status-challenge.status)+"%;background:transparent;"
         }
         var getChallengeByUnit = function (challenge) {
             return GameSrv.getChallengeByUnit(challenge.unit)

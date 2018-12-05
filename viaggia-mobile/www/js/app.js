@@ -171,6 +171,12 @@ angular.module('viaggia', [
       console.log('hide loading');
       $ionicLoading.hide();
     }
+    var resetCache = function () {
+      localStorage.removeItem(Config.getAppId() + "_diaryRefresh") ;
+      localStorage.removeItem(Config.getAppId() + "_challengesRefresh") ;
+      localStorage.removeItem(Config.getAppId() + "_homeRefresh") ;
+      localStorage.removeItem(Config.getAppId() + "_rankingRefresh") ;
+    }
     $ionicPlatform.ready(function () { // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       document.addEventListener('chcp_updateLoadFailed', function () { console.log('chcp_updateLoadFailed') });
@@ -211,10 +217,8 @@ angular.module('viaggia', [
           clientSecret: Config.getClientSecKey(),
           aacUrl: Config.getAACURL()
         });
-        // $rootScope.GPSAllow = true;
-        //            if (window.BackgroundGeolocation) {
-        //                trackService.startup();
-        //            }
+        //reset cache
+        resetCache();
         cordova.plugins.diagnostic.registerLocationStateChangeHandler(function (state) {
           if ((ionic.Platform.isAndroid() && state !== cordova.plugins.diagnostic.locationMode.LOCATION_OFF)
             || ionic.Platform.isIOS() && (state === cordova.plugins.diagnostic.permissionStatus.GRANTED
@@ -477,7 +481,8 @@ angular.module('viaggia', [
         url: "/challenges",
         params: {
           challengeEnd: null,
-          challengeStart:null
+          challengeStart:null,
+          unlock:false
         },
         views: {
           'tab-challenges': {
@@ -1501,9 +1506,9 @@ angular.module('viaggia', [
       read_more: "altro",
       challenge_popup_title: "Sblocca sfida",
       challenge_detail_popup_title: "Dettaglio sfida",
-      challenge_popup_template_comp_time: "Confermando sbloccherai la tipologia di sfida competitiva a tempo e potrai sfidare altri giocatori",
-      challenge_popup_template_comp_perf: "Confermando sbloccherai la tipologia di sfida competitiva a performance e potrai sfidare altri giocatori",
-      challenge_popup_template_coop: "Confermando sbloccherai la tipologia di sfida cooperativa e potrai sfidare altri giocatori",
+      challenge_popup_template_groupCompetitiveTime: "Confermando sbloccherai la tipologia di sfida competitiva a tempo e potrai sfidare altri giocatori",
+      challenge_popup_template_groupCompetitivePerformance: "Confermando sbloccherai la tipologia di sfida competitiva a performance e potrai sfidare altri giocatori",
+      challenge_popup_template_groupCooperative: "Confermando sbloccherai la tipologia di sfida cooperativa e potrai sfidare altri giocatori",
       btn_got_it: "Ho capito",
       btn_challenge_accept: "Accetto",
       btn_challenge_reject: "Rifiuto",
@@ -1556,7 +1561,8 @@ angular.module('viaggia', [
       lbl_chall_blacklist:"I giocatori elencati di seguito non possono essere invitati ad una sfida di coppia perche' li hai inseriti nella tua blacklist. Se vuoi provare a sfidare uno di questi utenti devi prima rimuoverlo dalla backlist.",
       lbl_insert_nickname:"Inserisci il nickname del giocatore",
       lbl_challenge_percentage:"Percentuale:",
-      lbl_challenge_threshold:"Threshold:"
+      lbl_challenge_threshold:"Threshold:",
+      home_unlock_challenge:"Sblocca una nuova sfida"
       
     });
 
@@ -2044,9 +2050,9 @@ angular.module('viaggia', [
       read_more: "read more",
       challenge_popup_title: "Unlock challenge",
       challenge_detail_popup_title: "Challenge detail",
-      challenge_popup_template_comp_time: "Confirm to unlock competitive \"time based\" challenge and challenge other palyers.",
-      challenge_popup_template_comp_perf: "Confirm to unlock competitive \"performance based\" challenge and challenge other palyers.",
-      challenge_popup_template_coop: "Confirm to unlock collaborative challenge and challenge other palyers.",
+      challenge_popup_template_groupCompetitiveTime: "Confirm to unlock competitive \"time based\" challenge and challenge other palyers.",
+      challenge_popup_template_groupCompetitivePerformance: "Confirm to unlock competitive \"performance based\" challenge and challenge other palyers.",
+      challenge_popup_template_groupCooperative: "Confirm to unlock collaborative challenge and challenge other palyers.",
       btn_got_it: "I got it",
       btn_challenge_accept: "Accept",
       btn_challenge_reject: "Reject",
@@ -2099,7 +2105,9 @@ angular.module('viaggia', [
       lbl_chall_blacklist:"The players listed in the following section cannot be invited to a challenge because you added them to your blacklist. If you want to try to challenge one of these users you have to remove him/her from your blacklist first.",
       lbl_insert_nickname:"Insert the player's nickname",
       lbl_challenge_percentage:"Percentage:",
-      lbl_challenge_threshold:"Threshold:"
+      lbl_challenge_threshold:"Threshold:",
+      home_unlock_challenge:"Unlock a new challenge"
+
    
 
     });

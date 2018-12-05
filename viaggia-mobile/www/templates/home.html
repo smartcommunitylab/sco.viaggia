@@ -154,9 +154,13 @@
         </div>
 
         <div class="home-challenges">
-            <div class="row" ng-if="buttonEnabled">
+            <div class="row" ng-if="buttonProposedEnabled">
                 <button class="button button-block button-block-active button-next-challenge" ng-click="programChallenge()">
                     {{'home_next_challenge'|translate}} </button>
+            </div>
+            <div class="row" ng-if="buttonUnlockEnabled">
+                <button class="button button-block button-block-active button-unlock-challenge" ng-click="unlockChallenge()">
+                    {{'home_unlock_challenge'|translate}} </button>
             </div>
             <div class="row">
                 <div class="col home-your-challenges">

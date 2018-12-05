@@ -4,7 +4,7 @@ angular.module('viaggia.services.notification', [])
   //
   //A Service to work with notifications with server
   //
-  .factory('notificationService', function ($q, $http, $state, $ionicPopup, LoginService, $filter, Config) {
+  .factory('notificationService', function ($q, $http, $state, $ionicHistory, $ionicPopup, LoginService, $filter, Config) {
 
     var notificationService = {};
     var numberNotification = 10;
@@ -12,32 +12,53 @@ angular.module('viaggia.services.notification', [])
     var typeOfChallenges = {
       "level": {
         state: 'app.home.home',
-        params: null
+        params: null,
+        cache: '_homeRefresh'
       },
       "program_challenge": {
         state: 'app.home.challenges',
-        params: null
+        params: { challengeEnd: 1 },
+        cache: '_challengesRefresh'
 
       },
       "new_challenge": {
         state: 'app.home.home',
-        params: null
+        params: null,
+        cache: '_homeRefresh'
 
       },
       "new_invite": {
         state: 'app.home.challenges',
-        params: { id: '' }
+        params: { challengeEnd: 1 },
+        cache: '_challengesRefresh'
 
       },
       "reply_invite": {
         state: 'app.home.challenges',
-        params: { id: '' }
+        params: { challengeEnd: 1 },
+        cache: '_challengesRefresh'
 
       },
       "unlock_type": {
         state: 'app.home.challenges',
-        params: { type: 'unlock' }
+        params: { type: 'unlock' },
+        cache: '_challengesRefresh'
 
+      },
+      "reply_denied": {
+        state: 'app.home.challenges',
+        params: { challengeEnd: 1 },
+        cache: '_challengesRefresh'
+      },
+      "reply_accepted": {
+        state: 'app.home.challenges',
+        params: { challengeEnd: 1 },
+        cache: '_challengesRefresh'
+      },
+      "challenge_cancel": {
+        state: 'app.home.challenges',
+        params: { challengeEnd: 1 },
+        cache: '_challengesRefresh'
       }
     }
     notificationService.getNotifications = function (sinceTimestamp, sincePosition, numberNotification) {
@@ -124,7 +145,12 @@ angular.module('viaggia.services.notification', [])
               type: 'button-custom',
               onTap: function () {
                 if (notification["content.type"] && typeOfChallenges[notification["content.type"]]) {
-                  $state.go(typeOfChallenges[notification["content.type"]].state, typeOfChallenges[notification["content.type"]].params)
+                  // localStorage.removeItem(Config.getAppId() +typeOfChallenges[notification["content.type"]].cache);
+                  $ionicHistory.clearCache().then(function () {
+                    $state.go(typeOfChallenges[notification["content.type"]].state, typeOfChallenges[notification["content.type"]].params, { reload: true })
+                  }, function (err) {
+                    $state.go(typeOfChallenges[notification["content.type"]].state, typeOfChallenges[notification["content.type"]].params, { reload: true })
+                  })
                 }
               }
             }

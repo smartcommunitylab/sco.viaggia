@@ -355,6 +355,8 @@ angular.module('viaggia.directives', [])
                 onType: '=onType',
                 onSelect: '=onSelect',
                 onClear: '=onClear',
+                getUserImg:'&',
+                player:'&',
                 playerautocompleteRequired: '='
             },
             controller: [
@@ -594,7 +596,30 @@ angular.module('viaggia.directives', [])
                     }
                 });
             },
-            template: '\
+        //     template: '\
+        // <div class="playerautocomplete {{ attrs.class }}" ng-class="{ notempty: (searchParam.length > 0) }" id="{{ attrs.id }}">\
+        //   <input\
+        //     type="text"\
+        //     ng-model="searchParam"\
+        //     placeholder="{{ attrs.placeholder }}"\
+        //     class="input-challenge-search {{ attrs.inputclass }}"\
+        //     id="{{ attrs.inputid }}"\
+        //     ng-required="{{ playerautocompleteRequired }}" />\
+        //   <ul ng-show="completing && (suggestions).length > 0">\
+        //     <li\
+        //       suggestion-player\
+        //       ng-repeat="suggestion in suggestions track by $index"\
+        //       index="{{ $index }}"\
+        //       val="{{ suggestion }}"\
+        //       class="suggestion"\
+        //       ng-class="{ active: ($index === selectedIndex) }"\
+        //       ng-click="select(suggestion)">\
+        //       <img class="challenge-profile-img" ng-src="{{getUserImg(player.id)}}">\
+        //       <span ng-bind-html="suggestion | highlight:searchParam"></span></li>\
+        //   </ul>\
+        // </div>'
+        // };
+        template: '\
         <div class="playerautocomplete {{ attrs.class }}" ng-class="{ notempty: (searchParam.length > 0) }" id="{{ attrs.id }}">\
           <input\
             type="text"\
@@ -611,8 +636,8 @@ angular.module('viaggia.directives', [])
               val="{{ suggestion }}"\
               class="suggestion"\
               ng-class="{ active: ($index === selectedIndex) }"\
-              ng-click="select(suggestion)"\
-              ng-bind-html="suggestion | highlight:searchParam"></li>\
+              ng-click="select(suggestion)">\
+              <span ng-bind-html="suggestion | highlight:searchParam"></span></li>\
           </ul>\
         </div>'
         };

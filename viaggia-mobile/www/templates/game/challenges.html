@@ -162,7 +162,7 @@
                                         </div>
                                         <div class="row">
                                             <!-- <div class="col challenge-long-desc">{{challenge.long}}</div> -->
-                                            <div class="col button-active"  ng-class="{'fog':!canPropose}" ng-click="readMore(challenge)">{{'read_more'
+                                            <div class="col button-active" ng-class="{'fog':!canPropose}" ng-click="readMore(challenge)">{{'read_more'
                                                 | translate}}</div>
                                         </div>
                                     </div>
@@ -188,7 +188,6 @@
                                 <div class="col  padding-10">
                                     <div>{{challenge.short}}</div>
                                     <div class="row">
-                                        <!-- <div class="col challenge-long-desc">{{challenge.long}}</div> -->
                                         <div class="col challenge-sent">
                                             <span ng-if="challenge.received">{{'lbl_sent_from' | translate}}</span>
                                             <span ng-if="!challenge.received"> {{'lbl_sent_to' | translate}}</span>
@@ -197,15 +196,21 @@
                                         <div class="col button-active" ng-click="readMore(challenge)">{{'read_more' |
                                             translate}}</div>
                                     </div>
-                                    <div ng-if="challenge.received">
-                                        <button class="col button button-clear button-challenge-enable" ng-click="rejectChallenge(challenge)">
-                                            {{'btn_challenge_reject' | translate}}</button>
-                                        <button class="button button-clear button-challenge-enable" ng-click="acceptChallenge(challenge)">
-                                            {{'btn_challenge_accept' | translate}}</button>
-                                    </div>
-                                    <div ng-if="!challenge.received">
-                                        <button class="col button button-clear button-challenge-enable" ng-click="cancelChallenge(challenge)">
-                                            {{'btn_challenge_reject_sent' | translate}}</button>
+                                    <div class="row row-margin">
+                                        <div class="col">
+                                            <div ng-if="challenge.received">
+                                                <button class="col button button-clear button-challenge-enable"
+                                                    ng-click="rejectChallenge(challenge)">
+                                                    {{'btn_challenge_reject' | translate}}</button>
+                                                <button class="button button-clear button-challenge-enable" ng-click="acceptChallenge(challenge)">
+                                                    {{'btn_challenge_accept' | translate}}</button>
+                                            </div>
+                                            <div ng-if="!challenge.received">
+                                                <button class="col button button-clear button-challenge-enable"
+                                                    ng-click="cancelChallenge(challenge)">
+                                                    {{'btn_challenge_reject_sent' | translate}}</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
