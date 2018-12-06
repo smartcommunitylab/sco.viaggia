@@ -961,7 +961,7 @@ angular.module('viaggia.services.game', [])
                 });
             return deferred.promise;
         }
-        
+
         gameService.addToBlacklist = function (id, user) {
             var deferred = $q.defer();
             LoginService.getValidAACtoken().then(
@@ -1038,7 +1038,7 @@ angular.module('viaggia.services.game', [])
                 });
             return deferred.promise;
         }
-        
+
         gameService.getChallengeByUnit = function (unit) {
             if (challengeUnit[unit])
                 return challengeUnit[unit];
@@ -1067,7 +1067,7 @@ angular.module('viaggia.services.game', [])
                 });
             return deferred.promise;
         }
-        
+
         gameService.getRewards = function () {
             var deferred = $q.defer();
             LoginService.getValidAACtoken().then(
@@ -1155,6 +1155,36 @@ angular.module('viaggia.services.game', [])
                 });
             return deferred.promise;
         }
+        gameService.previewChallenge = function (challenge) {
+            var deferred = $q.defer();
+            var dataChallenge = {
+                attendeeId: challenge.player.id,
+                challengeModelName: challenge.type,
+                challengePointConcept: meansChall[challenge.mean]
+            }
+            LoginService.getValidAACtoken().then(
+                function (token) {
+                    
+                    $http({
+                        method: 'POST',
+                        url: Config.getServerURL() + '/gamificationweb/invitation/preview',
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        data: dataChallenge,
+                        timeout: Config.getHTTPConfig().timeout
+                    })
+                        .success(function (preview) {
+                            deferred.resolve(preview);
+                        })
+
+                        .error(function (response) {
+                            deferred.reject(response);
+                        });
+                });
+            return deferred.promise;
+        }
         gameService.requestChallenge = function (challenge) {
             var deferred = $q.defer();
             var dataChallenge = {
@@ -1164,7 +1194,6 @@ angular.module('viaggia.services.game', [])
             }
             LoginService.getValidAACtoken().then(
                 function (token) {
-                    deferred.resolve();
                     $http({
                         method: 'POST',
                         url: Config.getServerURL() + '/gamificationweb/invitation',
@@ -1222,22 +1251,23 @@ angular.module('viaggia.services.game', [])
             return type_challenges;
         }
         gameService.getConfigureTemplate = function (challenge) {
-            switch (challenge.type) {
-                case type_challenges['groupCompetitiveTime'].id: {
-                    return 'templates/game/challengeConfigureTemplate/groupTime.html';
-                    break;
-                }
-                case type_challenges['groupCompetitivePerformance'].id: {
-                    return 'templates/game/challengeConfigureTemplate/groupPerformance.html';
-                    break;
-                }
-                case type_challenges['groupCooperative'].id: {
-                    return 'templates/game/challengeConfigureTemplate/groupCoop.html';
-                    break;
-                }
-                default:
-                    return 'templates/game/challengeConfigureTemplate/default.html';
-            }
+            return 'templates/game/challengeConfigureTemplate/simpleText.html';
+            // switch (challenge.type) {
+            //     case type_challenges['groupCompetitiveTime'].id: {
+            //         return 'templates/game/challengeConfigureTemplate/groupTime.html';
+            //         break;
+            //     }
+            //     case type_challenges['groupCompetitivePerformance'].id: {
+            //         return 'templates/game/challengeConfigureTemplate/groupPerformance.html';
+            //         break;
+            //     }
+            //     case type_challenges['groupCooperative'].id: {
+            //         return 'templates/game/challengeConfigureTemplate/groupCoop.html';
+            //         break;
+            //     }
+            //     default:
+            //         return 'templates/game/challengeConfigureTemplate/default.html';
+            // }
         }
         gameService.getChallengeBarTemplate = function (challenge) {
             switch (challenge.type) {
