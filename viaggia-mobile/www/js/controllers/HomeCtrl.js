@@ -5,7 +5,7 @@ angular.module('viaggia.controllers.home', [])
 
         $scope.challenges = null;
         $scope.buttonProposedEnabled = false;
-         $scope.buttonUnlockEnabled = false;
+        $scope.buttonUnlockEnabled = false;
         $scope.expansion = [];
         $scope.buttons = [{
             label: $filter('translate')('menu_news'),
@@ -74,11 +74,16 @@ angular.module('viaggia.controllers.home', [])
         }
         $scope.programChallenge = function () {
             var date = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
-            $state.go("app.home.challenges", { challengeEnd: date })
+            $ionicHistory.clearCache().then(function () {
+                $state.go("app.home.challenges", { challengeEnd: date })
+            });
         }
-        $scope.unlockChallenge = function() {
-            $state.go("app.home.challenges",  { challengeEnd: 1 })
+        $scope.unlockChallenge = function () {
+            $ionicHistory.clearCache().then(function () {
+                $state.go("app.home.challenges", { unlock: true })
+            });
         }
+
         $scope.watch = $rootScope.$watch(function () {
             return profileService.status;
         }, function (newVal, oldVal, scope) {
@@ -490,15 +495,15 @@ angular.module('viaggia.controllers.home', [])
             return $scope.expansion[index]
         }
         $scope.getWidthUser = function (challenge) {
-            return "width:" + ((challenge.status>100)?100:challenge.status) + "%;"
+            return "width:" + ((challenge.status > 100) ? 100 : challenge.status) + "%;"
         }
         $scope.getWidthOther = function (challenge) {
             if (challenge.otherAttendeeData)
-                return "width:" + ((challenge.otherAttendeeData.status>100)?100:challenge.otherAttendeeData.status) + "%;"
+                return "width:" + ((challenge.otherAttendeeData.status > 100) ? 100 : challenge.otherAttendeeData.status) + "%;"
             return "width: 1%;"
         }
         $scope.getWidthSeparator = function (challenge) {
-            return "width:"+(100-challenge.otherAttendeeData.status-challenge.status)+"%;background:transparent;"
+            return "width:" + (100 - challenge.otherAttendeeData.status - challenge.status) + "%;background:transparent;"
         }
         var getChallengeByUnit = function (challenge) {
             return GameSrv.getChallengeByUnit(challenge.unit)
