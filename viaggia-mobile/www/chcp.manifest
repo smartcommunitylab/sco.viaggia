@@ -9,7 +9,7 @@
   },
   {
     "file": "css/style.css",
-    "hash": "662324d342a56fbb85ccbde0595190ae"
+    "hash": "e4b73bceec86d3e46dcd96abd7de8b3d"
   },
   {
     "file": "data/bus.csv",
@@ -41,7 +41,7 @@
   },
   {
     "file": "data/tt.json",
-    "hash": "f8b82f3c5fc923374756cb0ab8eeb46c"
+    "hash": "3e76640a411c3afdff41d608f3989d3d"
   },
   {
     "file": "data/tt.json.full.json",
@@ -389,7 +389,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "08b827d74dc010d1cc5a961167f86b3a"
+    "hash": "005fb85ba0daf189738aa4c17413e9f6"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -401,11 +401,11 @@
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "d3fe0d6aca149307f89fdad223a439ea"
+    "hash": "0e6d64055d4513130a259283bc235135"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
-    "hash": "9f778380bf1f98204d22fc3bd5c9e500"
+    "hash": "5785efff068ecce0846e869ca3385b69"
   },
   {
     "file": "js/controllers/InfoCtrl.js",
@@ -513,7 +513,7 @@
   },
   {
     "file": "js/services/GameSrv.js",
-    "hash": "208b4ab41afeec934c7d1a980cec99a0"
+    "hash": "01726e4cd20deddc6c899aa4bd5f4cc0"
   },
   {
     "file": "js/services/GeoSrv.js",
@@ -1028,6 +1028,10 @@
     "hash": "48b70a015192f460dfa144907c4c3687"
   },
   {
+    "file": "templates/game/challengeConfigureTemplate/simpleText.html",
+    "hash": "c6f2a74ab2e7077f52aa0408c0061409"
+  },
+  {
     "file": "templates/game/challenges.html",
     "hash": "be9f03e0b3201b48caafbd2d4b4d2f4c"
   },
@@ -1069,7 +1073,7 @@
   },
   {
     "file": "templates/game/configureChallenge.html",
-    "hash": "11659c988f31f4f2a6f83d59149af8a6"
+    "hash": "df3c299edd5081d3f00aa763974e959b"
   },
   {
     "file": "templates/game/diary.html",
