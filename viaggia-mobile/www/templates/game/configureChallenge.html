@@ -18,23 +18,29 @@
                     ng-click="setChallengeMean('leaf')"></button>
             </div>
         </div>
+
+
         <div class="row">
-            <div class="col lab-challenge-conf">{{'lbl_challenge_configure_opponent'|translate}}</div>
+            <div class="col lab-challenge-conf" style="padding-top:30px;">{{'lbl_challenge_configure_opponent'|translate}}</div>
         </div>
-        <div class="row row-center">
-            <div class="col col-80">
+        <div class="row">
+                <div class="col popup-chall" ng-click="showWhy()"><a class="button-icon icon ion-ios-information-outline">
+                    <span class="popup-string">{{'lbl__challenge_cant_see_player'|translate}}</span>
+                </a>
+                </div>
+            </div>
+        <div class="row row-center" ng-if="!challenge.player.nickname">
+            <div class="col">
                 <button class="button button-block configure-list-button" ng-click="chooseFromList()">
                     <span>{{'lbl_challenge_choose_from_list'|translate}}</span>
-            </div>
-            <div class="col col-20">
-                <a class="button-icon icon ion-ios-information-outline" ng-click="showWhy()"></a>
             </div>
 
         </div>
         <div class="row" ng-if="!challenge.player.nickname">
             <div class="col col-80">
-                <playerautocomplete on-clear="clearFrom" getUserImg="getUserImg" player="player" ng-model="playerName" attr-placeholder="{{'lbl_insert_nickname' | translate}}"
-                    click-activation="false" data="playersName" on-type="typeName" on-select="changeStringName" ng-blur="setNameParam">
+                <playerautocomplete on-clear="clearFrom" getUserImg="getUserImg" player="player" ng-model="playerName"
+                    attr-placeholder="{{'lbl_insert_nickname' | translate}}" click-activation="false" data="playersName"
+                    on-type="typeName" on-select="changeStringName" ng-blur="setNameParam">
                 </playerautocomplete>
                 <!-- <input class="input-challenge-search" type="text" placeholder="{{'ph_challenge_nick'|translate}}"> -->
             </div>
@@ -55,7 +61,7 @@
                 <a class="icon ion-android-cancel"></a>
             </div>
         </div>
-        <div class="row">
+        <div class="row"  style="padding-top: 30px;" ng-if="challenge.player.nickname">
             <div class="col">
                 <button class="button button-block configure-list-button" ng-click="calculateTarget()">
                     <span>{{'lbl_challenge_calculate'|translate}}</span>
@@ -65,7 +71,7 @@
             <div class="card">
                 <ng-include src="getConfigureTemplate(challenge)" style="width: 100%"></ng-include>
             </div>
-            <div class="row">
+            <div class="row" ng-if="challenge.player.nickname && challenge && challenge.mean">
                 <div class="col">
                     <button class="button button-block configure-list-button" ng-click="requestChallenge()">
                         <span>{{'lbl_challenge_request'|translate}}</span>

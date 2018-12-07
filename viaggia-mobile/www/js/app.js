@@ -1558,11 +1558,12 @@ angular.module('viaggia', [
       Walk_Km:" Km",
       Bike_Km:" Km",
       Green_Leaves:"Green Leaves",
-      lbl_chall_blacklist:"I giocatori elencati di seguito non possono essere invitati ad una sfida di coppia perche' li hai inseriti nella tua blacklist. Se vuoi provare a sfidare uno di questi utenti devi prima rimuoverlo dalla backlist.",
+      lbl_chall_blacklist:"Il giocatore che hai cercato non e’ sfidabile. Questo succede quando si verifica una o più delle seguenti condizioni: il giocatore ha un livello troppo alto (o basso) rispetto al tuo, il giocatore ha già ricevuto tre richieste, il giocatore ha già programmato la sfida per la prossima settimana, il giocatore ti ha inserito nella sua blacklist o tu hai inserito il giocatore nella tua blacklist.",
       lbl_insert_nickname:"Inserisci il nickname del giocatore",
       lbl_challenge_percentage:"Percentuale:",
       lbl_challenge_threshold:"Threshold:",
-      home_unlock_challenge:"Sblocca una nuova sfida"
+      home_unlock_challenge:"Sblocca una nuova sfida",
+      lbl__challenge_cant_see_player:"Perche’ non riesco a trovare un giocatore?"
       
     });
 
@@ -2102,11 +2103,12 @@ angular.module('viaggia', [
       Walk_Km:" Km",
       Bike_Km:" Km",
       Green_Leaves:"Green Leaves",
-      lbl_chall_blacklist:"The players listed in the following section cannot be invited to a challenge because you added them to your blacklist. If you want to try to challenge one of these users you have to remove him/her from your blacklist first.",
+      lbl_chall_blacklist:"You cannot invite the player to a challenge. This happens when one or more of the following applies: the player has a too much higher (or lower) level in comparison to yours, the player has already received three requests, the player has already programmed the challenge for the next week, the player blacklisted you, or you blacklisted the player.",
       lbl_insert_nickname:"Insert the player's nickname",
       lbl_challenge_percentage:"Percentage:",
       lbl_challenge_threshold:"Threshold:",
-      home_unlock_challenge:"Unlock a new challenge"
+      home_unlock_challenge:"Unlock a new challenge",
+      lbl__challenge_cant_see_player:"Why can't I find a player?"
 
    
 

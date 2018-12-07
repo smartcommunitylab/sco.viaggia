@@ -220,7 +220,7 @@ angular.module('viaggia.services.game', [])
         var meansChall = {
             foot: "Walk_Km",
             bike: "Bike_Km",
-            leaf: "green leaf"
+            leaf: "green leaves"
         }
         var challengeUnit = {
             "Walk_Km": "Walk_Km",

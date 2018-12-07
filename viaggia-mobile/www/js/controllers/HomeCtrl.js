@@ -4,6 +4,8 @@ angular.module('viaggia.controllers.home', [])
 
 
         $scope.challenges = null;
+        $scope.buttonProposedEnabled = false;
+         $scope.buttonUnlockEnabled = false;
         $scope.expansion = [];
         $scope.buttons = [{
             label: $filter('translate')('menu_news'),

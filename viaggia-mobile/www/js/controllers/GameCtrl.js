@@ -564,7 +564,7 @@ angular.module('viaggia.controllers.game', [])
         }
         $scope.lockedType = function (type) {
             if (type.state)
-                return (type.state == 'LOCKED' || ($scope.inventory == 0 && type.state != 'ACTIVE' || !$rootScope.canPropose))
+                return (type.state == 'LOCKED' || ($scope.inventory == 0 && type.state != 'ACTIVE' ))
             return false;
         }
         $scope.unlock = function (type) {
@@ -627,7 +627,7 @@ angular.module('viaggia.controllers.game', [])
             }
         });
     })
-    .controller('ConfigureChallengeCtrl', function ($scope, $state, $ionicPopup, $stateParams, $filter, $ionicModal, Toast, GameSrv, Config) {
+    .controller('ConfigureChallengeCtrl', function ($scope, $state,$ionicHistory, $ionicPopup, $stateParams, $filter, $ionicModal, Toast, GameSrv, Config) {
         $scope.players = [];
         $scope.blacklistplayers = [];
         howPlayer = 0; fromPlayer = 0; toPlayer = 0;
@@ -728,19 +728,22 @@ angular.module('viaggia.controllers.game', [])
         }
         $scope.requestChallenge = function () {
             if (parametersCorrect()) {
-            Config.loading();
-            GameSrv.requestChallenge($scope.challenge).then(function () {
-                $state.go('app.home.challenges', { challengeEnd: new Date().getTime() });
-            }, function (error) {
+                Config.loading();
+                GameSrv.requestChallenge($scope.challenge).then(function () {
+                    $ionicHistory.clearCache().then(function () {
+                        $state.go('app.home.challenges', { challengeEnd: new Date().getTime() });
+                    })
+                }, function (error) {
 
-            }).finally(Config.loaded);
-        } else {
-            Toast.show($filter('translate')("toast_error_configure"), "short", "bottom");
+                }).finally(Config.loaded);
+            } else {
+                Toast.show($filter('translate')("toast_error_configure"), "short", "bottom");
 
-        }
+            }
         }
         $scope.removePlayer = function () {
             $scope.challenge.player = null;
+            $scope.preview = null;
 
         }
         $scope.initConf = function () {
