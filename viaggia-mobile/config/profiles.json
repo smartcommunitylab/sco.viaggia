@@ -2,8 +2,8 @@
     "ALPECIMBRA": {
         "resource_folder": "config/instances/ALPECIMBRA",
         "widget_id": "it.smartcommunitylab.viaggiaalpecimbra",
-        "version": "1.0.4",
-        "version_code": "8",
+        "version": "1.0.5",
+        "version_code": "9",
         "app_name": "Viaggia Alpe Cimbra"
     },
     "TRENTO": {
@@ -16,8 +16,8 @@
     "ROVERETO": {
         "resource_folder": "config/instances/ROVERETO",
         "widget_id": "eu.trentorise.smartcampus.viaggiarovereto",
-        "version": "2.1.9",
-        "version_code": "44",
+        "version": "2.1.10",
+        "version_code": "45",
         "app_name": "Viaggia Rovereto"
     },
     "BOLOGNA": {
