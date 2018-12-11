@@ -230,7 +230,7 @@
         "stationaryRadius": 20,
         "activityType": "Other",
         "disableElasticity": true,
-        "disableStopDetection":true,
+        "disableStopDetection": true,
         "stopDetectionDelay": 0,
         "stopTimeout": 0,
         "activityRecognitionInterval": 10000,

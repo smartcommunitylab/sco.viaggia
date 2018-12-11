@@ -1563,8 +1563,7 @@ angular.module('viaggia', [
       lbl_challenge_percentage:"Percentuale:",
       lbl_challenge_threshold:"Threshold:",
       home_unlock_challenge:"Sblocca una nuova sfida",
-      lbl__challenge_cant_see_player:"Perche’ non riesco a trovare un giocatore?"
-      
+      lbl__challenge_cant_see_player:"Perche’ non riesco a trovare un giocatore?"      
     });
 
     $translateProvider.translations('en', {
