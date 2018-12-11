@@ -3186,7 +3186,7 @@ ion-header-bar .title {
     color: #4EB0E6 !important;
 }
 .configure-challenge-button {
-    border-radius: 12px;
+    border-radius: 26px;
     height: 80px;
 }
 
@@ -3205,7 +3205,6 @@ ion-header-bar .title {
 .lab-challenge-conf{
     width: 100%;
     padding: 20px;
-    text-align: center;
     font-size: large;
     font-weight: bold;
 }
@@ -3422,15 +3421,18 @@ ion-header-bar .title {
  }
 
  .popup-chall{
-    text-align: center;
+     padding-top: 0px;
     text-decoration: underline;
     color: #4EB0E6;
     display: table;
+    padding-left: 16px;
  }
  .popup-string {
     display: table-cell;
     vertical-align: middle;
-    padding-left: 30px;
+ }
+ .label-chall-target {
+     padding-left: 20px;
  }
 @-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
 @-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}

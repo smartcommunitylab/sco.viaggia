@@ -643,6 +643,7 @@ angular.module('viaggia.controllers.game', [])
         }
         $scope.setChallengeMean = function (mean) {
             $scope.challenge.mean = mean;
+            $scope.preview = null;
         }
         $scope.confirmPlayer = function () {
             console.log($scope.challenge.player);
