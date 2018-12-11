@@ -9,7 +9,7 @@
   },
   {
     "file": "css/style.css",
-    "hash": "e4b73bceec86d3e46dcd96abd7de8b3d"
+    "hash": "cf12ea3bc07e8af1ce90324fe2b1ad75"
   },
   {
     "file": "data/bus.csv",
@@ -17,7 +17,7 @@
   },
   {
     "file": "data/config.json",
-    "hash": "0c955938c04de60593b1ef34cd9cc191"
+    "hash": "84d6837aae3fd2e79efc154678c67531"
   },
   {
     "file": "data/game/ranking.json",
@@ -389,7 +389,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "005fb85ba0daf189738aa4c17413e9f6"
+    "hash": "e6501363e05f44b7c6e179bc7e4ecbcd"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -401,11 +401,11 @@
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "0e6d64055d4513130a259283bc235135"
+    "hash": "0bfd0f23efdff7235228a9136e0ef410"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
-    "hash": "5785efff068ecce0846e869ca3385b69"
+    "hash": "58c21498ab62e8977d19d2d9b162e3eb"
   },
   {
     "file": "js/controllers/InfoCtrl.js",
@@ -993,7 +993,7 @@
   },
   {
     "file": "templates/credits.html",
-    "hash": "dddbe1b1ee77c8cbbceb47a1cfcf4fb9"
+    "hash": "65ed44fc2e734ed2a2a15ca33c8ad061"
   },
   {
     "file": "templates/emptyHomepage.html",
@@ -1029,7 +1029,7 @@
   },
   {
     "file": "templates/game/challengeConfigureTemplate/simpleText.html",
-    "hash": "c6f2a74ab2e7077f52aa0408c0061409"
+    "hash": "08981e256da840633595a5760e09cfca"
   },
   {
     "file": "templates/game/challenges.html",
@@ -1073,7 +1073,7 @@
   },
   {
     "file": "templates/game/configureChallenge.html",
-    "hash": "df3c299edd5081d3f00aa763974e959b"
+    "hash": "3b95b9d18fc5f5ee6a1ba10162fa395f"
   },
   {
     "file": "templates/game/diary.html",
