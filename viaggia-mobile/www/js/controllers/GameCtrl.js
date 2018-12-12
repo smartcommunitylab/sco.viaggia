@@ -349,7 +349,37 @@ angular.module('viaggia.controllers.game', [])
         $scope.hideWarning = function (type) {
             localStorage.setItem('warning_hide_' + type, true);
         }
+        $scope.chooseChallenge = function (challenge) {
+            //confirm popup
+            $ionicPopup.show({
+                title: $filter('translate')("challenge_accept_popup_title"),
+                template: $filter('translate')("challenge_accept_popup_template"),
+                buttons: [
+                    {
+                        text: $filter('translate')("btn_close"),
+                        type: 'button-cancel'
+                    },
+                    {
+                        text: $filter('translate')("btn_conferma"),
+                        type: 'button-custom',
+                        onTap: function () {
+                            Config.loading();
+                            GameSrv.chooseChallenge(challenge).then(function () {
+                                //clean list and keep the only one
+                                // challenge.group = 'futu';
+                                // $scope.challenges = [challenge];
+                                // $ionicScrollDelegate.resize();
+                                reloadList();
+                            }, function (err) {
+                                //TODO err
+                            }).finally(Config.loaded);
+                        }
+                    }
 
+                ]
+            });
+
+        }
         $scope.acceptChallenge = function (challenge) {
             //confirm popup
             $ionicPopup.show({

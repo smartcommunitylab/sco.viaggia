@@ -992,6 +992,29 @@ angular.module('viaggia.services.game', [])
                 return true
             return false;
         }
+        gameService.chooseChallenge = function (challenge) {
+            var deferred = $q.defer();
+            LoginService.getValidAACtoken().then(
+                function (token) {
+                    $http({
+                        method: 'PUT',
+                        url: Config.getServerURL() + '/gamificationweb/challenge/choose/' + challenge.challId,
+                        headers: {
+                            'Authorization': 'Bearer ' + token,
+                            'appId': Config.getAppId(),
+                        },
+                        timeout: Config.getHTTPConfig().timeout
+                    })
+                        .success(function () {
+                            deferred.resolve();
+                        })
+
+                        .error(function (err) {
+                            deferred.reject(err);
+                        });
+                });
+            return deferred.promise;
+        }
         gameService.acceptChallenge = function (challenge) {
             var deferred = $q.defer();
             LoginService.getValidAACtoken().then(
@@ -1015,6 +1038,7 @@ angular.module('viaggia.services.game', [])
                 });
             return deferred.promise;
         }
+
         gameService.rejectChallenge = function (challenge) {
             var deferred = $q.defer();
             LoginService.getValidAACtoken().then(
