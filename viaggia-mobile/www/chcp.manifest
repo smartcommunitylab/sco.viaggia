@@ -389,7 +389,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "e6501363e05f44b7c6e179bc7e4ecbcd"
+    "hash": "06d75d517a26d5fc54af4479463e8bb3"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -401,7 +401,7 @@
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "36ee609f219f2da1e94ac255a9575831"
+    "hash": "36ccf80a236991b5d1b7f474cd515bc3"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
@@ -993,7 +993,7 @@
   },
   {
     "file": "templates/credits.html",
-    "hash": "65ed44fc2e734ed2a2a15ca33c8ad061"
+    "hash": "ccb59666a51c8a75cead2fbbe7732377"
   },
   {
     "file": "templates/emptyHomepage.html",
@@ -1009,7 +1009,7 @@
   },
   {
     "file": "templates/game/blacklist.html",
-    "hash": "5411365744d98e1791a6c11a945ff478"
+    "hash": "1eb0951c39dfd3652d43e7f364182678"
   },
   {
     "file": "templates/game/challengeConfigureTemplate/default.html",
