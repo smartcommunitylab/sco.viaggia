@@ -401,7 +401,7 @@
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "0bfd0f23efdff7235228a9136e0ef410"
+    "hash": "36ee609f219f2da1e94ac255a9575831"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
@@ -513,7 +513,7 @@
   },
   {
     "file": "js/services/GameSrv.js",
-    "hash": "01726e4cd20deddc6c899aa4bd5f4cc0"
+    "hash": "d662f37cfd06f1b758e8b82297b2bfeb"
   },
   {
     "file": "js/services/GeoSrv.js",
@@ -1033,7 +1033,7 @@
   },
   {
     "file": "templates/game/challenges.html",
-    "hash": "be9f03e0b3201b48caafbd2d4b4d2f4c"
+    "hash": "6d6b009702065558098bcdb9b00de5c6"
   },
   {
     "file": "templates/game/challengeTemplates/competitivePerformance.html",
