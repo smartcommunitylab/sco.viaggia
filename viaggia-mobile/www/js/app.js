@@ -1563,7 +1563,8 @@ angular.module('viaggia', [
       lbl_challenge_percentage:"Percentuale:",
       lbl_challenge_threshold:"Threshold:",
       home_unlock_challenge:"Sblocca una nuova sfida",
-      lbl__challenge_cant_see_player:"Perche’ non riesco a trovare un giocatore?"      
+      lbl__challenge_cant_see_player:"Perche’ non riesco a trovare un giocatore?",
+      no_blacklist:"Nessuna blacklist trovata"      
     });
 
     $translateProvider.translations('en', {
@@ -2107,7 +2108,8 @@ angular.module('viaggia', [
       lbl_challenge_percentage:"Percentage:",
       lbl_challenge_threshold:"Threshold:",
       home_unlock_challenge:"Unlock a new challenge",
-      lbl__challenge_cant_see_player:"Why can't I find a player?"
+      lbl__challenge_cant_see_player:"Why can't I find a player?",
+      no_blacklist:"No blacklist found"
 
    
 
