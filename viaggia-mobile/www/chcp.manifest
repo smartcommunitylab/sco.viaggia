@@ -389,7 +389,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "06d75d517a26d5fc54af4479463e8bb3"
+    "hash": "8787aab62866a46a59023763abc497e4"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -401,11 +401,11 @@
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "36ccf80a236991b5d1b7f474cd515bc3"
+    "hash": "3b73089de3ac70f446828a18f887be27"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
-    "hash": "58c21498ab62e8977d19d2d9b162e3eb"
+    "hash": "e866a5f29b4ffd0c7435a21d5d1fb7a3"
   },
   {
     "file": "js/controllers/InfoCtrl.js",
@@ -449,7 +449,7 @@
   },
   {
     "file": "js/controllers/ProfileCtrl.js",
-    "hash": "257f25a61b90f87f851b2fae7df5194d"
+    "hash": "6a67254fa8a02cbabf7396b12353a406"
   },
   {
     "file": "js/controllers/RegistrationController.js",
@@ -1009,7 +1009,7 @@
   },
   {
     "file": "templates/game/blacklist.html",
-    "hash": "1eb0951c39dfd3652d43e7f364182678"
+    "hash": "b8bbdc1c9e350d8a9301019684767e68"
   },
   {
     "file": "templates/game/challengeConfigureTemplate/default.html",
@@ -1069,7 +1069,7 @@
   },
   {
     "file": "templates/game/choosePlayerChallengeModal.html",
-    "hash": "ff117a2d1ed3874a6ad71ad06fed0638"
+    "hash": "dbed6407581661e51cc5b09aa6a0d703"
   },
   {
     "file": "templates/game/configureChallenge.html",
