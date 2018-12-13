@@ -510,12 +510,12 @@ angular.module('viaggia.controllers.home', [])
         }
         $scope.getValueUser = function (challenge) {
             var labelChallenge = getChallengeByUnit(challenge);
-            return challenge.row_status + " " + $filter('translate')(labelChallenge);
+            return $filter('number')(challenge.row_status,'0') + " " + $filter('translate')(labelChallenge);
         }
         $scope.getValueOther = function (challenge) {
             if (challenge.otherAttendeeData) {
                 var labelChallenge = getChallengeByUnit(challenge);
-                return challenge.otherAttendeeData.row_status + " " + $filter('translate')(labelChallenge);
+                return $filter('number')(challenge.otherAttendeeData.row_status,'0') + " " + $filter('translate')(labelChallenge);
             }
             return "";
         }

@@ -735,6 +735,7 @@ angular.module('viaggia.controllers.game', [])
         GameSrv.previewChallenge($scope.challenge).then(function (preview) {
           $scope.preview = preview;
         }, function (error) {
+          Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
 
         }).finally(Config.loaded);;
       } else {
@@ -760,7 +761,26 @@ angular.module('viaggia.controllers.game', [])
             });
           })
         }, function (error) {
+          if (error && error.status == 400) {
+            //user not available
+            //popup and refresh
+            $ionicPopup.confirm({
+              title: $filter('translate')("lbl_chall_user_not_available_title"),
+              template: $filter('translate')("lbl_chall_user_not_available"),
+              buttons: [{
+                text: $filter('translate')("btn_close"),
+                type: 'button-ok',
+                onTap: function () {
+                  //refresh list
+                  $scope.removePlayer();
+                  $scope.getPlayers();
+                }
+              }]
+            });
+          } else {
+            Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
 
+          }
         }).finally(Config.loaded);
       } else {
         Toast.show($filter('translate')("toast_error_configure"), "short", "bottom");

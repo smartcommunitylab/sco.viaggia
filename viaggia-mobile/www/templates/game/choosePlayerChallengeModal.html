@@ -6,7 +6,6 @@
         <h1 class="title">{{'title_select_player'|translate}}</h1>
         <div class="buttons" side="right" ng-click="confirmPlayer()">
             <div class="button done-button">{{'button_select_player_done'|translate}}</div>
-                <!-- <i class="icon close-modal" ng-class="{'ion-android-arrow-back': platform.isAndroid(), 'ion-ios-arrow-back': !platform.isAndroid()}"></i> -->
          </div>
     </ion-header-bar>
     <ion-content>
@@ -15,25 +14,6 @@
                 <img class="challenge-profile-img" ng-src="{{getUserImg(player.id)}}">
                 <span class="challenge-profile-text">{{player.nickname}}</span>
             </ion-radio>
-            <!-- <div class="chall-player-separator">
-
-            </div> -->
-            <!-- <div class="row">
-                <div class="col col-80 chall-player-blacklist">
-                    {{'lbl_chall_choose_player_blacklist'|translate}}
-                </div>
-                <a class="button-icon icon ion-ios-information-outline" ng-click="showWhy()">
-                </a>
-
-            </div>
-            <div class="row" ng-if="why">
-                <div>
-                        {{'lbl_chall_blacklist'|translate}}
-                </div>
-            </div>
-            <ion-item ng-repeat="player in blacklistplayers">
-                <span class="blacklisted-player">{{player.nickname}}</span>
-            </ion-item> -->
         </ion-list>
     </ion-content>
 </ion-modal-view>

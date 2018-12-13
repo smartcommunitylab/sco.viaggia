@@ -351,14 +351,14 @@ angular.module('viaggia.controllers.profile', [])
         }
 
 
-        $scope.getWidthUser = function (challenge) {
-            //TODO
-            return "width:" + challenge.status + "%;"
-        }
-        $scope.getValueUser = function (challenge) {
-            //TODO
-            return $filter('translate')('user_chall_status') + challenge.status + "%";
-        }
+        // $scope.getWidthUser = function (challenge) {
+        //     //TODO
+        //     return "width:" + challenge.status + "%;"
+        // }
+        // $scope.getValueUser = function (challenge) {
+        //     //TODO
+        //     return $filter('translate')('user_chall_status') + challenge.status + "%";
+        // }
         $scope.filter.options = ['Total', 'Monthly'];
         $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
         $scope.filter.filter = function (selection) {

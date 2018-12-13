@@ -1048,7 +1048,7 @@ angular.module('viaggia', [
       plan_day: 'Giorno',
       plan_time: 'Ora',
       plan_preferences: 'Preferenze',
-      plan_preferences_fastest: 'Itinerario piu veloce',
+      plan_preferences_fastest: 'Itinerario più veloce',
       plan_preferences_leastChanges: 'Con meno cambi',
       plan_preferences_leastWalking: 'Minimo tragitto a piedi',
       plan_map_title: 'Seleziona l\'indirizzo',
@@ -1210,7 +1210,7 @@ angular.module('viaggia', [
       pop_up_no_start_template: "Per iniziare a tracciare il viaggio è necessaria una connessione internet. Verificare le impostazioni del telefono",
       popup_modify_trip_title: 'Modifica',
       popup_modify_trip_message: 'Sicuro di voler modificare il viaggio salvato?',
-      plan_preferences_fastest: 'Itinerario piu veloce',
+      plan_preferences_fastest: 'Itinerario più veloce',
       plan_preferences_leastChanges: 'Con meno cambi',
       plan_preferences_leastWalking: 'Minimo tragitto a piedi',
       lbl_taxi_station: 'Stazione Taxi',
@@ -1564,7 +1564,9 @@ angular.module('viaggia', [
       lbl_challenge_threshold:"Threshold:",
       home_unlock_challenge:"Sblocca una nuova sfida",
       lbl__challenge_cant_see_player:"Perche’ non riesco a trovare un giocatore?",
-      no_blacklist:"Nessuna blacklist trovata"      
+      no_blacklist:"Nessuna blacklist trovata",
+      lbl_chall_user_not_available_title:"Utente non disponibile",
+      lbl_chall_user_not_available:"L'utente selezionato non e’ più disponibile. Selezionare un altro giocatore"      
     });
 
     $translateProvider.translations('en', {
@@ -2109,7 +2111,9 @@ angular.module('viaggia', [
       lbl_challenge_threshold:"Threshold:",
       home_unlock_challenge:"Unlock a new challenge",
       lbl__challenge_cant_see_player:"Why can't I find a player?",
-      no_blacklist:"No blacklist found"
+      no_blacklist:"No blacklist found",
+      lbl_chall_user_not_available_title:"User not available",
+      lbl_chall_user_not_available:"Selected user is not available anymore. Please, select a different one"  
 
    
 

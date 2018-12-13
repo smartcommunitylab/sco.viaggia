@@ -11,19 +11,21 @@
         <ion-list>
           <ion-item ng-repeat="item in blacklist" class="blackitem">
             <div class="row">
-              <div class="col col-10 ">
+              <div class="col col-90">
+                <img class="challenge-profile-img" ng-src="{{getUserImg(item.id)}}">
+                <span class="challenge-profile-text">{{item.nickname}}</span>
+              </div>
+              <!-- <div class="col col-10 ">
                 <img class="profile-img" ng-src="{{getUserImg(item.id)}}">
               </div>
               <div class="col col-80 blacklist-name">
                 <span>{{item.nickname}}</span>
-              </div>
+              </div> -->
               <div class="col col-10">
                 <a class="button-icon icon ion-close-circled" ng-click="removeFromBlacklist(item.id)"></a>
               </div>
             </div>
           </ion-item>
-
-          <!-- <ion-infinite-scroll ng-if="maybeMore" on-infinite="loadMore()"></ion-infinite-scroll> -->
         </ion-list>
       </ion-scroll>
     </div>
