@@ -128,11 +128,9 @@ angular.module('viaggia.controllers.game', [])
     $scope.tabs = ['past', 'future', 'unlock'];
     $scope.actualTab = "";
     $scope.expansion = [];
-
     $scope.challenge = [];
     $scope.typeOfChallenges = [];
     $scope.language = null;
-
     var paramEnd = $stateParams.challengeEnd;
     var paramStart = $stateParams.challengeStart;
     var unlock = $stateParams.unlock;
