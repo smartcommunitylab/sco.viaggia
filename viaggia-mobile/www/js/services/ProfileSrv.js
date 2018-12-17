@@ -71,6 +71,7 @@ angular.module('viaggia.services.profile', [])
     profileService.getProfileStatus = function () {
       return this.status;
     }
+    
     profileService.setProfileImage = function (file) {
       var deferred = $q.defer();
       var fd = new FormData();
