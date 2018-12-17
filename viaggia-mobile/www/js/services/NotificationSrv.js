@@ -17,7 +17,9 @@ angular.module('viaggia.services.notification', [])
       },
       "program_challenge": {
         state: 'app.home.challenges',
-        params: { challengeEnd: 1 },
+        params: {
+          challengeEnd: 1
+        },
         cache: '_challengesRefresh'
 
       },
@@ -29,44 +31,66 @@ angular.module('viaggia.services.notification', [])
       },
       "new_invite": {
         state: 'app.home.challenges',
-        params: { challengeEnd: 1 },
+        params: {
+          challengeEnd: 1
+        },
         cache: '_challengesRefresh'
 
       },
       "reply_invite": {
         state: 'app.home.challenges',
-        params: { challengeEnd: 1 },
+        params: {
+          challengeEnd: 1
+        },
         cache: '_challengesRefresh'
 
       },
       "unlock_type": {
         state: 'app.home.challenges',
-        params: { type: 'unlock' },
+        params: {
+          type: 'unlock'
+        },
         cache: '_challengesRefresh'
 
       },
       "reply_denied": {
         state: 'app.home.challenges',
-        params: { challengeEnd: 1 },
+        params: {
+          challengeEnd: 1
+        },
         cache: '_challengesRefresh'
       },
       "reply_accepted": {
         state: 'app.home.challenges',
-        params: { challengeEnd: 1 },
+        params: {
+          challengeEnd: 1
+        },
         cache: '_challengesRefresh'
       },
       "challenge_cancel": {
         state: 'app.home.challenges',
-        params: { challengeEnd: 1 },
+        params: {
+          challengeEnd: 1
+        },
         cache: '_challengesRefresh'
+      },
+      "challenge_complete": {
+        state: 'app.home.diary',
+        params: null,
+        cache: '_diaryRefresh'
+      },
+      "challenge_failed": {
+        state: 'app.home.diary',
+        params: null,
+        cache: '_diaryRefresh'
       }
     }
     notificationService.getNotifications = function (sinceTimestamp, sincePosition, numberNotification) {
       var deferred = $q.defer();
       $http.get(Config.getMessagingServerURL() + '/app/public/notification/' + Config.getMessagingAppId() +
-        '/?since=' + sinceTimestamp +
-        '&position=' + sincePosition +
-        '&count=' + numberNotification, Config.getHTTPConfig())
+          '/?since=' + sinceTimestamp +
+          '&position=' + sincePosition +
+          '&count=' + numberNotification, Config.getHTTPConfig())
         .success(function (data) {
           deferred.resolve(data.notifications);
         })
@@ -96,23 +120,23 @@ angular.module('viaggia.services.notification', [])
         LoginService.getValidAACtoken().then(
           function (tokenLogin) {
             $http({
-              method: 'POST',
-              url: Config.getMessagingServerURL() + '/register/user/' + Config.getMessagingAppId(),
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + tokenLogin
+                method: 'POST',
+                url: Config.getMessagingServerURL() + '/register/user/' + Config.getMessagingAppId(),
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + tokenLogin
 
-              },
-              data: {
-                "appName": Config.getMessagingAppId(),
-                "registrationId": registrationId,
-                "platform": ionic.Platform.isAndroid() ? "android" : "ios"
-              },
-              timeout: 5000
-            }).success(function (data) {
-              deferred.resolve(data.notifications);
-            })
+                },
+                data: {
+                  "appName": Config.getMessagingAppId(),
+                  "registrationId": registrationId,
+                  "platform": ionic.Platform.isAndroid() ? "android" : "ios"
+                },
+                timeout: 5000
+              }).success(function (data) {
+                deferred.resolve(data.notifications);
+              })
               .error(function (err) {
                 deferred.reject(err);
 
@@ -139,22 +163,24 @@ angular.module('viaggia.services.notification', [])
         $ionicPopup.show({
           title: notification.title,
           template: notification.description,
-          buttons: [
-            {
-              text: $filter('translate')("btn_close"),
-              type: 'button-custom',
-              onTap: function () {
-                if (notification["content.type"] && typeOfChallenges[notification["content.type"]]) {
-                  // localStorage.removeItem(Config.getAppId() +typeOfChallenges[notification["content.type"]].cache);
-                  $ionicHistory.clearCache().then(function () {
-                    $state.go(typeOfChallenges[notification["content.type"]].state, typeOfChallenges[notification["content.type"]].params, { reload: true })
-                  }, function (err) {
-                    $state.go(typeOfChallenges[notification["content.type"]].state, typeOfChallenges[notification["content.type"]].params, { reload: true })
+          buttons: [{
+            text: $filter('translate')("btn_close"),
+            type: 'button-custom',
+            onTap: function () {
+              if (notification["content.type"] && typeOfChallenges[notification["content.type"]]) {
+                // localStorage.removeItem(Config.getAppId() +typeOfChallenges[notification["content.type"]].cache);
+                $ionicHistory.clearCache().then(function () {
+                  $state.go(typeOfChallenges[notification["content.type"]].state, typeOfChallenges[notification["content.type"]].params, {
+                    reload: true
                   })
-                }
+                }, function (err) {
+                  $state.go(typeOfChallenges[notification["content.type"]].state, typeOfChallenges[notification["content.type"]].params, {
+                    reload: true
+                  })
+                })
               }
             }
-          ]
+          }]
         });
       }, function (error) {
         console.error(error);
@@ -215,14 +241,14 @@ angular.module('viaggia.services.notification', [])
 
     }
 
-    var getNotificationDetail = function () { }
+    var getNotificationDetail = function () {}
 
     //get the last notification since last update
     var updateNotifications = function (lastTimeUpdate) {
       $http.get(Config.getMessagingServerURL() + '/app/public/notification/' + Config.getMessagingAppId() +
-        '/?since=' + lastTimeUpdate.getTime() +
-        '&position=' + 0 +
-        '&count=' + numberNotification, Config.getHTTPConfig())
+          '/?since=' + lastTimeUpdate.getTime() +
+          '&position=' + 0 +
+          '&count=' + numberNotification, Config.getHTTPConfig())
         .success(function (data) {
           if (data.notifications) {
             var lastUpdateTime = new Date(data.notifications[0].updateTime);
