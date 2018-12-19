@@ -670,12 +670,11 @@ angular.module('viaggia.controllers.game', [])
     }
     $scope.confirmPlayer = function () {
       console.log($scope.challenge.player);
-      //TODO update list
-      // $scope.challenge.player = $scope.playerChoice;
       $scope.closeList();
     }
     $scope.selectPlayer = function (player) {
       $scope.challenge.player = player;
+      $scope.confirmPlayer()
     }
     $scope.getConfigureTemplate = function (challenge) {
       return GameSrv.getConfigureTemplate(challenge);

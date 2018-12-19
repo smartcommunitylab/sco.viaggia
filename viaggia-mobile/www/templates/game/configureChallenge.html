@@ -1,5 +1,7 @@
-<ion-view title="{{'home_configure_challenge' | translate}} {{currentUser.nickName}}" ng-init="initConf()">
-
+<ion-view  ng-init="initConf()">
+    <ion-nav-title  class="home-title">
+        {{'home_configure_challenge' | translate}} {{currentUser.nickName}}
+    </ion-nav-title>
   <ion-content>
     <div class="row">
       <div class="col lab-challenge-conf">{{'lbl_challenge_configure_type'|translate}}</div>
