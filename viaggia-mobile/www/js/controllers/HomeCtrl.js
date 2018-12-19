@@ -90,6 +90,7 @@ angular.module('viaggia.controllers.home', [])
             $scope.status = profileService.getProfileStatus();
             setUserLevel();
             setUserProgress();
+            setChooseButton();
             if ($scope.status && $scope.status.challengeConcept)
                 setChallenges();
         });
@@ -204,6 +205,8 @@ angular.module('viaggia.controllers.home', [])
                 }, function () {
                     //$ionicLoading.hide();
                 });
+            } else {
+                setChooseButton();
             }
         });
         $scope.$on("$ionicView.enter", function (scopes, states) {
