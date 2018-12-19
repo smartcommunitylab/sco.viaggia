@@ -389,7 +389,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "8787aab62866a46a59023763abc497e4"
+    "hash": "8a8954dd7d3ad23373df047e466922ec"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -401,7 +401,7 @@
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "be2c6aa3176f9cf4cee8f17b799fc129"
+    "hash": "95bd7f300fa4d70d1fc1ea9c0c480da4"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
@@ -1069,11 +1069,11 @@
   },
   {
     "file": "templates/game/choosePlayerChallengeModal.html",
-    "hash": "dbed6407581661e51cc5b09aa6a0d703"
+    "hash": "33387272891c2e24a701fba5ea28bfea"
   },
   {
     "file": "templates/game/configureChallenge.html",
-    "hash": "3b95b9d18fc5f5ee6a1ba10162fa395f"
+    "hash": "5d1ecfc21a10e9e4ae81d13234d7b452"
   },
   {
     "file": "templates/game/diary.html",
