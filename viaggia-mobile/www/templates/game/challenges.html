@@ -1,62 +1,66 @@
 <ion-view title="{{'home_gamification' | translate}} {{currentUser.nickName}}">
-    <ion-nav-buttons side="right">
-        <button ng-click="openNotifications()" class="button button-icon button-home ic_notification"><span class="badge badge-assertive header-badge"
-                ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span></button>
-        <!-- <div class="profile-container">
+  <ion-nav-buttons side="right">
+    <button ng-click="openNotifications()" class="button button-icon button-home ic_notification"><span class="badge badge-assertive header-badge"
+        ng-if="countNotification>0">{{getCountNotification(countNotification)}}</span></button>
+    <!-- <div class="profile-container">
             <img class="bar-profile-img" ng-if="profileImg" ng-src="{{profileImg}}" ng-click="openProfile()">
         </div> -->
-    </ion-nav-buttons>
+  </ion-nav-buttons>
 
-    <ion-content class="game-challenges" has-bouncing="false" scroll="false" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
-        <!-- tabs -->
-        <div class="filter">
-            <div class="challenge-tabs row">
-                <div class="col challenge-tab" ng-click="openTab('past')" ng-class="{'becomeblue':!activeTab('past')}">{{'challenge_past'
-                    | translate}}</h4>
+  <ion-content class="game-challenges" has-bouncing="false" scroll="false" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
+    <!-- tabs -->
+    <div class="filter">
+      <div class="challenge-tabs row">
+        <div class="col challenge-tab" ng-click="openTab('past')" ng-class="{'becomeblue':!activeTab('past')}">{{'challenge_past'
+          | translate}}</h4>
+        </div>
+        <div class="col challenge-tab" ng-click="openTab('future')" ng-class="{'becomeblue':!activeTab('future')}">{{'challenge_future'
+          | translate}}</h4>
+        </div>
+        <div class="col challenge-tab" ng-click="openTab('unlock')" ng-class="{'becomeblue':!activeTab('unlock')}">{{'challenge_unlock'
+          | translate}}</h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- Unlock -->
+    <div ng-if="actualTab=='unlock'">
+      <ion-scroll class="padding-right padding-left challenges" ng-style="challengesStyle" delegate-handle="challengesScroll">
+        <ion-list>
+          <ion-item class="challenge item-text-wrap type-challenge" ng-if="showWarning('unlock')">
+            <h4 class="label">{{'warning_unlock_challenge' | translate}}</h4>
+            <button class="button button-clear button-challenge-enable" ng-click="hideWarning('unlock')">
+              {{'btn_got_it' | translate}}</button>
+          </ion-item>
+          <ion-item class="challenge no-padding" ng-repeat="type in typeOfChallenges">
+            <div class="row no-padding">
+              <div class="col col-20 {{getColorType(type)}} padding-10 " ng-class="{'fog': lockedType(type)}">
+                <a class="icon-chall icon {{getIconType(type)}} "></a>
+              </div>
+              <div class="col col-60 padding-10 ">
+                <div class="row" ng-class="{'fog': lockedType(type)}">
+                  <div class="col short-desc">{{type.short|translate}}</div>
                 </div>
-                <div class="col challenge-tab" ng-click="openTab('future')" ng-class="{'becomeblue':!activeTab('future')}">{{'challenge_future'
-                    | translate}}</h4>
+                <div class="row" ng-class="{'fog': lockedType(type)}">
+                  <p class="col challenge-long-desc">{{type.long|translate}}</p>
                 </div>
-                <div class="col challenge-tab" ng-click="openTab('unlock')" ng-class="{'becomeblue':!activeTab('unlock')}">{{'challenge_unlock'
-                    | translate}}</h4>
+                <div class="row" ng-class="{'fog': lockedType(type)}">
+                  <div class="col button-active" ng-click="readMore(type)">{{'read_more' |
+                    translate}}</div>
                 </div>
+              </div>
+              <div class="col col-20 padding-10 " ng-if="type.state!='ACTIVE'" ng-class="{'fog': lockedType(type)}">
+                <a class="icon-chall icon ic_game_lock button-active" ng-click="unlock(type)"></a>
+              </div>
+              <div class="col col-20 padding-10 " ng-if="type.state== 'ACTIVE'">
+                <a class="icon-chall icon ic_unlock button-active"></a>
+              </div>
             </div>
-        </div>
-
-        <!-- Unlock -->
-        <div ng-if="actualTab=='unlock'">
-            <ion-scroll class="padding-right padding-left challenges" ng-style="challengesStyle" delegate-handle="challengesScroll">
-                <ion-list>
-                    <ion-item class="challenge item-text-wrap type-challenge" ng-if="showWarning('unlock')">
-                        <h4 class="label">{{'warning_unlock_challenge' | translate}}</h4>
-                        <button class="button button-clear button-challenge-enable" ng-click="hideWarning('unlock')">
-                            {{'btn_got_it' | translate}}</button>
-                    </ion-item>
-                    <ion-item class="challenge no-padding" ng-repeat="type in typeOfChallenges">
-                        <div class="row no-padding">
-                            <div class="col col-20 {{getColorType(type)}} padding-10 " ng-class="{'fog': lockedType(type)}">
-                                <a class="icon-chall icon {{getIconType(type)}} "></a>
-                            </div>
-                            <div class="col col-60 padding-10 ">
-                                <div class="short-desc" ng-class="{'fog': lockedType(type)}">{{type.short|translate}}</div>
-                                <div class="row" ng-class="{'fog': lockedType(type)}">
-                                    <p class="col challenge-long-desc">{{type.long|translate}}</p>
-                                    <div class="col button-active" ng-click="readMore(type)">{{'read_more' |
-                                        translate}}</div>
-                                </div>
-                            </div>
-                            <div class="col col-20 padding-10 " ng-if="type.state!='ACTIVE'" ng-class="{'fog': lockedType(type)}">
-                                <a class="icon-chall icon ic_game_lock button-active" ng-click="unlock(type)"></a>
-                            </div>
-                            <div class="col col-20 padding-10 " ng-if="type.state== 'ACTIVE'">
-                                <a class="icon-chall icon ic_unlock button-active"></a>
-                            </div>
-                        </div>
-                    </ion-item>
-                </ion-list>
-            </ion-scroll>
-        </div>
-        <!-- <div ng-if="challenge.group=='unlock'">
+          </ion-item>
+        </ion-list>
+      </ion-scroll>
+    </div>
+    <!-- <div ng-if="challenge.group=='unlock'">
                             <div class="row no-padding">
                                 <div class="col col-20 {{getColorChallenge(challenge)}} padding-10" ng-class="{'fog':challenge.state == 'LOCKED'}">
                                     <a class="icon-chall  icon {{getIconChallenge(challenge)}}"></a>
@@ -86,197 +90,194 @@
                                 </div>
                             </div>
                         </div> -->
-        <!-- future and proposed-->
+    <!-- future and proposed-->
 
-        <div ng-if="actualTab=='future'">
-            <ion-scroll ng-if="challenges && challenges.length > 0" class="padding-right padding-left challenges"
-                ng-style="challengesStyle" delegate-handle="challengesScroll">
-                <ion-item class="challenge item-text-wrap type-challenge" ng-if="showWarning('future')">
-                    <h4 class="label">{{'warning_choose_challenge' | translate}}</h4>
-                    <button class="button button-clear button-challenge-enable" ng-click="hideWarning('future')">
-                        {{'btn_got_it' | translate}}</button>
-                </ion-item>
-                <ion-list>
-                    <ion-item class="challenge no-padding" ng-repeat="challenge in challenges">
-                        <div ng-if="challenge.group=='racc'">
-                            <div class="row no-padding">
-                                <div class="col col-20 {{getColorChallenge(challenge)}} padding-10">
-                                    <a class="icon-chall  icon {{getIconChallenge(challenge)}}"></a>
-                                </div>
-                                <div class="col padding-10 ">
-                                    <div>
-                                        <p class="challenge-short-desc">{{challenge.short}}</p>
-                                        <p class="challenge-long-desc" style="float:left">{{challenge.long}}</p>
-                                        <div class="button-active" style="float:right" ng-click="readMore(challenge)">{{'read_more'
-                                            | translate}}</div>
+    <div ng-if="actualTab=='future'">
+      <ion-scroll ng-if="challenges && challenges.length > 0" class="padding-right padding-left challenges" ng-style="challengesStyle"
+        delegate-handle="challengesScroll">
+        <ion-item class="challenge item-text-wrap type-challenge" ng-if="showWarning('future')">
+          <h4 class="label">{{'warning_choose_challenge' | translate}}</h4>
+          <button class="button button-clear button-challenge-enable" ng-click="hideWarning('future')">
+            {{'btn_got_it' | translate}}</button>
+        </ion-item>
+        <ion-list>
+          <ion-item class="challenge no-padding" ng-repeat="challenge in challenges">
+            <div ng-if="challenge.group=='racc'">
+              <div class="row no-padding">
+                <div class="col col-20 {{getColorChallenge(challenge)}} padding-10">
+                  <a class="icon-chall  icon {{getIconChallenge(challenge)}}"></a>
+                </div>
+                <div class="col padding-10 ">
+                  <div>
+                    <p class="challenge-short-desc">{{challenge.short}}</p>
+                    <p class="challenge-long-desc" style="float:left">{{challenge.long}}</p>
+                    <div class="button-active" style="float:right" ng-click="readMore(challenge)">{{'read_more'
+                      | translate}}</div>
 
-                                    </div>
-                                    <div class="row">
-                                        <div class="col home-points text-center" ng-if="challenge.bonus">
-                                            {{challenge.bonus}}
-                                            <i class="icon ion-leaf"></i>
-                                        </div>
-                                        <div class="col button-active text-right" ng-click="chooseChallenge(challenge)">
-                                            {{'btn_challenge_accept' | translate | uppercase}}</div>
-                                        <!-- <div class="col">
+                  </div>
+                  <div class="row">
+                    <div class="col home-points text-center" ng-if="challenge.bonus">
+                      {{challenge.bonus}}
+                      <i class="icon ion-leaf"></i>
+                    </div>
+                    <div class="col button-active text-right" ng-click="chooseChallenge(challenge)">
+                      {{'btn_challenge_accept' | translate | uppercase}}</div>
+                    <!-- <div class="col">
                                             <button class="button button-clear button-challenge-enable" ng-click="acceptChallenge(challenge)"> {{'btn_challenge_accept' | translate}}</button>
                                         </div> -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div ng-if="challenge.group=='futu'">
-                            <div class="row no-padding">
-                                <div class="col col-20 {{getColorChallenge(challenge)}} padding-10">
-                                    <a class="icon-chall  icon {{getIconChallenge(challenge)}}"></a>
-                                </div>
-                                <div class="col padding-10 ">
-                                    <div>
-                                        <p class="challenge-short-desc">{{challenge.short}}</p>
-                                        <p class="challenge-long-desc" style="float:left">{{challenge.long}}</p>
-                                        <div class="button-active" style="float:right" ng-click="readMore(challenge)">{{'read_more'
-                                            | translate}}</div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col home-points text-center" ng-if="challenge.bonus">
-                                            {{challenge.bonus}}
-                                            <i class="icon ion-leaf"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div ng-if="challenge.group=='unlock'">
-                            <div class="row no-padding">
-                                <div class="col col-20 {{getColorChallenge(challenge)}} padding-10" ng-class="{'fog':challenge.state == 1 || !canPropose}">
-                                    <a class="icon-chall  icon {{getIconChallenge(challenge)}}"></a>
-                                </div>
-                                <div class="col  padding-10">
-                                    <div ng-class="{'fog':challenge.state == 1 || !canPropose}">{{challenge.short|translate}}</div>
-                                    <div ng-if="challenge.state != 1">
-                                        <div class="row">
-                                            <div class="col challenge-long-desc" ng-class="{'fog':!canPropose}">{{challenge.long|translate}}</div>
-                                            <!-- <div class="col button-active" ng-click="readMore(challenge)">{{'read_more' | translate}}</div> -->
-                                        </div>
-                                        <div class="row">
-                                            <!-- <div class="col challenge-long-desc">{{challenge.long}}</div> -->
-                                            <div class="col button-active" ng-class="{'fog':!canPropose}" ng-click="readMore(challenge)">{{'read_more'
-                                                | translate}}</div>
-                                        </div>
-                                    </div>
-                                    <div class="row" ng-if="challenge.state == 1 ">
-                                        <div class="col ">{{'lbl_challenge_unlock_next' | translate}}</div>
-                                    </div>
-                                    <button class="button button-clear button-challenge-enable" style="color:black!important;"
-                                        ng-if="challenge.state == 1">
-                                        <i class="icon ion-locked"></i>
-                                    </button>
-                                    <button class="button button-clear button-challenge-enable" ng-if="challenge.state != 1 &&  canPropose"
-                                        ng-click="configureChallenge(challenge)">
-                                        {{'btn_challenge_choose' | translate}}</button>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div ng-if="challenge.group=='invite'">
-                            <div class="row ">
-                                <div class="col col-20 {{getColorChallenge(challenge)}} padding-10">
-                                    <a class="icon-chall icon {{getIconChallenge(challenge)}}"></a>
-                                </div>
-                                <div class="col  padding-10">
-                                    <div>{{challenge.short}}</div>
-                                    <div class="row">
-                                        <div class="col challenge-sent">
-                                            <span ng-if="challenge.received">{{'lbl_sent_from' | translate}}</span>
-                                            <span ng-if="!challenge.received"> {{'lbl_sent_to' | translate}}</span>
-                                            <b>{{challenge.nickname}}</b>
-                                        </div>
-                                        <div class="col button-active" ng-click="readMore(challenge)">{{'read_more' |
-                                            translate}}</div>
-                                    </div>
-                                    <div class="row row-margin">
-                                        <div class="col">
-                                            <div ng-if="challenge.received">
-                                                <button class="col button button-clear button-challenge-enable"
-                                                    ng-click="rejectChallenge(challenge)">
-                                                    {{'btn_challenge_reject' | translate}}</button>
-                                                <button class="button button-clear button-challenge-enable" ng-click="acceptChallenge(challenge)">
-                                                    {{'btn_challenge_accept' | translate}}</button>
-                                            </div>
-                                            <div ng-if="!challenge.received">
-                                                <button class="col button button-clear button-challenge-enable"
-                                                    ng-click="cancelChallenge(challenge)">
-                                                    {{'btn_challenge_reject_sent' | translate}}</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ion-item>
-                </ion-list>
-            </ion-scroll>
-            <div ng-if="challenges != null && challenges.length == 0" class="text-center padding">
-                <h4>{{ 'no_challenges' | translate}}</h4>
+                  </div>
+                </div>
+              </div>
             </div>
-            <!-- <div class="padding-right padding-left game-points" ng-if="!challenges">
+            <div ng-if="challenge.group=='futu'">
+              <div class="row no-padding">
+                <div class="col col-20 {{getColorChallenge(challenge)}} padding-10">
+                  <a class="icon-chall  icon {{getIconChallenge(challenge)}}"></a>
+                </div>
+                <div class="col padding-10 ">
+                  <div>
+                    <p class="challenge-short-desc">{{challenge.short}}</p>
+                    <p class="challenge-long-desc" style="float:left">{{challenge.long}}</p>
+                    <div class="button-active" style="float:right" ng-click="readMore(challenge)">{{'read_more'
+                      | translate}}</div>
+
+                  </div>
+                  <div class="row">
+                    <div class="col home-points text-center" ng-if="challenge.bonus">
+                      {{challenge.bonus}}
+                      <i class="icon ion-leaf"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div ng-if="challenge.group=='unlock'">
+              <div class="row no-padding">
+                <div class="col col-20 {{getColorChallenge(challenge)}} padding-10" ng-class="{'fog':challenge.state == 1 || !canPropose}">
+                  <a class="icon-chall  icon {{getIconChallenge(challenge)}}"></a>
+                </div>
+                <div class="col  padding-10">
+                  <div ng-class="{'fog':challenge.state == 1 || !canPropose}">{{challenge.short|translate}}</div>
+                  <div ng-if="challenge.state != 1">
+                    <div class="row">
+                      <div class="col challenge-long-desc" ng-class="{'fog':!canPropose}">{{challenge.long|translate}}</div>
+                      <!-- <div class="col button-active" ng-click="readMore(challenge)">{{'read_more' | translate}}</div> -->
+                    </div>
+                    <div class="row">
+                      <!-- <div class="col challenge-long-desc">{{challenge.long}}</div> -->
+                      <div class="col button-active" ng-class="{'fog':!canPropose}" ng-click="readMore(challenge)">{{'read_more'
+                        | translate}}</div>
+                    </div>
+                  </div>
+                  <div class="row" ng-if="challenge.state == 1 ">
+                    <div class="col ">{{'lbl_challenge_unlock_next' | translate}}</div>
+                  </div>
+                  <button class="button button-clear button-challenge-enable" style="color:black!important;" ng-if="challenge.state == 1">
+                    <i class="icon ion-locked"></i>
+                  </button>
+                  <button class="button button-clear button-challenge-enable" ng-if="challenge.state != 1 &&  canPropose"
+                    ng-click="configureChallenge(challenge)">
+                    {{'btn_challenge_choose' | translate}}</button>
+
+                </div>
+              </div>
+            </div>
+            <div ng-if="challenge.group=='invite'">
+              <div class="row ">
+                <div class="col col-20 {{getColorChallenge(challenge)}} padding-10">
+                  <a class="icon-chall icon {{getIconChallenge(challenge)}}"></a>
+                </div>
+                <div class="col  padding-10">
+                  <div>{{challenge.short}}</div>
+                  <div class="row">
+                    <div class="col challenge-sent">
+                      <span ng-if="challenge.received">{{'lbl_sent_from' | translate}}</span>
+                      <span ng-if="!challenge.received"> {{'lbl_sent_to' | translate}}</span>
+                      <b>{{challenge.nickname}}</b>
+                    </div>
+                    <div class="col button-active" ng-click="readMore(challenge)">{{'read_more' |
+                      translate}}</div>
+                  </div>
+                  <div class="row row-margin">
+                    <div class="col">
+                      <div ng-if="challenge.received">
+                        <button class="col button button-clear button-challenge-enable" ng-click="rejectChallenge(challenge)">
+                          {{'btn_challenge_reject' | translate}}</button>
+                        <button class="button button-clear button-challenge-enable" ng-click="acceptChallenge(challenge)">
+                          {{'btn_challenge_accept' | translate}}</button>
+                      </div>
+                      <div ng-if="!challenge.received">
+                        <button class="col button button-clear button-challenge-enable" ng-click="cancelChallenge(challenge)">
+                          {{'btn_challenge_reject_sent' | translate}}</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-scroll>
+      <div ng-if="challenges != null && challenges.length == 0" class="text-center padding">
+        <h4>{{ 'no_challenges' | translate}}</h4>
+      </div>
+      <!-- <div class="padding-right padding-left game-points" ng-if="!challenges">
                 <h4 class="label">{{'no_status' | translate}}</h4>
             </div> -->
-        </div>
+    </div>
 
-        <!-- past -->
-        <div ng-if="actualTab=='past'">
-            <div ng-if="pastChallenges != null && pastChallenges.length == 0" class="text-center padding">
-                <h4>{{ 'no_challenges_old' | translate}}</h4>
-            </div>
-            <ion-scroll class="padding-right padding-left challenges" ng-style="challengesStyle" delegate-handle="challengesScroll"
-                ng-if="pastChallenges != null && pastChallenges.length > 0">
-                <ion-list>
-                    <ion-item class="challenge" ng-repeat="challenge in pastChallenges" style="{{getBorderColor(challenge)}}"
-                        ng-class="{'challenge-old': !challenge.active || challenge.success, success: !!challenge.success, fail: !challenge.success}">
-                        <div class="row">
-                            <div class="col col-70">
-                                <div class="row">
-                                    <div class="col">
-                                        {{challenge.short}}
-                                    </div>
-                                </div>
-                                <!-- <div class="row">
+    <!-- past -->
+    <div ng-if="actualTab=='past'">
+      <div ng-if="pastChallenges != null && pastChallenges.length == 0" class="text-center padding">
+        <h4>{{ 'no_challenges_old' | translate}}</h4>
+      </div>
+      <ion-scroll class="padding-right padding-left challenges" ng-style="challengesStyle" delegate-handle="challengesScroll"
+        ng-if="pastChallenges != null && pastChallenges.length > 0">
+        <ion-list>
+          <ion-item class="challenge" ng-repeat="challenge in pastChallenges" style="{{getBorderColor(challenge)}}"
+            ng-class="{'challenge-old': !challenge.active || challenge.success, success: !!challenge.success, fail: !challenge.success}">
+            <div class="row">
+              <div class="col col-70">
+                <div class="row">
+                  <div class="col">
+                    {{challenge.short}}
+                  </div>
+                </div>
+                <!-- <div class="row">
                                 </div> -->
-                                <div class="row" ng-if="isExpanded($index)">
-                                    <span compile="challenge.long" ng-if="isExpanded($index)"></span>
-                                </div>
-                                <div class="challenge-string-result">
-                                    <span ng-if="challenge.success"> {{'you_win'| translate}} {{challenge.dataFinished|
-                                        date:'dd-MM-yy'}}{{'at_clock'| translate}}
-                                        {{challenge.dataFinished| date:'HH:mm'}}</span>
-                                    <span ng-if="!challenge.success">{{'you_lose'| translate}}
-                                        <span ng-if="challenge.nicknameOpponent">.{{challenge.nicknameOpponent}}{{'at_day_opponent'|
-                                            translate}}</span>
-                                        <span ng-if="challenge.nicknameOpponent==null">{{'at_day'| translate}}</span>
-                                        {{challenge.dataFinished| date:'dd-MM-yy'}}{{'at_clock'|
-                                        translate}} {{challenge.dataFinished| date:'HH:mm'}}</span>
-                                </div>
-                            </div>
-                            <div class="col col-10" style="line-height: 15vh;" ng-click="expand($index)">
-                                <i class="icon" ng-class="isExpanded($index) ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i>
-                            </div>
-                            <div class="col col-20">
-                                <!-- coppa  -->
-                                <p ng-if="challenge.success">
-                                    <a class="icon ic_game_challenge challenge-win" style="{{getColorCup(challenge)}}"></a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <ng-include src="getChallengeBarTemplate(challenge)" style="width: 100%"></ng-include>
-                        </div>
-                    </ion-item>
-                </ion-list>
-            </ion-scroll>
-        </div>
+                <div class="row" ng-if="isExpanded($index)">
+                  <span compile="challenge.long" ng-if="isExpanded($index)"></span>
+                </div>
+                <div class="challenge-string-result">
+                  <span ng-if="challenge.success"> {{'you_win'| translate}} {{challenge.dataFinished|
+                    date:'dd-MM-yy'}}{{'at_clock'| translate}}
+                    {{challenge.dataFinished| date:'HH:mm'}}</span>
+                  <span ng-if="!challenge.success">{{'you_lose'| translate}}
+                    <span ng-if="challenge.nicknameOpponent">.{{challenge.nicknameOpponent}}{{'at_day_opponent'|
+                      translate}}</span>
+                    <span ng-if="challenge.nicknameOpponent==null">{{'at_day'| translate}}</span>
+                    {{challenge.dataFinished| date:'dd-MM-yy'}}{{'at_clock'|
+                    translate}} {{challenge.dataFinished| date:'HH:mm'}}</span>
+                </div>
+              </div>
+              <div class="col col-10" style="line-height: 15vh;" ng-click="expand($index)">
+                <i class="icon" ng-class="isExpanded($index) ? 'ion-arrow-up-b' : 'ion-arrow-down-b'"></i>
+              </div>
+              <div class="col col-20">
+                <!-- coppa  -->
+                <p ng-if="challenge.success">
+                  <a class="icon ic_game_challenge challenge-win" style="{{getColorCup(challenge)}}"></a>
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <ng-include src="getChallengeBarTemplate(challenge)" style="width: 100%"></ng-include>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-scroll>
+    </div>
 
-    </ion-content>
+  </ion-content>
 </ion-view>

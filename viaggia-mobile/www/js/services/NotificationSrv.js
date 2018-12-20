@@ -159,29 +159,30 @@ angular.module('viaggia.services.notification', [])
 
       // Get notified when the user opens a notification
       window.FirebasePlugin.onNotificationOpen(function (notification) {
-        console.log(JSON.stringify(notification));
-        $ionicPopup.show({
-          title: notification.title,
-          template: notification.description,
-          buttons: [{
-            text: $filter('translate')("btn_close"),
-            type: 'button-custom',
-            onTap: function () {
-              if (notification["content.type"] && typeOfChallenges[notification["content.type"]]) {
-                // localStorage.removeItem(Config.getAppId() +typeOfChallenges[notification["content.type"]].cache);
-                $ionicHistory.clearCache().then(function () {
-                  $state.go(typeOfChallenges[notification["content.type"]].state, typeOfChallenges[notification["content.type"]].params, {
-                    reload: true
+        if ($ionicPopup._popupStack.length == 0) {
+          $ionicPopup.show({
+            title: notification.title,
+            template: notification.description,
+            buttons: [{
+              text: $filter('translate')("btn_close"),
+              type: 'button-custom',
+              onTap: function () {
+                if (notification["content.type"] && typeOfChallenges[notification["content.type"]]) {
+                  // localStorage.removeItem(Config.getAppId() +typeOfChallenges[notification["content.type"]].cache);
+                  $ionicHistory.clearCache().then(function () {
+                    $state.go(typeOfChallenges[notification["content.type"]].state, typeOfChallenges[notification["content.type"]].params, {
+                      reload: true
+                    })
+                  }, function (err) {
+                    $state.go(typeOfChallenges[notification["content.type"]].state, typeOfChallenges[notification["content.type"]].params, {
+                      reload: true
+                    })
                   })
-                }, function (err) {
-                  $state.go(typeOfChallenges[notification["content.type"]].state, typeOfChallenges[notification["content.type"]].params, {
-                    reload: true
-                  })
-                })
+                }
               }
-            }
-          }]
-        });
+            }]
+          });
+        }
       }, function (error) {
         console.error(error);
       });

@@ -308,9 +308,6 @@ angular.module('viaggia.controllers.game', [])
     }
     var buildChallenges = function (future, proposed) {
       $scope.challenges = [];
-      //TODO
-      // if (!proposed)
-      //     proposed = [];
       if (future) {
         for (var i = 0; i < future.length; i++) {
           $scope.challenges.push(convertChall(future[i], "futu"));
@@ -326,18 +323,39 @@ angular.module('viaggia.controllers.game', [])
           }
         }
         //build challenges with type
-        for (var i = 0; i < $scope.typeOfChallenges.length; i++) {
-          if ($scope.typeOfChallenges[i] && $scope.typeOfChallenges[i].state == "ACTIVE") {
-            $scope.challenges.push({
-              group: 'unlock',
-              type: $scope.typeOfChallenges[i].type,
-              short: $scope.typeOfChallenges[i].short,
-              long: $scope.typeOfChallenges[i].long,
-              state: 'ACTIVE'
-            });
+        if (!$rootScope.canPropose) {
+          for (var i = 0; i < $scope.typeOfChallenges.length; i++) {
+            if ($scope.typeOfChallenges[i] && $scope.typeOfChallenges[i].state == "ACTIVE") {
+              $scope.challenges.push({
+                group: 'unlock',
+                type: $scope.typeOfChallenges[i].type,
+                short: $scope.typeOfChallenges[i].short,
+                long: $scope.typeOfChallenges[i].long,
+                state: 'ACTIVE'
+              });
+            }
+          }
+        } else {
+          //find last index with invite
+          var index = 0;
+          for (var i = 0; i < $scope.challenges.length; i++) {
+            if ($scope.challenges[i].group == "racc") {
+              index = i;
+              break;
+            }
+          }
+          for (var i = 0; i < $scope.typeOfChallenges.length; i++) {
+            if ($scope.typeOfChallenges[i] && $scope.typeOfChallenges[i].state == "ACTIVE") {
+              $scope.challenges.splice(index, 0, {
+                group: 'unlock',
+                type: $scope.typeOfChallenges[i].type,
+                short: $scope.typeOfChallenges[i].short,
+                long: $scope.typeOfChallenges[i].long,
+                state: 'ACTIVE'
+              });
+            }
           }
         }
-
       }
     }
     $scope.showWarning = function (type) {
@@ -640,13 +658,12 @@ angular.module('viaggia.controllers.game', [])
         $scope.init();
         generateChallengesStyle();
         localStorage.setItem(Config.getAppId() + "_challengesRefresh", new Date().getTime());
-      }
-      if (!$scope.pastChallenges) {
+      } else if (!$scope.pastChallenges) {
         $scope.init();
       }
     });
   })
-  .controller('ConfigureChallengeCtrl', function ($scope, $state, $ionicHistory, $ionicPopup, $stateParams, $filter, $ionicModal, Toast, GameSrv, Config) {
+  .controller('ConfigureChallengeCtrl', function ($scope, $state, $rootScope,$ionicHistory, $ionicPopup, $stateParams, $filter, $ionicModal, Toast, GameSrv, Config) {
     $scope.players = [];
     $scope.blacklistplayers = [];
     howPlayer = 0;
@@ -663,6 +680,11 @@ angular.module('viaggia.controllers.game', [])
 
     $scope.isChallengeMean = function (mean) {
       return (mean == $scope.challenge.mean);
+    }
+    $scope.getChooseOpponentString = function () {
+      if ($scope.challenge.type != 'groupCooperative')
+        return $filter('translate')("lbl_challenge_configure_opponent");
+      return $filter('translate')("lbl_challenge_configure_friend");
     }
     $scope.setChallengeMean = function (mean) {
       $scope.challenge.mean = mean;
@@ -753,6 +775,7 @@ angular.module('viaggia.controllers.game', [])
         Config.loading();
         GameSrv.requestChallenge($scope.challenge).then(function () {
           $ionicHistory.clearCache().then(function () {
+            $rootScope.canPropose = false;
             $state.go('app.home.challenges', {
               challengeEnd: new Date().getTime()
             });
