@@ -9,7 +9,7 @@
   },
   {
     "file": "css/style.css",
-    "hash": "cf12ea3bc07e8af1ce90324fe2b1ad75"
+    "hash": "63e0487a8592b511963be6a54afc0a6a"
   },
   {
     "file": "data/bus.csv",
@@ -389,7 +389,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "8a8954dd7d3ad23373df047e466922ec"
+    "hash": "676f60f6f9e9ebb585e235c1a0736e7a"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -401,7 +401,7 @@
   },
   {
     "file": "js/controllers/GameCtrl.js",
-    "hash": "95bd7f300fa4d70d1fc1ea9c0c480da4"
+    "hash": "1e68086011cfb0fc73f1930d61f79cdf"
   },
   {
     "file": "js/controllers/HomeCtrl.js",
@@ -513,7 +513,7 @@
   },
   {
     "file": "js/services/GameSrv.js",
-    "hash": "d662f37cfd06f1b758e8b82297b2bfeb"
+    "hash": "ba74c150fcef9c8ec45bf60ff089de67"
   },
   {
     "file": "js/services/GeoSrv.js",
@@ -537,7 +537,7 @@
   },
   {
     "file": "js/services/NotificationSrv.js",
-    "hash": "e068b67fe0c34eea787bb5b6ecb40a2b"
+    "hash": "6ecd28dabe7989282683389237a4586c"
   },
   {
     "file": "js/services/PlanSrv.js",
@@ -1033,7 +1033,7 @@
   },
   {
     "file": "templates/game/challenges.html",
-    "hash": "c17ec493e6ffdcf586b39bdfde6434d0"
+    "hash": "62bf573983228f5a021c6d007ff3355b"
   },
   {
     "file": "templates/game/challengeTemplates/competitivePerformance.html",
@@ -1073,7 +1073,7 @@
   },
   {
     "file": "templates/game/configureChallenge.html",
-    "hash": "5d1ecfc21a10e9e4ae81d13234d7b452"
+    "hash": "a895c70d821b6c9089259ca337923295"
   },
   {
     "file": "templates/game/diary.html",
