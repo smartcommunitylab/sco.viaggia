@@ -1353,7 +1353,7 @@ angular.module('viaggia.services.game', [])
 
     /*update if I can propose or not*/
     updateVariables = function (status, proposed) {
-      if (proposed == null && status.challengeConcept && status.challengeConcept.challengeData && status.challengeConcept.challengeData.PROPOSED) {
+      if (proposed == null && status && status.challengeConcept && status.challengeConcept.challengeData && status.challengeConcept.challengeData.PROPOSED) {
         for (var i = 0; i < status.challengeConcept.challengeData.PROPOSED.length; i++) {
           if (status.challengeConcept.challengeData.PROPOSED[i].proposerId == status.playerData.playerId) {
             return $rootScope.canPropose = false
