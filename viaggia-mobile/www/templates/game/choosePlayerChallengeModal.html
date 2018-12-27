@@ -4,16 +4,16 @@
             <i class="icon close-modal" ng-class="{'ion-android-arrow-back': platform.isAndroid(), 'ion-ios-arrow-back': !platform.isAndroid()}"></i>
         </div>
         <h1 class="title">{{'title_select_player'|translate}}</h1>
-        <!-- <div class="buttons" side="right">
-                <button  ng-click="confirmPlayer()" class="button button-icon button-home ic_notification">
-         </div> -->
     </ion-header-bar>
     <ion-content>
         <ion-list>
-            <ion-radio class="user-choose-chall" ng-model="playerId" ng-value="player.id" ng-repeat="player in players" ng-click="selectPlayer(player)">
+            <ion-radio class="user-choose-chall" ng-if="players && players.length>0" ng-model="playerId" ng-value="player.id" ng-repeat="player in players" ng-click="selectPlayer(player)">
                 <img class="challenge-profile-img" ng-src="{{getUserImg(player.id)}}">
                 <span class="challenge-profile-text">{{player.nickname}}</span>
             </ion-radio>
         </ion-list>
+        <div  ng-if="!players || players.length==0" class="text-center padding">
+            <h4>{{ 'no_challengables' | translate}}</h4>
+          </div>
     </ion-content>
 </ion-modal-view>
