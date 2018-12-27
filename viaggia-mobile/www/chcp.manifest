@@ -389,7 +389,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "676f60f6f9e9ebb585e235c1a0736e7a"
+    "hash": "f28e40e32301cee285b1f4c98deabfe3"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -513,7 +513,7 @@
   },
   {
     "file": "js/services/GameSrv.js",
-    "hash": "5d0f538af841fe79a7a25473db3dd4e6"
+    "hash": "6d456f0432ee58b7492e438451318fb9"
   },
   {
     "file": "js/services/GeoSrv.js",
@@ -1069,7 +1069,7 @@
   },
   {
     "file": "templates/game/choosePlayerChallengeModal.html",
-    "hash": "33387272891c2e24a701fba5ea28bfea"
+    "hash": "bb4dc2f96ae3a201e7d1c0935ecc2ac8"
   },
   {
     "file": "templates/game/configureChallenge.html",
