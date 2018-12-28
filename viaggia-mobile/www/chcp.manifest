@@ -513,7 +513,7 @@
   },
   {
     "file": "js/services/GameSrv.js",
-    "hash": "6d456f0432ee58b7492e438451318fb9"
+    "hash": "b0b2802364e7d61116ada5fc17d8c244"
   },
   {
     "file": "js/services/GeoSrv.js",
@@ -1033,7 +1033,7 @@
   },
   {
     "file": "templates/game/challenges.html",
-    "hash": "62bf573983228f5a021c6d007ff3355b"
+    "hash": "cd320f405432c736565a76cd7ba0fd34"
   },
   {
     "file": "templates/game/challengeTemplates/competitivePerformance.html",
