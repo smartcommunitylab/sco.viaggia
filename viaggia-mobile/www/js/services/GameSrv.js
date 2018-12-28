@@ -742,7 +742,7 @@ angular.module('viaggia.services.game', [])
       LoginService.getValidAACtoken().then(
         function (token) {
           gameService.getChallenge(token, 'PROPOSED').then(function (challenges) {
-           // updateVariables(null,challenges);
+            updateVariables(null,challenges);
             deferred.resolve(challenges);
           }, function (err) {
             deferred.reject();

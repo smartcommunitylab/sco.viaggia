@@ -176,7 +176,7 @@
                   <button class="button button-clear button-challenge-enable" style="color:black!important;" ng-if="challenge.state == 1">
                     <i class="icon ion-locked"></i>
                   </button>
-                  <button class="button button-clear button-challenge-enable" ng-if="challenge.state != 1 &&  canPropose"
+                  <button class="button button-clear button-challenge-enable" style="position: relative" ng-if="challenge.state != 1 &&  canPropose"
                     ng-click="configureChallenge(challenge)">
                     {{'btn_challenge_choose' | translate}}</button>
 
