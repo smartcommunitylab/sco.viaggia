@@ -1492,7 +1492,7 @@ angular.module('viaggia.services.game', [])
       );
 
       return deferred.promise;
-    }
+    } 
     gameService.validUserForGamificationLocal = function () {
       return 'true' == localStorage.userValid;
     }
