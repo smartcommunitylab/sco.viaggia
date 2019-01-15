@@ -528,7 +528,7 @@ angular.module('viaggia.controllers.home', [])
         $rootScope.currentUser = null;
         $scope.noStatus = false;
         $rootScope.profileImg = null;
-        $scope.tmpUrl = 'https://dev.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/' + Config.getAppId() + '/'
+        $scope.tmpUrl = 'https://tn.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/' + Config.getAppId() + '/'
         $scope.getImage = function () {
             if ($scope.status)
                 profileService.getProfileImage($scope.status.playerData.playerId).then(function (image) {
