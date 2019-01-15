@@ -1,0 +1,25 @@
+<div class="row" ng-if="challenge.target.target">
+        <div class="col col-80">{{'lbl_challenge_target'|translate |uppercase}}</div>
+        <div class="col col-20">
+            <b>{{challenge.target.target}}</b>
+        </div>
+    </div>
+    <div class="row" ng-if="challenge.target.leavesPlayer">
+        <div class="col col-80">{{'lbl_challenge_leaves_player'|translate|uppercase}}</div>
+        <div class="col col-20">
+            <b>{{challenge.target.leavesPlayer}}</b>
+        </div>
+    </div>
+    <div class="row" ng-if="challenge.target.leavesOpponent">
+        <div class="col col-80">{{'lbl_challenge_leaves_opponent'| translate
+            |uppercase}}{{challenge.player.nome}}:</div>
+        <div class="col col-20">
+            <b>{{challenge.target.leavesOpponent}}</b>
+        </div>
+    </div>
+    <div class="row" ng-if="challenge.target.leavesBoth">
+        <div class="col col-80">{{'lbl_challenge_leaves_both'| translate |uppercase}}</div>
+        <div class="col col-20">
+            <b>{{challenge.target.leavesBoth}}</b>
+        </div>
+    </div>

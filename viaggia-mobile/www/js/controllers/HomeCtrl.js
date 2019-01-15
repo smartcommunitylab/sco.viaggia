@@ -2,7 +2,10 @@ angular.module('viaggia.controllers.home', [])
 
     .controller('HomeCtrl', function ($scope, $state, GameSrv, profileService, $rootScope, $ionicPlatform, $timeout, $interval, $filter, $location, $ionicHistory, marketService, notificationService, Config, GeoLocate, mapService, ionicMaterialMotion, ionicMaterialInk, bookmarkService, planService, $ionicLoading, $ionicPopup, trackService, Toast, tutorial, GameSrv, DiaryDbSrv, BT) {
 
+
         $scope.challenges = null;
+        $scope.buttonProposedEnabled = false;
+        $scope.buttonUnlockEnabled = false;
         $scope.expansion = [];
         $scope.buttons = [{
             label: $filter('translate')('menu_news'),
@@ -11,6 +14,7 @@ angular.module('viaggia.controllers.home', [])
             label: $filter('translate')('menu_notifications'),
             icon: 'ic_notification'
         }];
+        var typeofChallenges = {};
         updateStatus = function () {
             GameSrv.updateStatus();
 
@@ -58,26 +62,38 @@ angular.module('viaggia.controllers.home', [])
             return false;
         }
         var localDataInit = function () {
+            typeofChallenges = GameSrv.getTypeChallenge();
             planService.getTrips().then(function () {
                 //$ionicLoading.hide();
             }, function () {
                 //$ionicLoading.hide();
             });
         }
+        var getBlacklistMap = function () {
+            GameSrv.getBlacklistMap();
+        }
         $scope.programChallenge = function () {
             var date = new Date(new Date().getTime() + (24 * 60 * 60 * 1000));
-            $state.go("app.home.challenges", { challengeEnd: date })
+            $ionicHistory.clearCache().then(function () {
+                $state.go("app.home.challenges", { challengeEnd: date })
+            });
         }
+        $scope.unlockChallenge = function () {
+            $ionicHistory.clearCache().then(function () {
+                $state.go("app.home.challenges", { unlock: true })
+            });
+        }
+
         $scope.watch = $rootScope.$watch(function () {
             return profileService.status;
         }, function (newVal, oldVal, scope) {
             $scope.status = profileService.getProfileStatus();
             setUserLevel();
             setUserProgress();
+            setChooseButton();
             if ($scope.status && $scope.status.challengeConcept)
                 setChallenges();
         });
-
         $scope.$on("$destroy", function () {
             $scope.watch();
         })
@@ -90,14 +106,22 @@ angular.module('viaggia.controllers.home', [])
             //if proposed is not empty enable
             GameSrv.getProposedChallenges(profileService.status).then(function (challenges) {
                 if (challenges && challenges.length) {
-                    $scope.buttonEnabled = true;
+                    $scope.buttonProposedEnabled = true;
 
                 } else {
-                    $scope.buttonEnabled = false;
+                    $scope.buttonProposedEnabled = false;
                 }
             }, function (err) {
-                $scope.buttonEnabled = false;
+                $scope.buttonProposedEnabled = false;
             });
+
+            //check inventory
+            if ($scope.status && $scope.status.inventory && $scope.status.inventory.challengeActivationActions > 0) {
+                $scope.buttonUnlockEnabled = true
+            }
+            else {
+                $scope.buttonUnlockEnabled = false;
+            }
         }
         var setChallenges = function () {
             // get the updated active challenges
@@ -138,15 +162,15 @@ angular.module('viaggia.controllers.home', [])
         // var mymap = document.getElementById('map-container');
         $scope.getChallengeTemplate = function (challenge) {
             switch (challenge.type) {
-                case 'groupCompetitiveTime': {
+                case typeofChallenges['groupCompetitiveTime'].id: {
                     return 'templates/game/challengeTemplates/competitiveTime.html';
                     break;
                 }
-                case 'groupCompetitivePerformance': {
+                case typeofChallenges['groupCompetitivePerformance'].id: {
                     return 'templates/game/challengeTemplates/competitivePerformance.html';
                     break;
                 }
-                case 'groupCooperative': {
+                case typeofChallenges['groupCooperative'].id: {
                     return 'templates/game/challengeTemplates/cooperative.html';
                     break;
                 }
@@ -154,7 +178,6 @@ angular.module('viaggia.controllers.home', [])
                     return 'templates/game/challengeTemplates/default.html';
             }
         }
-
 
 
         $scope.$on("$ionicView.afterEnter", function (scopes, states) {
@@ -177,10 +200,13 @@ angular.module('viaggia.controllers.home', [])
                     setChallenges();
                     setChooseButton();
                     updateStatus();
+                    getBlacklistMap();
                     localStorage.setItem(Config.getAppId() + "_homeRefresh", new Date().getTime());
                 }, function () {
                     //$ionicLoading.hide();
                 });
+            } else {
+                setChooseButton();
             }
         });
         $scope.$on("$ionicView.enter", function (scopes, states) {
@@ -472,41 +498,37 @@ angular.module('viaggia.controllers.home', [])
             return $scope.expansion[index]
         }
         $scope.getWidthUser = function (challenge) {
-            //TODO
-            // if (challenge.type == 'coop')
-            //     return "width:30%;"
-            // return "width:60%;"
-            return "width:" + challenge.status + "%;"
-
+            return "width:" + ((challenge.status > 100) ? 100 : challenge.status) + "%;"
         }
         $scope.getWidthOther = function (challenge) {
-            //TODO
-            if (challenge.type == 'coop')
-                return "width:40%;;"
-            return "width:40%;"
+            if (challenge.otherAttendeeData)
+                return "width:" + ((challenge.otherAttendeeData.status > 100) ? 100 : challenge.otherAttendeeData.status) + "%;"
+            return "width: 1%;"
         }
         $scope.getWidthSeparator = function (challenge) {
-            //TODO
-
-            return "width:30%;background:transparent;"
+            return "width:" + (100 - challenge.otherAttendeeData.status - challenge.status) + "%;background:transparent;"
+        }
+        var getChallengeByUnit = function (challenge) {
+            return GameSrv.getChallengeByUnit(challenge.unit)
         }
         $scope.getValueUser = function (challenge) {
-            //TODO
-            // usa status ma verifica challTarget
-            // return challenge.status + $filter('translate')('user_points_label');
-            return $filter('translate')('user_chall_status') + challenge.status + "%";
+            var labelChallenge = getChallengeByUnit(challenge);
+            return $filter('number')(challenge.row_status,'0') + " " + $filter('translate')(labelChallenge);
         }
         $scope.getValueOther = function (challenge) {
-            //TODO
-            return "5 " + $filter('translate')('user_points_label');
+            if (challenge.otherAttendeeData) {
+                var labelChallenge = getChallengeByUnit(challenge);
+                return $filter('number')(challenge.otherAttendeeData.row_status,'0') + " " + $filter('translate')(labelChallenge);
+            }
+            return "";
         }
+
     })
     .controller('HomeContainerCtrl', function ($scope, $rootScope, profileService, GameSrv, Config, Toast, $filter) {
         $rootScope.currentUser = null;
         $scope.noStatus = false;
         $rootScope.profileImg = null;
-        $scope.tmpUrl = 'https://tn.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/' + Config.getAppId() + '/'
-
+        $scope.tmpUrl = 'https://dev.smartcommunitylab.it/core.mobility/gamificationweb/player/avatar/' + Config.getAppId() + '/'
         $scope.getImage = function () {
             if ($scope.status)
                 profileService.getProfileImage($scope.status.playerData.playerId).then(function (image) {
@@ -515,34 +537,50 @@ angular.module('viaggia.controllers.home', [])
                     $rootScope.profileImg = 'img/game/generic_user.png' + '?' + (localStorage.getItem(Config.getAppId() + '_timestampImg'));
                 })
         }
-
-        $scope.$on("$ionicView.afterEnter", function (scopes, states) {
-            //check timer if passed x time
-            var date = new Date();
-            if (!localStorage.getItem(Config.getAppId() + "_homeContainerRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_homeContainerRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
-                // Config.loading();
-                GameSrv.getLocalStatus().then(
-                    function (status) {
-                        $scope.status = status;
-                        profileService.setProfileStatus(status);
-                        $rootScope.currentUser = status.playerData;
-                        if (!localStorage.getItem(Config.getAppId() + '_timestampImg')) {
-                            localStorage.setItem(Config.getAppId() + '_timestampImg', new Date().getTime());
-                        }
-                    },
-                    function (err) {
-                        $scope.noStatus = true;
-                        Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
-                    }
-                ).finally(function () {
-                    $scope.getImage();
-                    // Config.loaded
-                });
-                localStorage.setItem(Config.getAppId() + "_homeContainerRefresh", new Date().getTime());
-
-
+        GameSrv.getLocalStatus().then(
+            function (status) {
+                $scope.status = status;
+                profileService.setProfileStatus(status);
+                $rootScope.currentUser = status.playerData;
+                if (!localStorage.getItem(Config.getAppId() + '_timestampImg')) {
+                    localStorage.setItem(Config.getAppId() + '_timestampImg', new Date().getTime());
+                }
+            },
+            function (err) {
+                $scope.noStatus = true;
+                Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
             }
+        ).finally(function () {
+            $scope.getImage();
+            // Config.loaded
         });
+        // $scope.$on("$ionicView.afterEnter", function (scopes, states) {
+        //     //check timer if passed x time
+        //     var date = new Date();
+        //     if (!localStorage.getItem(Config.getAppId() + "_homeContainerRefresh") || parseInt(localStorage.getItem(Config.getAppId() + "_homeContainerRefresh")) + Config.getCacheRefresh() < new Date().getTime()) {
+        //         // Config.loading();
+        //         GameSrv.getLocalStatus().then(
+        //             function (status) {
+        //                 $scope.status = status;
+        //                 profileService.setProfileStatus(status);
+        //                 $rootScope.currentUser = status.playerData;
+        //                 if (!localStorage.getItem(Config.getAppId() + '_timestampImg')) {
+        //                     localStorage.setItem(Config.getAppId() + '_timestampImg', new Date().getTime());
+        //                 }
+        //             },
+        //             function (err) {
+        //                 $scope.noStatus = true;
+        //                 Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
+        //             }
+        //         ).finally(function () {
+        //             $scope.getImage();
+        //             // Config.loaded
+        //         });
+        //         localStorage.setItem(Config.getAppId() + "_homeContainerRefresh", new Date().getTime());
+
+
+        //     }
+        // });
 
     })
     .controller('MobilityCtrl', function ($scope, $state, $ionicHistory, $location, bookmarkService) {

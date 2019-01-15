@@ -29,6 +29,7 @@ angular.module('viaggia.services.conf', [])
         var HTTP_CONFIG = {
             timeout: 10000
         };
+        var CACHE_REFRESH = 60000;
         var TRACKING_MINIMUM_DISTANCE = 250;
         var mapJsonConfig = null;
         var ttJsonConfig = null;
@@ -239,6 +240,9 @@ angular.module('viaggia.services.conf', [])
             },
             getBadgeTypes: function () {
                 return badgeTypes;
+            },
+            getCacheRefresh: function() {
+                return CACHE_REFRESH;
             },
             getHTTPConfig: function () {
                 return angular.copy(HTTP_CONFIG);

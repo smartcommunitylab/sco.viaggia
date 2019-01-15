@@ -120,7 +120,7 @@ angular.module('viaggia.controllers.profile', [])
 
         $scope.serverhow = GameSrv.getServerHow($scope.filter.selected);
         var generateRankingStyle = function () {
-            $scope.rankingStyle = {
+            $scope.profileStyle = {
                 'height': window.innerHeight - (44 + 44) + 'px'
             };
             $ionicScrollDelegate.$getByHandle('statisticScroll').resize();
@@ -293,9 +293,8 @@ angular.module('viaggia.controllers.profile', [])
     })
     .controller('ProfileOthersContainerCtrl', function ($scope, $filter, $stateParams, Config, GameSrv, $ionicScrollDelegate, Toast) {
         Config.loading();
-        //TODO
-        $scope.blacklisted = true;
         $scope.profileId = $stateParams.profileId
+        $scope.blacklisted = GameSrv.blacklisted($scope.profileId );
         $scope.user = {};
         $scope.badges = null;
         $scope.stats = {}
@@ -342,9 +341,7 @@ angular.module('viaggia.controllers.profile', [])
             selected: null,
         };
 
-        $scope.getUserImg = function (id) {
-            return Config.getServerURL() + '/gamificationweb/player/avatar/' + Config.getAppId() + '/' + $scope.profileId + '/big';
-        }
+
         $scope.getChallengeBarTemplate = function(challenge){
             //TODO for the other challenges
             //right now status is always 100% and 'racc'
@@ -354,14 +351,14 @@ angular.module('viaggia.controllers.profile', [])
         }
 
 
-        $scope.getWidthUser = function (challenge) {
-            //TODO
-            return "width:" + challenge.status + "%;"
-        }
-        $scope.getValueUser = function (challenge) {
-            //TODO
-            return $filter('translate')('user_chall_status') + challenge.status + "%";
-        }
+        // $scope.getWidthUser = function (challenge) {
+        //     //TODO
+        //     return "width:" + challenge.status + "%;"
+        // }
+        // $scope.getValueUser = function (challenge) {
+        //     //TODO
+        //     return $filter('translate')('user_chall_status') + challenge.status + "%";
+        // }
         $scope.filter.options = ['Total', 'Monthly'];
         $scope.filter.selected = !$scope.filter.selected ? $scope.filter.options[0] : $scope.filter.selected;
         $scope.filter.filter = function (selection) {
@@ -411,7 +408,6 @@ angular.module('viaggia.controllers.profile', [])
                 $scope.user = profile
                 updateBadges();
 
-                //TODO real challenges and stiatistics
 
                 $scope.challenges = $scope.user.wonChallenges;
                 if (Object.keys($scope.user.statistics).length != 0 && $scope.user.statistics.constructor === Object) {
@@ -444,9 +440,8 @@ angular.module('viaggia.controllers.profile', [])
             }
         }
         $scope.removeFromBlacklist = function () {
-            //TODO
             Config.loading();
-            GameSrv.removeFromBlacklist($scope.user.id).then(function () {
+            GameSrv.removeFromBlacklist($scope.profileId).then(function () {
                 //removed
                 $scope.blacklisted = false;
                 Config.loaded();
@@ -456,9 +451,8 @@ angular.module('viaggia.controllers.profile', [])
             });
         }
         $scope.addToBlacklist = function () {
-            //TODO
             Config.loading();
-            GameSrv.addToBlacklist($scope.user.id).then(function () {
+            GameSrv.addToBlacklist($scope.profileId,$scope.user).then(function () {
                 //removed
                 $scope.blacklisted = true;
                 Config.loaded();

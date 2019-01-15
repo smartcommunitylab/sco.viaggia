@@ -4,14 +4,14 @@
             <i class="ion-android-arrow-back" style="font-size:30px;"></i>
         </button>
     </ion-nav-buttons>
-    <!-- <ion-nav-buttons side="right">
+    <ion-nav-buttons side="right">
         <button ng-if="blacklisted" class="button button-clear" ng-click="removeFromBlacklist()">
             <i class="ic_blacklist_off"></i>
         </button>
         <button ng-if="!blacklisted" class="button button-clear" ng-click="addToBlacklist()">
             <i class="ic_blacklist_on"></i>
         </button>
-    </ion-nav-buttons> -->
+    </ion-nav-buttons>
     <ion-tabs id="profileTabs" class="tabs-icon-top">
         <ion-tab icon-on="ic_score" icon-off="ic_score">
             <ion-content class="padding-right padding-left game-points tab-others" ng-class="{'margin-for-trackingbar-tab':buttonMapNeed()}">
@@ -20,7 +20,7 @@
                     <div class="user-state card no-shadow">
                         <div class="row">
                             <div class="col">
-                                <img class="profile-image-round" ng-if="profileImg" ng-src="{{getUserImg(user.playerId)}}">
+                                <img class="profile-image-round" ng-if="profileImg" ng-src="{{getUserImgBig(profileId)}}">
                             </div>
                         </div>
 
@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 <div ng-if="!!user && !singleRankStatus && stats[filter.selected]">
-                    <ion-scroll class="ranking" ng-style="rankingStyle" delegate-handle="statisticScroll">
+                    <ion-scroll class="ranking" ng-style="profileStyle" delegate-handle="statisticScroll">
                         <ion-list>
                             <div class="chart">
                                 <H5 class="H5stats">{{getTitle(day)}}</H5>

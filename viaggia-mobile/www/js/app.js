@@ -171,6 +171,12 @@ angular.module('viaggia', [
       console.log('hide loading');
       $ionicLoading.hide();
     }
+    var resetCache = function () {
+      localStorage.removeItem(Config.getAppId() + "_diaryRefresh") ;
+      localStorage.removeItem(Config.getAppId() + "_challengesRefresh") ;
+      localStorage.removeItem(Config.getAppId() + "_homeRefresh") ;
+      localStorage.removeItem(Config.getAppId() + "_rankingRefresh") ;
+    }
     $ionicPlatform.ready(function () { // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       document.addEventListener('chcp_updateLoadFailed', function () { console.log('chcp_updateLoadFailed') });
@@ -211,10 +217,8 @@ angular.module('viaggia', [
           clientSecret: Config.getClientSecKey(),
           aacUrl: Config.getAACURL()
         });
-        // $rootScope.GPSAllow = true;
-        //            if (window.BackgroundGeolocation) {
-        //                trackService.startup();
-        //            }
+        //reset cache
+        resetCache();
         cordova.plugins.diagnostic.registerLocationStateChangeHandler(function (state) {
           if ((ionic.Platform.isAndroid() && state !== cordova.plugins.diagnostic.locationMode.LOCATION_OFF)
             || ionic.Platform.isIOS() && (state === cordova.plugins.diagnostic.permissionStatus.GRANTED
@@ -477,7 +481,8 @@ angular.module('viaggia', [
         url: "/challenges",
         params: {
           challengeEnd: null,
-          challengeStart:null
+          challengeStart:null,
+          unlock:false
         },
         views: {
           'tab-challenges': {
@@ -982,7 +987,7 @@ angular.module('viaggia', [
         cache: false,
         url: "/configure",
         params: {
-          challenge: null
+          challenge: null,
         },
         views: {
           'menuContent': {
@@ -1043,7 +1048,7 @@ angular.module('viaggia', [
       plan_day: 'Giorno',
       plan_time: 'Ora',
       plan_preferences: 'Preferenze',
-      plan_preferences_fastest: 'Itinerario piu veloce',
+      plan_preferences_fastest: 'Itinerario più veloce',
       plan_preferences_leastChanges: 'Con meno cambi',
       plan_preferences_leastWalking: 'Minimo tragitto a piedi',
       plan_map_title: 'Seleziona l\'indirizzo',
@@ -1205,7 +1210,7 @@ angular.module('viaggia', [
       pop_up_no_start_template: "Per iniziare a tracciare il viaggio è necessaria una connessione internet. Verificare le impostazioni del telefono",
       popup_modify_trip_title: 'Modifica',
       popup_modify_trip_message: 'Sicuro di voler modificare il viaggio salvato?',
-      plan_preferences_fastest: 'Itinerario piu veloce',
+      plan_preferences_fastest: 'Itinerario più veloce',
       plan_preferences_leastChanges: 'Con meno cambi',
       plan_preferences_leastWalking: 'Minimo tragitto a piedi',
       lbl_taxi_station: 'Stazione Taxi',
@@ -1391,6 +1396,7 @@ angular.module('viaggia', [
       "recommendations": "User Recommendation Badge",
       "leaderboard top 3": "Leaderboard Top 3 Badge",
       "no_challenges": "Al momento non ci sono sfide",
+      "no_challengables": "Al momento non ci sono giocatori disponibili",
       "no_badges": "Al momento non ci sono badges",
       "no_challenges_old": "Nessuna sfida trovata",
       no_ranking:"Nessuna classifica trovata",
@@ -1501,15 +1507,16 @@ angular.module('viaggia', [
       read_more: "altro",
       challenge_popup_title: "Sblocca sfida",
       challenge_detail_popup_title: "Dettaglio sfida",
-      challenge_popup_template_comp_time: "Confermando sbloccherai la tipologia di sfida competitiva a tempo e potrai sfidare altri giocatori",
-      challenge_popup_template_comp_perf: "Confermando sbloccherai la tipologia di sfida competitiva a performance e potrai sfidare altri giocatori",
-      challenge_popup_template_coop: "Confermando sbloccherai la tipologia di sfida cooperativa e potrai sfidare altri giocatori",
+      challenge_popup_template_groupCompetitiveTime: "Confermando sbloccherai la tipologia di sfida competitiva a tempo e potrai sfidare altri giocatori",
+      challenge_popup_template_groupCompetitivePerformance: "Confermando sbloccherai la tipologia di sfida competitiva a performance e potrai sfidare altri giocatori",
+      challenge_popup_template_groupCooperative: "Confermando sbloccherai la tipologia di sfida cooperativa e potrai sfidare altri giocatori",
       btn_got_it: "Ho capito",
       btn_challenge_accept: "Accetto",
       btn_challenge_reject: "Rifiuto",
       btn_challenge_choose: "Scegli chi sfidare",
       lbl_challenge_configure_type: "Come preferisci affrontare la sfida?",
       lbl_challenge_configure_opponent: "Scegli il tuo avversario",
+      lbl_challenge_configure_friend:"Scegli il tuo compagno",
       home_configure_challenge: "Configura la sfida",
       lbl_challenge_choose_from_list: "Seleziona da lista",
       ph_challenge_nick: "Cerca per nickname",
@@ -1521,7 +1528,7 @@ angular.module('viaggia', [
       lbl_challenge_target: "Obiettivo: ",
       lbl_challenge_leaves_player: "Green Leaves per te: ",
       lbl_challenge_leaves_opponent: "Green Leaves per ",
-      toast_error_configure: "Parametri inseriti non corretti",
+      toast_error_configure: "Scegli la modalità di sfida",
       btn_challenge_reject_sent: "annulla invito",
       lbl_sent_from: "Inviato da ",
       lbl_sent_to: "Inviato a ",
@@ -1542,7 +1549,26 @@ angular.module('viaggia', [
       user_chall_status: "Stato completamento sfida:  ",
       challenge_days_to_end: 'Hai ancora {{challenge.daysToEnd}} giorni per completare la sfida.',
       payload_large: "Immagine troppo grande",
-      payload_unsupported: "Immagine non sopportata"
+      payload_unsupported: "Immagine non sopportata",
+      toast_type_unlocked: "Tipologia di sfida sbloccata!",
+      groupCompetitivePerformance_desc_short:"Chi la dura la vince",
+      groupCompetitivePerformance_desc_long:"Sfida un altro giocatore su un obiettivo a scelta. Chi, al termine della settimana avrà ottenuto un risultato migliore vince.",
+      groupCompetitiveTime_desc_short:"Vinca il più veloce",
+      groupCompetitiveTime_desc_long:"Sfida un altro giocatore in una gara a tempo. Vince chi raggiunge per primo l'obiettivo.",
+      groupCooperative_desc_short:"L'unione fa la forza",
+      groupCooperative_desc_long:"Invita un altro utente a giocare con te su un obiettivo comune. Vincerete se, al termine della settimana, la somma dei vostri risultati raggiungerà l'obiettivo.",
+      Walk_Km:" Km",
+      Bike_Km:" Km",
+      Green_Leaves:"Green Leaves",
+      lbl_chall_blacklist:"Il giocatore che hai cercato non e’ sfidabile. Questo succede quando si verifica una o più delle seguenti condizioni: il giocatore ha un livello troppo alto (o basso) rispetto al tuo, il giocatore ha già ricevuto tre richieste, il giocatore ha già programmato la sfida per la prossima settimana, il giocatore ti ha inserito nella sua blacklist o tu hai inserito il giocatore nella tua blacklist.",
+      lbl_insert_nickname:"Inserisci il nickname del giocatore",
+      lbl_challenge_percentage:"Percentuale:",
+      lbl_challenge_threshold:"Threshold:",
+      home_unlock_challenge:"Sblocca una nuova sfida",
+      lbl__challenge_cant_see_player:"Perche’ non riesco a trovare un giocatore?",
+      no_blacklist:"Nessuna blacklist trovata",
+      lbl_chall_user_not_available_title:"Utente non disponibile",
+      lbl_chall_user_not_available:"L'utente selezionato non e’ più disponibile. Selezionare un altro giocatore"      
     });
 
     $translateProvider.translations('en', {
@@ -1920,6 +1946,7 @@ angular.module('viaggia', [
       "recommendations": "User Recommendation Badge",
       "leaderboard top 3": "Leaderboard Top 3 Badge",
       "no_challenges": "No challenges at this moment",
+      "no_challengables": "No players available",
       "no_badges": "No badges at the moment",
       "no_challenges_old": "No challenges found",
       "no_statistics": "No data found",
@@ -2029,15 +2056,16 @@ angular.module('viaggia', [
       read_more: "read more",
       challenge_popup_title: "Unlock challenge",
       challenge_detail_popup_title: "Challenge detail",
-      challenge_popup_template_comp_time: "Confirm to unlock competitive \"time based\" challenge and challenge other palyers.",
-      challenge_popup_template_comp_perf: "Confirm to unlock competitive \"performance based\" challenge and challenge other palyers.",
-      challenge_popup_template_coop: "Confirm to unlock collaborative challenge and challenge other palyers.",
+      challenge_popup_template_groupCompetitiveTime: "Confirm to unlock competitive \"time based\" challenge and challenge other palyers.",
+      challenge_popup_template_groupCompetitivePerformance: "Confirm to unlock competitive \"performance based\" challenge and challenge other palyers.",
+      challenge_popup_template_groupCooperative: "Confirm to unlock collaborative challenge and challenge other palyers.",
       btn_got_it: "I got it",
       btn_challenge_accept: "Accept",
       btn_challenge_reject: "Reject",
       btn_challenge_choose: "Choose your opponent ",
       lbl_challenge_configure_type: "Come preferisci affrontare la sfida?",
-      lbl_challenge_configure_opponent: "Choose your opponent",
+      lbl_challenge_configure_opponent: "Choose your partner",
+      lbl_challenge_configure_friend:"Choose your opponent",
       home_configure_challenge: "Challenge settings",
       lbl_challenge_choose_from_list: "Select form the list",
       ph_challenge_nick: "Insert nickname",
@@ -2049,7 +2077,7 @@ angular.module('viaggia', [
       lbl_challenge_target: "Goal: ",
       lbl_challenge_leaves_player: "Your Green Leaves: ",
       lbl_challenge_leaves_opponent: " ...  Green Leaves",
-      toast_error_configure: "",
+      toast_error_configure: "Choose the kind of challenge",
       btn_challenge_reject_sent: "delete invitation",
       lbl_sent_from: "Sent by ",
       lbl_sent_to: "Sent to ",
@@ -2070,7 +2098,28 @@ angular.module('viaggia', [
       user_chall_status: "Challenge completion status:  ",
       challenge_days_to_end: 'You still have {{challenge.daysToEnd}} days to complete the challenge.',
       payload_large: "Payload too large",
-      payload_unsupported: "Unsupported media type"
+      payload_unsupported: "Unsupported media type",
+      toast_type_unlocked: "Type of challenge unlocked!",
+      groupCompetitivePerformance_desc_short:" Who endures wins",
+      groupCompetitivePerformance_desc_long:"Choose the goal and challenge another player. At the end of the week, the one giving the best performance will be the winner.",
+      groupCompetitiveTime_desc_short:" May the fastest win",
+      groupCompetitiveTime_desc_long:" Challenge another player in a speed competition. The one that reaches the goal first wins.",
+      groupCooperative_desc_short:"Unity is strength",
+      groupCooperative_desc_long:"Invite another user to play with you on a common goal. To win, the sum of what you do individually during the week has to be at least equal to the target of the challenge.",
+      Walk_Km:" Km",
+      Bike_Km:" Km",
+      Green_Leaves:"Green Leaves",
+      lbl_chall_blacklist:"You cannot invite the player to a challenge. This happens when one or more of the following applies: the player has a too much higher (or lower) level in comparison to yours, the player has already received three requests, the player has already programmed the challenge for the next week, the player blacklisted you, or you blacklisted the player.",
+      lbl_insert_nickname:"Insert the player's nickname",
+      lbl_challenge_percentage:"Percentage:",
+      lbl_challenge_threshold:"Threshold:",
+      home_unlock_challenge:"Unlock a new challenge",
+      lbl__challenge_cant_see_player:"Why can't I find a player?",
+      no_blacklist:"No blacklist found",
+      lbl_chall_user_not_available_title:"User not available",
+      lbl_chall_user_not_available:"Selected user is not available anymore. Please, select a different one"  
+
+   
 
     });
 

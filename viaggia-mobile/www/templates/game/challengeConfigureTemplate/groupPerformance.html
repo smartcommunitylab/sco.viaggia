@@ -1,0 +1,12 @@
+<div class="row" ng-if="challenge.target.percentage">
+    <div class="col col-80">{{'lbl_challenge_percentage'|translate |uppercase}}</div>
+    <div class="col col-20">
+        <b>{{challenge.target.percentage}}</b>
+    </div>
+</div>
+<div class="row" ng-if="challenge.target.threshold">
+    <div class="col col-80">{{'lbl_challenge_threshold'|translate|uppercase}}</div>
+    <div class="col col-20">
+        <b>{{challenge.target.threshold}}</b>
+    </div>
+</div>

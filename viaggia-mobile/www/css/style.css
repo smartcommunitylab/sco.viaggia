@@ -2161,7 +2161,7 @@ ion-header-bar .title {
     text-overflow: ellipsis;
     overflow: hidden;
     width: 160px;
-    height: 20px;
+    /* height: 20px; */
     line-height: 20px;
     white-space: nowrap;
 }
@@ -2929,6 +2929,9 @@ ion-header-bar .title {
     /* margin: 4px 8px; */
     object-fit: cover;
 }
+.challenge-profile-text {
+    margin-left: 24px;
+}
 .diary-line {
     padding: 0px;
 }
@@ -3108,6 +3111,7 @@ ion-header-bar .title {
 }
 .coop-other {
     background: #B62000;
+    float: right;
 }
 .time-user {
     background: #25BC5D;
@@ -3182,20 +3186,27 @@ ion-header-bar .title {
     color: #4EB0E6 !important;
 }
 .configure-challenge-button {
-    border-radius: 12px;
+    border-radius: 26px;
     height: 80px;
 }
+
+.configure-challenge-button:before {
+    font-size: 34px!important;
+}
 .configure-list-button {
-    border-radius: 16px;
+    border-radius: 4px;
     padding: 4px;
     text-align: center;
     width: 100%;
     margin: auto;
+    color: white;
+    background-color: #4EB0E6;
 }
 .lab-challenge-conf{
     width: 100%;
     padding: 20px;
-    text-align: center;
+    font-size: large;
+    font-weight: bold;
 }
 .input-challenge-search {
     border-bottom: 1px solid!important;
@@ -3213,7 +3224,11 @@ ion-header-bar .title {
 }
 .chall-selected {
     color: white;
-    background-color: #007cc2;
+    background-color: #4EB0E6;
+}
+.chall-not-selected {
+    color:  #4EB0E6;
+    background-color:white;
 }
 .chall-player-separator{
     border-top: 1px solid;
@@ -3236,6 +3251,7 @@ ion-header-bar .title {
 }
 .challenge-img>img{
     width: 50px;
+    height: 50px;
 }
 .challenge-img-row {
     line-height: 50px;
@@ -3266,6 +3282,10 @@ ion-header-bar .title {
     margin: 0px 0px 8px 8px;
 }
 .button-next-challenge{
+    margin: 3px;
+}
+.button-unlock-challenge{
+    background-color: #4caf4f;
     margin: 3px;
 }
 .tabs>a>i  {
@@ -3328,6 +3348,15 @@ ion-header-bar .title {
     flex: 0 0 40%;
     max-width: 40%;
 }
+.col-100 {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 40%;
+    -moz-box-flex: 0;
+    -moz-flex: 0 0 40%;
+    -ms-flex: 0 0 40%;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
 
 .no-shadow {
     box-shadow: none!important;
@@ -3378,7 +3407,33 @@ ion-header-bar .title {
 .menu-expanded {
     transform: translate3d(275px, 0px, 0px);
 }
+ .user-choose-chall .item-content {
+    display: flex;
+    align-items:center;
+ }
 
+ .row-center {
+    display: flex;
+    align-items: center;
+ }
+ .row-margin {
+     margin-top:8px!important;
+ }
+
+ .popup-chall{
+     padding-top: 0px;
+    text-decoration: underline;
+    color: #4EB0E6;
+    display: table;
+    padding-left: 16px;
+ }
+ .popup-string {
+    display: table-cell;
+    vertical-align: middle;
+ }
+ .label-chall-target {
+     padding-left: 20px;
+ }
 @-webkit-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
 @-moz-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
 @-ms-keyframes pulse {to {box-shadow: 0 0 0 45px rgba(232, 76, 61, 0);}}
