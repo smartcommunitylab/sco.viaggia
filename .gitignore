@@ -21,3 +21,5 @@
 /tracking_modified_with_state/
 
 .DS_Store
+viaggia-mobile/GoogleService-Info.plist
+viaggia-mobile/google-services.json
