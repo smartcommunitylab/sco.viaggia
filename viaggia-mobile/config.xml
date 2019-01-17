@@ -78,4 +78,7 @@
     <icon src="config/instances/ROVERETO/resources/android/icon/drawable-xhdpi-icon.png" />
     <engine name="ios" spec="^4.5.5" />
     <engine name="android" />
+    <plugin name="phonegap-plugin-push" spec="^2.1.2">
+        <variable name="FCM_VERSION" value="11.0.1" />
+    </plugin>
 </widget>

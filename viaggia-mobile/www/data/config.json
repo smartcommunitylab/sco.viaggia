@@ -1,105 +1,112 @@
 {
-    "apptoken": "viaggiarovereto",
-    "appid": "rovereto",
-    "messagingAppId": "mobility.rovereto",
-    "senderID": "453601816446",
-    "appversion": "2.1.10",
-    "appname": "Viaggia Rovereto",
-    "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
-    "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
-    "newsRSS": "https://tn.smartcommunitylab.it/core.mobility/announcements/rss/rovereto",
-    "contact_link" : "mailto:viaggia@smartcommunitylab.it?subject=ViaggiaRovereto:%20segnalazione%20problema",
-    "smartcheck_options": [
+  "apptoken": "viaggiatrento",
+  "appid": "trento",
+  "messagingAppId": "mobility.trento",
+  "appversion": "2.4.2",
+  "appname": "Viaggia Trento",
+  "senderID": "453601816446",
+  "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
+  "metroparco": "https://tn.smartcommunitylab.it/metroparco/data/tn",
+  "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
+  "newsRSS": "https://tn.smartcommunitylab.it/core.mobility/announcements/rss/trento",
+  "contact_link": "mailto:viaggiatrento@smartcommunitylab.it?subject=ViaggiaTrento:%20segnalazione%20problema",
+  "smartcheck_options": [
         1,
         4,
         5
     ],
-    "plan_default_options": {
-        "routeType": "fastest",
-        "transportTypes": [
+  "plan_default_options": {
+    "routeType": "fastest",
+    "transportTypes": [
             "WALK",
             "TRANSIT"
         ]
-    },
-    "accessibility": true,
-    "plan_policy": "Rovereto",
-    "agencies": [5, 6, 10, 16, 17],
-    "extraurban_agencies": [17],
-    "broadcast_notifications_options": [
+  },
+  "plan_policy": "Trento",
+  "taxi_id": "TAXI_TRENTO",
+  "taxi_accuracy": 65,
+  "accessibility": true,
+  "agencies": [5, 6, 10, 12, 17],
+  "extraurban_agencies": [17],
+  "broadcast_notifications_options": [
         1,
         4
     ],
-    "center_map": [
-      45.890919,
-      11.040184
+  "center_map": [
+      46.069672,
+      11.121270
    ],
-    "zoom_map": 15,
-    "db_version": 25,
-    "visualization": {
-        "primaryLinks": [
-            {
-                "state": "/app/plan",
-                "label": "menu_plan",
-                "icon": "ic_search",
-                "color": "#3BBACF"
+  "zoom_map": 15,
+  "db_version": 25,
+  "visualization": {
+    "primaryLinks": [
+      {
+        "state": "/app/plan",
+        "label": "menu_plan",
+        "icon": "ic_search",
+        "color": "#3BBACF"
             },
-            {
-                "state": "/app/ttlist/urbano",
-                "label": "menu_real_time_bus_urban",
-                "icon": "ic_urban-bus",
-                "color": "#EB8919"
+
+      {
+        "state": "/app/ttlist/urbano",
+        "label": "menu_real_time_bus_urban",
+        "icon": "ic_urban-bus",
+        "color": "#eb8919"
             },
-            {
-                "state": "/app/ttlist/trains",
-                "label": "menu_real_time_train",
-                "icon": "ic_train",
-                "color": "#cd251c"
+      {
+        "state": "/app/ttlist/trains",
+        "label": "menu_real_time_train",
+        "icon": "ic_train",
+        "color": "#cd251c"
             },
-            {
-                "state": "/app/ttlist/extraurbano",
-                "label": "menu_real_time_bus_suburban",
-                "icon": "ic_extraurban-bus",
-                "color": "#00588e"
+      {
+        "state": "/app/parking/COMUNE_DI_TRENTO",
+        "label": "menu_real_time_park",
+        "icon": "ic_parking-lot",
+        "color": "#164286"
             },
-            {
-                "state": "/app/parking/COMUNE_DI_ROVERETO",
-                "label": "menu_real_time_park",
-                "icon": "ic_parking-lot",
-                "color": "#164286"
+      {
+        "state": "/app/parkingMeters",
+        "label": "menu_parking_meters",
+        "icon": "ic_parcometro",
+        "color": "#FBA724"
             },
-            {
-                "state": "/app/bikesharing/rovereto",
-                "label": "menu_real_time_bike",
-                "icon": "ic_bike",
-                "color": "#922d66"
+      {
+        "state": "/app/bikesharing/trento",
+        "label": "menu_real_time_bike",
+        "icon": "ic_bike",
+        "color": "#922d66"
+            }, {
+        "state": "/app/taxi",
+        "label": "menu_taxi",
+        "icon": "ic_taxi",
+        "color": "#f8cf20"
             }
+
       ],
-        "infomenu": [
-            {
-                "state": "/app/ttlist/urbano",
-                "label": "menu_real_time_bus_urban",
-                "icon": "ic_urban-bus"
+    "infomenu": [
+
+      {
+        "state": "/app/ttlist/urbano",
+        "label": "menu_real_time_bus_urban",
+        "icon": "ic_urban-bus"
             },
-            {
-                "state": "/app/ttlist/extraurbano",
-                "label": "menu_real_time_bus_suburban",
-                "icon": "ic_extraurban-bus"
+
+      {
+        "state": "/app/ttlist/trains",
+        "label": "menu_real_time_train",
+        "icon": "ic_train"
             },
-            {
-                "state": "/app/ttlist/trains",
-                "label": "menu_real_time_train",
-                "icon": "ic_train"
+      {
+        "state": "/app/bikesharing/trento",
+        "label": "menu_real_time_bike",
+        "icon": "ic_bike"
             },
-            {
-                "state": "/app/bikesharing/rovereto",
-                "label": "menu_real_time_bike",
-                "icon": "ic_bike"
-            },
-            {
-                "state": "/app/parking/COMUNE_DI_ROVERETO",
-                "label": "menu_real_time_park",
-                "icon": "ic_parking-lot"
+      {
+        "state": "/app/parking/COMUNE_DI_TRENTO",
+        "label": "menu_real_time_park",
+        "icon": "ic_parking-lot"
             }
       ]
-    }
+  }
 }
