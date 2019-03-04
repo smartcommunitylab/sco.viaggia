@@ -76,6 +76,12 @@
         <splash height="480" src="config/instances/ROVERETO/resources/ios/splash/Default~iphone.png" width="320" />
     </platform>
     <icon src="config/instances/ROVERETO/resources/android/icon/drawable-xhdpi-icon.png" />
-    <engine name="android" />
     <engine name="ios" spec="^4.5.5" />
+    <engine name="android" spec="6.3.0" />
+    <plugin name="cordova-plugin-compat" />
+    <plugin name="cordova-android-support-gradle-release" spec="^1.4.3">
+        <variable name="ANDROID_SUPPORT_VERSION" value="27.+" />
+    </plugin>
+    <plugin name="cordova-plugin-device" />
+    <plugin name="cordova-sqlite-storage" />
 </widget>
