@@ -81,10 +81,9 @@ angular.module('viaggia.services.notification', [])
   var updateNotifications = function (lastTimeUpdate) {
     $http.get(Config.getMessagingServerURL() + '/app/public/notification/' + Config.getMessagingAppId() +
         '/?since=' + lastTimeUpdate.getTime() +
-        '&position=' + 0 +
-        '&count=' + numberNotification, Config.getHTTPConfig())
+        '&position=' + 0 , Config.getHTTPConfig())
       .success(function (data) {
-        if (data.notifications) {
+        if (data.notifications && data.notifications[0].updateTime) {
           var lastUpdateTime = new Date(data.notifications[0].updateTime);
           localStorage.setItem(Config.getAppId() + '_lastUpdateTime', lastUpdateTime);
           //update the local notifications and not readed index

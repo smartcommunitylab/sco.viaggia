@@ -5,6 +5,8 @@
   "dependencies": {
     "@types/js-base64": "^2.3.1",
     "cordova-android": "6.3.0",
+    "cordova-android-firebase-gradle-release": "^2.0.0",
+    "cordova-android-play-services-gradle-release": "^2.0.0",
     "cordova-android-support-gradle-release": "^1.4.3",
     "cordova-custom-config": "^5.0.3",
     "cordova-ios": "^4.5.5",
@@ -13,7 +15,8 @@
     "gulp-minify-css": "^0.3.0",
     "gulp-rename": "^1.2.0",
     "gulp-sass": "^2.0.4",
-    "ncp": "^2.0.0"
+    "ncp": "^2.0.0",
+    "phonegap-plugin-push": "^2.1.2"
   },
   "devDependencies": {
     "@ionic/v1-toolkit": "1.0.20",
@@ -60,7 +63,18 @@
         "ANDROID_SUPPORT_VERSION": "27.+"
       },
       "cordova-plugin-device": {},
-      "cordova-sqlite-storage": {}
+      "cordova-sqlite-storage": {},
+      "phonegap-plugin-push": {
+        "SENDER_ID": "453601816446",
+        "GOOGLE_APP_ID": "453601816446",
+        "FCM_VERSION": "11.0.1"
+      },
+      "cordova-android-play-services-gradle-release": {
+        "PLAY_SERVICES_VERSION": "15.+"
+      },
+      "cordova-android-firebase-gradle-release": {
+        "FIREBASE_VERSION": "15.+"
+      }
     },
     "platforms": [
       "ios",

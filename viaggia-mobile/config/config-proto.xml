@@ -23,7 +23,7 @@
     <preference name="FadeSplashScreen" value="false" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="android-minSdkVersion" value="16" />
-    <preference name="android-targetSdkVersion" value="20" />
+    <preference name="android-targetSdkVersion" value="26" />
     <feature name="StatusBar">
       <param name="ios-package" value="CDVStatusBar" onload="true" />
     </feature>

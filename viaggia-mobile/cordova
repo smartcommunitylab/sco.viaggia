@@ -1,0 +1,2 @@
+> cordova plugin remove plugin ls --save
+Error: Plugin "ls" is not present in the project. See `cordova plugin list`.

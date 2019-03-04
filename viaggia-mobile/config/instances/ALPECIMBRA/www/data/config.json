@@ -2,7 +2,7 @@
     "appid": "alpecimbra",
     "messagingAppId": "mobility.alpecimbra",
     "senderID": "453601816446",
-    "appversion": "1.0.4",
+    "appversion": "1.0.5",
     "appname": "Viaggia Alpe Cimbra",
     "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
     "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
