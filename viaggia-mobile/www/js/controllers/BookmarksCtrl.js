@@ -119,8 +119,8 @@ Here it is managed also the tutorial for the page
   //create and open the tutorial
   $scope.showTutorial = function () {
     if (doTutorial()) {
-      if (window.cordova && window.cordova.plugins.screenorientation) {
-        screen.lockOrientation('portrait');
+      if (window.cordova && window.cordova.plugins && window.cordova.plugins.screenorientation) {
+        window.cordova.plugins.screenorientation.setOrientation('portrait');
       }
 
       $ionicModal.fromTemplateUrl('templates/bookmarkstutorial.html', {
