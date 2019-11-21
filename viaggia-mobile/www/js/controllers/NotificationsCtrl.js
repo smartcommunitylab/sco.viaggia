@@ -48,9 +48,11 @@ Controller that manages the notifications and get the last data from server
       $scope.$broadcast('scroll.refreshComplete');
     }, function (err) {
       console.error(err);
+      Toast.show($filter('translate')("pop_up_error_server_template"), "short", "bottom");
       $scope.$broadcast('scroll.infiniteScrollComplete');
       $scope.$broadcast('scroll.refreshComplete');
       $scope.end_reached = true;
+      $scope.emptylist = true;
     });
   };
 

@@ -115,10 +115,11 @@ angular.module('viaggia', [
       if (window.cordova && window.cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       }
-      if (window.StatusBar) {
-        StatusBar.styleDefault();
-      }
+      // if (window.StatusBar) {
+      //   StatusBar.styleDefault();
+      // }
       Config.init().then(function () {
+         notificationService.register();
         if (ionic.Platform.isWebView()) {
           //we are on a phone so synch the database
           DataManager.dbSetup();
@@ -145,7 +146,6 @@ angular.module('viaggia', [
           navigator.splashscreen.hide();
         }
       }, 1500);
-      notificationService.register();
 
     });
   })

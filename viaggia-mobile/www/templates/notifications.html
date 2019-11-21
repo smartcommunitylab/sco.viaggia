@@ -2,18 +2,13 @@
     <ion-content id="content" has-header="true">
         <ion-refresher on-refresh="doRefresh()">
         </ion-refresher>
-        <!--    notification list-->
         <div ng-show="emptylist" class="text-center">
             <h4>{{'notifications_empty_list'|translate}}</h4>
         </div>
-
         <ion-list ng-show="!emptylist">
-
             <div class="card notification-card" ng-repeat="notification in notifications | orderBy:'updateTime':true track by $index" ng-last-repeat="notifications" ng-click="showNotification(notification)">
-
                 <div> {{notification.updateTime| date:' dd-MM-yyyy'}} <i class="icon ic_new alignright" style="font-size:25px;" ng-hide="notification.seen || isInArray($index,notification.id)"></i></div>
                 <div class="notification-title">{{notification.title }}</div>
-
             </div>
         </ion-list>
         <ion-infinite-scroll ng-if="!end_reached" on-infinite="loadMore()" distance="5%">
