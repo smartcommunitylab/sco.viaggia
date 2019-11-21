@@ -1,0 +1,1022 @@
+[
+  {
+    "file": "css/custom.css",
+    "hash": "cc207ae36d6ab2fd55b9b0aaf58e3ffb"
+  },
+  {
+    "file": "css/ionic.app.css",
+    "hash": "a20da0e20b1d94fa31567550adffd8cd"
+  },
+  {
+    "file": "css/ionic.app.min.css",
+    "hash": "e9c8bcd360cb61943d82309ba27ea3d2"
+  },
+  {
+    "file": "css/ng-cells.css",
+    "hash": "0a53be0320067a24ea4856e4854ed880"
+  },
+  {
+    "file": "css/style.css",
+    "hash": "30a4493250fe34ebca9cb5ac27b6a4e7"
+  },
+  {
+    "file": "data/config.json",
+    "hash": "faf83ab24fbb30ca44540153e34b246b"
+  },
+  {
+    "file": "data/notifications.json",
+    "hash": "7238623e98c854aca0063e208d9e9630"
+  },
+  {
+    "file": "data/poi.json",
+    "hash": "30a0f56a5b1a89ef271d4002e3876275"
+  },
+  {
+    "file": "data/routes.json",
+    "hash": "8e9f473945b951623b134575010eb832"
+  },
+  {
+    "file": "data/routesdb.zip",
+    "hash": "45c79aaf5879fd8b4da37040319b5522"
+  },
+  {
+    "file": "data/tt.json",
+    "hash": "b4cadcffd99aecfc2fbc91617b5fa01d"
+  },
+  {
+    "file": "data/tt.json.full.json",
+    "hash": "31a3ff73525147ebb8fd4e364850d085"
+  },
+  {
+    "file": "fonts/Roboto_Mono/LICENSE.txt",
+    "hash": "d273d63619c9aeaf15cdaf76422c4f87"
+  },
+  {
+    "file": "fonts/Roboto_Mono/RobotoMono-Regular.ttf",
+    "hash": "a48ac41620cd818c5020d0f4302489ff"
+  },
+  {
+    "file": "fonts/RobotoDraft-Bold.woff",
+    "hash": "c885e9942e52c7711ad0271a82f394bb"
+  },
+  {
+    "file": "fonts/RobotoDraft-Italic.woff",
+    "hash": "c544b218dbd69ce12ce6c6f79c0ea5c6"
+  },
+  {
+    "file": "fonts/RobotoDraft-Medium.woff",
+    "hash": "245a9c4cf90821ecd551a983399da1fa"
+  },
+  {
+    "file": "fonts/RobotoDraft.woff",
+    "hash": "3404d7b64957502197fc22a011c549c0"
+  },
+  {
+    "file": "fonts/style.css~",
+    "hash": "8245afce4c83685e4bf16d95a6612403"
+  },
+  {
+    "file": "fonts/viaggia.css",
+    "hash": "d2f37e3dc165a3847135ceb42a54dbe2"
+  },
+  {
+    "file": "fonts/viaggia.css~",
+    "hash": "5d594d0ad4c8301b46c4894be36c1e2a"
+  },
+  {
+    "file": "fonts/viaggia.eot",
+    "hash": "ec0b565d1db69ae23ea64bc6c03af680"
+  },
+  {
+    "file": "fonts/viaggia.svg",
+    "hash": "f3dea6d9acdc935b9443d2a722ff58aa"
+  },
+  {
+    "file": "fonts/viaggia.ttf",
+    "hash": "ee58a0ce6a78d2b580c704ba4f8e1a8f"
+  },
+  {
+    "file": "fonts/viaggia.woff",
+    "hash": "ecec94da2fb7d599cb50c9e85eb5de2d"
+  },
+  {
+    "file": "frame_en.html",
+    "hash": "5e03ff276903b78ba4fa2bd97614d5fc"
+  },
+  {
+    "file": "frame.html",
+    "hash": "2f0de06ae26b7f245dc7067f735cc465"
+  },
+  {
+    "file": "img/bookmarks/empty_home_img.png",
+    "hash": "0db208a870366010555d0eccefef07d2"
+  },
+  {
+    "file": "img/bookmarks/step_1_en.png",
+    "hash": "d6d23954ea66bcd6bc362f6824f2af41"
+  },
+  {
+    "file": "img/bookmarks/step_1_it.png",
+    "hash": "f8c0a5446e664cd3ba4a1edbb1516f6d"
+  },
+  {
+    "file": "img/bookmarks/step_2_en.png",
+    "hash": "3883c9e5e10facb7abdbc4bbe17cc339"
+  },
+  {
+    "file": "img/bookmarks/step_2_it.png",
+    "hash": "f4f9b9bda18f7b28ff34229fc4eeb0db"
+  },
+  {
+    "file": "img/compassCalibration.png",
+    "hash": "7c7e5e857aa34caafaeb2a4151a94f37"
+  },
+  {
+    "file": "img/credits/aptcimbra.png",
+    "hash": "c6681dbce8342e3e3035cb914c92063a"
+  },
+  {
+    "file": "img/credits/comune_tn.png",
+    "hash": "20a49c4ffddbe644df03027307b74bc0"
+  },
+  {
+    "file": "img/credits/comunita_di_valle.jpg",
+    "hash": "33fddf729e53ccac8cee4ef7cfafd933"
+  },
+  {
+    "file": "img/credits/folgaria.gif",
+    "hash": "199d619f8f9bc065a1c14ce3428a5365"
+  },
+  {
+    "file": "img/credits/folgaria.png",
+    "hash": "8d4234f34968494b2ec1087fb756f41d"
+  },
+  {
+    "file": "img/credits/lavarone.gif",
+    "hash": "1e702589fa255dc8d80c6fdbe8d8e918"
+  },
+  {
+    "file": "img/credits/logo_rovereto.png",
+    "hash": "a9b38a00216980ea71e094b3f3b0ca0c"
+  },
+  {
+    "file": "img/credits/logo-sco-fbk.png",
+    "hash": "e636a7cfddd98f529b7f37188a651708"
+  },
+  {
+    "file": "img/credits/luserna.png",
+    "hash": "8c7d856fc58d118503930daa8944b681"
+  },
+  {
+    "file": "img/credits/luserna.tiff",
+    "hash": "13536f04446fefe7be87286384af9e81"
+  },
+  {
+    "file": "img/credits/valle.png",
+    "hash": "16e1457734d8b48cf21ce2dc3ef1ca8d"
+  },
+  {
+    "file": "img/ic_arrival.png",
+    "hash": "e4ed6b3aa8b5586538f67932dd9cb53a"
+  },
+  {
+    "file": "img/ic_bike.png",
+    "hash": "3a4a9e425727b342c78f11d48b5374c3"
+  },
+  {
+    "file": "img/ic_car.png",
+    "hash": "0e598f91f896cfa688057c4371aff53f"
+  },
+  {
+    "file": "img/ic_compass_old.png",
+    "hash": "7972e924169d7ba07ca6fad7bb22d2f2"
+  },
+  {
+    "file": "img/ic_compass.png",
+    "hash": "8bf0c2279e8c1b8bad76ab1145695a9f"
+  },
+  {
+    "file": "img/ic_extraurbanBus.png",
+    "hash": "4916171db1961e78f7bead0a9fee602a"
+  },
+  {
+    "file": "img/ic_funivia.png",
+    "hash": "1d7a9bf117beab1e71bc56650f978035"
+  },
+  {
+    "file": "img/ic_leaf.png",
+    "hash": "60cf70bd907899f65bfba5400a4a745e"
+  },
+  {
+    "file": "img/ic_look_for_parking.png",
+    "hash": "88644f919a9bf5a8a929f44c8ebd6e84"
+  },
+  {
+    "file": "img/ic_mt_bicycle.png",
+    "hash": "6ca96ff267c8d954f084f089363e9f3f"
+  },
+  {
+    "file": "img/ic_mt_bus.png",
+    "hash": "e2bb03d1826f90c5fc715c69031ea272"
+  },
+  {
+    "file": "img/ic_mt_car.png",
+    "hash": "7285d8ab81c2d23c7b79478e7431a6e8"
+  },
+  {
+    "file": "img/ic_mt_extraurbano.png",
+    "hash": "700b50a0577abbaaf8159dba5780b556"
+  },
+  {
+    "file": "img/ic_mt_foot.png",
+    "hash": "1ce9efdadf0a411c36df6227e4f3584d"
+  },
+  {
+    "file": "img/ic_mt_funivia.png",
+    "hash": "696a0a6a71e5629f8ad084977c7b1716"
+  },
+  {
+    "file": "img/ic_mt_parking.png",
+    "hash": "004521888cdc2eb6349a4705f57bf001"
+  },
+  {
+    "file": "img/ic_mt_train.png",
+    "hash": "11eea5c1c2b3fe0712843c9228c711cf"
+  },
+  {
+    "file": "img/ic_notif.png",
+    "hash": "599b05acaaedbb7263cf6b34c97da62d"
+  },
+  {
+    "file": "img/ic_parcometro_euro-card_selected.png",
+    "hash": "57fdc3de826955892c773b406b4b61c7"
+  },
+  {
+    "file": "img/ic_parcometro_euro-card.png",
+    "hash": "ef08f05a5258c6598e4e546a51d1a197"
+  },
+  {
+    "file": "img/ic_parcometro_selected.png",
+    "hash": "1534dcf1160362be547cf1d6cecac3ca"
+  },
+  {
+    "file": "img/ic_parcometro.png",
+    "hash": "3cbcef5a07f8d82e5dfad7dd55a4a07c"
+  },
+  {
+    "file": "img/ic_park_walk.png",
+    "hash": "3b9b9b04ec7e77074f6d54fa44df48a0"
+  },
+  {
+    "file": "img/ic_parkingLot.png",
+    "hash": "b4d381675d53a79885191bf2ba8a9ea5"
+  },
+  {
+    "file": "img/ic_point_line_list.png",
+    "hash": "a919d3a37aa41f54b0e28102627ee7fe"
+  },
+  {
+    "file": "img/ic_point_line.png",
+    "hash": "69c4ee3717060c92ea063cb80ee03aa0"
+  },
+  {
+    "file": "img/ic_point_outline.png",
+    "hash": "6af057f31def3a0fe96c42cb47715302"
+  },
+  {
+    "file": "img/ic_point.png",
+    "hash": "c43cfc737534c0c2eb9ee06760339a39"
+  },
+  {
+    "file": "img/ic_price_parking.png",
+    "hash": "664362537ba7754f548c7473cb6774bf"
+  },
+  {
+    "file": "img/ic_taxi.png",
+    "hash": "5a383f0099e82b8c45f5bdeb51cafd59"
+  },
+  {
+    "file": "img/ic_train.png",
+    "hash": "136391c5fbb1dda1ecb1cd2b2f3fd0e3"
+  },
+  {
+    "file": "img/ic_urbanBus_no_acc.png",
+    "hash": "b92e1a0f0d26523a9a20f0165c555c45"
+  },
+  {
+    "file": "img/ic_urbanBus.png",
+    "hash": "64946448c2f5668b729cd1bafa515604"
+  },
+  {
+    "file": "img/ic_user.png",
+    "hash": "11474e739bd52e58830f5d38d409beb2"
+  },
+  {
+    "file": "img/ic_walk.png",
+    "hash": "64c3fd16e0ef291a9b7c08a09fe11af9"
+  },
+  {
+    "file": "img/ionic.png",
+    "hash": "251ebf03b1c7889cf36cbcbcce8f689e"
+  },
+  {
+    "file": "img/markets/ic_nataleDeiPopoli.png",
+    "hash": "8da695953454c97b802649e8e32efe2a"
+  },
+  {
+    "file": "img/poi_default.jpg",
+    "hash": "95f3540639754fb7a5996ff6858ed055"
+  },
+  {
+    "file": "img/trentinoCard.png",
+    "hash": "a4d23ed8c0a67a512931b52499dc3bb4"
+  },
+  {
+    "file": "index_en.html",
+    "hash": "2e41a3c07e8121300b8afcbc55c68417"
+  },
+  {
+    "file": "index.html",
+    "hash": "98866116eb01340f5a28cdb9476a7b64"
+  },
+  {
+    "file": "js/app.js",
+    "hash": "fb4c9bb00d480621e997049bf358d582"
+  },
+  {
+    "file": "js/controllers/BookmarksCtrl.js",
+    "hash": "aafe6813e9d40755c4bbd8b3127f00dd"
+  },
+  {
+    "file": "js/controllers/CommonCtrl.js",
+    "hash": "d4a12dc18ac04ae270444f87d89a1d3a"
+  },
+  {
+    "file": "js/controllers/HomeCtrl.js",
+    "hash": "257847f2c94e04f21457c31c75473319"
+  },
+  {
+    "file": "js/controllers/InfoCtrl.js",
+    "hash": "634f066f8cd6103dfe3a05a29d24d7a5"
+  },
+  {
+    "file": "js/controllers/MyTripsCtrl.js",
+    "hash": "e12d484d402ad3c18577b21fb21539b9"
+  },
+  {
+    "file": "js/controllers/NewsCtrl.js",
+    "hash": "ba2875eaf0c30fba23b9ef033be2d5dd"
+  },
+  {
+    "file": "js/controllers/NotificationsCtrl.js",
+    "hash": "35d0787c5af981935e737eefb7598ae2"
+  },
+  {
+    "file": "js/controllers/PlanCtrl.js",
+    "hash": "e2eb4862a06811d1f661d7b8844ae3ce"
+  },
+  {
+    "file": "js/controllers/PlanlistCtrl.js",
+    "hash": "c394766ed0085c6e532271aba17c44ae"
+  },
+  {
+    "file": "js/controllers/POICtrl.js",
+    "hash": "e33abb5c285dbddb39dd88dc9d36e84a"
+  },
+  {
+    "file": "js/controllers/TaxiCtrl.js",
+    "hash": "435d4561dfd6e4e673d2d5b5a2c0e9d8"
+  },
+  {
+    "file": "js/controllers/TripdetailsCtrl.js",
+    "hash": "5291fb3c272706a1f3f4954c52ac0440"
+  },
+  {
+    "file": "js/controllers/TTCtrl.js",
+    "hash": "2444ca8e17b31261902a5aeaeaa3154c"
+  },
+  {
+    "file": "js/directives/Directives.js",
+    "hash": "3d249429787ada9731086082b908d9e4"
+  },
+  {
+    "file": "js/directives/mfb-directive.js",
+    "hash": "4288cf122285bec40a4705eefa33ce36"
+  },
+  {
+    "file": "js/ext.js",
+    "hash": "46aa2b02ab62c8ec06e0b26e448a89aa"
+  },
+  {
+    "file": "js/filters.js",
+    "hash": "b70e615a2a77a9c31e37cd43d59c8673"
+  },
+  {
+    "file": "js/services/BookmarkSrv.js",
+    "hash": "6d96d036f189b08dce45739b4193b35f"
+  },
+  {
+    "file": "js/services/ConfigSrv.js",
+    "hash": "b536de8aaf714ac7f149e403ff3c3a35"
+  },
+  {
+    "file": "js/services/DataSrv.js",
+    "hash": "c0a0da8df159ff4d5c7000681f93bad2"
+  },
+  {
+    "file": "js/services/GeoSrv.js",
+    "hash": "09acc3e9c11c55d70c3264cbfc769201"
+  },
+  {
+    "file": "js/services/InfoSrv.js",
+    "hash": "92d126cb9c158765f067240c506e3b97"
+  },
+  {
+    "file": "js/services/MapSrv.js",
+    "hash": "e17129a888f2076a985c05a9b027f527"
+  },
+  {
+    "file": "js/services/MarketsSrv.js",
+    "hash": "c3cea4c34d815b02d8c4a6a41fd9a6d6"
+  },
+  {
+    "file": "js/services/NotificationSrv.js",
+    "hash": "0acfca1d18c9ade391b25a38bd75c2af"
+  },
+  {
+    "file": "js/services/PlanSrv.js",
+    "hash": "39c0e2fe5a846601595196316b5f1cc6"
+  },
+  {
+    "file": "js/services/POISrv.js",
+    "hash": "43d4c89d5024bbc6c4591a18a8d17e29"
+  },
+  {
+    "file": "js/services/ProfileSrv.js",
+    "hash": "dfad552a90dcb06187d646a7c70c7df9"
+  },
+  {
+    "file": "js/services/TaxiSrv.js",
+    "hash": "870d5d05bf08899996e56545f36d1c8a"
+  },
+  {
+    "file": "js/services/TTSrv.js",
+    "hash": "857c9e5c104b335ba43b1c68c2b238bc"
+  },
+  {
+    "file": "lib/angular-animate/angular-animate.min.js",
+    "hash": "abf4748a7ef6bb5b610ecb5ab749afae"
+  },
+  {
+    "file": "lib/angular-leaflet-directive/angular-leaflet-directive.min.js",
+    "hash": "324d37398d8af55990964869bf16faa1"
+  },
+  {
+    "file": "lib/angular-sanitize/angular-sanitize.min.js",
+    "hash": "bacfe60d661bf26faa119cebc50c6518"
+  },
+  {
+    "file": "lib/angular-simple-logger/angular-simple-logger.js",
+    "hash": "11da70ab1b261c6bd141a2e6aca37410"
+  },
+  {
+    "file": "lib/angular-translate/angular-translate.min.js",
+    "hash": "c5ebd01305e9d551a30a1590b8842ab8"
+  },
+  {
+    "file": "lib/angular-ui-router/angular-ui-router.min.js",
+    "hash": "a7e4b1ac540e125642766cd3c147ee1b"
+  },
+  {
+    "file": "lib/angular/angular.min.js",
+    "hash": "d2342622316f832ef1333c74e41354ca"
+  },
+  {
+    "file": "lib/ionic-datepicker/ionic-datepicker.bundle.min.js",
+    "hash": "3096cc6c78e3621ee65c13746942517f"
+  },
+  {
+    "file": "lib/ionic-material/ionic.material.min.css",
+    "hash": "eeb41e543b2d524743542cbf2863c086"
+  },
+  {
+    "file": "lib/ionic-material/ionic.material.min.js",
+    "hash": "6a043424bcbae9ad79c3d4c50f326872"
+  },
+  {
+    "file": "lib/ionic-timepicker/ionic-timepicker.bundle.min.js",
+    "hash": "715a5f445fbd2f99893efc03712fd3b2"
+  },
+  {
+    "file": "lib/ionic/bower.json",
+    "hash": "542625f5df378f67ade11757ad288bf3"
+  },
+  {
+    "file": "lib/ionic/css/ionic.css",
+    "hash": "bcef5306be0721a5e082c29574da4c15"
+  },
+  {
+    "file": "lib/ionic/css/ionic.min.css",
+    "hash": "ac5223d594faef325a7ae54a5414e99d"
+  },
+  {
+    "file": "lib/ionic/fonts/ionicons.eot",
+    "hash": "2c2ae068be3b089e0a5b59abb1831550"
+  },
+  {
+    "file": "lib/ionic/fonts/ionicons.svg",
+    "hash": "201c16cd3e8227301559745f4b8bf25b"
+  },
+  {
+    "file": "lib/ionic/fonts/ionicons.ttf",
+    "hash": "24712f6c47821394fba7942fbb52c3b2"
+  },
+  {
+    "file": "lib/ionic/fonts/ionicons.woff",
+    "hash": "05acfdb568b3df49ad31355b19495d4a"
+  },
+  {
+    "file": "lib/ionic/js/ionic-angular.js",
+    "hash": "953200210ecff162d1f6a113adbb2d4b"
+  },
+  {
+    "file": "lib/ionic/js/ionic-angular.min.js",
+    "hash": "305317883fb58c783823ce6f90a89af5"
+  },
+  {
+    "file": "lib/ionic/js/ionic.bundle.js",
+    "hash": "065d7b882514ae0a8126bb5ee9444eb8"
+  },
+  {
+    "file": "lib/ionic/js/ionic.bundle.min.js",
+    "hash": "de7a9c436a0c9c3abcc77b03dd6ad801"
+  },
+  {
+    "file": "lib/ionic/js/ionic.js",
+    "hash": "eb8b8cf905caf37edc557a6c9f783eeb"
+  },
+  {
+    "file": "lib/ionic/js/ionic.min.js",
+    "hash": "c2b965907f38367bd5b6259bc21e3b21"
+  },
+  {
+    "file": "lib/ionic/README.md",
+    "hash": "1bde1ceac2c2b0a1e1f45e1a9c99e94b"
+  },
+  {
+    "file": "lib/ionic/scss/_action-sheet.scss",
+    "hash": "d0c6449f31db02323aa6e7f56ef55e67"
+  },
+  {
+    "file": "lib/ionic/scss/_animations.scss",
+    "hash": "5596f74cb1ee03f9faf453ad4ee11807"
+  },
+  {
+    "file": "lib/ionic/scss/_backdrop.scss",
+    "hash": "7ff048e091b39f6615db62ee136ef040"
+  },
+  {
+    "file": "lib/ionic/scss/_badge.scss",
+    "hash": "c7b1b0e3049754fc22b45730e6c560fa"
+  },
+  {
+    "file": "lib/ionic/scss/_bar.scss",
+    "hash": "6e815d4d3afc1a97139aad2f94163515"
+  },
+  {
+    "file": "lib/ionic/scss/_button-bar.scss",
+    "hash": "b7ebe3065a06a3838c17a3e4f744068e"
+  },
+  {
+    "file": "lib/ionic/scss/_button.scss",
+    "hash": "78ec8db7cd9d771f011dcff61e8f81fd"
+  },
+  {
+    "file": "lib/ionic/scss/_checkbox.scss",
+    "hash": "c34feb3460dbc588de2c921812891567"
+  },
+  {
+    "file": "lib/ionic/scss/_form.scss",
+    "hash": "5ce548e83a854962c7f1f9d123047fd7"
+  },
+  {
+    "file": "lib/ionic/scss/_grid.scss",
+    "hash": "e04a80ec87a6a67f65e93d94eb76f32d"
+  },
+  {
+    "file": "lib/ionic/scss/_items.scss",
+    "hash": "e4c46d2f4ba12769d254cc066cd27989"
+  },
+  {
+    "file": "lib/ionic/scss/_list.scss",
+    "hash": "0ab8daf57764aac25bf68aa0b0e6c776"
+  },
+  {
+    "file": "lib/ionic/scss/_loaders.scss",
+    "hash": "94ce5c70431f9418dcfbfe635c5b9ba9"
+  },
+  {
+    "file": "lib/ionic/scss/_loading.scss",
+    "hash": "9f23e266d43a432bbf07a8677d1d1592"
+  },
+  {
+    "file": "lib/ionic/scss/_menu.scss",
+    "hash": "75661cd0566dcb4b93245390c0af215b"
+  },
+  {
+    "file": "lib/ionic/scss/_mixins.scss",
+    "hash": "5b97c405b5849d080b81ddbd3a0b30e3"
+  },
+  {
+    "file": "lib/ionic/scss/_modal.scss",
+    "hash": "38e8624ef28a495e7a01341915516bd1"
+  },
+  {
+    "file": "lib/ionic/scss/_platform.scss",
+    "hash": "db73214ac171e89a966c24d5320fe096"
+  },
+  {
+    "file": "lib/ionic/scss/_popover.scss",
+    "hash": "cfdbb6c6b1a87f04c068484392066b55"
+  },
+  {
+    "file": "lib/ionic/scss/_popup.scss",
+    "hash": "988126e645408f1e5a270934520c20ac"
+  },
+  {
+    "file": "lib/ionic/scss/_progress.scss",
+    "hash": "19a19537d8e9483db7bde8a7febd43f6"
+  },
+  {
+    "file": "lib/ionic/scss/_radio.scss",
+    "hash": "eb4b88433f2db4a905b957676eb7afef"
+  },
+  {
+    "file": "lib/ionic/scss/_range.scss",
+    "hash": "e3164511c46a6af06ecf9ea3c0956a29"
+  },
+  {
+    "file": "lib/ionic/scss/_refresher.scss",
+    "hash": "a45314eb301b977b3506a3f8e0fbc29f"
+  },
+  {
+    "file": "lib/ionic/scss/_reset.scss",
+    "hash": "319f0fb2d58da7fc89222752c5e527a4"
+  },
+  {
+    "file": "lib/ionic/scss/_scaffolding.scss",
+    "hash": "cf9e931591f63ebdf619372d94efd843"
+  },
+  {
+    "file": "lib/ionic/scss/_select.scss",
+    "hash": "7b40e394e01f33ebc89fcfc89f826410"
+  },
+  {
+    "file": "lib/ionic/scss/_slide-box.scss",
+    "hash": "f65800f27eb1f9520851e32f71a9b07b"
+  },
+  {
+    "file": "lib/ionic/scss/_spinner.scss",
+    "hash": "472ae7eb35a68c22078b1d56b10f35be"
+  },
+  {
+    "file": "lib/ionic/scss/_split-pane.scss",
+    "hash": "7d9c2d8d024e96ffa04db424e9467ebb"
+  },
+  {
+    "file": "lib/ionic/scss/_tabs.scss",
+    "hash": "591a8ae143d4f2c4be7217bc208dae69"
+  },
+  {
+    "file": "lib/ionic/scss/_toggle.scss",
+    "hash": "09146009f139820a34375ec3dc70c5a0"
+  },
+  {
+    "file": "lib/ionic/scss/_transitions.scss",
+    "hash": "c060678db2049bbca8833bf769d65dd1"
+  },
+  {
+    "file": "lib/ionic/scss/_type.scss",
+    "hash": "178ef3eca86f77f818db20587d194045"
+  },
+  {
+    "file": "lib/ionic/scss/_util.scss",
+    "hash": "9fbec68fcd983d0493f2256335f22572"
+  },
+  {
+    "file": "lib/ionic/scss/_variables.scss",
+    "hash": "f66614f030533890aa438e3483d46b04"
+  },
+  {
+    "file": "lib/ionic/scss/ionic.scss",
+    "hash": "983a7f27e5e19b920b0b17a033c71b39"
+  },
+  {
+    "file": "lib/ionic/scss/ionicons/_ionicons-animation.scss",
+    "hash": "9a42a67adf70760201ffe1b2ae5dc1c3"
+  },
+  {
+    "file": "lib/ionic/scss/ionicons/_ionicons-font.scss",
+    "hash": "9a1734051fa60f52fdbdd74001b0f0e0"
+  },
+  {
+    "file": "lib/ionic/scss/ionicons/_ionicons-icons.scss",
+    "hash": "f8da6b7d864740bf9b836246b5403928"
+  },
+  {
+    "file": "lib/ionic/scss/ionicons/_ionicons-variables.scss",
+    "hash": "1396036b27c4b230ebcbd57202a00a7d"
+  },
+  {
+    "file": "lib/ionic/scss/ionicons/ionicons.scss",
+    "hash": "37204d759a9eb7bfc074034fd1bf95fb"
+  },
+  {
+    "file": "lib/jszip-utils/jszip-utils.min.js",
+    "hash": "0608ff0ca6b939ae7263f0b219b0e4f2"
+  },
+  {
+    "file": "lib/jszip/jszip.min.js",
+    "hash": "5c57bf53827ad2dc9d9d2ed198eaa643"
+  },
+  {
+    "file": "lib/leaflet/images/layers-2x.png",
+    "hash": "324b4fcaf164735c627269504b7bc28e"
+  },
+  {
+    "file": "lib/leaflet/images/layers.png",
+    "hash": "7cb0d2482ecadc1b80eb0abe457371b6"
+  },
+  {
+    "file": "lib/leaflet/images/marker-icon-2x.png",
+    "hash": "1c824216f354218b04b25a57e0f7ab1f"
+  },
+  {
+    "file": "lib/leaflet/images/marker-icon.png",
+    "hash": "87f6ca46ac356e81dc438589630ae107"
+  },
+  {
+    "file": "lib/leaflet/images/marker-shadow.png",
+    "hash": "e7bd5e4b8dbbc3dfbe3ed88c098bc61e"
+  },
+  {
+    "file": "lib/leaflet/layers-2x.png",
+    "hash": "324b4fcaf164735c627269504b7bc28e"
+  },
+  {
+    "file": "lib/leaflet/layers.png",
+    "hash": "7cb0d2482ecadc1b80eb0abe457371b6"
+  },
+  {
+    "file": "lib/leaflet/leaflet-src.js",
+    "hash": "66c127b72bdf0980b3c35d72fcd37a5e"
+  },
+  {
+    "file": "lib/leaflet/leaflet.css",
+    "hash": "e84b0b64a0dce38ad53107db1258e98a"
+  },
+  {
+    "file": "lib/leaflet/leaflet.js",
+    "hash": "d4914be5173dde24cf72260063c47424"
+  },
+  {
+    "file": "lib/leaflet/marker-icon-2x.png",
+    "hash": "1c824216f354218b04b25a57e0f7ab1f"
+  },
+  {
+    "file": "lib/leaflet/marker-icon.png",
+    "hash": "87f6ca46ac356e81dc438589630ae107"
+  },
+  {
+    "file": "lib/leaflet/marker-shadow.png",
+    "hash": "e7bd5e4b8dbbc3dfbe3ed88c098bc61e"
+  },
+  {
+    "file": "lib/MapPolyline.js",
+    "hash": "a79c1a2cf139801b8cf7e0af56f84d86"
+  },
+  {
+    "file": "lib/ng-cells/ng-cells.min.js",
+    "hash": "065fc017d4d371768a7f31148e3a62ec"
+  },
+  {
+    "file": "lib/ng-material-floating-button/mfb.css",
+    "hash": "8e8d21da4111d5d5e3d6a279efc08710"
+  },
+  {
+    "file": "lib/ng-scrollable/ng-scrollable.min.css",
+    "hash": "bcd4a33ed817eac6916882a5c8dd94f0"
+  },
+  {
+    "file": "lib/ng-scrollable/ng-scrollable.min.js",
+    "hash": "44282e7b68ed82b109ff6a7f2e330611"
+  },
+  {
+    "file": "lib/ng-walkthrough/ng-walkthrough.css",
+    "hash": "32e784c1199ac9a3eb6a9f02efc2d2c4"
+  },
+  {
+    "file": "lib/ng-walkthrough/ng-walkthrough.js",
+    "hash": "a6902d36095ec783bd17c4d715590f10"
+  },
+  {
+    "file": "lib/ngCordova/ng-cordova.min.js",
+    "hash": "5ddfc4ea91af3f8d507c5bb8586dc3c1"
+  },
+  {
+    "file": "lib/waves/waves.min.css",
+    "hash": "479f53e6c221764ebdbb1b3c6863a20c"
+  },
+  {
+    "file": "lib/waves/waves.min.js",
+    "hash": "e36e619aa3433aa0527c376dff375652"
+  },
+  {
+    "file": "lib/x2js/xml2json.min.js",
+    "hash": "ec489f013788dbb1fcdf624745707767"
+  },
+  {
+    "file": "templates/bikesharing.html",
+    "hash": "be20266e4347e9ef9787454889da10c8"
+  },
+  {
+    "file": "templates/bikesharingPopup.html",
+    "hash": "bb24db154335675f92c65209267c74bc"
+  },
+  {
+    "file": "templates/bm/bikesharing.html",
+    "hash": "78fd82d57fca34aed542df0eebcc8770"
+  },
+  {
+    "file": "templates/bm/default.html",
+    "hash": "b38c93ca55efbdd5cc0cc2a3b6642896"
+  },
+  {
+    "file": "templates/bm/line.html",
+    "hash": "f7e2b3eda1d587d0f47e7b42fe08509f"
+  },
+  {
+    "file": "templates/bm/parking.html",
+    "hash": "e0b644ae27f9ad628f8da6ec2da35159"
+  },
+  {
+    "file": "templates/bm/stop.html",
+    "hash": "f7e2b3eda1d587d0f47e7b42fe08509f"
+  },
+  {
+    "file": "templates/bm/trip.html",
+    "hash": "825cde65c68001933f0140d7142428d4"
+  },
+  {
+    "file": "templates/bookmarks.html",
+    "hash": "8dba6ab766358cc923512d8615d60846"
+  },
+  {
+    "file": "templates/bookmarkstutorial.html",
+    "hash": "9938e8e17a5633ea3eefe15813b7727d"
+  },
+  {
+    "file": "templates/calibrationPopup.html",
+    "hash": "631ebb1e0f569a5c7c34712ed2fcd5c0"
+  },
+  {
+    "file": "templates/credits.html",
+    "hash": "eb66d6deb7572c7413b3d502cd30f975"
+  },
+  {
+    "file": "templates/emptyHomepage.html",
+    "hash": "f5a7506dc4aefb5a10b9d6edbf89e2e6"
+  },
+  {
+    "file": "templates/favoritesModal.html",
+    "hash": "a9f66515ba019c0c5a6059995825eb90"
+  },
+  {
+    "file": "templates/firstTimeParkingMeterPopup.html",
+    "hash": "757be6331aba15bd6b3b1be24f8b305f"
+  },
+  {
+    "file": "templates/home.html",
+    "hash": "55e1ff35601fa71154672c113ff3b8f4"
+  },
+  {
+    "file": "templates/mapModalBike.html",
+    "hash": "989cd154cc92c1493738b194685969a8"
+  },
+  {
+    "file": "templates/mapModalParking.html",
+    "hash": "6acd2a5f3b2948772c6546493c81d300"
+  },
+  {
+    "file": "templates/mapModalTaxi.html",
+    "hash": "b5ae66500e84debba6241a0baf18d0f9"
+  },
+  {
+    "file": "templates/mapParkingMeters.html",
+    "hash": "1e9ab8b8f915b645edb917b524f84ec4"
+  },
+  {
+    "file": "templates/markets.html",
+    "hash": "a7f536e04a685ed4d94cd5ef99a29fbe"
+  },
+  {
+    "file": "templates/menu.html",
+    "hash": "1dc44af93eb6d594184ac95ebc486d9d"
+  },
+  {
+    "file": "templates/mytrips.html",
+    "hash": "8ad3e2e3a499dafeee9a6c0f47af472b"
+  },
+  {
+    "file": "templates/news.html",
+    "hash": "5e362d6688d511fbf60ea9f92fa8d089"
+  },
+  {
+    "file": "templates/newsitem.html",
+    "hash": "5b615abe8129b4851ff49fae7ad1eb1d"
+  },
+  {
+    "file": "templates/noGpsPopup.html",
+    "hash": "ff8c09c8a5eecc9b0ee511cfb064d524"
+  },
+  {
+    "file": "templates/notification.html",
+    "hash": "724e83d3a83c8fd8d6ee75bef5c2c542"
+  },
+  {
+    "file": "templates/notifications.html",
+    "hash": "6158d1bd6a878e57a06a7d83e7204fa4"
+  },
+  {
+    "file": "templates/parking.html",
+    "hash": "7507b15f58fbe0516ab008f6e00e1ca2"
+  },
+  {
+    "file": "templates/parkingMeterPopup.html",
+    "hash": "aa8e57ff792ddf9b0678408122658828"
+  },
+  {
+    "file": "templates/parkingPopup.html",
+    "hash": "69042e2158952b1a277cda2e36fb38e2"
+  },
+  {
+    "file": "templates/plan.html",
+    "hash": "0c8e0f938220500c414baa1594dfb815"
+  },
+  {
+    "file": "templates/planlist.html",
+    "hash": "1f0ea9965bf288f35c8add01aa6a1039"
+  },
+  {
+    "file": "templates/planMapModal.html",
+    "hash": "5e9fc6a6e8a0e2c5521b867c9eeb92b8"
+  },
+  {
+    "file": "templates/planMapPopup.html",
+    "hash": "18d017246ae3429e0594d9aa9e79d0f3"
+  },
+  {
+    "file": "templates/poi.html",
+    "hash": "97727bbd0dca55a3d9311486f8424bf9"
+  },
+  {
+    "file": "templates/pois.html",
+    "hash": "ce4b8ba97bffb103533395f9cfaaf6c8"
+  },
+  {
+    "file": "templates/popup-savetrip.html",
+    "hash": "838abd358f72e6bb022ca072ca877af2"
+  },
+  {
+    "file": "templates/stopPopup.html",
+    "hash": "f680ae2ba906c3cd53674249007ecdd6"
+  },
+  {
+    "file": "templates/table1.html",
+    "hash": "4c919118b6f8e12f57470c6edba5f2a7"
+  },
+  {
+    "file": "templates/taxi.html",
+    "hash": "2bb19c47b7cdb53a2681ea40c9849890"
+  },
+  {
+    "file": "templates/taxiPopup.html",
+    "hash": "9c2287148d520f9d0c566cee6912c8da"
+  },
+  {
+    "file": "templates/tripdetails.html",
+    "hash": "8549c61917b4996547c7f7110519e189"
+  },
+  {
+    "file": "templates/ttmap.html",
+    "hash": "dad994f74d239ed11b4bfb6b38c687e0"
+  },
+  {
+    "file": "templates/ttroutelist.html",
+    "hash": "c6e1085a9a83bb8dfd1f222f80092df2"
+  },
+  {
+    "file": "templates/ttstop.html",
+    "hash": "ca821e38d15257ada47ad13be9b3418f"
+  }
+]

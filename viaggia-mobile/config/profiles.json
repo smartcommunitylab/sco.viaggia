@@ -4,6 +4,7 @@
         "widget_id": "it.smartcommunitylab.viaggiaalpecimbra",
         "version": "1.0.5",
         "version_code": "9",
+        "url-chcp":"https://hotcode.z6.web.core.windows.net/alpecimbra/chcp.json",
         "app_name": "Viaggia Alpe Cimbra"
     },
     "TRENTO": {
@@ -11,6 +12,7 @@
         "widget_id": "eu.trentorise.smartcampus.viaggiatrento",
         "version": "2.4.2",
         "version_code": "49",
+        "url-chcp":"https://hotcode.z6.web.core.windows.net/rovereto/chcp.json",
         "app_name": "Viaggia Trento"
     },
     "ROVERETO": {
@@ -18,6 +20,7 @@
         "widget_id": "eu.trentorise.smartcampus.viaggiarovereto",
         "version": " 2.1.12",
         "version_code": "49",
+        "url-chcp":"https://hotcode.z6.web.core.windows.net/rovereto/chcp.json",
         "app_name": "Viaggia Rovereto"
     },
     "BOLOGNA": {
@@ -25,6 +28,7 @@
         "widget_id": "eu.trentorise.smartcampus.viaggiabologna",
         "version": "0.0.1",
         "version_code": "1",
+        "url-chcp":"https://hotcode.z6.web.core.windows.net/bologna/chcp.json",
         "app_name": "Viaggia Bologna"
     }
 }

@@ -84,4 +84,7 @@
       <splash src="*resource_folder*/resources/ios/splash/Default~iphone.png" width="320" height="480" />
     </platform>
     <icon src="*resource_folder*/resources/android/icon/drawable-xhdpi-icon.png" />
+        <chcp>
+        <config-file url="*url-chcp*" />
+    </chcp>
   </widget>
