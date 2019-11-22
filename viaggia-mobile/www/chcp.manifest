@@ -1,7 +1,7 @@
 [
   {
     "file": "css/custom.css",
-    "hash": "b2601ea70646b9f5ee2233051e355870"
+    "hash": "cc207ae36d6ab2fd55b9b0aaf58e3ffb"
   },
   {
     "file": "css/ionic.app.css",
@@ -21,7 +21,7 @@
   },
   {
     "file": "data/config.json",
-    "hash": "c21329b105435342c2d8c0eebaaf8925"
+    "hash": "faf83ab24fbb30ca44540153e34b246b"
   },
   {
     "file": "data/notifications.json",
@@ -37,11 +37,11 @@
   },
   {
     "file": "data/routesdb.zip",
-    "hash": "80f9b0a9a5d7053f4c04e8f21b40dff7"
+    "hash": "45c79aaf5879fd8b4da37040319b5522"
   },
   {
     "file": "data/tt.json",
-    "hash": "4251507fa9e453143638fd455470ff5d"
+    "hash": "b4cadcffd99aecfc2fbc91617b5fa01d"
   },
   {
     "file": "data/tt.json.full.json",
@@ -437,7 +437,7 @@
   },
   {
     "file": "js/services/MarketsSrv.js",
-    "hash": "9edd32003df7799cbeefac7116eb93e9"
+    "hash": "c3cea4c34d815b02d8c4a6a41fd9a6d6"
   },
   {
     "file": "js/services/NotificationSrv.js",
@@ -881,7 +881,7 @@
   },
   {
     "file": "templates/credits.html",
-    "hash": "9c5672d6ec2ce95f1b778f6c688a7efa"
+    "hash": "eb66d6deb7572c7413b3d502cd30f975"
   },
   {
     "file": "templates/emptyHomepage.html",

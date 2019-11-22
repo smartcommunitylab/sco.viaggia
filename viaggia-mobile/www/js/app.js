@@ -108,8 +108,56 @@ angular.module('viaggia', [
       console.log('CANNOT LOCATE!');
     });
 
+    var initAppUpdate = function () {
+      document.addEventListener('chcp_updateIsReadyToInstall', onUpdateReady, false);
+      document.addEventListener('chcp_nothingToUpdate', nothingToUpdate, false);
+      document.addEventListener('chcp_updateInstalled', hideLoad, false);
+      document.addEventListener('chcp_updateInstallFailed', hideLoad, false);
+    }
+
+    // chcp_updateIsReadyToInstall Event Handler
+    var onUpdateReady = function () {
+      console.log('Update is ready for installation');
+      //loading
+      // $ionicLoading.show();
+    }
+    // chcp_updateIsReadyToInstall Event Handler
+    var nothingToUpdate = function () {
+      console.log('Nothing to update');
+    }
+    var hideLoad = function () {
+      console.log('hide loading');
+      $ionicLoading.hide();
+    }
+    var resetCache = function () {
+      localStorage.removeItem(Config.getAppId() + "_diaryRefresh") ;
+      localStorage.removeItem(Config.getAppId() + "_challengesRefresh") ;
+      localStorage.removeItem(Config.getAppId() + "_homeRefresh") ;
+      localStorage.removeItem(Config.getAppId() + "_rankingRefresh") ;
+    }
 
     $ionicPlatform.ready(function () {
+      document.addEventListener('chcp_updateLoadFailed', function () { console.log('chcp_updateLoadFailed') });
+      document.addEventListener('chcp_updateInstallFailed', function () { console.log('chcp_updateInstallFailed') });
+      document.addEventListener('chcp_assetsInstallationError', function () { console.log('chcp_assetsInstallationError') });
+      document.addEventListener('chcp_updateIsReadyToInstall', onUpdateReady, false);
+      document.addEventListener('chcp_nothingToUpdate', nothingToUpdate, false);
+      document.addEventListener('chcp_updateInstalled', hideLoad, false);
+      document.addEventListener('chcp_updateInstallFailed', hideLoad, false);
+      function onUpdateReady() {
+        console.log('Update is ready for installation');
+        //loading
+        //$ionicLoading.show();
+      }
+      // chcp_updateIsReadyToInstall Event Handler
+      function nothingToUpdate() {
+        console.log('Nothing to update');
+      }
+      function hideLoad() {
+        console.log('hide loading');
+        $ionicLoading.hide();
+      }
+      initAppUpdate();
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       if (window.cordova && window.cordova.plugins.Keyboard) {
