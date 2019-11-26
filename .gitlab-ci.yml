@@ -1,0 +1,18 @@
+image: docker:latest
+services:
+  - docker:dind
+variables:
+  DOCKER_DRIVER: overlay
+
+stages:
+  - deploy
+
+deploy_frontend:
+  stage: deploy
+  image: smartcommunitylab/cordova-hcp:slim
+  environment:
+    name: develop
+  script:
+    - bash deploy-statics.sh
+  only:
+    - test
