@@ -17,7 +17,7 @@ cd ${root_dir}/viaggia-mobile || exit
 i=0
 ios_id=""
 for inst in "${inst_lower[@]}"; do
-  sed -i -e "s@\(\"content_url\": \"https://hotcode.z6.web.core.windows.net/\).*\"@\1$inst\"@g" cordova-hcp.json
+  sed -i -e "s@\(\"content_url\": \"https://hcp.smartcommunitylab.it/viaggia/\).*\"@\1$inst\"@g" cordova-hcp.json
   sed -i -e "s@\(\"android_identifier\": \"eu.trentorise.smartcampus.viaggia\).*\"@\1$inst\"@g" cordova-hcp.json
   sed -i -e "s@\(\"name\": \"viaggia\).*\"@\1$inst\"@g" cordova-hcp.json
   case $inst in
@@ -38,5 +38,5 @@ for inst in "${inst_lower[@]}"; do
   cp -r www/ ../upload/$inst
   i+=1
 done
-BLOB="$BLOB_URL\$web$TOKEN"
+BLOB="$BLOB_URL$TOKEN"
 azcopy sync '../upload/' $BLOB --recursive --delete-destination=true
