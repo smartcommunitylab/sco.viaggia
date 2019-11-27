@@ -15,6 +15,12 @@ if (process.argv.length < 3) {
 if (profile == null) {
     console.error("Profile name is missing!");
 } else {
+    ncp("config/instances/"+profile+"/cordova-hcp.json", "cordova-hcp.json", function (err) {
+        if (err) {
+          return console.error(err);
+        }
+        console.log('done!');
+       });
     ncp("config/instances/"+profile+"/www", "www", function (err) {
      if (err) {
        return console.error(err);
