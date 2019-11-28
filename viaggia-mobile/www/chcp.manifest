@@ -20,6 +20,14 @@
     "hash": "30a4493250fe34ebca9cb5ac27b6a4e7"
   },
   {
+    "file": "data/config_dev.json",
+    "hash": "9d5d5687bf1b40bf3843f311051c31e4"
+  },
+  {
+    "file": "data/config_prod.json",
+    "hash": "faf83ab24fbb30ca44540153e34b246b"
+  },
+  {
     "file": "data/config.json",
     "hash": "faf83ab24fbb30ca44540153e34b246b"
   },
@@ -341,7 +349,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "fb4c9bb00d480621e997049bf358d582"
+    "hash": "6e1067b7e40b6b0fda75dfd4b09e000e"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -393,7 +401,7 @@
   },
   {
     "file": "js/controllers/TTCtrl.js",
-    "hash": "2444ca8e17b31261902a5aeaeaa3154c"
+    "hash": "b292fcfb9a93298127d8db020a4f8eef"
   },
   {
     "file": "js/directives/Directives.js",
@@ -881,7 +889,7 @@
   },
   {
     "file": "templates/credits.html",
-    "hash": "eb66d6deb7572c7413b3d502cd30f975"
+    "hash": "53432595253671017ee5d091eb24fc00"
   },
   {
     "file": "templates/emptyHomepage.html",

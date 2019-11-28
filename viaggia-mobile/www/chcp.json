@@ -3,6 +3,6 @@
   "ios_identifier": "id1068474391",
   "android_identifier": "eu.trentorise.smartcampus.viaggiatrento",
   "update": "resume",
-  "content_url": "https://hotcode.z6.web.core.windows.net/trento",
-  "release": "2019.11.21-16.13.36"
+  "content_url": "https://hcp.smartcommunitylab.it/viaggia/trento/chcp.json",
+  "release": "2019.11.28-16.32.36"
 }
