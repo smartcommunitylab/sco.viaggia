@@ -39,4 +39,4 @@ for inst in "${inst_lower[@]}"; do
   i+=1
 done
 BLOB="$BLOB_URL$TOKEN"
-azcopy sync '../upload/' $BLOB --recursive --delete-destination=true
+azcopy copy '../upload/*' $BLOB --recursive --cache-control 'max-age=360' --overwrite 'true'
