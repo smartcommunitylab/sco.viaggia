@@ -31,7 +31,11 @@
     </feature>
     <platform name="android">
         <preference name="StatusBarOverlaysWebView" value="false" />
-
+        <resource-file src="resources/android/notification_icon/drawable-mdpi/notification_icon.png" target="app/src/main/res/drawable-mdpi/notification_icon.png" />
+        <resource-file src="resources/android/notification_icon/drawable-hdpi/notification_icon.png" target="app/src/main/res/drawable-hdpi/notification_icon.png" />
+        <resource-file src="resources/android/notification_icon/drawable-xhdpi/notification_icon.png" target="app/src/main/res/drawable-xhdpi/notification_icon.png" />
+        <resource-file src="resources/android/notification_icon/drawable-xxhdpi/notification_icon.png" target="app/src/main/res/drawable-xxhdpi/notification_icon.png" />
+        <resource-file src="resources/android/notification_icon/drawable-xxxhdpi/notification_icon.png" target="app/src/main/res/drawable-xxxhdpi/notification_icon.png" />
       <icon src="*resource_folder*/resources/android/icon/drawable-ldpi-icon.png" density="ldpi" />
       <icon src="*resource_folder*/resources/android/icon/drawable-mdpi-icon.png" density="mdpi" />
       <icon src="*resource_folder*/resources/android/icon/drawable-hdpi-icon.png" density="hdpi" />

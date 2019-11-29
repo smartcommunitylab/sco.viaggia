@@ -29,7 +29,7 @@
   },
   {
     "file": "data/config.json",
-    "hash": "faf83ab24fbb30ca44540153e34b246b"
+    "hash": "5530959ec927681a85cbab8aeb522595"
   },
   {
     "file": "data/notifications.json",
@@ -889,7 +889,7 @@
   },
   {
     "file": "templates/credits.html",
-    "hash": "53432595253671017ee5d091eb24fc00"
+    "hash": "eb66d6deb7572c7413b3d502cd30f975"
   },
   {
     "file": "templates/emptyHomepage.html",
@@ -953,7 +953,7 @@
   },
   {
     "file": "templates/notifications.html",
-    "hash": "6158d1bd6a878e57a06a7d83e7204fa4"
+    "hash": "0ed6e6d347f96f78d453a8bfb2d0f8b8"
   },
   {
     "file": "templates/parking.html",
