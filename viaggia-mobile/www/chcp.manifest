@@ -20,16 +20,8 @@
     "hash": "30a4493250fe34ebca9cb5ac27b6a4e7"
   },
   {
-    "file": "data/config_dev.json",
-    "hash": "9d5d5687bf1b40bf3843f311051c31e4"
-  },
-  {
-    "file": "data/config_prod.json",
-    "hash": "faf83ab24fbb30ca44540153e34b246b"
-  },
-  {
     "file": "data/config.json",
-    "hash": "5530959ec927681a85cbab8aeb522595"
+    "hash": "faf83ab24fbb30ca44540153e34b246b"
   },
   {
     "file": "data/notifications.json",
@@ -349,7 +341,7 @@
   },
   {
     "file": "js/app.js",
-    "hash": "6e1067b7e40b6b0fda75dfd4b09e000e"
+    "hash": "fb4c9bb00d480621e997049bf358d582"
   },
   {
     "file": "js/controllers/BookmarksCtrl.js",
@@ -401,7 +393,7 @@
   },
   {
     "file": "js/controllers/TTCtrl.js",
-    "hash": "b292fcfb9a93298127d8db020a4f8eef"
+    "hash": "2444ca8e17b31261902a5aeaeaa3154c"
   },
   {
     "file": "js/directives/Directives.js",
@@ -953,7 +945,7 @@
   },
   {
     "file": "templates/notifications.html",
-    "hash": "0ed6e6d347f96f78d453a8bfb2d0f8b8"
+    "hash": "6158d1bd6a878e57a06a7d83e7204fa4"
   },
   {
     "file": "templates/parking.html",
