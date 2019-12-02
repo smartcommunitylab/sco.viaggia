@@ -15,4 +15,4 @@ deploy_frontend:
   script:
     - bash deploy-statics.sh
   only:
-    - test
+    - prod
