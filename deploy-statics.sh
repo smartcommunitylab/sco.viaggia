@@ -38,5 +38,5 @@ for inst in "${inst_lower[@]}"; do
   cp -r www/ ../upload/$inst
   i+=1
 done
-BLOB="$BLOB_URL$TOKEN"
+BLOB="$BLOB_URL_PROD$TOKEN"
 azcopy copy '../upload/*' $BLOB --recursive --cache-control 'max-age=360' --overwrite 'true'
