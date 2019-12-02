@@ -12,7 +12,7 @@
         "widget_id": "eu.trentorise.smartcampus.viaggiatrento",
         "version": "2.4.2",
         "version_code": "49",
-        "url-chcp":"https://hcp.smartcommunitylab.it/viaggia/trento/chcp.json",
+        "url-chcp":"https://hcp.smartcommunitylab.it/viaggia-dev/trento/chcp.json",
         "app_name": "Viaggia Trento"
     },
     "ROVERETO": {
@@ -20,7 +20,7 @@
         "widget_id": "eu.trentorise.smartcampus.viaggiarovereto",
         "version": " 2.1.12",
         "version_code": "49",
-        "url-chcp":"https://hcp.smartcommunitylab.it/viaggia/rovereto/chcp.json",
+        "url-chcp":"https://hcp.smartcommunitylab.it/viaggia-dev/rovereto/chcp.json",
         "app_name": "Viaggia Rovereto"
     },
     "BOLOGNA": {

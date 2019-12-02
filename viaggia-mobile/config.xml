@@ -89,7 +89,7 @@
     </platform>
     <icon src="config/instances/TRENTO/resources/android/icon/drawable-xhdpi-icon.png" />
     <chcp>
-        <config-file url="https://hcp.smartcommunitylab.it/viaggia/trento/chcp.json" />
+        <config-file url="https://hcp.smartcommunitylab.it/viaggia-dev/trento/chcp.json" />
     </chcp>
     <engine name="android" spec="7.1.4" />
     <engine name="ios" spec="4.5.5" />
