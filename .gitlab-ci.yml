@@ -1,4 +1,4 @@
-image: docker:latest
+`image: docker:latest
 services:
   - docker:dind
 variables:
@@ -15,4 +15,4 @@ deploy_frontend:
   script:
     - bash deploy-statics.sh
   only:
-    - test
+    - dev
