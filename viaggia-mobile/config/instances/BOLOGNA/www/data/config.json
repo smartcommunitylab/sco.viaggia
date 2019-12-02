@@ -6,7 +6,7 @@
     "appversion": "0.0.1",
     "appname": "Viaggia Bologna",
     "serverURL": "https://travelplanner.lepida.it/core.mobility",
-    "messagingServerURL": "https://dev.smartcommunitylab.it/core.communicator",
+    "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
     "smartcheck_options": [
         1,
         4,
