@@ -9,24 +9,15 @@ stages:
   - test
   - deploy
 
-
-build_frontend_dev:
+build_frontend:
   stage: build
   environment:
     name: develop
   script:
-    - grep -rl tn.smartcommunitylab.it viaggia-mobile/config/instances/ | xargs sed -i 's/tn\.smartcommunitylab\.it/dev.smartcommunitylab.it/g'
+    - bash build.sh
   only:
     - dev
-
-build_frontend_prod:
-  stage: build
-  environment:
-    name: develop
-  script:
-    - grep -rl tn.smartcommunitylab.it viaggia-mobile/config/instances/ | xargs sed -i 's/dev\.smartcommunitylab\.it/tn.smartcommunitylab.it/g'
-  only:
-    - dev
+    - prod
 
 test_frontend:
   stage: test
