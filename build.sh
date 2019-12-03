@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-if [[ $CI_COMMIT_REF_NAME == "dev" ]]; then
+if [ $CI_COMMIT_REF_NAME = "dev" ]; then
   link_tfind="tn.smartcommunitylab.it"
   link_trepl="dev.smartcommunitylab.it"
-elif [[ $CI_COMMIT_REF_NAME == "prod" ]]; then
+elif [ $CI_COMMIT_REF_NAME = "prod" ]; then
   link_tfind="dev.smartcommunitylab.it"
   link_trepl="tn.smartcommunitylab.it"
 fi
