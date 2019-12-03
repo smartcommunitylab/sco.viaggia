@@ -547,7 +547,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         // }
 
         $scope.showStop = function ($event) {
-            var pos = $ionicScrollDelegate.$getByHandle('list').getScrollPosition().top + $event.clientY - $scope.tableHeaderHeight - headerHeight;
+            var pos = $ionicScrollDelegate.$getByHandle('list').getScrollPosition().top + $event.clientY - $scope.tableHeaderHeight - (headerHeight- ($scope.header_row_number==2?20:0));
             var idx = Math.floor(pos / $scope.stopsColLineHeight);
             if (idx < 0 || idx >= $scope.tt.stops.length) return;
             var stop = $scope.tt.stops[idx];
