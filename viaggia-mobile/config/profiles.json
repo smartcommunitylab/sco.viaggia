@@ -10,16 +10,16 @@
     "TRENTO": {
         "resource_folder": "config/instances/TRENTO",
         "widget_id": "eu.trentorise.smartcampus.viaggiatrento",
-        "version": "2.4.2",
-        "version_code": "49",
+        "version": "2.4.3",
+        "version_code": "50",
         "url-chcp":"https://hcp.smartcommunitylab.it/viaggia/trento/chcp.json",
         "app_name": "Viaggia Trento"
     },
     "ROVERETO": {
         "resource_folder": "config/instances/ROVERETO",
         "widget_id": "eu.trentorise.smartcampus.viaggiarovereto",
-        "version": " 2.1.12",
-        "version_code": "49",
+        "version": " 2.1.13",
+        "version_code": "50",
         "url-chcp":"https://hcp.smartcommunitylab.it/viaggia/rovereto/chcp.json",
         "app_name": "Viaggia Rovereto"
     },

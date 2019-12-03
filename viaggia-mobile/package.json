@@ -7,7 +7,7 @@
     "cordova-android": "7.1.4",
     "cordova-android-play-services-gradle-release": "^2.1.0",
     "cordova-android-support-gradle-release": "^1.4.7",
-    "cordova-custom-config": "^5.0.3",
+    "cordova-custom-config": "5.0.3",
     "cordova-hot-code-push-plugin": "1.5.3",
     "cordova-ios": "4.5.5",
     "cordova-plugin-compat": "^1.2.0",
@@ -100,7 +100,8 @@
       "cordova-plugin-screen-orientation": {},
       "phonegap-plugin-push": {},
       "cordova-plugin-statusbar": {},
-      "cordova-hot-code-push-plugin": {}
+      "cordova-hot-code-push-plugin": {},
+      "cordova-custom-config": {}
     },
     "platforms": [
       "android",

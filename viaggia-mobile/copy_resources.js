@@ -21,6 +21,12 @@ if (profile == null) {
         }
         console.log('done!');
        });
+       ncp("config/instances/"+profile+"/resources", "resources", function (err) {
+        if (err) {
+          return console.error(err);
+        }
+        console.log('done!');
+       });
     ncp("config/instances/"+profile+"/www", "www", function (err) {
      if (err) {
        return console.error(err);
