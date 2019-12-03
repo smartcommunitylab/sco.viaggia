@@ -9,6 +9,5 @@ elif [ $CI_COMMIT_REF_NAME = "prod" ]; then
 fi
 link_num=$(grep -rl $link_tfind viaggia-mobile/config/instances/ | wc -l)
 if [ $link_num -gt 0 ]; then
-  echo $link_tfind
   grep -rl $link_tfind viaggia-mobile/config/instances/ | xargs sed -i "s/$link_tfind/$link_trepl/"
 fi
