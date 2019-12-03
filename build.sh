@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-CI_COMMIT_REF_NAME="dev"
+
 if [ $CI_COMMIT_REF_NAME = "dev" ]; then
   link_tfind="tn.smartcommunitylab.it"
   link_trepl="dev.smartcommunitylab.it"

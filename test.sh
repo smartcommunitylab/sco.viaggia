@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-CI_COMMIT_REF_NAME="prod"
+
 if [ $CI_COMMIT_REF_NAME = "dev" ]; then
   link_ref="tn.smartcommunitylab.it"
 elif [ $CI_COMMIT_REF_NAME = "prod" ]; then
