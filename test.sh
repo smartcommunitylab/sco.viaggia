@@ -5,8 +5,8 @@ if [ $CI_COMMIT_REF_NAME = "dev" ]; then
 elif [ $CI_COMMIT_REF_NAME = "prod" ]; then
   link_ref="tn.smartcommunitylab.it"
 fi
-link_num=$(grep -rl $link_ref viaggia-mobile/ | wc -l)
-if [ $link_num -ge 4 ]; then
+link_num=$(grep -rl $link_ref viaggia-mobile/config/instances/ | wc -l)
+if [ $link_num -eq 4 ]; then
   echo "too many links to $CI_COMMIT_REF_NAME server"
   echo "check the following files:"
   grep -rl $link_ref viaggia-mobile/
