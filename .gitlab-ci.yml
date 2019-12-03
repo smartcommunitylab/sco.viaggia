@@ -5,7 +5,38 @@ variables:
   DOCKER_DRIVER: overlay
 
 stages:
+  - build
+  - test
   - deploy
+
+
+build_frontend_dev:
+  stage: build
+  environment:
+    name: develop
+  script:
+    - grep -rl tn.smartcommunitylab.it viaggia-mobile/config/instances/ | xargs sed -i 's/tn\.smartcommunitylab\.it/dev.smartcommunitylab.it/g'
+  only:
+    - dev
+
+build_frontend_prod:
+  stage: build
+  environment:
+    name: develop
+  script:
+    - grep -rl tn.smartcommunitylab.it viaggia-mobile/config/instances/ | xargs sed -i 's/dev\.smartcommunitylab\.it/tn.smartcommunitylab.it/g'
+  only:
+    - dev
+
+test_frontend:
+  stage: test
+  enviroment:
+    name: develop
+  script:
+    - bash test.sh
+  only:
+    - dev
+    - prod
 
 deploy_frontend:
   stage: deploy
@@ -15,4 +46,5 @@ deploy_frontend:
   script:
     - bash deploy-statics.sh
   only:
-    - test
+    - dev
+    - prod
