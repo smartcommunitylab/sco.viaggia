@@ -5,14 +5,44 @@ variables:
   DOCKER_DRIVER: overlay
 
 stages:
+  - build
+  - test
   - deploy
+
+build_frontend:
+  stage: build
+  environment:
+    name: develop
+  artifacts:
+    paths:
+      - viaggia-mobile/
+  script:
+    - sh build.sh
+  only:
+    - dev
+    - prod
+
+test_frontend:
+  stage: test
+  environment:
+    name: develop
+  dependencies:
+    - build_frontend
+  script:
+    - sh test.sh
+  only:
+    - dev
+    - prod
 
 deploy_frontend:
   stage: deploy
   image: smartcommunitylab/cordova-hcp:slim
   environment:
     name: develop
+  dependencies:
+    - build_frontend
   script:
     - bash deploy-statics.sh
   only:
+    - dev
     - prod

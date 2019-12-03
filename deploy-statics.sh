@@ -17,7 +17,13 @@ cd ${root_dir}/viaggia-mobile || exit
 i=0
 ios_id=""
 for inst in "${inst_lower[@]}"; do
-  sed -i -e "s@\(\"content_url\": \"https://hcp.smartcommunitylab.it/viaggia/\).*\"@\1$inst\"@g" cordova-hcp.json
+  if [ $CI_COMMIT_REF_NAME == "prod" ]; then
+    sed -i -e "s@\(\"content_url\": \"https://hcp.smartcommunitylab.it/\).*\"@\1viaggia\/$inst\"@g" cordova-hcp.json
+    BLOB="$BLOB_URL_PROD$TOKEN"
+  elif [ $CI_COMMIT_REF_NAME == "dev" ]; then
+    sed -i -e "s@\(\"content_url\": \"https://hcp.smartcommunitylab.it/\).*\"@\1viaggia-dev\/$inst\"@g" cordova-hcp.json
+    BLOB="$BLOB_URL_DEV$TOKEN"
+  fi
   sed -i -e "s@\(\"android_identifier\": \"eu.trentorise.smartcampus.viaggia\).*\"@\1$inst\"@g" cordova-hcp.json
   sed -i -e "s@\(\"name\": \"viaggia\).*\"@\1$inst\"@g" cordova-hcp.json
   case $inst in
@@ -38,5 +44,4 @@ for inst in "${inst_lower[@]}"; do
   cp -r www/ ../upload/$inst
   i+=1
 done
-BLOB="$BLOB_URL_PROD$TOKEN"
 azcopy copy '../upload/*' $BLOB --recursive --cache-control 'max-age=360' --overwrite 'true'
