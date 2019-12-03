@@ -30,7 +30,7 @@ build_frontend_prod:
 
 test_frontend:
   stage: test
-  enviroment:
+  environment:
     name: develop
   script:
     - bash test.sh
