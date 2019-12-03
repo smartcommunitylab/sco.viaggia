@@ -14,7 +14,7 @@ build_frontend:
   environment:
     name: develop
   script:
-    - bash build.sh
+    - sh build.sh
   only:
     - dev
     - prod
@@ -24,7 +24,7 @@ test_frontend:
   environment:
     name: develop
   script:
-    - bash test.sh
+    - sh test.sh
   only:
     - dev
     - prod
