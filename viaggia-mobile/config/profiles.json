@@ -19,7 +19,7 @@
         "resource_folder": "config/instances/ROVERETO",
         "widget_id": "eu.trentorise.smartcampus.viaggiarovereto",
         "version": " 2.1.13",
-        "version_code": "50",
+        "version_code": "51",
         "url-chcp":"https://hcp.smartcommunitylab.it/viaggia/rovereto/chcp.json",
         "app_name": "Viaggia Rovereto"
     },
