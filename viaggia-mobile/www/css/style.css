@@ -1709,10 +1709,15 @@ text-align: center;
   background-color: #2975a7 !important;
   color: white;
 }
-
+.coronaPopup .popup-title{
+  color: white;
+}
  .coronaPopup .popup-head {
-  visibility: hidden;
-  padding: 0px;
+  /* visibility: hidden; */
+  /* padding: 0px; */
+  color: white!important;
+  border-bottom: none;
+  padding-top: 21px;
 } 
 
 .coronaPopup .popup-body {
@@ -1735,11 +1740,14 @@ text-align: center;
 .coronaPopup .close-button{
   position: absolute;
   right: 15px;
-  /* top: -25px; */
+  top: -50px;
 }
 .coronaPopup a {
   color: white;
 }
 .coronaPopup .body-message{
   margin: 20px;
+}
+.corona-content{
+  top:0px!important;
 }
