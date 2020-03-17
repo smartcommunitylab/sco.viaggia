@@ -1690,3 +1690,56 @@ margin-right: 10px;
 ion-modal-view{
   height: 100vh;
 }
+.warning-corona{
+  margin: 8px;
+  margin-top: 28px;
+  background-color: #2975a7 !important;
+  color: white;
+  text-align: justify;
+  padding: 8px;
+}
+.warning-corona-title{
+  font-weight: bold;
+}
+.warning-corona-subtitle{
+text-align: center;
+}
+.coronaPopup .popup {
+  min-width: 85% !important;  /* height: 230px; */
+  background-color: #2975a7 !important;
+  color: white;
+}
+
+ .coronaPopup .popup-head {
+  visibility: hidden;
+  padding: 0px;
+} 
+
+.coronaPopup .popup-body {
+  overflow: inherit !important;
+  text-align: justify;
+  position: relative;
+  height: 100vh;
+
+}
+
+.coronaPopup .popup-buttons .button:last-child {
+  /* position: absolute;
+  right: -22px;
+  bottom: -20px;
+  width: 45px;
+  cursor: pointer; */
+  background-color: white!important;
+  color:#2975a7 !important;
+}
+.coronaPopup .close-button{
+  position: absolute;
+  right: 15px;
+  /* top: -25px; */
+}
+.coronaPopup a {
+  color: white;
+}
+.coronaPopup .body-message{
+  margin: 20px;
+}
