@@ -3,6 +3,10 @@
         <button class="button button-icon button-fab button-viaggia-header ion-map" ng-click="showMap()" ng-if="hasMap"></button>
     </ion-nav-buttons>
     <ion-content has-header="true">
+        <div class="warning-corona" ng-click="openPopUp()">
+            <div class="warning-corona-title" ng-bind-html="titleCorona"></div>
+            <div class="warning-corona-subtitle" ng-bind-html="subtitleCorona"></div>
+        </div>
         <ion-list class="route-list space-from-top" ng-if="view == 'list'">
             <ion-item ng-repeat="elem in elements" ng-last-repeat="elements" ng-click="selectElement(elem)">
                 <div class="card card-tt" style="{{elem.color ? ('color:'+textColor(elem.color)+';background-color: '+elem.color) : ''}}">{{elem.title}}</div>

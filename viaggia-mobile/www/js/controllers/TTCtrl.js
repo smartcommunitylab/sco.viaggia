@@ -11,7 +11,23 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
         $scope.hasMap = false;
         $scope.allMarkers = null;
+        $scope.titleCorona = $filter('translate')('label_warning_corona_title');
+        $scope.subtitleCorona = $filter('translate')('label_warning_corona_message');
+        $scope.openPopUp = function () {
+            $scope.messageCorona = $filter('translate')('label_warning_corona_extended');
+            $scope.alertPopup = $ionicPopup.alert({
+                title:$scope.titleCorona,
+                templateUrl: 'templates/coronaPopup.html',
+                scope: $scope,
+                cssClass: 'coronaPopup'
+            });
 
+            $scope.alertPopup.then(function (res) {
+            });
+        }
+        $scope.closePopup = function () {
+            $scope.alertPopup.close();
+        }
         $scope.selectElement = function (e) {
             // route element: go to table
             if (e.route != null) {
@@ -124,7 +140,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
     })
 
-    .controller('TTCtrl', function ($scope, $state, $location, $stateParams, $ionicPosition, $ionicScrollDelegate, $timeout, $filter, ttService, Config, Toast, bookmarkService, $ionicLoading, profileService) {
+    .controller('TTCtrl', function ($scope, $state,$ionicPopup, $location, $stateParams, $ionicPosition, $ionicScrollDelegate, $timeout, $filter, ttService, Config, Toast, bookmarkService, $ionicLoading, profileService) {
         $scope.data = [];
         var biggerTable = false;
         $scope.tableStyle = profileService.isLittleSize() ? 'ic_text_size_outline' : 'ic_text_size';
@@ -222,7 +238,22 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
             var firstRowHeight = 28;
             $scope.scrollHeight = window.innerHeight - headerHeight;
         };
+        $scope.openCorona = function () {
+            $scope.messageCorona = $filter('translate')('label_warning_corona_extended');
+            $scope.titleCorona = $filter('translate')('label_warning_corona_title');
+            $scope.alertPopup = $ionicPopup.alert({
+                 title:$scope.titleCorona,
+                templateUrl: 'templates/coronaPopup.html',
+                scope: $scope,
+                cssClass: 'coronaPopup'
+            });
 
+            $scope.alertPopup.then(function (res) {
+            });
+            $scope.closePopup = function () {
+                $scope.alertPopup.close();
+            }
+        }
         $scope.changeStyleTable = function () {
             //change style to the table
 
@@ -479,11 +510,11 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
                             headStr[1] += str;
                             // table data
                         } else {
-                                var str = data.times[col - 1][row - $scope.header_row_number];
-                                rowContent.push(str);
-                                if (!str) str = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-                                dataStr += '&nbsp;&nbsp;' + str + '&nbsp;&nbsp;';
-                                if (col == data.tripIds.length) dataStr += '<br/>';
+                            var str = data.times[col - 1][row - $scope.header_row_number];
+                            rowContent.push(str);
+                            if (!str) str = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+                            dataStr += '&nbsp;&nbsp;' + str + '&nbsp;&nbsp;';
+                            if (col == data.tripIds.length) dataStr += '<br/>';
                         }
                     }
                     rows.push(rowContent);
@@ -547,7 +578,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         // }
 
         $scope.showStop = function ($event) {
-            var pos = $ionicScrollDelegate.$getByHandle('list').getScrollPosition().top + $event.clientY - $scope.tableHeaderHeight - (headerHeight- ($scope.header_row_number==2?20:0));
+            var pos = $ionicScrollDelegate.$getByHandle('list').getScrollPosition().top + $event.clientY - $scope.tableHeaderHeight - (headerHeight - ($scope.header_row_number == 2 ? 20 : 0));
             var idx = Math.floor(pos / $scope.stopsColLineHeight);
             if (idx < 0 || idx >= $scope.tt.stops.length) return;
             var stop = $scope.tt.stops[idx];
@@ -556,7 +587,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
 
         $scope.bookmark = function () {
             var ref = Config.getTTData($stateParams.ref);
-            bookmarkService.toggleBookmark($location.path(), $scope.title+" "+$scope.subtitle, ref.transportType).then(function (style) {
+            bookmarkService.toggleBookmark($location.path(), $scope.title + " " + $scope.subtitle, ref.transportType).then(function (style) {
                 $scope.bookmarkStyle = style;
             });
         };
