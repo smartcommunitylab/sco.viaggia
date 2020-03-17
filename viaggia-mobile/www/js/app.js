@@ -658,8 +658,17 @@ angular.module('viaggia', [
       pop_up_expired_title: 'Versione scaduta',
       pop_up__expired_template: 'Ci scusiamo ma non è più possibile utilizzare questa versione dell\'applicazione in quanto il periodo di prova è terminata',
       pop_up_not_expired_title: 'Versione di prova',
-      pop_up_not_expired_template: 'Questa  è una versione di prova e terminerà il '
-
+      pop_up_not_expired_template: 'Questa  è una versione di prova e terminerà il ',
+      label_warning_corona_title:'ATTENZIONE: nuove misure di contenimento COVID-19',
+      label_warning_corona_message:'Tra lunedi e sabato, tutte le corse seguono l\'orario festivo.<br> La domenica ed i festivi tutte le corse sono sospese.<br>Tocca per ulteriori INFO' ,
+      label_warning_corona_extended:'<b>NUOVE MISURE CONTENIMENTO CORONAVIRUS:</b> <br>\
+- azzeramento servizio festivo  <br>\
+- applicazione orario festivo a giornate feriali lun/sab  <br>\
+- istituzione servizio a chiamata elastibus  <br>\
+<b>Per esigenze di lavoro e urgenti ragioni sanitarie </b> (comprese le necessità di recarsi da parenti non autosufficienti) sarà possibile <b>contattare il numero verde 800390270 (Elastibus) </b>tutti i giorni dalle 8.00 alle 17.00, per richiedere uno specifico trasporto gratuito, purché la richiesta arrivi entro le 17 del giorno precedente. I servizi di trasporto (gratuiti) saranno svolti dalle imprese del Consorzio Trentino Autonoleggiatori. <br>\
+<br>\
+<b>I provvedimenti hanno validità a tempo indeterminato, fino a revoca da parte delle Autorità Competenti che li hanno deliberati. <br>\
+<br>'
     });
 
 
@@ -875,7 +884,17 @@ angular.module('viaggia', [
       pop_up_expired_title: 'Version expired',
       pop_up__expired_template: 'The actual version of the app has expired',
       pop_up_not_expired_title: 'Trial version',
-      pop_up_not_expired_template: 'The actual version of the app end on '
+      pop_up_not_expired_template: 'The actual version of the app end on ',
+      label_warning_corona_title:'ATTENZIONE: nuove misure di contenimento COVID-19',
+      label_warning_corona_message:'Tra lunedi e sabato, tutte le corse seguono l\'orario festivo.<br> La domenica ed i festivi tutte le corse sono sospese.<br>Tocca per ulteriori INFO' ,
+      label_warning_corona_extended:'<b>NUOVE MISURE CONTENIMENTO CORONAVIRUS:</b> <br>\
+- azzeramento servizio festivo  <br>\
+- applicazione orario festivo a giornate feriali lun/sab  <br>\
+- istituzione servizio a chiamata elastibus  <br>\
+<b>Per esigenze di lavoro e urgenti ragioni sanitarie </b> (comprese le necessità di recarsi da parenti non autosufficienti) sarà possibile <b>contattare il numero verde 800390270 (Elastibus) </b>tutti i giorni dalle 8.00 alle 17.00, per richiedere uno specifico trasporto gratuito, purché la richiesta arrivi entro le 17 del giorno precedente. I servizi di trasporto (gratuiti) saranno svolti dalle imprese del Consorzio Trentino Autonoleggiatori. <br>\
+<br>\
+<b>I provvedimenti hanno validità a tempo indeterminato, fino a revoca da parte delle Autorità Competenti che li hanno deliberati. <br>\
+<br>'
 
     });
 

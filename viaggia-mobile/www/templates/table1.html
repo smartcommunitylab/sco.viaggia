@@ -5,6 +5,8 @@
         </button>
         <button class="button button-icon ion-plus-round" ng-click="changeStyleTable('plus')"></button>
 -->
+        <button class="button button-icon button-clear ion-alert-circled" ng-click="openCorona()"></button>
+        <!-- <button class="button button-icon ion-alert-circled" ng-class="tableStyle" ng-click="openCorona()"></button> -->
         <button class="button button-icon button-clear" ng-class="tableStyle" ng-click="changeStyleTable()"></button>
         <button ng-if="isAccessibilitySet()" class="button button-icon button-clear" ng-class="accessibilityStyle" ng-click="toggleAccessibility()" ng-show="accesibilityKnow"></button>
         <button class="button button-icon button-clear" ng-class="bookmarkStyle" ng-click="bookmark()"></button>
