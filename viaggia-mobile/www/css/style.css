@@ -1316,7 +1316,7 @@ margin-right: 10px;
   margin-top: -10px;
   padding: 3px 3px 3px 3px;
   width: 22px;
-  display: block!inspect;
+  display: block!important;
   /*
     top: -32px !important;
     padding: 2px 12px 2px 3px;
@@ -1559,7 +1559,6 @@ margin-right: 10px;
 }
 
 
-}
 .tt-table #table-col div {
   width: 20px;
   display: inline-block;
@@ -1708,6 +1707,7 @@ text-align: center;
   min-width: 85% !important;  /* height: 230px; */
   background-color: #2975a7 !important;
   color: white;
+  height: 50%;
 }
 .coronaPopup .popup-title{
   color: white;
@@ -1739,8 +1739,9 @@ text-align: center;
 }
 .coronaPopup .close-button{
   position: absolute;
-  right: 15px;
-  top: -50px;
+  right: 6px;
+  top: -68px;
+  
 }
 .coronaPopup a {
   color: white;
