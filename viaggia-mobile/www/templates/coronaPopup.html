@@ -3,7 +3,7 @@
         <ion-content no-bounce class="corona-content">
 
     <div class="body-message">
-        <div ng-bind-html="messageCorona"></div>
+        <!-- <div ng-bind-html="messageCorona"></div> -->
         <!-- <b>NUOVE MISURE CONTENIMENTO CORONAVIRUS:</b> <br><br>
         - azzeramento servizio festivo <br>
         - applicazione orario festivo a giornate feriali lun/sab <br>
@@ -19,7 +19,7 @@
             hanno deliberati. <br>
             <br>
             <br> -->
-            Servizi di trasporto pubblico urbano di Trento</b>: <a href="#"
+            <!-- Servizi di trasporto pubblico urbano di Trento</b>: <a href="#"
             onclick="window.open('http://www.ttesercizio.it//public/Comunicati/Comunicato-131-20-12032020-114426.pdf', '_system', 'location=yes'); return false;">vedi
             allegato</a> <br>
         <b>Funivia Trento - Sardagna</b>: <a href="#"
@@ -30,6 +30,13 @@
             allegato</a><br>
         <b>Ferroviaria R25-R26 Trento - Borgo - Bassano</b>: <a href="#"
             onclick="window.open('http://www.ttesercizio.it//public/Comunicati/Comunicato-141-20-14032020-233310.pdf', '_system', 'location=yes'); return false;">vedi
-            allegato</a><br>
+            allegato</a><br> -->
+            <div ng-bind-html="messageZero"></div>
+
+{{'message_popup_first'|translate}}  <a href="#" onclick="window.open('https://www.trentinotrasporti.it/news/5989-emergenza-coronavirus-servizio-elastibus', '_system', 'location=yes'); return false;">{{'message_popup_second'|translate}} </a>).<br> 
+
+{{'message_popup_third'|translate}}  <br>
+
+{{'message_popup_forth'|translate}}  <a href="#" onclick="window.open('https://www.trentinotrasporti.it/images/allegati/COMUNICAZIONE_04052020.pdf', '_system', 'location=yes'); return false;">{{'message_popup_fifth'|translate}} </a> {{'message_popup_last'|translate}}   
         </ion-content >
         </div>

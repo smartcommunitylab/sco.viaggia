@@ -14,7 +14,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         $scope.titleCorona = $filter('translate')('label_warning_corona_title');
         $scope.subtitleCorona = $filter('translate')('label_warning_corona_message');
         $scope.openPopUp = function () {
-            $scope.messageCorona = $filter('translate')('label_warning_corona_extended');
+            $scope.messageZero = $filter('translate')('message_popup_zero');
             $scope.alertPopup = $ionicPopup.alert({
                 title:$scope.titleCorona,
                 templateUrl: 'templates/coronaPopup.html',
@@ -239,7 +239,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
             $scope.scrollHeight = window.innerHeight - headerHeight;
         };
         $scope.openCorona = function () {
-            $scope.messageCorona = $filter('translate')('label_warning_corona_extended');
+            $scope.messageZero = $filter('translate')('message_popup_zero');
             $scope.titleCorona = $filter('translate')('label_warning_corona_title');
             $scope.alertPopup = $ionicPopup.alert({
                  title:$scope.titleCorona,
