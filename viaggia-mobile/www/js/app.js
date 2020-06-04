@@ -130,10 +130,10 @@ angular.module('viaggia', [
       $ionicLoading.hide();
     }
     var resetCache = function () {
-      localStorage.removeItem(Config.getAppId() + "_diaryRefresh") ;
-      localStorage.removeItem(Config.getAppId() + "_challengesRefresh") ;
-      localStorage.removeItem(Config.getAppId() + "_homeRefresh") ;
-      localStorage.removeItem(Config.getAppId() + "_rankingRefresh") ;
+      localStorage.removeItem(Config.getAppId() + "_diaryRefresh");
+      localStorage.removeItem(Config.getAppId() + "_challengesRefresh");
+      localStorage.removeItem(Config.getAppId() + "_homeRefresh");
+      localStorage.removeItem(Config.getAppId() + "_rankingRefresh");
     }
 
     $ionicPlatform.ready(function () {
@@ -167,7 +167,7 @@ angular.module('viaggia', [
       //   StatusBar.styleDefault();
       // }
       Config.init().then(function () {
-         notificationService.register();
+        notificationService.register();
         if (ionic.Platform.isWebView()) {
           //we are on a phone so synch the database
           DataManager.dbSetup();
@@ -654,20 +654,20 @@ angular.module('viaggia', [
       lbl_parking_meter_payment_card: 'moneta e carte',
       lbl_parking_meter_payment_cash: 'moneta',
       lbl_parking_meter_payment: 'Metodo di pagamento: ',
-      home_guest_card:'Servizi Guest Card',
+      home_guest_card: 'Servizi Guest Card',
       pop_up_expired_title: 'Versione scaduta',
       pop_up__expired_template: 'Ci scusiamo ma non è più possibile utilizzare questa versione dell\'applicazione in quanto il periodo di prova è terminata',
       pop_up_not_expired_title: 'Versione di prova',
       pop_up_not_expired_template: 'Questa  è una versione di prova e terminerà il ',
-      label_warning_corona_title:'ATTENZIONE: nuove disposizioni in vigore dal 04 maggio 2020',
-      label_warning_corona_message:'Vengono ripristinati nei <b>giorni feriali </b>i servizi Extraurbano, Urbano, Ferroviario e Funiviario.<br>Tocca per ulteriori INFO' ,
-      message_popup_zero: 'Vengono ripristinati nei <b>giorni feriali </b>i servizi Extraurbano, Urbano, Ferroviario e Funiviario.',
-      message_popup_first: 'Nei giorni festivi, i servizi sono sospesi (rimane disponibile il',
-      message_popup_second: 'servizio Elastibus',
-      message_popup_third: 'Lunedì 11 maggio 2020 termina la gratuità sui servizi di trasporto  pubblico. Non sarà possibile l\'acquisto dei biglietti a bordo.',
-      message_popup_forth: 'Clicca',
-      message_popup_fifth: 'QUI',
-      message_popup_last:'per maggiori informazioni. '
+      label_warning_corona_title: 'ATTENZIONE: nuove disposizioni in vigore dal 31 maggio 2020',
+      label_warning_corona_message: 'Viene ripristinato il servizio festivo. Tocca per ulteriori INFO',
+      message_popup_first: 'Viene ripristinato il servizio festivo, con orario ridotto, per i Servizi Urbani di ',
+      message_popup_second: ' e ',
+      message_popup_third: 'e la ',
+      message_popup_forth: ' Funivia Trento - Sardagna',
+      message_popup_fifth: 'Rimane disponibile il servizio Elastibus. Per consultare le disposizioni in vigore clicca ',
+      message_popup_sixth: 'QUI' 
+
 
     });
 
@@ -885,24 +885,14 @@ angular.module('viaggia', [
       pop_up__expired_template: 'The actual version of the app has expired',
       pop_up_not_expired_title: 'Trial version',
       pop_up_not_expired_template: 'The actual version of the app end on ',
-      label_warning_corona_title:'WARNING: new containment measures starting from 04 May 2020',
-      label_warning_corona_message:'The suburban, urban, railway and cableway services are restored on <b> weekdays </b>.<br> Touch for further INFO' ,
-//       label_warning_corona_title:'WARNING: new containment measures COVID-19',
-// label_warning_corona_message:'<b>From Monday to Saturday</b>, all rides follow public holidays timetables<b> On Sundays and public holidays </b> all rides are suspended. <br> Touch for more INFO',
-//       label_warning_corona_extended:'- No holiday service <br>\
-// -  Holiday timetables application from Monday to Saturday  <br>\
-// - Elastibus service on call  <br>\
-// <b>For work needs and urgent health reasons </b> (including the need to go to relatives) it will be possible to  <b> contact the toll-free number 800390270 (Elastibus) </b>every day from 8.00 to 17.00 , to request a specific free transport, only if that the call arrives before 5 pm of the previous day. The transport services (free of charge) will be carried out by the companies of the Trentino Autonoleggiatori Consortium. <br>\
-// <br>\
-// <b>The measures are valid for an indefinitely, until revoked by the Competent Authorities that have approved them.<br>\
-// <br>'
-message_popup_zero: 'The suburban, urban, railway and cableway services are restored on <b> weekdays </b>. ',
-message_popup_first: 'On holidays  all rides are suspended. (is still available the ',
-message_popup_second: ' Elastibus service',
-message_popup_third: 'Free admission on public transport services ends on Monday 11 May 2020. It will not be possible to purchase tickets on board.',
-message_popup_forth: 'Click',
-message_popup_fifth: 'here',
-message_popup_last:'for further information '
+      label_warning_corona_title: 'WARNING: new containment measures starting from 31 May 2020',
+      label_warning_corona_message: 'The holiday service is restored.<br> Touch for further INFO',
+      message_popup_first: 'The holiday service is restored, with limited timetable, for urban services of  ',
+      message_popup_second: ' and ',
+      message_popup_third: ' and the ',
+      message_popup_forth: ' Cablecar Trento - Sardagna',
+      message_popup_fifth: 'Elastibus service is still available. For further information click ',
+      message_popup_sixth: 'HERE' 
     });
 
 
