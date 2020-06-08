@@ -116,39 +116,6 @@
               ]
             },
                         {
-                            "label": "B",
-                            "color": "#717780",
-                            "routes": [
-                                {
-                                    "routeId": "_B",
-                                    "routeSymId": "%20BC",
-                                    "title": "Piazza Dante - Laste - Piazza Dante",
-                                    "label": "B",
-                                    "wheelChairBoarding": 1
-                                }
-              ]
-            },
-                        {
-                            "label": "C",
-                            "color": "#000000",
-                            "routes": [
-                                {
-                                    "routeId": "Ca",
-                                    "routeSymId": "Ca",
-                                    "title": "RSA S. Bartolomeo - RSA Angeli Custodi",
-                                    "label": "C",
-                                    "wheelChairBoarding": 2
-                                },
-                                {
-                                    "routeId": "Cr",
-                                    "routeSymId": "Cr",
-                                    "title": "RSA Angeli Custodi - RSA S. Bartolomeo",
-                                    "label": "C",
-                                    "wheelChairBoarding": 2
-                                }
-              ]
-            },
-                        {
                             "label": "NP",
                             "color": "#7f8080",
                             "routes": [
