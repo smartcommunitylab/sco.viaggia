@@ -19,8 +19,9 @@ build_frontend:
   script:
     - sh build.sh
   only:
-    - dev
-    - prod
+    # - dev
+    # - prod
+    - disabled
 
 test_frontend:
   stage: test
@@ -31,8 +32,9 @@ test_frontend:
   script:
     - sh test.sh
   only:
-    - dev
-    - prod
+    # - dev
+    # - prod
+    - disabled
 
 deploy_frontend:
   stage: deploy
@@ -44,5 +46,6 @@ deploy_frontend:
   script:
     - bash deploy-statics.sh
   only:
-    - dev
-    - prod
+    # - dev
+    # - prod
+    - disabled
