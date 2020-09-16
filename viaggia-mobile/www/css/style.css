@@ -1703,6 +1703,52 @@ ion-modal-view{
 .warning-corona-subtitle{
 text-align: center;
 }
+
+.workInProgressPopup .popup {
+  min-width: 85% !important;  /* height: 230px; */
+  background-color: #2975a7 !important;
+  color: white;
+  height: 200px;
+}
+.workInProgressPopup .popup-title{
+  color: white;
+}
+ .workInProgressPopup .popup-head {
+  /* visibility: hidden; */
+  /* padding: 0px; */
+  color: white!important;
+  border-bottom: none;
+  padding-top: 21px;
+} 
+
+.workInProgressPopup .popup-body {
+  overflow: inherit !important;
+  text-align: justify;
+  position: relative;
+  height : 100vh;
+}
+
+.workInProgressPopup .popup-buttons .button:last-child {
+  /* position: absolute;
+  right: -22px;
+  bottom: -20px;
+  width: 45px;
+  cursor: pointer; */
+  background-color: white!important;
+  color:#2975a7 !important;
+}
+.workInProgressPopup .close-button{
+  position: absolute;
+  right: 6px;
+  top: -50px;
+  
+}
+.workInProgressPopup a {
+  color: white;
+}
+.workInProgressPopup .body-message{
+  margin: 20px;
+}
 .coronaPopup .popup {
   min-width: 85% !important;  /* height: 230px; */
   background-color: #2975a7 !important;

@@ -666,7 +666,9 @@ angular.module('viaggia', [
       message_popup_third: 'e la ',
       message_popup_forth: ' Funivia Trento - Sardagna',
       message_popup_fifth: 'Rimane disponibile il servizio Elastibus. Per consultare le disposizioni in vigore clicca ',
-      message_popup_sixth: 'QUI' 
+      message_popup_sixth: 'QUI',
+      title_work_in_progress: 'In lavorazione',
+      message_work_in_progress: 'Stiamo aggiornando gli orari. Saranno disponibili a breve. Ci scusiamo per il disagio.'
 
 
     });
@@ -892,7 +894,9 @@ angular.module('viaggia', [
       message_popup_third: ' and the ',
       message_popup_forth: ' Cablecar Trento - Sardagna',
       message_popup_fifth: 'Elastibus service is still available. For further information click ',
-      message_popup_sixth: 'HERE' 
+      message_popup_sixth: 'HERE',
+      title_work_in_progress: 'Work In Progress',
+      message_work_in_progress: 'We are updating the timetables. They will be available soon. We apologize for the inconvenience.'
     });
 
 
