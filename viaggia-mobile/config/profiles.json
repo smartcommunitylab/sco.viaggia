@@ -10,18 +10,22 @@
     "TRENTO": {
         "resource_folder": "config/instances/TRENTO",
         "widget_id": "eu.trentorise.smartcampus.viaggiatrento",
-        "version": "2.4.3",
-        "version_code": "50",
+        "version": "2.4.5",
+        "version_code": "52",
         "url-chcp":"https://hcp.smartcommunitylab.it/viaggia/trento/chcp.json",
-        "app_name": "Viaggia Trento"
+        "app_name": "Viaggia Trento",
+        "android_key":"hm12pTBG4HdJc_YPRPNWOx1rRjASXT5LL2xrK",
+        "ios_key":"A4QHOS5nOaRjysZ4ILTJI6LAM1KXQoxU_S3HC"
     },
     "ROVERETO": {
         "resource_folder": "config/instances/ROVERETO",
         "widget_id": "eu.trentorise.smartcampus.viaggiarovereto",
-        "version": " 2.1.13",
-        "version_code": "50",
+        "version": "2.2.3",
+        "version_code": "53",
         "url-chcp":"https://hcp.smartcommunitylab.it/viaggia/rovereto/chcp.json",
-        "app_name": "Viaggia Rovereto"
+        "app_name": "Viaggia Rovereto",
+        "android_key":"HZ-48qVOdC1ZlvI26e03Ufgn4TiO1ORBAJybb",
+        "ios_key":"4XGilorYkKRwVrwpvTvXCkF0LhPDv6lavBSC3"
     },
     "BOLOGNA": {
         "resource_folder": "config/instances/BOLOGNA",

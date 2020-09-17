@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Viaggia Trento
+
+  Created by Smart Community Lab on 17/09/2020.
+  
+*/
+
+NSLocationWhenInUseUsageDescription="This app requires access to your location to provide better information. ";

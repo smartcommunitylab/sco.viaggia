@@ -633,42 +633,6 @@
                             ]
                         },
                         {
-                            "label": "P",
-                            "color": "#B9BAB5",
-                            "routes": [
-                                {
-                                    "routeId": "PA_Rov",
-                                    "routeSymId": "PA",
-                                    "title": "Castellano - Molini - Villa Lagarina",
-                                    "label": "P"
-                                },
-                                {
-                                    "routeId": "PR_Rov",
-                                    "routeSymId": "PR",
-                                    "title": "Villa Lagarina - Molini - Castellano",
-                                    "label": "P"
-                                }
-                            ]
-                        },
-                        {
-                            "label": "S",
-                            "color": "#B9BAB5",
-                            "routes": [
-                                {
-                                    "routeId": "SA_Rov",
-                                    "routeSymId": "SA",
-                                    "title": "Savignano - Pomarolo",
-                                    "label": "S"
-                                },
-                                {
-                                    "routeId": "SR_Rov",
-                                    "routeSymId": "SR",
-                                    "title": "POMAROLO - SAVIGNANO",
-                                    "label": "S"
-                                }
-                            ]
-                        },
-                        {
                             "label": "V",
                             "color": "#B9BAB5",
                             "routes": [

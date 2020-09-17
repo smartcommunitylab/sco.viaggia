@@ -109,10 +109,11 @@ angular.module('viaggia', [
     });
 
     var initAppUpdate = function () {
-      document.addEventListener('chcp_updateIsReadyToInstall', onUpdateReady, false);
-      document.addEventListener('chcp_nothingToUpdate', nothingToUpdate, false);
-      document.addEventListener('chcp_updateInstalled', hideLoad, false);
-      document.addEventListener('chcp_updateInstallFailed', hideLoad, false);
+      codePush.sync();
+      // document.addEventListener('chcp_updateIsReadyToInstall', onUpdateReady, false);
+      // document.addEventListener('chcp_nothingToUpdate', nothingToUpdate, false);
+      // document.addEventListener('chcp_updateInstalled', hideLoad, false);
+      // document.addEventListener('chcp_updateInstallFailed', hideLoad, false);
     }
 
     // chcp_updateIsReadyToInstall Event Handler

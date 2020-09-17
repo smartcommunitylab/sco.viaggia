@@ -33,7 +33,6 @@
                             "color": "#cd251c",
                             "showTrips": true,
                             "wheelChairBoarding": 0
-
                         },
                         {
                             "routeId": "BV_R1_R",
@@ -42,10 +41,9 @@
                             "color": "#cd251c",
                             "showTrips": true,
                             "wheelChairBoarding": 0
-
                         }
-          ]
-        },
+                    ]
+                },
                 {
                     "agencyId": "6",
                     "color": "#cd251c",
@@ -66,8 +64,8 @@
                             "showTrips": true,
                             "wheelChairBoarding": 0
                         }
-          ]
-        },
+                    ]
+                },
                 {
                     "agencyId": "10",
                     "color": "#cd251c",
@@ -86,9 +84,9 @@
                             "title": "Malé - Trento",
                             "wheelChairBoarding": 0
                         }
-          ]
-        }
-      ]
+                    ]
+                }
+            ]
         },
         "urbano": {
             "view": "grid",
@@ -113,8 +111,28 @@
                                     "label": "A",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
+                        {
+                            "label": "C",
+                            "color": "#000000",
+                            "routes": [
+                                {
+                                    "routeId": "Ca",
+                                    "routeSymId": "Ca",
+                                    "title": "RSA S. Bartolomeo - RSA Angeli Custodi",
+                                    "label": "C",
+                                    "wheelChairBoarding": 2
+                                },
+                                {
+                                    "routeId": "Cr",
+                                    "routeSymId": "Cr",
+                                    "title": "RSA Angeli Custodi - RSA S. Bartolomeo",
+                                    "label": "C",
+                                    "wheelChairBoarding": 2
+                                }
+                            ]
+                        },
                         {
                             "label": "NP",
                             "color": "#7f8080",
@@ -126,8 +144,8 @@
                                     "label": "NP",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "1",
                             "color": "#1a3f6f",
@@ -146,8 +164,8 @@
                                     "label": "1",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "2",
                             "color": "#d4592c",
@@ -159,8 +177,8 @@
                                     "label": "2",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "3",
                             "color": "#bf2c26",
@@ -179,8 +197,8 @@
                                     "label": "3",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "4",
                             "color": "#0977b7",
@@ -199,8 +217,8 @@
                                     "label": "4",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "5",
                             "color": "#f8ad1e",
@@ -219,8 +237,8 @@
                                     "label": "5",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "6",
                             "color": "#6eae46",
@@ -239,8 +257,8 @@
                                     "label": "6",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "7",
                             "color": "#179585",
@@ -259,8 +277,8 @@
                                     "label": "7",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "8",
                             "color": "#543428",
@@ -279,8 +297,8 @@
                                     "label": "8",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "9",
                             "color": "#894d2d",
@@ -299,8 +317,8 @@
                                     "label": "9",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "10",
                             "color": "#125547",
@@ -319,8 +337,8 @@
                                     "label": "10",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "11",
                             "color": "#572f75",
@@ -339,8 +357,8 @@
                                     "label": "11",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "12",
                             "color": "#922840",
@@ -359,8 +377,8 @@
                                     "label": "12",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "13",
                             "color": "#b55f8e",
@@ -379,8 +397,8 @@
                                     "label": "13",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "14",
                             "color": "#db8fac",
@@ -399,8 +417,8 @@
                                     "label": "14",
                                     "wheelChairBoarding": 2
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "15",
                             "color": "#81bb46",
@@ -419,8 +437,8 @@
                                     "label": "15",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "16",
                             "color": "#262e5f",
@@ -439,8 +457,8 @@
                                     "label": "16",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "17",
                             "color": "#2993c4",
@@ -459,8 +477,8 @@
                                     "label": "17",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "Funivia",
                             "color": "#016a6a",
@@ -480,8 +498,8 @@
                                     "label": "Sardagna - Trento",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "CM",
                             "color": "#f8ad1e",
@@ -500,8 +518,8 @@
                                     "label": "Passo Cimirlo - Celva - Borino - Povo",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            },
+                            ]
+                        },
                         {
                             "label": "G",
                             "color": "#572f75",
@@ -520,11 +538,11 @@
                                     "label": "Spini e Gardolo di Mezzo - Gardolo",
                                     "wheelChairBoarding": 1
                                 }
-              ]
-            }
-          ]
-        }
-      ]
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     }
 }

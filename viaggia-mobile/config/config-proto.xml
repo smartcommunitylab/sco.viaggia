@@ -23,9 +23,14 @@
     <preference name="FadeSplashScreen" value="false" />
     <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="android-minSdkVersion" value="16" />
-    <preference name="android-targetSdkVersion" value="26" />
+    <preference name="android-targetSdkVersion" value="28" />
      <preference name="StatusBarBackgroundColor" value="#000000" />
         <preference name="StatusBarStyle" value="lightcontent" />
+        <preference name="WKWebViewOnly" value="true" />
+<feature name="CDVWKWebViewEngine">`
+<param name="ios-package" value="CDVWKWebViewEngine" />
+</feature>
+<preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
     <feature name="StatusBar">
         <param name="ios-package" value="CDVStatusBar" onload="true" />
     </feature>
@@ -88,7 +93,10 @@
       <splash src="*resource_folder*/resources/ios/splash/Default~iphone.png" width="320" height="480" />
     </platform>
     <icon src="*resource_folder*/resources/android/icon/drawable-xhdpi-icon.png" />
-        <chcp>
-        <config-file url="*url-chcp*" />
-    </chcp>
+    <platform name="android">
+        <preference name="CodePushDeploymentKey" value="*android_key*" />
+    </platform>
+    <platform name="ios">
+        <preference name="CodePushDeploymentKey" value="*ios_key*" />
+    </platform>
   </widget>
