@@ -16,13 +16,34 @@ angular.module('viaggia.services.pois', [])
       return deferred.promise;
     }
     
+    
+    var headers =  {
+      headers : { 
+        "access-control-allow-origin": "*"
+      }
+    };
     $http.get(Config.getPOIURL()).then(function(data){
+      // fix malformed geojson format
+      // begin
+      if (data.data.geodata) {
+        data.data.features = data.data.geodata.features;
+      }
+      // fix malformed geojson format
+      // end
+      
       if (!data.data.features) {
         objects = [];
         deferred.resolve([]);
       } else {
         objects = data.data.features;
         objects.forEach(function(o){
+          // fix malformed coodinates array when it contains strings
+          // begin
+          tmp = o.geometry.coordinates.match(/\d+(?:\.\d+)?/g).map(Number)
+          o.geometry.coordinates = tmp;
+          // fix malformed coodinates array when it contains strings
+          // end
+
           o.geometry.coordinates.reverse();
           if (!o.properties.image) {
             o.properties.image = 'img/poi_default.jpg';

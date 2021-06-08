@@ -31,8 +31,10 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
             $scope.alertPopup.close();
         }
         $scope.selectElement = function (e) {
-            // route element: go to table
-            if (e.route != null) {
+             if (e.route != null && e.route.openExternalLink != null){
+                // open external link
+                window.open(e.route.openExternalLink);
+            } else  if (e.route != null) {
                 $state.go('app.tt', {
                     ref: e.ref,
                     agencyId: e.agencyId,

@@ -64,6 +64,7 @@ angular.module('viaggia', [
   'viaggia.controllers.plan',
   'viaggia.controllers.taxi',
   'viaggia.controllers.pois',
+  'viaggia.controllers.events',
   'viaggia.controllers.planlist',
   'viaggia.controllers.tripdetails',
   'viaggia.services.data',
@@ -74,6 +75,7 @@ angular.module('viaggia', [
   'viaggia.services.info',
   'viaggia.services.taxi',
   'viaggia.services.pois',
+  'viaggia.services.events',
   'viaggia.services.notification',
   'viaggia.directives',
   'viaggia.services.geo',
@@ -158,7 +160,7 @@ angular.module('viaggia', [
         console.log('hide loading');
         $ionicLoading.hide();
       }
-      initAppUpdate();
+      //initAppUpdate();
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -439,6 +441,25 @@ angular.module('viaggia', [
             controller: 'POICtrl'
           }
         }
+      }).state('app.events', {
+        //cache: false,
+        url: "/events",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/events.html",
+            controller: 'EVENTsCtrl'
+          }
+        }
+      })
+      .state('app.event', {
+        //cache: false,
+        url: "/event/:eventId",
+        views: {
+          'menuContent': {
+            templateUrl: "templates/event.html",
+            controller: 'EVENTCtrl'
+          }
+        }
       });
 
 
@@ -468,6 +489,7 @@ angular.module('viaggia', [
       menu_credits: "Credits",
       menu_quest: "Questionario",
       menu_pois: "Punti di interesse",
+      menu_events: "Eventi",
       menu_login: "Login",
       menu_logout: "Logout",
       menu_parking_meters: "Parcometri",
@@ -698,6 +720,7 @@ angular.module('viaggia', [
       menu_credits: "Credits",
       menu_quest: "Survey",
       menu_pois: "Points of Interest",
+      menu_events: "Events",
       menu_login: "Login",
       menu_logout: "Logout",
       menu_parking_meters: "Parking meters",

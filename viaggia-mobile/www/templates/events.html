@@ -1,0 +1,24 @@
+<ion-view title="{{'menu_events'|translate}}">
+  <ion-content has-header="true">
+    <ion-list class="event-list" ng-if="events != null">
+
+      <ion-item ng-click="view(event.properties.id)" ng-repeat="event in events | orderBy:'distance'">
+        <button class="button button-block">
+          <div class="row event-row">
+            <img ng-src="{{event.properties.image}}">
+            <div class="col col-center">
+            <h2>{{event.properties.title[lang]}}</h2>
+            <div class="row footer">
+              <div class="col col-75">{{event.properties.address}}</div>
+              <div class="text-right" ng-if="!!event.distance">{{event.distance|number:1}}km</div>
+            </div>
+          </div>
+        </button>
+      </ion-item>
+
+    </ion-list>
+    <div ng-if="events != null && events.length == 0" class="text-center ">
+        <h4>{{'no_data' | translate}}</h4>
+    </div>
+  </ion-content>  
+</ion-view>  

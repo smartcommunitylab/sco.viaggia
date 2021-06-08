@@ -1,0 +1,429 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+              "id": "MART",
+              "address": "Corso bettini",
+              "title": {
+                "en": "MART",
+                "it": "MART" 
+              },
+              "abstract" :{
+                "en": "MART abstract",
+                "it": "MART abstract" 
+              },
+              "description" :{
+                "en": "MART description",
+                "it": "MART description" 
+              },
+              "web" : "http://www.mart.trento.it",
+              "image" : "http://www.archimagazine.com/abomartnuova3_max.jpg"
+            },
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                11.043609,
+                45.893761
+              ]
+            }
+          },
+        {
+            "id": 2056,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.691349,
+                    45.997214
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 2056,
+                "name": "Asilo nido Sella Giudicarie",
+                "class_identifier": "luogo",
+                "mainNodeId": "1353"
+            }
+        },
+        {
+            "id": 2065,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.6379,
+                    45.937737
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 2065,
+                "name": "Asilo Nido \" L'Isola che non c'\u00e8\"",
+                "class_identifier": "luogo",
+                "mainNodeId": "1360",
+                "geo": "Via Roma 48\/A - 38085 Pieve Di Bono, Pieve di Bono-Prezzo (Tn)"
+            }
+        },
+        {
+            "id": 1896,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.658326,
+                    45.963949
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 1896,
+                "name": "Forte Larino",
+                "class_identifier": "luogo",
+                "mainNodeId": "1194",
+                "geo": "Lardaro, 38087, Sella Giudicarie"
+            }
+        },
+        {
+            "id": 3795,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.692911,
+                    46.001296
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 3795,
+                "name": "Casa Bonus",
+                "class_identifier": "luogo",
+                "mainNodeId": "3046",
+                "geo": "Bondo, 38087, Sella Giudicarie"
+            }
+        },
+        {
+            "id": 3804,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.69187,
+                    46.000599
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 3804,
+                "name": "Antica chiesa di San Barnaba",
+                "class_identifier": "luogo",
+                "mainNodeId": "3053",
+                "geo": "Piazza Italia, Bondo, 38087, Sella Giudicarie"
+            }
+        },
+        {
+            "id": 3805,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.686657,
+                    46.002388
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 3805,
+                "name": "Capitello di Tartoe",
+                "class_identifier": "luogo",
+                "mainNodeId": "3054",
+                "geo": "Via Santi, Bondo, 38087, Sella Giudicarie"
+            }
+        },
+        {
+            "id": 3807,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.694246,
+                    46.001284
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 3807,
+                "name": "Cimitero austroungarico monumentale",
+                "class_identifier": "luogo",
+                "mainNodeId": "3056",
+                "geo": "Strada statale 237, Bondo, 38087, Sella Giudicarie"
+            }
+        },
+        {
+            "id": 3808,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.70085,
+                    46.010506
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 3808,
+                "name": "Antica Chiesa di Sant'Andrea",
+                "class_identifier": "luogo",
+                "mainNodeId": "3057",
+                "geo": "Strada statale 237, Breguzzo, 38087, Sella Giudicarie"
+            }
+        },
+        {
+            "id": 3810,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.6993,
+                    46.00847
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 3810,
+                "name": "Nuova chiesa di Sant'Andrea",
+                "class_identifier": "luogo",
+                "mainNodeId": "3059",
+                "geo": "Strada statale 237, Breguzzo, 38087, Sella Giudicarie"
+            }
+        },
+        {
+            "id": 3811,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.706902,
+                    46.020867
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 3811,
+                "name": "La Rocca",
+                "class_identifier": "luogo",
+                "mainNodeId": "3060",
+                "geo": "Via Rocca, Breguzzo, 38087, Sella Giudicarie"
+            }
+        },
+        {
+            "id": 3817,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.671855,
+                    45.985296
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 3817,
+                "name": "Chiesa di Santo Stefano",
+                "class_identifier": "luogo",
+                "mainNodeId": "3066",
+                "geo": "Roncone, 38087, Sella Giudicarie"
+            }
+        },
+        {
+            "id": 3818,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.675551,
+                    45.985113
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 3818,
+                "name": "Laghetto di Roncone",
+                "class_identifier": "luogo",
+                "mainNodeId": "3067",
+                "geo": "Localit&amp;agrave; Milanino, Roncone, 38087, Sella Giudicarie"
+            }
+        },
+        {
+            "id": 3822,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.670564,
+                    45.984954
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 3822,
+                "name": "Malga Avalina",
+                "class_identifier": "luogo",
+                "mainNodeId": "3071",
+                "geo": "Roncone, 38087, Sella Giudicarie"
+            }
+        },
+        {
+            "id": 3823,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.670564,
+                    45.984954
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 3823,
+                "name": "Malga Giuggia",
+                "class_identifier": "luogo",
+                "mainNodeId": "3072",
+                "geo": "Roncone, 38087, Sella Giudicarie"
+            }
+        },
+        {
+            "id": 3824,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.670564,
+                    45.984954
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 3824,
+                "name": "Malga Maggiasone",
+                "class_identifier": "luogo",
+                "mainNodeId": "3073",
+                "geo": "Roncone, 38087, Sella Giudicarie"
+            }
+        },
+        {
+            "id": 3827,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.670564,
+                    45.984954
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 3827,
+                "name": "Alla Pozza di Dampon",
+                "class_identifier": "luogo",
+                "mainNodeId": "3076",
+                "geo": "Roncone, 38087, Sella Giudicarie"
+            }
+        },
+        {
+            "id": 3828,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.676208,
+                    45.984912
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 3828,
+                "name": "Lago di Roncone - localit\u00e0 Milanino",
+                "class_identifier": "luogo",
+                "mainNodeId": "3077",
+                "geo": "Roncone, 38087, Sella Giudicarie"
+            }
+        },
+        {
+            "id": 3829,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.670564,
+                    45.984954
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 3829,
+                "name": "Roncone - Malga Avalina - Dosso dei Morti",
+                "class_identifier": "luogo",
+                "mainNodeId": "3078",
+                "geo": "Roncone, 38087, Sella Giudicarie"
+            }
+        },
+        {
+            "id": 3830,
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    10.670564,
+                    45.984954
+                ]
+            },
+            "type": "Feature",
+            "properties": {
+                "id": 3830,
+                "name": "Valle di Bondone",
+                "class_identifier": "luogo",
+                "mainNodeId": "3079",
+                "geo": "Roncone, 38087, Sella Giudicarie"
+            }
+        }
+    ],
+    "query": {
+        "string": "classes 'luogo'",
+        "eZFindQuery": {
+            "_query": null,
+            "SearchContentClassID": [
+                359
+            ],
+            "Filter": [
+                "subattr_geo___coordinates____gpt:[-90,-90 TO 90,90]"
+            ],
+            "SearchLimit": 500,
+            "SearchOffset": 0,
+            "Limitation": null,
+            "AsObjects": false,
+            "FieldsToReturn": [
+                "as_opendatastorage_bst"
+            ]
+        },
+        "responseHeader": {
+            "status": 0,
+            "QTime": 1,
+            "params": {
+                "qt": "ezpublish",
+                "hl": "false",
+                "indent": "on",
+                "fl": "meta_guid_ms meta_installation_id_ms meta_main_url_alias_ms meta_installation_url_ms meta_id_si meta_main_node_id_si meta_language_code_ms meta_name_t score meta_published_dt meta_path_string_ms meta_main_path_string_ms meta_is_invisible_b [elevated]  as_opendatastorage_bst",
+                "hl.requireFieldMatch": "true",
+                "start": "0",
+                "hl.fragsize": "200",
+                "sort": "score desc",
+                "fq": [
+                    "((meta_installation_id_ms:a825f9f8721d986cd1a96ace97f0fa1e AND (( ( meta_contentclass_id_si:304 )) OR ( ( meta_section_id_si:10 ) AND ( meta_object_states_si:3 OR meta_object_states_si:4 OR meta_object_states_si:6 )) OR ( ( meta_contentclass_id_si:188 OR meta_contentclass_id_si:208 OR meta_contentclass_id_si:211 OR meta_contentclass_id_si:213 OR meta_contentclass_id_si:215 OR meta_contentclass_id_si:217 OR meta_contentclass_id_si:219 OR meta_contentclass_id_si:225 OR meta_contentclass_id_si:241 ) AND ( meta_section_id_si:3 )) OR ( ( meta_section_id_si:1 )) OR ( ( meta_path_si:512))))  ) AND meta_is_invisible_b:false",
+                    "meta_contentclass_id_si:359",
+                    "meta_language_code_ms:ita-IT",
+                    "subattr_geo___coordinates____gpt:[-90,-90 TO 90,90]"
+                ],
+                "rows": "500",
+                "version": "2.2",
+                "hl.simple.pre": "&lt;b&gt;",
+                "bq": "meta_installation_id_ms:a825f9f8721d986cd1a96ace97f0fa1e^1.5 meta_language_code_ms:ita-IT^1.2",
+                "hl.snippets": "1",
+                "q": "",
+                "forceElevation": "false",
+                "enableElevation": "false",
+                "hl.simple.post": "&lt;\/b&gt;",
+                "qf": "attr_abstract_t attr_descrizione_t attr_email_t attr_geo_t attr_indirizzo_t attr_tags_lk attr_telefono_t attr_title_t subattr_geo___coordinates____gpt subattr_geo___geohash____gh submeta_comune___name____t submeta_galleria___name____t submeta_tipo_luogo___name____t meta_name_t meta_owner_name_t",
+                "clustering": "false",
+                "hl.fl": "attr_abstract_t attr_descrizione_t attr_email_t attr_geo_t attr_indirizzo_t attr_tags_lk attr_telefono_t attr_title_t subattr_geo___coordinates____gpt subattr_geo___geohash____gh submeta_comune___name____t submeta_galleria___name____t submeta_tipo_luogo___name____t",
+                "wt": "php"
+            }
+        }
+    },
+    "nextPageQuery": null,
+    "totalCount": 19,
+    "facets": []
+}

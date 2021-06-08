@@ -7,6 +7,14 @@
         "url-chcp":"https://hotcode.z6.web.core.windows.net/alpecimbra/chcp.json",
         "app_name": "Viaggia Alpe Cimbra"
     },
+    "MABUNESCO": {
+        "resource_folder": "config/instances/MABUNESCO",
+        "widget_id": "it.smartcommunitylab.viaggiaalpecimbra",
+        "version": "1.0.5",
+        "version_code": "9",
+        "url-chcp":"https://hotcode.z6.web.core.windows.net/alpecimbra/chcp.json",
+        "app_name": "Viaggia MABUNESCO"
+    },
     "TRENTO": {
         "resource_folder": "config/instances/TRENTO",
         "widget_id": "eu.trentorise.smartcampus.viaggiatrento",

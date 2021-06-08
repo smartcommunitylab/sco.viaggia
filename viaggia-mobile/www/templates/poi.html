@@ -15,12 +15,19 @@
         </div>  
       </div>  
     </div>  
-    <div class="row"><div class="col"><p>{{poi.properties.abstract[lang]}}</p></div></div>
+    <div class="row">
+      <div ng-if="poi.properties.date_from != null" class="col"><p>Dal: {{poi.properties.date_from}}</p></div>
+      <div ng-if="poi.properties.date_to != null" class="col"><p>Al: {{poi.properties.date_to}}</p></div>
+      <div ng-if="poi.properties.time != null" class="col"><p>Alle ore: {{poi.properties.time}}</p></div>
+    </div>
+    <!--div class="row"><div class="col"><p>{{poi.properties.abstract[lang]}}</p></div></div-->
     <div class="row web" ng-if="poi.properties.web != null">
       <div class="col">
         <h4><a ng-href="{{poi.properties.web}}" target="_system">{{poi.properties.web}}</a></h4>
       </div>  
     </div>
-    <div class="row"><div class="col"><p>{{poi.properties.description[lang]}}</p></div></div>
+    <div class="row"><div class="col">
+      <div ng-bind-html="poi.properties.description[lang]"></div>
+    </div></div>
   </ion-content>  
 </ion-view>  

@@ -296,6 +296,9 @@ angular.module('viaggia.services.conf', [])
       getPOIURL: function () {
         return mapJsonConfig["POIURL"];
       },
+      getEVENTURL: function () {
+        return mapJsonConfig["EVENTURL"];
+      },
       getQuestURL: function () {
         return mapJsonConfig["QuestURL"];
       },

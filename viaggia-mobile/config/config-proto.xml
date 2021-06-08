@@ -93,10 +93,11 @@
       <splash src="*resource_folder*/resources/ios/splash/Default~iphone.png" width="320" height="480" />
     </platform>
     <icon src="*resource_folder*/resources/android/icon/drawable-xhdpi-icon.png" />
-    <platform name="android">
+ 
+    <!-- <platform name="android">
         <preference name="CodePushDeploymentKey" value="*android_key*" />
     </platform>
     <platform name="ios">
         <preference name="CodePushDeploymentKey" value="*ios_key*" />
-    </platform>
+    </platform> -->
   </widget>

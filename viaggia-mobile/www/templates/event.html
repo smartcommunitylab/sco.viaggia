@@ -1,0 +1,39 @@
+<ion-view>
+  <ion-nav-title>
+    {{event.properties.title[lang]}}
+  </ion-nav-title>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-fab button-viaggia-header ion-navigate" ng-click="navigate()"></button>
+  </ion-nav-buttons>
+  <ion-content has-header="true" class="event">
+    <div class="img-container">
+      <img class="event-img" ng-src="{{event.properties.image}}"/>
+      <div class="trans"></div>
+      <div class="row address">
+        <div class="col">
+          <h4><i class="icon ion-ios-location"></i> {{event.properties.address}}</h4>
+        </div>  
+      </div>  
+    </div>  
+    <div class="row">
+      <div ng-if="event.properties.date_from != null" class="col"><p>Dal: {{event.properties.date_from | date}}</p></div>
+      <div ng-if="event.properties.date_to != null" class="col"><p>Al: {{event.properties.date_to | date}}</p></div>
+      <div ng-if="event.properties.time != null" class="col"><p>Alle ore: {{event.properties.time}}</p></div>
+    </div>
+    
+    <div class="row"><div class="col"><p>{{event.properties.abstract[lang]}}</p></div></div>
+    <div class="row web" ng-if="event.properties.web != null">
+      <div class="col">
+        <h4><a ng-href="{{event.properties.web}}" target="_system">{{event.properties.web}}</a></h4>
+      </div>  
+    </div>
+    <div class="row"><div class="col">
+      <div ng-bind-html="event.properties.description[lang]"></div>
+    
+
+     
+    </div></div>
+    
+
+  </ion-content>  
+</ion-view>  
