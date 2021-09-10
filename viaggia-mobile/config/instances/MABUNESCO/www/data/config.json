@@ -1,12 +1,12 @@
 {
-    "appid": "alpecimbra",
-    "messagingAppId": "mobility.alpecimbra",
+    "appid": "mabunesco",
+    "messagingAppId": "mobility.mabunesco",
     "senderID": "453601816446",
     "appversion": "1.0.0",
     "appname": "Viaggia MAB UNESCO",
     "serverURL": "https://tn.smartcommunitylab.it/core.mobility",
     "messagingServerURL": "https://tn.smartcommunitylab.it/core.communicator",
-    "newsRSS": "https://tn.smartcommunitylab.it/core.mobility/announcements/rss/alpecimbra",
+    "newsRSS": "https://tn.smartcommunitylab.it/core.mobility/announcements/rss/mabunesco",
     "POIURL": "https://gw.tnlab.smartcommunitylab.it/t/playground.test/mabunesco/1.0.0/mabpoi",
     "EVENTURL": "https://gw.tnlab.smartcommunitylab.it/t/playground.test/mabunesco/1.0.0/mabevent",
     "QuestURL": null,
@@ -23,9 +23,9 @@
             "TRANSIT"
         ]
     },
-    "taxi_id": "TAXI_MABUNESCO",
+    "taxi_id": "TAXI_ALPECIMBRA",
     "taxi_accuracy": 65,
-    "plan_policy": "Tione",
+    "plan_policy": "Trento",
     "agencies": [5, 6, 7, 8, 9, 10, 17],
     "extraurban_agencies": [17],
     "broadcast_notifications_options": [

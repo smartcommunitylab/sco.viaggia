@@ -66,6 +66,6 @@ Controller that show the news details
 
   //open the news in a new browser page
   $scope.clickLink = function (link) {
-    window.open(link, '_system', 'location=yes')
+    cordova.InAppBrowser.open(link, '_system', 'location=yes')
   }
 })

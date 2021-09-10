@@ -9,11 +9,13 @@
     },
     "MABUNESCO": {
         "resource_folder": "config/instances/MABUNESCO",
-        "widget_id": "it.smartcommunitylab.viaggiaalpecimbra",
+        "widget_id": "it.smartcommunitylab.viaggiamabunesco",
         "version": "1.0.5",
         "version_code": "9",
         "url-chcp":"https://hotcode.z6.web.core.windows.net/alpecimbra/chcp.json",
-        "app_name": "Viaggia MABUNESCO"
+        "app_name": "Viaggia MABUNESCO",
+        "android_key":"KzLZbFrtzJY0ofrUJq6TZBSqLog8ycwQ3vcX1",
+        "ios_key":"XzwfxjLrHQR4J8VwfrsLDV5juwLBmzzr8xGXR"
     },
     "TRENTO": {
         "resource_folder": "config/instances/TRENTO",

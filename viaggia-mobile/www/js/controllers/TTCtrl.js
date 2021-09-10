@@ -33,7 +33,7 @@ angular.module('viaggia.controllers.timetable', ['ionic'])
         $scope.selectElement = function (e) {
              if (e.route != null && e.route.openExternalLink != null){
                 // open external link
-                window.open(e.route.openExternalLink);
+                cordova.InAppBrowser.open(e.route.openExternalLink,'_system','location=yes');
             } else  if (e.route != null) {
                 $state.go('app.tt', {
                     ref: e.ref,

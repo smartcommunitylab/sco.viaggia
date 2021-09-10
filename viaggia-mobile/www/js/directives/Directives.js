@@ -349,7 +349,7 @@ angular.module('viaggia.directives', [])
       restrict: 'A',
       link: function ($scope, $element, $attrs) {
         var handleTap = function (e) {
-          var inAppBrowser = window.open(encodeURI($attrs.browseTo), '_system');
+          var inAppBrowser = cordova.InAppBrowser.open(encodeURI($attrs.browseTo), '_system');
         };
         var tapGesture = $ionicGesture.on('tap', handleTap, $element);
         $scope.$on('$destroy', function () {
@@ -391,7 +391,7 @@ angular.module('viaggia.directives', [])
 
               // do not open broken/relative links
               if (url.indexOf('http://') == 00 || url.indexOf('https://') == 0 || url.indexOf('mailto:') == 0 || url.indexOf('tel:') == 0 || url.indexOf('sms:') == 0) {
-                window.open(url, '_system');
+                cordova.InAppBrowser.open(url, '_system');
               } else {
                 console.log("blocking broken link: " + url);
               }

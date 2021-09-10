@@ -120,12 +120,14 @@ angular.module('viaggia.services.notification', [])
         //download and parse the new feeds
         var x2js = new X2JS();
         var jsonObj = x2js.xml_str2json(page.data);
-        if (jsonObj && jsonObj.rss && jsonObj.rss.channel && jsonObj.rss.channel.item) {
-          var res = jsonObj.rss.channel.item;
+        if (jsonObj && jsonObj.rss && jsonObj.rss.channel) {
+          if (jsonObj.rss.channel.item)
+          {var res = jsonObj.rss.channel.item;
           localStorage['entries_' + feedKey] = JSON.stringify(res);
           localStorage['timestamp_' + feedKey] = new Date().getTime();
           cache = res;
-          deferred.resolve(res);
+          deferred.resolve(res);}
+          else deferred.resolve([])
         } else {
           deferred.reject();
         }
