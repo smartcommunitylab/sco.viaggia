@@ -2,8 +2,8 @@
   <ion-nav-title>
     {{event.properties.title[lang]}}
   </ion-nav-title>
-  <ion-nav-buttons side="right">
-    <button class="button button-icon button-fab button-viaggia-header ion-navigate" ng-click="navigate()"></button>
+  <ion-nav-buttons side="right" >
+    <button ng-if="event.distance" class="button button-icon button-fab button-viaggia-header ion-navigate" ng-click="navigate()"></button>
   </ion-nav-buttons>
   <ion-content has-header="true" class="event">
     <div class="img-container">
