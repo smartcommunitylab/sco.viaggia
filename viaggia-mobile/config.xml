@@ -20,8 +20,8 @@
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="FadeSplashScreen" value="false" />
     <preference name="ShowSplashScreenSpinner" value="false" />
-    <preference name="android-minSdkVersion" value="16" />
-    <preference name="android-targetSdkVersion" value="29" />
+    <preference name="android-minSdkVersion" value="19" />
+    <preference name="android-targetSdkVersion" value="30" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="WKWebViewOnly" value="true" />
@@ -100,6 +100,6 @@
     <platform name="ios">
         <preference name="CodePushDeploymentKey" value="XzwfxjLrHQR4J8VwfrsLDV5juwLBmzzr8xGXR" />
     </platform>
-    <engine name="android" spec="7.1.4" />
-    <engine name="ios" spec="^4.5.5" />
+    <engine name="ios" spec="^5.1.1" />
+    <engine name="android" spec="^8.1.0" />
 </widget>

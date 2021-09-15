@@ -112,14 +112,14 @@
                                     "routeId": "71_17_0",
                                     "routeSymId": "201A",
                                     "title": "Trento-Vezzano-Sarche-Tione",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-201A.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-201A.PDF",
                                     "label": "201"
                                 },
                                 {
                                     "routeId": "71_17_1",
                                     "routeSymId": "201R",
                                     "title": "Tione-Sarche-Vezzano-Trento",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-201R.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-201R.PDF",
                                     "label": "201"
                                 }
                             ]
@@ -133,14 +133,14 @@
                                     "routeId": "175_17_0",
                                     "routeSymId": "204A",
                                     "title": "Trento-Vezzano-Vigo Cavedine-Riva del Garda",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-204A.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-204A.PDF",
                                     "label": "204"
                                 },
                                 {
                                     "routeId": "175_17_1",
                                     "routeSymId": "204R",
                                     "title": "Riva del Garda-Vigo Cavedine-Trento",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-204R.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-204R.PDF",
                                     "label": "204"
                                 }
                             ]
@@ -154,14 +154,14 @@
                                     "routeId": "134_17_0",
                                     "routeSymId": "205A",
                                     "title": "Trento-Vezzano-Sarche-Dro-Arco-Riva",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-205A.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-205A.PDF",
                                     "label": "205"
                                 },
                                 {
                                     "routeId": "134_17_1",
                                     "routeSymId": "205R",
                                     "title": "Riva-Arco-Dro-Sarche-Vezzano-Trento",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-205R.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-205R.PDF",
                                     "label": "205"
                                 }
                             ]
@@ -175,14 +175,14 @@
                                     "routeId": "153_17_0",
                                     "routeSymId": "211A",
                                     "title": "Riva del G.-Tenno-Fiave'-Ponte Arche",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-211A.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-211A.PDF",
                                     "label": "211"
                                 },
                                 {
                                     "routeId": "153_17_1",
                                     "routeSymId": "211R",
                                     "title": "Ponte Arche-L.Tenno-Riva del G.",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-211R.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-211R.PDF",
                                     "label": "211"
                                 }
                             ]
@@ -197,14 +197,14 @@
                                     "routeId": "171_17_0",
                                     "routeSymId": "214A",
                                     "title": "Riva-Pregasina-Bezzecca-Storo-Pieve di Bono",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-214INA.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-214INA.PDF",
                                     "label": "214"
                                 },
                                 {
                                     "routeId": "171_17_1",
                                     "routeSymId": "214R",
                                     "title": "Pieve di Bono-Storo-Bezzecca-Pregasina-Riva",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-214INR.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-214INR.PDF",
                                     "label": "214"
                                 }
                             ]
@@ -218,14 +218,14 @@
                                     "routeId": "157_17_0",
                                     "routeSymId": "215A",
                                     "title": "Tione-Pieve di Bono-Storo-Baitoni-Ponte Caffaro",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-215A.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-215A.PDF",
                                     "label": "215"
                                 },
                                 {
                                     "routeId": "157_17_1",
                                     "routeSymId": "215R",
                                     "title": "Ponte Caffaro-Baitoni-Storo-Pieve di BonoTione",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-215R.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-215R.PDF",
                                     "label": "215"
                                 }
                             ]
@@ -239,14 +239,14 @@
                                     "routeId": "73_17_0",
                                     "routeSymId": "216A",
                                     "title": "Tione-Bolbeno-Ragoli-Montagne",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-216A.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-216A.PDF",
                                     "label": "216"
                                 },
                                 {
                                     "routeId": "73_17_1",
                                     "routeSymId": "216R",
                                     "title": " Montagne-Ragoli-Bolbeno-Tione",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-216R.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-216R.PDF",
                                     "label": "216"
                                 }
                             ]
@@ -260,14 +260,14 @@
                                     "routeId": "320_17_0",
                                     "routeSymId": "217A",
                                     "title": "Tione - Tione Ospedale Civile",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-217A.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-217A.PDF",
                                     "label": "217"
                                 },
                                 {
                                     "routeId": "320_17_1",
                                     "routeSymId": "217R",
                                     "title": "Tione Ospedale Civile - Tione",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-217A.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-217A.PDF",
                                     "label": "217"
                                 }
                             ]
@@ -281,14 +281,14 @@
                                     "routeId": "636_17_0",
                                     "routeSymId": "231A",
                                     "title": "Tione-Pinzolo-Madonna di C.-C.C.Magno",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-231A.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-231A.PDF",
                                     "label": "231"
                                 },
                                 {
                                     "routeId": "636_17_1",
                                     "routeSymId": "231R",
                                     "title": "C.C.Magno-Madonna di C.-Pinzolo-Tione",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-231R.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-231R.PDF",
                                     "label": "231"
                                 }
                             ]
@@ -302,14 +302,14 @@
                                     "routeId": "634_17_0",
                                     "routeSymId": "332A",
                                     "title": "Rovereto-Mori-Riva-Arco-Bolognano",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-332A.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-332A.PDF",
                                     "label": "231"
                                 },
                                 {
                                     "routeId": "634_17_1",
                                     "routeSymId": "332R",
                                     "title": "Bolognano-Arco-Riva-Mori-Rovereto",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-332R.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-332R.PDF",
                                     "label": "332"
                                 }
                             ]
@@ -400,14 +400,14 @@
                                     "routeId": "420_17_0",
                                     "routeSymId": "B861A",
                                     "title": "Riva -Varone -Arco -S.Giorgio-Brione-Riva",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-861A.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-861A.PDF",
                                     "label": "B861 - Linea 1"
                                 },
                                 {
                                     "routeId": "420_17_1",
                                     "routeSymId": "B861R",
                                     "title": "Riva -Varone -Arco -S.Giorgio-Brione-Riva",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-861A.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-861A.PDF",
                                     "label": "B861 - Linea 1"
                                 }
                             ]
@@ -421,14 +421,14 @@
                                     "routeId": "423_17_0",
                                     "routeSymId": "B862A",
                                     "title": "Riva-Brione-S.Giorgio-Arco-Varone-Riva",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-862A.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-862A.PDF",
                                     "label": "B862 - Linea 2"
                                 },
                                 {
                                     "routeId": "423_17_1",
                                     "routeSymId": "B862R",
                                     "title": "Riva-Brione-S.Giorgio-Arco-Varone-Riva",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-862A.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-862A.PDF",
                                     "label": "B862 - Linea 2"
                                 }
                             ]
@@ -442,14 +442,14 @@
                                     "routeId": "417_17_0",
                                     "routeSymId": "B863A",
                                     "title": "Nago-Torbole-Riva-Arco-Bolognano",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-863A.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-863A.PDF",
                                     "label": "B863 - Linea 3"
                                 },
                                 {
                                     "routeId": "417_17_1",
                                     "routeSymId": "B863R",
                                     "title": "Bolognano-Arco-RivaTorbole-Nago",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-863R.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-863R.PDF",
                                     "label": "B863 - Linea 3"
                                 }
                             ]
@@ -463,14 +463,14 @@
                                     "routeId": "672_17_0",
                                     "routeSymId": "B869A",
                                     "title": "Riva del Garda-Deva-Pranzo-Camp",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-869A.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-869A.PDF",
                                     "label": "B864 - Linea 4"
                                 },
                                 {
                                     "routeId": "672_17_1",
                                     "routeSymId": "B869R",
                                     "title": "Riva del Garda-Deva-Pranzo-Campi",
-                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E20I-869A.PDF",
+                                    "openExternalLink": "https://www.trentinotrasporti.it/pdforari/extraurbani/linee/OrariDiDirettrice-E21I-869A.PDF",
                                     "label": "B869 - Linea 4"
                                 }
                             ]

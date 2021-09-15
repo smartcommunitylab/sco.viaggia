@@ -200,6 +200,11 @@ angular.module('viaggia', [
 
     });
   })
+  .config(['$compileProvider', function ($compileProvider) {
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob|ionic):|data:image/);
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|local|data|ionic|tel|mailto):/);
+
+  }])
   .config(function ($stateProvider, $compileProvider, $urlRouterProvider, $translateProvider, $ionicConfigProvider) {
     $ionicConfigProvider.views.swipeBackEnabled(false);
     $stateProvider.state('app', {

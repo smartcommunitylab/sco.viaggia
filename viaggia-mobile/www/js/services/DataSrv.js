@@ -144,7 +144,7 @@ angular.module('viaggia.services.data', [])
 
     var getDataURL = function (remote) {
       if (remote) {
-        return Config.getServerURL() + '/routesDB/trento';
+        return Config.getServerURL() + '/routesDB/alpecimbra';
 
       } else {
         return LOCAL_DATA_URL;
