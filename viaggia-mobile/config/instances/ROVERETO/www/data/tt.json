@@ -307,25 +307,6 @@
                             ]
                         },
                         {
-                            "label": "316",
-                            "title": "316 - ROVERETO-TRAMBILENO-VANZA-POZZACCHIO",
-                            "color": "#fcbf0e",
-                            "routes": [
-                                {
-                                    "routeId": "190_17_0",
-                                    "routeSymId": "316AA",
-                                    "title": "ROVERETO-TRAMBILENO-VANZA-POZZACCHIO",
-                                    "label": "316"
-                                },
-                                {
-                                    "routeId": "190_17_1",
-                                    "routeSymId": "316AR",
-                                    "title": "POZZACCHIO-VANZA-TRAMBILENO-ROVERETO",
-                                    "label": "316"
-                                }
-                            ]
-                        },
-                        {
                             "label": "318",
                             "title": "318 - VALLE S.FELICE-MANZANO-NOMESINO",
                             "color": "#fcbf0e",
