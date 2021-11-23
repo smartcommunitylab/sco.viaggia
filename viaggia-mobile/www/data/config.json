@@ -62,28 +62,10 @@
                 "color": "#EB8919"
             },
             {
-                "state": "/app/parking/ALPECIMBRA",
-                "label": "menu_real_time_park",
-                "icon": "ic_parking-lot",
-                "color": "#164286"
-            }, 
-            {
-                "state": "/app/taxi",
-                "label": "menu_ncc",
-                "icon": "ic_taxi",
-                "color": "#f8cf20"
-            },
-            {
                 "state": "/app/pois",
                 "label": "menu_pois",
                 "icon": "ion-ios-location",
                 "color": "#a9a836"
-            }, 
-            {
-                "state": "/app/events",
-                "label": "menu_events",
-                "icon": "ion-ios-location",
-                "color": "#daf7a6"
             }
       ],
         "infomenu": [
@@ -101,11 +83,6 @@
                 "state": "/app/ttlist/trains",
                 "label": "menu_real_time_train",
                 "icon": "ic_train"
-            },
-            {
-                "state": "/app/parking/ALPECIMBRA",
-                "label": "menu_real_time_park",
-                "icon": "ic_parking-lot"
             }
       ]
     }
