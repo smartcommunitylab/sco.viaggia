@@ -4,7 +4,7 @@
   "description": "viaggia-mobile: An Ionic project",
   "dependencies": {
     "@types/js-base64": "^2.3.1",
-    "code-push": "^3.0.1",
+    "code-push": "^3.1.0",
     "cordova-android": "^7.1.4",
     "cordova-android-play-services-gradle-release": "^2.1.0",
     "cordova-android-support-gradle-release": "^1.4.7",
